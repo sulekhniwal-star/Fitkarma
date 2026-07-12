@@ -71,8 +71,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 1 — ONBOARDING + USER PROFILE
 
 ### §P1-A Onboarding Flow Order
-- [ ] Implement onboarding flow controller/router
-- [ ] Add progress indicator + skip/back navigation rules
+- [x] Implement onboarding flow controller/router
+- [x] Add progress indicator + skip/back navigation rules
 
 ### §P1-B Welcome Screen
 - [ ] Build UI layout
