@@ -9,9 +9,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 0 — FOUNDATION
 
 ### §P0-A Design Philosophy
-- [ ] Define design token spec (dark-mode-first palette, glassmorphism blur values, spring physics curves)
-- [ ] Build bento-grid layout primitives as reusable widgets
-- [ ] Document design system in a shared style guide referenced by all screen builds
+- [x] Define design token spec (dark-mode-first palette, glassmorphism blur values, spring physics curves)
+- [x] Build bento-grid layout primitives as reusable widgets
+- [x] Document design system in a shared style guide referenced by all screen builds
 
 ### §P0-B Project Structure
 - [ ] Scaffold module boundaries (features/, core/, data/, services/)
