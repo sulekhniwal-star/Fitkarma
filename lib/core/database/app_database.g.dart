@@ -3163,6 +3163,326 @@ class DailyIntelligencePackagesCompanion
   }
 }
 
+class $AICacheEntriesTable extends AICacheEntries
+    with TableInfo<$AICacheEntriesTable, AICacheEntry> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AICacheEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _promptHashMeta = const VerificationMeta(
+    'promptHash',
+  );
+  @override
+  late final GeneratedColumn<String> promptHash = GeneratedColumn<String>(
+    'prompt_hash',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _responseMeta = const VerificationMeta(
+    'response',
+  );
+  @override
+  late final GeneratedColumn<String> response = GeneratedColumn<String>(
+    'response',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _expiresAtMeta = const VerificationMeta(
+    'expiresAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
+    'expires_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    userId,
+    promptHash,
+    response,
+    expiresAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'a_i_cache_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AICacheEntry> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('prompt_hash')) {
+      context.handle(
+        _promptHashMeta,
+        promptHash.isAcceptableOrUnknown(data['prompt_hash']!, _promptHashMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_promptHashMeta);
+    }
+    if (data.containsKey('response')) {
+      context.handle(
+        _responseMeta,
+        response.isAcceptableOrUnknown(data['response']!, _responseMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_responseMeta);
+    }
+    if (data.containsKey('expires_at')) {
+      context.handle(
+        _expiresAtMeta,
+        expiresAt.isAcceptableOrUnknown(data['expires_at']!, _expiresAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_expiresAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {userId, promptHash};
+  @override
+  AICacheEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AICacheEntry(
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      promptHash: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prompt_hash'],
+      )!,
+      response: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}response'],
+      )!,
+      expiresAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}expires_at'],
+      )!,
+    );
+  }
+
+  @override
+  $AICacheEntriesTable createAlias(String alias) {
+    return $AICacheEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class AICacheEntry extends DataClass implements Insertable<AICacheEntry> {
+  final String userId;
+  final String promptHash;
+  final String response;
+  final DateTime expiresAt;
+  const AICacheEntry({
+    required this.userId,
+    required this.promptHash,
+    required this.response,
+    required this.expiresAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['user_id'] = Variable<String>(userId);
+    map['prompt_hash'] = Variable<String>(promptHash);
+    map['response'] = Variable<String>(response);
+    map['expires_at'] = Variable<DateTime>(expiresAt);
+    return map;
+  }
+
+  AICacheEntriesCompanion toCompanion(bool nullToAbsent) {
+    return AICacheEntriesCompanion(
+      userId: Value(userId),
+      promptHash: Value(promptHash),
+      response: Value(response),
+      expiresAt: Value(expiresAt),
+    );
+  }
+
+  factory AICacheEntry.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AICacheEntry(
+      userId: serializer.fromJson<String>(json['userId']),
+      promptHash: serializer.fromJson<String>(json['promptHash']),
+      response: serializer.fromJson<String>(json['response']),
+      expiresAt: serializer.fromJson<DateTime>(json['expiresAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'userId': serializer.toJson<String>(userId),
+      'promptHash': serializer.toJson<String>(promptHash),
+      'response': serializer.toJson<String>(response),
+      'expiresAt': serializer.toJson<DateTime>(expiresAt),
+    };
+  }
+
+  AICacheEntry copyWith({
+    String? userId,
+    String? promptHash,
+    String? response,
+    DateTime? expiresAt,
+  }) => AICacheEntry(
+    userId: userId ?? this.userId,
+    promptHash: promptHash ?? this.promptHash,
+    response: response ?? this.response,
+    expiresAt: expiresAt ?? this.expiresAt,
+  );
+  AICacheEntry copyWithCompanion(AICacheEntriesCompanion data) {
+    return AICacheEntry(
+      userId: data.userId.present ? data.userId.value : this.userId,
+      promptHash: data.promptHash.present
+          ? data.promptHash.value
+          : this.promptHash,
+      response: data.response.present ? data.response.value : this.response,
+      expiresAt: data.expiresAt.present ? data.expiresAt.value : this.expiresAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AICacheEntry(')
+          ..write('userId: $userId, ')
+          ..write('promptHash: $promptHash, ')
+          ..write('response: $response, ')
+          ..write('expiresAt: $expiresAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(userId, promptHash, response, expiresAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AICacheEntry &&
+          other.userId == this.userId &&
+          other.promptHash == this.promptHash &&
+          other.response == this.response &&
+          other.expiresAt == this.expiresAt);
+}
+
+class AICacheEntriesCompanion extends UpdateCompanion<AICacheEntry> {
+  final Value<String> userId;
+  final Value<String> promptHash;
+  final Value<String> response;
+  final Value<DateTime> expiresAt;
+  final Value<int> rowid;
+  const AICacheEntriesCompanion({
+    this.userId = const Value.absent(),
+    this.promptHash = const Value.absent(),
+    this.response = const Value.absent(),
+    this.expiresAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  AICacheEntriesCompanion.insert({
+    required String userId,
+    required String promptHash,
+    required String response,
+    required DateTime expiresAt,
+    this.rowid = const Value.absent(),
+  }) : userId = Value(userId),
+       promptHash = Value(promptHash),
+       response = Value(response),
+       expiresAt = Value(expiresAt);
+  static Insertable<AICacheEntry> custom({
+    Expression<String>? userId,
+    Expression<String>? promptHash,
+    Expression<String>? response,
+    Expression<DateTime>? expiresAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (userId != null) 'user_id': userId,
+      if (promptHash != null) 'prompt_hash': promptHash,
+      if (response != null) 'response': response,
+      if (expiresAt != null) 'expires_at': expiresAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  AICacheEntriesCompanion copyWith({
+    Value<String>? userId,
+    Value<String>? promptHash,
+    Value<String>? response,
+    Value<DateTime>? expiresAt,
+    Value<int>? rowid,
+  }) {
+    return AICacheEntriesCompanion(
+      userId: userId ?? this.userId,
+      promptHash: promptHash ?? this.promptHash,
+      response: response ?? this.response,
+      expiresAt: expiresAt ?? this.expiresAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (promptHash.present) {
+      map['prompt_hash'] = Variable<String>(promptHash.value);
+    }
+    if (response.present) {
+      map['response'] = Variable<String>(response.value);
+    }
+    if (expiresAt.present) {
+      map['expires_at'] = Variable<DateTime>(expiresAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AICacheEntriesCompanion(')
+          ..write('userId: $userId, ')
+          ..write('promptHash: $promptHash, ')
+          ..write('response: $response, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3173,6 +3493,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $DeadLetterQueueItemsTable(this);
   late final $DailyIntelligencePackagesTable dailyIntelligencePackages =
       $DailyIntelligencePackagesTable(this);
+  late final $AICacheEntriesTable aICacheEntries = $AICacheEntriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3183,6 +3504,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     syncQueueItems,
     deadLetterQueueItems,
     dailyIntelligencePackages,
+    aICacheEntries,
   ];
 }
 
@@ -4725,6 +5047,191 @@ typedef $$DailyIntelligencePackagesTableProcessedTableManager =
       DailyIntelligencePackage,
       PrefetchHooks Function()
     >;
+typedef $$AICacheEntriesTableCreateCompanionBuilder =
+    AICacheEntriesCompanion Function({
+      required String userId,
+      required String promptHash,
+      required String response,
+      required DateTime expiresAt,
+      Value<int> rowid,
+    });
+typedef $$AICacheEntriesTableUpdateCompanionBuilder =
+    AICacheEntriesCompanion Function({
+      Value<String> userId,
+      Value<String> promptHash,
+      Value<String> response,
+      Value<DateTime> expiresAt,
+      Value<int> rowid,
+    });
+
+class $$AICacheEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $AICacheEntriesTable> {
+  $$AICacheEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get promptHash => $composableBuilder(
+    column: $table.promptHash,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get response => $composableBuilder(
+    column: $table.response,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$AICacheEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $AICacheEntriesTable> {
+  $$AICacheEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get promptHash => $composableBuilder(
+    column: $table.promptHash,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get response => $composableBuilder(
+    column: $table.response,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$AICacheEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AICacheEntriesTable> {
+  $$AICacheEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get promptHash => $composableBuilder(
+    column: $table.promptHash,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get response =>
+      $composableBuilder(column: $table.response, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiresAt =>
+      $composableBuilder(column: $table.expiresAt, builder: (column) => column);
+}
+
+class $$AICacheEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AICacheEntriesTable,
+          AICacheEntry,
+          $$AICacheEntriesTableFilterComposer,
+          $$AICacheEntriesTableOrderingComposer,
+          $$AICacheEntriesTableAnnotationComposer,
+          $$AICacheEntriesTableCreateCompanionBuilder,
+          $$AICacheEntriesTableUpdateCompanionBuilder,
+          (
+            AICacheEntry,
+            BaseReferences<_$AppDatabase, $AICacheEntriesTable, AICacheEntry>,
+          ),
+          AICacheEntry,
+          PrefetchHooks Function()
+        > {
+  $$AICacheEntriesTableTableManager(
+    _$AppDatabase db,
+    $AICacheEntriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AICacheEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AICacheEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AICacheEntriesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> userId = const Value.absent(),
+                Value<String> promptHash = const Value.absent(),
+                Value<String> response = const Value.absent(),
+                Value<DateTime> expiresAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => AICacheEntriesCompanion(
+                userId: userId,
+                promptHash: promptHash,
+                response: response,
+                expiresAt: expiresAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String userId,
+                required String promptHash,
+                required String response,
+                required DateTime expiresAt,
+                Value<int> rowid = const Value.absent(),
+              }) => AICacheEntriesCompanion.insert(
+                userId: userId,
+                promptHash: promptHash,
+                response: response,
+                expiresAt: expiresAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$AICacheEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AICacheEntriesTable,
+      AICacheEntry,
+      $$AICacheEntriesTableFilterComposer,
+      $$AICacheEntriesTableOrderingComposer,
+      $$AICacheEntriesTableAnnotationComposer,
+      $$AICacheEntriesTableCreateCompanionBuilder,
+      $$AICacheEntriesTableUpdateCompanionBuilder,
+      (
+        AICacheEntry,
+        BaseReferences<_$AppDatabase, $AICacheEntriesTable, AICacheEntry>,
+      ),
+      AICacheEntry,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4742,4 +5249,6 @@ class $AppDatabaseManager {
         _db,
         _db.dailyIntelligencePackages,
       );
+  $$AICacheEntriesTableTableManager get aICacheEntries =>
+      $$AICacheEntriesTableTableManager(_db, _db.aICacheEntries);
 }

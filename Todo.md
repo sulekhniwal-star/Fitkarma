@@ -41,10 +41,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build DIP → Drift sync queue integration
 
 ### §P0-F AI Routing Layer
-- [ ] Implement tiny/medium/large model tier classifier
-- [ ] Wire Groq API client with per-tier model selection
-- [ ] Implement AI response caching (see AI Cache Implementation below)
-- [ ] Add fallback/retry logic for AI call failures
+- [x] Implement tiny/medium/large model tier classifier
+- [x] Wire Groq API client with per-tier model selection
+- [x] Implement AI response caching (see AI Cache Implementation below)
+- [x] Add fallback/retry logic for AI call failures
 
 ### §P0-G Program Evolution Engine
 - [ ] Define program-phase transition rules

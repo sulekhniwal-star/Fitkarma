@@ -86,7 +86,18 @@ class DailyIntelligencePackages extends Table {
   Set<Column> get primaryKey => {localId};
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages])
+// 6. AI response Cache Table
+class AICacheEntries extends Table {
+  TextColumn get userId => text()();
+  TextColumn get promptHash => text()();
+  TextColumn get response => text()();
+  DateTimeColumn get expiresAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {userId, promptHash};
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
