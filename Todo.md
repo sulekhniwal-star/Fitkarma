@@ -35,10 +35,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build loading/empty/error state components used across all screens
 
 ### §P0-E Health OS Brain
-- [ ] Implement `computeHealthSnapshot()` (deterministic, no AI)
-- [ ] Implement `checkAITrigger()` decision logic
-- [ ] Implement Daily Intelligence Package (DIP) generation + storage
-- [ ] Build DIP → Drift sync queue integration
+- [x] Implement `computeHealthSnapshot()` (deterministic, no AI)
+- [x] Implement `checkAITrigger()` decision logic
+- [x] Implement Daily Intelligence Package (DIP) generation + storage
+- [x] Build DIP → Drift sync queue integration
 
 ### §P0-F AI Routing Layer
 - [ ] Implement tiny/medium/large model tier classifier

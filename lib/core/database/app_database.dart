@@ -57,7 +57,36 @@ class DeadLetterQueueItems extends Table {
   DateTimeColumn get failedAt => dateTime()();
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems])
+// 5. Daily Intelligence Packages
+class DailyIntelligencePackages extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get packageDate => dateTime()();
+  TextColumn get primaryInsight => text()();
+  TextColumn get todaysMission => text()();
+  TextColumn get nutritionFocus => text()();
+  TextColumn get recoveryFocus => text()();
+  TextColumn get motivationMessage => text()();
+  IntColumn get adjustedCalories => integer()();
+  IntColumn get adjustedProtein => integer()();
+  RealColumn get adjustedHydrationL => real()();
+  TextColumn get recommendedIntensity => text()();
+  BoolColumn get isRestDay => boolean().withDefault(const Constant(false))();
+  TextColumn get activeRisks => text()(); // JSON array
+  BoolColumn get showFestivalBanner => boolean().withDefault(const Constant(false))();
+  TextColumn get festivalAdaptation => text().nullable()();
+  BoolColumn get dietBreakActive => boolean().withDefault(const Constant(false))();
+  IntColumn get proteinTimingTarget => integer().withDefault(const Constant(25))();
+  TextColumn get loggingReliabilityStatus => text().withDefault(const Constant('high'))();
+  IntColumn get satietyTargetScore => integer().withDefault(const Constant(70))();
+  IntColumn get aiCallsUsed => integer().withDefault(const Constant(0))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);

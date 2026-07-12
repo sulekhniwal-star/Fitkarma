@@ -1857,6 +1857,1312 @@ class DeadLetterQueueItemsCompanion
   }
 }
 
+class $DailyIntelligencePackagesTable extends DailyIntelligencePackages
+    with TableInfo<$DailyIntelligencePackagesTable, DailyIntelligencePackage> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DailyIntelligencePackagesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _localIdMeta = const VerificationMeta(
+    'localId',
+  );
+  @override
+  late final GeneratedColumn<String> localId = GeneratedColumn<String>(
+    'local_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _packageDateMeta = const VerificationMeta(
+    'packageDate',
+  );
+  @override
+  late final GeneratedColumn<DateTime> packageDate = GeneratedColumn<DateTime>(
+    'package_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _primaryInsightMeta = const VerificationMeta(
+    'primaryInsight',
+  );
+  @override
+  late final GeneratedColumn<String> primaryInsight = GeneratedColumn<String>(
+    'primary_insight',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _todaysMissionMeta = const VerificationMeta(
+    'todaysMission',
+  );
+  @override
+  late final GeneratedColumn<String> todaysMission = GeneratedColumn<String>(
+    'todays_mission',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nutritionFocusMeta = const VerificationMeta(
+    'nutritionFocus',
+  );
+  @override
+  late final GeneratedColumn<String> nutritionFocus = GeneratedColumn<String>(
+    'nutrition_focus',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _recoveryFocusMeta = const VerificationMeta(
+    'recoveryFocus',
+  );
+  @override
+  late final GeneratedColumn<String> recoveryFocus = GeneratedColumn<String>(
+    'recovery_focus',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _motivationMessageMeta = const VerificationMeta(
+    'motivationMessage',
+  );
+  @override
+  late final GeneratedColumn<String> motivationMessage =
+      GeneratedColumn<String>(
+        'motivation_message',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _adjustedCaloriesMeta = const VerificationMeta(
+    'adjustedCalories',
+  );
+  @override
+  late final GeneratedColumn<int> adjustedCalories = GeneratedColumn<int>(
+    'adjusted_calories',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _adjustedProteinMeta = const VerificationMeta(
+    'adjustedProtein',
+  );
+  @override
+  late final GeneratedColumn<int> adjustedProtein = GeneratedColumn<int>(
+    'adjusted_protein',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _adjustedHydrationLMeta =
+      const VerificationMeta('adjustedHydrationL');
+  @override
+  late final GeneratedColumn<double> adjustedHydrationL =
+      GeneratedColumn<double>(
+        'adjusted_hydration_l',
+        aliasedName,
+        false,
+        type: DriftSqlType.double,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _recommendedIntensityMeta =
+      const VerificationMeta('recommendedIntensity');
+  @override
+  late final GeneratedColumn<String> recommendedIntensity =
+      GeneratedColumn<String>(
+        'recommended_intensity',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _isRestDayMeta = const VerificationMeta(
+    'isRestDay',
+  );
+  @override
+  late final GeneratedColumn<bool> isRestDay = GeneratedColumn<bool>(
+    'is_rest_day',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_rest_day" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _activeRisksMeta = const VerificationMeta(
+    'activeRisks',
+  );
+  @override
+  late final GeneratedColumn<String> activeRisks = GeneratedColumn<String>(
+    'active_risks',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _showFestivalBannerMeta =
+      const VerificationMeta('showFestivalBanner');
+  @override
+  late final GeneratedColumn<bool> showFestivalBanner = GeneratedColumn<bool>(
+    'show_festival_banner',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("show_festival_banner" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _festivalAdaptationMeta =
+      const VerificationMeta('festivalAdaptation');
+  @override
+  late final GeneratedColumn<String> festivalAdaptation =
+      GeneratedColumn<String>(
+        'festival_adaptation',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _dietBreakActiveMeta = const VerificationMeta(
+    'dietBreakActive',
+  );
+  @override
+  late final GeneratedColumn<bool> dietBreakActive = GeneratedColumn<bool>(
+    'diet_break_active',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("diet_break_active" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _proteinTimingTargetMeta =
+      const VerificationMeta('proteinTimingTarget');
+  @override
+  late final GeneratedColumn<int> proteinTimingTarget = GeneratedColumn<int>(
+    'protein_timing_target',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(25),
+  );
+  static const VerificationMeta _loggingReliabilityStatusMeta =
+      const VerificationMeta('loggingReliabilityStatus');
+  @override
+  late final GeneratedColumn<String> loggingReliabilityStatus =
+      GeneratedColumn<String>(
+        'logging_reliability_status',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('high'),
+      );
+  static const VerificationMeta _satietyTargetScoreMeta =
+      const VerificationMeta('satietyTargetScore');
+  @override
+  late final GeneratedColumn<int> satietyTargetScore = GeneratedColumn<int>(
+    'satiety_target_score',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(70),
+  );
+  static const VerificationMeta _aiCallsUsedMeta = const VerificationMeta(
+    'aiCallsUsed',
+  );
+  @override
+  late final GeneratedColumn<int> aiCallsUsed = GeneratedColumn<int>(
+    'ai_calls_used',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    localId,
+    userId,
+    packageDate,
+    primaryInsight,
+    todaysMission,
+    nutritionFocus,
+    recoveryFocus,
+    motivationMessage,
+    adjustedCalories,
+    adjustedProtein,
+    adjustedHydrationL,
+    recommendedIntensity,
+    isRestDay,
+    activeRisks,
+    showFestivalBanner,
+    festivalAdaptation,
+    dietBreakActive,
+    proteinTimingTarget,
+    loggingReliabilityStatus,
+    satietyTargetScore,
+    aiCallsUsed,
+    createdAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'daily_intelligence_packages';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DailyIntelligencePackage> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('local_id')) {
+      context.handle(
+        _localIdMeta,
+        localId.isAcceptableOrUnknown(data['local_id']!, _localIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_localIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('package_date')) {
+      context.handle(
+        _packageDateMeta,
+        packageDate.isAcceptableOrUnknown(
+          data['package_date']!,
+          _packageDateMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_packageDateMeta);
+    }
+    if (data.containsKey('primary_insight')) {
+      context.handle(
+        _primaryInsightMeta,
+        primaryInsight.isAcceptableOrUnknown(
+          data['primary_insight']!,
+          _primaryInsightMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_primaryInsightMeta);
+    }
+    if (data.containsKey('todays_mission')) {
+      context.handle(
+        _todaysMissionMeta,
+        todaysMission.isAcceptableOrUnknown(
+          data['todays_mission']!,
+          _todaysMissionMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_todaysMissionMeta);
+    }
+    if (data.containsKey('nutrition_focus')) {
+      context.handle(
+        _nutritionFocusMeta,
+        nutritionFocus.isAcceptableOrUnknown(
+          data['nutrition_focus']!,
+          _nutritionFocusMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_nutritionFocusMeta);
+    }
+    if (data.containsKey('recovery_focus')) {
+      context.handle(
+        _recoveryFocusMeta,
+        recoveryFocus.isAcceptableOrUnknown(
+          data['recovery_focus']!,
+          _recoveryFocusMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_recoveryFocusMeta);
+    }
+    if (data.containsKey('motivation_message')) {
+      context.handle(
+        _motivationMessageMeta,
+        motivationMessage.isAcceptableOrUnknown(
+          data['motivation_message']!,
+          _motivationMessageMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_motivationMessageMeta);
+    }
+    if (data.containsKey('adjusted_calories')) {
+      context.handle(
+        _adjustedCaloriesMeta,
+        adjustedCalories.isAcceptableOrUnknown(
+          data['adjusted_calories']!,
+          _adjustedCaloriesMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_adjustedCaloriesMeta);
+    }
+    if (data.containsKey('adjusted_protein')) {
+      context.handle(
+        _adjustedProteinMeta,
+        adjustedProtein.isAcceptableOrUnknown(
+          data['adjusted_protein']!,
+          _adjustedProteinMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_adjustedProteinMeta);
+    }
+    if (data.containsKey('adjusted_hydration_l')) {
+      context.handle(
+        _adjustedHydrationLMeta,
+        adjustedHydrationL.isAcceptableOrUnknown(
+          data['adjusted_hydration_l']!,
+          _adjustedHydrationLMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_adjustedHydrationLMeta);
+    }
+    if (data.containsKey('recommended_intensity')) {
+      context.handle(
+        _recommendedIntensityMeta,
+        recommendedIntensity.isAcceptableOrUnknown(
+          data['recommended_intensity']!,
+          _recommendedIntensityMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_recommendedIntensityMeta);
+    }
+    if (data.containsKey('is_rest_day')) {
+      context.handle(
+        _isRestDayMeta,
+        isRestDay.isAcceptableOrUnknown(data['is_rest_day']!, _isRestDayMeta),
+      );
+    }
+    if (data.containsKey('active_risks')) {
+      context.handle(
+        _activeRisksMeta,
+        activeRisks.isAcceptableOrUnknown(
+          data['active_risks']!,
+          _activeRisksMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_activeRisksMeta);
+    }
+    if (data.containsKey('show_festival_banner')) {
+      context.handle(
+        _showFestivalBannerMeta,
+        showFestivalBanner.isAcceptableOrUnknown(
+          data['show_festival_banner']!,
+          _showFestivalBannerMeta,
+        ),
+      );
+    }
+    if (data.containsKey('festival_adaptation')) {
+      context.handle(
+        _festivalAdaptationMeta,
+        festivalAdaptation.isAcceptableOrUnknown(
+          data['festival_adaptation']!,
+          _festivalAdaptationMeta,
+        ),
+      );
+    }
+    if (data.containsKey('diet_break_active')) {
+      context.handle(
+        _dietBreakActiveMeta,
+        dietBreakActive.isAcceptableOrUnknown(
+          data['diet_break_active']!,
+          _dietBreakActiveMeta,
+        ),
+      );
+    }
+    if (data.containsKey('protein_timing_target')) {
+      context.handle(
+        _proteinTimingTargetMeta,
+        proteinTimingTarget.isAcceptableOrUnknown(
+          data['protein_timing_target']!,
+          _proteinTimingTargetMeta,
+        ),
+      );
+    }
+    if (data.containsKey('logging_reliability_status')) {
+      context.handle(
+        _loggingReliabilityStatusMeta,
+        loggingReliabilityStatus.isAcceptableOrUnknown(
+          data['logging_reliability_status']!,
+          _loggingReliabilityStatusMeta,
+        ),
+      );
+    }
+    if (data.containsKey('satiety_target_score')) {
+      context.handle(
+        _satietyTargetScoreMeta,
+        satietyTargetScore.isAcceptableOrUnknown(
+          data['satiety_target_score']!,
+          _satietyTargetScoreMeta,
+        ),
+      );
+    }
+    if (data.containsKey('ai_calls_used')) {
+      context.handle(
+        _aiCallsUsedMeta,
+        aiCallsUsed.isAcceptableOrUnknown(
+          data['ai_calls_used']!,
+          _aiCallsUsedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {localId};
+  @override
+  DailyIntelligencePackage map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DailyIntelligencePackage(
+      localId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}local_id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      packageDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}package_date'],
+      )!,
+      primaryInsight: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}primary_insight'],
+      )!,
+      todaysMission: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}todays_mission'],
+      )!,
+      nutritionFocus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}nutrition_focus'],
+      )!,
+      recoveryFocus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recovery_focus'],
+      )!,
+      motivationMessage: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}motivation_message'],
+      )!,
+      adjustedCalories: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}adjusted_calories'],
+      )!,
+      adjustedProtein: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}adjusted_protein'],
+      )!,
+      adjustedHydrationL: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}adjusted_hydration_l'],
+      )!,
+      recommendedIntensity: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recommended_intensity'],
+      )!,
+      isRestDay: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_rest_day'],
+      )!,
+      activeRisks: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}active_risks'],
+      )!,
+      showFestivalBanner: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}show_festival_banner'],
+      )!,
+      festivalAdaptation: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}festival_adaptation'],
+      ),
+      dietBreakActive: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}diet_break_active'],
+      )!,
+      proteinTimingTarget: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}protein_timing_target'],
+      )!,
+      loggingReliabilityStatus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}logging_reliability_status'],
+      )!,
+      satietyTargetScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}satiety_target_score'],
+      )!,
+      aiCallsUsed: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}ai_calls_used'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $DailyIntelligencePackagesTable createAlias(String alias) {
+    return $DailyIntelligencePackagesTable(attachedDatabase, alias);
+  }
+}
+
+class DailyIntelligencePackage extends DataClass
+    implements Insertable<DailyIntelligencePackage> {
+  final String localId;
+  final String userId;
+  final DateTime packageDate;
+  final String primaryInsight;
+  final String todaysMission;
+  final String nutritionFocus;
+  final String recoveryFocus;
+  final String motivationMessage;
+  final int adjustedCalories;
+  final int adjustedProtein;
+  final double adjustedHydrationL;
+  final String recommendedIntensity;
+  final bool isRestDay;
+  final String activeRisks;
+  final bool showFestivalBanner;
+  final String? festivalAdaptation;
+  final bool dietBreakActive;
+  final int proteinTimingTarget;
+  final String loggingReliabilityStatus;
+  final int satietyTargetScore;
+  final int aiCallsUsed;
+  final DateTime createdAt;
+  const DailyIntelligencePackage({
+    required this.localId,
+    required this.userId,
+    required this.packageDate,
+    required this.primaryInsight,
+    required this.todaysMission,
+    required this.nutritionFocus,
+    required this.recoveryFocus,
+    required this.motivationMessage,
+    required this.adjustedCalories,
+    required this.adjustedProtein,
+    required this.adjustedHydrationL,
+    required this.recommendedIntensity,
+    required this.isRestDay,
+    required this.activeRisks,
+    required this.showFestivalBanner,
+    this.festivalAdaptation,
+    required this.dietBreakActive,
+    required this.proteinTimingTarget,
+    required this.loggingReliabilityStatus,
+    required this.satietyTargetScore,
+    required this.aiCallsUsed,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['local_id'] = Variable<String>(localId);
+    map['user_id'] = Variable<String>(userId);
+    map['package_date'] = Variable<DateTime>(packageDate);
+    map['primary_insight'] = Variable<String>(primaryInsight);
+    map['todays_mission'] = Variable<String>(todaysMission);
+    map['nutrition_focus'] = Variable<String>(nutritionFocus);
+    map['recovery_focus'] = Variable<String>(recoveryFocus);
+    map['motivation_message'] = Variable<String>(motivationMessage);
+    map['adjusted_calories'] = Variable<int>(adjustedCalories);
+    map['adjusted_protein'] = Variable<int>(adjustedProtein);
+    map['adjusted_hydration_l'] = Variable<double>(adjustedHydrationL);
+    map['recommended_intensity'] = Variable<String>(recommendedIntensity);
+    map['is_rest_day'] = Variable<bool>(isRestDay);
+    map['active_risks'] = Variable<String>(activeRisks);
+    map['show_festival_banner'] = Variable<bool>(showFestivalBanner);
+    if (!nullToAbsent || festivalAdaptation != null) {
+      map['festival_adaptation'] = Variable<String>(festivalAdaptation);
+    }
+    map['diet_break_active'] = Variable<bool>(dietBreakActive);
+    map['protein_timing_target'] = Variable<int>(proteinTimingTarget);
+    map['logging_reliability_status'] = Variable<String>(
+      loggingReliabilityStatus,
+    );
+    map['satiety_target_score'] = Variable<int>(satietyTargetScore);
+    map['ai_calls_used'] = Variable<int>(aiCallsUsed);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  DailyIntelligencePackagesCompanion toCompanion(bool nullToAbsent) {
+    return DailyIntelligencePackagesCompanion(
+      localId: Value(localId),
+      userId: Value(userId),
+      packageDate: Value(packageDate),
+      primaryInsight: Value(primaryInsight),
+      todaysMission: Value(todaysMission),
+      nutritionFocus: Value(nutritionFocus),
+      recoveryFocus: Value(recoveryFocus),
+      motivationMessage: Value(motivationMessage),
+      adjustedCalories: Value(adjustedCalories),
+      adjustedProtein: Value(adjustedProtein),
+      adjustedHydrationL: Value(adjustedHydrationL),
+      recommendedIntensity: Value(recommendedIntensity),
+      isRestDay: Value(isRestDay),
+      activeRisks: Value(activeRisks),
+      showFestivalBanner: Value(showFestivalBanner),
+      festivalAdaptation: festivalAdaptation == null && nullToAbsent
+          ? const Value.absent()
+          : Value(festivalAdaptation),
+      dietBreakActive: Value(dietBreakActive),
+      proteinTimingTarget: Value(proteinTimingTarget),
+      loggingReliabilityStatus: Value(loggingReliabilityStatus),
+      satietyTargetScore: Value(satietyTargetScore),
+      aiCallsUsed: Value(aiCallsUsed),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory DailyIntelligencePackage.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DailyIntelligencePackage(
+      localId: serializer.fromJson<String>(json['localId']),
+      userId: serializer.fromJson<String>(json['userId']),
+      packageDate: serializer.fromJson<DateTime>(json['packageDate']),
+      primaryInsight: serializer.fromJson<String>(json['primaryInsight']),
+      todaysMission: serializer.fromJson<String>(json['todaysMission']),
+      nutritionFocus: serializer.fromJson<String>(json['nutritionFocus']),
+      recoveryFocus: serializer.fromJson<String>(json['recoveryFocus']),
+      motivationMessage: serializer.fromJson<String>(json['motivationMessage']),
+      adjustedCalories: serializer.fromJson<int>(json['adjustedCalories']),
+      adjustedProtein: serializer.fromJson<int>(json['adjustedProtein']),
+      adjustedHydrationL: serializer.fromJson<double>(
+        json['adjustedHydrationL'],
+      ),
+      recommendedIntensity: serializer.fromJson<String>(
+        json['recommendedIntensity'],
+      ),
+      isRestDay: serializer.fromJson<bool>(json['isRestDay']),
+      activeRisks: serializer.fromJson<String>(json['activeRisks']),
+      showFestivalBanner: serializer.fromJson<bool>(json['showFestivalBanner']),
+      festivalAdaptation: serializer.fromJson<String?>(
+        json['festivalAdaptation'],
+      ),
+      dietBreakActive: serializer.fromJson<bool>(json['dietBreakActive']),
+      proteinTimingTarget: serializer.fromJson<int>(
+        json['proteinTimingTarget'],
+      ),
+      loggingReliabilityStatus: serializer.fromJson<String>(
+        json['loggingReliabilityStatus'],
+      ),
+      satietyTargetScore: serializer.fromJson<int>(json['satietyTargetScore']),
+      aiCallsUsed: serializer.fromJson<int>(json['aiCallsUsed']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'localId': serializer.toJson<String>(localId),
+      'userId': serializer.toJson<String>(userId),
+      'packageDate': serializer.toJson<DateTime>(packageDate),
+      'primaryInsight': serializer.toJson<String>(primaryInsight),
+      'todaysMission': serializer.toJson<String>(todaysMission),
+      'nutritionFocus': serializer.toJson<String>(nutritionFocus),
+      'recoveryFocus': serializer.toJson<String>(recoveryFocus),
+      'motivationMessage': serializer.toJson<String>(motivationMessage),
+      'adjustedCalories': serializer.toJson<int>(adjustedCalories),
+      'adjustedProtein': serializer.toJson<int>(adjustedProtein),
+      'adjustedHydrationL': serializer.toJson<double>(adjustedHydrationL),
+      'recommendedIntensity': serializer.toJson<String>(recommendedIntensity),
+      'isRestDay': serializer.toJson<bool>(isRestDay),
+      'activeRisks': serializer.toJson<String>(activeRisks),
+      'showFestivalBanner': serializer.toJson<bool>(showFestivalBanner),
+      'festivalAdaptation': serializer.toJson<String?>(festivalAdaptation),
+      'dietBreakActive': serializer.toJson<bool>(dietBreakActive),
+      'proteinTimingTarget': serializer.toJson<int>(proteinTimingTarget),
+      'loggingReliabilityStatus': serializer.toJson<String>(
+        loggingReliabilityStatus,
+      ),
+      'satietyTargetScore': serializer.toJson<int>(satietyTargetScore),
+      'aiCallsUsed': serializer.toJson<int>(aiCallsUsed),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  DailyIntelligencePackage copyWith({
+    String? localId,
+    String? userId,
+    DateTime? packageDate,
+    String? primaryInsight,
+    String? todaysMission,
+    String? nutritionFocus,
+    String? recoveryFocus,
+    String? motivationMessage,
+    int? adjustedCalories,
+    int? adjustedProtein,
+    double? adjustedHydrationL,
+    String? recommendedIntensity,
+    bool? isRestDay,
+    String? activeRisks,
+    bool? showFestivalBanner,
+    Value<String?> festivalAdaptation = const Value.absent(),
+    bool? dietBreakActive,
+    int? proteinTimingTarget,
+    String? loggingReliabilityStatus,
+    int? satietyTargetScore,
+    int? aiCallsUsed,
+    DateTime? createdAt,
+  }) => DailyIntelligencePackage(
+    localId: localId ?? this.localId,
+    userId: userId ?? this.userId,
+    packageDate: packageDate ?? this.packageDate,
+    primaryInsight: primaryInsight ?? this.primaryInsight,
+    todaysMission: todaysMission ?? this.todaysMission,
+    nutritionFocus: nutritionFocus ?? this.nutritionFocus,
+    recoveryFocus: recoveryFocus ?? this.recoveryFocus,
+    motivationMessage: motivationMessage ?? this.motivationMessage,
+    adjustedCalories: adjustedCalories ?? this.adjustedCalories,
+    adjustedProtein: adjustedProtein ?? this.adjustedProtein,
+    adjustedHydrationL: adjustedHydrationL ?? this.adjustedHydrationL,
+    recommendedIntensity: recommendedIntensity ?? this.recommendedIntensity,
+    isRestDay: isRestDay ?? this.isRestDay,
+    activeRisks: activeRisks ?? this.activeRisks,
+    showFestivalBanner: showFestivalBanner ?? this.showFestivalBanner,
+    festivalAdaptation: festivalAdaptation.present
+        ? festivalAdaptation.value
+        : this.festivalAdaptation,
+    dietBreakActive: dietBreakActive ?? this.dietBreakActive,
+    proteinTimingTarget: proteinTimingTarget ?? this.proteinTimingTarget,
+    loggingReliabilityStatus:
+        loggingReliabilityStatus ?? this.loggingReliabilityStatus,
+    satietyTargetScore: satietyTargetScore ?? this.satietyTargetScore,
+    aiCallsUsed: aiCallsUsed ?? this.aiCallsUsed,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  DailyIntelligencePackage copyWithCompanion(
+    DailyIntelligencePackagesCompanion data,
+  ) {
+    return DailyIntelligencePackage(
+      localId: data.localId.present ? data.localId.value : this.localId,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      packageDate: data.packageDate.present
+          ? data.packageDate.value
+          : this.packageDate,
+      primaryInsight: data.primaryInsight.present
+          ? data.primaryInsight.value
+          : this.primaryInsight,
+      todaysMission: data.todaysMission.present
+          ? data.todaysMission.value
+          : this.todaysMission,
+      nutritionFocus: data.nutritionFocus.present
+          ? data.nutritionFocus.value
+          : this.nutritionFocus,
+      recoveryFocus: data.recoveryFocus.present
+          ? data.recoveryFocus.value
+          : this.recoveryFocus,
+      motivationMessage: data.motivationMessage.present
+          ? data.motivationMessage.value
+          : this.motivationMessage,
+      adjustedCalories: data.adjustedCalories.present
+          ? data.adjustedCalories.value
+          : this.adjustedCalories,
+      adjustedProtein: data.adjustedProtein.present
+          ? data.adjustedProtein.value
+          : this.adjustedProtein,
+      adjustedHydrationL: data.adjustedHydrationL.present
+          ? data.adjustedHydrationL.value
+          : this.adjustedHydrationL,
+      recommendedIntensity: data.recommendedIntensity.present
+          ? data.recommendedIntensity.value
+          : this.recommendedIntensity,
+      isRestDay: data.isRestDay.present ? data.isRestDay.value : this.isRestDay,
+      activeRisks: data.activeRisks.present
+          ? data.activeRisks.value
+          : this.activeRisks,
+      showFestivalBanner: data.showFestivalBanner.present
+          ? data.showFestivalBanner.value
+          : this.showFestivalBanner,
+      festivalAdaptation: data.festivalAdaptation.present
+          ? data.festivalAdaptation.value
+          : this.festivalAdaptation,
+      dietBreakActive: data.dietBreakActive.present
+          ? data.dietBreakActive.value
+          : this.dietBreakActive,
+      proteinTimingTarget: data.proteinTimingTarget.present
+          ? data.proteinTimingTarget.value
+          : this.proteinTimingTarget,
+      loggingReliabilityStatus: data.loggingReliabilityStatus.present
+          ? data.loggingReliabilityStatus.value
+          : this.loggingReliabilityStatus,
+      satietyTargetScore: data.satietyTargetScore.present
+          ? data.satietyTargetScore.value
+          : this.satietyTargetScore,
+      aiCallsUsed: data.aiCallsUsed.present
+          ? data.aiCallsUsed.value
+          : this.aiCallsUsed,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyIntelligencePackage(')
+          ..write('localId: $localId, ')
+          ..write('userId: $userId, ')
+          ..write('packageDate: $packageDate, ')
+          ..write('primaryInsight: $primaryInsight, ')
+          ..write('todaysMission: $todaysMission, ')
+          ..write('nutritionFocus: $nutritionFocus, ')
+          ..write('recoveryFocus: $recoveryFocus, ')
+          ..write('motivationMessage: $motivationMessage, ')
+          ..write('adjustedCalories: $adjustedCalories, ')
+          ..write('adjustedProtein: $adjustedProtein, ')
+          ..write('adjustedHydrationL: $adjustedHydrationL, ')
+          ..write('recommendedIntensity: $recommendedIntensity, ')
+          ..write('isRestDay: $isRestDay, ')
+          ..write('activeRisks: $activeRisks, ')
+          ..write('showFestivalBanner: $showFestivalBanner, ')
+          ..write('festivalAdaptation: $festivalAdaptation, ')
+          ..write('dietBreakActive: $dietBreakActive, ')
+          ..write('proteinTimingTarget: $proteinTimingTarget, ')
+          ..write('loggingReliabilityStatus: $loggingReliabilityStatus, ')
+          ..write('satietyTargetScore: $satietyTargetScore, ')
+          ..write('aiCallsUsed: $aiCallsUsed, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+    localId,
+    userId,
+    packageDate,
+    primaryInsight,
+    todaysMission,
+    nutritionFocus,
+    recoveryFocus,
+    motivationMessage,
+    adjustedCalories,
+    adjustedProtein,
+    adjustedHydrationL,
+    recommendedIntensity,
+    isRestDay,
+    activeRisks,
+    showFestivalBanner,
+    festivalAdaptation,
+    dietBreakActive,
+    proteinTimingTarget,
+    loggingReliabilityStatus,
+    satietyTargetScore,
+    aiCallsUsed,
+    createdAt,
+  ]);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DailyIntelligencePackage &&
+          other.localId == this.localId &&
+          other.userId == this.userId &&
+          other.packageDate == this.packageDate &&
+          other.primaryInsight == this.primaryInsight &&
+          other.todaysMission == this.todaysMission &&
+          other.nutritionFocus == this.nutritionFocus &&
+          other.recoveryFocus == this.recoveryFocus &&
+          other.motivationMessage == this.motivationMessage &&
+          other.adjustedCalories == this.adjustedCalories &&
+          other.adjustedProtein == this.adjustedProtein &&
+          other.adjustedHydrationL == this.adjustedHydrationL &&
+          other.recommendedIntensity == this.recommendedIntensity &&
+          other.isRestDay == this.isRestDay &&
+          other.activeRisks == this.activeRisks &&
+          other.showFestivalBanner == this.showFestivalBanner &&
+          other.festivalAdaptation == this.festivalAdaptation &&
+          other.dietBreakActive == this.dietBreakActive &&
+          other.proteinTimingTarget == this.proteinTimingTarget &&
+          other.loggingReliabilityStatus == this.loggingReliabilityStatus &&
+          other.satietyTargetScore == this.satietyTargetScore &&
+          other.aiCallsUsed == this.aiCallsUsed &&
+          other.createdAt == this.createdAt);
+}
+
+class DailyIntelligencePackagesCompanion
+    extends UpdateCompanion<DailyIntelligencePackage> {
+  final Value<String> localId;
+  final Value<String> userId;
+  final Value<DateTime> packageDate;
+  final Value<String> primaryInsight;
+  final Value<String> todaysMission;
+  final Value<String> nutritionFocus;
+  final Value<String> recoveryFocus;
+  final Value<String> motivationMessage;
+  final Value<int> adjustedCalories;
+  final Value<int> adjustedProtein;
+  final Value<double> adjustedHydrationL;
+  final Value<String> recommendedIntensity;
+  final Value<bool> isRestDay;
+  final Value<String> activeRisks;
+  final Value<bool> showFestivalBanner;
+  final Value<String?> festivalAdaptation;
+  final Value<bool> dietBreakActive;
+  final Value<int> proteinTimingTarget;
+  final Value<String> loggingReliabilityStatus;
+  final Value<int> satietyTargetScore;
+  final Value<int> aiCallsUsed;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const DailyIntelligencePackagesCompanion({
+    this.localId = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.packageDate = const Value.absent(),
+    this.primaryInsight = const Value.absent(),
+    this.todaysMission = const Value.absent(),
+    this.nutritionFocus = const Value.absent(),
+    this.recoveryFocus = const Value.absent(),
+    this.motivationMessage = const Value.absent(),
+    this.adjustedCalories = const Value.absent(),
+    this.adjustedProtein = const Value.absent(),
+    this.adjustedHydrationL = const Value.absent(),
+    this.recommendedIntensity = const Value.absent(),
+    this.isRestDay = const Value.absent(),
+    this.activeRisks = const Value.absent(),
+    this.showFestivalBanner = const Value.absent(),
+    this.festivalAdaptation = const Value.absent(),
+    this.dietBreakActive = const Value.absent(),
+    this.proteinTimingTarget = const Value.absent(),
+    this.loggingReliabilityStatus = const Value.absent(),
+    this.satietyTargetScore = const Value.absent(),
+    this.aiCallsUsed = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DailyIntelligencePackagesCompanion.insert({
+    required String localId,
+    required String userId,
+    required DateTime packageDate,
+    required String primaryInsight,
+    required String todaysMission,
+    required String nutritionFocus,
+    required String recoveryFocus,
+    required String motivationMessage,
+    required int adjustedCalories,
+    required int adjustedProtein,
+    required double adjustedHydrationL,
+    required String recommendedIntensity,
+    this.isRestDay = const Value.absent(),
+    required String activeRisks,
+    this.showFestivalBanner = const Value.absent(),
+    this.festivalAdaptation = const Value.absent(),
+    this.dietBreakActive = const Value.absent(),
+    this.proteinTimingTarget = const Value.absent(),
+    this.loggingReliabilityStatus = const Value.absent(),
+    this.satietyTargetScore = const Value.absent(),
+    this.aiCallsUsed = const Value.absent(),
+    required DateTime createdAt,
+    this.rowid = const Value.absent(),
+  }) : localId = Value(localId),
+       userId = Value(userId),
+       packageDate = Value(packageDate),
+       primaryInsight = Value(primaryInsight),
+       todaysMission = Value(todaysMission),
+       nutritionFocus = Value(nutritionFocus),
+       recoveryFocus = Value(recoveryFocus),
+       motivationMessage = Value(motivationMessage),
+       adjustedCalories = Value(adjustedCalories),
+       adjustedProtein = Value(adjustedProtein),
+       adjustedHydrationL = Value(adjustedHydrationL),
+       recommendedIntensity = Value(recommendedIntensity),
+       activeRisks = Value(activeRisks),
+       createdAt = Value(createdAt);
+  static Insertable<DailyIntelligencePackage> custom({
+    Expression<String>? localId,
+    Expression<String>? userId,
+    Expression<DateTime>? packageDate,
+    Expression<String>? primaryInsight,
+    Expression<String>? todaysMission,
+    Expression<String>? nutritionFocus,
+    Expression<String>? recoveryFocus,
+    Expression<String>? motivationMessage,
+    Expression<int>? adjustedCalories,
+    Expression<int>? adjustedProtein,
+    Expression<double>? adjustedHydrationL,
+    Expression<String>? recommendedIntensity,
+    Expression<bool>? isRestDay,
+    Expression<String>? activeRisks,
+    Expression<bool>? showFestivalBanner,
+    Expression<String>? festivalAdaptation,
+    Expression<bool>? dietBreakActive,
+    Expression<int>? proteinTimingTarget,
+    Expression<String>? loggingReliabilityStatus,
+    Expression<int>? satietyTargetScore,
+    Expression<int>? aiCallsUsed,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (localId != null) 'local_id': localId,
+      if (userId != null) 'user_id': userId,
+      if (packageDate != null) 'package_date': packageDate,
+      if (primaryInsight != null) 'primary_insight': primaryInsight,
+      if (todaysMission != null) 'todays_mission': todaysMission,
+      if (nutritionFocus != null) 'nutrition_focus': nutritionFocus,
+      if (recoveryFocus != null) 'recovery_focus': recoveryFocus,
+      if (motivationMessage != null) 'motivation_message': motivationMessage,
+      if (adjustedCalories != null) 'adjusted_calories': adjustedCalories,
+      if (adjustedProtein != null) 'adjusted_protein': adjustedProtein,
+      if (adjustedHydrationL != null)
+        'adjusted_hydration_l': adjustedHydrationL,
+      if (recommendedIntensity != null)
+        'recommended_intensity': recommendedIntensity,
+      if (isRestDay != null) 'is_rest_day': isRestDay,
+      if (activeRisks != null) 'active_risks': activeRisks,
+      if (showFestivalBanner != null)
+        'show_festival_banner': showFestivalBanner,
+      if (festivalAdaptation != null) 'festival_adaptation': festivalAdaptation,
+      if (dietBreakActive != null) 'diet_break_active': dietBreakActive,
+      if (proteinTimingTarget != null)
+        'protein_timing_target': proteinTimingTarget,
+      if (loggingReliabilityStatus != null)
+        'logging_reliability_status': loggingReliabilityStatus,
+      if (satietyTargetScore != null)
+        'satiety_target_score': satietyTargetScore,
+      if (aiCallsUsed != null) 'ai_calls_used': aiCallsUsed,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DailyIntelligencePackagesCompanion copyWith({
+    Value<String>? localId,
+    Value<String>? userId,
+    Value<DateTime>? packageDate,
+    Value<String>? primaryInsight,
+    Value<String>? todaysMission,
+    Value<String>? nutritionFocus,
+    Value<String>? recoveryFocus,
+    Value<String>? motivationMessage,
+    Value<int>? adjustedCalories,
+    Value<int>? adjustedProtein,
+    Value<double>? adjustedHydrationL,
+    Value<String>? recommendedIntensity,
+    Value<bool>? isRestDay,
+    Value<String>? activeRisks,
+    Value<bool>? showFestivalBanner,
+    Value<String?>? festivalAdaptation,
+    Value<bool>? dietBreakActive,
+    Value<int>? proteinTimingTarget,
+    Value<String>? loggingReliabilityStatus,
+    Value<int>? satietyTargetScore,
+    Value<int>? aiCallsUsed,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
+    return DailyIntelligencePackagesCompanion(
+      localId: localId ?? this.localId,
+      userId: userId ?? this.userId,
+      packageDate: packageDate ?? this.packageDate,
+      primaryInsight: primaryInsight ?? this.primaryInsight,
+      todaysMission: todaysMission ?? this.todaysMission,
+      nutritionFocus: nutritionFocus ?? this.nutritionFocus,
+      recoveryFocus: recoveryFocus ?? this.recoveryFocus,
+      motivationMessage: motivationMessage ?? this.motivationMessage,
+      adjustedCalories: adjustedCalories ?? this.adjustedCalories,
+      adjustedProtein: adjustedProtein ?? this.adjustedProtein,
+      adjustedHydrationL: adjustedHydrationL ?? this.adjustedHydrationL,
+      recommendedIntensity: recommendedIntensity ?? this.recommendedIntensity,
+      isRestDay: isRestDay ?? this.isRestDay,
+      activeRisks: activeRisks ?? this.activeRisks,
+      showFestivalBanner: showFestivalBanner ?? this.showFestivalBanner,
+      festivalAdaptation: festivalAdaptation ?? this.festivalAdaptation,
+      dietBreakActive: dietBreakActive ?? this.dietBreakActive,
+      proteinTimingTarget: proteinTimingTarget ?? this.proteinTimingTarget,
+      loggingReliabilityStatus:
+          loggingReliabilityStatus ?? this.loggingReliabilityStatus,
+      satietyTargetScore: satietyTargetScore ?? this.satietyTargetScore,
+      aiCallsUsed: aiCallsUsed ?? this.aiCallsUsed,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (localId.present) {
+      map['local_id'] = Variable<String>(localId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (packageDate.present) {
+      map['package_date'] = Variable<DateTime>(packageDate.value);
+    }
+    if (primaryInsight.present) {
+      map['primary_insight'] = Variable<String>(primaryInsight.value);
+    }
+    if (todaysMission.present) {
+      map['todays_mission'] = Variable<String>(todaysMission.value);
+    }
+    if (nutritionFocus.present) {
+      map['nutrition_focus'] = Variable<String>(nutritionFocus.value);
+    }
+    if (recoveryFocus.present) {
+      map['recovery_focus'] = Variable<String>(recoveryFocus.value);
+    }
+    if (motivationMessage.present) {
+      map['motivation_message'] = Variable<String>(motivationMessage.value);
+    }
+    if (adjustedCalories.present) {
+      map['adjusted_calories'] = Variable<int>(adjustedCalories.value);
+    }
+    if (adjustedProtein.present) {
+      map['adjusted_protein'] = Variable<int>(adjustedProtein.value);
+    }
+    if (adjustedHydrationL.present) {
+      map['adjusted_hydration_l'] = Variable<double>(adjustedHydrationL.value);
+    }
+    if (recommendedIntensity.present) {
+      map['recommended_intensity'] = Variable<String>(
+        recommendedIntensity.value,
+      );
+    }
+    if (isRestDay.present) {
+      map['is_rest_day'] = Variable<bool>(isRestDay.value);
+    }
+    if (activeRisks.present) {
+      map['active_risks'] = Variable<String>(activeRisks.value);
+    }
+    if (showFestivalBanner.present) {
+      map['show_festival_banner'] = Variable<bool>(showFestivalBanner.value);
+    }
+    if (festivalAdaptation.present) {
+      map['festival_adaptation'] = Variable<String>(festivalAdaptation.value);
+    }
+    if (dietBreakActive.present) {
+      map['diet_break_active'] = Variable<bool>(dietBreakActive.value);
+    }
+    if (proteinTimingTarget.present) {
+      map['protein_timing_target'] = Variable<int>(proteinTimingTarget.value);
+    }
+    if (loggingReliabilityStatus.present) {
+      map['logging_reliability_status'] = Variable<String>(
+        loggingReliabilityStatus.value,
+      );
+    }
+    if (satietyTargetScore.present) {
+      map['satiety_target_score'] = Variable<int>(satietyTargetScore.value);
+    }
+    if (aiCallsUsed.present) {
+      map['ai_calls_used'] = Variable<int>(aiCallsUsed.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyIntelligencePackagesCompanion(')
+          ..write('localId: $localId, ')
+          ..write('userId: $userId, ')
+          ..write('packageDate: $packageDate, ')
+          ..write('primaryInsight: $primaryInsight, ')
+          ..write('todaysMission: $todaysMission, ')
+          ..write('nutritionFocus: $nutritionFocus, ')
+          ..write('recoveryFocus: $recoveryFocus, ')
+          ..write('motivationMessage: $motivationMessage, ')
+          ..write('adjustedCalories: $adjustedCalories, ')
+          ..write('adjustedProtein: $adjustedProtein, ')
+          ..write('adjustedHydrationL: $adjustedHydrationL, ')
+          ..write('recommendedIntensity: $recommendedIntensity, ')
+          ..write('isRestDay: $isRestDay, ')
+          ..write('activeRisks: $activeRisks, ')
+          ..write('showFestivalBanner: $showFestivalBanner, ')
+          ..write('festivalAdaptation: $festivalAdaptation, ')
+          ..write('dietBreakActive: $dietBreakActive, ')
+          ..write('proteinTimingTarget: $proteinTimingTarget, ')
+          ..write('loggingReliabilityStatus: $loggingReliabilityStatus, ')
+          ..write('satietyTargetScore: $satietyTargetScore, ')
+          ..write('aiCallsUsed: $aiCallsUsed, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1865,6 +3171,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $SyncQueueItemsTable syncQueueItems = $SyncQueueItemsTable(this);
   late final $DeadLetterQueueItemsTable deadLetterQueueItems =
       $DeadLetterQueueItemsTable(this);
+  late final $DailyIntelligencePackagesTable dailyIntelligencePackages =
+      $DailyIntelligencePackagesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1874,6 +3182,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     waterLogs,
     syncQueueItems,
     deadLetterQueueItems,
+    dailyIntelligencePackages,
   ];
 }
 
@@ -2838,6 +4147,584 @@ typedef $$DeadLetterQueueItemsTableProcessedTableManager =
       DeadLetterQueueItem,
       PrefetchHooks Function()
     >;
+typedef $$DailyIntelligencePackagesTableCreateCompanionBuilder =
+    DailyIntelligencePackagesCompanion Function({
+      required String localId,
+      required String userId,
+      required DateTime packageDate,
+      required String primaryInsight,
+      required String todaysMission,
+      required String nutritionFocus,
+      required String recoveryFocus,
+      required String motivationMessage,
+      required int adjustedCalories,
+      required int adjustedProtein,
+      required double adjustedHydrationL,
+      required String recommendedIntensity,
+      Value<bool> isRestDay,
+      required String activeRisks,
+      Value<bool> showFestivalBanner,
+      Value<String?> festivalAdaptation,
+      Value<bool> dietBreakActive,
+      Value<int> proteinTimingTarget,
+      Value<String> loggingReliabilityStatus,
+      Value<int> satietyTargetScore,
+      Value<int> aiCallsUsed,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$DailyIntelligencePackagesTableUpdateCompanionBuilder =
+    DailyIntelligencePackagesCompanion Function({
+      Value<String> localId,
+      Value<String> userId,
+      Value<DateTime> packageDate,
+      Value<String> primaryInsight,
+      Value<String> todaysMission,
+      Value<String> nutritionFocus,
+      Value<String> recoveryFocus,
+      Value<String> motivationMessage,
+      Value<int> adjustedCalories,
+      Value<int> adjustedProtein,
+      Value<double> adjustedHydrationL,
+      Value<String> recommendedIntensity,
+      Value<bool> isRestDay,
+      Value<String> activeRisks,
+      Value<bool> showFestivalBanner,
+      Value<String?> festivalAdaptation,
+      Value<bool> dietBreakActive,
+      Value<int> proteinTimingTarget,
+      Value<String> loggingReliabilityStatus,
+      Value<int> satietyTargetScore,
+      Value<int> aiCallsUsed,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+class $$DailyIntelligencePackagesTableFilterComposer
+    extends Composer<_$AppDatabase, $DailyIntelligencePackagesTable> {
+  $$DailyIntelligencePackagesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get localId => $composableBuilder(
+    column: $table.localId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get packageDate => $composableBuilder(
+    column: $table.packageDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get primaryInsight => $composableBuilder(
+    column: $table.primaryInsight,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get todaysMission => $composableBuilder(
+    column: $table.todaysMission,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get nutritionFocus => $composableBuilder(
+    column: $table.nutritionFocus,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get recoveryFocus => $composableBuilder(
+    column: $table.recoveryFocus,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get motivationMessage => $composableBuilder(
+    column: $table.motivationMessage,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get adjustedCalories => $composableBuilder(
+    column: $table.adjustedCalories,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get adjustedProtein => $composableBuilder(
+    column: $table.adjustedProtein,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get adjustedHydrationL => $composableBuilder(
+    column: $table.adjustedHydrationL,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get recommendedIntensity => $composableBuilder(
+    column: $table.recommendedIntensity,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isRestDay => $composableBuilder(
+    column: $table.isRestDay,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get activeRisks => $composableBuilder(
+    column: $table.activeRisks,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get showFestivalBanner => $composableBuilder(
+    column: $table.showFestivalBanner,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get festivalAdaptation => $composableBuilder(
+    column: $table.festivalAdaptation,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get dietBreakActive => $composableBuilder(
+    column: $table.dietBreakActive,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get proteinTimingTarget => $composableBuilder(
+    column: $table.proteinTimingTarget,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get loggingReliabilityStatus => $composableBuilder(
+    column: $table.loggingReliabilityStatus,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get satietyTargetScore => $composableBuilder(
+    column: $table.satietyTargetScore,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get aiCallsUsed => $composableBuilder(
+    column: $table.aiCallsUsed,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DailyIntelligencePackagesTableOrderingComposer
+    extends Composer<_$AppDatabase, $DailyIntelligencePackagesTable> {
+  $$DailyIntelligencePackagesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get localId => $composableBuilder(
+    column: $table.localId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get packageDate => $composableBuilder(
+    column: $table.packageDate,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get primaryInsight => $composableBuilder(
+    column: $table.primaryInsight,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get todaysMission => $composableBuilder(
+    column: $table.todaysMission,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get nutritionFocus => $composableBuilder(
+    column: $table.nutritionFocus,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get recoveryFocus => $composableBuilder(
+    column: $table.recoveryFocus,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get motivationMessage => $composableBuilder(
+    column: $table.motivationMessage,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get adjustedCalories => $composableBuilder(
+    column: $table.adjustedCalories,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get adjustedProtein => $composableBuilder(
+    column: $table.adjustedProtein,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get adjustedHydrationL => $composableBuilder(
+    column: $table.adjustedHydrationL,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get recommendedIntensity => $composableBuilder(
+    column: $table.recommendedIntensity,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isRestDay => $composableBuilder(
+    column: $table.isRestDay,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get activeRisks => $composableBuilder(
+    column: $table.activeRisks,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get showFestivalBanner => $composableBuilder(
+    column: $table.showFestivalBanner,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get festivalAdaptation => $composableBuilder(
+    column: $table.festivalAdaptation,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get dietBreakActive => $composableBuilder(
+    column: $table.dietBreakActive,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get proteinTimingTarget => $composableBuilder(
+    column: $table.proteinTimingTarget,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get loggingReliabilityStatus => $composableBuilder(
+    column: $table.loggingReliabilityStatus,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get satietyTargetScore => $composableBuilder(
+    column: $table.satietyTargetScore,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get aiCallsUsed => $composableBuilder(
+    column: $table.aiCallsUsed,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DailyIntelligencePackagesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DailyIntelligencePackagesTable> {
+  $$DailyIntelligencePackagesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get localId =>
+      $composableBuilder(column: $table.localId, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get packageDate => $composableBuilder(
+    column: $table.packageDate,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get primaryInsight => $composableBuilder(
+    column: $table.primaryInsight,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get todaysMission => $composableBuilder(
+    column: $table.todaysMission,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get nutritionFocus => $composableBuilder(
+    column: $table.nutritionFocus,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get recoveryFocus => $composableBuilder(
+    column: $table.recoveryFocus,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get motivationMessage => $composableBuilder(
+    column: $table.motivationMessage,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get adjustedCalories => $composableBuilder(
+    column: $table.adjustedCalories,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get adjustedProtein => $composableBuilder(
+    column: $table.adjustedProtein,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get adjustedHydrationL => $composableBuilder(
+    column: $table.adjustedHydrationL,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get recommendedIntensity => $composableBuilder(
+    column: $table.recommendedIntensity,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get isRestDay =>
+      $composableBuilder(column: $table.isRestDay, builder: (column) => column);
+
+  GeneratedColumn<String> get activeRisks => $composableBuilder(
+    column: $table.activeRisks,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get showFestivalBanner => $composableBuilder(
+    column: $table.showFestivalBanner,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get festivalAdaptation => $composableBuilder(
+    column: $table.festivalAdaptation,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get dietBreakActive => $composableBuilder(
+    column: $table.dietBreakActive,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get proteinTimingTarget => $composableBuilder(
+    column: $table.proteinTimingTarget,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get loggingReliabilityStatus => $composableBuilder(
+    column: $table.loggingReliabilityStatus,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get satietyTargetScore => $composableBuilder(
+    column: $table.satietyTargetScore,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get aiCallsUsed => $composableBuilder(
+    column: $table.aiCallsUsed,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$DailyIntelligencePackagesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DailyIntelligencePackagesTable,
+          DailyIntelligencePackage,
+          $$DailyIntelligencePackagesTableFilterComposer,
+          $$DailyIntelligencePackagesTableOrderingComposer,
+          $$DailyIntelligencePackagesTableAnnotationComposer,
+          $$DailyIntelligencePackagesTableCreateCompanionBuilder,
+          $$DailyIntelligencePackagesTableUpdateCompanionBuilder,
+          (
+            DailyIntelligencePackage,
+            BaseReferences<
+              _$AppDatabase,
+              $DailyIntelligencePackagesTable,
+              DailyIntelligencePackage
+            >,
+          ),
+          DailyIntelligencePackage,
+          PrefetchHooks Function()
+        > {
+  $$DailyIntelligencePackagesTableTableManager(
+    _$AppDatabase db,
+    $DailyIntelligencePackagesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DailyIntelligencePackagesTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$DailyIntelligencePackagesTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$DailyIntelligencePackagesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> localId = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<DateTime> packageDate = const Value.absent(),
+                Value<String> primaryInsight = const Value.absent(),
+                Value<String> todaysMission = const Value.absent(),
+                Value<String> nutritionFocus = const Value.absent(),
+                Value<String> recoveryFocus = const Value.absent(),
+                Value<String> motivationMessage = const Value.absent(),
+                Value<int> adjustedCalories = const Value.absent(),
+                Value<int> adjustedProtein = const Value.absent(),
+                Value<double> adjustedHydrationL = const Value.absent(),
+                Value<String> recommendedIntensity = const Value.absent(),
+                Value<bool> isRestDay = const Value.absent(),
+                Value<String> activeRisks = const Value.absent(),
+                Value<bool> showFestivalBanner = const Value.absent(),
+                Value<String?> festivalAdaptation = const Value.absent(),
+                Value<bool> dietBreakActive = const Value.absent(),
+                Value<int> proteinTimingTarget = const Value.absent(),
+                Value<String> loggingReliabilityStatus = const Value.absent(),
+                Value<int> satietyTargetScore = const Value.absent(),
+                Value<int> aiCallsUsed = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DailyIntelligencePackagesCompanion(
+                localId: localId,
+                userId: userId,
+                packageDate: packageDate,
+                primaryInsight: primaryInsight,
+                todaysMission: todaysMission,
+                nutritionFocus: nutritionFocus,
+                recoveryFocus: recoveryFocus,
+                motivationMessage: motivationMessage,
+                adjustedCalories: adjustedCalories,
+                adjustedProtein: adjustedProtein,
+                adjustedHydrationL: adjustedHydrationL,
+                recommendedIntensity: recommendedIntensity,
+                isRestDay: isRestDay,
+                activeRisks: activeRisks,
+                showFestivalBanner: showFestivalBanner,
+                festivalAdaptation: festivalAdaptation,
+                dietBreakActive: dietBreakActive,
+                proteinTimingTarget: proteinTimingTarget,
+                loggingReliabilityStatus: loggingReliabilityStatus,
+                satietyTargetScore: satietyTargetScore,
+                aiCallsUsed: aiCallsUsed,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String localId,
+                required String userId,
+                required DateTime packageDate,
+                required String primaryInsight,
+                required String todaysMission,
+                required String nutritionFocus,
+                required String recoveryFocus,
+                required String motivationMessage,
+                required int adjustedCalories,
+                required int adjustedProtein,
+                required double adjustedHydrationL,
+                required String recommendedIntensity,
+                Value<bool> isRestDay = const Value.absent(),
+                required String activeRisks,
+                Value<bool> showFestivalBanner = const Value.absent(),
+                Value<String?> festivalAdaptation = const Value.absent(),
+                Value<bool> dietBreakActive = const Value.absent(),
+                Value<int> proteinTimingTarget = const Value.absent(),
+                Value<String> loggingReliabilityStatus = const Value.absent(),
+                Value<int> satietyTargetScore = const Value.absent(),
+                Value<int> aiCallsUsed = const Value.absent(),
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => DailyIntelligencePackagesCompanion.insert(
+                localId: localId,
+                userId: userId,
+                packageDate: packageDate,
+                primaryInsight: primaryInsight,
+                todaysMission: todaysMission,
+                nutritionFocus: nutritionFocus,
+                recoveryFocus: recoveryFocus,
+                motivationMessage: motivationMessage,
+                adjustedCalories: adjustedCalories,
+                adjustedProtein: adjustedProtein,
+                adjustedHydrationL: adjustedHydrationL,
+                recommendedIntensity: recommendedIntensity,
+                isRestDay: isRestDay,
+                activeRisks: activeRisks,
+                showFestivalBanner: showFestivalBanner,
+                festivalAdaptation: festivalAdaptation,
+                dietBreakActive: dietBreakActive,
+                proteinTimingTarget: proteinTimingTarget,
+                loggingReliabilityStatus: loggingReliabilityStatus,
+                satietyTargetScore: satietyTargetScore,
+                aiCallsUsed: aiCallsUsed,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DailyIntelligencePackagesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DailyIntelligencePackagesTable,
+      DailyIntelligencePackage,
+      $$DailyIntelligencePackagesTableFilterComposer,
+      $$DailyIntelligencePackagesTableOrderingComposer,
+      $$DailyIntelligencePackagesTableAnnotationComposer,
+      $$DailyIntelligencePackagesTableCreateCompanionBuilder,
+      $$DailyIntelligencePackagesTableUpdateCompanionBuilder,
+      (
+        DailyIntelligencePackage,
+        BaseReferences<
+          _$AppDatabase,
+          $DailyIntelligencePackagesTable,
+          DailyIntelligencePackage
+        >,
+      ),
+      DailyIntelligencePackage,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2850,4 +4737,9 @@ class $AppDatabaseManager {
       $$SyncQueueItemsTableTableManager(_db, _db.syncQueueItems);
   $$DeadLetterQueueItemsTableTableManager get deadLetterQueueItems =>
       $$DeadLetterQueueItemsTableTableManager(_db, _db.deadLetterQueueItems);
+  $$DailyIntelligencePackagesTableTableManager get dailyIntelligencePackages =>
+      $$DailyIntelligencePackagesTableTableManager(
+        _db,
+        _db.dailyIntelligencePackages,
+      );
 }
