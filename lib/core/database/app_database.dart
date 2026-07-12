@@ -17,6 +17,7 @@ class Users extends Table {
   RealColumn get weight => real().nullable()();
   RealColumn get height => real().nullable()();
   TextColumn get goals => text().nullable()(); // JSON list
+  IntColumn get dailyCalorieTarget => integer().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};

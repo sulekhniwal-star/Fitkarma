@@ -56,9 +56,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Set up local dev environment onboarding doc
 
 ### §P0-I Adaptive Metabolism Engine
-- [ ] Implement TDEE adaptation algorithm (MacroFactor-style rolling recalculation)
-- [ ] Build weight-trend smoothing logic
-- [ ] Wire adaptive TDEE into `dailyCalorieTarget` on Users
+- [x] Implement TDEE adaptation algorithm (MacroFactor-style rolling recalculation)
+- [x] Build weight-trend smoothing logic
+- [x] Wire adaptive TDEE into `dailyCalorieTarget` on Users
 
 ### §P0-J Environmental Health Layer
 - [ ] Integrate AQI data source
