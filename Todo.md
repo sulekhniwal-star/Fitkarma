@@ -14,9 +14,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Document design system in a shared style guide referenced by all screen builds
 
 ### §P0-B Project Structure
-- [ ] Scaffold module boundaries (features/, core/, data/, services/)
-- [ ] Set up dependency injection / Riverpod provider structure
-- [ ] Configure lint rules and folder-structure enforcement in CI
+- [x] Scaffold module boundaries (features/, core/, data/, services/)
+- [x] Set up dependency injection / Riverpod provider structure
+- [x] Configure lint rules and folder-structure enforcement in CI
 
 ### §P0-C Architecture Overview
 - [ ] Stand up local Drift + SQLCipher database layer

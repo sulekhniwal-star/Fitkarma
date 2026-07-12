@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
-import 'package:fitkarma/core/theme/app_spacing.dart';
-import 'package:fitkarma/core/theme/app_typography.dart';
-import 'package:fitkarma/core/theme/app_springs.dart';
 import 'package:fitkarma/core/theme/app_gradients.dart';
+import 'package:fitkarma/core/theme/app_spacing.dart';
+import 'package:fitkarma/core/theme/app_springs.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/shared/widgets/activity_rings.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
 import 'package:fitkarma/shared/widgets/bento_grid.dart';
-import 'package:fitkarma/shared/widgets/activity_rings.dart';
-import 'package:fitkarma/shared/widgets/glowing_metric.dart';
 import 'package:fitkarma/shared/widgets/bilingual_label.dart';
+import 'package:fitkarma/shared/widgets/glowing_metric.dart';
+import 'package:flutter/material.dart';
 
 class StyleGuideScreen extends StatefulWidget {
   const StyleGuideScreen({super.key});
@@ -413,10 +413,10 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
               Container(
                 width: 60,
                 height: 60,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: AppGradients.primary,
                   shape: BoxShape.circle,
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
                       color: AppColorsDark.primaryGlow,
                       blurRadius: 16,
@@ -489,10 +489,10 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
                           child: Container(
                             width: 40,
                             height: 40,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: AppGradients.primary,
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
                                   color: AppColorsDark.primaryGlow,
                                   blurRadius: 10,
@@ -598,11 +598,11 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
         const SizedBox(height: 12.0),
         
         // 2. Typography Spec
-        BentoCard(
+        const BentoCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Typography Tokens',
                 style: TextStyle(
                   fontSize: 16,
@@ -610,14 +610,14 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
                   color: AppColorsDark.textPrimary,
                 ),
               ),
-              const SizedBox(height: 12.0),
-              const Text('Display Bold (72px)', style: AppTypography.heroDisplay),
-              const SizedBox(height: 8.0),
-              const Text('Metric Hero (56px)', style: AppTypography.metricXL),
-              const SizedBox(height: 8.0),
-              const Text('Header H1 (22px)', style: AppTypography.h1),
-              const SizedBox(height: 8.0),
-              const Text('Body Regular (14px)', style: AppTypography.bodyMd),
+              SizedBox(height: 12.0),
+              Text('Display Bold (72px)', style: AppTypography.heroDisplay),
+              SizedBox(height: 8.0),
+              Text('Metric Hero (56px)', style: AppTypography.metricXL),
+              SizedBox(height: 8.0),
+              Text('Header H1 (22px)', style: AppTypography.h1),
+              SizedBox(height: 8.0),
+              Text('Body Regular (14px)', style: AppTypography.bodyMd),
             ],
           ),
         ),

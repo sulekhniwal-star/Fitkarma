@@ -2,30 +2,30 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class RingData {
-  final double value;
-  final double target;
-  final List<Color> colors;
-  final double strokeWidth;
-
   RingData({
     required this.value,
     required this.target,
     required this.colors,
     this.strokeWidth = 12.0,
   });
+
+  final double value;
+  final double target;
+  final List<Color> colors;
+  final double strokeWidth;
 }
 
 class ActivityRings extends StatelessWidget {
-  final List<RingData> rings;
-  final double size;
-  final double gap;
-
   const ActivityRings({
     super.key,
     required this.rings,
     this.size = 200.0,
     this.gap = 4.0,
   });
+
+  final List<RingData> rings;
+  final double size;
+  final double gap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,13 @@ class ActivityRings extends StatelessWidget {
 }
 
 class _ActivityRingsPainter extends CustomPainter {
-  final List<RingData> rings;
-  final double gap;
-
   _ActivityRingsPainter({
     required this.rings,
     required this.gap,
   });
+
+  final List<RingData> rings;
+  final double gap;
 
   @override
   void paint(Canvas canvas, Size size) {

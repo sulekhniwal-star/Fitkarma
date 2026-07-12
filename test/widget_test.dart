@@ -1,6 +1,6 @@
 // This is a basic Flutter widget test for the Fitkarma App.
-import 'package:flutter_test/flutter_test.dart';
 import 'package:fitkarma/main.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Fitkarma style guide screen loads correctly', (WidgetTester tester) async {

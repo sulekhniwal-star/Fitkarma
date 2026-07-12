@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter/material.dart';
 
 class AppSprings {
   AppSprings._();
@@ -9,13 +9,13 @@ class AppSprings {
 }
 
 class SpringCurve extends Curve {
-  final double damping;
-  final double frequency;
-
   const SpringCurve({
     this.damping = 0.6,
     this.frequency = 1.5,
   });
+
+  final double damping;
+  final double frequency;
 
   @override
   double transformInternal(double t) {

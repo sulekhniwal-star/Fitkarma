@@ -1,22 +1,31 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
 import 'package:fitkarma/core/theme/app_spacing.dart';
+import 'package:flutter/material.dart';
 
 /// Wrapper class to represent an item in a [BentoGrid].
 class BentoGridItem {
-  final Widget child;
-  final int columnSpan;
-  final int rowSpan;
-
   const BentoGridItem({
     required this.child,
     this.columnSpan = 1,
     this.rowSpan = 1,
   });
+
+  final Widget child;
+  final int columnSpan;
+  final int rowSpan;
 }
 
 /// A responsive Bento Grid layout primitive matching spacing configurations.
 class BentoGrid extends StatelessWidget {
+  const BentoGrid({
+    super.key,
+    required this.items,
+    this.crossAxisCount,
+    this.spacing = AppSpacing.bentoGap,
+    this.rowHeight = 135.0,
+  });
+
   final List<BentoGridItem> items;
   
   /// The number of columns. If null, automatically selects columns based on layout width:
@@ -30,14 +39,6 @@ class BentoGrid extends StatelessWidget {
   
   /// Height of a single row block
   final double rowHeight;
-
-  const BentoGrid({
-    super.key,
-    required this.items,
-    this.crossAxisCount,
-    this.spacing = AppSpacing.bentoGap,
-    this.rowHeight = 135.0,
-  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:fitkarma/core/theme/app_typography.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:flutter/material.dart';
 
 class BilingualLabel extends StatelessWidget {
-  final String englishText;
-  final String? hindiText;
-  final TextStyle? englishStyle;
-  final double hindiFontSizeScale;
-  final CrossAxisAlignment alignment;
-
   const BilingualLabel({
     super.key,
     required this.englishText,
@@ -17,6 +11,12 @@ class BilingualLabel extends StatelessWidget {
     this.hindiFontSizeScale = 0.85,
     this.alignment = CrossAxisAlignment.start,
   });
+
+  final String englishText;
+  final String? hindiText;
+  final TextStyle? englishStyle;
+  final double hindiFontSizeScale;
+  final CrossAxisAlignment alignment;
 
   @override
   Widget build(BuildContext context) {

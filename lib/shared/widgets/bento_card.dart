@@ -1,20 +1,11 @@
 import 'dart:ui';
-import 'package:flutter/material.dart';
+
 import 'package:fitkarma/core/theme/app_colors.dart';
 import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_springs.dart';
+import 'package:flutter/material.dart';
 
 class BentoCard extends StatefulWidget {
-  final Widget child;
-  final double? width;
-  final double? height;
-  final EdgeInsetsGeometry? padding;
-  final VoidCallback? onTap;
-  final Color? customBgColor;
-  final double blurRadius;
-  final double borderRadius;
-  final bool hasSecondaryGlow;
-
   const BentoCard({
     super.key,
     required this.child,
@@ -27,6 +18,16 @@ class BentoCard extends StatefulWidget {
     this.borderRadius = AppRadius.bentoOuter,
     this.hasSecondaryGlow = false,
   });
+
+  final Widget child;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
+  final VoidCallback? onTap;
+  final Color? customBgColor;
+  final double blurRadius;
+  final double borderRadius;
+  final bool hasSecondaryGlow;
 
   @override
   State<BentoCard> createState() => _BentoCardState();
@@ -59,7 +60,7 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    Widget cardBody = ClipRRect(
+    final Widget cardBody = ClipRRect(
       borderRadius: BorderRadius.circular(widget.borderRadius),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: widget.blurRadius, sigmaY: widget.blurRadius),

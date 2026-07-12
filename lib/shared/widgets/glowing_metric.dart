@@ -1,13 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:flutter/material.dart';
 
 class GlowingMetric extends StatelessWidget {
-  final String value;
-  final String? unit;
-  final Color glowColor;
-  final TextStyle? customStyle;
-  final bool hasGlow;
-
   const GlowingMetric({
     super.key,
     required this.value,
@@ -16,6 +10,12 @@ class GlowingMetric extends StatelessWidget {
     this.customStyle,
     this.hasGlow = true,
   });
+
+  final String value;
+  final String? unit;
+  final Color glowColor;
+  final TextStyle? customStyle;
+  final bool hasGlow;
 
   @override
   Widget build(BuildContext context) {
