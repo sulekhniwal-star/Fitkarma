@@ -1,0 +1,732 @@
+# FitKarma — Master Build Todo (v1.0)
+
+Source of truth: `FitKarma_Documentation_v1.0.md`. Every feature is broken into concrete, independently-completable engineering tasks (data model → logic → UI → integration → tests), not a single line per feature. `§Px-y` references point back to the doc section.
+
+Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
+
+---
+
+# PHASE 0 — FOUNDATION
+
+### §P0-A Design Philosophy
+- [ ] Define design token spec (dark-mode-first palette, glassmorphism blur values, spring physics curves)
+- [ ] Build bento-grid layout primitives as reusable widgets
+- [ ] Document design system in a shared style guide referenced by all screen builds
+
+### §P0-B Project Structure
+- [ ] Scaffold module boundaries (features/, core/, data/, services/)
+- [ ] Set up dependency injection / Riverpod provider structure
+- [ ] Configure lint rules and folder-structure enforcement in CI
+
+### §P0-C Architecture Overview
+- [ ] Stand up local Drift + SQLCipher database layer
+- [ ] Build Sync Engine (priority queue + DLQ, 3× retry)
+- [ ] Provision Azure SQL + Entra B2C auth
+- [ ] Wire offline-first read path (local Drift as source of truth for UI)
+
+### §P0-D Design Tokens
+- [ ] Implement color tokens (dark mode primary + light mode fallback)
+- [ ] Implement typography scale
+- [ ] Implement spacing/radius/elevation tokens
+
+### §P0-D2 Shared Foundation Widgets
+- [ ] Build GlassCard component (with `DeviceTier.low` blur fallback)
+- [ ] Build shared button/input/chip component library
+- [ ] Build loading/empty/error state components used across all screens
+
+### §P0-E Health OS Brain
+- [ ] Implement `computeHealthSnapshot()` (deterministic, no AI)
+- [ ] Implement `checkAITrigger()` decision logic
+- [ ] Implement Daily Intelligence Package (DIP) generation + storage
+- [ ] Build DIP → Drift sync queue integration
+
+### §P0-F AI Routing Layer
+- [ ] Implement tiny/medium/large model tier classifier
+- [ ] Wire Groq API client with per-tier model selection
+- [ ] Implement AI response caching (see AI Cache Implementation below)
+- [ ] Add fallback/retry logic for AI call failures
+
+### §P0-G Program Evolution Engine
+- [ ] Define program-phase transition rules
+- [ ] Implement evolution trigger detection (deterministic)
+- [ ] Wire evolution events into Transformation Memory
+
+### §P0-H Prerequisites
+- [ ] Document and provision all required SDKs/API keys (Groq, Azure, RevenueCat, Health Connect/HealthKit)
+- [ ] Set up local dev environment onboarding doc
+
+### §P0-I Adaptive Metabolism Engine
+- [ ] Implement TDEE adaptation algorithm (MacroFactor-style rolling recalculation)
+- [ ] Build weight-trend smoothing logic
+- [ ] Wire adaptive TDEE into `dailyCalorieTarget` on Users
+
+### §P0-J Environmental Health Layer
+- [ ] Integrate AQI data source
+- [ ] Integrate UV index data source
+- [ ] Integrate heat-index data source
+- [ ] Build environmental-adjustment logic feeding into Daily Mission recommendations
+
+---
+
+# PHASE 1 — ONBOARDING + USER PROFILE
+
+### §P1-A Onboarding Flow Order
+- [ ] Implement onboarding flow controller/router
+- [ ] Add progress indicator + skip/back navigation rules
+
+### §P1-B Welcome Screen
+- [ ] Build UI layout
+- [ ] Wire entry animation/branding
+- [ ] Widget test
+
+### §P1-C Goals Screen
+- [ ] Build UI (multi-select goal picker)
+- [ ] Persist selected goals to `Users.goals` (JSON array)
+- [ ] Widget test
+
+### §P1-D Demographics Screen
+- [ ] Build UI (age, gender, height, weight, activity level inputs)
+- [ ] Validation + unit conversion handling
+- [ ] Persist to Users table
+- [ ] Widget test
+
+### §P1-E AI Diet Plan Results Screen
+- [ ] Build results UI
+- [ ] Wire initial AI diet plan generation call
+- [ ] Loading/error states for AI call
+- [ ] Widget test
+
+### §P1-F Dosha Quiz Screen
+- [ ] Build quiz UI flow
+- [ ] Implement dosha-scoring logic (deterministic)
+- [ ] Persist result to `Users.dosha`
+- [ ] Widget test
+
+### §P1-G Program Blueprint Selection Screen
+- [ ] Build program selection UI
+- [ ] Wire selection into `Users.currentProgram`
+- [ ] Widget test
+
+### §P1-H Women's Advanced Health Layer
+- [ ] Build cycle-tracking data model
+- [ ] Implement cycle-aware training adjustment logic
+- [ ] Build cycle-tracking onboarding screens
+- [ ] Wire cycle phase into Daily Mission and Training OS
+- [ ] Unit tests for phase-detection logic
+
+---
+
+# PHASE 2 — DAILY MISSION + READINESS ENGINE
+
+### §P2-A Readiness Engine
+- [ ] Implement readiness score calculation (deterministic)
+- [ ] Implement 3-tier confidence model
+- [ ] Unit tests across confidence tiers
+
+### §P2-B Daily Briefing Screen (Daily Mission)
+- [ ] Build UI reading DIP directly from Drift (no AI call on open)
+- [ ] Verify open time < 100ms (§P14-B target)
+- [ ] Widget test
+
+### §P2-C Recovery Log Screen
+- [ ] Build manual recovery logging UI
+- [ ] Persist to RecoveryLogs
+- [ ] Widget test
+
+### §P2-D Recovery Operating System
+- [ ] Implement Sleep Need Calculator
+- [ ] Implement Bedtime Coach recommendation logic
+- [ ] Implement Daily Strain scoring (0–21 scale)
+- [ ] Implement Recovery Capacity calculation
+- [ ] Implement Recovery Prescriptions generator
+- [ ] Implement Circadian Score calculation
+- [ ] Implement Illness Detection (deviation-based)
+- [ ] Implement Recovery Drivers breakdown (JSON) surfaced in UI
+- [ ] Integration tests across the full Recovery OS pipeline
+
+---
+
+# PHASE 3 — AI ADAPTIVE COACH
+
+### §P3-A AI Coach Philosophy
+- [ ] Document coach tone/persona rules referenced by prompt templates
+
+### §P3-B AI Context Builder
+- [ ] Implement context compression (snapshot → prompt payload)
+- [ ] Unit tests for token-budget compliance
+
+### §P3-C AI Coach Screen
+- [ ] Build chat UI
+- [ ] Wire `fitkarma-coach` Azure Function
+- [ ] Persist conversation to ChatMessages
+- [ ] Loading/error/offline states
+- [ ] Widget test
+
+### §P3-D Health Coach Escalation Layer
+- [ ] Implement escalation trigger logic (Elite tier)
+- [ ] Build human-coach handoff UI/workflow
+- [ ] Wire escalation event logging
+
+---
+
+# PHASE 4 — HEALTH TRACKING
+
+### §P4-A Dashboard Screen
+- [ ] Build UI aggregating steps/sleep/BP/glucose widgets
+- [ ] Widget test
+
+### §P4-B Steps Screen
+- [ ] Build UI + Health Connect/HealthKit sync
+- [ ] Persist to step logs (CumulativeLog pattern, §P0-C)
+- [ ] Widget test
+
+### §P4-C Sleep Screen
+- [ ] Build UI + wearable/manual sleep entry
+- [ ] Persist to SleepLogs
+- [ ] Widget test
+
+### §P4-D Blood Pressure Screen
+- [ ] Build manual BP entry UI
+- [ ] Persist to BpReadings
+- [ ] Widget test
+
+### §P4-E Glucose Screen
+- [ ] Build manual glucose entry UI
+- [ ] Persist to GlucoseReadings
+- [ ] Widget test
+
+### §P4-F Preventive Intelligence Engine
+- [ ] Implement deterministic risk-flagging rules (no AI)
+- [ ] Unit tests for each rule
+
+### §P4-G Smart Wearable Comparison Layer
+- [ ] Implement Device Reliability Engine (cross-device delta detection)
+- [ ] Build wearable comparison UI
+- [ ] Unit tests
+
+---
+
+# PHASE 5 — SMART INDIAN NUTRITION SYSTEM
+
+### §P5-A Food Screen Home
+- [ ] Build UI (quick-log, search, recent meals)
+- [ ] Widget test
+
+### §P5-B Meal Analysis Pipeline
+- [ ] Implement text-based meal parser
+- [ ] Wire nutrition lookup against FoodReferences
+- [ ] Unit tests
+
+### §P5-C "Fix My Meal" — AI Meal Photo Analysis
+- [ ] Build photo capture/upload UI
+- [ ] Wire `fitkarma-meal-vision` Azure Function
+- [ ] Implement result review/edit-before-save UI
+- [ ] Cache Groq Vision responses (AI cache)
+- [ ] Widget test
+
+### §P5-D Smart Indian Meal Intelligence
+- [ ] Build regional cuisine recognition dataset mapping
+- [ ] Implement mixed-dish macro estimation logic
+- [ ] Unit tests
+
+### §P5-E Indian Restaurant Intelligence 2.0
+- [ ] Build restaurant menu database integration
+- [ ] Implement dish-level nutrition estimation
+- [ ] Build restaurant search/browse UI
+
+### §P5-F Grocery Optimization Engine 2.0
+- [ ] Implement shopping-list generation from meal plan
+- [ ] Wire `Users.monthlyGroceryBudgetInr` into list optimization
+- [ ] Build grocery list UI
+- [ ] 🆕 See §P16-E for vendor checkout extension
+
+### §P5-G Nutrition Periodization Engine
+- [ ] Implement phase-based macro cycling logic
+- [ ] Wire `Users.nutritionPeriodizationPhase` transitions
+- [ ] Unit tests
+
+### §P5-H Protein Distribution & Timing Intelligence
+- [ ] Implement MPS-aware protein timing algorithm
+- [ ] Wire into meal plan recommendations
+- [ ] Unit tests
+
+### §P5-I Micronutrient Intelligence Core
+- [ ] Build micronutrient database mapping
+- [ ] Implement deficiency-risk detection logic
+- [ ] Persist to MicronutrientLogs
+- [ ] Build micronutrient dashboard UI
+
+### §P5-J Nutrition Adherence Engine
+- [ ] Implement adherence scoring algorithm
+- [ ] Wire into Karma System (§P7-A)
+- [ ] Unit tests
+
+### §P5-K Smart Festival Nutrition Adaptation
+- [ ] Implement festival calendar detection
+- [ ] Implement festival-specific macro/target adjustment logic
+- [ ] Integration with §P12-A Festival Intelligence
+
+### §P5-L Adaptive Hunger & Cravings Engine
+- [ ] Implement craving-pattern detection logic
+- [ ] Build hunger-logging UI prompt
+- [ ] Unit tests
+
+### §P5-M Glycemic Response & Personal Food Scoring
+- [ ] Implement personal glycemic scoring algorithm
+- [ ] Wire into §P10-L Retrospective Glycemic Processing Pipeline
+- [ ] Unit tests
+
+### §P5-N Multi-Dimensional Meal Quality Score
+- [ ] Implement composite quality scoring (processing tier, micronutrients, satiety)
+- [ ] Build score display UI
+- [ ] Unit tests
+
+### §P5-O Nutrition Reliability Score & Data Confidence Shield
+- [ ] Implement logging-consistency scoring
+- [ ] Wire "low confidence" UI messaging when data is sparse
+- [ ] Unit tests
+
+### §P5-P Satiety Prediction Engine
+- [ ] Implement satiety prediction model (deterministic heuristics)
+- [ ] Wire into meal recommendations
+- [ ] Unit tests
+
+### §P5-Q Family Nutrition Integration
+- [ ] Build FamilyMealPlans data model usage
+- [ ] Implement multi-member meal plan aggregation
+- [ ] Build family meal planning UI
+
+### §P5-R Indian Food Substitution & Swap Engine
+- [ ] Build FoodSubstitutions lookup logic
+- [ ] Implement swap-suggestion algorithm (nutrition-equivalent alternatives)
+- [ ] Build swap suggestion UI
+
+---
+
+# PHASE 6 — WORKOUT SYSTEM & MOVEMENT INTELLIGENCE
+
+### §P6-A Workout Screen Home
+- [ ] Build UI (program overview, today's workout)
+- [ ] Widget test
+
+### §P6-B Active Workout Screen
+- [ ] Build set/rep logging UI
+- [ ] Implement rest timer
+- [ ] Persist to WorkoutLogs
+- [ ] Widget test
+
+### §P6-C Progressive Overload Engine
+- [ ] Implement deterministic overload progression rules
+- [ ] Unit tests
+
+### §P6-D Dynamic Fitness Blueprint Generator
+- [ ] Implement program generation algorithm from goals + equipment + experience
+- [ ] Unit tests
+
+### §P6-E Training Operating System
+- [ ] Implement Movement Screening Engine
+- [ ] Implement Adaptive Overload logic
+- [ ] Implement Local Readiness (upper/lower body) scoring
+- [ ] Wire into UserScores (upperBodyReadiness / lowerBodyReadiness)
+- [ ] Integration tests
+
+### §P6-F Adaptive Computer Vision Loop (ACVL)
+- [ ] Integrate MediaPipe pose estimation
+- [ ] Implement form-deviation detection algorithm
+- [ ] Build real-time form feedback UI overlay
+- [ ] Persist form-quality data to MovementLogs
+- [ ] Performance test on-device (frame rate, battery/thermal impact)
+
+---
+
+# PHASE 7 — GAMIFICATION + KARMA SYSTEM
+
+### §P7-A Karma System Design
+- [ ] Implement outcome-based XP calculation rules
+- [ ] Persist to KarmaEvents
+- [ ] Unit tests
+
+### §P7-B Karma Hub Screen
+- [ ] Build UI (XP history, levels, badges)
+- [ ] Widget test
+
+### §P7-C Habit Automation System
+- [ ] Implement habit-streak detection logic
+- [ ] Persist to HabitLogs
+- [ ] Unit tests
+
+### §P7-D Adherence Score
+- [ ] Implement adherence scoring algorithm (major KPI)
+- [ ] Wire into Karma Hub UI
+- [ ] Unit tests
+
+### §P7-E Benchmarking Engine
+- [ ] Implement Fitness Percentile calculation vs. cohort
+- [ ] Build benchmarking UI
+- [ ] Unit tests
+
+### §P7-F Demographic Cohort Insights & Network Effects
+- [ ] Implement anonymized cohort aggregation pipeline
+- [ ] Enforce minimum-cohort-size threshold before displaying any aggregate
+- [ ] Build cohort insights UI (city/age-group rankings)
+- [ ] Privacy audit: confirm no individual-level data leaks through aggregates
+
+---
+
+# PHASE 8 — TRANSFORMATION JOURNEY + ANTI-QUIT PSYCHOLOGY
+
+### §P8-A Transformation Journey Engine
+- [ ] Implement journey-stage detection logic
+- [ ] Persist to TransformationMemories
+- [ ] Unit tests
+
+### §P8-B Transformation Timeline Screen
+- [ ] Build UI (milestones, progress photos, journey stages)
+- [ ] Widget test
+
+### §P8-C Habit Identity Layer
+- [ ] Implement identity-reinforcement messaging logic (behavior science)
+- [ ] Wire into Daily Mission and AI Coach prompts
+- [ ] Unit tests
+
+---
+
+# PHASE 9 — SOCIAL + SQUAD ACCOUNTABILITY
+
+### §P9-A Social Screen
+- [ ] Build UI (feed entry point, squads, clubs)
+- [ ] Widget test
+
+### §P9-B Squad System
+- [ ] Implement Squad Missions logic
+- [ ] Implement Squad Challenges logic
+- [ ] Persist to SquadGroups / SquadMembers
+- [ ] Build squad UI
+
+### §P9-C Accountability Communities
+- [ ] Implement community membership logic
+- [ ] Build community UI
+
+### §P9-D Family Health Hub
+- [ ] Build household management UI
+- [ ] Wire `Users.familyUnitId` grouping
+- [ ] Implement family-level dashboards (aggregated, permission-gated)
+
+### §P9-E Activity Feed & Sharing Architecture
+- [ ] Implement Follow System data model + logic
+- [ ] Persist to Followers
+- [ ] Build Activity Feed UI
+- [ ] Implement Workout/Route/Transformation sharing cards
+- [ ] Feed pagination + performance test
+
+### §P9-F Local Geolocation Clubs & Interest Circles
+- [ ] Implement geolocation-based club discovery
+- [ ] Persist to Clubs
+- [ ] Build club discovery + join UI
+
+### §P9-G Weekly & Monthly Leaderboards
+- [ ] Implement leaderboard ranking computation (scheduled job)
+- [ ] Build leaderboard UI
+- [ ] Unit tests
+
+---
+
+# PHASE 10 — PREDICTIVE HEALTH + PREVENTIVE INTELLIGENCE
+
+### §P10-A Health Risk Prevention System
+- [ ] Implement deterministic risk-flag rules
+- [ ] Unit tests
+
+### §P10-B Biological Age Estimation
+- [ ] Implement monthly biological-age algorithm (no AI)
+- [ ] Unit tests
+
+### §P10-C Monthly Health Report
+- [ ] Implement report generation job
+- [ ] Build report UI/export
+- [ ] Widget test
+
+### §P10-D Injury Risk Engine
+- [ ] Implement injury-risk scoring logic
+- [ ] Wire into Training OS (§P6-E) recommendations
+- [ ] Unit tests
+
+### §P10-E Stress Detection Engine
+- [ ] Implement inferred-stress detection algorithm (HRV/sleep/behavior signals)
+- [ ] Unit tests
+
+### §P10-F Clinical Report Intelligence
+- [ ] Build lab report (PDF) upload + parsing pipeline
+- [ ] Implement lab-value extraction and normalization
+- [ ] Build clinical report UI
+- [ ] 🔒 Apply Non-Diagnostic Shield disclaimer (§P10-K)
+
+### §P10-G Longevity Score + Biological Age v1
+- [ ] Implement composite longevity scoring algorithm
+- [ ] Build longevity score UI
+
+### §P10-H Continuous Biomarker Tracking (CGM Sync)
+- [ ] Integrate CGM manufacturer sync APIs
+- [ ] Persist to CgmReadings
+- [ ] Build CGM trend UI
+- [ ] Wire into §P10-L Retrospective Glycemic Processing Pipeline
+
+### §P10-I Medication Tracker & Interaction Warning Engine
+- [ ] Build medication schedule data model + UI
+- [ ] Persist to MedicationLogs
+- [ ] Integrate drug-interaction database (e.g., RxNorm)
+- [ ] Implement interaction-warning generation logic
+- [ ] 🔒 Run all warning copy through `ClinicalCopyLinter` (§P10-M)
+
+### §P10-J Doctor Sharing Portal
+- [ ] Implement passcode-protected PDF export (default)
+- [ ] Build sharing UI + link/token management
+- [ ] 🆕 Implement FHIR-lite export mode (§P16-C ABHA integration)
+
+### §P10-K Regulatory & Clinical Compliance Framework
+- [ ] Implement Non-Diagnostic Shield disclaimer component (reused across §P10-F/G/H/I)
+- [ ] Implement "Revoke All Clinical Access" single-tap setting
+- [ ] Implement anonymized cohort sync routing (excludes lab dates/medication brands)
+
+### §P10-L Retrospective Glycemic Processing Pipeline (RGPP)
+- [ ] Implement late-arriving CGM batch detection
+- [ ] Implement retroactive food-window linking algorithm
+- [ ] Unit tests for sync-latency edge cases
+
+### §P10-M Clinical Compliance Hardening 🔒
+- [ ] Implement `ClinicalCopyLinter` (banned directive-pattern regex set)
+- [ ] Wire linter into CI for any PR touching §P10-I/H/J copy
+- [ ] Add Clinical Copy Change Checklist to PR template
+- [ ] Gate Phase 10 behind a feature flag for initial opt-in cohort rollout
+- [ ] Schedule legal sign-off review before general availability
+
+---
+
+# PHASE 11 — VISUAL BODY ANALYTICS
+
+### §P11-A Body Analytics Screen
+- [ ] Build UI (measurements, trends)
+- [ ] Persist to BodyMeasurements
+- [ ] Widget test
+
+### §P11-B Progress Photo System
+- [ ] Build photo capture + comparison UI
+- [ ] Implement secure local photo storage (encrypted)
+- [ ] Persist metadata to TransformationChecks
+
+### §P11-C Wearable-Free Body Composition Estimation
+- [ ] Implement photo-based body composition estimation algorithm
+- [ ] Unit tests against reference dataset
+
+---
+
+# PHASE 12 — FESTIVAL + LIFE EVENTS INTELLIGENCE
+
+### §P12-A Festival Intelligence System
+- [ ] Build Indian festival calendar dataset
+- [ ] Implement cross-module festival adaptation hooks (nutrition, workout, mission)
+
+### §P12-B Life Events Engine
+- [ ] Implement life-event detection/logging (wedding, injury, travel, etc.)
+- [ ] Persist to LifeEvents
+- [ ] Wire into Transformation Memory
+
+### §P12-C Wedding Transformation Mode
+- [ ] Implement wedding-mode program generation
+- [ ] Build wedding countdown UI
+- [ ] End-to-end test with synthetic data
+
+### §P12-D AI Roast Mode
+- [ ] Implement opt-in "roast" tone variant for AI Coach
+- [ ] Build toggle UI
+
+### §P12-E Travel Intelligence (Travel Mode)
+- [ ] Implement travel detection (timezone/location change)
+- [ ] Implement travel-adjusted mission/nutrition logic
+- [ ] 🔒 Verify DIP scheduling respects Travel Mode timezone (see v1.0 hardening)
+
+### §P12-F Smart Calendar Integration
+- [ ] Integrate device calendar API
+- [ ] Implement calendar-aware scheduling suggestions
+- [ ] Build calendar sync settings UI
+
+---
+
+# PHASE 13 — PREMIUM + MONETISATION
+
+### §P13-A Subscription Tiers
+- [ ] Implement Free/Pro/Elite tier gating logic
+- [ ] Wire RevenueCat subscription management
+- [ ] Build paywall/upgrade UI
+
+### §P13-B Creator & Coach Marketplace
+- [ ] Build CreatorProfiles data model + onboarding flow
+- [ ] Implement creator-user matchmaking logic
+- [ ] Build Program Store (direct purchase) UI
+- [ ] Implement wallet/royalty distribution logic
+- [ ] Wire `fitkarma-marketplace` Azure Function
+
+### §P13-C Creator Affiliate Program
+- [ ] Implement affiliate referral link generation + tracking
+- [ ] Build recurring payout ledger
+- [ ] Build affiliate dashboard UI
+- [ ] 🆕 Reused by §P16-E Grocery Vendor Checkout for affiliate revenue tracking
+
+---
+
+# PHASE 14 — ENTERPRISE HARDENING + CI/CD
+
+### §P14-A Security
+- [ ] 🔒 Implement `_generateSecureKey()` using `Random.secure()` for SQLCipher key
+- [ ] Enforce TLS 1.3 + certificate pinning on all network calls
+- [ ] Verify Azure Function logs never contain user context
+- [ ] Verify Sentry PII stripping (no names/emails in error reports)
+- [ ] 🔒 Verify `ai_cache` scoped by `user_id`, prompt hashes only, no PII
+
+### §P14-B Performance
+- [ ] Verify cold start < 2s on mid-tier device
+- [ ] Verify Daily Briefing open < 100ms (DIP read from Drift only)
+- [ ] Verify GlassCard blur disabled on `DeviceTier.low`
+
+### §P14-C Testing Strategy
+- [ ] Unit test coverage for all deterministic engines
+- [ ] Widget tests for all primary screens
+- [ ] Golden tests generated and passing for all primary screens
+- [ ] Offline → online sync round-trip test (airplane mode)
+- [ ] DLQ alert banner test (3 consecutive sync failures)
+- [ ] Biometric lock test on physical device
+
+### §P14-D CI/CD Pipeline
+- [ ] `test` job (flutter test) in GitHub Actions
+- [ ] `build-android` job (release appbundle, dart-defines wired)
+- [ ] `build-ios` job (release ipa)
+- [ ] Verify all `--dart-define` vars set for dev/staging/prod
+
+---
+
+# PHASE 16 — INDIA GROWTH & TRUST LAYER 🆕
+
+### §P16-A WhatsApp Business Logging
+- [ ] Provision WhatsApp Business Cloud API account + webhook endpoint
+- [ ] Implement `fitkarma-whatsapp` Azure Function (webhook handler)
+- [ ] Implement phone-number → userId resolution
+- [ ] Wire text messages into existing food-text parser
+- [ ] Wire image messages into `meal_photo_analyzer` (§P5-C) pipeline
+- [ ] Implement WhatsApp reply/confirmation messages
+- [ ] Build in-app opt-in/opt-out flow (Settings → Link WhatsApp), off by default
+- [ ] Test unlinked-number fallback message
+
+### §P16-B Vernacular Voice Logging
+- [ ] Integrate Azure Speech-to-Text (multi-language) client
+- [ ] Implement `VoiceLogService` (ASR → existing food/workout parser)
+- [ ] Build language locale mapping (`preferredInputLanguage` → ASR locale)
+- [ ] Build mic input UI + language picker
+- [ ] Test ASR accuracy per supported language (Hindi, Tamil, Telugu, Marathi, Bengali, Kannada, English-India)
+- [ ] Test code-mixed input handling
+
+### §P16-C ABHA Health ID Integration
+- [ ] Implement ABHA OAuth linking flow (NDHM Health ID API)
+- [ ] Store `abhaHealthId` encrypted at rest
+- [ ] Build "Link ABHA Health ID" Settings screen
+- [ ] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
+- [ ] Verify passcode-PDF export remains default/unaffected
+- [ ] Apply §P10-M compliance boundary to all ABHA-linked sharing content
+
+### §P16-D Corporate Wellness & Insurer Tier
+- [ ] Build `OrganizationAccounts` data model + Azure SQL mirror
+- [ ] Build `EmployeeEnrollments` data model + Azure SQL mirror
+- [ ] Implement enrollment-code linking flow (opt-in, reversible)
+- [ ] Implement org-facing aggregate query layer
+- [ ] Enforce minimum-cohort-size threshold (reuse §P7-F logic) before rendering any aggregate
+- [ ] Build HR/insurer dashboard UI (enrollment %, aggregate adherence distribution)
+- [ ] Build org seat/billing management (corporate_basic / corporate_plus tiers)
+- [ ] Privacy audit: confirm no per-user data is ever queryable from org-facing endpoints
+
+### §P16-E Grocery Vendor Checkout Integration
+- [ ] Define `GroceryVendorAdapter` interface
+- [ ] Implement first vendor adapter (Blinkit or BigBasket or Zepto)
+- [ ] Implement catalog-mapping logic (FitKarma generic items → vendor SKUs)
+- [ ] Implement deep-link checkout with pre-filled cart + affiliate tag
+- [ ] Wire affiliate order-confirmation webhook
+- [ ] Reuse §P13-C affiliate ledger for revenue tracking (no parallel payout system)
+- [ ] Build "Order groceries" CTA on Grocery Optimization Engine UI (§P5-F)
+
+---
+
+# DATABASE — DRIFT LOCAL SCHEMA (v17) & AZURE SQL MIRROR
+
+### Schema & migration
+- [ ] Implement all 36 Drift tables (see full list: Users, UserScores 🆕, OrganizationAccounts 🆕, EmployeeEnrollments 🆕, FoodLogs, FoodReferences, WorkoutLogs, SleepLogs, BpReadings, GlucoseReadings, WaterLogs, HabitLogs, MoodLogs, MedicationLogs, KarmaEvents, AiInsights, ChatMessages, DietPlans, RecoveryLogs, BodyMeasurements, SquadGroups, SquadMembers, TransformationChecks, DailyIntelligencePackages, HealthSnapshots, TransformationMemories, LifeEvents, Followers, Clubs, CgmReadings, CreatorProfiles, MicronutrientLogs, MealNutritionDetails, FamilyMealPlans, FoodSubstitutions, MovementWeaknessProfiles, MovementLogs)
+- [ ] Mirror every table's DDL in Azure SQL
+- [ ] Implement `ai_cache` table in Azure SQL 🔒 (scoped by `user_id`, composite key with `prompt_hash`)
+- [ ] Verify legacy migrations v1→v2 through v15→v16 still pass on a fresh install
+- [ ] 🔒 Implement v16→v17 migration: create `UserScores`, copy legacy score columns row-by-row, drop legacy columns from `Users` via `TableMigration`
+- [ ] Implement v17 Phase 16 column additions (`timezoneOffsetMinutes`, `preferredDIPHour`, `whatsAppOptIn`, `abhaHealthId`, `preferredInputLanguage`)
+- [ ] Implement v17 table creation (`OrganizationAccounts`, `EmployeeEnrollments`)
+- [ ] Test upgrade path end-to-end: fresh v5 install → sequential upgrade through v17
+- [ ] Implement `latestScore(userId, scoreType)` helper query + index `(userId, scoreType, computedAt DESC)`
+
+---
+
+# AZURE FUNCTIONS (CLOUD LAYER)
+
+- [ ] `fitkarma-health-os-trigger` / `healthOSOrchestrator` / `generateDIPForUser` 🔒 — implement Durable Functions fan-out, verify per-user error isolation
+- [ ] `getUsersDueForDIP` activity — implement per-user timezone-window filtering
+- [ ] `fitkarma-social` — implement and deploy
+- [ ] `fitkarma-marketplace` — implement and deploy
+- [ ] `fitkarma-cores` — implement and deploy
+- [ ] `fitkarma-coach` — implement and deploy
+- [ ] `fitkarma-meal-vision` — implement and deploy
+- [ ] `fitkarma-insights` — implement and deploy
+- [ ] `fitkarma-reports` — implement and deploy
+- [ ] `fitkarma-whatsapp` 🆕 — implement and deploy
+- [ ] Load-test the fan-out orchestrator at realistic active-user volume (verify no timeout regression vs. old sequential loop)
+
+---
+
+# v1.0 ARCHITECTURE HARDENING 🔒 (CROSS-CUTTING)
+
+- [ ] Replace timestamp-based key generation with `Random.secure()` in `EncryptedDatabaseConnection`
+- [ ] Replace sequential DIP loop with Durable Functions fan-out + per-user error isolation
+- [ ] Replace hardcoded 6am IST schedule with per-user `timezoneOffsetMinutes` + `preferredDIPHour`
+- [ ] Replace raw-timestamp LWW with `HLCTimestamp`-based conflict resolution in `SyncMergeResolver`
+- [ ] Add `syncBatchId` idempotency to all `CumulativeLog` sync batches; implement server-side dedup
+- [ ] Extract 8 derived score columns off `Users` into `UserScores`; update all read sites to use `latestScore()`
+- [ ] Add `user_id` scoping to `ai_cache`; implement `purgeCacheForUser` in account-deletion workflow
+- [ ] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
+- [ ] Add Clinical Copy Change Checklist to PR template
+
+---
+
+# COMPLIANCE
+
+- [ ] Write and link DPDP Act Privacy Policy
+- [ ] Implement "Revoke All Clinical Access" single-tap wipe (local + Azure SQL)
+- [ ] Implement Non-Diagnostic Shield disclaimer component, applied to all CGM/interaction/bio-age screens
+- [ ] Verify anonymized cohort sync excludes individual lab dates / medication brand names
+- [ ] Schedule pre-launch legal review of medication/interaction-warning copy and Doctor Sharing Portal PDF template
+
+---
+
+# POST-LAUNCH (WITHIN 30 DAYS)
+
+- [ ] Expand Indian food database to 10,000+ items
+- [ ] Measure AI cost per user/day against projections
+- [ ] Monitor DIP generation success rate (verify fan-out per-user isolation in production)
+- [ ] Tune model routing from real usage patterns
+- [ ] Test HealthKit background delivery for overnight sleep
+- [ ] Measure push notification open rates; A/B test meal reminders
+- [ ] Analyze subscription conversion funnel (trial → paid)
+- [ ] Build home widget (iOS + Android): today's steps + health score
+- [ ] End-to-end test Wedding Mode with synthetic data
+- [ ] Validate Program Evolution Engine's first real transitions
+- [ ] Validate Transformation Memory accuracy at the 4-week mark
+- [ ] 🆕 Measure WhatsApp logging opt-in rate and message-parse accuracy
+- [ ] 🆕 Measure vernacular voice logging ASR accuracy per language vs. typed-log baseline
+- [ ] 🆕 Measure ABHA linking conversion rate
+- [ ] 🆕 Onboard first corporate/insurer organization end-to-end
+- [ ] 🆕 Measure grocery checkout affiliate conversion rate per vendor adapter
+
+---
+
+**Totals: 17 phases · 106 feature sections broken into ~430 concrete engineering tasks · 36 database tables · 9 Azure Functions · 9 v1.0 hardening fixes · full compliance and post-launch checklists.**
