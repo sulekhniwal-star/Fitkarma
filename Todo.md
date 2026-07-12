@@ -19,10 +19,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Configure lint rules and folder-structure enforcement in CI
 
 ### §P0-C Architecture Overview
-- [ ] Stand up local Drift + SQLCipher database layer
-- [ ] Build Sync Engine (priority queue + DLQ, 3× retry)
-- [ ] Provision Azure SQL + Entra B2C auth
-- [ ] Wire offline-first read path (local Drift as source of truth for UI)
+- [x] Stand up local Drift + SQLCipher database layer
+- [x] Build Sync Engine (priority queue + DLQ, 3× retry)
+- [x] Provision Azure SQL + Entra B2C auth
+- [x] Wire offline-first read path (local Drift as source of truth for UI)
 
 ### §P0-D Design Tokens
 - [ ] Implement color tokens (dark mode primary + light mode fallback)

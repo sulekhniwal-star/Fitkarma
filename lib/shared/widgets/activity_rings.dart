@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class RingData {
-  RingData({
+  const RingData({
     required this.value,
     required this.target,
     required this.colors,

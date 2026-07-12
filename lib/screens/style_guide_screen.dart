@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:drift/drift.dart' hide Column;
+import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/providers/azure_provider.dart';
+import 'package:fitkarma/core/sync/connectivity_service.dart';
+import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
 import 'package:fitkarma/core/theme/app_gradients.dart';
 import 'package:fitkarma/core/theme/app_spacing.dart';
@@ -9,16 +16,36 @@ import 'package:fitkarma/shared/widgets/bento_grid.dart';
 import 'package:fitkarma/shared/widgets/bilingual_label.dart';
 import 'package:fitkarma/shared/widgets/glowing_metric.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StyleGuideScreen extends StatefulWidget {
+// Stream providers for offline-first reactive UI sync states
+final waterLogsTodayProvider = StreamProvider<int>((ref) {
+  final db = ref.watch(databaseProvider);
+  final todayStart = DateTime.now().copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
+  final query = db.select(db.waterLogs)..where((t) => t.loggedAt.isBiggerThanValue(todayStart));
+  return query.watch().map((list) {
+    return list.fold<int>(0, (sum, item) => sum + item.cups);
+  });
+});
+
+final syncQueueCountProvider = StreamProvider<int>((ref) {
+  final db = ref.watch(databaseProvider);
+  return db.select(db.syncQueueItems).watch().map((list) => list.length);
+});
+
+final dlqCountProvider = StreamProvider<int>((ref) {
+  final db = ref.watch(databaseProvider);
+  return db.select(db.deadLetterQueueItems).watch().map((list) => list.length);
+});
+
+class StyleGuideScreen extends ConsumerStatefulWidget {
   const StyleGuideScreen({super.key});
 
   @override
-  State<StyleGuideScreen> createState() => _StyleGuideScreenState();
+  ConsumerState<StyleGuideScreen> createState() => _StyleGuideScreenState();
 }
 
-class _StyleGuideScreenState extends State<StyleGuideScreen> {
-  int _waterCups = 4;
+class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   bool _springToggled = false;
   int _activeTab = 0;
 
@@ -59,6 +86,8 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
 
   // --- HEADER SECTION ---
   Widget _buildHeader() {
+    final isOnline = ref.watch(connectivityProvider);
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
       child: Row(
@@ -74,36 +103,50 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
               color: AppColorsDark.primary,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),
-            decoration: BoxDecoration(
-              color: AppColorsDark.surface1,
-              borderRadius: BorderRadius.circular(AppRadius.full),
-              border: Border.all(
-                color: AppColorsDark.glassBorder,
-                width: 1.0,
+          // Interactive Connection Status Badge
+          GestureDetector(
+            onTap: () {
+              ref.read(connectivityProvider.notifier).setOnline(!isOnline);
+            },
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),
+                decoration: BoxDecoration(
+                  color: isOnline 
+                      ? AppColorsDark.success.withOpacity(0.08)
+                      : AppColorsDark.textMuted.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(AppRadius.full),
+                  border: Border.all(
+                    color: isOnline 
+                        ? AppColorsDark.success.withOpacity(0.3)
+                        : AppColorsDark.textMuted.withOpacity(0.3),
+                    width: 1.0,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 8.0,
+                      height: 8.0,
+                      decoration: BoxDecoration(
+                        color: isOnline ? AppColorsDark.success : AppColorsDark.textMuted,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      isOnline ? 'Online (Click to toggle)' : 'Offline (Click to toggle)',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: isOnline ? AppColorsDark.success : AppColorsDark.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 8.0,
-                  height: 8.0,
-                  decoration: const BoxDecoration(
-                    color: AppColorsDark.success,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 8.0),
-                const Text(
-                  'v1.0.0 Refactored',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: AppColorsDark.textPrimary,
-                  ),
-                ),
-              ],
             ),
           )
         ],
@@ -172,6 +215,15 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
 
   // --- VIEW 1: FITNESS DASHBOARD VIEW ---
   Widget _buildDashboardView() {
+    final waterCupsAsync = ref.watch(waterLogsTodayProvider);
+    final waterCups = waterCupsAsync.value ?? 0;
+
+    final queueCountAsync = ref.watch(syncQueueCountProvider);
+    final queueCount = queueCountAsync.value ?? 0;
+
+    final dlqCountAsync = ref.watch(dlqCountProvider);
+    final dlqCount = dlqCountAsync.value ?? 0;
+
     final bentoItems = [
       // 1. Concentric Activity Rings (2x2)
       BentoGridItem(
@@ -193,7 +245,7 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
               const Spacer(),
               Center(
                 child: ActivityRings(
-                  rings: [
+                  rings: const [
                     RingData(
                       value: 7800,
                       target: 10000,
@@ -253,11 +305,11 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
                       ),
                     ),
                     const SizedBox(height: 4.0),
-                    GlowingMetric(
+                    const GlowingMetric(
                       value: '124',
                       unit: 'bpm',
                       glowColor: AppColorsDark.rose,
-                      customStyle: AppTypography.metricLg.copyWith(color: Colors.white),
+                      customStyle: AppTypography.metricLg,
                     ),
                   ],
                 ),
@@ -288,15 +340,44 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
         ),
       ),
 
-      // 3. Hydration Incrementer (1x1)
+      // 3. Encrypted Local SQLite + Sync Queue Water Incrementer (1x1)
       BentoGridItem(
         columnSpan: 1,
         rowSpan: 1,
         child: BentoCard(
-          onTap: () {
-            setState(() {
-              _waterCups = (_waterCups >= 12) ? 0 : _waterCups + 1;
-            });
+          onTap: () async {
+            final db = ref.read(databaseProvider);
+            final batchId = 'water_batch_${DateTime.now().millisecondsSinceEpoch}';
+            
+            // 1. Optimistic SQLite insert (streams update local UI state immediately)
+            await db.into(db.waterLogs).insert(
+              WaterLogsCompanion.insert(
+                cups: 1,
+                syncBatchId: batchId,
+                loggedAt: DateTime.now(),
+                hlcPhysicalTime: DateTime.now(),
+                hlcLogicalCounter: 0,
+                hlcNodeId: 'node_mobile_device',
+              ),
+            );
+
+            // 2. Queue local sync item
+            await db.into(db.syncQueueItems).insert(
+              SyncQueueItemsCompanion.insert(
+                entityType: 'water_log',
+                entityId: batchId,
+                serializedPayload: jsonEncode({
+                  'cups': 1,
+                  'loggedAt': DateTime.now().toIso8601String(),
+                  'syncBatchId': batchId,
+                }),
+                createdAt: DateTime.now(),
+                syncBatchId: batchId,
+              ),
+            );
+
+            // 3. Trigger worker thread sync
+            ref.read(syncWorkerProvider).triggerSync();
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -305,21 +386,21 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
                 englishText: 'Water Log',
                 hindiText: 'पानी का सेवन',
                 englishStyle: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: AppColorsDark.textSecondary,
                 ),
               ),
               const Spacer(),
               GlowingMetric(
-                value: '$_waterCups',
+                value: '$waterCups',
                 unit: 'cups',
                 glowColor: AppColorsDark.teal,
                 customStyle: AppTypography.metricLg.copyWith(color: Colors.white),
               ),
               const Spacer(),
               const Text(
-                'Tap to Quick Log',
+                '+ Log (Writes DB)',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
@@ -331,7 +412,7 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
         ),
       ),
 
-      // 4. Sleep Tracker (1x1)
+      // 4. Diagnostics Dashboard (1x1)
       BentoGridItem(
         columnSpan: 1,
         rowSpan: 1,
@@ -341,25 +422,35 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const BilingualLabel(
-                englishText: 'Sleep Need',
-                hindiText: 'नींद की स्थिति',
+                englishText: 'Sync Status',
+                hindiText: 'सिंक स्थिति',
                 englishStyle: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: AppColorsDark.textSecondary,
                 ),
               ),
               const Spacer(),
-              GlowingMetric(
-                value: '8.2',
-                unit: 'hrs',
-                glowColor: AppColorsDark.secondary,
-                customStyle: AppTypography.metricLg.copyWith(color: Colors.white),
+              Text(
+                'Queued: $queueCount',
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                  color: AppColorsDark.accent,
+                ),
+              ),
+              Text(
+                'DLQ: $dlqCount',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                  color: dlqCount > 0 ? AppColorsDark.error : AppColorsDark.textMuted,
+                ),
               ),
               const Spacer(),
-              const Text(
-                '86% Sleep Quality',
-                style: TextStyle(
+              Text(
+                ref.watch(syncWorkerProvider).isSyncing ? 'Syncing...' : 'Idle',
+                style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
                   color: AppColorsDark.textSecondary,
@@ -567,12 +658,68 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
     );
   }
 
-  // --- VIEW 2: TOKEN SPECIFICATIONS ---
+  // --- VIEW 2: TOKEN SPECIFICATIONS AND DIAGNOSTICS ---
   Widget _buildSpecsView() {
+    final client = ref.read(azureSyncClientProvider);
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // 1. Color Palette Tokens
+        // Simulated Cloud Config Toggles
+        BentoCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Cloud Sync Simulation & Diagnostics',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppColorsDark.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 12.0),
+              // Failures switch
+              SwitchListTile(
+                title: const Text('Simulate Flaky Internet (60% REST drop)'),
+                subtitle: const Text('Forces retries up to 3 times, then drops items to DLQ'),
+                value: client.simulateNetworkFailures,
+                activeThumbColor: AppColorsDark.primary,
+                contentPadding: EdgeInsets.zero,
+                onChanged: (val) {
+                  setState(() {
+                    client.simulateNetworkFailures = val;
+                  });
+                },
+              ),
+              // Purge database button
+              const SizedBox(height: 12.0),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final db = ref.read(databaseProvider);
+                    await db.delete(db.waterLogs).go();
+                    await db.delete(db.syncQueueItems).go();
+                    await db.delete(db.deadLetterQueueItems).go();
+                    ref.read(syncWorkerProvider).triggerSync();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColorsDark.error.withOpacity(0.12),
+                    foregroundColor: AppColorsDark.error,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
+                    ),
+                  ),
+                  child: const Text('Purge Database & Sync Queues', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(height: 12.0),
+
+        // Color Palette Tokens
         BentoCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -597,7 +744,7 @@ class _StyleGuideScreenState extends State<StyleGuideScreen> {
         ),
         const SizedBox(height: 12.0),
         
-        // 2. Typography Spec
+        // Typography Spec
         const BentoCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
