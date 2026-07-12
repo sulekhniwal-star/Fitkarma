@@ -28,6 +28,16 @@ class AppColorsDark {
   static const teal           = Color(0xFF00D4B4);
   static const tealGlow       = Color(0x3300D4B4);
 
+  // Hero / Onboarding welcome gradient
+  static const heroDeep       = Color(0xFF0A0818);
+  static const heroDeep2      = Color(0xFF130D2E);
+  static const LinearGradient heroGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    stops: [0.0, 0.45, 1.0],
+    colors: [heroDeep, Color(0xFF1A0F3A), Color(0xFF0F0920)],
+  );
+
   // Semantic
   static const success        = Color(0xFF4ADE80);
   static const successGlow    = Color(0x334ADE80);

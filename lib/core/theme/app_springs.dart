@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class AppSprings {
   AppSprings._();
 
-  static const Curve touchResponseCurve = SpringCurve(damping: 0.5, frequency: 1.8);
+  static const Curve touchResponseCurve  = SpringCurve(damping: 0.5, frequency: 1.8);
   static const Curve smoothAnimationCurve = SpringCurve(damping: 0.7, frequency: 1.2);
+  /// Underdamped spring for the Welcome logo bounce-reveal (slightly bouncy).
+  static const Curve logoRevealCurve     = SpringCurve(damping: 0.45, frequency: 0.9);
 }
 
 class SpringCurve extends Curve {

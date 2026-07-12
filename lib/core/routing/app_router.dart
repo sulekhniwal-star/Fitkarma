@@ -1,6 +1,7 @@
 import 'package:fitkarma/core/config/user_experience_stage.dart';
 import 'package:fitkarma/core/providers/core_providers.dart';
 import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
+import 'package:fitkarma/features/onboarding/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -177,9 +178,7 @@ class AppRouter {
           path: AppRoutes.onboardingWelcome,
           pageBuilder: (context, state) => _fadeTransition(
             state,
-            const _OnboardingPlaceholderScreen(
-              title: 'Welcome — Your health, your karma.',
-            ),
+            const WelcomeScreen(),
           ),
         ),
         GoRoute(

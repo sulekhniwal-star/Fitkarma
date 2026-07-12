@@ -75,9 +75,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Add progress indicator + skip/back navigation rules
 
 ### §P1-B Welcome Screen
-- [ ] Build UI layout
-- [ ] Wire entry animation/branding
-- [ ] Widget test
+- [x] Build UI layout
+- [x] Wire entry animation/branding
+- [x] Widget test
 
 ### §P1-C Goals Screen
 - [ ] Build UI (multi-select goal picker)
