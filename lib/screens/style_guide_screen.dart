@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:drift/drift.dart' hide Column;
 import 'package:fitkarma/core/database/app_database.dart';
 import 'package:fitkarma/core/providers/azure_provider.dart';
+import 'package:fitkarma/core/providers/core_providers.dart';
 import 'package:fitkarma/core/sync/connectivity_service.dart';
 import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
@@ -49,10 +50,13 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   bool _springToggled = false;
   int _activeTab = 0;
 
+  // Theme Colors helper resolving active brightness color tokens
+  _ThemeColors get colors => _ThemeColors(Theme.of(context).brightness == Brightness.dark);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColorsDark.bg0,
+      backgroundColor: colors.bg0,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,68 +91,114 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   // --- HEADER SECTION ---
   Widget _buildHeader() {
     final isOnline = ref.watch(connectivityProvider);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const BilingualLabel(
+          BilingualLabel(
             englishText: 'FITKARMA',
             hindiText: 'फिटकर्मा • स्वास्थ्य ओएस',
             englishStyle: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,
               letterSpacing: 2.0,
-              color: AppColorsDark.primary,
+              color: colors.primary,
             ),
           ),
-          // Interactive Connection Status Badge
-          GestureDetector(
-            onTap: () {
-              ref.read(connectivityProvider.notifier).setOnline(!isOnline);
-            },
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),
-                decoration: BoxDecoration(
-                  color: isOnline 
-                      ? AppColorsDark.success.withOpacity(0.08)
-                      : AppColorsDark.textMuted.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(AppRadius.full),
-                  border: Border.all(
-                    color: isOnline 
-                        ? AppColorsDark.success.withOpacity(0.3)
-                        : AppColorsDark.textMuted.withOpacity(0.3),
-                    width: 1.0,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Connection Status Badge
+              GestureDetector(
+                onTap: () {
+                  ref.read(connectivityProvider.notifier).setOnline(!isOnline);
+                },
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                    decoration: BoxDecoration(
+                      color: isOnline 
+                          ? colors.success.withOpacity(0.08)
+                          : colors.textMuted.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(AppRadius.full),
+                      border: Border.all(
+                        color: isOnline 
+                            ? colors.success.withOpacity(0.3)
+                            : colors.textMuted.withOpacity(0.3),
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 8.0,
+                          height: 8.0,
+                          decoration: BoxDecoration(
+                            color: isOnline ? colors.success : colors.textMuted,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 8.0),
+                        Text(
+                          isOnline ? 'Online' : 'Offline',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: isOnline ? colors.success : colors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 8.0,
-                      height: 8.0,
-                      decoration: BoxDecoration(
-                        color: isOnline ? AppColorsDark.success : AppColorsDark.textMuted,
-                        shape: BoxShape.circle,
+              ),
+              const SizedBox(width: 10.0),
+              // Dynamic Theme Toggler
+              GestureDetector(
+                onTap: () {
+                  ref.read(themeModeProvider.notifier).toggle();
+                },
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                    decoration: BoxDecoration(
+                      color: colors.secondary.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(AppRadius.full),
+                      border: Border.all(
+                        color: colors.secondary.withOpacity(0.3),
+                        width: 1.0,
                       ),
                     ),
-                    const SizedBox(width: 8.0),
-                    Text(
-                      isOnline ? 'Online (Click to toggle)' : 'Offline (Click to toggle)',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        color: isOnline ? AppColorsDark.success : AppColorsDark.textSecondary,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+                          size: 12,
+                          color: colors.secondary,
+                        ),
+                        const SizedBox(width: 6.0),
+                        Text(
+                          isDark ? 'Light' : 'Dark',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: colors.secondary,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          )
+            ],
+          ),
         ],
       ),
     );
@@ -180,13 +230,13 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
           decoration: BoxDecoration(
             color: isSelected 
-                ? AppColorsDark.primary.withOpacity(0.1)
-                : AppColorsDark.surface0,
+                ? colors.primary.withOpacity(0.1)
+                : colors.surface0,
             borderRadius: BorderRadius.circular(AppRadius.md),
             border: Border.all(
               color: isSelected 
-                  ? AppColorsDark.primary.withOpacity(0.4)
-                  : AppColorsDark.glassBorder,
+                  ? colors.primary.withOpacity(0.4)
+                  : colors.glassBorder,
               width: 1.0,
             ),
           ),
@@ -195,7 +245,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               Icon(
                 icon,
                 size: 16,
-                color: isSelected ? AppColorsDark.primary : AppColorsDark.textSecondary,
+                color: isSelected ? colors.primary : colors.textSecondary,
               ),
               const SizedBox(width: 8.0),
               Text(
@@ -203,7 +253,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: isSelected ? AppColorsDark.primary : AppColorsDark.textSecondary,
+                  color: isSelected ? colors.primary : colors.textSecondary,
                 ),
               ),
             ],
@@ -215,6 +265,8 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
 
   // --- VIEW 1: FITNESS DASHBOARD VIEW ---
   Widget _buildDashboardView() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     final waterCupsAsync = ref.watch(waterLogsTodayProvider);
     final waterCups = waterCupsAsync.value ?? 0;
 
@@ -233,35 +285,35 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BilingualLabel(
+              BilingualLabel(
                 englishText: 'Daily Mission progress',
                 hindiText: 'दैनिक मिशन प्रगति',
                 englishStyle: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: AppColorsDark.textPrimary,
+                  color: colors.textPrimary,
                 ),
               ),
               const Spacer(),
               Center(
                 child: ActivityRings(
-                  rings: const [
+                  rings: [
                     RingData(
                       value: 7800,
                       target: 10000,
-                      colors: [AppColorsDark.primary, AppColorsDark.accent],
+                      colors: [colors.primary, colors.accent],
                       strokeWidth: 10.0,
                     ),
                     RingData(
                       value: 580,
                       target: 800,
-                      colors: [AppColorsDark.rose, AppColorsDark.purple],
+                      colors: [colors.rose, colors.purple],
                       strokeWidth: 10.0,
                     ),
                     RingData(
                       value: 30,
                       target: 45,
-                      colors: [AppColorsDark.teal, AppColorsDark.success],
+                      colors: [colors.teal, colors.success],
                       strokeWidth: 10.0,
                     ),
                   ],
@@ -273,9 +325,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildLegendDot('Steps', AppColorsDark.primary),
-                  _buildLegendDot('Energy', AppColorsDark.rose),
-                  _buildLegendDot('Active', AppColorsDark.teal),
+                  _buildLegendDot('Steps', colors.primary),
+                  _buildLegendDot('Energy', colors.rose),
+                  _buildLegendDot('Active', colors.teal),
                 ],
               )
             ],
@@ -295,21 +347,23 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const BilingualLabel(
+                    BilingualLabel(
                       englishText: 'Heart Rate',
                       hindiText: 'हृदय गति',
                       englishStyle: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: AppColorsDark.textSecondary,
+                        color: colors.textSecondary,
                       ),
                     ),
                     const SizedBox(height: 4.0),
-                    const GlowingMetric(
+                    GlowingMetric(
                       value: '124',
                       unit: 'bpm',
-                      glowColor: AppColorsDark.rose,
-                      customStyle: AppTypography.metricLg,
+                      glowColor: colors.rose,
+                      customStyle: AppTypography.metricLg.copyWith(
+                        color: colors.textPrimary,
+                      ),
                     ),
                   ],
                 ),
@@ -326,8 +380,8 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                         height: 45 * heights[index],
                         decoration: BoxDecoration(
                           color: index == 3 || index == 4 
-                              ? AppColorsDark.rose 
-                              : AppColorsDark.rose.withOpacity(0.3),
+                              ? colors.rose 
+                              : colors.rose.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(AppRadius.sm),
                         ),
                       );
@@ -349,7 +403,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
             final db = ref.read(databaseProvider);
             final batchId = 'water_batch_${DateTime.now().millisecondsSinceEpoch}';
             
-            // 1. Optimistic SQLite insert (streams update local UI state immediately)
+            // 1. Optimistic SQLite insert
             await db.into(db.waterLogs).insert(
               WaterLogsCompanion.insert(
                 cups: 1,
@@ -376,35 +430,35 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               ),
             );
 
-            // 3. Trigger worker thread sync
+            // 3. Trigger worker sync
             ref.read(syncWorkerProvider).triggerSync();
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BilingualLabel(
+              BilingualLabel(
                 englishText: 'Water Log',
                 hindiText: 'पानी का सेवन',
                 englishStyle: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: AppColorsDark.textSecondary,
+                  color: colors.textSecondary,
                 ),
               ),
               const Spacer(),
               GlowingMetric(
                 value: '$waterCups',
                 unit: 'cups',
-                glowColor: AppColorsDark.teal,
-                customStyle: AppTypography.metricLg.copyWith(color: Colors.white),
+                glowColor: colors.teal,
+                customStyle: AppTypography.metricLg.copyWith(color: colors.textPrimary),
               ),
               const Spacer(),
-              const Text(
+              Text(
                 '+ Log (Writes DB)',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
-                  color: AppColorsDark.teal,
+                  color: colors.teal,
                 ),
               ),
             ],
@@ -417,26 +471,26 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
         columnSpan: 1,
         rowSpan: 1,
         child: BentoCard(
-          customBgColor: AppColorsDark.surface1.withOpacity(0.8),
+          customBgColor: colors.surface1.withOpacity(0.8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BilingualLabel(
+              BilingualLabel(
                 englishText: 'Sync Status',
                 hindiText: 'सिंक स्थिति',
                 englishStyle: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: AppColorsDark.textSecondary,
+                  color: colors.textSecondary,
                 ),
               ),
               const Spacer(),
               Text(
                 'Queued: $queueCount',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w800,
-                  color: AppColorsDark.accent,
+                  color: colors.accent,
                 ),
               ),
               Text(
@@ -444,16 +498,16 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w800,
-                  color: dlqCount > 0 ? AppColorsDark.error : AppColorsDark.textMuted,
+                  color: dlqCount > 0 ? colors.error : colors.textMuted,
                 ),
               ),
               const Spacer(),
               Text(
                 ref.watch(syncWorkerProvider).isSyncing ? 'Syncing...' : 'Idle',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
-                  color: AppColorsDark.textSecondary,
+                  color: colors.textSecondary,
                 ),
               ),
             ],
@@ -473,28 +527,28 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const BilingualLabel(
+                    BilingualLabel(
                       englishText: 'Today\'s Routine',
                       hindiText: 'आज का व्यायाम',
                       englishStyle: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: AppColorsDark.textSecondary,
+                        color: colors.textSecondary,
                       ),
                     ),
                     const SizedBox(height: 6.0),
-                    const Text(
+                    Text(
                       'Hypertrophy',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
-                        color: AppColorsDark.textPrimary,
+                        color: colors.textPrimary,
                       ),
                     ),
                     Text(
                       'Push workout A',
                       style: AppTypography.bodySm.copyWith(
-                        color: AppColorsDark.success,
+                        color: colors.success,
                         fontWeight: FontWeight.w700,
                       ),
                     )
@@ -504,16 +558,10 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               Container(
                 width: 60,
                 height: 60,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: AppGradients.primary,
                   shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColorsDark.primaryGlow,
-                      blurRadius: 16,
-                      offset: Offset(0, 4),
-                    )
-                  ],
+                  boxShadow: isDark ? AppElevation.primaryGlowDark : AppElevation.primaryGlowLight,
                 ),
                 child: const Icon(
                   Icons.fitness_center_rounded,
@@ -534,21 +582,21 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BilingualLabel(
+              BilingualLabel(
                 englishText: 'Spring Physics Simulator',
                 hindiText: 'स्प्रिंग भौतिकी सिम्युलेटर',
                 englishStyle: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: AppColorsDark.textPrimary,
+                  color: colors.textPrimary,
                 ),
               ),
               const SizedBox(height: 4.0),
-              const Text(
+              Text(
                 'Uses AppSprings.touchResponseCurve (damping: 0.5, freq: 1.8) on state transformations.',
                 style: TextStyle(
                   fontSize: 11,
-                  color: AppColorsDark.textSecondary,
+                  color: colors.textSecondary,
                 ),
               ),
               const Spacer(),
@@ -559,7 +607,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   color: Colors.black.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(AppRadius.md),
                   border: Border.all(
-                    color: AppColorsDark.glassBorder,
+                    color: colors.glassBorder,
                   ),
                 ),
                 child: Stack(
@@ -580,16 +628,10 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                           child: Container(
                             width: 40,
                             height: 40,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: AppGradients.primary,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColorsDark.primaryGlow,
-                                  blurRadius: 10,
-                                  spreadRadius: 1,
-                                )
-                              ],
+                              boxShadow: isDark ? AppElevation.primaryGlowDark : AppElevation.primaryGlowLight,
                             ),
                             child: const Icon(
                               Icons.bolt,
@@ -607,12 +649,12 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Physics formula: Damped Harmonic Oscillator',
                     style: TextStyle(
                       fontSize: 10,
                       fontFamily: 'monospace',
-                      color: AppColorsDark.textMuted,
+                      color: colors.textMuted,
                     ),
                   ),
                   ElevatedButton(
@@ -622,15 +664,15 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColorsDark.primary.withOpacity(0.12),
-                      foregroundColor: AppColorsDark.primary,
+                      backgroundColor: colors.primary.withOpacity(0.12),
+                      foregroundColor: colors.primary,
                       surfaceTintColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppRadius.sm),
-                        side: const BorderSide(
-                          color: AppColorsDark.primary,
+                        side: BorderSide(
+                          color: colors.primary,
                           width: 1.0,
                         ),
                       ),
@@ -670,12 +712,12 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Cloud Sync Simulation & Diagnostics',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: AppColorsDark.textPrimary,
+                  color: colors.textPrimary,
                 ),
               ),
               const SizedBox(height: 12.0),
@@ -684,7 +726,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 title: const Text('Simulate Flaky Internet (60% REST drop)'),
                 subtitle: const Text('Forces retries up to 3 times, then drops items to DLQ'),
                 value: client.simulateNetworkFailures,
-                activeThumbColor: AppColorsDark.primary,
+                activeThumbColor: colors.primary,
                 contentPadding: EdgeInsets.zero,
                 onChanged: (val) {
                   setState(() {
@@ -704,8 +746,8 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                     ref.read(syncWorkerProvider).triggerSync();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColorsDark.error.withOpacity(0.12),
-                    foregroundColor: AppColorsDark.error,
+                    backgroundColor: colors.error.withOpacity(0.12),
+                    foregroundColor: colors.error,
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -724,28 +766,28 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Design Palette Tokens',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: AppColorsDark.textPrimary,
+                  color: colors.textPrimary,
                 ),
               ),
               const SizedBox(height: 12.0),
-              _buildColorSwatch('bg0 (Scaffold Background)', AppColorsDark.bg0, '#080810'),
-              _buildColorSwatch('surface0 (Default Container)', AppColorsDark.surface0, '#1C1C2E'),
-              _buildColorSwatch('primary (Brand highlight)', AppColorsDark.primary, '#FF6B35'),
-              _buildColorSwatch('accent (Gains & Achievements)', AppColorsDark.accent, '#FFB547'),
-              _buildColorSwatch('secondary (Sleep/Meditation)', AppColorsDark.secondary, '#7B6FF0'),
-              _buildColorSwatch('teal (Hydration & Vitals)', AppColorsDark.teal, '#00D4B4'),
+              _buildColorSwatch('bg0 (Scaffold Background)', colors.bg0, '#080810 / #F6F6FB'),
+              _buildColorSwatch('surface0 (Default Container)', colors.surface0, '#1C1C2E / #FFFFFF'),
+              _buildColorSwatch('primary (Brand highlight)', colors.primary, '#FF6B35 / #E04E1B'),
+              _buildColorSwatch('accent (Gains & Achievements)', colors.accent, '#FFB547 / #D97706'),
+              _buildColorSwatch('secondary (Sleep/Meditation)', colors.secondary, '#7B6FF0 / #5D50DD'),
+              _buildColorSwatch('teal (Hydration & Vitals)', colors.teal, '#00D4B4 / #009688'),
             ],
           ),
         ),
         const SizedBox(height: 12.0),
         
         // Typography Spec
-        const BentoCard(
+        BentoCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -754,17 +796,17 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: AppColorsDark.textPrimary,
+                  color: colors.textPrimary,
                 ),
               ),
-              SizedBox(height: 12.0),
-              Text('Display Bold (72px)', style: AppTypography.heroDisplay),
-              SizedBox(height: 8.0),
-              Text('Metric Hero (56px)', style: AppTypography.metricXL),
-              SizedBox(height: 8.0),
-              Text('Header H1 (22px)', style: AppTypography.h1),
-              SizedBox(height: 8.0),
-              Text('Body Regular (14px)', style: AppTypography.bodyMd),
+              const SizedBox(height: 12.0),
+              Text('Display Bold (72px)', style: AppTypography.heroDisplay.copyWith(color: colors.textPrimary)),
+              const SizedBox(height: 8.0),
+              Text('Metric Hero (56px)', style: AppTypography.metricXL.copyWith(color: colors.textPrimary)),
+              const SizedBox(height: 8.0),
+              Text('Header H1 (22px)', style: AppTypography.h1.copyWith(color: colors.textPrimary)),
+              const SizedBox(height: 8.0),
+              Text('Body Regular (14px)', style: AppTypography.bodyMd.copyWith(color: colors.textSecondary)),
             ],
           ),
         ),
@@ -786,10 +828,10 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
         const SizedBox(width: 6.0),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.bold,
-            color: AppColorsDark.textSecondary,
+            color: colors.textSecondary,
           ),
         ),
       ],
@@ -807,7 +849,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(AppRadius.sm),
-              border: Border.all(color: AppColorsDark.glassBorder),
+              border: Border.all(color: colors.glassBorder),
             ),
           ),
           const SizedBox(width: 12.0),
@@ -817,18 +859,18 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: AppColorsDark.textPrimary,
+                    color: colors.textPrimary,
                   ),
                 ),
                 Text(
                   hexCode,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
                     fontFamily: 'monospace',
-                    color: AppColorsDark.textSecondary,
+                    color: colors.textSecondary,
                   ),
                 ),
               ],
@@ -838,4 +880,39 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
       ),
     );
   }
+}
+
+// Private class to dynamically map colors based on brightness state
+class _ThemeColors {
+  _ThemeColors(this.isDark);
+
+  final bool isDark;
+
+  Color get bg0 => isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
+  Color get bg1 => isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
+  Color get bg2 => isDark ? AppColorsDark.bg2 : AppColorsLight.bg2;
+  Color get surface0 => isDark ? AppColorsDark.surface0 : AppColorsLight.surface0;
+  Color get surface1 => isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+  Color get surface2 => isDark ? AppColorsDark.surface2 : AppColorsLight.surface2;
+  Color get glass => isDark ? AppColorsDark.glass : AppColorsLight.glass;
+  Color get glassBorder => isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
+  Color get primary => isDark ? AppColorsDark.primary : AppColorsLight.primary;
+  Color get primaryGlow => isDark ? AppColorsDark.primaryGlow : AppColorsLight.primaryGlow;
+  Color get primaryMuted => isDark ? AppColorsDark.primaryMuted : AppColorsLight.primaryMuted;
+  Color get accent => isDark ? AppColorsDark.accent : AppColorsLight.accent;
+  Color get accentGlow => isDark ? AppColorsDark.accentGlow : AppColorsLight.accentGlow;
+  Color get secondary => isDark ? AppColorsDark.secondary : AppColorsLight.secondary;
+  Color get secondaryGlow => isDark ? AppColorsDark.secondaryGlow : AppColorsLight.secondaryGlow;
+  Color get teal => isDark ? AppColorsDark.teal : AppColorsLight.teal;
+  Color get tealGlow => isDark ? AppColorsDark.tealGlow : AppColorsLight.tealGlow;
+  Color get success => isDark ? AppColorsDark.success : AppColorsLight.success;
+  Color get successGlow => isDark ? AppColorsDark.successGlow : AppColorsLight.successGlow;
+  Color get warning => isDark ? AppColorsDark.warning : AppColorsLight.warning;
+  Color get error => isDark ? AppColorsDark.error : AppColorsLight.error;
+  Color get rose => isDark ? AppColorsDark.rose : AppColorsLight.rose;
+  Color get purple => isDark ? AppColorsDark.purple : AppColorsLight.purple;
+  Color get textPrimary => isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
+  Color get textSecondary => isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+  Color get textMuted => isDark ? AppColorsDark.textMuted : AppColorsLight.textMuted;
+  Color get divider => isDark ? AppColorsDark.divider : AppColorsLight.divider;
 }

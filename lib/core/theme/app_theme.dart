@@ -43,4 +43,43 @@ class FitkarmaAppTheme {
       ),
     );
   }
+
+  static ThemeData get lightTheme {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: AppColorsLight.bg0,
+      primaryColor: AppColorsLight.primary,
+      
+      colorScheme: const ColorScheme.light(
+        primary: AppColorsLight.primary,
+        secondary: AppColorsLight.secondary,
+        surface: AppColorsLight.surface0,
+        error: AppColorsLight.error,
+      ),
+      
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: AppColorsLight.primary,
+        selectionColor: AppColorsLight.primaryMuted,
+        selectionHandleColor: AppColorsLight.primary,
+      ),
+
+      textTheme: const TextTheme(
+        displayLarge: AppTypography.heroDisplay,
+        displayMedium: AppTypography.metricXL,
+        displaySmall: AppTypography.metricLg,
+        headlineLarge: AppTypography.displayLg,
+        headlineMedium: AppTypography.displayMd,
+        headlineSmall: AppTypography.h1,
+        titleLarge: AppTypography.h1,
+        titleMedium: AppTypography.h2,
+        titleSmall: AppTypography.h3,
+        bodyLarge: AppTypography.bodyLg,
+        bodyMedium: AppTypography.bodyMd,
+        bodySmall: AppTypography.bodySm,
+        labelLarge: AppTypography.labelLg,
+        labelSmall: AppTypography.labelMd,
+      ),
+    );
+  }
 }

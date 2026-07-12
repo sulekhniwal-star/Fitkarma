@@ -60,6 +60,7 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final Widget cardBody = ClipRRect(
       borderRadius: BorderRadius.circular(widget.borderRadius),
       child: BackdropFilter(
@@ -69,18 +70,18 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
           height: widget.height,
           padding: widget.padding ?? const EdgeInsets.all(AppSpacing.cardH),
           decoration: BoxDecoration(
-            color: widget.customBgColor ?? AppColorsDark.glass,
+            color: widget.customBgColor ?? (isDark ? AppColorsDark.glass : AppColorsLight.glass),
             borderRadius: BorderRadius.circular(widget.borderRadius),
             border: Border.all(
-              color: AppColorsDark.glassBorder,
+              color: isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder,
               width: 1.0,
             ),
             boxShadow: widget.hasSecondaryGlow 
                 ? [
-                    const BoxShadow(
-                      color: AppColorsDark.primaryMuted,
+                    BoxShadow(
+                      color: isDark ? AppColorsDark.primaryMuted : AppColorsLight.primaryMuted,
                       blurRadius: 24,
-                      offset: Offset(0, 8),
+                      offset: const Offset(0, 8),
                     )
                   ]
                 : null,

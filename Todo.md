@@ -25,9 +25,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Wire offline-first read path (local Drift as source of truth for UI)
 
 ### §P0-D Design Tokens
-- [ ] Implement color tokens (dark mode primary + light mode fallback)
-- [ ] Implement typography scale
-- [ ] Implement spacing/radius/elevation tokens
+- [x] Implement color tokens (dark mode primary + light mode fallback)
+- [x] Implement typography scale
+- [x] Implement spacing/radius/elevation tokens
 
 ### §P0-D2 Shared Foundation Widgets
 - [ ] Build GlassCard component (with `DeviceTier.low` blur fallback)

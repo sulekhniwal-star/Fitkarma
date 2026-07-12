@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/device_tier.dart';
 import '../config/user_experience_stage.dart';
@@ -38,3 +39,18 @@ class LowDataModeNotifier extends Notifier<bool> {
 
 /// Provider for low data/bandwidth optimization settings.
 final lowDataModeProvider = NotifierProvider<LowDataModeNotifier, bool>(LowDataModeNotifier.new);
+
+/// Notifier class for selecting light/dark theme.
+class ThemeModeNotifier extends Notifier<ThemeMode> {
+  @override
+  ThemeMode build() {
+    return ThemeMode.dark; // Default to dark theme mode
+  }
+
+  void toggle() {
+    state = state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+  }
+}
+
+/// Provider managing the active theme mode of the application.
+final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);

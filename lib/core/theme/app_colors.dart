@@ -42,3 +42,46 @@ class AppColorsDark {
   static const textMuted      = Color(0xFF6B68A0);
   static const divider        = Color(0x14FFFFFF);
 }
+
+class AppColorsLight {
+  AppColorsLight._();
+
+  // Background layers
+  static const bg0         = Color(0xFFF6F6FB);
+  static const bg1         = Color(0xFFFCFCFF);
+  static const bg2         = Color(0xFFFFFFFF);
+
+  // Surface layers
+  static const surface0    = Color(0xFFFFFFFF);
+  static const surface1    = Color(0xFFF1F1F6);
+  static const surface2    = Color(0xFFEBEBEF);
+
+  // Glassmorphic overlays (subtle shadow contrast)
+  static const glass       = Color(0x08000000);
+  static const glassBorder = Color(0x0C000000);
+
+  // Brand Highlights (deeper contrast to improve accessibility ratios)
+  static const primary        = Color(0xFFE04E1B);
+  static const primaryGlow    = Color(0x22E04E1B);
+  static const primaryMuted   = Color(0x12E04E1B);
+  static const accent         = Color(0xFFD97706);
+  static const accentGlow     = Color(0x1CD97706);
+  static const secondary      = Color(0xFF5D50DD);
+  static const secondaryGlow  = Color(0x205D50DD);
+  static const teal           = Color(0xFF009688);
+  static const tealGlow       = Color(0x1A009688);
+
+  // Semantic Warnings & Health states
+  static const success        = Color(0xFF16A34A);
+  static const successGlow    = Color(0x1C16A34A);
+  static const warning        = Color(0xFFD97706);
+  static const error          = Color(0xFFDC2626);
+  static const rose           = Color(0xFFE11D48);
+  static const purple         = Color(0xFF9333EA);
+
+  // Texts
+  static const textPrimary    = Color(0xFF0A0A10);
+  static const textSecondary  = Color(0xFF585777);
+  static const textMuted      = Color(0xFF8886A5);
+  static const divider        = Color(0x0A000000);
+}
