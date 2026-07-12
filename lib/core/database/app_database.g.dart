@@ -3483,6 +3483,717 @@ class AICacheEntriesCompanion extends UpdateCompanion<AICacheEntry> {
   }
 }
 
+class $TransformationMemoriesTable extends TransformationMemories
+    with TableInfo<$TransformationMemoriesTable, TransformationMemory> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TransformationMemoriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _localIdMeta = const VerificationMeta(
+    'localId',
+  );
+  @override
+  late final GeneratedColumn<String> localId = GeneratedColumn<String>(
+    'local_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _weightHistoryJsonMeta = const VerificationMeta(
+    'weightHistoryJson',
+  );
+  @override
+  late final GeneratedColumn<String> weightHistoryJson =
+      GeneratedColumn<String>(
+        'weight_history_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _majorStrugglesMeta = const VerificationMeta(
+    'majorStruggles',
+  );
+  @override
+  late final GeneratedColumn<String> majorStruggles = GeneratedColumn<String>(
+    'major_struggles',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _injuriesJsonMeta = const VerificationMeta(
+    'injuriesJson',
+  );
+  @override
+  late final GeneratedColumn<String> injuriesJson = GeneratedColumn<String>(
+    'injuries_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _successPatternsMeta = const VerificationMeta(
+    'successPatterns',
+  );
+  @override
+  late final GeneratedColumn<String> successPatterns = GeneratedColumn<String>(
+    'success_patterns',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _motivationTriggersMeta =
+      const VerificationMeta('motivationTriggers');
+  @override
+  late final GeneratedColumn<String> motivationTriggers =
+      GeneratedColumn<String>(
+        'motivation_triggers',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _primaryPersonalityMeta =
+      const VerificationMeta('primaryPersonality');
+  @override
+  late final GeneratedColumn<String> primaryPersonality =
+      GeneratedColumn<String>(
+        'primary_personality',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _conversationSummaryMeta =
+      const VerificationMeta('conversationSummary');
+  @override
+  late final GeneratedColumn<String> conversationSummary =
+      GeneratedColumn<String>(
+        'conversation_summary',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _lastUpdatedMeta = const VerificationMeta(
+    'lastUpdated',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastUpdated = GeneratedColumn<DateTime>(
+    'last_updated',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _syncStatusMeta = const VerificationMeta(
+    'syncStatus',
+  );
+  @override
+  late final GeneratedColumn<String> syncStatus = GeneratedColumn<String>(
+    'sync_status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    localId,
+    userId,
+    weightHistoryJson,
+    majorStruggles,
+    injuriesJson,
+    successPatterns,
+    motivationTriggers,
+    primaryPersonality,
+    conversationSummary,
+    lastUpdated,
+    syncStatus,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'transformation_memories';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TransformationMemory> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('local_id')) {
+      context.handle(
+        _localIdMeta,
+        localId.isAcceptableOrUnknown(data['local_id']!, _localIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_localIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('weight_history_json')) {
+      context.handle(
+        _weightHistoryJsonMeta,
+        weightHistoryJson.isAcceptableOrUnknown(
+          data['weight_history_json']!,
+          _weightHistoryJsonMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_weightHistoryJsonMeta);
+    }
+    if (data.containsKey('major_struggles')) {
+      context.handle(
+        _majorStrugglesMeta,
+        majorStruggles.isAcceptableOrUnknown(
+          data['major_struggles']!,
+          _majorStrugglesMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_majorStrugglesMeta);
+    }
+    if (data.containsKey('injuries_json')) {
+      context.handle(
+        _injuriesJsonMeta,
+        injuriesJson.isAcceptableOrUnknown(
+          data['injuries_json']!,
+          _injuriesJsonMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_injuriesJsonMeta);
+    }
+    if (data.containsKey('success_patterns')) {
+      context.handle(
+        _successPatternsMeta,
+        successPatterns.isAcceptableOrUnknown(
+          data['success_patterns']!,
+          _successPatternsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_successPatternsMeta);
+    }
+    if (data.containsKey('motivation_triggers')) {
+      context.handle(
+        _motivationTriggersMeta,
+        motivationTriggers.isAcceptableOrUnknown(
+          data['motivation_triggers']!,
+          _motivationTriggersMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_motivationTriggersMeta);
+    }
+    if (data.containsKey('primary_personality')) {
+      context.handle(
+        _primaryPersonalityMeta,
+        primaryPersonality.isAcceptableOrUnknown(
+          data['primary_personality']!,
+          _primaryPersonalityMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_primaryPersonalityMeta);
+    }
+    if (data.containsKey('conversation_summary')) {
+      context.handle(
+        _conversationSummaryMeta,
+        conversationSummary.isAcceptableOrUnknown(
+          data['conversation_summary']!,
+          _conversationSummaryMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_conversationSummaryMeta);
+    }
+    if (data.containsKey('last_updated')) {
+      context.handle(
+        _lastUpdatedMeta,
+        lastUpdated.isAcceptableOrUnknown(
+          data['last_updated']!,
+          _lastUpdatedMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_lastUpdatedMeta);
+    }
+    if (data.containsKey('sync_status')) {
+      context.handle(
+        _syncStatusMeta,
+        syncStatus.isAcceptableOrUnknown(data['sync_status']!, _syncStatusMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_syncStatusMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {localId};
+  @override
+  TransformationMemory map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TransformationMemory(
+      localId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}local_id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      weightHistoryJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}weight_history_json'],
+      )!,
+      majorStruggles: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}major_struggles'],
+      )!,
+      injuriesJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}injuries_json'],
+      )!,
+      successPatterns: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}success_patterns'],
+      )!,
+      motivationTriggers: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}motivation_triggers'],
+      )!,
+      primaryPersonality: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}primary_personality'],
+      )!,
+      conversationSummary: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}conversation_summary'],
+      )!,
+      lastUpdated: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_updated'],
+      )!,
+      syncStatus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sync_status'],
+      )!,
+    );
+  }
+
+  @override
+  $TransformationMemoriesTable createAlias(String alias) {
+    return $TransformationMemoriesTable(attachedDatabase, alias);
+  }
+}
+
+class TransformationMemory extends DataClass
+    implements Insertable<TransformationMemory> {
+  final String localId;
+  final String userId;
+  final String weightHistoryJson;
+  final String majorStruggles;
+  final String injuriesJson;
+  final String successPatterns;
+  final String motivationTriggers;
+  final String primaryPersonality;
+  final String conversationSummary;
+  final DateTime lastUpdated;
+  final String syncStatus;
+  const TransformationMemory({
+    required this.localId,
+    required this.userId,
+    required this.weightHistoryJson,
+    required this.majorStruggles,
+    required this.injuriesJson,
+    required this.successPatterns,
+    required this.motivationTriggers,
+    required this.primaryPersonality,
+    required this.conversationSummary,
+    required this.lastUpdated,
+    required this.syncStatus,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['local_id'] = Variable<String>(localId);
+    map['user_id'] = Variable<String>(userId);
+    map['weight_history_json'] = Variable<String>(weightHistoryJson);
+    map['major_struggles'] = Variable<String>(majorStruggles);
+    map['injuries_json'] = Variable<String>(injuriesJson);
+    map['success_patterns'] = Variable<String>(successPatterns);
+    map['motivation_triggers'] = Variable<String>(motivationTriggers);
+    map['primary_personality'] = Variable<String>(primaryPersonality);
+    map['conversation_summary'] = Variable<String>(conversationSummary);
+    map['last_updated'] = Variable<DateTime>(lastUpdated);
+    map['sync_status'] = Variable<String>(syncStatus);
+    return map;
+  }
+
+  TransformationMemoriesCompanion toCompanion(bool nullToAbsent) {
+    return TransformationMemoriesCompanion(
+      localId: Value(localId),
+      userId: Value(userId),
+      weightHistoryJson: Value(weightHistoryJson),
+      majorStruggles: Value(majorStruggles),
+      injuriesJson: Value(injuriesJson),
+      successPatterns: Value(successPatterns),
+      motivationTriggers: Value(motivationTriggers),
+      primaryPersonality: Value(primaryPersonality),
+      conversationSummary: Value(conversationSummary),
+      lastUpdated: Value(lastUpdated),
+      syncStatus: Value(syncStatus),
+    );
+  }
+
+  factory TransformationMemory.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TransformationMemory(
+      localId: serializer.fromJson<String>(json['localId']),
+      userId: serializer.fromJson<String>(json['userId']),
+      weightHistoryJson: serializer.fromJson<String>(json['weightHistoryJson']),
+      majorStruggles: serializer.fromJson<String>(json['majorStruggles']),
+      injuriesJson: serializer.fromJson<String>(json['injuriesJson']),
+      successPatterns: serializer.fromJson<String>(json['successPatterns']),
+      motivationTriggers: serializer.fromJson<String>(
+        json['motivationTriggers'],
+      ),
+      primaryPersonality: serializer.fromJson<String>(
+        json['primaryPersonality'],
+      ),
+      conversationSummary: serializer.fromJson<String>(
+        json['conversationSummary'],
+      ),
+      lastUpdated: serializer.fromJson<DateTime>(json['lastUpdated']),
+      syncStatus: serializer.fromJson<String>(json['syncStatus']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'localId': serializer.toJson<String>(localId),
+      'userId': serializer.toJson<String>(userId),
+      'weightHistoryJson': serializer.toJson<String>(weightHistoryJson),
+      'majorStruggles': serializer.toJson<String>(majorStruggles),
+      'injuriesJson': serializer.toJson<String>(injuriesJson),
+      'successPatterns': serializer.toJson<String>(successPatterns),
+      'motivationTriggers': serializer.toJson<String>(motivationTriggers),
+      'primaryPersonality': serializer.toJson<String>(primaryPersonality),
+      'conversationSummary': serializer.toJson<String>(conversationSummary),
+      'lastUpdated': serializer.toJson<DateTime>(lastUpdated),
+      'syncStatus': serializer.toJson<String>(syncStatus),
+    };
+  }
+
+  TransformationMemory copyWith({
+    String? localId,
+    String? userId,
+    String? weightHistoryJson,
+    String? majorStruggles,
+    String? injuriesJson,
+    String? successPatterns,
+    String? motivationTriggers,
+    String? primaryPersonality,
+    String? conversationSummary,
+    DateTime? lastUpdated,
+    String? syncStatus,
+  }) => TransformationMemory(
+    localId: localId ?? this.localId,
+    userId: userId ?? this.userId,
+    weightHistoryJson: weightHistoryJson ?? this.weightHistoryJson,
+    majorStruggles: majorStruggles ?? this.majorStruggles,
+    injuriesJson: injuriesJson ?? this.injuriesJson,
+    successPatterns: successPatterns ?? this.successPatterns,
+    motivationTriggers: motivationTriggers ?? this.motivationTriggers,
+    primaryPersonality: primaryPersonality ?? this.primaryPersonality,
+    conversationSummary: conversationSummary ?? this.conversationSummary,
+    lastUpdated: lastUpdated ?? this.lastUpdated,
+    syncStatus: syncStatus ?? this.syncStatus,
+  );
+  TransformationMemory copyWithCompanion(TransformationMemoriesCompanion data) {
+    return TransformationMemory(
+      localId: data.localId.present ? data.localId.value : this.localId,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      weightHistoryJson: data.weightHistoryJson.present
+          ? data.weightHistoryJson.value
+          : this.weightHistoryJson,
+      majorStruggles: data.majorStruggles.present
+          ? data.majorStruggles.value
+          : this.majorStruggles,
+      injuriesJson: data.injuriesJson.present
+          ? data.injuriesJson.value
+          : this.injuriesJson,
+      successPatterns: data.successPatterns.present
+          ? data.successPatterns.value
+          : this.successPatterns,
+      motivationTriggers: data.motivationTriggers.present
+          ? data.motivationTriggers.value
+          : this.motivationTriggers,
+      primaryPersonality: data.primaryPersonality.present
+          ? data.primaryPersonality.value
+          : this.primaryPersonality,
+      conversationSummary: data.conversationSummary.present
+          ? data.conversationSummary.value
+          : this.conversationSummary,
+      lastUpdated: data.lastUpdated.present
+          ? data.lastUpdated.value
+          : this.lastUpdated,
+      syncStatus: data.syncStatus.present
+          ? data.syncStatus.value
+          : this.syncStatus,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TransformationMemory(')
+          ..write('localId: $localId, ')
+          ..write('userId: $userId, ')
+          ..write('weightHistoryJson: $weightHistoryJson, ')
+          ..write('majorStruggles: $majorStruggles, ')
+          ..write('injuriesJson: $injuriesJson, ')
+          ..write('successPatterns: $successPatterns, ')
+          ..write('motivationTriggers: $motivationTriggers, ')
+          ..write('primaryPersonality: $primaryPersonality, ')
+          ..write('conversationSummary: $conversationSummary, ')
+          ..write('lastUpdated: $lastUpdated, ')
+          ..write('syncStatus: $syncStatus')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    localId,
+    userId,
+    weightHistoryJson,
+    majorStruggles,
+    injuriesJson,
+    successPatterns,
+    motivationTriggers,
+    primaryPersonality,
+    conversationSummary,
+    lastUpdated,
+    syncStatus,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TransformationMemory &&
+          other.localId == this.localId &&
+          other.userId == this.userId &&
+          other.weightHistoryJson == this.weightHistoryJson &&
+          other.majorStruggles == this.majorStruggles &&
+          other.injuriesJson == this.injuriesJson &&
+          other.successPatterns == this.successPatterns &&
+          other.motivationTriggers == this.motivationTriggers &&
+          other.primaryPersonality == this.primaryPersonality &&
+          other.conversationSummary == this.conversationSummary &&
+          other.lastUpdated == this.lastUpdated &&
+          other.syncStatus == this.syncStatus);
+}
+
+class TransformationMemoriesCompanion
+    extends UpdateCompanion<TransformationMemory> {
+  final Value<String> localId;
+  final Value<String> userId;
+  final Value<String> weightHistoryJson;
+  final Value<String> majorStruggles;
+  final Value<String> injuriesJson;
+  final Value<String> successPatterns;
+  final Value<String> motivationTriggers;
+  final Value<String> primaryPersonality;
+  final Value<String> conversationSummary;
+  final Value<DateTime> lastUpdated;
+  final Value<String> syncStatus;
+  final Value<int> rowid;
+  const TransformationMemoriesCompanion({
+    this.localId = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.weightHistoryJson = const Value.absent(),
+    this.majorStruggles = const Value.absent(),
+    this.injuriesJson = const Value.absent(),
+    this.successPatterns = const Value.absent(),
+    this.motivationTriggers = const Value.absent(),
+    this.primaryPersonality = const Value.absent(),
+    this.conversationSummary = const Value.absent(),
+    this.lastUpdated = const Value.absent(),
+    this.syncStatus = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TransformationMemoriesCompanion.insert({
+    required String localId,
+    required String userId,
+    required String weightHistoryJson,
+    required String majorStruggles,
+    required String injuriesJson,
+    required String successPatterns,
+    required String motivationTriggers,
+    required String primaryPersonality,
+    required String conversationSummary,
+    required DateTime lastUpdated,
+    required String syncStatus,
+    this.rowid = const Value.absent(),
+  }) : localId = Value(localId),
+       userId = Value(userId),
+       weightHistoryJson = Value(weightHistoryJson),
+       majorStruggles = Value(majorStruggles),
+       injuriesJson = Value(injuriesJson),
+       successPatterns = Value(successPatterns),
+       motivationTriggers = Value(motivationTriggers),
+       primaryPersonality = Value(primaryPersonality),
+       conversationSummary = Value(conversationSummary),
+       lastUpdated = Value(lastUpdated),
+       syncStatus = Value(syncStatus);
+  static Insertable<TransformationMemory> custom({
+    Expression<String>? localId,
+    Expression<String>? userId,
+    Expression<String>? weightHistoryJson,
+    Expression<String>? majorStruggles,
+    Expression<String>? injuriesJson,
+    Expression<String>? successPatterns,
+    Expression<String>? motivationTriggers,
+    Expression<String>? primaryPersonality,
+    Expression<String>? conversationSummary,
+    Expression<DateTime>? lastUpdated,
+    Expression<String>? syncStatus,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (localId != null) 'local_id': localId,
+      if (userId != null) 'user_id': userId,
+      if (weightHistoryJson != null) 'weight_history_json': weightHistoryJson,
+      if (majorStruggles != null) 'major_struggles': majorStruggles,
+      if (injuriesJson != null) 'injuries_json': injuriesJson,
+      if (successPatterns != null) 'success_patterns': successPatterns,
+      if (motivationTriggers != null) 'motivation_triggers': motivationTriggers,
+      if (primaryPersonality != null) 'primary_personality': primaryPersonality,
+      if (conversationSummary != null)
+        'conversation_summary': conversationSummary,
+      if (lastUpdated != null) 'last_updated': lastUpdated,
+      if (syncStatus != null) 'sync_status': syncStatus,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TransformationMemoriesCompanion copyWith({
+    Value<String>? localId,
+    Value<String>? userId,
+    Value<String>? weightHistoryJson,
+    Value<String>? majorStruggles,
+    Value<String>? injuriesJson,
+    Value<String>? successPatterns,
+    Value<String>? motivationTriggers,
+    Value<String>? primaryPersonality,
+    Value<String>? conversationSummary,
+    Value<DateTime>? lastUpdated,
+    Value<String>? syncStatus,
+    Value<int>? rowid,
+  }) {
+    return TransformationMemoriesCompanion(
+      localId: localId ?? this.localId,
+      userId: userId ?? this.userId,
+      weightHistoryJson: weightHistoryJson ?? this.weightHistoryJson,
+      majorStruggles: majorStruggles ?? this.majorStruggles,
+      injuriesJson: injuriesJson ?? this.injuriesJson,
+      successPatterns: successPatterns ?? this.successPatterns,
+      motivationTriggers: motivationTriggers ?? this.motivationTriggers,
+      primaryPersonality: primaryPersonality ?? this.primaryPersonality,
+      conversationSummary: conversationSummary ?? this.conversationSummary,
+      lastUpdated: lastUpdated ?? this.lastUpdated,
+      syncStatus: syncStatus ?? this.syncStatus,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (localId.present) {
+      map['local_id'] = Variable<String>(localId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (weightHistoryJson.present) {
+      map['weight_history_json'] = Variable<String>(weightHistoryJson.value);
+    }
+    if (majorStruggles.present) {
+      map['major_struggles'] = Variable<String>(majorStruggles.value);
+    }
+    if (injuriesJson.present) {
+      map['injuries_json'] = Variable<String>(injuriesJson.value);
+    }
+    if (successPatterns.present) {
+      map['success_patterns'] = Variable<String>(successPatterns.value);
+    }
+    if (motivationTriggers.present) {
+      map['motivation_triggers'] = Variable<String>(motivationTriggers.value);
+    }
+    if (primaryPersonality.present) {
+      map['primary_personality'] = Variable<String>(primaryPersonality.value);
+    }
+    if (conversationSummary.present) {
+      map['conversation_summary'] = Variable<String>(conversationSummary.value);
+    }
+    if (lastUpdated.present) {
+      map['last_updated'] = Variable<DateTime>(lastUpdated.value);
+    }
+    if (syncStatus.present) {
+      map['sync_status'] = Variable<String>(syncStatus.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TransformationMemoriesCompanion(')
+          ..write('localId: $localId, ')
+          ..write('userId: $userId, ')
+          ..write('weightHistoryJson: $weightHistoryJson, ')
+          ..write('majorStruggles: $majorStruggles, ')
+          ..write('injuriesJson: $injuriesJson, ')
+          ..write('successPatterns: $successPatterns, ')
+          ..write('motivationTriggers: $motivationTriggers, ')
+          ..write('primaryPersonality: $primaryPersonality, ')
+          ..write('conversationSummary: $conversationSummary, ')
+          ..write('lastUpdated: $lastUpdated, ')
+          ..write('syncStatus: $syncStatus, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3494,6 +4205,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $DailyIntelligencePackagesTable dailyIntelligencePackages =
       $DailyIntelligencePackagesTable(this);
   late final $AICacheEntriesTable aICacheEntries = $AICacheEntriesTable(this);
+  late final $TransformationMemoriesTable transformationMemories =
+      $TransformationMemoriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3505,6 +4218,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     deadLetterQueueItems,
     dailyIntelligencePackages,
     aICacheEntries,
+    transformationMemories,
   ];
 }
 
@@ -5232,6 +5946,357 @@ typedef $$AICacheEntriesTableProcessedTableManager =
       AICacheEntry,
       PrefetchHooks Function()
     >;
+typedef $$TransformationMemoriesTableCreateCompanionBuilder =
+    TransformationMemoriesCompanion Function({
+      required String localId,
+      required String userId,
+      required String weightHistoryJson,
+      required String majorStruggles,
+      required String injuriesJson,
+      required String successPatterns,
+      required String motivationTriggers,
+      required String primaryPersonality,
+      required String conversationSummary,
+      required DateTime lastUpdated,
+      required String syncStatus,
+      Value<int> rowid,
+    });
+typedef $$TransformationMemoriesTableUpdateCompanionBuilder =
+    TransformationMemoriesCompanion Function({
+      Value<String> localId,
+      Value<String> userId,
+      Value<String> weightHistoryJson,
+      Value<String> majorStruggles,
+      Value<String> injuriesJson,
+      Value<String> successPatterns,
+      Value<String> motivationTriggers,
+      Value<String> primaryPersonality,
+      Value<String> conversationSummary,
+      Value<DateTime> lastUpdated,
+      Value<String> syncStatus,
+      Value<int> rowid,
+    });
+
+class $$TransformationMemoriesTableFilterComposer
+    extends Composer<_$AppDatabase, $TransformationMemoriesTable> {
+  $$TransformationMemoriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get localId => $composableBuilder(
+    column: $table.localId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get weightHistoryJson => $composableBuilder(
+    column: $table.weightHistoryJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get majorStruggles => $composableBuilder(
+    column: $table.majorStruggles,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get injuriesJson => $composableBuilder(
+    column: $table.injuriesJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get successPatterns => $composableBuilder(
+    column: $table.successPatterns,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get motivationTriggers => $composableBuilder(
+    column: $table.motivationTriggers,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get primaryPersonality => $composableBuilder(
+    column: $table.primaryPersonality,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get conversationSummary => $composableBuilder(
+    column: $table.conversationSummary,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastUpdated => $composableBuilder(
+    column: $table.lastUpdated,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$TransformationMemoriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $TransformationMemoriesTable> {
+  $$TransformationMemoriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get localId => $composableBuilder(
+    column: $table.localId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get weightHistoryJson => $composableBuilder(
+    column: $table.weightHistoryJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get majorStruggles => $composableBuilder(
+    column: $table.majorStruggles,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get injuriesJson => $composableBuilder(
+    column: $table.injuriesJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get successPatterns => $composableBuilder(
+    column: $table.successPatterns,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get motivationTriggers => $composableBuilder(
+    column: $table.motivationTriggers,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get primaryPersonality => $composableBuilder(
+    column: $table.primaryPersonality,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get conversationSummary => $composableBuilder(
+    column: $table.conversationSummary,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastUpdated => $composableBuilder(
+    column: $table.lastUpdated,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$TransformationMemoriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $TransformationMemoriesTable> {
+  $$TransformationMemoriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get localId =>
+      $composableBuilder(column: $table.localId, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get weightHistoryJson => $composableBuilder(
+    column: $table.weightHistoryJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get majorStruggles => $composableBuilder(
+    column: $table.majorStruggles,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get injuriesJson => $composableBuilder(
+    column: $table.injuriesJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get successPatterns => $composableBuilder(
+    column: $table.successPatterns,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get motivationTriggers => $composableBuilder(
+    column: $table.motivationTriggers,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get primaryPersonality => $composableBuilder(
+    column: $table.primaryPersonality,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get conversationSummary => $composableBuilder(
+    column: $table.conversationSummary,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get lastUpdated => $composableBuilder(
+    column: $table.lastUpdated,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => column,
+  );
+}
+
+class $$TransformationMemoriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $TransformationMemoriesTable,
+          TransformationMemory,
+          $$TransformationMemoriesTableFilterComposer,
+          $$TransformationMemoriesTableOrderingComposer,
+          $$TransformationMemoriesTableAnnotationComposer,
+          $$TransformationMemoriesTableCreateCompanionBuilder,
+          $$TransformationMemoriesTableUpdateCompanionBuilder,
+          (
+            TransformationMemory,
+            BaseReferences<
+              _$AppDatabase,
+              $TransformationMemoriesTable,
+              TransformationMemory
+            >,
+          ),
+          TransformationMemory,
+          PrefetchHooks Function()
+        > {
+  $$TransformationMemoriesTableTableManager(
+    _$AppDatabase db,
+    $TransformationMemoriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$TransformationMemoriesTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$TransformationMemoriesTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$TransformationMemoriesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> localId = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<String> weightHistoryJson = const Value.absent(),
+                Value<String> majorStruggles = const Value.absent(),
+                Value<String> injuriesJson = const Value.absent(),
+                Value<String> successPatterns = const Value.absent(),
+                Value<String> motivationTriggers = const Value.absent(),
+                Value<String> primaryPersonality = const Value.absent(),
+                Value<String> conversationSummary = const Value.absent(),
+                Value<DateTime> lastUpdated = const Value.absent(),
+                Value<String> syncStatus = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => TransformationMemoriesCompanion(
+                localId: localId,
+                userId: userId,
+                weightHistoryJson: weightHistoryJson,
+                majorStruggles: majorStruggles,
+                injuriesJson: injuriesJson,
+                successPatterns: successPatterns,
+                motivationTriggers: motivationTriggers,
+                primaryPersonality: primaryPersonality,
+                conversationSummary: conversationSummary,
+                lastUpdated: lastUpdated,
+                syncStatus: syncStatus,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String localId,
+                required String userId,
+                required String weightHistoryJson,
+                required String majorStruggles,
+                required String injuriesJson,
+                required String successPatterns,
+                required String motivationTriggers,
+                required String primaryPersonality,
+                required String conversationSummary,
+                required DateTime lastUpdated,
+                required String syncStatus,
+                Value<int> rowid = const Value.absent(),
+              }) => TransformationMemoriesCompanion.insert(
+                localId: localId,
+                userId: userId,
+                weightHistoryJson: weightHistoryJson,
+                majorStruggles: majorStruggles,
+                injuriesJson: injuriesJson,
+                successPatterns: successPatterns,
+                motivationTriggers: motivationTriggers,
+                primaryPersonality: primaryPersonality,
+                conversationSummary: conversationSummary,
+                lastUpdated: lastUpdated,
+                syncStatus: syncStatus,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$TransformationMemoriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $TransformationMemoriesTable,
+      TransformationMemory,
+      $$TransformationMemoriesTableFilterComposer,
+      $$TransformationMemoriesTableOrderingComposer,
+      $$TransformationMemoriesTableAnnotationComposer,
+      $$TransformationMemoriesTableCreateCompanionBuilder,
+      $$TransformationMemoriesTableUpdateCompanionBuilder,
+      (
+        TransformationMemory,
+        BaseReferences<
+          _$AppDatabase,
+          $TransformationMemoriesTable,
+          TransformationMemory
+        >,
+      ),
+      TransformationMemory,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -5251,4 +6316,9 @@ class $AppDatabaseManager {
       );
   $$AICacheEntriesTableTableManager get aICacheEntries =>
       $$AICacheEntriesTableTableManager(_db, _db.aICacheEntries);
+  $$TransformationMemoriesTableTableManager get transformationMemories =>
+      $$TransformationMemoriesTableTableManager(
+        _db,
+        _db.transformationMemories,
+      );
 }

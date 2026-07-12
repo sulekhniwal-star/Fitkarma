@@ -97,7 +97,25 @@ class AICacheEntries extends Table {
   Set<Column> get primaryKey => {userId, promptHash};
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries])
+// 7. Transformation Memories
+class TransformationMemories extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  TextColumn get weightHistoryJson => text()(); // JSON array
+  TextColumn get majorStruggles => text()(); // JSON array
+  TextColumn get injuriesJson => text()(); // JSON array
+  TextColumn get successPatterns => text()(); // JSON array
+  TextColumn get motivationTriggers => text()(); // JSON array
+  TextColumn get primaryPersonality => text()();
+  TextColumn get conversationSummary => text()();
+  DateTimeColumn get lastUpdated => dateTime()();
+  TextColumn get syncStatus => text()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);

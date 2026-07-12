@@ -47,9 +47,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Add fallback/retry logic for AI call failures
 
 ### §P0-G Program Evolution Engine
-- [ ] Define program-phase transition rules
-- [ ] Implement evolution trigger detection (deterministic)
-- [ ] Wire evolution events into Transformation Memory
+- [x] Define program-phase transition rules
+- [x] Implement evolution trigger detection (deterministic)
+- [x] Wire evolution events into Transformation Memory
 
 ### §P0-H Prerequisites
 - [ ] Document and provision all required SDKs/API keys (Groq, Azure, RevenueCat, Health Connect/HealthKit)
