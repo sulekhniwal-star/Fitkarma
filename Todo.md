@@ -80,9 +80,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P1-C Goals Screen
-- [ ] Build UI (multi-select goal picker)
-- [ ] Persist selected goals to `Users.goals` (JSON array)
-- [ ] Widget test
+- [x] Build UI (multi-select goal picker)
+- [x] Persist selected goals to `Users.goals` (JSON array)
+- [x] Widget test
 
 ### §P1-D Demographics Screen
 - [ ] Build UI (age, gender, height, weight, activity level inputs)

@@ -71,6 +71,17 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _targetWeightMeta = const VerificationMeta(
+    'targetWeight',
+  );
+  @override
+  late final GeneratedColumn<double> targetWeight = GeneratedColumn<double>(
+    'target_weight',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _dailyCalorieTargetMeta =
       const VerificationMeta('dailyCalorieTarget');
   @override
@@ -90,6 +101,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     weight,
     height,
     goals,
+    targetWeight,
     dailyCalorieTarget,
   ];
   @override
@@ -145,6 +157,15 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         goals.isAcceptableOrUnknown(data['goals']!, _goalsMeta),
       );
     }
+    if (data.containsKey('target_weight')) {
+      context.handle(
+        _targetWeightMeta,
+        targetWeight.isAcceptableOrUnknown(
+          data['target_weight']!,
+          _targetWeightMeta,
+        ),
+      );
+    }
     if (data.containsKey('daily_calorie_target')) {
       context.handle(
         _dailyCalorieTargetMeta,
@@ -191,6 +212,10 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         DriftSqlType.string,
         data['${effectivePrefix}goals'],
       ),
+      targetWeight: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}target_weight'],
+      ),
       dailyCalorieTarget: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}daily_calorie_target'],
@@ -212,6 +237,7 @@ class User extends DataClass implements Insertable<User> {
   final double? weight;
   final double? height;
   final String? goals;
+  final double? targetWeight;
   final int? dailyCalorieTarget;
   const User({
     required this.id,
@@ -221,6 +247,7 @@ class User extends DataClass implements Insertable<User> {
     this.weight,
     this.height,
     this.goals,
+    this.targetWeight,
     this.dailyCalorieTarget,
   });
   @override
@@ -245,6 +272,9 @@ class User extends DataClass implements Insertable<User> {
     if (!nullToAbsent || goals != null) {
       map['goals'] = Variable<String>(goals);
     }
+    if (!nullToAbsent || targetWeight != null) {
+      map['target_weight'] = Variable<double>(targetWeight);
+    }
     if (!nullToAbsent || dailyCalorieTarget != null) {
       map['daily_calorie_target'] = Variable<int>(dailyCalorieTarget);
     }
@@ -268,6 +298,9 @@ class User extends DataClass implements Insertable<User> {
       goals: goals == null && nullToAbsent
           ? const Value.absent()
           : Value(goals),
+      targetWeight: targetWeight == null && nullToAbsent
+          ? const Value.absent()
+          : Value(targetWeight),
       dailyCalorieTarget: dailyCalorieTarget == null && nullToAbsent
           ? const Value.absent()
           : Value(dailyCalorieTarget),
@@ -287,6 +320,7 @@ class User extends DataClass implements Insertable<User> {
       weight: serializer.fromJson<double?>(json['weight']),
       height: serializer.fromJson<double?>(json['height']),
       goals: serializer.fromJson<String?>(json['goals']),
+      targetWeight: serializer.fromJson<double?>(json['targetWeight']),
       dailyCalorieTarget: serializer.fromJson<int?>(json['dailyCalorieTarget']),
     );
   }
@@ -301,6 +335,7 @@ class User extends DataClass implements Insertable<User> {
       'weight': serializer.toJson<double?>(weight),
       'height': serializer.toJson<double?>(height),
       'goals': serializer.toJson<String?>(goals),
+      'targetWeight': serializer.toJson<double?>(targetWeight),
       'dailyCalorieTarget': serializer.toJson<int?>(dailyCalorieTarget),
     };
   }
@@ -313,6 +348,7 @@ class User extends DataClass implements Insertable<User> {
     Value<double?> weight = const Value.absent(),
     Value<double?> height = const Value.absent(),
     Value<String?> goals = const Value.absent(),
+    Value<double?> targetWeight = const Value.absent(),
     Value<int?> dailyCalorieTarget = const Value.absent(),
   }) => User(
     id: id ?? this.id,
@@ -322,6 +358,7 @@ class User extends DataClass implements Insertable<User> {
     weight: weight.present ? weight.value : this.weight,
     height: height.present ? height.value : this.height,
     goals: goals.present ? goals.value : this.goals,
+    targetWeight: targetWeight.present ? targetWeight.value : this.targetWeight,
     dailyCalorieTarget: dailyCalorieTarget.present
         ? dailyCalorieTarget.value
         : this.dailyCalorieTarget,
@@ -335,6 +372,9 @@ class User extends DataClass implements Insertable<User> {
       weight: data.weight.present ? data.weight.value : this.weight,
       height: data.height.present ? data.height.value : this.height,
       goals: data.goals.present ? data.goals.value : this.goals,
+      targetWeight: data.targetWeight.present
+          ? data.targetWeight.value
+          : this.targetWeight,
       dailyCalorieTarget: data.dailyCalorieTarget.present
           ? data.dailyCalorieTarget.value
           : this.dailyCalorieTarget,
@@ -351,6 +391,7 @@ class User extends DataClass implements Insertable<User> {
           ..write('weight: $weight, ')
           ..write('height: $height, ')
           ..write('goals: $goals, ')
+          ..write('targetWeight: $targetWeight, ')
           ..write('dailyCalorieTarget: $dailyCalorieTarget')
           ..write(')'))
         .toString();
@@ -365,6 +406,7 @@ class User extends DataClass implements Insertable<User> {
     weight,
     height,
     goals,
+    targetWeight,
     dailyCalorieTarget,
   );
   @override
@@ -378,6 +420,7 @@ class User extends DataClass implements Insertable<User> {
           other.weight == this.weight &&
           other.height == this.height &&
           other.goals == this.goals &&
+          other.targetWeight == this.targetWeight &&
           other.dailyCalorieTarget == this.dailyCalorieTarget);
 }
 
@@ -389,6 +432,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<double?> weight;
   final Value<double?> height;
   final Value<String?> goals;
+  final Value<double?> targetWeight;
   final Value<int?> dailyCalorieTarget;
   final Value<int> rowid;
   const UsersCompanion({
@@ -399,6 +443,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.weight = const Value.absent(),
     this.height = const Value.absent(),
     this.goals = const Value.absent(),
+    this.targetWeight = const Value.absent(),
     this.dailyCalorieTarget = const Value.absent(),
     this.rowid = const Value.absent(),
   });
@@ -410,6 +455,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.weight = const Value.absent(),
     this.height = const Value.absent(),
     this.goals = const Value.absent(),
+    this.targetWeight = const Value.absent(),
     this.dailyCalorieTarget = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id);
@@ -421,6 +467,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<double>? weight,
     Expression<double>? height,
     Expression<String>? goals,
+    Expression<double>? targetWeight,
     Expression<int>? dailyCalorieTarget,
     Expression<int>? rowid,
   }) {
@@ -432,6 +479,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       if (weight != null) 'weight': weight,
       if (height != null) 'height': height,
       if (goals != null) 'goals': goals,
+      if (targetWeight != null) 'target_weight': targetWeight,
       if (dailyCalorieTarget != null)
         'daily_calorie_target': dailyCalorieTarget,
       if (rowid != null) 'rowid': rowid,
@@ -446,6 +494,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Value<double?>? weight,
     Value<double?>? height,
     Value<String?>? goals,
+    Value<double?>? targetWeight,
     Value<int?>? dailyCalorieTarget,
     Value<int>? rowid,
   }) {
@@ -457,6 +506,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       weight: weight ?? this.weight,
       height: height ?? this.height,
       goals: goals ?? this.goals,
+      targetWeight: targetWeight ?? this.targetWeight,
       dailyCalorieTarget: dailyCalorieTarget ?? this.dailyCalorieTarget,
       rowid: rowid ?? this.rowid,
     );
@@ -486,6 +536,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (goals.present) {
       map['goals'] = Variable<String>(goals.value);
     }
+    if (targetWeight.present) {
+      map['target_weight'] = Variable<double>(targetWeight.value);
+    }
     if (dailyCalorieTarget.present) {
       map['daily_calorie_target'] = Variable<int>(dailyCalorieTarget.value);
     }
@@ -505,6 +558,7 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('weight: $weight, ')
           ..write('height: $height, ')
           ..write('goals: $goals, ')
+          ..write('targetWeight: $targetWeight, ')
           ..write('dailyCalorieTarget: $dailyCalorieTarget, ')
           ..write('rowid: $rowid')
           ..write(')'))
@@ -4295,6 +4349,7 @@ typedef $$UsersTableCreateCompanionBuilder =
       Value<double?> weight,
       Value<double?> height,
       Value<String?> goals,
+      Value<double?> targetWeight,
       Value<int?> dailyCalorieTarget,
       Value<int> rowid,
     });
@@ -4307,6 +4362,7 @@ typedef $$UsersTableUpdateCompanionBuilder =
       Value<double?> weight,
       Value<double?> height,
       Value<String?> goals,
+      Value<double?> targetWeight,
       Value<int?> dailyCalorieTarget,
       Value<int> rowid,
     });
@@ -4351,6 +4407,11 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
 
   ColumnFilters<String> get goals => $composableBuilder(
     column: $table.goals,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get targetWeight => $composableBuilder(
+    column: $table.targetWeight,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4404,6 +4465,11 @@ class $$UsersTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<double> get targetWeight => $composableBuilder(
+    column: $table.targetWeight,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get dailyCalorieTarget => $composableBuilder(
     column: $table.dailyCalorieTarget,
     builder: (column) => ColumnOrderings(column),
@@ -4439,6 +4505,11 @@ class $$UsersTableAnnotationComposer
 
   GeneratedColumn<String> get goals =>
       $composableBuilder(column: $table.goals, builder: (column) => column);
+
+  GeneratedColumn<double> get targetWeight => $composableBuilder(
+    column: $table.targetWeight,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<int> get dailyCalorieTarget => $composableBuilder(
     column: $table.dailyCalorieTarget,
@@ -4481,6 +4552,7 @@ class $$UsersTableTableManager
                 Value<double?> weight = const Value.absent(),
                 Value<double?> height = const Value.absent(),
                 Value<String?> goals = const Value.absent(),
+                Value<double?> targetWeight = const Value.absent(),
                 Value<int?> dailyCalorieTarget = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion(
@@ -4491,6 +4563,7 @@ class $$UsersTableTableManager
                 weight: weight,
                 height: height,
                 goals: goals,
+                targetWeight: targetWeight,
                 dailyCalorieTarget: dailyCalorieTarget,
                 rowid: rowid,
               ),
@@ -4503,6 +4576,7 @@ class $$UsersTableTableManager
                 Value<double?> weight = const Value.absent(),
                 Value<double?> height = const Value.absent(),
                 Value<String?> goals = const Value.absent(),
+                Value<double?> targetWeight = const Value.absent(),
                 Value<int?> dailyCalorieTarget = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion.insert(
@@ -4513,6 +4587,7 @@ class $$UsersTableTableManager
                 weight: weight,
                 height: height,
                 goals: goals,
+                targetWeight: targetWeight,
                 dailyCalorieTarget: dailyCalorieTarget,
                 rowid: rowid,
               ),

@@ -16,7 +16,8 @@ class Users extends Table {
   IntColumn get age => integer().nullable()();
   RealColumn get weight => real().nullable()();
   RealColumn get height => real().nullable()();
-  TextColumn get goals => text().nullable()(); // JSON list
+  TextColumn get goals => text().nullable()(); // JSON list e.g. '["weight_loss","heart_health"]'
+  RealColumn get targetWeight => real().nullable()(); // kg
   IntColumn get dailyCalorieTarget => integer().nullable()();
 
   @override
@@ -122,7 +123,23 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 17; // Database Drift Schema v17 matching docs
+  int get schemaVersion => 18;
+
+  /// Upserts the onboarding goals + target weight for a given user.
+  Future<void> updateUserProfile({
+    required String userId,
+    String? goalsJson,
+    double? targetWeight,
+    int? dailyCalorieTarget,
+  }) async {
+    await (update(users)
+      ..where((t) => t.id.equals(userId)))
+      .write(UsersCompanion(
+        goals: goalsJson != null ? Value(goalsJson) : const Value.absent(),
+        targetWeight: targetWeight != null ? Value(targetWeight) : const Value.absent(),
+        dailyCalorieTarget: dailyCalorieTarget != null ? Value(dailyCalorieTarget) : const Value.absent(),
+      ));
+  }
 }
 
 LazyDatabase _openConnection() {
