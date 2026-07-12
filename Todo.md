@@ -61,10 +61,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Wire adaptive TDEE into `dailyCalorieTarget` on Users
 
 ### §P0-J Environmental Health Layer
-- [ ] Integrate AQI data source
-- [ ] Integrate UV index data source
-- [ ] Integrate heat-index data source
-- [ ] Build environmental-adjustment logic feeding into Daily Mission recommendations
+- [x] Integrate AQI data source
+- [x] Integrate UV index data source
+- [x] Integrate heat-index data source
+- [x] Build environmental-adjustment logic feeding into Daily Mission recommendations
 
 ---
 
