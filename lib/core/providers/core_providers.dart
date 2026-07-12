@@ -3,11 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/device_tier.dart';
 import '../config/user_experience_stage.dart';
 
+/// Notifier class for managing graphics capabilities.
+class DeviceTierNotifier extends Notifier<DeviceTier> {
+  @override
+  DeviceTier build() {
+    // Defaults to medium, but can be customized/inferred based on device specs
+    return DeviceTier.medium;
+  }
+
+  void setTier(DeviceTier tier) {
+    state = tier;
+  }
+}
+
 /// Provider for the client device graphics and performance tier.
-final deviceTierProvider = Provider<DeviceTier>((ref) {
-  // Defaults to medium, but can be customized/inferred based on device specs
-  return DeviceTier.medium;
-});
+final deviceTierProvider = NotifierProvider<DeviceTierNotifier, DeviceTier>(DeviceTierNotifier.new);
 
 /// Notifier class for the user experience stage.
 class UxStageNotifier extends Notifier<UserExperienceStage> {

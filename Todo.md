@@ -30,9 +30,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Implement spacing/radius/elevation tokens
 
 ### §P0-D2 Shared Foundation Widgets
-- [ ] Build GlassCard component (with `DeviceTier.low` blur fallback)
-- [ ] Build shared button/input/chip component library
-- [ ] Build loading/empty/error state components used across all screens
+- [x] Build GlassCard component (with `DeviceTier.low` blur fallback)
+- [x] Build shared button/input/chip component library
+- [x] Build loading/empty/error state components used across all screens
 
 ### §P0-E Health OS Brain
 - [ ] Implement `computeHealthSnapshot()` (deterministic, no AI)

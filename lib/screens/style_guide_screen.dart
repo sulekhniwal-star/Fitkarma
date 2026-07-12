@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart' hide Column;
+import 'package:fitkarma/core/config/device_tier.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 import 'package:fitkarma/core/providers/azure_provider.dart';
 import 'package:fitkarma/core/providers/core_providers.dart';
@@ -15,7 +16,12 @@ import 'package:fitkarma/shared/widgets/activity_rings.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
 import 'package:fitkarma/shared/widgets/bento_grid.dart';
 import 'package:fitkarma/shared/widgets/bilingual_label.dart';
+import 'package:fitkarma/shared/widgets/fit_button.dart';
+import 'package:fitkarma/shared/widgets/fit_chip.dart';
+import 'package:fitkarma/shared/widgets/fit_text_field.dart';
+import 'package:fitkarma/shared/widgets/glass_card.dart';
 import 'package:fitkarma/shared/widgets/glowing_metric.dart';
+import 'package:fitkarma/shared/widgets/state_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -49,9 +55,19 @@ class StyleGuideScreen extends ConsumerStatefulWidget {
 class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   bool _springToggled = false;
   int _activeTab = 0;
+  
+  // Interactive fields for components sandbox
+  final TextEditingController _testInputController = TextEditingController();
+  int _selectedChipIndex = 0;
+  bool _btnLoadingState = false;
 
-  // Theme Colors helper resolving active brightness color tokens
   _ThemeColors get colors => _ThemeColors(Theme.of(context).brightness == Brightness.dark);
+
+  @override
+  void dispose() {
+    _testInputController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +92,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                     const SizedBox(height: 20.0),
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
-                      child: _activeTab == 0 ? _buildDashboardView() : _buildSpecsView(),
+                      child: _activeTab == 0 
+                          ? _buildDashboardView() 
+                          : (_activeTab == 1 ? _buildSpecsView() : _buildComponentsView()),
                     ),
                   ],
                 ),
@@ -211,6 +229,8 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
         _buildTabItem(0, 'Health Dashboard', Icons.fitness_center_rounded),
         const SizedBox(width: 12.0),
         _buildTabItem(1, 'Token Specs', Icons.menu_book_rounded),
+        const SizedBox(width: 12.0),
+        _buildTabItem(2, 'Components', Icons.grid_view_rounded),
       ],
     );
   }
@@ -700,7 +720,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
     );
   }
 
-  // --- VIEW 2: TOKEN SPECIFICATIONS AND DIAGNOSTICS ---
+  // --- VIEW 2: TOKEN SPECIFICATIONS ---
   Widget _buildSpecsView() {
     final client = ref.read(azureSyncClientProvider);
     
@@ -811,6 +831,290 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  // --- VIEW 3: COMPONENT SANDBOX VIEW ---
+  Widget _buildComponentsView() {
+    final activeDeviceTier = ref.watch(deviceTierProvider);
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // 1. Performance blur switcher
+        BentoCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Performance-Aware Glassmorphism Fallbacks',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                'GlassCard automatically disables blur filters on DeviceTier.low devices to save GPU cycles.',
+                style: TextStyle(fontSize: 12.0, color: colors.textSecondary),
+              ),
+              const SizedBox(height: 14.0),
+              // Segmented tier selection
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildTierButton(DeviceTier.low, 'Low Tier (Solid Fallback)'),
+                  ),
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: _buildTierButton(DeviceTier.medium, 'Medium Tier (Blurred)'),
+                  ),
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: _buildTierButton(DeviceTier.high, 'High Tier (Blurred)'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              // Sandbox Demonstration Cards side-by-side
+              Row(
+                children: [
+                  Expanded(
+                    child: GlassCard(
+                      height: 120.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.speed_rounded, size: 28.0),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            activeDeviceTier == DeviceTier.low ? 'Solid Fallback Active' : 'Blur Filter Active',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16.0),
+
+        // 2. Buttons Spec
+        BentoCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Interactive Button Library',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 14.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: FitButton(
+                      onPressed: () {},
+                      type: FitButtonType.primary,
+                      child: const Text('Primary Orange'),
+                    ),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: FitButton(
+                      onPressed: () {},
+                      type: FitButtonType.secondary,
+                      child: const Text('Secondary Glass'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: FitButton(
+                      onPressed: () {},
+                      type: FitButtonType.accent,
+                      child: const Text('Accent Gold'),
+                    ),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: FitButton(
+                      onPressed: () {
+                        setState(() {
+                          _btnLoadingState = !_btnLoadingState;
+                        });
+                      },
+                      isLoading: _btnLoadingState,
+                      child: const Text('Tap to Toggle Loading'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+              FitButton(
+                onPressed: () {},
+                isDisabled: true,
+                width: double.infinity,
+                child: const Text('Disabled Action'),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16.0),
+
+        // 3. Inputs & Chips
+        BentoCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bilingual TextFields & Chips',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 14.0),
+              FitTextField(
+                controller: _testInputController,
+                englishLabel: 'Full Name',
+                hindiLabel: 'पूरा नाम',
+                hintText: 'Enter your name...',
+              ),
+              const SizedBox(height: 16.0),
+              // Chips display
+              Text(
+                'Selectable Chips',
+                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: colors.textSecondary),
+              ),
+              const SizedBox(height: 8.0),
+              Wrap(
+                spacing: 8.0,
+                runSpacing: 8.0,
+                children: [
+                  FitChip(
+                    label: 'Breakfast (नाश्ता)',
+                    isSelected: _selectedChipIndex == 0,
+                    badgeText: '340 kcal',
+                    icon: Icons.breakfast_dining_rounded,
+                    onTap: () => setState(() => _selectedChipIndex = 0),
+                  ),
+                  FitChip(
+                    label: 'Lunch (दोपहर का भोजन)',
+                    isSelected: _selectedChipIndex == 1,
+                    badgeText: '620 kcal',
+                    icon: Icons.lunch_dining_rounded,
+                    onTap: () => setState(() => _selectedChipIndex = 1),
+                  ),
+                  FitChip(
+                    label: 'Dinner (रात का भोजन)',
+                    isSelected: _selectedChipIndex == 2,
+                    badgeText: '510 kcal',
+                    icon: Icons.dinner_dining_rounded,
+                    onTap: () => setState(() => _selectedChipIndex = 2),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16.0),
+
+        // 4. Standard UI State placeholders
+        BentoCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Unified UI State Components',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 14.0),
+              const Text('1. Loading State', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0)),
+              const SizedBox(height: 8.0),
+              const FitLoadingState(
+                message: 'Processing sync transaction...',
+                hindiMessage: 'सिंक लेनदेन की प्रक्रिया चल रही है...',
+              ),
+              const Divider(height: 32.0, color: Colors.white24),
+              const Text('2. Empty State', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0)),
+              const SizedBox(height: 8.0),
+              const FitEmptyState(
+                englishTitle: 'No workouts logged today',
+                hindiTitle: 'आज कोई व्यायाम दर्ज नहीं किया गया',
+                englishSubtitle: 'Complete a routine to start your daily streak.',
+                hindiSubtitle: 'दैनिक सिलसिला शुरू करने के लिए एक व्यायाम पूरा करें।',
+                icon: Icons.assignment_turned_in_rounded,
+              ),
+              const Divider(height: 32.0, color: Colors.white24),
+              const Text('3. Error State', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0)),
+              const SizedBox(height: 8.0),
+              FitErrorState(
+                englishMessage: 'Sync operation timed out',
+                hindiMessage: 'सिंक ऑपरेशन का समय समाप्त हो गया',
+                onRetry: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Retrying data synchronization queue...', style: TextStyle(fontWeight: FontWeight.bold)),
+                      backgroundColor: AppColorsDark.primary,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTierButton(DeviceTier tier, String label) {
+    final activeDeviceTier = ref.watch(deviceTierProvider);
+    final isSelected = activeDeviceTier == tier;
+    
+    return GestureDetector(
+      onTap: () {
+        ref.read(deviceTierProvider.notifier).setTier(tier);
+      },
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? colors.primary.withOpacity(0.12) : colors.surface1,
+            borderRadius: BorderRadius.circular(AppRadius.sm),
+            border: Border.all(
+              color: isSelected ? colors.primary : colors.glassBorder,
+              width: 1.0,
+            ),
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 10.0,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? colors.primary : colors.textSecondary,
+            ),
+          ),
+        ),
+      ),
     );
   }
 
