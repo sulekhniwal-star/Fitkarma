@@ -52,8 +52,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Wire evolution events into Transformation Memory
 
 ### §P0-H Prerequisites
-- [ ] Document and provision all required SDKs/API keys (Groq, Azure, RevenueCat, Health Connect/HealthKit)
-- [ ] Set up local dev environment onboarding doc
+- [x] Document and provision all required SDKs/API keys (Groq, Azure, RevenueCat, Health Connect/HealthKit)
+- [x] Set up local dev environment onboarding doc
 
 ### §P0-I Adaptive Metabolism Engine
 - [ ] Implement TDEE adaptation algorithm (MacroFactor-style rolling recalculation)
