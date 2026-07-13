@@ -14,8 +14,10 @@ class Users extends Table {
   TextColumn get name => text().nullable()();
   TextColumn get email => text().nullable()();
   IntColumn get age => integer().nullable()();
+  TextColumn get gender => text().nullable()(); // 'male' | 'female'
   RealColumn get weight => real().nullable()();
   RealColumn get height => real().nullable()();
+  TextColumn get activityLevel => text().nullable()(); // ActivityLevel.name
   TextColumn get goals => text().nullable()(); // JSON list e.g. '["weight_loss","heart_health"]'
   RealColumn get targetWeight => real().nullable()(); // kg
   IntColumn get dailyCalorieTarget => integer().nullable()();
@@ -123,7 +125,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 18;
+  int get schemaVersion => 19;
 
   /// Upserts the onboarding goals + target weight for a given user.
   Future<void> updateUserProfile({
@@ -139,6 +141,29 @@ class AppDatabase extends _$AppDatabase {
         targetWeight: targetWeight != null ? Value(targetWeight) : const Value.absent(),
         dailyCalorieTarget: dailyCalorieTarget != null ? Value(dailyCalorieTarget) : const Value.absent(),
       ));
+  }
+
+  /// Upserts age, gender, height, weight, activityLevel, and computed
+  /// dailyCalorieTarget for the Demographics Screen (§P1-D).
+  Future<void> updateUserDemographics({
+    required String userId,
+    required int age,
+    required String gender,
+    required double heightCm,
+    required double weightKg,
+    required String activityLevel,
+    required int dailyCalorieTarget,
+  }) async {
+    await (update(users)..where((t) => t.id.equals(userId))).write(
+      UsersCompanion(
+        age:                Value(age),
+        gender:             Value(gender),
+        height:             Value(heightCm),
+        weight:             Value(weightKg),
+        activityLevel:      Value(activityLevel),
+        dailyCalorieTarget: Value(dailyCalorieTarget),
+      ),
+    );
   }
 }
 

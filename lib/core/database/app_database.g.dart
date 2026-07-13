@@ -44,6 +44,15 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _genderMeta = const VerificationMeta('gender');
+  @override
+  late final GeneratedColumn<String> gender = GeneratedColumn<String>(
+    'gender',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _weightMeta = const VerificationMeta('weight');
   @override
   late final GeneratedColumn<double> weight = GeneratedColumn<double>(
@@ -60,6 +69,17 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     aliasedName,
     true,
     type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _activityLevelMeta = const VerificationMeta(
+    'activityLevel',
+  );
+  @override
+  late final GeneratedColumn<String> activityLevel = GeneratedColumn<String>(
+    'activity_level',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
   static const VerificationMeta _goalsMeta = const VerificationMeta('goals');
@@ -98,8 +118,10 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     name,
     email,
     age,
+    gender,
     weight,
     height,
+    activityLevel,
     goals,
     targetWeight,
     dailyCalorieTarget,
@@ -139,6 +161,12 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         age.isAcceptableOrUnknown(data['age']!, _ageMeta),
       );
     }
+    if (data.containsKey('gender')) {
+      context.handle(
+        _genderMeta,
+        gender.isAcceptableOrUnknown(data['gender']!, _genderMeta),
+      );
+    }
     if (data.containsKey('weight')) {
       context.handle(
         _weightMeta,
@@ -149,6 +177,15 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
       context.handle(
         _heightMeta,
         height.isAcceptableOrUnknown(data['height']!, _heightMeta),
+      );
+    }
+    if (data.containsKey('activity_level')) {
+      context.handle(
+        _activityLevelMeta,
+        activityLevel.isAcceptableOrUnknown(
+          data['activity_level']!,
+          _activityLevelMeta,
+        ),
       );
     }
     if (data.containsKey('goals')) {
@@ -200,6 +237,10 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         DriftSqlType.int,
         data['${effectivePrefix}age'],
       ),
+      gender: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}gender'],
+      ),
       weight: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}weight'],
@@ -207,6 +248,10 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
       height: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}height'],
+      ),
+      activityLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}activity_level'],
       ),
       goals: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -234,8 +279,10 @@ class User extends DataClass implements Insertable<User> {
   final String? name;
   final String? email;
   final int? age;
+  final String? gender;
   final double? weight;
   final double? height;
+  final String? activityLevel;
   final String? goals;
   final double? targetWeight;
   final int? dailyCalorieTarget;
@@ -244,8 +291,10 @@ class User extends DataClass implements Insertable<User> {
     this.name,
     this.email,
     this.age,
+    this.gender,
     this.weight,
     this.height,
+    this.activityLevel,
     this.goals,
     this.targetWeight,
     this.dailyCalorieTarget,
@@ -263,11 +312,17 @@ class User extends DataClass implements Insertable<User> {
     if (!nullToAbsent || age != null) {
       map['age'] = Variable<int>(age);
     }
+    if (!nullToAbsent || gender != null) {
+      map['gender'] = Variable<String>(gender);
+    }
     if (!nullToAbsent || weight != null) {
       map['weight'] = Variable<double>(weight);
     }
     if (!nullToAbsent || height != null) {
       map['height'] = Variable<double>(height);
+    }
+    if (!nullToAbsent || activityLevel != null) {
+      map['activity_level'] = Variable<String>(activityLevel);
     }
     if (!nullToAbsent || goals != null) {
       map['goals'] = Variable<String>(goals);
@@ -289,12 +344,18 @@ class User extends DataClass implements Insertable<User> {
           ? const Value.absent()
           : Value(email),
       age: age == null && nullToAbsent ? const Value.absent() : Value(age),
+      gender: gender == null && nullToAbsent
+          ? const Value.absent()
+          : Value(gender),
       weight: weight == null && nullToAbsent
           ? const Value.absent()
           : Value(weight),
       height: height == null && nullToAbsent
           ? const Value.absent()
           : Value(height),
+      activityLevel: activityLevel == null && nullToAbsent
+          ? const Value.absent()
+          : Value(activityLevel),
       goals: goals == null && nullToAbsent
           ? const Value.absent()
           : Value(goals),
@@ -317,8 +378,10 @@ class User extends DataClass implements Insertable<User> {
       name: serializer.fromJson<String?>(json['name']),
       email: serializer.fromJson<String?>(json['email']),
       age: serializer.fromJson<int?>(json['age']),
+      gender: serializer.fromJson<String?>(json['gender']),
       weight: serializer.fromJson<double?>(json['weight']),
       height: serializer.fromJson<double?>(json['height']),
+      activityLevel: serializer.fromJson<String?>(json['activityLevel']),
       goals: serializer.fromJson<String?>(json['goals']),
       targetWeight: serializer.fromJson<double?>(json['targetWeight']),
       dailyCalorieTarget: serializer.fromJson<int?>(json['dailyCalorieTarget']),
@@ -332,8 +395,10 @@ class User extends DataClass implements Insertable<User> {
       'name': serializer.toJson<String?>(name),
       'email': serializer.toJson<String?>(email),
       'age': serializer.toJson<int?>(age),
+      'gender': serializer.toJson<String?>(gender),
       'weight': serializer.toJson<double?>(weight),
       'height': serializer.toJson<double?>(height),
+      'activityLevel': serializer.toJson<String?>(activityLevel),
       'goals': serializer.toJson<String?>(goals),
       'targetWeight': serializer.toJson<double?>(targetWeight),
       'dailyCalorieTarget': serializer.toJson<int?>(dailyCalorieTarget),
@@ -345,8 +410,10 @@ class User extends DataClass implements Insertable<User> {
     Value<String?> name = const Value.absent(),
     Value<String?> email = const Value.absent(),
     Value<int?> age = const Value.absent(),
+    Value<String?> gender = const Value.absent(),
     Value<double?> weight = const Value.absent(),
     Value<double?> height = const Value.absent(),
+    Value<String?> activityLevel = const Value.absent(),
     Value<String?> goals = const Value.absent(),
     Value<double?> targetWeight = const Value.absent(),
     Value<int?> dailyCalorieTarget = const Value.absent(),
@@ -355,8 +422,12 @@ class User extends DataClass implements Insertable<User> {
     name: name.present ? name.value : this.name,
     email: email.present ? email.value : this.email,
     age: age.present ? age.value : this.age,
+    gender: gender.present ? gender.value : this.gender,
     weight: weight.present ? weight.value : this.weight,
     height: height.present ? height.value : this.height,
+    activityLevel: activityLevel.present
+        ? activityLevel.value
+        : this.activityLevel,
     goals: goals.present ? goals.value : this.goals,
     targetWeight: targetWeight.present ? targetWeight.value : this.targetWeight,
     dailyCalorieTarget: dailyCalorieTarget.present
@@ -369,8 +440,12 @@ class User extends DataClass implements Insertable<User> {
       name: data.name.present ? data.name.value : this.name,
       email: data.email.present ? data.email.value : this.email,
       age: data.age.present ? data.age.value : this.age,
+      gender: data.gender.present ? data.gender.value : this.gender,
       weight: data.weight.present ? data.weight.value : this.weight,
       height: data.height.present ? data.height.value : this.height,
+      activityLevel: data.activityLevel.present
+          ? data.activityLevel.value
+          : this.activityLevel,
       goals: data.goals.present ? data.goals.value : this.goals,
       targetWeight: data.targetWeight.present
           ? data.targetWeight.value
@@ -388,8 +463,10 @@ class User extends DataClass implements Insertable<User> {
           ..write('name: $name, ')
           ..write('email: $email, ')
           ..write('age: $age, ')
+          ..write('gender: $gender, ')
           ..write('weight: $weight, ')
           ..write('height: $height, ')
+          ..write('activityLevel: $activityLevel, ')
           ..write('goals: $goals, ')
           ..write('targetWeight: $targetWeight, ')
           ..write('dailyCalorieTarget: $dailyCalorieTarget')
@@ -403,8 +480,10 @@ class User extends DataClass implements Insertable<User> {
     name,
     email,
     age,
+    gender,
     weight,
     height,
+    activityLevel,
     goals,
     targetWeight,
     dailyCalorieTarget,
@@ -417,8 +496,10 @@ class User extends DataClass implements Insertable<User> {
           other.name == this.name &&
           other.email == this.email &&
           other.age == this.age &&
+          other.gender == this.gender &&
           other.weight == this.weight &&
           other.height == this.height &&
+          other.activityLevel == this.activityLevel &&
           other.goals == this.goals &&
           other.targetWeight == this.targetWeight &&
           other.dailyCalorieTarget == this.dailyCalorieTarget);
@@ -429,8 +510,10 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<String?> name;
   final Value<String?> email;
   final Value<int?> age;
+  final Value<String?> gender;
   final Value<double?> weight;
   final Value<double?> height;
+  final Value<String?> activityLevel;
   final Value<String?> goals;
   final Value<double?> targetWeight;
   final Value<int?> dailyCalorieTarget;
@@ -440,8 +523,10 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.name = const Value.absent(),
     this.email = const Value.absent(),
     this.age = const Value.absent(),
+    this.gender = const Value.absent(),
     this.weight = const Value.absent(),
     this.height = const Value.absent(),
+    this.activityLevel = const Value.absent(),
     this.goals = const Value.absent(),
     this.targetWeight = const Value.absent(),
     this.dailyCalorieTarget = const Value.absent(),
@@ -452,8 +537,10 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.name = const Value.absent(),
     this.email = const Value.absent(),
     this.age = const Value.absent(),
+    this.gender = const Value.absent(),
     this.weight = const Value.absent(),
     this.height = const Value.absent(),
+    this.activityLevel = const Value.absent(),
     this.goals = const Value.absent(),
     this.targetWeight = const Value.absent(),
     this.dailyCalorieTarget = const Value.absent(),
@@ -464,8 +551,10 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<String>? name,
     Expression<String>? email,
     Expression<int>? age,
+    Expression<String>? gender,
     Expression<double>? weight,
     Expression<double>? height,
+    Expression<String>? activityLevel,
     Expression<String>? goals,
     Expression<double>? targetWeight,
     Expression<int>? dailyCalorieTarget,
@@ -476,8 +565,10 @@ class UsersCompanion extends UpdateCompanion<User> {
       if (name != null) 'name': name,
       if (email != null) 'email': email,
       if (age != null) 'age': age,
+      if (gender != null) 'gender': gender,
       if (weight != null) 'weight': weight,
       if (height != null) 'height': height,
+      if (activityLevel != null) 'activity_level': activityLevel,
       if (goals != null) 'goals': goals,
       if (targetWeight != null) 'target_weight': targetWeight,
       if (dailyCalorieTarget != null)
@@ -491,8 +582,10 @@ class UsersCompanion extends UpdateCompanion<User> {
     Value<String?>? name,
     Value<String?>? email,
     Value<int?>? age,
+    Value<String?>? gender,
     Value<double?>? weight,
     Value<double?>? height,
+    Value<String?>? activityLevel,
     Value<String?>? goals,
     Value<double?>? targetWeight,
     Value<int?>? dailyCalorieTarget,
@@ -503,8 +596,10 @@ class UsersCompanion extends UpdateCompanion<User> {
       name: name ?? this.name,
       email: email ?? this.email,
       age: age ?? this.age,
+      gender: gender ?? this.gender,
       weight: weight ?? this.weight,
       height: height ?? this.height,
+      activityLevel: activityLevel ?? this.activityLevel,
       goals: goals ?? this.goals,
       targetWeight: targetWeight ?? this.targetWeight,
       dailyCalorieTarget: dailyCalorieTarget ?? this.dailyCalorieTarget,
@@ -527,11 +622,17 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (age.present) {
       map['age'] = Variable<int>(age.value);
     }
+    if (gender.present) {
+      map['gender'] = Variable<String>(gender.value);
+    }
     if (weight.present) {
       map['weight'] = Variable<double>(weight.value);
     }
     if (height.present) {
       map['height'] = Variable<double>(height.value);
+    }
+    if (activityLevel.present) {
+      map['activity_level'] = Variable<String>(activityLevel.value);
     }
     if (goals.present) {
       map['goals'] = Variable<String>(goals.value);
@@ -555,8 +656,10 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('name: $name, ')
           ..write('email: $email, ')
           ..write('age: $age, ')
+          ..write('gender: $gender, ')
           ..write('weight: $weight, ')
           ..write('height: $height, ')
+          ..write('activityLevel: $activityLevel, ')
           ..write('goals: $goals, ')
           ..write('targetWeight: $targetWeight, ')
           ..write('dailyCalorieTarget: $dailyCalorieTarget, ')
@@ -4346,8 +4449,10 @@ typedef $$UsersTableCreateCompanionBuilder =
       Value<String?> name,
       Value<String?> email,
       Value<int?> age,
+      Value<String?> gender,
       Value<double?> weight,
       Value<double?> height,
+      Value<String?> activityLevel,
       Value<String?> goals,
       Value<double?> targetWeight,
       Value<int?> dailyCalorieTarget,
@@ -4359,8 +4464,10 @@ typedef $$UsersTableUpdateCompanionBuilder =
       Value<String?> name,
       Value<String?> email,
       Value<int?> age,
+      Value<String?> gender,
       Value<double?> weight,
       Value<double?> height,
+      Value<String?> activityLevel,
       Value<String?> goals,
       Value<double?> targetWeight,
       Value<int?> dailyCalorieTarget,
@@ -4395,6 +4502,11 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<String> get gender => $composableBuilder(
+    column: $table.gender,
+    builder: (column) => ColumnFilters(column),
+  );
+
   ColumnFilters<double> get weight => $composableBuilder(
     column: $table.weight,
     builder: (column) => ColumnFilters(column),
@@ -4402,6 +4514,11 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
 
   ColumnFilters<double> get height => $composableBuilder(
     column: $table.height,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get activityLevel => $composableBuilder(
+    column: $table.activityLevel,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4450,6 +4567,11 @@ class $$UsersTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get gender => $composableBuilder(
+    column: $table.gender,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<double> get weight => $composableBuilder(
     column: $table.weight,
     builder: (column) => ColumnOrderings(column),
@@ -4457,6 +4579,11 @@ class $$UsersTableOrderingComposer
 
   ColumnOrderings<double> get height => $composableBuilder(
     column: $table.height,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get activityLevel => $composableBuilder(
+    column: $table.activityLevel,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -4497,11 +4624,19 @@ class $$UsersTableAnnotationComposer
   GeneratedColumn<int> get age =>
       $composableBuilder(column: $table.age, builder: (column) => column);
 
+  GeneratedColumn<String> get gender =>
+      $composableBuilder(column: $table.gender, builder: (column) => column);
+
   GeneratedColumn<double> get weight =>
       $composableBuilder(column: $table.weight, builder: (column) => column);
 
   GeneratedColumn<double> get height =>
       $composableBuilder(column: $table.height, builder: (column) => column);
+
+  GeneratedColumn<String> get activityLevel => $composableBuilder(
+    column: $table.activityLevel,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get goals =>
       $composableBuilder(column: $table.goals, builder: (column) => column);
@@ -4549,8 +4684,10 @@ class $$UsersTableTableManager
                 Value<String?> name = const Value.absent(),
                 Value<String?> email = const Value.absent(),
                 Value<int?> age = const Value.absent(),
+                Value<String?> gender = const Value.absent(),
                 Value<double?> weight = const Value.absent(),
                 Value<double?> height = const Value.absent(),
+                Value<String?> activityLevel = const Value.absent(),
                 Value<String?> goals = const Value.absent(),
                 Value<double?> targetWeight = const Value.absent(),
                 Value<int?> dailyCalorieTarget = const Value.absent(),
@@ -4560,8 +4697,10 @@ class $$UsersTableTableManager
                 name: name,
                 email: email,
                 age: age,
+                gender: gender,
                 weight: weight,
                 height: height,
+                activityLevel: activityLevel,
                 goals: goals,
                 targetWeight: targetWeight,
                 dailyCalorieTarget: dailyCalorieTarget,
@@ -4573,8 +4712,10 @@ class $$UsersTableTableManager
                 Value<String?> name = const Value.absent(),
                 Value<String?> email = const Value.absent(),
                 Value<int?> age = const Value.absent(),
+                Value<String?> gender = const Value.absent(),
                 Value<double?> weight = const Value.absent(),
                 Value<double?> height = const Value.absent(),
+                Value<String?> activityLevel = const Value.absent(),
                 Value<String?> goals = const Value.absent(),
                 Value<double?> targetWeight = const Value.absent(),
                 Value<int?> dailyCalorieTarget = const Value.absent(),
@@ -4584,8 +4725,10 @@ class $$UsersTableTableManager
                 name: name,
                 email: email,
                 age: age,
+                gender: gender,
                 weight: weight,
                 height: height,
+                activityLevel: activityLevel,
                 goals: goals,
                 targetWeight: targetWeight,
                 dailyCalorieTarget: dailyCalorieTarget,

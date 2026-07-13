@@ -85,10 +85,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P1-D Demographics Screen
-- [ ] Build UI (age, gender, height, weight, activity level inputs)
-- [ ] Validation + unit conversion handling
-- [ ] Persist to Users table
-- [ ] Widget test
+- [x] Build UI (age, gender, height, weight, activity level inputs)
+- [x] Validation + unit conversion handling
+- [x] Persist to Users table
+- [x] Widget test
 
 ### §P1-E AI Diet Plan Results Screen
 - [ ] Build results UI
