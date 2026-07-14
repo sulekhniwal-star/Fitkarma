@@ -108,11 +108,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P1-H Women's Advanced Health Layer
-- [ ] Build cycle-tracking data model
-- [ ] Implement cycle-aware training adjustment logic
-- [ ] Build cycle-tracking onboarding screens
-- [ ] Wire cycle phase into Daily Mission and Training OS
-- [ ] Unit tests for phase-detection logic
+- [x] Build cycle-tracking data model
+- [x] Implement cycle-aware training adjustment logic
+- [x] Build cycle-tracking onboarding screens
+- [x] Wire cycle phase into Daily Mission and Training OS
+- [x] Unit tests for phase-detection logic
 
 ---
 

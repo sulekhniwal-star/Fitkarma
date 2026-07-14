@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:fitkarma/core/brain/health_snapshot.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 import 'package:fitkarma/core/sync/sync_worker.dart';
+import 'package:fitkarma/features/womens_health/womens_health_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final healthOSBrainProvider = Provider<HealthOSBrain>((ref) {
@@ -121,6 +122,10 @@ class HealthOSBrain {
 
   /// 3. DIP Generation & Storage with Sync Queue Integration
   Future<DailyIntelligencePackage> getOrGenerateDIP(String userId, {bool forceRegenerate = false}) async {
+    final user = await (_db.select(_db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+    if (user == null) {
+      throw Exception('User profile not found in local database for $userId');
+    }
     final snapshot = await computeHealthSnapshot(userId);
     final todayStart = DateTime.now().copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
 
@@ -144,6 +149,58 @@ class HealthOSBrain {
 
     DailyIntelligencePackage newPackage;
 
+    // D. Fetch cycle tracking info
+    DynamicCycleState? cycleState;
+    WorkoutAdaptation? cycleAdaptation;
+    String? phaseNutritionFocus;
+
+    if (user.isCycleTrackingEnabled == true && user.lastPeriodDate != null) {
+      final symptomLogs = await _db.getMenstrualSymptomLogs(userId);
+      final wrappers = symptomLogs.map<MenstrualSymptomLogWrapper>((l) => MenstrualSymptomLogWrapper(
+        logDate: l.logDate,
+        hasMenstrualFlow: l.hasMenstrualFlow,
+        basalBodyTemperatureCelsius: l.basalBodyTemperature,
+        positiveLhTest: l.positiveLhTest,
+        physicalSymptoms: l.physicalSymptoms.isNotEmpty ? l.physicalSymptoms.split(',') : const [],
+        restingHeartRateBpm: l.restingHeartRate,
+        heartRateVariabilityMs: l.hrvMs,
+      )).toList();
+
+      if (wrappers.isEmpty) {
+        // Seed initial log from onboarding setup
+        wrappers.add(MenstrualSymptomLogWrapper(
+          logDate: user.lastPeriodDate!,
+          hasMenstrualFlow: true,
+          physicalSymptoms: const [],
+        ));
+      }
+
+      const calibrator = DynamicCycleCalibrator();
+      cycleState = calibrator.recalibratePhase(
+        symptomLogs: wrappers,
+        defaultCycleLengthDays: user.averageCycleLength ?? 28,
+      );
+      cycleAdaptation = const CycleAwareTrainingAdapter().adaptForCyclePhase(cycleState.currentPhase);
+
+      phaseNutritionFocus = switch (cycleState.currentPhase) {
+        CyclePhase.menstrual => 'Iron + Vitamin C focus (e.g. spinach dal, sesame chikki, pomegranate).',
+        CyclePhase.follicular => 'Protein + B vitamins focus (e.g. eggs, sprouts, moong dal).',
+        CyclePhase.ovulatory => 'Antioxidants + light meals focus (e.g. fruits, salads, coconut water).',
+        CyclePhase.luteal => 'Complex carbs + magnesium focus (e.g. sweet potato, banana).',
+      };
+    }
+
+    // E. Apply intensity modifications
+    final double baseReadiness = snapshot.avgReadinessScore7Days;
+    final double adjustedReadiness = cycleAdaptation != null
+        ? baseReadiness * cycleAdaptation.intensityModifier
+        : baseReadiness;
+
+    final String recommendedIntensity = adjustedReadiness < 50
+        ? 'low'
+        : (adjustedReadiness < 65 ? 'low' : (adjustedReadiness < 80 ? 'medium' : 'high'));
+    final bool isRestDay = adjustedReadiness < 50;
+
     if (triggerAI) {
       // Step A: Trigger Cloud/Local LLM representation
       final insight = _simulateAIInsight(snapshot);
@@ -154,15 +211,19 @@ class HealthOSBrain {
         userId: userId,
         packageDate: todayStart,
         primaryInsight: insight['primaryInsight']!,
-        todaysMission: insight['todaysMission']!,
-        nutritionFocus: 'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
-        recoveryFocus: 'Sleep averages 7.6h. Keep a consistent bedtime routine.',
+        todaysMission: cycleAdaptation != null
+            ? '${insight['todaysMission']!} (Phase Focus: ${cycleAdaptation.preferredTypes.join('/')})'
+            : insight['todaysMission']!,
+        nutritionFocus: phaseNutritionFocus ?? 'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
+        recoveryFocus: cycleAdaptation != null
+            ? 'Current phase: ${cycleState!.currentPhase.name.toUpperCase()} — ${cycleAdaptation.rationale}'
+            : 'Sleep averages 7.6h. Keep a consistent bedtime routine.',
         motivationMessage: 'You are crushing your daily streaks. Let\'s continue standard gains!',
         adjustedCalories: snapshot.dailyCalorieTarget.round(),
         adjustedProtein: snapshot.dailyProteinTargetG.round(),
         adjustedHydrationL: snapshot.dailyHydrationTargetL,
-        recommendedIntensity: snapshot.avgReadinessScore7Days < 60 ? 'low' : 'medium',
-        isRestDay: Value(snapshot.avgReadinessScore7Days < 50),
+        recommendedIntensity: recommendedIntensity,
+        isRestDay: Value(isRestDay),
         activeRisks: jsonEncode(snapshot.localRisks),
         showFestivalBanner: const Value(false),
         festivalAdaptation: const Value(null),
@@ -186,14 +247,16 @@ class HealthOSBrain {
         packageDate: todayStart,
         primaryInsight: latestPackage.primaryInsight,
         todaysMission: latestPackage.todaysMission,
-        nutritionFocus: 'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
-        recoveryFocus: latestPackage.recoveryFocus,
+        nutritionFocus: phaseNutritionFocus ?? 'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
+        recoveryFocus: cycleAdaptation != null
+            ? 'Current phase: ${cycleState!.currentPhase.name.toUpperCase()} — ${cycleAdaptation.rationale}'
+            : latestPackage.recoveryFocus,
         motivationMessage: latestPackage.motivationMessage,
         adjustedCalories: snapshot.dailyCalorieTarget.round(),
         adjustedProtein: snapshot.dailyProteinTargetG.round(),
         adjustedHydrationL: snapshot.dailyHydrationTargetL,
-        recommendedIntensity: snapshot.avgReadinessScore7Days < 60 ? 'low' : 'medium',
-        isRestDay: Value(snapshot.avgReadinessScore7Days < 50),
+        recommendedIntensity: recommendedIntensity,
+        isRestDay: Value(isRestDay),
         activeRisks: jsonEncode(snapshot.localRisks),
         showFestivalBanner: Value(latestPackage.showFestivalBanner),
         festivalAdaptation: Value(latestPackage.festivalAdaptation),

@@ -132,6 +132,42 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _isCycleTrackingEnabledMeta =
+      const VerificationMeta('isCycleTrackingEnabled');
+  @override
+  late final GeneratedColumn<bool> isCycleTrackingEnabled =
+      GeneratedColumn<bool>(
+        'is_cycle_tracking_enabled',
+        aliasedName,
+        true,
+        type: DriftSqlType.bool,
+        requiredDuringInsert: false,
+        defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_cycle_tracking_enabled" IN (0, 1))',
+        ),
+      );
+  static const VerificationMeta _averageCycleLengthMeta =
+      const VerificationMeta('averageCycleLength');
+  @override
+  late final GeneratedColumn<int> averageCycleLength = GeneratedColumn<int>(
+    'average_cycle_length',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lastPeriodDateMeta = const VerificationMeta(
+    'lastPeriodDate',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastPeriodDate =
+      GeneratedColumn<DateTime>(
+        'last_period_date',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -147,6 +183,9 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     dailyCalorieTarget,
     dosha,
     currentProgram,
+    isCycleTrackingEnabled,
+    averageCycleLength,
+    lastPeriodDate,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -249,6 +288,33 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         ),
       );
     }
+    if (data.containsKey('is_cycle_tracking_enabled')) {
+      context.handle(
+        _isCycleTrackingEnabledMeta,
+        isCycleTrackingEnabled.isAcceptableOrUnknown(
+          data['is_cycle_tracking_enabled']!,
+          _isCycleTrackingEnabledMeta,
+        ),
+      );
+    }
+    if (data.containsKey('average_cycle_length')) {
+      context.handle(
+        _averageCycleLengthMeta,
+        averageCycleLength.isAcceptableOrUnknown(
+          data['average_cycle_length']!,
+          _averageCycleLengthMeta,
+        ),
+      );
+    }
+    if (data.containsKey('last_period_date')) {
+      context.handle(
+        _lastPeriodDateMeta,
+        lastPeriodDate.isAcceptableOrUnknown(
+          data['last_period_date']!,
+          _lastPeriodDateMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -310,6 +376,18 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         DriftSqlType.string,
         data['${effectivePrefix}current_program'],
       ),
+      isCycleTrackingEnabled: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_cycle_tracking_enabled'],
+      ),
+      averageCycleLength: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}average_cycle_length'],
+      ),
+      lastPeriodDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_period_date'],
+      ),
     );
   }
 
@@ -333,6 +411,9 @@ class User extends DataClass implements Insertable<User> {
   final int? dailyCalorieTarget;
   final String? dosha;
   final String? currentProgram;
+  final bool? isCycleTrackingEnabled;
+  final int? averageCycleLength;
+  final DateTime? lastPeriodDate;
   const User({
     required this.id,
     this.name,
@@ -347,6 +428,9 @@ class User extends DataClass implements Insertable<User> {
     this.dailyCalorieTarget,
     this.dosha,
     this.currentProgram,
+    this.isCycleTrackingEnabled,
+    this.averageCycleLength,
+    this.lastPeriodDate,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -388,6 +472,15 @@ class User extends DataClass implements Insertable<User> {
     if (!nullToAbsent || currentProgram != null) {
       map['current_program'] = Variable<String>(currentProgram);
     }
+    if (!nullToAbsent || isCycleTrackingEnabled != null) {
+      map['is_cycle_tracking_enabled'] = Variable<bool>(isCycleTrackingEnabled);
+    }
+    if (!nullToAbsent || averageCycleLength != null) {
+      map['average_cycle_length'] = Variable<int>(averageCycleLength);
+    }
+    if (!nullToAbsent || lastPeriodDate != null) {
+      map['last_period_date'] = Variable<DateTime>(lastPeriodDate);
+    }
     return map;
   }
 
@@ -426,6 +519,15 @@ class User extends DataClass implements Insertable<User> {
       currentProgram: currentProgram == null && nullToAbsent
           ? const Value.absent()
           : Value(currentProgram),
+      isCycleTrackingEnabled: isCycleTrackingEnabled == null && nullToAbsent
+          ? const Value.absent()
+          : Value(isCycleTrackingEnabled),
+      averageCycleLength: averageCycleLength == null && nullToAbsent
+          ? const Value.absent()
+          : Value(averageCycleLength),
+      lastPeriodDate: lastPeriodDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastPeriodDate),
     );
   }
 
@@ -448,6 +550,11 @@ class User extends DataClass implements Insertable<User> {
       dailyCalorieTarget: serializer.fromJson<int?>(json['dailyCalorieTarget']),
       dosha: serializer.fromJson<String?>(json['dosha']),
       currentProgram: serializer.fromJson<String?>(json['currentProgram']),
+      isCycleTrackingEnabled: serializer.fromJson<bool?>(
+        json['isCycleTrackingEnabled'],
+      ),
+      averageCycleLength: serializer.fromJson<int?>(json['averageCycleLength']),
+      lastPeriodDate: serializer.fromJson<DateTime?>(json['lastPeriodDate']),
     );
   }
   @override
@@ -467,6 +574,11 @@ class User extends DataClass implements Insertable<User> {
       'dailyCalorieTarget': serializer.toJson<int?>(dailyCalorieTarget),
       'dosha': serializer.toJson<String?>(dosha),
       'currentProgram': serializer.toJson<String?>(currentProgram),
+      'isCycleTrackingEnabled': serializer.toJson<bool?>(
+        isCycleTrackingEnabled,
+      ),
+      'averageCycleLength': serializer.toJson<int?>(averageCycleLength),
+      'lastPeriodDate': serializer.toJson<DateTime?>(lastPeriodDate),
     };
   }
 
@@ -484,6 +596,9 @@ class User extends DataClass implements Insertable<User> {
     Value<int?> dailyCalorieTarget = const Value.absent(),
     Value<String?> dosha = const Value.absent(),
     Value<String?> currentProgram = const Value.absent(),
+    Value<bool?> isCycleTrackingEnabled = const Value.absent(),
+    Value<int?> averageCycleLength = const Value.absent(),
+    Value<DateTime?> lastPeriodDate = const Value.absent(),
   }) => User(
     id: id ?? this.id,
     name: name.present ? name.value : this.name,
@@ -504,6 +619,15 @@ class User extends DataClass implements Insertable<User> {
     currentProgram: currentProgram.present
         ? currentProgram.value
         : this.currentProgram,
+    isCycleTrackingEnabled: isCycleTrackingEnabled.present
+        ? isCycleTrackingEnabled.value
+        : this.isCycleTrackingEnabled,
+    averageCycleLength: averageCycleLength.present
+        ? averageCycleLength.value
+        : this.averageCycleLength,
+    lastPeriodDate: lastPeriodDate.present
+        ? lastPeriodDate.value
+        : this.lastPeriodDate,
   );
   User copyWithCompanion(UsersCompanion data) {
     return User(
@@ -528,6 +652,15 @@ class User extends DataClass implements Insertable<User> {
       currentProgram: data.currentProgram.present
           ? data.currentProgram.value
           : this.currentProgram,
+      isCycleTrackingEnabled: data.isCycleTrackingEnabled.present
+          ? data.isCycleTrackingEnabled.value
+          : this.isCycleTrackingEnabled,
+      averageCycleLength: data.averageCycleLength.present
+          ? data.averageCycleLength.value
+          : this.averageCycleLength,
+      lastPeriodDate: data.lastPeriodDate.present
+          ? data.lastPeriodDate.value
+          : this.lastPeriodDate,
     );
   }
 
@@ -546,7 +679,10 @@ class User extends DataClass implements Insertable<User> {
           ..write('targetWeight: $targetWeight, ')
           ..write('dailyCalorieTarget: $dailyCalorieTarget, ')
           ..write('dosha: $dosha, ')
-          ..write('currentProgram: $currentProgram')
+          ..write('currentProgram: $currentProgram, ')
+          ..write('isCycleTrackingEnabled: $isCycleTrackingEnabled, ')
+          ..write('averageCycleLength: $averageCycleLength, ')
+          ..write('lastPeriodDate: $lastPeriodDate')
           ..write(')'))
         .toString();
   }
@@ -566,6 +702,9 @@ class User extends DataClass implements Insertable<User> {
     dailyCalorieTarget,
     dosha,
     currentProgram,
+    isCycleTrackingEnabled,
+    averageCycleLength,
+    lastPeriodDate,
   );
   @override
   bool operator ==(Object other) =>
@@ -583,7 +722,10 @@ class User extends DataClass implements Insertable<User> {
           other.targetWeight == this.targetWeight &&
           other.dailyCalorieTarget == this.dailyCalorieTarget &&
           other.dosha == this.dosha &&
-          other.currentProgram == this.currentProgram);
+          other.currentProgram == this.currentProgram &&
+          other.isCycleTrackingEnabled == this.isCycleTrackingEnabled &&
+          other.averageCycleLength == this.averageCycleLength &&
+          other.lastPeriodDate == this.lastPeriodDate);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
@@ -600,6 +742,9 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<int?> dailyCalorieTarget;
   final Value<String?> dosha;
   final Value<String?> currentProgram;
+  final Value<bool?> isCycleTrackingEnabled;
+  final Value<int?> averageCycleLength;
+  final Value<DateTime?> lastPeriodDate;
   final Value<int> rowid;
   const UsersCompanion({
     this.id = const Value.absent(),
@@ -615,6 +760,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.dailyCalorieTarget = const Value.absent(),
     this.dosha = const Value.absent(),
     this.currentProgram = const Value.absent(),
+    this.isCycleTrackingEnabled = const Value.absent(),
+    this.averageCycleLength = const Value.absent(),
+    this.lastPeriodDate = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
@@ -631,6 +779,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.dailyCalorieTarget = const Value.absent(),
     this.dosha = const Value.absent(),
     this.currentProgram = const Value.absent(),
+    this.isCycleTrackingEnabled = const Value.absent(),
+    this.averageCycleLength = const Value.absent(),
+    this.lastPeriodDate = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id);
   static Insertable<User> custom({
@@ -647,6 +798,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<int>? dailyCalorieTarget,
     Expression<String>? dosha,
     Expression<String>? currentProgram,
+    Expression<bool>? isCycleTrackingEnabled,
+    Expression<int>? averageCycleLength,
+    Expression<DateTime>? lastPeriodDate,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -664,6 +818,11 @@ class UsersCompanion extends UpdateCompanion<User> {
         'daily_calorie_target': dailyCalorieTarget,
       if (dosha != null) 'dosha': dosha,
       if (currentProgram != null) 'current_program': currentProgram,
+      if (isCycleTrackingEnabled != null)
+        'is_cycle_tracking_enabled': isCycleTrackingEnabled,
+      if (averageCycleLength != null)
+        'average_cycle_length': averageCycleLength,
+      if (lastPeriodDate != null) 'last_period_date': lastPeriodDate,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -682,6 +841,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     Value<int?>? dailyCalorieTarget,
     Value<String?>? dosha,
     Value<String?>? currentProgram,
+    Value<bool?>? isCycleTrackingEnabled,
+    Value<int?>? averageCycleLength,
+    Value<DateTime?>? lastPeriodDate,
     Value<int>? rowid,
   }) {
     return UsersCompanion(
@@ -698,6 +860,10 @@ class UsersCompanion extends UpdateCompanion<User> {
       dailyCalorieTarget: dailyCalorieTarget ?? this.dailyCalorieTarget,
       dosha: dosha ?? this.dosha,
       currentProgram: currentProgram ?? this.currentProgram,
+      isCycleTrackingEnabled:
+          isCycleTrackingEnabled ?? this.isCycleTrackingEnabled,
+      averageCycleLength: averageCycleLength ?? this.averageCycleLength,
+      lastPeriodDate: lastPeriodDate ?? this.lastPeriodDate,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -744,6 +910,17 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (currentProgram.present) {
       map['current_program'] = Variable<String>(currentProgram.value);
     }
+    if (isCycleTrackingEnabled.present) {
+      map['is_cycle_tracking_enabled'] = Variable<bool>(
+        isCycleTrackingEnabled.value,
+      );
+    }
+    if (averageCycleLength.present) {
+      map['average_cycle_length'] = Variable<int>(averageCycleLength.value);
+    }
+    if (lastPeriodDate.present) {
+      map['last_period_date'] = Variable<DateTime>(lastPeriodDate.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -766,6 +943,9 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('dailyCalorieTarget: $dailyCalorieTarget, ')
           ..write('dosha: $dosha, ')
           ..write('currentProgram: $currentProgram, ')
+          ..write('isCycleTrackingEnabled: $isCycleTrackingEnabled, ')
+          ..write('averageCycleLength: $averageCycleLength, ')
+          ..write('lastPeriodDate: $lastPeriodDate, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -5010,6 +5190,600 @@ class CachedDietPlansCompanion extends UpdateCompanion<CachedDietPlan> {
   }
 }
 
+class $MenstrualSymptomLogsTable extends MenstrualSymptomLogs
+    with TableInfo<$MenstrualSymptomLogsTable, MenstrualSymptomLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MenstrualSymptomLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _logDateMeta = const VerificationMeta(
+    'logDate',
+  );
+  @override
+  late final GeneratedColumn<DateTime> logDate = GeneratedColumn<DateTime>(
+    'log_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _hasMenstrualFlowMeta = const VerificationMeta(
+    'hasMenstrualFlow',
+  );
+  @override
+  late final GeneratedColumn<bool> hasMenstrualFlow = GeneratedColumn<bool>(
+    'has_menstrual_flow',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("has_menstrual_flow" IN (0, 1))',
+    ),
+  );
+  static const VerificationMeta _basalBodyTemperatureMeta =
+      const VerificationMeta('basalBodyTemperature');
+  @override
+  late final GeneratedColumn<double> basalBodyTemperature =
+      GeneratedColumn<double>(
+        'basal_body_temperature',
+        aliasedName,
+        true,
+        type: DriftSqlType.double,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _positiveLhTestMeta = const VerificationMeta(
+    'positiveLhTest',
+  );
+  @override
+  late final GeneratedColumn<bool> positiveLhTest = GeneratedColumn<bool>(
+    'positive_lh_test',
+    aliasedName,
+    true,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("positive_lh_test" IN (0, 1))',
+    ),
+  );
+  static const VerificationMeta _physicalSymptomsMeta = const VerificationMeta(
+    'physicalSymptoms',
+  );
+  @override
+  late final GeneratedColumn<String> physicalSymptoms = GeneratedColumn<String>(
+    'physical_symptoms',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _restingHeartRateMeta = const VerificationMeta(
+    'restingHeartRate',
+  );
+  @override
+  late final GeneratedColumn<int> restingHeartRate = GeneratedColumn<int>(
+    'resting_heart_rate',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _hrvMsMeta = const VerificationMeta('hrvMs');
+  @override
+  late final GeneratedColumn<double> hrvMs = GeneratedColumn<double>(
+    'hrv_ms',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    userId,
+    logDate,
+    hasMenstrualFlow,
+    basalBodyTemperature,
+    positiveLhTest,
+    physicalSymptoms,
+    restingHeartRate,
+    hrvMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'menstrual_symptom_logs';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MenstrualSymptomLog> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('log_date')) {
+      context.handle(
+        _logDateMeta,
+        logDate.isAcceptableOrUnknown(data['log_date']!, _logDateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_logDateMeta);
+    }
+    if (data.containsKey('has_menstrual_flow')) {
+      context.handle(
+        _hasMenstrualFlowMeta,
+        hasMenstrualFlow.isAcceptableOrUnknown(
+          data['has_menstrual_flow']!,
+          _hasMenstrualFlowMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_hasMenstrualFlowMeta);
+    }
+    if (data.containsKey('basal_body_temperature')) {
+      context.handle(
+        _basalBodyTemperatureMeta,
+        basalBodyTemperature.isAcceptableOrUnknown(
+          data['basal_body_temperature']!,
+          _basalBodyTemperatureMeta,
+        ),
+      );
+    }
+    if (data.containsKey('positive_lh_test')) {
+      context.handle(
+        _positiveLhTestMeta,
+        positiveLhTest.isAcceptableOrUnknown(
+          data['positive_lh_test']!,
+          _positiveLhTestMeta,
+        ),
+      );
+    }
+    if (data.containsKey('physical_symptoms')) {
+      context.handle(
+        _physicalSymptomsMeta,
+        physicalSymptoms.isAcceptableOrUnknown(
+          data['physical_symptoms']!,
+          _physicalSymptomsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_physicalSymptomsMeta);
+    }
+    if (data.containsKey('resting_heart_rate')) {
+      context.handle(
+        _restingHeartRateMeta,
+        restingHeartRate.isAcceptableOrUnknown(
+          data['resting_heart_rate']!,
+          _restingHeartRateMeta,
+        ),
+      );
+    }
+    if (data.containsKey('hrv_ms')) {
+      context.handle(
+        _hrvMsMeta,
+        hrvMs.isAcceptableOrUnknown(data['hrv_ms']!, _hrvMsMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  MenstrualSymptomLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MenstrualSymptomLog(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      logDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}log_date'],
+      )!,
+      hasMenstrualFlow: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}has_menstrual_flow'],
+      )!,
+      basalBodyTemperature: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}basal_body_temperature'],
+      ),
+      positiveLhTest: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}positive_lh_test'],
+      ),
+      physicalSymptoms: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}physical_symptoms'],
+      )!,
+      restingHeartRate: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}resting_heart_rate'],
+      ),
+      hrvMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}hrv_ms'],
+      ),
+    );
+  }
+
+  @override
+  $MenstrualSymptomLogsTable createAlias(String alias) {
+    return $MenstrualSymptomLogsTable(attachedDatabase, alias);
+  }
+}
+
+class MenstrualSymptomLog extends DataClass
+    implements Insertable<MenstrualSymptomLog> {
+  final int id;
+  final String userId;
+  final DateTime logDate;
+  final bool hasMenstrualFlow;
+  final double? basalBodyTemperature;
+  final bool? positiveLhTest;
+  final String physicalSymptoms;
+  final int? restingHeartRate;
+  final double? hrvMs;
+  const MenstrualSymptomLog({
+    required this.id,
+    required this.userId,
+    required this.logDate,
+    required this.hasMenstrualFlow,
+    this.basalBodyTemperature,
+    this.positiveLhTest,
+    required this.physicalSymptoms,
+    this.restingHeartRate,
+    this.hrvMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['log_date'] = Variable<DateTime>(logDate);
+    map['has_menstrual_flow'] = Variable<bool>(hasMenstrualFlow);
+    if (!nullToAbsent || basalBodyTemperature != null) {
+      map['basal_body_temperature'] = Variable<double>(basalBodyTemperature);
+    }
+    if (!nullToAbsent || positiveLhTest != null) {
+      map['positive_lh_test'] = Variable<bool>(positiveLhTest);
+    }
+    map['physical_symptoms'] = Variable<String>(physicalSymptoms);
+    if (!nullToAbsent || restingHeartRate != null) {
+      map['resting_heart_rate'] = Variable<int>(restingHeartRate);
+    }
+    if (!nullToAbsent || hrvMs != null) {
+      map['hrv_ms'] = Variable<double>(hrvMs);
+    }
+    return map;
+  }
+
+  MenstrualSymptomLogsCompanion toCompanion(bool nullToAbsent) {
+    return MenstrualSymptomLogsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      logDate: Value(logDate),
+      hasMenstrualFlow: Value(hasMenstrualFlow),
+      basalBodyTemperature: basalBodyTemperature == null && nullToAbsent
+          ? const Value.absent()
+          : Value(basalBodyTemperature),
+      positiveLhTest: positiveLhTest == null && nullToAbsent
+          ? const Value.absent()
+          : Value(positiveLhTest),
+      physicalSymptoms: Value(physicalSymptoms),
+      restingHeartRate: restingHeartRate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(restingHeartRate),
+      hrvMs: hrvMs == null && nullToAbsent
+          ? const Value.absent()
+          : Value(hrvMs),
+    );
+  }
+
+  factory MenstrualSymptomLog.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MenstrualSymptomLog(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      logDate: serializer.fromJson<DateTime>(json['logDate']),
+      hasMenstrualFlow: serializer.fromJson<bool>(json['hasMenstrualFlow']),
+      basalBodyTemperature: serializer.fromJson<double?>(
+        json['basalBodyTemperature'],
+      ),
+      positiveLhTest: serializer.fromJson<bool?>(json['positiveLhTest']),
+      physicalSymptoms: serializer.fromJson<String>(json['physicalSymptoms']),
+      restingHeartRate: serializer.fromJson<int?>(json['restingHeartRate']),
+      hrvMs: serializer.fromJson<double?>(json['hrvMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'logDate': serializer.toJson<DateTime>(logDate),
+      'hasMenstrualFlow': serializer.toJson<bool>(hasMenstrualFlow),
+      'basalBodyTemperature': serializer.toJson<double?>(basalBodyTemperature),
+      'positiveLhTest': serializer.toJson<bool?>(positiveLhTest),
+      'physicalSymptoms': serializer.toJson<String>(physicalSymptoms),
+      'restingHeartRate': serializer.toJson<int?>(restingHeartRate),
+      'hrvMs': serializer.toJson<double?>(hrvMs),
+    };
+  }
+
+  MenstrualSymptomLog copyWith({
+    int? id,
+    String? userId,
+    DateTime? logDate,
+    bool? hasMenstrualFlow,
+    Value<double?> basalBodyTemperature = const Value.absent(),
+    Value<bool?> positiveLhTest = const Value.absent(),
+    String? physicalSymptoms,
+    Value<int?> restingHeartRate = const Value.absent(),
+    Value<double?> hrvMs = const Value.absent(),
+  }) => MenstrualSymptomLog(
+    id: id ?? this.id,
+    userId: userId ?? this.userId,
+    logDate: logDate ?? this.logDate,
+    hasMenstrualFlow: hasMenstrualFlow ?? this.hasMenstrualFlow,
+    basalBodyTemperature: basalBodyTemperature.present
+        ? basalBodyTemperature.value
+        : this.basalBodyTemperature,
+    positiveLhTest: positiveLhTest.present
+        ? positiveLhTest.value
+        : this.positiveLhTest,
+    physicalSymptoms: physicalSymptoms ?? this.physicalSymptoms,
+    restingHeartRate: restingHeartRate.present
+        ? restingHeartRate.value
+        : this.restingHeartRate,
+    hrvMs: hrvMs.present ? hrvMs.value : this.hrvMs,
+  );
+  MenstrualSymptomLog copyWithCompanion(MenstrualSymptomLogsCompanion data) {
+    return MenstrualSymptomLog(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      logDate: data.logDate.present ? data.logDate.value : this.logDate,
+      hasMenstrualFlow: data.hasMenstrualFlow.present
+          ? data.hasMenstrualFlow.value
+          : this.hasMenstrualFlow,
+      basalBodyTemperature: data.basalBodyTemperature.present
+          ? data.basalBodyTemperature.value
+          : this.basalBodyTemperature,
+      positiveLhTest: data.positiveLhTest.present
+          ? data.positiveLhTest.value
+          : this.positiveLhTest,
+      physicalSymptoms: data.physicalSymptoms.present
+          ? data.physicalSymptoms.value
+          : this.physicalSymptoms,
+      restingHeartRate: data.restingHeartRate.present
+          ? data.restingHeartRate.value
+          : this.restingHeartRate,
+      hrvMs: data.hrvMs.present ? data.hrvMs.value : this.hrvMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MenstrualSymptomLog(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('logDate: $logDate, ')
+          ..write('hasMenstrualFlow: $hasMenstrualFlow, ')
+          ..write('basalBodyTemperature: $basalBodyTemperature, ')
+          ..write('positiveLhTest: $positiveLhTest, ')
+          ..write('physicalSymptoms: $physicalSymptoms, ')
+          ..write('restingHeartRate: $restingHeartRate, ')
+          ..write('hrvMs: $hrvMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    userId,
+    logDate,
+    hasMenstrualFlow,
+    basalBodyTemperature,
+    positiveLhTest,
+    physicalSymptoms,
+    restingHeartRate,
+    hrvMs,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MenstrualSymptomLog &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.logDate == this.logDate &&
+          other.hasMenstrualFlow == this.hasMenstrualFlow &&
+          other.basalBodyTemperature == this.basalBodyTemperature &&
+          other.positiveLhTest == this.positiveLhTest &&
+          other.physicalSymptoms == this.physicalSymptoms &&
+          other.restingHeartRate == this.restingHeartRate &&
+          other.hrvMs == this.hrvMs);
+}
+
+class MenstrualSymptomLogsCompanion
+    extends UpdateCompanion<MenstrualSymptomLog> {
+  final Value<int> id;
+  final Value<String> userId;
+  final Value<DateTime> logDate;
+  final Value<bool> hasMenstrualFlow;
+  final Value<double?> basalBodyTemperature;
+  final Value<bool?> positiveLhTest;
+  final Value<String> physicalSymptoms;
+  final Value<int?> restingHeartRate;
+  final Value<double?> hrvMs;
+  const MenstrualSymptomLogsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.logDate = const Value.absent(),
+    this.hasMenstrualFlow = const Value.absent(),
+    this.basalBodyTemperature = const Value.absent(),
+    this.positiveLhTest = const Value.absent(),
+    this.physicalSymptoms = const Value.absent(),
+    this.restingHeartRate = const Value.absent(),
+    this.hrvMs = const Value.absent(),
+  });
+  MenstrualSymptomLogsCompanion.insert({
+    this.id = const Value.absent(),
+    required String userId,
+    required DateTime logDate,
+    required bool hasMenstrualFlow,
+    this.basalBodyTemperature = const Value.absent(),
+    this.positiveLhTest = const Value.absent(),
+    required String physicalSymptoms,
+    this.restingHeartRate = const Value.absent(),
+    this.hrvMs = const Value.absent(),
+  }) : userId = Value(userId),
+       logDate = Value(logDate),
+       hasMenstrualFlow = Value(hasMenstrualFlow),
+       physicalSymptoms = Value(physicalSymptoms);
+  static Insertable<MenstrualSymptomLog> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<DateTime>? logDate,
+    Expression<bool>? hasMenstrualFlow,
+    Expression<double>? basalBodyTemperature,
+    Expression<bool>? positiveLhTest,
+    Expression<String>? physicalSymptoms,
+    Expression<int>? restingHeartRate,
+    Expression<double>? hrvMs,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (logDate != null) 'log_date': logDate,
+      if (hasMenstrualFlow != null) 'has_menstrual_flow': hasMenstrualFlow,
+      if (basalBodyTemperature != null)
+        'basal_body_temperature': basalBodyTemperature,
+      if (positiveLhTest != null) 'positive_lh_test': positiveLhTest,
+      if (physicalSymptoms != null) 'physical_symptoms': physicalSymptoms,
+      if (restingHeartRate != null) 'resting_heart_rate': restingHeartRate,
+      if (hrvMs != null) 'hrv_ms': hrvMs,
+    });
+  }
+
+  MenstrualSymptomLogsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? userId,
+    Value<DateTime>? logDate,
+    Value<bool>? hasMenstrualFlow,
+    Value<double?>? basalBodyTemperature,
+    Value<bool?>? positiveLhTest,
+    Value<String>? physicalSymptoms,
+    Value<int?>? restingHeartRate,
+    Value<double?>? hrvMs,
+  }) {
+    return MenstrualSymptomLogsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      logDate: logDate ?? this.logDate,
+      hasMenstrualFlow: hasMenstrualFlow ?? this.hasMenstrualFlow,
+      basalBodyTemperature: basalBodyTemperature ?? this.basalBodyTemperature,
+      positiveLhTest: positiveLhTest ?? this.positiveLhTest,
+      physicalSymptoms: physicalSymptoms ?? this.physicalSymptoms,
+      restingHeartRate: restingHeartRate ?? this.restingHeartRate,
+      hrvMs: hrvMs ?? this.hrvMs,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (logDate.present) {
+      map['log_date'] = Variable<DateTime>(logDate.value);
+    }
+    if (hasMenstrualFlow.present) {
+      map['has_menstrual_flow'] = Variable<bool>(hasMenstrualFlow.value);
+    }
+    if (basalBodyTemperature.present) {
+      map['basal_body_temperature'] = Variable<double>(
+        basalBodyTemperature.value,
+      );
+    }
+    if (positiveLhTest.present) {
+      map['positive_lh_test'] = Variable<bool>(positiveLhTest.value);
+    }
+    if (physicalSymptoms.present) {
+      map['physical_symptoms'] = Variable<String>(physicalSymptoms.value);
+    }
+    if (restingHeartRate.present) {
+      map['resting_heart_rate'] = Variable<int>(restingHeartRate.value);
+    }
+    if (hrvMs.present) {
+      map['hrv_ms'] = Variable<double>(hrvMs.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MenstrualSymptomLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('logDate: $logDate, ')
+          ..write('hasMenstrualFlow: $hasMenstrualFlow, ')
+          ..write('basalBodyTemperature: $basalBodyTemperature, ')
+          ..write('positiveLhTest: $positiveLhTest, ')
+          ..write('physicalSymptoms: $physicalSymptoms, ')
+          ..write('restingHeartRate: $restingHeartRate, ')
+          ..write('hrvMs: $hrvMs')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -5026,6 +5800,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $CachedDietPlansTable cachedDietPlans = $CachedDietPlansTable(
     this,
   );
+  late final $MenstrualSymptomLogsTable menstrualSymptomLogs =
+      $MenstrualSymptomLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -5039,6 +5815,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     aICacheEntries,
     transformationMemories,
     cachedDietPlans,
+    menstrualSymptomLogs,
   ];
 }
 
@@ -5057,6 +5834,9 @@ typedef $$UsersTableCreateCompanionBuilder =
       Value<int?> dailyCalorieTarget,
       Value<String?> dosha,
       Value<String?> currentProgram,
+      Value<bool?> isCycleTrackingEnabled,
+      Value<int?> averageCycleLength,
+      Value<DateTime?> lastPeriodDate,
       Value<int> rowid,
     });
 typedef $$UsersTableUpdateCompanionBuilder =
@@ -5074,6 +5854,9 @@ typedef $$UsersTableUpdateCompanionBuilder =
       Value<int?> dailyCalorieTarget,
       Value<String?> dosha,
       Value<String?> currentProgram,
+      Value<bool?> isCycleTrackingEnabled,
+      Value<int?> averageCycleLength,
+      Value<DateTime?> lastPeriodDate,
       Value<int> rowid,
     });
 
@@ -5147,6 +5930,21 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
 
   ColumnFilters<String> get currentProgram => $composableBuilder(
     column: $table.currentProgram,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isCycleTrackingEnabled => $composableBuilder(
+    column: $table.isCycleTrackingEnabled,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get averageCycleLength => $composableBuilder(
+    column: $table.averageCycleLength,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastPeriodDate => $composableBuilder(
+    column: $table.lastPeriodDate,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -5224,6 +6022,21 @@ class $$UsersTableOrderingComposer
     column: $table.currentProgram,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<bool> get isCycleTrackingEnabled => $composableBuilder(
+    column: $table.isCycleTrackingEnabled,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get averageCycleLength => $composableBuilder(
+    column: $table.averageCycleLength,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastPeriodDate => $composableBuilder(
+    column: $table.lastPeriodDate,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$UsersTableAnnotationComposer
@@ -5281,6 +6094,21 @@ class $$UsersTableAnnotationComposer
     column: $table.currentProgram,
     builder: (column) => column,
   );
+
+  GeneratedColumn<bool> get isCycleTrackingEnabled => $composableBuilder(
+    column: $table.isCycleTrackingEnabled,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get averageCycleLength => $composableBuilder(
+    column: $table.averageCycleLength,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get lastPeriodDate => $composableBuilder(
+    column: $table.lastPeriodDate,
+    builder: (column) => column,
+  );
 }
 
 class $$UsersTableTableManager
@@ -5324,6 +6152,9 @@ class $$UsersTableTableManager
                 Value<int?> dailyCalorieTarget = const Value.absent(),
                 Value<String?> dosha = const Value.absent(),
                 Value<String?> currentProgram = const Value.absent(),
+                Value<bool?> isCycleTrackingEnabled = const Value.absent(),
+                Value<int?> averageCycleLength = const Value.absent(),
+                Value<DateTime?> lastPeriodDate = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion(
                 id: id,
@@ -5339,6 +6170,9 @@ class $$UsersTableTableManager
                 dailyCalorieTarget: dailyCalorieTarget,
                 dosha: dosha,
                 currentProgram: currentProgram,
+                isCycleTrackingEnabled: isCycleTrackingEnabled,
+                averageCycleLength: averageCycleLength,
+                lastPeriodDate: lastPeriodDate,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -5356,6 +6190,9 @@ class $$UsersTableTableManager
                 Value<int?> dailyCalorieTarget = const Value.absent(),
                 Value<String?> dosha = const Value.absent(),
                 Value<String?> currentProgram = const Value.absent(),
+                Value<bool?> isCycleTrackingEnabled = const Value.absent(),
+                Value<int?> averageCycleLength = const Value.absent(),
+                Value<DateTime?> lastPeriodDate = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion.insert(
                 id: id,
@@ -5371,6 +6208,9 @@ class $$UsersTableTableManager
                 dailyCalorieTarget: dailyCalorieTarget,
                 dosha: dosha,
                 currentProgram: currentProgram,
+                isCycleTrackingEnabled: isCycleTrackingEnabled,
+                averageCycleLength: averageCycleLength,
+                lastPeriodDate: lastPeriodDate,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -7491,6 +8331,302 @@ typedef $$CachedDietPlansTableProcessedTableManager =
       CachedDietPlan,
       PrefetchHooks Function()
     >;
+typedef $$MenstrualSymptomLogsTableCreateCompanionBuilder =
+    MenstrualSymptomLogsCompanion Function({
+      Value<int> id,
+      required String userId,
+      required DateTime logDate,
+      required bool hasMenstrualFlow,
+      Value<double?> basalBodyTemperature,
+      Value<bool?> positiveLhTest,
+      required String physicalSymptoms,
+      Value<int?> restingHeartRate,
+      Value<double?> hrvMs,
+    });
+typedef $$MenstrualSymptomLogsTableUpdateCompanionBuilder =
+    MenstrualSymptomLogsCompanion Function({
+      Value<int> id,
+      Value<String> userId,
+      Value<DateTime> logDate,
+      Value<bool> hasMenstrualFlow,
+      Value<double?> basalBodyTemperature,
+      Value<bool?> positiveLhTest,
+      Value<String> physicalSymptoms,
+      Value<int?> restingHeartRate,
+      Value<double?> hrvMs,
+    });
+
+class $$MenstrualSymptomLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $MenstrualSymptomLogsTable> {
+  $$MenstrualSymptomLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get logDate => $composableBuilder(
+    column: $table.logDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get hasMenstrualFlow => $composableBuilder(
+    column: $table.hasMenstrualFlow,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get basalBodyTemperature => $composableBuilder(
+    column: $table.basalBodyTemperature,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get positiveLhTest => $composableBuilder(
+    column: $table.positiveLhTest,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get physicalSymptoms => $composableBuilder(
+    column: $table.physicalSymptoms,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get restingHeartRate => $composableBuilder(
+    column: $table.restingHeartRate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get hrvMs => $composableBuilder(
+    column: $table.hrvMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MenstrualSymptomLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $MenstrualSymptomLogsTable> {
+  $$MenstrualSymptomLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get logDate => $composableBuilder(
+    column: $table.logDate,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get hasMenstrualFlow => $composableBuilder(
+    column: $table.hasMenstrualFlow,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get basalBodyTemperature => $composableBuilder(
+    column: $table.basalBodyTemperature,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get positiveLhTest => $composableBuilder(
+    column: $table.positiveLhTest,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get physicalSymptoms => $composableBuilder(
+    column: $table.physicalSymptoms,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get restingHeartRate => $composableBuilder(
+    column: $table.restingHeartRate,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get hrvMs => $composableBuilder(
+    column: $table.hrvMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MenstrualSymptomLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MenstrualSymptomLogsTable> {
+  $$MenstrualSymptomLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get logDate =>
+      $composableBuilder(column: $table.logDate, builder: (column) => column);
+
+  GeneratedColumn<bool> get hasMenstrualFlow => $composableBuilder(
+    column: $table.hasMenstrualFlow,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get basalBodyTemperature => $composableBuilder(
+    column: $table.basalBodyTemperature,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get positiveLhTest => $composableBuilder(
+    column: $table.positiveLhTest,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get physicalSymptoms => $composableBuilder(
+    column: $table.physicalSymptoms,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get restingHeartRate => $composableBuilder(
+    column: $table.restingHeartRate,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get hrvMs =>
+      $composableBuilder(column: $table.hrvMs, builder: (column) => column);
+}
+
+class $$MenstrualSymptomLogsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MenstrualSymptomLogsTable,
+          MenstrualSymptomLog,
+          $$MenstrualSymptomLogsTableFilterComposer,
+          $$MenstrualSymptomLogsTableOrderingComposer,
+          $$MenstrualSymptomLogsTableAnnotationComposer,
+          $$MenstrualSymptomLogsTableCreateCompanionBuilder,
+          $$MenstrualSymptomLogsTableUpdateCompanionBuilder,
+          (
+            MenstrualSymptomLog,
+            BaseReferences<
+              _$AppDatabase,
+              $MenstrualSymptomLogsTable,
+              MenstrualSymptomLog
+            >,
+          ),
+          MenstrualSymptomLog,
+          PrefetchHooks Function()
+        > {
+  $$MenstrualSymptomLogsTableTableManager(
+    _$AppDatabase db,
+    $MenstrualSymptomLogsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MenstrualSymptomLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MenstrualSymptomLogsTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$MenstrualSymptomLogsTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<DateTime> logDate = const Value.absent(),
+                Value<bool> hasMenstrualFlow = const Value.absent(),
+                Value<double?> basalBodyTemperature = const Value.absent(),
+                Value<bool?> positiveLhTest = const Value.absent(),
+                Value<String> physicalSymptoms = const Value.absent(),
+                Value<int?> restingHeartRate = const Value.absent(),
+                Value<double?> hrvMs = const Value.absent(),
+              }) => MenstrualSymptomLogsCompanion(
+                id: id,
+                userId: userId,
+                logDate: logDate,
+                hasMenstrualFlow: hasMenstrualFlow,
+                basalBodyTemperature: basalBodyTemperature,
+                positiveLhTest: positiveLhTest,
+                physicalSymptoms: physicalSymptoms,
+                restingHeartRate: restingHeartRate,
+                hrvMs: hrvMs,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String userId,
+                required DateTime logDate,
+                required bool hasMenstrualFlow,
+                Value<double?> basalBodyTemperature = const Value.absent(),
+                Value<bool?> positiveLhTest = const Value.absent(),
+                required String physicalSymptoms,
+                Value<int?> restingHeartRate = const Value.absent(),
+                Value<double?> hrvMs = const Value.absent(),
+              }) => MenstrualSymptomLogsCompanion.insert(
+                id: id,
+                userId: userId,
+                logDate: logDate,
+                hasMenstrualFlow: hasMenstrualFlow,
+                basalBodyTemperature: basalBodyTemperature,
+                positiveLhTest: positiveLhTest,
+                physicalSymptoms: physicalSymptoms,
+                restingHeartRate: restingHeartRate,
+                hrvMs: hrvMs,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MenstrualSymptomLogsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MenstrualSymptomLogsTable,
+      MenstrualSymptomLog,
+      $$MenstrualSymptomLogsTableFilterComposer,
+      $$MenstrualSymptomLogsTableOrderingComposer,
+      $$MenstrualSymptomLogsTableAnnotationComposer,
+      $$MenstrualSymptomLogsTableCreateCompanionBuilder,
+      $$MenstrualSymptomLogsTableUpdateCompanionBuilder,
+      (
+        MenstrualSymptomLog,
+        BaseReferences<
+          _$AppDatabase,
+          $MenstrualSymptomLogsTable,
+          MenstrualSymptomLog
+        >,
+      ),
+      MenstrualSymptomLog,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -7517,4 +8653,6 @@ class $AppDatabaseManager {
       );
   $$CachedDietPlansTableTableManager get cachedDietPlans =>
       $$CachedDietPlansTableTableManager(_db, _db.cachedDietPlans);
+  $$MenstrualSymptomLogsTableTableManager get menstrualSymptomLogs =>
+      $$MenstrualSymptomLogsTableTableManager(_db, _db.menstrualSymptomLogs);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fitkarma/features/onboarding/demographics_controller.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Onboarding Steps
@@ -15,6 +16,7 @@ enum OnboardingStep {
   dietPlan,
   dosha,
   programSelect,
+  womensHealth,
   permissions,
 }
 
@@ -32,6 +34,7 @@ int? stepNumber(OnboardingStep step) {
     OnboardingStep.dietPlan     => 3,
     OnboardingStep.dosha        => 3,
     OnboardingStep.programSelect => 4,
+    OnboardingStep.womensHealth => 4,
     OnboardingStep.permissions  => 5,
   };
 }
@@ -46,6 +49,7 @@ bool canSkip(OnboardingStep step) {
     OnboardingStep.dietPlan      => true,
     OnboardingStep.dosha         => true,
     OnboardingStep.programSelect => false,  // must choose a blueprint
+    OnboardingStep.womensHealth  => true,
     OnboardingStep.permissions   => true,   // can grant later
   };
 }
@@ -67,7 +71,8 @@ OnboardingStep? previousStep(OnboardingStep step) {
     OnboardingStep.dietPlan      => OnboardingStep.demographics,
     OnboardingStep.dosha         => OnboardingStep.dietPlan,
     OnboardingStep.programSelect => OnboardingStep.dosha,
-    OnboardingStep.permissions   => OnboardingStep.programSelect,
+    OnboardingStep.womensHealth  => OnboardingStep.programSelect,
+    OnboardingStep.permissions   => OnboardingStep.womensHealth,
   };
 }
 
@@ -79,7 +84,8 @@ OnboardingStep? nextStep(OnboardingStep step) {
     OnboardingStep.demographics  => OnboardingStep.dietPlan,
     OnboardingStep.dietPlan      => OnboardingStep.dosha,
     OnboardingStep.dosha         => OnboardingStep.programSelect,
-    OnboardingStep.programSelect => OnboardingStep.permissions,
+    OnboardingStep.programSelect => OnboardingStep.womensHealth,
+    OnboardingStep.womensHealth  => OnboardingStep.permissions,
     OnboardingStep.permissions   => null,  // end of onboarding
   };
 }
@@ -113,10 +119,32 @@ class OnboardingFlowNotifier extends Notifier<OnboardingFlowState> {
   @override
   OnboardingFlowState build() => const OnboardingFlowState();
 
+  OnboardingStep? _resolveNext(OnboardingStep current) {
+    var next = nextStep(current);
+    if (next == OnboardingStep.womensHealth) {
+      final gender = ref.read(demographicsProvider).gender;
+      if (gender != Gender.female) {
+        next = nextStep(next!);
+      }
+    }
+    return next;
+  }
+
+  OnboardingStep? _resolvePrev(OnboardingStep current) {
+    var prev = previousStep(current);
+    if (prev == OnboardingStep.womensHealth) {
+      final gender = ref.read(demographicsProvider).gender;
+      if (gender != Gender.female) {
+        prev = previousStep(prev!);
+      }
+    }
+    return prev;
+  }
+
   /// Navigate forward to the next step.
   /// Returns the new step, or null if onboarding is complete.
   OnboardingStep? advance() {
-    final next = nextStep(state.currentStep);
+    final next = _resolveNext(state.currentStep);
     if (next == null) {
       state = state.copyWith(isComplete: true);
       return null;
@@ -129,7 +157,7 @@ class OnboardingFlowNotifier extends Notifier<OnboardingFlowState> {
   /// Returns the previous step, or null if already at welcome.
   OnboardingStep? back() {
     if (!canGoBack(state.currentStep)) return null;
-    final prev = previousStep(state.currentStep);
+    final prev = _resolvePrev(state.currentStep);
     if (prev == null) return null;
     state = state.copyWith(currentStep: prev);
     return prev;

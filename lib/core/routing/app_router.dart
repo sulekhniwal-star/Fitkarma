@@ -7,6 +7,7 @@ import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
 import 'package:fitkarma/features/onboarding/welcome_screen.dart';
 import 'package:fitkarma/features/onboarding/dosha_screen.dart';
 import 'package:fitkarma/features/onboarding/program_select_screen.dart';
+import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +26,7 @@ class AppRoutes {
   static const onboardingDietPlan     = '/onboarding/diet_plan';
   static const onboardingDosha        = '/onboarding/dosha';
   static const onboardingProgramSelect = '/onboarding/program_select';
+  static const onboardingWomensHealth = '/onboarding/womens_health';
   static const onboardingPermissions  = '/onboarding/permissions';
 
   // Main app shell
@@ -46,6 +48,7 @@ OnboardingStep? stepForPath(String path) {
     AppRoutes.onboardingDietPlan      => OnboardingStep.dietPlan,
     AppRoutes.onboardingDosha         => OnboardingStep.dosha,
     AppRoutes.onboardingProgramSelect => OnboardingStep.programSelect,
+    AppRoutes.onboardingWomensHealth  => OnboardingStep.womensHealth,
     AppRoutes.onboardingPermissions   => OnboardingStep.permissions,
     _                                 => null,
   };
@@ -60,6 +63,7 @@ String pathForStep(OnboardingStep step) {
     OnboardingStep.dietPlan      => AppRoutes.onboardingDietPlan,
     OnboardingStep.dosha         => AppRoutes.onboardingDosha,
     OnboardingStep.programSelect => AppRoutes.onboardingProgramSelect,
+    OnboardingStep.womensHealth  => AppRoutes.onboardingWomensHealth,
     OnboardingStep.permissions   => AppRoutes.onboardingPermissions,
   };
 }
@@ -219,6 +223,13 @@ class AppRouter {
           pageBuilder: (context, state) => _slideTransition(
             state,
             const ProgramSelectScreen(),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.onboardingWomensHealth,
+          pageBuilder: (context, state) => _slideTransition(
+            state,
+            const WomensHealthOnboardingScreen(),
           ),
         ),
         GoRoute(

@@ -23,9 +23,25 @@ class Users extends Table {
   IntColumn get dailyCalorieTarget => integer().nullable()();
   TextColumn get dosha => text().nullable()(); // Added for §P1-F Dosha Quiz
   TextColumn get currentProgram => text().nullable()(); // Added for §P1-G Program Blueprint Selection Screen
+  BoolColumn get isCycleTrackingEnabled => boolean().nullable()();
+  IntColumn get averageCycleLength => integer().nullable()();
+  DateTimeColumn get lastPeriodDate => dateTime().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};
+}
+
+// 1.5 Menstrual Symptom Logs Table
+class MenstrualSymptomLogs extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get userId => text()();
+  DateTimeColumn get logDate => dateTime()();
+  BoolColumn get hasMenstrualFlow => boolean()();
+  RealColumn get basalBodyTemperature => real().nullable()();
+  BoolColumn get positiveLhTest => boolean().nullable()();
+  TextColumn get physicalSymptoms => text()(); // comma separated list
+  IntColumn get restingHeartRate => integer().nullable()();
+  RealColumn get hrvMs => real().nullable()();
 }
 
 // 2. Cumulative Water logs
@@ -138,13 +154,13 @@ class CachedDietPlans extends Table {
   Set<Column> get primaryKey => {userId};
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans])
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 22;
+  int get schemaVersion => 23;
 
   @override
   MigrationStrategy get migration {
@@ -155,6 +171,12 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 22) {
           await migrator.addColumn(users, users.currentProgram);
+        }
+        if (from < 23) {
+          await migrator.addColumn(users, users.isCycleTrackingEnabled);
+          await migrator.addColumn(users, users.averageCycleLength);
+          await migrator.addColumn(users, users.lastPeriodDate);
+          await migrator.createTable(menstrualSymptomLogs);
         }
       },
     );
@@ -168,6 +190,9 @@ class AppDatabase extends _$AppDatabase {
     int? dailyCalorieTarget,
     String? dosha,
     String? currentProgram,
+    bool? isCycleTrackingEnabled,
+    int? averageCycleLength,
+    DateTime? lastPeriodDate,
   }) async {
     await (update(users)
       ..where((t) => t.id.equals(userId)))
@@ -177,7 +202,23 @@ class AppDatabase extends _$AppDatabase {
         dailyCalorieTarget: dailyCalorieTarget != null ? Value(dailyCalorieTarget) : const Value.absent(),
         dosha: dosha != null ? Value(dosha) : const Value.absent(),
         currentProgram: currentProgram != null ? Value(currentProgram) : const Value.absent(),
+        isCycleTrackingEnabled: isCycleTrackingEnabled != null ? Value(isCycleTrackingEnabled) : const Value.absent(),
+        averageCycleLength: averageCycleLength != null ? Value(averageCycleLength) : const Value.absent(),
+        lastPeriodDate: lastPeriodDate != null ? Value(lastPeriodDate) : const Value.absent(),
       ));
+  }
+
+  // ── Women's Health helpers ──────────────────────────────────────────────
+
+  Future<void> saveMenstrualSymptomLog(MenstrualSymptomLogsCompanion log) async {
+    await into(menstrualSymptomLogs).insertOnConflictUpdate(log);
+  }
+
+  Future<List<MenstrualSymptomLog>> getMenstrualSymptomLogs(String userId) async {
+    return (select(menstrualSymptomLogs)
+          ..where((t) => t.userId.equals(userId))
+          ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc)]))
+        .get();
   }
 
   /// Upserts age, gender, height, weight, activityLevel, and computed
