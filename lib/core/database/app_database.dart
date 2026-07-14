@@ -22,6 +22,7 @@ class Users extends Table {
   RealColumn get targetWeight => real().nullable()(); // kg
   IntColumn get dailyCalorieTarget => integer().nullable()();
   TextColumn get dosha => text().nullable()(); // Added for §P1-F Dosha Quiz
+  TextColumn get currentProgram => text().nullable()(); // Added for §P1-G Program Blueprint Selection Screen
 
   @override
   Set<Column> get primaryKey => {id};
@@ -143,7 +144,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 21;
+  int get schemaVersion => 22;
 
   @override
   MigrationStrategy get migration {
@@ -151,6 +152,9 @@ class AppDatabase extends _$AppDatabase {
       onUpgrade: (migrator, from, to) async {
         if (from < 21) {
           await migrator.addColumn(users, users.dosha);
+        }
+        if (from < 22) {
+          await migrator.addColumn(users, users.currentProgram);
         }
       },
     );
@@ -163,6 +167,7 @@ class AppDatabase extends _$AppDatabase {
     double? targetWeight,
     int? dailyCalorieTarget,
     String? dosha,
+    String? currentProgram,
   }) async {
     await (update(users)
       ..where((t) => t.id.equals(userId)))
@@ -171,6 +176,7 @@ class AppDatabase extends _$AppDatabase {
         targetWeight: targetWeight != null ? Value(targetWeight) : const Value.absent(),
         dailyCalorieTarget: dailyCalorieTarget != null ? Value(dailyCalorieTarget) : const Value.absent(),
         dosha: dosha != null ? Value(dosha) : const Value.absent(),
+        currentProgram: currentProgram != null ? Value(currentProgram) : const Value.absent(),
       ));
   }
 

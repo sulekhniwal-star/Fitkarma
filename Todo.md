@@ -103,9 +103,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P1-G Program Blueprint Selection Screen
-- [ ] Build program selection UI
-- [ ] Wire selection into `Users.currentProgram`
-- [ ] Widget test
+- [x] Build program selection UI
+- [x] Wire selection into `Users.currentProgram`
+- [x] Widget test
 
 ### §P1-H Women's Advanced Health Layer
 - [ ] Build cycle-tracking data model
