@@ -91,10 +91,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P1-E AI Diet Plan Results Screen
-- [ ] Build results UI
-- [ ] Wire initial AI diet plan generation call
-- [ ] Loading/error states for AI call
-- [ ] Widget test
+- [x] Build results UI
+- [x] Wire initial AI diet plan generation call
+- [x] Loading/error states for AI call
+- [x] Widget test
 
 ### §P1-F Dosha Quiz Screen
 - [ ] Build quiz UI flow

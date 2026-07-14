@@ -119,13 +119,30 @@ class TransformationMemories extends Table {
   Set<Column> get primaryKey => {localId};
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories])
+// 8. Diet Plans — 7-day AI / deterministic plan cache (§P1-E)
+class CachedDietPlans extends Table {
+  TextColumn get userId => text()();
+  /// Full plan serialized as JSON ({"days":[...]}).
+  TextColumn get planJson => text()();
+  IntColumn get calorieTarget => integer()();
+  IntColumn get proteinTargetG => integer()();
+  BoolColumn get isAiGenerated =>
+      boolean().withDefault(const Constant(true))();
+  DateTimeColumn get generatedAt => dateTime()();
+  /// Plan is valid for 7 days; re-generate when expired or BMI shifts > 1.0.
+  DateTimeColumn get expiresAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {userId};
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 19;
+  int get schemaVersion => 20;
 
   /// Upserts the onboarding goals + target weight for a given user.
   Future<void> updateUserProfile({
@@ -164,6 +181,41 @@ class AppDatabase extends _$AppDatabase {
         dailyCalorieTarget: Value(dailyCalorieTarget),
       ),
     );
+  }
+
+  // ── Diet Plan Cache helpers (§P1-E) ────────────────────────────────────────
+
+  /// Writes (or replaces) the cached 7-day diet plan for a user.
+  Future<void> saveDietPlan({
+    required String userId,
+    required String planJson,
+    required int calorieTarget,
+    required int proteinTargetG,
+    required bool isAiGenerated,
+  }) async {
+    final now       = DateTime.now();
+    final expiresAt = now.add(const Duration(days: 7));
+    await into(cachedDietPlans).insertOnConflictUpdate(
+      CachedDietPlansCompanion.insert(
+        userId:         userId,
+        planJson:       planJson,
+        calorieTarget:  calorieTarget,
+        proteinTargetG: proteinTargetG,
+        isAiGenerated:  Value(isAiGenerated),
+        generatedAt:    now,
+        expiresAt:      expiresAt,
+      ),
+    );
+  }
+
+  /// Returns the cached plan if it exists and has not expired; otherwise null.
+  Future<CachedDietPlan?> getCachedDietPlan(String userId) async {
+    return (select(cachedDietPlans)
+          ..where(
+            (t) => t.userId.equals(userId) &
+                t.expiresAt.isBiggerThanValue(DateTime.now()),
+          ))
+        .getSingleOrNull();
   }
 }
 

@@ -4415,6 +4415,498 @@ class TransformationMemoriesCompanion
   }
 }
 
+class $CachedDietPlansTable extends CachedDietPlans
+    with TableInfo<$CachedDietPlansTable, CachedDietPlan> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CachedDietPlansTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _planJsonMeta = const VerificationMeta(
+    'planJson',
+  );
+  @override
+  late final GeneratedColumn<String> planJson = GeneratedColumn<String>(
+    'plan_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _calorieTargetMeta = const VerificationMeta(
+    'calorieTarget',
+  );
+  @override
+  late final GeneratedColumn<int> calorieTarget = GeneratedColumn<int>(
+    'calorie_target',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _proteinTargetGMeta = const VerificationMeta(
+    'proteinTargetG',
+  );
+  @override
+  late final GeneratedColumn<int> proteinTargetG = GeneratedColumn<int>(
+    'protein_target_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _isAiGeneratedMeta = const VerificationMeta(
+    'isAiGenerated',
+  );
+  @override
+  late final GeneratedColumn<bool> isAiGenerated = GeneratedColumn<bool>(
+    'is_ai_generated',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_ai_generated" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  static const VerificationMeta _generatedAtMeta = const VerificationMeta(
+    'generatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> generatedAt = GeneratedColumn<DateTime>(
+    'generated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _expiresAtMeta = const VerificationMeta(
+    'expiresAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
+    'expires_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    userId,
+    planJson,
+    calorieTarget,
+    proteinTargetG,
+    isAiGenerated,
+    generatedAt,
+    expiresAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'cached_diet_plans';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<CachedDietPlan> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('plan_json')) {
+      context.handle(
+        _planJsonMeta,
+        planJson.isAcceptableOrUnknown(data['plan_json']!, _planJsonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_planJsonMeta);
+    }
+    if (data.containsKey('calorie_target')) {
+      context.handle(
+        _calorieTargetMeta,
+        calorieTarget.isAcceptableOrUnknown(
+          data['calorie_target']!,
+          _calorieTargetMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_calorieTargetMeta);
+    }
+    if (data.containsKey('protein_target_g')) {
+      context.handle(
+        _proteinTargetGMeta,
+        proteinTargetG.isAcceptableOrUnknown(
+          data['protein_target_g']!,
+          _proteinTargetGMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_proteinTargetGMeta);
+    }
+    if (data.containsKey('is_ai_generated')) {
+      context.handle(
+        _isAiGeneratedMeta,
+        isAiGenerated.isAcceptableOrUnknown(
+          data['is_ai_generated']!,
+          _isAiGeneratedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('generated_at')) {
+      context.handle(
+        _generatedAtMeta,
+        generatedAt.isAcceptableOrUnknown(
+          data['generated_at']!,
+          _generatedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_generatedAtMeta);
+    }
+    if (data.containsKey('expires_at')) {
+      context.handle(
+        _expiresAtMeta,
+        expiresAt.isAcceptableOrUnknown(data['expires_at']!, _expiresAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_expiresAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {userId};
+  @override
+  CachedDietPlan map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CachedDietPlan(
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      planJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}plan_json'],
+      )!,
+      calorieTarget: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}calorie_target'],
+      )!,
+      proteinTargetG: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}protein_target_g'],
+      )!,
+      isAiGenerated: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_ai_generated'],
+      )!,
+      generatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}generated_at'],
+      )!,
+      expiresAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}expires_at'],
+      )!,
+    );
+  }
+
+  @override
+  $CachedDietPlansTable createAlias(String alias) {
+    return $CachedDietPlansTable(attachedDatabase, alias);
+  }
+}
+
+class CachedDietPlan extends DataClass implements Insertable<CachedDietPlan> {
+  final String userId;
+
+  /// Full plan serialized as JSON ({"days":[...]}).
+  final String planJson;
+  final int calorieTarget;
+  final int proteinTargetG;
+  final bool isAiGenerated;
+  final DateTime generatedAt;
+
+  /// Plan is valid for 7 days; re-generate when expired or BMI shifts > 1.0.
+  final DateTime expiresAt;
+  const CachedDietPlan({
+    required this.userId,
+    required this.planJson,
+    required this.calorieTarget,
+    required this.proteinTargetG,
+    required this.isAiGenerated,
+    required this.generatedAt,
+    required this.expiresAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['user_id'] = Variable<String>(userId);
+    map['plan_json'] = Variable<String>(planJson);
+    map['calorie_target'] = Variable<int>(calorieTarget);
+    map['protein_target_g'] = Variable<int>(proteinTargetG);
+    map['is_ai_generated'] = Variable<bool>(isAiGenerated);
+    map['generated_at'] = Variable<DateTime>(generatedAt);
+    map['expires_at'] = Variable<DateTime>(expiresAt);
+    return map;
+  }
+
+  CachedDietPlansCompanion toCompanion(bool nullToAbsent) {
+    return CachedDietPlansCompanion(
+      userId: Value(userId),
+      planJson: Value(planJson),
+      calorieTarget: Value(calorieTarget),
+      proteinTargetG: Value(proteinTargetG),
+      isAiGenerated: Value(isAiGenerated),
+      generatedAt: Value(generatedAt),
+      expiresAt: Value(expiresAt),
+    );
+  }
+
+  factory CachedDietPlan.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CachedDietPlan(
+      userId: serializer.fromJson<String>(json['userId']),
+      planJson: serializer.fromJson<String>(json['planJson']),
+      calorieTarget: serializer.fromJson<int>(json['calorieTarget']),
+      proteinTargetG: serializer.fromJson<int>(json['proteinTargetG']),
+      isAiGenerated: serializer.fromJson<bool>(json['isAiGenerated']),
+      generatedAt: serializer.fromJson<DateTime>(json['generatedAt']),
+      expiresAt: serializer.fromJson<DateTime>(json['expiresAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'userId': serializer.toJson<String>(userId),
+      'planJson': serializer.toJson<String>(planJson),
+      'calorieTarget': serializer.toJson<int>(calorieTarget),
+      'proteinTargetG': serializer.toJson<int>(proteinTargetG),
+      'isAiGenerated': serializer.toJson<bool>(isAiGenerated),
+      'generatedAt': serializer.toJson<DateTime>(generatedAt),
+      'expiresAt': serializer.toJson<DateTime>(expiresAt),
+    };
+  }
+
+  CachedDietPlan copyWith({
+    String? userId,
+    String? planJson,
+    int? calorieTarget,
+    int? proteinTargetG,
+    bool? isAiGenerated,
+    DateTime? generatedAt,
+    DateTime? expiresAt,
+  }) => CachedDietPlan(
+    userId: userId ?? this.userId,
+    planJson: planJson ?? this.planJson,
+    calorieTarget: calorieTarget ?? this.calorieTarget,
+    proteinTargetG: proteinTargetG ?? this.proteinTargetG,
+    isAiGenerated: isAiGenerated ?? this.isAiGenerated,
+    generatedAt: generatedAt ?? this.generatedAt,
+    expiresAt: expiresAt ?? this.expiresAt,
+  );
+  CachedDietPlan copyWithCompanion(CachedDietPlansCompanion data) {
+    return CachedDietPlan(
+      userId: data.userId.present ? data.userId.value : this.userId,
+      planJson: data.planJson.present ? data.planJson.value : this.planJson,
+      calorieTarget: data.calorieTarget.present
+          ? data.calorieTarget.value
+          : this.calorieTarget,
+      proteinTargetG: data.proteinTargetG.present
+          ? data.proteinTargetG.value
+          : this.proteinTargetG,
+      isAiGenerated: data.isAiGenerated.present
+          ? data.isAiGenerated.value
+          : this.isAiGenerated,
+      generatedAt: data.generatedAt.present
+          ? data.generatedAt.value
+          : this.generatedAt,
+      expiresAt: data.expiresAt.present ? data.expiresAt.value : this.expiresAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CachedDietPlan(')
+          ..write('userId: $userId, ')
+          ..write('planJson: $planJson, ')
+          ..write('calorieTarget: $calorieTarget, ')
+          ..write('proteinTargetG: $proteinTargetG, ')
+          ..write('isAiGenerated: $isAiGenerated, ')
+          ..write('generatedAt: $generatedAt, ')
+          ..write('expiresAt: $expiresAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    userId,
+    planJson,
+    calorieTarget,
+    proteinTargetG,
+    isAiGenerated,
+    generatedAt,
+    expiresAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CachedDietPlan &&
+          other.userId == this.userId &&
+          other.planJson == this.planJson &&
+          other.calorieTarget == this.calorieTarget &&
+          other.proteinTargetG == this.proteinTargetG &&
+          other.isAiGenerated == this.isAiGenerated &&
+          other.generatedAt == this.generatedAt &&
+          other.expiresAt == this.expiresAt);
+}
+
+class CachedDietPlansCompanion extends UpdateCompanion<CachedDietPlan> {
+  final Value<String> userId;
+  final Value<String> planJson;
+  final Value<int> calorieTarget;
+  final Value<int> proteinTargetG;
+  final Value<bool> isAiGenerated;
+  final Value<DateTime> generatedAt;
+  final Value<DateTime> expiresAt;
+  final Value<int> rowid;
+  const CachedDietPlansCompanion({
+    this.userId = const Value.absent(),
+    this.planJson = const Value.absent(),
+    this.calorieTarget = const Value.absent(),
+    this.proteinTargetG = const Value.absent(),
+    this.isAiGenerated = const Value.absent(),
+    this.generatedAt = const Value.absent(),
+    this.expiresAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CachedDietPlansCompanion.insert({
+    required String userId,
+    required String planJson,
+    required int calorieTarget,
+    required int proteinTargetG,
+    this.isAiGenerated = const Value.absent(),
+    required DateTime generatedAt,
+    required DateTime expiresAt,
+    this.rowid = const Value.absent(),
+  }) : userId = Value(userId),
+       planJson = Value(planJson),
+       calorieTarget = Value(calorieTarget),
+       proteinTargetG = Value(proteinTargetG),
+       generatedAt = Value(generatedAt),
+       expiresAt = Value(expiresAt);
+  static Insertable<CachedDietPlan> custom({
+    Expression<String>? userId,
+    Expression<String>? planJson,
+    Expression<int>? calorieTarget,
+    Expression<int>? proteinTargetG,
+    Expression<bool>? isAiGenerated,
+    Expression<DateTime>? generatedAt,
+    Expression<DateTime>? expiresAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (userId != null) 'user_id': userId,
+      if (planJson != null) 'plan_json': planJson,
+      if (calorieTarget != null) 'calorie_target': calorieTarget,
+      if (proteinTargetG != null) 'protein_target_g': proteinTargetG,
+      if (isAiGenerated != null) 'is_ai_generated': isAiGenerated,
+      if (generatedAt != null) 'generated_at': generatedAt,
+      if (expiresAt != null) 'expires_at': expiresAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CachedDietPlansCompanion copyWith({
+    Value<String>? userId,
+    Value<String>? planJson,
+    Value<int>? calorieTarget,
+    Value<int>? proteinTargetG,
+    Value<bool>? isAiGenerated,
+    Value<DateTime>? generatedAt,
+    Value<DateTime>? expiresAt,
+    Value<int>? rowid,
+  }) {
+    return CachedDietPlansCompanion(
+      userId: userId ?? this.userId,
+      planJson: planJson ?? this.planJson,
+      calorieTarget: calorieTarget ?? this.calorieTarget,
+      proteinTargetG: proteinTargetG ?? this.proteinTargetG,
+      isAiGenerated: isAiGenerated ?? this.isAiGenerated,
+      generatedAt: generatedAt ?? this.generatedAt,
+      expiresAt: expiresAt ?? this.expiresAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (planJson.present) {
+      map['plan_json'] = Variable<String>(planJson.value);
+    }
+    if (calorieTarget.present) {
+      map['calorie_target'] = Variable<int>(calorieTarget.value);
+    }
+    if (proteinTargetG.present) {
+      map['protein_target_g'] = Variable<int>(proteinTargetG.value);
+    }
+    if (isAiGenerated.present) {
+      map['is_ai_generated'] = Variable<bool>(isAiGenerated.value);
+    }
+    if (generatedAt.present) {
+      map['generated_at'] = Variable<DateTime>(generatedAt.value);
+    }
+    if (expiresAt.present) {
+      map['expires_at'] = Variable<DateTime>(expiresAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CachedDietPlansCompanion(')
+          ..write('userId: $userId, ')
+          ..write('planJson: $planJson, ')
+          ..write('calorieTarget: $calorieTarget, ')
+          ..write('proteinTargetG: $proteinTargetG, ')
+          ..write('isAiGenerated: $isAiGenerated, ')
+          ..write('generatedAt: $generatedAt, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -4428,6 +4920,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $AICacheEntriesTable aICacheEntries = $AICacheEntriesTable(this);
   late final $TransformationMemoriesTable transformationMemories =
       $TransformationMemoriesTable(this);
+  late final $CachedDietPlansTable cachedDietPlans = $CachedDietPlansTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -4440,6 +4935,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     dailyIntelligencePackages,
     aICacheEntries,
     transformationMemories,
+    cachedDietPlans,
   ];
 }
 
@@ -6600,6 +7096,258 @@ typedef $$TransformationMemoriesTableProcessedTableManager =
       TransformationMemory,
       PrefetchHooks Function()
     >;
+typedef $$CachedDietPlansTableCreateCompanionBuilder =
+    CachedDietPlansCompanion Function({
+      required String userId,
+      required String planJson,
+      required int calorieTarget,
+      required int proteinTargetG,
+      Value<bool> isAiGenerated,
+      required DateTime generatedAt,
+      required DateTime expiresAt,
+      Value<int> rowid,
+    });
+typedef $$CachedDietPlansTableUpdateCompanionBuilder =
+    CachedDietPlansCompanion Function({
+      Value<String> userId,
+      Value<String> planJson,
+      Value<int> calorieTarget,
+      Value<int> proteinTargetG,
+      Value<bool> isAiGenerated,
+      Value<DateTime> generatedAt,
+      Value<DateTime> expiresAt,
+      Value<int> rowid,
+    });
+
+class $$CachedDietPlansTableFilterComposer
+    extends Composer<_$AppDatabase, $CachedDietPlansTable> {
+  $$CachedDietPlansTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get planJson => $composableBuilder(
+    column: $table.planJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get calorieTarget => $composableBuilder(
+    column: $table.calorieTarget,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get proteinTargetG => $composableBuilder(
+    column: $table.proteinTargetG,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isAiGenerated => $composableBuilder(
+    column: $table.isAiGenerated,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get generatedAt => $composableBuilder(
+    column: $table.generatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$CachedDietPlansTableOrderingComposer
+    extends Composer<_$AppDatabase, $CachedDietPlansTable> {
+  $$CachedDietPlansTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get planJson => $composableBuilder(
+    column: $table.planJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get calorieTarget => $composableBuilder(
+    column: $table.calorieTarget,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get proteinTargetG => $composableBuilder(
+    column: $table.proteinTargetG,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isAiGenerated => $composableBuilder(
+    column: $table.isAiGenerated,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get generatedAt => $composableBuilder(
+    column: $table.generatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$CachedDietPlansTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CachedDietPlansTable> {
+  $$CachedDietPlansTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get planJson =>
+      $composableBuilder(column: $table.planJson, builder: (column) => column);
+
+  GeneratedColumn<int> get calorieTarget => $composableBuilder(
+    column: $table.calorieTarget,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get proteinTargetG => $composableBuilder(
+    column: $table.proteinTargetG,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get isAiGenerated => $composableBuilder(
+    column: $table.isAiGenerated,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get generatedAt => $composableBuilder(
+    column: $table.generatedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get expiresAt =>
+      $composableBuilder(column: $table.expiresAt, builder: (column) => column);
+}
+
+class $$CachedDietPlansTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $CachedDietPlansTable,
+          CachedDietPlan,
+          $$CachedDietPlansTableFilterComposer,
+          $$CachedDietPlansTableOrderingComposer,
+          $$CachedDietPlansTableAnnotationComposer,
+          $$CachedDietPlansTableCreateCompanionBuilder,
+          $$CachedDietPlansTableUpdateCompanionBuilder,
+          (
+            CachedDietPlan,
+            BaseReferences<
+              _$AppDatabase,
+              $CachedDietPlansTable,
+              CachedDietPlan
+            >,
+          ),
+          CachedDietPlan,
+          PrefetchHooks Function()
+        > {
+  $$CachedDietPlansTableTableManager(
+    _$AppDatabase db,
+    $CachedDietPlansTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CachedDietPlansTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CachedDietPlansTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CachedDietPlansTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> userId = const Value.absent(),
+                Value<String> planJson = const Value.absent(),
+                Value<int> calorieTarget = const Value.absent(),
+                Value<int> proteinTargetG = const Value.absent(),
+                Value<bool> isAiGenerated = const Value.absent(),
+                Value<DateTime> generatedAt = const Value.absent(),
+                Value<DateTime> expiresAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CachedDietPlansCompanion(
+                userId: userId,
+                planJson: planJson,
+                calorieTarget: calorieTarget,
+                proteinTargetG: proteinTargetG,
+                isAiGenerated: isAiGenerated,
+                generatedAt: generatedAt,
+                expiresAt: expiresAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String userId,
+                required String planJson,
+                required int calorieTarget,
+                required int proteinTargetG,
+                Value<bool> isAiGenerated = const Value.absent(),
+                required DateTime generatedAt,
+                required DateTime expiresAt,
+                Value<int> rowid = const Value.absent(),
+              }) => CachedDietPlansCompanion.insert(
+                userId: userId,
+                planJson: planJson,
+                calorieTarget: calorieTarget,
+                proteinTargetG: proteinTargetG,
+                isAiGenerated: isAiGenerated,
+                generatedAt: generatedAt,
+                expiresAt: expiresAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$CachedDietPlansTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $CachedDietPlansTable,
+      CachedDietPlan,
+      $$CachedDietPlansTableFilterComposer,
+      $$CachedDietPlansTableOrderingComposer,
+      $$CachedDietPlansTableAnnotationComposer,
+      $$CachedDietPlansTableCreateCompanionBuilder,
+      $$CachedDietPlansTableUpdateCompanionBuilder,
+      (
+        CachedDietPlan,
+        BaseReferences<_$AppDatabase, $CachedDietPlansTable, CachedDietPlan>,
+      ),
+      CachedDietPlan,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6624,4 +7372,6 @@ class $AppDatabaseManager {
         _db,
         _db.transformationMemories,
       );
+  $$CachedDietPlansTableTableManager get cachedDietPlans =>
+      $$CachedDietPlansTableTableManager(_db, _db.cachedDietPlans);
 }

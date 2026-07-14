@@ -1,6 +1,7 @@
 import 'package:fitkarma/core/config/user_experience_stage.dart';
 import 'package:fitkarma/core/providers/core_providers.dart';
 import 'package:fitkarma/features/onboarding/demographics_screen.dart';
+import 'package:fitkarma/features/onboarding/diet_plan_screen.dart';
 import 'package:fitkarma/features/onboarding/goals_screen.dart';
 import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
 import 'package:fitkarma/features/onboarding/welcome_screen.dart';
@@ -201,10 +202,7 @@ class AppRouter {
           path: AppRoutes.onboardingDietPlan,
           pageBuilder: (context, state) => _slideTransition(
             state,
-            const _OnboardingPlaceholderScreen(
-              title: 'AI Diet Plan',
-              stepNumber: 3,
-            ),
+            const DietPlanScreen(),
           ),
         ),
         GoRoute(
