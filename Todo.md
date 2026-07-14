@@ -97,10 +97,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P1-F Dosha Quiz Screen
-- [ ] Build quiz UI flow
-- [ ] Implement dosha-scoring logic (deterministic)
-- [ ] Persist result to `Users.dosha`
-- [ ] Widget test
+- [x] Build quiz UI flow
+- [x] Implement dosha-scoring logic (deterministic)
+- [x] Persist result to `Users.dosha`
+- [x] Widget test
 
 ### §P1-G Program Blueprint Selection Screen
 - [ ] Build program selection UI

@@ -112,6 +112,15 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _doshaMeta = const VerificationMeta('dosha');
+  @override
+  late final GeneratedColumn<String> dosha = GeneratedColumn<String>(
+    'dosha',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -125,6 +134,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     goals,
     targetWeight,
     dailyCalorieTarget,
+    dosha,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -212,6 +222,12 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         ),
       );
     }
+    if (data.containsKey('dosha')) {
+      context.handle(
+        _doshaMeta,
+        dosha.isAcceptableOrUnknown(data['dosha']!, _doshaMeta),
+      );
+    }
     return context;
   }
 
@@ -265,6 +281,10 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         DriftSqlType.int,
         data['${effectivePrefix}daily_calorie_target'],
       ),
+      dosha: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}dosha'],
+      ),
     );
   }
 
@@ -286,6 +306,7 @@ class User extends DataClass implements Insertable<User> {
   final String? goals;
   final double? targetWeight;
   final int? dailyCalorieTarget;
+  final String? dosha;
   const User({
     required this.id,
     this.name,
@@ -298,6 +319,7 @@ class User extends DataClass implements Insertable<User> {
     this.goals,
     this.targetWeight,
     this.dailyCalorieTarget,
+    this.dosha,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -333,6 +355,9 @@ class User extends DataClass implements Insertable<User> {
     if (!nullToAbsent || dailyCalorieTarget != null) {
       map['daily_calorie_target'] = Variable<int>(dailyCalorieTarget);
     }
+    if (!nullToAbsent || dosha != null) {
+      map['dosha'] = Variable<String>(dosha);
+    }
     return map;
   }
 
@@ -365,6 +390,9 @@ class User extends DataClass implements Insertable<User> {
       dailyCalorieTarget: dailyCalorieTarget == null && nullToAbsent
           ? const Value.absent()
           : Value(dailyCalorieTarget),
+      dosha: dosha == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dosha),
     );
   }
 
@@ -385,6 +413,7 @@ class User extends DataClass implements Insertable<User> {
       goals: serializer.fromJson<String?>(json['goals']),
       targetWeight: serializer.fromJson<double?>(json['targetWeight']),
       dailyCalorieTarget: serializer.fromJson<int?>(json['dailyCalorieTarget']),
+      dosha: serializer.fromJson<String?>(json['dosha']),
     );
   }
   @override
@@ -402,6 +431,7 @@ class User extends DataClass implements Insertable<User> {
       'goals': serializer.toJson<String?>(goals),
       'targetWeight': serializer.toJson<double?>(targetWeight),
       'dailyCalorieTarget': serializer.toJson<int?>(dailyCalorieTarget),
+      'dosha': serializer.toJson<String?>(dosha),
     };
   }
 
@@ -417,6 +447,7 @@ class User extends DataClass implements Insertable<User> {
     Value<String?> goals = const Value.absent(),
     Value<double?> targetWeight = const Value.absent(),
     Value<int?> dailyCalorieTarget = const Value.absent(),
+    Value<String?> dosha = const Value.absent(),
   }) => User(
     id: id ?? this.id,
     name: name.present ? name.value : this.name,
@@ -433,6 +464,7 @@ class User extends DataClass implements Insertable<User> {
     dailyCalorieTarget: dailyCalorieTarget.present
         ? dailyCalorieTarget.value
         : this.dailyCalorieTarget,
+    dosha: dosha.present ? dosha.value : this.dosha,
   );
   User copyWithCompanion(UsersCompanion data) {
     return User(
@@ -453,6 +485,7 @@ class User extends DataClass implements Insertable<User> {
       dailyCalorieTarget: data.dailyCalorieTarget.present
           ? data.dailyCalorieTarget.value
           : this.dailyCalorieTarget,
+      dosha: data.dosha.present ? data.dosha.value : this.dosha,
     );
   }
 
@@ -469,7 +502,8 @@ class User extends DataClass implements Insertable<User> {
           ..write('activityLevel: $activityLevel, ')
           ..write('goals: $goals, ')
           ..write('targetWeight: $targetWeight, ')
-          ..write('dailyCalorieTarget: $dailyCalorieTarget')
+          ..write('dailyCalorieTarget: $dailyCalorieTarget, ')
+          ..write('dosha: $dosha')
           ..write(')'))
         .toString();
   }
@@ -487,6 +521,7 @@ class User extends DataClass implements Insertable<User> {
     goals,
     targetWeight,
     dailyCalorieTarget,
+    dosha,
   );
   @override
   bool operator ==(Object other) =>
@@ -502,7 +537,8 @@ class User extends DataClass implements Insertable<User> {
           other.activityLevel == this.activityLevel &&
           other.goals == this.goals &&
           other.targetWeight == this.targetWeight &&
-          other.dailyCalorieTarget == this.dailyCalorieTarget);
+          other.dailyCalorieTarget == this.dailyCalorieTarget &&
+          other.dosha == this.dosha);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
@@ -517,6 +553,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<String?> goals;
   final Value<double?> targetWeight;
   final Value<int?> dailyCalorieTarget;
+  final Value<String?> dosha;
   final Value<int> rowid;
   const UsersCompanion({
     this.id = const Value.absent(),
@@ -530,6 +567,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.goals = const Value.absent(),
     this.targetWeight = const Value.absent(),
     this.dailyCalorieTarget = const Value.absent(),
+    this.dosha = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
@@ -544,6 +582,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.goals = const Value.absent(),
     this.targetWeight = const Value.absent(),
     this.dailyCalorieTarget = const Value.absent(),
+    this.dosha = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id);
   static Insertable<User> custom({
@@ -558,6 +597,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<String>? goals,
     Expression<double>? targetWeight,
     Expression<int>? dailyCalorieTarget,
+    Expression<String>? dosha,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -573,6 +613,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       if (targetWeight != null) 'target_weight': targetWeight,
       if (dailyCalorieTarget != null)
         'daily_calorie_target': dailyCalorieTarget,
+      if (dosha != null) 'dosha': dosha,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -589,6 +630,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Value<String?>? goals,
     Value<double?>? targetWeight,
     Value<int?>? dailyCalorieTarget,
+    Value<String?>? dosha,
     Value<int>? rowid,
   }) {
     return UsersCompanion(
@@ -603,6 +645,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       goals: goals ?? this.goals,
       targetWeight: targetWeight ?? this.targetWeight,
       dailyCalorieTarget: dailyCalorieTarget ?? this.dailyCalorieTarget,
+      dosha: dosha ?? this.dosha,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -643,6 +686,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (dailyCalorieTarget.present) {
       map['daily_calorie_target'] = Variable<int>(dailyCalorieTarget.value);
     }
+    if (dosha.present) {
+      map['dosha'] = Variable<String>(dosha.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -663,6 +709,7 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('goals: $goals, ')
           ..write('targetWeight: $targetWeight, ')
           ..write('dailyCalorieTarget: $dailyCalorieTarget, ')
+          ..write('dosha: $dosha, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -4952,6 +4999,7 @@ typedef $$UsersTableCreateCompanionBuilder =
       Value<String?> goals,
       Value<double?> targetWeight,
       Value<int?> dailyCalorieTarget,
+      Value<String?> dosha,
       Value<int> rowid,
     });
 typedef $$UsersTableUpdateCompanionBuilder =
@@ -4967,6 +5015,7 @@ typedef $$UsersTableUpdateCompanionBuilder =
       Value<String?> goals,
       Value<double?> targetWeight,
       Value<int?> dailyCalorieTarget,
+      Value<String?> dosha,
       Value<int> rowid,
     });
 
@@ -5030,6 +5079,11 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
 
   ColumnFilters<int> get dailyCalorieTarget => $composableBuilder(
     column: $table.dailyCalorieTarget,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get dosha => $composableBuilder(
+    column: $table.dosha,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -5097,6 +5151,11 @@ class $$UsersTableOrderingComposer
     column: $table.dailyCalorieTarget,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get dosha => $composableBuilder(
+    column: $table.dosha,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$UsersTableAnnotationComposer
@@ -5146,6 +5205,9 @@ class $$UsersTableAnnotationComposer
     column: $table.dailyCalorieTarget,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get dosha =>
+      $composableBuilder(column: $table.dosha, builder: (column) => column);
 }
 
 class $$UsersTableTableManager
@@ -5187,6 +5249,7 @@ class $$UsersTableTableManager
                 Value<String?> goals = const Value.absent(),
                 Value<double?> targetWeight = const Value.absent(),
                 Value<int?> dailyCalorieTarget = const Value.absent(),
+                Value<String?> dosha = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion(
                 id: id,
@@ -5200,6 +5263,7 @@ class $$UsersTableTableManager
                 goals: goals,
                 targetWeight: targetWeight,
                 dailyCalorieTarget: dailyCalorieTarget,
+                dosha: dosha,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -5215,6 +5279,7 @@ class $$UsersTableTableManager
                 Value<String?> goals = const Value.absent(),
                 Value<double?> targetWeight = const Value.absent(),
                 Value<int?> dailyCalorieTarget = const Value.absent(),
+                Value<String?> dosha = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion.insert(
                 id: id,
@@ -5228,6 +5293,7 @@ class $$UsersTableTableManager
                 goals: goals,
                 targetWeight: targetWeight,
                 dailyCalorieTarget: dailyCalorieTarget,
+                dosha: dosha,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0

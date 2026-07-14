@@ -5,6 +5,7 @@ import 'package:fitkarma/features/onboarding/diet_plan_screen.dart';
 import 'package:fitkarma/features/onboarding/goals_screen.dart';
 import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
 import 'package:fitkarma/features/onboarding/welcome_screen.dart';
+import 'package:fitkarma/features/onboarding/dosha_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -209,10 +210,7 @@ class AppRouter {
           path: AppRoutes.onboardingDosha,
           pageBuilder: (context, state) => _slideTransition(
             state,
-            const _OnboardingPlaceholderScreen(
-              title: 'Ayurvedic Dosha Quiz',
-              stepNumber: 3,
-            ),
+            const DoshaScreen(),
           ),
         ),
         GoRoute(

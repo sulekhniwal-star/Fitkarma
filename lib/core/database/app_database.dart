@@ -21,6 +21,7 @@ class Users extends Table {
   TextColumn get goals => text().nullable()(); // JSON list e.g. '["weight_loss","heart_health"]'
   RealColumn get targetWeight => real().nullable()(); // kg
   IntColumn get dailyCalorieTarget => integer().nullable()();
+  TextColumn get dosha => text().nullable()(); // Added for §P1-F Dosha Quiz
 
   @override
   Set<Column> get primaryKey => {id};
@@ -142,7 +143,18 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 20;
+  int get schemaVersion => 21;
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onUpgrade: (migrator, from, to) async {
+        if (from < 21) {
+          await migrator.addColumn(users, users.dosha);
+        }
+      },
+    );
+  }
 
   /// Upserts the onboarding goals + target weight for a given user.
   Future<void> updateUserProfile({
@@ -150,6 +162,7 @@ class AppDatabase extends _$AppDatabase {
     String? goalsJson,
     double? targetWeight,
     int? dailyCalorieTarget,
+    String? dosha,
   }) async {
     await (update(users)
       ..where((t) => t.id.equals(userId)))
@@ -157,6 +170,7 @@ class AppDatabase extends _$AppDatabase {
         goals: goalsJson != null ? Value(goalsJson) : const Value.absent(),
         targetWeight: targetWeight != null ? Value(targetWeight) : const Value.absent(),
         dailyCalorieTarget: dailyCalorieTarget != null ? Value(dailyCalorieTarget) : const Value.absent(),
+        dosha: dosha != null ? Value(dosha) : const Value.absent(),
       ));
   }
 
