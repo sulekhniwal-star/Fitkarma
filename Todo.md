@@ -134,15 +134,15 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P2-D Recovery Operating System
-- [ ] Implement Sleep Need Calculator
-- [ ] Implement Bedtime Coach recommendation logic
-- [ ] Implement Daily Strain scoring (0–21 scale)
-- [ ] Implement Recovery Capacity calculation
-- [ ] Implement Recovery Prescriptions generator
-- [ ] Implement Circadian Score calculation
-- [ ] Implement Illness Detection (deviation-based)
-- [ ] Implement Recovery Drivers breakdown (JSON) surfaced in UI
-- [ ] Integration tests across the full Recovery OS pipeline
+- [x] Implement Sleep Need Calculator
+- [x] Implement Bedtime Coach recommendation logic
+- [x] Implement Daily Strain scoring (0–21 scale)
+- [x] Implement Recovery Capacity calculation
+- [x] Implement Recovery Prescriptions generator
+- [x] Implement Circadian Score calculation
+- [x] Implement Illness Detection (deviation-based)
+- [x] Implement Recovery Drivers breakdown (JSON) surfaced in UI
+- [x] Integration tests across the full Recovery OS pipeline
 
 ---
 
