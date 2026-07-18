@@ -119,14 +119,14 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 2 — DAILY MISSION + READINESS ENGINE
 
 ### §P2-A Readiness Engine
-- [ ] Implement readiness score calculation (deterministic)
-- [ ] Implement 3-tier confidence model
-- [ ] Unit tests across confidence tiers
+- [x] Implement readiness score calculation (deterministic)
+- [x] Implement 3-tier confidence model
+- [x] Unit tests across confidence tiers
 
 ### §P2-B Daily Briefing Screen (Daily Mission)
-- [ ] Build UI reading DIP directly from Drift (no AI call on open)
-- [ ] Verify open time < 100ms (§P14-B target)
-- [ ] Widget test
+- [x] Build UI reading DIP directly from Drift (no AI call on open)
+- [x] Verify open time < 100ms (§P14-B target)
+- [x] Widget test
 
 ### §P2-C Recovery Log Screen
 - [ ] Build manual recovery logging UI

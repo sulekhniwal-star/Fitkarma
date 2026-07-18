@@ -8,6 +8,7 @@ import 'package:fitkarma/features/onboarding/welcome_screen.dart';
 import 'package:fitkarma/features/onboarding/dosha_screen.dart';
 import 'package:fitkarma/features/onboarding/program_select_screen.dart';
 import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
+import 'package:fitkarma/features/daily_mission/daily_mission_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
 
   // Main app shell
   static const dashboard = '/dashboard';
+  static const mission   = '/mission';
 
   // Auth
   static const login = '/login';
@@ -248,6 +250,11 @@ class AppRouter {
           path: AppRoutes.dashboard,
           pageBuilder: (context, state) =>
               _fadeTransition(state, const _DashboardPlaceholder()),
+        ),
+        GoRoute(
+          path: AppRoutes.mission,
+          pageBuilder: (context, state) =>
+              _fadeTransition(state, const DailyMissionScreen()),
         ),
 
         // ── Auth ─────────────────────────────────────────────────────────────
