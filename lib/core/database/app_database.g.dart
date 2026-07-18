@@ -5784,6 +5784,1171 @@ class MenstrualSymptomLogsCompanion
   }
 }
 
+class $RecoveryLogsTable extends RecoveryLogs
+    with TableInfo<$RecoveryLogsTable, RecoveryLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RecoveryLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _localIdMeta = const VerificationMeta(
+    'localId',
+  );
+  @override
+  late final GeneratedColumn<String> localId = GeneratedColumn<String>(
+    'local_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _logDateMeta = const VerificationMeta(
+    'logDate',
+  );
+  @override
+  late final GeneratedColumn<DateTime> logDate = GeneratedColumn<DateTime>(
+    'log_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _readinessScoreMeta = const VerificationMeta(
+    'readinessScore',
+  );
+  @override
+  late final GeneratedColumn<int> readinessScore = GeneratedColumn<int>(
+    'readiness_score',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _confidenceTierMeta = const VerificationMeta(
+    'confidenceTier',
+  );
+  @override
+  late final GeneratedColumn<String> confidenceTier = GeneratedColumn<String>(
+    'confidence_tier',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sleepQualityMeta = const VerificationMeta(
+    'sleepQuality',
+  );
+  @override
+  late final GeneratedColumn<int> sleepQuality = GeneratedColumn<int>(
+    'sleep_quality',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sorenessLevelMeta = const VerificationMeta(
+    'sorenessLevel',
+  );
+  @override
+  late final GeneratedColumn<int> sorenessLevel = GeneratedColumn<int>(
+    'soreness_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _stressLevelMeta = const VerificationMeta(
+    'stressLevel',
+  );
+  @override
+  late final GeneratedColumn<int> stressLevel = GeneratedColumn<int>(
+    'stress_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _energyLevelMeta = const VerificationMeta(
+    'energyLevel',
+  );
+  @override
+  late final GeneratedColumn<int> energyLevel = GeneratedColumn<int>(
+    'energy_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _restingHRMeta = const VerificationMeta(
+    'restingHR',
+  );
+  @override
+  late final GeneratedColumn<double> restingHR = GeneratedColumn<double>(
+    'resting_h_r',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _hrvMeta = const VerificationMeta('hrv');
+  @override
+  late final GeneratedColumn<double> hrv = GeneratedColumn<double>(
+    'hrv',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _sorenessRegionsMeta = const VerificationMeta(
+    'sorenessRegions',
+  );
+  @override
+  late final GeneratedColumn<String> sorenessRegions = GeneratedColumn<String>(
+    'soreness_regions',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sleepNeedMinutesMeta = const VerificationMeta(
+    'sleepNeedMinutes',
+  );
+  @override
+  late final GeneratedColumn<int> sleepNeedMinutes = GeneratedColumn<int>(
+    'sleep_need_minutes',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(480),
+  );
+  static const VerificationMeta _sleepPerformanceScoreMeta =
+      const VerificationMeta('sleepPerformanceScore');
+  @override
+  late final GeneratedColumn<int> sleepPerformanceScore = GeneratedColumn<int>(
+    'sleep_performance_score',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(100),
+  );
+  static const VerificationMeta _dailyStrainScoreMeta = const VerificationMeta(
+    'dailyStrainScore',
+  );
+  @override
+  late final GeneratedColumn<double> dailyStrainScore = GeneratedColumn<double>(
+    'daily_strain_score',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _illnessRiskStatusMeta = const VerificationMeta(
+    'illnessRiskStatus',
+  );
+  @override
+  late final GeneratedColumn<String> illnessRiskStatus =
+      GeneratedColumn<String>(
+        'illness_risk_status',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('low'),
+      );
+  static const VerificationMeta _prescribedActionsJsonMeta =
+      const VerificationMeta('prescribedActionsJson');
+  @override
+  late final GeneratedColumn<String> prescribedActionsJson =
+      GeneratedColumn<String>(
+        'prescribed_actions_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _recoveryDriversJsonMeta =
+      const VerificationMeta('recoveryDriversJson');
+  @override
+  late final GeneratedColumn<String> recoveryDriversJson =
+      GeneratedColumn<String>(
+        'recovery_drivers_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _syncStatusMeta = const VerificationMeta(
+    'syncStatus',
+  );
+  @override
+  late final GeneratedColumn<String> syncStatus = GeneratedColumn<String>(
+    'sync_status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    localId,
+    userId,
+    logDate,
+    readinessScore,
+    confidenceTier,
+    sleepQuality,
+    sorenessLevel,
+    stressLevel,
+    energyLevel,
+    restingHR,
+    hrv,
+    sorenessRegions,
+    sleepNeedMinutes,
+    sleepPerformanceScore,
+    dailyStrainScore,
+    illnessRiskStatus,
+    prescribedActionsJson,
+    recoveryDriversJson,
+    syncStatus,
+    createdAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'recovery_logs';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RecoveryLog> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('local_id')) {
+      context.handle(
+        _localIdMeta,
+        localId.isAcceptableOrUnknown(data['local_id']!, _localIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_localIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('log_date')) {
+      context.handle(
+        _logDateMeta,
+        logDate.isAcceptableOrUnknown(data['log_date']!, _logDateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_logDateMeta);
+    }
+    if (data.containsKey('readiness_score')) {
+      context.handle(
+        _readinessScoreMeta,
+        readinessScore.isAcceptableOrUnknown(
+          data['readiness_score']!,
+          _readinessScoreMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_readinessScoreMeta);
+    }
+    if (data.containsKey('confidence_tier')) {
+      context.handle(
+        _confidenceTierMeta,
+        confidenceTier.isAcceptableOrUnknown(
+          data['confidence_tier']!,
+          _confidenceTierMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_confidenceTierMeta);
+    }
+    if (data.containsKey('sleep_quality')) {
+      context.handle(
+        _sleepQualityMeta,
+        sleepQuality.isAcceptableOrUnknown(
+          data['sleep_quality']!,
+          _sleepQualityMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_sleepQualityMeta);
+    }
+    if (data.containsKey('soreness_level')) {
+      context.handle(
+        _sorenessLevelMeta,
+        sorenessLevel.isAcceptableOrUnknown(
+          data['soreness_level']!,
+          _sorenessLevelMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_sorenessLevelMeta);
+    }
+    if (data.containsKey('stress_level')) {
+      context.handle(
+        _stressLevelMeta,
+        stressLevel.isAcceptableOrUnknown(
+          data['stress_level']!,
+          _stressLevelMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_stressLevelMeta);
+    }
+    if (data.containsKey('energy_level')) {
+      context.handle(
+        _energyLevelMeta,
+        energyLevel.isAcceptableOrUnknown(
+          data['energy_level']!,
+          _energyLevelMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_energyLevelMeta);
+    }
+    if (data.containsKey('resting_h_r')) {
+      context.handle(
+        _restingHRMeta,
+        restingHR.isAcceptableOrUnknown(data['resting_h_r']!, _restingHRMeta),
+      );
+    }
+    if (data.containsKey('hrv')) {
+      context.handle(
+        _hrvMeta,
+        hrv.isAcceptableOrUnknown(data['hrv']!, _hrvMeta),
+      );
+    }
+    if (data.containsKey('soreness_regions')) {
+      context.handle(
+        _sorenessRegionsMeta,
+        sorenessRegions.isAcceptableOrUnknown(
+          data['soreness_regions']!,
+          _sorenessRegionsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_sorenessRegionsMeta);
+    }
+    if (data.containsKey('sleep_need_minutes')) {
+      context.handle(
+        _sleepNeedMinutesMeta,
+        sleepNeedMinutes.isAcceptableOrUnknown(
+          data['sleep_need_minutes']!,
+          _sleepNeedMinutesMeta,
+        ),
+      );
+    }
+    if (data.containsKey('sleep_performance_score')) {
+      context.handle(
+        _sleepPerformanceScoreMeta,
+        sleepPerformanceScore.isAcceptableOrUnknown(
+          data['sleep_performance_score']!,
+          _sleepPerformanceScoreMeta,
+        ),
+      );
+    }
+    if (data.containsKey('daily_strain_score')) {
+      context.handle(
+        _dailyStrainScoreMeta,
+        dailyStrainScore.isAcceptableOrUnknown(
+          data['daily_strain_score']!,
+          _dailyStrainScoreMeta,
+        ),
+      );
+    }
+    if (data.containsKey('illness_risk_status')) {
+      context.handle(
+        _illnessRiskStatusMeta,
+        illnessRiskStatus.isAcceptableOrUnknown(
+          data['illness_risk_status']!,
+          _illnessRiskStatusMeta,
+        ),
+      );
+    }
+    if (data.containsKey('prescribed_actions_json')) {
+      context.handle(
+        _prescribedActionsJsonMeta,
+        prescribedActionsJson.isAcceptableOrUnknown(
+          data['prescribed_actions_json']!,
+          _prescribedActionsJsonMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_prescribedActionsJsonMeta);
+    }
+    if (data.containsKey('recovery_drivers_json')) {
+      context.handle(
+        _recoveryDriversJsonMeta,
+        recoveryDriversJson.isAcceptableOrUnknown(
+          data['recovery_drivers_json']!,
+          _recoveryDriversJsonMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_recoveryDriversJsonMeta);
+    }
+    if (data.containsKey('sync_status')) {
+      context.handle(
+        _syncStatusMeta,
+        syncStatus.isAcceptableOrUnknown(data['sync_status']!, _syncStatusMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_syncStatusMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {localId};
+  @override
+  RecoveryLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RecoveryLog(
+      localId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}local_id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      logDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}log_date'],
+      )!,
+      readinessScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}readiness_score'],
+      )!,
+      confidenceTier: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}confidence_tier'],
+      )!,
+      sleepQuality: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sleep_quality'],
+      )!,
+      sorenessLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}soreness_level'],
+      )!,
+      stressLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stress_level'],
+      )!,
+      energyLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}energy_level'],
+      )!,
+      restingHR: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}resting_h_r'],
+      ),
+      hrv: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}hrv'],
+      ),
+      sorenessRegions: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}soreness_regions'],
+      )!,
+      sleepNeedMinutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sleep_need_minutes'],
+      )!,
+      sleepPerformanceScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sleep_performance_score'],
+      )!,
+      dailyStrainScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}daily_strain_score'],
+      )!,
+      illnessRiskStatus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}illness_risk_status'],
+      )!,
+      prescribedActionsJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prescribed_actions_json'],
+      )!,
+      recoveryDriversJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recovery_drivers_json'],
+      )!,
+      syncStatus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sync_status'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $RecoveryLogsTable createAlias(String alias) {
+    return $RecoveryLogsTable(attachedDatabase, alias);
+  }
+}
+
+class RecoveryLog extends DataClass implements Insertable<RecoveryLog> {
+  final String localId;
+  final String userId;
+  final DateTime logDate;
+  final int readinessScore;
+  final String confidenceTier;
+  final int sleepQuality;
+  final int sorenessLevel;
+  final int stressLevel;
+  final int energyLevel;
+  final double? restingHR;
+  final double? hrv;
+  final String sorenessRegions;
+  final int sleepNeedMinutes;
+  final int sleepPerformanceScore;
+  final double dailyStrainScore;
+  final String illnessRiskStatus;
+  final String prescribedActionsJson;
+  final String recoveryDriversJson;
+  final String syncStatus;
+  final DateTime createdAt;
+  const RecoveryLog({
+    required this.localId,
+    required this.userId,
+    required this.logDate,
+    required this.readinessScore,
+    required this.confidenceTier,
+    required this.sleepQuality,
+    required this.sorenessLevel,
+    required this.stressLevel,
+    required this.energyLevel,
+    this.restingHR,
+    this.hrv,
+    required this.sorenessRegions,
+    required this.sleepNeedMinutes,
+    required this.sleepPerformanceScore,
+    required this.dailyStrainScore,
+    required this.illnessRiskStatus,
+    required this.prescribedActionsJson,
+    required this.recoveryDriversJson,
+    required this.syncStatus,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['local_id'] = Variable<String>(localId);
+    map['user_id'] = Variable<String>(userId);
+    map['log_date'] = Variable<DateTime>(logDate);
+    map['readiness_score'] = Variable<int>(readinessScore);
+    map['confidence_tier'] = Variable<String>(confidenceTier);
+    map['sleep_quality'] = Variable<int>(sleepQuality);
+    map['soreness_level'] = Variable<int>(sorenessLevel);
+    map['stress_level'] = Variable<int>(stressLevel);
+    map['energy_level'] = Variable<int>(energyLevel);
+    if (!nullToAbsent || restingHR != null) {
+      map['resting_h_r'] = Variable<double>(restingHR);
+    }
+    if (!nullToAbsent || hrv != null) {
+      map['hrv'] = Variable<double>(hrv);
+    }
+    map['soreness_regions'] = Variable<String>(sorenessRegions);
+    map['sleep_need_minutes'] = Variable<int>(sleepNeedMinutes);
+    map['sleep_performance_score'] = Variable<int>(sleepPerformanceScore);
+    map['daily_strain_score'] = Variable<double>(dailyStrainScore);
+    map['illness_risk_status'] = Variable<String>(illnessRiskStatus);
+    map['prescribed_actions_json'] = Variable<String>(prescribedActionsJson);
+    map['recovery_drivers_json'] = Variable<String>(recoveryDriversJson);
+    map['sync_status'] = Variable<String>(syncStatus);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  RecoveryLogsCompanion toCompanion(bool nullToAbsent) {
+    return RecoveryLogsCompanion(
+      localId: Value(localId),
+      userId: Value(userId),
+      logDate: Value(logDate),
+      readinessScore: Value(readinessScore),
+      confidenceTier: Value(confidenceTier),
+      sleepQuality: Value(sleepQuality),
+      sorenessLevel: Value(sorenessLevel),
+      stressLevel: Value(stressLevel),
+      energyLevel: Value(energyLevel),
+      restingHR: restingHR == null && nullToAbsent
+          ? const Value.absent()
+          : Value(restingHR),
+      hrv: hrv == null && nullToAbsent ? const Value.absent() : Value(hrv),
+      sorenessRegions: Value(sorenessRegions),
+      sleepNeedMinutes: Value(sleepNeedMinutes),
+      sleepPerformanceScore: Value(sleepPerformanceScore),
+      dailyStrainScore: Value(dailyStrainScore),
+      illnessRiskStatus: Value(illnessRiskStatus),
+      prescribedActionsJson: Value(prescribedActionsJson),
+      recoveryDriversJson: Value(recoveryDriversJson),
+      syncStatus: Value(syncStatus),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory RecoveryLog.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RecoveryLog(
+      localId: serializer.fromJson<String>(json['localId']),
+      userId: serializer.fromJson<String>(json['userId']),
+      logDate: serializer.fromJson<DateTime>(json['logDate']),
+      readinessScore: serializer.fromJson<int>(json['readinessScore']),
+      confidenceTier: serializer.fromJson<String>(json['confidenceTier']),
+      sleepQuality: serializer.fromJson<int>(json['sleepQuality']),
+      sorenessLevel: serializer.fromJson<int>(json['sorenessLevel']),
+      stressLevel: serializer.fromJson<int>(json['stressLevel']),
+      energyLevel: serializer.fromJson<int>(json['energyLevel']),
+      restingHR: serializer.fromJson<double?>(json['restingHR']),
+      hrv: serializer.fromJson<double?>(json['hrv']),
+      sorenessRegions: serializer.fromJson<String>(json['sorenessRegions']),
+      sleepNeedMinutes: serializer.fromJson<int>(json['sleepNeedMinutes']),
+      sleepPerformanceScore: serializer.fromJson<int>(
+        json['sleepPerformanceScore'],
+      ),
+      dailyStrainScore: serializer.fromJson<double>(json['dailyStrainScore']),
+      illnessRiskStatus: serializer.fromJson<String>(json['illnessRiskStatus']),
+      prescribedActionsJson: serializer.fromJson<String>(
+        json['prescribedActionsJson'],
+      ),
+      recoveryDriversJson: serializer.fromJson<String>(
+        json['recoveryDriversJson'],
+      ),
+      syncStatus: serializer.fromJson<String>(json['syncStatus']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'localId': serializer.toJson<String>(localId),
+      'userId': serializer.toJson<String>(userId),
+      'logDate': serializer.toJson<DateTime>(logDate),
+      'readinessScore': serializer.toJson<int>(readinessScore),
+      'confidenceTier': serializer.toJson<String>(confidenceTier),
+      'sleepQuality': serializer.toJson<int>(sleepQuality),
+      'sorenessLevel': serializer.toJson<int>(sorenessLevel),
+      'stressLevel': serializer.toJson<int>(stressLevel),
+      'energyLevel': serializer.toJson<int>(energyLevel),
+      'restingHR': serializer.toJson<double?>(restingHR),
+      'hrv': serializer.toJson<double?>(hrv),
+      'sorenessRegions': serializer.toJson<String>(sorenessRegions),
+      'sleepNeedMinutes': serializer.toJson<int>(sleepNeedMinutes),
+      'sleepPerformanceScore': serializer.toJson<int>(sleepPerformanceScore),
+      'dailyStrainScore': serializer.toJson<double>(dailyStrainScore),
+      'illnessRiskStatus': serializer.toJson<String>(illnessRiskStatus),
+      'prescribedActionsJson': serializer.toJson<String>(prescribedActionsJson),
+      'recoveryDriversJson': serializer.toJson<String>(recoveryDriversJson),
+      'syncStatus': serializer.toJson<String>(syncStatus),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  RecoveryLog copyWith({
+    String? localId,
+    String? userId,
+    DateTime? logDate,
+    int? readinessScore,
+    String? confidenceTier,
+    int? sleepQuality,
+    int? sorenessLevel,
+    int? stressLevel,
+    int? energyLevel,
+    Value<double?> restingHR = const Value.absent(),
+    Value<double?> hrv = const Value.absent(),
+    String? sorenessRegions,
+    int? sleepNeedMinutes,
+    int? sleepPerformanceScore,
+    double? dailyStrainScore,
+    String? illnessRiskStatus,
+    String? prescribedActionsJson,
+    String? recoveryDriversJson,
+    String? syncStatus,
+    DateTime? createdAt,
+  }) => RecoveryLog(
+    localId: localId ?? this.localId,
+    userId: userId ?? this.userId,
+    logDate: logDate ?? this.logDate,
+    readinessScore: readinessScore ?? this.readinessScore,
+    confidenceTier: confidenceTier ?? this.confidenceTier,
+    sleepQuality: sleepQuality ?? this.sleepQuality,
+    sorenessLevel: sorenessLevel ?? this.sorenessLevel,
+    stressLevel: stressLevel ?? this.stressLevel,
+    energyLevel: energyLevel ?? this.energyLevel,
+    restingHR: restingHR.present ? restingHR.value : this.restingHR,
+    hrv: hrv.present ? hrv.value : this.hrv,
+    sorenessRegions: sorenessRegions ?? this.sorenessRegions,
+    sleepNeedMinutes: sleepNeedMinutes ?? this.sleepNeedMinutes,
+    sleepPerformanceScore: sleepPerformanceScore ?? this.sleepPerformanceScore,
+    dailyStrainScore: dailyStrainScore ?? this.dailyStrainScore,
+    illnessRiskStatus: illnessRiskStatus ?? this.illnessRiskStatus,
+    prescribedActionsJson: prescribedActionsJson ?? this.prescribedActionsJson,
+    recoveryDriversJson: recoveryDriversJson ?? this.recoveryDriversJson,
+    syncStatus: syncStatus ?? this.syncStatus,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  RecoveryLog copyWithCompanion(RecoveryLogsCompanion data) {
+    return RecoveryLog(
+      localId: data.localId.present ? data.localId.value : this.localId,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      logDate: data.logDate.present ? data.logDate.value : this.logDate,
+      readinessScore: data.readinessScore.present
+          ? data.readinessScore.value
+          : this.readinessScore,
+      confidenceTier: data.confidenceTier.present
+          ? data.confidenceTier.value
+          : this.confidenceTier,
+      sleepQuality: data.sleepQuality.present
+          ? data.sleepQuality.value
+          : this.sleepQuality,
+      sorenessLevel: data.sorenessLevel.present
+          ? data.sorenessLevel.value
+          : this.sorenessLevel,
+      stressLevel: data.stressLevel.present
+          ? data.stressLevel.value
+          : this.stressLevel,
+      energyLevel: data.energyLevel.present
+          ? data.energyLevel.value
+          : this.energyLevel,
+      restingHR: data.restingHR.present ? data.restingHR.value : this.restingHR,
+      hrv: data.hrv.present ? data.hrv.value : this.hrv,
+      sorenessRegions: data.sorenessRegions.present
+          ? data.sorenessRegions.value
+          : this.sorenessRegions,
+      sleepNeedMinutes: data.sleepNeedMinutes.present
+          ? data.sleepNeedMinutes.value
+          : this.sleepNeedMinutes,
+      sleepPerformanceScore: data.sleepPerformanceScore.present
+          ? data.sleepPerformanceScore.value
+          : this.sleepPerformanceScore,
+      dailyStrainScore: data.dailyStrainScore.present
+          ? data.dailyStrainScore.value
+          : this.dailyStrainScore,
+      illnessRiskStatus: data.illnessRiskStatus.present
+          ? data.illnessRiskStatus.value
+          : this.illnessRiskStatus,
+      prescribedActionsJson: data.prescribedActionsJson.present
+          ? data.prescribedActionsJson.value
+          : this.prescribedActionsJson,
+      recoveryDriversJson: data.recoveryDriversJson.present
+          ? data.recoveryDriversJson.value
+          : this.recoveryDriversJson,
+      syncStatus: data.syncStatus.present
+          ? data.syncStatus.value
+          : this.syncStatus,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecoveryLog(')
+          ..write('localId: $localId, ')
+          ..write('userId: $userId, ')
+          ..write('logDate: $logDate, ')
+          ..write('readinessScore: $readinessScore, ')
+          ..write('confidenceTier: $confidenceTier, ')
+          ..write('sleepQuality: $sleepQuality, ')
+          ..write('sorenessLevel: $sorenessLevel, ')
+          ..write('stressLevel: $stressLevel, ')
+          ..write('energyLevel: $energyLevel, ')
+          ..write('restingHR: $restingHR, ')
+          ..write('hrv: $hrv, ')
+          ..write('sorenessRegions: $sorenessRegions, ')
+          ..write('sleepNeedMinutes: $sleepNeedMinutes, ')
+          ..write('sleepPerformanceScore: $sleepPerformanceScore, ')
+          ..write('dailyStrainScore: $dailyStrainScore, ')
+          ..write('illnessRiskStatus: $illnessRiskStatus, ')
+          ..write('prescribedActionsJson: $prescribedActionsJson, ')
+          ..write('recoveryDriversJson: $recoveryDriversJson, ')
+          ..write('syncStatus: $syncStatus, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    localId,
+    userId,
+    logDate,
+    readinessScore,
+    confidenceTier,
+    sleepQuality,
+    sorenessLevel,
+    stressLevel,
+    energyLevel,
+    restingHR,
+    hrv,
+    sorenessRegions,
+    sleepNeedMinutes,
+    sleepPerformanceScore,
+    dailyStrainScore,
+    illnessRiskStatus,
+    prescribedActionsJson,
+    recoveryDriversJson,
+    syncStatus,
+    createdAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecoveryLog &&
+          other.localId == this.localId &&
+          other.userId == this.userId &&
+          other.logDate == this.logDate &&
+          other.readinessScore == this.readinessScore &&
+          other.confidenceTier == this.confidenceTier &&
+          other.sleepQuality == this.sleepQuality &&
+          other.sorenessLevel == this.sorenessLevel &&
+          other.stressLevel == this.stressLevel &&
+          other.energyLevel == this.energyLevel &&
+          other.restingHR == this.restingHR &&
+          other.hrv == this.hrv &&
+          other.sorenessRegions == this.sorenessRegions &&
+          other.sleepNeedMinutes == this.sleepNeedMinutes &&
+          other.sleepPerformanceScore == this.sleepPerformanceScore &&
+          other.dailyStrainScore == this.dailyStrainScore &&
+          other.illnessRiskStatus == this.illnessRiskStatus &&
+          other.prescribedActionsJson == this.prescribedActionsJson &&
+          other.recoveryDriversJson == this.recoveryDriversJson &&
+          other.syncStatus == this.syncStatus &&
+          other.createdAt == this.createdAt);
+}
+
+class RecoveryLogsCompanion extends UpdateCompanion<RecoveryLog> {
+  final Value<String> localId;
+  final Value<String> userId;
+  final Value<DateTime> logDate;
+  final Value<int> readinessScore;
+  final Value<String> confidenceTier;
+  final Value<int> sleepQuality;
+  final Value<int> sorenessLevel;
+  final Value<int> stressLevel;
+  final Value<int> energyLevel;
+  final Value<double?> restingHR;
+  final Value<double?> hrv;
+  final Value<String> sorenessRegions;
+  final Value<int> sleepNeedMinutes;
+  final Value<int> sleepPerformanceScore;
+  final Value<double> dailyStrainScore;
+  final Value<String> illnessRiskStatus;
+  final Value<String> prescribedActionsJson;
+  final Value<String> recoveryDriversJson;
+  final Value<String> syncStatus;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const RecoveryLogsCompanion({
+    this.localId = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.logDate = const Value.absent(),
+    this.readinessScore = const Value.absent(),
+    this.confidenceTier = const Value.absent(),
+    this.sleepQuality = const Value.absent(),
+    this.sorenessLevel = const Value.absent(),
+    this.stressLevel = const Value.absent(),
+    this.energyLevel = const Value.absent(),
+    this.restingHR = const Value.absent(),
+    this.hrv = const Value.absent(),
+    this.sorenessRegions = const Value.absent(),
+    this.sleepNeedMinutes = const Value.absent(),
+    this.sleepPerformanceScore = const Value.absent(),
+    this.dailyStrainScore = const Value.absent(),
+    this.illnessRiskStatus = const Value.absent(),
+    this.prescribedActionsJson = const Value.absent(),
+    this.recoveryDriversJson = const Value.absent(),
+    this.syncStatus = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RecoveryLogsCompanion.insert({
+    required String localId,
+    required String userId,
+    required DateTime logDate,
+    required int readinessScore,
+    required String confidenceTier,
+    required int sleepQuality,
+    required int sorenessLevel,
+    required int stressLevel,
+    required int energyLevel,
+    this.restingHR = const Value.absent(),
+    this.hrv = const Value.absent(),
+    required String sorenessRegions,
+    this.sleepNeedMinutes = const Value.absent(),
+    this.sleepPerformanceScore = const Value.absent(),
+    this.dailyStrainScore = const Value.absent(),
+    this.illnessRiskStatus = const Value.absent(),
+    required String prescribedActionsJson,
+    required String recoveryDriversJson,
+    required String syncStatus,
+    required DateTime createdAt,
+    this.rowid = const Value.absent(),
+  }) : localId = Value(localId),
+       userId = Value(userId),
+       logDate = Value(logDate),
+       readinessScore = Value(readinessScore),
+       confidenceTier = Value(confidenceTier),
+       sleepQuality = Value(sleepQuality),
+       sorenessLevel = Value(sorenessLevel),
+       stressLevel = Value(stressLevel),
+       energyLevel = Value(energyLevel),
+       sorenessRegions = Value(sorenessRegions),
+       prescribedActionsJson = Value(prescribedActionsJson),
+       recoveryDriversJson = Value(recoveryDriversJson),
+       syncStatus = Value(syncStatus),
+       createdAt = Value(createdAt);
+  static Insertable<RecoveryLog> custom({
+    Expression<String>? localId,
+    Expression<String>? userId,
+    Expression<DateTime>? logDate,
+    Expression<int>? readinessScore,
+    Expression<String>? confidenceTier,
+    Expression<int>? sleepQuality,
+    Expression<int>? sorenessLevel,
+    Expression<int>? stressLevel,
+    Expression<int>? energyLevel,
+    Expression<double>? restingHR,
+    Expression<double>? hrv,
+    Expression<String>? sorenessRegions,
+    Expression<int>? sleepNeedMinutes,
+    Expression<int>? sleepPerformanceScore,
+    Expression<double>? dailyStrainScore,
+    Expression<String>? illnessRiskStatus,
+    Expression<String>? prescribedActionsJson,
+    Expression<String>? recoveryDriversJson,
+    Expression<String>? syncStatus,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (localId != null) 'local_id': localId,
+      if (userId != null) 'user_id': userId,
+      if (logDate != null) 'log_date': logDate,
+      if (readinessScore != null) 'readiness_score': readinessScore,
+      if (confidenceTier != null) 'confidence_tier': confidenceTier,
+      if (sleepQuality != null) 'sleep_quality': sleepQuality,
+      if (sorenessLevel != null) 'soreness_level': sorenessLevel,
+      if (stressLevel != null) 'stress_level': stressLevel,
+      if (energyLevel != null) 'energy_level': energyLevel,
+      if (restingHR != null) 'resting_h_r': restingHR,
+      if (hrv != null) 'hrv': hrv,
+      if (sorenessRegions != null) 'soreness_regions': sorenessRegions,
+      if (sleepNeedMinutes != null) 'sleep_need_minutes': sleepNeedMinutes,
+      if (sleepPerformanceScore != null)
+        'sleep_performance_score': sleepPerformanceScore,
+      if (dailyStrainScore != null) 'daily_strain_score': dailyStrainScore,
+      if (illnessRiskStatus != null) 'illness_risk_status': illnessRiskStatus,
+      if (prescribedActionsJson != null)
+        'prescribed_actions_json': prescribedActionsJson,
+      if (recoveryDriversJson != null)
+        'recovery_drivers_json': recoveryDriversJson,
+      if (syncStatus != null) 'sync_status': syncStatus,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RecoveryLogsCompanion copyWith({
+    Value<String>? localId,
+    Value<String>? userId,
+    Value<DateTime>? logDate,
+    Value<int>? readinessScore,
+    Value<String>? confidenceTier,
+    Value<int>? sleepQuality,
+    Value<int>? sorenessLevel,
+    Value<int>? stressLevel,
+    Value<int>? energyLevel,
+    Value<double?>? restingHR,
+    Value<double?>? hrv,
+    Value<String>? sorenessRegions,
+    Value<int>? sleepNeedMinutes,
+    Value<int>? sleepPerformanceScore,
+    Value<double>? dailyStrainScore,
+    Value<String>? illnessRiskStatus,
+    Value<String>? prescribedActionsJson,
+    Value<String>? recoveryDriversJson,
+    Value<String>? syncStatus,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
+    return RecoveryLogsCompanion(
+      localId: localId ?? this.localId,
+      userId: userId ?? this.userId,
+      logDate: logDate ?? this.logDate,
+      readinessScore: readinessScore ?? this.readinessScore,
+      confidenceTier: confidenceTier ?? this.confidenceTier,
+      sleepQuality: sleepQuality ?? this.sleepQuality,
+      sorenessLevel: sorenessLevel ?? this.sorenessLevel,
+      stressLevel: stressLevel ?? this.stressLevel,
+      energyLevel: energyLevel ?? this.energyLevel,
+      restingHR: restingHR ?? this.restingHR,
+      hrv: hrv ?? this.hrv,
+      sorenessRegions: sorenessRegions ?? this.sorenessRegions,
+      sleepNeedMinutes: sleepNeedMinutes ?? this.sleepNeedMinutes,
+      sleepPerformanceScore:
+          sleepPerformanceScore ?? this.sleepPerformanceScore,
+      dailyStrainScore: dailyStrainScore ?? this.dailyStrainScore,
+      illnessRiskStatus: illnessRiskStatus ?? this.illnessRiskStatus,
+      prescribedActionsJson:
+          prescribedActionsJson ?? this.prescribedActionsJson,
+      recoveryDriversJson: recoveryDriversJson ?? this.recoveryDriversJson,
+      syncStatus: syncStatus ?? this.syncStatus,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (localId.present) {
+      map['local_id'] = Variable<String>(localId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (logDate.present) {
+      map['log_date'] = Variable<DateTime>(logDate.value);
+    }
+    if (readinessScore.present) {
+      map['readiness_score'] = Variable<int>(readinessScore.value);
+    }
+    if (confidenceTier.present) {
+      map['confidence_tier'] = Variable<String>(confidenceTier.value);
+    }
+    if (sleepQuality.present) {
+      map['sleep_quality'] = Variable<int>(sleepQuality.value);
+    }
+    if (sorenessLevel.present) {
+      map['soreness_level'] = Variable<int>(sorenessLevel.value);
+    }
+    if (stressLevel.present) {
+      map['stress_level'] = Variable<int>(stressLevel.value);
+    }
+    if (energyLevel.present) {
+      map['energy_level'] = Variable<int>(energyLevel.value);
+    }
+    if (restingHR.present) {
+      map['resting_h_r'] = Variable<double>(restingHR.value);
+    }
+    if (hrv.present) {
+      map['hrv'] = Variable<double>(hrv.value);
+    }
+    if (sorenessRegions.present) {
+      map['soreness_regions'] = Variable<String>(sorenessRegions.value);
+    }
+    if (sleepNeedMinutes.present) {
+      map['sleep_need_minutes'] = Variable<int>(sleepNeedMinutes.value);
+    }
+    if (sleepPerformanceScore.present) {
+      map['sleep_performance_score'] = Variable<int>(
+        sleepPerformanceScore.value,
+      );
+    }
+    if (dailyStrainScore.present) {
+      map['daily_strain_score'] = Variable<double>(dailyStrainScore.value);
+    }
+    if (illnessRiskStatus.present) {
+      map['illness_risk_status'] = Variable<String>(illnessRiskStatus.value);
+    }
+    if (prescribedActionsJson.present) {
+      map['prescribed_actions_json'] = Variable<String>(
+        prescribedActionsJson.value,
+      );
+    }
+    if (recoveryDriversJson.present) {
+      map['recovery_drivers_json'] = Variable<String>(
+        recoveryDriversJson.value,
+      );
+    }
+    if (syncStatus.present) {
+      map['sync_status'] = Variable<String>(syncStatus.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecoveryLogsCompanion(')
+          ..write('localId: $localId, ')
+          ..write('userId: $userId, ')
+          ..write('logDate: $logDate, ')
+          ..write('readinessScore: $readinessScore, ')
+          ..write('confidenceTier: $confidenceTier, ')
+          ..write('sleepQuality: $sleepQuality, ')
+          ..write('sorenessLevel: $sorenessLevel, ')
+          ..write('stressLevel: $stressLevel, ')
+          ..write('energyLevel: $energyLevel, ')
+          ..write('restingHR: $restingHR, ')
+          ..write('hrv: $hrv, ')
+          ..write('sorenessRegions: $sorenessRegions, ')
+          ..write('sleepNeedMinutes: $sleepNeedMinutes, ')
+          ..write('sleepPerformanceScore: $sleepPerformanceScore, ')
+          ..write('dailyStrainScore: $dailyStrainScore, ')
+          ..write('illnessRiskStatus: $illnessRiskStatus, ')
+          ..write('prescribedActionsJson: $prescribedActionsJson, ')
+          ..write('recoveryDriversJson: $recoveryDriversJson, ')
+          ..write('syncStatus: $syncStatus, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -5802,6 +6967,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final $MenstrualSymptomLogsTable menstrualSymptomLogs =
       $MenstrualSymptomLogsTable(this);
+  late final $RecoveryLogsTable recoveryLogs = $RecoveryLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -5816,6 +6982,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     transformationMemories,
     cachedDietPlans,
     menstrualSymptomLogs,
+    recoveryLogs,
   ];
 }
 
@@ -8627,6 +9794,519 @@ typedef $$MenstrualSymptomLogsTableProcessedTableManager =
       MenstrualSymptomLog,
       PrefetchHooks Function()
     >;
+typedef $$RecoveryLogsTableCreateCompanionBuilder =
+    RecoveryLogsCompanion Function({
+      required String localId,
+      required String userId,
+      required DateTime logDate,
+      required int readinessScore,
+      required String confidenceTier,
+      required int sleepQuality,
+      required int sorenessLevel,
+      required int stressLevel,
+      required int energyLevel,
+      Value<double?> restingHR,
+      Value<double?> hrv,
+      required String sorenessRegions,
+      Value<int> sleepNeedMinutes,
+      Value<int> sleepPerformanceScore,
+      Value<double> dailyStrainScore,
+      Value<String> illnessRiskStatus,
+      required String prescribedActionsJson,
+      required String recoveryDriversJson,
+      required String syncStatus,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$RecoveryLogsTableUpdateCompanionBuilder =
+    RecoveryLogsCompanion Function({
+      Value<String> localId,
+      Value<String> userId,
+      Value<DateTime> logDate,
+      Value<int> readinessScore,
+      Value<String> confidenceTier,
+      Value<int> sleepQuality,
+      Value<int> sorenessLevel,
+      Value<int> stressLevel,
+      Value<int> energyLevel,
+      Value<double?> restingHR,
+      Value<double?> hrv,
+      Value<String> sorenessRegions,
+      Value<int> sleepNeedMinutes,
+      Value<int> sleepPerformanceScore,
+      Value<double> dailyStrainScore,
+      Value<String> illnessRiskStatus,
+      Value<String> prescribedActionsJson,
+      Value<String> recoveryDriversJson,
+      Value<String> syncStatus,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+class $$RecoveryLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $RecoveryLogsTable> {
+  $$RecoveryLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get localId => $composableBuilder(
+    column: $table.localId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get logDate => $composableBuilder(
+    column: $table.logDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get readinessScore => $composableBuilder(
+    column: $table.readinessScore,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get confidenceTier => $composableBuilder(
+    column: $table.confidenceTier,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sleepQuality => $composableBuilder(
+    column: $table.sleepQuality,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sorenessLevel => $composableBuilder(
+    column: $table.sorenessLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get stressLevel => $composableBuilder(
+    column: $table.stressLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get energyLevel => $composableBuilder(
+    column: $table.energyLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get restingHR => $composableBuilder(
+    column: $table.restingHR,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get hrv => $composableBuilder(
+    column: $table.hrv,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get sorenessRegions => $composableBuilder(
+    column: $table.sorenessRegions,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sleepNeedMinutes => $composableBuilder(
+    column: $table.sleepNeedMinutes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sleepPerformanceScore => $composableBuilder(
+    column: $table.sleepPerformanceScore,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get dailyStrainScore => $composableBuilder(
+    column: $table.dailyStrainScore,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get illnessRiskStatus => $composableBuilder(
+    column: $table.illnessRiskStatus,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get prescribedActionsJson => $composableBuilder(
+    column: $table.prescribedActionsJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get recoveryDriversJson => $composableBuilder(
+    column: $table.recoveryDriversJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$RecoveryLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $RecoveryLogsTable> {
+  $$RecoveryLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get localId => $composableBuilder(
+    column: $table.localId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get logDate => $composableBuilder(
+    column: $table.logDate,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get readinessScore => $composableBuilder(
+    column: $table.readinessScore,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get confidenceTier => $composableBuilder(
+    column: $table.confidenceTier,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sleepQuality => $composableBuilder(
+    column: $table.sleepQuality,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sorenessLevel => $composableBuilder(
+    column: $table.sorenessLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get stressLevel => $composableBuilder(
+    column: $table.stressLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get energyLevel => $composableBuilder(
+    column: $table.energyLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get restingHR => $composableBuilder(
+    column: $table.restingHR,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get hrv => $composableBuilder(
+    column: $table.hrv,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get sorenessRegions => $composableBuilder(
+    column: $table.sorenessRegions,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sleepNeedMinutes => $composableBuilder(
+    column: $table.sleepNeedMinutes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sleepPerformanceScore => $composableBuilder(
+    column: $table.sleepPerformanceScore,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get dailyStrainScore => $composableBuilder(
+    column: $table.dailyStrainScore,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get illnessRiskStatus => $composableBuilder(
+    column: $table.illnessRiskStatus,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get prescribedActionsJson => $composableBuilder(
+    column: $table.prescribedActionsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get recoveryDriversJson => $composableBuilder(
+    column: $table.recoveryDriversJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$RecoveryLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RecoveryLogsTable> {
+  $$RecoveryLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get localId =>
+      $composableBuilder(column: $table.localId, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get logDate =>
+      $composableBuilder(column: $table.logDate, builder: (column) => column);
+
+  GeneratedColumn<int> get readinessScore => $composableBuilder(
+    column: $table.readinessScore,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get confidenceTier => $composableBuilder(
+    column: $table.confidenceTier,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sleepQuality => $composableBuilder(
+    column: $table.sleepQuality,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sorenessLevel => $composableBuilder(
+    column: $table.sorenessLevel,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get stressLevel => $composableBuilder(
+    column: $table.stressLevel,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get energyLevel => $composableBuilder(
+    column: $table.energyLevel,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get restingHR =>
+      $composableBuilder(column: $table.restingHR, builder: (column) => column);
+
+  GeneratedColumn<double> get hrv =>
+      $composableBuilder(column: $table.hrv, builder: (column) => column);
+
+  GeneratedColumn<String> get sorenessRegions => $composableBuilder(
+    column: $table.sorenessRegions,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sleepNeedMinutes => $composableBuilder(
+    column: $table.sleepNeedMinutes,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sleepPerformanceScore => $composableBuilder(
+    column: $table.sleepPerformanceScore,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get dailyStrainScore => $composableBuilder(
+    column: $table.dailyStrainScore,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get illnessRiskStatus => $composableBuilder(
+    column: $table.illnessRiskStatus,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get prescribedActionsJson => $composableBuilder(
+    column: $table.prescribedActionsJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get recoveryDriversJson => $composableBuilder(
+    column: $table.recoveryDriversJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get syncStatus => $composableBuilder(
+    column: $table.syncStatus,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$RecoveryLogsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RecoveryLogsTable,
+          RecoveryLog,
+          $$RecoveryLogsTableFilterComposer,
+          $$RecoveryLogsTableOrderingComposer,
+          $$RecoveryLogsTableAnnotationComposer,
+          $$RecoveryLogsTableCreateCompanionBuilder,
+          $$RecoveryLogsTableUpdateCompanionBuilder,
+          (
+            RecoveryLog,
+            BaseReferences<_$AppDatabase, $RecoveryLogsTable, RecoveryLog>,
+          ),
+          RecoveryLog,
+          PrefetchHooks Function()
+        > {
+  $$RecoveryLogsTableTableManager(_$AppDatabase db, $RecoveryLogsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RecoveryLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RecoveryLogsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RecoveryLogsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> localId = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<DateTime> logDate = const Value.absent(),
+                Value<int> readinessScore = const Value.absent(),
+                Value<String> confidenceTier = const Value.absent(),
+                Value<int> sleepQuality = const Value.absent(),
+                Value<int> sorenessLevel = const Value.absent(),
+                Value<int> stressLevel = const Value.absent(),
+                Value<int> energyLevel = const Value.absent(),
+                Value<double?> restingHR = const Value.absent(),
+                Value<double?> hrv = const Value.absent(),
+                Value<String> sorenessRegions = const Value.absent(),
+                Value<int> sleepNeedMinutes = const Value.absent(),
+                Value<int> sleepPerformanceScore = const Value.absent(),
+                Value<double> dailyStrainScore = const Value.absent(),
+                Value<String> illnessRiskStatus = const Value.absent(),
+                Value<String> prescribedActionsJson = const Value.absent(),
+                Value<String> recoveryDriversJson = const Value.absent(),
+                Value<String> syncStatus = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RecoveryLogsCompanion(
+                localId: localId,
+                userId: userId,
+                logDate: logDate,
+                readinessScore: readinessScore,
+                confidenceTier: confidenceTier,
+                sleepQuality: sleepQuality,
+                sorenessLevel: sorenessLevel,
+                stressLevel: stressLevel,
+                energyLevel: energyLevel,
+                restingHR: restingHR,
+                hrv: hrv,
+                sorenessRegions: sorenessRegions,
+                sleepNeedMinutes: sleepNeedMinutes,
+                sleepPerformanceScore: sleepPerformanceScore,
+                dailyStrainScore: dailyStrainScore,
+                illnessRiskStatus: illnessRiskStatus,
+                prescribedActionsJson: prescribedActionsJson,
+                recoveryDriversJson: recoveryDriversJson,
+                syncStatus: syncStatus,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String localId,
+                required String userId,
+                required DateTime logDate,
+                required int readinessScore,
+                required String confidenceTier,
+                required int sleepQuality,
+                required int sorenessLevel,
+                required int stressLevel,
+                required int energyLevel,
+                Value<double?> restingHR = const Value.absent(),
+                Value<double?> hrv = const Value.absent(),
+                required String sorenessRegions,
+                Value<int> sleepNeedMinutes = const Value.absent(),
+                Value<int> sleepPerformanceScore = const Value.absent(),
+                Value<double> dailyStrainScore = const Value.absent(),
+                Value<String> illnessRiskStatus = const Value.absent(),
+                required String prescribedActionsJson,
+                required String recoveryDriversJson,
+                required String syncStatus,
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => RecoveryLogsCompanion.insert(
+                localId: localId,
+                userId: userId,
+                logDate: logDate,
+                readinessScore: readinessScore,
+                confidenceTier: confidenceTier,
+                sleepQuality: sleepQuality,
+                sorenessLevel: sorenessLevel,
+                stressLevel: stressLevel,
+                energyLevel: energyLevel,
+                restingHR: restingHR,
+                hrv: hrv,
+                sorenessRegions: sorenessRegions,
+                sleepNeedMinutes: sleepNeedMinutes,
+                sleepPerformanceScore: sleepPerformanceScore,
+                dailyStrainScore: dailyStrainScore,
+                illnessRiskStatus: illnessRiskStatus,
+                prescribedActionsJson: prescribedActionsJson,
+                recoveryDriversJson: recoveryDriversJson,
+                syncStatus: syncStatus,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$RecoveryLogsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RecoveryLogsTable,
+      RecoveryLog,
+      $$RecoveryLogsTableFilterComposer,
+      $$RecoveryLogsTableOrderingComposer,
+      $$RecoveryLogsTableAnnotationComposer,
+      $$RecoveryLogsTableCreateCompanionBuilder,
+      $$RecoveryLogsTableUpdateCompanionBuilder,
+      (
+        RecoveryLog,
+        BaseReferences<_$AppDatabase, $RecoveryLogsTable, RecoveryLog>,
+      ),
+      RecoveryLog,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -8655,4 +10335,6 @@ class $AppDatabaseManager {
       $$CachedDietPlansTableTableManager(_db, _db.cachedDietPlans);
   $$MenstrualSymptomLogsTableTableManager get menstrualSymptomLogs =>
       $$MenstrualSymptomLogsTableTableManager(_db, _db.menstrualSymptomLogs);
+  $$RecoveryLogsTableTableManager get recoveryLogs =>
+      $$RecoveryLogsTableTableManager(_db, _db.recoveryLogs);
 }

@@ -129,9 +129,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P2-C Recovery Log Screen
-- [ ] Build manual recovery logging UI
-- [ ] Persist to RecoveryLogs
-- [ ] Widget test
+- [x] Build manual recovery logging UI
+- [x] Persist to RecoveryLogs
+- [x] Widget test
 
 ### §P2-D Recovery Operating System
 - [ ] Implement Sleep Need Calculator

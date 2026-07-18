@@ -154,13 +154,39 @@ class CachedDietPlans extends Table {
   Set<Column> get primaryKey => {userId};
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs])
+class RecoveryLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get logDate => dateTime()();
+  IntColumn get readinessScore => integer()();
+  TextColumn get confidenceTier => text()(); // basic/enhanced/premium
+  IntColumn get sleepQuality => integer()();
+  IntColumn get sorenessLevel => integer()();
+  IntColumn get stressLevel => integer()();
+  IntColumn get energyLevel => integer()();
+  RealColumn get restingHR => real().nullable()();
+  RealColumn get hrv => real().nullable()();
+  TextColumn get sorenessRegions => text()();
+  IntColumn get sleepNeedMinutes => integer().withDefault(const Constant(480))();
+  IntColumn get sleepPerformanceScore => integer().withDefault(const Constant(100))();
+  RealColumn get dailyStrainScore => real().withDefault(const Constant(0.0))();
+  TextColumn get illnessRiskStatus => text().withDefault(const Constant('low'))();
+  TextColumn get prescribedActionsJson => text()();
+  TextColumn get recoveryDriversJson => text()();
+  TextColumn get syncStatus => text()();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs, RecoveryLogs])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 23;
+  int get schemaVersion => 24;
 
   @override
   MigrationStrategy get migration {
@@ -177,6 +203,9 @@ class AppDatabase extends _$AppDatabase {
           await migrator.addColumn(users, users.averageCycleLength);
           await migrator.addColumn(users, users.lastPeriodDate);
           await migrator.createTable(menstrualSymptomLogs);
+        }
+        if (from < 24) {
+          await migrator.createTable(recoveryLogs);
         }
       },
     );
@@ -216,6 +245,19 @@ class AppDatabase extends _$AppDatabase {
 
   Future<List<MenstrualSymptomLog>> getMenstrualSymptomLogs(String userId) async {
     return (select(menstrualSymptomLogs)
+          ..where((t) => t.userId.equals(userId))
+          ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc)]))
+        .get();
+  }
+
+  // ── Recovery Logs helpers ──────────────────────────────────────────────────
+
+  Future<void> saveRecoveryLog(RecoveryLogsCompanion log) async {
+    await into(recoveryLogs).insertOnConflictUpdate(log);
+  }
+
+  Future<List<RecoveryLog>> getRecoveryLogs(String userId) async {
+    return (select(recoveryLogs)
           ..where((t) => t.userId.equals(userId))
           ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc)]))
         .get();
