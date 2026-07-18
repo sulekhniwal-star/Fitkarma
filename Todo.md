@@ -149,7 +149,7 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 3 — AI ADAPTIVE COACH
 
 ### §P3-A AI Coach Philosophy
-- [ ] Document coach tone/persona rules referenced by prompt templates
+- [x] Document coach tone/persona rules referenced by prompt templates
 
 ### §P3-B AI Context Builder
 - [ ] Implement context compression (snapshot → prompt payload)
