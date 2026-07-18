@@ -88,8 +88,13 @@ class AIContext {
       
       // If still exceeding, perform aggressive truncation
       if (estimatedTokens > tokenBudget) {
-        final allowedChars = tokenBudget * 4;
-        payload = payload.substring(0, allowedChars) + "... [truncated]";
+        const suffix = "... [truncated]";
+        final allowedChars = (tokenBudget * 4) - suffix.length;
+        if (allowedChars > 0 && allowedChars < payload.length) {
+          payload = payload.substring(0, allowedChars) + suffix;
+        } else {
+          payload = suffix;
+        }
       }
     }
 

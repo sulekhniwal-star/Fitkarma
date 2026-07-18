@@ -152,8 +152,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Document coach tone/persona rules referenced by prompt templates
 
 ### §P3-B AI Context Builder
-- [ ] Implement context compression (snapshot → prompt payload)
-- [ ] Unit tests for token-budget compliance
+- [x] Implement context compression (snapshot → prompt payload)
+- [x] Unit tests for token-budget compliance
 
 ### §P3-C AI Coach Screen
 - [ ] Build chat UI
