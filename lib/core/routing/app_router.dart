@@ -14,6 +14,8 @@ import 'package:fitkarma/features/onboarding/goals_screen.dart';
 import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
 import 'package:fitkarma/features/onboarding/program_select_screen.dart';
 import 'package:fitkarma/features/onboarding/welcome_screen.dart';
+import 'package:fitkarma/features/dashboard/dashboard_screen.dart';
+import 'package:fitkarma/features/steps/steps_screen.dart';
 import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -38,6 +40,7 @@ class AppRoutes {
   static const mission   = '/mission';
   static const recovery  = '/recovery';
   static const aiCoach   = '/ai-coach';
+  static const steps     = '/steps';
 
   // Auth
   static const login = '/login';
@@ -254,7 +257,7 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.dashboard,
           pageBuilder: (context, state) =>
-              _fadeTransition(state, const _DashboardPlaceholder()),
+              _fadeTransition(state, const DashboardScreen()),
         ),
         GoRoute(
           path: AppRoutes.mission,
@@ -265,6 +268,11 @@ class AppRouter {
           path: AppRoutes.recovery,
           pageBuilder: (context, state) =>
               _slideTransition(state, const RecoveryLogScreen()),
+        ),
+        GoRoute(
+          path: AppRoutes.steps,
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const StepsScreen()),
         ),
         GoRoute(
           path: AppRoutes.aiCoach,

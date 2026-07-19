@@ -167,13 +167,13 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 4 — HEALTH TRACKING
 
 ### §P4-A Dashboard Screen
-- [ ] Build UI aggregating steps/sleep/BP/glucose widgets
-- [ ] Widget test
+- [x] Build UI aggregating steps/sleep/BP/glucose widgets
+- [x] Widget test
 
 ### §P4-B Steps Screen
-- [ ] Build UI + Health Connect/HealthKit sync
-- [ ] Persist to step logs (CumulativeLog pattern, §P0-C)
-- [ ] Widget test
+- [x] Build UI + Health Connect/HealthKit sync
+- [x] Persist to step logs (CumulativeLog pattern, §P0-C)
+- [x] Widget test
 
 ### §P4-C Sleep Screen
 - [ ] Build UI + wearable/manual sleep entry

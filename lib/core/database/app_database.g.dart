@@ -7893,6 +7893,473 @@ class EscalationEventsCompanion extends UpdateCompanion<EscalationEvent> {
   }
 }
 
+class $StepLogsTable extends StepLogs with TableInfo<$StepLogsTable, StepLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $StepLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _stepsMeta = const VerificationMeta('steps');
+  @override
+  late final GeneratedColumn<int> steps = GeneratedColumn<int>(
+    'steps',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _syncBatchIdMeta = const VerificationMeta(
+    'syncBatchId',
+  );
+  @override
+  late final GeneratedColumn<String> syncBatchId = GeneratedColumn<String>(
+    'sync_batch_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _loggedAtMeta = const VerificationMeta(
+    'loggedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> loggedAt = GeneratedColumn<DateTime>(
+    'logged_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _hlcPhysicalTimeMeta = const VerificationMeta(
+    'hlcPhysicalTime',
+  );
+  @override
+  late final GeneratedColumn<DateTime> hlcPhysicalTime =
+      GeneratedColumn<DateTime>(
+        'hlc_physical_time',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _hlcLogicalCounterMeta = const VerificationMeta(
+    'hlcLogicalCounter',
+  );
+  @override
+  late final GeneratedColumn<int> hlcLogicalCounter = GeneratedColumn<int>(
+    'hlc_logical_counter',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _hlcNodeIdMeta = const VerificationMeta(
+    'hlcNodeId',
+  );
+  @override
+  late final GeneratedColumn<String> hlcNodeId = GeneratedColumn<String>(
+    'hlc_node_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    steps,
+    syncBatchId,
+    loggedAt,
+    hlcPhysicalTime,
+    hlcLogicalCounter,
+    hlcNodeId,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'step_logs';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<StepLog> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('steps')) {
+      context.handle(
+        _stepsMeta,
+        steps.isAcceptableOrUnknown(data['steps']!, _stepsMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_stepsMeta);
+    }
+    if (data.containsKey('sync_batch_id')) {
+      context.handle(
+        _syncBatchIdMeta,
+        syncBatchId.isAcceptableOrUnknown(
+          data['sync_batch_id']!,
+          _syncBatchIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_syncBatchIdMeta);
+    }
+    if (data.containsKey('logged_at')) {
+      context.handle(
+        _loggedAtMeta,
+        loggedAt.isAcceptableOrUnknown(data['logged_at']!, _loggedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_loggedAtMeta);
+    }
+    if (data.containsKey('hlc_physical_time')) {
+      context.handle(
+        _hlcPhysicalTimeMeta,
+        hlcPhysicalTime.isAcceptableOrUnknown(
+          data['hlc_physical_time']!,
+          _hlcPhysicalTimeMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_hlcPhysicalTimeMeta);
+    }
+    if (data.containsKey('hlc_logical_counter')) {
+      context.handle(
+        _hlcLogicalCounterMeta,
+        hlcLogicalCounter.isAcceptableOrUnknown(
+          data['hlc_logical_counter']!,
+          _hlcLogicalCounterMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_hlcLogicalCounterMeta);
+    }
+    if (data.containsKey('hlc_node_id')) {
+      context.handle(
+        _hlcNodeIdMeta,
+        hlcNodeId.isAcceptableOrUnknown(data['hlc_node_id']!, _hlcNodeIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_hlcNodeIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  StepLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return StepLog(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      steps: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}steps'],
+      )!,
+      syncBatchId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sync_batch_id'],
+      )!,
+      loggedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}logged_at'],
+      )!,
+      hlcPhysicalTime: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}hlc_physical_time'],
+      )!,
+      hlcLogicalCounter: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}hlc_logical_counter'],
+      )!,
+      hlcNodeId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}hlc_node_id'],
+      )!,
+    );
+  }
+
+  @override
+  $StepLogsTable createAlias(String alias) {
+    return $StepLogsTable(attachedDatabase, alias);
+  }
+}
+
+class StepLog extends DataClass implements Insertable<StepLog> {
+  final int id;
+  final int steps;
+  final String syncBatchId;
+  final DateTime loggedAt;
+  final DateTime hlcPhysicalTime;
+  final int hlcLogicalCounter;
+  final String hlcNodeId;
+  const StepLog({
+    required this.id,
+    required this.steps,
+    required this.syncBatchId,
+    required this.loggedAt,
+    required this.hlcPhysicalTime,
+    required this.hlcLogicalCounter,
+    required this.hlcNodeId,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['steps'] = Variable<int>(steps);
+    map['sync_batch_id'] = Variable<String>(syncBatchId);
+    map['logged_at'] = Variable<DateTime>(loggedAt);
+    map['hlc_physical_time'] = Variable<DateTime>(hlcPhysicalTime);
+    map['hlc_logical_counter'] = Variable<int>(hlcLogicalCounter);
+    map['hlc_node_id'] = Variable<String>(hlcNodeId);
+    return map;
+  }
+
+  StepLogsCompanion toCompanion(bool nullToAbsent) {
+    return StepLogsCompanion(
+      id: Value(id),
+      steps: Value(steps),
+      syncBatchId: Value(syncBatchId),
+      loggedAt: Value(loggedAt),
+      hlcPhysicalTime: Value(hlcPhysicalTime),
+      hlcLogicalCounter: Value(hlcLogicalCounter),
+      hlcNodeId: Value(hlcNodeId),
+    );
+  }
+
+  factory StepLog.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return StepLog(
+      id: serializer.fromJson<int>(json['id']),
+      steps: serializer.fromJson<int>(json['steps']),
+      syncBatchId: serializer.fromJson<String>(json['syncBatchId']),
+      loggedAt: serializer.fromJson<DateTime>(json['loggedAt']),
+      hlcPhysicalTime: serializer.fromJson<DateTime>(json['hlcPhysicalTime']),
+      hlcLogicalCounter: serializer.fromJson<int>(json['hlcLogicalCounter']),
+      hlcNodeId: serializer.fromJson<String>(json['hlcNodeId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'steps': serializer.toJson<int>(steps),
+      'syncBatchId': serializer.toJson<String>(syncBatchId),
+      'loggedAt': serializer.toJson<DateTime>(loggedAt),
+      'hlcPhysicalTime': serializer.toJson<DateTime>(hlcPhysicalTime),
+      'hlcLogicalCounter': serializer.toJson<int>(hlcLogicalCounter),
+      'hlcNodeId': serializer.toJson<String>(hlcNodeId),
+    };
+  }
+
+  StepLog copyWith({
+    int? id,
+    int? steps,
+    String? syncBatchId,
+    DateTime? loggedAt,
+    DateTime? hlcPhysicalTime,
+    int? hlcLogicalCounter,
+    String? hlcNodeId,
+  }) => StepLog(
+    id: id ?? this.id,
+    steps: steps ?? this.steps,
+    syncBatchId: syncBatchId ?? this.syncBatchId,
+    loggedAt: loggedAt ?? this.loggedAt,
+    hlcPhysicalTime: hlcPhysicalTime ?? this.hlcPhysicalTime,
+    hlcLogicalCounter: hlcLogicalCounter ?? this.hlcLogicalCounter,
+    hlcNodeId: hlcNodeId ?? this.hlcNodeId,
+  );
+  StepLog copyWithCompanion(StepLogsCompanion data) {
+    return StepLog(
+      id: data.id.present ? data.id.value : this.id,
+      steps: data.steps.present ? data.steps.value : this.steps,
+      syncBatchId: data.syncBatchId.present
+          ? data.syncBatchId.value
+          : this.syncBatchId,
+      loggedAt: data.loggedAt.present ? data.loggedAt.value : this.loggedAt,
+      hlcPhysicalTime: data.hlcPhysicalTime.present
+          ? data.hlcPhysicalTime.value
+          : this.hlcPhysicalTime,
+      hlcLogicalCounter: data.hlcLogicalCounter.present
+          ? data.hlcLogicalCounter.value
+          : this.hlcLogicalCounter,
+      hlcNodeId: data.hlcNodeId.present ? data.hlcNodeId.value : this.hlcNodeId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('StepLog(')
+          ..write('id: $id, ')
+          ..write('steps: $steps, ')
+          ..write('syncBatchId: $syncBatchId, ')
+          ..write('loggedAt: $loggedAt, ')
+          ..write('hlcPhysicalTime: $hlcPhysicalTime, ')
+          ..write('hlcLogicalCounter: $hlcLogicalCounter, ')
+          ..write('hlcNodeId: $hlcNodeId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    steps,
+    syncBatchId,
+    loggedAt,
+    hlcPhysicalTime,
+    hlcLogicalCounter,
+    hlcNodeId,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is StepLog &&
+          other.id == this.id &&
+          other.steps == this.steps &&
+          other.syncBatchId == this.syncBatchId &&
+          other.loggedAt == this.loggedAt &&
+          other.hlcPhysicalTime == this.hlcPhysicalTime &&
+          other.hlcLogicalCounter == this.hlcLogicalCounter &&
+          other.hlcNodeId == this.hlcNodeId);
+}
+
+class StepLogsCompanion extends UpdateCompanion<StepLog> {
+  final Value<int> id;
+  final Value<int> steps;
+  final Value<String> syncBatchId;
+  final Value<DateTime> loggedAt;
+  final Value<DateTime> hlcPhysicalTime;
+  final Value<int> hlcLogicalCounter;
+  final Value<String> hlcNodeId;
+  const StepLogsCompanion({
+    this.id = const Value.absent(),
+    this.steps = const Value.absent(),
+    this.syncBatchId = const Value.absent(),
+    this.loggedAt = const Value.absent(),
+    this.hlcPhysicalTime = const Value.absent(),
+    this.hlcLogicalCounter = const Value.absent(),
+    this.hlcNodeId = const Value.absent(),
+  });
+  StepLogsCompanion.insert({
+    this.id = const Value.absent(),
+    required int steps,
+    required String syncBatchId,
+    required DateTime loggedAt,
+    required DateTime hlcPhysicalTime,
+    required int hlcLogicalCounter,
+    required String hlcNodeId,
+  }) : steps = Value(steps),
+       syncBatchId = Value(syncBatchId),
+       loggedAt = Value(loggedAt),
+       hlcPhysicalTime = Value(hlcPhysicalTime),
+       hlcLogicalCounter = Value(hlcLogicalCounter),
+       hlcNodeId = Value(hlcNodeId);
+  static Insertable<StepLog> custom({
+    Expression<int>? id,
+    Expression<int>? steps,
+    Expression<String>? syncBatchId,
+    Expression<DateTime>? loggedAt,
+    Expression<DateTime>? hlcPhysicalTime,
+    Expression<int>? hlcLogicalCounter,
+    Expression<String>? hlcNodeId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (steps != null) 'steps': steps,
+      if (syncBatchId != null) 'sync_batch_id': syncBatchId,
+      if (loggedAt != null) 'logged_at': loggedAt,
+      if (hlcPhysicalTime != null) 'hlc_physical_time': hlcPhysicalTime,
+      if (hlcLogicalCounter != null) 'hlc_logical_counter': hlcLogicalCounter,
+      if (hlcNodeId != null) 'hlc_node_id': hlcNodeId,
+    });
+  }
+
+  StepLogsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? steps,
+    Value<String>? syncBatchId,
+    Value<DateTime>? loggedAt,
+    Value<DateTime>? hlcPhysicalTime,
+    Value<int>? hlcLogicalCounter,
+    Value<String>? hlcNodeId,
+  }) {
+    return StepLogsCompanion(
+      id: id ?? this.id,
+      steps: steps ?? this.steps,
+      syncBatchId: syncBatchId ?? this.syncBatchId,
+      loggedAt: loggedAt ?? this.loggedAt,
+      hlcPhysicalTime: hlcPhysicalTime ?? this.hlcPhysicalTime,
+      hlcLogicalCounter: hlcLogicalCounter ?? this.hlcLogicalCounter,
+      hlcNodeId: hlcNodeId ?? this.hlcNodeId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (steps.present) {
+      map['steps'] = Variable<int>(steps.value);
+    }
+    if (syncBatchId.present) {
+      map['sync_batch_id'] = Variable<String>(syncBatchId.value);
+    }
+    if (loggedAt.present) {
+      map['logged_at'] = Variable<DateTime>(loggedAt.value);
+    }
+    if (hlcPhysicalTime.present) {
+      map['hlc_physical_time'] = Variable<DateTime>(hlcPhysicalTime.value);
+    }
+    if (hlcLogicalCounter.present) {
+      map['hlc_logical_counter'] = Variable<int>(hlcLogicalCounter.value);
+    }
+    if (hlcNodeId.present) {
+      map['hlc_node_id'] = Variable<String>(hlcNodeId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('StepLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('steps: $steps, ')
+          ..write('syncBatchId: $syncBatchId, ')
+          ..write('loggedAt: $loggedAt, ')
+          ..write('hlcPhysicalTime: $hlcPhysicalTime, ')
+          ..write('hlcLogicalCounter: $hlcLogicalCounter, ')
+          ..write('hlcNodeId: $hlcNodeId')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -7916,6 +8383,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $EscalationEventsTable escalationEvents = $EscalationEventsTable(
     this,
   );
+  late final $StepLogsTable stepLogs = $StepLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -7933,6 +8401,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     recoveryLogs,
     chatMessages,
     escalationEvents,
+    stepLogs,
   ];
 }
 
@@ -11743,6 +12212,238 @@ typedef $$EscalationEventsTableProcessedTableManager =
       EscalationEvent,
       PrefetchHooks Function()
     >;
+typedef $$StepLogsTableCreateCompanionBuilder =
+    StepLogsCompanion Function({
+      Value<int> id,
+      required int steps,
+      required String syncBatchId,
+      required DateTime loggedAt,
+      required DateTime hlcPhysicalTime,
+      required int hlcLogicalCounter,
+      required String hlcNodeId,
+    });
+typedef $$StepLogsTableUpdateCompanionBuilder =
+    StepLogsCompanion Function({
+      Value<int> id,
+      Value<int> steps,
+      Value<String> syncBatchId,
+      Value<DateTime> loggedAt,
+      Value<DateTime> hlcPhysicalTime,
+      Value<int> hlcLogicalCounter,
+      Value<String> hlcNodeId,
+    });
+
+class $$StepLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $StepLogsTable> {
+  $$StepLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get steps => $composableBuilder(
+    column: $table.steps,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get syncBatchId => $composableBuilder(
+    column: $table.syncBatchId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get loggedAt => $composableBuilder(
+    column: $table.loggedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get hlcPhysicalTime => $composableBuilder(
+    column: $table.hlcPhysicalTime,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get hlcLogicalCounter => $composableBuilder(
+    column: $table.hlcLogicalCounter,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get hlcNodeId => $composableBuilder(
+    column: $table.hlcNodeId,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$StepLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $StepLogsTable> {
+  $$StepLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get steps => $composableBuilder(
+    column: $table.steps,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get syncBatchId => $composableBuilder(
+    column: $table.syncBatchId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get loggedAt => $composableBuilder(
+    column: $table.loggedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get hlcPhysicalTime => $composableBuilder(
+    column: $table.hlcPhysicalTime,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get hlcLogicalCounter => $composableBuilder(
+    column: $table.hlcLogicalCounter,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get hlcNodeId => $composableBuilder(
+    column: $table.hlcNodeId,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$StepLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $StepLogsTable> {
+  $$StepLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get steps =>
+      $composableBuilder(column: $table.steps, builder: (column) => column);
+
+  GeneratedColumn<String> get syncBatchId => $composableBuilder(
+    column: $table.syncBatchId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get loggedAt =>
+      $composableBuilder(column: $table.loggedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get hlcPhysicalTime => $composableBuilder(
+    column: $table.hlcPhysicalTime,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get hlcLogicalCounter => $composableBuilder(
+    column: $table.hlcLogicalCounter,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get hlcNodeId =>
+      $composableBuilder(column: $table.hlcNodeId, builder: (column) => column);
+}
+
+class $$StepLogsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $StepLogsTable,
+          StepLog,
+          $$StepLogsTableFilterComposer,
+          $$StepLogsTableOrderingComposer,
+          $$StepLogsTableAnnotationComposer,
+          $$StepLogsTableCreateCompanionBuilder,
+          $$StepLogsTableUpdateCompanionBuilder,
+          (StepLog, BaseReferences<_$AppDatabase, $StepLogsTable, StepLog>),
+          StepLog,
+          PrefetchHooks Function()
+        > {
+  $$StepLogsTableTableManager(_$AppDatabase db, $StepLogsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$StepLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$StepLogsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$StepLogsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> steps = const Value.absent(),
+                Value<String> syncBatchId = const Value.absent(),
+                Value<DateTime> loggedAt = const Value.absent(),
+                Value<DateTime> hlcPhysicalTime = const Value.absent(),
+                Value<int> hlcLogicalCounter = const Value.absent(),
+                Value<String> hlcNodeId = const Value.absent(),
+              }) => StepLogsCompanion(
+                id: id,
+                steps: steps,
+                syncBatchId: syncBatchId,
+                loggedAt: loggedAt,
+                hlcPhysicalTime: hlcPhysicalTime,
+                hlcLogicalCounter: hlcLogicalCounter,
+                hlcNodeId: hlcNodeId,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int steps,
+                required String syncBatchId,
+                required DateTime loggedAt,
+                required DateTime hlcPhysicalTime,
+                required int hlcLogicalCounter,
+                required String hlcNodeId,
+              }) => StepLogsCompanion.insert(
+                id: id,
+                steps: steps,
+                syncBatchId: syncBatchId,
+                loggedAt: loggedAt,
+                hlcPhysicalTime: hlcPhysicalTime,
+                hlcLogicalCounter: hlcLogicalCounter,
+                hlcNodeId: hlcNodeId,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$StepLogsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $StepLogsTable,
+      StepLog,
+      $$StepLogsTableFilterComposer,
+      $$StepLogsTableOrderingComposer,
+      $$StepLogsTableAnnotationComposer,
+      $$StepLogsTableCreateCompanionBuilder,
+      $$StepLogsTableUpdateCompanionBuilder,
+      (StepLog, BaseReferences<_$AppDatabase, $StepLogsTable, StepLog>),
+      StepLog,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -11777,4 +12478,6 @@ class $AppDatabaseManager {
       $$ChatMessagesTableTableManager(_db, _db.chatMessages);
   $$EscalationEventsTableTableManager get escalationEvents =>
       $$EscalationEventsTableTableManager(_db, _db.escalationEvents);
+  $$StepLogsTableTableManager get stepLogs =>
+      $$StepLogsTableTableManager(_db, _db.stepLogs);
 }

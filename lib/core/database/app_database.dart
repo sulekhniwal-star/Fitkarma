@@ -200,13 +200,39 @@ class EscalationEvents extends Table {
   DateTimeColumn get resolvedAt => dateTime().nullable()();
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs, RecoveryLogs, ChatMessages, EscalationEvents])
+class StepLogs extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get steps => integer()();
+  TextColumn get syncBatchId => text()();
+  DateTimeColumn get loggedAt => dateTime()();
+
+  // HLC logical components
+  DateTimeColumn get hlcPhysicalTime => dateTime()();
+  IntColumn get hlcLogicalCounter => integer()();
+  TextColumn get hlcNodeId => text()();
+}
+
+@DriftDatabase(tables: [
+  Users,
+  WaterLogs,
+  SyncQueueItems,
+  DeadLetterQueueItems,
+  DailyIntelligencePackages,
+  AICacheEntries,
+  TransformationMemories,
+  CachedDietPlans,
+  MenstrualSymptomLogs,
+  RecoveryLogs,
+  ChatMessages,
+  EscalationEvents,
+  StepLogs,
+])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 26;
+  int get schemaVersion => 27;
 
   @override
   MigrationStrategy get migration {
@@ -233,6 +259,9 @@ class AppDatabase extends _$AppDatabase {
         if (from < 26) {
           await migrator.addColumn(users, users.subscriptionTier);
           await migrator.createTable(escalationEvents);
+        }
+        if (from < 27) {
+          await migrator.createTable(stepLogs);
         }
       },
     );
