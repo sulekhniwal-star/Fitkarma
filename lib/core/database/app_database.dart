@@ -231,6 +231,14 @@ class SleepLogs extends Table {
   TextColumn get hlcNodeId => text()();
 }
 
+class BpReadings extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get systolic => integer()();
+  IntColumn get diastolic => integer()();
+  DateTimeColumn get measuredAt => dateTime()();
+  TextColumn get recordingMethod => text()(); // 'manual' or 'wearable'
+}
+
 @DriftDatabase(tables: [
   Users,
   WaterLogs,
@@ -246,13 +254,14 @@ class SleepLogs extends Table {
   EscalationEvents,
   StepLogs,
   SleepLogs,
+  BpReadings,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 28;
+  int get schemaVersion => 29;
 
   @override
   MigrationStrategy get migration {
@@ -285,6 +294,9 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 28) {
           await migrator.createTable(sleepLogs);
+        }
+        if (from < 29) {
+          await migrator.createTable(bpReadings);
         }
       },
     );

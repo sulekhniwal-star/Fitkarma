@@ -181,9 +181,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P4-D Blood Pressure Screen
-- [ ] Build manual BP entry UI
-- [ ] Persist to BpReadings
-- [ ] Widget test
+- [x] Build manual BP entry UI
+- [x] Persist to BpReadings
+- [x] Widget test
 
 ### §P4-E Glucose Screen
 - [ ] Build manual glucose entry UI
