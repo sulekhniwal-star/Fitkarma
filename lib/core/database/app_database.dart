@@ -26,6 +26,7 @@ class Users extends Table {
   BoolColumn get isCycleTrackingEnabled => boolean().nullable()();
   IntColumn get averageCycleLength => integer().nullable()();
   DateTimeColumn get lastPeriodDate => dateTime().nullable()();
+  TextColumn get subscriptionTier => text().withDefault(const Constant('free'))();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -190,13 +191,22 @@ class ChatMessages extends Table {
   TextColumn get localAttachmentPath => text().nullable()();
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs, RecoveryLogs, ChatMessages])
+class EscalationEvents extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get userId => text()();
+  TextColumn get reason => text()();
+  TextColumn get briefing => text()();
+  DateTimeColumn get escalatedAt => dateTime()();
+  DateTimeColumn get resolvedAt => dateTime().nullable()();
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs, RecoveryLogs, ChatMessages, EscalationEvents])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 25;
+  int get schemaVersion => 26;
 
   @override
   MigrationStrategy get migration {
@@ -220,6 +230,10 @@ class AppDatabase extends _$AppDatabase {
         if (from < 25) {
           await migrator.createTable(chatMessages);
         }
+        if (from < 26) {
+          await migrator.addColumn(users, users.subscriptionTier);
+          await migrator.createTable(escalationEvents);
+        }
       },
     );
   }
@@ -235,6 +249,7 @@ class AppDatabase extends _$AppDatabase {
     bool? isCycleTrackingEnabled,
     int? averageCycleLength,
     DateTime? lastPeriodDate,
+    String? subscriptionTier,
   }) async {
     await (update(users)
       ..where((t) => t.id.equals(userId)))
@@ -247,6 +262,7 @@ class AppDatabase extends _$AppDatabase {
         isCycleTrackingEnabled: isCycleTrackingEnabled != null ? Value(isCycleTrackingEnabled) : const Value.absent(),
         averageCycleLength: averageCycleLength != null ? Value(averageCycleLength) : const Value.absent(),
         lastPeriodDate: lastPeriodDate != null ? Value(lastPeriodDate) : const Value.absent(),
+        subscriptionTier: subscriptionTier != null ? Value(subscriptionTier) : const Value.absent(),
       ));
   }
 
@@ -342,9 +358,22 @@ class AppDatabase extends _$AppDatabase {
     return (select(cachedDietPlans)
           ..where(
             (t) => t.userId.equals(userId) &
-                t.expiresAt.isBiggerThanValue(DateTime.now()),
+                 t.expiresAt.isBiggerThanValue(DateTime.now()),
           ))
         .getSingleOrNull();
+  }
+
+  // ── Escalation Events helpers ──────────────────────────────────────────────
+
+  Future<void> saveEscalationEvent(EscalationEventsCompanion event) async {
+    await into(escalationEvents).insertOnConflictUpdate(event);
+  }
+
+  Future<List<EscalationEvent>> getEscalationEvents(String userId) async {
+    return (select(escalationEvents)
+          ..where((t) => t.userId.equals(userId))
+          ..orderBy([(t) => OrderingTerm(expression: t.escalatedAt, mode: OrderingMode.desc)]))
+        .get();
   }
 }
 

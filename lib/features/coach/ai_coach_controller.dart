@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/features/coach/coach_escalation_service.dart';
 
 class AiCoachChatState {
   final List<ChatMessage> messages;
@@ -9,6 +10,9 @@ class AiCoachChatState {
   final bool errorOccurred;
   final String? currentConversationId;
   final bool isOffline;
+  final bool isEscalated;
+  final String? activeEscalationBriefing;
+  final String subscriptionTier;
 
   const AiCoachChatState({
     this.messages = const [],
@@ -16,6 +20,9 @@ class AiCoachChatState {
     this.errorOccurred = false,
     this.currentConversationId,
     this.isOffline = false,
+    this.isEscalated = false,
+    this.activeEscalationBriefing,
+    this.subscriptionTier = 'free',
   });
 
   AiCoachChatState copyWith({
@@ -24,6 +31,9 @@ class AiCoachChatState {
     bool? errorOccurred,
     String? currentConversationId,
     bool? isOffline,
+    bool? isEscalated,
+    String? activeEscalationBriefing,
+    String? subscriptionTier,
   }) {
     return AiCoachChatState(
       messages: messages ?? this.messages,
@@ -31,6 +41,9 @@ class AiCoachChatState {
       errorOccurred: errorOccurred ?? this.errorOccurred,
       currentConversationId: currentConversationId ?? this.currentConversationId,
       isOffline: isOffline ?? this.isOffline,
+      isEscalated: isEscalated ?? this.isEscalated,
+      activeEscalationBriefing: activeEscalationBriefing ?? this.activeEscalationBriefing,
+      subscriptionTier: subscriptionTier ?? this.subscriptionTier,
     );
   }
 }
@@ -48,16 +61,59 @@ class AiCoachChatNotifier extends Notifier<AiCoachChatState> {
     required AppDatabase db,
   }) async {
     final cached = await db.getChatMessages(conversationId);
+    final user = await (db.select(db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+    final tier = user?.subscriptionTier ?? 'free';
+
+    final escalations = await db.getEscalationEvents(userId);
+    final activeEscalation = escalations.where((e) => e.resolvedAt == null).firstOrNull;
+
     state = state.copyWith(
       currentConversationId: conversationId,
       messages: cached,
       errorOccurred: false,
+      subscriptionTier: tier,
+      isEscalated: activeEscalation != null,
+      activeEscalationBriefing: activeEscalation?.briefing,
     );
   }
 
   /// Sets the offline status of the chat.
   void setOfflineStatus(bool isOffline) {
     state = state.copyWith(isOffline: isOffline);
+  }
+
+  /// Updates subscription tier helper.
+  Future<void> updateSubscriptionTier(String tier, String userId, AppDatabase db) async {
+    await db.updateUserProfile(userId: userId, subscriptionTier: tier);
+    state = state.copyWith(subscriptionTier: tier);
+  }
+
+  /// Manually escalate to a human coach.
+  Future<void> escalateToHumanCoach({
+    required String userId,
+    required String reason,
+    required AppDatabase db,
+  }) async {
+    final service = CoachEscalationService();
+    await service.escalate(userId: userId, reason: reason, db: db);
+
+    final escalations = await db.getEscalationEvents(userId);
+    final activeEscalation = escalations.where((e) => e.resolvedAt == null).firstOrNull;
+
+    state = state.copyWith(
+      isEscalated: true,
+      activeEscalationBriefing: activeEscalation?.briefing,
+      messages: [
+        ...state.messages,
+        ChatMessage(
+          id: -4,
+          conversationId: state.currentConversationId ?? 'temp',
+          senderType: 'ai',
+          messageContent: "Plan under human review. A certified coach will respond shortly.",
+          createdAt: DateTime.now(),
+        )
+      ],
+    );
   }
 
   /// Sends a user message with optimistic updates, triggers mock Azure Function,
@@ -97,6 +153,29 @@ class AiCoachChatNotifier extends Notifier<AiCoachChatState> {
       createdAt: userCreatedAt,
       localAttachmentPath: Value(localAttachmentPath),
     ));
+
+    // Check triggers if eliteCoach tier
+    bool triggered = false;
+    String triggerReason = "";
+    if (state.subscriptionTier == 'eliteCoach') {
+      final lowerText = text.toLowerCase();
+      if (lowerText.contains("plateau")) {
+        triggered = true;
+        triggerReason = "Metabolic plateau detected in message: '$text'";
+      } else if (lowerText.contains("relapse") || lowerText.contains("distress")) {
+        triggered = true;
+        triggerReason = "Psychological distress signal in message: '$text'";
+      } else if (lowerText.contains("human coach") || lowerText.contains("human review") || lowerText.contains("talk to a human")) {
+        triggered = true;
+        triggerReason = "User explicitly requested human coach in message: '$text'";
+      }
+    }
+
+    if (triggered) {
+      state = state.copyWith(isAiTyping: false);
+      await escalateToHumanCoach(userId: userId, reason: triggerReason, db: db);
+      return;
+    }
 
     // 2. Handle Offline / Connection errors
     if (!isOnline || state.isOffline) {
@@ -228,3 +307,4 @@ class AzureCoachResponse {
 final aiCoachChatProvider = NotifierProvider<AiCoachChatNotifier, AiCoachChatState>(
   AiCoachChatNotifier.new,
 );
+

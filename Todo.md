@@ -158,9 +158,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 ### 
 
 ### §P3-D Health Coach Escalation Layer
-- [ ] Implement escalation trigger logic (Elite tier)
-- [ ] Build human-coach handoff UI/workflow
-- [ ] Wire escalation event logging
+- [x] Implement escalation trigger logic (Elite tier)
+- [x] Build human-coach handoff UI/workflow
+- [x] Wire escalation event logging
 
 ---
 

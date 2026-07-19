@@ -112,6 +112,23 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
           style: AppTypography.h3.copyWith(color: textPrimary),
         ),
         actions: [
+          // Tier Switcher
+          PopupMenuButton<String>(
+            icon: Icon(Icons.verified_user_rounded, color: accentColor),
+            tooltip: "Switch Tier",
+            onSelected: (tier) {
+              ref.read(aiCoachChatProvider.notifier).updateSubscriptionTier(
+                tier,
+                widget.userId,
+                ref.read(databaseProvider),
+              );
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(value: 'free', child: Text('Free Tier')),
+              const PopupMenuItem(value: 'pro', child: Text('Pro Tier')),
+              const PopupMenuItem(value: 'eliteCoach', child: Text('Elite Tier')),
+            ],
+          ),
           // Toggle offline mode switch for demo/testing convenience
           Row(
             children: [
@@ -148,7 +165,47 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
+
+            // Elite Tier Human Handoff Trigger Button
+            if (state.subscriptionTier == 'eliteCoach' && !state.isEscalated)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenH, vertical: 4),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TextButton.icon(
+                    icon: const Icon(Icons.phone_in_talk_rounded, size: 18),
+                    label: const Text('Talk to a Human Coach'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: accentColor,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    onPressed: () => _showEscalationBottomSheet(context, state, ref.read(aiCoachChatProvider.notifier)),
+                  ),
+                ),
+              ),
+
+            // Escalation status banner
+            if (state.isEscalated)
+              Container(
+                width: double.infinity,
+                color: Colors.blue.withOpacity(0.2),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Row(
+                  children: [
+                    const Icon(Icons.support_agent_rounded, color: Colors.blue, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Plan under human review. A certified coach will respond shortly.',
+                        style: AppTypography.bodySm.copyWith(color: Colors.blue[800], fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
             // Offline banner
             if (state.isOffline)
@@ -430,6 +487,76 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showEscalationBottomSheet(BuildContext context, AiCoachChatState state, AiCoachChatNotifier notifier) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
+        final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
+        return Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: cardBg,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Request Human Coach Handoff',
+                style: AppTypography.h3.copyWith(color: textPrimary),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Your health coach will review your full plan and respond within 24 hours via in-app message.',
+                style: AppTypography.bodyMd.copyWith(color: textPrimary.withOpacity(0.8)),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Continue with AI Coach'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColorsDark.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        await notifier.escalateToHumanCoach(
+                          userId: widget.userId,
+                          reason: "User requested human review via handoff button.",
+                          db: ref.read(databaseProvider),
+                        );
+                      },
+                      child: const Text('Request Review'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

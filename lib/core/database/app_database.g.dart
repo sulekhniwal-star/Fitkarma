@@ -168,6 +168,18 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         type: DriftSqlType.dateTime,
         requiredDuringInsert: false,
       );
+  static const VerificationMeta _subscriptionTierMeta = const VerificationMeta(
+    'subscriptionTier',
+  );
+  @override
+  late final GeneratedColumn<String> subscriptionTier = GeneratedColumn<String>(
+    'subscription_tier',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('free'),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -186,6 +198,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     isCycleTrackingEnabled,
     averageCycleLength,
     lastPeriodDate,
+    subscriptionTier,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -315,6 +328,15 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         ),
       );
     }
+    if (data.containsKey('subscription_tier')) {
+      context.handle(
+        _subscriptionTierMeta,
+        subscriptionTier.isAcceptableOrUnknown(
+          data['subscription_tier']!,
+          _subscriptionTierMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -388,6 +410,10 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         DriftSqlType.dateTime,
         data['${effectivePrefix}last_period_date'],
       ),
+      subscriptionTier: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}subscription_tier'],
+      )!,
     );
   }
 
@@ -414,6 +440,7 @@ class User extends DataClass implements Insertable<User> {
   final bool? isCycleTrackingEnabled;
   final int? averageCycleLength;
   final DateTime? lastPeriodDate;
+  final String subscriptionTier;
   const User({
     required this.id,
     this.name,
@@ -431,6 +458,7 @@ class User extends DataClass implements Insertable<User> {
     this.isCycleTrackingEnabled,
     this.averageCycleLength,
     this.lastPeriodDate,
+    required this.subscriptionTier,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -481,6 +509,7 @@ class User extends DataClass implements Insertable<User> {
     if (!nullToAbsent || lastPeriodDate != null) {
       map['last_period_date'] = Variable<DateTime>(lastPeriodDate);
     }
+    map['subscription_tier'] = Variable<String>(subscriptionTier);
     return map;
   }
 
@@ -528,6 +557,7 @@ class User extends DataClass implements Insertable<User> {
       lastPeriodDate: lastPeriodDate == null && nullToAbsent
           ? const Value.absent()
           : Value(lastPeriodDate),
+      subscriptionTier: Value(subscriptionTier),
     );
   }
 
@@ -555,6 +585,7 @@ class User extends DataClass implements Insertable<User> {
       ),
       averageCycleLength: serializer.fromJson<int?>(json['averageCycleLength']),
       lastPeriodDate: serializer.fromJson<DateTime?>(json['lastPeriodDate']),
+      subscriptionTier: serializer.fromJson<String>(json['subscriptionTier']),
     );
   }
   @override
@@ -579,6 +610,7 @@ class User extends DataClass implements Insertable<User> {
       ),
       'averageCycleLength': serializer.toJson<int?>(averageCycleLength),
       'lastPeriodDate': serializer.toJson<DateTime?>(lastPeriodDate),
+      'subscriptionTier': serializer.toJson<String>(subscriptionTier),
     };
   }
 
@@ -599,6 +631,7 @@ class User extends DataClass implements Insertable<User> {
     Value<bool?> isCycleTrackingEnabled = const Value.absent(),
     Value<int?> averageCycleLength = const Value.absent(),
     Value<DateTime?> lastPeriodDate = const Value.absent(),
+    String? subscriptionTier,
   }) => User(
     id: id ?? this.id,
     name: name.present ? name.value : this.name,
@@ -628,6 +661,7 @@ class User extends DataClass implements Insertable<User> {
     lastPeriodDate: lastPeriodDate.present
         ? lastPeriodDate.value
         : this.lastPeriodDate,
+    subscriptionTier: subscriptionTier ?? this.subscriptionTier,
   );
   User copyWithCompanion(UsersCompanion data) {
     return User(
@@ -661,6 +695,9 @@ class User extends DataClass implements Insertable<User> {
       lastPeriodDate: data.lastPeriodDate.present
           ? data.lastPeriodDate.value
           : this.lastPeriodDate,
+      subscriptionTier: data.subscriptionTier.present
+          ? data.subscriptionTier.value
+          : this.subscriptionTier,
     );
   }
 
@@ -682,7 +719,8 @@ class User extends DataClass implements Insertable<User> {
           ..write('currentProgram: $currentProgram, ')
           ..write('isCycleTrackingEnabled: $isCycleTrackingEnabled, ')
           ..write('averageCycleLength: $averageCycleLength, ')
-          ..write('lastPeriodDate: $lastPeriodDate')
+          ..write('lastPeriodDate: $lastPeriodDate, ')
+          ..write('subscriptionTier: $subscriptionTier')
           ..write(')'))
         .toString();
   }
@@ -705,6 +743,7 @@ class User extends DataClass implements Insertable<User> {
     isCycleTrackingEnabled,
     averageCycleLength,
     lastPeriodDate,
+    subscriptionTier,
   );
   @override
   bool operator ==(Object other) =>
@@ -725,7 +764,8 @@ class User extends DataClass implements Insertable<User> {
           other.currentProgram == this.currentProgram &&
           other.isCycleTrackingEnabled == this.isCycleTrackingEnabled &&
           other.averageCycleLength == this.averageCycleLength &&
-          other.lastPeriodDate == this.lastPeriodDate);
+          other.lastPeriodDate == this.lastPeriodDate &&
+          other.subscriptionTier == this.subscriptionTier);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
@@ -745,6 +785,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<bool?> isCycleTrackingEnabled;
   final Value<int?> averageCycleLength;
   final Value<DateTime?> lastPeriodDate;
+  final Value<String> subscriptionTier;
   final Value<int> rowid;
   const UsersCompanion({
     this.id = const Value.absent(),
@@ -763,6 +804,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.isCycleTrackingEnabled = const Value.absent(),
     this.averageCycleLength = const Value.absent(),
     this.lastPeriodDate = const Value.absent(),
+    this.subscriptionTier = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
@@ -782,6 +824,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.isCycleTrackingEnabled = const Value.absent(),
     this.averageCycleLength = const Value.absent(),
     this.lastPeriodDate = const Value.absent(),
+    this.subscriptionTier = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id);
   static Insertable<User> custom({
@@ -801,6 +844,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<bool>? isCycleTrackingEnabled,
     Expression<int>? averageCycleLength,
     Expression<DateTime>? lastPeriodDate,
+    Expression<String>? subscriptionTier,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -823,6 +867,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       if (averageCycleLength != null)
         'average_cycle_length': averageCycleLength,
       if (lastPeriodDate != null) 'last_period_date': lastPeriodDate,
+      if (subscriptionTier != null) 'subscription_tier': subscriptionTier,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -844,6 +889,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Value<bool?>? isCycleTrackingEnabled,
     Value<int?>? averageCycleLength,
     Value<DateTime?>? lastPeriodDate,
+    Value<String>? subscriptionTier,
     Value<int>? rowid,
   }) {
     return UsersCompanion(
@@ -864,6 +910,7 @@ class UsersCompanion extends UpdateCompanion<User> {
           isCycleTrackingEnabled ?? this.isCycleTrackingEnabled,
       averageCycleLength: averageCycleLength ?? this.averageCycleLength,
       lastPeriodDate: lastPeriodDate ?? this.lastPeriodDate,
+      subscriptionTier: subscriptionTier ?? this.subscriptionTier,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -921,6 +968,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (lastPeriodDate.present) {
       map['last_period_date'] = Variable<DateTime>(lastPeriodDate.value);
     }
+    if (subscriptionTier.present) {
+      map['subscription_tier'] = Variable<String>(subscriptionTier.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -946,6 +996,7 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('isCycleTrackingEnabled: $isCycleTrackingEnabled, ')
           ..write('averageCycleLength: $averageCycleLength, ')
           ..write('lastPeriodDate: $lastPeriodDate, ')
+          ..write('subscriptionTier: $subscriptionTier, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -7438,6 +7489,410 @@ class ChatMessagesCompanion extends UpdateCompanion<ChatMessage> {
   }
 }
 
+class $EscalationEventsTable extends EscalationEvents
+    with TableInfo<$EscalationEventsTable, EscalationEvent> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $EscalationEventsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _reasonMeta = const VerificationMeta('reason');
+  @override
+  late final GeneratedColumn<String> reason = GeneratedColumn<String>(
+    'reason',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _briefingMeta = const VerificationMeta(
+    'briefing',
+  );
+  @override
+  late final GeneratedColumn<String> briefing = GeneratedColumn<String>(
+    'briefing',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _escalatedAtMeta = const VerificationMeta(
+    'escalatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> escalatedAt = GeneratedColumn<DateTime>(
+    'escalated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _resolvedAtMeta = const VerificationMeta(
+    'resolvedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> resolvedAt = GeneratedColumn<DateTime>(
+    'resolved_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    userId,
+    reason,
+    briefing,
+    escalatedAt,
+    resolvedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'escalation_events';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<EscalationEvent> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('reason')) {
+      context.handle(
+        _reasonMeta,
+        reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_reasonMeta);
+    }
+    if (data.containsKey('briefing')) {
+      context.handle(
+        _briefingMeta,
+        briefing.isAcceptableOrUnknown(data['briefing']!, _briefingMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_briefingMeta);
+    }
+    if (data.containsKey('escalated_at')) {
+      context.handle(
+        _escalatedAtMeta,
+        escalatedAt.isAcceptableOrUnknown(
+          data['escalated_at']!,
+          _escalatedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_escalatedAtMeta);
+    }
+    if (data.containsKey('resolved_at')) {
+      context.handle(
+        _resolvedAtMeta,
+        resolvedAt.isAcceptableOrUnknown(data['resolved_at']!, _resolvedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  EscalationEvent map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return EscalationEvent(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      reason: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reason'],
+      )!,
+      briefing: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}briefing'],
+      )!,
+      escalatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}escalated_at'],
+      )!,
+      resolvedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}resolved_at'],
+      ),
+    );
+  }
+
+  @override
+  $EscalationEventsTable createAlias(String alias) {
+    return $EscalationEventsTable(attachedDatabase, alias);
+  }
+}
+
+class EscalationEvent extends DataClass implements Insertable<EscalationEvent> {
+  final int id;
+  final String userId;
+  final String reason;
+  final String briefing;
+  final DateTime escalatedAt;
+  final DateTime? resolvedAt;
+  const EscalationEvent({
+    required this.id,
+    required this.userId,
+    required this.reason,
+    required this.briefing,
+    required this.escalatedAt,
+    this.resolvedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['reason'] = Variable<String>(reason);
+    map['briefing'] = Variable<String>(briefing);
+    map['escalated_at'] = Variable<DateTime>(escalatedAt);
+    if (!nullToAbsent || resolvedAt != null) {
+      map['resolved_at'] = Variable<DateTime>(resolvedAt);
+    }
+    return map;
+  }
+
+  EscalationEventsCompanion toCompanion(bool nullToAbsent) {
+    return EscalationEventsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      reason: Value(reason),
+      briefing: Value(briefing),
+      escalatedAt: Value(escalatedAt),
+      resolvedAt: resolvedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(resolvedAt),
+    );
+  }
+
+  factory EscalationEvent.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return EscalationEvent(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      reason: serializer.fromJson<String>(json['reason']),
+      briefing: serializer.fromJson<String>(json['briefing']),
+      escalatedAt: serializer.fromJson<DateTime>(json['escalatedAt']),
+      resolvedAt: serializer.fromJson<DateTime?>(json['resolvedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'reason': serializer.toJson<String>(reason),
+      'briefing': serializer.toJson<String>(briefing),
+      'escalatedAt': serializer.toJson<DateTime>(escalatedAt),
+      'resolvedAt': serializer.toJson<DateTime?>(resolvedAt),
+    };
+  }
+
+  EscalationEvent copyWith({
+    int? id,
+    String? userId,
+    String? reason,
+    String? briefing,
+    DateTime? escalatedAt,
+    Value<DateTime?> resolvedAt = const Value.absent(),
+  }) => EscalationEvent(
+    id: id ?? this.id,
+    userId: userId ?? this.userId,
+    reason: reason ?? this.reason,
+    briefing: briefing ?? this.briefing,
+    escalatedAt: escalatedAt ?? this.escalatedAt,
+    resolvedAt: resolvedAt.present ? resolvedAt.value : this.resolvedAt,
+  );
+  EscalationEvent copyWithCompanion(EscalationEventsCompanion data) {
+    return EscalationEvent(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      reason: data.reason.present ? data.reason.value : this.reason,
+      briefing: data.briefing.present ? data.briefing.value : this.briefing,
+      escalatedAt: data.escalatedAt.present
+          ? data.escalatedAt.value
+          : this.escalatedAt,
+      resolvedAt: data.resolvedAt.present
+          ? data.resolvedAt.value
+          : this.resolvedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('EscalationEvent(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('reason: $reason, ')
+          ..write('briefing: $briefing, ')
+          ..write('escalatedAt: $escalatedAt, ')
+          ..write('resolvedAt: $resolvedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, userId, reason, briefing, escalatedAt, resolvedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is EscalationEvent &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.reason == this.reason &&
+          other.briefing == this.briefing &&
+          other.escalatedAt == this.escalatedAt &&
+          other.resolvedAt == this.resolvedAt);
+}
+
+class EscalationEventsCompanion extends UpdateCompanion<EscalationEvent> {
+  final Value<int> id;
+  final Value<String> userId;
+  final Value<String> reason;
+  final Value<String> briefing;
+  final Value<DateTime> escalatedAt;
+  final Value<DateTime?> resolvedAt;
+  const EscalationEventsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.reason = const Value.absent(),
+    this.briefing = const Value.absent(),
+    this.escalatedAt = const Value.absent(),
+    this.resolvedAt = const Value.absent(),
+  });
+  EscalationEventsCompanion.insert({
+    this.id = const Value.absent(),
+    required String userId,
+    required String reason,
+    required String briefing,
+    required DateTime escalatedAt,
+    this.resolvedAt = const Value.absent(),
+  }) : userId = Value(userId),
+       reason = Value(reason),
+       briefing = Value(briefing),
+       escalatedAt = Value(escalatedAt);
+  static Insertable<EscalationEvent> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<String>? reason,
+    Expression<String>? briefing,
+    Expression<DateTime>? escalatedAt,
+    Expression<DateTime>? resolvedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (reason != null) 'reason': reason,
+      if (briefing != null) 'briefing': briefing,
+      if (escalatedAt != null) 'escalated_at': escalatedAt,
+      if (resolvedAt != null) 'resolved_at': resolvedAt,
+    });
+  }
+
+  EscalationEventsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? userId,
+    Value<String>? reason,
+    Value<String>? briefing,
+    Value<DateTime>? escalatedAt,
+    Value<DateTime?>? resolvedAt,
+  }) {
+    return EscalationEventsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      reason: reason ?? this.reason,
+      briefing: briefing ?? this.briefing,
+      escalatedAt: escalatedAt ?? this.escalatedAt,
+      resolvedAt: resolvedAt ?? this.resolvedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (reason.present) {
+      map['reason'] = Variable<String>(reason.value);
+    }
+    if (briefing.present) {
+      map['briefing'] = Variable<String>(briefing.value);
+    }
+    if (escalatedAt.present) {
+      map['escalated_at'] = Variable<DateTime>(escalatedAt.value);
+    }
+    if (resolvedAt.present) {
+      map['resolved_at'] = Variable<DateTime>(resolvedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('EscalationEventsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('reason: $reason, ')
+          ..write('briefing: $briefing, ')
+          ..write('escalatedAt: $escalatedAt, ')
+          ..write('resolvedAt: $resolvedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -7458,6 +7913,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $MenstrualSymptomLogsTable(this);
   late final $RecoveryLogsTable recoveryLogs = $RecoveryLogsTable(this);
   late final $ChatMessagesTable chatMessages = $ChatMessagesTable(this);
+  late final $EscalationEventsTable escalationEvents = $EscalationEventsTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -7474,6 +7932,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     menstrualSymptomLogs,
     recoveryLogs,
     chatMessages,
+    escalationEvents,
   ];
 }
 
@@ -7495,6 +7954,7 @@ typedef $$UsersTableCreateCompanionBuilder =
       Value<bool?> isCycleTrackingEnabled,
       Value<int?> averageCycleLength,
       Value<DateTime?> lastPeriodDate,
+      Value<String> subscriptionTier,
       Value<int> rowid,
     });
 typedef $$UsersTableUpdateCompanionBuilder =
@@ -7515,6 +7975,7 @@ typedef $$UsersTableUpdateCompanionBuilder =
       Value<bool?> isCycleTrackingEnabled,
       Value<int?> averageCycleLength,
       Value<DateTime?> lastPeriodDate,
+      Value<String> subscriptionTier,
       Value<int> rowid,
     });
 
@@ -7603,6 +8064,11 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
 
   ColumnFilters<DateTime> get lastPeriodDate => $composableBuilder(
     column: $table.lastPeriodDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get subscriptionTier => $composableBuilder(
+    column: $table.subscriptionTier,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -7695,6 +8161,11 @@ class $$UsersTableOrderingComposer
     column: $table.lastPeriodDate,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get subscriptionTier => $composableBuilder(
+    column: $table.subscriptionTier,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$UsersTableAnnotationComposer
@@ -7767,6 +8238,11 @@ class $$UsersTableAnnotationComposer
     column: $table.lastPeriodDate,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get subscriptionTier => $composableBuilder(
+    column: $table.subscriptionTier,
+    builder: (column) => column,
+  );
 }
 
 class $$UsersTableTableManager
@@ -7813,6 +8289,7 @@ class $$UsersTableTableManager
                 Value<bool?> isCycleTrackingEnabled = const Value.absent(),
                 Value<int?> averageCycleLength = const Value.absent(),
                 Value<DateTime?> lastPeriodDate = const Value.absent(),
+                Value<String> subscriptionTier = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion(
                 id: id,
@@ -7831,6 +8308,7 @@ class $$UsersTableTableManager
                 isCycleTrackingEnabled: isCycleTrackingEnabled,
                 averageCycleLength: averageCycleLength,
                 lastPeriodDate: lastPeriodDate,
+                subscriptionTier: subscriptionTier,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -7851,6 +8329,7 @@ class $$UsersTableTableManager
                 Value<bool?> isCycleTrackingEnabled = const Value.absent(),
                 Value<int?> averageCycleLength = const Value.absent(),
                 Value<DateTime?> lastPeriodDate = const Value.absent(),
+                Value<String> subscriptionTier = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion.insert(
                 id: id,
@@ -7869,6 +8348,7 @@ class $$UsersTableTableManager
                 isCycleTrackingEnabled: isCycleTrackingEnabled,
                 averageCycleLength: averageCycleLength,
                 lastPeriodDate: lastPeriodDate,
+                subscriptionTier: subscriptionTier,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -11040,6 +11520,229 @@ typedef $$ChatMessagesTableProcessedTableManager =
       ChatMessage,
       PrefetchHooks Function()
     >;
+typedef $$EscalationEventsTableCreateCompanionBuilder =
+    EscalationEventsCompanion Function({
+      Value<int> id,
+      required String userId,
+      required String reason,
+      required String briefing,
+      required DateTime escalatedAt,
+      Value<DateTime?> resolvedAt,
+    });
+typedef $$EscalationEventsTableUpdateCompanionBuilder =
+    EscalationEventsCompanion Function({
+      Value<int> id,
+      Value<String> userId,
+      Value<String> reason,
+      Value<String> briefing,
+      Value<DateTime> escalatedAt,
+      Value<DateTime?> resolvedAt,
+    });
+
+class $$EscalationEventsTableFilterComposer
+    extends Composer<_$AppDatabase, $EscalationEventsTable> {
+  $$EscalationEventsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get reason => $composableBuilder(
+    column: $table.reason,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get briefing => $composableBuilder(
+    column: $table.briefing,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get escalatedAt => $composableBuilder(
+    column: $table.escalatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get resolvedAt => $composableBuilder(
+    column: $table.resolvedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$EscalationEventsTableOrderingComposer
+    extends Composer<_$AppDatabase, $EscalationEventsTable> {
+  $$EscalationEventsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get reason => $composableBuilder(
+    column: $table.reason,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get briefing => $composableBuilder(
+    column: $table.briefing,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get escalatedAt => $composableBuilder(
+    column: $table.escalatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get resolvedAt => $composableBuilder(
+    column: $table.resolvedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$EscalationEventsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $EscalationEventsTable> {
+  $$EscalationEventsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get reason =>
+      $composableBuilder(column: $table.reason, builder: (column) => column);
+
+  GeneratedColumn<String> get briefing =>
+      $composableBuilder(column: $table.briefing, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get escalatedAt => $composableBuilder(
+    column: $table.escalatedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get resolvedAt => $composableBuilder(
+    column: $table.resolvedAt,
+    builder: (column) => column,
+  );
+}
+
+class $$EscalationEventsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $EscalationEventsTable,
+          EscalationEvent,
+          $$EscalationEventsTableFilterComposer,
+          $$EscalationEventsTableOrderingComposer,
+          $$EscalationEventsTableAnnotationComposer,
+          $$EscalationEventsTableCreateCompanionBuilder,
+          $$EscalationEventsTableUpdateCompanionBuilder,
+          (
+            EscalationEvent,
+            BaseReferences<
+              _$AppDatabase,
+              $EscalationEventsTable,
+              EscalationEvent
+            >,
+          ),
+          EscalationEvent,
+          PrefetchHooks Function()
+        > {
+  $$EscalationEventsTableTableManager(
+    _$AppDatabase db,
+    $EscalationEventsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$EscalationEventsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$EscalationEventsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$EscalationEventsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<String> reason = const Value.absent(),
+                Value<String> briefing = const Value.absent(),
+                Value<DateTime> escalatedAt = const Value.absent(),
+                Value<DateTime?> resolvedAt = const Value.absent(),
+              }) => EscalationEventsCompanion(
+                id: id,
+                userId: userId,
+                reason: reason,
+                briefing: briefing,
+                escalatedAt: escalatedAt,
+                resolvedAt: resolvedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String userId,
+                required String reason,
+                required String briefing,
+                required DateTime escalatedAt,
+                Value<DateTime?> resolvedAt = const Value.absent(),
+              }) => EscalationEventsCompanion.insert(
+                id: id,
+                userId: userId,
+                reason: reason,
+                briefing: briefing,
+                escalatedAt: escalatedAt,
+                resolvedAt: resolvedAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$EscalationEventsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $EscalationEventsTable,
+      EscalationEvent,
+      $$EscalationEventsTableFilterComposer,
+      $$EscalationEventsTableOrderingComposer,
+      $$EscalationEventsTableAnnotationComposer,
+      $$EscalationEventsTableCreateCompanionBuilder,
+      $$EscalationEventsTableUpdateCompanionBuilder,
+      (
+        EscalationEvent,
+        BaseReferences<_$AppDatabase, $EscalationEventsTable, EscalationEvent>,
+      ),
+      EscalationEvent,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -11072,4 +11775,6 @@ class $AppDatabaseManager {
       $$RecoveryLogsTableTableManager(_db, _db.recoveryLogs);
   $$ChatMessagesTableTableManager get chatMessages =>
       $$ChatMessagesTableTableManager(_db, _db.chatMessages);
+  $$EscalationEventsTableTableManager get escalationEvents =>
+      $$EscalationEventsTableTableManager(_db, _db.escalationEvents);
 }
