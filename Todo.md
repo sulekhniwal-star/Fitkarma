@@ -191,8 +191,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P4-F Preventive Intelligence Engine
-- [ ] Implement deterministic risk-flagging rules (no AI)
-- [ ] Unit tests for each rule
+- [x] Implement deterministic risk-flagging rules (no AI)
+- [x] Unit tests for each rule
 
 ### §P4-G Smart Wearable Comparison Layer
 - [ ] Implement Device Reliability Engine (cross-device delta detection)
