@@ -204,8 +204,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 5 — SMART INDIAN NUTRITION SYSTEM
 
 ### §P5-A Food Screen Home
-- [ ] Build UI (quick-log, search, recent meals)
-- [ ] Widget test
+- [x] Build UI (quick-log, search, recent meals)
+- [x] Widget test
 
 ### §P5-B Meal Analysis Pipeline
 - [ ] Implement text-based meal parser

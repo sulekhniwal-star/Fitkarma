@@ -20,6 +20,7 @@ import 'package:fitkarma/features/sleep/sleep_screen.dart';
 import 'package:fitkarma/features/bp/bp_screen.dart';
 import 'package:fitkarma/features/glucose/glucose_screen.dart';
 import 'package:fitkarma/features/wearable/wearable_comparison_screen.dart';
+import 'package:fitkarma/features/food/food_screen.dart';
 import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -49,6 +50,7 @@ class AppRoutes {
   static const bp        = '/health/bp';
   static const glucose   = '/health/glucose';
   static const wearables = '/wearables';
+  static const food      = '/food';
 
   // Auth
   static const login = '/login';
@@ -301,6 +303,11 @@ class AppRouter {
           path: AppRoutes.wearables,
           pageBuilder: (context, state) =>
               _slideTransition(state, const WearableComparisonScreen()),
+        ),
+        GoRoute(
+          path: AppRoutes.food,
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const FoodScreen()),
         ),
         GoRoute(
           path: AppRoutes.aiCoach,
