@@ -246,6 +246,25 @@ class GlucoseReadings extends Table {
   DateTimeColumn get measuredAt => dateTime()();
 }
 
+// FoodReferences — offline seeded Indian food nutrition database (§P5-D)
+class FoodReferences extends Table {
+  TextColumn get id => text()(); // e.g. 'roti_1', 'dal_1'
+  TextColumn get foodName => text()();
+  RealColumn get defaultServingG => real()();
+  TextColumn get servingDescription => text()(); // e.g. '1 Roti (40g)'
+  RealColumn get calories => real()();
+  RealColumn get proteinG => real()();
+  RealColumn get carbsG => real()();
+  RealColumn get fatG => real()();
+  IntColumn get glycemicIndex => integer()();
+  RealColumn get fiberG => real()();
+  IntColumn get satietyIndex => integer()(); // 0–100
+  TextColumn get searchTerms => text()(); // comma-separated aliases
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   Users,
   WaterLogs,
@@ -263,13 +282,14 @@ class GlucoseReadings extends Table {
   SleepLogs,
   BpReadings,
   GlucoseReadings,
+  FoodReferences,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 30;
+  int get schemaVersion => 31;
 
   @override
   MigrationStrategy get migration {
@@ -308,6 +328,9 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 30) {
           await migrator.createTable(glucoseReadings);
+        }
+        if (from < 31) {
+          await migrator.createTable(foodReferences);
         }
       },
     );
@@ -448,6 +471,133 @@ class AppDatabase extends _$AppDatabase {
     return (select(escalationEvents)
           ..where((t) => t.userId.equals(userId))
           ..orderBy([(t) => OrderingTerm(expression: t.escalatedAt, mode: OrderingMode.desc)]))
+        .get();
+  }
+
+  // ── FoodReferences helpers (§P5-B) ────────────────────────────────────────
+
+  /// Idempotent seed for the 15 pre-seeded Indian foods from §P5-D.
+  Future<void> seedFoodReferences() async {
+    const seeds = [
+      FoodReferencesCompanion(
+        id: Value('roti_1'), foodName: Value('Whole Wheat Roti'),
+        defaultServingG: Value(40), servingDescription: Value('1 Roti (40g)'),
+        calories: Value(85), proteinG: Value(3.0), carbsG: Value(18), fatG: Value(0.5),
+        glycemicIndex: Value(62), fiberG: Value(2.5), satietyIndex: Value(65),
+        searchTerms: Value('roti,chapati,wheat roti,fulka,phulka'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('rice_1'), foodName: Value('Steamed Basmati Rice'),
+        defaultServingG: Value(150), servingDescription: Value('1 Cup (150g)'),
+        calories: Value(200), proteinG: Value(4.2), carbsG: Value(44), fatG: Value(0.4),
+        glycemicIndex: Value(72), fiberG: Value(1.0), satietyIndex: Value(50),
+        searchTerms: Value('rice,basmati,steamed rice,white rice,chawal'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('dal_1'), foodName: Value('Dal Tadka (Yellow)'),
+        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(150), proteinG: Value(8.5), carbsG: Value(22), fatG: Value(3.5),
+        glycemicIndex: Value(45), fiberG: Value(6.0), satietyIndex: Value(75),
+        searchTerms: Value('dal,dal tadka,tadka dal,yellow dal,lentil,dhal'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('paneer_1'), foodName: Value('Paneer Bhurji'),
+        defaultServingG: Value(150), servingDescription: Value('1 Plate (150g)'),
+        calories: Value(280), proteinG: Value(18.0), carbsG: Value(8), fatG: Value(20),
+        glycemicIndex: Value(30), fiberG: Value(2.0), satietyIndex: Value(85),
+        searchTerms: Value('paneer,paneer bhurji,bhurji,cottage cheese'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('chick_1'), foodName: Value('Tandoori Chicken'),
+        defaultServingG: Value(180), servingDescription: Value('1 Plate (180g)'),
+        calories: Value(260), proteinG: Value(32.0), carbsG: Value(3), fatG: Value(12),
+        glycemicIndex: Value(15), fiberG: Value(0.5), satietyIndex: Value(90),
+        searchTerms: Value('chicken,tandoori chicken,grilled chicken,chicken tikka,murgh'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('poha_1'), foodName: Value('Onion Poha'),
+        defaultServingG: Value(150), servingDescription: Value('1 Plate (150g)'),
+        calories: Value(220), proteinG: Value(3.5), carbsG: Value(42), fatG: Value(4.0),
+        glycemicIndex: Value(68), fiberG: Value(2.8), satietyIndex: Value(60),
+        searchTerms: Value('poha,onion poha,beaten rice,chivda'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('idli_1'), foodName: Value('Steamed Idli'),
+        defaultServingG: Value(90), servingDescription: Value('2 Pieces (90g)'),
+        calories: Value(120), proteinG: Value(3.0), carbsG: Value(26), fatG: Value(0.2),
+        glycemicIndex: Value(70), fiberG: Value(1.5), satietyIndex: Value(58),
+        searchTerms: Value('idli,steamed idli,idly,idlis'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('dosa_1'), foodName: Value('Plain Dosa'),
+        defaultServingG: Value(80), servingDescription: Value('1 Piece (80g)'),
+        calories: Value(165), proteinG: Value(3.2), carbsG: Value(32), fatG: Value(2.5),
+        glycemicIndex: Value(75), fiberG: Value(1.2), satietyIndex: Value(55),
+        searchTerms: Value('dosa,plain dosa,dosai,crispy dosa,masala dosa'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('sambar_1'), foodName: Value('Mixed Veg Sambar'),
+        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(110), proteinG: Value(4.0), carbsG: Value(18), fatG: Value(2.0),
+        glycemicIndex: Value(48), fiberG: Value(4.5), satietyIndex: Value(70),
+        searchTerms: Value('sambar,sambhar,veg sambar,south indian curry'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('chole_1'), foodName: Value('Punjabi Chole Masala'),
+        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(240), proteinG: Value(10.2), carbsG: Value(34), fatG: Value(7.0),
+        glycemicIndex: Value(38), fiberG: Value(8.5), satietyIndex: Value(80),
+        searchTerms: Value('chole,chana,chole masala,chickpea curry,chick pea'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('rajma_1'), foodName: Value('Rajma Masala'),
+        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(220), proteinG: Value(9.8), carbsG: Value(32), fatG: Value(5.5),
+        glycemicIndex: Value(35), fiberG: Value(9.0), satietyIndex: Value(80),
+        searchTerms: Value('rajma,kidney bean,rajma masala,rajma chawal'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('curd_1'), foodName: Value('Whole Milk Curd'),
+        defaultServingG: Value(150), servingDescription: Value('1 Cup (150g)'),
+        calories: Value(98), proteinG: Value(5.2), carbsG: Value(6), fatG: Value(6.0),
+        glycemicIndex: Value(28), fiberG: Value(0.0), satietyIndex: Value(72),
+        searchTerms: Value('curd,dahi,yogurt,yoghurt,raita'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('khich_1'), foodName: Value('Moong Dal Khichdi'),
+        defaultServingG: Value(200), servingDescription: Value('1 Bowl (200g)'),
+        calories: Value(210), proteinG: Value(7.2), carbsG: Value(38), fatG: Value(3.0),
+        glycemicIndex: Value(55), fiberG: Value(4.0), satietyIndex: Value(72),
+        searchTerms: Value('khichdi,khichri,moong dal khichdi,dal khichdi'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('upma_1'), foodName: Value('Semolina Upma'),
+        defaultServingG: Value(150), servingDescription: Value('1 Plate (150g)'),
+        calories: Value(190), proteinG: Value(4.0), carbsG: Value(34), fatG: Value(3.5),
+        glycemicIndex: Value(65), fiberG: Value(2.0), satietyIndex: Value(62),
+        searchTerms: Value('upma,rava upma,semolina upma,sooji upma'),
+      ),
+      FoodReferencesCompanion(
+        id: Value('egg_1'), foodName: Value('Boiled Egg'),
+        defaultServingG: Value(50), servingDescription: Value('1 Large (50g)'),
+        calories: Value(78), proteinG: Value(6.3), carbsG: Value(0.6), fatG: Value(5.3),
+        glycemicIndex: Value(0), fiberG: Value(0.0), satietyIndex: Value(85),
+        searchTerms: Value('egg,boiled egg,hard boiled egg,anda,ande'),
+      ),
+    ];
+    for (final seed in seeds) {
+      await into(foodReferences).insertOnConflictUpdate(seed);
+    }
+  }
+
+  /// Returns all FoodReferences whose foodName or searchTerms contain [query].
+  Future<List<FoodReference>> searchFoodReferences(String query) async {
+    final lower = query.toLowerCase();
+    return (select(foodReferences)
+          ..where((t) =>
+              t.foodName.lower().contains(lower) |
+              t.searchTerms.lower().contains(lower))
+          ..orderBy([(t) => OrderingTerm(expression: t.foodName)]))
         .get();
   }
 }

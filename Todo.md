@@ -208,9 +208,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P5-B Meal Analysis Pipeline
-- [ ] Implement text-based meal parser
-- [ ] Wire nutrition lookup against FoodReferences
-- [ ] Unit tests
+- [x] Implement text-based meal parser
+- [x] Wire nutrition lookup against FoodReferences
+- [x] Unit tests
 
 ### §P5-C "Fix My Meal" — AI Meal Photo Analysis
 - [ ] Build photo capture/upload UI

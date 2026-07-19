@@ -9856,6 +9856,731 @@ class GlucoseReadingsCompanion extends UpdateCompanion<GlucoseReading> {
   }
 }
 
+class $FoodReferencesTable extends FoodReferences
+    with TableInfo<$FoodReferencesTable, FoodReference> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $FoodReferencesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _foodNameMeta = const VerificationMeta(
+    'foodName',
+  );
+  @override
+  late final GeneratedColumn<String> foodName = GeneratedColumn<String>(
+    'food_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _defaultServingGMeta = const VerificationMeta(
+    'defaultServingG',
+  );
+  @override
+  late final GeneratedColumn<double> defaultServingG = GeneratedColumn<double>(
+    'default_serving_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _servingDescriptionMeta =
+      const VerificationMeta('servingDescription');
+  @override
+  late final GeneratedColumn<String> servingDescription =
+      GeneratedColumn<String>(
+        'serving_description',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _caloriesMeta = const VerificationMeta(
+    'calories',
+  );
+  @override
+  late final GeneratedColumn<double> calories = GeneratedColumn<double>(
+    'calories',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _proteinGMeta = const VerificationMeta(
+    'proteinG',
+  );
+  @override
+  late final GeneratedColumn<double> proteinG = GeneratedColumn<double>(
+    'protein_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _carbsGMeta = const VerificationMeta('carbsG');
+  @override
+  late final GeneratedColumn<double> carbsG = GeneratedColumn<double>(
+    'carbs_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fatGMeta = const VerificationMeta('fatG');
+  @override
+  late final GeneratedColumn<double> fatG = GeneratedColumn<double>(
+    'fat_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _glycemicIndexMeta = const VerificationMeta(
+    'glycemicIndex',
+  );
+  @override
+  late final GeneratedColumn<int> glycemicIndex = GeneratedColumn<int>(
+    'glycemic_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fiberGMeta = const VerificationMeta('fiberG');
+  @override
+  late final GeneratedColumn<double> fiberG = GeneratedColumn<double>(
+    'fiber_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _satietyIndexMeta = const VerificationMeta(
+    'satietyIndex',
+  );
+  @override
+  late final GeneratedColumn<int> satietyIndex = GeneratedColumn<int>(
+    'satiety_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _searchTermsMeta = const VerificationMeta(
+    'searchTerms',
+  );
+  @override
+  late final GeneratedColumn<String> searchTerms = GeneratedColumn<String>(
+    'search_terms',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    foodName,
+    defaultServingG,
+    servingDescription,
+    calories,
+    proteinG,
+    carbsG,
+    fatG,
+    glycemicIndex,
+    fiberG,
+    satietyIndex,
+    searchTerms,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'food_references';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<FoodReference> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('food_name')) {
+      context.handle(
+        _foodNameMeta,
+        foodName.isAcceptableOrUnknown(data['food_name']!, _foodNameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_foodNameMeta);
+    }
+    if (data.containsKey('default_serving_g')) {
+      context.handle(
+        _defaultServingGMeta,
+        defaultServingG.isAcceptableOrUnknown(
+          data['default_serving_g']!,
+          _defaultServingGMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_defaultServingGMeta);
+    }
+    if (data.containsKey('serving_description')) {
+      context.handle(
+        _servingDescriptionMeta,
+        servingDescription.isAcceptableOrUnknown(
+          data['serving_description']!,
+          _servingDescriptionMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_servingDescriptionMeta);
+    }
+    if (data.containsKey('calories')) {
+      context.handle(
+        _caloriesMeta,
+        calories.isAcceptableOrUnknown(data['calories']!, _caloriesMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_caloriesMeta);
+    }
+    if (data.containsKey('protein_g')) {
+      context.handle(
+        _proteinGMeta,
+        proteinG.isAcceptableOrUnknown(data['protein_g']!, _proteinGMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_proteinGMeta);
+    }
+    if (data.containsKey('carbs_g')) {
+      context.handle(
+        _carbsGMeta,
+        carbsG.isAcceptableOrUnknown(data['carbs_g']!, _carbsGMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_carbsGMeta);
+    }
+    if (data.containsKey('fat_g')) {
+      context.handle(
+        _fatGMeta,
+        fatG.isAcceptableOrUnknown(data['fat_g']!, _fatGMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fatGMeta);
+    }
+    if (data.containsKey('glycemic_index')) {
+      context.handle(
+        _glycemicIndexMeta,
+        glycemicIndex.isAcceptableOrUnknown(
+          data['glycemic_index']!,
+          _glycemicIndexMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_glycemicIndexMeta);
+    }
+    if (data.containsKey('fiber_g')) {
+      context.handle(
+        _fiberGMeta,
+        fiberG.isAcceptableOrUnknown(data['fiber_g']!, _fiberGMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fiberGMeta);
+    }
+    if (data.containsKey('satiety_index')) {
+      context.handle(
+        _satietyIndexMeta,
+        satietyIndex.isAcceptableOrUnknown(
+          data['satiety_index']!,
+          _satietyIndexMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_satietyIndexMeta);
+    }
+    if (data.containsKey('search_terms')) {
+      context.handle(
+        _searchTermsMeta,
+        searchTerms.isAcceptableOrUnknown(
+          data['search_terms']!,
+          _searchTermsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_searchTermsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FoodReference map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return FoodReference(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      foodName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}food_name'],
+      )!,
+      defaultServingG: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}default_serving_g'],
+      )!,
+      servingDescription: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}serving_description'],
+      )!,
+      calories: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}calories'],
+      )!,
+      proteinG: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}protein_g'],
+      )!,
+      carbsG: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}carbs_g'],
+      )!,
+      fatG: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}fat_g'],
+      )!,
+      glycemicIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}glycemic_index'],
+      )!,
+      fiberG: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}fiber_g'],
+      )!,
+      satietyIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}satiety_index'],
+      )!,
+      searchTerms: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}search_terms'],
+      )!,
+    );
+  }
+
+  @override
+  $FoodReferencesTable createAlias(String alias) {
+    return $FoodReferencesTable(attachedDatabase, alias);
+  }
+}
+
+class FoodReference extends DataClass implements Insertable<FoodReference> {
+  final String id;
+  final String foodName;
+  final double defaultServingG;
+  final String servingDescription;
+  final double calories;
+  final double proteinG;
+  final double carbsG;
+  final double fatG;
+  final int glycemicIndex;
+  final double fiberG;
+  final int satietyIndex;
+  final String searchTerms;
+  const FoodReference({
+    required this.id,
+    required this.foodName,
+    required this.defaultServingG,
+    required this.servingDescription,
+    required this.calories,
+    required this.proteinG,
+    required this.carbsG,
+    required this.fatG,
+    required this.glycemicIndex,
+    required this.fiberG,
+    required this.satietyIndex,
+    required this.searchTerms,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['food_name'] = Variable<String>(foodName);
+    map['default_serving_g'] = Variable<double>(defaultServingG);
+    map['serving_description'] = Variable<String>(servingDescription);
+    map['calories'] = Variable<double>(calories);
+    map['protein_g'] = Variable<double>(proteinG);
+    map['carbs_g'] = Variable<double>(carbsG);
+    map['fat_g'] = Variable<double>(fatG);
+    map['glycemic_index'] = Variable<int>(glycemicIndex);
+    map['fiber_g'] = Variable<double>(fiberG);
+    map['satiety_index'] = Variable<int>(satietyIndex);
+    map['search_terms'] = Variable<String>(searchTerms);
+    return map;
+  }
+
+  FoodReferencesCompanion toCompanion(bool nullToAbsent) {
+    return FoodReferencesCompanion(
+      id: Value(id),
+      foodName: Value(foodName),
+      defaultServingG: Value(defaultServingG),
+      servingDescription: Value(servingDescription),
+      calories: Value(calories),
+      proteinG: Value(proteinG),
+      carbsG: Value(carbsG),
+      fatG: Value(fatG),
+      glycemicIndex: Value(glycemicIndex),
+      fiberG: Value(fiberG),
+      satietyIndex: Value(satietyIndex),
+      searchTerms: Value(searchTerms),
+    );
+  }
+
+  factory FoodReference.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return FoodReference(
+      id: serializer.fromJson<String>(json['id']),
+      foodName: serializer.fromJson<String>(json['foodName']),
+      defaultServingG: serializer.fromJson<double>(json['defaultServingG']),
+      servingDescription: serializer.fromJson<String>(
+        json['servingDescription'],
+      ),
+      calories: serializer.fromJson<double>(json['calories']),
+      proteinG: serializer.fromJson<double>(json['proteinG']),
+      carbsG: serializer.fromJson<double>(json['carbsG']),
+      fatG: serializer.fromJson<double>(json['fatG']),
+      glycemicIndex: serializer.fromJson<int>(json['glycemicIndex']),
+      fiberG: serializer.fromJson<double>(json['fiberG']),
+      satietyIndex: serializer.fromJson<int>(json['satietyIndex']),
+      searchTerms: serializer.fromJson<String>(json['searchTerms']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'foodName': serializer.toJson<String>(foodName),
+      'defaultServingG': serializer.toJson<double>(defaultServingG),
+      'servingDescription': serializer.toJson<String>(servingDescription),
+      'calories': serializer.toJson<double>(calories),
+      'proteinG': serializer.toJson<double>(proteinG),
+      'carbsG': serializer.toJson<double>(carbsG),
+      'fatG': serializer.toJson<double>(fatG),
+      'glycemicIndex': serializer.toJson<int>(glycemicIndex),
+      'fiberG': serializer.toJson<double>(fiberG),
+      'satietyIndex': serializer.toJson<int>(satietyIndex),
+      'searchTerms': serializer.toJson<String>(searchTerms),
+    };
+  }
+
+  FoodReference copyWith({
+    String? id,
+    String? foodName,
+    double? defaultServingG,
+    String? servingDescription,
+    double? calories,
+    double? proteinG,
+    double? carbsG,
+    double? fatG,
+    int? glycemicIndex,
+    double? fiberG,
+    int? satietyIndex,
+    String? searchTerms,
+  }) => FoodReference(
+    id: id ?? this.id,
+    foodName: foodName ?? this.foodName,
+    defaultServingG: defaultServingG ?? this.defaultServingG,
+    servingDescription: servingDescription ?? this.servingDescription,
+    calories: calories ?? this.calories,
+    proteinG: proteinG ?? this.proteinG,
+    carbsG: carbsG ?? this.carbsG,
+    fatG: fatG ?? this.fatG,
+    glycemicIndex: glycemicIndex ?? this.glycemicIndex,
+    fiberG: fiberG ?? this.fiberG,
+    satietyIndex: satietyIndex ?? this.satietyIndex,
+    searchTerms: searchTerms ?? this.searchTerms,
+  );
+  FoodReference copyWithCompanion(FoodReferencesCompanion data) {
+    return FoodReference(
+      id: data.id.present ? data.id.value : this.id,
+      foodName: data.foodName.present ? data.foodName.value : this.foodName,
+      defaultServingG: data.defaultServingG.present
+          ? data.defaultServingG.value
+          : this.defaultServingG,
+      servingDescription: data.servingDescription.present
+          ? data.servingDescription.value
+          : this.servingDescription,
+      calories: data.calories.present ? data.calories.value : this.calories,
+      proteinG: data.proteinG.present ? data.proteinG.value : this.proteinG,
+      carbsG: data.carbsG.present ? data.carbsG.value : this.carbsG,
+      fatG: data.fatG.present ? data.fatG.value : this.fatG,
+      glycemicIndex: data.glycemicIndex.present
+          ? data.glycemicIndex.value
+          : this.glycemicIndex,
+      fiberG: data.fiberG.present ? data.fiberG.value : this.fiberG,
+      satietyIndex: data.satietyIndex.present
+          ? data.satietyIndex.value
+          : this.satietyIndex,
+      searchTerms: data.searchTerms.present
+          ? data.searchTerms.value
+          : this.searchTerms,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FoodReference(')
+          ..write('id: $id, ')
+          ..write('foodName: $foodName, ')
+          ..write('defaultServingG: $defaultServingG, ')
+          ..write('servingDescription: $servingDescription, ')
+          ..write('calories: $calories, ')
+          ..write('proteinG: $proteinG, ')
+          ..write('carbsG: $carbsG, ')
+          ..write('fatG: $fatG, ')
+          ..write('glycemicIndex: $glycemicIndex, ')
+          ..write('fiberG: $fiberG, ')
+          ..write('satietyIndex: $satietyIndex, ')
+          ..write('searchTerms: $searchTerms')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    foodName,
+    defaultServingG,
+    servingDescription,
+    calories,
+    proteinG,
+    carbsG,
+    fatG,
+    glycemicIndex,
+    fiberG,
+    satietyIndex,
+    searchTerms,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FoodReference &&
+          other.id == this.id &&
+          other.foodName == this.foodName &&
+          other.defaultServingG == this.defaultServingG &&
+          other.servingDescription == this.servingDescription &&
+          other.calories == this.calories &&
+          other.proteinG == this.proteinG &&
+          other.carbsG == this.carbsG &&
+          other.fatG == this.fatG &&
+          other.glycemicIndex == this.glycemicIndex &&
+          other.fiberG == this.fiberG &&
+          other.satietyIndex == this.satietyIndex &&
+          other.searchTerms == this.searchTerms);
+}
+
+class FoodReferencesCompanion extends UpdateCompanion<FoodReference> {
+  final Value<String> id;
+  final Value<String> foodName;
+  final Value<double> defaultServingG;
+  final Value<String> servingDescription;
+  final Value<double> calories;
+  final Value<double> proteinG;
+  final Value<double> carbsG;
+  final Value<double> fatG;
+  final Value<int> glycemicIndex;
+  final Value<double> fiberG;
+  final Value<int> satietyIndex;
+  final Value<String> searchTerms;
+  final Value<int> rowid;
+  const FoodReferencesCompanion({
+    this.id = const Value.absent(),
+    this.foodName = const Value.absent(),
+    this.defaultServingG = const Value.absent(),
+    this.servingDescription = const Value.absent(),
+    this.calories = const Value.absent(),
+    this.proteinG = const Value.absent(),
+    this.carbsG = const Value.absent(),
+    this.fatG = const Value.absent(),
+    this.glycemicIndex = const Value.absent(),
+    this.fiberG = const Value.absent(),
+    this.satietyIndex = const Value.absent(),
+    this.searchTerms = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  FoodReferencesCompanion.insert({
+    required String id,
+    required String foodName,
+    required double defaultServingG,
+    required String servingDescription,
+    required double calories,
+    required double proteinG,
+    required double carbsG,
+    required double fatG,
+    required int glycemicIndex,
+    required double fiberG,
+    required int satietyIndex,
+    required String searchTerms,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       foodName = Value(foodName),
+       defaultServingG = Value(defaultServingG),
+       servingDescription = Value(servingDescription),
+       calories = Value(calories),
+       proteinG = Value(proteinG),
+       carbsG = Value(carbsG),
+       fatG = Value(fatG),
+       glycemicIndex = Value(glycemicIndex),
+       fiberG = Value(fiberG),
+       satietyIndex = Value(satietyIndex),
+       searchTerms = Value(searchTerms);
+  static Insertable<FoodReference> custom({
+    Expression<String>? id,
+    Expression<String>? foodName,
+    Expression<double>? defaultServingG,
+    Expression<String>? servingDescription,
+    Expression<double>? calories,
+    Expression<double>? proteinG,
+    Expression<double>? carbsG,
+    Expression<double>? fatG,
+    Expression<int>? glycemicIndex,
+    Expression<double>? fiberG,
+    Expression<int>? satietyIndex,
+    Expression<String>? searchTerms,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (foodName != null) 'food_name': foodName,
+      if (defaultServingG != null) 'default_serving_g': defaultServingG,
+      if (servingDescription != null) 'serving_description': servingDescription,
+      if (calories != null) 'calories': calories,
+      if (proteinG != null) 'protein_g': proteinG,
+      if (carbsG != null) 'carbs_g': carbsG,
+      if (fatG != null) 'fat_g': fatG,
+      if (glycemicIndex != null) 'glycemic_index': glycemicIndex,
+      if (fiberG != null) 'fiber_g': fiberG,
+      if (satietyIndex != null) 'satiety_index': satietyIndex,
+      if (searchTerms != null) 'search_terms': searchTerms,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  FoodReferencesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? foodName,
+    Value<double>? defaultServingG,
+    Value<String>? servingDescription,
+    Value<double>? calories,
+    Value<double>? proteinG,
+    Value<double>? carbsG,
+    Value<double>? fatG,
+    Value<int>? glycemicIndex,
+    Value<double>? fiberG,
+    Value<int>? satietyIndex,
+    Value<String>? searchTerms,
+    Value<int>? rowid,
+  }) {
+    return FoodReferencesCompanion(
+      id: id ?? this.id,
+      foodName: foodName ?? this.foodName,
+      defaultServingG: defaultServingG ?? this.defaultServingG,
+      servingDescription: servingDescription ?? this.servingDescription,
+      calories: calories ?? this.calories,
+      proteinG: proteinG ?? this.proteinG,
+      carbsG: carbsG ?? this.carbsG,
+      fatG: fatG ?? this.fatG,
+      glycemicIndex: glycemicIndex ?? this.glycemicIndex,
+      fiberG: fiberG ?? this.fiberG,
+      satietyIndex: satietyIndex ?? this.satietyIndex,
+      searchTerms: searchTerms ?? this.searchTerms,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (foodName.present) {
+      map['food_name'] = Variable<String>(foodName.value);
+    }
+    if (defaultServingG.present) {
+      map['default_serving_g'] = Variable<double>(defaultServingG.value);
+    }
+    if (servingDescription.present) {
+      map['serving_description'] = Variable<String>(servingDescription.value);
+    }
+    if (calories.present) {
+      map['calories'] = Variable<double>(calories.value);
+    }
+    if (proteinG.present) {
+      map['protein_g'] = Variable<double>(proteinG.value);
+    }
+    if (carbsG.present) {
+      map['carbs_g'] = Variable<double>(carbsG.value);
+    }
+    if (fatG.present) {
+      map['fat_g'] = Variable<double>(fatG.value);
+    }
+    if (glycemicIndex.present) {
+      map['glycemic_index'] = Variable<int>(glycemicIndex.value);
+    }
+    if (fiberG.present) {
+      map['fiber_g'] = Variable<double>(fiberG.value);
+    }
+    if (satietyIndex.present) {
+      map['satiety_index'] = Variable<int>(satietyIndex.value);
+    }
+    if (searchTerms.present) {
+      map['search_terms'] = Variable<String>(searchTerms.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FoodReferencesCompanion(')
+          ..write('id: $id, ')
+          ..write('foodName: $foodName, ')
+          ..write('defaultServingG: $defaultServingG, ')
+          ..write('servingDescription: $servingDescription, ')
+          ..write('calories: $calories, ')
+          ..write('proteinG: $proteinG, ')
+          ..write('carbsG: $carbsG, ')
+          ..write('fatG: $fatG, ')
+          ..write('glycemicIndex: $glycemicIndex, ')
+          ..write('fiberG: $fiberG, ')
+          ..write('satietyIndex: $satietyIndex, ')
+          ..write('searchTerms: $searchTerms, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -9885,6 +10610,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $GlucoseReadingsTable glucoseReadings = $GlucoseReadingsTable(
     this,
   );
+  late final $FoodReferencesTable foodReferences = $FoodReferencesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -9906,6 +10632,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     sleepLogs,
     bpReadings,
     glucoseReadings,
+    foodReferences,
   ];
 }
 
@@ -14705,6 +15432,351 @@ typedef $$GlucoseReadingsTableProcessedTableManager =
       GlucoseReading,
       PrefetchHooks Function()
     >;
+typedef $$FoodReferencesTableCreateCompanionBuilder =
+    FoodReferencesCompanion Function({
+      required String id,
+      required String foodName,
+      required double defaultServingG,
+      required String servingDescription,
+      required double calories,
+      required double proteinG,
+      required double carbsG,
+      required double fatG,
+      required int glycemicIndex,
+      required double fiberG,
+      required int satietyIndex,
+      required String searchTerms,
+      Value<int> rowid,
+    });
+typedef $$FoodReferencesTableUpdateCompanionBuilder =
+    FoodReferencesCompanion Function({
+      Value<String> id,
+      Value<String> foodName,
+      Value<double> defaultServingG,
+      Value<String> servingDescription,
+      Value<double> calories,
+      Value<double> proteinG,
+      Value<double> carbsG,
+      Value<double> fatG,
+      Value<int> glycemicIndex,
+      Value<double> fiberG,
+      Value<int> satietyIndex,
+      Value<String> searchTerms,
+      Value<int> rowid,
+    });
+
+class $$FoodReferencesTableFilterComposer
+    extends Composer<_$AppDatabase, $FoodReferencesTable> {
+  $$FoodReferencesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get foodName => $composableBuilder(
+    column: $table.foodName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get defaultServingG => $composableBuilder(
+    column: $table.defaultServingG,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get servingDescription => $composableBuilder(
+    column: $table.servingDescription,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get calories => $composableBuilder(
+    column: $table.calories,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get proteinG => $composableBuilder(
+    column: $table.proteinG,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get carbsG => $composableBuilder(
+    column: $table.carbsG,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get fatG => $composableBuilder(
+    column: $table.fatG,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get glycemicIndex => $composableBuilder(
+    column: $table.glycemicIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get fiberG => $composableBuilder(
+    column: $table.fiberG,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get satietyIndex => $composableBuilder(
+    column: $table.satietyIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get searchTerms => $composableBuilder(
+    column: $table.searchTerms,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$FoodReferencesTableOrderingComposer
+    extends Composer<_$AppDatabase, $FoodReferencesTable> {
+  $$FoodReferencesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get foodName => $composableBuilder(
+    column: $table.foodName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get defaultServingG => $composableBuilder(
+    column: $table.defaultServingG,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get servingDescription => $composableBuilder(
+    column: $table.servingDescription,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get calories => $composableBuilder(
+    column: $table.calories,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get proteinG => $composableBuilder(
+    column: $table.proteinG,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get carbsG => $composableBuilder(
+    column: $table.carbsG,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get fatG => $composableBuilder(
+    column: $table.fatG,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get glycemicIndex => $composableBuilder(
+    column: $table.glycemicIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get fiberG => $composableBuilder(
+    column: $table.fiberG,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get satietyIndex => $composableBuilder(
+    column: $table.satietyIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get searchTerms => $composableBuilder(
+    column: $table.searchTerms,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$FoodReferencesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $FoodReferencesTable> {
+  $$FoodReferencesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get foodName =>
+      $composableBuilder(column: $table.foodName, builder: (column) => column);
+
+  GeneratedColumn<double> get defaultServingG => $composableBuilder(
+    column: $table.defaultServingG,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get servingDescription => $composableBuilder(
+    column: $table.servingDescription,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get calories =>
+      $composableBuilder(column: $table.calories, builder: (column) => column);
+
+  GeneratedColumn<double> get proteinG =>
+      $composableBuilder(column: $table.proteinG, builder: (column) => column);
+
+  GeneratedColumn<double> get carbsG =>
+      $composableBuilder(column: $table.carbsG, builder: (column) => column);
+
+  GeneratedColumn<double> get fatG =>
+      $composableBuilder(column: $table.fatG, builder: (column) => column);
+
+  GeneratedColumn<int> get glycemicIndex => $composableBuilder(
+    column: $table.glycemicIndex,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get fiberG =>
+      $composableBuilder(column: $table.fiberG, builder: (column) => column);
+
+  GeneratedColumn<int> get satietyIndex => $composableBuilder(
+    column: $table.satietyIndex,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get searchTerms => $composableBuilder(
+    column: $table.searchTerms,
+    builder: (column) => column,
+  );
+}
+
+class $$FoodReferencesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $FoodReferencesTable,
+          FoodReference,
+          $$FoodReferencesTableFilterComposer,
+          $$FoodReferencesTableOrderingComposer,
+          $$FoodReferencesTableAnnotationComposer,
+          $$FoodReferencesTableCreateCompanionBuilder,
+          $$FoodReferencesTableUpdateCompanionBuilder,
+          (
+            FoodReference,
+            BaseReferences<_$AppDatabase, $FoodReferencesTable, FoodReference>,
+          ),
+          FoodReference,
+          PrefetchHooks Function()
+        > {
+  $$FoodReferencesTableTableManager(
+    _$AppDatabase db,
+    $FoodReferencesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$FoodReferencesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$FoodReferencesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$FoodReferencesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> foodName = const Value.absent(),
+                Value<double> defaultServingG = const Value.absent(),
+                Value<String> servingDescription = const Value.absent(),
+                Value<double> calories = const Value.absent(),
+                Value<double> proteinG = const Value.absent(),
+                Value<double> carbsG = const Value.absent(),
+                Value<double> fatG = const Value.absent(),
+                Value<int> glycemicIndex = const Value.absent(),
+                Value<double> fiberG = const Value.absent(),
+                Value<int> satietyIndex = const Value.absent(),
+                Value<String> searchTerms = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => FoodReferencesCompanion(
+                id: id,
+                foodName: foodName,
+                defaultServingG: defaultServingG,
+                servingDescription: servingDescription,
+                calories: calories,
+                proteinG: proteinG,
+                carbsG: carbsG,
+                fatG: fatG,
+                glycemicIndex: glycemicIndex,
+                fiberG: fiberG,
+                satietyIndex: satietyIndex,
+                searchTerms: searchTerms,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String foodName,
+                required double defaultServingG,
+                required String servingDescription,
+                required double calories,
+                required double proteinG,
+                required double carbsG,
+                required double fatG,
+                required int glycemicIndex,
+                required double fiberG,
+                required int satietyIndex,
+                required String searchTerms,
+                Value<int> rowid = const Value.absent(),
+              }) => FoodReferencesCompanion.insert(
+                id: id,
+                foodName: foodName,
+                defaultServingG: defaultServingG,
+                servingDescription: servingDescription,
+                calories: calories,
+                proteinG: proteinG,
+                carbsG: carbsG,
+                fatG: fatG,
+                glycemicIndex: glycemicIndex,
+                fiberG: fiberG,
+                satietyIndex: satietyIndex,
+                searchTerms: searchTerms,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$FoodReferencesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $FoodReferencesTable,
+      FoodReference,
+      $$FoodReferencesTableFilterComposer,
+      $$FoodReferencesTableOrderingComposer,
+      $$FoodReferencesTableAnnotationComposer,
+      $$FoodReferencesTableCreateCompanionBuilder,
+      $$FoodReferencesTableUpdateCompanionBuilder,
+      (
+        FoodReference,
+        BaseReferences<_$AppDatabase, $FoodReferencesTable, FoodReference>,
+      ),
+      FoodReference,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -14747,4 +15819,6 @@ class $AppDatabaseManager {
       $$BpReadingsTableTableManager(_db, _db.bpReadings);
   $$GlucoseReadingsTableTableManager get glucoseReadings =>
       $$GlucoseReadingsTableTableManager(_db, _db.glucoseReadings);
+  $$FoodReferencesTableTableManager get foodReferences =>
+      $$FoodReferencesTableTableManager(_db, _db.foodReferences);
 }
