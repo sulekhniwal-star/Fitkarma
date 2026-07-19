@@ -180,13 +180,23 @@ class RecoveryLogs extends Table {
   Set<Column> get primaryKey => {localId};
 }
 
-@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs, RecoveryLogs])
+class ChatMessages extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get conversationId => text().withLength(min: 1, max: 50)();
+  TextColumn get senderType => text()(); // 'user' or 'ai'
+  TextColumn get messageContent => text()();
+  DateTimeColumn get createdAt => dateTime()();
+  TextColumn get sourcesJson => text().nullable()();
+  TextColumn get localAttachmentPath => text().nullable()();
+}
+
+@DriftDatabase(tables: [Users, WaterLogs, SyncQueueItems, DeadLetterQueueItems, DailyIntelligencePackages, AICacheEntries, TransformationMemories, CachedDietPlans, MenstrualSymptomLogs, RecoveryLogs, ChatMessages])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 24;
+  int get schemaVersion => 25;
 
   @override
   MigrationStrategy get migration {
@@ -206,6 +216,9 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 24) {
           await migrator.createTable(recoveryLogs);
+        }
+        if (from < 25) {
+          await migrator.createTable(chatMessages);
         }
       },
     );
@@ -260,6 +273,19 @@ class AppDatabase extends _$AppDatabase {
     return (select(recoveryLogs)
           ..where((t) => t.userId.equals(userId))
           ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc)]))
+        .get();
+  }
+
+  // ── Chat Messages helpers ──────────────────────────────────────────────────
+
+  Future<void> saveChatMessage(ChatMessagesCompanion message) async {
+    await into(chatMessages).insertOnConflictUpdate(message);
+  }
+
+  Future<List<ChatMessage>> getChatMessages(String conversationId) async {
+    return (select(chatMessages)
+          ..where((t) => t.conversationId.equals(conversationId))
+          ..orderBy([(t) => OrderingTerm(expression: t.createdAt, mode: OrderingMode.asc)]))
         .get();
   }
 

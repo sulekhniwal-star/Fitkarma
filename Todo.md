@@ -155,12 +155,7 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Implement context compression (snapshot → prompt payload)
 - [x] Unit tests for token-budget compliance
 
-### §P3-C AI Coach Screen
-- [ ] Build chat UI
-- [ ] Wire `fitkarma-coach` Azure Function
-- [ ] Persist conversation to ChatMessages
-- [ ] Loading/error/offline states
-- [ ] Widget test
+### 
 
 ### §P3-D Health Coach Escalation Layer
 - [ ] Implement escalation trigger logic (Elite tier)

@@ -6949,6 +6949,495 @@ class RecoveryLogsCompanion extends UpdateCompanion<RecoveryLog> {
   }
 }
 
+class $ChatMessagesTable extends ChatMessages
+    with TableInfo<$ChatMessagesTable, ChatMessage> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ChatMessagesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _conversationIdMeta = const VerificationMeta(
+    'conversationId',
+  );
+  @override
+  late final GeneratedColumn<String> conversationId = GeneratedColumn<String>(
+    'conversation_id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 50,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _senderTypeMeta = const VerificationMeta(
+    'senderType',
+  );
+  @override
+  late final GeneratedColumn<String> senderType = GeneratedColumn<String>(
+    'sender_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _messageContentMeta = const VerificationMeta(
+    'messageContent',
+  );
+  @override
+  late final GeneratedColumn<String> messageContent = GeneratedColumn<String>(
+    'message_content',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sourcesJsonMeta = const VerificationMeta(
+    'sourcesJson',
+  );
+  @override
+  late final GeneratedColumn<String> sourcesJson = GeneratedColumn<String>(
+    'sources_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _localAttachmentPathMeta =
+      const VerificationMeta('localAttachmentPath');
+  @override
+  late final GeneratedColumn<String> localAttachmentPath =
+      GeneratedColumn<String>(
+        'local_attachment_path',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    conversationId,
+    senderType,
+    messageContent,
+    createdAt,
+    sourcesJson,
+    localAttachmentPath,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'chat_messages';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ChatMessage> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('conversation_id')) {
+      context.handle(
+        _conversationIdMeta,
+        conversationId.isAcceptableOrUnknown(
+          data['conversation_id']!,
+          _conversationIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_conversationIdMeta);
+    }
+    if (data.containsKey('sender_type')) {
+      context.handle(
+        _senderTypeMeta,
+        senderType.isAcceptableOrUnknown(data['sender_type']!, _senderTypeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_senderTypeMeta);
+    }
+    if (data.containsKey('message_content')) {
+      context.handle(
+        _messageContentMeta,
+        messageContent.isAcceptableOrUnknown(
+          data['message_content']!,
+          _messageContentMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_messageContentMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('sources_json')) {
+      context.handle(
+        _sourcesJsonMeta,
+        sourcesJson.isAcceptableOrUnknown(
+          data['sources_json']!,
+          _sourcesJsonMeta,
+        ),
+      );
+    }
+    if (data.containsKey('local_attachment_path')) {
+      context.handle(
+        _localAttachmentPathMeta,
+        localAttachmentPath.isAcceptableOrUnknown(
+          data['local_attachment_path']!,
+          _localAttachmentPathMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ChatMessage map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ChatMessage(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      conversationId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}conversation_id'],
+      )!,
+      senderType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sender_type'],
+      )!,
+      messageContent: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}message_content'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      sourcesJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sources_json'],
+      ),
+      localAttachmentPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}local_attachment_path'],
+      ),
+    );
+  }
+
+  @override
+  $ChatMessagesTable createAlias(String alias) {
+    return $ChatMessagesTable(attachedDatabase, alias);
+  }
+}
+
+class ChatMessage extends DataClass implements Insertable<ChatMessage> {
+  final int id;
+  final String conversationId;
+  final String senderType;
+  final String messageContent;
+  final DateTime createdAt;
+  final String? sourcesJson;
+  final String? localAttachmentPath;
+  const ChatMessage({
+    required this.id,
+    required this.conversationId,
+    required this.senderType,
+    required this.messageContent,
+    required this.createdAt,
+    this.sourcesJson,
+    this.localAttachmentPath,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['conversation_id'] = Variable<String>(conversationId);
+    map['sender_type'] = Variable<String>(senderType);
+    map['message_content'] = Variable<String>(messageContent);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    if (!nullToAbsent || sourcesJson != null) {
+      map['sources_json'] = Variable<String>(sourcesJson);
+    }
+    if (!nullToAbsent || localAttachmentPath != null) {
+      map['local_attachment_path'] = Variable<String>(localAttachmentPath);
+    }
+    return map;
+  }
+
+  ChatMessagesCompanion toCompanion(bool nullToAbsent) {
+    return ChatMessagesCompanion(
+      id: Value(id),
+      conversationId: Value(conversationId),
+      senderType: Value(senderType),
+      messageContent: Value(messageContent),
+      createdAt: Value(createdAt),
+      sourcesJson: sourcesJson == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sourcesJson),
+      localAttachmentPath: localAttachmentPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(localAttachmentPath),
+    );
+  }
+
+  factory ChatMessage.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ChatMessage(
+      id: serializer.fromJson<int>(json['id']),
+      conversationId: serializer.fromJson<String>(json['conversationId']),
+      senderType: serializer.fromJson<String>(json['senderType']),
+      messageContent: serializer.fromJson<String>(json['messageContent']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      sourcesJson: serializer.fromJson<String?>(json['sourcesJson']),
+      localAttachmentPath: serializer.fromJson<String?>(
+        json['localAttachmentPath'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'conversationId': serializer.toJson<String>(conversationId),
+      'senderType': serializer.toJson<String>(senderType),
+      'messageContent': serializer.toJson<String>(messageContent),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'sourcesJson': serializer.toJson<String?>(sourcesJson),
+      'localAttachmentPath': serializer.toJson<String?>(localAttachmentPath),
+    };
+  }
+
+  ChatMessage copyWith({
+    int? id,
+    String? conversationId,
+    String? senderType,
+    String? messageContent,
+    DateTime? createdAt,
+    Value<String?> sourcesJson = const Value.absent(),
+    Value<String?> localAttachmentPath = const Value.absent(),
+  }) => ChatMessage(
+    id: id ?? this.id,
+    conversationId: conversationId ?? this.conversationId,
+    senderType: senderType ?? this.senderType,
+    messageContent: messageContent ?? this.messageContent,
+    createdAt: createdAt ?? this.createdAt,
+    sourcesJson: sourcesJson.present ? sourcesJson.value : this.sourcesJson,
+    localAttachmentPath: localAttachmentPath.present
+        ? localAttachmentPath.value
+        : this.localAttachmentPath,
+  );
+  ChatMessage copyWithCompanion(ChatMessagesCompanion data) {
+    return ChatMessage(
+      id: data.id.present ? data.id.value : this.id,
+      conversationId: data.conversationId.present
+          ? data.conversationId.value
+          : this.conversationId,
+      senderType: data.senderType.present
+          ? data.senderType.value
+          : this.senderType,
+      messageContent: data.messageContent.present
+          ? data.messageContent.value
+          : this.messageContent,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      sourcesJson: data.sourcesJson.present
+          ? data.sourcesJson.value
+          : this.sourcesJson,
+      localAttachmentPath: data.localAttachmentPath.present
+          ? data.localAttachmentPath.value
+          : this.localAttachmentPath,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ChatMessage(')
+          ..write('id: $id, ')
+          ..write('conversationId: $conversationId, ')
+          ..write('senderType: $senderType, ')
+          ..write('messageContent: $messageContent, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('sourcesJson: $sourcesJson, ')
+          ..write('localAttachmentPath: $localAttachmentPath')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    conversationId,
+    senderType,
+    messageContent,
+    createdAt,
+    sourcesJson,
+    localAttachmentPath,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ChatMessage &&
+          other.id == this.id &&
+          other.conversationId == this.conversationId &&
+          other.senderType == this.senderType &&
+          other.messageContent == this.messageContent &&
+          other.createdAt == this.createdAt &&
+          other.sourcesJson == this.sourcesJson &&
+          other.localAttachmentPath == this.localAttachmentPath);
+}
+
+class ChatMessagesCompanion extends UpdateCompanion<ChatMessage> {
+  final Value<int> id;
+  final Value<String> conversationId;
+  final Value<String> senderType;
+  final Value<String> messageContent;
+  final Value<DateTime> createdAt;
+  final Value<String?> sourcesJson;
+  final Value<String?> localAttachmentPath;
+  const ChatMessagesCompanion({
+    this.id = const Value.absent(),
+    this.conversationId = const Value.absent(),
+    this.senderType = const Value.absent(),
+    this.messageContent = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.sourcesJson = const Value.absent(),
+    this.localAttachmentPath = const Value.absent(),
+  });
+  ChatMessagesCompanion.insert({
+    this.id = const Value.absent(),
+    required String conversationId,
+    required String senderType,
+    required String messageContent,
+    required DateTime createdAt,
+    this.sourcesJson = const Value.absent(),
+    this.localAttachmentPath = const Value.absent(),
+  }) : conversationId = Value(conversationId),
+       senderType = Value(senderType),
+       messageContent = Value(messageContent),
+       createdAt = Value(createdAt);
+  static Insertable<ChatMessage> custom({
+    Expression<int>? id,
+    Expression<String>? conversationId,
+    Expression<String>? senderType,
+    Expression<String>? messageContent,
+    Expression<DateTime>? createdAt,
+    Expression<String>? sourcesJson,
+    Expression<String>? localAttachmentPath,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (conversationId != null) 'conversation_id': conversationId,
+      if (senderType != null) 'sender_type': senderType,
+      if (messageContent != null) 'message_content': messageContent,
+      if (createdAt != null) 'created_at': createdAt,
+      if (sourcesJson != null) 'sources_json': sourcesJson,
+      if (localAttachmentPath != null)
+        'local_attachment_path': localAttachmentPath,
+    });
+  }
+
+  ChatMessagesCompanion copyWith({
+    Value<int>? id,
+    Value<String>? conversationId,
+    Value<String>? senderType,
+    Value<String>? messageContent,
+    Value<DateTime>? createdAt,
+    Value<String?>? sourcesJson,
+    Value<String?>? localAttachmentPath,
+  }) {
+    return ChatMessagesCompanion(
+      id: id ?? this.id,
+      conversationId: conversationId ?? this.conversationId,
+      senderType: senderType ?? this.senderType,
+      messageContent: messageContent ?? this.messageContent,
+      createdAt: createdAt ?? this.createdAt,
+      sourcesJson: sourcesJson ?? this.sourcesJson,
+      localAttachmentPath: localAttachmentPath ?? this.localAttachmentPath,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (conversationId.present) {
+      map['conversation_id'] = Variable<String>(conversationId.value);
+    }
+    if (senderType.present) {
+      map['sender_type'] = Variable<String>(senderType.value);
+    }
+    if (messageContent.present) {
+      map['message_content'] = Variable<String>(messageContent.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (sourcesJson.present) {
+      map['sources_json'] = Variable<String>(sourcesJson.value);
+    }
+    if (localAttachmentPath.present) {
+      map['local_attachment_path'] = Variable<String>(
+        localAttachmentPath.value,
+      );
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ChatMessagesCompanion(')
+          ..write('id: $id, ')
+          ..write('conversationId: $conversationId, ')
+          ..write('senderType: $senderType, ')
+          ..write('messageContent: $messageContent, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('sourcesJson: $sourcesJson, ')
+          ..write('localAttachmentPath: $localAttachmentPath')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -6968,6 +7457,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $MenstrualSymptomLogsTable menstrualSymptomLogs =
       $MenstrualSymptomLogsTable(this);
   late final $RecoveryLogsTable recoveryLogs = $RecoveryLogsTable(this);
+  late final $ChatMessagesTable chatMessages = $ChatMessagesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -6983,6 +7473,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     cachedDietPlans,
     menstrualSymptomLogs,
     recoveryLogs,
+    chatMessages,
   ];
 }
 
@@ -10307,6 +10798,248 @@ typedef $$RecoveryLogsTableProcessedTableManager =
       RecoveryLog,
       PrefetchHooks Function()
     >;
+typedef $$ChatMessagesTableCreateCompanionBuilder =
+    ChatMessagesCompanion Function({
+      Value<int> id,
+      required String conversationId,
+      required String senderType,
+      required String messageContent,
+      required DateTime createdAt,
+      Value<String?> sourcesJson,
+      Value<String?> localAttachmentPath,
+    });
+typedef $$ChatMessagesTableUpdateCompanionBuilder =
+    ChatMessagesCompanion Function({
+      Value<int> id,
+      Value<String> conversationId,
+      Value<String> senderType,
+      Value<String> messageContent,
+      Value<DateTime> createdAt,
+      Value<String?> sourcesJson,
+      Value<String?> localAttachmentPath,
+    });
+
+class $$ChatMessagesTableFilterComposer
+    extends Composer<_$AppDatabase, $ChatMessagesTable> {
+  $$ChatMessagesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get conversationId => $composableBuilder(
+    column: $table.conversationId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get senderType => $composableBuilder(
+    column: $table.senderType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get messageContent => $composableBuilder(
+    column: $table.messageContent,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get sourcesJson => $composableBuilder(
+    column: $table.sourcesJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get localAttachmentPath => $composableBuilder(
+    column: $table.localAttachmentPath,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ChatMessagesTableOrderingComposer
+    extends Composer<_$AppDatabase, $ChatMessagesTable> {
+  $$ChatMessagesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get conversationId => $composableBuilder(
+    column: $table.conversationId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get senderType => $composableBuilder(
+    column: $table.senderType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get messageContent => $composableBuilder(
+    column: $table.messageContent,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get sourcesJson => $composableBuilder(
+    column: $table.sourcesJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get localAttachmentPath => $composableBuilder(
+    column: $table.localAttachmentPath,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ChatMessagesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ChatMessagesTable> {
+  $$ChatMessagesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get conversationId => $composableBuilder(
+    column: $table.conversationId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get senderType => $composableBuilder(
+    column: $table.senderType,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get messageContent => $composableBuilder(
+    column: $table.messageContent,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<String> get sourcesJson => $composableBuilder(
+    column: $table.sourcesJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get localAttachmentPath => $composableBuilder(
+    column: $table.localAttachmentPath,
+    builder: (column) => column,
+  );
+}
+
+class $$ChatMessagesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ChatMessagesTable,
+          ChatMessage,
+          $$ChatMessagesTableFilterComposer,
+          $$ChatMessagesTableOrderingComposer,
+          $$ChatMessagesTableAnnotationComposer,
+          $$ChatMessagesTableCreateCompanionBuilder,
+          $$ChatMessagesTableUpdateCompanionBuilder,
+          (
+            ChatMessage,
+            BaseReferences<_$AppDatabase, $ChatMessagesTable, ChatMessage>,
+          ),
+          ChatMessage,
+          PrefetchHooks Function()
+        > {
+  $$ChatMessagesTableTableManager(_$AppDatabase db, $ChatMessagesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ChatMessagesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ChatMessagesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ChatMessagesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> conversationId = const Value.absent(),
+                Value<String> senderType = const Value.absent(),
+                Value<String> messageContent = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<String?> sourcesJson = const Value.absent(),
+                Value<String?> localAttachmentPath = const Value.absent(),
+              }) => ChatMessagesCompanion(
+                id: id,
+                conversationId: conversationId,
+                senderType: senderType,
+                messageContent: messageContent,
+                createdAt: createdAt,
+                sourcesJson: sourcesJson,
+                localAttachmentPath: localAttachmentPath,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String conversationId,
+                required String senderType,
+                required String messageContent,
+                required DateTime createdAt,
+                Value<String?> sourcesJson = const Value.absent(),
+                Value<String?> localAttachmentPath = const Value.absent(),
+              }) => ChatMessagesCompanion.insert(
+                id: id,
+                conversationId: conversationId,
+                senderType: senderType,
+                messageContent: messageContent,
+                createdAt: createdAt,
+                sourcesJson: sourcesJson,
+                localAttachmentPath: localAttachmentPath,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ChatMessagesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ChatMessagesTable,
+      ChatMessage,
+      $$ChatMessagesTableFilterComposer,
+      $$ChatMessagesTableOrderingComposer,
+      $$ChatMessagesTableAnnotationComposer,
+      $$ChatMessagesTableCreateCompanionBuilder,
+      $$ChatMessagesTableUpdateCompanionBuilder,
+      (
+        ChatMessage,
+        BaseReferences<_$AppDatabase, $ChatMessagesTable, ChatMessage>,
+      ),
+      ChatMessage,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -10337,4 +11070,6 @@ class $AppDatabaseManager {
       $$MenstrualSymptomLogsTableTableManager(_db, _db.menstrualSymptomLogs);
   $$RecoveryLogsTableTableManager get recoveryLogs =>
       $$RecoveryLogsTableTableManager(_db, _db.recoveryLogs);
+  $$ChatMessagesTableTableManager get chatMessages =>
+      $$ChatMessagesTableTableManager(_db, _db.chatMessages);
 }

@@ -10,6 +10,7 @@ import 'package:fitkarma/features/onboarding/program_select_screen.dart';
 import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 import 'package:fitkarma/features/daily_mission/daily_mission_screen.dart';
 import 'package:fitkarma/features/daily_mission/recovery_log_screen.dart';
+import 'package:fitkarma/features/coach/ai_coach_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -35,6 +36,7 @@ class AppRoutes {
   static const dashboard = '/dashboard';
   static const mission   = '/mission';
   static const recovery  = '/recovery';
+  static const aiCoach   = '/ai-coach';
 
   // Auth
   static const login = '/login';
@@ -262,6 +264,18 @@ class AppRouter {
           path: AppRoutes.recovery,
           pageBuilder: (context, state) =>
               _slideTransition(state, const RecoveryLogScreen()),
+        ),
+        GoRoute(
+          path: AppRoutes.aiCoach,
+          pageBuilder: (context, state) {
+            final extra = state.extra as Map<String, dynamic>?;
+            final userId = extra?['userId'] ?? 'onboarding_user';
+            final conversationId = extra?['conversationId'] as String?;
+            return _slideTransition(
+              state,
+              AICoachScreen(userId: userId, conversationId: conversationId),
+            );
+          },
         ),
 
         // ── Auth ─────────────────────────────────────────────────────────────
