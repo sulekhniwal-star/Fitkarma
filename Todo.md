@@ -176,9 +176,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P4-C Sleep Screen
-- [ ] Build UI + wearable/manual sleep entry
-- [ ] Persist to SleepLogs
-- [ ] Widget test
+- [x] Build UI + wearable/manual sleep entry
+- [x] Persist to SleepLogs
+- [x] Widget test
 
 ### §P4-D Blood Pressure Screen
 - [ ] Build manual BP entry UI

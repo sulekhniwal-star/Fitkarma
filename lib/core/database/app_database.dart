@@ -212,6 +212,25 @@ class StepLogs extends Table {
   TextColumn get hlcNodeId => text()();
 }
 
+class SleepLogs extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get userId => text()();
+  IntColumn get sleepMinutes => integer()();
+  IntColumn get awakeMinutes => integer()();
+  IntColumn get remMinutes => integer()();
+  IntColumn get lightMinutes => integer()();
+  IntColumn get deepMinutes => integer()();
+  IntColumn get sleepQuality => integer()();
+  RealColumn get hrvMs => real()();
+  DateTimeColumn get sleepDate => dateTime()();
+  TextColumn get syncBatchId => text()();
+
+  // HLC logical components
+  DateTimeColumn get hlcPhysicalTime => dateTime()();
+  IntColumn get hlcLogicalCounter => integer()();
+  TextColumn get hlcNodeId => text()();
+}
+
 @DriftDatabase(tables: [
   Users,
   WaterLogs,
@@ -226,13 +245,14 @@ class StepLogs extends Table {
   ChatMessages,
   EscalationEvents,
   StepLogs,
+  SleepLogs,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 27;
+  int get schemaVersion => 28;
 
   @override
   MigrationStrategy get migration {
@@ -262,6 +282,9 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 27) {
           await migrator.createTable(stepLogs);
+        }
+        if (from < 28) {
+          await migrator.createTable(sleepLogs);
         }
       },
     );
