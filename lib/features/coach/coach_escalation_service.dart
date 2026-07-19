@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:drift/drift.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 
 enum SubscriptionTier { free, pro, eliteCoach }
@@ -7,19 +5,13 @@ enum SubscriptionTier { free, pro, eliteCoach }
 enum RiskSeverity { low, medium, high }
 
 class ActiveRisk {
+  const ActiveRisk({required this.label, required this.severity});
+
   final String label;
   final RiskSeverity severity;
-
-  const ActiveRisk({required this.label, required this.severity});
 }
 
 class UserState {
-  final List<ActiveRisk> activeRisks;
-  final int plateauWeeks;
-  final bool adaptiveCaloriesAlreadyAdjusted;
-  final int consecutiveRelapseAttempts;
-  final bool userRequestedHumanCoach;
-
   const UserState({
     this.activeRisks = const [],
     this.plateauWeeks = 0,
@@ -27,6 +19,12 @@ class UserState {
     this.consecutiveRelapseAttempts = 0,
     this.userRequestedHumanCoach = false,
   });
+
+  final List<ActiveRisk> activeRisks;
+  final int plateauWeeks;
+  final bool adaptiveCaloriesAlreadyAdjusted;
+  final int consecutiveRelapseAttempts;
+  final bool userRequestedHumanCoach;
 }
 
 class CoachEscalationService {
@@ -58,10 +56,10 @@ class CoachEscalationService {
 
     // Retrieve latest recovery logs to calculate metrics
     final logs = await db.getRecoveryLogs(userId);
-    double initialWeight = user?.weight ?? 75.0;
-    double currentWeight = initialWeight;
+    final double initialWeight = user?.weight ?? 75.0;
+    final double currentWeight = initialWeight;
     int recoveryDebtMinutes = 0;
-    int adherenceScore = 60; // default adherence fallback
+    final int adherenceScore = 60; // default adherence fallback
 
     if (logs.isNotEmpty) {
       int totalSleepMinutes = 0;

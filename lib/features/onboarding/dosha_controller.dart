@@ -1,7 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:fitkarma/core/database/app_database.dart';
-import 'package:fitkarma/core/sync/sync_worker.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Domain Models (§P1-F)
@@ -42,6 +43,12 @@ class DoshaGuidelines {
     required this.recommendedSpices,
   });
 
+  factory DoshaGuidelines.fromJson(Map<String, dynamic> json) => DoshaGuidelines(
+        dietaryFocus: json['dietaryFocus'] as String,
+        stressFocus: json['stressFocus'] as String,
+        recommendedSpices: List<String>.from(json['recommendedSpices'] as List),
+      );
+
   final String dietaryFocus;
   final String stressFocus;
   final List<String> recommendedSpices;
@@ -51,12 +58,6 @@ class DoshaGuidelines {
         'stressFocus': stressFocus,
         'recommendedSpices': recommendedSpices,
       };
-
-  factory DoshaGuidelines.fromJson(Map<String, dynamic> json) => DoshaGuidelines(
-        dietaryFocus: json['dietaryFocus'] as String,
-        stressFocus: json['stressFocus'] as String,
-        recommendedSpices: List<String>.from(json['recommendedSpices'] as List),
-      );
 }
 
 class DoshaResult {
@@ -67,6 +68,16 @@ class DoshaResult {
     required this.kaphaPct,
     required this.guidelines,
   });
+
+  factory DoshaResult.fromJson(Map<String, dynamic> json) {
+    return DoshaResult(
+      dominant: DoshaType.values.byName(json['dominant'] as String),
+      vataPct: (json['vataPct'] as num).toDouble(),
+      pittaPct: (json['pittaPct'] as num).toDouble(),
+      kaphaPct: (json['kaphaPct'] as num).toDouble(),
+      guidelines: DoshaGuidelines.fromJson(json['guidelines'] as Map<String, dynamic>),
+    );
+  }
 
   final DoshaType dominant;
   final double vataPct;
@@ -81,16 +92,6 @@ class DoshaResult {
         'kaphaPct': kaphaPct,
         'guidelines': guidelines.toJson(),
       };
-
-  factory DoshaResult.fromJson(Map<String, dynamic> json) {
-    return DoshaResult(
-      dominant: DoshaType.values.byName(json['dominant'] as String),
-      vataPct: (json['vataPct'] as num).toDouble(),
-      pittaPct: (json['pittaPct'] as num).toDouble(),
-      kaphaPct: (json['kaphaPct'] as num).toDouble(),
-      guidelines: DoshaGuidelines.fromJson(json['guidelines'] as Map<String, dynamic>),
-    );
-  }
 }
 
 // ──────────────────────────────────────────────────────────────────────────────

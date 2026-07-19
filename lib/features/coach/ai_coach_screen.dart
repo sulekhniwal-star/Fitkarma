@@ -1,23 +1,25 @@
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
 import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_typography.dart';
 import 'package:fitkarma/features/coach/ai_coach_controller.dart';
-import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AICoachScreen extends ConsumerStatefulWidget {
-  final String userId;
-  final String? conversationId;
-
   const AICoachScreen({
     super.key,
     required this.userId,
     this.conversationId,
   });
+
+  final String userId;
+  final String? conversationId;
 
   @override
   ConsumerState<AICoachScreen> createState() => _AICoachScreenState();
@@ -135,7 +137,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
               Text('Offline', style: AppTypography.bodySm.copyWith(color: textSecondary)),
               Switch(
                 value: state.isOffline,
-                activeColor: accentColor,
+                activeThumbColor: accentColor,
                 onChanged: (val) {
                   ref.read(aiCoachChatProvider.notifier).setOfflineStatus(val);
                 },
@@ -191,7 +193,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
             if (state.isEscalated)
               Container(
                 width: double.infinity,
-                color: Colors.blue.withOpacity(0.2),
+                color: Colors.blue.withValues(alpha: 0.2),
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Row(
                   children: [
@@ -211,7 +213,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
             if (state.isOffline)
               Container(
                 width: double.infinity,
-                color: Colors.amber.withOpacity(0.2),
+                color: Colors.amber.withValues(alpha: 0.2),
                 padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                 child: Row(
                   children: [
@@ -311,7 +313,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
               decoration: BoxDecoration(
                 color: cardBgColor,
                 borderRadius: BorderRadius.circular(28),
-                border: Border.all(color: textSecondary.withOpacity(0.15)),
+                border: Border.all(color: textSecondary.withValues(alpha: 0.15)),
               ),
               child: Row(
                 children: [
@@ -341,7 +343,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
                       style: TextStyle(color: textPrimary),
                       decoration: InputDecoration(
                         hintText: 'Ask anything...',
-                        hintStyle: TextStyle(color: textSecondary.withOpacity(0.6)),
+                        hintStyle: TextStyle(color: textSecondary.withValues(alpha: 0.6)),
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(horizontal: 4),
                       ),
@@ -370,7 +372,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
         Text(
           label.toUpperCase(),
           style: AppTypography.bodySm.copyWith(
-            color: color.withOpacity(0.8),
+            color: color.withValues(alpha: 0.8),
             fontWeight: FontWeight.bold,
             letterSpacing: 0.5,
           ),
@@ -390,7 +392,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
     return Container(
       height: 32,
       width: 1,
-      color: (isDark ? Colors.white : Colors.black).withOpacity(0.1),
+      color: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.1),
     );
   }
 
@@ -417,11 +419,11 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
   }) {
     final alignment = isUser ? Alignment.centerRight : Alignment.centerLeft;
     final bubbleColor = isUser
-        ? primaryColor.withOpacity(0.85)
+        ? primaryColor.withValues(alpha: 0.85)
         : cardBg;
 
     // Decode sources if present
-    List<String> sources = [];
+    final List<String> sources = [];
     if (message.sourcesJson != null) {
       try {
         final decoded = jsonDecode(message.sourcesJson!);
@@ -461,7 +463,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
                             margin: const EdgeInsets.only(right: 6),
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: primaryColor.withOpacity(0.15),
+                              color: primaryColor.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
@@ -491,7 +493,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
   }
 
   void _showEscalationBottomSheet(BuildContext context, AiCoachChatState state, AiCoachChatNotifier notifier) {
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
@@ -515,7 +517,7 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
               const SizedBox(height: 12),
               Text(
                 'Your health coach will review your full plan and respond within 24 hours via in-app message.',
-                style: AppTypography.bodyMd.copyWith(color: textPrimary.withOpacity(0.8)),
+                style: AppTypography.bodyMd.copyWith(color: textPrimary.withValues(alpha: 0.8)),
               ),
               const SizedBox(height: 24),
               Row(

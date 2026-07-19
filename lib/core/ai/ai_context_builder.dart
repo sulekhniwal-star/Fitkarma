@@ -1,22 +1,9 @@
-import 'dart:convert';
 import 'package:drift/drift.dart';
-import 'package:fitkarma/core/brain/health_snapshot.dart';
 import 'package:fitkarma/core/brain/health_os_brain.dart';
+import 'package:fitkarma/core/brain/health_snapshot.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 
 class AIContext {
-  final String name;
-  final String goals; // e.g. JSON list or string
-  final String program; // e.g. active program
-  final String dietType; // e.g. Veg, Non-veg
-  final String tone; // e.g. gentle, motivational, roast, no_nonsense
-  final String injuries; // e.g. knee pain
-  final HealthSnapshot snapshot;
-  final int readinessScore;
-  final String primaryConcern;
-  final String? weather;
-  final String? festival;
-
   AIContext({
     required this.name,
     required this.goals,
@@ -30,6 +17,18 @@ class AIContext {
     this.weather,
     this.festival,
   });
+
+  final String name;
+  final String goals; // e.g. JSON list or string
+  final String program; // e.g. active program
+  final String dietType; // e.g. Veg, Non-veg
+  final String tone; // e.g. gentle, motivational, roast, no_nonsense
+  final String injuries; // e.g. knee pain
+  final HealthSnapshot snapshot;
+  final int readinessScore;
+  final String primaryConcern;
+  final String? weather;
+  final String? festival;
 
   /// Compresses the context to a prompt payload string under a token budget.
   /// Standard word/token approximation: ~4 characters per token.
@@ -103,10 +102,10 @@ class AIContext {
 }
 
 class AIContextBuilder {
+  AIContextBuilder(this._db, this._healthOSBrain);
+
   final AppDatabase _db;
   final HealthOSBrain _healthOSBrain;
-
-  AIContextBuilder(this._db, this._healthOSBrain);
 
   Future<AIContext> buildCompressed(String userId, {String? weather, String? festival}) async {
     final user = await (_db.select(_db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();

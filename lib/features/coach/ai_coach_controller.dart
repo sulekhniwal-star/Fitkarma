@@ -1,19 +1,10 @@
 import 'dart:convert';
 import 'package:drift/drift.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 import 'package:fitkarma/features/coach/coach_escalation_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AiCoachChatState {
-  final List<ChatMessage> messages;
-  final bool isAiTyping;
-  final bool errorOccurred;
-  final String? currentConversationId;
-  final bool isOffline;
-  final bool isEscalated;
-  final String? activeEscalationBriefing;
-  final String subscriptionTier;
-
   const AiCoachChatState({
     this.messages = const [],
     this.isAiTyping = false,
@@ -24,6 +15,15 @@ class AiCoachChatState {
     this.activeEscalationBriefing,
     this.subscriptionTier = 'free',
   });
+
+  final List<ChatMessage> messages;
+  final bool isAiTyping;
+  final bool errorOccurred;
+  final String? currentConversationId;
+  final bool isOffline;
+  final bool isEscalated;
+  final String? activeEscalationBriefing;
+  final String subscriptionTier;
 
   AiCoachChatState copyWith({
     List<ChatMessage>? messages,
@@ -252,7 +252,7 @@ class AiCoachChatNotifier extends Notifier<AiCoachChatState> {
       activeText += characters[i];
       
       // Throttle update loops slightly to produce typing effect
-      await Future.delayed(const Duration(milliseconds: 15));
+      await Future<void>.delayed(const Duration(milliseconds: 15));
 
       final updatedMessages = List<ChatMessage>.from(state.messages);
       updatedMessages[updatedMessages.length - 1] = aiMsgPlaceholder.copyWith(
@@ -295,13 +295,13 @@ class AiCoachChatNotifier extends Notifier<AiCoachChatState> {
 }
 
 class AzureCoachResponse {
-  final String reply;
-  final List<String> sources;
-
   AzureCoachResponse({
     required this.reply,
     required this.sources,
   });
+
+  final String reply;
+  final List<String> sources;
 }
 
 final aiCoachChatProvider = NotifierProvider<AiCoachChatNotifier, AiCoachChatState>(

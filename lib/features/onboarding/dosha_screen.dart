@@ -1,18 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:fitkarma/core/routing/app_router.dart';
+import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
-import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_springs.dart';
 import 'package:fitkarma/core/theme/app_typography.dart';
-import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/features/onboarding/dosha_controller.dart';
 import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
 import 'package:fitkarma/features/onboarding/widgets/onboarding_progress_indicator.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
 import 'package:fitkarma/shared/widgets/bilingual_label.dart';
 import 'package:fitkarma/shared/widgets/fit_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class DoshaScreen extends ConsumerStatefulWidget {
   const DoshaScreen({super.key});
@@ -247,7 +247,7 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
               color: dominantColor,
               shadows: [
                 Shadow(
-                  color: dominantColor.withOpacity(0.4),
+                  color: dominantColor.withValues(alpha: 0.4),
                   blurRadius: 18,
                 ),
               ],
@@ -346,7 +346,7 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
                       label: Text(spice),
                       backgroundColor: AppColorsDark.surface1,
                       labelStyle: AppTypography.labelLg.copyWith(color: textPrimary),
-                      side: BorderSide(color: AppColorsDark.glassBorder),
+                      side: const BorderSide(color: AppColorsDark.glassBorder),
                     );
                   }).toList(),
                 ),
@@ -390,7 +390,7 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
                 borderRadius: BorderRadius.circular(4),
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(0.3),
+                    color: color.withValues(alpha: 0.3),
                     blurRadius: 4,
                     spreadRadius: 1,
                   ),

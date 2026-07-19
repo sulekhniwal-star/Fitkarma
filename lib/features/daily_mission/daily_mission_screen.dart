@@ -1,18 +1,16 @@
-import 'dart:convert';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
+import 'package:fitkarma/core/brain/health_os_brain.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
 import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_typography.dart';
-import 'package:fitkarma/core/brain/health_os_brain.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
 import 'package:fitkarma/shared/widgets/bento_grid.dart';
 import 'package:fitkarma/shared/widgets/glowing_metric.dart';
-import 'package:fitkarma/shared/widgets/bilingual_label.dart';
 import 'package:fitkarma/shared/widgets/state_widgets.dart';
 
 // Provider to fetch today's Daily Intelligence Package directly from Drift.
@@ -80,7 +78,7 @@ class DailyMissionScreen extends ConsumerWidget {
         ),
         data: (dip) {
           if (dip == null) {
-            return FitEmptyState(
+            return const FitEmptyState(
               englishTitle: 'No Briefing Available',
               hindiTitle: 'कोई ब्रीफिंग उपलब्ध नहीं है',
               englishSubtitle: 'Complete your check-in or profile to start.',
@@ -105,7 +103,7 @@ class DailyMissionScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              ref.refresh(dailyBriefingProvider);
+              ref.invalidate(dailyBriefingProvider);
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -119,7 +117,7 @@ class DailyMissionScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColorsDark.heroGradient
-                          : LinearGradient(
+                          : const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
@@ -220,10 +218,10 @@ class DailyMissionScreen extends ConsumerWidget {
                             padding: const EdgeInsets.all(14.0),
                             margin: const EdgeInsets.only(bottom: AppSpacing.bentoGap),
                             decoration: BoxDecoration(
-                              color: (isDark ? AppColorsDark.error : AppColorsLight.error).withOpacity(0.12),
+                              color: (isDark ? AppColorsDark.error : AppColorsLight.error).withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(AppRadius.md),
                               border: Border.all(
-                                color: (isDark ? AppColorsDark.error : AppColorsLight.error).withOpacity(0.3),
+                                color: (isDark ? AppColorsDark.error : AppColorsLight.error).withValues(alpha: 0.3),
                               ),
                             ),
                             child: Row(
@@ -475,7 +473,7 @@ class DailyMissionScreen extends ConsumerWidget {
     required Color color,
   }) {
     return Material(
-      color: color.withOpacity(0.12),
+      color: color.withValues(alpha: 0.12),
       borderRadius: BorderRadius.circular(AppRadius.md),
       child: InkWell(
         onTap: () {
@@ -490,7 +488,7 @@ class DailyMissionScreen extends ConsumerWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            border: Border.all(color: color.withOpacity(0.3)),
+            border: Border.all(color: color.withValues(alpha: 0.3)),
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           child: Column(
@@ -553,7 +551,7 @@ class ReadinessRing extends StatelessWidget {
                   shadows: isDark
                       ? [
                           Shadow(
-                            color: primaryColor.withOpacity(0.5),
+                            color: primaryColor.withValues(alpha: 0.5),
                             blurRadius: 12,
                           )
                         ]
@@ -564,9 +562,9 @@ class ReadinessRing extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: secondaryColor.withOpacity(0.2),
+                  color: secondaryColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(AppRadius.sm),
-                  border: Border.all(color: secondaryColor.withOpacity(0.4), width: 0.5),
+                  border: Border.all(color: secondaryColor.withValues(alpha: 0.4), width: 0.5),
                 ),
                 child: Text(
                   confidenceLabel.split(' ').first.toUpperCase(),
@@ -629,15 +627,15 @@ class HealthScoreRing extends StatelessWidget {
 }
 
 class _RingPainter extends CustomPainter {
-  final int score;
-  final Color primaryColor;
-  final Color trackColor;
-
   const _RingPainter({
     required this.score,
     required this.primaryColor,
     required this.trackColor,
   });
+
+  final int score;
+  final Color primaryColor;
+  final Color trackColor;
 
   @override
   void paint(Canvas canvas, Size size) {

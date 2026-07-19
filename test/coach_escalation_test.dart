@@ -1,9 +1,9 @@
 import 'package:drift/drift.dart' show Value;
 import 'package:drift/native.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/core/database/app_database.dart';
-import 'package:fitkarma/features/coach/coach_escalation_service.dart';
 import 'package:fitkarma/features/coach/ai_coach_controller.dart';
+import 'package:fitkarma/features/coach/coach_escalation_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -21,16 +21,16 @@ void main() {
 
   group('CoachEscalationService Triggers Tests', () {
     test('shouldEscalate is true when high severity risk exists', () {
-      final state = UserState(
+      final state = const UserState(
         activeRisks: [
-          const ActiveRisk(label: 'Severe Chest Pain', severity: RiskSeverity.high),
+          ActiveRisk(label: 'Severe Chest Pain', severity: RiskSeverity.high),
         ],
       );
       expect(escalationService.shouldEscalate(state), isTrue);
     });
 
     test('shouldEscalate is true when plateau weeks >= 4 and adaptive calories adjusted', () {
-      final state = UserState(
+      final state = const UserState(
         plateauWeeks: 4,
         adaptiveCaloriesAlreadyAdjusted: true,
       );
@@ -38,7 +38,7 @@ void main() {
     });
 
     test('shouldEscalate is false when plateau weeks >= 4 but adaptive calories not adjusted', () {
-      final state = UserState(
+      final state = const UserState(
         plateauWeeks: 4,
         adaptiveCaloriesAlreadyAdjusted: false,
       );
@@ -46,23 +46,23 @@ void main() {
     });
 
     test('shouldEscalate is true when consecutive relapse attempts >= 3', () {
-      final state = UserState(
+      final state = const UserState(
         consecutiveRelapseAttempts: 3,
       );
       expect(escalationService.shouldEscalate(state), isTrue);
     });
 
     test('shouldEscalate is true when user explicitly requests human coach', () {
-      final state = UserState(
+      final state = const UserState(
         userRequestedHumanCoach: true,
       );
       expect(escalationService.shouldEscalate(state), isTrue);
     });
 
     test('shouldEscalate is false under normal state', () {
-      final state = UserState(
+      final state = const UserState(
         activeRisks: [
-          const ActiveRisk(label: 'Mild Soreness', severity: RiskSeverity.low),
+          ActiveRisk(label: 'Mild Soreness', severity: RiskSeverity.low),
         ],
         plateauWeeks: 2,
         adaptiveCaloriesAlreadyAdjusted: true,

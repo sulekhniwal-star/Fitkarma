@@ -123,7 +123,6 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
   void _onContinue() async {
     // Save to DB (user ID stub — in real app comes from auth session)
     // For now, save with a placeholder ID if no user is seeded
-    final notifier = ref.read(onboardingGoalsProvider.notifier);
     // Note: DB save is best-effort; we advance regardless (can retry on sync)
     // notifier.saveToDb(db, userId) — hooked once auth is in place
     final next = ref.read(onboardingFlowProvider.notifier).advance();
@@ -461,7 +460,6 @@ class _TargetWeightSlider extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primary = isDark ? AppColorsDark.primary : AppColorsLight.primary;
     final surface = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
     final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
 
     // Round to nearest 0.5

@@ -1,6 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
-import 'package:drift/drift.dart' show Value;
 import 'package:fitkarma/core/database/app_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -56,9 +53,10 @@ enum ActivityLevel {
 enum BmiCategory { underweight, normal, overweight, obese }
 
 class BmiResult {
+  const BmiResult({required this.score, required this.category});
+
   final double score;
   final BmiCategory category;
-  const BmiResult({required this.score, required this.category});
 
   String get displayName => score.toStringAsFixed(1);
 
@@ -151,7 +149,7 @@ class DemographicsState {
     final totalInches = (heightCm / 2.54).round();
     final ft = totalInches ~/ 12;
     final inches = totalInches % 12;
-    return "${ft}' ${inches}\"";
+    return "$ft' $inches\"";
   }
 
   String get weightDisplay {

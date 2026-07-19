@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+
 import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/theme/app_colors.dart';
 import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/features/daily_mission/recovery_log_controller.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
 import 'package:fitkarma/shared/widgets/fit_button.dart';
-import 'package:fitkarma/features/daily_mission/recovery_log_controller.dart';
 
 class RecoveryLogScreen extends ConsumerStatefulWidget {
   const RecoveryLogScreen({super.key});
@@ -282,7 +281,7 @@ class _RecoveryLogScreenState extends ConsumerState<RecoveryLogScreen> {
                           decoration: BoxDecoration(
                             color: isDark ? AppColorsDark.surface0 : AppColorsLight.surface2,
                             borderRadius: BorderRadius.circular(AppRadius.md),
-                            border: Border.all(color: textSecondary.withOpacity(0.2)),
+                            border: Border.all(color: textSecondary.withValues(alpha: 0.2)),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(AppRadius.md),
@@ -410,7 +409,7 @@ class _RecoveryLogScreenState extends ConsumerState<RecoveryLogScreen> {
             min: min,
             max: max,
             activeColor: primaryColor,
-            inactiveColor: primaryColor.withOpacity(0.2),
+            inactiveColor: primaryColor.withValues(alpha: 0.2),
             onChanged: onChanged,
           ),
         ],
@@ -480,15 +479,15 @@ class _RecoveryLogScreenState extends ConsumerState<RecoveryLogScreen> {
 }
 
 class _BodyPainter extends CustomPainter {
-  final RecoveryLogState state;
-  final bool isFrontView;
-  final bool isDark;
-
   _BodyPainter({
     required this.state,
     required this.isFrontView,
     required this.isDark,
   });
+
+  final RecoveryLogState state;
+  final bool isFrontView;
+  final bool isDark;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -558,9 +557,9 @@ class _BodyPainter extends CustomPainter {
   Color _getPaintColor(SorenessSeverity severity) {
     return switch (severity) {
       SorenessSeverity.none => Colors.transparent,
-      SorenessSeverity.mild => Colors.yellow.withOpacity(0.25),
-      SorenessSeverity.moderate => Colors.orange.withOpacity(0.45),
-      SorenessSeverity.severe => Colors.red.withOpacity(0.65),
+      SorenessSeverity.mild => Colors.yellow.withValues(alpha: 0.25),
+      SorenessSeverity.moderate => Colors.orange.withValues(alpha: 0.45),
+      SorenessSeverity.severe => Colors.red.withValues(alpha: 0.65),
     };
   }
 

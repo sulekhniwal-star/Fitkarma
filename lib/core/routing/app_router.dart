@@ -1,19 +1,20 @@
-import 'package:fitkarma/core/config/user_experience_stage.dart';
-import 'package:fitkarma/core/providers/core_providers.dart';
-import 'package:fitkarma/features/onboarding/demographics_screen.dart';
-import 'package:fitkarma/features/onboarding/diet_plan_screen.dart';
-import 'package:fitkarma/features/onboarding/goals_screen.dart';
-import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
-import 'package:fitkarma/features/onboarding/welcome_screen.dart';
-import 'package:fitkarma/features/onboarding/dosha_screen.dart';
-import 'package:fitkarma/features/onboarding/program_select_screen.dart';
-import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
-import 'package:fitkarma/features/daily_mission/daily_mission_screen.dart';
-import 'package:fitkarma/features/daily_mission/recovery_log_screen.dart';
-import 'package:fitkarma/features/coach/ai_coach_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:fitkarma/core/config/user_experience_stage.dart';
+import 'package:fitkarma/core/providers/core_providers.dart';
+import 'package:fitkarma/features/coach/ai_coach_screen.dart';
+import 'package:fitkarma/features/daily_mission/daily_mission_screen.dart';
+import 'package:fitkarma/features/daily_mission/recovery_log_screen.dart';
+import 'package:fitkarma/features/onboarding/demographics_screen.dart';
+import 'package:fitkarma/features/onboarding/diet_plan_screen.dart';
+import 'package:fitkarma/features/onboarding/dosha_screen.dart';
+import 'package:fitkarma/features/onboarding/goals_screen.dart';
+import 'package:fitkarma/features/onboarding/onboarding_flow_controller.dart';
+import 'package:fitkarma/features/onboarding/program_select_screen.dart';
+import 'package:fitkarma/features/onboarding/welcome_screen.dart';
+import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Route Paths (centralized constants)
@@ -269,7 +270,7 @@ class AppRouter {
           path: AppRoutes.aiCoach,
           pageBuilder: (context, state) {
             final extra = state.extra as Map<String, dynamic>?;
-            final userId = extra?['userId'] ?? 'onboarding_user';
+            final String userId = (extra?['userId'] as String?) ?? 'onboarding_user';
             final conversationId = extra?['conversationId'] as String?;
             return _slideTransition(
               state,

@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:fitkarma/core/brain/recovery_os.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Sleep Intelligence Layer Tests', () {
@@ -217,8 +217,8 @@ void main() {
         heatIndexCelsius: 37.0,
       );
 
-      final List contributors = drivers['contributors'];
-      final List detractors = drivers['detractors'];
+      final List<dynamic> contributors = drivers['contributors'] as List<dynamic>;
+      final List<dynamic> detractors = drivers['detractors'] as List<dynamic>;
 
       expect(contributors.any((c) => c['driver'] == 'Sleep Quality'), true);
       expect(contributors.any((c) => c['driver'] == 'Protein Intake'), true);

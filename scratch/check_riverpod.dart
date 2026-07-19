@@ -1,5 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+// Scratch file for checking Riverpod configuration.
 void main() {
-  print(FamilyNotifier);
+  // Empty
 }

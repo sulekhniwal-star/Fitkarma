@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/core/database/app_database.dart';
-import 'package:fitkarma/core/sync/sync_worker.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Domain Models (§P1-H)
@@ -86,11 +85,6 @@ class DynamicCycleState {
     required this.isIrregularDetected,
   });
 
-  final int currentCycleDay;
-  final int projectedCycleLength;
-  final CyclePhase currentPhase;
-  final bool isIrregularDetected;
-
   factory DynamicCycleState.defaultCalendar(int length, CyclePhase phase) =>
       DynamicCycleState(
         currentCycleDay: 1,
@@ -98,6 +92,11 @@ class DynamicCycleState {
         currentPhase: phase,
         isIrregularDetected: false,
       );
+
+  final int currentCycleDay;
+  final int projectedCycleLength;
+  final CyclePhase currentPhase;
+  final bool isIrregularDetected;
 }
 
 class DynamicCycleCalibrator {
