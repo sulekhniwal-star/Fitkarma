@@ -195,9 +195,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests for each rule
 
 ### §P4-G Smart Wearable Comparison Layer
-- [ ] Implement Device Reliability Engine (cross-device delta detection)
-- [ ] Build wearable comparison UI
-- [ ] Unit tests
+- [x] Implement Device Reliability Engine (cross-device delta detection)
+- [x] Build wearable comparison UI
+- [x] Unit tests
 
 ---
 
