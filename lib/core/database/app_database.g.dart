@@ -9549,6 +9549,313 @@ class BpReadingsCompanion extends UpdateCompanion<BpReading> {
   }
 }
 
+class $GlucoseReadingsTable extends GlucoseReadings
+    with TableInfo<$GlucoseReadingsTable, GlucoseReading> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GlucoseReadingsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _glucoseValueMeta = const VerificationMeta(
+    'glucoseValue',
+  );
+  @override
+  late final GeneratedColumn<double> glucoseValue = GeneratedColumn<double>(
+    'glucose_value',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _mealTagMeta = const VerificationMeta(
+    'mealTag',
+  );
+  @override
+  late final GeneratedColumn<String> mealTag = GeneratedColumn<String>(
+    'meal_tag',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _measuredAtMeta = const VerificationMeta(
+    'measuredAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> measuredAt = GeneratedColumn<DateTime>(
+    'measured_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, glucoseValue, mealTag, measuredAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'glucose_readings';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GlucoseReading> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('glucose_value')) {
+      context.handle(
+        _glucoseValueMeta,
+        glucoseValue.isAcceptableOrUnknown(
+          data['glucose_value']!,
+          _glucoseValueMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_glucoseValueMeta);
+    }
+    if (data.containsKey('meal_tag')) {
+      context.handle(
+        _mealTagMeta,
+        mealTag.isAcceptableOrUnknown(data['meal_tag']!, _mealTagMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_mealTagMeta);
+    }
+    if (data.containsKey('measured_at')) {
+      context.handle(
+        _measuredAtMeta,
+        measuredAt.isAcceptableOrUnknown(data['measured_at']!, _measuredAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_measuredAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GlucoseReading map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GlucoseReading(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      glucoseValue: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}glucose_value'],
+      )!,
+      mealTag: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}meal_tag'],
+      )!,
+      measuredAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}measured_at'],
+      )!,
+    );
+  }
+
+  @override
+  $GlucoseReadingsTable createAlias(String alias) {
+    return $GlucoseReadingsTable(attachedDatabase, alias);
+  }
+}
+
+class GlucoseReading extends DataClass implements Insertable<GlucoseReading> {
+  final int id;
+  final double glucoseValue;
+  final String mealTag;
+  final DateTime measuredAt;
+  const GlucoseReading({
+    required this.id,
+    required this.glucoseValue,
+    required this.mealTag,
+    required this.measuredAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['glucose_value'] = Variable<double>(glucoseValue);
+    map['meal_tag'] = Variable<String>(mealTag);
+    map['measured_at'] = Variable<DateTime>(measuredAt);
+    return map;
+  }
+
+  GlucoseReadingsCompanion toCompanion(bool nullToAbsent) {
+    return GlucoseReadingsCompanion(
+      id: Value(id),
+      glucoseValue: Value(glucoseValue),
+      mealTag: Value(mealTag),
+      measuredAt: Value(measuredAt),
+    );
+  }
+
+  factory GlucoseReading.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GlucoseReading(
+      id: serializer.fromJson<int>(json['id']),
+      glucoseValue: serializer.fromJson<double>(json['glucoseValue']),
+      mealTag: serializer.fromJson<String>(json['mealTag']),
+      measuredAt: serializer.fromJson<DateTime>(json['measuredAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'glucoseValue': serializer.toJson<double>(glucoseValue),
+      'mealTag': serializer.toJson<String>(mealTag),
+      'measuredAt': serializer.toJson<DateTime>(measuredAt),
+    };
+  }
+
+  GlucoseReading copyWith({
+    int? id,
+    double? glucoseValue,
+    String? mealTag,
+    DateTime? measuredAt,
+  }) => GlucoseReading(
+    id: id ?? this.id,
+    glucoseValue: glucoseValue ?? this.glucoseValue,
+    mealTag: mealTag ?? this.mealTag,
+    measuredAt: measuredAt ?? this.measuredAt,
+  );
+  GlucoseReading copyWithCompanion(GlucoseReadingsCompanion data) {
+    return GlucoseReading(
+      id: data.id.present ? data.id.value : this.id,
+      glucoseValue: data.glucoseValue.present
+          ? data.glucoseValue.value
+          : this.glucoseValue,
+      mealTag: data.mealTag.present ? data.mealTag.value : this.mealTag,
+      measuredAt: data.measuredAt.present
+          ? data.measuredAt.value
+          : this.measuredAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GlucoseReading(')
+          ..write('id: $id, ')
+          ..write('glucoseValue: $glucoseValue, ')
+          ..write('mealTag: $mealTag, ')
+          ..write('measuredAt: $measuredAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, glucoseValue, mealTag, measuredAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GlucoseReading &&
+          other.id == this.id &&
+          other.glucoseValue == this.glucoseValue &&
+          other.mealTag == this.mealTag &&
+          other.measuredAt == this.measuredAt);
+}
+
+class GlucoseReadingsCompanion extends UpdateCompanion<GlucoseReading> {
+  final Value<int> id;
+  final Value<double> glucoseValue;
+  final Value<String> mealTag;
+  final Value<DateTime> measuredAt;
+  const GlucoseReadingsCompanion({
+    this.id = const Value.absent(),
+    this.glucoseValue = const Value.absent(),
+    this.mealTag = const Value.absent(),
+    this.measuredAt = const Value.absent(),
+  });
+  GlucoseReadingsCompanion.insert({
+    this.id = const Value.absent(),
+    required double glucoseValue,
+    required String mealTag,
+    required DateTime measuredAt,
+  }) : glucoseValue = Value(glucoseValue),
+       mealTag = Value(mealTag),
+       measuredAt = Value(measuredAt);
+  static Insertable<GlucoseReading> custom({
+    Expression<int>? id,
+    Expression<double>? glucoseValue,
+    Expression<String>? mealTag,
+    Expression<DateTime>? measuredAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (glucoseValue != null) 'glucose_value': glucoseValue,
+      if (mealTag != null) 'meal_tag': mealTag,
+      if (measuredAt != null) 'measured_at': measuredAt,
+    });
+  }
+
+  GlucoseReadingsCompanion copyWith({
+    Value<int>? id,
+    Value<double>? glucoseValue,
+    Value<String>? mealTag,
+    Value<DateTime>? measuredAt,
+  }) {
+    return GlucoseReadingsCompanion(
+      id: id ?? this.id,
+      glucoseValue: glucoseValue ?? this.glucoseValue,
+      mealTag: mealTag ?? this.mealTag,
+      measuredAt: measuredAt ?? this.measuredAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (glucoseValue.present) {
+      map['glucose_value'] = Variable<double>(glucoseValue.value);
+    }
+    if (mealTag.present) {
+      map['meal_tag'] = Variable<String>(mealTag.value);
+    }
+    if (measuredAt.present) {
+      map['measured_at'] = Variable<DateTime>(measuredAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GlucoseReadingsCompanion(')
+          ..write('id: $id, ')
+          ..write('glucoseValue: $glucoseValue, ')
+          ..write('mealTag: $mealTag, ')
+          ..write('measuredAt: $measuredAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -9575,6 +9882,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $StepLogsTable stepLogs = $StepLogsTable(this);
   late final $SleepLogsTable sleepLogs = $SleepLogsTable(this);
   late final $BpReadingsTable bpReadings = $BpReadingsTable(this);
+  late final $GlucoseReadingsTable glucoseReadings = $GlucoseReadingsTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -9595,6 +9905,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     stepLogs,
     sleepLogs,
     bpReadings,
+    glucoseReadings,
   ];
 }
 
@@ -14209,6 +14520,191 @@ typedef $$BpReadingsTableProcessedTableManager =
       BpReading,
       PrefetchHooks Function()
     >;
+typedef $$GlucoseReadingsTableCreateCompanionBuilder =
+    GlucoseReadingsCompanion Function({
+      Value<int> id,
+      required double glucoseValue,
+      required String mealTag,
+      required DateTime measuredAt,
+    });
+typedef $$GlucoseReadingsTableUpdateCompanionBuilder =
+    GlucoseReadingsCompanion Function({
+      Value<int> id,
+      Value<double> glucoseValue,
+      Value<String> mealTag,
+      Value<DateTime> measuredAt,
+    });
+
+class $$GlucoseReadingsTableFilterComposer
+    extends Composer<_$AppDatabase, $GlucoseReadingsTable> {
+  $$GlucoseReadingsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get glucoseValue => $composableBuilder(
+    column: $table.glucoseValue,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mealTag => $composableBuilder(
+    column: $table.mealTag,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get measuredAt => $composableBuilder(
+    column: $table.measuredAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$GlucoseReadingsTableOrderingComposer
+    extends Composer<_$AppDatabase, $GlucoseReadingsTable> {
+  $$GlucoseReadingsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get glucoseValue => $composableBuilder(
+    column: $table.glucoseValue,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mealTag => $composableBuilder(
+    column: $table.mealTag,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get measuredAt => $composableBuilder(
+    column: $table.measuredAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$GlucoseReadingsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GlucoseReadingsTable> {
+  $$GlucoseReadingsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<double> get glucoseValue => $composableBuilder(
+    column: $table.glucoseValue,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get mealTag =>
+      $composableBuilder(column: $table.mealTag, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get measuredAt => $composableBuilder(
+    column: $table.measuredAt,
+    builder: (column) => column,
+  );
+}
+
+class $$GlucoseReadingsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GlucoseReadingsTable,
+          GlucoseReading,
+          $$GlucoseReadingsTableFilterComposer,
+          $$GlucoseReadingsTableOrderingComposer,
+          $$GlucoseReadingsTableAnnotationComposer,
+          $$GlucoseReadingsTableCreateCompanionBuilder,
+          $$GlucoseReadingsTableUpdateCompanionBuilder,
+          (
+            GlucoseReading,
+            BaseReferences<
+              _$AppDatabase,
+              $GlucoseReadingsTable,
+              GlucoseReading
+            >,
+          ),
+          GlucoseReading,
+          PrefetchHooks Function()
+        > {
+  $$GlucoseReadingsTableTableManager(
+    _$AppDatabase db,
+    $GlucoseReadingsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GlucoseReadingsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GlucoseReadingsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GlucoseReadingsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<double> glucoseValue = const Value.absent(),
+                Value<String> mealTag = const Value.absent(),
+                Value<DateTime> measuredAt = const Value.absent(),
+              }) => GlucoseReadingsCompanion(
+                id: id,
+                glucoseValue: glucoseValue,
+                mealTag: mealTag,
+                measuredAt: measuredAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required double glucoseValue,
+                required String mealTag,
+                required DateTime measuredAt,
+              }) => GlucoseReadingsCompanion.insert(
+                id: id,
+                glucoseValue: glucoseValue,
+                mealTag: mealTag,
+                measuredAt: measuredAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$GlucoseReadingsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GlucoseReadingsTable,
+      GlucoseReading,
+      $$GlucoseReadingsTableFilterComposer,
+      $$GlucoseReadingsTableOrderingComposer,
+      $$GlucoseReadingsTableAnnotationComposer,
+      $$GlucoseReadingsTableCreateCompanionBuilder,
+      $$GlucoseReadingsTableUpdateCompanionBuilder,
+      (
+        GlucoseReading,
+        BaseReferences<_$AppDatabase, $GlucoseReadingsTable, GlucoseReading>,
+      ),
+      GlucoseReading,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -14249,4 +14745,6 @@ class $AppDatabaseManager {
       $$SleepLogsTableTableManager(_db, _db.sleepLogs);
   $$BpReadingsTableTableManager get bpReadings =>
       $$BpReadingsTableTableManager(_db, _db.bpReadings);
+  $$GlucoseReadingsTableTableManager get glucoseReadings =>
+      $$GlucoseReadingsTableTableManager(_db, _db.glucoseReadings);
 }

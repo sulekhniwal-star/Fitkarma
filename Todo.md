@@ -186,9 +186,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P4-E Glucose Screen
-- [ ] Build manual glucose entry UI
-- [ ] Persist to GlucoseReadings
-- [ ] Widget test
+- [x] Build manual glucose entry UI
+- [x] Persist to GlucoseReadings
+- [x] Widget test
 
 ### §P4-F Preventive Intelligence Engine
 - [ ] Implement deterministic risk-flagging rules (no AI)

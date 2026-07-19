@@ -239,6 +239,13 @@ class BpReadings extends Table {
   TextColumn get recordingMethod => text()(); // 'manual' or 'wearable'
 }
 
+class GlucoseReadings extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  RealColumn get glucoseValue => real()();
+  TextColumn get mealTag => text()(); // 'Fasting', 'Pre-Meal', 'Post-Meal (1-hour)', 'Post-Meal (2-hour)'
+  DateTimeColumn get measuredAt => dateTime()();
+}
+
 @DriftDatabase(tables: [
   Users,
   WaterLogs,
@@ -255,13 +262,14 @@ class BpReadings extends Table {
   StepLogs,
   SleepLogs,
   BpReadings,
+  GlucoseReadings,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 29;
+  int get schemaVersion => 30;
 
   @override
   MigrationStrategy get migration {
@@ -297,6 +305,9 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 29) {
           await migrator.createTable(bpReadings);
+        }
+        if (from < 30) {
+          await migrator.createTable(glucoseReadings);
         }
       },
     );
