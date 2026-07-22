@@ -213,16 +213,16 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-C "Fix My Meal" — AI Meal Photo Analysis
-- [ ] Build photo capture/upload UI
-- [ ] Wire `fitkarma-meal-vision` Azure Function
-- [ ] Implement result review/edit-before-save UI
-- [ ] Cache Groq Vision responses (AI cache)
-- [ ] Widget test
+- [x] Build photo capture/upload UI
+- [x] Wire `fitkarma-meal-vision` Azure Function
+- [x] Implement result review/edit-before-save UI
+- [x] Cache Groq Vision responses (AI cache)
+- [x] Widget test
 
 ### §P5-D Smart Indian Meal Intelligence
-- [ ] Build regional cuisine recognition dataset mapping
-- [ ] Implement mixed-dish macro estimation logic
-- [ ] Unit tests
+- [x] Build regional cuisine recognition dataset mapping
+- [x] Implement mixed-dish macro estimation logic
+- [x] Unit tests
 
 ### §P5-E Indian Restaurant Intelligence 2.0
 - [ ] Build restaurant menu database integration
