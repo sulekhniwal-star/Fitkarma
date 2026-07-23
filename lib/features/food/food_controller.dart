@@ -1,14 +1,7 @@
+import 'package:fitkarma/features/food/protein_timing_evaluator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FoodItem {
-  final String id;
-  final String name;
-  final int calories;
-  final int protein;
-  final int carbs;
-  final int fat;
-  final String mealType; // 'Breakfast', 'Lunch', 'Dinner', 'Snacks'
-
   const FoodItem({
     required this.id,
     required this.name,
@@ -18,6 +11,14 @@ class FoodItem {
     required this.fat,
     required this.mealType,
   });
+
+  final String id;
+  final String name;
+  final int calories;
+  final int protein;
+  final int carbs;
+  final int fat;
+  final String mealType; // 'Breakfast', 'Lunch', 'Dinner', 'Snacks'
 
   FoodItem copyWith({
     String? id,
@@ -41,16 +42,6 @@ class FoodItem {
 }
 
 class FoodState {
-  final int caloriesTarget;
-  final int proteinTarget;
-  final int carbsTarget;
-  final int fatTarget;
-  final List<FoodItem> loggedItems;
-  final String searchQuery;
-  final List<FoodItem> searchResults;
-  final List<FoodItem> recentMeals;
-  final bool isLoading;
-
   const FoodState({
     required this.caloriesTarget,
     required this.proteinTarget,
@@ -62,6 +53,16 @@ class FoodState {
     required this.recentMeals,
     required this.isLoading,
   });
+
+  final int caloriesTarget;
+  final int proteinTarget;
+  final int carbsTarget;
+  final int fatTarget;
+  final List<FoodItem> loggedItems;
+  final String searchQuery;
+  final List<FoodItem> searchResults;
+  final List<FoodItem> recentMeals;
+  final bool isLoading;
 
   FoodState copyWith({
     int? caloriesTarget,
@@ -160,3 +161,13 @@ class FoodNotifier extends Notifier<FoodState> {
 final foodProvider = NotifierProvider<FoodNotifier, FoodState>(
   FoodNotifier.new,
 );
+
+final proteinTimingEvaluatorProvider = Provider<ProteinTimingEvaluator>((ref) {
+  return const ProteinTimingEvaluator();
+});
+
+final proteinTimingProvider = Provider<ProteinTimingResult>((ref) {
+  final foodState = ref.watch(foodProvider);
+  final evaluator = ref.watch(proteinTimingEvaluatorProvider);
+  return evaluator.evaluateDistribution(foodState.loggedItems);
+});

@@ -241,9 +241,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-H Protein Distribution & Timing Intelligence
-- [ ] Implement MPS-aware protein timing algorithm
-- [ ] Wire into meal plan recommendations
-- [ ] Unit tests
+- [x] Implement MPS-aware protein timing algorithm
+- [x] Wire into meal plan recommendations
+- [x] Unit tests
 
 ### §P5-I Micronutrient Intelligence Core
 - [ ] Build micronutrient database mapping
