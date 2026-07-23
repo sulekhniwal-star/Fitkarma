@@ -337,9 +337,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 7 — GAMIFICATION + KARMA SYSTEM
 
 ### §P7-A Karma System Design
-- [ ] Implement outcome-based XP calculation rules
-- [ ] Persist to KarmaEvents
-- [ ] Unit tests
+- [x] Implement outcome-based XP calculation rules
+- [x] Persist to KarmaEvents
+- [x] Unit tests
 
 ### §P7-B Karma Hub Screen
 - [ ] Build UI (XP history, levels, badges)
