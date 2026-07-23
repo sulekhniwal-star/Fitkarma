@@ -21,12 +21,42 @@ class GoalOption {
   final String icon; // emoji used in the chip
 
   static const all = [
-    GoalOption(id: 'weight_loss',      label: 'Weight Loss',      labelHindi: 'वजन घटाना',        icon: '⚖️'),
-    GoalOption(id: 'muscle_gain',      label: 'Muscle Gain',      labelHindi: 'मसल्स बनाना',      icon: '💪'),
-    GoalOption(id: 'pcos_management',  label: 'PCOS Management',  labelHindi: 'PCOS नियंत्रण',    icon: '🌸'),
-    GoalOption(id: 'heart_health',     label: 'Heart Health',     labelHindi: 'हृदय स्वास्थ्य',   icon: '❤️'),
-    GoalOption(id: 'diabetes_control', label: 'Diabetes Control', labelHindi: 'मधुमेह नियंत्रण', icon: '🩺'),
-    GoalOption(id: 'general_fitness',  label: 'General Fitness',  labelHindi: 'सामान्य फिटनेस',   icon: '🏃'),
+    GoalOption(
+      id: 'weight_loss',
+      label: 'Weight Loss',
+      labelHindi: 'वजन घटाना',
+      icon: '⚖️',
+    ),
+    GoalOption(
+      id: 'muscle_gain',
+      label: 'Muscle Gain',
+      labelHindi: 'मसल्स बनाना',
+      icon: '💪',
+    ),
+    GoalOption(
+      id: 'pcos_management',
+      label: 'PCOS Management',
+      labelHindi: 'PCOS नियंत्रण',
+      icon: '🌸',
+    ),
+    GoalOption(
+      id: 'heart_health',
+      label: 'Heart Health',
+      labelHindi: 'हृदय स्वास्थ्य',
+      icon: '❤️',
+    ),
+    GoalOption(
+      id: 'diabetes_control',
+      label: 'Diabetes Control',
+      labelHindi: 'मधुमेह नियंत्रण',
+      icon: '🩺',
+    ),
+    GoalOption(
+      id: 'general_fitness',
+      label: 'General Fitness',
+      labelHindi: 'सामान्य फिटनेस',
+      icon: '🏃',
+    ),
   ];
 }
 
@@ -121,5 +151,5 @@ class OnboardingGoalsNotifier extends Notifier<OnboardingGoalsState> {
 /// Provider for Goals Screen state machine.
 final onboardingGoalsProvider =
     NotifierProvider<OnboardingGoalsNotifier, OnboardingGoalsState>(
-  OnboardingGoalsNotifier.new,
-);
+      OnboardingGoalsNotifier.new,
+    );

@@ -37,14 +37,14 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
   DietPlanRequest get _request {
     final demo = ref.read(demographicsProvider);
     return DietPlanRequest(
-      userId:         'onboarding_user',
-      age:            demo.age,
-      gender:         demo.gender,
-      weightKg:       demo.weightKg,
-      heightCm:       demo.heightCm,
-      activityLevel:  demo.activityLevel,
-      goals:          const ['general_fitness'],
-      calorieTarget:  demo.dailyCalorieTarget,
+      userId: 'onboarding_user',
+      age: demo.age,
+      gender: demo.gender,
+      weightKg: demo.weightKg,
+      heightCm: demo.heightCm,
+      activityLevel: demo.activityLevel,
+      goals: const ['general_fitness'],
+      calorieTarget: demo.dailyCalorieTarget,
       proteinTargetG: computeProteinTarget(demo.weightKg),
     );
   }
@@ -76,20 +76,23 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
   void _onRegenerate() =>
       ref.read(dietPlanProvider.notifier).regenerate(_request);
 
-  void _onRetry() =>
-      ref.read(dietPlanProvider.notifier).load(_request);
+  void _onRetry() => ref.read(dietPlanProvider.notifier).load(_request);
 
   // ── Build ──────────────────────────────────────────────────────────────────
 
   @override
   Widget build(BuildContext context) {
-    final isDark        = Theme.of(context).brightness == Brightness.dark;
-    final planState     = ref.watch(dietPlanProvider);
-    final bg            = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
-    final textPrimary   = isDark ? AppColorsDark.textPrimary   : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final canBack       = ref.watch(onboardingCanGoBackProvider);
-    final canSkip       = ref.watch(onboardingCanSkipProvider);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final planState = ref.watch(dietPlanProvider);
+    final bg = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final canBack = ref.watch(onboardingCanGoBackProvider);
+    final canSkip = ref.watch(onboardingCanSkipProvider);
 
     return Scaffold(
       backgroundColor: bg,
@@ -100,7 +103,10 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
         leading: canBack
             ? IconButton(
                 key: const Key('diet_plan_back_btn'),
-                icon: Icon(Icons.arrow_back_ios_new_rounded, color: textSecondary),
+                icon: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: textSecondary,
+                ),
                 onPressed: _onBack,
               )
             : null,
@@ -112,8 +118,10 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
                 final next = ref.read(onboardingFlowProvider.notifier).skip();
                 if (next != null && mounted) context.go(pathForStep(next));
               },
-              child: Text('Skip',
-                  style: AppTypography.bodyMd.copyWith(color: textSecondary)),
+              child: Text(
+                'Skip',
+                style: AppTypography.bodyMd.copyWith(color: textSecondary),
+              ),
             ),
         ],
       ),
@@ -128,10 +136,16 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
                 duration: const Duration(milliseconds: 350),
                 switchInCurve: AppSprings.smoothAnimationCurve,
                 child: switch (planState.status) {
-                  DietPlanStatus.idle    => const SizedBox.shrink(),
+                  DietPlanStatus.idle => const SizedBox.shrink(),
                   DietPlanStatus.loading => _buildSkeleton(isDark),
-                  DietPlanStatus.error   => _buildError(isDark, planState),
-                  DietPlanStatus.loaded  => _buildPlan(context, isDark, textPrimary, textSecondary, planState),
+                  DietPlanStatus.error => _buildError(isDark, planState),
+                  DietPlanStatus.loaded => _buildPlan(
+                    context,
+                    isDark,
+                    textPrimary,
+                    textSecondary,
+                    planState,
+                  ),
                 },
               ),
             ),
@@ -191,9 +205,10 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
       key: const ValueKey('diet_plan_error'),
       padding: const EdgeInsets.all(AppSpacing.screenH),
       child: FitErrorState(
-        englishMessage: state.errorMessage ?? 'Failed to generate your diet plan.',
-        hindiMessage:   'आहार योजना बनाने में विफल।',
-        onRetry:        _onRetry,
+        englishMessage:
+            state.errorMessage ?? 'Failed to generate your diet plan.',
+        hindiMessage: 'आहार योजना बनाने में विफल।',
+        onRetry: _onRetry,
       ),
     );
   }
@@ -207,7 +222,7 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
     Color textSecondary,
     DietPlanState state,
   ) {
-    final plan        = state.plan!;
+    final plan = state.plan!;
     final selectedDay = plan.days[state.selectedDayIndex];
 
     return SingleChildScrollView(
@@ -227,8 +242,11 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
           Row(
             children: [
               if (!plan.isAiGenerated) ...[
-                const Icon(Icons.offline_bolt_rounded,
-                    size: 13, color: AppColorsDark.accent),
+                const Icon(
+                  Icons.offline_bolt_rounded,
+                  size: 13,
+                  color: AppColorsDark.accent,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   'Offline plan — connect for AI-personalised',
@@ -247,25 +265,30 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
 
           // Day tabs
           _DayTabRow(
-            days:          plan.days,
+            days: plan.days,
             selectedIndex: state.selectedDayIndex,
-            isDark:        isDark,
-            onTap:         (i) => ref.read(dietPlanProvider.notifier).selectDay(i),
+            isDark: isDark,
+            onTap: (i) => ref.read(dietPlanProvider.notifier).selectDay(i),
           ),
           const SizedBox(height: 16),
 
           // Daily targets card
           _DailyTargetsCard(
-            calorieTarget:  plan.dailyCalorieTarget,
+            calorieTarget: plan.dailyCalorieTarget,
             proteinTargetG: plan.dailyProteinTargetG,
             actualCalories: selectedDay.totalCalories,
             actualProteinG: selectedDay.totalProteinG,
-            isDark:         isDark,
+            isDark: isDark,
           ),
           const SizedBox(height: 20),
 
           // Meal cards
-          ..._buildMealSections(selectedDay, isDark, textPrimary, textSecondary),
+          ..._buildMealSections(
+            selectedDay,
+            isDark,
+            textPrimary,
+            textSecondary,
+          ),
           const SizedBox(height: 32),
         ],
       ),
@@ -283,10 +306,12 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
       final meals = day.meals.where((m) => m.mealType == mealType).toList();
       if (meals.isEmpty) continue;
       widgets
-        ..add(Text(
-          _mealTypeDisplay[mealType]!,
-          style: AppTypography.h3.copyWith(color: textSecondary),
-        ))
+        ..add(
+          Text(
+            _mealTypeDisplay[mealType]!,
+            style: AppTypography.h3.copyWith(color: textSecondary),
+          ),
+        )
         ..add(const SizedBox(height: 8));
       for (final meal in meals) {
         widgets
@@ -315,7 +340,7 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
               onPressed: (isLoaded && state.regeneratesLeft > 0)
                   ? _onRegenerate
                   : null,
-              type:   FitButtonType.secondary,
+              type: FitButtonType.secondary,
               height: 54,
               child: Text(
                 'Regenerate (${state.regeneratesLeft} left)',
@@ -334,7 +359,7 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
             child: FitButton(
               key: const Key('diet_plan_accept_btn'),
               onPressed: isLoaded ? _onAccept : null,
-              height:    54,
+              height: 54,
               child: Text(
                 'Accept Plan  →',
                 style: AppTypography.h3.copyWith(color: Colors.white),
@@ -349,9 +374,9 @@ class _DietPlanScreenState extends ConsumerState<DietPlanScreen> {
   static const _mealTypeLabels = ['breakfast', 'lunch', 'snack', 'dinner'];
   static const _mealTypeDisplay = {
     'breakfast': '🌅  Breakfast',
-    'lunch':     '☀️  Lunch',
-    'snack':     '🍎  Snack',
-    'dinner':    '🌙  Dinner',
+    'lunch': '☀️  Lunch',
+    'snack': '🍎  Snack',
+    'dinner': '🌙  Dinner',
   };
 }
 
@@ -383,11 +408,19 @@ class _DayTabRow extends StatelessWidget {
         separatorBuilder: (_, __) => const SizedBox(width: 6),
         itemBuilder: (_, i) {
           final isSelected = i == selectedIndex;
-          final primary    = isDark ? AppColorsDark.primary    : AppColorsLight.primary;
-          final surface    = isDark ? AppColorsDark.surface1   : AppColorsLight.surface1;
-          final glassBorder= isDark ? AppColorsDark.glassBorder: AppColorsLight.glassBorder;
-          final textPrimary= isDark ? AppColorsDark.textPrimary: AppColorsLight.textPrimary;
-          final abbrev     = days[i].day.substring(0, 3);
+          final primary = isDark
+              ? AppColorsDark.primary
+              : AppColorsLight.primary;
+          final surface = isDark
+              ? AppColorsDark.surface1
+              : AppColorsLight.surface1;
+          final glassBorder = isDark
+              ? AppColorsDark.glassBorder
+              : AppColorsLight.glassBorder;
+          final textPrimary = isDark
+              ? AppColorsDark.textPrimary
+              : AppColorsLight.textPrimary;
+          final abbrev = days[i].day.substring(0, 3);
 
           return GestureDetector(
             onTap: () => onTap(i),
@@ -407,7 +440,7 @@ class _DayTabRow extends StatelessWidget {
                           color: primary.withValues(alpha: 0.35),
                           blurRadius: 8,
                           offset: const Offset(0, 3),
-                        )
+                        ),
                       ]
                     : null,
               ),
@@ -415,8 +448,7 @@ class _DayTabRow extends StatelessWidget {
                 abbrev,
                 style: AppTypography.labelLg.copyWith(
                   color: isSelected ? Colors.white : textPrimary,
-                  fontWeight:
-                      isSelected ? FontWeight.w700 : FontWeight.w500,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 ),
               ),
             ),
@@ -440,23 +472,29 @@ class _DailyTargetsCard extends StatelessWidget {
     required this.isDark,
   });
 
-  final int    calorieTarget;
-  final int    proteinTargetG;
-  final int    actualCalories;
+  final int calorieTarget;
+  final int proteinTargetG;
+  final int actualCalories;
   final double actualProteinG;
-  final bool   isDark;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
-    final surface     = isDark ? AppColorsDark.surface0   : AppColorsLight.surface0;
-    final glassBorder = isDark ? AppColorsDark.glassBorder: AppColorsLight.glassBorder;
-    final primary     = isDark ? AppColorsDark.primary    : AppColorsLight.primary;
-    final teal        = isDark ? AppColorsDark.teal       : AppColorsLight.teal;
-    final textPrimary = isDark ? AppColorsDark.textPrimary: AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final surface = isDark ? AppColorsDark.surface0 : AppColorsLight.surface0;
+    final glassBorder = isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+    final primary = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final teal = isDark ? AppColorsDark.teal : AppColorsLight.teal;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
-    final calFrac     = (actualCalories / calorieTarget).clamp(0.0, 1.0);
-    final proFrac     = (actualProteinG / proteinTargetG).clamp(0.0, 1.0);
+    final calFrac = (actualCalories / calorieTarget).clamp(0.0, 1.0);
+    final proFrac = (actualProteinG / proteinTargetG).clamp(0.0, 1.0);
 
     return Container(
       key: const Key('diet_plan_targets_card'),
@@ -468,20 +506,19 @@ class _DailyTargetsCard extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            surface,
-            primary.withValues(alpha: 0.04),
-          ],
+          colors: [surface, primary.withValues(alpha: 0.04)],
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Daily Targets',
-              style: AppTypography.h3.copyWith(color: textPrimary)),
+          Text(
+            'Daily Targets',
+            style: AppTypography.h3.copyWith(color: textPrimary),
+          ),
           const SizedBox(height: 12),
           _MacroBar(
-            label:  '🔥 Calories',
+            label: '🔥 Calories',
             target: '$calorieTarget kcal',
             actual: '$actualCalories kcal',
             fraction: calFrac,
@@ -491,7 +528,7 @@ class _DailyTargetsCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _MacroBar(
-            label:  '💪 Protein',
+            label: '💪 Protein',
             target: '${proteinTargetG}g',
             actual: '${actualProteinG.round()}g',
             fraction: proFrac,
@@ -531,14 +568,19 @@ class _MacroBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: AppTypography.labelLg.copyWith(color: textSecondary)),
+            Text(
+              label,
+              style: AppTypography.labelLg.copyWith(color: textSecondary),
+            ),
             Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: actual,
                     style: AppTypography.labelLg.copyWith(
-                        color: textPrimary, fontWeight: FontWeight.w700),
+                      color: textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   TextSpan(
                     text: ' / $target',
@@ -587,9 +629,12 @@ class _MealCardState extends State<_MealCard>
   void initState() {
     super.initState();
     _pressCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 100));
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
     _scale = Tween<double>(begin: 1.0, end: 0.97).animate(
-        CurvedAnimation(parent: _pressCtrl, curve: AppSprings.touchResponseCurve));
+      CurvedAnimation(parent: _pressCtrl, curve: AppSprings.touchResponseCurve),
+    );
   }
 
   @override
@@ -600,28 +645,36 @@ class _MealCardState extends State<_MealCard>
 
   @override
   Widget build(BuildContext context) {
-    final isDark      = widget.isDark;
-    final surface     = isDark ? AppColorsDark.surface1   : AppColorsLight.surface1;
-    final glassBorder = isDark ? AppColorsDark.glassBorder: AppColorsLight.glassBorder;
-    final primary     = isDark ? AppColorsDark.primary    : AppColorsLight.primary;
-    final teal        = isDark ? AppColorsDark.teal       : AppColorsLight.teal;
-    final accent      = isDark ? AppColorsDark.accent     : AppColorsLight.accent;
-    final textPrimary = isDark ? AppColorsDark.textPrimary: AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final textMuted   = isDark ? AppColorsDark.textMuted  : AppColorsLight.textMuted;
+    final isDark = widget.isDark;
+    final surface = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+    final glassBorder = isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+    final primary = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final teal = isDark ? AppColorsDark.teal : AppColorsLight.teal;
+    final accent = isDark ? AppColorsDark.accent : AppColorsLight.accent;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final textMuted = isDark
+        ? AppColorsDark.textMuted
+        : AppColorsLight.textMuted;
 
     return GestureDetector(
       onTapDown: (_) => _pressCtrl.forward(),
-      onTapUp:   (_) => _pressCtrl.reverse(),
+      onTapUp: (_) => _pressCtrl.reverse(),
       onTapCancel: () => _pressCtrl.reverse(),
       child: ScaleTransition(
         scale: _scale,
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color:        surface,
+            color: surface,
             borderRadius: BorderRadius.circular(AppRadius.md),
-            border:       Border.all(color: glassBorder),
+            border: Border.all(color: glassBorder),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -638,16 +691,23 @@ class _MealCardState extends State<_MealCard>
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(AppRadius.full),
-                      border: Border.all(color: primary.withValues(alpha: 0.25)),
+                      border: Border.all(
+                        color: primary.withValues(alpha: 0.25),
+                      ),
                     ),
                     child: Text(
                       '${widget.meal.calories} kcal',
                       style: AppTypography.labelMd.copyWith(
-                          color: primary, fontWeight: FontWeight.w700),
+                        color: primary,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ],
@@ -657,14 +717,19 @@ class _MealCardState extends State<_MealCard>
               Row(
                 children: [
                   _MacroPill(
-                      label: '${widget.meal.proteinG.round()}g P', color: teal),
+                    label: '${widget.meal.proteinG.round()}g P',
+                    color: teal,
+                  ),
                   const SizedBox(width: 6),
                   _MacroPill(
-                      label: '${widget.meal.carbsG.round()}g C', color: accent),
+                    label: '${widget.meal.carbsG.round()}g C',
+                    color: accent,
+                  ),
                   const SizedBox(width: 6),
                   _MacroPill(
-                      label: '${widget.meal.fatG.round()}g F',
-                      color: textSecondary),
+                    label: '${widget.meal.fatG.round()}g F',
+                    color: textSecondary,
+                  ),
                 ],
               ),
               // Tip (if any)
@@ -673,8 +738,11 @@ class _MealCardState extends State<_MealCard>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.lightbulb_outline_rounded,
-                        size: 13, color: textMuted),
+                    Icon(
+                      Icons.lightbulb_outline_rounded,
+                      size: 13,
+                      color: textMuted,
+                    ),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
@@ -704,13 +772,13 @@ class _MacroPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
       decoration: BoxDecoration(
-        color:        color.withValues(alpha: 0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppRadius.full),
       ),
       child: Text(
         label,
         style: AppTypography.labelMd.copyWith(
-          color:      color,
+          color: color,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -746,10 +814,13 @@ class _SkeletonBlockState extends State<_SkeletonBlock>
   void initState() {
     super.initState();
     _ctrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1200))
-      ..repeat(reverse: true);
-    _anim = Tween<double>(begin: 0.3, end: 0.7).animate(
-        CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
+    _anim = Tween<double>(
+      begin: 0.3,
+      end: 0.7,
+    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
   }
 
   @override
@@ -760,15 +831,17 @@ class _SkeletonBlockState extends State<_SkeletonBlock>
 
   @override
   Widget build(BuildContext context) {
-    final base = widget.isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+    final base = widget.isDark
+        ? AppColorsDark.surface1
+        : AppColorsLight.surface1;
     return AnimatedBuilder(
       animation: _anim,
       builder: (_, __) => Container(
-        width:  widget.width,
+        width: widget.width,
         height: widget.height,
         margin: const EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-          color:        base.withValues(alpha: _anim.value + 0.3),
+          color: base.withValues(alpha: _anim.value + 0.3),
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
       ),

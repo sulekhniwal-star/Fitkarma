@@ -18,7 +18,8 @@ class FitLoadingState extends StatefulWidget {
   State<FitLoadingState> createState() => _FitLoadingStateState();
 }
 
-class _FitLoadingStateState extends State<FitLoadingState> with SingleTickerProviderStateMixin {
+class _FitLoadingStateState extends State<FitLoadingState>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -39,8 +40,12 @@ class _FitLoadingStateState extends State<FitLoadingState> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     return Center(
       child: Padding(
@@ -76,7 +81,7 @@ class _FitLoadingStateState extends State<FitLoadingState> with SingleTickerProv
                               color: primaryColor,
                               blurRadius: 8.0,
                               spreadRadius: 2.0,
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -122,12 +127,20 @@ class FitEmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final textMuted = isDark ? AppColorsDark.textMuted : AppColorsLight.textMuted;
+
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final textMuted = isDark
+        ? AppColorsDark.textMuted
+        : AppColorsLight.textMuted;
     final glassColor = isDark ? AppColorsDark.glass : AppColorsLight.glass;
-    final glassBorderColor = isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
+    final glassBorderColor = isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
 
     return Center(
       child: Container(
@@ -140,11 +153,7 @@ class FitEmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              size: 48,
-              color: textMuted,
-            ),
+            Icon(icon, size: 48, color: textMuted),
             const SizedBox(height: 16.0),
             BilingualLabel(
               englishText: englishTitle,
@@ -162,10 +171,7 @@ class FitEmptyState extends StatelessWidget {
                 englishText: englishSubtitle!,
                 hindiText: hindiSubtitle,
                 alignment: CrossAxisAlignment.center,
-                englishStyle: TextStyle(
-                  fontSize: 12.0,
-                  color: textSecondary,
-                ),
+                englishStyle: TextStyle(fontSize: 12.0, color: textSecondary),
               ),
             ],
           ],
@@ -190,9 +196,13 @@ class FitErrorState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
     final errorColor = isDark ? AppColorsDark.error : AppColorsLight.error;
 
     return Container(
@@ -204,11 +214,7 @@ class FitErrorState extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(
-            Icons.error_outline_rounded,
-            color: errorColor,
-            size: 24,
-          ),
+          Icon(Icons.error_outline_rounded, color: errorColor, size: 24),
           const SizedBox(width: 14.0),
           Expanded(
             child: Column(
@@ -227,10 +233,7 @@ class FitErrorState extends StatelessWidget {
                 const SizedBox(height: 4.0),
                 Text(
                   'Please check connectivity and try again.',
-                  style: TextStyle(
-                    fontSize: 11.0,
-                    color: textSecondary,
-                  ),
+                  style: TextStyle(fontSize: 11.0, color: textSecondary),
                 ),
               ],
             ),

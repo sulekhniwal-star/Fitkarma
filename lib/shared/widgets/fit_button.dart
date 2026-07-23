@@ -3,11 +3,7 @@ import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_springs.dart';
 import 'package:flutter/material.dart';
 
-enum FitButtonType {
-  primary,
-  secondary,
-  accent,
-}
+enum FitButtonType { primary, secondary, accent }
 
 class FitButton extends StatefulWidget {
   const FitButton({
@@ -37,7 +33,8 @@ class FitButton extends StatefulWidget {
   State<FitButton> createState() => _FitButtonState();
 }
 
-class _FitButtonState extends State<FitButton> with SingleTickerProviderStateMixin {
+class _FitButtonState extends State<FitButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -65,7 +62,8 @@ class _FitButtonState extends State<FitButton> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final active = !widget.isDisabled && !widget.isLoading && widget.onPressed != null;
+    final active =
+        !widget.isDisabled && !widget.isLoading && widget.onPressed != null;
 
     Color btnColor;
     Color textColor;
@@ -78,8 +76,12 @@ class _FitButtonState extends State<FitButton> with SingleTickerProviderStateMix
         break;
       case FitButtonType.secondary:
         btnColor = isDark ? AppColorsDark.glass : AppColorsLight.glass;
-        textColor = isDark ? (isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary) : (isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary);
-        borderCol = isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
+        textColor = isDark
+            ? (isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary)
+            : (isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary);
+        borderCol = isDark
+            ? AppColorsDark.glassBorder
+            : AppColorsLight.glassBorder;
         break;
       case FitButtonType.accent:
         btnColor = isDark ? AppColorsDark.accent : AppColorsLight.accent;
@@ -124,18 +126,19 @@ class _FitButtonState extends State<FitButton> with SingleTickerProviderStateMix
             duration: const Duration(milliseconds: 200),
             width: widget.width,
             height: widget.height,
-            padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
+            padding:
+                widget.padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
             decoration: BoxDecoration(
               color: btnColor,
               borderRadius: BorderRadius.circular(widget.borderRadius),
               border: Border.all(color: borderCol, width: 1.0),
               boxShadow: (widget.type == FitButtonType.primary && active)
-                  ? (isDark ? AppElevation.primaryGlowDark : AppElevation.primaryGlowLight)
+                  ? (isDark
+                        ? AppElevation.primaryGlowDark
+                        : AppElevation.primaryGlowLight)
                   : null,
             ),
-            child: Center(
-              child: content,
-            ),
+            child: Center(child: content),
           ),
         ),
       ),

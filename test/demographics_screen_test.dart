@@ -17,22 +17,22 @@ AppDatabase testDb() => AppDatabase.executor(NativeDatabase.memory());
 
 /// GoRouter starting on demographics with stub routes for adjacent steps.
 GoRouter _demographicsRouter() => GoRouter(
-      initialLocation: AppRoutes.onboardingDemographics,
-      routes: [
-        GoRoute(
-          path: AppRoutes.onboardingGoals,
-          builder: (_, __) => const Scaffold(body: Text('Goals')),
-        ),
-        GoRoute(
-          path: AppRoutes.onboardingDemographics,
-          builder: (_, __) => const DemographicsScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.onboardingDietPlan,
-          builder: (_, __) => const Scaffold(body: Text('DietPlan')),
-        ),
-      ],
-    );
+  initialLocation: AppRoutes.onboardingDemographics,
+  routes: [
+    GoRoute(
+      path: AppRoutes.onboardingGoals,
+      builder: (_, __) => const Scaffold(body: Text('Goals')),
+    ),
+    GoRoute(
+      path: AppRoutes.onboardingDemographics,
+      builder: (_, __) => const DemographicsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.onboardingDietPlan,
+      builder: (_, __) => const Scaffold(body: Text('DietPlan')),
+    ),
+  ],
+);
 
 /// Wraps subject in a [UncontrolledProviderScope] backed by [container].
 Widget buildSubject(ProviderContainer container) {
@@ -65,7 +65,7 @@ void main() {
 
     test('setAge clamps to valid range', () {
       final n = container.read(demographicsProvider.notifier);
-      n.setAge(5);   // below minimum
+      n.setAge(5); // below minimum
       expect(container.read(demographicsProvider).age, 13);
       n.setAge(200); // above maximum
       expect(container.read(demographicsProvider).age, 100);
@@ -113,8 +113,9 @@ void main() {
       n.setHeight(170);
       n.setWeight(40);
       expect(
-          container.read(demographicsProvider).bmi.category,
-          BmiCategory.underweight);
+        container.read(demographicsProvider).bmi.category,
+        BmiCategory.underweight,
+      );
     });
 
     test('bmi returns normal for healthy weight', () {
@@ -183,8 +184,7 @@ void main() {
     // ── Validation ────────────────────────────────────────────────────────────
 
     test('validate returns null for valid defaults', () {
-      final error =
-          container.read(demographicsProvider.notifier).validate();
+      final error = container.read(demographicsProvider.notifier).validate();
       expect(error, isNull);
     });
 
@@ -205,9 +205,9 @@ void main() {
 
       await n.saveToDb(db, 'u1');
 
-      final user =
-          await (db.select(db.users)..where((u) => u.id.equals('u1')))
-              .getSingle();
+      final user = await (db.select(
+        db.users,
+      )..where((u) => u.id.equals('u1'))).getSingle();
 
       expect(user.age, 28);
       expect(user.gender, 'female');
@@ -238,7 +238,10 @@ void main() {
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
       expect(find.byKey(const Key('demographics_gender_male')), findsOneWidget);
-      expect(find.byKey(const Key('demographics_gender_female')), findsOneWidget);
+      expect(
+        find.byKey(const Key('demographics_gender_female')),
+        findsOneWidget,
+      );
     });
 
     testWidgets('renders BMI card', (tester) async {
@@ -250,8 +253,9 @@ void main() {
     testWidgets('renders Continue button always enabled', (tester) async {
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
-      final btn =
-          tester.widget<FitButton>(find.byKey(const Key('demographics_continue_btn')));
+      final btn = tester.widget<FitButton>(
+        find.byKey(const Key('demographics_continue_btn')),
+      );
       expect(btn.onPressed, isNotNull);
     });
 

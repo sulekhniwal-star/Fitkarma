@@ -31,7 +31,10 @@ void main() {
       targetDatePassed: false,
     );
     expect(
-      evolutionEngine.checkEvolution(currentProgram: 'Corporate Fat Loss', progress: progressLow),
+      evolutionEngine.checkEvolution(
+        currentProgram: 'Corporate Fat Loss',
+        progress: progressLow,
+      ),
       isNull,
     );
 
@@ -44,7 +47,10 @@ void main() {
       targetDatePassed: false,
     );
     expect(
-      evolutionEngine.checkEvolution(currentProgram: 'Corporate Fat Loss', progress: progressHigh),
+      evolutionEngine.checkEvolution(
+        currentProgram: 'Corporate Fat Loss',
+        progress: progressHigh,
+      ),
       'Corporate Recomposition',
     );
 
@@ -58,7 +64,10 @@ void main() {
       targetDatePassed: false,
     );
     expect(
-      evolutionEngine.checkEvolution(currentProgram: 'Corporate Recomposition', progress: recompositionHigh),
+      evolutionEngine.checkEvolution(
+        currentProgram: 'Corporate Recomposition',
+        progress: recompositionHigh,
+      ),
       'Athletic Lean Build',
     );
 
@@ -72,28 +81,44 @@ void main() {
       targetDatePassed: false,
     );
     expect(
-      evolutionEngine.checkEvolution(currentProgram: 'Student Hostel Fitness', progress: hostelHigh),
+      evolutionEngine.checkEvolution(
+        currentProgram: 'Student Hostel Fitness',
+        progress: hostelHigh,
+      ),
       'Intermediate Strength',
     );
   });
 
-  test('TransformationMemoryService seeds default memory and records evolution events', () async {
-    final userId = 'user_999';
+  test(
+    'TransformationMemoryService seeds default memory and records evolution events',
+    () async {
+      final userId = 'user_999';
 
-    // 1. Get or create initializes default memory
-    final memory = await memoryService.getOrCreateMemory(userId);
-    expect(memory.userId, userId);
-    expect(memory.primaryPersonality, 'Competitor');
-    expect(jsonDecode(memory.successPatterns), isEmpty);
+      // 1. Get or create initializes default memory
+      final memory = await memoryService.getOrCreateMemory(userId);
+      expect(memory.userId, userId);
+      expect(memory.primaryPersonality, 'Competitor');
+      expect(jsonDecode(memory.successPatterns), isEmpty);
 
-    // 2. Record evolution event appends log to successPatterns list
-    await memoryService.recordEvolutionEvent(userId, 'Corporate Fat Loss', 'Corporate Recomposition');
+      // 2. Record evolution event appends log to successPatterns list
+      await memoryService.recordEvolutionEvent(
+        userId,
+        'Corporate Fat Loss',
+        'Corporate Recomposition',
+      );
 
-    final updatedMemory = await memoryService.getOrCreateMemory(userId);
-    final List<dynamic> patterns = jsonDecode(updatedMemory.successPatterns) as List<dynamic>;
-    
-    expect(patterns.length, 1);
-    expect(patterns.first, contains('Program evolved: Advanced from Corporate Fat Loss to Corporate Recomposition'));
-    expect(updatedMemory.syncStatus, 'pending');
-  });
+      final updatedMemory = await memoryService.getOrCreateMemory(userId);
+      final List<dynamic> patterns =
+          jsonDecode(updatedMemory.successPatterns) as List<dynamic>;
+
+      expect(patterns.length, 1);
+      expect(
+        patterns.first,
+        contains(
+          'Program evolved: Advanced from Corporate Fat Loss to Corporate Recomposition',
+        ),
+      );
+      expect(updatedMemory.syncStatus, 'pending');
+    },
+  );
 }

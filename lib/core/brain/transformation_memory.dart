@@ -9,10 +9,11 @@ class TransformationMemoryService {
 
   /// Retrieves or seeds a blank TransformationMemory for a user
   Future<TransformationMemory> getOrCreateMemory(String userId) async {
-    final existing = await (_db.select(_db.transformationMemories)
-          ..where((t) => t.userId.equals(userId))
-          ..limit(1))
-        .getSingleOrNull();
+    final existing =
+        await (_db.select(_db.transformationMemories)
+              ..where((t) => t.userId.equals(userId))
+              ..limit(1))
+            .getSingleOrNull();
 
     if (existing != null) return existing;
 
@@ -32,11 +33,17 @@ class TransformationMemoryService {
     );
 
     await _db.into(_db.transformationMemories).insert(companion);
-    return await (_db.select(_db.transformationMemories)..where((t) => t.localId.equals(localId))).getSingle();
+    return await (_db.select(
+      _db.transformationMemories,
+    )..where((t) => t.localId.equals(localId))).getSingle();
   }
 
   /// Appends a new success pattern or program evolution event to TransformationMemory
-  Future<void> recordEvolutionEvent(String userId, String fromProgram, String toProgram) async {
+  Future<void> recordEvolutionEvent(
+    String userId,
+    String fromProgram,
+    String toProgram,
+  ) async {
     final memory = await getOrCreateMemory(userId);
 
     final List<String> patterns = [];
@@ -47,10 +54,13 @@ class TransformationMemoryService {
       }
     } catch (_) {}
 
-    patterns.add('Program evolved: Advanced from $fromProgram to $toProgram on ${DateTime.now().toIso8601String()}');
+    patterns.add(
+      'Program evolved: Advanced from $fromProgram to $toProgram on ${DateTime.now().toIso8601String()}',
+    );
 
-    await (_db.update(_db.transformationMemories)..where((t) => t.localId.equals(memory.localId)))
-        .write(
+    await (_db.update(
+      _db.transformationMemories,
+    )..where((t) => t.localId.equals(memory.localId))).write(
       TransformationMemoriesCompanion(
         successPatterns: Value(jsonEncode(patterns)),
         lastUpdated: Value(DateTime.now()),

@@ -4,34 +4,58 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('RegionalOilProfile', () {
     test('returns correct primary oil names for each region', () {
-      expect(RegionalOilProfile.getOilNameForRegion(IndianRegion.north), contains('Ghee'));
-      expect(RegionalOilProfile.getOilNameForRegion(IndianRegion.south), contains('Coconut'));
-      expect(RegionalOilProfile.getOilNameForRegion(IndianRegion.east), contains('Mustard'));
-      expect(RegionalOilProfile.getOilNameForRegion(IndianRegion.west), contains('Groundnut'));
+      expect(
+        RegionalOilProfile.getOilNameForRegion(IndianRegion.north),
+        contains('Ghee'),
+      );
+      expect(
+        RegionalOilProfile.getOilNameForRegion(IndianRegion.south),
+        contains('Coconut'),
+      );
+      expect(
+        RegionalOilProfile.getOilNameForRegion(IndianRegion.east),
+        contains('Mustard'),
+      );
+      expect(
+        RegionalOilProfile.getOilNameForRegion(IndianRegion.west),
+        contains('Groundnut'),
+      );
     });
 
     test('returns correct fat multipliers by cooking style', () {
       expect(RegionalOilProfile.getFatMultiplier(CookingStyle.lowOil), 0.70);
-      expect(RegionalOilProfile.getFatMultiplier(CookingStyle.homeCooked), 1.00);
-      expect(RegionalOilProfile.getFatMultiplier(CookingStyle.restaurantStyle), 1.30);
-      expect(RegionalOilProfile.getFatMultiplier(CookingStyle.dhabaStyle), 1.55);
+      expect(
+        RegionalOilProfile.getFatMultiplier(CookingStyle.homeCooked),
+        1.00,
+      );
+      expect(
+        RegionalOilProfile.getFatMultiplier(CookingStyle.restaurantStyle),
+        1.30,
+      );
+      expect(
+        RegionalOilProfile.getFatMultiplier(CookingStyle.dhabaStyle),
+        1.55,
+      );
     });
   });
 
   group('FastingValidator', () {
     const validator = FastingValidator();
 
-    test('Navratri validation flags grains and legumes in North Indian Thali', () {
-      final res = validator.validate(
-        components: RegionalThaliDataset.northIndianThali.components,
-        mode: FastingMode.navratri,
-      );
+    test(
+      'Navratri validation flags grains and legumes in North Indian Thali',
+      () {
+        final res = validator.validate(
+          components: RegionalThaliDataset.northIndianThali.components,
+          mode: FastingMode.navratri,
+        );
 
-      expect(res.isCompliant, isFalse);
-      expect(res.violations, anyElement(contains('Whole Wheat Roti')));
-      expect(res.violations, anyElement(contains('Dal Tadka')));
-      expect(res.recommendations, anyElement(contains('Sabudana')));
-    });
+        expect(res.isCompliant, isFalse);
+        expect(res.violations, anyElement(contains('Whole Wheat Roti')));
+        expect(res.violations, anyElement(contains('Dal Tadka')));
+        expect(res.recommendations, anyElement(contains('Sabudana')));
+      },
+    );
 
     test('Navratri validation passes Navratri Fasting Thali', () {
       final res = validator.validate(

@@ -28,8 +28,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Stream providers for offline-first reactive UI sync states
 final waterLogsTodayProvider = StreamProvider<int>((ref) {
   final db = ref.watch(databaseProvider);
-  final todayStart = DateTime.now().copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
-  final query = db.select(db.waterLogs)..where((t) => t.loggedAt.isBiggerThanValue(todayStart));
+  final todayStart = DateTime.now().copyWith(
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+    microsecond: 0,
+  );
+  final query = db.select(db.waterLogs)
+    ..where((t) => t.loggedAt.isBiggerThanValue(todayStart));
   return query.watch().map((list) {
     return list.fold<int>(0, (sum, item) => sum + item.cups);
   });
@@ -55,13 +62,14 @@ class StyleGuideScreen extends ConsumerStatefulWidget {
 class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   bool _springToggled = false;
   int _activeTab = 0;
-  
+
   // Interactive fields for components sandbox
   final TextEditingController _testInputController = TextEditingController();
   int _selectedChipIndex = 0;
   bool _btnLoadingState = false;
 
-  _ThemeColors get colors => _ThemeColors(Theme.of(context).brightness == Brightness.dark);
+  _ThemeColors get colors =>
+      _ThemeColors(Theme.of(context).brightness == Brightness.dark);
 
   @override
   void dispose() {
@@ -92,9 +100,11 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                     const SizedBox(height: 20.0),
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
-                      child: _activeTab == 0 
-                          ? _buildDashboardView() 
-                          : (_activeTab == 1 ? _buildSpecsView() : _buildComponentsView()),
+                      child: _activeTab == 0
+                          ? _buildDashboardView()
+                          : (_activeTab == 1
+                                ? _buildSpecsView()
+                                : _buildComponentsView()),
                     ),
                   ],
                 ),
@@ -110,7 +120,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   Widget _buildHeader() {
     final isOnline = ref.watch(connectivityProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
       child: Row(
@@ -138,14 +148,17 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   cursor: SystemMouseCursors.click,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6.0,
+                    ),
                     decoration: BoxDecoration(
-                      color: isOnline 
+                      color: isOnline
                           ? colors.success.withOpacity(0.08)
                           : colors.textMuted.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(AppRadius.full),
                       border: Border.all(
-                        color: isOnline 
+                        color: isOnline
                             ? colors.success.withOpacity(0.3)
                             : colors.textMuted.withOpacity(0.3),
                         width: 1.0,
@@ -167,7 +180,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
-                            color: isOnline ? colors.success : colors.textSecondary,
+                            color: isOnline
+                                ? colors.success
+                                : colors.textSecondary,
                           ),
                         ),
                       ],
@@ -185,7 +200,10 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   cursor: SystemMouseCursors.click,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6.0,
+                    ),
                     decoration: BoxDecoration(
                       color: colors.secondary.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(AppRadius.full),
@@ -197,7 +215,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                     child: Row(
                       children: [
                         Icon(
-                          isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+                          isDark
+                              ? Icons.light_mode_rounded
+                              : Icons.dark_mode_rounded,
                           size: 12,
                           color: colors.secondary,
                         ),
@@ -249,12 +269,12 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
           decoration: BoxDecoration(
-            color: isSelected 
+            color: isSelected
                 ? colors.primary.withOpacity(0.1)
                 : colors.surface0,
             borderRadius: BorderRadius.circular(AppRadius.md),
             border: Border.all(
-              color: isSelected 
+              color: isSelected
                   ? colors.primary.withOpacity(0.4)
                   : colors.glassBorder,
               width: 1.0,
@@ -286,7 +306,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   // --- VIEW 1: FITNESS DASHBOARD VIEW ---
   Widget _buildDashboardView() {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     final waterCupsAsync = ref.watch(waterLogsTodayProvider);
     final waterCups = waterCupsAsync.value ?? 0;
 
@@ -349,7 +369,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   _buildLegendDot('Energy', colors.rose),
                   _buildLegendDot('Active', colors.teal),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -394,13 +414,24 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: List.generate(10, (index) {
-                      final heights = [0.2, 0.4, 0.3, 0.9, 0.8, 0.3, 0.5, 0.7, 0.4, 0.3];
+                      final heights = [
+                        0.2,
+                        0.4,
+                        0.3,
+                        0.9,
+                        0.8,
+                        0.3,
+                        0.5,
+                        0.7,
+                        0.4,
+                        0.3,
+                      ];
                       return Container(
                         width: 4,
                         height: 45 * heights[index],
                         decoration: BoxDecoration(
-                          color: index == 3 || index == 4 
-                              ? colors.rose 
+                          color: index == 3 || index == 4
+                              ? colors.rose
                               : colors.rose.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(AppRadius.sm),
                         ),
@@ -408,7 +439,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                     }),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -421,34 +452,39 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
         child: BentoCard(
           onTap: () async {
             final db = ref.read(databaseProvider);
-            final batchId = 'water_batch_${DateTime.now().millisecondsSinceEpoch}';
-            
+            final batchId =
+                'water_batch_${DateTime.now().millisecondsSinceEpoch}';
+
             // 1. Optimistic SQLite insert
-            await db.into(db.waterLogs).insert(
-              WaterLogsCompanion.insert(
-                cups: 1,
-                syncBatchId: batchId,
-                loggedAt: DateTime.now(),
-                hlcPhysicalTime: DateTime.now(),
-                hlcLogicalCounter: 0,
-                hlcNodeId: 'node_mobile_device',
-              ),
-            );
+            await db
+                .into(db.waterLogs)
+                .insert(
+                  WaterLogsCompanion.insert(
+                    cups: 1,
+                    syncBatchId: batchId,
+                    loggedAt: DateTime.now(),
+                    hlcPhysicalTime: DateTime.now(),
+                    hlcLogicalCounter: 0,
+                    hlcNodeId: 'node_mobile_device',
+                  ),
+                );
 
             // 2. Queue local sync item
-            await db.into(db.syncQueueItems).insert(
-              SyncQueueItemsCompanion.insert(
-                entityType: 'water_log',
-                entityId: batchId,
-                serializedPayload: jsonEncode({
-                  'cups': 1,
-                  'loggedAt': DateTime.now().toIso8601String(),
-                  'syncBatchId': batchId,
-                }),
-                createdAt: DateTime.now(),
-                syncBatchId: batchId,
-              ),
-            );
+            await db
+                .into(db.syncQueueItems)
+                .insert(
+                  SyncQueueItemsCompanion.insert(
+                    entityType: 'water_log',
+                    entityId: batchId,
+                    serializedPayload: jsonEncode({
+                      'cups': 1,
+                      'loggedAt': DateTime.now().toIso8601String(),
+                      'syncBatchId': batchId,
+                    }),
+                    createdAt: DateTime.now(),
+                    syncBatchId: batchId,
+                  ),
+                );
 
             // 3. Trigger worker sync
             ref.read(syncWorkerProvider).triggerSync();
@@ -470,7 +506,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 value: '$waterCups',
                 unit: 'cups',
                 glowColor: colors.teal,
-                customStyle: AppTypography.metricLg.copyWith(color: colors.textPrimary),
+                customStyle: AppTypography.metricLg.copyWith(
+                  color: colors.textPrimary,
+                ),
               ),
               const Spacer(),
               Text(
@@ -571,7 +609,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                         color: colors.success,
                         fontWeight: FontWeight.w700,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -581,14 +619,16 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 decoration: BoxDecoration(
                   gradient: AppGradients.primary,
                   shape: BoxShape.circle,
-                  boxShadow: isDark ? AppElevation.primaryGlowDark : AppElevation.primaryGlowLight,
+                  boxShadow: isDark
+                      ? AppElevation.primaryGlowDark
+                      : AppElevation.primaryGlowLight,
                 ),
                 child: const Icon(
                   Icons.fitness_center_rounded,
                   color: Colors.black,
                   size: 24,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -614,10 +654,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               const SizedBox(height: 4.0),
               Text(
                 'Uses AppSprings.touchResponseCurve (damping: 0.5, freq: 1.8) on state transformations.',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: colors.textSecondary,
-                ),
+                style: TextStyle(fontSize: 11, color: colors.textSecondary),
               ),
               const Spacer(),
               // Spring track
@@ -626,9 +663,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(AppRadius.md),
-                  border: Border.all(
-                    color: colors.glassBorder,
-                  ),
+                  border: Border.all(color: colors.glassBorder),
                 ),
                 child: Stack(
                   children: [
@@ -651,7 +686,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: AppGradients.primary,
-                              boxShadow: isDark ? AppElevation.primaryGlowDark : AppElevation.primaryGlowLight,
+                              boxShadow: isDark
+                                  ? AppElevation.primaryGlowDark
+                                  : AppElevation.primaryGlowLight,
                             ),
                             child: const Icon(
                               Icons.bolt,
@@ -688,42 +725,41 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                       foregroundColor: colors.primary,
                       surfaceTintColor: Colors.transparent,
                       shadowColor: Colors.transparent,
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 8,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppRadius.sm),
-                        side: BorderSide(
-                          color: colors.primary,
-                          width: 1.0,
-                        ),
+                        side: BorderSide(color: colors.primary, width: 1.0),
                       ),
                     ),
                     child: const Text(
                       'Launch Spring',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
-      )
+      ),
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        BentoGrid(
-          items: bentoItems,
-        ),
-      ],
+      children: [BentoGrid(items: bentoItems)],
     );
   }
 
   // --- VIEW 2: TOKEN SPECIFICATIONS ---
   Widget _buildSpecsView() {
     final client = ref.read(azureSyncClientProvider);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -744,7 +780,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               // Failures switch
               SwitchListTile(
                 title: const Text('Simulate Flaky Internet (60% REST drop)'),
-                subtitle: const Text('Forces retries up to 3 times, then drops items to DLQ'),
+                subtitle: const Text(
+                  'Forces retries up to 3 times, then drops items to DLQ',
+                ),
                 value: client.simulateNetworkFailures,
                 activeThumbColor: colors.primary,
                 contentPadding: EdgeInsets.zero,
@@ -768,14 +806,20 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colors.error.withOpacity(0.12),
                     foregroundColor: colors.error,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                     ),
                   ),
-                  child: const Text('Purge Database & Sync Queues', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: const Text(
+                    'Purge Database & Sync Queues',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -795,17 +839,41 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 ),
               ),
               const SizedBox(height: 12.0),
-              _buildColorSwatch('bg0 (Scaffold Background)', colors.bg0, '#080810 / #F6F6FB'),
-              _buildColorSwatch('surface0 (Default Container)', colors.surface0, '#1C1C2E / #FFFFFF'),
-              _buildColorSwatch('primary (Brand highlight)', colors.primary, '#FF6B35 / #E04E1B'),
-              _buildColorSwatch('accent (Gains & Achievements)', colors.accent, '#FFB547 / #D97706'),
-              _buildColorSwatch('secondary (Sleep/Meditation)', colors.secondary, '#7B6FF0 / #5D50DD'),
-              _buildColorSwatch('teal (Hydration & Vitals)', colors.teal, '#00D4B4 / #009688'),
+              _buildColorSwatch(
+                'bg0 (Scaffold Background)',
+                colors.bg0,
+                '#080810 / #F6F6FB',
+              ),
+              _buildColorSwatch(
+                'surface0 (Default Container)',
+                colors.surface0,
+                '#1C1C2E / #FFFFFF',
+              ),
+              _buildColorSwatch(
+                'primary (Brand highlight)',
+                colors.primary,
+                '#FF6B35 / #E04E1B',
+              ),
+              _buildColorSwatch(
+                'accent (Gains & Achievements)',
+                colors.accent,
+                '#FFB547 / #D97706',
+              ),
+              _buildColorSwatch(
+                'secondary (Sleep/Meditation)',
+                colors.secondary,
+                '#7B6FF0 / #5D50DD',
+              ),
+              _buildColorSwatch(
+                'teal (Hydration & Vitals)',
+                colors.teal,
+                '#00D4B4 / #009688',
+              ),
             ],
           ),
         ),
         const SizedBox(height: 12.0),
-        
+
         // Typography Spec
         BentoCard(
           child: Column(
@@ -820,13 +888,31 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 ),
               ),
               const SizedBox(height: 12.0),
-              Text('Display Bold (72px)', style: AppTypography.heroDisplay.copyWith(color: colors.textPrimary)),
+              Text(
+                'Display Bold (72px)',
+                style: AppTypography.heroDisplay.copyWith(
+                  color: colors.textPrimary,
+                ),
+              ),
               const SizedBox(height: 8.0),
-              Text('Metric Hero (56px)', style: AppTypography.metricXL.copyWith(color: colors.textPrimary)),
+              Text(
+                'Metric Hero (56px)',
+                style: AppTypography.metricXL.copyWith(
+                  color: colors.textPrimary,
+                ),
+              ),
               const SizedBox(height: 8.0),
-              Text('Header H1 (22px)', style: AppTypography.h1.copyWith(color: colors.textPrimary)),
+              Text(
+                'Header H1 (22px)',
+                style: AppTypography.h1.copyWith(color: colors.textPrimary),
+              ),
               const SizedBox(height: 8.0),
-              Text('Body Regular (14px)', style: AppTypography.bodyMd.copyWith(color: colors.textSecondary)),
+              Text(
+                'Body Regular (14px)',
+                style: AppTypography.bodyMd.copyWith(
+                  color: colors.textSecondary,
+                ),
+              ),
             ],
           ),
         ),
@@ -837,7 +923,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   // --- VIEW 3: COMPONENT SANDBOX VIEW ---
   Widget _buildComponentsView() {
     final activeDeviceTier = ref.watch(deviceTierProvider);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -864,15 +950,24 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: _buildTierButton(DeviceTier.low, 'Low Tier (Solid Fallback)'),
+                    child: _buildTierButton(
+                      DeviceTier.low,
+                      'Low Tier (Solid Fallback)',
+                    ),
                   ),
                   const SizedBox(width: 8.0),
                   Expanded(
-                    child: _buildTierButton(DeviceTier.medium, 'Medium Tier (Blurred)'),
+                    child: _buildTierButton(
+                      DeviceTier.medium,
+                      'Medium Tier (Blurred)',
+                    ),
                   ),
                   const SizedBox(width: 8.0),
                   Expanded(
-                    child: _buildTierButton(DeviceTier.high, 'High Tier (Blurred)'),
+                    child: _buildTierButton(
+                      DeviceTier.high,
+                      'High Tier (Blurred)',
+                    ),
                   ),
                 ],
               ),
@@ -889,8 +984,13 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                           const Icon(Icons.speed_rounded, size: 28.0),
                           const SizedBox(height: 8.0),
                           Text(
-                            activeDeviceTier == DeviceTier.low ? 'Solid Fallback Active' : 'Blur Filter Active',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
+                            activeDeviceTier == DeviceTier.low
+                                ? 'Solid Fallback Active'
+                                : 'Blur Filter Active',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.0,
+                            ),
                           ),
                         ],
                       ),
@@ -996,7 +1096,11 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
               // Chips display
               Text(
                 'Selectable Chips',
-                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: colors.textSecondary),
+                style: TextStyle(
+                  fontSize: 13.0,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textSecondary,
+                ),
               ),
               const SizedBox(height: 8.0),
               Wrap(
@@ -1045,24 +1149,35 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 ),
               ),
               const SizedBox(height: 14.0),
-              const Text('1. Loading State', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0)),
+              const Text(
+                '1. Loading State',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0),
+              ),
               const SizedBox(height: 8.0),
               const FitLoadingState(
                 message: 'Processing sync transaction...',
                 hindiMessage: 'सिंक लेनदेन की प्रक्रिया चल रही है...',
               ),
               const Divider(height: 32.0, color: Colors.white24),
-              const Text('2. Empty State', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0)),
+              const Text(
+                '2. Empty State',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0),
+              ),
               const SizedBox(height: 8.0),
               const FitEmptyState(
                 englishTitle: 'No workouts logged today',
                 hindiTitle: 'आज कोई व्यायाम दर्ज नहीं किया गया',
-                englishSubtitle: 'Complete a routine to start your daily streak.',
-                hindiSubtitle: 'दैनिक सिलसिला शुरू करने के लिए एक व्यायाम पूरा करें।',
+                englishSubtitle:
+                    'Complete a routine to start your daily streak.',
+                hindiSubtitle:
+                    'दैनिक सिलसिला शुरू करने के लिए एक व्यायाम पूरा करें।',
                 icon: Icons.assignment_turned_in_rounded,
               ),
               const Divider(height: 32.0, color: Colors.white24),
-              const Text('3. Error State', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0)),
+              const Text(
+                '3. Error State',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.0),
+              ),
               const SizedBox(height: 8.0),
               FitErrorState(
                 englishMessage: 'Sync operation timed out',
@@ -1070,7 +1185,10 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
                 onRetry: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Retrying data synchronization queue...', style: TextStyle(fontWeight: FontWeight.bold)),
+                      content: Text(
+                        'Retrying data synchronization queue...',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       backgroundColor: AppColorsDark.primary,
                     ),
                   );
@@ -1086,7 +1204,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
   Widget _buildTierButton(DeviceTier tier, String label) {
     final activeDeviceTier = ref.watch(deviceTierProvider);
     final isSelected = activeDeviceTier == tier;
-    
+
     return GestureDetector(
       onTap: () {
         ref.read(deviceTierProvider.notifier).setTier(tier);
@@ -1098,7 +1216,9 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: isSelected ? colors.primary.withOpacity(0.12) : colors.surface1,
+            color: isSelected
+                ? colors.primary.withOpacity(0.12)
+                : colors.surface1,
             borderRadius: BorderRadius.circular(AppRadius.sm),
             border: Border.all(
               color: isSelected ? colors.primary : colors.glassBorder,
@@ -1124,10 +1244,7 @@ class _StyleGuideScreenState extends ConsumerState<StyleGuideScreen> {
         Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6.0),
         Text(
@@ -1195,28 +1312,42 @@ class _ThemeColors {
   Color get bg0 => isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
   Color get bg1 => isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
   Color get bg2 => isDark ? AppColorsDark.bg2 : AppColorsLight.bg2;
-  Color get surface0 => isDark ? AppColorsDark.surface0 : AppColorsLight.surface0;
-  Color get surface1 => isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
-  Color get surface2 => isDark ? AppColorsDark.surface2 : AppColorsLight.surface2;
+  Color get surface0 =>
+      isDark ? AppColorsDark.surface0 : AppColorsLight.surface0;
+  Color get surface1 =>
+      isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+  Color get surface2 =>
+      isDark ? AppColorsDark.surface2 : AppColorsLight.surface2;
   Color get glass => isDark ? AppColorsDark.glass : AppColorsLight.glass;
-  Color get glassBorder => isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
+  Color get glassBorder =>
+      isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
   Color get primary => isDark ? AppColorsDark.primary : AppColorsLight.primary;
-  Color get primaryGlow => isDark ? AppColorsDark.primaryGlow : AppColorsLight.primaryGlow;
-  Color get primaryMuted => isDark ? AppColorsDark.primaryMuted : AppColorsLight.primaryMuted;
+  Color get primaryGlow =>
+      isDark ? AppColorsDark.primaryGlow : AppColorsLight.primaryGlow;
+  Color get primaryMuted =>
+      isDark ? AppColorsDark.primaryMuted : AppColorsLight.primaryMuted;
   Color get accent => isDark ? AppColorsDark.accent : AppColorsLight.accent;
-  Color get accentGlow => isDark ? AppColorsDark.accentGlow : AppColorsLight.accentGlow;
-  Color get secondary => isDark ? AppColorsDark.secondary : AppColorsLight.secondary;
-  Color get secondaryGlow => isDark ? AppColorsDark.secondaryGlow : AppColorsLight.secondaryGlow;
+  Color get accentGlow =>
+      isDark ? AppColorsDark.accentGlow : AppColorsLight.accentGlow;
+  Color get secondary =>
+      isDark ? AppColorsDark.secondary : AppColorsLight.secondary;
+  Color get secondaryGlow =>
+      isDark ? AppColorsDark.secondaryGlow : AppColorsLight.secondaryGlow;
   Color get teal => isDark ? AppColorsDark.teal : AppColorsLight.teal;
-  Color get tealGlow => isDark ? AppColorsDark.tealGlow : AppColorsLight.tealGlow;
+  Color get tealGlow =>
+      isDark ? AppColorsDark.tealGlow : AppColorsLight.tealGlow;
   Color get success => isDark ? AppColorsDark.success : AppColorsLight.success;
-  Color get successGlow => isDark ? AppColorsDark.successGlow : AppColorsLight.successGlow;
+  Color get successGlow =>
+      isDark ? AppColorsDark.successGlow : AppColorsLight.successGlow;
   Color get warning => isDark ? AppColorsDark.warning : AppColorsLight.warning;
   Color get error => isDark ? AppColorsDark.error : AppColorsLight.error;
   Color get rose => isDark ? AppColorsDark.rose : AppColorsLight.rose;
   Color get purple => isDark ? AppColorsDark.purple : AppColorsLight.purple;
-  Color get textPrimary => isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-  Color get textSecondary => isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-  Color get textMuted => isDark ? AppColorsDark.textMuted : AppColorsLight.textMuted;
+  Color get textPrimary =>
+      isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
+  Color get textSecondary =>
+      isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+  Color get textMuted =>
+      isDark ? AppColorsDark.textMuted : AppColorsLight.textMuted;
   Color get divider => isDark ? AppColorsDark.divider : AppColorsLight.divider;
 }

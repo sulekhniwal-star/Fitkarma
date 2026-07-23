@@ -277,9 +277,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-O Nutrition Reliability Score & Data Confidence Shield
-- [ ] Implement logging-consistency scoring
-- [ ] Wire "low confidence" UI messaging when data is sparse
-- [ ] Unit tests
+- [x] Implement logging-consistency scoring
+- [x] Wire "low confidence" UI messaging when data is sparse
+- [x] Unit tests
 
 ### §P5-P Satiety Prediction Engine
 - [ ] Implement satiety prediction model (deterministic heuristics)

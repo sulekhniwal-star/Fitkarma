@@ -20,21 +20,29 @@ class DashboardScreen extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
     final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
     final accentColor = isDark ? AppColorsDark.accent : AppColorsLight.accent;
-    final successColor = isDark ? AppColorsDark.success : AppColorsLight.success;
-    final secondaryColor = isDark ? AppColorsDark.secondary : AppColorsLight.secondary;
+    final successColor = isDark
+        ? AppColorsDark.success
+        : AppColorsLight.success;
+    final secondaryColor = isDark
+        ? AppColorsDark.secondary
+        : AppColorsLight.secondary;
 
     // Loading State
     if (state.isLoading) {
       return Scaffold(
         backgroundColor: bgColor,
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -63,7 +71,10 @@ class DashboardScreen extends ConsumerWidget {
               child: SafeArea(
                 bottom: false,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenH, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.screenH,
+                    vertical: 12,
+                  ),
                   child: Column(
                     children: [
                       // Header Row
@@ -91,8 +102,12 @@ class DashboardScreen extends ConsumerWidget {
                             ],
                           ),
                           IconButton(
-                            icon: Icon(Icons.refresh_rounded, color: textSecondary),
-                            onPressed: () => ref.read(dashboardProvider.notifier).loadData(),
+                            icon: Icon(
+                              Icons.refresh_rounded,
+                              color: textSecondary,
+                            ),
+                            onPressed: () =>
+                                ref.read(dashboardProvider.notifier).loadData(),
                           ),
                         ],
                       ),
@@ -151,11 +166,21 @@ class DashboardScreen extends ConsumerWidget {
                                   const SizedBox(height: 6),
                                   // TrendChip
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 2,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: successColor.withValues(alpha: 0.15),
+                                      color: successColor.withValues(
+                                        alpha: 0.15,
+                                      ),
                                       borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(color: successColor.withValues(alpha: 0.3), width: 0.5),
+                                      border: Border.all(
+                                        color: successColor.withValues(
+                                          alpha: 0.3,
+                                        ),
+                                        width: 0.5,
+                                      ),
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
@@ -200,7 +225,10 @@ class DashboardScreen extends ConsumerWidget {
                               children: [
                                 Text(
                                   'READINESS',
-                                  style: AppTypography.labelMd.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                                  style: AppTypography.labelMd.copyWith(
+                                    color: textSecondary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 const SizedBox(height: 8),
                                 ReadinessRing(
@@ -219,7 +247,10 @@ class DashboardScreen extends ConsumerWidget {
                               children: [
                                 Text(
                                   'HEALTH SCORE',
-                                  style: AppTypography.labelMd.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                                  style: AppTypography.labelMd.copyWith(
+                                    color: textSecondary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 const SizedBox(height: 8),
                                 HealthScoreRing(
@@ -237,16 +268,26 @@ class DashboardScreen extends ConsumerWidget {
                           onTap: () => context.go(AppRoutes.mission),
                           borderRadius: BorderRadius.circular(8),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8.0,
+                              horizontal: 12.0,
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   "Tap to see today's mission",
-                                  style: AppTypography.bodyMd.copyWith(color: primaryColor, fontWeight: FontWeight.bold),
+                                  style: AppTypography.bodyMd.copyWith(
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 const SizedBox(width: 8),
-                                Icon(Icons.arrow_forward_rounded, color: primaryColor, size: 16),
+                                Icon(
+                                  Icons.arrow_forward_rounded,
+                                  color: primaryColor,
+                                  size: 16,
+                                ),
                               ],
                             ),
                           ),
@@ -267,23 +308,35 @@ class DashboardScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.local_drink_rounded, color: secondaryColor, size: 20),
+                                  Icon(
+                                    Icons.local_drink_rounded,
+                                    color: secondaryColor,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 6),
                                   Text(
                                     'Water',
-                                    style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                    style: AppTypography.bodyMd.copyWith(
+                                      color: textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 '${state.waterL.toStringAsFixed(1)} / ${state.waterTargetL.toStringAsFixed(1)} L',
-                                style: AppTypography.h3.copyWith(fontWeight: FontWeight.bold),
+                                style: AppTypography.h3.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(height: 8),
                               LinearProgressIndicator(
-                                value: (state.waterL / state.waterTargetL).clamp(0.0, 1.0),
-                                backgroundColor: secondaryColor.withValues(alpha: 0.15),
+                                value: (state.waterL / state.waterTargetL)
+                                    .clamp(0.0, 1.0),
+                                backgroundColor: secondaryColor.withValues(
+                                  alpha: 0.15,
+                                ),
                                 color: secondaryColor,
                                 borderRadius: BorderRadius.circular(4),
                               ),
@@ -300,23 +353,37 @@ class DashboardScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.local_fire_department_rounded, color: Colors.orange, size: 20),
+                                  Icon(
+                                    Icons.local_fire_department_rounded,
+                                    color: Colors.orange,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 6),
                                   Text(
                                     'Calories',
-                                    style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                    style: AppTypography.bodyMd.copyWith(
+                                      color: textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 '${state.caloriesConsumed} / ${state.caloriesTarget} kcal',
-                                style: AppTypography.h3.copyWith(fontWeight: FontWeight.bold),
+                                style: AppTypography.h3.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(height: 8),
                               LinearProgressIndicator(
-                                value: (state.caloriesConsumed / state.caloriesTarget).clamp(0.0, 1.0),
-                                backgroundColor: Colors.orange.withValues(alpha: 0.15),
+                                value:
+                                    (state.caloriesConsumed /
+                                            state.caloriesTarget)
+                                        .clamp(0.0, 1.0),
+                                backgroundColor: Colors.orange.withValues(
+                                  alpha: 0.15,
+                                ),
                                 color: Colors.orange,
                                 borderRadius: BorderRadius.circular(4),
                               ),
@@ -333,7 +400,10 @@ class DashboardScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: cardBg,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.orange.withValues(alpha: 0.6), width: 1.5),
+                      border: Border.all(
+                        color: Colors.orange.withValues(alpha: 0.6),
+                        width: 1.5,
+                      ),
                     ),
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -341,7 +411,11 @@ class DashboardScreen extends ConsumerWidget {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.insights_rounded, color: Colors.orange, size: 20),
+                            const Icon(
+                              Icons.insights_rounded,
+                              color: Colors.orange,
+                              size: 20,
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               'AI COACH INSIGHT',
@@ -356,7 +430,10 @@ class DashboardScreen extends ConsumerWidget {
                         const SizedBox(height: 8),
                         Text(
                           state.primaryInsight,
-                          style: AppTypography.bodyMd.copyWith(color: textPrimary, height: 1.4),
+                          style: AppTypography.bodyMd.copyWith(
+                            color: textPrimary,
+                            height: 1.4,
+                          ),
                         ),
                       ],
                     ),
@@ -374,22 +451,33 @@ class DashboardScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.bedtime_rounded, color: Colors.indigoAccent, size: 18),
+                                  Icon(
+                                    Icons.bedtime_rounded,
+                                    color: Colors.indigoAccent,
+                                    size: 18,
+                                  ),
                                   const SizedBox(width: 6),
                                   Text(
                                     'Sleep',
-                                    style: AppTypography.bodySm.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                    style: AppTypography.bodySm.copyWith(
+                                      color: textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                '${state.sleepHours.toInt()}h ${( (state.sleepHours - state.sleepHours.toInt()) * 60 ).round()}m',
-                                style: AppTypography.bodyLg.copyWith(fontWeight: FontWeight.bold),
+                                '${state.sleepHours.toInt()}h ${((state.sleepHours - state.sleepHours.toInt()) * 60).round()}m',
+                                style: AppTypography.bodyLg.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 'Score: ${state.sleepScore}',
-                                style: AppTypography.labelMd.copyWith(color: textSecondary),
+                                style: AppTypography.labelMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                             ],
                           ),
@@ -404,22 +492,33 @@ class DashboardScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.favorite_rounded, color: Colors.redAccent, size: 18),
+                                  Icon(
+                                    Icons.favorite_rounded,
+                                    color: Colors.redAccent,
+                                    size: 18,
+                                  ),
                                   const SizedBox(width: 6),
                                   Text(
                                     'BP',
-                                    style: AppTypography.bodySm.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                    style: AppTypography.bodySm.copyWith(
+                                      color: textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Text(
                                 '${state.systolic}/${state.diastolic}',
-                                style: AppTypography.bodyLg.copyWith(fontWeight: FontWeight.bold),
+                                style: AppTypography.bodyLg.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 'mmHg · Normal',
-                                style: AppTypography.labelMd.copyWith(color: textSecondary),
+                                style: AppTypography.labelMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                             ],
                           ),
@@ -434,22 +533,33 @@ class DashboardScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.bloodtype_rounded, color: Colors.tealAccent, size: 18),
+                                  Icon(
+                                    Icons.bloodtype_rounded,
+                                    color: Colors.tealAccent,
+                                    size: 18,
+                                  ),
                                   const SizedBox(width: 6),
                                   Text(
                                     'Glucose',
-                                    style: AppTypography.bodySm.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                    style: AppTypography.bodySm.copyWith(
+                                      color: textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Text(
                                 '${state.glucose.round()}',
-                                style: AppTypography.bodyLg.copyWith(fontWeight: FontWeight.bold),
+                                style: AppTypography.bodyLg.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 'mg/dL · Normal',
-                                style: AppTypography.labelMd.copyWith(color: textSecondary),
+                                style: AppTypography.labelMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                             ],
                           ),
@@ -467,11 +577,18 @@ class DashboardScreen extends ConsumerWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.local_fire_department_rounded, color: Colors.orange, size: 24),
+                              const Icon(
+                                Icons.local_fire_department_rounded,
+                                color: Colors.orange,
+                                size: 24,
+                              ),
                               const SizedBox(width: 8),
                               Text(
                                 '${state.streakDays}-day streak',
-                                style: AppTypography.bodyLg.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                style: AppTypography.bodyLg.copyWith(
+                                  color: textPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
@@ -483,11 +600,18 @@ class DashboardScreen extends ConsumerWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.star_rounded, color: Colors.amber, size: 24),
+                              const Icon(
+                                Icons.star_rounded,
+                                color: Colors.amber,
+                                size: 24,
+                              ),
                               const SizedBox(width: 8),
                               Text(
                                 '${state.karmaPoints} karma',
-                                style: AppTypography.bodyLg.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                style: AppTypography.bodyLg.copyWith(
+                                  color: textPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),

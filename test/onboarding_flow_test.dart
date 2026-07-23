@@ -52,11 +52,17 @@ void main() {
       notifier.advance(); // → goals
       notifier.advance(); // → demographics
 
-      expect(container.read(currentOnboardingStepProvider), OnboardingStep.demographics);
+      expect(
+        container.read(currentOnboardingStepProvider),
+        OnboardingStep.demographics,
+      );
 
       final prev = notifier.back();
       expect(prev, OnboardingStep.goals);
-      expect(container.read(currentOnboardingStepProvider), OnboardingStep.goals);
+      expect(
+        container.read(currentOnboardingStepProvider),
+        OnboardingStep.goals,
+      );
     });
 
     test('back() on welcome returns null', () {
@@ -66,7 +72,10 @@ void main() {
       final notifier = container.read(onboardingFlowProvider.notifier);
       final result = notifier.back();
       expect(result, isNull);
-      expect(container.read(currentOnboardingStepProvider), OnboardingStep.welcome);
+      expect(
+        container.read(currentOnboardingStepProvider),
+        OnboardingStep.welcome,
+      );
     });
 
     test('skip() advances when allowed, returns null for demographics', () {
@@ -88,14 +97,19 @@ void main() {
       final skipDenied = notifier.skip();
       expect(skipDenied, isNull);
       // should still be on demographics
-      expect(container.read(currentOnboardingStepProvider), OnboardingStep.demographics);
+      expect(
+        container.read(currentOnboardingStepProvider),
+        OnboardingStep.demographics,
+      );
     });
   });
 
   group('Navigation rules helpers', () {
     test('canGoBack returns false only for welcome', () {
       expect(canGoBack(OnboardingStep.welcome), isFalse);
-      for (final step in OnboardingStep.values.where((s) => s != OnboardingStep.welcome)) {
+      for (final step in OnboardingStep.values.where(
+        (s) => s != OnboardingStep.welcome,
+      )) {
         expect(canGoBack(step), isTrue);
       }
     });

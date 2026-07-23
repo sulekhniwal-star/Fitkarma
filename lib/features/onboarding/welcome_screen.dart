@@ -68,21 +68,16 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen>
     );
 
     _contentOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _contentController,
-        curve: Curves.easeOut,
-      ),
+      CurvedAnimation(parent: _contentController, curve: Curves.easeOut),
     );
 
-    _contentSlide = Tween<Offset>(
-      begin: const Offset(0.0, 0.08),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _contentController,
-        curve: Curves.easeOutCubic,
-      ),
-    );
+    _contentSlide =
+        Tween<Offset>(begin: const Offset(0.0, 0.08), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _contentController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     // Sequence: wait 300ms, play logo, then play content
     _startTimer = Timer(const Duration(milliseconds: 300), () {
@@ -125,7 +120,11 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen>
         children: [
           // ── Full-bleed gradient background ────────────────────────────────
           Positioned.fill(
-            child: DecoratedBox(decoration: const BoxDecoration(gradient: AppColorsDark.heroGradient)),
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                gradient: AppColorsDark.heroGradient,
+              ),
+            ),
           ),
 
           // ── Ambient glow behind the logo ─────────────────────────────────
@@ -234,7 +233,11 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen>
                                     ),
                                   ),
                                   const SizedBox(width: 8),
-                                  const Icon(Icons.arrow_forward_rounded, size: 18, color: Colors.white),
+                                  const Icon(
+                                    Icons.arrow_forward_rounded,
+                                    size: 18,
+                                    color: Colors.white,
+                                  ),
                                 ],
                               ),
                             ),
@@ -305,10 +308,7 @@ class _FitkarmaLogo extends StatelessWidget {
               size: 64,
               color: AppColorsDark.primary,
               shadows: [
-                Shadow(
-                  color: AppColorsDark.primaryGlow,
-                  blurRadius: 24,
-                ),
+                Shadow(color: AppColorsDark.primaryGlow, blurRadius: 24),
               ],
             ),
           ],

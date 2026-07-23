@@ -33,7 +33,8 @@ class BentoCard extends StatefulWidget {
   State<BentoCard> createState() => _BentoCardState();
 }
 
-class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMixin {
+class _BentoCardState extends State<BentoCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -47,7 +48,8 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.97).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: AppSprings.touchResponseCurve, // Swift Touch-to-Response Spring physics
+        curve: AppSprings
+            .touchResponseCurve, // Swift Touch-to-Response Spring physics
       ),
     );
   }
@@ -64,25 +66,34 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
     final Widget cardBody = ClipRRect(
       borderRadius: BorderRadius.circular(widget.borderRadius),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: widget.blurRadius, sigmaY: widget.blurRadius),
+        filter: ImageFilter.blur(
+          sigmaX: widget.blurRadius,
+          sigmaY: widget.blurRadius,
+        ),
         child: Container(
           width: widget.width,
           height: widget.height,
           padding: widget.padding ?? const EdgeInsets.all(AppSpacing.cardH),
           decoration: BoxDecoration(
-            color: widget.customBgColor ?? (isDark ? AppColorsDark.glass : AppColorsLight.glass),
+            color:
+                widget.customBgColor ??
+                (isDark ? AppColorsDark.glass : AppColorsLight.glass),
             borderRadius: BorderRadius.circular(widget.borderRadius),
             border: Border.all(
-              color: isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder,
+              color: isDark
+                  ? AppColorsDark.glassBorder
+                  : AppColorsLight.glassBorder,
               width: 1.0,
             ),
-            boxShadow: widget.hasSecondaryGlow 
+            boxShadow: widget.hasSecondaryGlow
                 ? [
                     BoxShadow(
-                      color: isDark ? AppColorsDark.primaryMuted : AppColorsLight.primaryMuted,
+                      color: isDark
+                          ? AppColorsDark.primaryMuted
+                          : AppColorsLight.primaryMuted,
                       blurRadius: 24,
                       offset: const Offset(0, 8),
-                    )
+                    ),
                   ]
                 : null,
           ),
@@ -102,10 +113,7 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
         widget.onTap!();
       },
       onTapCancel: () => _controller.reverse(),
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: cardBody,
-      ),
+      child: ScaleTransition(scale: _scaleAnimation, child: cardBody),
     );
   }
 }

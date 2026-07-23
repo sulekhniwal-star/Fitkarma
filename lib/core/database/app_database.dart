@@ -18,17 +18,22 @@ class Users extends Table {
   RealColumn get weight => real().nullable()();
   RealColumn get height => real().nullable()();
   TextColumn get activityLevel => text().nullable()(); // ActivityLevel.name
-  TextColumn get goals => text().nullable()(); // JSON list e.g. '["weight_loss","heart_health"]'
+  TextColumn get goals =>
+      text().nullable()(); // JSON list e.g. '["weight_loss","heart_health"]'
   RealColumn get targetWeight => real().nullable()(); // kg
   IntColumn get dailyCalorieTarget => integer().nullable()();
   TextColumn get dosha => text().nullable()(); // Added for §P1-F Dosha Quiz
-  TextColumn get currentProgram => text().nullable()(); // Added for §P1-G Program Blueprint Selection Screen
+  TextColumn get currentProgram =>
+      text().nullable()(); // Added for §P1-G Program Blueprint Selection Screen
   BoolColumn get isCycleTrackingEnabled => boolean().nullable()();
   IntColumn get averageCycleLength => integer().nullable()();
   DateTimeColumn get lastPeriodDate => dateTime().nullable()();
-  TextColumn get subscriptionTier => text().withDefault(const Constant('free'))();
-  RealColumn get monthlyGroceryBudgetInr => real().withDefault(const Constant(3000.0))();
-  TextColumn get nutritionPeriodizationPhase => text().withDefault(const Constant('maintenance'))();
+  TextColumn get subscriptionTier =>
+      text().withDefault(const Constant('free'))();
+  RealColumn get monthlyGroceryBudgetInr =>
+      real().withDefault(const Constant(3000.0))();
+  TextColumn get nutritionPeriodizationPhase =>
+      text().withDefault(const Constant('maintenance'))();
   DateTimeColumn get periodizationPhaseStartedAt => dateTime().nullable()();
 
   @override
@@ -54,7 +59,7 @@ class WaterLogs extends Table {
   IntColumn get cups => integer()();
   TextColumn get syncBatchId => text()();
   DateTimeColumn get loggedAt => dateTime()();
-  
+
   // HLC logical components
   DateTimeColumn get hlcPhysicalTime => dateTime()();
   IntColumn get hlcLogicalCounter => integer()();
@@ -99,12 +104,17 @@ class DailyIntelligencePackages extends Table {
   TextColumn get recommendedIntensity => text()();
   BoolColumn get isRestDay => boolean().withDefault(const Constant(false))();
   TextColumn get activeRisks => text()(); // JSON array
-  BoolColumn get showFestivalBanner => boolean().withDefault(const Constant(false))();
+  BoolColumn get showFestivalBanner =>
+      boolean().withDefault(const Constant(false))();
   TextColumn get festivalAdaptation => text().nullable()();
-  BoolColumn get dietBreakActive => boolean().withDefault(const Constant(false))();
-  IntColumn get proteinTimingTarget => integer().withDefault(const Constant(25))();
-  TextColumn get loggingReliabilityStatus => text().withDefault(const Constant('high'))();
-  IntColumn get satietyTargetScore => integer().withDefault(const Constant(70))();
+  BoolColumn get dietBreakActive =>
+      boolean().withDefault(const Constant(false))();
+  IntColumn get proteinTimingTarget =>
+      integer().withDefault(const Constant(25))();
+  TextColumn get loggingReliabilityStatus =>
+      text().withDefault(const Constant('high'))();
+  IntColumn get satietyTargetScore =>
+      integer().withDefault(const Constant(70))();
   IntColumn get aiCallsUsed => integer().withDefault(const Constant(0))();
   DateTimeColumn get createdAt => dateTime()();
 
@@ -144,13 +154,14 @@ class TransformationMemories extends Table {
 // 8. Diet Plans — 7-day AI / deterministic plan cache (§P1-E)
 class CachedDietPlans extends Table {
   TextColumn get userId => text()();
+
   /// Full plan serialized as JSON ({"days":[...]}).
   TextColumn get planJson => text()();
   IntColumn get calorieTarget => integer()();
   IntColumn get proteinTargetG => integer()();
-  BoolColumn get isAiGenerated =>
-      boolean().withDefault(const Constant(true))();
+  BoolColumn get isAiGenerated => boolean().withDefault(const Constant(true))();
   DateTimeColumn get generatedAt => dateTime()();
+
   /// Plan is valid for 7 days; re-generate when expired or BMI shifts > 1.0.
   DateTimeColumn get expiresAt => dateTime()();
 
@@ -171,10 +182,13 @@ class RecoveryLogs extends Table {
   RealColumn get restingHR => real().nullable()();
   RealColumn get hrv => real().nullable()();
   TextColumn get sorenessRegions => text()();
-  IntColumn get sleepNeedMinutes => integer().withDefault(const Constant(480))();
-  IntColumn get sleepPerformanceScore => integer().withDefault(const Constant(100))();
+  IntColumn get sleepNeedMinutes =>
+      integer().withDefault(const Constant(480))();
+  IntColumn get sleepPerformanceScore =>
+      integer().withDefault(const Constant(100))();
   RealColumn get dailyStrainScore => real().withDefault(const Constant(0.0))();
-  TextColumn get illnessRiskStatus => text().withDefault(const Constant('low'))();
+  TextColumn get illnessRiskStatus =>
+      text().withDefault(const Constant('low'))();
   TextColumn get prescribedActionsJson => text()();
   TextColumn get recoveryDriversJson => text()();
   TextColumn get syncStatus => text()();
@@ -245,7 +259,8 @@ class BpReadings extends Table {
 class GlucoseReadings extends Table {
   IntColumn get id => integer().autoIncrement()();
   RealColumn get glucoseValue => real()();
-  TextColumn get mealTag => text()(); // 'Fasting', 'Pre-Meal', 'Post-Meal (1-hour)', 'Post-Meal (2-hour)'
+  TextColumn get mealTag =>
+      text()(); // 'Fasting', 'Pre-Meal', 'Post-Meal (1-hour)', 'Post-Meal (2-hour)'
   DateTimeColumn get measuredAt => dateTime()();
 }
 
@@ -282,26 +297,28 @@ class MicronutrientLogs extends Table {
   RealColumn get omega3G => real().withDefault(const Constant(0.0))();
 }
 
-@DriftDatabase(tables: [
-  Users,
-  WaterLogs,
-  SyncQueueItems,
-  DeadLetterQueueItems,
-  DailyIntelligencePackages,
-  AICacheEntries,
-  TransformationMemories,
-  CachedDietPlans,
-  MenstrualSymptomLogs,
-  RecoveryLogs,
-  ChatMessages,
-  EscalationEvents,
-  StepLogs,
-  SleepLogs,
-  BpReadings,
-  GlucoseReadings,
-  FoodReferences,
-  MicronutrientLogs,
-])
+@DriftDatabase(
+  tables: [
+    Users,
+    WaterLogs,
+    SyncQueueItems,
+    DeadLetterQueueItems,
+    DailyIntelligencePackages,
+    AICacheEntries,
+    TransformationMemories,
+    CachedDietPlans,
+    MenstrualSymptomLogs,
+    RecoveryLogs,
+    ChatMessages,
+    EscalationEvents,
+    StepLogs,
+    SleepLogs,
+    BpReadings,
+    GlucoseReadings,
+    FoodReferences,
+    MicronutrientLogs,
+  ],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
@@ -380,34 +397,60 @@ class AppDatabase extends _$AppDatabase {
     String? nutritionPeriodizationPhase,
     DateTime? periodizationPhaseStartedAt,
   }) async {
-    await (update(users)
-      ..where((t) => t.id.equals(userId)))
-      .write(UsersCompanion(
+    await (update(users)..where((t) => t.id.equals(userId))).write(
+      UsersCompanion(
         goals: goalsJson != null ? Value(goalsJson) : const Value.absent(),
-        targetWeight: targetWeight != null ? Value(targetWeight) : const Value.absent(),
-        dailyCalorieTarget: dailyCalorieTarget != null ? Value(dailyCalorieTarget) : const Value.absent(),
+        targetWeight: targetWeight != null
+            ? Value(targetWeight)
+            : const Value.absent(),
+        dailyCalorieTarget: dailyCalorieTarget != null
+            ? Value(dailyCalorieTarget)
+            : const Value.absent(),
         dosha: dosha != null ? Value(dosha) : const Value.absent(),
-        currentProgram: currentProgram != null ? Value(currentProgram) : const Value.absent(),
-        isCycleTrackingEnabled: isCycleTrackingEnabled != null ? Value(isCycleTrackingEnabled) : const Value.absent(),
-        averageCycleLength: averageCycleLength != null ? Value(averageCycleLength) : const Value.absent(),
-        lastPeriodDate: lastPeriodDate != null ? Value(lastPeriodDate) : const Value.absent(),
-        subscriptionTier: subscriptionTier != null ? Value(subscriptionTier) : const Value.absent(),
-        monthlyGroceryBudgetInr: monthlyGroceryBudgetInr != null ? Value(monthlyGroceryBudgetInr) : const Value.absent(),
-        nutritionPeriodizationPhase: nutritionPeriodizationPhase != null ? Value(nutritionPeriodizationPhase) : const Value.absent(),
-        periodizationPhaseStartedAt: periodizationPhaseStartedAt != null ? Value(periodizationPhaseStartedAt) : const Value.absent(),
-      ));
+        currentProgram: currentProgram != null
+            ? Value(currentProgram)
+            : const Value.absent(),
+        isCycleTrackingEnabled: isCycleTrackingEnabled != null
+            ? Value(isCycleTrackingEnabled)
+            : const Value.absent(),
+        averageCycleLength: averageCycleLength != null
+            ? Value(averageCycleLength)
+            : const Value.absent(),
+        lastPeriodDate: lastPeriodDate != null
+            ? Value(lastPeriodDate)
+            : const Value.absent(),
+        subscriptionTier: subscriptionTier != null
+            ? Value(subscriptionTier)
+            : const Value.absent(),
+        monthlyGroceryBudgetInr: monthlyGroceryBudgetInr != null
+            ? Value(monthlyGroceryBudgetInr)
+            : const Value.absent(),
+        nutritionPeriodizationPhase: nutritionPeriodizationPhase != null
+            ? Value(nutritionPeriodizationPhase)
+            : const Value.absent(),
+        periodizationPhaseStartedAt: periodizationPhaseStartedAt != null
+            ? Value(periodizationPhaseStartedAt)
+            : const Value.absent(),
+      ),
+    );
   }
 
   // ── Women's Health helpers ──────────────────────────────────────────────
 
-  Future<void> saveMenstrualSymptomLog(MenstrualSymptomLogsCompanion log) async {
+  Future<void> saveMenstrualSymptomLog(
+    MenstrualSymptomLogsCompanion log,
+  ) async {
     await into(menstrualSymptomLogs).insertOnConflictUpdate(log);
   }
 
-  Future<List<MenstrualSymptomLog>> getMenstrualSymptomLogs(String userId) async {
+  Future<List<MenstrualSymptomLog>> getMenstrualSymptomLogs(
+    String userId,
+  ) async {
     return (select(menstrualSymptomLogs)
           ..where((t) => t.userId.equals(userId))
-          ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc)]))
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc),
+          ]))
         .get();
   }
 
@@ -420,7 +463,9 @@ class AppDatabase extends _$AppDatabase {
   Future<List<RecoveryLog>> getRecoveryLogs(String userId) async {
     return (select(recoveryLogs)
           ..where((t) => t.userId.equals(userId))
-          ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc)]))
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.asc),
+          ]))
         .get();
   }
 
@@ -433,7 +478,10 @@ class AppDatabase extends _$AppDatabase {
   Future<List<ChatMessage>> getChatMessages(String conversationId) async {
     return (select(chatMessages)
           ..where((t) => t.conversationId.equals(conversationId))
-          ..orderBy([(t) => OrderingTerm(expression: t.createdAt, mode: OrderingMode.asc)]))
+          ..orderBy([
+            (t) =>
+                OrderingTerm(expression: t.createdAt, mode: OrderingMode.asc),
+          ]))
         .get();
   }
 
@@ -450,11 +498,11 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     await (update(users)..where((t) => t.id.equals(userId))).write(
       UsersCompanion(
-        age:                Value(age),
-        gender:             Value(gender),
-        height:             Value(heightCm),
-        weight:             Value(weightKg),
-        activityLevel:      Value(activityLevel),
+        age: Value(age),
+        gender: Value(gender),
+        height: Value(heightCm),
+        weight: Value(weightKg),
+        activityLevel: Value(activityLevel),
         dailyCalorieTarget: Value(dailyCalorieTarget),
       ),
     );
@@ -470,28 +518,28 @@ class AppDatabase extends _$AppDatabase {
     required int proteinTargetG,
     required bool isAiGenerated,
   }) async {
-    final now       = DateTime.now();
+    final now = DateTime.now();
     final expiresAt = now.add(const Duration(days: 7));
     await into(cachedDietPlans).insertOnConflictUpdate(
       CachedDietPlansCompanion.insert(
-        userId:         userId,
-        planJson:       planJson,
-        calorieTarget:  calorieTarget,
+        userId: userId,
+        planJson: planJson,
+        calorieTarget: calorieTarget,
         proteinTargetG: proteinTargetG,
-        isAiGenerated:  Value(isAiGenerated),
-        generatedAt:    now,
-        expiresAt:      expiresAt,
+        isAiGenerated: Value(isAiGenerated),
+        generatedAt: now,
+        expiresAt: expiresAt,
       ),
     );
   }
 
   /// Returns the cached plan if it exists and has not expired; otherwise null.
   Future<CachedDietPlan?> getCachedDietPlan(String userId) async {
-    return (select(cachedDietPlans)
-          ..where(
-            (t) => t.userId.equals(userId) &
-                 t.expiresAt.isBiggerThanValue(DateTime.now()),
-          ))
+    return (select(cachedDietPlans)..where(
+          (t) =>
+              t.userId.equals(userId) &
+              t.expiresAt.isBiggerThanValue(DateTime.now()),
+        ))
         .getSingleOrNull();
   }
 
@@ -504,7 +552,12 @@ class AppDatabase extends _$AppDatabase {
   Future<List<EscalationEvent>> getEscalationEvents(String userId) async {
     return (select(escalationEvents)
           ..where((t) => t.userId.equals(userId))
-          ..orderBy([(t) => OrderingTerm(expression: t.escalatedAt, mode: OrderingMode.desc)]))
+          ..orderBy([
+            (t) => OrderingTerm(
+              expression: t.escalatedAt,
+              mode: OrderingMode.desc,
+            ),
+          ]))
         .get();
   }
 
@@ -514,108 +567,215 @@ class AppDatabase extends _$AppDatabase {
   Future<void> seedFoodReferences() async {
     const seeds = [
       FoodReferencesCompanion(
-        id: Value('roti_1'), foodName: Value('Whole Wheat Roti'),
-        defaultServingG: Value(40), servingDescription: Value('1 Roti (40g)'),
-        calories: Value(85), proteinG: Value(3.0), carbsG: Value(18), fatG: Value(0.5),
-        glycemicIndex: Value(62), fiberG: Value(2.5), satietyIndex: Value(65),
+        id: Value('roti_1'),
+        foodName: Value('Whole Wheat Roti'),
+        defaultServingG: Value(40),
+        servingDescription: Value('1 Roti (40g)'),
+        calories: Value(85),
+        proteinG: Value(3.0),
+        carbsG: Value(18),
+        fatG: Value(0.5),
+        glycemicIndex: Value(62),
+        fiberG: Value(2.5),
+        satietyIndex: Value(65),
         searchTerms: Value('roti,chapati,wheat roti,fulka,phulka'),
       ),
       FoodReferencesCompanion(
-        id: Value('rice_1'), foodName: Value('Steamed Basmati Rice'),
-        defaultServingG: Value(150), servingDescription: Value('1 Cup (150g)'),
-        calories: Value(200), proteinG: Value(4.2), carbsG: Value(44), fatG: Value(0.4),
-        glycemicIndex: Value(72), fiberG: Value(1.0), satietyIndex: Value(50),
+        id: Value('rice_1'),
+        foodName: Value('Steamed Basmati Rice'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Cup (150g)'),
+        calories: Value(200),
+        proteinG: Value(4.2),
+        carbsG: Value(44),
+        fatG: Value(0.4),
+        glycemicIndex: Value(72),
+        fiberG: Value(1.0),
+        satietyIndex: Value(50),
         searchTerms: Value('rice,basmati,steamed rice,white rice,chawal'),
       ),
       FoodReferencesCompanion(
-        id: Value('dal_1'), foodName: Value('Dal Tadka (Yellow)'),
-        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
-        calories: Value(150), proteinG: Value(8.5), carbsG: Value(22), fatG: Value(3.5),
-        glycemicIndex: Value(45), fiberG: Value(6.0), satietyIndex: Value(75),
+        id: Value('dal_1'),
+        foodName: Value('Dal Tadka (Yellow)'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(150),
+        proteinG: Value(8.5),
+        carbsG: Value(22),
+        fatG: Value(3.5),
+        glycemicIndex: Value(45),
+        fiberG: Value(6.0),
+        satietyIndex: Value(75),
         searchTerms: Value('dal,dal tadka,tadka dal,yellow dal,lentil,dhal'),
       ),
       FoodReferencesCompanion(
-        id: Value('paneer_1'), foodName: Value('Paneer Bhurji'),
-        defaultServingG: Value(150), servingDescription: Value('1 Plate (150g)'),
-        calories: Value(280), proteinG: Value(18.0), carbsG: Value(8), fatG: Value(20),
-        glycemicIndex: Value(30), fiberG: Value(2.0), satietyIndex: Value(85),
+        id: Value('paneer_1'),
+        foodName: Value('Paneer Bhurji'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Plate (150g)'),
+        calories: Value(280),
+        proteinG: Value(18.0),
+        carbsG: Value(8),
+        fatG: Value(20),
+        glycemicIndex: Value(30),
+        fiberG: Value(2.0),
+        satietyIndex: Value(85),
         searchTerms: Value('paneer,paneer bhurji,bhurji,cottage cheese'),
       ),
       FoodReferencesCompanion(
-        id: Value('chick_1'), foodName: Value('Tandoori Chicken'),
-        defaultServingG: Value(180), servingDescription: Value('1 Plate (180g)'),
-        calories: Value(260), proteinG: Value(32.0), carbsG: Value(3), fatG: Value(12),
-        glycemicIndex: Value(15), fiberG: Value(0.5), satietyIndex: Value(90),
-        searchTerms: Value('chicken,tandoori chicken,grilled chicken,chicken tikka,murgh'),
+        id: Value('chick_1'),
+        foodName: Value('Tandoori Chicken'),
+        defaultServingG: Value(180),
+        servingDescription: Value('1 Plate (180g)'),
+        calories: Value(260),
+        proteinG: Value(32.0),
+        carbsG: Value(3),
+        fatG: Value(12),
+        glycemicIndex: Value(15),
+        fiberG: Value(0.5),
+        satietyIndex: Value(90),
+        searchTerms: Value(
+          'chicken,tandoori chicken,grilled chicken,chicken tikka,murgh',
+        ),
       ),
       FoodReferencesCompanion(
-        id: Value('poha_1'), foodName: Value('Onion Poha'),
-        defaultServingG: Value(150), servingDescription: Value('1 Plate (150g)'),
-        calories: Value(220), proteinG: Value(3.5), carbsG: Value(42), fatG: Value(4.0),
-        glycemicIndex: Value(68), fiberG: Value(2.8), satietyIndex: Value(60),
+        id: Value('poha_1'),
+        foodName: Value('Onion Poha'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Plate (150g)'),
+        calories: Value(220),
+        proteinG: Value(3.5),
+        carbsG: Value(42),
+        fatG: Value(4.0),
+        glycemicIndex: Value(68),
+        fiberG: Value(2.8),
+        satietyIndex: Value(60),
         searchTerms: Value('poha,onion poha,beaten rice,chivda'),
       ),
       FoodReferencesCompanion(
-        id: Value('idli_1'), foodName: Value('Steamed Idli'),
-        defaultServingG: Value(90), servingDescription: Value('2 Pieces (90g)'),
-        calories: Value(120), proteinG: Value(3.0), carbsG: Value(26), fatG: Value(0.2),
-        glycemicIndex: Value(70), fiberG: Value(1.5), satietyIndex: Value(58),
+        id: Value('idli_1'),
+        foodName: Value('Steamed Idli'),
+        defaultServingG: Value(90),
+        servingDescription: Value('2 Pieces (90g)'),
+        calories: Value(120),
+        proteinG: Value(3.0),
+        carbsG: Value(26),
+        fatG: Value(0.2),
+        glycemicIndex: Value(70),
+        fiberG: Value(1.5),
+        satietyIndex: Value(58),
         searchTerms: Value('idli,steamed idli,idly,idlis'),
       ),
       FoodReferencesCompanion(
-        id: Value('dosa_1'), foodName: Value('Plain Dosa'),
-        defaultServingG: Value(80), servingDescription: Value('1 Piece (80g)'),
-        calories: Value(165), proteinG: Value(3.2), carbsG: Value(32), fatG: Value(2.5),
-        glycemicIndex: Value(75), fiberG: Value(1.2), satietyIndex: Value(55),
+        id: Value('dosa_1'),
+        foodName: Value('Plain Dosa'),
+        defaultServingG: Value(80),
+        servingDescription: Value('1 Piece (80g)'),
+        calories: Value(165),
+        proteinG: Value(3.2),
+        carbsG: Value(32),
+        fatG: Value(2.5),
+        glycemicIndex: Value(75),
+        fiberG: Value(1.2),
+        satietyIndex: Value(55),
         searchTerms: Value('dosa,plain dosa,dosai,crispy dosa,masala dosa'),
       ),
       FoodReferencesCompanion(
-        id: Value('sambar_1'), foodName: Value('Mixed Veg Sambar'),
-        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
-        calories: Value(110), proteinG: Value(4.0), carbsG: Value(18), fatG: Value(2.0),
-        glycemicIndex: Value(48), fiberG: Value(4.5), satietyIndex: Value(70),
+        id: Value('sambar_1'),
+        foodName: Value('Mixed Veg Sambar'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(110),
+        proteinG: Value(4.0),
+        carbsG: Value(18),
+        fatG: Value(2.0),
+        glycemicIndex: Value(48),
+        fiberG: Value(4.5),
+        satietyIndex: Value(70),
         searchTerms: Value('sambar,sambhar,veg sambar,south indian curry'),
       ),
       FoodReferencesCompanion(
-        id: Value('chole_1'), foodName: Value('Punjabi Chole Masala'),
-        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
-        calories: Value(240), proteinG: Value(10.2), carbsG: Value(34), fatG: Value(7.0),
-        glycemicIndex: Value(38), fiberG: Value(8.5), satietyIndex: Value(80),
+        id: Value('chole_1'),
+        foodName: Value('Punjabi Chole Masala'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(240),
+        proteinG: Value(10.2),
+        carbsG: Value(34),
+        fatG: Value(7.0),
+        glycemicIndex: Value(38),
+        fiberG: Value(8.5),
+        satietyIndex: Value(80),
         searchTerms: Value('chole,chana,chole masala,chickpea curry,chick pea'),
       ),
       FoodReferencesCompanion(
-        id: Value('rajma_1'), foodName: Value('Rajma Masala'),
-        defaultServingG: Value(150), servingDescription: Value('1 Bowl (150g)'),
-        calories: Value(220), proteinG: Value(9.8), carbsG: Value(32), fatG: Value(5.5),
-        glycemicIndex: Value(35), fiberG: Value(9.0), satietyIndex: Value(80),
+        id: Value('rajma_1'),
+        foodName: Value('Rajma Masala'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Bowl (150g)'),
+        calories: Value(220),
+        proteinG: Value(9.8),
+        carbsG: Value(32),
+        fatG: Value(5.5),
+        glycemicIndex: Value(35),
+        fiberG: Value(9.0),
+        satietyIndex: Value(80),
         searchTerms: Value('rajma,kidney bean,rajma masala,rajma chawal'),
       ),
       FoodReferencesCompanion(
-        id: Value('curd_1'), foodName: Value('Whole Milk Curd'),
-        defaultServingG: Value(150), servingDescription: Value('1 Cup (150g)'),
-        calories: Value(98), proteinG: Value(5.2), carbsG: Value(6), fatG: Value(6.0),
-        glycemicIndex: Value(28), fiberG: Value(0.0), satietyIndex: Value(72),
+        id: Value('curd_1'),
+        foodName: Value('Whole Milk Curd'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Cup (150g)'),
+        calories: Value(98),
+        proteinG: Value(5.2),
+        carbsG: Value(6),
+        fatG: Value(6.0),
+        glycemicIndex: Value(28),
+        fiberG: Value(0.0),
+        satietyIndex: Value(72),
         searchTerms: Value('curd,dahi,yogurt,yoghurt,raita'),
       ),
       FoodReferencesCompanion(
-        id: Value('khich_1'), foodName: Value('Moong Dal Khichdi'),
-        defaultServingG: Value(200), servingDescription: Value('1 Bowl (200g)'),
-        calories: Value(210), proteinG: Value(7.2), carbsG: Value(38), fatG: Value(3.0),
-        glycemicIndex: Value(55), fiberG: Value(4.0), satietyIndex: Value(72),
+        id: Value('khich_1'),
+        foodName: Value('Moong Dal Khichdi'),
+        defaultServingG: Value(200),
+        servingDescription: Value('1 Bowl (200g)'),
+        calories: Value(210),
+        proteinG: Value(7.2),
+        carbsG: Value(38),
+        fatG: Value(3.0),
+        glycemicIndex: Value(55),
+        fiberG: Value(4.0),
+        satietyIndex: Value(72),
         searchTerms: Value('khichdi,khichri,moong dal khichdi,dal khichdi'),
       ),
       FoodReferencesCompanion(
-        id: Value('upma_1'), foodName: Value('Semolina Upma'),
-        defaultServingG: Value(150), servingDescription: Value('1 Plate (150g)'),
-        calories: Value(190), proteinG: Value(4.0), carbsG: Value(34), fatG: Value(3.5),
-        glycemicIndex: Value(65), fiberG: Value(2.0), satietyIndex: Value(62),
+        id: Value('upma_1'),
+        foodName: Value('Semolina Upma'),
+        defaultServingG: Value(150),
+        servingDescription: Value('1 Plate (150g)'),
+        calories: Value(190),
+        proteinG: Value(4.0),
+        carbsG: Value(34),
+        fatG: Value(3.5),
+        glycemicIndex: Value(65),
+        fiberG: Value(2.0),
+        satietyIndex: Value(62),
         searchTerms: Value('upma,rava upma,semolina upma,sooji upma'),
       ),
       FoodReferencesCompanion(
-        id: Value('egg_1'), foodName: Value('Boiled Egg'),
-        defaultServingG: Value(50), servingDescription: Value('1 Large (50g)'),
-        calories: Value(78), proteinG: Value(6.3), carbsG: Value(0.6), fatG: Value(5.3),
-        glycemicIndex: Value(0), fiberG: Value(0.0), satietyIndex: Value(85),
+        id: Value('egg_1'),
+        foodName: Value('Boiled Egg'),
+        defaultServingG: Value(50),
+        servingDescription: Value('1 Large (50g)'),
+        calories: Value(78),
+        proteinG: Value(6.3),
+        carbsG: Value(0.6),
+        fatG: Value(5.3),
+        glycemicIndex: Value(0),
+        fiberG: Value(0.0),
+        satietyIndex: Value(85),
         searchTerms: Value('egg,boiled egg,hard boiled egg,anda,ande'),
       ),
     ];
@@ -628,9 +788,11 @@ class AppDatabase extends _$AppDatabase {
   Future<List<FoodReference>> searchFoodReferences(String query) async {
     final lower = query.toLowerCase();
     return (select(foodReferences)
-          ..where((t) =>
-              t.foodName.lower().contains(lower) |
-              t.searchTerms.lower().contains(lower))
+          ..where(
+            (t) =>
+                t.foodName.lower().contains(lower) |
+                t.searchTerms.lower().contains(lower),
+          )
           ..orderBy([(t) => OrderingTerm(expression: t.foodName)]))
         .get();
   }
@@ -641,11 +803,20 @@ class AppDatabase extends _$AppDatabase {
     await into(micronutrientLogs).insertOnConflictUpdate(log);
   }
 
-  Future<List<MicronutrientLog>> getMicronutrientLogs(String userId, {int days = 7}) async {
+  Future<List<MicronutrientLog>> getMicronutrientLogs(
+    String userId, {
+    int days = 7,
+  }) async {
     final cutoff = DateTime.now().subtract(Duration(days: days));
     return (select(micronutrientLogs)
-          ..where((t) => t.userId.equals(userId) & t.logDate.isBiggerOrEqualValue(cutoff))
-          ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.desc)]))
+          ..where(
+            (t) =>
+                t.userId.equals(userId) &
+                t.logDate.isBiggerOrEqualValue(cutoff),
+          )
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.desc),
+          ]))
         .get();
   }
 }
@@ -654,10 +825,10 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
     final file = File(p.join(dbFolder.path, 'fitkarma.db'));
-    
+
     // Load or generate secure encryption key
     final key = await _getOrGenerateEncryptionKey(dbFolder);
-    
+
     return NativeDatabase.createInBackground(
       file,
       setup: (database) {
@@ -671,16 +842,16 @@ LazyDatabase _openConnection() {
 /// Cryptographically secure key generator using Random.secure() (CSPRNG)
 Future<String> _getOrGenerateEncryptionKey(Directory directory) async {
   final keyFile = File(p.join(directory.path, '.db_secure_key'));
-  
+
   if (await keyFile.exists()) {
     return await keyFile.readAsString();
   }
-  
+
   // Generate secure key bytes using OS-level entropy source
   final random = Random.secure();
   final bytes = List<int>.generate(32, (i) => random.nextInt(256));
   final key = base64Url.encode(bytes);
-  
+
   await keyFile.writeAsString(key);
   return key;
 }

@@ -11,18 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor        = Color(0xFF0E0F14);
-const _surfaceColor   = Color(0xFF1A1C26);
-const _cardColor      = Color(0xFF222434);
-const _accentOrange   = Color(0xFFFF6B35);
-const _accentGreen    = Color(0xFF4ADE80);
-const _accentRed      = Color(0xFFF87171);
-const _accentBlue     = Color(0xFF60A5FA);
-const _accentYellow   = Color(0xFFFBBF24);
-const _accentPurple   = Color(0xFFA78BFA);
-const _textPrimary    = Color(0xFFEFF0F7);
-const _textSecondary  = Color(0xFF9095B3);
-const _borderColor    = Color(0xFF2D2F45);
+const _bgColor = Color(0xFF0E0F14);
+const _surfaceColor = Color(0xFF1A1C26);
+const _cardColor = Color(0xFF222434);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentBlue = Color(0xFF60A5FA);
+const _accentYellow = Color(0xFFFBBF24);
+const _accentPurple = Color(0xFFA78BFA);
+const _textPrimary = Color(0xFFEFF0F7);
+const _textSecondary = Color(0xFF9095B3);
+const _borderColor = Color(0xFF2D2F45);
 
 class MicronutrientDashboardScreen extends ConsumerWidget {
   const MicronutrientDashboardScreen({super.key});
@@ -37,7 +37,10 @@ class MicronutrientDashboardScreen extends ConsumerWidget {
         backgroundColor: _bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: _textPrimary),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: _textPrimary,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
@@ -213,7 +216,9 @@ class _DemographicsBar extends ConsumerWidget {
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(color: state.isVegetarian ? _accentGreen : _borderColor),
+            side: BorderSide(
+              color: state.isVegetarian ? _accentGreen : _borderColor,
+            ),
           ),
         ),
         FilterChip(
@@ -231,7 +236,9 @@ class _DemographicsBar extends ConsumerWidget {
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(color: state.isFemale ? _accentPurple : _borderColor),
+            side: BorderSide(
+              color: state.isFemale ? _accentPurple : _borderColor,
+            ),
           ),
         ),
       ],
@@ -267,7 +274,9 @@ class _CoverageGaugeCard extends StatelessWidget {
                   valueColor: AlwaysStoppedAnimation(
                     state.overallCoveragePct >= 80.0
                         ? _accentGreen
-                        : (state.overallCoveragePct >= 50.0 ? _accentYellow : _accentRed),
+                        : (state.overallCoveragePct >= 50.0
+                              ? _accentYellow
+                              : _accentRed),
                   ),
                   strokeWidth: 8,
                 ),
@@ -306,7 +315,9 @@ class _CoverageGaugeCard extends StatelessWidget {
                       ? '🟢 All 8 essential biomarker RDA targets on track!'
                       : '⚠️ ${state.activeAlerts.length} deficiency risk warning(s) detected.',
                   style: TextStyle(
-                    color: state.activeAlerts.isEmpty ? _accentGreen : _accentYellow,
+                    color: state.activeAlerts.isEmpty
+                        ? _accentGreen
+                        : _accentYellow,
                     fontSize: 12,
                   ),
                 ),
@@ -326,9 +337,9 @@ class _AlertCard extends StatelessWidget {
 
   Color get _color {
     return switch (alert.severity) {
-      MicroAlertSeverity.high   => _accentRed,
+      MicroAlertSeverity.high => _accentRed,
       MicroAlertSeverity.medium => _accentYellow,
-      MicroAlertSeverity.low    => _accentBlue,
+      MicroAlertSeverity.low => _accentBlue,
     };
   }
 
@@ -368,12 +379,20 @@ class _AlertCard extends StatelessWidget {
           const SizedBox(height: 6),
           Row(
             children: [
-              const Icon(Icons.tips_and_updates_rounded, color: _accentGreen, size: 14),
+              const Icon(
+                Icons.tips_and_updates_rounded,
+                color: _accentGreen,
+                size: 14,
+              ),
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
                   alert.recommendation,
-                  style: const TextStyle(color: _accentGreen, fontSize: 11, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    color: _accentGreen,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -476,7 +495,11 @@ class _IndianFoodSourcesGuideCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.restaurant_menu_rounded, color: _accentOrange, size: 18),
+              Icon(
+                Icons.restaurant_menu_rounded,
+                color: _accentOrange,
+                size: 18,
+              ),
               SizedBox(width: 8),
               Text(
                 'High-Yield Indian Food Sources',
@@ -490,10 +513,22 @@ class _IndianFoodSourcesGuideCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10),
-          _FoodSourceItem(nutrient: 'Iron', sources: 'Spinach (Palak), Soya Chunks, Black Chana, Jaggery'),
-          _FoodSourceItem(nutrient: 'B12', sources: 'Whole Milk Curd, Paneer, Fortified Milk, Eggs'),
-          _FoodSourceItem(nutrient: 'Calcium', sources: 'Curd, Paneer, Til (Sesame Seeds), Ragi Atta'),
-          _FoodSourceItem(nutrient: 'Omega-3', sources: 'Flaxseeds (Alsi), Walnuts, Mustard Oil, Fish'),
+          _FoodSourceItem(
+            nutrient: 'Iron',
+            sources: 'Spinach (Palak), Soya Chunks, Black Chana, Jaggery',
+          ),
+          _FoodSourceItem(
+            nutrient: 'B12',
+            sources: 'Whole Milk Curd, Paneer, Fortified Milk, Eggs',
+          ),
+          _FoodSourceItem(
+            nutrient: 'Calcium',
+            sources: 'Curd, Paneer, Til (Sesame Seeds), Ragi Atta',
+          ),
+          _FoodSourceItem(
+            nutrient: 'Omega-3',
+            sources: 'Flaxseeds (Alsi), Walnuts, Mustard Oil, Fish',
+          ),
         ],
       ),
     );
@@ -515,7 +550,11 @@ class _FoodSourceItem extends StatelessWidget {
           children: [
             TextSpan(
               text: '$nutrient: ',
-              style: const TextStyle(color: _accentOrange, fontWeight: FontWeight.w700, fontSize: 12),
+              style: const TextStyle(
+                color: _accentOrange,
+                fontWeight: FontWeight.w700,
+                fontSize: 12,
+              ),
             ),
             TextSpan(
               text: sources,

@@ -10,16 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _surfaceColor  = Color(0xFF1B1D2A);
-const _accentOrange  = Color(0xFFFF6B35);
-const _accentGreen   = Color(0xFF4ADE80);
-const _accentRed     = Color(0xFFF87171);
-const _accentBlue    = Color(0xFF60A5FA);
-const _accentYellow  = Color(0xFFFBBF24);
-const _accentPurple  = Color(0xFFA78BFA);
-const _textPrimary   = Color(0xFFEFF0F7);
+const _surfaceColor = Color(0xFF1B1D2A);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentBlue = Color(0xFF60A5FA);
+const _accentYellow = Color(0xFFFBBF24);
+const _accentPurple = Color(0xFFA78BFA);
+const _textPrimary = Color(0xFFEFF0F7);
 const _textSecondary = Color(0xFF9095B3);
-const _borderColor   = Color(0xFF2E324A);
+const _borderColor = Color(0xFF2E324A);
 
 class MealQualityDisplayCard extends ConsumerWidget {
   const MealQualityDisplayCard({super.key});
@@ -90,11 +90,16 @@ class MealQualityDisplayCard extends ConsumerWidget {
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: gradeColor.withAlpha(40),
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: gradeColor.withAlpha(100)),
+                            border: Border.all(
+                              color: gradeColor.withAlpha(100),
+                            ),
                           ),
                           child: Text(
                             summary.grade,
@@ -112,7 +117,10 @@ class MealQualityDisplayCard extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       summary.breakdownSummary,
-                      style: const TextStyle(color: _textSecondary, fontSize: 11),
+                      style: const TextStyle(
+                        color: _textSecondary,
+                        fontSize: 11,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -129,7 +137,8 @@ class MealQualityDisplayCard extends ConsumerWidget {
           // ── 4 Component Progress Rows ──
           _ComponentRow(
             label: 'Protein Density (2.5x)',
-            valueText: '${summary.proteinDensity.toStringAsFixed(1)} g / 100 kcal',
+            valueText:
+                '${summary.proteinDensity.toStringAsFixed(1)} g / 100 kcal',
             progress: (summary.proteinDensity / 15.0).clamp(0.0, 1.0),
             color: _accentPurple,
           ),
@@ -150,9 +159,15 @@ class MealQualityDisplayCard extends ConsumerWidget {
           const SizedBox(height: 8),
           _ComponentRow(
             label: 'NOVA Processing Penalty (-15x)',
-            valueText: '-${summary.processingTier.penaltyValue * 15} pts (${summary.processingTier.name})',
-            progress: (summary.processingTier.penaltyValue / 3.0).clamp(0.0, 1.0),
-            color: summary.processingTier.penaltyValue > 0 ? _accentRed : _accentBlue,
+            valueText:
+                '-${summary.processingTier.penaltyValue * 15} pts (${summary.processingTier.name})',
+            progress: (summary.processingTier.penaltyValue / 3.0).clamp(
+              0.0,
+              1.0,
+            ),
+            color: summary.processingTier.penaltyValue > 0
+                ? _accentRed
+                : _accentBlue,
           ),
         ],
       ),
@@ -191,11 +206,20 @@ class _ComponentRow extends StatelessWidget {
           children: [
             Text(
               label,
-              style: const TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                color: _textSecondary,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             Text(
               valueText,
-              style: TextStyle(color: color, fontFamily: 'Outfit', fontSize: 12, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                color: color,
+                fontFamily: 'Outfit',
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ],
         ),

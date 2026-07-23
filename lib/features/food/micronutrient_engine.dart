@@ -22,11 +22,7 @@ enum MicronutrientType {
 }
 
 /// Alert severity level.
-enum MicroAlertSeverity {
-  high,
-  medium,
-  low,
-}
+enum MicroAlertSeverity { high, medium, low }
 
 /// User RDA target configuration for 8 micronutrients.
 class MicroRdaConfig {
@@ -144,21 +140,89 @@ class MicronutrientEngine {
 
   /// Seed database mapping common Indian food items to per-serving micronutrient yields.
   static const Map<String, DailyMicronutrientSummary> indianFoodMicroMap = {
-    'spinach': DailyMicronutrientSummary(ironMg: 6.5, calciumMg: 150, magnesiumMg: 80, folateMcg: 140),
-    'palak': DailyMicronutrientSummary(ironMg: 6.5, calciumMg: 150, magnesiumMg: 80, folateMcg: 140),
-    'egg': DailyMicronutrientSummary(ironMg: 1.2, vitaminB12Mcg: 0.6, vitaminD3Iu: 45, zincMg: 0.7, calciumMg: 28),
-    'eggs': DailyMicronutrientSummary(ironMg: 2.4, vitaminB12Mcg: 1.2, vitaminD3Iu: 90, zincMg: 1.4, calciumMg: 56),
-    'curd': DailyMicronutrientSummary(calciumMg: 200, vitaminB12Mcg: 0.5, magnesiumMg: 24, zincMg: 0.8),
-    'dahi': DailyMicronutrientSummary(calciumMg: 200, vitaminB12Mcg: 0.5, magnesiumMg: 24, zincMg: 0.8),
-    'paneer': DailyMicronutrientSummary(calciumMg: 240, zincMg: 1.2, vitaminB12Mcg: 0.4, magnesiumMg: 18),
-    'soya': DailyMicronutrientSummary(ironMg: 8.0, calciumMg: 180, magnesiumMg: 110, zincMg: 2.5, folateMcg: 120),
-    'soya chunks': DailyMicronutrientSummary(ironMg: 8.0, calciumMg: 180, magnesiumMg: 110, zincMg: 2.5, folateMcg: 120),
-    'chana': DailyMicronutrientSummary(ironMg: 4.8, folateMcg: 160, magnesiumMg: 75, zincMg: 1.8),
-    'rajma': DailyMicronutrientSummary(ironMg: 5.2, folateMcg: 180, magnesiumMg: 85, zincMg: 2.0),
-    'dal': DailyMicronutrientSummary(ironMg: 3.5, folateMcg: 120, magnesiumMg: 50, zincMg: 1.2),
+    'spinach': DailyMicronutrientSummary(
+      ironMg: 6.5,
+      calciumMg: 150,
+      magnesiumMg: 80,
+      folateMcg: 140,
+    ),
+    'palak': DailyMicronutrientSummary(
+      ironMg: 6.5,
+      calciumMg: 150,
+      magnesiumMg: 80,
+      folateMcg: 140,
+    ),
+    'egg': DailyMicronutrientSummary(
+      ironMg: 1.2,
+      vitaminB12Mcg: 0.6,
+      vitaminD3Iu: 45,
+      zincMg: 0.7,
+      calciumMg: 28,
+    ),
+    'eggs': DailyMicronutrientSummary(
+      ironMg: 2.4,
+      vitaminB12Mcg: 1.2,
+      vitaminD3Iu: 90,
+      zincMg: 1.4,
+      calciumMg: 56,
+    ),
+    'curd': DailyMicronutrientSummary(
+      calciumMg: 200,
+      vitaminB12Mcg: 0.5,
+      magnesiumMg: 24,
+      zincMg: 0.8,
+    ),
+    'dahi': DailyMicronutrientSummary(
+      calciumMg: 200,
+      vitaminB12Mcg: 0.5,
+      magnesiumMg: 24,
+      zincMg: 0.8,
+    ),
+    'paneer': DailyMicronutrientSummary(
+      calciumMg: 240,
+      zincMg: 1.2,
+      vitaminB12Mcg: 0.4,
+      magnesiumMg: 18,
+    ),
+    'soya': DailyMicronutrientSummary(
+      ironMg: 8.0,
+      calciumMg: 180,
+      magnesiumMg: 110,
+      zincMg: 2.5,
+      folateMcg: 120,
+    ),
+    'soya chunks': DailyMicronutrientSummary(
+      ironMg: 8.0,
+      calciumMg: 180,
+      magnesiumMg: 110,
+      zincMg: 2.5,
+      folateMcg: 120,
+    ),
+    'chana': DailyMicronutrientSummary(
+      ironMg: 4.8,
+      folateMcg: 160,
+      magnesiumMg: 75,
+      zincMg: 1.8,
+    ),
+    'rajma': DailyMicronutrientSummary(
+      ironMg: 5.2,
+      folateMcg: 180,
+      magnesiumMg: 85,
+      zincMg: 2.0,
+    ),
+    'dal': DailyMicronutrientSummary(
+      ironMg: 3.5,
+      folateMcg: 120,
+      magnesiumMg: 50,
+      zincMg: 1.2,
+    ),
     'walnut': DailyMicronutrientSummary(omega3G: 1.5, magnesiumMg: 45),
     'flaxseed': DailyMicronutrientSummary(omega3G: 2.2, magnesiumMg: 60),
-    'fish': DailyMicronutrientSummary(omega3G: 1.2, vitaminD3Iu: 400, vitaminB12Mcg: 2.8),
+    'fish': DailyMicronutrientSummary(
+      omega3G: 1.2,
+      vitaminD3Iu: 400,
+      vitaminB12Mcg: 2.8,
+    ),
   };
 
   /// Looks up estimated micronutrient yield for a food item by name query.
@@ -183,59 +247,80 @@ class MicronutrientEngine {
     if (recent7DayLogs.isEmpty) return const [];
 
     final count = recent7DayLogs.length;
-    final avgB12 = recent7DayLogs.fold(0.0, (s, l) => s + l.vitaminB12Mcg) / count;
+    final avgB12 =
+        recent7DayLogs.fold(0.0, (s, l) => s + l.vitaminB12Mcg) / count;
     final avgIron = recent7DayLogs.fold(0.0, (s, l) => s + l.ironMg) / count;
     final avgD3 = recent7DayLogs.fold(0.0, (s, l) => s + l.vitaminD3Iu) / count;
-    final avgCalcium = recent7DayLogs.fold(0.0, (s, l) => s + l.calciumMg) / count;
+    final avgCalcium =
+        recent7DayLogs.fold(0.0, (s, l) => s + l.calciumMg) / count;
 
     final alerts = <MicroAlert>[];
 
     // Alert 1: B12 Depletion Risk for Vegetarians (<50% RDA target)
-    final b12Ratio = avgB12 / (rdaTargets.vitaminB12Mcg > 0 ? rdaTargets.vitaminB12Mcg : 1);
+    final b12Ratio =
+        avgB12 / (rdaTargets.vitaminB12Mcg > 0 ? rdaTargets.vitaminB12Mcg : 1);
     if (isVegetarian && b12Ratio < 0.50) {
-      alerts.add(MicroAlert(
-        title: 'B12 Depletion Risk ⚠️',
-        message: 'Your vegetarian diet yields only ${(b12Ratio * 100).round()}% of Vitamin B12 targets (${avgB12.toStringAsFixed(1)} / ${rdaTargets.vitaminB12Mcg} mcg).',
-        severity: MicroAlertSeverity.high,
-        affectedNutrient: MicronutrientType.vitaminB12,
-        recommendation: 'Add fortified milk, whole curd, paneer, or consider an oral B12 supplement.',
-      ));
+      alerts.add(
+        MicroAlert(
+          title: 'B12 Depletion Risk ⚠️',
+          message:
+              'Your vegetarian diet yields only ${(b12Ratio * 100).round()}% of Vitamin B12 targets (${avgB12.toStringAsFixed(1)} / ${rdaTargets.vitaminB12Mcg} mcg).',
+          severity: MicroAlertSeverity.high,
+          affectedNutrient: MicronutrientType.vitaminB12,
+          recommendation:
+              'Add fortified milk, whole curd, paneer, or consider an oral B12 supplement.',
+        ),
+      );
     }
 
     // Alert 2: Iron Deficit Warning (<60% RDA target for Females / Vegetarians)
     final ironRatio = avgIron / (rdaTargets.ironMg > 0 ? rdaTargets.ironMg : 1);
     if ((isFemale || isVegetarian) && ironRatio < 0.60) {
-      alerts.add(MicroAlert(
-        title: 'Iron Deficit Warning ⚠️',
-        message: 'Logged meals yield only ${(ironRatio * 100).round()}% of Iron targets (${avgIron.toStringAsFixed(1)} / ${rdaTargets.ironMg} mg).',
-        severity: MicroAlertSeverity.medium,
-        affectedNutrient: MicronutrientType.iron,
-        recommendation: 'Pair plant-iron foods (spinach, chana, soya) with Vitamin C (fresh lemon juice) to double non-heme absorption.',
-      ));
+      alerts.add(
+        MicroAlert(
+          title: 'Iron Deficit Warning ⚠️',
+          message:
+              'Logged meals yield only ${(ironRatio * 100).round()}% of Iron targets (${avgIron.toStringAsFixed(1)} / ${rdaTargets.ironMg} mg).',
+          severity: MicroAlertSeverity.medium,
+          affectedNutrient: MicronutrientType.iron,
+          recommendation:
+              'Pair plant-iron foods (spinach, chana, soya) with Vitamin C (fresh lemon juice) to double non-heme absorption.',
+        ),
+      );
     }
 
     // Alert 3: Vitamin D3 Deficiency Risk (<40% target)
-    final d3Ratio = avgD3 / (rdaTargets.vitaminD3Iu > 0 ? rdaTargets.vitaminD3Iu : 1);
+    final d3Ratio =
+        avgD3 / (rdaTargets.vitaminD3Iu > 0 ? rdaTargets.vitaminD3Iu : 1);
     if (d3Ratio < 0.40) {
-      alerts.add(MicroAlert(
-        title: 'Vitamin D3 Sub-Optimal Intake ☀️',
-        message: 'Average D3 intake is at ${(d3Ratio * 100).round()}% of recommended 800-1000 IU.',
-        severity: MicroAlertSeverity.medium,
-        affectedNutrient: MicronutrientType.vitaminD3,
-        recommendation: 'Aim for 15-20 mins of direct morning sunlight exposure or consumption of D3 fortified dairy.',
-      ));
+      alerts.add(
+        MicroAlert(
+          title: 'Vitamin D3 Sub-Optimal Intake ☀️',
+          message:
+              'Average D3 intake is at ${(d3Ratio * 100).round()}% of recommended 800-1000 IU.',
+          severity: MicroAlertSeverity.medium,
+          affectedNutrient: MicronutrientType.vitaminD3,
+          recommendation:
+              'Aim for 15-20 mins of direct morning sunlight exposure or consumption of D3 fortified dairy.',
+        ),
+      );
     }
 
     // Alert 4: Calcium Gap for Female / PCOS (<50% target)
-    final calciumRatio = avgCalcium / (rdaTargets.calciumMg > 0 ? rdaTargets.calciumMg : 1);
+    final calciumRatio =
+        avgCalcium / (rdaTargets.calciumMg > 0 ? rdaTargets.calciumMg : 1);
     if ((isFemale || hasPcos) && calciumRatio < 0.50) {
-      alerts.add(MicroAlert(
-        title: 'Calcium Gap Alert 🦴',
-        message: 'Calcium intake is at ${(calciumRatio * 100).round()}% of target (${avgCalcium.round()} / ${rdaTargets.calciumMg.round()} mg).',
-        severity: MicroAlertSeverity.medium,
-        affectedNutrient: MicronutrientType.calcium,
-        recommendation: 'Incorporate 1 extra curd bowl or 100g paneer daily to support bone density and muscle firing.',
-      ));
+      alerts.add(
+        MicroAlert(
+          title: 'Calcium Gap Alert 🦴',
+          message:
+              'Calcium intake is at ${(calciumRatio * 100).round()}% of target (${avgCalcium.round()} / ${rdaTargets.calciumMg.round()} mg).',
+          severity: MicroAlertSeverity.medium,
+          affectedNutrient: MicronutrientType.calcium,
+          recommendation:
+              'Incorporate 1 extra curd bowl or 100g paneer daily to support bone density and muscle firing.',
+        ),
+      );
     }
 
     return alerts;

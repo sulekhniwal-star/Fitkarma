@@ -14,7 +14,7 @@ class AzureSyncClient {
       // Simulate flaky network connection for testing retry logic
       return _random.nextDouble() > 0.6; // 60% failure rate
     }
-    
+
     return true;
   }
 }

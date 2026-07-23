@@ -18,22 +18,44 @@ class GlucoseScreen extends ConsumerWidget {
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
     final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
     final accentColor = isDark ? AppColorsDark.accent : AppColorsLight.accent;
     final errorColor = isDark ? AppColorsDark.error : AppColorsLight.error;
-    final successColor = isDark ? AppColorsDark.success : AppColorsLight.success;
+    final successColor = isDark
+        ? AppColorsDark.success
+        : AppColorsLight.success;
 
     if (!state.isUnlocked) {
-      return _buildLockScreen(context, ref, state, bgColor, cardBg, textPrimary, textSecondary, primaryColor, errorColor);
+      return _buildLockScreen(
+        context,
+        ref,
+        state,
+        bgColor,
+        cardBg,
+        textPrimary,
+        textSecondary,
+        primaryColor,
+        errorColor,
+      );
     }
 
     // HbA1c progress calculation: pre-diabetic threshold is 5.7%
     // Maximum expected HbA1c representation range: e.g. 4.0% to 8.0%
     final double hba1cMin = 4.0;
     final double hba1cMax = 8.0;
-    final double progressFraction = ((state.estimatedHba1c - hba1cMin) / (hba1cMax - hba1cMin)).clamp(0.0, 1.0);
+    final double progressFraction =
+        ((state.estimatedHba1c - hba1cMin) / (hba1cMax - hba1cMin)).clamp(
+          0.0,
+          1.0,
+        );
     final isPreDiabetic = state.estimatedHba1c >= 5.7;
 
     return Scaffold(
@@ -47,7 +69,10 @@ class GlucoseScreen extends ConsumerWidget {
         ),
         title: Text(
           'Blood Glucose',
-          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+          style: AppTypography.h3.copyWith(
+            color: textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           IconButton(
@@ -76,18 +101,28 @@ class GlucoseScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 'Fasting',
-                                style: AppTypography.bodySm.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                                style: AppTypography.bodySm.copyWith(
+                                  color: textSecondary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 '${state.fastingGlucose.round()} mg/dL',
-                                style: AppTypography.h2.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                style: AppTypography.h2.copyWith(
+                                  color: textPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(height: 6),
                               Text(
                                 _getFastingCategory(state.fastingGlucose),
                                 style: AppTypography.bodySm.copyWith(
-                                  color: _getFastingColor(state.fastingGlucose, successColor, errorColor),
+                                  color: _getFastingColor(
+                                    state.fastingGlucose,
+                                    successColor,
+                                    errorColor,
+                                  ),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -105,18 +140,28 @@ class GlucoseScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 'Post-Meal',
-                                style: AppTypography.bodySm.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                                style: AppTypography.bodySm.copyWith(
+                                  color: textSecondary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 '${state.postMealGlucose.round()} mg/dL',
-                                style: AppTypography.h2.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                style: AppTypography.h2.copyWith(
+                                  color: textPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(height: 6),
                               Text(
                                 _getPostMealCategory(state.postMealGlucose),
                                 style: AppTypography.bodySm.copyWith(
-                                  color: _getPostMealColor(state.postMealGlucose, successColor, errorColor),
+                                  color: _getPostMealColor(
+                                    state.postMealGlucose,
+                                    successColor,
+                                    errorColor,
+                                  ),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -139,12 +184,17 @@ class GlucoseScreen extends ConsumerWidget {
                           children: [
                             Text(
                               'Estimated HbA1c',
-                              style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                              style: AppTypography.bodyMd.copyWith(
+                                color: textPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               '${state.estimatedHba1c.toStringAsFixed(1)}%',
                               style: AppTypography.h3.copyWith(
-                                color: isPreDiabetic ? Colors.orange : successColor,
+                                color: isPreDiabetic
+                                    ? Colors.orange
+                                    : successColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -152,10 +202,12 @@ class GlucoseScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          isPreDiabetic 
-                              ? 'Pre-diabetic Threshold: 5.7%' 
+                          isPreDiabetic
+                              ? 'Pre-diabetic Threshold: 5.7%'
                               : 'Normal Metabolic Health range',
-                          style: AppTypography.bodySm.copyWith(color: textSecondary),
+                          style: AppTypography.bodySm.copyWith(
+                            color: textSecondary,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         // Progress bar representating HbA1c
@@ -172,8 +224,8 @@ class GlucoseScreen extends ConsumerWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: isPreDiabetic 
-                                      ? [Colors.orange, errorColor] 
+                                  colors: isPreDiabetic
+                                      ? [Colors.orange, errorColor]
                                       : [successColor, accentColor],
                                 ),
                                 borderRadius: BorderRadius.circular(6),
@@ -194,7 +246,10 @@ class GlucoseScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Glucose Response History',
-                          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                          style: AppTypography.h3.copyWith(
+                            color: textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         if (state.history.isEmpty)
@@ -203,7 +258,9 @@ class GlucoseScreen extends ConsumerWidget {
                             child: Center(
                               child: Text(
                                 'No glucose records logged yet.',
-                                style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                                style: AppTypography.bodyMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                             ),
                           )
@@ -212,43 +269,69 @@ class GlucoseScreen extends ConsumerWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.history.length,
-                            separatorBuilder: (context, index) => const Divider(color: Colors.white10),
+                            separatorBuilder: (context, index) =>
+                                const Divider(color: Colors.white10),
                             itemBuilder: (context, index) {
                               final item = state.history[index];
                               final isFasting = item.mealTag == 'Fasting';
-                              final cat = isFasting ? _getFastingCategory(item.glucoseValue) : _getPostMealCategory(item.glucoseValue);
-                              final catColor = isFasting 
-                                  ? _getFastingColor(item.glucoseValue, successColor, errorColor) 
-                                  : _getPostMealColor(item.glucoseValue, successColor, errorColor);
+                              final cat = isFasting
+                                  ? _getFastingCategory(item.glucoseValue)
+                                  : _getPostMealCategory(item.glucoseValue);
+                              final catColor = isFasting
+                                  ? _getFastingColor(
+                                      item.glucoseValue,
+                                      successColor,
+                                      errorColor,
+                                    )
+                                  : _getPostMealColor(
+                                      item.glucoseValue,
+                                      successColor,
+                                      errorColor,
+                                    );
 
                               return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '${item.glucoseValue.round()} mg/dL',
-                                          style: AppTypography.bodyLg.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                          style: AppTypography.bodyLg.copyWith(
+                                            color: textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         Text(
                                           cat,
-                                          style: AppTypography.bodySm.copyWith(color: catColor),
+                                          style: AppTypography.bodySm.copyWith(
+                                            color: catColor,
+                                          ),
                                         ),
                                       ],
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           item.mealTag,
-                                          style: AppTypography.labelMd.copyWith(color: textSecondary),
+                                          style: AppTypography.labelMd.copyWith(
+                                            color: textSecondary,
+                                          ),
                                         ),
                                         Text(
                                           '${item.measuredAt.day}/${item.measuredAt.month}',
-                                          style: AppTypography.labelMd.copyWith(color: textSecondary, fontSize: 10),
+                                          style: AppTypography.labelMd.copyWith(
+                                            color: textSecondary,
+                                            fontSize: 10,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -269,11 +352,19 @@ class GlucoseScreen extends ConsumerWidget {
                       backgroundColor: primaryColor,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                     onPressed: () => _showManualEntrySheet(context, ref),
                     icon: const Icon(Icons.add_rounded),
-                    label: Text('Log Blood Glucose', style: AppTypography.bodyLg.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+                    label: Text(
+                      'Log Blood Glucose',
+                      style: AppTypography.bodyLg.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -307,7 +398,10 @@ class GlucoseScreen extends ConsumerWidget {
                 Text(
                   'Sensitive Vitals Locked',
                   textAlign: TextAlign.center,
-                  style: AppTypography.h2.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                  style: AppTypography.h2.copyWith(
+                    color: textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -325,7 +419,9 @@ class GlucoseScreen extends ConsumerWidget {
                     foregroundColor: textPrimary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     side: const BorderSide(color: Colors.white10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: () => _showBiometricDialog(context, ref),
                   icon: const Icon(Icons.fingerprint_rounded),
@@ -343,8 +439,8 @@ class GlucoseScreen extends ConsumerWidget {
                       width: 14,
                       height: 14,
                       decoration: BoxDecoration(
-                        color: index < state.pinInput.length 
-                            ? primaryColor 
+                        color: index < state.pinInput.length
+                            ? primaryColor
                             : Colors.white12,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white24, width: 1),
@@ -358,7 +454,10 @@ class GlucoseScreen extends ConsumerWidget {
                     'Invalid PIN. Try again.',
                     key: const Key('glucose_pin_error_text'),
                     textAlign: TextAlign.center,
-                    style: AppTypography.bodySm.copyWith(color: errorColor, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodySm.copyWith(
+                      color: errorColor,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 const SizedBox(height: 24),
 
@@ -377,7 +476,8 @@ class GlucoseScreen extends ConsumerWidget {
                     if (index == 9) {
                       return IconButton(
                         icon: Icon(Icons.backspace_rounded, color: textPrimary),
-                        onPressed: () => ref.read(glucoseProvider.notifier).clearPin(),
+                        onPressed: () =>
+                            ref.read(glucoseProvider.notifier).clearPin(),
                       );
                     }
                     if (index == 11) {
@@ -390,10 +490,19 @@ class GlucoseScreen extends ConsumerWidget {
                         backgroundColor: cardBg,
                         foregroundColor: textPrimary,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      onPressed: () => ref.read(glucoseProvider.notifier).enterPinDigit(digit),
-                      child: Text(digit, style: AppTypography.h3.copyWith(fontWeight: FontWeight.bold)),
+                      onPressed: () => ref
+                          .read(glucoseProvider.notifier)
+                          .enterPinDigit(digit),
+                      child: Text(
+                        digit,
+                        style: AppTypography.h3.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -411,16 +520,27 @@ class GlucoseScreen extends ConsumerWidget {
       builder: (context) {
         return AlertDialog(
           backgroundColor: const Color(0xFF1F1E2C),
-          title: const Text('Simulated Biometrics', style: TextStyle(color: Colors.white)),
-          content: const Text('Simulate system biometric authentication check.', style: TextStyle(color: Colors.white70)),
+          title: const Text(
+            'Simulated Biometrics',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            'Simulate system biometric authentication check.',
+            style: TextStyle(color: Colors.white70),
+          ),
           actions: [
             TextButton(
               key: const Key('glucose_biometric_fail'),
               onPressed: () {
-                ref.read(glucoseProvider.notifier).authenticateBiometrics(false);
+                ref
+                    .read(glucoseProvider.notifier)
+                    .authenticateBiometrics(false);
                 Navigator.pop(context);
               },
-              child: const Text('Fail', style: TextStyle(color: Colors.redAccent)),
+              child: const Text(
+                'Fail',
+                style: TextStyle(color: Colors.redAccent),
+              ),
             ),
             TextButton(
               key: const Key('glucose_biometric_success'),
@@ -428,7 +548,10 @@ class GlucoseScreen extends ConsumerWidget {
                 ref.read(glucoseProvider.notifier).authenticateBiometrics(true);
                 Navigator.pop(context);
               },
-              child: const Text('Success', style: TextStyle(color: Colors.green)),
+              child: const Text(
+                'Success',
+                style: TextStyle(color: Colors.green),
+              ),
             ),
           ],
         );
@@ -461,14 +584,18 @@ class GlucoseScreen extends ConsumerWidget {
   }
 
   void _showManualEntrySheet(BuildContext context, WidgetRef ref) {
-    final TextEditingController valController = TextEditingController(text: '100');
+    final TextEditingController valController = TextEditingController(
+      text: '100',
+    );
     String selectedTag = 'Fasting';
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: const Color(0xFF1C1A2E),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setStateSheet) {
@@ -485,7 +612,10 @@ class GlucoseScreen extends ConsumerWidget {
                 children: [
                   Text(
                     'Log Blood Glucose',
-                    style: AppTypography.h3.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: AppTypography.h3.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   TextField(
@@ -495,14 +625,21 @@ class GlucoseScreen extends ConsumerWidget {
                     decoration: const InputDecoration(
                       labelText: 'Glucose Level (mg/dL)',
                       labelStyle: TextStyle(color: Colors.white70),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
-                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.tealAccent)),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white24),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.tealAccent),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'Meal Period Tag',
-                    style: AppTypography.bodySm.copyWith(color: Colors.white70, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodySm.copyWith(
+                      color: Colors.white70,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   DropdownButton<String>(
@@ -513,10 +650,22 @@ class GlucoseScreen extends ConsumerWidget {
                     underline: Container(height: 1, color: Colors.white24),
                     isExpanded: true,
                     items: const [
-                      DropdownMenuItem(value: 'Fasting', child: Text('Fasting')),
-                      DropdownMenuItem(value: 'Pre-Meal', child: Text('Pre-Meal')),
-                      DropdownMenuItem(value: 'Post-Meal (1-hour)', child: Text('Post-Meal (1-hour)')),
-                      DropdownMenuItem(value: 'Post-Meal (2-hour)', child: Text('Post-Meal (2-hour)')),
+                      DropdownMenuItem(
+                        value: 'Fasting',
+                        child: Text('Fasting'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Pre-Meal',
+                        child: Text('Pre-Meal'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Post-Meal (1-hour)',
+                        child: Text('Post-Meal (1-hour)'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Post-Meal (2-hour)',
+                        child: Text('Post-Meal (2-hour)'),
+                      ),
                     ],
                     onChanged: (val) {
                       if (val != null) {
@@ -533,14 +682,21 @@ class GlucoseScreen extends ConsumerWidget {
                       backgroundColor: AppColorsDark.primary,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     onPressed: () {
                       final val = double.tryParse(valController.text) ?? 100.0;
-                      ref.read(glucoseProvider.notifier).addGlucoseReading(val, selectedTag);
+                      ref
+                          .read(glucoseProvider.notifier)
+                          .addGlucoseReading(val, selectedTag);
                       Navigator.pop(context);
                     },
-                    child: const Text('Save Record', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: const Text(
+                      'Save Record',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

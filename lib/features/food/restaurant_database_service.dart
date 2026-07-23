@@ -313,17 +313,14 @@ class RestaurantDatabaseService {
   ];
 
   /// Searches the restaurant menu database by restaurant name or dish query.
-  List<RestaurantMenuItem> search({
-    String? restaurantName,
-    String? dishQuery,
-  }) {
+  List<RestaurantMenuItem> search({String? restaurantName, String? dishQuery}) {
     return _seededLocalDishes.where((item) {
       if (restaurantName != null &&
           restaurantName.isNotEmpty &&
           restaurantName != 'All') {
-        if (!item.restaurantName
-            .toLowerCase()
-            .contains(restaurantName.toLowerCase())) {
+        if (!item.restaurantName.toLowerCase().contains(
+          restaurantName.toLowerCase(),
+        )) {
           return false;
         }
       }
@@ -400,7 +397,10 @@ class RestaurantDatabaseService {
       }
 
       // 3. Levenshtein edit distance calculation
-      final distance = _calculateLevenshteinDistance(normalizedOcr, normalizedDb);
+      final distance = _calculateLevenshteinDistance(
+        normalizedOcr,
+        normalizedDb,
+      );
       final maxLength = max(normalizedOcr.length, normalizedDb.length);
       final similarity = maxLength > 0 ? 1.0 - (distance / maxLength) : 0.0;
 
@@ -422,9 +422,7 @@ class RestaurantDatabaseService {
     List<String> rawOcrLines, {
     bool isPcosOrDiabetic = false,
   }) {
-    return rawOcrLines
-        .where((line) => line.trim().isNotEmpty)
-        .map((line) {
+    return rawOcrLines.where((line) => line.trim().isNotEmpty).map((line) {
       final matchedItem = matchDishInDatabase(line);
       final overlayColor = computeGoalOverlay(
         matchedItem,
@@ -472,6 +470,5 @@ class RestaurantDatabaseService {
     return v0[t.length];
   }
 
-  int _min3(int a, int b, int c) =>
-      a < b ? (a < c ? a : c) : (b < c ? b : c);
+  int _min3(int a, int b, int c) => a < b ? (a < c ? a : c) : (b < c ? b : c);
 }

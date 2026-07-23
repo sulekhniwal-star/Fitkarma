@@ -70,20 +70,34 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
       final db = ref.read(databaseProvider);
 
       // Query Glucose readings sorted by measuredAt descending, id descending
-      final readings = await (db.select(db.glucoseReadings)
-            ..orderBy([
-              (t) => drift.OrderingTerm(expression: t.measuredAt, mode: drift.OrderingMode.desc),
-              (t) => drift.OrderingTerm(expression: t.id, mode: drift.OrderingMode.desc),
-            ]))
-          .get();
+      final readings =
+          await (db.select(db.glucoseReadings)..orderBy([
+                (t) => drift.OrderingTerm(
+                  expression: t.measuredAt,
+                  mode: drift.OrderingMode.desc,
+                ),
+                (t) => drift.OrderingTerm(
+                  expression: t.id,
+                  mode: drift.OrderingMode.desc,
+                ),
+              ]))
+              .get();
 
       // Latest Fasting
-      final fastingRecord = readings.where((r) => r.mealTag == 'Fasting').toList();
-      final latestFasting = fastingRecord.isNotEmpty ? fastingRecord.first.glucoseValue : 98.0;
+      final fastingRecord = readings
+          .where((r) => r.mealTag == 'Fasting')
+          .toList();
+      final latestFasting = fastingRecord.isNotEmpty
+          ? fastingRecord.first.glucoseValue
+          : 98.0;
 
       // Latest Post-Meal
-      final postMealRecord = readings.where((r) => r.mealTag.contains('Post-Meal')).toList();
-      final latestPostMeal = postMealRecord.isNotEmpty ? postMealRecord.first.glucoseValue : 142.0;
+      final postMealRecord = readings
+          .where((r) => r.mealTag.contains('Post-Meal'))
+          .toList();
+      final latestPostMeal = postMealRecord.isNotEmpty
+          ? postMealRecord.first.glucoseValue
+          : 142.0;
 
       // HbA1c estimation
       double hba1c = 5.6;
@@ -119,7 +133,11 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
 
       if (newInput.length == 6) {
         if (newInput == '123456') {
-          state = state.copyWith(isUnlocked: true, pinInput: '', isPinError: false);
+          state = state.copyWith(
+            isUnlocked: true,
+            pinInput: '',
+            isPinError: false,
+          );
         } else {
           state = state.copyWith(isPinError: true, pinInput: '');
         }
@@ -147,13 +165,15 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
       final db = ref.read(databaseProvider);
       final now = DateTime.now();
 
-      await db.into(db.glucoseReadings).insert(
-        GlucoseReadingsCompanion.insert(
-          glucoseValue: value,
-          mealTag: tag,
-          measuredAt: now,
-        ),
-      );
+      await db
+          .into(db.glucoseReadings)
+          .insert(
+            GlucoseReadingsCompanion.insert(
+              glucoseValue: value,
+              mealTag: tag,
+              measuredAt: now,
+            ),
+          );
 
       await loadFromDb();
     } catch (_) {

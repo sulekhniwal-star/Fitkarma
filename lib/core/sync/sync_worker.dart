@@ -31,9 +31,9 @@ class SyncWorker {
     _isSyncing = true;
 
     try {
-      final queueItems = await (_db.select(_db.syncQueueItems)
-            ..orderBy([(t) => OrderingTerm(expression: t.createdAt)]))
-          .get();
+      final queueItems = await (_db.select(
+        _db.syncQueueItems,
+      )..orderBy([(t) => OrderingTerm(expression: t.createdAt)])).get();
 
       for (final item in queueItems) {
         final isStillOnline = _ref.read(connectivityProvider);
@@ -46,32 +46,37 @@ class SyncWorker {
 
         if (success) {
           // Sync succeeded. Remove from local FIFO queue
-          await (_db.delete(_db.syncQueueItems)..where((t) => t.id.equals(item.id))).go();
+          await (_db.delete(
+            _db.syncQueueItems,
+          )..where((t) => t.id.equals(item.id))).go();
         } else {
           // Sync failed. Check retry limits
           final nextRetry = item.retryCount + 1;
-          
+
           if (nextRetry >= 3) {
             // Retries exceeded (3x limit). Redirect to Dead Letter Queue (DLQ)
-            await _db.into(_db.deadLetterQueueItems).insert(
-              DeadLetterQueueItemsCompanion.insert(
-                entityType: item.entityType,
-                entityId: item.entityId,
-                serializedPayload: item.serializedPayload,
-                syncBatchId: item.syncBatchId,
-                failureReason: 'Remote HTTP sync failed 3 consecutive times',
-                failedAt: DateTime.now(),
-              ),
-            );
+            await _db
+                .into(_db.deadLetterQueueItems)
+                .insert(
+                  DeadLetterQueueItemsCompanion.insert(
+                    entityType: item.entityType,
+                    entityId: item.entityId,
+                    serializedPayload: item.serializedPayload,
+                    syncBatchId: item.syncBatchId,
+                    failureReason:
+                        'Remote HTTP sync failed 3 consecutive times',
+                    failedAt: DateTime.now(),
+                  ),
+                );
             // Drop from active queue
-            await (_db.delete(_db.syncQueueItems)..where((t) => t.id.equals(item.id))).go();
+            await (_db.delete(
+              _db.syncQueueItems,
+            )..where((t) => t.id.equals(item.id))).go();
           } else {
             // Update retry count and preserve in queue
-            await (_db.update(_db.syncQueueItems)..where((t) => t.id.equals(item.id))).write(
-              SyncQueueItemsCompanion(
-                retryCount: Value(nextRetry),
-              ),
-            );
+            await (_db.update(_db.syncQueueItems)
+                  ..where((t) => t.id.equals(item.id)))
+                .write(SyncQueueItemsCompanion(retryCount: Value(nextRetry)));
             break; // Terminate sync loop on transient network failure
           }
         }
@@ -90,7 +95,7 @@ final syncWorkerProvider = Provider<SyncWorker>((ref) {
     ref.watch(azureSyncClientProvider),
     ref,
   );
-  
+
   // Auto-trigger sync when connectivity state changes back to online
   ref.listen<bool>(connectivityProvider, (previous, next) {
     if (next) {

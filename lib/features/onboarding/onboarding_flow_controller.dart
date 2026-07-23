@@ -28,14 +28,14 @@ enum OnboardingStep {
 /// Welcome has no step count (null). Each subsequent step maps 1-5.
 int? stepNumber(OnboardingStep step) {
   return switch (step) {
-    OnboardingStep.welcome      => null,
-    OnboardingStep.goals        => 1,
+    OnboardingStep.welcome => null,
+    OnboardingStep.goals => 1,
     OnboardingStep.demographics => 2,
-    OnboardingStep.dietPlan     => 3,
-    OnboardingStep.dosha        => 3,
+    OnboardingStep.dietPlan => 3,
+    OnboardingStep.dosha => 3,
     OnboardingStep.programSelect => 4,
     OnboardingStep.womensHealth => 4,
-    OnboardingStep.permissions  => 5,
+    OnboardingStep.permissions => 5,
   };
 }
 
@@ -43,50 +43,50 @@ int? stepNumber(OnboardingStep step) {
 /// Demographics (step 2) is REQUIRED — no skip allowed.
 bool canSkip(OnboardingStep step) {
   return switch (step) {
-    OnboardingStep.welcome       => false,  // no progress bar at all
-    OnboardingStep.goals         => true,   // can skip to demographics
-    OnboardingStep.demographics  => false,  // REQUIRED — no Skip
-    OnboardingStep.dietPlan      => true,
-    OnboardingStep.dosha         => true,
-    OnboardingStep.programSelect => false,  // must choose a blueprint
-    OnboardingStep.womensHealth  => true,
-    OnboardingStep.permissions   => true,   // can grant later
+    OnboardingStep.welcome => false, // no progress bar at all
+    OnboardingStep.goals => true, // can skip to demographics
+    OnboardingStep.demographics => false, // REQUIRED — no Skip
+    OnboardingStep.dietPlan => true,
+    OnboardingStep.dosha => true,
+    OnboardingStep.programSelect => false, // must choose a blueprint
+    OnboardingStep.womensHealth => true,
+    OnboardingStep.permissions => true, // can grant later
   };
 }
 
 /// Returns true when a Back button should be shown on this step.
 bool canGoBack(OnboardingStep step) {
   return switch (step) {
-    OnboardingStep.welcome => false,  // first screen, no back
-    _                      => true,
+    OnboardingStep.welcome => false, // first screen, no back
+    _ => true,
   };
 }
 
 /// Maps a step to the previous step in the funnel.
 OnboardingStep? previousStep(OnboardingStep step) {
   return switch (step) {
-    OnboardingStep.welcome       => null,
-    OnboardingStep.goals         => OnboardingStep.welcome,
-    OnboardingStep.demographics  => OnboardingStep.goals,
-    OnboardingStep.dietPlan      => OnboardingStep.demographics,
-    OnboardingStep.dosha         => OnboardingStep.dietPlan,
+    OnboardingStep.welcome => null,
+    OnboardingStep.goals => OnboardingStep.welcome,
+    OnboardingStep.demographics => OnboardingStep.goals,
+    OnboardingStep.dietPlan => OnboardingStep.demographics,
+    OnboardingStep.dosha => OnboardingStep.dietPlan,
     OnboardingStep.programSelect => OnboardingStep.dosha,
-    OnboardingStep.womensHealth  => OnboardingStep.programSelect,
-    OnboardingStep.permissions   => OnboardingStep.womensHealth,
+    OnboardingStep.womensHealth => OnboardingStep.programSelect,
+    OnboardingStep.permissions => OnboardingStep.womensHealth,
   };
 }
 
 /// Maps a step to the next step in the funnel.
 OnboardingStep? nextStep(OnboardingStep step) {
   return switch (step) {
-    OnboardingStep.welcome       => OnboardingStep.goals,
-    OnboardingStep.goals         => OnboardingStep.demographics,
-    OnboardingStep.demographics  => OnboardingStep.dietPlan,
-    OnboardingStep.dietPlan      => OnboardingStep.dosha,
-    OnboardingStep.dosha         => OnboardingStep.programSelect,
+    OnboardingStep.welcome => OnboardingStep.goals,
+    OnboardingStep.goals => OnboardingStep.demographics,
+    OnboardingStep.demographics => OnboardingStep.dietPlan,
+    OnboardingStep.dietPlan => OnboardingStep.dosha,
+    OnboardingStep.dosha => OnboardingStep.programSelect,
     OnboardingStep.programSelect => OnboardingStep.womensHealth,
-    OnboardingStep.womensHealth  => OnboardingStep.permissions,
-    OnboardingStep.permissions   => null,  // end of onboarding
+    OnboardingStep.womensHealth => OnboardingStep.permissions,
+    OnboardingStep.permissions => null, // end of onboarding
   };
 }
 
@@ -103,7 +103,10 @@ class OnboardingFlowState {
   final OnboardingStep currentStep;
   final bool isComplete;
 
-  OnboardingFlowState copyWith({OnboardingStep? currentStep, bool? isComplete}) {
+  OnboardingFlowState copyWith({
+    OnboardingStep? currentStep,
+    bool? isComplete,
+  }) {
     return OnboardingFlowState(
       currentStep: currentStep ?? this.currentStep,
       isComplete: isComplete ?? this.isComplete,
@@ -179,8 +182,8 @@ class OnboardingFlowNotifier extends Notifier<OnboardingFlowState> {
 /// Provider for the onboarding flow state machine.
 final onboardingFlowProvider =
     NotifierProvider<OnboardingFlowNotifier, OnboardingFlowState>(
-  OnboardingFlowNotifier.new,
-);
+      OnboardingFlowNotifier.new,
+    );
 
 /// Convenience computed provider — the currently active step.
 final currentOnboardingStepProvider = Provider<OnboardingStep>(

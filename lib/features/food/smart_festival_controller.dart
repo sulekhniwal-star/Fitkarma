@@ -53,7 +53,9 @@ class FestivalNutritionState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final smartFestivalEngineProvider = Provider<SmartFestivalNutritionEngine>((ref) {
+final smartFestivalEngineProvider = Provider<SmartFestivalNutritionEngine>((
+  ref,
+) {
   return const SmartFestivalNutritionEngine();
 });
 
@@ -87,7 +89,10 @@ class FestivalNutritionNotifier extends Notifier<FestivalNutritionState> {
     List<FestivalEvent>? customCalendar,
   }) {
     final engine = ref.read(smartFestivalEngineProvider);
-    final (event, relativeDay) = engine.detectFestival(targetDate, customCalendar: customCalendar);
+    final (event, relativeDay) = engine.detectFestival(
+      targetDate,
+      customCalendar: customCalendar,
+    );
 
     if (event != null && relativeDay != FestivalDayRelative.none) {
       final adjusted = engine.adjustTargets(
@@ -125,5 +130,5 @@ class FestivalNutritionNotifier extends Notifier<FestivalNutritionState> {
 
 final festivalNutritionProvider =
     NotifierProvider<FestivalNutritionNotifier, FestivalNutritionState>(
-  FestivalNutritionNotifier.new,
-);
+      FestivalNutritionNotifier.new,
+    );

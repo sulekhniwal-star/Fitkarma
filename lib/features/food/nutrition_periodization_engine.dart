@@ -89,7 +89,8 @@ class NutritionPeriodizationEngine {
       case PeriodizationPhase.dietBreak:
         calorieMultiplier = 1.00; // Maintenance
         proteinPerKg = 1.8;
-        description = 'Diet Break Phase (Full TDEE Maintenance to reset leptin & T3)';
+        description =
+            'Diet Break Phase (Full TDEE Maintenance to reset leptin & T3)';
         break;
 
       case PeriodizationPhase.maintenance:
@@ -101,7 +102,8 @@ class NutritionPeriodizationEngine {
       case PeriodizationPhase.recomposition:
         calorieMultiplier = 1.00; // Maintenance TDEE
         proteinPerKg = 2.2; // High protein requirement for muscle synthesis
-        description = 'Body Recomposition Phase (High Protein 2.2g/kg @ Maintenance)';
+        description =
+            'Body Recomposition Phase (High Protein 2.2g/kg @ Maintenance)';
         break;
 
       case PeriodizationPhase.leanGain:
@@ -149,7 +151,8 @@ class NutritionPeriodizationEngine {
         nextPhase: PeriodizationPhase.dietBreak,
         actionRequired: true,
         weeksInCurrentPhase: weeksInPhase,
-        reason: 'Deficit active for 8+ weeks. Triggering a 10-day Diet Break to restore leptin & T3 hormones.',
+        reason:
+            'Deficit active for 8+ weeks. Triggering a 10-day Diet Break to restore leptin & T3 hormones.',
       );
     }
 
@@ -162,7 +165,8 @@ class NutritionPeriodizationEngine {
         nextPhase: PeriodizationPhase.dietBreak,
         actionRequired: true,
         weeksInCurrentPhase: weeksInPhase,
-        reason: 'Plateau detected (<0.2kg variance over 3 weeks). Exiting deficit to maintenance for 7-10 days to reset metabolism.',
+        reason:
+            'Plateau detected (<0.2kg variance over 3 weeks). Exiting deficit to maintenance for 7-10 days to reset metabolism.',
       );
     }
 
@@ -173,7 +177,8 @@ class NutritionPeriodizationEngine {
         nextPhase: PeriodizationPhase.fatLoss,
         actionRequired: true,
         weeksInCurrentPhase: weeksInPhase,
-        reason: '2-week Diet Break completed! Metabolism restored. Returning to Fat Loss deficit.',
+        reason:
+            '2-week Diet Break completed! Metabolism restored. Returning to Fat Loss deficit.',
       );
     }
 

@@ -11,18 +11,10 @@ import 'meal_parser.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// User's primary fitness goal, used for [GoalImpact] calculation.
-enum UserGoal {
-  fatLoss,
-  muscleGain,
-  generalHealth,
-}
+enum UserGoal { fatLoss, muscleGain, generalHealth }
 
 /// Whether a meal aligns with, is neutral to, or conflicts with the user's goal.
-enum GoalImpact {
-  aligned,
-  neutral,
-  misaligned,
-}
+enum GoalImpact { aligned, neutral, misaligned }
 
 /// Complete result produced by [MealAnalysisPipeline.analyze].
 class MealAnalysisResult {
@@ -103,11 +95,16 @@ class LocalMealQualityCalculator {
     final double glScore = glycemicLoad > 20
         ? 0.5
         : glycemicLoad > 10
-            ? 1.5
-            : 2.5;
+        ? 1.5
+        : 2.5;
 
     // 4. Satiety Index Score (≤ 2.0 pts)
-    final double satietyIndex = calculateSatietyIndex(proteinG, fiberG, fatG, carbsG);
+    final double satietyIndex = calculateSatietyIndex(
+      proteinG,
+      fiberG,
+      fatG,
+      carbsG,
+    );
     final double satietyScore = (satietyIndex / 100.0) * 2.0;
 
     final raw = proteinScore + fiberScore + glScore + satietyScore;
@@ -116,14 +113,22 @@ class LocalMealQualityCalculator {
 
   /// Returns a Satiety Index in [10.0, 100.0].
   double calculateSatietyIndex(
-      double protein, double fiber, double fat, double carbs) {
+    double protein,
+    double fiber,
+    double fat,
+    double carbs,
+  ) {
     final double base =
         (protein * 2.5) + (fiber * 3.0) + (fat * 1.0) + (carbs * 0.5);
     return base.clamp(10.0, 100.0);
   }
 
   /// Returns a signed readiness impact integer per §P5-D rules.
-  int calculateReadinessImpact(double proteinG, int glycemicIndex, double carbsG) {
+  int calculateReadinessImpact(
+    double proteinG,
+    int glycemicIndex,
+    double carbsG,
+  ) {
     int impact = 0;
     if (proteinG >= 20.0) impact += 2; // muscle recovery boost
     final double glycemicLoad = (carbsG * glycemicIndex) / 100.0;
@@ -139,9 +144,8 @@ class LocalMealQualityCalculator {
 /// Orchestrates the full §P5-B analysis pipeline:
 ///   text → MealParser → quality score → readiness/goal impact → suggestions.
 class MealAnalysisPipeline {
-  const MealAnalysisPipeline({
-    LocalMealQualityCalculator? calculator,
-  }) : _calculator = calculator ?? const LocalMealQualityCalculator();
+  const MealAnalysisPipeline({LocalMealQualityCalculator? calculator})
+    : _calculator = calculator ?? const LocalMealQualityCalculator();
 
   final LocalMealQualityCalculator _calculator;
 
@@ -195,8 +199,12 @@ class MealAnalysisPipeline {
     );
 
     // 5. Goal impact
-    final GoalImpact goalImpact =
-        _computeGoalImpact(userGoal, totalCalories, totalProteinG, qualityScore);
+    final GoalImpact goalImpact = _computeGoalImpact(
+      userGoal,
+      totalCalories,
+      totalProteinG,
+      qualityScore,
+    );
 
     // 6. Fix suggestions
     final List<String> suggestions = _buildSuggestions(
@@ -264,8 +272,9 @@ class MealAnalysisPipeline {
     }
     final double gl = (totalCarbsG * weightedGI) / 100.0;
     if (gl > 20) {
-      suggestions
-          .add('Replace 1 roti with a bowl of sabzi to reduce glycemic load');
+      suggestions.add(
+        'Replace 1 roti with a bowl of sabzi to reduce glycemic load',
+      );
     }
 
     return suggestions;

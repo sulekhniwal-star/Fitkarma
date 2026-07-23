@@ -8,10 +8,12 @@ class SleepNeedCalculator {
   /// Calculates the dynamic Sleep Need in minutes.
   int calculateSleepNeed({
     int baselineNeedMins = 480, // Default 8 hours
-    double sleepDebtMins = 0.0,  // Deficit over the last 7 days (max addition: 90 mins)
-    double yesterdayStrain = 0.0, // Yesterday's training load strain score (0–21)
-    int stressLevel = 1,          // Daily inferred stress level (1–5)
-    bool isSick = false,          // Active illness flag
+    double sleepDebtMins =
+        0.0, // Deficit over the last 7 days (max addition: 90 mins)
+    double yesterdayStrain =
+        0.0, // Yesterday's training load strain score (0–21)
+    int stressLevel = 1, // Daily inferred stress level (1–5)
+    bool isSick = false, // Active illness flag
   }) {
     // 1. Baseline
     double total = baselineNeedMins.toDouble();
@@ -42,14 +44,15 @@ class SleepPerformanceScore {
   int calculateScore({
     required int actualSleepMins,
     required int sleepNeedMins,
-    required double efficiency,          // timeAsleep / totalTimeInBed (0.0 to 1.0)
-    required double consistencyScore,    // 0.0 to 1.0
-    required int opportunityMins,        // dedicated time in bed
+    required double efficiency, // timeAsleep / totalTimeInBed (0.0 to 1.0)
+    required double consistencyScore, // 0.0 to 1.0
+    required int opportunityMins, // dedicated time in bed
   }) {
     if (sleepNeedMins <= 0) return 0;
 
     // Duration (40%)
-    final double durationScore = (actualSleepMins / sleepNeedMins).clamp(0.0, 1.0) * 40.0;
+    final double durationScore =
+        (actualSleepMins / sleepNeedMins).clamp(0.0, 1.0) * 40.0;
 
     // Efficiency (30%)
     final double efficiencyScore = efficiency.clamp(0.0, 1.0) * 30.0;
@@ -58,9 +61,14 @@ class SleepPerformanceScore {
     final double consistencyWeighted = consistencyScore.clamp(0.0, 1.0) * 20.0;
 
     // Opportunity (10%) - Capped relative to 510 mins (8.5h window)
-    final double opportunityScore = (opportunityMins / 510.0).clamp(0.0, 1.0) * 10.0;
+    final double opportunityScore =
+        (opportunityMins / 510.0).clamp(0.0, 1.0) * 10.0;
 
-    final double total = durationScore + efficiencyScore + consistencyWeighted + opportunityScore;
+    final double total =
+        durationScore +
+        efficiencyScore +
+        consistencyWeighted +
+        opportunityScore;
     return total.clamp(0.0, 100.0).round();
   }
 }
@@ -72,7 +80,9 @@ class BedtimeCoach {
     required DateTime targetWakeTime,
     int windDownBufferMins = 15,
   }) {
-    return targetWakeTime.subtract(Duration(minutes: sleepNeedMins + windDownBufferMins));
+    return targetWakeTime.subtract(
+      Duration(minutes: sleepNeedMins + windDownBufferMins),
+    );
   }
 
   /// Generates a bedtime nudge message.
@@ -128,7 +138,9 @@ class DailyStrainCalculator {
     int? averageHeartRate,
     List<ActivityLog>? dailyActivities,
   }) {
-    final Map<int, int> resolvedZones = zoneDurationsMinutes != null ? Map.from(zoneDurationsMinutes) : {};
+    final Map<int, int> resolvedZones = zoneDurationsMinutes != null
+        ? Map.from(zoneDurationsMinutes)
+        : {};
 
     // 1. If detailed zones are missing, estimate them using fallback parameters
     if (resolvedZones.isEmpty) {
@@ -144,11 +156,11 @@ class DailyStrainCalculator {
 
     // 2. Compute cardiac impulse from resolved zones
     final zoneWeights = {
-      1: 0.05,  // Active Recovery
-      2: 0.15,  // Aerobic
-      3: 0.35,  // Tempo
-      4: 0.70,  // Threshold
-      5: 1.50,  // Anaerobic
+      1: 0.05, // Active Recovery
+      2: 0.15, // Aerobic
+      3: 0.35, // Tempo
+      4: 0.70, // Threshold
+      5: 1.50, // Anaerobic
     };
 
     double cardiacImpulse = 0.0;
@@ -163,12 +175,14 @@ class DailyStrainCalculator {
     // 4. Factor in environmental heat strain
     double heatFactor = 1.0;
     if (heatIndexCelsius > 32.0) {
-      heatFactor += (heatIndexCelsius - 32.0) * 0.02; // +2% strain per degree Celsius above 32C
+      heatFactor +=
+          (heatIndexCelsius - 32.0) *
+          0.02; // +2% strain per degree Celsius above 32C
     }
 
     final totalImpulse = (cardiacImpulse + stepsImpulse) * heatFactor;
     final strain = 21.0 * (1.0 - exp(-0.015 * totalImpulse));
-    
+
     return double.parse(strain.toStringAsFixed(1));
   }
 
@@ -220,7 +234,7 @@ class DailyStrainCalculator {
     // 2. If no activities are logged, use step cadence & active minutes to estimate cardiorespiratory zones
     if (activeMinutes > 0) {
       final averageCadenceSpm = dailySteps / activeMinutes.toDouble();
-      
+
       if (averageCadenceSpm >= 110.0) {
         estimatedZones[2] = (activeMinutes * 0.7).round();
         estimatedZones[3] = (activeMinutes * 0.3).round();
@@ -272,11 +286,14 @@ class RecoveryDecisionEngine {
 
     String trainingAdvice;
     if (readinessScore >= 80 && dailyStrain < strainCap) {
-      trainingAdvice = "High Capacity. Body is fully primed for heavy training load.";
+      trainingAdvice =
+          "High Capacity. Body is fully primed for heavy training load.";
     } else if (readinessScore >= 50 && dailyStrain < strainCap) {
-      trainingAdvice = "Standard Capacity. Maintain standard training; avoid extra sets.";
+      trainingAdvice =
+          "Standard Capacity. Maintain standard training; avoid extra sets.";
     } else {
-      trainingAdvice = "Low Capacity / Overreaching. Limit strain to active recovery or rest.";
+      trainingAdvice =
+          "Low Capacity / Overreaching. Limit strain to active recovery or rest.";
     }
 
     return RecoveryDecision(
@@ -299,20 +316,20 @@ class RecoveryPrescriptionGenerator {
         "Sleep Extension: Bedtime moved 45 min earlier",
         "Nutrition: Prioritize 120g protein for tissue repair",
         "Hydration: Hydrate with an extra +700ml water",
-        "Restriction: No high-intensity HIIT or max-lifts"
+        "Restriction: No high-intensity HIIT or max-lifts",
       ];
     } else if (capacityScore < 80) {
       return [
         "Active Recovery: Target 15-minute mobility work",
         "Sleep Extension: Bedtime moved 15 min earlier",
         "Nutrition: Meet base protein target",
-        "Hydration: Drink standard water amount"
+        "Hydration: Drink standard water amount",
       ];
     } else {
       return [
         "Training: Prime day to push high intensity",
         "Sleep: Maintain regular schedule",
-        "Nutrition: Fuel for high performance"
+        "Nutrition: Fuel for high performance",
       ];
     }
   }
@@ -325,8 +342,10 @@ class RecoveryPrescriptionGenerator {
 class CircadianScoreCalculator {
   /// Calculates circadian alignment score out of 100.
   int calculateCircadianScore({
-    required double midpointShiftMins, // Deviation of sleep midpoint from rolling average
-    required bool morningLightExposure, // True if logged light exposure between 6 AM and 9 AM
+    required double
+    midpointShiftMins, // Deviation of sleep midpoint from rolling average
+    required bool
+    morningLightExposure, // True if logged light exposure between 6 AM and 9 AM
   }) {
     double score = 100.0;
 
@@ -349,10 +368,7 @@ class IllnessDetectionResult {
   final String illnessRiskStatus; // 'low' | 'high'
   final String? sicknessNudge;
 
-  IllnessDetectionResult({
-    required this.illnessRiskStatus,
-    this.sicknessNudge,
-  });
+  IllnessDetectionResult({required this.illnessRiskStatus, this.sicknessNudge});
 }
 
 class IllnessDetector {
@@ -376,12 +392,14 @@ class IllnessDetector {
     final bool hrvDepressed = (baselineHRV - hrv) / baselineHRV > 0.15;
 
     // sleep duration increases by > 20%
-    final bool sleepElevated = (sleepDurationMins - baselineSleepMins) / baselineSleepMins > 0.20;
+    final bool sleepElevated =
+        (sleepDurationMins - baselineSleepMins) / baselineSleepMins > 0.20;
 
     if (hrElevated && hrvDepressed && sleepElevated) {
       return IllnessDetectionResult(
         illnessRiskStatus: 'high',
-        sicknessNudge: "Warning: Elevated biometric signals suggest potential illness. Reducing training target by 50% and locking out high-intensity exercises.",
+        sicknessNudge:
+            "Warning: Elevated biometric signals suggest potential illness. Reducing training target by 50% and locking out high-intensity exercises.",
       );
     }
 
@@ -392,12 +410,12 @@ class IllnessDetector {
 class RecoveryDriversEngine {
   /// Calculates contributors and detractors to today's readiness score.
   Map<String, dynamic> calculateDrivers({
-    required int sleepQuality,           // 1-5
+    required int sleepQuality, // 1-5
     required int proteinG,
     required int targetProteinG,
     required int hydrationMl,
     required int targetHydrationMl,
-    required int stressLevel,            // 1-5
+    required int stressLevel, // 1-5
     required int aqi,
     required double heatIndexCelsius,
   }) {
@@ -408,7 +426,10 @@ class RecoveryDriversEngine {
     if (sleepQuality >= 4) {
       contributors.add({'driver': 'Sleep Quality', 'impact': sleepQuality * 4});
     } else if (sleepQuality <= 2) {
-      detractors.add({'driver': 'Poor Sleep', 'impact': (3 - sleepQuality) * 8});
+      detractors.add({
+        'driver': 'Poor Sleep',
+        'impact': (3 - sleepQuality) * 8,
+      });
     }
 
     // Protein Intake
@@ -423,7 +444,10 @@ class RecoveryDriversEngine {
 
     // Stress Level
     if (stressLevel >= 4) {
-      detractors.add({'driver': 'Daily Stress', 'impact': (stressLevel - 2) * 5});
+      detractors.add({
+        'driver': 'Daily Stress',
+        'impact': (stressLevel - 2) * 5,
+      });
     }
 
     // Ambient AQI
@@ -436,9 +460,6 @@ class RecoveryDriversEngine {
       detractors.add({'driver': 'Extreme Heat', 'impact': 4});
     }
 
-    return {
-      'contributors': contributors,
-      'detractors': detractors,
-    };
+    return {'contributors': contributors, 'detractors': detractors};
   }
 }

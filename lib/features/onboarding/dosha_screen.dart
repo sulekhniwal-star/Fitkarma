@@ -72,10 +72,10 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
   Future<void> _onSaveAndContinue() async {
     final db = ref.read(databaseProvider);
     final notifier = ref.read(onboardingDoshaProvider.notifier);
-    
+
     // Save to local database with a stub user ID for onboarding
     await notifier.saveToDb(db, 'onboarding_user');
-    
+
     if (mounted) {
       final next = ref.read(onboardingFlowProvider.notifier).advance();
       if (next != null) {
@@ -98,9 +98,15 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColorsDark.bg0 : AppColorsDark.bg0; // fallback to dark
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsDark.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsDark.textSecondary;
+    final bg = isDark
+        ? AppColorsDark.bg0
+        : AppColorsDark.bg0; // fallback to dark
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsDark.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsDark.textSecondary;
 
     final quizState = ref.watch(onboardingDoshaProvider);
     final showResult = quizState.result != null;
@@ -114,7 +120,10 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
         leading: showResult
             ? null
             : IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Colors.white,
+                ),
                 onPressed: () => _onBack(quizState.activeQuestionIndex),
               ),
         actions: [
@@ -123,7 +132,9 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
               onPressed: _onSkip,
               child: Text(
                 'Skip',
-                style: AppTypography.bodyMd.copyWith(color: AppColorsDark.primary),
+                style: AppTypography.bodyMd.copyWith(
+                  color: AppColorsDark.primary,
+                ),
               ),
             ),
         ],
@@ -132,16 +143,17 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
         child: Column(
           children: [
             // Onboarding funnel progress indicator
-            const OnboardingProgressIndicator(
-              currentStep: 3,
-              totalSteps: 5,
-            ),
+            const OnboardingProgressIndicator(currentStep: 3, totalSteps: 5),
             Expanded(
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 400),
                 switchInCurve: AppSprings.smoothAnimationCurve,
                 child: showResult
-                    ? _buildResultView(quizState.result!, textPrimary, textSecondary)
+                    ? _buildResultView(
+                        quizState.result!,
+                        textPrimary,
+                        textSecondary,
+                      )
                     : _buildQuizView(quizState, textPrimary, textSecondary),
               ),
             ),
@@ -151,7 +163,11 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
     );
   }
 
-  Widget _buildQuizView(DoshaQuizState quizState, Color textPrimary, Color textSecondary) {
+  Widget _buildQuizView(
+    DoshaQuizState quizState,
+    Color textPrimary,
+    Color textSecondary,
+  ) {
     return PageView.builder(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
@@ -168,7 +184,9 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
               // Question Progress Indicator
               Text(
                 'Question ${index + 1} of ${doshaQuestions.length}',
-                style: AppTypography.labelLg.copyWith(color: AppColorsDark.primary),
+                style: AppTypography.labelLg.copyWith(
+                  color: AppColorsDark.primary,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
@@ -189,7 +207,8 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: BentoCard(
-                    onTap: () => _onOptionSelected(q.id, opt.associatedDosha, index),
+                    onTap: () =>
+                        _onOptionSelected(q.id, opt.associatedDosha, index),
                     customBgColor: isSelected
                         ? AppColorsDark.primaryMuted
                         : AppColorsDark.glass,
@@ -201,8 +220,12 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
                           englishText: opt.text,
                           hindiText: opt.textHindi,
                           englishStyle: AppTypography.h3.copyWith(
-                            color: isSelected ? AppColorsDark.primary : textPrimary,
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                            color: isSelected
+                                ? AppColorsDark.primary
+                                : textPrimary,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                         ),
                       ],
@@ -217,7 +240,11 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
     );
   }
 
-  Widget _buildResultView(DoshaResult result, Color textPrimary, Color textSecondary) {
+  Widget _buildResultView(
+    DoshaResult result,
+    Color textPrimary,
+    Color textSecondary,
+  ) {
     Color dominantColor = AppColorsDark.primary;
     String displayDominant = "Vata";
     if (result.dominant == DoshaType.pitta) {
@@ -265,11 +292,23 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
                   style: AppTypography.h2.copyWith(color: textPrimary),
                 ),
                 const SizedBox(height: 16),
-                _buildDoshaBar('Vata (Air/Space)', result.vataPct, AppColorsDark.secondary),
+                _buildDoshaBar(
+                  'Vata (Air/Space)',
+                  result.vataPct,
+                  AppColorsDark.secondary,
+                ),
                 const SizedBox(height: 12),
-                _buildDoshaBar('Pitta (Fire/Water)', result.pittaPct, AppColorsDark.primary),
+                _buildDoshaBar(
+                  'Pitta (Fire/Water)',
+                  result.pittaPct,
+                  AppColorsDark.primary,
+                ),
                 const SizedBox(height: 12),
-                _buildDoshaBar('Kapha (Water/Earth)', result.kaphaPct, AppColorsDark.teal),
+                _buildDoshaBar(
+                  'Kapha (Water/Earth)',
+                  result.kaphaPct,
+                  AppColorsDark.teal,
+                ),
               ],
             ),
           ),
@@ -281,7 +320,10 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.restaurant_rounded, color: AppColorsDark.teal),
+                    const Icon(
+                      Icons.restaurant_rounded,
+                      color: AppColorsDark.teal,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'Dietary Focus',
@@ -305,7 +347,10 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.spa_rounded, color: AppColorsDark.secondary),
+                    const Icon(
+                      Icons.spa_rounded,
+                      color: AppColorsDark.secondary,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'Stress Management',
@@ -345,7 +390,9 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
                     return Chip(
                       label: Text(spice),
                       backgroundColor: AppColorsDark.surface1,
-                      labelStyle: AppTypography.labelLg.copyWith(color: textPrimary),
+                      labelStyle: AppTypography.labelLg.copyWith(
+                        color: textPrimary,
+                      ),
                       side: const BorderSide(color: AppColorsDark.glassBorder),
                     );
                   }).toList(),
@@ -370,8 +417,17 @@ class _DoshaScreenState extends ConsumerState<DoshaScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: AppTypography.bodyMd.copyWith(color: Colors.white)),
-            Text('${pct.toStringAsFixed(1)}%', style: AppTypography.bodyLg.copyWith(color: color, fontWeight: FontWeight.bold)),
+            Text(
+              label,
+              style: AppTypography.bodyMd.copyWith(color: Colors.white),
+            ),
+            Text(
+              '${pct.toStringAsFixed(1)}%',
+              style: AppTypography.bodyLg.copyWith(
+                color: color,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 4),

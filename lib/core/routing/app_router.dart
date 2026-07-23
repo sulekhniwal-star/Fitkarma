@@ -35,29 +35,29 @@ class AppRoutes {
   AppRoutes._();
 
   // Onboarding funnel
-  static const onboardingWelcome      = '/onboarding/welcome';
-  static const onboardingGoals        = '/onboarding/goals';
+  static const onboardingWelcome = '/onboarding/welcome';
+  static const onboardingGoals = '/onboarding/goals';
   static const onboardingDemographics = '/onboarding/demographics';
-  static const onboardingDietPlan     = '/onboarding/diet_plan';
-  static const onboardingDosha        = '/onboarding/dosha';
+  static const onboardingDietPlan = '/onboarding/diet_plan';
+  static const onboardingDosha = '/onboarding/dosha';
   static const onboardingProgramSelect = '/onboarding/program_select';
   static const onboardingWomensHealth = '/onboarding/womens_health';
-  static const onboardingPermissions  = '/onboarding/permissions';
+  static const onboardingPermissions = '/onboarding/permissions';
 
   // Main app shell
   static const dashboard = '/dashboard';
-  static const mission   = '/mission';
-  static const recovery  = '/recovery';
-  static const aiCoach   = '/ai-coach';
-  static const steps     = '/steps';
-  static const sleep     = '/sleep';
-  static const bp        = '/health/bp';
-  static const glucose   = '/health/glucose';
+  static const mission = '/mission';
+  static const recovery = '/recovery';
+  static const aiCoach = '/ai-coach';
+  static const steps = '/steps';
+  static const sleep = '/sleep';
+  static const bp = '/health/bp';
+  static const glucose = '/health/glucose';
   static const wearables = '/wearables';
-  static const food       = '/food';
-  static const fixMyMeal  = '/food/fix-my-meal';
+  static const food = '/food';
+  static const fixMyMeal = '/food/fix-my-meal';
   static const restaurant = '/food/restaurant';
-  static const grocery    = '/food/grocery';
+  static const grocery = '/food/grocery';
   static const micronutrients = '/food/micronutrients';
 
   // Auth
@@ -70,29 +70,29 @@ class AppRoutes {
 
 OnboardingStep? stepForPath(String path) {
   return switch (path) {
-    AppRoutes.onboardingWelcome       => OnboardingStep.welcome,
-    AppRoutes.onboardingGoals         => OnboardingStep.goals,
-    AppRoutes.onboardingDemographics  => OnboardingStep.demographics,
-    AppRoutes.onboardingDietPlan      => OnboardingStep.dietPlan,
-    AppRoutes.onboardingDosha         => OnboardingStep.dosha,
+    AppRoutes.onboardingWelcome => OnboardingStep.welcome,
+    AppRoutes.onboardingGoals => OnboardingStep.goals,
+    AppRoutes.onboardingDemographics => OnboardingStep.demographics,
+    AppRoutes.onboardingDietPlan => OnboardingStep.dietPlan,
+    AppRoutes.onboardingDosha => OnboardingStep.dosha,
     AppRoutes.onboardingProgramSelect => OnboardingStep.programSelect,
-    AppRoutes.onboardingWomensHealth  => OnboardingStep.womensHealth,
-    AppRoutes.onboardingPermissions   => OnboardingStep.permissions,
-    _                                 => null,
+    AppRoutes.onboardingWomensHealth => OnboardingStep.womensHealth,
+    AppRoutes.onboardingPermissions => OnboardingStep.permissions,
+    _ => null,
   };
 }
 
 /// Map an [OnboardingStep] back to its canonical URL path.
 String pathForStep(OnboardingStep step) {
   return switch (step) {
-    OnboardingStep.welcome       => AppRoutes.onboardingWelcome,
-    OnboardingStep.goals         => AppRoutes.onboardingGoals,
-    OnboardingStep.demographics  => AppRoutes.onboardingDemographics,
-    OnboardingStep.dietPlan      => AppRoutes.onboardingDietPlan,
-    OnboardingStep.dosha         => AppRoutes.onboardingDosha,
+    OnboardingStep.welcome => AppRoutes.onboardingWelcome,
+    OnboardingStep.goals => AppRoutes.onboardingGoals,
+    OnboardingStep.demographics => AppRoutes.onboardingDemographics,
+    OnboardingStep.dietPlan => AppRoutes.onboardingDietPlan,
+    OnboardingStep.dosha => AppRoutes.onboardingDosha,
     OnboardingStep.programSelect => AppRoutes.onboardingProgramSelect,
-    OnboardingStep.womensHealth  => AppRoutes.onboardingWomensHealth,
-    OnboardingStep.permissions   => AppRoutes.onboardingPermissions,
+    OnboardingStep.womensHealth => AppRoutes.onboardingWomensHealth,
+    OnboardingStep.permissions => AppRoutes.onboardingPermissions,
   };
 }
 
@@ -142,10 +142,7 @@ class _OnboardingPlaceholderScreen extends ConsumerWidget {
         ],
       ),
       body: Center(
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+        child: Text(title, style: Theme.of(context).textTheme.headlineMedium),
       ),
     );
   }
@@ -156,9 +153,7 @@ class _DashboardPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Dashboard — coming soon')),
-    );
+    return const Scaffold(body: Center(child: Text('Dashboard — coming soon')));
   }
 }
 
@@ -167,9 +162,7 @@ class _LoginPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Login — coming soon')),
-    );
+    return const Scaffold(body: Center(child: Text('Login — coming soon')));
   }
 }
 
@@ -190,11 +183,11 @@ class AppRouter {
       // ── Global redirect guard ────────────────────────────────────────────
       redirect: (BuildContext context, GoRouterState state) {
         final uxStage = ref.read(uxStageProvider);
-        final onboardingComplete =
-            ref.read(onboardingFlowProvider).isComplete;
+        final onboardingComplete = ref.read(onboardingFlowProvider).isComplete;
 
-        final onOnboardingRoute =
-            state.uri.toString().startsWith('/onboarding');
+        final onOnboardingRoute = state.uri.toString().startsWith(
+          '/onboarding',
+        );
 
         // If user has already completed onboarding, send them to dashboard
         if (uxStage == UserExperienceStage.active && onboardingComplete) {
@@ -213,52 +206,38 @@ class AppRouter {
         // ── Onboarding funnel ───────────────────────────────────────────────
         GoRoute(
           path: AppRoutes.onboardingWelcome,
-          pageBuilder: (context, state) => _fadeTransition(
-            state,
-            const WelcomeScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _fadeTransition(state, const WelcomeScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingGoals,
-          pageBuilder: (context, state) => _slideTransition(
-            state,
-            const GoalsScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const GoalsScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingDemographics,
-          pageBuilder: (context, state) => _slideTransition(
-            state,
-            const DemographicsScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const DemographicsScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingDietPlan,
-          pageBuilder: (context, state) => _slideTransition(
-            state,
-            const DietPlanScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const DietPlanScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingDosha,
-          pageBuilder: (context, state) => _slideTransition(
-            state,
-            const DoshaScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const DoshaScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingProgramSelect,
-          pageBuilder: (context, state) => _slideTransition(
-            state,
-            const ProgramSelectScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const ProgramSelectScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingWomensHealth,
-          pageBuilder: (context, state) => _slideTransition(
-            state,
-            const WomensHealthOnboardingScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const WomensHealthOnboardingScreen()),
         ),
         GoRoute(
           path: AppRoutes.onboardingPermissions,
@@ -341,7 +320,8 @@ class AppRouter {
           path: AppRoutes.aiCoach,
           pageBuilder: (context, state) {
             final extra = state.extra as Map<String, dynamic>?;
-            final String userId = (extra?['userId'] as String?) ?? 'onboarding_user';
+            final String userId =
+                (extra?['userId'] as String?) ?? 'onboarding_user';
             final conversationId = extra?['conversationId'] as String?;
             return _slideTransition(
               state,

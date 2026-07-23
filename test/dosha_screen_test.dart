@@ -14,18 +14,18 @@ import 'package:go_router/go_router.dart';
 AppDatabase testDb() => AppDatabase.executor(NativeDatabase.memory());
 
 GoRouter _doshaRouter() => GoRouter(
-      initialLocation: AppRoutes.onboardingDosha,
-      routes: [
-        GoRoute(
-          path: AppRoutes.onboardingDosha,
-          builder: (_, __) => const DoshaScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.onboardingProgramSelect,
-          builder: (_, __) => const Scaffold(body: Text('ProgramSelect')),
-        ),
-      ],
-    );
+  initialLocation: AppRoutes.onboardingDosha,
+  routes: [
+    GoRoute(
+      path: AppRoutes.onboardingDosha,
+      builder: (_, __) => const DoshaScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.onboardingProgramSelect,
+      builder: (_, __) => const Scaffold(body: Text('ProgramSelect')),
+    ),
+  ],
+);
 
 Widget buildSubject(ProviderContainer container) {
   return UncontrolledProviderScope(
@@ -35,11 +35,7 @@ Widget buildSubject(ProviderContainer container) {
 }
 
 ProviderContainer makeContainer(AppDatabase db) {
-  return ProviderContainer(
-    overrides: [
-      databaseProvider.overrideWithValue(db),
-    ],
-  );
+  return ProviderContainer(overrides: [databaseProvider.overrideWithValue(db)]);
 }
 
 void main() {
@@ -101,11 +97,13 @@ void main() {
     setUp(() async {
       db = testDb();
       // Insert onboarding_user row to satisfy DB constraints
-      await db.into(db.users).insert(
-            UsersCompanion.insert(id: 'onboarding_user'),
-          );
+      await db
+          .into(db.users)
+          .insert(UsersCompanion.insert(id: 'onboarding_user'));
       container = makeContainer(db);
-      container.read(onboardingFlowProvider.notifier).jumpTo(OnboardingStep.dosha);
+      container
+          .read(onboardingFlowProvider.notifier)
+          .jumpTo(OnboardingStep.dosha);
     });
 
     tearDown(() async {
@@ -113,7 +111,9 @@ void main() {
       await db.close();
     });
 
-    testWidgets('renders progress indicator and first question', (tester) async {
+    testWidgets('renders progress indicator and first question', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildSubject(container));
       await tester.pumpAndSettle();
 
@@ -122,44 +122,57 @@ void main() {
       expect(find.textContaining('body frame'), findsOneWidget);
     });
 
-    testWidgets('answering questions advances screen, computes profile, saves to DB', (tester) async {
-      await tester.pumpWidget(buildSubject(container));
-      await tester.pumpAndSettle();
-
-      // Tap through all 10 questions selecting the first option (which corresponds to Vata)
-      for (int i = 0; i < 10; i++) {
-        expect(find.textContaining('Question ${i + 1} of 10'), findsOneWidget);
-        // Tap first option card (index 0)
-        final optionCard = find.textContaining(doshaQuestions[i].options[0].text);
-        expect(optionCard, findsOneWidget);
-        await tester.tap(optionCard);
+    testWidgets(
+      'answering questions advances screen, computes profile, saves to DB',
+      (tester) async {
+        await tester.pumpWidget(buildSubject(container));
         await tester.pumpAndSettle();
-      }
 
-      // Check results view: Dominant Vata is displayed
-      expect(find.text('VATA'), findsOneWidget);
-      expect(find.textContaining('Vata (Air/Space)'), findsOneWidget);
-      expect(find.textContaining('100.0%'), findsOneWidget);
+        // Tap through all 10 questions selecting the first option (which corresponds to Vata)
+        for (int i = 0; i < 10; i++) {
+          expect(
+            find.textContaining('Question ${i + 1} of 10'),
+            findsOneWidget,
+          );
+          // Tap first option card (index 0)
+          final optionCard = find.textContaining(
+            doshaQuestions[i].options[0].text,
+          );
+          expect(optionCard, findsOneWidget);
+          await tester.tap(optionCard);
+          await tester.pumpAndSettle();
+        }
 
-      // Check guidelines
-      expect(find.textContaining('Warm, cooked, and grounding foods'), findsOneWidget);
+        // Check results view: Dominant Vata is displayed
+        expect(find.text('VATA'), findsOneWidget);
+        expect(find.textContaining('Vata (Air/Space)'), findsOneWidget);
+        expect(find.textContaining('100.0%'), findsOneWidget);
 
-      // Tap save and continue
-      final saveBtn = find.text('Save and Continue');
-      expect(saveBtn, findsOneWidget);
-      await tester.ensureVisible(saveBtn);
-      await tester.tap(saveBtn);
-      await tester.pumpAndSettle();
+        // Check guidelines
+        expect(
+          find.textContaining('Warm, cooked, and grounding foods'),
+          findsOneWidget,
+        );
 
-      // Verify redirection to next screen (programSelect)
-      expect(find.text('ProgramSelect'), findsOneWidget);
+        // Tap save and continue
+        final saveBtn = find.text('Save and Continue');
+        expect(saveBtn, findsOneWidget);
+        await tester.ensureVisible(saveBtn);
+        await tester.tap(saveBtn);
+        await tester.pumpAndSettle();
 
-      // Verify database has persisted the result
-      final user = await (db.select(db.users)..where((t) => t.id.equals('onboarding_user'))).getSingle();
-      expect(user.dosha, isNotNull);
-      final jsonResult = jsonDecode(user.dosha!) as Map<String, dynamic>;
-      expect(jsonResult['dominant'], 'vata');
-      expect(jsonResult['vataPct'], 100.0);
-    });
+        // Verify redirection to next screen (programSelect)
+        expect(find.text('ProgramSelect'), findsOneWidget);
+
+        // Verify database has persisted the result
+        final user = await (db.select(
+          db.users,
+        )..where((t) => t.id.equals('onboarding_user'))).getSingle();
+        expect(user.dosha, isNotNull);
+        final jsonResult = jsonDecode(user.dosha!) as Map<String, dynamic>;
+        expect(jsonResult['dominant'], 'vata');
+        expect(jsonResult['vataPct'], 100.0);
+      },
+    );
   });
 }

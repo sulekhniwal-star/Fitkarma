@@ -28,9 +28,10 @@ class MultiDimensionalMealQualityState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final multiDimensionalMealQualityEngineProvider = Provider<MultiDimensionalMealQualityEngine>((ref) {
-  return const MultiDimensionalMealQualityEngine();
-});
+final multiDimensionalMealQualityEngineProvider =
+    Provider<MultiDimensionalMealQualityEngine>((ref) {
+      return const MultiDimensionalMealQualityEngine();
+    });
 
 class MealQualityNotifier extends Notifier<MultiDimensionalMealQualityState> {
   @override
@@ -71,9 +72,14 @@ class MealQualityNotifier extends Notifier<MultiDimensionalMealQualityState> {
     double total = 0.0;
     for (final item in items) {
       final name = item.name.toLowerCase();
-      if (name.contains('rajma') || name.contains('chana') || name.contains('dal')) {
+      if (name.contains('rajma') ||
+          name.contains('chana') ||
+          name.contains('dal')) {
         total += 10.0;
-      } else if (name.contains('roti') || name.contains('oats') || name.contains('salad') || name.contains('palak')) {
+      } else if (name.contains('roti') ||
+          name.contains('oats') ||
+          name.contains('salad') ||
+          name.contains('palak')) {
         total += 4.0;
       } else {
         total += 1.0;
@@ -85,7 +91,7 @@ class MealQualityNotifier extends Notifier<MultiDimensionalMealQualityState> {
   double _estimateSatiety(double protein, double fiber, double calories) {
     if (calories <= 0) return 1.0;
     final proteinRatio = protein / 50.0; // 50g = 1.0
-    final fiberRatio = fiber / 15.0;     // 15g = 1.0
+    final fiberRatio = fiber / 15.0; // 15g = 1.0
     final raw = 1.0 + (proteinRatio * 2.0) + (fiberRatio * 2.0);
     return raw.clamp(1.0, 5.0);
   }
@@ -94,7 +100,10 @@ class MealQualityNotifier extends Notifier<MultiDimensionalMealQualityState> {
     if (items.isEmpty) return ProcessingTier.wholeFood;
     for (final item in items) {
       final name = item.name.toLowerCase();
-      if (name.contains('pizza') || name.contains('burger') || name.contains('chips') || name.contains('noodle')) {
+      if (name.contains('pizza') ||
+          name.contains('burger') ||
+          name.contains('chips') ||
+          name.contains('noodle')) {
         return ProcessingTier.ultraProcessed;
       }
     }
@@ -104,5 +113,5 @@ class MealQualityNotifier extends Notifier<MultiDimensionalMealQualityState> {
 
 final multiDimensionalMealQualityProvider =
     NotifierProvider<MealQualityNotifier, MultiDimensionalMealQualityState>(
-  MealQualityNotifier.new,
-);
+      MealQualityNotifier.new,
+    );

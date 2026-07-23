@@ -90,7 +90,8 @@ class MultiDimensionalMealQualityEngine {
 
     // 2. Exact Formula:
     // Score = (2.5 * ProteinDensity) + (3 * FiberG) + (20 * SatietyIndex) - (15 * ProcessingTier)
-    final rawScore = (2.5 * proteinDensity) +
+    final rawScore =
+        (2.5 * proteinDensity) +
         (3.0 * fiberG) +
         (20.0 * satietyIndex1To5) -
         (15.0 * processingTier.penaltyValue);
@@ -111,13 +112,16 @@ class MultiDimensionalMealQualityEngine {
 
     String summary = '';
     if (processingTier == ProcessingTier.ultraProcessed) {
-      summary = 'Ultra-processed food penalty (-45 pts) applied. Swap with whole food alternatives to boost quality score.';
+      summary =
+          'Ultra-processed food penalty (-45 pts) applied. Swap with whole food alternatives to boost quality score.';
     } else if (score >= 85.0) {
-      summary = 'Flawless nutrient density! High in protein, fiber, and satiety with minimal processing.';
+      summary =
+          'Flawless nutrient density! High in protein, fiber, and satiety with minimal processing.';
     } else if (score >= 70.0) {
       summary = 'High quality meal! Excellent satiety and protein density.';
     } else {
-      summary = 'Moderate quality meal. Add high-fiber vegetables or lean protein to improve score.';
+      summary =
+          'Moderate quality meal. Add high-fiber vegetables or lean protein to improve score.';
     }
 
     return MultiDimensionalMealQualityResult(

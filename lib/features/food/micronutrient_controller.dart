@@ -115,11 +115,7 @@ class MicronutrientNotifier extends Notifier<MicronutrientState> {
   }
 
   /// Updates user demographic profile flags and re-calculates RDA targets & alerts.
-  void updateDemographics({
-    bool? isVegetarian,
-    bool? isFemale,
-    bool? hasPcos,
-  }) {
+  void updateDemographics({bool? isVegetarian, bool? isFemale, bool? hasPcos}) {
     final veg = isVegetarian ?? state.isVegetarian;
     final fem = isFemale ?? state.isFemale;
     final pcos = hasPcos ?? state.hasPcos;
@@ -188,20 +184,56 @@ class MicronutrientNotifier extends Notifier<MicronutrientState> {
     return total;
   }
 
-  double _calculateOverallCoverage(DailyMicronutrientSummary summary, MicroRdaConfig rda) {
-    final ironPct = (summary.ironMg / (rda.ironMg > 0 ? rda.ironMg : 1)).clamp(0.0, 1.0);
-    final b12Pct = (summary.vitaminB12Mcg / (rda.vitaminB12Mcg > 0 ? rda.vitaminB12Mcg : 1)).clamp(0.0, 1.0);
-    final d3Pct = (summary.vitaminD3Iu / (rda.vitaminD3Iu > 0 ? rda.vitaminD3Iu : 1)).clamp(0.0, 1.0);
-    final calciumPct = (summary.calciumMg / (rda.calciumMg > 0 ? rda.calciumMg : 1)).clamp(0.0, 1.0);
-    final magPct = (summary.magnesiumMg / (rda.magnesiumMg > 0 ? rda.magnesiumMg : 1)).clamp(0.0, 1.0);
-    final zincPct = (summary.zincMg / (rda.zincMg > 0 ? rda.zincMg : 1)).clamp(0.0, 1.0);
-    final folatePct = (summary.folateMcg / (rda.folateMcg > 0 ? rda.folateMcg : 1)).clamp(0.0, 1.0);
-    final omegaPct = (summary.omega3G / (rda.omega3G > 0 ? rda.omega3G : 1)).clamp(0.0, 1.0);
+  double _calculateOverallCoverage(
+    DailyMicronutrientSummary summary,
+    MicroRdaConfig rda,
+  ) {
+    final ironPct = (summary.ironMg / (rda.ironMg > 0 ? rda.ironMg : 1)).clamp(
+      0.0,
+      1.0,
+    );
+    final b12Pct =
+        (summary.vitaminB12Mcg /
+                (rda.vitaminB12Mcg > 0 ? rda.vitaminB12Mcg : 1))
+            .clamp(0.0, 1.0);
+    final d3Pct =
+        (summary.vitaminD3Iu / (rda.vitaminD3Iu > 0 ? rda.vitaminD3Iu : 1))
+            .clamp(0.0, 1.0);
+    final calciumPct =
+        (summary.calciumMg / (rda.calciumMg > 0 ? rda.calciumMg : 1)).clamp(
+          0.0,
+          1.0,
+        );
+    final magPct =
+        (summary.magnesiumMg / (rda.magnesiumMg > 0 ? rda.magnesiumMg : 1))
+            .clamp(0.0, 1.0);
+    final zincPct = (summary.zincMg / (rda.zincMg > 0 ? rda.zincMg : 1)).clamp(
+      0.0,
+      1.0,
+    );
+    final folatePct =
+        (summary.folateMcg / (rda.folateMcg > 0 ? rda.folateMcg : 1)).clamp(
+          0.0,
+          1.0,
+        );
+    final omegaPct = (summary.omega3G / (rda.omega3G > 0 ? rda.omega3G : 1))
+        .clamp(0.0, 1.0);
 
-    final avg = (ironPct + b12Pct + d3Pct + calciumPct + magPct + zincPct + folatePct + omegaPct) / 8.0;
+    final avg =
+        (ironPct +
+            b12Pct +
+            d3Pct +
+            calciumPct +
+            magPct +
+            zincPct +
+            folatePct +
+            omegaPct) /
+        8.0;
     return double.parse((avg * 100).toStringAsFixed(1));
   }
 }
 
 final micronutrientProvider =
-    NotifierProvider<MicronutrientNotifier, MicronutrientState>(MicronutrientNotifier.new);
+    NotifierProvider<MicronutrientNotifier, MicronutrientState>(
+      MicronutrientNotifier.new,
+    );

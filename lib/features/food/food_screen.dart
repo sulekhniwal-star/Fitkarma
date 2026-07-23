@@ -43,11 +43,19 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
     final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
     final accentColor = isDark ? AppColorsDark.accent : AppColorsLight.accent;
-    final successColor = isDark ? AppColorsDark.success : AppColorsLight.success;
+    final successColor = isDark
+        ? AppColorsDark.success
+        : AppColorsLight.success;
 
     // Aggregate totals
     int totalKcal = 0;
@@ -62,9 +70,18 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
       totalFat += item.fat;
     }
 
-    final double kcalProgress = (totalKcal / state.caloriesTarget).clamp(0.0, 1.0);
-    final double proteinProgress = (totalProtein / state.proteinTarget).clamp(0.0, 1.0);
-    final double carbsProgress = (totalCarbs / state.carbsTarget).clamp(0.0, 1.0);
+    final double kcalProgress = (totalKcal / state.caloriesTarget).clamp(
+      0.0,
+      1.0,
+    );
+    final double proteinProgress = (totalProtein / state.proteinTarget).clamp(
+      0.0,
+      1.0,
+    );
+    final double carbsProgress = (totalCarbs / state.carbsTarget).clamp(
+      0.0,
+      1.0,
+    );
     final double fatProgress = (totalFat / state.fatTarget).clamp(0.0, 1.0);
 
     // Protein alert calculation: 70% threshold of 110g is 77g
@@ -81,7 +98,10 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
         ),
         title: Text(
           'Nutrition',
-          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+          style: AppTypography.h3.copyWith(
+            color: textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -115,11 +135,16 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                                 children: [
                                   Text(
                                     '$totalKcal',
-                                    style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                    style: AppTypography.h3.copyWith(
+                                      color: textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   Text(
                                     'kcal',
-                                    style: AppTypography.labelMd.copyWith(color: textSecondary),
+                                    style: AppTypography.labelMd.copyWith(
+                                      color: textSecondary,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -133,11 +158,37 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildMacroProgress('Protein', totalProtein, state.proteinTarget, proteinProgress, showProteinAlert ? Colors.redAccent : successColor, textPrimary, textSecondary),
+                            _buildMacroProgress(
+                              'Protein',
+                              totalProtein,
+                              state.proteinTarget,
+                              proteinProgress,
+                              showProteinAlert
+                                  ? Colors.redAccent
+                                  : successColor,
+                              textPrimary,
+                              textSecondary,
+                            ),
                             const SizedBox(height: 10),
-                            _buildMacroProgress('Carbs', totalCarbs, state.carbsTarget, carbsProgress, accentColor, textPrimary, textSecondary),
+                            _buildMacroProgress(
+                              'Carbs',
+                              totalCarbs,
+                              state.carbsTarget,
+                              carbsProgress,
+                              accentColor,
+                              textPrimary,
+                              textSecondary,
+                            ),
                             const SizedBox(height: 10),
-                            _buildMacroProgress('Fat', totalFat, state.fatTarget, fatProgress, Colors.orangeAccent, textPrimary, textSecondary),
+                            _buildMacroProgress(
+                              'Fat',
+                              totalFat,
+                              state.fatTarget,
+                              fatProgress,
+                              Colors.orangeAccent,
+                              textPrimary,
+                              textSecondary,
+                            ),
                           ],
                         ),
                       ),
@@ -151,16 +202,24 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                       decoration: BoxDecoration(
                         color: Colors.redAccent.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.redAccent.withOpacity(0.3)),
+                        border: Border.all(
+                          color: Colors.redAccent.withOpacity(0.3),
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
+                          const Icon(
+                            Icons.warning_amber_rounded,
+                            color: Colors.redAccent,
+                          ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               'Protein low — add paneer or eggs to your next meal',
-                              style: AppTypography.bodySm.copyWith(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                              style: AppTypography.bodySm.copyWith(
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
@@ -180,7 +239,10 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                 children: [
                   Text(
                     'Quick Log / Search Food',
-                    style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodyMd.copyWith(
+                      color: textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   // Search TextField
@@ -191,11 +253,20 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                     decoration: InputDecoration(
                       hintText: 'Search food (e.g. Oats, Egg, Chicken)',
                       hintStyle: TextStyle(color: textSecondary),
-                      prefixIcon: Icon(Icons.search_rounded, color: textSecondary),
+                      prefixIcon: Icon(
+                        Icons.search_rounded,
+                        color: textSecondary,
+                      ),
                       filled: true,
                       fillColor: Colors.white10,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                     ),
                     onChanged: (val) {
                       ref.read(foodProvider.notifier).searchFood(val);
@@ -205,18 +276,37 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                   // Meal target dropdown for new items
                   Row(
                     children: [
-                      Text('Log to: ', style: TextStyle(color: textSecondary, fontSize: 13)),
+                      Text(
+                        'Log to: ',
+                        style: TextStyle(color: textSecondary, fontSize: 13),
+                      ),
                       DropdownButton<String>(
                         key: const Key('food_meal_type_log_dropdown'),
                         dropdownColor: cardBg,
                         value: _selectedMealTypeForLogging,
-                        style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold, fontSize: 13),
+                        style: TextStyle(
+                          color: textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
                         underline: const SizedBox.shrink(),
                         items: const [
-                          DropdownMenuItem(value: 'Breakfast', child: Text('Breakfast')),
-                          DropdownMenuItem(value: 'Lunch', child: Text('Lunch')),
-                          DropdownMenuItem(value: 'Dinner', child: Text('Dinner')),
-                          DropdownMenuItem(value: 'Snacks', child: Text('Snacks')),
+                          DropdownMenuItem(
+                            value: 'Breakfast',
+                            child: Text('Breakfast'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Lunch',
+                            child: Text('Lunch'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Dinner',
+                            child: Text('Dinner'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Snacks',
+                            child: Text('Snacks'),
+                          ),
                         ],
                         onChanged: (val) {
                           if (val != null) {
@@ -238,19 +328,37 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                       itemBuilder: (context, index) {
                         final res = state.searchResults[index];
                         return Material(
-                           color: Colors.transparent,
-                           child: ListTile(
-                             key: Key('food_search_result_${res.name}'),
-                             contentPadding: EdgeInsets.zero,
-                             title: Text(res.name, style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold)),
-                             subtitle: Text('${res.calories} kcal · P: ${res.protein}g · C: ${res.carbs}g', style: TextStyle(color: textSecondary)),
-                             trailing: Icon(Icons.add_circle_outline_rounded, color: successColor),
-                             onTap: () {
-                               ref.read(foodProvider.notifier).addFood(res.copyWith(mealType: _selectedMealTypeForLogging));
-                               _searchController.clear();
-                             },
-                           ),
-                         );
+                          color: Colors.transparent,
+                          child: ListTile(
+                            key: Key('food_search_result_${res.name}'),
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(
+                              res.name,
+                              style: TextStyle(
+                                color: textPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '${res.calories} kcal · P: ${res.protein}g · C: ${res.carbs}g',
+                              style: TextStyle(color: textSecondary),
+                            ),
+                            trailing: Icon(
+                              Icons.add_circle_outline_rounded,
+                              color: successColor,
+                            ),
+                            onTap: () {
+                              ref
+                                  .read(foodProvider.notifier)
+                                  .addFood(
+                                    res.copyWith(
+                                      mealType: _selectedMealTypeForLogging,
+                                    ),
+                                  );
+                              _searchController.clear();
+                            },
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -261,7 +369,9 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
 
             // 3. Collapsible Meal Sections
             ...['Breakfast', 'Lunch', 'Dinner', 'Snacks'].map((mealType) {
-              final sectionItems = state.loggedItems.where((element) => element.mealType == mealType).toList();
+              final sectionItems = state.loggedItems
+                  .where((element) => element.mealType == mealType)
+                  .toList();
               final isExpanded = _collapsedStates[mealType] ?? true;
 
               int sectionKcal = 0;
@@ -304,7 +414,10 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                                 const SizedBox(width: 8),
                                 Text(
                                   mealType,
-                                  style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                  style: AppTypography.h3.copyWith(
+                                    color: textPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ],
                             ),
@@ -312,11 +425,16 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                               children: [
                                 Text(
                                   '$sectionKcal kcal',
-                                  style: AppTypography.bodyLg.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                  style: AppTypography.bodyLg.copyWith(
+                                    color: textPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 const SizedBox(width: 8),
                                 Icon(
-                                  isExpanded ? Icons.expand_more_rounded : Icons.chevron_right_rounded,
+                                  isExpanded
+                                      ? Icons.expand_more_rounded
+                                      : Icons.chevron_right_rounded,
                                   color: textSecondary,
                                 ),
                               ],
@@ -332,7 +450,10 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             child: Text(
                               'No food logged yet.',
-                              style: TextStyle(color: textSecondary, fontStyle: FontStyle.italic),
+                              style: TextStyle(
+                                color: textSecondary,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           )
                         else ...[
@@ -343,20 +464,30 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                             itemBuilder: (context, index) {
                               final item = sectionItems[index];
                               return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 6,
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           item.name,
-                                          style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                            color: textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         Text(
                                           'P: ${item.protein}g · C: ${item.carbs}g · F: ${item.fat}g',
-                                          style: TextStyle(color: textSecondary, fontSize: 12),
+                                          style: TextStyle(
+                                            color: textSecondary,
+                                            fontSize: 12,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -364,14 +495,25 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                                       children: [
                                         Text(
                                           '${item.calories} kcal',
-                                          style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                            color: textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         const SizedBox(width: 8),
                                         IconButton(
-                                          key: Key('food_remove_item_${item.id}'),
-                                          icon: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 18),
+                                          key: Key(
+                                            'food_remove_item_${item.id}',
+                                          ),
+                                          icon: const Icon(
+                                            Icons.delete_outline_rounded,
+                                            color: Colors.redAccent,
+                                            size: 18,
+                                          ),
                                           onPressed: () {
-                                            ref.read(foodProvider.notifier).removeFood(item.id);
+                                            ref
+                                                .read(foodProvider.notifier)
+                                                .removeFood(item.id);
                                           },
                                         ),
                                       ],
@@ -387,12 +529,33 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                           // Local calculated Meal Quality scores
                           Text(
                             'Meal Quality Score (5 Dimensions)',
-                            style: AppTypography.bodySm.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                            style: AppTypography.bodySm.copyWith(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 8),
-                          _buildQualityStat('Protein Score', sectionProtein > 10 ? 'High' : 'Low', sectionProtein > 10 ? successColor : Colors.orangeAccent),
-                          _buildQualityStat('Readiness Impact', supportsRecovery ? 'This meal will support recovery (+2% readiness)' : 'Moderate glycemic impact', supportsRecovery ? successColor : textSecondary),
-                          _buildQualityStat('Goal Impact', alignsGoal ? 'This meal aligns with your fat-loss goal ✓' : 'Matches baseline target', alignsGoal ? successColor : textSecondary),
+                          _buildQualityStat(
+                            'Protein Score',
+                            sectionProtein > 10 ? 'High' : 'Low',
+                            sectionProtein > 10
+                                ? successColor
+                                : Colors.orangeAccent,
+                          ),
+                          _buildQualityStat(
+                            'Readiness Impact',
+                            supportsRecovery
+                                ? 'This meal will support recovery (+2% readiness)'
+                                : 'Moderate glycemic impact',
+                            supportsRecovery ? successColor : textSecondary,
+                          ),
+                          _buildQualityStat(
+                            'Goal Impact',
+                            alignsGoal
+                                ? 'This meal aligns with your fat-loss goal ✓'
+                                : 'Matches baseline target',
+                            alignsGoal ? successColor : textSecondary,
+                          ),
                         ],
                       ],
                     ],
@@ -414,7 +577,10 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
                       const SizedBox(width: 8),
                       Text(
                         'Nutrition Focus Recommendation',
-                        style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                        style: AppTypography.bodyMd.copyWith(
+                          color: textPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -432,15 +598,33 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
     );
   }
 
-  Widget _buildMacroProgress(String label, int val, int target, double progress, Color barColor, Color textPrimary, Color textSecondary) {
+  Widget _buildMacroProgress(
+    String label,
+    int val,
+    int target,
+    double progress,
+    Color barColor,
+    Color textPrimary,
+    Color textSecondary,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold, fontSize: 13)),
-            Text('${val}g / ${target}g', style: TextStyle(color: textSecondary, fontSize: 12)),
+            Text(
+              label,
+              style: TextStyle(
+                color: textPrimary,
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+              ),
+            ),
+            Text(
+              '${val}g / ${target}g',
+              style: TextStyle(color: textSecondary, fontSize: 12),
+            ),
           ],
         ),
         const SizedBox(height: 4),
@@ -463,11 +647,18 @@ class _FoodScreenState extends ConsumerState<FoodScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$label: ', style: const TextStyle(color: Colors.white60, fontSize: 12)),
+          Text(
+            '$label: ',
+            style: const TextStyle(color: Colors.white60, fontSize: 12),
+          ),
           Expanded(
             child: Text(
               value,
-              style: TextStyle(color: valueColor, fontWeight: FontWeight.bold, fontSize: 12),
+              style: TextStyle(
+                color: valueColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
             ),
           ),
         ],

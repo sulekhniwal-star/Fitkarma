@@ -78,28 +78,28 @@ class GroqVisionResponse {
 
   /// Serialises to JSON for caching.
   String toJson() => jsonEncode({
-        'detectedMeal': detectedMeal,
-        'confidence': confidence,
-        'totalCalories': totalCalories,
-        'proteinG': proteinG,
-        'carbsG': carbsG,
-        'fatG': fatG,
-        'fiberG': fiberG,
-        'glycemicIndex': glycemicIndex,
-        'source': source.name,
-      });
+    'detectedMeal': detectedMeal,
+    'confidence': confidence,
+    'totalCalories': totalCalories,
+    'proteinG': proteinG,
+    'carbsG': carbsG,
+    'fatG': fatG,
+    'fiberG': fiberG,
+    'glycemicIndex': glycemicIndex,
+    'source': source.name,
+  });
 
   GroqVisionResponse copyWith({VisionSource? source}) => GroqVisionResponse(
-        detectedMeal: detectedMeal,
-        confidence: confidence,
-        totalCalories: totalCalories,
-        proteinG: proteinG,
-        carbsG: carbsG,
-        fatG: fatG,
-        fiberG: fiberG,
-        glycemicIndex: glycemicIndex,
-        source: source ?? this.source,
-      );
+    detectedMeal: detectedMeal,
+    confidence: confidence,
+    totalCalories: totalCalories,
+    proteinG: proteinG,
+    carbsG: carbsG,
+    fatG: fatG,
+    fiberG: fiberG,
+    glycemicIndex: glycemicIndex,
+    source: source ?? this.source,
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -120,7 +120,8 @@ class _OfflineMealEntry {
   });
 
   final String name;
-  final List<String> keywords; // matched against the mock "label" derived from byte length bucket
+  final List<String>
+  keywords; // matched against the mock "label" derived from byte length bucket
   final double calories;
   final double proteinG;
   final double carbsG;
@@ -131,18 +132,126 @@ class _OfflineMealEntry {
 
 // 12 common Indian meals pre-seeded for offline recognition.
 const List<_OfflineMealEntry> _offlineCatalog = [
-  _OfflineMealEntry(name: 'Poha', keywords: ['poha','beaten rice'], calories: 220, proteinG: 3.5, carbsG: 42, fatG: 4.0, fiberG: 2.8, glycemicIndex: 68),
-  _OfflineMealEntry(name: 'Idli + Sambar', keywords: ['idli','sambar'], calories: 230, proteinG: 7.0, carbsG: 44, fatG: 2.2, fiberG: 6.0, glycemicIndex: 58),
-  _OfflineMealEntry(name: 'Plain Dosa', keywords: ['dosa','dosai'], calories: 165, proteinG: 3.2, carbsG: 32, fatG: 2.5, fiberG: 1.2, glycemicIndex: 75),
-  _OfflineMealEntry(name: 'Dal + 2 Rotis', keywords: ['dal','roti','chapati'], calories: 320, proteinG: 14.5, carbsG: 58, fatG: 4.0, fiberG: 11.0, glycemicIndex: 52),
-  _OfflineMealEntry(name: 'Rajma Chawal', keywords: ['rajma','rice','chawal'], calories: 420, proteinG: 14.0, carbsG: 76, fatG: 6.0, fiberG: 10.0, glycemicIndex: 54),
-  _OfflineMealEntry(name: 'Upma', keywords: ['upma','rava','semolina'], calories: 190, proteinG: 4.0, carbsG: 34, fatG: 3.5, fiberG: 2.0, glycemicIndex: 65),
-  _OfflineMealEntry(name: 'Chole Bhature', keywords: ['chole','bhature','puri'], calories: 620, proteinG: 16.0, carbsG: 88, fatG: 22.0, fiberG: 12.0, glycemicIndex: 58),
-  _OfflineMealEntry(name: 'Moong Dal Khichdi', keywords: ['khichdi','moong'], calories: 210, proteinG: 7.2, carbsG: 38, fatG: 3.0, fiberG: 4.0, glycemicIndex: 55),
-  _OfflineMealEntry(name: 'Paneer Butter Masala + Roti', keywords: ['paneer','butter masala'], calories: 500, proteinG: 21.0, carbsG: 46, fatG: 24.0, fiberG: 3.5, glycemicIndex: 48),
-  _OfflineMealEntry(name: 'Tandoori Chicken', keywords: ['chicken','tandoori','murgh'], calories: 260, proteinG: 32.0, carbsG: 3, fatG: 12.0, fiberG: 0.5, glycemicIndex: 15),
-  _OfflineMealEntry(name: 'Masala Dosa', keywords: ['masala dosa'], calories: 350, proteinG: 6.0, carbsG: 55, fatG: 12.0, fiberG: 2.5, glycemicIndex: 70),
-  _OfflineMealEntry(name: 'Aloo Paratha + Curd', keywords: ['paratha','aloo paratha'], calories: 430, proteinG: 10.5, carbsG: 65, fatG: 14.0, fiberG: 4.0, glycemicIndex: 62),
+  _OfflineMealEntry(
+    name: 'Poha',
+    keywords: ['poha', 'beaten rice'],
+    calories: 220,
+    proteinG: 3.5,
+    carbsG: 42,
+    fatG: 4.0,
+    fiberG: 2.8,
+    glycemicIndex: 68,
+  ),
+  _OfflineMealEntry(
+    name: 'Idli + Sambar',
+    keywords: ['idli', 'sambar'],
+    calories: 230,
+    proteinG: 7.0,
+    carbsG: 44,
+    fatG: 2.2,
+    fiberG: 6.0,
+    glycemicIndex: 58,
+  ),
+  _OfflineMealEntry(
+    name: 'Plain Dosa',
+    keywords: ['dosa', 'dosai'],
+    calories: 165,
+    proteinG: 3.2,
+    carbsG: 32,
+    fatG: 2.5,
+    fiberG: 1.2,
+    glycemicIndex: 75,
+  ),
+  _OfflineMealEntry(
+    name: 'Dal + 2 Rotis',
+    keywords: ['dal', 'roti', 'chapati'],
+    calories: 320,
+    proteinG: 14.5,
+    carbsG: 58,
+    fatG: 4.0,
+    fiberG: 11.0,
+    glycemicIndex: 52,
+  ),
+  _OfflineMealEntry(
+    name: 'Rajma Chawal',
+    keywords: ['rajma', 'rice', 'chawal'],
+    calories: 420,
+    proteinG: 14.0,
+    carbsG: 76,
+    fatG: 6.0,
+    fiberG: 10.0,
+    glycemicIndex: 54,
+  ),
+  _OfflineMealEntry(
+    name: 'Upma',
+    keywords: ['upma', 'rava', 'semolina'],
+    calories: 190,
+    proteinG: 4.0,
+    carbsG: 34,
+    fatG: 3.5,
+    fiberG: 2.0,
+    glycemicIndex: 65,
+  ),
+  _OfflineMealEntry(
+    name: 'Chole Bhature',
+    keywords: ['chole', 'bhature', 'puri'],
+    calories: 620,
+    proteinG: 16.0,
+    carbsG: 88,
+    fatG: 22.0,
+    fiberG: 12.0,
+    glycemicIndex: 58,
+  ),
+  _OfflineMealEntry(
+    name: 'Moong Dal Khichdi',
+    keywords: ['khichdi', 'moong'],
+    calories: 210,
+    proteinG: 7.2,
+    carbsG: 38,
+    fatG: 3.0,
+    fiberG: 4.0,
+    glycemicIndex: 55,
+  ),
+  _OfflineMealEntry(
+    name: 'Paneer Butter Masala + Roti',
+    keywords: ['paneer', 'butter masala'],
+    calories: 500,
+    proteinG: 21.0,
+    carbsG: 46,
+    fatG: 24.0,
+    fiberG: 3.5,
+    glycemicIndex: 48,
+  ),
+  _OfflineMealEntry(
+    name: 'Tandoori Chicken',
+    keywords: ['chicken', 'tandoori', 'murgh'],
+    calories: 260,
+    proteinG: 32.0,
+    carbsG: 3,
+    fatG: 12.0,
+    fiberG: 0.5,
+    glycemicIndex: 15,
+  ),
+  _OfflineMealEntry(
+    name: 'Masala Dosa',
+    keywords: ['masala dosa'],
+    calories: 350,
+    proteinG: 6.0,
+    carbsG: 55,
+    fatG: 12.0,
+    fiberG: 2.5,
+    glycemicIndex: 70,
+  ),
+  _OfflineMealEntry(
+    name: 'Aloo Paratha + Curd',
+    keywords: ['paratha', 'aloo paratha'],
+    calories: 430,
+    proteinG: 10.5,
+    carbsG: 65,
+    fatG: 14.0,
+    fiberG: 4.0,
+    glycemicIndex: 62,
+  ),
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────

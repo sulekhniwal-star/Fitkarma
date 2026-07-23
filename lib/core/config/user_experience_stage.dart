@@ -1,5 +1,1 @@
-enum UserExperienceStage {
-  onboarding,
-  dailyBriefing,
-  active,
-}
+enum UserExperienceStage { onboarding, dailyBriefing, active }

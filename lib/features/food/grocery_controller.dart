@@ -53,7 +53,9 @@ class GroceryState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final groceryOptimizationEngineProvider = Provider<GroceryOptimizationEngine>((ref) {
+final groceryOptimizationEngineProvider = Provider<GroceryOptimizationEngine>((
+  ref,
+) {
   return const GroceryOptimizationEngine();
 });
 
@@ -138,7 +140,9 @@ class GroceryNotifier extends Notifier<GroceryState> {
     };
 
     final manifestLines = list.items
-        .map((item) => '- ${item.name} (${item.unit}) ~ ₹${item.priceInr.round()}')
+        .map(
+          (item) => '- ${item.name} (${item.unit}) ~ ₹${item.priceInr.round()}',
+        )
         .join('\n');
 
     return '''
@@ -152,17 +156,11 @@ Est. Total: ₹${list.totalCostInr.round()}
   /// Simulates 1-tap quick commerce vendor checkout (§P16-E).
   void simulateVendorCheckout() {
     final payload = buildVendorCheckoutPayload();
-    state = state.copyWith(
-      isCheckoutSimulated: true,
-      checkoutPayload: payload,
-    );
+    state = state.copyWith(isCheckoutSimulated: true, checkoutPayload: payload);
   }
 
   void resetCheckoutSimulation() {
-    state = state.copyWith(
-      isCheckoutSimulated: false,
-      checkoutPayload: '',
-    );
+    state = state.copyWith(isCheckoutSimulated: false, checkoutPayload: '');
   }
 
   void _reoptimize() {
@@ -179,9 +177,9 @@ Est. Total: ₹${list.totalCostInr.round()}
   Future<void> _loadUserBudget() async {
     try {
       final db = ref.read(databaseProvider);
-      final user = await (db.select(db.users)
-            ..where((t) => t.id.equals(_userId)))
-          .getSingleOrNull();
+      final user = await (db.select(
+        db.users,
+      )..where((t) => t.id.equals(_userId))).getSingleOrNull();
 
       if (user != null && user.monthlyGroceryBudgetInr > 0) {
         setMonthlyBudget(user.monthlyGroceryBudgetInr);
@@ -192,5 +190,6 @@ Est. Total: ₹${list.totalCostInr.round()}
   }
 }
 
-final groceryProvider =
-    NotifierProvider<GroceryNotifier, GroceryState>(GroceryNotifier.new);
+final groceryProvider = NotifierProvider<GroceryNotifier, GroceryState>(
+  GroceryNotifier.new,
+);

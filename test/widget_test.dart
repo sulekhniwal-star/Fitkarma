@@ -22,7 +22,9 @@ class MediumTierNotifier extends DeviceTierNotifier {
 }
 
 void main() {
-  testWidgets('Fitkarma style guide screen loads correctly', (WidgetTester tester) async {
+  testWidgets('Fitkarma style guide screen loads correctly', (
+    WidgetTester tester,
+  ) async {
     late AppDatabase db;
 
     // Build our app and trigger a frame, overriding databaseProvider to use in-memory db
@@ -34,9 +36,7 @@ void main() {
             return db;
           }),
         ],
-        child: const MaterialApp(
-          home: StyleGuideScreen(),
-        ),
+        child: const MaterialApp(home: StyleGuideScreen()),
       ),
     );
 
@@ -52,20 +52,16 @@ void main() {
     await tester.pumpAndSettle();
   });
 
-  testWidgets('GlassCard handles low graphics tier fallback correctly', (WidgetTester tester) async {
+  testWidgets('GlassCard handles low graphics tier fallback correctly', (
+    WidgetTester tester,
+  ) async {
     // 1. Test Low Tier Fallback (BackdropFilter bypassed)
     await tester.pumpWidget(
       ProviderScope(
         key: const Key('low-tier-scope'),
-        overrides: [
-          deviceTierProvider.overrideWith(LowTierNotifier.new),
-        ],
+        overrides: [deviceTierProvider.overrideWith(LowTierNotifier.new)],
         child: const MaterialApp(
-          home: Scaffold(
-            body: GlassCard(
-              child: Text('Test Card'),
-            ),
-          ),
+          home: Scaffold(body: GlassCard(child: Text('Test Card'))),
         ),
       ),
     );
@@ -77,15 +73,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         key: const Key('medium-tier-scope'),
-        overrides: [
-          deviceTierProvider.overrideWith(MediumTierNotifier.new),
-        ],
+        overrides: [deviceTierProvider.overrideWith(MediumTierNotifier.new)],
         child: const MaterialApp(
-          home: Scaffold(
-            body: GlassCard(
-              child: Text('Test Card'),
-            ),
-          ),
+          home: Scaffold(body: GlassCard(child: Text('Test Card'))),
         ),
       ),
     );
@@ -93,7 +83,9 @@ void main() {
     expect(find.byType(BackdropFilter), findsOneWidget);
   });
 
-  testWidgets('FitButton works correctly with loading and tap interactions', (WidgetTester tester) async {
+  testWidgets('FitButton works correctly with loading and tap interactions', (
+    WidgetTester tester,
+  ) async {
     bool tapped = false;
 
     // Test active tap

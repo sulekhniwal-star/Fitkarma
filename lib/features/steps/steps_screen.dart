@@ -17,14 +17,25 @@ class StepsScreen extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
     final accentColor = isDark ? AppColorsDark.accent : AppColorsLight.accent;
-    final successColor = isDark ? AppColorsDark.success : AppColorsLight.success;
+    final successColor = isDark
+        ? AppColorsDark.success
+        : AppColorsLight.success;
     final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
 
-    final progressFraction = (state.stepsToday / state.targetSteps).clamp(0.0, 1.0);
+    final progressFraction = (state.stepsToday / state.targetSteps).clamp(
+      0.0,
+      1.0,
+    );
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -37,7 +48,10 @@ class StepsScreen extends ConsumerWidget {
         ),
         title: Text(
           'Steps Tracker',
-          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+          style: AppTypography.h3.copyWith(
+            color: textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           // Sync Badge
@@ -45,10 +59,14 @@ class StepsScreen extends ConsumerWidget {
             margin: const EdgeInsets.only(right: 16, top: 12, bottom: 12),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: (state.syncStatus == 'Syncing' ? accentColor : successColor).withValues(alpha: 0.12),
+              color:
+                  (state.syncStatus == 'Syncing' ? accentColor : successColor)
+                      .withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: (state.syncStatus == 'Syncing' ? accentColor : successColor).withValues(alpha: 0.3),
+                color:
+                    (state.syncStatus == 'Syncing' ? accentColor : successColor)
+                        .withValues(alpha: 0.3),
                 width: 0.5,
               ),
             ),
@@ -56,15 +74,21 @@ class StepsScreen extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  state.syncStatus == 'Syncing' ? Icons.sync_rounded : Icons.check_circle_rounded,
-                  color: state.syncStatus == 'Syncing' ? accentColor : successColor,
+                  state.syncStatus == 'Syncing'
+                      ? Icons.sync_rounded
+                      : Icons.check_circle_rounded,
+                  color: state.syncStatus == 'Syncing'
+                      ? accentColor
+                      : successColor,
                   size: 14,
                 ),
                 const SizedBox(width: 4),
                 Text(
                   'Sync: ${state.syncStatus}',
                   style: AppTypography.labelMd.copyWith(
-                    color: state.syncStatus == 'Syncing' ? accentColor : successColor,
+                    color: state.syncStatus == 'Syncing'
+                        ? accentColor
+                        : successColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
                   ),
@@ -91,11 +115,17 @@ class StepsScreen extends ConsumerWidget {
                           children: [
                             Text(
                               'Daily Progress',
-                              style: AppTypography.bodySm.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                              style: AppTypography.bodySm.copyWith(
+                                color: textSecondary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               '${state.stepsToday} / ${state.targetSteps} steps',
-                              style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                              style: AppTypography.bodyMd.copyWith(
+                                color: textPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
@@ -133,9 +163,24 @@ class StepsScreen extends ConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            _buildStatItem('Distance', '${state.distanceKm} km', Icons.directions_run_rounded, accentColor),
-                            _buildStatItem('Active Time', '${state.activeMinutes} min', Icons.timer_rounded, successColor),
-                            _buildStatItem('Calories', '${state.caloriesBurned} kcal', Icons.local_fire_department_rounded, Colors.orange),
+                            _buildStatItem(
+                              'Distance',
+                              '${state.distanceKm} km',
+                              Icons.directions_run_rounded,
+                              accentColor,
+                            ),
+                            _buildStatItem(
+                              'Active Time',
+                              '${state.activeMinutes} min',
+                              Icons.timer_rounded,
+                              successColor,
+                            ),
+                            _buildStatItem(
+                              'Calories',
+                              '${state.caloriesBurned} kcal',
+                              Icons.local_fire_department_rounded,
+                              Colors.orange,
+                            ),
                           ],
                         ),
                       ],
@@ -150,7 +195,10 @@ class StepsScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Hourly Step Distribution',
-                          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                          style: AppTypography.h3.copyWith(
+                            color: textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 24),
                         // Custom Vertical Bar Chart representation
@@ -160,12 +208,42 @@ class StepsScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              _buildBarNode('08:00', state.hourlySteps[8] ?? 0, 3000, primaryColor),
-                              _buildBarNode('10:00', state.hourlySteps[10] ?? 0, 3000, primaryColor),
-                              _buildBarNode('12:00', state.hourlySteps[12] ?? 0, 3000, primaryColor),
-                              _buildBarNode('14:00', state.hourlySteps[14] ?? 0, 3000, primaryColor),
-                              _buildBarNode('16:00', state.hourlySteps[16] ?? 0, 3000, primaryColor),
-                              _buildBarNode('18:00', state.hourlySteps[18] ?? 0, 3000, primaryColor),
+                              _buildBarNode(
+                                '08:00',
+                                state.hourlySteps[8] ?? 0,
+                                3000,
+                                primaryColor,
+                              ),
+                              _buildBarNode(
+                                '10:00',
+                                state.hourlySteps[10] ?? 0,
+                                3000,
+                                primaryColor,
+                              ),
+                              _buildBarNode(
+                                '12:00',
+                                state.hourlySteps[12] ?? 0,
+                                3000,
+                                primaryColor,
+                              ),
+                              _buildBarNode(
+                                '14:00',
+                                state.hourlySteps[14] ?? 0,
+                                3000,
+                                primaryColor,
+                              ),
+                              _buildBarNode(
+                                '16:00',
+                                state.hourlySteps[16] ?? 0,
+                                3000,
+                                primaryColor,
+                              ),
+                              _buildBarNode(
+                                '18:00',
+                                state.hourlySteps[18] ?? 0,
+                                3000,
+                                primaryColor,
+                              ),
                             ],
                           ),
                         ),
@@ -179,7 +257,10 @@ class StepsScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: cardBg,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.orange.withValues(alpha: 0.6), width: 1.5),
+                      border: Border.all(
+                        color: Colors.orange.withValues(alpha: 0.6),
+                        width: 1.5,
+                      ),
                     ),
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -187,7 +268,11 @@ class StepsScreen extends ConsumerWidget {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.tips_and_updates_rounded, color: Colors.orange, size: 20),
+                            const Icon(
+                              Icons.tips_and_updates_rounded,
+                              color: Colors.orange,
+                              size: 20,
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               'COACH RECOMMENDATION',
@@ -202,7 +287,10 @@ class StepsScreen extends ConsumerWidget {
                         const SizedBox(height: 8),
                         Text(
                           'Great job! A 10-minute walk now will cross your daily goal before dinner.',
-                          style: AppTypography.bodyMd.copyWith(color: textPrimary, height: 1.4),
+                          style: AppTypography.bodyMd.copyWith(
+                            color: textPrimary,
+                            height: 1.4,
+                          ),
                         ),
                       ],
                     ),
@@ -219,9 +307,13 @@ class StepsScreen extends ConsumerWidget {
                             backgroundColor: primaryColor,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          onPressed: () => ref.read(stepsProvider.notifier).syncWithDeviceHealth(1500),
+                          onPressed: () => ref
+                              .read(stepsProvider.notifier)
+                              .syncWithDeviceHealth(1500),
                           icon: const Icon(Icons.sync_rounded),
                           label: const Text('Simulate OS Sync (+1.5k)'),
                         ),
@@ -242,8 +334,16 @@ class StepsScreen extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(val, style: AppTypography.bodyMd.copyWith(fontWeight: FontWeight.bold)),
-            Text(label, style: AppTypography.bodySm.copyWith(color: AppColorsDark.textMuted)),
+            Text(
+              val,
+              style: AppTypography.bodyMd.copyWith(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              label,
+              style: AppTypography.bodySm.copyWith(
+                color: AppColorsDark.textMuted,
+              ),
+            ),
           ],
         ),
       ],
@@ -257,7 +357,10 @@ class StepsScreen extends ConsumerWidget {
       children: [
         Text(
           value > 0 ? '${(value / 100).round() / 10}k' : '0',
-          style: AppTypography.labelMd.copyWith(fontSize: 9, fontWeight: FontWeight.bold),
+          style: AppTypography.labelMd.copyWith(
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 4),
         Expanded(
@@ -269,14 +372,22 @@ class StepsScreen extends ConsumerWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: fraction.clamp(0.4, 1.0)),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(4),
+                  ),
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 6),
-        Text(label, style: AppTypography.bodySm.copyWith(color: AppColorsDark.textMuted, fontSize: 10)),
+        Text(
+          label,
+          style: AppTypography.bodySm.copyWith(
+            color: AppColorsDark.textMuted,
+            fontSize: 10,
+          ),
+        ),
       ],
     );
   }

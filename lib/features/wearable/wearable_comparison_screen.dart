@@ -11,7 +11,8 @@ class WearableComparisonScreen extends StatefulWidget {
   const WearableComparisonScreen({super.key});
 
   @override
-  State<WearableComparisonScreen> createState() => _WearableComparisonScreenState();
+  State<WearableComparisonScreen> createState() =>
+      _WearableComparisonScreenState();
 }
 
 class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
@@ -27,17 +28,30 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
     final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
     final accentColor = isDark ? AppColorsDark.accent : AppColorsLight.accent;
-    final successColor = isDark ? AppColorsDark.success : AppColorsLight.success;
+    final successColor = isDark
+        ? AppColorsDark.success
+        : AppColorsLight.success;
 
     final engine = DeviceReliabilityEngine();
-    final result = engine.applyConfidence(source: _selectedSource, rawHRV: _rawHrv, rawHR: _rawHr);
+    final result = engine.applyConfidence(
+      source: _selectedSource,
+      rawHRV: _rawHrv,
+      rawHR: _rawHr,
+    );
 
     // Baseline comparison
-    final double baselineDiff = ((_rawHrv - _baselineHrv) / _baselineHrv) * 100.0;
+    final double baselineDiff =
+        ((_rawHrv - _baselineHrv) / _baselineHrv) * 100.0;
     final diffSign = baselineDiff >= 0 ? '+' : '';
     final diffColor = baselineDiff >= 0 ? successColor : Colors.redAccent;
 
@@ -56,7 +70,10 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
         ),
         title: Text(
           'Wearable Comparison',
-          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+          style: AppTypography.h3.copyWith(
+            color: textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -72,14 +89,21 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
                 children: [
                   Text(
                     'Select Primary Device Source',
-                    style: AppTypography.bodySm.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodySm.copyWith(
+                      color: textSecondary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   DropdownButton<WearableSource>(
                     key: const Key('wearable_source_dropdown'),
                     dropdownColor: cardBg,
                     value: _selectedSource,
-                    style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(
+                      color: textPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                     iconEnabledColor: textPrimary,
                     underline: Container(height: 1, color: Colors.white24),
                     isExpanded: true,
@@ -114,11 +138,18 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
                     children: [
                       Text(
                         '⌚ HRV Source: ${_selectedSource.displayName}',
-                        style: AppTypography.bodyMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                        style: AppTypography.bodyMd.copyWith(
+                          color: textPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         starsText,
-                        style: const TextStyle(color: Colors.amber, fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: Colors.amber,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -129,19 +160,38 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Today\'s HRV', style: AppTypography.labelMd.copyWith(color: textSecondary)),
+                          Text(
+                            'Today\'s HRV',
+                            style: AppTypography.labelMd.copyWith(
+                              color: textSecondary,
+                            ),
+                          ),
                           const SizedBox(height: 4),
-                          Text('${_rawHrv.round()} ms', style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold)),
+                          Text(
+                            '${_rawHrv.round()} ms',
+                            style: AppTypography.h3.copyWith(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('Your Baseline', style: AppTypography.labelMd.copyWith(color: textSecondary)),
+                          Text(
+                            'Your Baseline',
+                            style: AppTypography.labelMd.copyWith(
+                              color: textSecondary,
+                            ),
+                          ),
                           const SizedBox(height: 4),
                           Text(
                             '${_baselineHrv.round()} ms ($diffSign${baselineDiff.round()}%)',
-                            style: AppTypography.bodyLg.copyWith(color: diffColor, fontWeight: FontWeight.bold),
+                            style: AppTypography.bodyLg.copyWith(
+                              color: diffColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
@@ -152,7 +202,10 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
                   const SizedBox(height: 8),
                   Text(
                     'ℹ️ ${_selectedSource.displayName} data is weighted at ${(result.readinessWeight * 100).round()}% confidence in your readiness score.',
-                    style: AppTypography.bodySm.copyWith(color: textSecondary, fontStyle: FontStyle.italic),
+                    style: AppTypography.bodySm.copyWith(
+                      color: textSecondary,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ],
               ),
@@ -167,36 +220,111 @@ class _WearableComparisonScreenState extends State<WearableComparisonScreen> {
                 children: [
                   Text(
                     'Device Confidence Matrix',
-                    style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                    style: AppTypography.h3.copyWith(
+                      color: textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                      headingRowColor: MaterialStateProperty.all(Colors.white10),
+                      headingRowColor: MaterialStateProperty.all(
+                        Colors.white10,
+                      ),
                       horizontalMargin: 8,
                       columnSpacing: 16,
                       columns: [
-                        DataColumn(label: Text('Device', style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold))),
-                        DataColumn(label: Text('HRV Conf.', style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold))),
-                        DataColumn(label: Text('HR Conf.', style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold))),
-                        DataColumn(label: Text('Weight', style: TextStyle(color: textPrimary, fontWeight: FontWeight.bold))),
+                        DataColumn(
+                          label: Text(
+                            'Device',
+                            style: TextStyle(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'HRV Conf.',
+                            style: TextStyle(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'HR Conf.',
+                            style: TextStyle(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Weight',
+                            style: TextStyle(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ],
                       rows: WearableSource.values.map((src) {
                         final p = DeviceReliabilityEngine.deviceProfiles[src]!;
-                        final w = engine.applyConfidence(source: src, rawHRV: 60, rawHR: 60).readinessWeight;
+                        final w = engine
+                            .applyConfidence(source: src, rawHRV: 60, rawHR: 60)
+                            .readinessWeight;
                         final isSelected = src == _selectedSource;
                         return DataRow(
                           selected: isSelected,
-                          color: MaterialStateProperty.resolveWith<Color?>((states) {
-                            if (isSelected) return primaryColor.withOpacity(0.2);
+                          color: MaterialStateProperty.resolveWith<Color?>((
+                            states,
+                          ) {
+                            if (isSelected)
+                              return primaryColor.withOpacity(0.2);
                             return null;
                           }),
                           cells: [
-                            DataCell(Text(src.displayName, style: TextStyle(color: textPrimary, fontSize: 13))),
-                            DataCell(Text('${(p.hrvConfidence * 100).round()}%', style: TextStyle(color: textSecondary, fontSize: 13))),
-                            DataCell(Text('${(p.hrConfidence * 100).round()}%', style: TextStyle(color: textSecondary, fontSize: 13))),
-                            DataCell(Text('${(w * 100).round()}%', style: TextStyle(color: accentColor, fontWeight: FontWeight.bold, fontSize: 13))),
+                            DataCell(
+                              Text(
+                                src.displayName,
+                                style: TextStyle(
+                                  color: textPrimary,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Text(
+                                '${(p.hrvConfidence * 100).round()}%',
+                                style: TextStyle(
+                                  color: textSecondary,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Text(
+                                '${(p.hrConfidence * 100).round()}%',
+                                style: TextStyle(
+                                  color: textSecondary,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Text(
+                                '${(w * 100).round()}%',
+                                style: TextStyle(
+                                  color: accentColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
                           ],
                         );
                       }).toList(),

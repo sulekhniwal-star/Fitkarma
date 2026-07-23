@@ -96,12 +96,16 @@ class EnvironmentalHealthEngine {
   }
 
   /// Transforms risks into actionable training adaptions and warnings.
-  EnvironmentalAdaptation _buildAdaptation(List<EnvironmentalRisk> risks, EnvironmentalData env) {
+  EnvironmentalAdaptation _buildAdaptation(
+    List<EnvironmentalRisk> risks,
+    EnvironmentalData env,
+  ) {
     if (risks.contains(EnvironmentalRisk.aqiHazardous)) {
       return EnvironmentalAdaptation(
         workoutRecommendation: WorkoutLocation.indoorOnly,
         hydrationBoostL: 0.5,
-        warningBanner: 'AQI ${env.aqi} — Hazardous. '
+        warningBanner:
+            'AQI ${env.aqi} — Hazardous. '
             'Outdoor exercise not recommended. '
             'Switch to indoor workout today.',
         bannerColor: AppColorsDark.error,
@@ -111,7 +115,8 @@ class EnvironmentalHealthEngine {
       return EnvironmentalAdaptation(
         workoutRecommendation: WorkoutLocation.indoorPreferred,
         hydrationBoostL: 0.3,
-        warningBanner: 'AQI ${env.aqi} — Very Poor air quality. '
+        warningBanner:
+            'AQI ${env.aqi} — Very Poor air quality. '
             'Indoor workout strongly preferred.',
         bannerColor: AppColorsDark.warning,
       );
@@ -120,7 +125,8 @@ class EnvironmentalHealthEngine {
       return EnvironmentalAdaptation(
         workoutRecommendation: WorkoutLocation.earlyMorningOrIndoor,
         hydrationBoostL: 0.8,
-        warningBanner: 'Heat index ${env.heatIndexC}°C. '
+        warningBanner:
+            'Heat index ${env.heatIndexC}°C. '
             'Exercise before 7am or indoors. Hydration +800ml.',
         bannerColor: AppColorsDark.warning,
       );
@@ -129,7 +135,8 @@ class EnvironmentalHealthEngine {
       return EnvironmentalAdaptation(
         workoutRecommendation: WorkoutLocation.earlyMorningOrIndoor,
         hydrationBoostL: 0.5,
-        warningBanner: 'Heat index ${env.heatIndexC}°C — High. '
+        warningBanner:
+            'Heat index ${env.heatIndexC}°C — High. '
             'Stay hydrated. Avoid peak sun hours.',
         bannerColor: AppColorsDark.warning,
       );
@@ -138,7 +145,8 @@ class EnvironmentalHealthEngine {
       return EnvironmentalAdaptation(
         workoutRecommendation: WorkoutLocation.indoorPreferred,
         hydrationBoostL: 0.2,
-        warningBanner: 'UV Index ${env.uvIndex} — Extreme. '
+        warningBanner:
+            'UV Index ${env.uvIndex} — Extreme. '
             'Apply sunscreen SPF 50+. Exercise indoors during peak hours.',
         bannerColor: AppColorsDark.warning,
       );
@@ -147,7 +155,8 @@ class EnvironmentalHealthEngine {
       return EnvironmentalAdaptation(
         workoutRecommendation: WorkoutLocation.indoorPreferred,
         hydrationBoostL: 0.1,
-        warningBanner: 'AQI ${env.aqi} — Poor. sensitive groups should exercise indoors.',
+        warningBanner:
+            'AQI ${env.aqi} — Poor. sensitive groups should exercise indoors.',
         bannerColor: AppColorsDark.warning,
       );
     }
@@ -155,17 +164,24 @@ class EnvironmentalHealthEngine {
   }
 
   /// Adjusts base Daily Missions based on active environmental adaptations.
-  DailyMission adjustMission(DailyMission baseMission, EnvironmentalAdaptation adaptation) {
+  DailyMission adjustMission(
+    DailyMission baseMission,
+    EnvironmentalAdaptation adaptation,
+  ) {
     int adjustedSteps = baseMission.stepGoal;
     String suggestion = baseMission.workoutSuggestion;
 
     if (adaptation.workoutRecommendation == WorkoutLocation.indoorOnly) {
-      adjustedSteps = (baseMission.stepGoal * 0.7).round(); // Mute steps if stuck indoors
+      adjustedSteps = (baseMission.stepGoal * 0.7)
+          .round(); // Mute steps if stuck indoors
       suggestion = 'Indoor Cardio/Yoga (Outdoor blocked: Hazardous AQI)';
-    } else if (adaptation.workoutRecommendation == WorkoutLocation.indoorPreferred) {
+    } else if (adaptation.workoutRecommendation ==
+        WorkoutLocation.indoorPreferred) {
       suggestion = 'Indoor Treadmill / Strength training preferred';
-    } else if (adaptation.workoutRecommendation == WorkoutLocation.earlyMorningOrIndoor) {
-      suggestion = 'Early Morning Outdoor Session (before 7 AM) or Indoor Cardio';
+    } else if (adaptation.workoutRecommendation ==
+        WorkoutLocation.earlyMorningOrIndoor) {
+      suggestion =
+          'Early Morning Outdoor Session (before 7 AM) or Indoor Cardio';
     }
 
     return DailyMission(

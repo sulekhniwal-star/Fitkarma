@@ -15,9 +15,9 @@ ProviderContainer _makeContainer(AppDatabase db) =>
     ProviderContainer(overrides: [databaseProvider.overrideWithValue(db)]);
 
 Widget _buildApp(ProviderContainer container) => UncontrolledProviderScope(
-      container: container,
-      child: const MaterialApp(home: RestaurantSearchScreen()),
-    );
+  container: container,
+  child: const MaterialApp(home: RestaurantSearchScreen()),
+);
 
 void main() {
   group('RestaurantDatabaseService', () {
@@ -32,51 +32,97 @@ void main() {
     test('search filters dishes by restaurant chain name', () {
       final haldirams = service.search(restaurantName: "Haldiram's");
       expect(haldirams, isNotEmpty);
-      expect(haldirams.every((item) => item.restaurantName == "Haldiram's"), isTrue);
+      expect(
+        haldirams.every((item) => item.restaurantName == "Haldiram's"),
+        isTrue,
+      );
     });
 
     test('search filters dishes by dish query substring', () {
       final paneerDishes = service.search(dishQuery: 'Paneer');
       expect(paneerDishes, isNotEmpty);
-      expect(paneerDishes.every((item) => item.name.contains('Paneer')), isTrue);
+      expect(
+        paneerDishes.every((item) => item.name.contains('Paneer')),
+        isTrue,
+      );
     });
 
-    test('computeGoalOverlay classifies green, blue, orange, red correctly', () {
-      // High protein (> 20g) -> green
-      const highPro = RestaurantMenuItem(
-        id: '1', restaurantName: 'Test', name: 'Pro Item',
-        calories: 350, proteinG: 24, carbsG: 20, fatG: 10, glycemicIndex: 30, isDeepFried: false, sugarG: 1,
-      );
-      expect(service.computeGoalOverlay(highPro), OverlayColor.green);
+    test(
+      'computeGoalOverlay classifies green, blue, orange, red correctly',
+      () {
+        // High protein (> 20g) -> green
+        const highPro = RestaurantMenuItem(
+          id: '1',
+          restaurantName: 'Test',
+          name: 'Pro Item',
+          calories: 350,
+          proteinG: 24,
+          carbsG: 20,
+          fatG: 10,
+          glycemicIndex: 30,
+          isDeepFried: false,
+          sugarG: 1,
+        );
+        expect(service.computeGoalOverlay(highPro), OverlayColor.green);
 
-      // Low calorie (< 300 kcal) -> blue
-      const lowCal = RestaurantMenuItem(
-        id: '2', restaurantName: 'Test', name: 'Low Cal Item',
-        calories: 180, proteinG: 8, carbsG: 20, fatG: 4, glycemicIndex: 30, isDeepFried: false, sugarG: 1,
-      );
-      expect(service.computeGoalOverlay(lowCal), OverlayColor.blue);
+        // Low calorie (< 300 kcal) -> blue
+        const lowCal = RestaurantMenuItem(
+          id: '2',
+          restaurantName: 'Test',
+          name: 'Low Cal Item',
+          calories: 180,
+          proteinG: 8,
+          carbsG: 20,
+          fatG: 4,
+          glycemicIndex: 30,
+          isDeepFried: false,
+          sugarG: 1,
+        );
+        expect(service.computeGoalOverlay(lowCal), OverlayColor.blue);
 
-      // Deep fried -> red
-      const fried = RestaurantMenuItem(
-        id: '3', restaurantName: 'Test', name: 'Fried Item',
-        calories: 800, proteinG: 10, carbsG: 90, fatG: 40, glycemicIndex: 65, isDeepFried: true, sugarG: 2,
-      );
-      expect(service.computeGoalOverlay(fried), OverlayColor.red);
+        // Deep fried -> red
+        const fried = RestaurantMenuItem(
+          id: '3',
+          restaurantName: 'Test',
+          name: 'Fried Item',
+          calories: 800,
+          proteinG: 10,
+          carbsG: 90,
+          fatG: 40,
+          glycemicIndex: 65,
+          isDeepFried: true,
+          sugarG: 2,
+        );
+        expect(service.computeGoalOverlay(fried), OverlayColor.red);
 
-      // Diabetic / PCOS safe (low GI <= 55) -> orange
-      const diabeticSafe = RestaurantMenuItem(
-        id: '4', restaurantName: 'Test', name: 'Diabetic Item',
-        calories: 320, proteinG: 12, carbsG: 30, fatG: 10, glycemicIndex: 40, isDeepFried: false, sugarG: 2,
-      );
-      expect(service.computeGoalOverlay(diabeticSafe, isPcosOrDiabetic: true), OverlayColor.orange);
-    });
+        // Diabetic / PCOS safe (low GI <= 55) -> orange
+        const diabeticSafe = RestaurantMenuItem(
+          id: '4',
+          restaurantName: 'Test',
+          name: 'Diabetic Item',
+          calories: 320,
+          proteinG: 12,
+          carbsG: 30,
+          fatG: 10,
+          glycemicIndex: 40,
+          isDeepFried: false,
+          sugarG: 2,
+        );
+        expect(
+          service.computeGoalOverlay(diabeticSafe, isPcosOrDiabetic: true),
+          OverlayColor.orange,
+        );
+      },
+    );
 
     test('fuzzy OCR matcher finds dish via Levenshtein or substring match', () {
       final matchExact = service.matchDishInDatabase('Paneer Tikka');
       expect(matchExact, isNotNull);
       expect(matchExact!.name, 'Paneer Tikka');
 
-      final matchSubstring = service.matchDishInDatabase('Special Paneer Tikka Platter');
+      final matchSubstring = service.matchDishInDatabase(
+        'Special Paneer Tikka Platter',
+      );
       expect(matchSubstring, isNotNull);
       expect(matchSubstring!.name, 'Paneer Tikka');
     });
@@ -106,21 +152,30 @@ void main() {
       await db.close();
     });
 
-    testWidgets('renders search screen with search bar, presets, and dish cards', (tester) async {
-      await tester.pumpWidget(_buildApp(container));
-      await tester.pump();
+    testWidgets(
+      'renders search screen with search bar, presets, and dish cards',
+      (tester) async {
+        await tester.pumpWidget(_buildApp(container));
+        await tester.pump();
 
-      expect(find.text('Restaurant Intelligence'), findsOneWidget);
-      expect(find.byKey(const Key('restaurant_search_input')), findsOneWidget);
-      expect(find.text('Major Chain Optimization Presets'), findsOneWidget);
-      expect(find.text("Haldiram's"), findsWidgets);
-    });
+        expect(find.text('Restaurant Intelligence'), findsOneWidget);
+        expect(
+          find.byKey(const Key('restaurant_search_input')),
+          findsOneWidget,
+        );
+        expect(find.text('Major Chain Optimization Presets'), findsOneWidget);
+        expect(find.text("Haldiram's"), findsWidgets);
+      },
+    );
 
     testWidgets('filtering search query updates visible items', (tester) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
-      await tester.enterText(find.byKey(const Key('restaurant_search_input')), 'Soya');
+      await tester.enterText(
+        find.byKey(const Key('restaurant_search_input')),
+        'Soya',
+      );
       await tester.pump();
 
       expect(find.text('Grilled Soya Chaap'), findsOneWidget);
@@ -130,7 +185,9 @@ void main() {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
-      container.read(restaurantProvider.notifier).setSelectedChain("McDonald's India");
+      container
+          .read(restaurantProvider.notifier)
+          .setSelectedChain("McDonald's India");
       await tester.pump();
 
       expect(find.text('McProtein Egg Burger'), findsOneWidget);
@@ -145,14 +202,19 @@ void main() {
       await tester.pumpAndSettle();
 
       // Enter OCR text
-      await tester.enterText(find.byKey(const Key('restaurant_ocr_input')), 'Paneer Tikka\nChole Bhature');
+      await tester.enterText(
+        find.byKey(const Key('restaurant_ocr_input')),
+        'Paneer Tikka\nChole Bhature',
+      );
       await tester.tap(find.byKey(const Key('restaurant_parse_ocr_btn')));
       await tester.pump();
 
       expect(find.textContaining('Parsed Menu Overlays'), findsOneWidget);
     });
 
-    testWidgets('logging restaurant dish adds item to foodProvider state', (tester) async {
+    testWidgets('logging restaurant dish adds item to foodProvider state', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 

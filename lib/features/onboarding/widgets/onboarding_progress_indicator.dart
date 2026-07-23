@@ -25,8 +25,12 @@ class OnboardingProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final activeColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
-    final inactiveColor = isDark ? AppColorsDark.surface2 : AppColorsLight.surface2;
-    final textColor = isDark ? AppColorsDark.textMuted : AppColorsLight.textMuted;
+    final inactiveColor = isDark
+        ? AppColorsDark.surface2
+        : AppColorsLight.surface2;
+    final textColor = isDark
+        ? AppColorsDark.textMuted
+        : AppColorsLight.textMuted;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -46,7 +50,9 @@ class OnboardingProgressIndicator extends StatelessWidget {
                   duration: const Duration(milliseconds: 280),
                   curve: Curves.easeOut,
                   height: 4,
-                  margin: EdgeInsets.only(right: index < totalSteps - 1 ? 4 : 0),
+                  margin: EdgeInsets.only(
+                    right: index < totalSteps - 1 ? 4 : 0,
+                  ),
                   decoration: BoxDecoration(
                     color: isActive ? activeColor : inactiveColor,
                     borderRadius: BorderRadius.circular(2),

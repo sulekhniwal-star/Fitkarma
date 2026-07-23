@@ -24,21 +24,28 @@ void main() {
   for (var entity in files) {
     if (entity is File && entity.path.endsWith('.dart')) {
       // Normalize path separating characters for split operations
-      final relativePath = entity.path.replaceFirst('lib${Platform.pathSeparator}', '');
+      final relativePath = entity.path.replaceFirst(
+        'lib${Platform.pathSeparator}',
+        '',
+      );
       final pathParts = relativePath.split(Platform.pathSeparator);
-      
+
       // If it is directly in lib/ (e.g. lib/main.dart)
       if (pathParts.length == 1) {
         if (pathParts[0] == 'main.dart') {
           continue;
         } else {
-          print('❌ ERROR: File located directly in lib/ root is not allowed: ${entity.path}');
+          print(
+            '❌ ERROR: File located directly in lib/ root is not allowed: ${entity.path}',
+          );
           hasErrors = true;
         }
       } else {
         final topLevelDir = pathParts[0];
         if (!allowedTopLevelDirs.contains(topLevelDir)) {
-          print('❌ ERROR: File resides in unapproved top-level folder "$topLevelDir": ${entity.path}');
+          print(
+            '❌ ERROR: File resides in unapproved top-level folder "$topLevelDir": ${entity.path}',
+          );
           hasErrors = true;
         }
       }

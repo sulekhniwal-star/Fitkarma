@@ -17,19 +17,18 @@ import 'package:drift/native.dart';
 Uint8List _pohaBytes() => Uint8List.fromList('poha meal photo'.codeUnits);
 
 /// Bytes that don't match any offline keyword → falls through to mock Azure.
-Uint8List _unknownBytes() => Uint8List.fromList(
-    List.generate(200, (i) => (i * 7 + 13) % 256));
+Uint8List _unknownBytes() =>
+    Uint8List.fromList(List.generate(200, (i) => (i * 7 + 13) % 256));
 
-AppDatabase _makeTestDb() =>
-    AppDatabase.executor(NativeDatabase.memory());
+AppDatabase _makeTestDb() => AppDatabase.executor(NativeDatabase.memory());
 
 ProviderContainer _makeContainer(AppDatabase db) =>
     ProviderContainer(overrides: [databaseProvider.overrideWithValue(db)]);
 
 Widget _buildApp(ProviderContainer container) => UncontrolledProviderScope(
-      container: container,
-      child: const MaterialApp(home: FixMyMealScreen()),
-    );
+  container: container,
+  child: const MaterialApp(home: FixMyMealScreen()),
+);
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -67,16 +66,16 @@ void main() {
 
     // ── 2. Analyzing state ───────────────────────────────────────────────────
 
-    testWidgets('shows analyzing indicator when phase is analyzing',
-        (tester) async {
+    testWidgets('shows analyzing indicator when phase is analyzing', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
       // Manually set the notifier to analyzing phase
-      container.read(fixMyMealProvider.notifier).state =
-          container.read(fixMyMealProvider).copyWith(
-                phase: FixMyMealPhase.analyzing,
-              );
+      container.read(fixMyMealProvider.notifier).state = container
+          .read(fixMyMealProvider)
+          .copyWith(phase: FixMyMealPhase.analyzing);
       await tester.pump();
 
       expect(find.byIcon(Icons.restaurant_rounded), findsOneWidget);
@@ -85,34 +84,38 @@ void main() {
 
     // ── 3. Result card after offline match ───────────────────────────────────
 
-    testWidgets('shows result card after offline match for poha bytes',
-        (tester) async {
+    testWidgets('shows result card after offline match for poha bytes', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
       // Trigger analysis with poha-encoded bytes (async, but no real I/O in tests)
-      await container
-          .read(fixMyMealProvider.notifier)
-          .pickImage(_pohaBytes());
+      await container.read(fixMyMealProvider.notifier).pickImage(_pohaBytes());
       // Pump once to flush microtasks + redraw; avoid pumpAndSettle due to
       // the repeating pulse AnimationController that never settles.
       await tester.pump(Duration.zero);
 
       // Detected meal name should be visible
-      expect(find.byKey(const Key('fix_my_meal_detected_name')),
-          findsOneWidget);
+      expect(
+        find.byKey(const Key('fix_my_meal_detected_name')),
+        findsOneWidget,
+      );
 
       // Macro strip
       expect(find.byKey(const Key('fix_my_meal_macro_strip')), findsOneWidget);
 
       // Quality score card
       expect(
-          find.byKey(const Key('fix_my_meal_quality_score')), findsOneWidget);
+        find.byKey(const Key('fix_my_meal_quality_score')),
+        findsOneWidget,
+      );
 
       // Source badge shows "Offline"
       expect(
-          find.byKey(const Key('fix_my_meal_source_badge_Offline')),
-          findsOneWidget);
+        find.byKey(const Key('fix_my_meal_source_badge_Offline')),
+        findsOneWidget,
+      );
 
       // Log button visible
       expect(find.byKey(const Key('fix_my_meal_log_button')), findsOneWidget);
@@ -120,8 +123,9 @@ void main() {
 
     // ── 4. Result card after mock Azure call ─────────────────────────────────
 
-    testWidgets('shows Groq Vision source badge for unknown image bytes',
-        (tester) async {
+    testWidgets('shows Groq Vision source badge for unknown image bytes', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
@@ -132,14 +136,16 @@ void main() {
 
       // Source badge should show "Groq Vision" (mock API call)
       expect(
-          find.byKey(const Key('fix_my_meal_source_badge_Groq Vision')),
-          findsOneWidget);
+        find.byKey(const Key('fix_my_meal_source_badge_Groq Vision')),
+        findsOneWidget,
+      );
     });
 
     // ── 5. Cache source badge ────────────────────────────────────────────────
 
-    testWidgets('shows Cached badge on second analysis of same bytes',
-        (tester) async {
+    testWidgets('shows Cached badge on second analysis of same bytes', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
@@ -160,8 +166,9 @@ void main() {
       await tester.pump(Duration.zero);
 
       expect(
-          find.byKey(const Key('fix_my_meal_source_badge_Cached')),
-          findsOneWidget);
+        find.byKey(const Key('fix_my_meal_source_badge_Cached')),
+        findsOneWidget,
+      );
     });
 
     // ── 6. Portion multiplier updates displayed macros ───────────────────────
@@ -170,9 +177,7 @@ void main() {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
-      await container
-          .read(fixMyMealProvider.notifier)
-          .pickImage(_pohaBytes());
+      await container.read(fixMyMealProvider.notifier).pickImage(_pohaBytes());
       await tester.pump(Duration.zero);
 
       // Record calories at 1×
@@ -190,13 +195,13 @@ void main() {
 
     // ── 7. Log This Meal adds item to foodProvider ────────────────────────────
 
-    testWidgets('Log This Meal adds item to foodProvider state', (tester) async {
+    testWidgets('Log This Meal adds item to foodProvider state', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
-      await container
-          .read(fixMyMealProvider.notifier)
-          .pickImage(_pohaBytes());
+      await container.read(fixMyMealProvider.notifier).pickImage(_pohaBytes());
       await tester.pump(Duration.zero);
 
       final foodBefore = container.read(foodProvider).loggedItems.length;

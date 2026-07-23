@@ -23,18 +23,17 @@ class HLCTimestamp implements Comparable<HLCTimestamp> {
   }
 }
 
-enum SyncResolutionType {
-  merged,
-  keepLocal,
-  keepRemote,
-}
+enum SyncResolutionType { merged, keepLocal, keepRemote }
 
 class SyncResolution {
   const SyncResolution._(this.type, [this.mergedRecord]);
 
-  factory SyncResolution.merged(SyncableEntity merged) => SyncResolution._(SyncResolutionType.merged, merged);
-  factory SyncResolution.keepLocal() => const SyncResolution._(SyncResolutionType.keepLocal);
-  factory SyncResolution.keepRemote() => const SyncResolution._(SyncResolutionType.keepRemote);
+  factory SyncResolution.merged(SyncableEntity merged) =>
+      SyncResolution._(SyncResolutionType.merged, merged);
+  factory SyncResolution.keepLocal() =>
+      const SyncResolution._(SyncResolutionType.keepLocal);
+  factory SyncResolution.keepRemote() =>
+      const SyncResolution._(SyncResolutionType.keepRemote);
 
   final SyncResolutionType type;
   final SyncableEntity? mergedRecord;
@@ -52,7 +51,7 @@ class SyncMergeResolver {
     //    deltas — deduplicated by syncBatchId, see CumulativeLog.mergeWith.
     if (localRecord is CumulativeLog && remoteRecord is CumulativeLog) {
       return SyncResolution.merged(
-        (localRecord as CumulativeLog).mergeWith(remoteRecord as CumulativeLog)
+        (localRecord as CumulativeLog).mergeWith(remoteRecord as CumulativeLog),
       );
     }
 

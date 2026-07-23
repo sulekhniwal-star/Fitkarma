@@ -4,7 +4,17 @@ import 'package:fitkarma/core/database/app_database.dart';
 import 'package:fitkarma/core/brain/readiness_engine.dart';
 
 // Soreness mapping definitions
-enum MuscleGroup { shoulders, chest, abs, quads, arms, lowerBack, glutes, hamstrings }
+enum MuscleGroup {
+  shoulders,
+  chest,
+  abs,
+  quads,
+  arms,
+  lowerBack,
+  glutes,
+  hamstrings,
+}
+
 enum SorenessSeverity { none, mild, moderate, severe }
 
 class SorenessState {
@@ -12,18 +22,25 @@ class SorenessState {
   const SorenessState({required this.sorenessMap});
 
   factory SorenessState.initial() => SorenessState(
-        sorenessMap: {for (var m in MuscleGroup.values) m: SorenessSeverity.none},
-      );
+    sorenessMap: {for (var m in MuscleGroup.values) m: SorenessSeverity.none},
+  );
 
   // Compute composite score (1 to 5 scale) for Readiness Engine Ingestion
   int get compositeSorenessValue {
     int totalPoints = 0;
     for (final severity in sorenessMap.values) {
       switch (severity) {
-        case SorenessSeverity.none: break;
-        case SorenessSeverity.mild: totalPoints += 1; break;
-        case SorenessSeverity.moderate: totalPoints += 2; break;
-        case SorenessSeverity.severe: totalPoints += 3; break;
+        case SorenessSeverity.none:
+          break;
+        case SorenessSeverity.mild:
+          totalPoints += 1;
+          break;
+        case SorenessSeverity.moderate:
+          totalPoints += 2;
+          break;
+        case SorenessSeverity.severe:
+          totalPoints += 3;
+          break;
       }
     }
     if (totalPoints == 0) return 1;
@@ -101,8 +118,9 @@ class RecoveryLogNotifier extends Notifier<RecoveryLogState> {
   }
 
   void updateSoreness(MuscleGroup muscle, SorenessSeverity severity) {
-    final updatedMap = Map<MuscleGroup, SorenessSeverity>.from(state.soreness.sorenessMap)
-      ..[muscle] = severity;
+    final updatedMap = Map<MuscleGroup, SorenessSeverity>.from(
+      state.soreness.sorenessMap,
+    )..[muscle] = severity;
     state = state.copyWith(soreness: SorenessState(sorenessMap: updatedMap));
     _recalculateReadiness();
   }
@@ -200,6 +218,7 @@ class RecoveryLogNotifier extends Notifier<RecoveryLogState> {
   }
 }
 
-final recoveryLogProvider = NotifierProvider<RecoveryLogNotifier, RecoveryLogState>(
-  RecoveryLogNotifier.new,
-);
+final recoveryLogProvider =
+    NotifierProvider<RecoveryLogNotifier, RecoveryLogState>(
+      RecoveryLogNotifier.new,
+    );

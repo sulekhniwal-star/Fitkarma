@@ -22,11 +22,7 @@ extension WearableSourceExtension on WearableSource {
   }
 }
 
-enum MetricType {
-  cumulativeSteps,
-  pointInTimeHeartRate,
-  sleepDuration,
-}
+enum MetricType { cumulativeSteps, pointInTimeHeartRate, sleepDuration }
 
 class WearableDataPoint {
   final DateTime timestamp;
@@ -74,13 +70,41 @@ class DeviceProfile {
 
 class DeviceReliabilityEngine {
   static const Map<WearableSource, DeviceProfile> deviceProfiles = {
-    WearableSource.appleWatch: DeviceProfile(hrvConfidence: 0.85, hrConfidence: 0.95, confidenceLabel: 'High'),
-    WearableSource.whoop: DeviceProfile(hrvConfidence: 0.95, hrConfidence: 0.90, confidenceLabel: 'Very High'),
-    WearableSource.garmin: DeviceProfile(hrvConfidence: 0.88, hrConfidence: 0.88, confidenceLabel: 'High'),
-    WearableSource.samsungWatch: DeviceProfile(hrvConfidence: 0.70, hrConfidence: 0.85, confidenceLabel: 'Medium'),
-    WearableSource.fitbit: DeviceProfile(hrvConfidence: 0.65, hrConfidence: 0.75, confidenceLabel: 'Medium'),
-    WearableSource.miBand: DeviceProfile(hrvConfidence: 0.40, hrConfidence: 0.60, confidenceLabel: 'Low'),
-    WearableSource.manual: DeviceProfile(hrvConfidence: 0.30, hrConfidence: 0.30, confidenceLabel: 'Low'),
+    WearableSource.appleWatch: DeviceProfile(
+      hrvConfidence: 0.85,
+      hrConfidence: 0.95,
+      confidenceLabel: 'High',
+    ),
+    WearableSource.whoop: DeviceProfile(
+      hrvConfidence: 0.95,
+      hrConfidence: 0.90,
+      confidenceLabel: 'Very High',
+    ),
+    WearableSource.garmin: DeviceProfile(
+      hrvConfidence: 0.88,
+      hrConfidence: 0.88,
+      confidenceLabel: 'High',
+    ),
+    WearableSource.samsungWatch: DeviceProfile(
+      hrvConfidence: 0.70,
+      hrConfidence: 0.85,
+      confidenceLabel: 'Medium',
+    ),
+    WearableSource.fitbit: DeviceProfile(
+      hrvConfidence: 0.65,
+      hrConfidence: 0.75,
+      confidenceLabel: 'Medium',
+    ),
+    WearableSource.miBand: DeviceProfile(
+      hrvConfidence: 0.40,
+      hrConfidence: 0.60,
+      confidenceLabel: 'Low',
+    ),
+    WearableSource.manual: DeviceProfile(
+      hrvConfidence: 0.30,
+      hrConfidence: 0.30,
+      confidenceLabel: 'Low',
+    ),
   };
 
   WearableReadingResult applyConfidence({
@@ -96,14 +120,15 @@ class DeviceReliabilityEngine {
       hrvConfidence: profile.hrvConfidence,
       hrConfidence: profile.hrConfidence,
       readinessWeight: _readinessWeight(profile.hrvConfidence),
-      displayLabel: '${source.displayName} · ${profile.confidenceLabel} confidence',
+      displayLabel:
+          '${source.displayName} · ${profile.confidenceLabel} confidence',
     );
   }
 
   double _readinessWeight(double confidence) {
-    if (confidence >= 0.85) return 1.0;   // Full weight
-    if (confidence >= 0.65) return 0.70;  // 70% weight
-    return 0.40;                           // 40% weight — guideline only
+    if (confidence >= 0.85) return 1.0; // Full weight
+    if (confidence >= 0.65) return 0.70; // 70% weight
+    return 0.40; // 40% weight — guideline only
   }
 }
 
@@ -141,17 +166,29 @@ class WearableSyncMerger {
       }
     }
 
-    return merged.values.toList()..sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    return merged.values.toList()
+      ..sort((a, b) => a.timestamp.compareTo(b.timestamp));
   }
 
   String _makeKey(WearableDataPoint p) {
     if (p.type == MetricType.pointInTimeHeartRate) {
       // Bucket by minute to prevent overlapping heart rates
-      final bucket = DateTime(p.timestamp.year, p.timestamp.month, p.timestamp.day, p.timestamp.hour, p.timestamp.minute);
+      final bucket = DateTime(
+        p.timestamp.year,
+        p.timestamp.month,
+        p.timestamp.day,
+        p.timestamp.hour,
+        p.timestamp.minute,
+      );
       return '${p.type.name}_$bucket';
     } else if (p.type == MetricType.cumulativeSteps) {
       // Bucket by hour to prevent double counting steps between watch and phone
-      final bucket = DateTime(p.timestamp.year, p.timestamp.month, p.timestamp.day, p.timestamp.hour);
+      final bucket = DateTime(
+        p.timestamp.year,
+        p.timestamp.month,
+        p.timestamp.day,
+        p.timestamp.hour,
+      );
       return '${p.type.name}_$bucket';
     }
     // Daily point metrics

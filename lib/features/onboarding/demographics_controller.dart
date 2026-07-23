@@ -16,32 +16,32 @@ enum ActivityLevel {
 
   String get label {
     return switch (this) {
-      ActivityLevel.sedentary        => 'Sedentary',
-      ActivityLevel.lightlyActive    => 'Lightly Active',
+      ActivityLevel.sedentary => 'Sedentary',
+      ActivityLevel.lightlyActive => 'Lightly Active',
       ActivityLevel.moderatelyActive => 'Moderately Active',
-      ActivityLevel.veryActive       => 'Very Active',
-      ActivityLevel.extraActive      => 'Extra Active',
+      ActivityLevel.veryActive => 'Very Active',
+      ActivityLevel.extraActive => 'Extra Active',
     };
   }
 
   String get labelHindi {
     return switch (this) {
-      ActivityLevel.sedentary        => 'कम सक्रिय',
-      ActivityLevel.lightlyActive    => 'थोड़ा सक्रिय',
+      ActivityLevel.sedentary => 'कम सक्रिय',
+      ActivityLevel.lightlyActive => 'थोड़ा सक्रिय',
       ActivityLevel.moderatelyActive => 'सामान्य सक्रिय',
-      ActivityLevel.veryActive       => 'बहुत सक्रिय',
-      ActivityLevel.extraActive      => 'अत्यधिक सक्रिय',
+      ActivityLevel.veryActive => 'बहुत सक्रिय',
+      ActivityLevel.extraActive => 'अत्यधिक सक्रिय',
     };
   }
 
   /// Mifflin-St Jeor activity multiplier.
   double get multiplier {
     return switch (this) {
-      ActivityLevel.sedentary        => 1.2,
-      ActivityLevel.lightlyActive    => 1.375,
+      ActivityLevel.sedentary => 1.2,
+      ActivityLevel.lightlyActive => 1.375,
       ActivityLevel.moderatelyActive => 1.55,
-      ActivityLevel.veryActive       => 1.725,
-      ActivityLevel.extraActive      => 1.9,
+      ActivityLevel.veryActive => 1.725,
+      ActivityLevel.extraActive => 1.9,
     };
   }
 }
@@ -63,9 +63,9 @@ class BmiResult {
   String get categoryLabel {
     return switch (category) {
       BmiCategory.underweight => 'Underweight',
-      BmiCategory.normal      => 'Normal',
-      BmiCategory.overweight  => 'Overweight',
-      BmiCategory.obese       => 'Obese',
+      BmiCategory.normal => 'Normal',
+      BmiCategory.overweight => 'Overweight',
+      BmiCategory.obese => 'Obese',
     };
   }
 
@@ -79,13 +79,13 @@ class BmiResult {
 
 class DemographicsState {
   const DemographicsState({
-    this.gender        = Gender.male,
-    this.age           = 25,
-    this.heightCm      = 170.0,
-    this.weightKg      = 70.0,
+    this.gender = Gender.male,
+    this.age = 25,
+    this.heightCm = 170.0,
+    this.weightKg = 70.0,
     this.activityLevel = ActivityLevel.sedentary,
-    this.isSaving      = false,
-    this.unitIsMetric  = true,
+    this.isSaving = false,
+    this.unitIsMetric = true,
   });
 
   final Gender gender;
@@ -102,7 +102,8 @@ class DemographicsState {
   // ── Derived ─────────────────────────────────────────────────────────────────
 
   BmiResult get bmi {
-    if (heightCm <= 0) return const BmiResult(score: 0, category: BmiCategory.normal);
+    if (heightCm <= 0)
+      return const BmiResult(score: 0, category: BmiCategory.normal);
     final hM = heightCm / 100.0;
     final score = weightKg / (hM * hM);
     final BmiCategory cat;
@@ -133,9 +134,9 @@ class DemographicsState {
   int get dailyCalorieTarget {
     return switch (bmi.category) {
       BmiCategory.underweight => tdee + 300,
-      BmiCategory.normal      => tdee,
-      BmiCategory.overweight  => (tdee - 300).clamp(1200, 9999),
-      BmiCategory.obese       => (tdee - 500).clamp(1200, 9999),
+      BmiCategory.normal => tdee,
+      BmiCategory.overweight => (tdee - 300).clamp(1200, 9999),
+      BmiCategory.obese => (tdee - 500).clamp(1200, 9999),
     };
   }
 
@@ -167,13 +168,13 @@ class DemographicsState {
     bool? unitIsMetric,
   }) {
     return DemographicsState(
-      gender:        gender        ?? this.gender,
-      age:           age           ?? this.age,
-      heightCm:      heightCm      ?? this.heightCm,
-      weightKg:      weightKg      ?? this.weightKg,
+      gender: gender ?? this.gender,
+      age: age ?? this.age,
+      heightCm: heightCm ?? this.heightCm,
+      weightKg: weightKg ?? this.weightKg,
       activityLevel: activityLevel ?? this.activityLevel,
-      isSaving:      isSaving      ?? this.isSaving,
-      unitIsMetric:  unitIsMetric  ?? this.unitIsMetric,
+      isSaving: isSaving ?? this.isSaving,
+      unitIsMetric: unitIsMetric ?? this.unitIsMetric,
     );
   }
 }
@@ -187,17 +188,24 @@ class DemographicsNotifier extends Notifier<DemographicsState> {
   DemographicsState build() => const DemographicsState();
 
   void setGender(Gender gender) => state = state.copyWith(gender: gender);
-  void setAge(int age)          => state = state.copyWith(age: age.clamp(13, 100));
-  void setHeight(double cm)     => state = state.copyWith(heightCm: cm.clamp(100.0, 250.0));
-  void setWeight(double kg)     => state = state.copyWith(weightKg: kg.clamp(20.0, 250.0));
-  void setActivity(ActivityLevel level) => state = state.copyWith(activityLevel: level);
-  void toggleUnit() => state = state.copyWith(unitIsMetric: !state.unitIsMetric);
+  void setAge(int age) => state = state.copyWith(age: age.clamp(13, 100));
+  void setHeight(double cm) =>
+      state = state.copyWith(heightCm: cm.clamp(100.0, 250.0));
+  void setWeight(double kg) =>
+      state = state.copyWith(weightKg: kg.clamp(20.0, 250.0));
+  void setActivity(ActivityLevel level) =>
+      state = state.copyWith(activityLevel: level);
+  void toggleUnit() =>
+      state = state.copyWith(unitIsMetric: !state.unitIsMetric);
 
   /// Validates all required fields. Returns an error string or null if valid.
   String? validate() {
-    if (state.age < 13 || state.age > 100) return 'Please enter a valid age (13–100).';
-    if (state.heightCm < 100 || state.heightCm > 250) return 'Please enter a valid height (100–250 cm).';
-    if (state.weightKg < 20 || state.weightKg > 250) return 'Please enter a valid weight (20–250 kg).';
+    if (state.age < 13 || state.age > 100)
+      return 'Please enter a valid age (13–100).';
+    if (state.heightCm < 100 || state.heightCm > 250)
+      return 'Please enter a valid height (100–250 cm).';
+    if (state.weightKg < 20 || state.weightKg > 250)
+      return 'Please enter a valid weight (20–250 kg).';
     return null;
   }
 
@@ -205,12 +213,12 @@ class DemographicsNotifier extends Notifier<DemographicsState> {
   Future<void> saveToDb(AppDatabase db, String userId) async {
     state = state.copyWith(isSaving: true);
     await db.updateUserDemographics(
-      userId:             userId,
-      age:                state.age,
-      gender:             state.gender.name,
-      heightCm:           state.heightCm,
-      weightKg:           state.weightKg,
-      activityLevel:      state.activityLevel.name,
+      userId: userId,
+      age: state.age,
+      gender: state.gender.name,
+      heightCm: state.heightCm,
+      weightKg: state.weightKg,
+      activityLevel: state.activityLevel.name,
       dailyCalorieTarget: state.dailyCalorieTarget,
     );
     state = state.copyWith(isSaving: false);
@@ -220,5 +228,5 @@ class DemographicsNotifier extends Notifier<DemographicsState> {
 /// Provider for the Demographics Screen state machine.
 final demographicsProvider =
     NotifierProvider<DemographicsNotifier, DemographicsState>(
-  DemographicsNotifier.new,
-);
+      DemographicsNotifier.new,
+    );

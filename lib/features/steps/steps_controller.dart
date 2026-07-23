@@ -58,14 +58,7 @@ class StepsNotifier extends Notifier<StepsState> {
       distanceKm: 6.2,
       activeMinutes: 52,
       caloriesBurned: 340,
-      hourlySteps: {
-        8: 1200,
-        10: 2500,
-        12: 1500,
-        14: 800,
-        16: 1800,
-        18: 620,
-      },
+      hourlySteps: {8: 1200, 10: 2500, 12: 1500, 14: 800, 16: 1800, 18: 620},
       syncStatus: 'Synced',
       isLoading: true,
     );
@@ -79,9 +72,9 @@ class StepsNotifier extends Notifier<StepsState> {
       final midnight = DateTime(now.year, now.month, now.day);
 
       // Query step logs for today
-      final logs = await (db.select(db.stepLogs)
-            ..where((t) => t.loggedAt.isBiggerOrEqualValue(midnight)))
-          .get();
+      final logs = await (db.select(
+        db.stepLogs,
+      )..where((t) => t.loggedAt.isBiggerOrEqualValue(midnight))).get();
 
       // Cumulative Log pattern: sum all deltas for the day
       int dbSteps = 0;
@@ -135,16 +128,18 @@ class StepsNotifier extends Notifier<StepsState> {
       final now = DateTime.now();
 
       // Insert delta using CumulativeLog pattern
-      await db.into(db.stepLogs).insert(
-        StepLogsCompanion.insert(
-          steps: deltaSteps,
-          syncBatchId: 'batch_${now.millisecondsSinceEpoch}',
-          loggedAt: now,
-          hlcPhysicalTime: now,
-          hlcLogicalCounter: 0,
-          hlcNodeId: 'device_sensor',
-        ),
-      );
+      await db
+          .into(db.stepLogs)
+          .insert(
+            StepLogsCompanion.insert(
+              steps: deltaSteps,
+              syncBatchId: 'batch_${now.millisecondsSinceEpoch}',
+              loggedAt: now,
+              hlcPhysicalTime: now,
+              hlcLogicalCounter: 0,
+              hlcNodeId: 'device_sensor',
+            ),
+          );
 
       await loadFromDb();
       state = state.copyWith(syncStatus: 'Synced');

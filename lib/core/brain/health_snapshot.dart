@@ -20,14 +20,14 @@ class HealthSnapshot {
   final double dailyProteinTargetG;
   final double dailyHydrationTargetL;
   final int dailyStepTarget;
-  
+
   // 7-day averages/telemetry
   final double avgSteps7Days;
   final double avgSleepMinutes7Days;
   final double avgWaterCups7Days;
   final double avgReadinessScore7Days;
   final double avgHeartRate7Days;
-  
+
   // Risk alerts detected locally
   final List<String> localRisks;
 

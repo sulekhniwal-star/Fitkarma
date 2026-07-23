@@ -9,29 +9,13 @@ library;
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// Primary geographical culinary regions of India.
-enum IndianRegion {
-  north,
-  south,
-  east,
-  west,
-  central,
-}
+enum IndianRegion { north, south, east, west, central }
 
 /// Preparation method affecting oil and hidden fat density.
-enum CookingStyle {
-  homeCooked,
-  lowOil,
-  restaurantStyle,
-  dhabaStyle,
-}
+enum CookingStyle { homeCooked, lowOil, restaurantStyle, dhabaStyle }
 
 /// Religious or cultural fasting modes.
-enum FastingMode {
-  none,
-  navratri,
-  ramadan,
-  ekadashi,
-}
+enum FastingMode { none, navratri, ramadan, ekadashi }
 
 /// Profile defining oil usage and fat multipliers by region and cooking style.
 class RegionalOilProfile {
@@ -384,9 +368,13 @@ class FastingValidator {
       switch (mode) {
         case FastingMode.navratri:
           if (item.isGrain) {
-            violations.add('${item.name} contains cereal grains (not allowed in Navratri fast)');
+            violations.add(
+              '${item.name} contains cereal grains (not allowed in Navratri fast)',
+            );
           } else if (item.isLegume) {
-            violations.add('${item.name} contains pulses/legumes (avoid during Navratri fast)');
+            violations.add(
+              '${item.name} contains pulses/legumes (avoid during Navratri fast)',
+            );
           } else if (!item.isFastingFriendly) {
             violations.add('${item.name} is not fasting-friendly');
           }
@@ -394,17 +382,26 @@ class FastingValidator {
 
         case FastingMode.ekadashi:
           if (item.isGrain) {
-            violations.add('${item.name} contains grains (Ekadashi prohibits grains)');
+            violations.add(
+              '${item.name} contains grains (Ekadashi prohibits grains)',
+            );
           } else if (item.isLegume) {
-            violations.add('${item.name} contains beans/pulses (Ekadashi prohibits legumes)');
+            violations.add(
+              '${item.name} contains beans/pulses (Ekadashi prohibits legumes)',
+            );
           }
           break;
 
         case FastingMode.ramadan:
           // Ramadan: Check macro suitability for Sehri (pre-fast) vs Iftar (break fast)
-          final totalFiber = components.fold<double>(0, (sum, c) => sum + c.fiberG);
+          final totalFiber = components.fold<double>(
+            0,
+            (sum, c) => sum + c.fiberG,
+          );
           if (totalFiber < 4.0) {
-            recommendations.add('Add high-fiber foods for sustained energy during Sehri');
+            recommendations.add(
+              'Add high-fiber foods for sustained energy during Sehri',
+            );
           }
           break;
 
@@ -414,9 +411,13 @@ class FastingValidator {
     }
 
     if (mode == FastingMode.navratri && violations.isNotEmpty) {
-      recommendations.add('Replace grains/pulses with Sabudana, Kuttu, Singhara, or fruits');
+      recommendations.add(
+        'Replace grains/pulses with Sabudana, Kuttu, Singhara, or fruits',
+      );
     } else if (mode == FastingMode.ekadashi && violations.isNotEmpty) {
-      recommendations.add('Opt for milk, curd, fruits, and root vegetables on Ekadashi');
+      recommendations.add(
+        'Opt for milk, curd, fruits, and root vegetables on Ekadashi',
+      );
     }
 
     return FastingValidationResult(
@@ -464,9 +465,8 @@ class MixedDishEstimateResult {
 }
 
 class MixedDishMacroEstimator {
-  const MixedDishMacroEstimator({
-    FastingValidator? fastingValidator,
-  }) : _fastingValidator = fastingValidator ?? const FastingValidator();
+  const MixedDishMacroEstimator({FastingValidator? fastingValidator})
+    : _fastingValidator = fastingValidator ?? const FastingValidator();
 
   final FastingValidator _fastingValidator;
 
@@ -525,7 +525,9 @@ class MixedDishMacroEstimator {
     final fatDeltaGrams = adjustedFat - baseFat;
     final adjustedCalories = baseCalories + (fatDeltaGrams * 9.0);
 
-    final weightedGI = baseCarbs > 0 ? (carbWeightedGISum / baseCarbs).round() : 0;
+    final weightedGI = baseCarbs > 0
+        ? (carbWeightedGISum / baseCarbs).round()
+        : 0;
 
     final fastingVal = _fastingValidator.validate(
       components: components,

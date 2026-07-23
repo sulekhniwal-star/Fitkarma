@@ -6,12 +6,7 @@ import 'package:fitkarma/core/sync/connectivity_service.dart';
 import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum AIComplexity {
-  classification,
-  dailyInsight,
-  coaching,
-  planning,
-}
+enum AIComplexity { classification, dailyInsight, coaching, planning }
 
 class AIRequest {
   AIRequest({
@@ -29,9 +24,9 @@ class AIRequest {
 
 // Model Tiers for Groq API selection
 enum GroqModel {
-  llama3_8b,          // Tiny (Classification, Category Labeling)
-  llama3_70b_medium,  // Medium (Daily insights, Program adaptations)
-  llama3_70b_full,    // Large (AI Coach chats, Transformation planning)
+  llama3_8b, // Tiny (Classification, Category Labeling)
+  llama3_70b_medium, // Medium (Daily insights, Program adaptations)
+  llama3_70b_full, // Large (AI Coach chats, Transformation planning)
 }
 
 final aiRouterProvider = Provider<AIRouter>((ref) {
@@ -59,11 +54,11 @@ class AIRouter {
   final InsightTemplateEngine _templateEngine;
   final AICache _cache;
   final Future<bool> Function() _checkOnline;
-  
+
   // Custom mock configurations for local Gemma execution
   bool isLocalModelLoaded = true;
   DeviceTier deviceHardwareTier = DeviceTier.medium;
-  
+
   // Simulates flaky Groq endpoint behavior for retry policy validations
   bool simulateFlakyGroq = false;
   int _groqFailuresCount = 0;
@@ -106,9 +101,9 @@ class AIRouter {
   GroqModel _selectModel(AIComplexity complexity) {
     return switch (complexity) {
       AIComplexity.classification => GroqModel.llama3_8b,
-      AIComplexity.dailyInsight   => GroqModel.llama3_70b_medium,
-      AIComplexity.coaching       => GroqModel.llama3_70b_full,
-      AIComplexity.planning       => GroqModel.llama3_70b_full,
+      AIComplexity.dailyInsight => GroqModel.llama3_70b_medium,
+      AIComplexity.coaching => GroqModel.llama3_70b_full,
+      AIComplexity.planning => GroqModel.llama3_70b_full,
     };
   }
 
@@ -123,9 +118,11 @@ class AIRouter {
       try {
         if (simulateFlakyGroq && _groqFailuresCount < 2) {
           _groqFailuresCount++;
-          throw Exception("HTTP 503: Groq Service Temporarily Unavailable (Flaky Demo)");
+          throw Exception(
+            "HTTP 503: Groq Service Temporarily Unavailable (Flaky Demo)",
+          );
         }
-        
+
         // Reset count on success
         _groqFailuresCount = 0;
         return "Mock Groq Response from ${model.name}: Verified primary insights successfully computed.";

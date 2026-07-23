@@ -22,10 +22,10 @@ class ReadinessResult {
 class ReadinessScoreCalculator {
   // All weights are configurable
   ReadinessResult calculate({
-    required int sleepQuality,        // 1–5
+    required int sleepQuality, // 1–5
     required int sleepDurationMin,
-    required int sorenessLevel,       // 1–5
-    required int stressLevel,         // 1–5
+    required int sorenessLevel, // 1–5
+    required int stressLevel, // 1–5
     double? restingHR,
     double? hrv,
     double? baselineHR,
@@ -35,8 +35,8 @@ class ReadinessScoreCalculator {
 
     // Sleep quality (max 35 pts)
     score -= (5 - sleepQuality) * 7.0;
-    if (sleepDurationMin < 360) score -= 10;  // < 6h
-    if (sleepDurationMin < 300) score -= 10;  // < 5h
+    if (sleepDurationMin < 360) score -= 10; // < 6h
+    if (sleepDurationMin < 300) score -= 10; // < 5h
 
     // Soreness (max 20 pts)
     score -= (sorenessLevel - 1) * 5.0;

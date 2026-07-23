@@ -43,7 +43,8 @@ class DoshaGuidelines {
     required this.recommendedSpices,
   });
 
-  factory DoshaGuidelines.fromJson(Map<String, dynamic> json) => DoshaGuidelines(
+  factory DoshaGuidelines.fromJson(Map<String, dynamic> json) =>
+      DoshaGuidelines(
         dietaryFocus: json['dietaryFocus'] as String,
         stressFocus: json['stressFocus'] as String,
         recommendedSpices: List<String>.from(json['recommendedSpices'] as List),
@@ -54,10 +55,10 @@ class DoshaGuidelines {
   final List<String> recommendedSpices;
 
   Map<String, dynamic> toJson() => {
-        'dietaryFocus': dietaryFocus,
-        'stressFocus': stressFocus,
-        'recommendedSpices': recommendedSpices,
-      };
+    'dietaryFocus': dietaryFocus,
+    'stressFocus': stressFocus,
+    'recommendedSpices': recommendedSpices,
+  };
 }
 
 class DoshaResult {
@@ -75,7 +76,9 @@ class DoshaResult {
       vataPct: (json['vataPct'] as num).toDouble(),
       pittaPct: (json['pittaPct'] as num).toDouble(),
       kaphaPct: (json['kaphaPct'] as num).toDouble(),
-      guidelines: DoshaGuidelines.fromJson(json['guidelines'] as Map<String, dynamic>),
+      guidelines: DoshaGuidelines.fromJson(
+        json['guidelines'] as Map<String, dynamic>,
+      ),
     );
   }
 
@@ -86,12 +89,12 @@ class DoshaResult {
   final DoshaGuidelines guidelines;
 
   Map<String, dynamic> toJson() => {
-        'dominant': dominant.name,
-        'vataPct': vataPct,
-        'pittaPct': pittaPct,
-        'kaphaPct': kaphaPct,
-        'guidelines': guidelines.toJson(),
-      };
+    'dominant': dominant.name,
+    'vataPct': vataPct,
+    'pittaPct': pittaPct,
+    'kaphaPct': kaphaPct,
+    'guidelines': guidelines.toJson(),
+  };
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -135,9 +138,15 @@ class DoshaQuizScoringEngine {
       );
     }
 
-    final vataPct = double.parse(((vataScore / total) * 100).toStringAsFixed(1));
-    final pittaPct = double.parse(((pittaScore / total) * 100).toStringAsFixed(1));
-    final kaphaPct = double.parse(((kaphaScore / total) * 100).toStringAsFixed(1));
+    final vataPct = double.parse(
+      ((vataScore / total) * 100).toStringAsFixed(1),
+    );
+    final pittaPct = double.parse(
+      ((pittaScore / total) * 100).toStringAsFixed(1),
+    );
+    final kaphaPct = double.parse(
+      ((kaphaScore / total) * 100).toStringAsFixed(1),
+    );
 
     DoshaType dominant = DoshaType.vata;
     double maxPct = vataPct;
@@ -161,20 +170,31 @@ class DoshaQuizScoringEngine {
   DoshaGuidelines _generateGuidelines(DoshaType dominant) {
     return switch (dominant) {
       DoshaType.vata => const DoshaGuidelines(
-          dietaryFocus: "Warm, cooked, and grounding foods. Favor sweet, sour, and salty tastes. Limit raw/cold items.",
-          stressFocus: "Gentle grounding routines, warm oil self-massage (Abhyanga), and restorative yoga.",
-          recommendedSpices: ["Ginger", "Cardamom", "Cinnamon", "Cumin"],
-        ),
+        dietaryFocus:
+            "Warm, cooked, and grounding foods. Favor sweet, sour, and salty tastes. Limit raw/cold items.",
+        stressFocus:
+            "Gentle grounding routines, warm oil self-massage (Abhyanga), and restorative yoga.",
+        recommendedSpices: ["Ginger", "Cardamom", "Cinnamon", "Cumin"],
+      ),
       DoshaType.pitta => const DoshaGuidelines(
-          dietaryFocus: "Cooling, hydrating foods. Favor sweet, bitter, and astringent tastes. Avoid spicy/fermented foods.",
-          stressFocus: "Non-competitive exercise, cooling breathing practices (Shitali Pranayama), and spending time in nature.",
-          recommendedSpices: ["Fennel", "Coriander", "Cilantro", "Turmeric"],
-        ),
+        dietaryFocus:
+            "Cooling, hydrating foods. Favor sweet, bitter, and astringent tastes. Avoid spicy/fermented foods.",
+        stressFocus:
+            "Non-competitive exercise, cooling breathing practices (Shitali Pranayama), and spending time in nature.",
+        recommendedSpices: ["Fennel", "Coriander", "Cilantro", "Turmeric"],
+      ),
       DoshaType.kapha => const DoshaGuidelines(
-          dietaryFocus: "Warm, light, and dry foods. Favor pungent, bitter, and astringent tastes. Avoid heavy dairy and sweets.",
-          stressFocus: "Vigorous daily physical activity, stimulating dynamic breathing (Kapalabhati), and warm-up stretches.",
-          recommendedSpices: ["Black Pepper", "Ginger", "Mustard Seeds", "Cayenne"],
-        ),
+        dietaryFocus:
+            "Warm, light, and dry foods. Favor pungent, bitter, and astringent tastes. Avoid heavy dairy and sweets.",
+        stressFocus:
+            "Vigorous daily physical activity, stimulating dynamic breathing (Kapalabhati), and warm-up stretches.",
+        recommendedSpices: [
+          "Black Pepper",
+          "Ginger",
+          "Mustard Seeds",
+          "Cayenne",
+        ],
+      ),
     };
   }
 }
@@ -261,8 +281,10 @@ const List<DoshaQuestion> doshaQuestions = [
         associatedDosha: DoshaType.vata,
       ),
       DoshaOption(
-        text: 'Strong, intense, get "hangry" if meals are delayed, prone to acidity',
-        textHindi: 'तीव्र भूख, भोजन में देरी होने पर गुस्सा आना, एसिडिटी की संभावना',
+        text:
+            'Strong, intense, get "hangry" if meals are delayed, prone to acidity',
+        textHindi:
+            'तीव्र भूख, भोजन में देरी होने पर गुस्सा आना, एसिडिटी की संभावना',
         associatedDosha: DoshaType.pitta,
       ),
       DoshaOption(
@@ -319,7 +341,8 @@ const List<DoshaQuestion> doshaQuestions = [
   DoshaQuestion(
     id: 'weather_preference',
     question: 'What weather or environmental conditions do you dislike most?',
-    questionHindi: 'आप किस मौसम या पर्यावरणीय परिस्थितियों को सबसे कम पसंद करते हैं?',
+    questionHindi:
+        'आप किस मौसम या पर्यावरणीय परिस्थितियों को सबसे कम पसंद करते हैं?',
     options: [
       DoshaOption(
         text: 'Cold, windy, and dry weather',
@@ -355,7 +378,8 @@ const List<DoshaQuestion> doshaQuestions = [
       ),
       DoshaOption(
         text: 'Steady, slow-paced, high endurance but needs push to start',
-        textHindi: 'स्थिर, धीमी गति, उच्च सहनशक्ति लेकिन शुरुआत के लिए प्रेरणा चाहिए',
+        textHindi:
+            'स्थिर, धीमी गति, उच्च सहनशक्ति लेकिन शुरुआत के लिए प्रेरणा चाहिए',
         associatedDosha: DoshaType.kapha,
       ),
     ],
@@ -399,7 +423,8 @@ const List<DoshaQuestion> doshaQuestions = [
       ),
       DoshaOption(
         text: 'Learn slowly, but retain permanently; patient and methodical',
-        textHindi: 'धीमे सीखना, लेकिन हमेशा के लिए याद रखना; धैर्यवान और व्यवस्थित',
+        textHindi:
+            'धीमे सीखना, लेकिन हमेशा के लिए याद रखना; धैर्यवान और व्यवस्थित',
         associatedDosha: DoshaType.kapha,
       ),
     ],
@@ -449,19 +474,24 @@ class OnboardingDoshaNotifier extends Notifier<DoshaQuizState> {
   DoshaQuizState build() => const DoshaQuizState();
 
   void selectOption(String questionId, DoshaType dosha) {
-    final updatedAnswers = Map<String, DoshaType>.from(state.answers)..[questionId] = dosha;
+    final updatedAnswers = Map<String, DoshaType>.from(state.answers)
+      ..[questionId] = dosha;
     state = state.copyWith(answers: updatedAnswers);
   }
 
   void nextQuestion() {
     if (state.activeQuestionIndex < doshaQuestions.length - 1) {
-      state = state.copyWith(activeQuestionIndex: state.activeQuestionIndex + 1);
+      state = state.copyWith(
+        activeQuestionIndex: state.activeQuestionIndex + 1,
+      );
     }
   }
 
   void previousQuestion() {
     if (state.activeQuestionIndex > 0) {
-      state = state.copyWith(activeQuestionIndex: state.activeQuestionIndex - 1);
+      state = state.copyWith(
+        activeQuestionIndex: state.activeQuestionIndex - 1,
+      );
     }
   }
 
@@ -474,20 +504,17 @@ class OnboardingDoshaNotifier extends Notifier<DoshaQuizState> {
   Future<void> saveToDb(AppDatabase db, String userId) async {
     state = state.copyWith(isSaving: true);
     calculateResult();
-    
+
     if (state.result != null) {
       final serializedResult = jsonEncode(state.result!.toJson());
-      await db.updateUserProfile(
-        userId: userId,
-        dosha: serializedResult,
-      );
+      await db.updateUserProfile(userId: userId, dosha: serializedResult);
     }
-    
+
     state = state.copyWith(isSaving: false);
   }
 }
 
 final onboardingDoshaProvider =
     NotifierProvider<OnboardingDoshaNotifier, DoshaQuizState>(
-  OnboardingDoshaNotifier.new,
-);
+      OnboardingDoshaNotifier.new,
+    );

@@ -16,7 +16,9 @@ class HungerCravingState {
     this.logs = const [],
     this.currentStressLevel = 2.0,
     this.latestHungerScore = 2,
-    this.activeIntervention = const HungerIntervention(shouldTriggerNudge: false),
+    this.activeIntervention = const HungerIntervention(
+      shouldTriggerNudge: false,
+    ),
   });
 
   final List<HungerCravingLog> logs;
@@ -117,5 +119,5 @@ class HungerCravingNotifier extends Notifier<HungerCravingState> {
 
 final hungerCravingProvider =
     NotifierProvider<HungerCravingNotifier, HungerCravingState>(
-  HungerCravingNotifier.new,
-);
+      HungerCravingNotifier.new,
+    );

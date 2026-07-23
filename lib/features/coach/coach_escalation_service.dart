@@ -48,8 +48,14 @@ class CoachEscalationService {
     return false;
   }
 
-  Future<String> buildCoachBriefing(String userId, String reason, AppDatabase db) async {
-    final user = await (db.select(db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+  Future<String> buildCoachBriefing(
+    String userId,
+    String reason,
+    AppDatabase db,
+  ) async {
+    final user = await (db.select(
+      db.users,
+    )..where((t) => t.id.equals(userId))).getSingleOrNull();
     final name = user?.name ?? "User";
     final goals = user?.goals ?? "[]";
     final program = user?.currentProgram ?? "Corporate Fat Loss";
@@ -83,15 +89,23 @@ class CoachEscalationService {
     buffer.writeln("Program:      $program");
     buffer.writeln("");
     buffer.writeln("Current Status:");
-    buffer.writeln("  Weight:              ${currentWeight.toStringAsFixed(1)} kg");
+    buffer.writeln(
+      "  Weight:              ${currentWeight.toStringAsFixed(1)} kg",
+    );
     buffer.writeln("  Adherence:           Avg $adherenceScore%");
-    buffer.writeln("  Recovery Debt:       ${recoveryDebtMinutes > 0 ? '$recoveryDebtMinutes min deficit' : 'Healthy'}");
+    buffer.writeln(
+      "  Recovery Debt:       ${recoveryDebtMinutes > 0 ? '$recoveryDebtMinutes min deficit' : 'Healthy'}",
+    );
     buffer.writeln("");
     buffer.writeln("Escalation Reason:");
     buffer.writeln("  $reason");
     buffer.writeln("");
     buffer.writeln("AI Coach Notes (recent conversation):");
-    buffer.writeln(recentConversation.isNotEmpty ? recentConversation : "No recent chat history.");
+    buffer.writeln(
+      recentConversation.isNotEmpty
+          ? recentConversation
+          : "No recent chat history.",
+    );
 
     return buffer.toString();
   }
@@ -104,11 +118,13 @@ class CoachEscalationService {
     final briefing = await buildCoachBriefing(userId, reason, db);
 
     // Save escalation event to DB
-    await db.saveEscalationEvent(EscalationEventsCompanion.insert(
-      userId: userId,
-      reason: reason,
-      briefing: briefing,
-      escalatedAt: DateTime.now(),
-    ));
+    await db.saveEscalationEvent(
+      EscalationEventsCompanion.insert(
+        userId: userId,
+        reason: reason,
+        briefing: briefing,
+        escalatedAt: DateTime.now(),
+      ),
+    );
   }
 }

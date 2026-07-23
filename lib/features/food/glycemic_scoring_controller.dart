@@ -41,7 +41,9 @@ class GlycemicScoringState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final retrospectivePipelineProvider = Provider<RetrospectiveGlycemicPipeline>((ref) {
+final retrospectivePipelineProvider = Provider<RetrospectiveGlycemicPipeline>((
+  ref,
+) {
   return const RetrospectiveGlycemicPipeline();
 });
 
@@ -55,7 +57,9 @@ class GlycemicScoringNotifier extends Notifier<GlycemicScoringState> {
     final evaluations = pipeline.processMealHistory(
       loggedMeals: foodState.loggedItems,
       glucoseReadings: glucoseState.history,
-      defaultBaseline: glucoseState.fastingGlucose > 0 ? glucoseState.fastingGlucose : 95.0,
+      defaultBaseline: glucoseState.fastingGlucose > 0
+          ? glucoseState.fastingGlucose
+          : 95.0,
     );
 
     double totalScore = 0.0;
@@ -82,5 +86,5 @@ class GlycemicScoringNotifier extends Notifier<GlycemicScoringState> {
 
 final glycemicScoringProvider =
     NotifierProvider<GlycemicScoringNotifier, GlycemicScoringState>(
-  GlycemicScoringNotifier.new,
-);
+      GlycemicScoringNotifier.new,
+    );

@@ -11,22 +11,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor       = Color(0xFF161822);
-const _surfaceColor  = Color(0xFF202334);
-const _accentOrange  = Color(0xFFFF6B35);
-const _accentGreen   = Color(0xFF4ADE80);
-const _accentRed     = Color(0xFFF87171);
-const _accentYellow  = Color(0xFFFBBF24);
-const _accentPurple  = Color(0xFFA78BFA);
-const _textPrimary   = Color(0xFFEFF0F7);
+const _bgColor = Color(0xFF161822);
+const _surfaceColor = Color(0xFF202334);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentYellow = Color(0xFFFBBF24);
+const _accentPurple = Color(0xFFA78BFA);
+const _textPrimary = Color(0xFFEFF0F7);
 const _textSecondary = Color(0xFF9095B3);
-const _borderColor   = Color(0xFF2E324A);
+const _borderColor = Color(0xFF2E324A);
 
 class HungerLoggingDialog extends ConsumerStatefulWidget {
   const HungerLoggingDialog({super.key});
 
   @override
-  ConsumerState<HungerLoggingDialog> createState() => _HungerLoggingDialogState();
+  ConsumerState<HungerLoggingDialog> createState() =>
+      _HungerLoggingDialogState();
 }
 
 class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
@@ -66,7 +67,11 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close_rounded, color: _textSecondary, size: 20),
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: _textSecondary,
+                      size: 20,
+                    ),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
@@ -88,7 +93,11 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.bolt_rounded, color: _accentOrange, size: 18),
+                          const Icon(
+                            Icons.bolt_rounded,
+                            color: _accentOrange,
+                            size: 18,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             state.activeIntervention.nudgeTitle,
@@ -104,7 +113,10 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
                       const SizedBox(height: 4),
                       Text(
                         state.activeIntervention.nudgeBody,
-                        style: const TextStyle(color: _textPrimary, fontSize: 11),
+                        style: const TextStyle(
+                          color: _textPrimary,
+                          fontSize: 11,
+                        ),
                       ),
                     ],
                   ),
@@ -115,7 +127,11 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
               // ── 1 to 5 Hunger Scale Segmented Selector ──
               const Text(
                 'Subjective Hunger Level (1 = Stuffed, 5 = Starving)',
-                style: TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: _textSecondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(height: 8),
               Row(
@@ -169,7 +185,11 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
               // ── Craving Type Selector Chips ──
               const Text(
                 'Active Craving Type (Optional)',
-                style: TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: _textSecondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -194,7 +214,9 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: isSelected ? _accentPurple : _borderColor),
+                      side: BorderSide(
+                        color: isSelected ? _accentPurple : _borderColor,
+                      ),
                     ),
                   );
                 }).toList(),
@@ -208,11 +230,19 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
                 children: [
                   const Text(
                     'Work / Daily Stress Level',
-                    style: TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      color: _textSecondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   Text(
                     '${_stressLevel.toStringAsFixed(1)} / 5.0',
-                    style: const TextStyle(color: _accentYellow, fontWeight: FontWeight.w700, fontSize: 12),
+                    style: const TextStyle(
+                      color: _accentYellow,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               ),
@@ -291,10 +321,10 @@ class _HungerLoggingDialogState extends ConsumerState<HungerLoggingDialog> {
 
   String _cravingLabel(CravingType type) {
     return switch (type) {
-      CravingType.sweet          => 'Sweet 🍫',
-      CravingType.salty          => 'Salty 🥨',
-      CravingType.fatty          => 'Fatty 🍟',
-      CravingType.spicy          => 'Spicy 🌶️',
+      CravingType.sweet => 'Sweet 🍫',
+      CravingType.salty => 'Salty 🥨',
+      CravingType.fatty => 'Fatty 🍟',
+      CravingType.spicy => 'Spicy 🌶️',
       CravingType.lateNightBinge => 'Late-Night Binge 🌙',
     };
   }

@@ -46,24 +46,27 @@ void main() {
       expect(alerts.first.actions.contains('Walk after meals'), isTrue);
     });
 
-    test('Both rules trigger simultaneously when all parameters are high-risk', () {
-      const data = UserHealthData(
-        bpTrend: Trend.rising,
-        sleepTrend: Trend.declining,
-        weightTrend: Trend.rising,
-        stepsTrend: Trend.declining,
-        glucoseTrend: Trend.rising,
-        bmi: 27.5,
-        stepAvg7d: 3000,
-      );
+    test(
+      'Both rules trigger simultaneously when all parameters are high-risk',
+      () {
+        const data = UserHealthData(
+          bpTrend: Trend.rising,
+          sleepTrend: Trend.declining,
+          weightTrend: Trend.rising,
+          stepsTrend: Trend.declining,
+          glucoseTrend: Trend.rising,
+          bmi: 27.5,
+          stepAvg7d: 3000,
+        );
 
-      final alerts = engine.analyze(data);
-      expect(alerts.length, 2);
-      
-      final risks = alerts.map((a) => a.risk).toList();
-      expect(risks.contains('Hypertension'), isTrue);
-      expect(risks.contains('Type 2 Diabetes'), isTrue);
-    });
+        final alerts = engine.analyze(data);
+        expect(alerts.length, 2);
+
+        final risks = alerts.map((a) => a.risk).toList();
+        expect(risks.contains('Hypertension'), isTrue);
+        expect(risks.contains('Type 2 Diabetes'), isTrue);
+      },
+    );
 
     test('No alerts returned when data is healthy/stable', () {
       const data = UserHealthData(

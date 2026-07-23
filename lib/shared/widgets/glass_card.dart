@@ -32,24 +32,24 @@ class GlassCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final deviceTier = ref.watch(deviceTierProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     // Low performance tier disables BackdropFilter blur to save GPU cycles
     final shouldBlur = deviceTier != DeviceTier.low;
-    
+
     // Choose appropriate fallback backgrounds
-    final baseBgColor = customBgColor ?? 
+    final baseBgColor =
+        customBgColor ??
         (isDark ? AppColorsDark.surface0 : AppColorsLight.surface0);
-        
+
     final glassColor = isDark ? AppColorsDark.glass : AppColorsLight.glass;
-    final glassBorderColor = isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
-    
+    final glassBorderColor = isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+
     final decoration = BoxDecoration(
       color: shouldBlur ? glassColor : baseBgColor.withOpacity(0.95),
       borderRadius: BorderRadius.circular(borderRadius),
-      border: Border.all(
-        color: glassBorderColor,
-        width: 1.0,
-      ),
+      border: Border.all(color: glassBorderColor, width: 1.0),
     );
 
     Widget cardBody;
@@ -80,10 +80,7 @@ class GlassCard extends ConsumerWidget {
     if (onTap != null) {
       return GestureDetector(
         onTap: onTap,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: cardBody,
-        ),
+        child: MouseRegion(cursor: SystemMouseCursors.click, child: cardBody),
       );
     }
 

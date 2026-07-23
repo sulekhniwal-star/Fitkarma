@@ -11,14 +11,14 @@ class FitkarmaAppTheme {
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColorsDark.bg0,
       primaryColor: AppColorsDark.primary,
-      
+
       colorScheme: const ColorScheme.dark(
         primary: AppColorsDark.primary,
         secondary: AppColorsDark.secondary,
         surface: AppColorsDark.surface0,
         error: AppColorsDark.error,
       ),
-      
+
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: AppColorsDark.primary,
         selectionColor: AppColorsDark.primaryMuted,
@@ -50,14 +50,14 @@ class FitkarmaAppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColorsLight.bg0,
       primaryColor: AppColorsLight.primary,
-      
+
       colorScheme: const ColorScheme.light(
         primary: AppColorsLight.primary,
         secondary: AppColorsLight.secondary,
         surface: AppColorsLight.surface0,
         error: AppColorsLight.error,
       ),
-      
+
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: AppColorsLight.primary,
         selectionColor: AppColorsLight.primaryMuted,

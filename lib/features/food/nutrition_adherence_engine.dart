@@ -23,10 +23,7 @@ class MealTimeMedian {
 
 /// Logged meal timing record.
 class MealLogRecord {
-  const MealLogRecord({
-    required this.mealType,
-    required this.loggedAt,
-  });
+  const MealLogRecord({required this.mealType, required this.loggedAt});
 
   final String mealType;
   final DateTime loggedAt;
@@ -46,8 +43,8 @@ class AdherenceScoreBreakdown {
   final double calorieScore; // Max 30.0
   final double proteinScore; // Max 35.0
   final double loggingScore; // Max 20.0
-  final double timingScore;  // Max 15.0
-  final double totalScore;   // Max 100.0
+  final double timingScore; // Max 15.0
+  final double totalScore; // Max 100.0
   final String summaryFeedback;
 }
 
@@ -132,7 +129,8 @@ class NutritionAdherenceEngine {
     for (final meal in mealRecords) {
       final median = historicalMedians.firstWhere(
         (m) => m.mealType.toLowerCase() == meal.mealType.toLowerCase(),
-        orElse: () => MealTimeMedian(mealType: meal.mealType, hour: 12, minute: 0),
+        orElse: () =>
+            MealTimeMedian(mealType: meal.mealType, hour: 12, minute: 0),
       );
       final mealMinuteOfDay = meal.loggedAt.hour * 60 + meal.loggedAt.minute;
       final medianMinuteOfDay = median.hour * 60 + median.minute;
@@ -158,7 +156,8 @@ class NutritionAdherenceEngine {
     } else if (totalScore >= 50.0) {
       feedback += 'Solid effort! Focus on evening protein to boost recovery.';
     } else {
-      feedback += 'Keep logging regularly to help calibrate your metabolic model.';
+      feedback +=
+          'Keep logging regularly to help calibrate your metabolic model.';
     }
 
     return AdherenceScoreBreakdown(
@@ -172,7 +171,10 @@ class NutritionAdherenceEngine {
   }
 
   /// Calculates Karma System (§P7-A) award based on adherence score & streak days.
-  KarmaAwardResult calculateKarmaAward(double adherenceScore, int currentStreakDays) {
+  KarmaAwardResult calculateKarmaAward(
+    double adherenceScore,
+    int currentStreakDays,
+  ) {
     int basePoints = 5;
     String tier = 'Effort Logged';
 

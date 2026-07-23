@@ -56,7 +56,9 @@ class RestaurantState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final restaurantDatabaseServiceProvider = Provider<RestaurantDatabaseService>((ref) {
+final restaurantDatabaseServiceProvider = Provider<RestaurantDatabaseService>((
+  ref,
+) {
   return const RestaurantDatabaseService();
 });
 
@@ -99,10 +101,7 @@ class RestaurantNotifier extends Notifier<RestaurantState> {
       lines,
       isPcosOrDiabetic: state.isPcosOrDiabetic,
     );
-    state = state.copyWith(
-      ocrText: text,
-      ocrResults: results,
-    );
+    state = state.copyWith(ocrText: text, ocrResults: results);
   }
 
   /// Logs a restaurant dish into the main [FoodController].
@@ -130,4 +129,6 @@ class RestaurantNotifier extends Notifier<RestaurantState> {
 }
 
 final restaurantProvider =
-    NotifierProvider<RestaurantNotifier, RestaurantState>(RestaurantNotifier.new);
+    NotifierProvider<RestaurantNotifier, RestaurantState>(
+      RestaurantNotifier.new,
+    );

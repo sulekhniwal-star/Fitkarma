@@ -114,40 +114,43 @@ void main() {
       expect(result.score, 85);
     });
 
-    test('Resting HR deviation deductions (delta > 0.1 -> -10, > 0.2 -> -15)', () {
-      // Delta = (77 - 70) / 70 = 0.10 => no reduction (since not > 0.1)
-      final resultNoReduction = calculator.calculate(
-        sleepQuality: 5,
-        sleepDurationMin: 480,
-        sorenessLevel: 1,
-        stressLevel: 1,
-        restingHR: 77,
-        baselineHR: 70,
-      );
-      expect(resultNoReduction.score, 100);
+    test(
+      'Resting HR deviation deductions (delta > 0.1 -> -10, > 0.2 -> -15)',
+      () {
+        // Delta = (77 - 70) / 70 = 0.10 => no reduction (since not > 0.1)
+        final resultNoReduction = calculator.calculate(
+          sleepQuality: 5,
+          sleepDurationMin: 480,
+          sorenessLevel: 1,
+          stressLevel: 1,
+          restingHR: 77,
+          baselineHR: 70,
+        );
+        expect(resultNoReduction.score, 100);
 
-      // Delta = (78 - 70) / 70 = 0.114 => > 0.1 -> -10
-      final resultModerateElevation = calculator.calculate(
-        sleepQuality: 5,
-        sleepDurationMin: 480,
-        sorenessLevel: 1,
-        stressLevel: 1,
-        restingHR: 78,
-        baselineHR: 70,
-      );
-      expect(resultModerateElevation.score, 90);
+        // Delta = (78 - 70) / 70 = 0.114 => > 0.1 -> -10
+        final resultModerateElevation = calculator.calculate(
+          sleepQuality: 5,
+          sleepDurationMin: 480,
+          sorenessLevel: 1,
+          stressLevel: 1,
+          restingHR: 78,
+          baselineHR: 70,
+        );
+        expect(resultModerateElevation.score, 90);
 
-      // Delta = (85 - 70) / 70 = 0.214 => > 0.2 -> -15 (both >0.1 and >0.2 conditions met: -10 and -5)
-      final resultHighElevation = calculator.calculate(
-        sleepQuality: 5,
-        sleepDurationMin: 480,
-        sorenessLevel: 1,
-        stressLevel: 1,
-        restingHR: 85,
-        baselineHR: 70,
-      );
-      expect(resultHighElevation.score, 85);
-    });
+        // Delta = (85 - 70) / 70 = 0.214 => > 0.2 -> -15 (both >0.1 and >0.2 conditions met: -10 and -5)
+        final resultHighElevation = calculator.calculate(
+          sleepQuality: 5,
+          sleepDurationMin: 480,
+          sorenessLevel: 1,
+          stressLevel: 1,
+          restingHR: 85,
+          baselineHR: 70,
+        );
+        expect(resultHighElevation.score, 85);
+      },
+    );
 
     test('HRV deviation deductions (delta > 0.15 -> -10)', () {
       // Delta = (50 - 45) / 50 = 0.10 => no reduction
@@ -175,13 +178,13 @@ void main() {
 
     test('Score is clamped to [0, 100]', () {
       final resultMiserable = calculator.calculate(
-        sleepQuality: 1,      // -28
+        sleepQuality: 1, // -28
         sleepDurationMin: 120, // -20
-        sorenessLevel: 5,     // -20
-        stressLevel: 5,       // -20
-        restingHR: 100,       // -15
+        sorenessLevel: 5, // -20
+        stressLevel: 5, // -20
+        restingHR: 100, // -15
         baselineHR: 70,
-        hrv: 20,              // -10
+        hrv: 20, // -10
         baselineHRV: 50,
       ); // Total subtraction = 113. Clamped score should be 0.
       expect(resultMiserable.score, 0);

@@ -27,17 +27,20 @@ void main() {
       expect(targets.proteinGrams, 140); // 70 * 2.0 = 140g
     });
 
-    test('calculateMacroTargets computes maintenance TDEE and high protein for Recomposition', () {
-      final targets = engine.calculateMacroTargets(
-        phase: PeriodizationPhase.recomposition,
-        tdee: 2500.0,
-        weightKg: 80.0,
-      );
+    test(
+      'calculateMacroTargets computes maintenance TDEE and high protein for Recomposition',
+      () {
+        final targets = engine.calculateMacroTargets(
+          phase: PeriodizationPhase.recomposition,
+          tdee: 2500.0,
+          weightKg: 80.0,
+        );
 
-      expect(targets.phase, PeriodizationPhase.recomposition);
-      expect(targets.targetCalories, 2500);
-      expect(targets.proteinGrams, 176); // 80 * 2.2 = 176g
-    });
+        expect(targets.phase, PeriodizationPhase.recomposition);
+        expect(targets.targetCalories, 2500);
+        expect(targets.proteinGrams, 176); // 80 * 2.2 = 176g
+      },
+    );
 
     test('calculateMacroTargets computes +10% surplus for Lean Gain phase', () {
       final targets = engine.calculateMacroTargets(
@@ -51,34 +54,40 @@ void main() {
       expect(targets.proteinGrams, 130); // 65 * 2.0 = 130g
     });
 
-    test('Rule 1: Auto-triggers Diet Break after 8 consecutive weeks in Fat Loss', () {
-      final eightWeeksAgo = DateTime.now().subtract(const Duration(days: 57));
-      final status = engine.checkPhaseProgression(
-        currentPhase: PeriodizationPhase.fatLoss,
-        phaseStartedAt: eightWeeksAgo,
-        recentWeightLogsKg: const [],
-      );
+    test(
+      'Rule 1: Auto-triggers Diet Break after 8 consecutive weeks in Fat Loss',
+      () {
+        final eightWeeksAgo = DateTime.now().subtract(const Duration(days: 57));
+        final status = engine.checkPhaseProgression(
+          currentPhase: PeriodizationPhase.fatLoss,
+          phaseStartedAt: eightWeeksAgo,
+          recentWeightLogsKg: const [],
+        );
 
-      expect(status.actionRequired, isTrue);
-      expect(status.nextPhase, PeriodizationPhase.dietBreak);
-      expect(status.reason, contains('8+ weeks'));
-    });
+        expect(status.actionRequired, isTrue);
+        expect(status.nextPhase, PeriodizationPhase.dietBreak);
+        expect(status.reason, contains('8+ weeks'));
+      },
+    );
 
-    test('Rule 2: Auto-triggers Diet Break when weight plateau is detected', () {
-      // 3 weeks of weight logs with zero variance (< 0.2kg)
-      final plateauLogs = List<double>.filled(10, 75.0);
-      final threeWeeksAgo = DateTime.now().subtract(const Duration(days: 22));
+    test(
+      'Rule 2: Auto-triggers Diet Break when weight plateau is detected',
+      () {
+        // 3 weeks of weight logs with zero variance (< 0.2kg)
+        final plateauLogs = List<double>.filled(10, 75.0);
+        final threeWeeksAgo = DateTime.now().subtract(const Duration(days: 22));
 
-      final status = engine.checkPhaseProgression(
-        currentPhase: PeriodizationPhase.fatLoss,
-        phaseStartedAt: threeWeeksAgo,
-        recentWeightLogsKg: plateauLogs,
-      );
+        final status = engine.checkPhaseProgression(
+          currentPhase: PeriodizationPhase.fatLoss,
+          phaseStartedAt: threeWeeksAgo,
+          recentWeightLogsKg: plateauLogs,
+        );
 
-      expect(status.actionRequired, isTrue);
-      expect(status.nextPhase, PeriodizationPhase.dietBreak);
-      expect(status.reason, contains('Plateau detected'));
-    });
+        expect(status.actionRequired, isTrue);
+        expect(status.nextPhase, PeriodizationPhase.dietBreak);
+        expect(status.reason, contains('Plateau detected'));
+      },
+    );
 
     test('Rule 3: Auto-expires Diet Break back to Fat Loss after 2 weeks', () {
       final twoWeeksAgo = DateTime.now().subtract(const Duration(days: 15));
@@ -111,7 +120,10 @@ void main() {
 
     test('transitionToPhase updates phase state and target macros', () async {
       final notifier = container.read(periodizationProvider.notifier);
-      expect(container.read(periodizationProvider).currentPhase, PeriodizationPhase.maintenance);
+      expect(
+        container.read(periodizationProvider).currentPhase,
+        PeriodizationPhase.maintenance,
+      );
 
       await notifier.transitionToPhase(PeriodizationPhase.fatLoss);
 
@@ -132,7 +144,10 @@ void main() {
       final plateauLogs = List<double>.filled(10, 70.0);
       notifier.evaluateProgression(plateauLogs);
 
-      expect(container.read(periodizationProvider).currentPhase, PeriodizationPhase.dietBreak);
+      expect(
+        container.read(periodizationProvider).currentPhase,
+        PeriodizationPhase.dietBreak,
+      );
     });
   });
 }

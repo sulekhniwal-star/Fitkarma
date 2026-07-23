@@ -22,7 +22,9 @@ class HealthOSBrain {
   /// 1. Deterministic local health calculator (no AI)
   Future<HealthSnapshot> computeHealthSnapshot(String userId) async {
     // A. Fetch profile
-    final user = await (_db.select(_db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+    final user = await (_db.select(
+      _db.users,
+    )..where((t) => t.id.equals(userId))).getSingleOrNull();
     if (user == null) {
       throw Exception('User profile not found in local database for $userId');
     }
@@ -31,12 +33,13 @@ class HealthOSBrain {
     final double heightCm = user.height ?? 175.0;
     final int age = user.age ?? 30;
     final double heightM = heightCm / 100.0;
-    
+
     // Compute BMI
     final double bmi = weight / (heightM * heightM);
 
     // Compute TDEE using Mifflin-St Jeor equation (moderate activity factor 1.375)
-    final double baseMetabolism = (10 * weight) + (6.25 * heightCm) - (5 * age) + 5;
+    final double baseMetabolism =
+        (10 * weight) + (6.25 * heightCm) - (5 * age) + 5;
     final double tdee = baseMetabolism * 1.375;
 
     // Parse user goals
@@ -77,9 +80,10 @@ class HealthOSBrain {
 
     // B. Calculate 7-day average telemetry
     final sevenDaysAgo = DateTime.now().subtract(const Duration(days: 7));
-    
+
     // Water logs average
-    final waterQuery = _db.select(_db.waterLogs)..where((t) => t.loggedAt.isBiggerThanValue(sevenDaysAgo));
+    final waterQuery = _db.select(_db.waterLogs)
+      ..where((t) => t.loggedAt.isBiggerThanValue(sevenDaysAgo));
     final waterLogs = await waterQuery.get();
     double avgWaterCups = 0.0;
     if (waterLogs.isNotEmpty) {
@@ -90,7 +94,9 @@ class HealthOSBrain {
     // Local risks evaluation
     final List<String> risks = [];
     if (avgWaterCups < 5.0) {
-      risks.add('Low hydration: averaging only ${avgWaterCups.toStringAsFixed(1)} cups of water per day.');
+      risks.add(
+        'Low hydration: averaging only ${avgWaterCups.toStringAsFixed(1)} cups of water per day.',
+      );
     }
 
     return HealthSnapshot(
@@ -121,27 +127,46 @@ class HealthOSBrain {
   }
 
   /// 3. DIP Generation & Storage with Sync Queue Integration
-  Future<DailyIntelligencePackage> getOrGenerateDIP(String userId, {bool forceRegenerate = false}) async {
-    final user = await (_db.select(_db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+  Future<DailyIntelligencePackage> getOrGenerateDIP(
+    String userId, {
+    bool forceRegenerate = false,
+  }) async {
+    final user = await (_db.select(
+      _db.users,
+    )..where((t) => t.id.equals(userId))).getSingleOrNull();
     if (user == null) {
       throw Exception('User profile not found in local database for $userId');
     }
     final snapshot = await computeHealthSnapshot(userId);
-    final todayStart = DateTime.now().copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
+    final todayStart = DateTime.now().copyWith(
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0,
+      microsecond: 0,
+    );
 
     // Fetch latest package
-    final latestPackage = await (_db.select(_db.dailyIntelligencePackages)
-          ..where((t) => t.userId.equals(userId))
-          ..orderBy([(t) => OrderingTerm(expression: t.packageDate, mode: OrderingMode.desc)])
-          ..limit(1))
-        .getSingleOrNull();
+    final latestPackage =
+        await (_db.select(_db.dailyIntelligencePackages)
+              ..where((t) => t.userId.equals(userId))
+              ..orderBy([
+                (t) => OrderingTerm(
+                  expression: t.packageDate,
+                  mode: OrderingMode.desc,
+                ),
+              ])
+              ..limit(1))
+            .getSingleOrNull();
 
-    final isSameDay = latestPackage != null && 
+    final isSameDay =
+        latestPackage != null &&
         latestPackage.packageDate.year == todayStart.year &&
         latestPackage.packageDate.month == todayStart.month &&
         latestPackage.packageDate.day == todayStart.day;
 
-    final triggerAI = checkAITrigger(snapshot) || forceRegenerate || latestPackage == null;
+    final triggerAI =
+        checkAITrigger(snapshot) || forceRegenerate || latestPackage == null;
 
     if (isSameDay && !forceRegenerate) {
       return latestPackage;
@@ -156,23 +181,31 @@ class HealthOSBrain {
 
     if (user.isCycleTrackingEnabled == true && user.lastPeriodDate != null) {
       final symptomLogs = await _db.getMenstrualSymptomLogs(userId);
-      final wrappers = symptomLogs.map<MenstrualSymptomLogWrapper>((l) => MenstrualSymptomLogWrapper(
-        logDate: l.logDate,
-        hasMenstrualFlow: l.hasMenstrualFlow,
-        basalBodyTemperatureCelsius: l.basalBodyTemperature,
-        positiveLhTest: l.positiveLhTest,
-        physicalSymptoms: l.physicalSymptoms.isNotEmpty ? l.physicalSymptoms.split(',') : const [],
-        restingHeartRateBpm: l.restingHeartRate,
-        heartRateVariabilityMs: l.hrvMs,
-      )).toList();
+      final wrappers = symptomLogs
+          .map<MenstrualSymptomLogWrapper>(
+            (l) => MenstrualSymptomLogWrapper(
+              logDate: l.logDate,
+              hasMenstrualFlow: l.hasMenstrualFlow,
+              basalBodyTemperatureCelsius: l.basalBodyTemperature,
+              positiveLhTest: l.positiveLhTest,
+              physicalSymptoms: l.physicalSymptoms.isNotEmpty
+                  ? l.physicalSymptoms.split(',')
+                  : const [],
+              restingHeartRateBpm: l.restingHeartRate,
+              heartRateVariabilityMs: l.hrvMs,
+            ),
+          )
+          .toList();
 
       if (wrappers.isEmpty) {
         // Seed initial log from onboarding setup
-        wrappers.add(MenstrualSymptomLogWrapper(
-          logDate: user.lastPeriodDate!,
-          hasMenstrualFlow: true,
-          physicalSymptoms: const [],
-        ));
+        wrappers.add(
+          MenstrualSymptomLogWrapper(
+            logDate: user.lastPeriodDate!,
+            hasMenstrualFlow: true,
+            physicalSymptoms: const [],
+          ),
+        );
       }
 
       const calibrator = DynamicCycleCalibrator();
@@ -180,13 +213,19 @@ class HealthOSBrain {
         symptomLogs: wrappers,
         defaultCycleLengthDays: user.averageCycleLength ?? 28,
       );
-      cycleAdaptation = const CycleAwareTrainingAdapter().adaptForCyclePhase(cycleState.currentPhase);
+      cycleAdaptation = const CycleAwareTrainingAdapter().adaptForCyclePhase(
+        cycleState.currentPhase,
+      );
 
       phaseNutritionFocus = switch (cycleState.currentPhase) {
-        CyclePhase.menstrual => 'Iron + Vitamin C focus (e.g. spinach dal, sesame chikki, pomegranate).',
-        CyclePhase.follicular => 'Protein + B vitamins focus (e.g. eggs, sprouts, moong dal).',
-        CyclePhase.ovulatory => 'Antioxidants + light meals focus (e.g. fruits, salads, coconut water).',
-        CyclePhase.luteal => 'Complex carbs + magnesium focus (e.g. sweet potato, banana).',
+        CyclePhase.menstrual =>
+          'Iron + Vitamin C focus (e.g. spinach dal, sesame chikki, pomegranate).',
+        CyclePhase.follicular =>
+          'Protein + B vitamins focus (e.g. eggs, sprouts, moong dal).',
+        CyclePhase.ovulatory =>
+          'Antioxidants + light meals focus (e.g. fruits, salads, coconut water).',
+        CyclePhase.luteal =>
+          'Complex carbs + magnesium focus (e.g. sweet potato, banana).',
       };
     }
 
@@ -198,7 +237,9 @@ class HealthOSBrain {
 
     final String recommendedIntensity = adjustedReadiness < 50
         ? 'low'
-        : (adjustedReadiness < 65 ? 'low' : (adjustedReadiness < 80 ? 'medium' : 'high'));
+        : (adjustedReadiness < 65
+              ? 'low'
+              : (adjustedReadiness < 80 ? 'medium' : 'high'));
     final bool isRestDay = adjustedReadiness < 50;
 
     if (triggerAI) {
@@ -214,11 +255,14 @@ class HealthOSBrain {
         todaysMission: cycleAdaptation != null
             ? '${insight['todaysMission']!} (Phase Focus: ${cycleAdaptation.preferredTypes.join('/')})'
             : insight['todaysMission']!,
-        nutritionFocus: phaseNutritionFocus ?? 'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
+        nutritionFocus:
+            phaseNutritionFocus ??
+            'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
         recoveryFocus: cycleAdaptation != null
             ? 'Current phase: ${cycleState!.currentPhase.name.toUpperCase()} — ${cycleAdaptation.rationale}'
             : 'Sleep averages 7.6h. Keep a consistent bedtime routine.',
-        motivationMessage: 'You are crushing your daily streaks. Let\'s continue standard gains!',
+        motivationMessage:
+            'You are crushing your daily streaks. Let\'s continue standard gains!',
         adjustedCalories: snapshot.dailyCalorieTarget.round(),
         adjustedProtein: snapshot.dailyProteinTargetG.round(),
         adjustedHydrationL: snapshot.dailyHydrationTargetL,
@@ -236,7 +280,9 @@ class HealthOSBrain {
       );
 
       await _db.into(_db.dailyIntelligencePackages).insert(companion);
-      newPackage = await (_db.select(_db.dailyIntelligencePackages)..where((t) => t.localId.equals(packageId))).getSingle();
+      newPackage = await (_db.select(
+        _db.dailyIntelligencePackages,
+      )..where((t) => t.localId.equals(packageId))).getSingle();
     } else {
       // Step B: Reuse yesterday's insight text, updating only target numbers
       final packageId = 'dip_${DateTime.now().millisecondsSinceEpoch}';
@@ -247,7 +293,9 @@ class HealthOSBrain {
         packageDate: todayStart,
         primaryInsight: latestPackage.primaryInsight,
         todaysMission: latestPackage.todaysMission,
-        nutritionFocus: phaseNutritionFocus ?? 'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
+        nutritionFocus:
+            phaseNutritionFocus ??
+            'Aim for ${snapshot.dailyProteinTargetG.round()}g of protein to fuel progressive recovery.',
         recoveryFocus: cycleAdaptation != null
             ? 'Current phase: ${cycleState!.currentPhase.name.toUpperCase()} — ${cycleAdaptation.rationale}'
             : latestPackage.recoveryFocus,
@@ -269,42 +317,46 @@ class HealthOSBrain {
       );
 
       await _db.into(_db.dailyIntelligencePackages).insert(companion);
-      newPackage = await (_db.select(_db.dailyIntelligencePackages)..where((t) => t.localId.equals(packageId))).getSingle();
+      newPackage = await (_db.select(
+        _db.dailyIntelligencePackages,
+      )..where((t) => t.localId.equals(packageId))).getSingle();
     }
 
     // Step C: Queue local Drift write to sync worker queue
     final syncBatchId = 'dip_sync_${DateTime.now().millisecondsSinceEpoch}';
-    await _db.into(_db.syncQueueItems).insert(
-      SyncQueueItemsCompanion.insert(
-        entityType: 'daily_intelligence_package',
-        entityId: newPackage.localId,
-        serializedPayload: jsonEncode({
-          'localId': newPackage.localId,
-          'userId': newPackage.userId,
-          'packageDate': newPackage.packageDate.toIso8601String(),
-          'primaryInsight': newPackage.primaryInsight,
-          'todaysMission': newPackage.todaysMission,
-          'nutritionFocus': newPackage.nutritionFocus,
-          'recoveryFocus': newPackage.recoveryFocus,
-          'motivationMessage': newPackage.motivationMessage,
-          'adjustedCalories': newPackage.adjustedCalories,
-          'adjustedProtein': newPackage.adjustedProtein,
-          'adjustedHydrationL': newPackage.adjustedHydrationL,
-          'recommendedIntensity': newPackage.recommendedIntensity,
-          'isRestDay': newPackage.isRestDay,
-          'activeRisks': newPackage.activeRisks,
-          'showFestivalBanner': newPackage.showFestivalBanner,
-          'festivalAdaptation': newPackage.festivalAdaptation,
-          'dietBreakActive': newPackage.dietBreakActive,
-          'proteinTimingTarget': newPackage.proteinTimingTarget,
-          'loggingReliabilityStatus': newPackage.loggingReliabilityStatus,
-          'satietyTargetScore': newPackage.satietyTargetScore,
-          'aiCallsUsed': newPackage.aiCallsUsed,
-        }),
-        createdAt: DateTime.now(),
-        syncBatchId: syncBatchId,
-      ),
-    );
+    await _db
+        .into(_db.syncQueueItems)
+        .insert(
+          SyncQueueItemsCompanion.insert(
+            entityType: 'daily_intelligence_package',
+            entityId: newPackage.localId,
+            serializedPayload: jsonEncode({
+              'localId': newPackage.localId,
+              'userId': newPackage.userId,
+              'packageDate': newPackage.packageDate.toIso8601String(),
+              'primaryInsight': newPackage.primaryInsight,
+              'todaysMission': newPackage.todaysMission,
+              'nutritionFocus': newPackage.nutritionFocus,
+              'recoveryFocus': newPackage.recoveryFocus,
+              'motivationMessage': newPackage.motivationMessage,
+              'adjustedCalories': newPackage.adjustedCalories,
+              'adjustedProtein': newPackage.adjustedProtein,
+              'adjustedHydrationL': newPackage.adjustedHydrationL,
+              'recommendedIntensity': newPackage.recommendedIntensity,
+              'isRestDay': newPackage.isRestDay,
+              'activeRisks': newPackage.activeRisks,
+              'showFestivalBanner': newPackage.showFestivalBanner,
+              'festivalAdaptation': newPackage.festivalAdaptation,
+              'dietBreakActive': newPackage.dietBreakActive,
+              'proteinTimingTarget': newPackage.proteinTimingTarget,
+              'loggingReliabilityStatus': newPackage.loggingReliabilityStatus,
+              'satietyTargetScore': newPackage.satietyTargetScore,
+              'aiCallsUsed': newPackage.aiCallsUsed,
+            }),
+            createdAt: DateTime.now(),
+            syncBatchId: syncBatchId,
+          ),
+        );
 
     // Step D: Trigger worker sync execution
     _syncWorker.triggerSync();
@@ -315,13 +367,16 @@ class HealthOSBrain {
   Map<String, String> _simulateAIInsight(HealthSnapshot snapshot) {
     if (snapshot.localRisks.isNotEmpty) {
       return {
-        'primaryInsight': 'Your telemetry points to critical dehydration. Prioritize rehydration to maintain metabolic pacing.',
+        'primaryInsight':
+            'Your telemetry points to critical dehydration. Prioritize rehydration to maintain metabolic pacing.',
         'todaysMission': 'Log 3 extra cups of water before noon.',
       };
     }
     return {
-      'primaryInsight': 'Your readiness score of 78% indicates peak adaptation. Perfect time to perform a high-intensity push workout.',
-      'todaysMission': 'Hit target protein macros and perform 1 compound workout.',
+      'primaryInsight':
+          'Your readiness score of 78% indicates peak adaptation. Perfect time to perform a high-intensity push workout.',
+      'todaysMission':
+          'Hit target protein macros and perform 1 compound workout.',
     };
   }
 }

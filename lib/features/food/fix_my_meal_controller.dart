@@ -47,16 +47,15 @@ class FixMyMealState {
     double? portionMultiplier,
     String? selectedMealType,
     String? errorMessage,
-  }) =>
-      FixMyMealState(
-        phase: phase ?? this.phase,
-        selectedImageBytes: selectedImageBytes ?? this.selectedImageBytes,
-        visionResponse: visionResponse ?? this.visionResponse,
-        analysisResult: analysisResult ?? this.analysisResult,
-        portionMultiplier: portionMultiplier ?? this.portionMultiplier,
-        selectedMealType: selectedMealType ?? this.selectedMealType,
-        errorMessage: errorMessage ?? this.errorMessage,
-      );
+  }) => FixMyMealState(
+    phase: phase ?? this.phase,
+    selectedImageBytes: selectedImageBytes ?? this.selectedImageBytes,
+    visionResponse: visionResponse ?? this.visionResponse,
+    analysisResult: analysisResult ?? this.analysisResult,
+    portionMultiplier: portionMultiplier ?? this.portionMultiplier,
+    selectedMealType: selectedMealType ?? this.selectedMealType,
+    errorMessage: errorMessage ?? this.errorMessage,
+  );
 
   /// Effective macros after applying [portionMultiplier].
   double get effectiveCalories =>
@@ -65,8 +64,7 @@ class FixMyMealState {
       (visionResponse?.proteinG ?? 0) * portionMultiplier;
   double get effectiveCarbsG =>
       (visionResponse?.carbsG ?? 0) * portionMultiplier;
-  double get effectiveFatG =>
-      (visionResponse?.fatG ?? 0) * portionMultiplier;
+  double get effectiveFatG => (visionResponse?.fatG ?? 0) * portionMultiplier;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -189,5 +187,6 @@ class FixMyMealNotifier extends Notifier<FixMyMealState> {
 // Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final fixMyMealProvider =
-    NotifierProvider<FixMyMealNotifier, FixMyMealState>(FixMyMealNotifier.new);
+final fixMyMealProvider = NotifierProvider<FixMyMealNotifier, FixMyMealState>(
+  FixMyMealNotifier.new,
+);

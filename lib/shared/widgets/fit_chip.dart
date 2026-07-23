@@ -51,12 +51,20 @@ class _FitChipState extends State<FitChip> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     final glassColor = isDark ? AppColorsDark.glass : AppColorsLight.glass;
-    final glassBorderColor = isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final glassBorderColor = isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     Color bgCol = glassColor;
     Color borderCol = glassBorderColor;
@@ -79,7 +87,10 @@ class _FitChipState extends State<FitChip> with SingleTickerProviderStateMixin {
           cursor: SystemMouseCursors.click,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 8.0,
+            ),
             decoration: BoxDecoration(
               color: bgCol,
               borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -89,11 +100,7 @@ class _FitChipState extends State<FitChip> with SingleTickerProviderStateMixin {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (widget.icon != null) ...[
-                  Icon(
-                    widget.icon,
-                    size: 14,
-                    color: txtCol,
-                  ),
+                  Icon(widget.icon, size: 14, color: txtCol),
                   const SizedBox(width: 6.0),
                 ],
                 Text(
@@ -107,11 +114,16 @@ class _FitChipState extends State<FitChip> with SingleTickerProviderStateMixin {
                 if (widget.badgeText != null) ...[
                   const SizedBox(width: 6.0),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0,
+                      vertical: 2.0,
+                    ),
                     decoration: BoxDecoration(
                       color: widget.isSelected
                           ? primaryColor.withOpacity(0.2)
-                          : (isDark ? AppColorsDark.surface1 : AppColorsLight.surface1),
+                          : (isDark
+                                ? AppColorsDark.surface1
+                                : AppColorsLight.surface1),
                       borderRadius: BorderRadius.circular(AppRadius.full),
                     ),
                     child: Text(

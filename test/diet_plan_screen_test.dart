@@ -22,29 +22,26 @@ import 'package:go_router/go_router.dart';
 AppDatabase testDb() => AppDatabase.executor(NativeDatabase.memory());
 
 GoRouter _dietPlanRouter() => GoRouter(
-      initialLocation: AppRoutes.onboardingDietPlan,
-      routes: [
-        GoRoute(
-          path: AppRoutes.onboardingDemographics,
-          builder: (_, __) => const Scaffold(body: Text('Demographics')),
-        ),
-        GoRoute(
-          path: AppRoutes.onboardingDietPlan,
-          builder: (_, __) => const DietPlanScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.onboardingDosha,
-          builder: (_, __) => const Scaffold(body: Text('Dosha')),
-        ),
-      ],
-    );
+  initialLocation: AppRoutes.onboardingDietPlan,
+  routes: [
+    GoRoute(
+      path: AppRoutes.onboardingDemographics,
+      builder: (_, __) => const Scaffold(body: Text('Demographics')),
+    ),
+    GoRoute(
+      path: AppRoutes.onboardingDietPlan,
+      builder: (_, __) => const DietPlanScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.onboardingDosha,
+      builder: (_, __) => const Scaffold(body: Text('Dosha')),
+    ),
+  ],
+);
 
 /// Wraps subject with a [ProviderContainer] that overrides the database and
 /// optionally forces offline mode.
-Widget buildSubject(
-  ProviderContainer container, {
-  bool online = true,
-}) {
+Widget buildSubject(ProviderContainer container, {bool online = true}) {
   return UncontrolledProviderScope(
     container: container,
     child: MaterialApp.router(routerConfig: _dietPlanRouter()),
@@ -58,8 +55,6 @@ class _MockConnectivityNotifier extends ConnectivityNotifier {
   bool build() => _online;
 }
 
-
-
 ProviderContainer makeContainer({bool online = true}) {
   return ProviderContainer(
     overrides: [
@@ -68,7 +63,9 @@ ProviderContainer makeContainer({bool online = true}) {
         ref.onDispose(() => db.close());
         return db;
       }),
-      connectivityProvider.overrideWith(() => _MockConnectivityNotifier(online)),
+      connectivityProvider.overrideWith(
+        () => _MockConnectivityNotifier(online),
+      ),
     ],
   );
 }
@@ -76,16 +73,16 @@ ProviderContainer makeContainer({bool online = true}) {
 // ── Helper: a stub DietPlanRequest ───────────────────────────────────────────
 
 DietPlanRequest stubRequest() => const DietPlanRequest(
-      userId:         'test_user',
-      age:            28,
-      gender:         Gender.male,
-      weightKg:       75,
-      heightCm:       175,
-      activityLevel:  ActivityLevel.moderatelyActive,
-      goals:          ['general_fitness'],
-      calorieTarget:  2000,
-      proteinTargetG: 120,
-    );
+  userId: 'test_user',
+  age: 28,
+  gender: Gender.male,
+  weightKg: 75,
+  heightCm: 175,
+  activityLevel: ActivityLevel.moderatelyActive,
+  goals: ['general_fitness'],
+  calorieTarget: 2000,
+  proteinTargetG: 120,
+);
 
 // ── Unit Tests — DietPlanNotifier ─────────────────────────────────────────────
 
@@ -99,7 +96,9 @@ void main() {
       container = ProviderContainer(
         overrides: [
           databaseProvider.overrideWithValue(db),
-          connectivityProvider.overrideWith(() => _MockConnectivityNotifier(true)),
+          connectivityProvider.overrideWith(
+            () => _MockConnectivityNotifier(true),
+          ),
         ],
       );
     });
@@ -150,9 +149,13 @@ void main() {
 
     test('regenerate with 0 left is no-op', () async {
       await container.read(dietPlanProvider.notifier).load(stubRequest());
-      await container.read(dietPlanProvider.notifier).regenerate(stubRequest()); // uses 1
+      await container
+          .read(dietPlanProvider.notifier)
+          .regenerate(stubRequest()); // uses 1
       final stateBefore = container.read(dietPlanProvider);
-      await container.read(dietPlanProvider.notifier).regenerate(stubRequest()); // should be no-op
+      await container
+          .read(dietPlanProvider.notifier)
+          .regenerate(stubRequest()); // should be no-op
       // Still loaded (not set to loading again)
       expect(container.read(dietPlanProvider).status, stateBefore.status);
     });
@@ -162,11 +165,14 @@ void main() {
         overrides: [
           databaseProvider.overrideWithValue(testDb()),
           connectivityProvider.overrideWith(
-              () => _MockConnectivityNotifier(false)),
+            () => _MockConnectivityNotifier(false),
+          ),
         ],
       );
       addTearDown(offlineContainer.dispose);
-      await offlineContainer.read(dietPlanProvider.notifier).load(stubRequest());
+      await offlineContainer
+          .read(dietPlanProvider.notifier)
+          .load(stubRequest());
       final plan = offlineContainer.read(dietPlanProvider).plan!;
       expect(plan.isAiGenerated, isFalse);
     });
@@ -180,7 +186,8 @@ void main() {
         overrides: [
           databaseProvider.overrideWithValue(db),
           connectivityProvider.overrideWith(
-              () => _MockConnectivityNotifier(true)),
+            () => _MockConnectivityNotifier(true),
+          ),
         ],
       );
       addTearDown(fresh.dispose);
@@ -197,25 +204,28 @@ void main() {
         overrides: [
           databaseProvider.overrideWithValue(testDb()),
           connectivityProvider.overrideWith(
-              () => _MockConnectivityNotifier(false)),
+            () => _MockConnectivityNotifier(false),
+          ),
         ],
       );
       addTearDown(errorContainer.dispose);
       await errorContainer.read(dietPlanProvider.notifier).load(stubRequest());
       // Offline fallback should still succeed (not error)
-      expect(errorContainer.read(dietPlanProvider).status,
-          DietPlanStatus.loaded);
+      expect(
+        errorContainer.read(dietPlanProvider).status,
+        DietPlanStatus.loaded,
+      );
     });
 
     test('DietMeal.fromJson parses correctly', () {
       final meal = DietMeal.fromJson({
-        'name':     'Paneer Bhurji',
-        'type':     'breakfast',
+        'name': 'Paneer Bhurji',
+        'type': 'breakfast',
         'calories': 420,
-        'protein':  22.0,
-        'carbs':    38.0,
-        'fat':      14.0,
-        'tip':      'Use low-fat paneer.',
+        'protein': 22.0,
+        'carbs': 38.0,
+        'fat': 14.0,
+        'tip': 'Use low-fat paneer.',
       });
       expect(meal.name, 'Paneer Bhurji');
       expect(meal.calories, 420);
@@ -224,10 +234,27 @@ void main() {
     });
 
     test('DietDay.totalCalories sums meals', () {
-      const day = DietDay(day: 'Monday', meals: [
-        DietMeal(name: 'A', mealType: 'breakfast', calories: 400, proteinG: 10, carbsG: 30, fatG: 5),
-        DietMeal(name: 'B', mealType: 'lunch',     calories: 600, proteinG: 20, carbsG: 80, fatG: 8),
-      ]);
+      const day = DietDay(
+        day: 'Monday',
+        meals: [
+          DietMeal(
+            name: 'A',
+            mealType: 'breakfast',
+            calories: 400,
+            proteinG: 10,
+            carbsG: 30,
+            fatG: 5,
+          ),
+          DietMeal(
+            name: 'B',
+            mealType: 'lunch',
+            calories: 600,
+            proteinG: 20,
+            carbsG: 80,
+            fatG: 8,
+          ),
+        ],
+      );
       expect(day.totalCalories, 1000);
     });
 
@@ -243,14 +270,14 @@ void main() {
     test('DietPlanRequest.promptHash differs for different users', () {
       final r1 = stubRequest();
       const r2 = DietPlanRequest(
-        userId:         'other_user',
-        age:            28,
-        gender:         Gender.male,
-        weightKg:       75,
-        heightCm:       175,
-        activityLevel:  ActivityLevel.moderatelyActive,
-        goals:          ['general_fitness'],
-        calorieTarget:  2000,
+        userId: 'other_user',
+        age: 28,
+        gender: Gender.male,
+        weightKg: 75,
+        heightCm: 175,
+        activityLevel: ActivityLevel.moderatelyActive,
+        goals: ['general_fitness'],
+        calorieTarget: 2000,
         proteinTargetG: 120,
       );
       expect(r1.promptHash, isNot(r2.promptHash));
@@ -284,8 +311,9 @@ void main() {
       await tester.pumpAndSettle();
     });
 
-    testWidgets('shows loaded plan with day tabs after generation completes',
-        (tester) async {
+    testWidgets('shows loaded plan with day tabs after generation completes', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildSubject(container));
       // Wait for the mock Groq "network" call (1.5s) + animation
       await tester.pump(const Duration(seconds: 3));
@@ -304,9 +332,11 @@ void main() {
       await tester.pumpWidget(buildSubject(container));
       await tester.pump(const Duration(milliseconds: 50));
       // Accept button should be disabled (onPressed == null)
-      final btn = tester.widget<FitButton>(find.byKey(const Key('diet_plan_accept_btn')));
+      final btn = tester.widget<FitButton>(
+        find.byKey(const Key('diet_plan_accept_btn')),
+      );
       expect(btn.onPressed, isNull);
-      
+
       // Let the load operation complete to avoid pending timer assertions
       await tester.pumpAndSettle();
     });
@@ -321,13 +351,15 @@ void main() {
           .jumpTo(OnboardingStep.dietPlan);
 
       // Pre-load plan so Accept button is enabled
-      final future = seededContainer.read(dietPlanProvider.notifier).load(stubRequest());
-      
+      final future = seededContainer
+          .read(dietPlanProvider.notifier)
+          .load(stubRequest());
+
       await tester.pumpWidget(buildSubject(seededContainer));
       // Allow time to pass so the Future.delayed in _callGroq completes
       await tester.pump(const Duration(seconds: 2));
       await future;
-      
+
       final state = seededContainer.read(dietPlanProvider);
       if (state.hasError) {
         print('Load error: ${state.errorMessage}');
@@ -346,7 +378,9 @@ void main() {
       addTearDown(offlineContainer.dispose);
 
       // Pre-load fallback plan before widget renders
-      await offlineContainer.read(dietPlanProvider.notifier).load(stubRequest());
+      await offlineContainer
+          .read(dietPlanProvider.notifier)
+          .load(stubRequest());
 
       final state = offlineContainer.read(dietPlanProvider);
       if (state.hasError) {

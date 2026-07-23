@@ -27,16 +27,16 @@ class BentoGrid extends StatelessWidget {
   });
 
   final List<BentoGridItem> items;
-  
+
   /// The number of columns. If null, automatically selects columns based on layout width:
   /// - Width >= 950: 4 columns
   /// - Width >= 600: 2 columns
   /// - Width < 600: 1 column
   final int? crossAxisCount;
-  
+
   /// Spacing between grid elements
   final double spacing;
-  
+
   /// Height of a single row block
   final double rowHeight;
 
@@ -45,7 +45,7 @@ class BentoGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final double width = constraints.maxWidth;
-        
+
         final int cols;
         if (crossAxisCount != null) {
           cols = crossAxisCount!;
@@ -60,15 +60,16 @@ class BentoGrid extends StatelessWidget {
         }
 
         final double cellWidth = (width - (spacing * (cols - 1))) / cols;
-        
+
         final List<List<bool>> occupied = [];
         final List<Widget> positionedWidgets = [];
         int maxRowReached = 0;
 
         for (var item in items) {
           final int colSpan = (cols == 1) ? 1 : item.columnSpan.clamp(1, cols);
-          final int rowSpan = (cols == 1 && item.columnSpan > 1 && item.rowSpan == 1) 
-              ? 1 
+          final int rowSpan =
+              (cols == 1 && item.columnSpan > 1 && item.rowSpan == 1)
+              ? 1
               : item.rowSpan.clamp(1, 100);
 
           int targetRow = 0;
@@ -82,7 +83,7 @@ class BentoGrid extends StatelessWidget {
 
             if (targetCol + colSpan <= cols) {
               bool fits = true;
-              
+
               for (int r = 0; r < rowSpan; r++) {
                 while (occupied.length <= targetRow + r) {
                   occupied.add(List.generate(cols, (_) => false));
@@ -116,8 +117,10 @@ class BentoGrid extends StatelessWidget {
 
           final double left = targetCol * (cellWidth + spacing);
           final double top = targetRow * (rowHeight + spacing);
-          final double itemWidth = colSpan * cellWidth + (colSpan - 1) * spacing;
-          final double itemHeight = rowSpan * rowHeight + (rowSpan - 1) * spacing;
+          final double itemWidth =
+              colSpan * cellWidth + (colSpan - 1) * spacing;
+          final double itemHeight =
+              rowSpan * rowHeight + (rowSpan - 1) * spacing;
 
           maxRowReached = math.max(maxRowReached, targetRow + rowSpan);
 
@@ -132,14 +135,13 @@ class BentoGrid extends StatelessWidget {
           );
         }
 
-        final double totalHeight = maxRowReached * rowHeight + (maxRowReached - 1).clamp(0, 1000000) * spacing;
+        final double totalHeight =
+            maxRowReached * rowHeight +
+            (maxRowReached - 1).clamp(0, 1000000) * spacing;
 
         return SizedBox(
           height: totalHeight,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: positionedWidgets,
-          ),
+          child: Stack(clipBehavior: Clip.none, children: positionedWidgets),
         );
       },
     );

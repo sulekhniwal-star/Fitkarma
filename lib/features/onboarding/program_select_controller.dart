@@ -27,7 +27,8 @@ class ProgramBlueprint {
   static const corporateFatLoss = ProgramBlueprint(
     id: 'corporate_fat_loss',
     name: 'Corporate Fat Loss',
-    description: 'Recommended based on desk-heavy style and goals. Focuses on low-barrier habits, post-meal walks, and desk-friendly movement.',
+    description:
+        'Recommended based on desk-heavy style and goals. Focuses on low-barrier habits, post-meal walks, and desk-friendly movement.',
     targetUser: 'Office workers, high stress',
     evolvesTo: 'corporate_recomposition',
     evolvesToLabel: 'Corporate Recomp',
@@ -36,7 +37,8 @@ class ProgramBlueprint {
   static const vegetarianMuscleGain = ProgramBlueprint(
     id: 'veg_muscle_gain',
     name: 'Indian Vegetarian Muscle Gain',
-    description: 'Designed for building lean muscle on a traditional lacto-vegetarian diet with high-protein swaps.',
+    description:
+        'Designed for building lean muscle on a traditional lacto-vegetarian diet with high-protein swaps.',
     targetUser: 'Vegetarian users building muscle',
     evolvesTo: 'athletic_lean_build',
     evolvesToLabel: 'Athletic Lean Build',
@@ -45,7 +47,8 @@ class ProgramBlueprint {
   static const pcosFatLoss = ProgramBlueprint(
     id: 'pcos_fat_loss',
     name: 'PCOS Fat Loss',
-    description: 'Supports insulin sensitivity and hormonal balance via strength workouts and blood-sugar stable meal pairings.',
+    description:
+        'Supports insulin sensitivity and hormonal balance via strength workouts and blood-sugar stable meal pairings.',
     targetUser: 'Women with PCOS',
     evolvesTo: 'pcos_maintenance',
     evolvesToLabel: 'PCOS Maintenance',
@@ -54,7 +57,8 @@ class ProgramBlueprint {
   static const weddingTransformation = ProgramBlueprint(
     id: 'wedding_transformation',
     name: 'Wedding Transformation',
-    description: 'A focused, high-adherence timeline program designed for rapid, sustainable body composition changes.',
+    description:
+        'A focused, high-adherence timeline program designed for rapid, sustainable body composition changes.',
     targetUser: '8–16 week wedding goal',
     evolvesTo: 'post_wedding_maintenance',
     evolvesToLabel: 'Post-Wedding Maintenance',
@@ -63,7 +67,8 @@ class ProgramBlueprint {
   static const seniorStrength = ProgramBlueprint(
     id: 'senior_strength',
     name: 'Senior Strength & Balance',
-    description: 'Prioritizes joint health, functional balance, mobility, and progressive muscle retention.',
+    description:
+        'Prioritizes joint health, functional balance, mobility, and progressive muscle retention.',
     targetUser: 'Users aged 50+',
     evolvesTo: 'active_aging',
     evolvesToLabel: 'Active Aging',
@@ -72,7 +77,8 @@ class ProgramBlueprint {
   static const athleticPerformance = ProgramBlueprint(
     id: 'athletic_performance',
     name: 'Athletic Performance',
-    description: 'For active individuals aiming to optimize power, endurance, and overall work capacity.',
+    description:
+        'For active individuals aiming to optimize power, endurance, and overall work capacity.',
     targetUser: 'Already active users',
     evolvesTo: 'elite_athletic',
     evolvesToLabel: 'Elite Athletic',
@@ -81,7 +87,8 @@ class ProgramBlueprint {
   static const diabetesSupport = ProgramBlueprint(
     id: 'diabetes_support',
     name: 'Diabetes Reversal Support',
-    description: 'A specialized routine matching glycemic guidelines to support stable blood sugars post-exercise.',
+    description:
+        'A specialized routine matching glycemic guidelines to support stable blood sugars post-exercise.',
     targetUser: 'High glucose management',
     evolvesTo: 'metabolic_optimization',
     evolvesToLabel: 'Metabolic Optimization',
@@ -90,7 +97,8 @@ class ProgramBlueprint {
   static const heartGuardian = ProgramBlueprint(
     id: 'heart_guardian',
     name: 'Heart Health Guardian',
-    description: 'Prioritizes low-intensity cardiovascular pacing, stress reduction, and blood pressure control.',
+    description:
+        'Prioritizes low-intensity cardiovascular pacing, stress reduction, and blood pressure control.',
     targetUser: 'BP / cardiac risk management',
     evolvesTo: 'heart_maintenance',
     evolvesToLabel: 'Heart Maintenance',
@@ -140,7 +148,9 @@ class ProgramSelectRecommendationEngine {
 
     // 3. BMI check
     final heightMeters = heightCm / 100.0;
-    final bmi = heightMeters > 0 ? weightKg / (heightMeters * heightMeters) : 22.0;
+    final bmi = heightMeters > 0
+        ? weightKg / (heightMeters * heightMeters)
+        : 22.0;
 
     if (bmi >= 25.0) {
       // High BMI default
@@ -194,14 +204,16 @@ class OnboardingProgramSelectNotifier extends Notifier<ProgramSelectState> {
 
   Future<void> loadRecommendation(AppDatabase db, String userId) async {
     state = state.copyWith(isLoading: true);
-    
+
     try {
-      final user = await (db.select(db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+      final user = await (db.select(
+        db.users,
+      )..where((t) => t.id.equals(userId))).getSingleOrNull();
       if (user != null) {
         final age = user.age ?? 30;
         final height = user.height ?? 170.0;
         final weight = user.weight ?? 70.0;
-        
+
         List<String> goals = [];
         if (user.goals != null && user.goals!.isNotEmpty) {
           try {
@@ -210,7 +222,7 @@ class OnboardingProgramSelectNotifier extends Notifier<ProgramSelectState> {
             goals = [];
           }
         }
-        
+
         String? dominantDosha;
         if (user.dosha != null && user.dosha!.isNotEmpty) {
           try {
@@ -256,7 +268,7 @@ class OnboardingProgramSelectNotifier extends Notifier<ProgramSelectState> {
 
   Future<void> saveToDb(AppDatabase db, String userId) async {
     if (state.selectedProgram == null) return;
-    
+
     state = state.copyWith(isSaving: true);
     await db.updateUserProfile(
       userId: userId,
@@ -268,5 +280,5 @@ class OnboardingProgramSelectNotifier extends Notifier<ProgramSelectState> {
 
 final onboardingProgramSelectProvider =
     NotifierProvider<OnboardingProgramSelectNotifier, ProgramSelectState>(
-  OnboardingProgramSelectNotifier.new,
-);
+      OnboardingProgramSelectNotifier.new,
+    );

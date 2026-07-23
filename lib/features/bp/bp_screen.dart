@@ -18,14 +18,32 @@ class BpScreen extends ConsumerWidget {
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
     final cardBg = isDark ? AppColorsDark.bg1 : AppColorsLight.bg1;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
     final errorColor = isDark ? AppColorsDark.error : AppColorsLight.error;
-    final successColor = isDark ? AppColorsDark.success : AppColorsLight.success;
+    final successColor = isDark
+        ? AppColorsDark.success
+        : AppColorsLight.success;
 
     if (!state.isUnlocked) {
-      return _buildLockScreen(context, ref, state, bgColor, cardBg, textPrimary, textSecondary, primaryColor, errorColor);
+      return _buildLockScreen(
+        context,
+        ref,
+        state,
+        bgColor,
+        cardBg,
+        textPrimary,
+        textSecondary,
+        primaryColor,
+        errorColor,
+      );
     }
 
     return Scaffold(
@@ -39,7 +57,10 @@ class BpScreen extends ConsumerWidget {
         ),
         title: Text(
           'Blood Pressure',
-          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+          style: AppTypography.h3.copyWith(
+            color: textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           IconButton(
@@ -64,18 +85,32 @@ class BpScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Latest Reading',
-                          style: AppTypography.bodySm.copyWith(color: textSecondary, fontWeight: FontWeight.bold),
+                          style: AppTypography.bodySm.copyWith(
+                            color: textSecondary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           '${state.latestSystolic} / ${state.latestDiastolic} mmHg',
-                          style: AppTypography.h1.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                          style: AppTypography.h1.copyWith(
+                            color: textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          _getBpCategory(state.latestSystolic, state.latestDiastolic),
+                          _getBpCategory(
+                            state.latestSystolic,
+                            state.latestDiastolic,
+                          ),
                           style: AppTypography.bodyMd.copyWith(
-                            color: _getBpColor(state.latestSystolic, state.latestDiastolic, successColor, errorColor),
+                            color: _getBpColor(
+                              state.latestSystolic,
+                              state.latestDiastolic,
+                              successColor,
+                              errorColor,
+                            ),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -91,7 +126,10 @@ class BpScreen extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: errorColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: errorColor.withValues(alpha: 0.6), width: 1.5),
+                        border: Border.all(
+                          color: errorColor.withValues(alpha: 0.6),
+                          width: 1.5,
+                        ),
                       ),
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -99,7 +137,11 @@ class BpScreen extends ConsumerWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.warning_amber_rounded, color: errorColor, size: 20),
+                              Icon(
+                                Icons.warning_amber_rounded,
+                                color: errorColor,
+                                size: 20,
+                              ),
                               const SizedBox(width: 8),
                               Text(
                                 'WARNING',
@@ -114,12 +156,16 @@ class BpScreen extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Text(
                             'Warning: 3 rising BP readings recorded. Limit caffeine and record again tonight.',
-                            style: AppTypography.bodyMd.copyWith(color: textPrimary, height: 1.4),
+                            style: AppTypography.bodyMd.copyWith(
+                              color: textPrimary,
+                              height: 1.4,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  if (state.showWarning) const SizedBox(height: AppSpacing.bentoGap),
+                  if (state.showWarning)
+                    const SizedBox(height: AppSpacing.bentoGap),
 
                   // 3. History Section
                   BentoCard(
@@ -129,7 +175,10 @@ class BpScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Systolic / Diastolic History (30 Days)',
-                          style: AppTypography.h3.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                          style: AppTypography.h3.copyWith(
+                            color: textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         if (state.history.isEmpty)
@@ -138,7 +187,9 @@ class BpScreen extends ConsumerWidget {
                             child: Center(
                               child: Text(
                                 'No records logged yet.',
-                                style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                                style: AppTypography.bodyMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                             ),
                           )
@@ -147,32 +198,50 @@ class BpScreen extends ConsumerWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.history.length,
-                            separatorBuilder: (context, index) => const Divider(color: Colors.white10),
+                            separatorBuilder: (context, index) =>
+                                const Divider(color: Colors.white10),
                             itemBuilder: (context, index) {
                               final item = state.history[index];
                               return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '${item.systolic}/${item.diastolic} mmHg',
-                                          style: AppTypography.bodyLg.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                          style: AppTypography.bodyLg.copyWith(
+                                            color: textPrimary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         Text(
-                                          _getBpCategory(item.systolic, item.diastolic),
+                                          _getBpCategory(
+                                            item.systolic,
+                                            item.diastolic,
+                                          ),
                                           style: AppTypography.bodySm.copyWith(
-                                            color: _getBpColor(item.systolic, item.diastolic, successColor, errorColor),
+                                            color: _getBpColor(
+                                              item.systolic,
+                                              item.diastolic,
+                                              successColor,
+                                              errorColor,
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                     Text(
                                       '${item.measuredAt.day}/${item.measuredAt.month} ${item.recordingMethod}',
-                                      style: AppTypography.labelMd.copyWith(color: textSecondary),
+                                      style: AppTypography.labelMd.copyWith(
+                                        color: textSecondary,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -191,11 +260,19 @@ class BpScreen extends ConsumerWidget {
                       backgroundColor: primaryColor,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                     onPressed: () => _showManualEntrySheet(context, ref),
                     icon: const Icon(Icons.add_rounded),
-                    label: Text('Record Blood Pressure', style: AppTypography.bodyLg.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+                    label: Text(
+                      'Record Blood Pressure',
+                      style: AppTypography.bodyLg.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -229,7 +306,10 @@ class BpScreen extends ConsumerWidget {
                 Text(
                   'Sensitive Vitals Locked',
                   textAlign: TextAlign.center,
-                  style: AppTypography.h2.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                  style: AppTypography.h2.copyWith(
+                    color: textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -247,7 +327,9 @@ class BpScreen extends ConsumerWidget {
                     foregroundColor: textPrimary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     side: const BorderSide(color: Colors.white10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: () => _showBiometricDialog(context, ref),
                   icon: const Icon(Icons.fingerprint_rounded),
@@ -265,8 +347,8 @@ class BpScreen extends ConsumerWidget {
                       width: 14,
                       height: 14,
                       decoration: BoxDecoration(
-                        color: index < state.pinInput.length 
-                            ? primaryColor 
+                        color: index < state.pinInput.length
+                            ? primaryColor
                             : Colors.white12,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white24, width: 1),
@@ -280,7 +362,10 @@ class BpScreen extends ConsumerWidget {
                     'Invalid PIN. Try again.',
                     key: const Key('bp_pin_error_text'),
                     textAlign: TextAlign.center,
-                    style: AppTypography.bodySm.copyWith(color: errorColor, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodySm.copyWith(
+                      color: errorColor,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 const SizedBox(height: 24),
 
@@ -299,7 +384,8 @@ class BpScreen extends ConsumerWidget {
                     if (index == 9) {
                       return IconButton(
                         icon: Icon(Icons.backspace_rounded, color: textPrimary),
-                        onPressed: () => ref.read(bpProvider.notifier).clearPin(),
+                        onPressed: () =>
+                            ref.read(bpProvider.notifier).clearPin(),
                       );
                     }
                     if (index == 11) {
@@ -312,10 +398,18 @@ class BpScreen extends ConsumerWidget {
                         backgroundColor: cardBg,
                         foregroundColor: textPrimary,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      onPressed: () => ref.read(bpProvider.notifier).enterPinDigit(digit),
-                      child: Text(digit, style: AppTypography.h3.copyWith(fontWeight: FontWeight.bold)),
+                      onPressed: () =>
+                          ref.read(bpProvider.notifier).enterPinDigit(digit),
+                      child: Text(
+                        digit,
+                        style: AppTypography.h3.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -333,8 +427,14 @@ class BpScreen extends ConsumerWidget {
       builder: (context) {
         return AlertDialog(
           backgroundColor: const Color(0xFF1F1E2C),
-          title: const Text('Simulated Biometrics', style: TextStyle(color: Colors.white)),
-          content: const Text('Simulate system biometric authentication check.', style: TextStyle(color: Colors.white70)),
+          title: const Text(
+            'Simulated Biometrics',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            'Simulate system biometric authentication check.',
+            style: TextStyle(color: Colors.white70),
+          ),
           actions: [
             TextButton(
               key: const Key('bp_biometric_fail'),
@@ -342,7 +442,10 @@ class BpScreen extends ConsumerWidget {
                 ref.read(bpProvider.notifier).authenticateBiometrics(false);
                 Navigator.pop(context);
               },
-              child: const Text('Fail', style: TextStyle(color: Colors.redAccent)),
+              child: const Text(
+                'Fail',
+                style: TextStyle(color: Colors.redAccent),
+              ),
             ),
             TextButton(
               key: const Key('bp_biometric_success'),
@@ -350,7 +453,10 @@ class BpScreen extends ConsumerWidget {
                 ref.read(bpProvider.notifier).authenticateBiometrics(true);
                 Navigator.pop(context);
               },
-              child: const Text('Success', style: TextStyle(color: Colors.green)),
+              child: const Text(
+                'Success',
+                style: TextStyle(color: Colors.green),
+              ),
             ),
           ],
         );
@@ -361,7 +467,8 @@ class BpScreen extends ConsumerWidget {
   String _getBpCategory(int sys, int dia) {
     if (sys < 120 && dia < 80) return 'Normal';
     if (sys >= 120 && sys < 130 && dia < 80) return 'Elevated';
-    if ((sys >= 130 && sys < 140) || (dia >= 80 && dia < 90)) return 'Hypertension Stage 1';
+    if ((sys >= 130 && sys < 140) || (dia >= 80 && dia < 90))
+      return 'Hypertension Stage 1';
     return 'Hypertension Stage 2';
   }
 
@@ -372,14 +479,20 @@ class BpScreen extends ConsumerWidget {
   }
 
   void _showManualEntrySheet(BuildContext context, WidgetRef ref) {
-    final TextEditingController sysController = TextEditingController(text: '120');
-    final TextEditingController diaController = TextEditingController(text: '80');
+    final TextEditingController sysController = TextEditingController(
+      text: '120',
+    );
+    final TextEditingController diaController = TextEditingController(
+      text: '80',
+    );
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: const Color(0xFF1C1A2E),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
@@ -394,7 +507,10 @@ class BpScreen extends ConsumerWidget {
             children: [
               Text(
                 'Record Blood Pressure',
-                style: AppTypography.h3.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                style: AppTypography.h3.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
@@ -404,8 +520,12 @@ class BpScreen extends ConsumerWidget {
                 decoration: const InputDecoration(
                   labelText: 'Systolic (mmHg)',
                   labelStyle: TextStyle(color: Colors.white70),
-                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
-                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orangeAccent)),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white24),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orangeAccent),
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -416,8 +536,12 @@ class BpScreen extends ConsumerWidget {
                 decoration: const InputDecoration(
                   labelText: 'Diastolic (mmHg)',
                   labelStyle: TextStyle(color: Colors.white70),
-                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white24)),
-                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.orangeAccent)),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white24),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orangeAccent),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -427,16 +551,23 @@ class BpScreen extends ConsumerWidget {
                   backgroundColor: AppColorsDark.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 onPressed: () {
                   final sys = int.tryParse(sysController.text) ?? 120;
                   final dia = int.tryParse(diaController.text) ?? 80;
 
-                  ref.read(bpProvider.notifier).addBpReading(sys, dia, 'manual');
+                  ref
+                      .read(bpProvider.notifier)
+                      .addBpReading(sys, dia, 'manual');
                   Navigator.pop(context);
                 },
-                child: const Text('Save Record', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: const Text(
+                  'Save Record',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),

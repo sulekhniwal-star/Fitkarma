@@ -66,8 +66,12 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final state = ref.watch(demographicsProvider);
     final bg = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
     final canBack = ref.watch(onboardingCanGoBackProvider);
 
     return Scaffold(
@@ -79,7 +83,10 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
         leading: canBack
             ? IconButton(
                 key: const Key('demographics_back_btn'),
-                icon: Icon(Icons.arrow_back_ios_new_rounded, color: textSecondary),
+                icon: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: textSecondary,
+                ),
                 onPressed: _onBack,
               )
             : null,
@@ -89,7 +96,8 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
             padding: const EdgeInsets.only(right: 12),
             child: _UnitToggle(
               isMetric: state.unitIsMetric,
-              onToggle: () => ref.read(demographicsProvider.notifier).toggleUnit(),
+              onToggle: () =>
+                  ref.read(demographicsProvider.notifier).toggleUnit(),
             ),
           ),
         ],
@@ -102,7 +110,9 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
             const OnboardingProgressIndicator(currentStep: 2, totalSteps: 5),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenH),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.screenH,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,21 +121,30 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                     // ── Header ───────────────────────────────────────────────
                     Text(
                       'Tell us about yourself',
-                      style: AppTypography.displayMd.copyWith(color: textPrimary),
+                      style: AppTypography.displayMd.copyWith(
+                        color: textPrimary,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       'We use this to personalise your calorie & fitness targets.',
-                      style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                      style: AppTypography.bodyMd.copyWith(
+                        color: textSecondary,
+                      ),
                     ),
                     const SizedBox(height: 28),
 
                     // ── Gender ───────────────────────────────────────────────
-                    _SectionLabel(label: 'Gender', labelHindi: 'लिंग', isDark: isDark),
+                    _SectionLabel(
+                      label: 'Gender',
+                      labelHindi: 'लिंग',
+                      isDark: isDark,
+                    ),
                     const SizedBox(height: 10),
                     _GenderToggle(
                       selected: state.gender,
-                      onChanged: (g) => ref.read(demographicsProvider.notifier).setGender(g),
+                      onChanged: (g) =>
+                          ref.read(demographicsProvider.notifier).setGender(g),
                       isDark: isDark,
                     ),
                     const SizedBox(height: 24),
@@ -141,8 +160,9 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                       max: 100,
                       divisions: 87,
                       isDark: isDark,
-                      onChanged: (v) =>
-                          ref.read(demographicsProvider.notifier).setAge(v.round()),
+                      onChanged: (v) => ref
+                          .read(demographicsProvider.notifier)
+                          .setAge(v.round()),
                     ),
                     const SizedBox(height: 20),
 
@@ -191,15 +211,19 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                     const SizedBox(height: 10),
                     _ActivityLevelSelector(
                       selected: state.activityLevel,
-                      onChanged: (l) =>
-                          ref.read(demographicsProvider.notifier).setActivity(l),
+                      onChanged: (l) => ref
+                          .read(demographicsProvider.notifier)
+                          .setActivity(l),
                       isDark: isDark,
                     ),
 
                     // ── Validation error ─────────────────────────────────────
                     if (_validationError != null) ...[
                       const SizedBox(height: 16),
-                      _ValidationError(message: _validationError!, isDark: isDark),
+                      _ValidationError(
+                        message: _validationError!,
+                        isDark: isDark,
+                      ),
                     ],
                     const SizedBox(height: 32),
                   ],
@@ -244,8 +268,12 @@ class _SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textPrimary    = isDark ? AppColorsDark.textPrimary    : AppColorsLight.textPrimary;
-    final textSecondary  = isDark ? AppColorsDark.textSecondary  : AppColorsLight.textSecondary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
     return Row(
       children: [
         Text(label, style: AppTypography.h3.copyWith(color: textPrimary)),
@@ -337,9 +365,12 @@ class _GenderChipState extends State<_GenderChip>
   void initState() {
     super.initState();
     _pressCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 100));
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
     _scale = Tween<double>(begin: 1.0, end: 0.96).animate(
-        CurvedAnimation(parent: _pressCtrl, curve: AppSprings.touchResponseCurve));
+      CurvedAnimation(parent: _pressCtrl, curve: AppSprings.touchResponseCurve),
+    );
   }
 
   @override
@@ -350,11 +381,21 @@ class _GenderChipState extends State<_GenderChip>
 
   @override
   Widget build(BuildContext context) {
-    final primary       = widget.isDark ? AppColorsDark.primary       : AppColorsLight.primary;
-    final surface       = widget.isDark ? AppColorsDark.surface1      : AppColorsLight.surface1;
-    final glassBorder   = widget.isDark ? AppColorsDark.glassBorder   : AppColorsLight.glassBorder;
-    final textPrimary   = widget.isDark ? AppColorsDark.textPrimary   : AppColorsLight.textPrimary;
-    final textSecondary = widget.isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final primary = widget.isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
+    final surface = widget.isDark
+        ? AppColorsDark.surface1
+        : AppColorsLight.surface1;
+    final glassBorder = widget.isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+    final textPrimary = widget.isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = widget.isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     return GestureDetector(
       onTapDown: (_) => _pressCtrl.forward(),
@@ -370,7 +411,9 @@ class _GenderChipState extends State<_GenderChip>
           curve: Curves.easeOut,
           padding: const EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
-            color: widget.isSelected ? primary.withValues(alpha: 0.15) : surface,
+            color: widget.isSelected
+                ? primary.withValues(alpha: 0.15)
+                : surface,
             borderRadius: BorderRadius.circular(AppRadius.md),
             border: Border.all(
               color: widget.isSelected ? primary : glassBorder,
@@ -429,10 +472,14 @@ class _SliderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary       = isDark ? AppColorsDark.primary       : AppColorsLight.primary;
-    final surface       = isDark ? AppColorsDark.surface1      : AppColorsLight.surface1;
-    final textPrimary   = isDark ? AppColorsDark.textPrimary   : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final primary = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final surface = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 10),
@@ -473,12 +520,12 @@ class _SliderSection extends StatelessWidget {
           ),
           SliderTheme(
             data: SliderThemeData(
-              activeTrackColor:   primary,
+              activeTrackColor: primary,
               inactiveTrackColor: primary.withValues(alpha: 0.18),
-              thumbColor:         primary,
-              overlayColor:       primary.withValues(alpha: 0.12),
-              trackHeight:        4,
-              thumbShape:         const RoundSliderThumbShape(enabledThumbRadius: 8),
+              thumbColor: primary,
+              overlayColor: primary.withValues(alpha: 0.12),
+              trackHeight: 4,
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
             ),
             child: Slider(
               value: value.clamp(min, max),
@@ -520,19 +567,25 @@ class _BmiCard extends StatelessWidget {
   // Colour for each category (using brand tokens where possible)
   Color get _barColor {
     return switch (bmi.category) {
-      BmiCategory.underweight => const Color(0xFF60A5FA),  // blue-400
-      BmiCategory.normal      => AppColorsDark.success,    // green
-      BmiCategory.overweight  => AppColorsDark.warning,    // amber
-      BmiCategory.obese       => AppColorsDark.error,      // red
+      BmiCategory.underweight => const Color(0xFF60A5FA), // blue-400
+      BmiCategory.normal => AppColorsDark.success, // green
+      BmiCategory.overweight => AppColorsDark.warning, // amber
+      BmiCategory.obese => AppColorsDark.error, // red
     };
   }
 
   @override
   Widget build(BuildContext context) {
-    final surface       = isDark ? AppColorsDark.surface1      : AppColorsLight.surface1;
-    final textPrimary   = isDark ? AppColorsDark.textPrimary   : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final glassBorder   = isDark ? AppColorsDark.glassBorder   : AppColorsLight.glassBorder;
+    final surface = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final glassBorder = isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
 
     return Container(
       key: const Key('demographics_bmi_card'),
@@ -607,10 +660,10 @@ class _BmiCard extends StatelessWidget {
               ),
               // Indicator dot
               Positioned(
-                left: MediaQuery.of(context).size.width * 0.0 +
-                    (MediaQuery.of(context).size.width - 72) *
-                        bmi.barFraction
-                        - 6,
+                left:
+                    MediaQuery.of(context).size.width * 0.0 +
+                    (MediaQuery.of(context).size.width - 72) * bmi.barFraction -
+                    6,
                 top: -2,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
@@ -642,10 +695,22 @@ class _BmiCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Under', style: AppTypography.labelMd.copyWith(color: textSecondary)),
-              Text('Normal', style: AppTypography.labelMd.copyWith(color: textSecondary)),
-              Text('Over', style: AppTypography.labelMd.copyWith(color: textSecondary)),
-              Text('Obese', style: AppTypography.labelMd.copyWith(color: textSecondary)),
+              Text(
+                'Under',
+                style: AppTypography.labelMd.copyWith(color: textSecondary),
+              ),
+              Text(
+                'Normal',
+                style: AppTypography.labelMd.copyWith(color: textSecondary),
+              ),
+              Text(
+                'Over',
+                style: AppTypography.labelMd.copyWith(color: textSecondary),
+              ),
+              Text(
+                'Obese',
+                style: AppTypography.labelMd.copyWith(color: textSecondary),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -660,8 +725,11 @@ class _BmiCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.local_fire_department_rounded,
-                    color: _barColor, size: 16),
+                Icon(
+                  Icons.local_fire_department_rounded,
+                  color: _barColor,
+                  size: 16,
+                ),
                 const SizedBox(width: 8),
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
@@ -739,9 +807,12 @@ class _ActivityPillState extends State<_ActivityPill>
   void initState() {
     super.initState();
     _pressCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 100));
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
     _scale = Tween<double>(begin: 1.0, end: 0.95).animate(
-        CurvedAnimation(parent: _pressCtrl, curve: AppSprings.touchResponseCurve));
+      CurvedAnimation(parent: _pressCtrl, curve: AppSprings.touchResponseCurve),
+    );
   }
 
   @override
@@ -752,11 +823,21 @@ class _ActivityPillState extends State<_ActivityPill>
 
   @override
   Widget build(BuildContext context) {
-    final primary       = widget.isDark ? AppColorsDark.primary       : AppColorsLight.primary;
-    final surface       = widget.isDark ? AppColorsDark.surface1      : AppColorsLight.surface1;
-    final glassBorder   = widget.isDark ? AppColorsDark.glassBorder   : AppColorsLight.glassBorder;
-    final textPrimary   = widget.isDark ? AppColorsDark.textPrimary   : AppColorsLight.textPrimary;
-    final textSecondary = widget.isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final primary = widget.isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
+    final surface = widget.isDark
+        ? AppColorsDark.surface1
+        : AppColorsLight.surface1;
+    final glassBorder = widget.isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+    final textPrimary = widget.isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = widget.isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     return GestureDetector(
       onTapDown: (_) => _pressCtrl.forward(),
@@ -772,7 +853,9 @@ class _ActivityPillState extends State<_ActivityPill>
           curve: Curves.easeOut,
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
           decoration: BoxDecoration(
-            color: widget.isSelected ? primary.withValues(alpha: 0.15) : surface,
+            color: widget.isSelected
+                ? primary.withValues(alpha: 0.15)
+                : surface,
             borderRadius: BorderRadius.circular(AppRadius.full),
             border: Border.all(
               color: widget.isSelected ? primary : glassBorder,
@@ -813,10 +896,12 @@ class _UnitToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark   = Theme.of(context).brightness == Brightness.dark;
-    final primary  = isDark ? AppColorsDark.primary  : AppColorsLight.primary;
-    final surface  = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
-    final textMuted = isDark ? AppColorsDark.textMuted : AppColorsLight.textMuted;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primary = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final surface = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
+    final textMuted = isDark
+        ? AppColorsDark.textMuted
+        : AppColorsLight.textMuted;
 
     return GestureDetector(
       key: const Key('demographics_unit_toggle'),
@@ -832,11 +917,21 @@ class _UnitToggle extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _UnitLabel(text: 'kg/cm', isActive: isMetric, primary: primary, muted: textMuted),
+            _UnitLabel(
+              text: 'kg/cm',
+              isActive: isMetric,
+              primary: primary,
+              muted: textMuted,
+            ),
             const SizedBox(width: 6),
             Text('·', style: TextStyle(color: textMuted)),
             const SizedBox(width: 6),
-            _UnitLabel(text: 'lbs/ft', isActive: !isMetric, primary: primary, muted: textMuted),
+            _UnitLabel(
+              text: 'lbs/ft',
+              isActive: !isMetric,
+              primary: primary,
+              muted: textMuted,
+            ),
           ],
         ),
       ),

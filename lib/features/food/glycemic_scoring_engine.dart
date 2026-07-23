@@ -57,16 +57,19 @@ class GlycemicScoringEngine {
 
     double score = 10.0;
     String tier = 'Optimal Energy Stability';
-    String recommendation = 'Great personal glycemic response! Enjoy this food.';
+    String recommendation =
+        'Great personal glycemic response! Enjoy this food.';
 
     if (spikeDelta > 45.0) {
       score = 3.0;
       tier = 'Poor Glycemic Response';
-      recommendation = 'High glucose spike detected (+${spikeDelta.round()} mg/dL). Pair $foodName with 10 almonds/walnuts or half a scoop of protein to blunt the insulin spike.';
+      recommendation =
+          'High glucose spike detected (+${spikeDelta.round()} mg/dL). Pair $foodName with 10 almonds/walnuts or half a scoop of protein to blunt the insulin spike.';
     } else if (spikeDelta > 25.0) {
       score = 7.0;
       tier = 'Moderate Glycemic Variance';
-      recommendation = 'Moderate spike detected (+${spikeDelta.round()} mg/dL). Keep portion size in check or pair with soluble fiber.';
+      recommendation =
+          'Moderate spike detected (+${spikeDelta.round()} mg/dL). Keep portion size in check or pair with soluble fiber.';
     }
 
     return FoodGlycemicEvaluation(
@@ -109,7 +112,10 @@ class RetrospectiveGlycemicPipeline {
       // Find post-meal readings (within 90 minutes post-meal)
       final postMealReadings = glucoseReadings.where((r) {
         final diffMinutes = r.measuredAt.difference(now).inMinutes.abs();
-        return diffMinutes <= 120 && (r.mealTag.contains('Post') || r.mealTag.contains('2-hour') || r.mealTag.contains('1-hour'));
+        return diffMinutes <= 120 &&
+            (r.mealTag.contains('Post') ||
+                r.mealTag.contains('2-hour') ||
+                r.mealTag.contains('1-hour'));
       }).toList();
 
       double baseline = defaultBaseline;
@@ -126,7 +132,9 @@ class RetrospectiveGlycemicPipeline {
 
       double peak = baseline;
       if (postMealReadings.isNotEmpty) {
-        peak = postMealReadings.map((r) => r.glucoseValue).reduce((a, b) => a > b ? a : b);
+        peak = postMealReadings
+            .map((r) => r.glucoseValue)
+            .reduce((a, b) => a > b ? a : b);
       } else {
         // Estimate peak from food carb/GI if no CGM reading is matched
         peak = baseline + (meal.carbs * 0.45).clamp(10.0, 60.0);

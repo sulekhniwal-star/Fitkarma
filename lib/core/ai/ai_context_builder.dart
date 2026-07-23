@@ -45,35 +45,45 @@ class AIContext {
       buffer.writeln("Tone: $tone");
       buffer.writeln("Readiness: $readinessScore");
       buffer.writeln("Concern: $primaryConcern");
-      
+
       if (weather != null && !compress) {
         buffer.writeln("Weather: $weather");
       }
       if (festival != null && !compress) {
         buffer.writeln("Festival: $festival");
       }
-      
+
       // Health Snapshot
       buffer.writeln("BMI: ${snapshot.bmi.toStringAsFixed(1)}");
       buffer.writeln("TDEE: ${snapshot.tdee.round()}");
       buffer.writeln("Cal Target: ${snapshot.dailyCalorieTarget.round()}");
-      buffer.writeln("Protein Target: ${snapshot.dailyProteinTargetG.round()}g");
-      buffer.writeln("Hydration Target: ${snapshot.dailyHydrationTargetL.toStringAsFixed(1)}L");
+      buffer.writeln(
+        "Protein Target: ${snapshot.dailyProteinTargetG.round()}g",
+      );
+      buffer.writeln(
+        "Hydration Target: ${snapshot.dailyHydrationTargetL.toStringAsFixed(1)}L",
+      );
       buffer.writeln("Step Target: ${snapshot.dailyStepTarget}");
-      
+
       // 7-day trends
       buffer.writeln("Avg Steps: ${snapshot.avgSteps7Days.round()}");
       buffer.writeln("Avg Sleep: ${snapshot.avgSleepMinutes7Days.round()}m");
-      buffer.writeln("Avg Water: ${snapshot.avgWaterCups7Days.toStringAsFixed(1)} cups");
-      buffer.writeln("Avg Readiness: ${snapshot.avgReadinessScore7Days.round()}");
+      buffer.writeln(
+        "Avg Water: ${snapshot.avgWaterCups7Days.toStringAsFixed(1)} cups",
+      );
+      buffer.writeln(
+        "Avg Readiness: ${snapshot.avgReadinessScore7Days.round()}",
+      );
       buffer.writeln("Avg HR: ${snapshot.avgHeartRate7Days.round()}");
-      
+
       // Local risks
       if (snapshot.localRisks.isNotEmpty) {
-        final risks = compress ? snapshot.localRisks.take(1) : snapshot.localRisks;
+        final risks = compress
+            ? snapshot.localRisks.take(1)
+            : snapshot.localRisks;
         buffer.writeln("Risks: ${risks.join('; ')}");
       }
-      
+
       return buffer.toString().trim();
     }
 
@@ -84,7 +94,7 @@ class AIContext {
       // Exceeds budget, perform compression
       payload = buildPayload(compress: true);
       estimatedTokens = (payload.length / 4).round();
-      
+
       // If still exceeding, perform aggressive truncation
       if (estimatedTokens > tokenBudget) {
         const suffix = "... [truncated]";
@@ -107,24 +117,35 @@ class AIContextBuilder {
   final AppDatabase _db;
   final HealthOSBrain _healthOSBrain;
 
-  Future<AIContext> buildCompressed(String userId, {String? weather, String? festival}) async {
-    final user = await (_db.select(_db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+  Future<AIContext> buildCompressed(
+    String userId, {
+    String? weather,
+    String? festival,
+  }) async {
+    final user = await (_db.select(
+      _db.users,
+    )..where((t) => t.id.equals(userId))).getSingleOrNull();
     if (user == null) {
       throw Exception("User not found: $userId");
     }
 
     final snapshot = await _healthOSBrain.computeHealthSnapshot(userId);
-    
+
     // Fetch latest DIP
-    final dip = await (_db.select(_db.dailyIntelligencePackages)
-          ..where((t) => t.userId.equals(userId))
-          ..orderBy([(t) => OrderingTerm.desc(t.packageDate)])
-          ..limit(1))
-        .getSingleOrNull();
-        
-    final readinessScore = dip?.adjustedCalories != null ? (snapshot.avgReadinessScore7Days.round()) : 75;
-    
-    final primaryConcern = snapshot.localRisks.isNotEmpty ? snapshot.localRisks.first : "None";
+    final dip =
+        await (_db.select(_db.dailyIntelligencePackages)
+              ..where((t) => t.userId.equals(userId))
+              ..orderBy([(t) => OrderingTerm.desc(t.packageDate)])
+              ..limit(1))
+            .getSingleOrNull();
+
+    final readinessScore = dip?.adjustedCalories != null
+        ? (snapshot.avgReadinessScore7Days.round())
+        : 75;
+
+    final primaryConcern = snapshot.localRisks.isNotEmpty
+        ? snapshot.localRisks.first
+        : "None";
 
     // Fallback/Parse values
     final name = user.name ?? "User";

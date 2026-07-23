@@ -78,10 +78,20 @@ class SleepNotifier extends Notifier<SleepState> {
       final sevenDaysAgo = now.subtract(const Duration(days: 7));
 
       // Query sleep logs for the last 7 days
-      final logs = await (db.select(db.sleepLogs)
-            ..where((t) => t.userId.equals(userId) & t.sleepDate.isBiggerOrEqualValue(sevenDaysAgo))
-            ..orderBy([(t) => drift.OrderingTerm(expression: t.sleepDate, mode: drift.OrderingMode.desc)]))
-          .get();
+      final logs =
+          await (db.select(db.sleepLogs)
+                ..where(
+                  (t) =>
+                      t.userId.equals(userId) &
+                      t.sleepDate.isBiggerOrEqualValue(sevenDaysAgo),
+                )
+                ..orderBy([
+                  (t) => drift.OrderingTerm(
+                    expression: t.sleepDate,
+                    mode: drift.OrderingMode.desc,
+                  ),
+                ]))
+              .get();
 
       if (logs.isEmpty) {
         // Fallback to default state if no DB logs exist yet
@@ -106,7 +116,8 @@ class SleepNotifier extends Notifier<SleepState> {
       int debt = 0;
       final Set<String> loggedDates = {};
       for (final log in logs) {
-        final dateKey = '${log.sleepDate.year}-${log.sleepDate.month}-${log.sleepDate.day}';
+        final dateKey =
+            '${log.sleepDate.year}-${log.sleepDate.month}-${log.sleepDate.day}';
         if (!loggedDates.contains(dateKey)) {
           loggedDates.add(dateKey);
           debt += (480 - log.sleepMinutes);
@@ -114,7 +125,11 @@ class SleepNotifier extends Notifier<SleepState> {
       }
 
       // Populate HRV trend from logs (reverse to make chronological)
-      final List<double> hrvs = logs.map((l) => l.hrvMs).toList().reversed.toList();
+      final List<double> hrvs = logs
+          .map((l) => l.hrvMs)
+          .toList()
+          .reversed
+          .toList();
 
       state = state.copyWith(
         sleepMinutes: lastNight.sleepMinutes,
@@ -148,23 +163,25 @@ class SleepNotifier extends Notifier<SleepState> {
       const userId = 'onboarding_user'; // Standard user reference
 
       // Insert sleep log delta
-      await db.into(db.sleepLogs).insert(
-        SleepLogsCompanion.insert(
-          userId: userId,
-          sleepMinutes: durationMinutes,
-          awakeMinutes: awakeMinutes,
-          remMinutes: remMinutes,
-          lightMinutes: lightMinutes,
-          deepMinutes: deepMinutes,
-          sleepQuality: quality,
-          hrvMs: hrv,
-          sleepDate: date,
-          syncBatchId: 'sleep_${date.millisecondsSinceEpoch}',
-          hlcPhysicalTime: date,
-          hlcLogicalCounter: 0,
-          hlcNodeId: 'device_wearable',
-        ),
-      );
+      await db
+          .into(db.sleepLogs)
+          .insert(
+            SleepLogsCompanion.insert(
+              userId: userId,
+              sleepMinutes: durationMinutes,
+              awakeMinutes: awakeMinutes,
+              remMinutes: remMinutes,
+              lightMinutes: lightMinutes,
+              deepMinutes: deepMinutes,
+              sleepQuality: quality,
+              hrvMs: hrv,
+              sleepDate: date,
+              syncBatchId: 'sleep_${date.millisecondsSinceEpoch}',
+              hlcPhysicalTime: date,
+              hlcLogicalCounter: 0,
+              hlcNodeId: 'device_wearable',
+            ),
+          );
 
       await loadFromDb();
     } catch (_) {

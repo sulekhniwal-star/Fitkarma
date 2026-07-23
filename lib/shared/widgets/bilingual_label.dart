@@ -27,13 +27,15 @@ class BilingualLabel extends StatelessWidget {
     if (hindiText == null || hindiText!.isEmpty) {
       return Text(
         englishText,
-        style: englishStyle ?? AppTypography.bodyMd.copyWith(color: AppColorsDark.textPrimary),
+        style:
+            englishStyle ??
+            AppTypography.bodyMd.copyWith(color: AppColorsDark.textPrimary),
       );
     }
 
-    final TextStyle baseEnglishStyle = englishStyle ?? AppTypography.bodyMd.copyWith(
-      color: AppColorsDark.textPrimary,
-    );
+    final TextStyle baseEnglishStyle =
+        englishStyle ??
+        AppTypography.bodyMd.copyWith(color: AppColorsDark.textPrimary);
 
     return Column(
       crossAxisAlignment: alignment,
@@ -42,24 +44,27 @@ class BilingualLabel extends StatelessWidget {
         // English primary label
         Text(
           englishText,
-          style: isHindiActive 
-              ? baseEnglishStyle.copyWith(color: AppColorsDark.textSecondary) // Mute English if user set Hindi
+          style: isHindiActive
+              ? baseEnglishStyle.copyWith(
+                  color: AppColorsDark.textSecondary,
+                ) // Mute English if user set Hindi
               : baseEnglishStyle,
         ),
         const SizedBox(height: 2.0),
         // Hindi secondary sub-label
         Text(
           hindiText!,
-          style: AppTypography.hindi(
-            size: baseEnglishStyle.fontSize != null 
-                ? baseEnglishStyle.fontSize! * hindiFontSizeScale 
-                : 12.0,
-            weight: isHindiActive ? FontWeight.bold : FontWeight.w400,
-          ).copyWith(
-            color: isHindiActive 
-                ? AppColorsDark.textPrimary 
-                : AppColorsDark.textMuted,
-          ),
+          style:
+              AppTypography.hindi(
+                size: baseEnglishStyle.fontSize != null
+                    ? baseEnglishStyle.fontSize! * hindiFontSizeScale
+                    : 12.0,
+                weight: isHindiActive ? FontWeight.bold : FontWeight.w400,
+              ).copyWith(
+                color: isHindiActive
+                    ? AppColorsDark.textPrimary
+                    : AppColorsDark.textMuted,
+              ),
         ),
       ],
     );

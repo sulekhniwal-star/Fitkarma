@@ -79,7 +79,10 @@ class AdherenceNotifier extends Notifier<AdherenceState> {
     );
 
     const currentStreak = 3;
-    final karmaResult = engine.calculateKarmaAward(breakdown.totalScore, currentStreak);
+    final karmaResult = engine.calculateKarmaAward(
+      breakdown.totalScore,
+      currentStreak,
+    );
 
     return AdherenceState(
       breakdown: breakdown,
@@ -90,5 +93,6 @@ class AdherenceNotifier extends Notifier<AdherenceState> {
   }
 }
 
-final adherenceProvider =
-    NotifierProvider<AdherenceNotifier, AdherenceState>(AdherenceNotifier.new);
+final adherenceProvider = NotifierProvider<AdherenceNotifier, AdherenceState>(
+  AdherenceNotifier.new,
+);

@@ -29,30 +29,35 @@ class CycleAwareTrainingAdapter {
   WorkoutAdaptation adaptForCyclePhase(CyclePhase phase) {
     return switch (phase) {
       CyclePhase.menstrual => const WorkoutAdaptation(
-          intensityModifier: 0.70,
-          preferredTypes: ['Yoga', 'Walking', 'Light Pilates'],
-          avoidTypes: ['HIIT', 'Heavy Lifting'],
-          rationale: 'Energy and iron levels are lower. Gentle movement reduces cramps and improves mood.',
-        ),
+        intensityModifier: 0.70,
+        preferredTypes: ['Yoga', 'Walking', 'Light Pilates'],
+        avoidTypes: ['HIIT', 'Heavy Lifting'],
+        rationale:
+            'Energy and iron levels are lower. Gentle movement reduces cramps and improves mood.',
+      ),
       CyclePhase.follicular => const WorkoutAdaptation(
-          intensityModifier: 1.10,
-          preferredTypes: ['Strength Training', 'HIIT', 'Running'],
-          avoidTypes: [],
-          rationale: 'Estrogen rising — best phase for high-intensity training and new personal records.',
-        ),
+        intensityModifier: 1.10,
+        preferredTypes: ['Strength Training', 'HIIT', 'Running'],
+        avoidTypes: [],
+        rationale:
+            'Estrogen rising — best phase for high-intensity training and new personal records.',
+      ),
       CyclePhase.ovulatory => const WorkoutAdaptation(
-          intensityModifier: 1.05,
-          preferredTypes: ['Strength', 'Cardio', 'Sports'],
-          avoidTypes: [],
-          rationale: 'Peak energy and coordination. Optimal for performance-focused sessions.',
-        ),
+        intensityModifier: 1.05,
+        preferredTypes: ['Strength', 'Cardio', 'Sports'],
+        avoidTypes: [],
+        rationale:
+            'Peak energy and coordination. Optimal for performance-focused sessions.',
+      ),
       CyclePhase.luteal => const WorkoutAdaptation(
-          intensityModifier: 0.85,
-          preferredTypes: ['Moderate Cardio', 'Yoga', 'Strength'],
-          avoidTypes: [],
-          nutritionNote: 'Cravings increase — add complex carbs (oats, sweet potato) to curb PMS cravings.',
-          rationale: 'Progesterone dominates. Body temperature slightly elevated; reduce intensity if fatigued.',
-        ),
+        intensityModifier: 0.85,
+        preferredTypes: ['Moderate Cardio', 'Yoga', 'Strength'],
+        avoidTypes: [],
+        nutritionNote:
+            'Cravings increase — add complex carbs (oats, sweet potato) to curb PMS cravings.',
+        rationale:
+            'Progesterone dominates. Body temperature slightly elevated; reduce intensity if fatigued.',
+      ),
     };
   }
 }
@@ -107,37 +112,60 @@ class DynamicCycleCalibrator {
     required int defaultCycleLengthDays,
   }) {
     if (symptomLogs.isEmpty) {
-      return DynamicCycleState.defaultCalendar(defaultCycleLengthDays, CyclePhase.follicular);
+      return DynamicCycleState.defaultCalendar(
+        defaultCycleLengthDays,
+        CyclePhase.follicular,
+      );
     }
 
     final sortedLogs = List<MenstrualSymptomLogWrapper>.from(symptomLogs)
       ..sort((a, b) => a.logDate.compareTo(b.logDate));
 
-    final flowStarts = sortedLogs.where((l) => l.hasMenstrualFlow).map((l) => l.logDate).toList();
+    final flowStarts = sortedLogs
+        .where((l) => l.hasMenstrualFlow)
+        .map((l) => l.logDate)
+        .toList();
     if (flowStarts.isEmpty) {
-      return DynamicCycleState.defaultCalendar(defaultCycleLengthDays, CyclePhase.follicular);
+      return DynamicCycleState.defaultCalendar(
+        defaultCycleLengthDays,
+        CyclePhase.follicular,
+      );
     }
 
     final currentCycleStart = flowStarts.last;
-    final daysInCurrentCycle = DateTime.now().difference(currentCycleStart).inDays + 1;
+    final daysInCurrentCycle =
+        DateTime.now().difference(currentCycleStart).inDays + 1;
 
     final historicalLengths = <int>[];
     for (int i = 1; i < flowStarts.length; i++) {
       historicalLengths.add(flowStarts[i].difference(flowStarts[i - 1]).inDays);
     }
 
-    final isIrregular = historicalLengths.isNotEmpty &&
-        (historicalLengths.map((l) => (l - defaultCycleLengthDays).abs()).reduce((a, b) => a + b) / historicalLengths.length > 4);
+    final isIrregular =
+        historicalLengths.isNotEmpty &&
+        (historicalLengths
+                    .map((l) => (l - defaultCycleLengthDays).abs())
+                    .reduce((a, b) => a + b) /
+                historicalLengths.length >
+            4);
 
     DateTime? detectedOvulationDate;
-    final currentCycleLogs = sortedLogs.where((l) => !l.logDate.isBefore(currentCycleStart)).toList();
+    final currentCycleLogs = sortedLogs
+        .where((l) => !l.logDate.isBefore(currentCycleStart))
+        .toList();
 
     final lhPositiveLog = currentCycleLogs.firstWhere(
       (l) => l.positiveLhTest == true,
-      orElse: () => MenstrualSymptomLogWrapper(logDate: DateTime(1970), hasMenstrualFlow: false, physicalSymptoms: []),
+      orElse: () => MenstrualSymptomLogWrapper(
+        logDate: DateTime(1970),
+        hasMenstrualFlow: false,
+        physicalSymptoms: [],
+      ),
     );
     if (lhPositiveLog.logDate.year != 1970) {
-      detectedOvulationDate = lhPositiveLog.logDate.add(const Duration(days: 1));
+      detectedOvulationDate = lhPositiveLog.logDate.add(
+        const Duration(days: 1),
+      );
     }
 
     if (detectedOvulationDate == null && currentCycleLogs.length >= 3) {
@@ -156,11 +184,16 @@ class DynamicCycleCalibrator {
 
     if (detectedOvulationDate == null && currentCycleLogs.isNotEmpty) {
       final follicularRhrLogs = currentCycleLogs
-          .where((l) => l.logDate.difference(currentCycleStart).inDays <= 10 && l.restingHeartRateBpm != null)
+          .where(
+            (l) =>
+                l.logDate.difference(currentCycleStart).inDays <= 10 &&
+                l.restingHeartRateBpm != null,
+          )
           .toList();
 
       if (follicularRhrLogs.isNotEmpty) {
-        final double follicularBaselineRhr = follicularRhrLogs
+        final double follicularBaselineRhr =
+            follicularRhrLogs
                 .map((l) => l.restingHeartRateBpm!)
                 .reduce((a, b) => a + b) /
             follicularRhrLogs.length;
@@ -170,11 +203,13 @@ class DynamicCycleCalibrator {
           final rhr = log.restingHeartRateBpm;
 
           if (rhr != null && rhr - follicularBaselineRhr >= 2.0) {
-            final hasSubjectiveSymptoms = log.physicalSymptoms.contains('egg_white_mucus') ||
+            final hasSubjectiveSymptoms =
+                log.physicalSymptoms.contains('egg_white_mucus') ||
                 log.physicalSymptoms.contains('ovulation_pain') ||
                 log.physicalSymptoms.contains('mittelschmerz');
 
-            if (hasSubjectiveSymptoms && log.logDate.difference(currentCycleStart).inDays > 10) {
+            if (hasSubjectiveSymptoms &&
+                log.logDate.difference(currentCycleStart).inDays > 10) {
               detectedOvulationDate = log.logDate;
               break;
             }
@@ -187,7 +222,9 @@ class DynamicCycleCalibrator {
     int adjustedCycleLength = defaultCycleLengthDays;
 
     if (detectedOvulationDate != null) {
-      final daysPostOvulation = DateTime.now().difference(detectedOvulationDate).inDays;
+      final daysPostOvulation = DateTime.now()
+          .difference(detectedOvulationDate)
+          .inDays;
       if (daysPostOvulation < 0) {
         phase = CyclePhase.ovulatory;
       } else if (daysPostOvulation <= 14) {
@@ -195,12 +232,15 @@ class DynamicCycleCalibrator {
       } else {
         phase = CyclePhase.menstrual;
       }
-      adjustedCycleLength = detectedOvulationDate.difference(currentCycleStart).inDays + 14;
+      adjustedCycleLength =
+          detectedOvulationDate.difference(currentCycleStart).inDays + 14;
     } else {
       if (isIrregular) {
         final avgLength = historicalLengths.isEmpty
             ? defaultCycleLengthDays
-            : (historicalLengths.reduce((a, b) => a + b) / historicalLengths.length).round();
+            : (historicalLengths.reduce((a, b) => a + b) /
+                      historicalLengths.length)
+                  .round();
         adjustedCycleLength = avgLength;
       }
 
@@ -248,7 +288,8 @@ class OnboardingWomensHealthState {
     bool? isSaving,
   }) {
     return OnboardingWomensHealthState(
-      isCycleTrackingEnabled: isCycleTrackingEnabled ?? this.isCycleTrackingEnabled,
+      isCycleTrackingEnabled:
+          isCycleTrackingEnabled ?? this.isCycleTrackingEnabled,
       averageCycleLength: averageCycleLength ?? this.averageCycleLength,
       lastPeriodDate: lastPeriodDate ?? this.lastPeriodDate,
       isSaving: isSaving ?? this.isSaving,
@@ -260,7 +301,8 @@ class OnboardingWomensHealthState {
 // Notifier
 // ──────────────────────────────────────────────────────────────────────────────
 
-class OnboardingWomensHealthNotifier extends Notifier<OnboardingWomensHealthState> {
+class OnboardingWomensHealthNotifier
+    extends Notifier<OnboardingWomensHealthState> {
   @override
   OnboardingWomensHealthState build() => const OnboardingWomensHealthState();
 
@@ -281,14 +323,19 @@ class OnboardingWomensHealthNotifier extends Notifier<OnboardingWomensHealthStat
     await db.updateUserProfile(
       userId: userId,
       isCycleTrackingEnabled: state.isCycleTrackingEnabled,
-      averageCycleLength: state.isCycleTrackingEnabled ? state.averageCycleLength : null,
-      lastPeriodDate: state.isCycleTrackingEnabled ? state.lastPeriodDate : null,
+      averageCycleLength: state.isCycleTrackingEnabled
+          ? state.averageCycleLength
+          : null,
+      lastPeriodDate: state.isCycleTrackingEnabled
+          ? state.lastPeriodDate
+          : null,
     );
     state = state.copyWith(isSaving: false);
   }
 }
 
 final onboardingWomensHealthProvider =
-    NotifierProvider<OnboardingWomensHealthNotifier, OnboardingWomensHealthState>(
-  OnboardingWomensHealthNotifier.new,
-);
+    NotifierProvider<
+      OnboardingWomensHealthNotifier,
+      OnboardingWomensHealthState
+    >(OnboardingWomensHealthNotifier.new);

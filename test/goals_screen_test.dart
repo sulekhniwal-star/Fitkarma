@@ -63,7 +63,10 @@ void main() {
       final notifier = container.read(onboardingGoalsProvider.notifier);
       final result = notifier.toggleGoal('weight_loss');
       expect(result, isTrue);
-      expect(container.read(onboardingGoalsProvider).selectedGoals, contains('weight_loss'));
+      expect(
+        container.read(onboardingGoalsProvider).selectedGoals,
+        contains('weight_loss'),
+      );
     });
 
     test('toggleGoal deselects an already-selected goal', () {
@@ -84,18 +87,33 @@ void main() {
     });
 
     test('showTargetWeightSlider is true when weight_loss selected', () {
-      container.read(onboardingGoalsProvider.notifier).toggleGoal('weight_loss');
-      expect(container.read(onboardingGoalsProvider).showTargetWeightSlider, isTrue);
+      container
+          .read(onboardingGoalsProvider.notifier)
+          .toggleGoal('weight_loss');
+      expect(
+        container.read(onboardingGoalsProvider).showTargetWeightSlider,
+        isTrue,
+      );
     });
 
     test('showTargetWeightSlider is true when muscle_gain selected', () {
-      container.read(onboardingGoalsProvider.notifier).toggleGoal('muscle_gain');
-      expect(container.read(onboardingGoalsProvider).showTargetWeightSlider, isTrue);
+      container
+          .read(onboardingGoalsProvider.notifier)
+          .toggleGoal('muscle_gain');
+      expect(
+        container.read(onboardingGoalsProvider).showTargetWeightSlider,
+        isTrue,
+      );
     });
 
     test('showTargetWeightSlider is false for non-weight goals', () {
-      container.read(onboardingGoalsProvider.notifier).toggleGoal('heart_health');
-      expect(container.read(onboardingGoalsProvider).showTargetWeightSlider, isFalse);
+      container
+          .read(onboardingGoalsProvider.notifier)
+          .toggleGoal('heart_health');
+      expect(
+        container.read(onboardingGoalsProvider).showTargetWeightSlider,
+        isFalse,
+      );
     });
 
     test('updateTargetWeight updates state', () {
@@ -117,9 +135,9 @@ void main() {
 
       await notifier.saveToDb(db, 'user1');
 
-      final user = await (db.select(db.users)
-            ..where((u) => u.id.equals('user1')))
-          .getSingle();
+      final user = await (db.select(
+        db.users,
+      )..where((u) => u.id.equals('user1'))).getSingle();
       expect(user.goals, isNotNull);
 
       final decoded = jsonDecode(user.goals!) as List;
@@ -152,11 +170,15 @@ void main() {
       }
     });
 
-    testWidgets('Continue button is disabled when nothing selected', (tester) async {
+    testWidgets('Continue button is disabled when nothing selected', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
 
-      final btn = tester.widget<FitButton>(find.byKey(const Key('goals_continue_btn')));
+      final btn = tester.widget<FitButton>(
+        find.byKey(const Key('goals_continue_btn')),
+      );
       expect(btn.onPressed, isNull);
     });
 
@@ -167,11 +189,15 @@ void main() {
       await tester.tap(find.textContaining('Weight Loss'));
       await tester.pumpAndSettle();
 
-      final btn = tester.widget<FitButton>(find.byKey(const Key('goals_continue_btn')));
+      final btn = tester.widget<FitButton>(
+        find.byKey(const Key('goals_continue_btn')),
+      );
       expect(btn.onPressed, isNotNull);
     });
 
-    testWidgets('target weight slider appears when weight_loss is selected', (tester) async {
+    testWidgets('target weight slider appears when weight_loss is selected', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
 
@@ -181,10 +207,15 @@ void main() {
       await tester.tap(find.textContaining('Weight Loss'));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(const Key('goals_target_weight_slider')), findsOneWidget);
+      expect(
+        find.byKey(const Key('goals_target_weight_slider')),
+        findsOneWidget,
+      );
     });
 
-    testWidgets('target weight slider hidden for non-weight goal', (tester) async {
+    testWidgets('target weight slider hidden for non-weight goal', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
 
@@ -196,7 +227,9 @@ void main() {
 
     testWidgets('Continue navigates to Demographics', (tester) async {
       // Pre-seed the flow controller to goals step before rendering
-      container.read(onboardingFlowProvider.notifier).jumpTo(OnboardingStep.goals);
+      container
+          .read(onboardingFlowProvider.notifier)
+          .jumpTo(OnboardingStep.goals);
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
 
@@ -211,7 +244,9 @@ void main() {
 
     testWidgets('Skip navigates to Demographics', (tester) async {
       // Pre-seed the flow controller to goals step before rendering
-      container.read(onboardingFlowProvider.notifier).jumpTo(OnboardingStep.goals);
+      container
+          .read(onboardingFlowProvider.notifier)
+          .jumpTo(OnboardingStep.goals);
       await tester.pumpWidget(buildSubject(container));
       await tester.pump();
 

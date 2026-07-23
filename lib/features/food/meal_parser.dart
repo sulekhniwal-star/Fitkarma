@@ -151,18 +151,20 @@ class MealParser {
         final phrase = tokens.sublist(phraseStart, end).join(' ');
         final entry = _findInCatalog(phrase, catalog);
         if (entry != null) {
-          matched.add(ParsedMealItem(
-            referenceId: entry.id,
-            foodName: entry.foodName,
-            servingMultiplier: quantity,
-            calories: entry.calories,
-            proteinG: entry.proteinG,
-            carbsG: entry.carbsG,
-            fatG: entry.fatG,
-            fiberG: entry.fiberG,
-            glycemicIndex: entry.glycemicIndex,
-            satietyIndex: entry.satietyIndex,
-          ));
+          matched.add(
+            ParsedMealItem(
+              referenceId: entry.id,
+              foodName: entry.foodName,
+              servingMultiplier: quantity,
+              calories: entry.calories,
+              proteinG: entry.proteinG,
+              carbsG: entry.carbsG,
+              fatG: entry.fatG,
+              fiberG: entry.fiberG,
+              glycemicIndex: entry.glycemicIndex,
+              satietyIndex: entry.satietyIndex,
+            ),
+          );
           // Mark all consumed indices
           for (int j = i; j < end; j++) {
             consumed.add(j);
@@ -196,7 +198,9 @@ class MealParser {
   /// Also tries a depluralized form (strips trailing 's') to handle
   /// common Indian food plurals: "rotis", "idlis", "eggs", etc.
   static FoodCatalogEntry? _findInCatalog(
-      String phrase, List<FoodCatalogEntry> catalog) {
+    String phrase,
+    List<FoodCatalogEntry> catalog,
+  ) {
     final candidates = [phrase];
     // Basic depluralization: strip trailing 's' if word is >2 chars
     if (phrase.endsWith('s') && phrase.length > 2) {

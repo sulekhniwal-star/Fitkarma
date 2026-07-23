@@ -15,38 +15,54 @@ import 'package:fitkarma/shared/widgets/state_widgets.dart';
 
 // Provider to fetch today's Daily Intelligence Package directly from Drift.
 // This fulfills the performance requirement (<100ms) by avoiding expensive network or redundant AI calls on startup.
-final dailyBriefingProvider = FutureProvider.autoDispose<DailyIntelligencePackage?>((ref) async {
-  final db = ref.watch(databaseProvider);
-  final userId = 'onboarding_user'; // Standard user reference
-  
-  final todayStart = DateTime.now().copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
+final dailyBriefingProvider =
+    FutureProvider.autoDispose<DailyIntelligencePackage?>((ref) async {
+      final db = ref.watch(databaseProvider);
+      final userId = 'onboarding_user'; // Standard user reference
 
-  // 1. Instantly check Drift database (local cache)
-  final latestPackage = await (db.select(db.dailyIntelligencePackages)
-        ..where((t) => t.userId.equals(userId))
-        ..orderBy([(t) => drift.OrderingTerm(expression: t.packageDate, mode: drift.OrderingMode.desc)])
-        ..limit(1))
-      .getSingleOrNull();
+      final todayStart = DateTime.now().copyWith(
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
 
-  final isSameDay = latestPackage != null && 
-      latestPackage.packageDate.year == todayStart.year &&
-      latestPackage.packageDate.month == todayStart.month &&
-      latestPackage.packageDate.day == todayStart.day;
+      // 1. Instantly check Drift database (local cache)
+      final latestPackage =
+          await (db.select(db.dailyIntelligencePackages)
+                ..where((t) => t.userId.equals(userId))
+                ..orderBy([
+                  (t) => drift.OrderingTerm(
+                    expression: t.packageDate,
+                    mode: drift.OrderingMode.desc,
+                  ),
+                ])
+                ..limit(1))
+              .getSingleOrNull();
 
-  if (isSameDay) {
-    return latestPackage;
-  }
+      final isSameDay =
+          latestPackage != null &&
+          latestPackage.packageDate.year == todayStart.year &&
+          latestPackage.packageDate.month == todayStart.month &&
+          latestPackage.packageDate.day == todayStart.day;
 
-  // 2. Fallback: Trigger generation using HealthOSBrain
-  final brain = ref.read(healthOSBrainProvider);
-  return await brain.getOrGenerateDIP(userId);
-});
+      if (isSameDay) {
+        return latestPackage;
+      }
+
+      // 2. Fallback: Trigger generation using HealthOSBrain
+      final brain = ref.read(healthOSBrainProvider);
+      return await brain.getOrGenerateDIP(userId);
+    });
 
 // A provider for the active user name to personalize the greeting.
 final userNameProvider = FutureProvider.autoDispose<String>((ref) async {
   final db = ref.watch(databaseProvider);
   final userId = 'onboarding_user';
-  final user = await (db.select(db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+  final user = await (db.select(
+    db.users,
+  )..where((t) => t.id.equals(userId))).getSingleOrNull();
   return user?.name ?? 'Arjun';
 });
 
@@ -60,9 +76,15 @@ class DailyMissionScreen extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final bgColor = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -87,17 +109,21 @@ class DailyMissionScreen extends ConsumerWidget {
 
           // Determine readiness mock score and confidence levels from DIP data
           final recommendedIntensity = dip.recommendedIntensity.toLowerCase();
-          final int readinessScore = recommendedIntensity == 'high' 
-              ? 85 
+          final int readinessScore = recommendedIntensity == 'high'
+              ? 85
               : (recommendedIntensity == 'medium' ? 72 : 48);
 
           final String confidenceLabel = recommendedIntensity == 'high'
               ? 'Very high confidence'
-              : (recommendedIntensity == 'medium' ? 'High confidence' : 'Medium confidence');
-          
+              : (recommendedIntensity == 'medium'
+                    ? 'High confidence'
+                    : 'Medium confidence');
+
           final String readinessStatus = recommendedIntensity == 'high'
               ? 'Great day for a hard session'
-              : (recommendedIntensity == 'medium' ? 'Standard program intensity' : 'Recovery or active rest focus');
+              : (recommendedIntensity == 'medium'
+                    ? 'Standard program intensity'
+                    : 'Recovery or active rest focus');
 
           final String name = userNameAsync.value ?? 'Arjun';
 
@@ -127,7 +153,9 @@ class DailyMissionScreen extends ConsumerWidget {
                               ],
                             ),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenH),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.screenH,
+                    ),
                     child: SafeArea(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +186,9 @@ class DailyMissionScreen extends ConsumerWidget {
                           Text(
                             readinessStatus,
                             textAlign: TextAlign.center,
-                            style: AppTypography.bodySm.copyWith(color: textSecondary),
+                            style: AppTypography.bodySm.copyWith(
+                              color: textSecondary,
+                            ),
                           ),
                         ],
                       ),
@@ -183,21 +213,27 @@ class DailyMissionScreen extends ConsumerWidget {
                                   children: [
                                     Text(
                                       'Health Score',
-                                      style: AppTypography.h3.copyWith(color: textPrimary),
+                                      style: AppTypography.h3.copyWith(
+                                        color: textPrimary,
+                                      ),
                                     ),
                                     const SizedBox(height: 4),
                                     Row(
                                       children: [
                                         Icon(
                                           Icons.arrow_upward_rounded,
-                                          color: isDark ? AppColorsDark.success : AppColorsLight.success,
+                                          color: isDark
+                                              ? AppColorsDark.success
+                                              : AppColorsLight.success,
                                           size: 16,
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
                                           '↑ 4 pts from yesterday — Consistency improving',
                                           style: AppTypography.bodySm.copyWith(
-                                            color: isDark ? AppColorsDark.success : AppColorsLight.success,
+                                            color: isDark
+                                                ? AppColorsDark.success
+                                                : AppColorsLight.success,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -216,34 +252,51 @@ class DailyMissionScreen extends ConsumerWidget {
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(14.0),
-                            margin: const EdgeInsets.only(bottom: AppSpacing.bentoGap),
+                            margin: const EdgeInsets.only(
+                              bottom: AppSpacing.bentoGap,
+                            ),
                             decoration: BoxDecoration(
-                              color: (isDark ? AppColorsDark.error : AppColorsLight.error).withValues(alpha: 0.12),
+                              color:
+                                  (isDark
+                                          ? AppColorsDark.error
+                                          : AppColorsLight.error)
+                                      .withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(AppRadius.md),
                               border: Border.all(
-                                color: (isDark ? AppColorsDark.error : AppColorsLight.error).withValues(alpha: 0.3),
+                                color:
+                                    (isDark
+                                            ? AppColorsDark.error
+                                            : AppColorsLight.error)
+                                        .withValues(alpha: 0.3),
                               ),
                             ),
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.warning_amber_rounded,
-                                  color: isDark ? AppColorsDark.error : AppColorsLight.error,
+                                  color: isDark
+                                      ? AppColorsDark.error
+                                      : AppColorsLight.error,
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Recovery Alert',
                                         style: AppTypography.h3.copyWith(
-                                          color: isDark ? AppColorsDark.error : AppColorsLight.error,
+                                          color: isDark
+                                              ? AppColorsDark.error
+                                              : AppColorsLight.error,
                                         ),
                                       ),
                                       Text(
                                         'Decision Hierarchy: Recovery priority today',
-                                        style: AppTypography.bodySm.copyWith(color: textSecondary),
+                                        style: AppTypography.bodySm.copyWith(
+                                          color: textSecondary,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -260,11 +313,16 @@ class DailyMissionScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  const Text('🎯', style: TextStyle(fontSize: 20)),
+                                  const Text(
+                                    '🎯',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     "Today's Mission",
-                                    style: AppTypography.h2.copyWith(color: textPrimary),
+                                    style: AppTypography.h2.copyWith(
+                                      color: textPrimary,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -289,12 +347,19 @@ class DailyMissionScreen extends ConsumerWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('😴 Sleep Debt', style: AppTypography.labelLg.copyWith(color: textSecondary)),
+                                    Text(
+                                      '😴 Sleep Debt',
+                                      style: AppTypography.labelLg.copyWith(
+                                        color: textSecondary,
+                                      ),
+                                    ),
                                     const SizedBox(height: 6),
                                     GlowingMetric(
                                       value: '-45',
                                       unit: 'min',
-                                      glowColor: isDark ? AppColorsDark.secondary : AppColorsLight.secondary,
+                                      glowColor: isDark
+                                          ? AppColorsDark.secondary
+                                          : AppColorsLight.secondary,
                                       customStyle: AppTypography.displayMd,
                                     ),
                                   ],
@@ -308,11 +373,21 @@ class DailyMissionScreen extends ConsumerWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('⚡ Energy', style: AppTypography.labelLg.copyWith(color: textSecondary)),
+                                    Text(
+                                      '⚡ Energy',
+                                      style: AppTypography.labelLg.copyWith(
+                                        color: textSecondary,
+                                      ),
+                                    ),
                                     const SizedBox(height: 6),
                                     Text(
-                                      recommendedIntensity == 'high' ? 'High' : 'Moderate',
-                                      style: AppTypography.displayMd.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                                      recommendedIntensity == 'high'
+                                          ? 'High'
+                                          : 'Moderate',
+                                      style: AppTypography.displayMd.copyWith(
+                                        color: textPrimary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -325,12 +400,19 @@ class DailyMissionScreen extends ConsumerWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('🔥 Streak', style: AppTypography.labelLg.copyWith(color: textSecondary)),
+                                    Text(
+                                      '🔥 Streak',
+                                      style: AppTypography.labelLg.copyWith(
+                                        color: textSecondary,
+                                      ),
+                                    ),
                                     const SizedBox(height: 6),
                                     GlowingMetric(
                                       value: '12',
                                       unit: 'days',
-                                      glowColor: isDark ? AppColorsDark.primary : AppColorsLight.primary,
+                                      glowColor: isDark
+                                          ? AppColorsDark.primary
+                                          : AppColorsLight.primary,
                                       customStyle: AppTypography.displayMd,
                                     ),
                                   ],
@@ -344,12 +426,19 @@ class DailyMissionScreen extends ConsumerWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('🏆 Karma Today', style: AppTypography.labelLg.copyWith(color: textSecondary)),
+                                    Text(
+                                      '🏆 Karma Today',
+                                      style: AppTypography.labelLg.copyWith(
+                                        color: textSecondary,
+                                      ),
+                                    ),
                                     const SizedBox(height: 6),
                                     GlowingMetric(
                                       value: '+45',
                                       unit: 'XP',
-                                      glowColor: isDark ? AppColorsDark.accent : AppColorsLight.accent,
+                                      glowColor: isDark
+                                          ? AppColorsDark.accent
+                                          : AppColorsLight.accent,
                                       customStyle: AppTypography.displayMd,
                                     ),
                                   ],
@@ -367,18 +456,25 @@ class DailyMissionScreen extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  const Text('🤖', style: TextStyle(fontSize: 20)),
+                                  const Text(
+                                    '🤖',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     'AI Coach Insight',
-                                    style: AppTypography.h2.copyWith(color: textPrimary),
+                                    style: AppTypography.h2.copyWith(
+                                      color: textPrimary,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Text(
                                 dip.primaryInsight,
-                                style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                                style: AppTypography.bodyMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                               const SizedBox(height: 6),
                               Text(
@@ -407,7 +503,9 @@ class DailyMissionScreen extends ConsumerWidget {
                                 context,
                                 label: 'Log Breakfast',
                                 icon: Icons.restaurant_rounded,
-                                color: isDark ? AppColorsDark.primary : AppColorsLight.primary,
+                                color: isDark
+                                    ? AppColorsDark.primary
+                                    : AppColorsLight.primary,
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -416,7 +514,9 @@ class DailyMissionScreen extends ConsumerWidget {
                                 context,
                                 label: 'Start Workout',
                                 icon: Icons.play_arrow_rounded,
-                                color: isDark ? AppColorsDark.secondary : AppColorsLight.secondary,
+                                color: isDark
+                                    ? AppColorsDark.secondary
+                                    : AppColorsLight.secondary,
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -425,7 +525,9 @@ class DailyMissionScreen extends ConsumerWidget {
                                 context,
                                 label: 'Log Water',
                                 icon: Icons.water_drop_rounded,
-                                color: isDark ? AppColorsDark.teal : AppColorsLight.teal,
+                                color: isDark
+                                    ? AppColorsDark.teal
+                                    : AppColorsLight.teal,
                               ),
                             ),
                           ],
@@ -444,7 +546,9 @@ class DailyMissionScreen extends ConsumerWidget {
   }
 
   Widget _buildMissionItem(String text, bool isDark) {
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -497,7 +601,10 @@ class DailyMissionScreen extends ConsumerWidget {
               const SizedBox(height: 4),
               Text(
                 label,
-                style: AppTypography.labelMd.copyWith(color: color, fontWeight: FontWeight.bold),
+                style: AppTypography.labelMd.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -523,8 +630,12 @@ class ReadinessRing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? AppColorsDark.primary : AppColorsLight.primary;
-    final secondaryColor = isDark ? AppColorsDark.secondary : AppColorsLight.secondary;
+    final primaryColor = isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
+    final secondaryColor = isDark
+        ? AppColorsDark.secondary
+        : AppColorsLight.secondary;
 
     return SizedBox(
       width: size,
@@ -537,7 +648,9 @@ class ReadinessRing extends StatelessWidget {
             painter: _RingPainter(
               score: score,
               primaryColor: primaryColor,
-              trackColor: isDark ? AppColorsDark.surface0 : AppColorsLight.surface2,
+              trackColor: isDark
+                  ? AppColorsDark.surface0
+                  : AppColorsLight.surface2,
             ),
           ),
           Column(
@@ -546,14 +659,16 @@ class ReadinessRing extends StatelessWidget {
               Text(
                 '$score',
                 style: AppTypography.metricLg.copyWith(
-                  color: isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary,
+                  color: isDark
+                      ? AppColorsDark.textPrimary
+                      : AppColorsLight.textPrimary,
                   fontWeight: FontWeight.w900,
                   shadows: isDark
                       ? [
                           Shadow(
                             color: primaryColor.withValues(alpha: 0.5),
                             blurRadius: 12,
-                          )
+                          ),
                         ]
                       : null,
                 ),
@@ -564,7 +679,10 @@ class ReadinessRing extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: secondaryColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(AppRadius.sm),
-                  border: Border.all(color: secondaryColor.withValues(alpha: 0.4), width: 0.5),
+                  border: Border.all(
+                    color: secondaryColor.withValues(alpha: 0.4),
+                    width: 0.5,
+                  ),
                 ),
                 child: Text(
                   confidenceLabel.split(' ').first.toUpperCase(),
@@ -585,11 +703,7 @@ class ReadinessRing extends StatelessWidget {
 
 // Custom Paint HealthScoreRing Widget
 class HealthScoreRing extends StatelessWidget {
-  const HealthScoreRing({
-    super.key,
-    required this.score,
-    required this.size,
-  });
+  const HealthScoreRing({super.key, required this.score, required this.size});
 
   final int score;
   final double size;
@@ -610,13 +724,17 @@ class HealthScoreRing extends StatelessWidget {
             painter: _RingPainter(
               score: score,
               primaryColor: tealColor,
-              trackColor: isDark ? AppColorsDark.surface0 : AppColorsLight.surface2,
+              trackColor: isDark
+                  ? AppColorsDark.surface0
+                  : AppColorsLight.surface2,
             ),
           ),
           Text(
             '$score',
             style: AppTypography.h1.copyWith(
-              color: isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary,
+              color: isDark
+                  ? AppColorsDark.textPrimary
+                  : AppColorsLight.textPrimary,
               fontWeight: FontWeight.w800,
             ),
           ),

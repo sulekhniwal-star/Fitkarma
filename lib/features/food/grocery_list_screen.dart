@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor        = Color(0xFF0E0F14);
-const _surfaceColor   = Color(0xFF1A1C26);
-const _cardColor      = Color(0xFF222434);
-const _accentOrange   = Color(0xFFFF6B35);
-const _accentGreen    = Color(0xFF4ADE80);
-const _accentRed      = Color(0xFFF87171);
-const _accentYellow   = Color(0xFFFBBF24);
-const _textPrimary    = Color(0xFFEFF0F7);
-const _textSecondary  = Color(0xFF9095B3);
-const _borderColor    = Color(0xFF2D2F45);
+const _bgColor = Color(0xFF0E0F14);
+const _surfaceColor = Color(0xFF1A1C26);
+const _cardColor = Color(0xFF222434);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentYellow = Color(0xFFFBBF24);
+const _textPrimary = Color(0xFFEFF0F7);
+const _textSecondary = Color(0xFF9095B3);
+const _borderColor = Color(0xFF2D2F45);
 
 class GroceryListScreen extends ConsumerWidget {
   const GroceryListScreen({super.key});
@@ -36,7 +36,10 @@ class GroceryListScreen extends ConsumerWidget {
         backgroundColor: _bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: _textPrimary),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: _textPrimary,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
@@ -51,7 +54,9 @@ class GroceryListScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: list == null
-            ? const Center(child: CircularProgressIndicator(color: _accentOrange))
+            ? const Center(
+                child: CircularProgressIndicator(color: _accentOrange),
+              )
             : SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -63,7 +68,11 @@ class GroceryListScreen extends ConsumerWidget {
                       weeklyLimitInr: list.weeklyCostLimitInr,
                       totalCostInr: list.totalCostInr,
                       isWithinBudget: list.isWithinBudget,
-                      onEditBudget: () => _showBudgetEditModal(context, ref, state.monthlyBudgetInr),
+                      onEditBudget: () => _showBudgetEditModal(
+                        context,
+                        ref,
+                        state.monthlyBudgetInr,
+                      ),
                     ),
 
                     const SizedBox(height: 14),
@@ -132,8 +141,14 @@ class GroceryListScreen extends ConsumerWidget {
     );
   }
 
-  void _showBudgetEditModal(BuildContext context, WidgetRef ref, double currentBudget) {
-    final textCtrl = TextEditingController(text: currentBudget.round().toString());
+  void _showBudgetEditModal(
+    BuildContext context,
+    WidgetRef ref,
+    double currentBudget,
+  ) {
+    final textCtrl = TextEditingController(
+      text: currentBudget.round().toString(),
+    );
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: _cardColor,
@@ -174,7 +189,10 @@ class GroceryListScreen extends ConsumerWidget {
                 style: const TextStyle(color: _textPrimary, fontSize: 16),
                 decoration: InputDecoration(
                   prefixText: '₹ ',
-                  prefixStyle: const TextStyle(color: _accentOrange, fontWeight: FontWeight.w700),
+                  prefixStyle: const TextStyle(
+                    color: _accentOrange,
+                    fontWeight: FontWeight.w700,
+                  ),
                   filled: true,
                   fillColor: _surfaceColor,
                   border: OutlineInputBorder(
@@ -187,17 +205,25 @@ class GroceryListScreen extends ConsumerWidget {
               ElevatedButton(
                 key: const Key('grocery_save_budget_btn'),
                 onPressed: () {
-                  final newBudget = double.tryParse(textCtrl.text) ?? currentBudget;
-                  ref.read(groceryProvider.notifier).setMonthlyBudget(newBudget);
+                  final newBudget =
+                      double.tryParse(textCtrl.text) ?? currentBudget;
+                  ref
+                      .read(groceryProvider.notifier)
+                      .setMonthlyBudget(newBudget);
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _accentOrange,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                child: const Text('Save & Optimize List', style: TextStyle(fontWeight: FontWeight.w700)),
+                child: const Text(
+                  'Save & Optimize List',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
               ),
             ],
           ),
@@ -228,7 +254,8 @@ class _BudgetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progress = (totalCostInr / (weeklyLimitInr > 0 ? weeklyLimitInr : 1)).clamp(0.0, 1.0);
+    final progress = (totalCostInr / (weeklyLimitInr > 0 ? weeklyLimitInr : 1))
+        .clamp(0.0, 1.0);
     final statusColor = isWithinBudget ? _accentGreen : _accentRed;
 
     return Container(
@@ -327,7 +354,11 @@ class _OptimizationBanner extends StatelessWidget {
             Expanded(
               child: Text(
                 'Within Budget ✓  No food swaps required.',
-                style: TextStyle(color: _accentGreen, fontWeight: FontWeight.w600, fontSize: 13),
+                style: TextStyle(
+                  color: _accentGreen,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                ),
               ),
             ),
           ],
@@ -336,7 +367,9 @@ class _OptimizationBanner extends StatelessWidget {
     }
 
     final color = list.isWithinBudget ? _accentYellow : _accentRed;
-    final icon = list.isWithinBudget ? Icons.bolt_rounded : Icons.warning_amber_rounded;
+    final icon = list.isWithinBudget
+        ? Icons.bolt_rounded
+        : Icons.warning_amber_rounded;
 
     return Container(
       key: const Key('grocery_optimization_banner'),
@@ -356,8 +389,14 @@ class _OptimizationBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  list.isWithinBudget ? 'Protein-per-Rupee Swaps Applied ⚡' : 'Budget Override Warning ⚠️',
-                  style: TextStyle(color: color, fontWeight: FontWeight.w700, fontSize: 14),
+                  list.isWithinBudget
+                      ? 'Protein-per-Rupee Swaps Applied ⚡'
+                      : 'Budget Override Warning ⚠️',
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -380,7 +419,9 @@ class _ProteinSwapsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final swappedItems = list.items.where((i) => i.isSwappedSubstitute).toList();
+    final swappedItems = list.items
+        .where((i) => i.isSwappedSubstitute)
+        .toList();
 
     return Container(
       key: const Key('grocery_protein_swaps_card'),
@@ -398,7 +439,11 @@ class _ProteinSwapsCard extends StatelessWidget {
             children: [
               const Row(
                 children: [
-                  Icon(Icons.swap_horiz_rounded, color: _accentOrange, size: 20),
+                  Icon(
+                    Icons.swap_horiz_rounded,
+                    color: _accentOrange,
+                    size: 20,
+                  ),
                   SizedBox(width: 8),
                   Text(
                     'Protein Swap Suggestions',
@@ -419,7 +464,11 @@ class _ProteinSwapsCard extends StatelessWidget {
                 ),
                 child: Text(
                   'Saved ~₹${list.totalSavedInr.round()}/wk',
-                  style: const TextStyle(color: _accentGreen, fontSize: 11, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                    color: _accentGreen,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],
@@ -443,14 +492,28 @@ class _ProteinSwapsCard extends StatelessWidget {
                               fontSize: 12,
                             ),
                           ),
-                          const TextSpan(text: ' → ', style: TextStyle(color: _accentOrange, fontSize: 12)),
+                          const TextSpan(
+                            text: ' → ',
+                            style: TextStyle(
+                              color: _accentOrange,
+                              fontSize: 12,
+                            ),
+                          ),
                           TextSpan(
                             text: '${item.name} ',
-                            style: const TextStyle(color: _textPrimary, fontWeight: FontWeight.w600, fontSize: 13),
+                            style: const TextStyle(
+                              color: _textPrimary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                            ),
                           ),
                           TextSpan(
                             text: '(₹${item.priceInr.round()})',
-                            style: const TextStyle(color: _accentGreen, fontWeight: FontWeight.w700, fontSize: 12),
+                            style: const TextStyle(
+                              color: _accentGreen,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
@@ -508,14 +571,18 @@ class _CategoryGroup extends ConsumerWidget {
                 value: item.isPurchased,
                 activeColor: _accentOrange,
                 onChanged: (_) {
-                  ref.read(groceryProvider.notifier).toggleItemPurchased(item.id);
+                  ref
+                      .read(groceryProvider.notifier)
+                      .toggleItemPurchased(item.id);
                 },
               ),
               title: Text(
                 item.name,
                 style: TextStyle(
                   color: item.isPurchased ? _textSecondary : _textPrimary,
-                  decoration: item.isPurchased ? TextDecoration.lineThrough : null,
+                  decoration: item.isPurchased
+                      ? TextDecoration.lineThrough
+                      : null,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
@@ -602,8 +669,10 @@ class _VendorCheckoutSection extends ConsumerWidget {
               _VendorChip(
                 vendor: VendorPartner.swiggyInstamart,
                 label: 'Instamart',
-                isSelected: state.selectedVendor == VendorPartner.swiggyInstamart,
-                onTap: () => notifier.setSelectedVendor(VendorPartner.swiggyInstamart),
+                isSelected:
+                    state.selectedVendor == VendorPartner.swiggyInstamart,
+                onTap: () =>
+                    notifier.setSelectedVendor(VendorPartner.swiggyInstamart),
               ),
             ],
           ),
@@ -626,7 +695,9 @@ class _VendorCheckoutSection extends ConsumerWidget {
               backgroundColor: _accentOrange,
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               textStyle: const TextStyle(
                 fontFamily: 'Outfit',
                 fontSize: 14,
@@ -650,18 +721,30 @@ class _VendorCheckoutSection extends ConsumerWidget {
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.check_circle_rounded, color: _accentGreen, size: 16),
+                      Icon(
+                        Icons.check_circle_rounded,
+                        color: _accentGreen,
+                        size: 16,
+                      ),
                       SizedBox(width: 6),
                       Text(
                         '1-Tap Checkout Payload Generated (Simulated)',
-                        style: TextStyle(color: _accentGreen, fontWeight: FontWeight.w700, fontSize: 12),
+                        style: TextStyle(
+                          color: _accentGreen,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 6),
                   Text(
                     state.checkoutPayload,
-                    style: const TextStyle(color: _textPrimary, fontSize: 11, fontFamily: 'monospace'),
+                    style: const TextStyle(
+                      color: _textPrimary,
+                      fontSize: 11,
+                      fontFamily: 'monospace',
+                    ),
                   ),
                 ],
               ),

@@ -10,14 +10,7 @@ library;
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// Major Indian festivals supported by FitKarma (§P5-K & §P12-A Specifications).
-enum FestivalType {
-  diwali,
-  holi,
-  navratri,
-  eid,
-  karwaChauth,
-  pongalOnam,
-}
+enum FestivalType { diwali, holi, navratri, eid, karwaChauth, pongalOnam }
 
 /// Relative day phase within a festival window.
 enum FestivalDayRelative {
@@ -138,18 +131,34 @@ class SmartFestivalNutritionEngine {
       type: FestivalType.diwali,
       startDate: DateTime(2026, 11, 8),
       endDate: DateTime(2026, 11, 10),
-      description: 'Festival of Lights! Indian sweets (Mithai) & celebration meals.',
+      description:
+          'Festival of Lights! Indian sweets (Mithai) & celebration meals.',
     ),
   ];
 
   /// Detects active festival and relative day phase for a given date.
-  (FestivalEvent?, FestivalDayRelative) detectFestival(DateTime targetDate, {List<FestivalEvent>? customCalendar}) {
+  (FestivalEvent?, FestivalDayRelative) detectFestival(
+    DateTime targetDate, {
+    List<FestivalEvent>? customCalendar,
+  }) {
     final calendar = customCalendar ?? festivalCalendar2026;
-    final dateOnly = DateTime(targetDate.year, targetDate.month, targetDate.day);
+    final dateOnly = DateTime(
+      targetDate.year,
+      targetDate.month,
+      targetDate.day,
+    );
 
     for (final event in calendar) {
-      final startOnly = DateTime(event.startDate.year, event.startDate.month, event.startDate.day);
-      final endOnly = DateTime(event.endDate.year, event.endDate.month, event.endDate.day);
+      final startOnly = DateTime(
+        event.startDate.year,
+        event.startDate.month,
+        event.startDate.day,
+      );
+      final endOnly = DateTime(
+        event.endDate.year,
+        event.endDate.month,
+        event.endDate.day,
+      );
 
       // Check if targetDate is exact festival day(s)
       if (dateOnly.isAfter(startOnly.subtract(const Duration(days: 1))) &&
@@ -201,7 +210,10 @@ class SmartFestivalNutritionEngine {
     }
   }
 
-  FestivalAdjustedTargets _calculateDiwaliProtocol(BaselineNutritionTargets base, FestivalDayRelative phase) {
+  FestivalAdjustedTargets _calculateDiwaliProtocol(
+    BaselineNutritionTargets base,
+    FestivalDayRelative phase,
+  ) {
     switch (phase) {
       case FestivalDayRelative.pre3Days:
       case FestivalDayRelative.pre1Day:
@@ -211,8 +223,10 @@ class SmartFestivalNutritionEngine {
           adjustedCarbsG: base.carbsG - 30,
           adjustedFatG: base.fatG - 5,
           adjustedWaterL: base.waterL + 0.5,
-          bannerMessage: '🪔 Diwali Buffer Active (-150 kcal/day banked for festival sweets)',
-          satietyNudge: 'Pre-diwali calorie banking in progress. Stay hydrated and prioritize protein.',
+          bannerMessage:
+              '🪔 Diwali Buffer Active (-150 kcal/day banked for festival sweets)',
+          satietyNudge:
+              'Pre-diwali calorie banking in progress. Stay hydrated and prioritize protein.',
           recommendedCardioMin: 0,
           relativeDay: phase,
         );
@@ -220,12 +234,14 @@ class SmartFestivalNutritionEngine {
       case FestivalDayRelative.festivalDay:
         return FestivalAdjustedTargets(
           adjustedCalories: base.calories + 400, // Sweets buffer
-          adjustedProteinG: base.proteinG + 15,  // Early satiety
+          adjustedProteinG: base.proteinG + 15, // Early satiety
           adjustedCarbsG: base.carbsG + 60,
           adjustedFatG: base.fatG + 15,
           adjustedWaterL: base.waterL + 0.5,
-          bannerMessage: '🪔 Happy Diwali! Calorie Target +400 kcal allocated for Mithai',
-          satietyNudge: 'Diwali sweets expected today! Eat your high-protein sources (whey/paneer) first before indulging to blunt blood sugar spikes.',
+          bannerMessage:
+              '🪔 Happy Diwali! Calorie Target +400 kcal allocated for Mithai',
+          satietyNudge:
+              'Diwali sweets expected today! Eat your high-protein sources (whey/paneer) first before indulging to blunt blood sugar spikes.',
           recommendedCardioMin: 0,
           relativeDay: phase,
         );
@@ -237,8 +253,10 @@ class SmartFestivalNutritionEngine {
           adjustedCarbsG: base.carbsG - 50,
           adjustedFatG: base.fatG - 10,
           adjustedWaterL: base.waterL + 1.0, // Flush sodium & bloat
-          bannerMessage: '💧 Post-Diwali Hydration & Recovery Protocol Active (+1.0L Water)',
-          satietyNudge: 'Flush out sodium & bloat today! Drink 3.5L water and take a 45-minute recovery walk.',
+          bannerMessage:
+              '💧 Post-Diwali Hydration & Recovery Protocol Active (+1.0L Water)',
+          satietyNudge:
+              'Flush out sodium & bloat today! Drink 3.5L water and take a 45-minute recovery walk.',
           recommendedCardioMin: 45,
           relativeDay: phase,
         );
@@ -248,7 +266,10 @@ class SmartFestivalNutritionEngine {
     }
   }
 
-  FestivalAdjustedTargets _calculateHoliProtocol(BaselineNutritionTargets base, FestivalDayRelative phase) {
+  FestivalAdjustedTargets _calculateHoliProtocol(
+    BaselineNutritionTargets base,
+    FestivalDayRelative phase,
+  ) {
     if (phase == FestivalDayRelative.festivalDay) {
       return FestivalAdjustedTargets(
         adjustedCalories: base.calories + 350,
@@ -256,8 +277,10 @@ class SmartFestivalNutritionEngine {
         adjustedCarbsG: base.carbsG + 50,
         adjustedFatG: base.fatG + 10,
         adjustedWaterL: base.waterL + 1.0,
-        bannerMessage: '🎨 Happy Holi! Hydration Target +1.0L for Outdoor Play & Gujiya Buffer',
-        satietyNudge: 'Holi celebrations today! Drink plenty of water and enjoy Gujiya mindfully after your protein meal.',
+        bannerMessage:
+            '🎨 Happy Holi! Hydration Target +1.0L for Outdoor Play & Gujiya Buffer',
+        satietyNudge:
+            'Holi celebrations today! Drink plenty of water and enjoy Gujiya mindfully after your protein meal.',
         recommendedCardioMin: 0,
         relativeDay: phase,
       );
@@ -277,21 +300,29 @@ class SmartFestivalNutritionEngine {
     return _unadjusted(base);
   }
 
-  FestivalAdjustedTargets _calculateNavratriProtocol(BaselineNutritionTargets base, FestivalDayRelative phase) {
+  FestivalAdjustedTargets _calculateNavratriProtocol(
+    BaselineNutritionTargets base,
+    FestivalDayRelative phase,
+  ) {
     return FestivalAdjustedTargets(
       adjustedCalories: base.calories,
       adjustedProteinG: base.proteinG,
       adjustedCarbsG: base.carbsG + 30, // Sabudana / Potato carb shift
       adjustedFatG: base.fatG,
       adjustedWaterL: base.waterL + 0.5,
-      bannerMessage: '🕉️ Navratri Fasting Mode Active (Sattvic & Dairy Protein Focus)',
-      satietyNudge: 'Grains & legumes restricted. Rely on paneer, curd, samak rice, and peanuts to hit your protein targets.',
+      bannerMessage:
+          '🕉️ Navratri Fasting Mode Active (Sattvic & Dairy Protein Focus)',
+      satietyNudge:
+          'Grains & legumes restricted. Rely on paneer, curd, samak rice, and peanuts to hit your protein targets.',
       recommendedCardioMin: 0,
       relativeDay: phase,
     );
   }
 
-  FestivalAdjustedTargets _calculateKarwaChauthProtocol(BaselineNutritionTargets base, FestivalDayRelative phase) {
+  FestivalAdjustedTargets _calculateKarwaChauthProtocol(
+    BaselineNutritionTargets base,
+    FestivalDayRelative phase,
+  ) {
     if (phase == FestivalDayRelative.pre1Day) {
       return FestivalAdjustedTargets(
         adjustedCalories: base.calories + 100,
@@ -300,7 +331,8 @@ class SmartFestivalNutritionEngine {
         adjustedFatG: base.fatG,
         adjustedWaterL: base.waterL + 1.5,
         bannerMessage: '🌕 Karwa Chauth Sargi Buffer Active (+1.5L Water)',
-        satietyNudge: 'Load up on complex carbs & hydration during Sargi to sustain energy throughout the fast.',
+        satietyNudge:
+            'Load up on complex carbs & hydration during Sargi to sustain energy throughout the fast.',
         recommendedCardioMin: 0,
         relativeDay: phase,
       );
@@ -321,7 +353,8 @@ class SmartFestivalNutritionEngine {
         adjustedFatG: base.fatG + 10,
         adjustedWaterL: base.waterL + 0.5,
         bannerMessage: '🎉 ${event.name} Target Adjustment Active (+300 kcal)',
-        satietyNudge: 'Enjoy the festival feast! Eat protein first to regulate satiety.',
+        satietyNudge:
+            'Enjoy the festival feast! Eat protein first to regulate satiety.',
         recommendedCardioMin: 0,
         relativeDay: phase,
       );

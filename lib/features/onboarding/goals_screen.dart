@@ -67,7 +67,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
   // ── Handlers ───────────────────────────────────────────────────────────────
 
   void _onGoalTapped(String goalId) {
-    final toggled = ref.read(onboardingGoalsProvider.notifier).toggleGoal(goalId);
+    final toggled = ref
+        .read(onboardingGoalsProvider.notifier)
+        .toggleGoal(goalId);
     if (!toggled) {
       _shakeControllers[goalId]?.forward(from: 0);
       _showLimitToast();
@@ -98,12 +100,16 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
                 children: [
                   Text(
                     'Maximum 3 goals selectable',
-                    style: AppTypography.labelLg.copyWith(color: AppColorsDark.textPrimary),
+                    style: AppTypography.labelLg.copyWith(
+                      color: AppColorsDark.textPrimary,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     'अधिकतम 3 लक्ष्य चुने जा सकते हैं',
-                    style: AppTypography.bodySm.copyWith(color: AppColorsDark.textSecondary),
+                    style: AppTypography.bodySm.copyWith(
+                      color: AppColorsDark.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -146,8 +152,12 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final goalsState = ref.watch(onboardingGoalsProvider);
     final bg = isDark ? AppColorsDark.bg0 : AppColorsLight.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
     final canBack = ref.watch(onboardingCanGoBackProvider);
     final canSkip = ref.watch(onboardingCanSkipProvider);
 
@@ -160,7 +170,10 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
         leading: canBack
             ? IconButton(
                 key: const Key('goals_back_btn'),
-                icon: Icon(Icons.arrow_back_ios_new_rounded, color: textSecondary),
+                icon: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: textSecondary,
+                ),
                 onPressed: _onBack,
               )
             : null,
@@ -195,12 +208,16 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
                     // Header
                     Text(
                       'Choose up to 3 Goals',
-                      style: AppTypography.displayMd.copyWith(color: textPrimary),
+                      style: AppTypography.displayMd.copyWith(
+                        color: textPrimary,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       'We personalise your plan around what matters most to you.',
-                      style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                      style: AppTypography.bodyMd.copyWith(
+                        color: textSecondary,
+                      ),
                     ),
                     const SizedBox(height: 24),
 
@@ -242,7 +259,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: FitButton(
                 key: const Key('goals_continue_btn'),
-                onPressed: goalsState.selectedGoals.isNotEmpty ? _onContinue : null,
+                onPressed: goalsState.selectedGoals.isNotEmpty
+                    ? _onContinue
+                    : null,
                 height: 54,
                 child: Text(
                   'Continue',
@@ -352,11 +371,21 @@ class _GoalChipState extends State<_GoalChip>
 
   @override
   Widget build(BuildContext context) {
-    final primary = widget.isDark ? AppColorsDark.primary : AppColorsLight.primary;
-    final surface = widget.isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
-    final glassBorder = widget.isDark ? AppColorsDark.glassBorder : AppColorsLight.glassBorder;
-    final textPrimary = widget.isDark ? AppColorsDark.textPrimary : AppColorsLight.textPrimary;
-    final textSecondary = widget.isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final primary = widget.isDark
+        ? AppColorsDark.primary
+        : AppColorsLight.primary;
+    final surface = widget.isDark
+        ? AppColorsDark.surface1
+        : AppColorsLight.surface1;
+    final glassBorder = widget.isDark
+        ? AppColorsDark.glassBorder
+        : AppColorsLight.glassBorder;
+    final textPrimary = widget.isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsLight.textPrimary;
+    final textSecondary = widget.isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     return GestureDetector(
       onTapDown: (_) => _pressCtrl.forward(),
@@ -397,7 +426,11 @@ class _GoalChipState extends State<_GoalChip>
                   ),
                 ),
                 child: widget.isSelected
-                    ? const Icon(Icons.check_rounded, size: 13, color: Colors.white)
+                    ? const Icon(
+                        Icons.check_rounded,
+                        size: 13,
+                        color: Colors.white,
+                      )
                     : null,
               ),
               const SizedBox(width: 8),
@@ -409,7 +442,10 @@ class _GoalChipState extends State<_GoalChip>
                   children: [
                     Row(
                       children: [
-                        Text(widget.goal.icon, style: const TextStyle(fontSize: 14)),
+                        Text(
+                          widget.goal.icon,
+                          style: const TextStyle(fontSize: 14),
+                        ),
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
@@ -460,7 +496,9 @@ class _TargetWeightSlider extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primary = isDark ? AppColorsDark.primary : AppColorsLight.primary;
     final surface = isDark ? AppColorsDark.surface1 : AppColorsLight.surface1;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsLight.textSecondary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsLight.textSecondary;
 
     // Round to nearest 0.5
     final displayWeight = (targetWeight * 2).round() / 2.0;
@@ -510,8 +548,14 @@ class _TargetWeightSlider extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('40 kg', style: AppTypography.labelMd.copyWith(color: textSecondary)),
-              Text('150 kg', style: AppTypography.labelMd.copyWith(color: textSecondary)),
+              Text(
+                '40 kg',
+                style: AppTypography.labelMd.copyWith(color: textSecondary),
+              ),
+              Text(
+                '150 kg',
+                style: AppTypography.labelMd.copyWith(color: textSecondary),
+              ),
             ],
           ),
         ],

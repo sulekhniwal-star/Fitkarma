@@ -17,7 +17,9 @@ class DeviceTierNotifier extends Notifier<DeviceTier> {
 }
 
 /// Provider for the client device graphics and performance tier.
-final deviceTierProvider = NotifierProvider<DeviceTierNotifier, DeviceTier>(DeviceTierNotifier.new);
+final deviceTierProvider = NotifierProvider<DeviceTierNotifier, DeviceTier>(
+  DeviceTierNotifier.new,
+);
 
 /// Notifier class for the user experience stage.
 class UxStageNotifier extends Notifier<UserExperienceStage> {
@@ -33,7 +35,9 @@ class UxStageNotifier extends Notifier<UserExperienceStage> {
 }
 
 /// Provider tracking the user's current progression stage in the app.
-final uxStageProvider = NotifierProvider<UxStageNotifier, UserExperienceStage>(UxStageNotifier.new);
+final uxStageProvider = NotifierProvider<UxStageNotifier, UserExperienceStage>(
+  UxStageNotifier.new,
+);
 
 /// Notifier class for low data/bandwidth mode.
 class LowDataModeNotifier extends Notifier<bool> {
@@ -48,7 +52,9 @@ class LowDataModeNotifier extends Notifier<bool> {
 }
 
 /// Provider for low data/bandwidth optimization settings.
-final lowDataModeProvider = NotifierProvider<LowDataModeNotifier, bool>(LowDataModeNotifier.new);
+final lowDataModeProvider = NotifierProvider<LowDataModeNotifier, bool>(
+  LowDataModeNotifier.new,
+);
 
 /// Notifier class for selecting light/dark theme.
 class ThemeModeNotifier extends Notifier<ThemeMode> {
@@ -63,4 +69,6 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
 }
 
 /// Provider managing the active theme mode of the application.
-final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);
+final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(
+  ThemeModeNotifier.new,
+);

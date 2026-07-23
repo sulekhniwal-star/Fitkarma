@@ -70,12 +70,18 @@ class BpNotifier extends Notifier<BpState> {
       final db = ref.read(databaseProvider);
 
       // Query BP readings sorted by measuredAt descending, id descending
-      final readings = await (db.select(db.bpReadings)
-            ..orderBy([
-              (t) => drift.OrderingTerm(expression: t.measuredAt, mode: drift.OrderingMode.desc),
-              (t) => drift.OrderingTerm(expression: t.id, mode: drift.OrderingMode.desc),
-            ]))
-          .get();
+      final readings =
+          await (db.select(db.bpReadings)..orderBy([
+                (t) => drift.OrderingTerm(
+                  expression: t.measuredAt,
+                  mode: drift.OrderingMode.desc,
+                ),
+                (t) => drift.OrderingTerm(
+                  expression: t.id,
+                  mode: drift.OrderingMode.desc,
+                ),
+              ]))
+              .get();
 
       final latest = readings.isNotEmpty ? readings.first : null;
 
@@ -110,7 +116,11 @@ class BpNotifier extends Notifier<BpState> {
 
       if (newInput.length == 6) {
         if (newInput == '123456') {
-          state = state.copyWith(isUnlocked: true, pinInput: '', isPinError: false);
+          state = state.copyWith(
+            isUnlocked: true,
+            pinInput: '',
+            isPinError: false,
+          );
         } else {
           state = state.copyWith(isPinError: true, pinInput: '');
         }
@@ -138,14 +148,16 @@ class BpNotifier extends Notifier<BpState> {
       final db = ref.read(databaseProvider);
       final now = DateTime.now();
 
-      await db.into(db.bpReadings).insert(
-        BpReadingsCompanion.insert(
-          systolic: systolic,
-          diastolic: diastolic,
-          measuredAt: now,
-          recordingMethod: method,
-        ),
-      );
+      await db
+          .into(db.bpReadings)
+          .insert(
+            BpReadingsCompanion.insert(
+              systolic: systolic,
+              diastolic: diastolic,
+              measuredAt: now,
+              recordingMethod: method,
+            ),
+          );
 
       await loadFromDb();
     } catch (_) {
@@ -154,6 +166,4 @@ class BpNotifier extends Notifier<BpState> {
   }
 }
 
-final bpProvider = NotifierProvider<BpNotifier, BpState>(
-  BpNotifier.new,
-);
+final bpProvider = NotifierProvider<BpNotifier, BpState>(BpNotifier.new);

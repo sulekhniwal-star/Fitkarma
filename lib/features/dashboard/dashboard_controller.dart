@@ -104,7 +104,8 @@ class DashboardNotifier extends Notifier<DashboardState> {
       healthScore: 80,
       streakDays: 12,
       karmaPoints: 4280,
-      primaryInsight: 'Add paneer or 2 boiled eggs to breakfast to help your muscles recover.',
+      primaryInsight:
+          'Add paneer or 2 boiled eggs to breakfast to help your muscles recover.',
       isLoading: true,
     );
   }
@@ -116,25 +117,37 @@ class DashboardNotifier extends Notifier<DashboardState> {
       const userId = 'onboarding_user'; // Standard user reference
 
       // 1. Fetch latest daily intelligence package
-      final dip = await (db.select(db.dailyIntelligencePackages)
-            ..where((t) => t.userId.equals(userId))
-            ..orderBy([(t) => drift.OrderingTerm(expression: t.packageDate, mode: drift.OrderingMode.desc)])
-            ..limit(1))
-          .getSingleOrNull();
+      final dip =
+          await (db.select(db.dailyIntelligencePackages)
+                ..where((t) => t.userId.equals(userId))
+                ..orderBy([
+                  (t) => drift.OrderingTerm(
+                    expression: t.packageDate,
+                    mode: drift.OrderingMode.desc,
+                  ),
+                ])
+                ..limit(1))
+              .getSingleOrNull();
 
       // 2. Fetch latest recovery log
       final recoveryLogs = await db.getRecoveryLogs(userId);
-      final latestRecovery = recoveryLogs.isNotEmpty ? recoveryLogs.first : null;
+      final latestRecovery = recoveryLogs.isNotEmpty
+          ? recoveryLogs.first
+          : null;
 
       // 3. Update state incorporating DB values or fallback to default specs
       state = state.copyWith(
         readinessScore: latestRecovery?.readinessScore ?? 73,
         healthScore: 80,
         sleepScore: latestRecovery?.sleepPerformanceScore ?? 82,
-        sleepHours: latestRecovery != null ? (latestRecovery.sleepPerformanceScore / 60.0) : 6.33,
+        sleepHours: latestRecovery != null
+            ? (latestRecovery.sleepPerformanceScore / 60.0)
+            : 6.33,
         caloriesTarget: dip?.adjustedCalories ?? 1800,
         waterTargetL: dip?.adjustedHydrationL ?? 3.0,
-        primaryInsight: dip?.primaryInsight ?? 'Add paneer or 2 boiled eggs to breakfast to help your muscles recover.',
+        primaryInsight:
+            dip?.primaryInsight ??
+            'Add paneer or 2 boiled eggs to breakfast to help your muscles recover.',
         isLoading: false,
       );
     } catch (_) {

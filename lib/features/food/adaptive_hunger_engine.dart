@@ -10,13 +10,7 @@ library;
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// Subjective craving categories (§P5-L Specification).
-enum CravingType {
-  sweet,
-  salty,
-  fatty,
-  spicy,
-  lateNightBinge,
-}
+enum CravingType { sweet, salty, fatty, spicy, lateNightBinge }
 
 /// Subjective hunger & craving log entry.
 class HungerCravingLog {
@@ -89,13 +83,17 @@ class AdaptiveHungerEngine {
     bool hasBingePattern = false;
     CravingType? predominantCraving;
 
-    final lateNightLogs = cravingLogs.where((l) =>
-        l.loggedAt.hour >= 21 ||
-        l.cravingType == CravingType.lateNightBinge ||
-        l.cravingType == CravingType.sweet);
+    final lateNightLogs = cravingLogs.where(
+      (l) =>
+          l.loggedAt.hour >= 21 ||
+          l.cravingType == CravingType.lateNightBinge ||
+          l.cravingType == CravingType.sweet,
+    );
 
     if (lateNightLogs.isNotEmpty) {
-      hasBingePattern = lateNightLogs.any((l) => l.stressLevel >= 3.0 || l.hungerScore >= 4);
+      hasBingePattern = lateNightLogs.any(
+        (l) => l.stressLevel >= 3.0 || l.hungerScore >= 4,
+      );
       predominantCraving = lateNightLogs.last.cravingType ?? CravingType.sweet;
     }
 
@@ -106,7 +104,8 @@ class AdaptiveHungerEngine {
       return HungerIntervention(
         shouldTriggerNudge: true,
         nudgeTitle: 'Pre-Emptive Snacking Alert 🍫',
-        nudgeBody: 'Stress is elevated. We notice you tend to crave sweet snacks at 9 PM on stressful days. Add a 20g protein snack now to stabilize insulin and prevent late-night binging.',
+        nudgeBody:
+            'Stress is elevated. We notice you tend to crave sweet snacks at 9 PM on stressful days. Add a 20g protein snack now to stabilize insulin and prevent late-night binging.',
         recommendedSnacks: defaultIndianProteinSnacks,
         predictedCraving: predominantCraving ?? CravingType.sweet,
       );
@@ -118,7 +117,8 @@ class AdaptiveHungerEngine {
       return HungerIntervention(
         shouldTriggerNudge: true,
         nudgeTitle: 'High Hunger Warning ⚠️',
-        nudgeBody: 'You logged Starving (5/5). Eat a balanced high-protein snack now to prevent rapid overeating at dinner.',
+        nudgeBody:
+            'You logged Starving (5/5). Eat a balanced high-protein snack now to prevent rapid overeating at dinner.',
         recommendedSnacks: defaultIndianProteinSnacks,
         predictedCraving: latestLog.cravingType,
       );

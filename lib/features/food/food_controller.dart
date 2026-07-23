@@ -91,12 +91,60 @@ class FoodState {
 
 class FoodNotifier extends Notifier<FoodState> {
   static const List<FoodItem> _foodDatabase = [
-    FoodItem(id: 'db_1', name: 'Egg Bhurji', calories: 250, protein: 18, carbs: 4, fat: 18, mealType: 'Breakfast'),
-    FoodItem(id: 'db_2', name: 'Paneer Butter Masala', calories: 380, protein: 14, carbs: 12, fat: 30, mealType: 'Lunch'),
-    FoodItem(id: 'db_3', name: 'Roti', calories: 120, protein: 3, carbs: 25, fat: 1, mealType: 'Lunch'),
-    FoodItem(id: 'db_4', name: 'Chicken Tikka', calories: 280, protein: 30, carbs: 5, fat: 15, mealType: 'Dinner'),
-    FoodItem(id: 'db_5', name: 'Dal Tadka', calories: 180, protein: 8, carbs: 24, fat: 6, mealType: 'Dinner'),
-    FoodItem(id: 'db_6', name: 'Oats with Milk', calories: 220, protein: 10, carbs: 35, fat: 4, mealType: 'Breakfast'),
+    FoodItem(
+      id: 'db_1',
+      name: 'Egg Bhurji',
+      calories: 250,
+      protein: 18,
+      carbs: 4,
+      fat: 18,
+      mealType: 'Breakfast',
+    ),
+    FoodItem(
+      id: 'db_2',
+      name: 'Paneer Butter Masala',
+      calories: 380,
+      protein: 14,
+      carbs: 12,
+      fat: 30,
+      mealType: 'Lunch',
+    ),
+    FoodItem(
+      id: 'db_3',
+      name: 'Roti',
+      calories: 120,
+      protein: 3,
+      carbs: 25,
+      fat: 1,
+      mealType: 'Lunch',
+    ),
+    FoodItem(
+      id: 'db_4',
+      name: 'Chicken Tikka',
+      calories: 280,
+      protein: 30,
+      carbs: 5,
+      fat: 15,
+      mealType: 'Dinner',
+    ),
+    FoodItem(
+      id: 'db_5',
+      name: 'Dal Tadka',
+      calories: 180,
+      protein: 8,
+      carbs: 24,
+      fat: 6,
+      mealType: 'Dinner',
+    ),
+    FoodItem(
+      id: 'db_6',
+      name: 'Oats with Milk',
+      calories: 220,
+      protein: 10,
+      carbs: 35,
+      fat: 4,
+      mealType: 'Breakfast',
+    ),
   ];
 
   @override
@@ -107,13 +155,37 @@ class FoodNotifier extends Notifier<FoodState> {
       carbsTarget: 220,
       fatTarget: 65,
       loggedItems: [
-        FoodItem(id: 'init_1', name: 'Masala Dosa', calories: 350, protein: 6, carbs: 55, fat: 12, mealType: 'Breakfast'),
+        FoodItem(
+          id: 'init_1',
+          name: 'Masala Dosa',
+          calories: 350,
+          protein: 6,
+          carbs: 55,
+          fat: 12,
+          mealType: 'Breakfast',
+        ),
       ],
       searchQuery: '',
       searchResults: [],
       recentMeals: [
-        FoodItem(id: 'rec_1', name: 'Egg Bhurji', calories: 250, protein: 18, carbs: 4, fat: 18, mealType: 'Breakfast'),
-        FoodItem(id: 'rec_2', name: 'Roti', calories: 120, protein: 3, carbs: 25, fat: 1, mealType: 'Lunch'),
+        FoodItem(
+          id: 'rec_1',
+          name: 'Egg Bhurji',
+          calories: 250,
+          protein: 18,
+          carbs: 4,
+          fat: 18,
+          mealType: 'Breakfast',
+        ),
+        FoodItem(
+          id: 'rec_2',
+          name: 'Roti',
+          calories: 120,
+          protein: 3,
+          carbs: 25,
+          fat: 1,
+          mealType: 'Lunch',
+        ),
       ],
       isLoading: false,
     );
@@ -126,19 +198,29 @@ class FoodNotifier extends Notifier<FoodState> {
     }
 
     final lower = query.toLowerCase();
-    final results = _foodDatabase.where((item) => item.name.toLowerCase().contains(lower)).toList();
+    final results = _foodDatabase
+        .where((item) => item.name.toLowerCase().contains(lower))
+        .toList();
     state = state.copyWith(searchQuery: query, searchResults: results);
   }
 
   void addFood(FoodItem item) {
-    final newItem = item.copyWith(id: 'item_${DateTime.now().millisecondsSinceEpoch}');
+    final newItem = item.copyWith(
+      id: 'item_${DateTime.now().millisecondsSinceEpoch}',
+    );
     final newList = List<FoodItem>.from(state.loggedItems)..add(newItem);
 
     // Also add to recents if not already there
-    final existsInRecents = state.recentMeals.any((element) => element.name.toLowerCase() == item.name.toLowerCase());
+    final existsInRecents = state.recentMeals.any(
+      (element) => element.name.toLowerCase() == item.name.toLowerCase(),
+    );
     List<FoodItem> newRecents = state.recentMeals;
     if (!existsInRecents) {
-      newRecents = List<FoodItem>.from(state.recentMeals)..insert(0, item.copyWith(id: 'rec_${DateTime.now().millisecondsSinceEpoch}'));
+      newRecents = List<FoodItem>.from(state.recentMeals)
+        ..insert(
+          0,
+          item.copyWith(id: 'rec_${DateTime.now().millisecondsSinceEpoch}'),
+        );
       if (newRecents.length > 5) {
         newRecents.removeLast();
       }
@@ -153,7 +235,9 @@ class FoodNotifier extends Notifier<FoodState> {
   }
 
   void removeFood(String id) {
-    final newList = state.loggedItems.where((element) => element.id != id).toList();
+    final newList = state.loggedItems
+        .where((element) => element.id != id)
+        .toList();
     state = state.copyWith(loggedItems: newList);
   }
 }

@@ -52,9 +52,10 @@ class PeriodizationState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final nutritionPeriodizationEngineProvider = Provider<NutritionPeriodizationEngine>((ref) {
-  return const NutritionPeriodizationEngine();
-});
+final nutritionPeriodizationEngineProvider =
+    Provider<NutritionPeriodizationEngine>((ref) {
+      return const NutritionPeriodizationEngine();
+    });
 
 class PeriodizationNotifier extends Notifier<PeriodizationState> {
   static const String _userId = 'local_user';
@@ -156,9 +157,9 @@ class PeriodizationNotifier extends Notifier<PeriodizationState> {
   Future<void> _loadUserPeriodizationState() async {
     try {
       final db = ref.read(databaseProvider);
-      final user = await (db.select(db.users)
-            ..where((t) => t.id.equals(_userId)))
-          .getSingleOrNull();
+      final user = await (db.select(
+        db.users,
+      )..where((t) => t.id.equals(_userId))).getSingleOrNull();
 
       if (user != null && user.nutritionPeriodizationPhase.isNotEmpty) {
         final phaseName = user.nutritionPeriodizationPhase;
@@ -190,4 +191,6 @@ class PeriodizationNotifier extends Notifier<PeriodizationState> {
 }
 
 final periodizationProvider =
-    NotifierProvider<PeriodizationNotifier, PeriodizationState>(PeriodizationNotifier.new);
+    NotifierProvider<PeriodizationNotifier, PeriodizationState>(
+      PeriodizationNotifier.new,
+    );

@@ -19,9 +19,8 @@ class GlowingMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseStyle = customStyle ?? AppTypography.metricXL.copyWith(
-      color: Colors.white,
-    );
+    final baseStyle =
+        customStyle ?? AppTypography.metricXL.copyWith(color: Colors.white);
 
     return RichText(
       textAlign: TextAlign.center,

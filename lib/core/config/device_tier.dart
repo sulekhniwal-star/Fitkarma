@@ -1,5 +1,1 @@
-enum DeviceTier {
-  low,
-  medium,
-  high,
-}
+enum DeviceTier { low, medium, high }

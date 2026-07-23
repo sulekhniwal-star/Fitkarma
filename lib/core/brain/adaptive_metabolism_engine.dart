@@ -1,17 +1,10 @@
 import 'package:drift/drift.dart';
 import 'package:fitkarma/core/database/app_database.dart';
 
-enum CalibrationConfidence {
-  low,
-  medium,
-  high,
-}
+enum CalibrationConfidence { low, medium, high }
 
 class WeightReading {
-  WeightReading({
-    required this.date,
-    required this.weightKg,
-  });
+  WeightReading({required this.date, required this.weightKg});
 
   final DateTime date;
   final double weightKg;
@@ -77,9 +70,9 @@ class AdaptiveMetabolismEngine {
 
   /// Called weekly by the Health OS Brain to recalculate metabolic changes.
   AdaptiveCalibrationResult recalibrate({
-    required List<WeightReading> recentWeighIns,   // last 4 weeks
-    required List<FoodLog> recentFoodLogs,          // last 4 weeks
-    required double targetWeeklyDeltaKg,            // user's goal rate
+    required List<WeightReading> recentWeighIns, // last 4 weeks
+    required List<FoodLog> recentFoodLogs, // last 4 weeks
+    required double targetWeeklyDeltaKg, // user's goal rate
     required int currentCalorieTarget,
   }) {
     if (recentWeighIns.length < 2) {
@@ -105,7 +98,10 @@ class AdaptiveMetabolismEngine {
     // Step 5: Adherence score (logging days over 28-day window)
     final loggingDays = recentFoodLogs
         .where((l) => l.isComplete)
-        .map((l) => '${l.consumeTime.year}-${l.consumeTime.month}-${l.consumeTime.day}')
+        .map(
+          (l) =>
+              '${l.consumeTime.year}-${l.consumeTime.month}-${l.consumeTime.day}',
+        )
         .toSet()
         .length;
     final adherence = loggingDays / 28.0;
@@ -138,11 +134,14 @@ class AdaptiveMetabolismEngine {
     final smoothed = <double>[];
     for (int i = 0; i < sorted.length; i++) {
       final current = sorted[i];
-      final window = sorted.where((r) {
-        final difference = current.date.difference(r.date).inDays.abs();
-        return difference <= 6;
-      }).map((r) => r.weightKg).toList();
-      
+      final window = sorted
+          .where((r) {
+            final difference = current.date.difference(r.date).inDays.abs();
+            return difference <= 6;
+          })
+          .map((r) => r.weightKg)
+          .toList();
+
       window.sort();
       final median = window[window.length ~/ 2];
       smoothed.add(median);
@@ -150,7 +149,9 @@ class AdaptiveMetabolismEngine {
 
     // Step 2: Compute least-squares linear regression slope (kg per week)
     final firstDate = sorted.first.date;
-    final times = sorted.map((r) => r.date.difference(firstDate).inDays / 7.0).toList();
+    final times = sorted
+        .map((r) => r.date.difference(firstDate).inDays / 7.0)
+        .toList();
 
     double sumX = 0;
     double sumY = 0;
@@ -176,14 +177,18 @@ class AdaptiveMetabolismEngine {
 
   double avgDailyCalories(List<FoodLog> logs) {
     if (logs.isEmpty) return 2000.0;
-    
+
     final dailyCalories = <String, double>{};
     for (final log in logs) {
-      final key = '${log.consumeTime.year}-${log.consumeTime.month}-${log.consumeTime.day}';
+      final key =
+          '${log.consumeTime.year}-${log.consumeTime.month}-${log.consumeTime.day}';
       dailyCalories[key] = (dailyCalories[key] ?? 0.0) + log.calories;
     }
-    
-    final totalCalories = dailyCalories.values.fold<double>(0.0, (sum, val) => sum + val);
+
+    final totalCalories = dailyCalories.values.fold<double>(
+      0.0,
+      (sum, val) => sum + val,
+    );
     return totalCalories / dailyCalories.length;
   }
 
@@ -207,13 +212,15 @@ class AdaptiveMetabolismService {
     required List<FoodLog> recentFoodLogs,
     required double targetWeeklyDeltaKg,
   }) async {
-    final user = await (_db.select(_db.users)..where((t) => t.id.equals(userId))).getSingleOrNull();
+    final user = await (_db.select(
+      _db.users,
+    )..where((t) => t.id.equals(userId))).getSingleOrNull();
     if (user == null) {
       throw Exception('User profile not found');
     }
 
     final currentTarget = user.dailyCalorieTarget ?? 2000;
-    
+
     final result = _engine.recalibrate(
       recentWeighIns: recentWeighIns,
       recentFoodLogs: recentFoodLogs,
@@ -222,8 +229,9 @@ class AdaptiveMetabolismService {
     );
 
     if (!result.isInsufficientData) {
-      await (_db.update(_db.users)..where((t) => t.id.equals(userId)))
-          .write(UsersCompanion(dailyCalorieTarget: Value(result.newCalorieTarget)));
+      await (_db.update(_db.users)..where((t) => t.id.equals(userId))).write(
+        UsersCompanion(dailyCalorieTarget: Value(result.newCalorieTarget)),
+      );
     }
 
     return result;

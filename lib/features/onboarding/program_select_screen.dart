@@ -17,7 +17,8 @@ class ProgramSelectScreen extends ConsumerStatefulWidget {
   const ProgramSelectScreen({super.key});
 
   @override
-  ConsumerState<ProgramSelectScreen> createState() => _ProgramSelectScreenState();
+  ConsumerState<ProgramSelectScreen> createState() =>
+      _ProgramSelectScreenState();
 }
 
 class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
@@ -26,10 +27,9 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
     super.initState();
     // Load recommendations on first render
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(onboardingProgramSelectProvider.notifier).loadRecommendation(
-            ref.read(databaseProvider),
-            'onboarding_user',
-          );
+      ref
+          .read(onboardingProgramSelectProvider.notifier)
+          .loadRecommendation(ref.read(databaseProvider), 'onboarding_user');
     });
   }
 
@@ -59,8 +59,12 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = isDark ? AppColorsDark.bg0 : AppColorsDark.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsDark.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsDark.textSecondary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsDark.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsDark.textSecondary;
 
     final selectState = ref.watch(onboardingProgramSelectProvider);
     final recommended = selectState.recommendedProgram;
@@ -84,20 +88,23 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
           onPressed: _onBack,
         ),
       ),
       body: SafeArea(
         child: Column(
           children: [
-            const OnboardingProgressIndicator(
-              currentStep: 4,
-              totalSteps: 5,
-            ),
+            const OnboardingProgressIndicator(currentStep: 4, totalSteps: 5),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 10.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -115,7 +122,9 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
                     // Hero Recommendation Card
                     BentoCard(
                       onTap: () {
-                        ref.read(onboardingProgramSelectProvider.notifier).selectProgram(recommended);
+                        ref
+                            .read(onboardingProgramSelectProvider.notifier)
+                            .selectProgram(recommended);
                       },
                       customBgColor: isRecommendedSelected
                           ? AppColorsDark.primaryMuted
@@ -128,7 +137,10 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColorsDark.primary,
                                   borderRadius: BorderRadius.circular(4),
@@ -142,33 +154,52 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
                                 ),
                               ),
                               if (isRecommendedSelected)
-                                const Icon(Icons.check_circle_rounded, color: AppColorsDark.primary),
+                                const Icon(
+                                  Icons.check_circle_rounded,
+                                  color: AppColorsDark.primary,
+                                ),
                             ],
                           ),
                           const SizedBox(height: 12),
                           Text(
                             recommended.name,
-                            style: AppTypography.h1.copyWith(color: textPrimary),
+                            style: AppTypography.h1.copyWith(
+                              color: textPrimary,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             recommended.targetUser,
-                            style: AppTypography.bodySm.copyWith(color: AppColorsDark.primary),
+                            style: AppTypography.bodySm.copyWith(
+                              color: AppColorsDark.primary,
+                            ),
                           ),
                           const SizedBox(height: 12),
                           Text(
                             recommended.description,
-                            style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                            style: AppTypography.bodyMd.copyWith(
+                              color: textSecondary,
+                            ),
                           ),
                           const SizedBox(height: 20),
-                          const Divider(color: AppColorsDark.divider, height: 1),
+                          const Divider(
+                            color: AppColorsDark.divider,
+                            height: 1,
+                          ),
                           const SizedBox(height: 16),
                           Text(
                             'Evolution Timeline:',
-                            style: AppTypography.labelLg.copyWith(color: textPrimary, fontWeight: FontWeight.bold),
+                            style: AppTypography.labelLg.copyWith(
+                              color: textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 12),
-                          _buildTimeline(recommended, textPrimary, textSecondary),
+                          _buildTimeline(
+                            recommended,
+                            textPrimary,
+                            textSecondary,
+                          ),
                         ],
                       ),
                     ),
@@ -186,7 +217,8 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
                       itemBuilder: (context, index) {
                         final prog = ProgramBlueprint.all[index];
                         // Skip rendering recommended program in list to avoid duplicates
-                        if (prog.id == recommended.id) return const SizedBox.shrink();
+                        if (prog.id == recommended.id)
+                          return const SizedBox.shrink();
 
                         final isSelected = selected.id == prog.id;
 
@@ -194,41 +226,64 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
                           padding: const EdgeInsets.only(bottom: 12.0),
                           child: BentoCard(
                             onTap: () {
-                              ref.read(onboardingProgramSelectProvider.notifier).selectProgram(prog);
+                              ref
+                                  .read(
+                                    onboardingProgramSelectProvider.notifier,
+                                  )
+                                  .selectProgram(prog);
                             },
-                            customBgColor: isSelected ? AppColorsDark.primaryMuted : AppColorsDark.glass,
+                            customBgColor: isSelected
+                                ? AppColorsDark.primaryMuted
+                                : AppColorsDark.glass,
                             hasSecondaryGlow: isSelected,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: Text(
                                         prog.name,
-                                        style: AppTypography.h2.copyWith(color: textPrimary),
+                                        style: AppTypography.h2.copyWith(
+                                          color: textPrimary,
+                                        ),
                                       ),
                                     ),
                                     if (isSelected)
-                                      const Icon(Icons.check_circle_rounded, color: AppColorsDark.primary),
+                                      const Icon(
+                                        Icons.check_circle_rounded,
+                                        color: AppColorsDark.primary,
+                                      ),
                                   ],
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   prog.targetUser,
-                                  style: AppTypography.bodySm.copyWith(color: textSecondary),
+                                  style: AppTypography.bodySm.copyWith(
+                                    color: textSecondary,
+                                  ),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   prog.description,
-                                  style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                                  style: AppTypography.bodyMd.copyWith(
+                                    color: textSecondary,
+                                  ),
                                 ),
                                 if (isSelected) ...[
                                   const SizedBox(height: 16),
-                                  const Divider(color: AppColorsDark.divider, height: 1),
+                                  const Divider(
+                                    color: AppColorsDark.divider,
+                                    height: 1,
+                                  ),
                                   const SizedBox(height: 12),
-                                  _buildTimeline(prog, textPrimary, textSecondary),
+                                  _buildTimeline(
+                                    prog,
+                                    textPrimary,
+                                    textSecondary,
+                                  ),
                                 ],
                               ],
                             ),
@@ -252,15 +307,37 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
     );
   }
 
-  Widget _buildTimeline(ProgramBlueprint prog, Color textPrimary, Color textSecondary) {
+  Widget _buildTimeline(
+    ProgramBlueprint prog,
+    Color textPrimary,
+    Color textSecondary,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: _buildTimelineNode(prog.name, 'Current', AppColorsDark.primary)),
+        Expanded(
+          child: _buildTimelineNode(
+            prog.name,
+            'Current',
+            AppColorsDark.primary,
+          ),
+        ),
         const Icon(Icons.chevron_right_rounded, color: AppColorsDark.textMuted),
-        Expanded(child: _buildTimelineNode(prog.evolvesToLabel, 'Next Tier', AppColorsDark.secondary)),
+        Expanded(
+          child: _buildTimelineNode(
+            prog.evolvesToLabel,
+            'Next Tier',
+            AppColorsDark.secondary,
+          ),
+        ),
         const Icon(Icons.chevron_right_rounded, color: AppColorsDark.textMuted),
-        Expanded(child: _buildTimelineNode('Peak Performance', 'Goal Stage', AppColorsDark.teal)),
+        Expanded(
+          child: _buildTimelineNode(
+            'Peak Performance',
+            'Goal Stage',
+            AppColorsDark.teal,
+          ),
+        ),
       ],
     );
   }
@@ -278,7 +355,10 @@ class _ProgramSelectScreenState extends ConsumerState<ProgramSelectScreen> {
           ),
           child: Text(
             title,
-            style: AppTypography.labelMd.copyWith(color: color, fontWeight: FontWeight.bold),
+            style: AppTypography.labelMd.copyWith(
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

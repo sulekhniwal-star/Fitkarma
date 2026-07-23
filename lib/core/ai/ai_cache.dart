@@ -9,20 +9,21 @@ class AICache {
   /// Retrieves a non-expired cached response from the database
   Future<String?> get(String userId, String promptHash) async {
     final now = DateTime.now();
-    final entry = await (_db.select(_db.aICacheEntries)
-          ..where((t) => 
-            t.userId.equals(userId) & 
-            t.promptHash.equals(promptHash) & 
-            t.expiresAt.isBiggerThanValue(now)
-          ))
-        .getSingleOrNull();
+    final entry =
+        await (_db.select(_db.aICacheEntries)..where(
+              (t) =>
+                  t.userId.equals(userId) &
+                  t.promptHash.equals(promptHash) &
+                  t.expiresAt.isBiggerThanValue(now),
+            ))
+            .getSingleOrNull();
     return entry?.response;
   }
 
   /// Stores or updates an AI response cache entry
   Future<void> set(
-    String userId, 
-    String promptHash, 
+    String userId,
+    String promptHash,
     String response, {
     Duration ttl = const Duration(hours: 24),
   }) async {
@@ -38,6 +39,8 @@ class AICache {
 
   /// Purges all cached items for a user (DPDP Act right-to-erasure)
   Future<void> purgeForUser(String userId) async {
-    await (_db.delete(_db.aICacheEntries)..where((t) => t.userId.equals(userId))).go();
+    await (_db.delete(
+      _db.aICacheEntries,
+    )..where((t) => t.userId.equals(userId))).go();
   }
 }

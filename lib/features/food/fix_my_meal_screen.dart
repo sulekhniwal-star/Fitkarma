@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor      = Color(0xFF0E0F14);
+const _bgColor = Color(0xFF0E0F14);
 const _surfaceColor = Color(0xFF1A1C26);
-const _cardColor    = Color(0xFF222434);
+const _cardColor = Color(0xFF222434);
 const _accentOrange = Color(0xFFFF6B35);
-const _accentGreen  = Color(0xFF4ADE80);
-const _accentRed    = Color(0xFFF87171);
-const _accentBlue   = Color(0xFF60A5FA);
-const _textPrimary  = Color(0xFFEFF0F7);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentBlue = Color(0xFF60A5FA);
+const _textPrimary = Color(0xFFEFF0F7);
 const _textSecondary = Color(0xFF9095B3);
-const _borderColor  = Color(0xFF2D2F45);
+const _borderColor = Color(0xFF2D2F45);
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -43,9 +43,10 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     )..repeat(reverse: true);
-    _pulseAnim = Tween<double>(begin: 0.85, end: 1.0).animate(
-      CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut),
-    );
+    _pulseAnim = Tween<double>(
+      begin: 0.85,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut));
   }
 
   @override
@@ -64,7 +65,10 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen>
         backgroundColor: _bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: _textPrimary),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: _textPrimary,
+          ),
           onPressed: () {
             ref.read(fixMyMealProvider.notifier).reset();
             Navigator.of(context).pop();
@@ -90,13 +94,13 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen>
       ),
       body: SafeArea(
         child: switch (state.phase) {
-          FixMyMealPhase.idle    => _IdlePickerSection(onPickImage: _onPickImage),
+          FixMyMealPhase.idle => _IdlePickerSection(onPickImage: _onPickImage),
           FixMyMealPhase.analyzing => _AnalyzingSection(pulseAnim: _pulseAnim),
-          FixMyMealPhase.result  => _ResultSection(state: state),
-          FixMyMealPhase.error   => _ErrorSection(
-              message: state.errorMessage ?? 'Unknown error',
-              onRetry: () => ref.read(fixMyMealProvider.notifier).reset(),
-            ),
+          FixMyMealPhase.result => _ResultSection(state: state),
+          FixMyMealPhase.error => _ErrorSection(
+            message: state.errorMessage ?? 'Unknown error',
+            onRetry: () => ref.read(fixMyMealProvider.notifier).reset(),
+          ),
         },
       ),
     );
@@ -265,9 +269,9 @@ class _IdlePickerSection extends StatelessWidget {
     );
   }
 }
+
 class _PickerButton extends StatelessWidget {
   const _PickerButton({
-
     super.key,
     required this.icon,
     required this.label,
@@ -334,12 +338,16 @@ class _AnalyzingSectionState extends State<_AnalyzingSection> {
   @override
   void initState() {
     super.initState();
-    _timers.add(Timer(const Duration(milliseconds: 900), () {
-      if (mounted) setState(() => _msgIndex = 1);
-    }));
-    _timers.add(Timer(const Duration(milliseconds: 1800), () {
-      if (mounted) setState(() => _msgIndex = 2);
-    }));
+    _timers.add(
+      Timer(const Duration(milliseconds: 900), () {
+        if (mounted) setState(() => _msgIndex = 1);
+      }),
+    );
+    _timers.add(
+      Timer(const Duration(milliseconds: 1800), () {
+        if (mounted) setState(() => _msgIndex = 2);
+      }),
+    );
   }
 
   @override
@@ -349,6 +357,7 @@ class _AnalyzingSectionState extends State<_AnalyzingSection> {
     }
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -445,7 +454,9 @@ class _ResultSection extends ConsumerWidget {
                           const Text(
                             'Detected',
                             style: TextStyle(
-                                color: _textSecondary, fontSize: 12),
+                              color: _textSecondary,
+                              fontSize: 12,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
@@ -467,8 +478,7 @@ class _ResultSection extends ConsumerWidget {
                 const SizedBox(height: 6),
                 Text(
                   'Confidence: ${(vision.confidence * 100).toStringAsFixed(0)}%',
-                  style:
-                      const TextStyle(color: _textSecondary, fontSize: 12),
+                  style: const TextStyle(color: _textSecondary, fontSize: 12),
                 ),
               ],
             ),
@@ -511,13 +521,13 @@ class _ResultSection extends ConsumerWidget {
                   child: _ImpactCard(
                     label: 'Goal Impact',
                     value: switch (analysis.goalImpact) {
-                      GoalImpact.aligned    => 'Aligned ✓',
-                      GoalImpact.neutral    => 'Neutral',
+                      GoalImpact.aligned => 'Aligned ✓',
+                      GoalImpact.neutral => 'Neutral',
                       GoalImpact.misaligned => 'Below need',
                     },
                     color: switch (analysis.goalImpact) {
-                      GoalImpact.aligned    => _accentGreen,
-                      GoalImpact.neutral    => _accentBlue,
+                      GoalImpact.aligned => _accentGreen,
+                      GoalImpact.neutral => _accentBlue,
                       GoalImpact.misaligned => _accentRed,
                     },
                     icon: Icons.flag_rounded,
@@ -583,8 +593,7 @@ class _ResultSection extends ConsumerWidget {
 
           TextButton.icon(
             key: const Key('fix_my_meal_reanalyze_btn'),
-            onPressed: () =>
-                ref.read(fixMyMealProvider.notifier).reset(),
+            onPressed: () => ref.read(fixMyMealProvider.notifier).reset(),
             icon: const Icon(Icons.refresh_rounded, color: _textSecondary),
             label: const Text(
               'Re-analyze',
@@ -608,13 +617,13 @@ class _SourceBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = switch (source) {
       VisionSource.offlineMatch => 'Offline',
-      VisionSource.cached       => 'Cached',
-      VisionSource.apiCall      => 'Groq Vision',
+      VisionSource.cached => 'Cached',
+      VisionSource.apiCall => 'Groq Vision',
     };
     final color = switch (source) {
       VisionSource.offlineMatch => _accentGreen,
-      VisionSource.cached       => _accentBlue,
-      VisionSource.apiCall      => _accentOrange,
+      VisionSource.cached => _accentBlue,
+      VisionSource.apiCall => _accentOrange,
     };
 
     return Container(
@@ -714,8 +723,10 @@ class _MacroItem extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 2),
-        Text(label,
-            style: const TextStyle(color: _textSecondary, fontSize: 11)),
+        Text(
+          label,
+          style: const TextStyle(color: _textSecondary, fontSize: 11),
+        ),
       ],
     );
   }
@@ -873,13 +884,14 @@ class _FixSuggestionsCard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('•  ',
-                      style: TextStyle(color: _accentOrange, fontSize: 14)),
+                  const Text(
+                    '•  ',
+                    style: TextStyle(color: _accentOrange, fontSize: 14),
+                  ),
                   Expanded(
                     child: Text(
                       s,
-                      style: const TextStyle(
-                          color: _textPrimary, fontSize: 13),
+                      style: const TextStyle(color: _textPrimary, fontSize: 13),
                     ),
                   ),
                 ],
@@ -926,8 +938,7 @@ class _PortionSelector extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color:
-                          active ? _accentOrange : _cardColor,
+                      color: active ? _accentOrange : _cardColor,
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: active ? _accentOrange : _borderColor,
@@ -1006,8 +1017,11 @@ class _ErrorSection extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error_outline_rounded,
-                color: _accentRed, size: 56),
+            const Icon(
+              Icons.error_outline_rounded,
+              color: _accentRed,
+              size: 56,
+            ),
             const SizedBox(height: 16),
             Text(
               message,
@@ -1030,5 +1044,3 @@ class _ErrorSection extends StatelessWidget {
     );
   }
 }
-
-

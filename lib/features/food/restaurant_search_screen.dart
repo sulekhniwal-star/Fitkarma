@@ -11,17 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor        = Color(0xFF0E0F14);
-const _surfaceColor   = Color(0xFF1A1C26);
-const _cardColor      = Color(0xFF222434);
-const _accentOrange   = Color(0xFFFF6B35);
-const _accentGreen    = Color(0xFF4ADE80);
-const _accentRed      = Color(0xFFF87171);
-const _accentBlue     = Color(0xFF60A5FA);
-const _accentYellow   = Color(0xFFFBBF24);
-const _textPrimary    = Color(0xFFEFF0F7);
-const _textSecondary  = Color(0xFF9095B3);
-const _borderColor    = Color(0xFF2D2F45);
+const _bgColor = Color(0xFF0E0F14);
+const _surfaceColor = Color(0xFF1A1C26);
+const _cardColor = Color(0xFF222434);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentBlue = Color(0xFF60A5FA);
+const _accentYellow = Color(0xFFFBBF24);
+const _textPrimary = Color(0xFFEFF0F7);
+const _textSecondary = Color(0xFF9095B3);
+const _borderColor = Color(0xFF2D2F45);
 
 class RestaurantSearchScreen extends ConsumerStatefulWidget {
   const RestaurantSearchScreen({super.key});
@@ -31,8 +31,7 @@ class RestaurantSearchScreen extends ConsumerStatefulWidget {
       _RestaurantSearchScreenState();
 }
 
-class _RestaurantSearchScreenState
-    extends ConsumerState<RestaurantSearchScreen>
+class _RestaurantSearchScreenState extends ConsumerState<RestaurantSearchScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchCtrl = TextEditingController();
@@ -62,7 +61,10 @@ class _RestaurantSearchScreenState
         backgroundColor: _bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: _textPrimary),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: _textPrimary,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
@@ -93,14 +95,8 @@ class _RestaurantSearchScreenState
       body: TabBarView(
         controller: _tabController,
         children: [
-          _BrowseTab(
-            state: state,
-            searchCtrl: _searchCtrl,
-          ),
-          _OcrTab(
-            state: state,
-            ocrCtrl: _ocrCtrl,
-          ),
+          _BrowseTab(state: state, searchCtrl: _searchCtrl),
+          _OcrTab(state: state, ocrCtrl: _ocrCtrl),
         ],
       ),
     );
@@ -112,10 +108,7 @@ class _RestaurantSearchScreenState
 // ─────────────────────────────────────────────────────────────────────────────
 
 class _BrowseTab extends ConsumerWidget {
-  const _BrowseTab({
-    required this.state,
-    required this.searchCtrl,
-  });
+  const _BrowseTab({required this.state, required this.searchCtrl});
 
   final RestaurantState state;
   final TextEditingController searchCtrl;
@@ -148,10 +141,16 @@ class _BrowseTab extends ConsumerWidget {
             decoration: InputDecoration(
               hintText: 'Search dish name, chain or category…',
               hintStyle: const TextStyle(color: _textSecondary),
-              prefixIcon: const Icon(Icons.search_rounded, color: _accentOrange),
+              prefixIcon: const Icon(
+                Icons.search_rounded,
+                color: _accentOrange,
+              ),
               suffixIcon: searchCtrl.text.isNotEmpty
                   ? IconButton(
-                      icon: const Icon(Icons.clear_rounded, color: _textSecondary),
+                      icon: const Icon(
+                        Icons.clear_rounded,
+                        color: _textSecondary,
+                      ),
                       onPressed: () {
                         searchCtrl.clear();
                         notifier.setSearchQuery('');
@@ -259,8 +258,14 @@ class _BrowseTab extends ConsumerWidget {
               spacing: 12,
               runSpacing: 8,
               children: [
-                _LegendBadge(color: _accentGreen, label: '🟢 High Protein (>20g)'),
-                _LegendBadge(color: _accentBlue, label: '🔵 Low Cal (<300 kcal)'),
+                _LegendBadge(
+                  color: _accentGreen,
+                  label: '🟢 High Protein (>20g)',
+                ),
+                _LegendBadge(
+                  color: _accentBlue,
+                  label: '🔵 Low Cal (<300 kcal)',
+                ),
                 _LegendBadge(color: _accentYellow, label: '🟠 Diabetic Safe'),
                 _LegendBadge(color: _accentRed, label: '🔴 Avoid / Fried'),
               ],
@@ -275,7 +280,11 @@ class _BrowseTab extends ConsumerWidget {
               padding: const EdgeInsets.all(32),
               child: const Column(
                 children: [
-                  Icon(Icons.search_off_rounded, color: _textSecondary, size: 48),
+                  Icon(
+                    Icons.search_off_rounded,
+                    color: _textSecondary,
+                    size: 48,
+                  ),
                   SizedBox(height: 12),
                   Text(
                     'No restaurant dishes match your search',
@@ -380,8 +389,11 @@ class _ChainPresetCard extends StatelessWidget {
                   ),
                 ),
                 if (isSelected)
-                  const Icon(Icons.check_circle_rounded,
-                      color: _accentOrange, size: 18),
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: _accentOrange,
+                    size: 18,
+                  ),
               ],
             ),
             const SizedBox(height: 8),
@@ -445,10 +457,7 @@ class _HighlightRow extends StatelessWidget {
                 ),
                 TextSpan(
                   text: value,
-                  style: const TextStyle(
-                    color: _textSecondary,
-                    fontSize: 11,
-                  ),
+                  style: const TextStyle(color: _textSecondary, fontSize: 11),
                 ),
               ],
             ),
@@ -474,21 +483,21 @@ class _MenuItemCard extends StatelessWidget {
 
   Color get _overlayColor {
     return switch (overlay) {
-      OverlayColor.green  => _accentGreen,
-      OverlayColor.blue   => _accentBlue,
+      OverlayColor.green => _accentGreen,
+      OverlayColor.blue => _accentBlue,
       OverlayColor.orange => _accentYellow,
-      OverlayColor.red    => _accentRed,
-      OverlayColor.none   => _borderColor,
+      OverlayColor.red => _accentRed,
+      OverlayColor.none => _borderColor,
     };
   }
 
   String get _overlayBadgeText {
     return switch (overlay) {
-      OverlayColor.green  => '🟢 High Protein',
-      OverlayColor.blue   => '🔵 Low Calorie',
+      OverlayColor.green => '🟢 High Protein',
+      OverlayColor.blue => '🔵 Low Calorie',
       OverlayColor.orange => '🟠 Diabetic Safe',
-      OverlayColor.red    => '🔴 Avoid / Fried',
-      OverlayColor.none   => '',
+      OverlayColor.red => '🔴 Avoid / Fried',
+      OverlayColor.none => '',
     };
   }
 
@@ -538,8 +547,10 @@ class _MenuItemCard extends StatelessWidget {
               ),
               if (overlay != OverlayColor.none)
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: _overlayColor.withAlpha(30),
                     borderRadius: BorderRadius.circular(12),
@@ -564,21 +575,25 @@ class _MenuItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _NutrientPill(
-                  label: 'Calories',
-                  value: '${item.calories.round()} kcal',
-                  color: _accentOrange),
+                label: 'Calories',
+                value: '${item.calories.round()} kcal',
+                color: _accentOrange,
+              ),
               _NutrientPill(
-                  label: 'Protein',
-                  value: '${item.proteinG.round()}g',
-                  color: _accentGreen),
+                label: 'Protein',
+                value: '${item.proteinG.round()}g',
+                color: _accentGreen,
+              ),
               _NutrientPill(
-                  label: 'Carbs',
-                  value: '${item.carbsG.round()}g',
-                  color: _accentYellow),
+                label: 'Carbs',
+                value: '${item.carbsG.round()}g',
+                color: _accentYellow,
+              ),
               _NutrientPill(
-                  label: 'GI Index',
-                  value: '${item.glycemicIndex}',
-                  color: _accentBlue),
+                label: 'GI Index',
+                value: '${item.glycemicIndex}',
+                color: _accentBlue,
+              ),
             ],
           ),
 
@@ -590,8 +605,11 @@ class _MenuItemCard extends StatelessWidget {
               if (item.isDeepFried)
                 const Row(
                   children: [
-                    Icon(Icons.local_fire_department_rounded,
-                        color: _accentRed, size: 14),
+                    Icon(
+                      Icons.local_fire_department_rounded,
+                      color: _accentRed,
+                      size: 14,
+                    ),
                     SizedBox(width: 4),
                     Text(
                       'Deep Fried',
@@ -610,7 +628,9 @@ class _MenuItemCard extends StatelessWidget {
                   backgroundColor: _accentOrange,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 8),
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
                   minimumSize: const Size(0, 32),
                   textStyle: const TextStyle(
                     fontFamily: 'Outfit',
@@ -665,10 +685,7 @@ class _NutrientPill extends StatelessWidget {
 // ─────────────────────────────────────────────────────────────────────────────
 
 class _OcrTab extends ConsumerWidget {
-  const _OcrTab({
-    required this.state,
-    required this.ocrCtrl,
-  });
+  const _OcrTab({required this.state, required this.ocrCtrl});
 
   final RestaurantState state;
   final TextEditingController ocrCtrl;
@@ -705,8 +722,11 @@ Dal Makhani
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.document_scanner_rounded,
-                        color: _accentOrange, size: 20),
+                    Icon(
+                      Icons.document_scanner_rounded,
+                      color: _accentOrange,
+                      size: 20,
+                    ),
                     SizedBox(width: 8),
                     Text(
                       'Menu OCR Scanner Simulator',
@@ -814,31 +834,28 @@ Dal Makhani
 }
 
 class _OcrOverlayTile extends StatelessWidget {
-  const _OcrOverlayTile({
-    required this.overlay,
-    required this.onLog,
-  });
+  const _OcrOverlayTile({required this.overlay, required this.onLog});
 
   final ParsedMenuItemOverlay overlay;
   final VoidCallback? onLog;
 
   Color get _color {
     return switch (overlay.colorOverlay) {
-      OverlayColor.green  => _accentGreen,
-      OverlayColor.blue   => _accentBlue,
+      OverlayColor.green => _accentGreen,
+      OverlayColor.blue => _accentBlue,
       OverlayColor.orange => _accentYellow,
-      OverlayColor.red    => _accentRed,
-      OverlayColor.none   => _borderColor,
+      OverlayColor.red => _accentRed,
+      OverlayColor.none => _borderColor,
     };
   }
 
   String get _tag {
     return switch (overlay.colorOverlay) {
-      OverlayColor.green  => 'High Protein',
-      OverlayColor.blue   => 'Low Calorie',
+      OverlayColor.green => 'High Protein',
+      OverlayColor.blue => 'Low Calorie',
       OverlayColor.orange => 'Diabetic Safe',
-      OverlayColor.red    => 'Avoid / Deep Fried',
-      OverlayColor.none   => 'Matched',
+      OverlayColor.red => 'Avoid / Deep Fried',
+      OverlayColor.none => 'Matched',
     };
   }
 

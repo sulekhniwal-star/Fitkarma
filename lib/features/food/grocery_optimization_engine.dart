@@ -18,11 +18,7 @@ enum GroceryCategory {
 }
 
 /// Supported Quick-Commerce delivery partners (§P16-E integration).
-enum VendorPartner {
-  blinkit,
-  zepto,
-  swiggyInstamart,
-}
+enum VendorPartner { blinkit, zepto, swiggyInstamart }
 
 /// A single grocery line item.
 class GroceryItem {
@@ -245,7 +241,8 @@ class GroceryOptimizationEngine {
     double newProteinCostTotal = 0.0;
 
     for (final item in rawList) {
-      if (item.category == GroceryCategory.protein && item.costPerGramOfProtein > 1.0) {
+      if (item.category == GroceryCategory.protein &&
+          item.costPerGramOfProtein > 1.0) {
         final substitute = _findCheaperProteinSubstitute(item);
         optimized.add(substitute);
         accumulatedCost += substitute.priceInr;

@@ -30,9 +30,7 @@ Widget buildSubject({String? initialLocation}) {
             ),
           ],
         );
-        return MaterialApp.router(
-          routerConfig: router,
-        );
+        return MaterialApp.router(routerConfig: router);
       },
     ),
   );
@@ -61,14 +59,8 @@ void main() {
       await tester.pumpWidget(buildSubject());
       await tester.pump();
 
-      expect(
-        find.textContaining('Your health, your karma.'),
-        findsOneWidget,
-      );
-      expect(
-        find.textContaining('Track steps'),
-        findsOneWidget,
-      );
+      expect(find.textContaining('Your health, your karma.'), findsOneWidget);
+      expect(find.textContaining('Track steps'), findsOneWidget);
     });
 
     testWidgets('renders Get Started and Login buttons', (tester) async {
@@ -86,7 +78,9 @@ void main() {
       // Let animations settle fully
       await tester.pump(const Duration(milliseconds: 300)); // delay before logo
       await tester.pump(const Duration(milliseconds: 900)); // logo controller
-      await tester.pump(const Duration(milliseconds: 550)); // content controller
+      await tester.pump(
+        const Duration(milliseconds: 550),
+      ); // content controller
       await tester.pump(); // final settle
 
       await tester.tap(find.byKey(const Key('welcome_get_started_btn')));

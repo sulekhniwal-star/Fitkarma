@@ -18,10 +18,12 @@ class WomensHealthOnboardingScreen extends ConsumerStatefulWidget {
   const WomensHealthOnboardingScreen({super.key});
 
   @override
-  ConsumerState<WomensHealthOnboardingScreen> createState() => _WomensHealthOnboardingScreenState();
+  ConsumerState<WomensHealthOnboardingScreen> createState() =>
+      _WomensHealthOnboardingScreenState();
 }
 
-class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboardingScreen> {
+class _WomensHealthOnboardingScreenState
+    extends ConsumerState<WomensHealthOnboardingScreen> {
   void _onBack() {
     final prev = ref.read(onboardingFlowProvider.notifier).back();
     if (prev != null && mounted) {
@@ -81,12 +83,27 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
       },
     );
     if (picked != null && mounted) {
-      ref.read(onboardingWomensHealthProvider.notifier).setLastPeriodDate(picked);
+      ref
+          .read(onboardingWomensHealthProvider.notifier)
+          .setLastPeriodDate(picked);
     }
   }
 
   String _formatDate(DateTime date) {
-    final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     return '${date.day} ${months[date.month - 1]} ${date.year}';
   }
 
@@ -94,15 +111,20 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = isDark ? AppColorsDark.bg0 : AppColorsDark.bg0;
-    final textPrimary = isDark ? AppColorsDark.textPrimary : AppColorsDark.textPrimary;
-    final textSecondary = isDark ? AppColorsDark.textSecondary : AppColorsDark.textSecondary;
+    final textPrimary = isDark
+        ? AppColorsDark.textPrimary
+        : AppColorsDark.textPrimary;
+    final textSecondary = isDark
+        ? AppColorsDark.textSecondary
+        : AppColorsDark.textSecondary;
 
     final healthState = ref.watch(onboardingWomensHealthProvider);
 
     // Compute estimated phase if last period date is set
     DynamicCycleState? estCycle;
     WorkoutAdaptation? workoutAdapt;
-    if (healthState.isCycleTrackingEnabled && healthState.lastPeriodDate != null) {
+    if (healthState.isCycleTrackingEnabled &&
+        healthState.lastPeriodDate != null) {
       const calibrator = DynamicCycleCalibrator();
       final log = MenstrualSymptomLogWrapper(
         logDate: healthState.lastPeriodDate!,
@@ -113,7 +135,9 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
         symptomLogs: [log],
         defaultCycleLengthDays: healthState.averageCycleLength,
       );
-      workoutAdapt = const CycleAwareTrainingAdapter().adaptForCyclePhase(estCycle.currentPhase);
+      workoutAdapt = const CycleAwareTrainingAdapter().adaptForCyclePhase(
+        estCycle.currentPhase,
+      );
     }
 
     return Scaffold(
@@ -123,7 +147,10 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
           onPressed: _onBack,
         ),
         actions: [
@@ -131,7 +158,9 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
             onPressed: _onSkip,
             child: Text(
               'Skip',
-              style: AppTypography.bodyMd.copyWith(color: AppColorsDark.primary),
+              style: AppTypography.bodyMd.copyWith(
+                color: AppColorsDark.primary,
+              ),
             ),
           ),
         ],
@@ -139,13 +168,13 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
       body: SafeArea(
         child: Column(
           children: [
-            const OnboardingProgressIndicator(
-              currentStep: 4,
-              totalSteps: 5,
-            ),
+            const OnboardingProgressIndicator(currentStep: 4, totalSteps: 5),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 10.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -162,7 +191,9 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                     const SizedBox(height: 8),
                     Text(
                       'Optimize workouts and nutrition based on your menstrual cycle phases.',
-                      style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                      style: AppTypography.bodyMd.copyWith(
+                        color: textSecondary,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 24),
@@ -177,12 +208,16 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                               children: [
                                 Text(
                                   'Enable Cycle Syncing',
-                                  style: AppTypography.h3.copyWith(color: textPrimary),
+                                  style: AppTypography.h3.copyWith(
+                                    color: textPrimary,
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   'Adapts workouts/diet recommendations',
-                                  style: AppTypography.bodySm.copyWith(color: textSecondary),
+                                  style: AppTypography.bodySm.copyWith(
+                                    color: textSecondary,
+                                  ),
                                 ),
                               ],
                             ),
@@ -190,9 +225,13 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                           Switch(
                             value: healthState.isCycleTrackingEnabled,
                             activeColor: AppColorsDark.rose,
-                            activeTrackColor: AppColorsDark.rose.withOpacity(0.3),
+                            activeTrackColor: AppColorsDark.rose.withOpacity(
+                              0.3,
+                            ),
                             onChanged: (val) {
-                              ref.read(onboardingWomensHealthProvider.notifier).setTrackingEnabled(val);
+                              ref
+                                  .read(onboardingWomensHealthProvider.notifier)
+                                  .setTrackingEnabled(val);
                             },
                           ),
                         ],
@@ -207,12 +246,16 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                           children: [
                             Text(
                               'Average Cycle Length',
-                              style: AppTypography.h3.copyWith(color: textPrimary),
+                              style: AppTypography.h3.copyWith(
+                                color: textPrimary,
+                              ),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               'Typically 21 to 40 days',
-                              style: AppTypography.bodySm.copyWith(color: textSecondary),
+                              style: AppTypography.bodySm.copyWith(
+                                color: textSecondary,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             Row(
@@ -220,18 +263,27 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                               children: [
                                 Text(
                                   '${healthState.averageCycleLength} Days',
-                                  style: AppTypography.h2.copyWith(color: AppColorsDark.rose, fontWeight: FontWeight.bold),
+                                  style: AppTypography.h2.copyWith(
+                                    color: AppColorsDark.rose,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 Expanded(
                                   child: Slider(
-                                    value: healthState.averageCycleLength.toDouble(),
+                                    value: healthState.averageCycleLength
+                                        .toDouble(),
                                     min: 21,
                                     max: 40,
                                     divisions: 19,
                                     activeColor: AppColorsDark.rose,
                                     inactiveColor: AppColorsDark.surface2,
                                     onChanged: (val) {
-                                      ref.read(onboardingWomensHealthProvider.notifier).setAverageCycleLength(val.round());
+                                      ref
+                                          .read(
+                                            onboardingWomensHealthProvider
+                                                .notifier,
+                                          )
+                                          .setAverageCycleLength(val.round());
                                     },
                                   ),
                                 ),
@@ -243,7 +295,8 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                       const SizedBox(height: 16),
                       // Last Period Card
                       BentoCard(
-                        onTap: () => _selectDate(context, healthState.lastPeriodDate),
+                        onTap: () =>
+                            _selectDate(context, healthState.lastPeriodDate),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -252,21 +305,33 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                               children: [
                                 Text(
                                   'Last Period Start Date',
-                                  style: AppTypography.h3.copyWith(color: textPrimary),
+                                  style: AppTypography.h3.copyWith(
+                                    color: textPrimary,
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   healthState.lastPeriodDate == null
                                       ? 'Not selected'
-                                      : _formatDate(healthState.lastPeriodDate!),
+                                      : _formatDate(
+                                          healthState.lastPeriodDate!,
+                                        ),
                                   style: AppTypography.bodyLg.copyWith(
-                                    color: healthState.lastPeriodDate == null ? textSecondary : AppColorsDark.rose,
-                                    fontWeight: healthState.lastPeriodDate == null ? FontWeight.normal : FontWeight.bold,
+                                    color: healthState.lastPeriodDate == null
+                                        ? textSecondary
+                                        : AppColorsDark.rose,
+                                    fontWeight:
+                                        healthState.lastPeriodDate == null
+                                        ? FontWeight.normal
+                                        : FontWeight.bold,
                                   ),
                                 ),
                               ],
                             ),
-                            const Icon(Icons.calendar_today_rounded, color: AppColorsDark.rose),
+                            const Icon(
+                              Icons.calendar_today_rounded,
+                              color: AppColorsDark.rose,
+                            ),
                           ],
                         ),
                       ),
@@ -283,23 +348,33 @@ class _WomensHealthOnboardingScreenState extends ConsumerState<WomensHealthOnboa
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.info_outline_rounded, color: AppColorsDark.rose),
+                                  const Icon(
+                                    Icons.info_outline_rounded,
+                                    color: AppColorsDark.rose,
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     estCycle.currentPhase.name.toUpperCase(),
-                                    style: AppTypography.h2.copyWith(color: AppColorsDark.rose, fontWeight: FontWeight.bold),
+                                    style: AppTypography.h2.copyWith(
+                                      color: AppColorsDark.rose,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 'Day ${estCycle.currentCycleDay} of ${estCycle.projectedCycleLength}',
-                                style: AppTypography.labelLg.copyWith(color: textPrimary),
+                                style: AppTypography.labelLg.copyWith(
+                                  color: textPrimary,
+                                ),
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 workoutAdapt.rationale,
-                                style: AppTypography.bodyMd.copyWith(color: textSecondary),
+                                style: AppTypography.bodyMd.copyWith(
+                                  color: textSecondary,
+                                ),
                               ),
                             ],
                           ),
