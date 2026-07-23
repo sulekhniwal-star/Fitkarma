@@ -97,6 +97,7 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
         hba1c = double.parse(rawHba1c.toStringAsFixed(1));
       }
 
+      if (!ref.mounted) return;
       state = state.copyWith(
         fastingGlucose: latestFasting,
         postMealGlucose: latestPostMeal,
@@ -105,7 +106,9 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
         isLoading: false,
       );
     } catch (_) {
-      state = state.copyWith(isLoading: false);
+      if (ref.mounted) {
+        state = state.copyWith(isLoading: false);
+      }
     }
   }
 

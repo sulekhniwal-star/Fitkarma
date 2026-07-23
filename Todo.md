@@ -267,9 +267,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-M Glycemic Response & Personal Food Scoring
-- [ ] Implement personal glycemic scoring algorithm
-- [ ] Wire into §P10-L Retrospective Glycemic Processing Pipeline
-- [ ] Unit tests
+- [x] Implement personal glycemic scoring algorithm
+- [x] Wire into §P10-L Retrospective Glycemic Processing Pipeline
+- [x] Unit tests
 
 ### §P5-N Multi-Dimensional Meal Quality Score
 - [ ] Implement composite quality scoring (processing tier, micronutrients, satiety)
