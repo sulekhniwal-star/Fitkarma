@@ -287,9 +287,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-Q Family Nutrition Integration
-- [ ] Build FamilyMealPlans data model usage
-- [ ] Implement multi-member meal plan aggregation
-- [ ] Build family meal planning UI
+- [x] Build FamilyMealPlans data model usage
+- [x] Implement multi-member meal plan aggregation
+- [x] Build family meal planning UI
 
 ### §P5-R Indian Food Substitution & Swap Engine
 - [ ] Build FoodSubstitutions lookup logic

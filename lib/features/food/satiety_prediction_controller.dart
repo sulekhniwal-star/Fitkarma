@@ -28,7 +28,9 @@ class SatietyPredictionState {
 // Notifier & Provider
 // ─────────────────────────────────────────────────────────────────────────────
 
-final satietyPredictionEngineProvider = Provider<SatietyPredictionEngine>((ref) {
+final satietyPredictionEngineProvider = Provider<SatietyPredictionEngine>((
+  ref,
+) {
   return const SatietyPredictionEngine();
 });
 
@@ -73,8 +75,10 @@ class SatietyNotifier extends Notifier<SatietyPredictionState> {
 
   double _estimateFiber(String name) {
     final lc = name.toLowerCase();
-    if (lc.contains('rajma') || lc.contains('chana') || lc.contains('dal')) return 10.0;
-    if (lc.contains('roti') || lc.contains('oats') || lc.contains('salad')) return 4.0;
+    if (lc.contains('rajma') || lc.contains('chana') || lc.contains('dal'))
+      return 10.0;
+    if (lc.contains('roti') || lc.contains('oats') || lc.contains('salad'))
+      return 4.0;
     return 1.0;
   }
 
@@ -86,7 +90,10 @@ class SatietyNotifier extends Notifier<SatietyPredictionState> {
 
   int _estimateProcessingTier(String name) {
     final lc = name.toLowerCase();
-    if (lc.contains('pizza') || lc.contains('burger') || lc.contains('chips') || lc.contains('biscuits')) {
+    if (lc.contains('pizza') ||
+        lc.contains('burger') ||
+        lc.contains('chips') ||
+        lc.contains('biscuits')) {
       return 3;
     }
     return 0;
@@ -95,5 +102,5 @@ class SatietyNotifier extends Notifier<SatietyPredictionState> {
 
 final satietyPredictionProvider =
     NotifierProvider<SatietyNotifier, SatietyPredictionState>(
-  SatietyNotifier.new,
-);
+      SatietyNotifier.new,
+    );

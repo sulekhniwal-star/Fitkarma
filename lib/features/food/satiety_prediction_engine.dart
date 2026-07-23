@@ -65,7 +65,8 @@ class SatietyPredictionEngine {
       fullnessDurationHours: 2.5,
       satietyTier: 'Moderate Fullness 🟡',
       primaryFullnessFactor: 'Fiber substitute + moderate fat drop',
-      recommendedHighSatietySwap: 'Pair with 1 cup Curd or Sprouts to reach 85+ score.',
+      recommendedHighSatietySwap:
+          'Pair with 1 cup Curd or Sprouts to reach 85+ score.',
     ),
     'deep-fried samosa': SatietyEvaluation(
       foodName: 'Deep-Fried Samosa (1 pc)',
@@ -73,7 +74,8 @@ class SatietyPredictionEngine {
       fullnessDurationHours: 1.5,
       satietyTier: 'Low Satiety / Rapid Crash 🔴',
       primaryFullnessFactor: 'Ultra-processed, high trans fat, zero fiber',
-      recommendedHighSatietySwap: 'Swap with Air-Fried Samosa or 1 Bowl Roasted Chana (+10g pro).',
+      recommendedHighSatietySwap:
+          'Swap with Air-Fried Samosa or 1 Bowl Roasted Chana (+10g pro).',
     ),
     'chai + biscuits': SatietyEvaluation(
       foodName: 'Indian Chai + 2 Biscuits',
@@ -81,7 +83,8 @@ class SatietyPredictionEngine {
       fullnessDurationHours: 1.0,
       satietyTier: 'Low Satiety / Rapid Crash 🔴',
       primaryFullnessFactor: 'Rapid sugar absorption, high glycemic crash',
-      recommendedHighSatietySwap: 'Swap with 1 Glass Chilled Sattu Drink (+18g pro) or 1 Bowl Curd + Walnuts.',
+      recommendedHighSatietySwap:
+          'Swap with 1 Glass Chilled Sattu Drink (+18g pro) or 1 Bowl Curd + Walnuts.',
     ),
   };
 
@@ -117,7 +120,8 @@ class SatietyPredictionEngine {
     final weightVolumeFraction = (weightG * 100.0) / calories;
 
     // Formula: min(100, (2.8 * ProteinG) + (4 * FiberG) + (1.2 * WeightVolumeFraction) - (12 * ProcessingTier))
-    final rawScore = (2.8 * proteinG) +
+    final rawScore =
+        (2.8 * proteinG) +
         (4.0 * fiberG) +
         (1.2 * weightVolumeFraction) -
         (12.0 * processingTier);
@@ -125,7 +129,9 @@ class SatietyPredictionEngine {
     final score = double.parse(rawScore.clamp(0.0, 100.0).toStringAsFixed(1));
 
     // Fullness duration estimation (1.0 to 5.0 hrs)
-    final durationHours = double.parse((1.0 + (score / 100.0) * 4.0).toStringAsFixed(1));
+    final durationHours = double.parse(
+      (1.0 + (score / 100.0) * 4.0).toStringAsFixed(1),
+    );
 
     String tier = 'Low Satiety / Rapid Crash 🔴';
     String factor = 'Low protein & fiber content';
@@ -137,11 +143,13 @@ class SatietyPredictionEngine {
     } else if (score >= 60.0) {
       tier = 'Moderate Fullness 🟡';
       factor = 'Moderate protein/fiber balance';
-      swap = 'Add 50g Paneer or 1 Bowl Greek Yogurt to extend fullness past 4 hours.';
+      swap =
+          'Add 50g Paneer or 1 Bowl Greek Yogurt to extend fullness past 4 hours.';
     } else {
       tier = 'Low Satiety / Rapid Crash 🔴';
       factor = 'Rapidly digestible simple carbs / processing penalty';
-      swap = 'Swap with 1 Glass Chilled Sattu Drink (+18g pro) or Curd + Roasted Chana.';
+      swap =
+          'Swap with 1 Glass Chilled Sattu Drink (+18g pro) or Curd + Roasted Chana.';
     }
 
     return SatietyEvaluation(
