@@ -301,8 +301,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 6 — WORKOUT SYSTEM & MOVEMENT INTELLIGENCE
 
 ### §P6-A Workout Screen Home
-- [ ] Build UI (program overview, today's workout)
-- [ ] Widget test
+- [x] Build UI (program overview, today's workout)
+- [x] Widget test
 
 ### §P6-B Active Workout Screen
 - [ ] Build set/rep logging UI
