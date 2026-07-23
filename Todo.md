@@ -305,10 +305,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P6-B Active Workout Screen
-- [ ] Build set/rep logging UI
-- [ ] Implement rest timer
-- [ ] Persist to WorkoutLogs
-- [ ] Widget test
+- [x] Build set/rep logging UI
+- [x] Implement rest timer
+- [x] Persist to WorkoutLogs
+- [x] Widget test
 
 ### §P6-C Progressive Overload Engine
 - [ ] Implement deterministic overload progression rules

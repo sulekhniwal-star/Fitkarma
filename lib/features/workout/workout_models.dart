@@ -1,6 +1,7 @@
-/// §P6-A Workout System Domain Models
+/// §P6-A / §P6-B Workout System Domain Models
 ///
-/// Data structures for WorkoutProgram, WorkoutSession, ExerciseSummary, and WorkoutHistoryItem.
+/// Data structures for WorkoutProgram, WorkoutSession, ExerciseSummary,
+/// WorkoutHistoryItem, SetLogEntry, and WorkoutLogEntry.
 library;
 
 /// Active Workout Program Overview (§P6-A Specification).
@@ -80,4 +81,80 @@ class WorkoutHistoryItem {
   final int durationMinutes;
   final int totalSets;
   final double totalVolumeKg;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// §P6-B Active Workout Log Models
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Mutable row state for a single set inside the active workout table.
+class SetRowState {
+  SetRowState({
+    required this.setNumber,
+    required this.targetReps,
+    required this.weightKg,
+    this.actualReps,
+    this.isCompleted = false,
+    this.completedAt,
+  });
+
+  final int setNumber;
+  final int targetReps;
+  double weightKg;
+  int? actualReps;
+  bool isCompleted;
+  DateTime? completedAt;
+
+  SetRowState copyWith({
+    double? weightKg,
+    int? actualReps,
+    bool? isCompleted,
+    DateTime? completedAt,
+  }) {
+    return SetRowState(
+      setNumber: setNumber,
+      targetReps: targetReps,
+      weightKg: weightKg ?? this.weightKg,
+      actualReps: actualReps ?? this.actualReps,
+      isCompleted: isCompleted ?? this.isCompleted,
+      completedAt: completedAt ?? this.completedAt,
+    );
+  }
+}
+
+/// Logged record of a completed set within a session (§P6-B: persisted in-memory).
+class SetLogEntry {
+  const SetLogEntry({
+    required this.setNumber,
+    required this.targetReps,
+    required this.actualReps,
+    required this.weightKg,
+    required this.isCompleted,
+    this.completedAt,
+  });
+
+  final int setNumber;
+  final int targetReps;
+  final int actualReps;
+  final double weightKg;
+  final bool isCompleted;
+  final DateTime? completedAt;
+}
+
+/// Logged record of all sets for one exercise in a session (§P6-B WorkoutLogs).
+class WorkoutLogEntry {
+  const WorkoutLogEntry({
+    required this.sessionId,
+    required this.exerciseName,
+    required this.sets,
+    required this.loggedAt,
+  });
+
+  final String sessionId;
+  final String exerciseName;
+  final List<SetLogEntry> sets;
+  final DateTime loggedAt;
+
+  double get totalVolumeKg =>
+      sets.fold(0.0, (v, s) => v + (s.isCompleted ? s.weightKg * s.actualReps : 0.0));
 }
