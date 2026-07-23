@@ -346,9 +346,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P7-C Habit Automation System
-- [ ] Implement habit-streak detection logic
-- [ ] Persist to HabitLogs
-- [ ] Unit tests
+- [x] Implement habit-streak detection logic
+- [x] Persist to HabitLogs
+- [x] Unit tests
 
 ### §P7-D Adherence Score
 - [ ] Implement adherence scoring algorithm (major KPI)
