@@ -326,11 +326,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Integration tests
 
 ### §P6-F Adaptive Computer Vision Loop (ACVL)
-- [ ] Integrate MediaPipe pose estimation
-- [ ] Implement form-deviation detection algorithm
-- [ ] Build real-time form feedback UI overlay
-- [ ] Persist form-quality data to MovementLogs
-- [ ] Performance test on-device (frame rate, battery/thermal impact)
+- [x] Integrate MediaPipe pose estimation
+- [x] Implement form-deviation detection algorithm
+- [x] Build real-time form feedback UI overlay
+- [x] Persist form-quality data to MovementLogs
+- [x] Performance test on-device (frame rate, battery/thermal impact)
 
 ---
 
