@@ -351,9 +351,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P7-D Adherence Score
-- [ ] Implement adherence scoring algorithm (major KPI)
-- [ ] Wire into Karma Hub UI
-- [ ] Unit tests
+- [x] Implement adherence scoring algorithm (major KPI)
+- [x] Wire into Karma Hub UI
+- [x] Unit tests
 
 ### §P7-E Benchmarking Engine
 - [ ] Implement Fitness Percentile calculation vs. cohort

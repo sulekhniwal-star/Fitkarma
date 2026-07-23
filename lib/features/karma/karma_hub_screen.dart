@@ -45,7 +45,20 @@ class KarmaHubScreen extends ConsumerWidget {
             _buildLevelHeaderCard(context, state),
             const SizedBox(height: 24),
 
-            // 2. Achievements Section
+            // 2. Adherence Score Card (§P7-D Major KPI)
+            const Text(
+              '📊 Adherence Score',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildAdherenceScoreCard(state),
+            const SizedBox(height: 24),
+
+            // 3. Achievements Section
             const Text(
               'Achievements',
               style: TextStyle(
@@ -177,6 +190,134 @@ class KarmaHubScreen extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildAdherenceScoreCard(KarmaHubState state) {
+    final result = state.adherenceResult;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.tealAccent.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF0F172A),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${result.overallScore}%',
+                        style: const TextStyle(
+                          color: Colors.tealAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Plan Execution Baseline',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        result.period,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.6),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.teal.shade900.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.tealAccent.withValues(alpha: 0.5)),
+                ),
+                child: Text(
+                  result.trend.displayName,
+                  style: const TextStyle(
+                    color: Colors.tealAccent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildScoreBar('Nutrition (40%)', result.nutritionScore, Colors.orangeAccent),
+          const SizedBox(height: 8),
+          _buildScoreBar('Training (40%)', result.trainingScore, Colors.blueAccent),
+          const SizedBox(height: 8),
+          _buildScoreBar('Recovery (20%)', result.recoveryScore, Colors.purpleAccent),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScoreBar(String label, int score, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.8),
+                fontSize: 12,
+              ),
+            ),
+            Text(
+              '$score%',
+              style: TextStyle(
+                color: color,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: (score / 100.0).clamp(0.0, 1.0),
+            minHeight: 6,
+            backgroundColor: const Color(0xFF0F172A),
+            valueColor: AlwaysStoppedAnimation<Color>(color),
+          ),
+        ),
+      ],
     );
   }
 

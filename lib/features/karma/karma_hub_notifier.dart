@@ -4,6 +4,7 @@
 /// demographic cohort comparison, and activity history matching §P7-B spec.
 library;
 
+import 'package:fitkarma/features/karma/adherence_score_calculator.dart';
 import 'package:fitkarma/features/karma/karma_models.dart';
 import 'package:fitkarma/features/karma/karma_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,6 +45,7 @@ class KarmaHubState {
     required this.totalCohortMembers,
     required this.cohortName,
     required this.recentEvents,
+    required this.adherenceResult,
   });
 
   final int totalXp;
@@ -58,6 +60,7 @@ class KarmaHubState {
   final int totalCohortMembers;
   final String cohortName;
   final List<KarmaEventRecord> recentEvents;
+  final AdherenceResult adherenceResult;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -111,6 +114,7 @@ class KarmaHubNotifier extends Notifier<KarmaHubState> {
       totalCohortMembers: 4210,
       cohortName: 'Noida Builders',
       recentEvents: repository.eventHistory,
+      adherenceResult: AdherenceResult.defaultScore(),
     );
   }
 }
