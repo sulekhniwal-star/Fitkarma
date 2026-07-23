@@ -282,9 +282,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-P Satiety Prediction Engine
-- [ ] Implement satiety prediction model (deterministic heuristics)
-- [ ] Wire into meal recommendations
-- [ ] Unit tests
+- [x] Implement satiety prediction model (deterministic heuristics)
+- [x] Wire into meal recommendations
+- [x] Unit tests
 
 ### §P5-Q Family Nutrition Integration
 - [ ] Build FamilyMealPlans data model usage
