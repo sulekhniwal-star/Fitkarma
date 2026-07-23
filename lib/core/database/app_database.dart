@@ -28,6 +28,8 @@ class Users extends Table {
   DateTimeColumn get lastPeriodDate => dateTime().nullable()();
   TextColumn get subscriptionTier => text().withDefault(const Constant('free'))();
   RealColumn get monthlyGroceryBudgetInr => real().withDefault(const Constant(3000.0))();
+  TextColumn get nutritionPeriodizationPhase => text().withDefault(const Constant('maintenance'))();
+  DateTimeColumn get periodizationPhaseStartedAt => dateTime().nullable()();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -290,7 +292,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 32;
+  int get schemaVersion => 33;
 
   @override
   MigrationStrategy get migration {
@@ -336,6 +338,10 @@ class AppDatabase extends _$AppDatabase {
         if (from < 32) {
           await migrator.addColumn(users, users.monthlyGroceryBudgetInr);
         }
+        if (from < 33) {
+          await migrator.addColumn(users, users.nutritionPeriodizationPhase);
+          await migrator.addColumn(users, users.periodizationPhaseStartedAt);
+        }
       },
     );
   }
@@ -353,6 +359,8 @@ class AppDatabase extends _$AppDatabase {
     DateTime? lastPeriodDate,
     String? subscriptionTier,
     double? monthlyGroceryBudgetInr,
+    String? nutritionPeriodizationPhase,
+    DateTime? periodizationPhaseStartedAt,
   }) async {
     await (update(users)
       ..where((t) => t.id.equals(userId)))
@@ -367,6 +375,8 @@ class AppDatabase extends _$AppDatabase {
         lastPeriodDate: lastPeriodDate != null ? Value(lastPeriodDate) : const Value.absent(),
         subscriptionTier: subscriptionTier != null ? Value(subscriptionTier) : const Value.absent(),
         monthlyGroceryBudgetInr: monthlyGroceryBudgetInr != null ? Value(monthlyGroceryBudgetInr) : const Value.absent(),
+        nutritionPeriodizationPhase: nutritionPeriodizationPhase != null ? Value(nutritionPeriodizationPhase) : const Value.absent(),
+        periodizationPhaseStartedAt: periodizationPhaseStartedAt != null ? Value(periodizationPhaseStartedAt) : const Value.absent(),
       ));
   }
 

@@ -236,9 +236,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] 🆕 See §P16-E for vendor checkout extension
 
 ### §P5-G Nutrition Periodization Engine
-- [ ] Implement phase-based macro cycling logic
-- [ ] Wire `Users.nutritionPeriodizationPhase` transitions
-- [ ] Unit tests
+- [x] Implement phase-based macro cycling logic
+- [x] Wire `Users.nutritionPeriodizationPhase` transitions
+- [x] Unit tests
 
 ### §P5-H Protein Distribution & Timing Intelligence
 - [ ] Implement MPS-aware protein timing algorithm

@@ -192,6 +192,29 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         requiredDuringInsert: false,
         defaultValue: const Constant(3000.0),
       );
+  static const VerificationMeta _nutritionPeriodizationPhaseMeta =
+      const VerificationMeta('nutritionPeriodizationPhase');
+  @override
+  late final GeneratedColumn<String> nutritionPeriodizationPhase =
+      GeneratedColumn<String>(
+        'nutrition_periodization_phase',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('maintenance'),
+      );
+  static const VerificationMeta _periodizationPhaseStartedAtMeta =
+      const VerificationMeta('periodizationPhaseStartedAt');
+  @override
+  late final GeneratedColumn<DateTime> periodizationPhaseStartedAt =
+      GeneratedColumn<DateTime>(
+        'periodization_phase_started_at',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -212,6 +235,8 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     lastPeriodDate,
     subscriptionTier,
     monthlyGroceryBudgetInr,
+    nutritionPeriodizationPhase,
+    periodizationPhaseStartedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -359,6 +384,24 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         ),
       );
     }
+    if (data.containsKey('nutrition_periodization_phase')) {
+      context.handle(
+        _nutritionPeriodizationPhaseMeta,
+        nutritionPeriodizationPhase.isAcceptableOrUnknown(
+          data['nutrition_periodization_phase']!,
+          _nutritionPeriodizationPhaseMeta,
+        ),
+      );
+    }
+    if (data.containsKey('periodization_phase_started_at')) {
+      context.handle(
+        _periodizationPhaseStartedAtMeta,
+        periodizationPhaseStartedAt.isAcceptableOrUnknown(
+          data['periodization_phase_started_at']!,
+          _periodizationPhaseStartedAtMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -440,6 +483,14 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
         DriftSqlType.double,
         data['${effectivePrefix}monthly_grocery_budget_inr'],
       )!,
+      nutritionPeriodizationPhase: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}nutrition_periodization_phase'],
+      )!,
+      periodizationPhaseStartedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}periodization_phase_started_at'],
+      ),
     );
   }
 
@@ -468,6 +519,8 @@ class User extends DataClass implements Insertable<User> {
   final DateTime? lastPeriodDate;
   final String subscriptionTier;
   final double monthlyGroceryBudgetInr;
+  final String nutritionPeriodizationPhase;
+  final DateTime? periodizationPhaseStartedAt;
   const User({
     required this.id,
     this.name,
@@ -487,6 +540,8 @@ class User extends DataClass implements Insertable<User> {
     this.lastPeriodDate,
     required this.subscriptionTier,
     required this.monthlyGroceryBudgetInr,
+    required this.nutritionPeriodizationPhase,
+    this.periodizationPhaseStartedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -541,6 +596,14 @@ class User extends DataClass implements Insertable<User> {
     map['monthly_grocery_budget_inr'] = Variable<double>(
       monthlyGroceryBudgetInr,
     );
+    map['nutrition_periodization_phase'] = Variable<String>(
+      nutritionPeriodizationPhase,
+    );
+    if (!nullToAbsent || periodizationPhaseStartedAt != null) {
+      map['periodization_phase_started_at'] = Variable<DateTime>(
+        periodizationPhaseStartedAt,
+      );
+    }
     return map;
   }
 
@@ -590,6 +653,11 @@ class User extends DataClass implements Insertable<User> {
           : Value(lastPeriodDate),
       subscriptionTier: Value(subscriptionTier),
       monthlyGroceryBudgetInr: Value(monthlyGroceryBudgetInr),
+      nutritionPeriodizationPhase: Value(nutritionPeriodizationPhase),
+      periodizationPhaseStartedAt:
+          periodizationPhaseStartedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(periodizationPhaseStartedAt),
     );
   }
 
@@ -621,6 +689,12 @@ class User extends DataClass implements Insertable<User> {
       monthlyGroceryBudgetInr: serializer.fromJson<double>(
         json['monthlyGroceryBudgetInr'],
       ),
+      nutritionPeriodizationPhase: serializer.fromJson<String>(
+        json['nutritionPeriodizationPhase'],
+      ),
+      periodizationPhaseStartedAt: serializer.fromJson<DateTime?>(
+        json['periodizationPhaseStartedAt'],
+      ),
     );
   }
   @override
@@ -649,6 +723,12 @@ class User extends DataClass implements Insertable<User> {
       'monthlyGroceryBudgetInr': serializer.toJson<double>(
         monthlyGroceryBudgetInr,
       ),
+      'nutritionPeriodizationPhase': serializer.toJson<String>(
+        nutritionPeriodizationPhase,
+      ),
+      'periodizationPhaseStartedAt': serializer.toJson<DateTime?>(
+        periodizationPhaseStartedAt,
+      ),
     };
   }
 
@@ -671,6 +751,8 @@ class User extends DataClass implements Insertable<User> {
     Value<DateTime?> lastPeriodDate = const Value.absent(),
     String? subscriptionTier,
     double? monthlyGroceryBudgetInr,
+    String? nutritionPeriodizationPhase,
+    Value<DateTime?> periodizationPhaseStartedAt = const Value.absent(),
   }) => User(
     id: id ?? this.id,
     name: name.present ? name.value : this.name,
@@ -703,6 +785,11 @@ class User extends DataClass implements Insertable<User> {
     subscriptionTier: subscriptionTier ?? this.subscriptionTier,
     monthlyGroceryBudgetInr:
         monthlyGroceryBudgetInr ?? this.monthlyGroceryBudgetInr,
+    nutritionPeriodizationPhase:
+        nutritionPeriodizationPhase ?? this.nutritionPeriodizationPhase,
+    periodizationPhaseStartedAt: periodizationPhaseStartedAt.present
+        ? periodizationPhaseStartedAt.value
+        : this.periodizationPhaseStartedAt,
   );
   User copyWithCompanion(UsersCompanion data) {
     return User(
@@ -742,6 +829,12 @@ class User extends DataClass implements Insertable<User> {
       monthlyGroceryBudgetInr: data.monthlyGroceryBudgetInr.present
           ? data.monthlyGroceryBudgetInr.value
           : this.monthlyGroceryBudgetInr,
+      nutritionPeriodizationPhase: data.nutritionPeriodizationPhase.present
+          ? data.nutritionPeriodizationPhase.value
+          : this.nutritionPeriodizationPhase,
+      periodizationPhaseStartedAt: data.periodizationPhaseStartedAt.present
+          ? data.periodizationPhaseStartedAt.value
+          : this.periodizationPhaseStartedAt,
     );
   }
 
@@ -765,7 +858,9 @@ class User extends DataClass implements Insertable<User> {
           ..write('averageCycleLength: $averageCycleLength, ')
           ..write('lastPeriodDate: $lastPeriodDate, ')
           ..write('subscriptionTier: $subscriptionTier, ')
-          ..write('monthlyGroceryBudgetInr: $monthlyGroceryBudgetInr')
+          ..write('monthlyGroceryBudgetInr: $monthlyGroceryBudgetInr, ')
+          ..write('nutritionPeriodizationPhase: $nutritionPeriodizationPhase, ')
+          ..write('periodizationPhaseStartedAt: $periodizationPhaseStartedAt')
           ..write(')'))
         .toString();
   }
@@ -790,6 +885,8 @@ class User extends DataClass implements Insertable<User> {
     lastPeriodDate,
     subscriptionTier,
     monthlyGroceryBudgetInr,
+    nutritionPeriodizationPhase,
+    periodizationPhaseStartedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -812,7 +909,11 @@ class User extends DataClass implements Insertable<User> {
           other.averageCycleLength == this.averageCycleLength &&
           other.lastPeriodDate == this.lastPeriodDate &&
           other.subscriptionTier == this.subscriptionTier &&
-          other.monthlyGroceryBudgetInr == this.monthlyGroceryBudgetInr);
+          other.monthlyGroceryBudgetInr == this.monthlyGroceryBudgetInr &&
+          other.nutritionPeriodizationPhase ==
+              this.nutritionPeriodizationPhase &&
+          other.periodizationPhaseStartedAt ==
+              this.periodizationPhaseStartedAt);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
@@ -834,6 +935,8 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<DateTime?> lastPeriodDate;
   final Value<String> subscriptionTier;
   final Value<double> monthlyGroceryBudgetInr;
+  final Value<String> nutritionPeriodizationPhase;
+  final Value<DateTime?> periodizationPhaseStartedAt;
   final Value<int> rowid;
   const UsersCompanion({
     this.id = const Value.absent(),
@@ -854,6 +957,8 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.lastPeriodDate = const Value.absent(),
     this.subscriptionTier = const Value.absent(),
     this.monthlyGroceryBudgetInr = const Value.absent(),
+    this.nutritionPeriodizationPhase = const Value.absent(),
+    this.periodizationPhaseStartedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
@@ -875,6 +980,8 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.lastPeriodDate = const Value.absent(),
     this.subscriptionTier = const Value.absent(),
     this.monthlyGroceryBudgetInr = const Value.absent(),
+    this.nutritionPeriodizationPhase = const Value.absent(),
+    this.periodizationPhaseStartedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id);
   static Insertable<User> custom({
@@ -896,6 +1003,8 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<DateTime>? lastPeriodDate,
     Expression<String>? subscriptionTier,
     Expression<double>? monthlyGroceryBudgetInr,
+    Expression<String>? nutritionPeriodizationPhase,
+    Expression<DateTime>? periodizationPhaseStartedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -921,6 +1030,10 @@ class UsersCompanion extends UpdateCompanion<User> {
       if (subscriptionTier != null) 'subscription_tier': subscriptionTier,
       if (monthlyGroceryBudgetInr != null)
         'monthly_grocery_budget_inr': monthlyGroceryBudgetInr,
+      if (nutritionPeriodizationPhase != null)
+        'nutrition_periodization_phase': nutritionPeriodizationPhase,
+      if (periodizationPhaseStartedAt != null)
+        'periodization_phase_started_at': periodizationPhaseStartedAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -944,6 +1057,8 @@ class UsersCompanion extends UpdateCompanion<User> {
     Value<DateTime?>? lastPeriodDate,
     Value<String>? subscriptionTier,
     Value<double>? monthlyGroceryBudgetInr,
+    Value<String>? nutritionPeriodizationPhase,
+    Value<DateTime?>? periodizationPhaseStartedAt,
     Value<int>? rowid,
   }) {
     return UsersCompanion(
@@ -967,6 +1082,10 @@ class UsersCompanion extends UpdateCompanion<User> {
       subscriptionTier: subscriptionTier ?? this.subscriptionTier,
       monthlyGroceryBudgetInr:
           monthlyGroceryBudgetInr ?? this.monthlyGroceryBudgetInr,
+      nutritionPeriodizationPhase:
+          nutritionPeriodizationPhase ?? this.nutritionPeriodizationPhase,
+      periodizationPhaseStartedAt:
+          periodizationPhaseStartedAt ?? this.periodizationPhaseStartedAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1032,6 +1151,16 @@ class UsersCompanion extends UpdateCompanion<User> {
         monthlyGroceryBudgetInr.value,
       );
     }
+    if (nutritionPeriodizationPhase.present) {
+      map['nutrition_periodization_phase'] = Variable<String>(
+        nutritionPeriodizationPhase.value,
+      );
+    }
+    if (periodizationPhaseStartedAt.present) {
+      map['periodization_phase_started_at'] = Variable<DateTime>(
+        periodizationPhaseStartedAt.value,
+      );
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1059,6 +1188,8 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('lastPeriodDate: $lastPeriodDate, ')
           ..write('subscriptionTier: $subscriptionTier, ')
           ..write('monthlyGroceryBudgetInr: $monthlyGroceryBudgetInr, ')
+          ..write('nutritionPeriodizationPhase: $nutritionPeriodizationPhase, ')
+          ..write('periodizationPhaseStartedAt: $periodizationPhaseStartedAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -10718,6 +10849,8 @@ typedef $$UsersTableCreateCompanionBuilder =
       Value<DateTime?> lastPeriodDate,
       Value<String> subscriptionTier,
       Value<double> monthlyGroceryBudgetInr,
+      Value<String> nutritionPeriodizationPhase,
+      Value<DateTime?> periodizationPhaseStartedAt,
       Value<int> rowid,
     });
 typedef $$UsersTableUpdateCompanionBuilder =
@@ -10740,6 +10873,8 @@ typedef $$UsersTableUpdateCompanionBuilder =
       Value<DateTime?> lastPeriodDate,
       Value<String> subscriptionTier,
       Value<double> monthlyGroceryBudgetInr,
+      Value<String> nutritionPeriodizationPhase,
+      Value<DateTime?> periodizationPhaseStartedAt,
       Value<int> rowid,
     });
 
@@ -10838,6 +10973,16 @@ class $$UsersTableFilterComposer extends Composer<_$AppDatabase, $UsersTable> {
 
   ColumnFilters<double> get monthlyGroceryBudgetInr => $composableBuilder(
     column: $table.monthlyGroceryBudgetInr,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get nutritionPeriodizationPhase => $composableBuilder(
+    column: $table.nutritionPeriodizationPhase,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get periodizationPhaseStartedAt => $composableBuilder(
+    column: $table.periodizationPhaseStartedAt,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -10940,6 +11085,17 @@ class $$UsersTableOrderingComposer
     column: $table.monthlyGroceryBudgetInr,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get nutritionPeriodizationPhase => $composableBuilder(
+    column: $table.nutritionPeriodizationPhase,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get periodizationPhaseStartedAt =>
+      $composableBuilder(
+        column: $table.periodizationPhaseStartedAt,
+        builder: (column) => ColumnOrderings(column),
+      );
 }
 
 class $$UsersTableAnnotationComposer
@@ -11022,6 +11178,17 @@ class $$UsersTableAnnotationComposer
     column: $table.monthlyGroceryBudgetInr,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get nutritionPeriodizationPhase => $composableBuilder(
+    column: $table.nutritionPeriodizationPhase,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get periodizationPhaseStartedAt =>
+      $composableBuilder(
+        column: $table.periodizationPhaseStartedAt,
+        builder: (column) => column,
+      );
 }
 
 class $$UsersTableTableManager
@@ -11070,6 +11237,10 @@ class $$UsersTableTableManager
                 Value<DateTime?> lastPeriodDate = const Value.absent(),
                 Value<String> subscriptionTier = const Value.absent(),
                 Value<double> monthlyGroceryBudgetInr = const Value.absent(),
+                Value<String> nutritionPeriodizationPhase =
+                    const Value.absent(),
+                Value<DateTime?> periodizationPhaseStartedAt =
+                    const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion(
                 id: id,
@@ -11090,6 +11261,8 @@ class $$UsersTableTableManager
                 lastPeriodDate: lastPeriodDate,
                 subscriptionTier: subscriptionTier,
                 monthlyGroceryBudgetInr: monthlyGroceryBudgetInr,
+                nutritionPeriodizationPhase: nutritionPeriodizationPhase,
+                periodizationPhaseStartedAt: periodizationPhaseStartedAt,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -11112,6 +11285,10 @@ class $$UsersTableTableManager
                 Value<DateTime?> lastPeriodDate = const Value.absent(),
                 Value<String> subscriptionTier = const Value.absent(),
                 Value<double> monthlyGroceryBudgetInr = const Value.absent(),
+                Value<String> nutritionPeriodizationPhase =
+                    const Value.absent(),
+                Value<DateTime?> periodizationPhaseStartedAt =
+                    const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UsersCompanion.insert(
                 id: id,
@@ -11132,6 +11309,8 @@ class $$UsersTableTableManager
                 lastPeriodDate: lastPeriodDate,
                 subscriptionTier: subscriptionTier,
                 monthlyGroceryBudgetInr: monthlyGroceryBudgetInr,
+                nutritionPeriodizationPhase: nutritionPeriodizationPhase,
+                periodizationPhaseStartedAt: periodizationPhaseStartedAt,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
