@@ -252,14 +252,14 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build micronutrient dashboard UI
 
 ### §P5-J Nutrition Adherence Engine
-- [ ] Implement adherence scoring algorithm
-- [ ] Wire into Karma System (§P7-A)
-- [ ] Unit tests
+- [x] Implement adherence scoring algorithm
+- [x] Wire into Karma System (§P7-A)
+- [x] Unit tests
 
 ### §P5-K Smart Festival Nutrition Adaptation
-- [ ] Implement festival calendar detection
-- [ ] Implement festival-specific macro/target adjustment logic
-- [ ] Integration with §P12-A Festival Intelligence
+- [x] Implement festival calendar detection
+- [x] Implement festival-specific macro/target adjustment logic
+- [x] Integration with §P12-A Festival Intelligence
 
 ### §P5-L Adaptive Hunger & Cravings Engine
 - [ ] Implement craving-pattern detection logic
