@@ -225,9 +225,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-E Indian Restaurant Intelligence 2.0
-- [ ] Build restaurant menu database integration
-- [ ] Implement dish-level nutrition estimation
-- [ ] Build restaurant search/browse UI
+- [x] Build restaurant menu database integration
+- [x] Implement dish-level nutrition estimation
+- [x] Build restaurant search/browse UI
 
 ### §P5-F Grocery Optimization Engine 2.0
 - [ ] Implement shopping-list generation from meal plan
