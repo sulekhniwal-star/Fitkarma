@@ -262,9 +262,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Integration with §P12-A Festival Intelligence
 
 ### §P5-L Adaptive Hunger & Cravings Engine
-- [ ] Implement craving-pattern detection logic
-- [ ] Build hunger-logging UI prompt
-- [ ] Unit tests
+- [x] Implement craving-pattern detection logic
+- [x] Build hunger-logging UI prompt
+- [x] Unit tests
 
 ### §P5-M Glycemic Response & Personal Food Scoring
 - [ ] Implement personal glycemic scoring algorithm
