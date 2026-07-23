@@ -24,6 +24,7 @@ import 'package:fitkarma/features/food/food_screen.dart';
 import 'package:fitkarma/features/food/fix_my_meal_screen.dart';
 import 'package:fitkarma/features/food/restaurant_search_screen.dart';
 import 'package:fitkarma/features/food/grocery_list_screen.dart';
+import 'package:fitkarma/features/food/micronutrient_dashboard_screen.dart';
 import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -57,6 +58,7 @@ class AppRoutes {
   static const fixMyMeal  = '/food/fix-my-meal';
   static const restaurant = '/food/restaurant';
   static const grocery    = '/food/grocery';
+  static const micronutrients = '/food/micronutrients';
 
   // Auth
   static const login = '/login';
@@ -329,6 +331,11 @@ class AppRouter {
           path: AppRoutes.grocery,
           pageBuilder: (context, state) =>
               _slideTransition(state, const GroceryListScreen()),
+        ),
+        GoRoute(
+          path: AppRoutes.micronutrients,
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const MicronutrientDashboardScreen()),
         ),
         GoRoute(
           path: AppRoutes.aiCoach,

@@ -10774,6 +10774,646 @@ class FoodReferencesCompanion extends UpdateCompanion<FoodReference> {
   }
 }
 
+class $MicronutrientLogsTable extends MicronutrientLogs
+    with TableInfo<$MicronutrientLogsTable, MicronutrientLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MicronutrientLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+    'user_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _logDateMeta = const VerificationMeta(
+    'logDate',
+  );
+  @override
+  late final GeneratedColumn<DateTime> logDate = GeneratedColumn<DateTime>(
+    'log_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ironMgMeta = const VerificationMeta('ironMg');
+  @override
+  late final GeneratedColumn<double> ironMg = GeneratedColumn<double>(
+    'iron_mg',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _vitaminB12McgMeta = const VerificationMeta(
+    'vitaminB12Mcg',
+  );
+  @override
+  late final GeneratedColumn<double> vitaminB12Mcg = GeneratedColumn<double>(
+    'vitamin_b12_mcg',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _vitaminD3IuMeta = const VerificationMeta(
+    'vitaminD3Iu',
+  );
+  @override
+  late final GeneratedColumn<double> vitaminD3Iu = GeneratedColumn<double>(
+    'vitamin_d3_iu',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _calciumMgMeta = const VerificationMeta(
+    'calciumMg',
+  );
+  @override
+  late final GeneratedColumn<double> calciumMg = GeneratedColumn<double>(
+    'calcium_mg',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _magnesiumMgMeta = const VerificationMeta(
+    'magnesiumMg',
+  );
+  @override
+  late final GeneratedColumn<double> magnesiumMg = GeneratedColumn<double>(
+    'magnesium_mg',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _zincMgMeta = const VerificationMeta('zincMg');
+  @override
+  late final GeneratedColumn<double> zincMg = GeneratedColumn<double>(
+    'zinc_mg',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _folateMcgMeta = const VerificationMeta(
+    'folateMcg',
+  );
+  @override
+  late final GeneratedColumn<double> folateMcg = GeneratedColumn<double>(
+    'folate_mcg',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _omega3GMeta = const VerificationMeta(
+    'omega3G',
+  );
+  @override
+  late final GeneratedColumn<double> omega3G = GeneratedColumn<double>(
+    'omega3_g',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    userId,
+    logDate,
+    ironMg,
+    vitaminB12Mcg,
+    vitaminD3Iu,
+    calciumMg,
+    magnesiumMg,
+    zincMg,
+    folateMcg,
+    omega3G,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'micronutrient_logs';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MicronutrientLog> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(
+        _userIdMeta,
+        userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('log_date')) {
+      context.handle(
+        _logDateMeta,
+        logDate.isAcceptableOrUnknown(data['log_date']!, _logDateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_logDateMeta);
+    }
+    if (data.containsKey('iron_mg')) {
+      context.handle(
+        _ironMgMeta,
+        ironMg.isAcceptableOrUnknown(data['iron_mg']!, _ironMgMeta),
+      );
+    }
+    if (data.containsKey('vitamin_b12_mcg')) {
+      context.handle(
+        _vitaminB12McgMeta,
+        vitaminB12Mcg.isAcceptableOrUnknown(
+          data['vitamin_b12_mcg']!,
+          _vitaminB12McgMeta,
+        ),
+      );
+    }
+    if (data.containsKey('vitamin_d3_iu')) {
+      context.handle(
+        _vitaminD3IuMeta,
+        vitaminD3Iu.isAcceptableOrUnknown(
+          data['vitamin_d3_iu']!,
+          _vitaminD3IuMeta,
+        ),
+      );
+    }
+    if (data.containsKey('calcium_mg')) {
+      context.handle(
+        _calciumMgMeta,
+        calciumMg.isAcceptableOrUnknown(data['calcium_mg']!, _calciumMgMeta),
+      );
+    }
+    if (data.containsKey('magnesium_mg')) {
+      context.handle(
+        _magnesiumMgMeta,
+        magnesiumMg.isAcceptableOrUnknown(
+          data['magnesium_mg']!,
+          _magnesiumMgMeta,
+        ),
+      );
+    }
+    if (data.containsKey('zinc_mg')) {
+      context.handle(
+        _zincMgMeta,
+        zincMg.isAcceptableOrUnknown(data['zinc_mg']!, _zincMgMeta),
+      );
+    }
+    if (data.containsKey('folate_mcg')) {
+      context.handle(
+        _folateMcgMeta,
+        folateMcg.isAcceptableOrUnknown(data['folate_mcg']!, _folateMcgMeta),
+      );
+    }
+    if (data.containsKey('omega3_g')) {
+      context.handle(
+        _omega3GMeta,
+        omega3G.isAcceptableOrUnknown(data['omega3_g']!, _omega3GMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  MicronutrientLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MicronutrientLog(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      userId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_id'],
+      )!,
+      logDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}log_date'],
+      )!,
+      ironMg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}iron_mg'],
+      )!,
+      vitaminB12Mcg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_b12_mcg'],
+      )!,
+      vitaminD3Iu: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}vitamin_d3_iu'],
+      )!,
+      calciumMg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}calcium_mg'],
+      )!,
+      magnesiumMg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}magnesium_mg'],
+      )!,
+      zincMg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}zinc_mg'],
+      )!,
+      folateMcg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}folate_mcg'],
+      )!,
+      omega3G: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}omega3_g'],
+      )!,
+    );
+  }
+
+  @override
+  $MicronutrientLogsTable createAlias(String alias) {
+    return $MicronutrientLogsTable(attachedDatabase, alias);
+  }
+}
+
+class MicronutrientLog extends DataClass
+    implements Insertable<MicronutrientLog> {
+  final int id;
+  final String userId;
+  final DateTime logDate;
+  final double ironMg;
+  final double vitaminB12Mcg;
+  final double vitaminD3Iu;
+  final double calciumMg;
+  final double magnesiumMg;
+  final double zincMg;
+  final double folateMcg;
+  final double omega3G;
+  const MicronutrientLog({
+    required this.id,
+    required this.userId,
+    required this.logDate,
+    required this.ironMg,
+    required this.vitaminB12Mcg,
+    required this.vitaminD3Iu,
+    required this.calciumMg,
+    required this.magnesiumMg,
+    required this.zincMg,
+    required this.folateMcg,
+    required this.omega3G,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['log_date'] = Variable<DateTime>(logDate);
+    map['iron_mg'] = Variable<double>(ironMg);
+    map['vitamin_b12_mcg'] = Variable<double>(vitaminB12Mcg);
+    map['vitamin_d3_iu'] = Variable<double>(vitaminD3Iu);
+    map['calcium_mg'] = Variable<double>(calciumMg);
+    map['magnesium_mg'] = Variable<double>(magnesiumMg);
+    map['zinc_mg'] = Variable<double>(zincMg);
+    map['folate_mcg'] = Variable<double>(folateMcg);
+    map['omega3_g'] = Variable<double>(omega3G);
+    return map;
+  }
+
+  MicronutrientLogsCompanion toCompanion(bool nullToAbsent) {
+    return MicronutrientLogsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      logDate: Value(logDate),
+      ironMg: Value(ironMg),
+      vitaminB12Mcg: Value(vitaminB12Mcg),
+      vitaminD3Iu: Value(vitaminD3Iu),
+      calciumMg: Value(calciumMg),
+      magnesiumMg: Value(magnesiumMg),
+      zincMg: Value(zincMg),
+      folateMcg: Value(folateMcg),
+      omega3G: Value(omega3G),
+    );
+  }
+
+  factory MicronutrientLog.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MicronutrientLog(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      logDate: serializer.fromJson<DateTime>(json['logDate']),
+      ironMg: serializer.fromJson<double>(json['ironMg']),
+      vitaminB12Mcg: serializer.fromJson<double>(json['vitaminB12Mcg']),
+      vitaminD3Iu: serializer.fromJson<double>(json['vitaminD3Iu']),
+      calciumMg: serializer.fromJson<double>(json['calciumMg']),
+      magnesiumMg: serializer.fromJson<double>(json['magnesiumMg']),
+      zincMg: serializer.fromJson<double>(json['zincMg']),
+      folateMcg: serializer.fromJson<double>(json['folateMcg']),
+      omega3G: serializer.fromJson<double>(json['omega3G']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
+      'logDate': serializer.toJson<DateTime>(logDate),
+      'ironMg': serializer.toJson<double>(ironMg),
+      'vitaminB12Mcg': serializer.toJson<double>(vitaminB12Mcg),
+      'vitaminD3Iu': serializer.toJson<double>(vitaminD3Iu),
+      'calciumMg': serializer.toJson<double>(calciumMg),
+      'magnesiumMg': serializer.toJson<double>(magnesiumMg),
+      'zincMg': serializer.toJson<double>(zincMg),
+      'folateMcg': serializer.toJson<double>(folateMcg),
+      'omega3G': serializer.toJson<double>(omega3G),
+    };
+  }
+
+  MicronutrientLog copyWith({
+    int? id,
+    String? userId,
+    DateTime? logDate,
+    double? ironMg,
+    double? vitaminB12Mcg,
+    double? vitaminD3Iu,
+    double? calciumMg,
+    double? magnesiumMg,
+    double? zincMg,
+    double? folateMcg,
+    double? omega3G,
+  }) => MicronutrientLog(
+    id: id ?? this.id,
+    userId: userId ?? this.userId,
+    logDate: logDate ?? this.logDate,
+    ironMg: ironMg ?? this.ironMg,
+    vitaminB12Mcg: vitaminB12Mcg ?? this.vitaminB12Mcg,
+    vitaminD3Iu: vitaminD3Iu ?? this.vitaminD3Iu,
+    calciumMg: calciumMg ?? this.calciumMg,
+    magnesiumMg: magnesiumMg ?? this.magnesiumMg,
+    zincMg: zincMg ?? this.zincMg,
+    folateMcg: folateMcg ?? this.folateMcg,
+    omega3G: omega3G ?? this.omega3G,
+  );
+  MicronutrientLog copyWithCompanion(MicronutrientLogsCompanion data) {
+    return MicronutrientLog(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      logDate: data.logDate.present ? data.logDate.value : this.logDate,
+      ironMg: data.ironMg.present ? data.ironMg.value : this.ironMg,
+      vitaminB12Mcg: data.vitaminB12Mcg.present
+          ? data.vitaminB12Mcg.value
+          : this.vitaminB12Mcg,
+      vitaminD3Iu: data.vitaminD3Iu.present
+          ? data.vitaminD3Iu.value
+          : this.vitaminD3Iu,
+      calciumMg: data.calciumMg.present ? data.calciumMg.value : this.calciumMg,
+      magnesiumMg: data.magnesiumMg.present
+          ? data.magnesiumMg.value
+          : this.magnesiumMg,
+      zincMg: data.zincMg.present ? data.zincMg.value : this.zincMg,
+      folateMcg: data.folateMcg.present ? data.folateMcg.value : this.folateMcg,
+      omega3G: data.omega3G.present ? data.omega3G.value : this.omega3G,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MicronutrientLog(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('logDate: $logDate, ')
+          ..write('ironMg: $ironMg, ')
+          ..write('vitaminB12Mcg: $vitaminB12Mcg, ')
+          ..write('vitaminD3Iu: $vitaminD3Iu, ')
+          ..write('calciumMg: $calciumMg, ')
+          ..write('magnesiumMg: $magnesiumMg, ')
+          ..write('zincMg: $zincMg, ')
+          ..write('folateMcg: $folateMcg, ')
+          ..write('omega3G: $omega3G')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    userId,
+    logDate,
+    ironMg,
+    vitaminB12Mcg,
+    vitaminD3Iu,
+    calciumMg,
+    magnesiumMg,
+    zincMg,
+    folateMcg,
+    omega3G,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MicronutrientLog &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.logDate == this.logDate &&
+          other.ironMg == this.ironMg &&
+          other.vitaminB12Mcg == this.vitaminB12Mcg &&
+          other.vitaminD3Iu == this.vitaminD3Iu &&
+          other.calciumMg == this.calciumMg &&
+          other.magnesiumMg == this.magnesiumMg &&
+          other.zincMg == this.zincMg &&
+          other.folateMcg == this.folateMcg &&
+          other.omega3G == this.omega3G);
+}
+
+class MicronutrientLogsCompanion extends UpdateCompanion<MicronutrientLog> {
+  final Value<int> id;
+  final Value<String> userId;
+  final Value<DateTime> logDate;
+  final Value<double> ironMg;
+  final Value<double> vitaminB12Mcg;
+  final Value<double> vitaminD3Iu;
+  final Value<double> calciumMg;
+  final Value<double> magnesiumMg;
+  final Value<double> zincMg;
+  final Value<double> folateMcg;
+  final Value<double> omega3G;
+  const MicronutrientLogsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.logDate = const Value.absent(),
+    this.ironMg = const Value.absent(),
+    this.vitaminB12Mcg = const Value.absent(),
+    this.vitaminD3Iu = const Value.absent(),
+    this.calciumMg = const Value.absent(),
+    this.magnesiumMg = const Value.absent(),
+    this.zincMg = const Value.absent(),
+    this.folateMcg = const Value.absent(),
+    this.omega3G = const Value.absent(),
+  });
+  MicronutrientLogsCompanion.insert({
+    this.id = const Value.absent(),
+    required String userId,
+    required DateTime logDate,
+    this.ironMg = const Value.absent(),
+    this.vitaminB12Mcg = const Value.absent(),
+    this.vitaminD3Iu = const Value.absent(),
+    this.calciumMg = const Value.absent(),
+    this.magnesiumMg = const Value.absent(),
+    this.zincMg = const Value.absent(),
+    this.folateMcg = const Value.absent(),
+    this.omega3G = const Value.absent(),
+  }) : userId = Value(userId),
+       logDate = Value(logDate);
+  static Insertable<MicronutrientLog> custom({
+    Expression<int>? id,
+    Expression<String>? userId,
+    Expression<DateTime>? logDate,
+    Expression<double>? ironMg,
+    Expression<double>? vitaminB12Mcg,
+    Expression<double>? vitaminD3Iu,
+    Expression<double>? calciumMg,
+    Expression<double>? magnesiumMg,
+    Expression<double>? zincMg,
+    Expression<double>? folateMcg,
+    Expression<double>? omega3G,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (logDate != null) 'log_date': logDate,
+      if (ironMg != null) 'iron_mg': ironMg,
+      if (vitaminB12Mcg != null) 'vitamin_b12_mcg': vitaminB12Mcg,
+      if (vitaminD3Iu != null) 'vitamin_d3_iu': vitaminD3Iu,
+      if (calciumMg != null) 'calcium_mg': calciumMg,
+      if (magnesiumMg != null) 'magnesium_mg': magnesiumMg,
+      if (zincMg != null) 'zinc_mg': zincMg,
+      if (folateMcg != null) 'folate_mcg': folateMcg,
+      if (omega3G != null) 'omega3_g': omega3G,
+    });
+  }
+
+  MicronutrientLogsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? userId,
+    Value<DateTime>? logDate,
+    Value<double>? ironMg,
+    Value<double>? vitaminB12Mcg,
+    Value<double>? vitaminD3Iu,
+    Value<double>? calciumMg,
+    Value<double>? magnesiumMg,
+    Value<double>? zincMg,
+    Value<double>? folateMcg,
+    Value<double>? omega3G,
+  }) {
+    return MicronutrientLogsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      logDate: logDate ?? this.logDate,
+      ironMg: ironMg ?? this.ironMg,
+      vitaminB12Mcg: vitaminB12Mcg ?? this.vitaminB12Mcg,
+      vitaminD3Iu: vitaminD3Iu ?? this.vitaminD3Iu,
+      calciumMg: calciumMg ?? this.calciumMg,
+      magnesiumMg: magnesiumMg ?? this.magnesiumMg,
+      zincMg: zincMg ?? this.zincMg,
+      folateMcg: folateMcg ?? this.folateMcg,
+      omega3G: omega3G ?? this.omega3G,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (logDate.present) {
+      map['log_date'] = Variable<DateTime>(logDate.value);
+    }
+    if (ironMg.present) {
+      map['iron_mg'] = Variable<double>(ironMg.value);
+    }
+    if (vitaminB12Mcg.present) {
+      map['vitamin_b12_mcg'] = Variable<double>(vitaminB12Mcg.value);
+    }
+    if (vitaminD3Iu.present) {
+      map['vitamin_d3_iu'] = Variable<double>(vitaminD3Iu.value);
+    }
+    if (calciumMg.present) {
+      map['calcium_mg'] = Variable<double>(calciumMg.value);
+    }
+    if (magnesiumMg.present) {
+      map['magnesium_mg'] = Variable<double>(magnesiumMg.value);
+    }
+    if (zincMg.present) {
+      map['zinc_mg'] = Variable<double>(zincMg.value);
+    }
+    if (folateMcg.present) {
+      map['folate_mcg'] = Variable<double>(folateMcg.value);
+    }
+    if (omega3G.present) {
+      map['omega3_g'] = Variable<double>(omega3G.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MicronutrientLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('logDate: $logDate, ')
+          ..write('ironMg: $ironMg, ')
+          ..write('vitaminB12Mcg: $vitaminB12Mcg, ')
+          ..write('vitaminD3Iu: $vitaminD3Iu, ')
+          ..write('calciumMg: $calciumMg, ')
+          ..write('magnesiumMg: $magnesiumMg, ')
+          ..write('zincMg: $zincMg, ')
+          ..write('folateMcg: $folateMcg, ')
+          ..write('omega3G: $omega3G')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -10804,6 +11444,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     this,
   );
   late final $FoodReferencesTable foodReferences = $FoodReferencesTable(this);
+  late final $MicronutrientLogsTable micronutrientLogs =
+      $MicronutrientLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -10826,6 +11468,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     bpReadings,
     glucoseReadings,
     foodReferences,
+    micronutrientLogs,
   ];
 }
 
@@ -16039,6 +16682,333 @@ typedef $$FoodReferencesTableProcessedTableManager =
       FoodReference,
       PrefetchHooks Function()
     >;
+typedef $$MicronutrientLogsTableCreateCompanionBuilder =
+    MicronutrientLogsCompanion Function({
+      Value<int> id,
+      required String userId,
+      required DateTime logDate,
+      Value<double> ironMg,
+      Value<double> vitaminB12Mcg,
+      Value<double> vitaminD3Iu,
+      Value<double> calciumMg,
+      Value<double> magnesiumMg,
+      Value<double> zincMg,
+      Value<double> folateMcg,
+      Value<double> omega3G,
+    });
+typedef $$MicronutrientLogsTableUpdateCompanionBuilder =
+    MicronutrientLogsCompanion Function({
+      Value<int> id,
+      Value<String> userId,
+      Value<DateTime> logDate,
+      Value<double> ironMg,
+      Value<double> vitaminB12Mcg,
+      Value<double> vitaminD3Iu,
+      Value<double> calciumMg,
+      Value<double> magnesiumMg,
+      Value<double> zincMg,
+      Value<double> folateMcg,
+      Value<double> omega3G,
+    });
+
+class $$MicronutrientLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $MicronutrientLogsTable> {
+  $$MicronutrientLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get logDate => $composableBuilder(
+    column: $table.logDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get ironMg => $composableBuilder(
+    column: $table.ironMg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get vitaminB12Mcg => $composableBuilder(
+    column: $table.vitaminB12Mcg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get vitaminD3Iu => $composableBuilder(
+    column: $table.vitaminD3Iu,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get calciumMg => $composableBuilder(
+    column: $table.calciumMg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get magnesiumMg => $composableBuilder(
+    column: $table.magnesiumMg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get zincMg => $composableBuilder(
+    column: $table.zincMg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get folateMcg => $composableBuilder(
+    column: $table.folateMcg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get omega3G => $composableBuilder(
+    column: $table.omega3G,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MicronutrientLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $MicronutrientLogsTable> {
+  $$MicronutrientLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+    column: $table.userId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get logDate => $composableBuilder(
+    column: $table.logDate,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get ironMg => $composableBuilder(
+    column: $table.ironMg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get vitaminB12Mcg => $composableBuilder(
+    column: $table.vitaminB12Mcg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get vitaminD3Iu => $composableBuilder(
+    column: $table.vitaminD3Iu,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get calciumMg => $composableBuilder(
+    column: $table.calciumMg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get magnesiumMg => $composableBuilder(
+    column: $table.magnesiumMg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get zincMg => $composableBuilder(
+    column: $table.zincMg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get folateMcg => $composableBuilder(
+    column: $table.folateMcg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get omega3G => $composableBuilder(
+    column: $table.omega3G,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MicronutrientLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MicronutrientLogsTable> {
+  $$MicronutrientLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get logDate =>
+      $composableBuilder(column: $table.logDate, builder: (column) => column);
+
+  GeneratedColumn<double> get ironMg =>
+      $composableBuilder(column: $table.ironMg, builder: (column) => column);
+
+  GeneratedColumn<double> get vitaminB12Mcg => $composableBuilder(
+    column: $table.vitaminB12Mcg,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get vitaminD3Iu => $composableBuilder(
+    column: $table.vitaminD3Iu,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get calciumMg =>
+      $composableBuilder(column: $table.calciumMg, builder: (column) => column);
+
+  GeneratedColumn<double> get magnesiumMg => $composableBuilder(
+    column: $table.magnesiumMg,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get zincMg =>
+      $composableBuilder(column: $table.zincMg, builder: (column) => column);
+
+  GeneratedColumn<double> get folateMcg =>
+      $composableBuilder(column: $table.folateMcg, builder: (column) => column);
+
+  GeneratedColumn<double> get omega3G =>
+      $composableBuilder(column: $table.omega3G, builder: (column) => column);
+}
+
+class $$MicronutrientLogsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MicronutrientLogsTable,
+          MicronutrientLog,
+          $$MicronutrientLogsTableFilterComposer,
+          $$MicronutrientLogsTableOrderingComposer,
+          $$MicronutrientLogsTableAnnotationComposer,
+          $$MicronutrientLogsTableCreateCompanionBuilder,
+          $$MicronutrientLogsTableUpdateCompanionBuilder,
+          (
+            MicronutrientLog,
+            BaseReferences<
+              _$AppDatabase,
+              $MicronutrientLogsTable,
+              MicronutrientLog
+            >,
+          ),
+          MicronutrientLog,
+          PrefetchHooks Function()
+        > {
+  $$MicronutrientLogsTableTableManager(
+    _$AppDatabase db,
+    $MicronutrientLogsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MicronutrientLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MicronutrientLogsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MicronutrientLogsTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> userId = const Value.absent(),
+                Value<DateTime> logDate = const Value.absent(),
+                Value<double> ironMg = const Value.absent(),
+                Value<double> vitaminB12Mcg = const Value.absent(),
+                Value<double> vitaminD3Iu = const Value.absent(),
+                Value<double> calciumMg = const Value.absent(),
+                Value<double> magnesiumMg = const Value.absent(),
+                Value<double> zincMg = const Value.absent(),
+                Value<double> folateMcg = const Value.absent(),
+                Value<double> omega3G = const Value.absent(),
+              }) => MicronutrientLogsCompanion(
+                id: id,
+                userId: userId,
+                logDate: logDate,
+                ironMg: ironMg,
+                vitaminB12Mcg: vitaminB12Mcg,
+                vitaminD3Iu: vitaminD3Iu,
+                calciumMg: calciumMg,
+                magnesiumMg: magnesiumMg,
+                zincMg: zincMg,
+                folateMcg: folateMcg,
+                omega3G: omega3G,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String userId,
+                required DateTime logDate,
+                Value<double> ironMg = const Value.absent(),
+                Value<double> vitaminB12Mcg = const Value.absent(),
+                Value<double> vitaminD3Iu = const Value.absent(),
+                Value<double> calciumMg = const Value.absent(),
+                Value<double> magnesiumMg = const Value.absent(),
+                Value<double> zincMg = const Value.absent(),
+                Value<double> folateMcg = const Value.absent(),
+                Value<double> omega3G = const Value.absent(),
+              }) => MicronutrientLogsCompanion.insert(
+                id: id,
+                userId: userId,
+                logDate: logDate,
+                ironMg: ironMg,
+                vitaminB12Mcg: vitaminB12Mcg,
+                vitaminD3Iu: vitaminD3Iu,
+                calciumMg: calciumMg,
+                magnesiumMg: magnesiumMg,
+                zincMg: zincMg,
+                folateMcg: folateMcg,
+                omega3G: omega3G,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MicronutrientLogsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MicronutrientLogsTable,
+      MicronutrientLog,
+      $$MicronutrientLogsTableFilterComposer,
+      $$MicronutrientLogsTableOrderingComposer,
+      $$MicronutrientLogsTableAnnotationComposer,
+      $$MicronutrientLogsTableCreateCompanionBuilder,
+      $$MicronutrientLogsTableUpdateCompanionBuilder,
+      (
+        MicronutrientLog,
+        BaseReferences<
+          _$AppDatabase,
+          $MicronutrientLogsTable,
+          MicronutrientLog
+        >,
+      ),
+      MicronutrientLog,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -16083,4 +17053,6 @@ class $AppDatabaseManager {
       $$GlucoseReadingsTableTableManager(_db, _db.glucoseReadings);
   $$FoodReferencesTableTableManager get foodReferences =>
       $$FoodReferencesTableTableManager(_db, _db.foodReferences);
+  $$MicronutrientLogsTableTableManager get micronutrientLogs =>
+      $$MicronutrientLogsTableTableManager(_db, _db.micronutrientLogs);
 }

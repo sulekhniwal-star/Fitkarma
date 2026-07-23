@@ -268,6 +268,20 @@ class FoodReferences extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+class MicronutrientLogs extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get userId => text()();
+  DateTimeColumn get logDate => dateTime()();
+  RealColumn get ironMg => real().withDefault(const Constant(0.0))();
+  RealColumn get vitaminB12Mcg => real().withDefault(const Constant(0.0))();
+  RealColumn get vitaminD3Iu => real().withDefault(const Constant(0.0))();
+  RealColumn get calciumMg => real().withDefault(const Constant(0.0))();
+  RealColumn get magnesiumMg => real().withDefault(const Constant(0.0))();
+  RealColumn get zincMg => real().withDefault(const Constant(0.0))();
+  RealColumn get folateMcg => real().withDefault(const Constant(0.0))();
+  RealColumn get omega3G => real().withDefault(const Constant(0.0))();
+}
+
 @DriftDatabase(tables: [
   Users,
   WaterLogs,
@@ -286,13 +300,14 @@ class FoodReferences extends Table {
   BpReadings,
   GlucoseReadings,
   FoodReferences,
+  MicronutrientLogs,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 33;
+  int get schemaVersion => 34;
 
   @override
   MigrationStrategy get migration {
@@ -341,6 +356,9 @@ class AppDatabase extends _$AppDatabase {
         if (from < 33) {
           await migrator.addColumn(users, users.nutritionPeriodizationPhase);
           await migrator.addColumn(users, users.periodizationPhaseStartedAt);
+        }
+        if (from < 34) {
+          await migrator.createTable(micronutrientLogs);
         }
       },
     );
@@ -614,6 +632,20 @@ class AppDatabase extends _$AppDatabase {
               t.foodName.lower().contains(lower) |
               t.searchTerms.lower().contains(lower))
           ..orderBy([(t) => OrderingTerm(expression: t.foodName)]))
+        .get();
+  }
+
+  // ── Micronutrient Logs ──────────────────────────────────────────────────
+
+  Future<void> saveMicronutrientLog(MicronutrientLogsCompanion log) async {
+    await into(micronutrientLogs).insertOnConflictUpdate(log);
+  }
+
+  Future<List<MicronutrientLog>> getMicronutrientLogs(String userId, {int days = 7}) async {
+    final cutoff = DateTime.now().subtract(Duration(days: days));
+    return (select(micronutrientLogs)
+          ..where((t) => t.userId.equals(userId) & t.logDate.isBiggerOrEqualValue(cutoff))
+          ..orderBy([(t) => OrderingTerm(expression: t.logDate, mode: OrderingMode.desc)]))
         .get();
   }
 }

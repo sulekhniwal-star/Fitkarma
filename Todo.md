@@ -246,10 +246,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-I Micronutrient Intelligence Core
-- [ ] Build micronutrient database mapping
-- [ ] Implement deficiency-risk detection logic
-- [ ] Persist to MicronutrientLogs
-- [ ] Build micronutrient dashboard UI
+- [x] Build micronutrient database mapping
+- [x] Implement deficiency-risk detection logic
+- [x] Persist to MicronutrientLogs
+- [x] Build micronutrient dashboard UI
 
 ### §P5-J Nutrition Adherence Engine
 - [ ] Implement adherence scoring algorithm
