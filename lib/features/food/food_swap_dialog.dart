@@ -12,23 +12,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor       = Color(0xFF161822);
-const _surfaceColor  = Color(0xFF202334);
-const _cardBgColor   = Color(0xFF282C42);
-const _accentOrange  = Color(0xFFFF6B35);
-const _accentGreen   = Color(0xFF4ADE80);
-const _accentRed     = Color(0xFFF87171);
-const _accentYellow  = Color(0xFFFBBF24);
-const _accentPurple  = Color(0xFFA78BFA);
-const _textPrimary   = Color(0xFFEFF0F7);
+const _bgColor = Color(0xFF161822);
+const _surfaceColor = Color(0xFF202334);
+const _cardBgColor = Color(0xFF282C42);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentRed = Color(0xFFF87171);
+const _accentYellow = Color(0xFFFBBF24);
+const _accentPurple = Color(0xFFA78BFA);
+const _textPrimary = Color(0xFFEFF0F7);
 const _textSecondary = Color(0xFF9095B3);
-const _borderColor   = Color(0xFF2E324A);
+const _borderColor = Color(0xFF2E324A);
 
 class FoodSwapDialog extends ConsumerWidget {
-  const FoodSwapDialog({
-    super.key,
-    this.initialQuery,
-  });
+  const FoodSwapDialog({super.key, this.initialQuery});
 
   final String? initialQuery;
 
@@ -37,8 +34,11 @@ class FoodSwapDialog extends ConsumerWidget {
     final state = ref.watch(foodSwapProvider);
     final engine = ref.read(foodSwapEngineProvider);
 
-    final currentSub = state.activeSubstitute ??
-        (initialQuery != null ? engine.findBestSwap(initialQuery!) : FoodSwapEngine.targetSwapRegistry.first);
+    final currentSub =
+        state.activeSubstitute ??
+        (initialQuery != null
+            ? engine.findBestSwap(initialQuery!)
+            : FoodSwapEngine.targetSwapRegistry.first);
 
     return Dialog(
       backgroundColor: _bgColor,
@@ -59,7 +59,11 @@ class FoodSwapDialog extends ConsumerWidget {
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.swap_horiz_rounded, color: _accentOrange, size: 22),
+                      Icon(
+                        Icons.swap_horiz_rounded,
+                        color: _accentOrange,
+                        size: 22,
+                      ),
                       SizedBox(width: 8),
                       Text(
                         'Indian Smart Swap 🔄',
@@ -73,7 +77,11 @@ class FoodSwapDialog extends ConsumerWidget {
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close_rounded, color: _textSecondary, size: 20),
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: _textSecondary,
+                      size: 20,
+                    ),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
@@ -116,7 +124,11 @@ class FoodSwapDialog extends ConsumerWidget {
                           ),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Icon(Icons.arrow_forward_rounded, color: _accentOrange, size: 20),
+                            child: Icon(
+                              Icons.arrow_forward_rounded,
+                              color: _accentOrange,
+                              size: 20,
+                            ),
                           ),
                           Expanded(
                             child: _FoodComparisonColumn(
@@ -182,7 +194,11 @@ class FoodSwapDialog extends ConsumerWidget {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.restaurant_rounded, color: _accentOrange, size: 16),
+                          Icon(
+                            Icons.restaurant_rounded,
+                            color: _accentOrange,
+                            size: 16,
+                          ),
                           SizedBox(width: 6),
                           Text(
                             'Culinary Prep Tip',
@@ -199,7 +215,11 @@ class FoodSwapDialog extends ConsumerWidget {
                       Text(
                         currentSub.culinaryPreparationTip,
                         key: const Key('swap_prep_tip_text'),
-                        style: const TextStyle(color: _textPrimary, fontSize: 11, height: 1.3),
+                        style: const TextStyle(
+                          color: _textPrimary,
+                          fontSize: 11,
+                          height: 1.3,
+                        ),
                       ),
                     ],
                   ),
@@ -220,17 +240,19 @@ class FoodSwapDialog extends ConsumerWidget {
                   ),
                   onPressed: () {
                     // Log the smart swap alternative to foodProvider
-                    ref.read(foodProvider.notifier).addFood(
-                      FoodItem(
-                        id: 'swap_${DateTime.now().millisecondsSinceEpoch}',
-                        name: currentSub.alternativeName,
-                        calories: currentSub.alternativeCalories.round(),
-                        protein: currentSub.alternativeProtein.round(),
-                        carbs: 25,
-                        fat: 5,
-                        mealType: 'Snacks',
-                      ),
-                    );
+                    ref
+                        .read(foodProvider.notifier)
+                        .addFood(
+                          FoodItem(
+                            id: 'swap_${DateTime.now().millisecondsSinceEpoch}',
+                            name: currentSub.alternativeName,
+                            calories: currentSub.alternativeCalories.round(),
+                            protein: currentSub.alternativeProtein.round(),
+                            carbs: 25,
+                            fat: 5,
+                            mealType: 'Snacks',
+                          ),
+                        );
                     Navigator.of(context).pop();
                   },
                   child: const Text(
@@ -271,16 +293,27 @@ class _FoodComparisonColumn extends StatelessWidget {
     final titleColor = isAlternative ? _accentGreen : _accentRed;
 
     return Column(
-      crossAxisAlignment: isAlternative ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: isAlternative
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: TextStyle(color: titleColor, fontSize: 10, fontWeight: FontWeight.w700),
+          style: TextStyle(
+            color: titleColor,
+            fontSize: 10,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 2),
         Text(
           name,
-          style: const TextStyle(color: _textPrimary, fontFamily: 'Outfit', fontSize: 13, fontWeight: FontWeight.w700),
+          style: const TextStyle(
+            color: _textPrimary,
+            fontFamily: 'Outfit',
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+          ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -322,7 +355,12 @@ class _MetricBadgeTile extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             value,
-            style: TextStyle(color: color, fontFamily: 'Outfit', fontSize: 12, fontWeight: FontWeight.w800),
+            style: TextStyle(
+              color: color,
+              fontFamily: 'Outfit',
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+            ),
           ),
           Text(
             label,

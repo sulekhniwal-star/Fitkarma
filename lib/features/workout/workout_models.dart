@@ -24,8 +24,9 @@ class WorkoutProgram {
   final int completedDaysThisWeek;
   final int targetDaysPerWeek;
 
-  double get weeklyProgressFraction =>
-      targetDaysPerWeek > 0 ? (completedDaysThisWeek / targetDaysPerWeek).clamp(0.0, 1.0) : 0.0;
+  double get weeklyProgressFraction => targetDaysPerWeek > 0
+      ? (completedDaysThisWeek / targetDaysPerWeek).clamp(0.0, 1.0)
+      : 0.0;
 }
 
 /// Summary for an individual exercise in a workout session.
@@ -155,6 +156,8 @@ class WorkoutLogEntry {
   final List<SetLogEntry> sets;
   final DateTime loggedAt;
 
-  double get totalVolumeKg =>
-      sets.fold(0.0, (v, s) => v + (s.isCompleted ? s.weightKg * s.actualReps : 0.0));
+  double get totalVolumeKg => sets.fold(
+    0.0,
+    (v, s) => v + (s.isCompleted ? s.weightKg * s.actualReps : 0.0),
+  );
 }

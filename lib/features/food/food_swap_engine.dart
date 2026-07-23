@@ -66,7 +66,8 @@ class FoodSwapEngine {
       proteinDelta: 0.0,
       satietyGain: 30.0,
       swapInstructions: 'Air-fry instead of deep frying.',
-      culinaryPreparationTip: 'Brush lightly with olive oil and bake/air-fry at 180°C for 15 mins.',
+      culinaryPreparationTip:
+          'Brush lightly with olive oil and bake/air-fry at 180°C for 15 mins.',
     ),
     SmartSubstitute(
       originalFoodName: 'Paneer Butter Masala',
@@ -78,8 +79,10 @@ class FoodSwapEngine {
       calorieDelta: -220.0,
       proteinDelta: 12.0,
       satietyGain: 40.0,
-      swapInstructions: 'Use low-fat yogurt and skimmed milk instead of heavy cashew cream.',
-      culinaryPreparationTip: 'Substitute cashew cream with low-fat yogurt/skimmed milk; reduce butter.',
+      swapInstructions:
+          'Use low-fat yogurt and skimmed milk instead of heavy cashew cream.',
+      culinaryPreparationTip:
+          'Substitute cashew cream with low-fat yogurt/skimmed milk; reduce butter.',
     ),
     SmartSubstitute(
       originalFoodName: 'Gulab Jamun / Mithai',
@@ -92,7 +95,8 @@ class FoodSwapEngine {
       proteinDelta: 18.0,
       satietyGain: 55.0,
       swapInstructions: 'Replace fried khoya with sattu & whey kheer.',
-      culinaryPreparationTip: 'Boil skimmed milk with roasted sattu, sweeten with stevia, add 0.5 scoop whey.',
+      culinaryPreparationTip:
+          'Boil skimmed milk with roasted sattu, sweeten with stevia, add 0.5 scoop whey.',
     ),
     SmartSubstitute(
       originalFoodName: 'Maida Laccha Paratha',
@@ -104,8 +108,10 @@ class FoodSwapEngine {
       calorieDelta: -120.0,
       proteinDelta: 4.0,
       satietyGain: 35.0,
-      swapInstructions: 'Use 50% besan + 50% oats flour instead of refined maida.',
-      culinaryPreparationTip: 'Knead oats flour & besan with ajwain & chopped coriander; cook on tawa without ghee.',
+      swapInstructions:
+          'Use 50% besan + 50% oats flour instead of refined maida.',
+      culinaryPreparationTip:
+          'Knead oats flour & besan with ajwain & chopped coriander; cook on tawa without ghee.',
     ),
     SmartSubstitute(
       originalFoodName: 'Butter Naan',
@@ -118,7 +124,8 @@ class FoodSwapEngine {
       proteinDelta: -2.0,
       satietyGain: 25.0,
       swapInstructions: 'Opt for unbuttered tandoori roti.',
-      culinaryPreparationTip: 'Ask restaurant for dry whole wheat Tandoori Roti with no butter.',
+      culinaryPreparationTip:
+          'Ask restaurant for dry whole wheat Tandoori Roti with no butter.',
     ),
     SmartSubstitute(
       originalFoodName: 'Chole Bhature',
@@ -131,7 +138,8 @@ class FoodSwapEngine {
       proteinDelta: 3.0,
       satietyGain: 45.0,
       swapInstructions: 'Bake kulcha without deep frying.',
-      culinaryPreparationTip: 'Air-fry yeast kulchas and simmer chole in whole spices without oil floaters.',
+      culinaryPreparationTip:
+          'Air-fry yeast kulchas and simmer chole in whole spices without oil floaters.',
     ),
   ];
 
@@ -149,23 +157,30 @@ class FoodSwapEngine {
 
     // Keyword fallback matching
     if (lc.contains('samosa')) return targetSwapRegistry[0];
-    if (lc.contains('paneer') && (lc.contains('butter') || lc.contains('masala'))) return targetSwapRegistry[1];
-    if (lc.contains('jamun') || lc.contains('mithai') || lc.contains('sweet')) return targetSwapRegistry[2];
+    if (lc.contains('paneer') &&
+        (lc.contains('butter') || lc.contains('masala')))
+      return targetSwapRegistry[1];
+    if (lc.contains('jamun') || lc.contains('mithai') || lc.contains('sweet'))
+      return targetSwapRegistry[2];
     if (lc.contains('paratha')) return targetSwapRegistry[3];
     if (lc.contains('naan')) return targetSwapRegistry[4];
-    if (lc.contains('bhature') || lc.contains('chole')) return targetSwapRegistry[5];
+    if (lc.contains('bhature') || lc.contains('chole'))
+      return targetSwapRegistry[5];
 
     return null;
   }
 
   /// Scans logged meals and returns list of applicable smart substitutes.
-  List<SmartSubstitute> findSubstitutesForLoggedFoods(List<FoodItem> loggedFoods) {
+  List<SmartSubstitute> findSubstitutesForLoggedFoods(
+    List<FoodItem> loggedFoods,
+  ) {
     if (loggedFoods.isEmpty) return const [];
     final matches = <SmartSubstitute>[];
 
     for (final food in loggedFoods) {
       final swap = findBestSwap(food.name);
-      if (swap != null && !matches.any((m) => m.alternativeName == swap.alternativeName)) {
+      if (swap != null &&
+          !matches.any((m) => m.alternativeName == swap.alternativeName)) {
         matches.add(swap);
       }
     }

@@ -25,7 +25,8 @@ class OverloadExercise {
   final double weightStepKg;
 
   double get nextWeightStep => currentWeightKg + weightStepKg;
-  double get deloadWeightKg => (currentWeightKg * 0.6 * 2).round() / 2; // round to nearest 0.5 kg
+  double get deloadWeightKg =>
+      (currentWeightKg * 0.6 * 2).round() / 2; // round to nearest 0.5 kg
 }
 
 /// Historical record of a single exercise set/session used for progression analysis.
@@ -86,10 +87,9 @@ class ProgressiveOverloadEngine {
     if (recentRecords.isEmpty) return null;
 
     // Filter to records for this exercise only, sorted most-recent first.
-    final exerciseRecords = recentRecords
-        .where((r) => r.exerciseName == exercise.name)
-        .toList()
-      ..sort((a, b) => b.sessionDate.compareTo(a.sessionDate));
+    final exerciseRecords =
+        recentRecords.where((r) => r.exerciseName == exercise.name).toList()
+          ..sort((a, b) => b.sessionDate.compareTo(a.sessionDate));
 
     if (exerciseRecords.isEmpty) return null;
 
@@ -100,7 +100,8 @@ class ProgressiveOverloadEngine {
       if (allComfortable) {
         return ProgressionSuggestion(
           type: ProgressionType.increaseWeight,
-          message: 'You completed 3 sessions at ${exercise.currentWeightKg}kg '
+          message:
+              'You completed 3 sessions at ${exercise.currentWeightKg}kg '
               'comfortably. Increase to ${exercise.nextWeightStep}kg.',
           suggestedWeightKg: exercise.nextWeightStep,
         );
@@ -128,11 +129,16 @@ class ProgressiveOverloadEngine {
 
   /// Plateau detection: 4 or more consecutive sessions at the same weight
   /// where reps completed never exceeded reps target.
-  bool _isPlateau(OverloadExercise exercise, List<ExerciseSessionRecord> records) {
+  bool _isPlateau(
+    OverloadExercise exercise,
+    List<ExerciseSessionRecord> records,
+  ) {
     if (records.length < 4) return false;
 
     final last4 = records.take(4).toList();
-    final allSameWeight = last4.every((r) => r.weightKg == exercise.currentWeightKg);
+    final allSameWeight = last4.every(
+      (r) => r.weightKg == exercise.currentWeightKg,
+    );
     final noImprovement = last4.every((r) => r.repsCompleted <= r.repsTarget);
 
     return allSameWeight && noImprovement;

@@ -5,11 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget _buildApp(ProviderContainer container) => UncontrolledProviderScope(
-      container: container,
-      child: const MaterialApp(
-        home: ActiveWorkoutScreen(),
-      ),
-    );
+  container: container,
+  child: const MaterialApp(home: ActiveWorkoutScreen()),
+);
 
 void main() {
   group('ActiveWorkoutScreen UI & Controller Tests', () {
@@ -23,7 +21,9 @@ void main() {
       container.dispose();
     });
 
-    testWidgets('renders exercise progress header and set logging table', (tester) async {
+    testWidgets('renders exercise progress header and set logging table', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 
@@ -48,7 +48,10 @@ void main() {
       final updatedState = container.read(activeWorkoutProvider);
       expect(updatedState.setStates[0][0].isCompleted, isTrue);
       expect(updatedState.workoutLogs, isNotEmpty);
-      expect(updatedState.workoutLogs.first.exerciseName, 'Flat Barbell Bench Press');
+      expect(
+        updatedState.workoutLogs.first.exerciseName,
+        'Flat Barbell Bench Press',
+      );
       // Rest timer should auto-start
       expect(updatedState.isTimerRunning, isTrue);
       expect(updatedState.restTimerSeconds, 90);
@@ -88,7 +91,9 @@ void main() {
       expect(finalState.isWorkoutComplete, isTrue);
     });
 
-    testWidgets('XP burst overlay appears when isWorkoutComplete is true', (tester) async {
+    testWidgets('XP burst overlay appears when isWorkoutComplete is true', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildApp(container));
       await tester.pump();
 

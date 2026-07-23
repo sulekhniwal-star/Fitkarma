@@ -50,7 +50,9 @@ class FoodSwapNotifier extends Notifier<FoodSwapState> {
     final engine = ref.watch(foodSwapEngineProvider);
     final foodState = ref.watch(foodProvider);
 
-    final loggedSwaps = engine.findSubstitutesForLoggedFoods(foodState.loggedItems);
+    final loggedSwaps = engine.findSubstitutesForLoggedFoods(
+      foodState.loggedItems,
+    );
 
     return FoodSwapState(
       activeSubstitute: loggedSwaps.isNotEmpty ? loggedSwaps.first : null,
@@ -63,10 +65,7 @@ class FoodSwapNotifier extends Notifier<FoodSwapState> {
     final engine = ref.read(foodSwapEngineProvider);
     final match = engine.findBestSwap(query);
 
-    state = state.copyWith(
-      searchQuery: query,
-      activeSubstitute: match,
-    );
+    state = state.copyWith(searchQuery: query, activeSubstitute: match);
   }
 
   /// Sets active substitute explicitly.
@@ -75,7 +74,6 @@ class FoodSwapNotifier extends Notifier<FoodSwapState> {
   }
 }
 
-final foodSwapProvider =
-    NotifierProvider<FoodSwapNotifier, FoodSwapState>(
+final foodSwapProvider = NotifierProvider<FoodSwapNotifier, FoodSwapState>(
   FoodSwapNotifier.new,
 );

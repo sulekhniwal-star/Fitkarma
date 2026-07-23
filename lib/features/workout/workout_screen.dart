@@ -11,17 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor       = Color(0xFF0F111A);
-const _surfaceColor  = Color(0xFF181B29);
-const _cardBgColor   = Color(0xFF222638);
-const _accentOrange  = Color(0xFFFF6B35);
-const _accentGreen   = Color(0xFF4ADE80);
-const _accentBlue    = Color(0xFF60A5FA);
-const _accentYellow  = Color(0xFFFBBF24);
-const _accentPurple  = Color(0xFFA78BFA);
-const _textPrimary   = Color(0xFFEFF0F7);
+const _bgColor = Color(0xFF0F111A);
+const _surfaceColor = Color(0xFF181B29);
+const _cardBgColor = Color(0xFF222638);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentBlue = Color(0xFF60A5FA);
+const _accentYellow = Color(0xFFFBBF24);
+const _accentPurple = Color(0xFFA78BFA);
+const _textPrimary = Color(0xFFEFF0F7);
 const _textSecondary = Color(0xFF9095B3);
-const _borderColor   = Color(0xFF2E324A);
+const _borderColor = Color(0xFF2E324A);
 
 class WorkoutScreen extends ConsumerWidget {
   const WorkoutScreen({super.key});
@@ -79,7 +79,10 @@ class WorkoutScreen extends ConsumerWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
                         decoration: BoxDecoration(
                           color: _accentBlue.withAlpha(30),
                           borderRadius: BorderRadius.circular(8),
@@ -103,12 +106,21 @@ class WorkoutScreen extends ConsumerWidget {
                     children: [
                       const Text(
                         'Weekly Progress',
-                        style: TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          color: _textSecondary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       Text(
                         '${program.completedDaysThisWeek} of ${program.targetDaysPerWeek} days',
                         key: const Key('workout_weekly_progress_text'),
-                        style: const TextStyle(color: _textPrimary, fontFamily: 'Outfit', fontSize: 12, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          color: _textPrimary,
+                          fontFamily: 'Outfit',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ],
                   ),
@@ -143,7 +155,11 @@ class WorkoutScreen extends ConsumerWidget {
                 children: [
                   const Text(
                     "Today's Session:",
-                    style: TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      color: _textSecondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -161,11 +177,23 @@ class WorkoutScreen extends ConsumerWidget {
                   // Stats Chips
                   Row(
                     children: [
-                      _StatChip(label: '${session.durationMinutes} mins', icon: Icons.timer_outlined, color: _accentOrange),
+                      _StatChip(
+                        label: '${session.durationMinutes} mins',
+                        icon: Icons.timer_outlined,
+                        color: _accentOrange,
+                      ),
                       const SizedBox(width: 8),
-                      _StatChip(label: '${session.exercises.length} Exercises', icon: Icons.fitness_center_rounded, color: _accentBlue),
+                      _StatChip(
+                        label: '${session.exercises.length} Exercises',
+                        icon: Icons.fitness_center_rounded,
+                        color: _accentBlue,
+                      ),
                       const SizedBox(width: 8),
-                      _StatChip(label: '${session.totalSets} sets', icon: Icons.repeat_rounded, color: _accentPurple),
+                      _StatChip(
+                        label: '${session.totalSets} sets',
+                        icon: Icons.repeat_rounded,
+                        color: _accentPurple,
+                      ),
                     ],
                   ),
 
@@ -183,7 +211,11 @@ class WorkoutScreen extends ConsumerWidget {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.trending_up_rounded, color: _accentYellow, size: 18),
+                          const Icon(
+                            Icons.trending_up_rounded,
+                            color: _accentYellow,
+                            size: 18,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
@@ -254,7 +286,11 @@ class WorkoutScreen extends ConsumerWidget {
 }
 
 class _StatChip extends StatelessWidget {
-  const _StatChip({required this.label, required this.icon, required this.color});
+  const _StatChip({
+    required this.label,
+    required this.icon,
+    required this.color,
+  });
 
   final String label;
   final IconData icon;
@@ -275,7 +311,12 @@ class _StatChip extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             label,
-            style: TextStyle(color: color, fontFamily: 'Outfit', fontSize: 11, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: color,
+              fontFamily: 'Outfit',
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),
@@ -326,7 +367,11 @@ class _HistoryTile extends StatelessWidget {
           ),
           const Text(
             'Completed ✓',
-            style: TextStyle(color: _accentGreen, fontSize: 11, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: _accentGreen,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),

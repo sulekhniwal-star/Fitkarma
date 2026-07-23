@@ -13,17 +13,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ─── Design tokens ───────────────────────────────────────────────────────────
-const _bgColor       = Color(0xFF0F111A);
-const _surfaceColor  = Color(0xFF181B29);
-const _cardBgColor   = Color(0xFF222638);
-const _accentOrange  = Color(0xFFFF6B35);
-const _accentGreen   = Color(0xFF4ADE80);
-const _accentBlue    = Color(0xFF60A5FA);
-const _accentYellow  = Color(0xFFFBBF24);
-const _accentRed     = Color(0xFFF87171);
-const _textPrimary   = Color(0xFFEFF0F7);
+const _bgColor = Color(0xFF0F111A);
+const _surfaceColor = Color(0xFF181B29);
+const _cardBgColor = Color(0xFF222638);
+const _accentOrange = Color(0xFFFF6B35);
+const _accentGreen = Color(0xFF4ADE80);
+const _accentBlue = Color(0xFF60A5FA);
+const _accentYellow = Color(0xFFFBBF24);
+const _accentRed = Color(0xFFF87171);
+const _textPrimary = Color(0xFFEFF0F7);
 const _textSecondary = Color(0xFF9095B3);
-const _borderColor   = Color(0xFF2E324A);
+const _borderColor = Color(0xFF2E324A);
 
 class ActiveWorkoutScreen extends ConsumerWidget {
   const ActiveWorkoutScreen({super.key});
@@ -44,13 +44,15 @@ class ActiveWorkoutScreen extends ConsumerWidget {
         ),
         title: const Text(
           'Active Workout',
-          style: TextStyle(color: _textPrimary, fontFamily: 'Outfit', fontSize: 20, fontWeight: FontWeight.w800),
+          style: TextStyle(
+            color: _textPrimary,
+            fontFamily: 'Outfit',
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: _ElapsedClock(),
-          ),
+          Padding(padding: EdgeInsets.only(right: 16), child: _ElapsedClock()),
         ],
       ),
       body: Stack(
@@ -156,7 +158,12 @@ class _ElapsedClockState extends State<_ElapsedClock> {
       child: Text(
         'Time: $_elapsed',
         key: const Key('workout_elapsed_timer'),
-        style: const TextStyle(color: _accentBlue, fontFamily: 'Outfit', fontSize: 14, fontWeight: FontWeight.w700),
+        style: const TextStyle(
+          color: _accentBlue,
+          fontFamily: 'Outfit',
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }
@@ -192,7 +199,11 @@ class _ExerciseProgressHeader extends StatelessWidget {
         children: [
           Text(
             'Exercise ${exerciseIndex + 1} of $totalExercises',
-            style: const TextStyle(color: _textSecondary, fontSize: 12, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              color: _textSecondary,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
@@ -219,7 +230,12 @@ class _ExerciseProgressHeader extends StatelessWidget {
               ),
               child: Text(
                 '📈 ${exercise.progressionNudge}',
-                style: const TextStyle(color: _accentYellow, fontFamily: 'Outfit', fontSize: 12, fontWeight: FontWeight.w700),
+                style: const TextStyle(
+                  color: _accentYellow,
+                  fontFamily: 'Outfit',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ],
@@ -260,7 +276,9 @@ class _ExerciseNavPills extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isActive ? _accentOrange : _cardBgColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: isActive ? _accentOrange : _borderColor),
+                border: Border.all(
+                  color: isActive ? _accentOrange : _borderColor,
+                ),
               ),
               child: Text(
                 'Ex ${i + 1}',
@@ -348,7 +366,11 @@ class _HeaderCell extends StatelessWidget {
       flex: flex,
       child: Text(
         label,
-        style: const TextStyle(color: _textSecondary, fontSize: 11, fontWeight: FontWeight.w700),
+        style: const TextStyle(
+          color: _textSecondary,
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+        ),
         textAlign: TextAlign.center,
       ),
     );
@@ -374,7 +396,9 @@ class _SetRow extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isCompleted ? _accentGreen.withAlpha(20) : Colors.transparent,
-        border: const Border(bottom: BorderSide(color: _borderColor, width: 0.5)),
+        border: const Border(
+          bottom: BorderSide(color: _borderColor, width: 0.5),
+        ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       child: Row(
@@ -408,7 +432,12 @@ class _SetRow extends StatelessWidget {
             child: Text(
               '${row.weightKg.toStringAsFixed(1)} kg',
               textAlign: TextAlign.center,
-              style: const TextStyle(color: _textPrimary, fontFamily: 'Outfit', fontSize: 13, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                color: _textPrimary,
+                fontFamily: 'Outfit',
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           // Actual reps (display)
@@ -444,7 +473,11 @@ class _SetRow extends StatelessWidget {
                   ),
                 ),
                 child: isCompleted
-                    ? const Icon(Icons.check_rounded, color: Colors.black, size: 18)
+                    ? const Icon(
+                        Icons.check_rounded,
+                        color: Colors.black,
+                        size: 18,
+                      )
                     : null,
               ),
             ),
@@ -498,7 +531,11 @@ class _RestTimerCard extends StatelessWidget {
         children: [
           const Text(
             'Rest Timer',
-            style: TextStyle(color: _textSecondary, fontSize: 13, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              color: _textSecondary,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 16),
 
@@ -524,7 +561,10 @@ class _RestTimerCard extends StatelessWidget {
                     ),
                     Text(
                       isPaused ? 'paused' : 'remaining',
-                      style: const TextStyle(color: _textSecondary, fontSize: 10),
+                      style: const TextStyle(
+                        color: _textSecondary,
+                        fontSize: 10,
+                      ),
                     ),
                   ],
                 ),
@@ -648,7 +688,10 @@ class _XpBurstOverlay extends StatelessWidget {
               GestureDetector(
                 onTap: onDismiss,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
                     color: _accentOrange,
                     borderRadius: BorderRadius.circular(14),

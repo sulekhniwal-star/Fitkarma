@@ -60,10 +60,31 @@ class WorkoutNotifier extends Notifier<WorkoutState> {
     durationMinutes: 45,
     progressionBadgeText: 'Suggesting +2.5kg on Bench Press today 🏋️',
     exercises: [
-      ExerciseSummary(name: 'Barbell Bench Press', targetSets: 4, targetReps: '8-10', suggestedWeightKg: 72.5, progressionNudge: '+2.5kg'),
-      ExerciseSummary(name: 'Incline Dumbbell Press', targetSets: 4, targetReps: '10-12', suggestedWeightKg: 24.0),
-      ExerciseSummary(name: 'Lat Pulldown', targetSets: 4, targetReps: '10-12', suggestedWeightKg: 55.0),
-      ExerciseSummary(name: 'Seated Cable Row', targetSets: 4, targetReps: '12-15', suggestedWeightKg: 47.5),
+      ExerciseSummary(
+        name: 'Barbell Bench Press',
+        targetSets: 4,
+        targetReps: '8-10',
+        suggestedWeightKg: 72.5,
+        progressionNudge: '+2.5kg',
+      ),
+      ExerciseSummary(
+        name: 'Incline Dumbbell Press',
+        targetSets: 4,
+        targetReps: '10-12',
+        suggestedWeightKg: 24.0,
+      ),
+      ExerciseSummary(
+        name: 'Lat Pulldown',
+        targetSets: 4,
+        targetReps: '10-12',
+        suggestedWeightKg: 55.0,
+      ),
+      ExerciseSummary(
+        name: 'Seated Cable Row',
+        targetSets: 4,
+        targetReps: '12-15',
+        suggestedWeightKg: 47.5,
+      ),
     ],
   );
 
@@ -111,14 +132,16 @@ class WorkoutNotifier extends Notifier<WorkoutState> {
       totalVolumeKg: 4500.0,
     );
 
-    final updatedHistory = List<WorkoutHistoryItem>.from(state.recentHistory)..insert(0, newHistoryItem);
+    final updatedHistory = List<WorkoutHistoryItem>.from(state.recentHistory)
+      ..insert(0, newHistoryItem);
     final updatedProgram = WorkoutProgram(
       id: state.activeProgram.id,
       title: state.activeProgram.title,
       currentWeek: state.activeProgram.currentWeek,
       currentDay: state.activeProgram.currentDay,
       totalWeeks: state.activeProgram.totalWeeks,
-      completedDaysThisWeek: (state.activeProgram.completedDaysThisWeek + 1).clamp(0, state.activeProgram.targetDaysPerWeek),
+      completedDaysThisWeek: (state.activeProgram.completedDaysThisWeek + 1)
+          .clamp(0, state.activeProgram.targetDaysPerWeek),
       targetDaysPerWeek: state.activeProgram.targetDaysPerWeek,
     );
 
@@ -130,7 +153,6 @@ class WorkoutNotifier extends Notifier<WorkoutState> {
   }
 }
 
-final workoutProvider =
-    NotifierProvider<WorkoutNotifier, WorkoutState>(
+final workoutProvider = NotifierProvider<WorkoutNotifier, WorkoutState>(
   WorkoutNotifier.new,
 );

@@ -39,8 +39,9 @@ class ActiveWorkoutState {
   final List<WorkoutLogEntry> workoutLogs;
   final bool isWorkoutComplete;
 
-  double get timerFraction =>
-      restTimerTotal > 0 ? (restTimerSeconds / restTimerTotal).clamp(0.0, 1.0) : 0.0;
+  double get timerFraction => restTimerTotal > 0
+      ? (restTimerSeconds / restTimerTotal).clamp(0.0, 1.0)
+      : 0.0;
 
   ExerciseSummary get currentExercise =>
       session.exercises[currentExerciseIndex];
@@ -101,10 +102,31 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
       durationMinutes: 45,
       progressionBadgeText: 'Suggesting +2.5kg on Bench Press today 🏋️',
       exercises: [
-        ExerciseSummary(name: 'Flat Barbell Bench Press', targetSets: 4, targetReps: '8-10', suggestedWeightKg: 80.0, progressionNudge: '+2.5kg'),
-        ExerciseSummary(name: 'Incline Dumbbell Press', targetSets: 4, targetReps: '10-12', suggestedWeightKg: 24.0),
-        ExerciseSummary(name: 'Lat Pulldown', targetSets: 4, targetReps: '10-12', suggestedWeightKg: 55.0),
-        ExerciseSummary(name: 'Seated Cable Row', targetSets: 4, targetReps: '12-15', suggestedWeightKg: 47.5),
+        ExerciseSummary(
+          name: 'Flat Barbell Bench Press',
+          targetSets: 4,
+          targetReps: '8-10',
+          suggestedWeightKg: 80.0,
+          progressionNudge: '+2.5kg',
+        ),
+        ExerciseSummary(
+          name: 'Incline Dumbbell Press',
+          targetSets: 4,
+          targetReps: '10-12',
+          suggestedWeightKg: 24.0,
+        ),
+        ExerciseSummary(
+          name: 'Lat Pulldown',
+          targetSets: 4,
+          targetReps: '10-12',
+          suggestedWeightKg: 55.0,
+        ),
+        ExerciseSummary(
+          name: 'Seated Cable Row',
+          targetSets: 4,
+          targetReps: '12-15',
+          suggestedWeightKg: 47.5,
+        ),
       ],
     );
 
@@ -122,7 +144,12 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
   // ── Set Completion ──
 
   /// Marks a set as done, records its log entry, and auto-starts the rest timer.
-  void completeSet(int exerciseIdx, int setIdx, {int? actualReps, double? weightKg}) {
+  void completeSet(
+    int exerciseIdx,
+    int setIdx, {
+    int? actualReps,
+    double? weightKg,
+  }) {
     final newSetStates = state.setStates
         .map((rows) => rows.map((r) => r).toList())
         .toList();
@@ -138,7 +165,9 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
 
     // Append to workout log for this exercise
     final updatedLogs = List<WorkoutLogEntry>.from(state.workoutLogs);
-    final existingLogIdx = updatedLogs.indexWhere((l) => l.exerciseName == state.session.exercises[exerciseIdx].name);
+    final existingLogIdx = updatedLogs.indexWhere(
+      (l) => l.exerciseName == state.session.exercises[exerciseIdx].name,
+    );
     final setEntry = SetLogEntry(
       setNumber: setIdx + 1,
       targetReps: row.targetReps,
@@ -149,8 +178,12 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
     );
 
     if (existingLogIdx >= 0) {
-      final existingSets = List<SetLogEntry>.from(updatedLogs[existingLogIdx].sets);
-      final existingSetIdx = existingSets.indexWhere((s) => s.setNumber == setIdx + 1);
+      final existingSets = List<SetLogEntry>.from(
+        updatedLogs[existingLogIdx].sets,
+      );
+      final existingSetIdx = existingSets.indexWhere(
+        (s) => s.setNumber == setIdx + 1,
+      );
       if (existingSetIdx >= 0) {
         existingSets[existingSetIdx] = setEntry;
       } else {
@@ -163,12 +196,14 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
         loggedAt: DateTime.now(),
       );
     } else {
-      updatedLogs.add(WorkoutLogEntry(
-        sessionId: state.session.id,
-        exerciseName: state.session.exercises[exerciseIdx].name,
-        sets: [setEntry],
-        loggedAt: DateTime.now(),
-      ));
+      updatedLogs.add(
+        WorkoutLogEntry(
+          sessionId: state.session.id,
+          exerciseName: state.session.exercises[exerciseIdx].name,
+          sets: [setEntry],
+          loggedAt: DateTime.now(),
+        ),
+      );
     }
 
     state = state.copyWith(setStates: newSetStates, workoutLogs: updatedLogs);
@@ -228,7 +263,11 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
 
   void skipRest() {
     _timer?.cancel();
-    state = state.copyWith(restTimerSeconds: 0, isTimerRunning: false, isTimerPaused: false);
+    state = state.copyWith(
+      restTimerSeconds: 0,
+      isTimerRunning: false,
+      isTimerPaused: false,
+    );
   }
 
   void pauseTimer() {
@@ -266,5 +305,5 @@ class ActiveWorkoutNotifier extends Notifier<ActiveWorkoutState> {
 
 final activeWorkoutProvider =
     NotifierProvider<ActiveWorkoutNotifier, ActiveWorkoutState>(
-  ActiveWorkoutNotifier.new,
-);
+      ActiveWorkoutNotifier.new,
+    );
