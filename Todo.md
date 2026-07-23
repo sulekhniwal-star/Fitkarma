@@ -230,10 +230,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build restaurant search/browse UI
 
 ### §P5-F Grocery Optimization Engine 2.0
-- [ ] Implement shopping-list generation from meal plan
-- [ ] Wire `Users.monthlyGroceryBudgetInr` into list optimization
-- [ ] Build grocery list UI
-- [ ] 🆕 See §P16-E for vendor checkout extension
+- [x] Implement shopping-list generation from meal plan
+- [x] Wire `Users.monthlyGroceryBudgetInr` into list optimization
+- [x] Build grocery list UI
+- [x] 🆕 See §P16-E for vendor checkout extension
 
 ### §P5-G Nutrition Periodization Engine
 - [ ] Implement phase-based macro cycling logic

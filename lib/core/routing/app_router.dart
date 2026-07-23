@@ -23,6 +23,7 @@ import 'package:fitkarma/features/wearable/wearable_comparison_screen.dart';
 import 'package:fitkarma/features/food/food_screen.dart';
 import 'package:fitkarma/features/food/fix_my_meal_screen.dart';
 import 'package:fitkarma/features/food/restaurant_search_screen.dart';
+import 'package:fitkarma/features/food/grocery_list_screen.dart';
 import 'package:fitkarma/features/womens_health/womens_health_onboarding_screen.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -55,6 +56,7 @@ class AppRoutes {
   static const food       = '/food';
   static const fixMyMeal  = '/food/fix-my-meal';
   static const restaurant = '/food/restaurant';
+  static const grocery    = '/food/grocery';
 
   // Auth
   static const login = '/login';
@@ -322,6 +324,11 @@ class AppRouter {
           path: AppRoutes.restaurant,
           pageBuilder: (context, state) =>
               _slideTransition(state, const RestaurantSearchScreen()),
+        ),
+        GoRoute(
+          path: AppRoutes.grocery,
+          pageBuilder: (context, state) =>
+              _slideTransition(state, const GroceryListScreen()),
         ),
         GoRoute(
           path: AppRoutes.aiCoach,

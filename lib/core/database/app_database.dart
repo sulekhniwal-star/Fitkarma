@@ -27,6 +27,7 @@ class Users extends Table {
   IntColumn get averageCycleLength => integer().nullable()();
   DateTimeColumn get lastPeriodDate => dateTime().nullable()();
   TextColumn get subscriptionTier => text().withDefault(const Constant('free'))();
+  RealColumn get monthlyGroceryBudgetInr => real().withDefault(const Constant(3000.0))();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -289,7 +290,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 31;
+  int get schemaVersion => 32;
 
   @override
   MigrationStrategy get migration {
@@ -332,6 +333,9 @@ class AppDatabase extends _$AppDatabase {
         if (from < 31) {
           await migrator.createTable(foodReferences);
         }
+        if (from < 32) {
+          await migrator.addColumn(users, users.monthlyGroceryBudgetInr);
+        }
       },
     );
   }
@@ -348,6 +352,7 @@ class AppDatabase extends _$AppDatabase {
     int? averageCycleLength,
     DateTime? lastPeriodDate,
     String? subscriptionTier,
+    double? monthlyGroceryBudgetInr,
   }) async {
     await (update(users)
       ..where((t) => t.id.equals(userId)))
@@ -361,6 +366,7 @@ class AppDatabase extends _$AppDatabase {
         averageCycleLength: averageCycleLength != null ? Value(averageCycleLength) : const Value.absent(),
         lastPeriodDate: lastPeriodDate != null ? Value(lastPeriodDate) : const Value.absent(),
         subscriptionTier: subscriptionTier != null ? Value(subscriptionTier) : const Value.absent(),
+        monthlyGroceryBudgetInr: monthlyGroceryBudgetInr != null ? Value(monthlyGroceryBudgetInr) : const Value.absent(),
       ));
   }
 
