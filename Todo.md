@@ -342,8 +342,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P7-B Karma Hub Screen
-- [ ] Build UI (XP history, levels, badges)
-- [ ] Widget test
+- [x] Build UI (XP history, levels, badges)
+- [x] Widget test
 
 ### §P7-C Habit Automation System
 - [ ] Implement habit-streak detection logic
