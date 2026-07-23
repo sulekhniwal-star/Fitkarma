@@ -319,11 +319,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P6-E Training Operating System
-- [ ] Implement Movement Screening Engine
-- [ ] Implement Adaptive Overload logic
-- [ ] Implement Local Readiness (upper/lower body) scoring
-- [ ] Wire into UserScores (upperBodyReadiness / lowerBodyReadiness)
-- [ ] Integration tests
+- [x] Implement Movement Screening Engine
+- [x] Implement Adaptive Overload logic
+- [x] Implement Local Readiness (upper/lower body) scoring
+- [x] Wire into UserScores (upperBodyReadiness / lowerBodyReadiness)
+- [x] Integration tests
 
 ### §P6-F Adaptive Computer Vision Loop (ACVL)
 - [ ] Integrate MediaPipe pose estimation
