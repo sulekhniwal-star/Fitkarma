@@ -315,8 +315,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P6-D Dynamic Fitness Blueprint Generator
-- [ ] Implement program generation algorithm from goals + equipment + experience
-- [ ] Unit tests
+- [x] Implement program generation algorithm from goals + equipment + experience
+- [x] Unit tests
 
 ### §P6-E Training Operating System
 - [ ] Implement Movement Screening Engine
