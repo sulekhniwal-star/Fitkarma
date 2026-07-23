@@ -272,9 +272,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P5-N Multi-Dimensional Meal Quality Score
-- [ ] Implement composite quality scoring (processing tier, micronutrients, satiety)
-- [ ] Build score display UI
-- [ ] Unit tests
+- [x] Implement composite quality scoring (processing tier, micronutrients, satiety)
+- [x] Build score display UI
+- [x] Unit tests
 
 ### §P5-O Nutrition Reliability Score & Data Confidence Shield
 - [ ] Implement logging-consistency scoring
