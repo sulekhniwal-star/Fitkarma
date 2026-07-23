@@ -311,8 +311,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P6-C Progressive Overload Engine
-- [ ] Implement deterministic overload progression rules
-- [ ] Unit tests
+- [x] Implement deterministic overload progression rules
+- [x] Unit tests
 
 ### §P6-D Dynamic Fitness Blueprint Generator
 - [ ] Implement program generation algorithm from goals + equipment + experience
