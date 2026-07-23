@@ -292,9 +292,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build family meal planning UI
 
 ### §P5-R Indian Food Substitution & Swap Engine
-- [ ] Build FoodSubstitutions lookup logic
-- [ ] Implement swap-suggestion algorithm (nutrition-equivalent alternatives)
-- [ ] Build swap suggestion UI
+- [x] Build FoodSubstitutions lookup logic
+- [x] Implement swap-suggestion algorithm (nutrition-equivalent alternatives)
+- [x] Build swap suggestion UI
 
 ---
 
