@@ -442,9 +442,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P10-D Injury Risk Engine
-- [ ] Implement injury-risk scoring logic
-- [ ] Wire into Training OS (§P6-E) recommendations
-- [ ] Unit tests
+- [x] Implement injury-risk scoring logic
+- [x] Wire into Training OS (§P6-E) recommendations
+- [x] Unit tests
 
 ### §P10-E Stress Detection Engine
 - [ ] Implement inferred-stress detection algorithm (HRV/sleep/behavior signals)

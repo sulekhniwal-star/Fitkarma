@@ -7,6 +7,8 @@
 ///  - LocalReadinessScorer: upper/lower body readiness 0–100
 library;
 
+import 'package:fitkarma/features/predictive/injury_risk_engine.dart';
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Input: Per-Rep Form Analysis Record
 // ─────────────────────────────────────────────────────────────────────────────
@@ -144,15 +146,28 @@ class AdaptiveExerciseSelector {
   /// the user's [identifiedLimitations].
   String selectAlternative(
     String primaryExerciseId,
-    List<String> identifiedLimitations,
-  ) {
+    List<String> identifiedLimitations, {
+    InjuryRiskAssessment? injuryRisk,
+  }) {
+    // Injury Risk Assessment Override (§P10-D Wiring)
+    if (injuryRisk != null && injuryRisk.isDeloadRecommended) {
+      if (injuryRisk.primaryVulnerableJoint == JointArea.shoulders &&
+          primaryExerciseId == 'barbell_overhead_press') {
+        return 'landmine_press'; // Joint-sparing landmine press override
+      }
+      if (injuryRisk.primaryVulnerableJoint == JointArea.knees &&
+          primaryExerciseId == 'barbell_back_squat') {
+        return 'goblet_box_squat'; // Joint-sparing box squat override
+      }
+    }
+
     // Shoulder impingement override
     if (primaryExerciseId == 'barbell_overhead_press' &&
-        identifiedLimitations.contains('Poor Shoulder Mobility')) {
+        identifiedLimitations.contains('Shoulder Impingement')) {
       return 'landmine_press';
     }
 
-    // Ankle dorsiflexion override
+    // Limited Ankle Dorsiflexion override
     if (primaryExerciseId == 'barbell_back_squat' &&
         identifiedLimitations.contains('Limited Ankle Dorsiflexion')) {
       return 'goblet_box_squat';
