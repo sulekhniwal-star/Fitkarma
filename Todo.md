@@ -433,8 +433,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P10-B Biological Age Estimation
-- [ ] Implement monthly biological-age algorithm (no AI)
-- [ ] Unit tests
+- [x] Implement monthly biological-age algorithm (no AI)
+- [x] Unit tests
 
 ### §P10-C Monthly Health Report
 - [ ] Implement report generation job
