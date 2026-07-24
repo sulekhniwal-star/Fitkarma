@@ -356,9 +356,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P7-E Benchmarking Engine
-- [ ] Implement Fitness Percentile calculation vs. cohort
-- [ ] Build benchmarking UI
-- [ ] Unit tests
+- [x] Implement Fitness Percentile calculation vs. cohort
+- [x] Build benchmarking UI
+- [x] Unit tests
 
 ### §P7-F Demographic Cohort Insights & Network Effects
 - [ ] Implement anonymized cohort aggregation pipeline
