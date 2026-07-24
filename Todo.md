@@ -447,8 +447,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P10-E Stress Detection Engine
-- [ ] Implement inferred-stress detection algorithm (HRV/sleep/behavior signals)
-- [ ] Unit tests
+- [x] Implement inferred-stress detection algorithm (HRV/sleep/behavior signals)
+- [x] Unit tests
 
 ### §P10-F Clinical Report Intelligence
 - [ ] Build lab report (PDF) upload + parsing pipeline
