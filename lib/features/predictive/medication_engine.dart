@@ -133,7 +133,7 @@ class DrugInteractionEngine {
       if ((nameLower.contains('statin') || nameLower.contains('atorva')) &&
           recentMealFoods.any((f) => f.toLowerCase().contains('grapefruit'))) {
         final rawMsg =
-            'Grapefruit compounds inhibit metabolic enzymes, raising statin concentrations in blood. Avoid grapefruit while on statins.';
+            'Grapefruit compounds inhibit CYP3A4 metabolic enzymes, raising statin concentrations in blood. Consult your doctor or pharmacist before consuming grapefruit while taking statins.';
         warnings.add(InteractionWarning(
           warningId: 'w_statin_grapefruit',
           severity: InteractionSeverity.high,

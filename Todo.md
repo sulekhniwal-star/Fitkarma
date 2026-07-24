@@ -489,11 +489,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests for sync-latency edge cases
 
 ### §P10-M Clinical Compliance Hardening 🔒
-- [ ] Implement `ClinicalCopyLinter` (banned directive-pattern regex set)
-- [ ] Wire linter into CI for any PR touching §P10-I/H/J copy
-- [ ] Add Clinical Copy Change Checklist to PR template
-- [ ] Gate Phase 10 behind a feature flag for initial opt-in cohort rollout
-- [ ] Schedule legal sign-off review before general availability
+- [x] Implement `ClinicalCopyLinter` (banned directive-pattern regex set)
+- [x] Wire linter into CI for any PR touching §P10-I/H/J copy
+- [x] Add Clinical Copy Change Checklist to PR template
+- [x] Gate Phase 10 behind a feature flag for initial opt-in cohort rollout
+- [x] Schedule legal sign-off review before general availability
 
 ---
 
@@ -688,8 +688,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [ ] Add `syncBatchId` idempotency to all `CumulativeLog` sync batches; implement server-side dedup
 - [ ] Extract 8 derived score columns off `Users` into `UserScores`; update all read sites to use `latestScore()`
 - [ ] Add `user_id` scoping to `ai_cache`; implement `purgeCacheForUser` in account-deletion workflow
-- [ ] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
-- [ ] Add Clinical Copy Change Checklist to PR template
+- [x] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
+- [x] Add Clinical Copy Change Checklist to PR template
 
 ---
 

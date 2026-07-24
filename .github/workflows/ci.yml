@@ -40,5 +40,8 @@ jobs:
       - name: Enforce Directory Structure
         run: dart run scripts/enforce_structure.dart
 
+      - name: Verify Clinical Copy Compliance (§P10-M)
+        run: dart run scripts/verify_clinical_copy.dart
+
       - name: Run Widget Tests
         run: flutter test
