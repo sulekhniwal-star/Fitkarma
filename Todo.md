@@ -361,10 +361,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P7-F Demographic Cohort Insights & Network Effects
-- [ ] Implement anonymized cohort aggregation pipeline
-- [ ] Enforce minimum-cohort-size threshold before displaying any aggregate
-- [ ] Build cohort insights UI (city/age-group rankings)
-- [ ] Privacy audit: confirm no individual-level data leaks through aggregates
+- [x] Implement anonymized cohort aggregation pipeline
+- [x] Enforce minimum-cohort-size threshold before displaying any aggregate
+- [x] Build cohort insights UI (city/age-group rankings)
+- [x] Privacy audit: confirm no individual-level data leaks through aggregates
 
 ---
 
