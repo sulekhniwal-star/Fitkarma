@@ -437,9 +437,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P10-C Monthly Health Report
-- [ ] Implement report generation job
-- [ ] Build report UI/export
-- [ ] Widget test
+- [x] Implement report generation job
+- [x] Build report UI/export
+- [x] Widget test
 
 ### §P10-D Injury Risk Engine
 - [ ] Implement injury-risk scoring logic
