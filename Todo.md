@@ -474,9 +474,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] 🔒 Run all warning copy through `ClinicalCopyLinter` (§P10-M)
 
 ### §P10-J Doctor Sharing Portal
-- [ ] Implement passcode-protected PDF export (default)
-- [ ] Build sharing UI + link/token management
-- [ ] 🆕 Implement FHIR-lite export mode (§P16-C ABHA integration)
+- [x] Implement passcode-protected PDF export (default)
+- [x] Build sharing UI + link/token management
+- [x] 🆕 Implement FHIR-lite export mode (§P16-C ABHA integration)
 
 ### §P10-K Regulatory & Clinical Compliance Framework
 - [ ] Implement Non-Diagnostic Shield disclaimer component (reused across §P10-F/G/H/I)
@@ -623,8 +623,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [ ] Implement ABHA OAuth linking flow (NDHM Health ID API)
 - [ ] Store `abhaHealthId` encrypted at rest
 - [ ] Build "Link ABHA Health ID" Settings screen
-- [ ] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
-- [ ] Verify passcode-PDF export remains default/unaffected
+- [x] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
+- [x] Verify passcode-PDF export remains default/unaffected
 - [ ] Apply §P10-M compliance boundary to all ABHA-linked sharing content
 
 ### §P16-D Corporate Wellness & Insurer Tier
