@@ -484,9 +484,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Implement anonymized cohort sync routing (excludes lab dates/medication brands)
 
 ### §P10-L Retrospective Glycemic Processing Pipeline (RGPP)
-- [ ] Implement late-arriving CGM batch detection
-- [ ] Implement retroactive food-window linking algorithm
-- [ ] Unit tests for sync-latency edge cases
+- [x] Implement late-arriving CGM batch detection
+- [x] Implement retroactive food-window linking algorithm
+- [x] Unit tests for sync-latency edge cases
 
 ### §P10-M Clinical Compliance Hardening 🔒
 - [ ] Implement `ClinicalCopyLinter` (banned directive-pattern regex set)
