@@ -415,9 +415,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Feed pagination + performance test
 
 ### §P9-F Local Geolocation Clubs & Interest Circles
-- [ ] Implement geolocation-based club discovery
-- [ ] Persist to Clubs
-- [ ] Build club discovery + join UI
+- [x] Implement geolocation-based club discovery
+- [x] Persist to Clubs
+- [x] Build club discovery + join UI
 
 ### §P9-G Weekly & Monthly Leaderboards
 - [ ] Implement leaderboard ranking computation (scheduled job)
