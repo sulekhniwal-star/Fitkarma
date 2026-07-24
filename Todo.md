@@ -461,10 +461,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build longevity score UI
 
 ### §P10-H Continuous Biomarker Tracking (CGM Sync)
-- [ ] Integrate CGM manufacturer sync APIs
-- [ ] Persist to CgmReadings
-- [ ] Build CGM trend UI
-- [ ] Wire into §P10-L Retrospective Glycemic Processing Pipeline
+- [x] Integrate CGM manufacturer sync APIs
+- [x] Persist to CgmReadings
+- [x] Build CGM trend UI
+- [x] Wire into §P10-L Retrospective Glycemic Processing Pipeline
 
 ### §P10-I Medication Tracker & Interaction Warning Engine
 - [ ] Build medication schedule data model + UI
