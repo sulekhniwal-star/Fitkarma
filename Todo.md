@@ -399,8 +399,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build squad UI
 
 ### §P9-C Accountability Communities
-- [ ] Implement community membership logic
-- [ ] Build community UI
+- [x] Implement community membership logic
+- [x] Build community UI
 
 ### §P9-D Family Health Hub
 - [ ] Build household management UI
