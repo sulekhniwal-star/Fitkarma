@@ -380,9 +380,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P8-C Habit Identity Layer
-- [ ] Implement identity-reinforcement messaging logic (behavior science)
-- [ ] Wire into Daily Mission and AI Coach prompts
-- [ ] Unit tests
+- [x] Implement identity-reinforcement messaging logic (behavior science)
+- [x] Wire into Daily Mission and AI Coach prompts
+- [x] Unit tests
 
 ---
 
