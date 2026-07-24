@@ -393,10 +393,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P9-B Squad System
-- [ ] Implement Squad Missions logic
-- [ ] Implement Squad Challenges logic
-- [ ] Persist to SquadGroups / SquadMembers
-- [ ] Build squad UI
+- [x] Implement Squad Missions logic
+- [x] Implement Squad Challenges logic
+- [x] Persist to SquadGroups / SquadMembers
+- [x] Build squad UI
 
 ### §P9-C Accountability Communities
 - [ ] Implement community membership logic
