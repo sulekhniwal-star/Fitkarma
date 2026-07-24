@@ -371,9 +371,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 8 — TRANSFORMATION JOURNEY + ANTI-QUIT PSYCHOLOGY
 
 ### §P8-A Transformation Journey Engine
-- [ ] Implement journey-stage detection logic
-- [ ] Persist to TransformationMemories
-- [ ] Unit tests
+- [x] Implement journey-stage detection logic
+- [x] Persist to TransformationMemories
+- [x] Unit tests
 
 ### §P8-B Transformation Timeline Screen
 - [ ] Build UI (milestones, progress photos, journey stages)
