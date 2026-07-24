@@ -429,8 +429,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 10 — PREDICTIVE HEALTH + PREVENTIVE INTELLIGENCE
 
 ### §P10-A Health Risk Prevention System
-- [ ] Implement deterministic risk-flag rules
-- [ ] Unit tests
+- [x] Implement deterministic risk-flag rules
+- [x] Unit tests
 
 ### §P10-B Biological Age Estimation
 - [ ] Implement monthly biological-age algorithm (no AI)
