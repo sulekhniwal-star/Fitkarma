@@ -226,7 +226,7 @@ void main() {
   });
 
   group('DoctorSharingEngine — buildAnonymizedCohortPayload §P10-K', () {
-    test('does not include patientId or PII fields', () {
+    test('does not include patientId, PII fields, lab dates, or medication brand names', () {
       final engine = DoctorSharingEngine();
       final payload = engine.buildAnonymizedCohortPayload(
         report: _stubReport(),
@@ -235,6 +235,10 @@ void main() {
 
       expect(payload, isNot(contains('patientId')));
       expect(payload, isNot(contains('name')));
+      expect(payload, isNot(contains('labDate')));
+      expect(payload, isNot(contains('labTestDate')));
+      expect(payload, isNot(contains('medicationBrand')));
+      expect(payload, isNot(contains('brandName')));
       expect(payload['_privacyLevel'], equals('anonymous-aggregate'));
       expect(payload['cohort'], equals('india-30-40-m'));
     });

@@ -10,6 +10,7 @@
 /// - Next Month's Focus Strategy Card
 library;
 
+import 'package:fitkarma/features/predictive/clinical_disclaimer_shield.dart';
 import 'package:fitkarma/features/predictive/monthly_report_models.dart';
 import 'package:fitkarma/features/predictive/monthly_report_notifier.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,9 @@ class MonthlyReportScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const NonDiagnosticShieldBanner(),
+            const SizedBox(height: 16),
+
             // 1. Report Period Header
             Text(
               'Report Period: ${report.reportMonthPeriod}',

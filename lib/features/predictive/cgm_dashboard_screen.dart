@@ -10,6 +10,7 @@ library;
 
 import 'package:fitkarma/features/predictive/cgm_notifier.dart';
 import 'package:fitkarma/features/predictive/cgm_sync_engine.dart';
+import 'package:fitkarma/features/predictive/clinical_disclaimer_shield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -57,6 +58,9 @@ class CgmDashboardScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const NonDiagnosticShieldBanner(),
+            const SizedBox(height: 16),
+
             // 1. Live Glucose Gauge Card
             _buildLiveGlucoseCard(current, cgmState.sensorStatus),
             const SizedBox(height: 20),

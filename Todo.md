@@ -479,9 +479,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] 🆕 Implement FHIR-lite export mode (§P16-C ABHA integration)
 
 ### §P10-K Regulatory & Clinical Compliance Framework
-- [ ] Implement Non-Diagnostic Shield disclaimer component (reused across §P10-F/G/H/I)
-- [ ] Implement "Revoke All Clinical Access" single-tap setting
-- [ ] Implement anonymized cohort sync routing (excludes lab dates/medication brands)
+- [x] Implement Non-Diagnostic Shield disclaimer component (reused across §P10-F/G/H/I)
+- [x] Implement "Revoke All Clinical Access" single-tap setting
+- [x] Implement anonymized cohort sync routing (excludes lab dates/medication brands)
 
 ### §P10-L Retrospective Glycemic Processing Pipeline (RGPP)
 - [ ] Implement late-arriving CGM batch detection
