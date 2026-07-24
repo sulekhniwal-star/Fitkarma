@@ -408,11 +408,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Implement family-level dashboards (aggregated, permission-gated)
 
 ### §P9-E Activity Feed & Sharing Architecture
-- [ ] Implement Follow System data model + logic
-- [ ] Persist to Followers
-- [ ] Build Activity Feed UI
-- [ ] Implement Workout/Route/Transformation sharing cards
-- [ ] Feed pagination + performance test
+- [x] Implement Follow System data model + logic
+- [x] Persist to Followers
+- [x] Build Activity Feed UI
+- [x] Implement Workout/Route/Transformation sharing cards
+- [x] Feed pagination + performance test
 
 ### §P9-F Local Geolocation Clubs & Interest Circles
 - [ ] Implement geolocation-based club discovery
