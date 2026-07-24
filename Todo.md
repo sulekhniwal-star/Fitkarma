@@ -376,8 +376,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P8-B Transformation Timeline Screen
-- [ ] Build UI (milestones, progress photos, journey stages)
-- [ ] Widget test
+- [x] Build UI (milestones, progress photos, journey stages)
+- [x] Widget test
 
 ### §P8-C Habit Identity Layer
 - [ ] Implement identity-reinforcement messaging logic (behavior science)
