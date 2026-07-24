@@ -457,8 +457,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] 🔒 Apply Non-Diagnostic Shield disclaimer (§P10-K)
 
 ### §P10-G Longevity Score + Biological Age v1
-- [ ] Implement composite longevity scoring algorithm
-- [ ] Build longevity score UI
+- [x] Implement composite longevity scoring algorithm
+- [x] Build longevity score UI
 
 ### §P10-H Continuous Biomarker Tracking (CGM Sync)
 - [ ] Integrate CGM manufacturer sync APIs
