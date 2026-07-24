@@ -389,8 +389,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 9 — SOCIAL + SQUAD ACCOUNTABILITY
 
 ### §P9-A Social Screen
-- [ ] Build UI (feed entry point, squads, clubs)
-- [ ] Widget test
+- [x] Build UI (feed entry point, squads, clubs)
+- [x] Widget test
 
 ### §P9-B Squad System
 - [ ] Implement Squad Missions logic
