@@ -451,10 +451,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Unit tests
 
 ### §P10-F Clinical Report Intelligence
-- [ ] Build lab report (PDF) upload + parsing pipeline
-- [ ] Implement lab-value extraction and normalization
-- [ ] Build clinical report UI
-- [ ] 🔒 Apply Non-Diagnostic Shield disclaimer (§P10-K)
+- [x] Build lab report (PDF) upload + parsing pipeline
+- [x] Implement lab-value extraction and normalization
+- [x] Build clinical report UI
+- [x] 🔒 Apply Non-Diagnostic Shield disclaimer (§P10-K)
 
 ### §P10-G Longevity Score + Biological Age v1
 - [ ] Implement composite longevity scoring algorithm
