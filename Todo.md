@@ -467,11 +467,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Wire into §P10-L Retrospective Glycemic Processing Pipeline
 
 ### §P10-I Medication Tracker & Interaction Warning Engine
-- [ ] Build medication schedule data model + UI
-- [ ] Persist to MedicationLogs
-- [ ] Integrate drug-interaction database (e.g., RxNorm)
-- [ ] Implement interaction-warning generation logic
-- [ ] 🔒 Run all warning copy through `ClinicalCopyLinter` (§P10-M)
+- [x] Build medication schedule data model + UI
+- [x] Persist to MedicationLogs
+- [x] Integrate drug-interaction database (e.g., RxNorm)
+- [x] Implement interaction-warning generation logic
+- [x] 🔒 Run all warning copy through `ClinicalCopyLinter` (§P10-M)
 
 ### §P10-J Doctor Sharing Portal
 - [ ] Implement passcode-protected PDF export (default)
