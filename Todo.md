@@ -403,9 +403,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build community UI
 
 ### §P9-D Family Health Hub
-- [ ] Build household management UI
-- [ ] Wire `Users.familyUnitId` grouping
-- [ ] Implement family-level dashboards (aggregated, permission-gated)
+- [x] Build household management UI
+- [x] Wire `Users.familyUnitId` grouping
+- [x] Implement family-level dashboards (aggregated, permission-gated)
 
 ### §P9-E Activity Feed & Sharing Architecture
 - [ ] Implement Follow System data model + logic
