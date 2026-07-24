@@ -420,9 +420,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build club discovery + join UI
 
 ### §P9-G Weekly & Monthly Leaderboards
-- [ ] Implement leaderboard ranking computation (scheduled job)
-- [ ] Build leaderboard UI
-- [ ] Unit tests
+- [x] Implement leaderboard ranking computation (scheduled job)
+- [x] Build leaderboard UI
+- [x] Unit tests
 
 ---
 
