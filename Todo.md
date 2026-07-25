@@ -592,10 +592,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Biometric lock test on physical device
 
 ### §P14-D CI/CD Pipeline
-- [ ] `test` job (flutter test) in GitHub Actions
-- [ ] `build-android` job (release appbundle, dart-defines wired)
-- [ ] `build-ios` job (release ipa)
-- [ ] Verify all `--dart-define` vars set for dev/staging/prod
+- [x] `test` job (flutter test) in GitHub Actions
+- [x] `build-android` job (release appbundle, dart-defines wired)
+- [x] `build-ios` job (release ipa)
+- [x] Verify all `--dart-define` vars set for dev/staging/prod
 
 ---
 
