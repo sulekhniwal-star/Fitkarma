@@ -555,11 +555,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build paywall/upgrade UI
 
 ### §P13-B Creator & Coach Marketplace
-- [ ] Build CreatorProfiles data model + onboarding flow
-- [ ] Implement creator-user matchmaking logic
-- [ ] Build Program Store (direct purchase) UI
-- [ ] Implement wallet/royalty distribution logic
-- [ ] Wire `fitkarma-marketplace` Azure Function
+- [x] Build CreatorProfiles data model + onboarding flow
+- [x] Implement creator-user matchmaking logic
+- [x] Build Program Store (direct purchase) UI
+- [x] Implement wallet/royalty distribution logic
+- [x] Wire `fitkarma-marketplace` Azure Function
 
 ### §P13-C Creator Affiliate Program
 - [ ] Implement affiliate referral link generation + tracking
