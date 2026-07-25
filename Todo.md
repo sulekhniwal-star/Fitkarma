@@ -518,8 +518,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 12 — FESTIVAL + LIFE EVENTS INTELLIGENCE
 
 ### §P12-A Festival Intelligence System
-- [ ] Build Indian festival calendar dataset
-- [ ] Implement cross-module festival adaptation hooks (nutrition, workout, mission)
+- [x] Build Indian festival calendar dataset
+- [x] Implement cross-module festival adaptation hooks (nutrition, workout, mission)
 
 ### §P12-B Life Events Engine
 - [ ] Implement life-event detection/logging (wedding, injury, travel, etc.)
