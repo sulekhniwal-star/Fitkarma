@@ -35,12 +35,43 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^3.3.2
-  go_router: ^15.1.2
+  riverpod_annotation: ^4.0.3
+  go_router: ^17.3.0
   drift: ^2.34.1
   sqlite3_flutter_libs: ^0.6.0+eol
   path_provider: ^2.1.6
   path: ^1.9.1
   crypto: ^3.0.6
+
+  # AES-256 database encryption (SQLCipher) — §P0-C architecture requirement
+  sqlcipher_flutter_libs: ^0.7.0+eol
+
+  # Health platform integrations (HealthKit / Google Fit) — §P4
+  health: ^13.3.1
+
+  # Charts for nutrition, steps, sleep, vitals screens — §P4/P5
+  fl_chart: ^1.2.0
+
+  # Vernacular voice logging (§P16-B)
+  speech_to_text: ^7.4.0
+
+  # Meal photo capture for vision AI (§P5)
+  image_picker: ^1.1.2
+
+  # Biometric lock — §P14 security hardening
+  local_auth: ^3.0.2
+
+  # RevenueCat subscriptions — §P13
+  purchases_flutter: ^10.4.3
+
+  # Error monitoring — §P14 enterprise hardening
+  sentry_flutter: ^8.3.0
+
+  # Background task scheduling for DIP generation — §P0-C
+  workmanager: ^0.9.0+3
+
+  # HTTP REST calls to Azure Functions — §AZ
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +85,8 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   drift_dev: ^2.34.0
   build_runner: ^2.15.1
+  riverpod_generator: ^4.0.4
+  golden_toolkit: ^0.15.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
