@@ -579,9 +579,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] 🔒 Verify `ai_cache` scoped by `user_id`, prompt hashes only, no PII
 
 ### §P14-B Performance
-- [ ] Verify cold start < 2s on mid-tier device
-- [ ] Verify Daily Briefing open < 100ms (DIP read from Drift only)
-- [ ] Verify GlassCard blur disabled on `DeviceTier.low`
+- [x] Verify cold start < 2s on mid-tier device
+- [x] Verify Daily Briefing open < 100ms (DIP read from Drift only)
+- [x] Verify GlassCard blur disabled on `DeviceTier.low`
 
 ### §P14-C Testing Strategy
 - [ ] Unit test coverage for all deterministic engines
