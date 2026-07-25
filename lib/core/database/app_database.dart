@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:fitkarma/core/security/security_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -847,10 +848,8 @@ Future<String> _getOrGenerateEncryptionKey(Directory directory) async {
     return await keyFile.readAsString();
   }
 
-  // Generate secure key bytes using OS-level entropy source
-  final random = Random.secure();
-  final bytes = List<int>.generate(32, (i) => random.nextInt(256));
-  final key = base64Url.encode(bytes);
+  // Generate secure key using OS CSPRNG (Random.secure)
+  final key = SqlCipherSecurity.generateSecureKey();
 
   await keyFile.writeAsString(key);
   return key;

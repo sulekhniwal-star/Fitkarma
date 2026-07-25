@@ -572,11 +572,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 14 — ENTERPRISE HARDENING + CI/CD
 
 ### §P14-A Security
-- [ ] 🔒 Implement `_generateSecureKey()` using `Random.secure()` for SQLCipher key
-- [ ] Enforce TLS 1.3 + certificate pinning on all network calls
-- [ ] Verify Azure Function logs never contain user context
-- [ ] Verify Sentry PII stripping (no names/emails in error reports)
-- [ ] 🔒 Verify `ai_cache` scoped by `user_id`, prompt hashes only, no PII
+- [x] 🔒 Implement `_generateSecureKey()` using `Random.secure()` for SQLCipher key
+- [x] Enforce TLS 1.3 + certificate pinning on all network calls
+- [x] Verify Azure Function logs never contain user context
+- [x] Verify Sentry PII stripping (no names/emails in error reports)
+- [x] 🔒 Verify `ai_cache` scoped by `user_id`, prompt hashes only, no PII
 
 ### §P14-B Performance
 - [ ] Verify cold start < 2s on mid-tier device
