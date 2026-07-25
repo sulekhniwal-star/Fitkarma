@@ -1,16 +1,13 @@
-## Summary
-Brief description of the changes introduced by this PR.
+## Description of Changes
+<!-- Provide a brief description of the changes introduced in this pull request -->
 
-## Type of Change
-- [ ] Bug fix (non-breaking change fixing an issue)
-- [ ] New feature (non-breaking change adding functionality)
-- [ ] Phase 10 Clinical / Predictive feature update
+## Checklist
+- [ ] Code builds cleanly and static analysis passes (`flutter analyze`)
+- [ ] Unit & widget tests updated and passing (`flutter test`)
+- [ ] Environment variables verified for dev/staging/prod via `--dart-define`
 
-## Clinical Copy Change Checklist (required for PRs touching §P10-I, §P10-H, §P10-J)
-- [ ] `ClinicalCopyLinter` passes with zero violations (`dart run scripts/verify_clinical_copy.dart`)
-- [ ] Non-diagnostic disclaimer (`NonDiagnosticShieldBanner`) is present and unmodified on affected screens
-- [ ] Change reviewed by compliance / legal sign-off role for this release (§P10-M)
-
-## Verification
-- [ ] `flutter test` passed cleanly locally
-- [ ] Static analysis (`flutter analyze`) clean
+### 🩺 Clinical Copy Change Checklist (§P10-M Compliance Boundary)
+- [ ] Verified copy changes in §P10-I (Prescription Verification), §P10-H (Medication Tracker), or §P10-J (Doctor Sharing Portal) retain mandatory medical disclaimers.
+- [ ] Confirmed no clinical diagnosis, treatment claims, or unvalidated medical advice is rendered to the user without physician disclaimer.
+- [ ] Ran `dart run scripts/clinical_copy_linter.dart` and verified 0 compliance violations.
+- [ ] Passcode-protected PDF export remains default for Doctor Sharing Portal (§P10-J).

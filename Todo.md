@@ -681,15 +681,15 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 
 # v1.0 ARCHITECTURE HARDENING 🔒 (CROSS-CUTTING)
 
-- [ ] Replace timestamp-based key generation with `Random.secure()` in `EncryptedDatabaseConnection`
-- [ ] Replace sequential DIP loop with Durable Functions fan-out + per-user error isolation
-- [ ] Replace hardcoded 6am IST schedule with per-user `timezoneOffsetMinutes` + `preferredDIPHour`
-- [ ] Replace raw-timestamp LWW with `HLCTimestamp`-based conflict resolution in `SyncMergeResolver`
-- [ ] Add `syncBatchId` idempotency to all `CumulativeLog` sync batches; implement server-side dedup
-- [ ] Extract 8 derived score columns off `Users` into `UserScores`; update all read sites to use `latestScore()`
-- [ ] Add `user_id` scoping to `ai_cache`; implement `purgeCacheForUser` in account-deletion workflow
-- [ ] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
-- [ ] Add Clinical Copy Change Checklist to PR template
+- [x] Replace timestamp-based key generation with `Random.secure()` in `EncryptedDatabaseConnection`
+- [x] Replace sequential DIP loop with Durable Functions fan-out + per-user error isolation
+- [x] Replace hardcoded 6am IST schedule with per-user `timezoneOffsetMinutes` + `preferredDIPHour`
+- [x] Replace raw-timestamp LWW with `HLCTimestamp`-based conflict resolution in `SyncMergeResolver`
+- [x] Add `syncBatchId` idempotency to all `CumulativeLog` sync batches; implement server-side dedup
+- [x] Extract 8 derived score columns off `Users` into `UserScores`; update all read sites to use `latestScore()`
+- [x] Add `user_id` scoping to `ai_cache`; implement `purgeCacheForUser` in account-deletion workflow
+- [x] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
+- [x] Add Clinical Copy Change Checklist to PR template
 
 ---
 
@@ -713,7 +713,7 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [ ] Measure push notification open rates; A/B test meal reminders
 - [ ] Analyze subscription conversion funnel (trial → paid)
 - [ ] Build home widget (iOS + Android): today's steps + health score
-- [x] End-to-end test Wedding Mode with synthetic data
+- [ ] End-to-end test Wedding Mode with synthetic data
 - [ ] Validate Program Evolution Engine's first real transitions
 - [ ] Validate Transformation Memory accuracy at the 4-week mark
 - [ ] 🆕 Measure WhatsApp logging opt-in rate and message-parse accuracy
