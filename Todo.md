@@ -620,12 +620,12 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Test code-mixed input handling
 
 ### §P16-C ABHA Health ID Integration
-- [ ] Implement ABHA OAuth linking flow (NDHM Health ID API)
-- [ ] Store `abhaHealthId` encrypted at rest
-- [ ] Build "Link ABHA Health ID" Settings screen
-- [ ] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
-- [ ] Verify passcode-PDF export remains default/unaffected
-- [ ] Apply §P10-M compliance boundary to all ABHA-linked sharing content
+- [x] Implement ABHA OAuth linking flow (NDHM Health ID API)
+- [x] Store `abhaHealthId` encrypted at rest
+- [x] Build "Link ABHA Health ID" Settings screen
+- [x] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
+- [x] Verify passcode-PDF export remains default/unaffected
+- [x] Apply §P10-M compliance boundary to all ABHA-linked sharing content
 
 ### §P16-D Corporate Wellness & Insurer Tier
 - [ ] Build `OrganizationAccounts` data model + Azure SQL mirror
