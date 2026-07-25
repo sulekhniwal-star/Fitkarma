@@ -602,14 +602,14 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 16 — INDIA GROWTH & TRUST LAYER 🆕
 
 ### §P16-A WhatsApp Business Logging
-- [ ] Provision WhatsApp Business Cloud API account + webhook endpoint
-- [ ] Implement `fitkarma-whatsapp` Azure Function (webhook handler)
-- [ ] Implement phone-number → userId resolution
-- [ ] Wire text messages into existing food-text parser
-- [ ] Wire image messages into `meal_photo_analyzer` (§P5-C) pipeline
-- [ ] Implement WhatsApp reply/confirmation messages
-- [ ] Build in-app opt-in/opt-out flow (Settings → Link WhatsApp), off by default
-- [ ] Test unlinked-number fallback message
+- [x] Provision WhatsApp Business Cloud API account + webhook endpoint
+- [x] Implement `fitkarma-whatsapp` Azure Function (webhook handler)
+- [x] Implement phone-number → userId resolution
+- [x] Wire text messages into existing food-text parser
+- [x] Wire image messages into `meal_photo_analyzer` (§P5-C) pipeline
+- [x] Implement WhatsApp reply/confirmation messages
+- [x] Build in-app opt-in/opt-out flow (Settings → Link WhatsApp), off by default
+- [x] Test unlinked-number fallback message
 
 ### §P16-B Vernacular Voice Logging
 - [ ] Integrate Azure Speech-to-Text (multi-language) client
