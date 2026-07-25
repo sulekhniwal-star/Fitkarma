@@ -612,12 +612,12 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Test unlinked-number fallback message
 
 ### §P16-B Vernacular Voice Logging
-- [ ] Integrate Azure Speech-to-Text (multi-language) client
-- [ ] Implement `VoiceLogService` (ASR → existing food/workout parser)
-- [ ] Build language locale mapping (`preferredInputLanguage` → ASR locale)
-- [ ] Build mic input UI + language picker
-- [ ] Test ASR accuracy per supported language (Hindi, Tamil, Telugu, Marathi, Bengali, Kannada, English-India)
-- [ ] Test code-mixed input handling
+- [x] Integrate Azure Speech-to-Text (multi-language) client
+- [x] Implement `VoiceLogService` (ASR → existing food/workout parser)
+- [x] Build language locale mapping (`preferredInputLanguage` → ASR locale)
+- [x] Build mic input UI + language picker
+- [x] Test ASR accuracy per supported language (Hindi, Tamil, Telugu, Marathi, Bengali, Kannada, English-India)
+- [x] Test code-mixed input handling
 
 ### §P16-C ABHA Health ID Integration
 - [ ] Implement ABHA OAuth linking flow (NDHM Health ID API)
