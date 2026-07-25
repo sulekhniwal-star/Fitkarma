@@ -562,10 +562,10 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Wire `fitkarma-marketplace` Azure Function
 
 ### §P13-C Creator Affiliate Program
-- [ ] Implement affiliate referral link generation + tracking
-- [ ] Build recurring payout ledger
-- [ ] Build affiliate dashboard UI
-- [ ] 🆕 Reused by §P16-E Grocery Vendor Checkout for affiliate revenue tracking
+- [x] Implement affiliate referral link generation + tracking
+- [x] Build recurring payout ledger
+- [x] Build affiliate dashboard UI
+- [x] 🆕 Reused by §P16-E Grocery Vendor Checkout for affiliate revenue tracking
 
 ---
 
