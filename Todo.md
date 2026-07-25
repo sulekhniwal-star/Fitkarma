@@ -584,12 +584,12 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Verify GlassCard blur disabled on `DeviceTier.low`
 
 ### §P14-C Testing Strategy
-- [ ] Unit test coverage for all deterministic engines
-- [ ] Widget tests for all primary screens
-- [ ] Golden tests generated and passing for all primary screens
-- [ ] Offline → online sync round-trip test (airplane mode)
-- [ ] DLQ alert banner test (3 consecutive sync failures)
-- [ ] Biometric lock test on physical device
+- [x] Unit test coverage for all deterministic engines
+- [x] Widget tests for all primary screens
+- [x] Golden tests generated and passing for all primary screens
+- [x] Offline → online sync round-trip test (airplane mode)
+- [x] DLQ alert banner test (3 consecutive sync failures)
+- [x] Biometric lock test on physical device
 
 ### §P14-D CI/CD Pipeline
 - [ ] `test` job (flutter test) in GitHub Actions
