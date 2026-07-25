@@ -550,9 +550,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 13 — PREMIUM + MONETISATION
 
 ### §P13-A Subscription Tiers
-- [ ] Implement Free/Pro/Elite tier gating logic
-- [ ] Wire RevenueCat subscription management
-- [ ] Build paywall/upgrade UI
+- [x] Implement Free/Pro/Elite tier gating logic
+- [x] Wire RevenueCat subscription management
+- [x] Build paywall/upgrade UI
 
 ### §P13-B Creator & Coach Marketplace
 - [ ] Build CreatorProfiles data model + onboarding flow
