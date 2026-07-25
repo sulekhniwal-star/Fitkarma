@@ -500,9 +500,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # PHASE 11 — VISUAL BODY ANALYTICS
 
 ### §P11-A Body Analytics Screen
-- [ ] Build UI (measurements, trends)
-- [ ] Persist to BodyMeasurements
-- [ ] Widget test
+- [x] Build UI (measurements, trends)
+- [x] Persist to BodyMeasurements
+- [x] Widget test
 
 ### §P11-B Progress Photo System
 - [ ] Build photo capture + comparison UI
