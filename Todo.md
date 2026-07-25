@@ -628,14 +628,14 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Apply §P10-M compliance boundary to all ABHA-linked sharing content
 
 ### §P16-D Corporate Wellness & Insurer Tier
-- [ ] Build `OrganizationAccounts` data model + Azure SQL mirror
-- [ ] Build `EmployeeEnrollments` data model + Azure SQL mirror
-- [ ] Implement enrollment-code linking flow (opt-in, reversible)
-- [ ] Implement org-facing aggregate query layer
-- [ ] Enforce minimum-cohort-size threshold (reuse §P7-F logic) before rendering any aggregate
-- [ ] Build HR/insurer dashboard UI (enrollment %, aggregate adherence distribution)
-- [ ] Build org seat/billing management (corporate_basic / corporate_plus tiers)
-- [ ] Privacy audit: confirm no per-user data is ever queryable from org-facing endpoints
+- [x] Build `OrganizationAccounts` data model + Azure SQL mirror
+- [x] Build `EmployeeEnrollments` data model + Azure SQL mirror
+- [x] Implement enrollment-code linking flow (opt-in, reversible)
+- [x] Implement org-facing aggregate query layer
+- [x] Enforce minimum-cohort-size threshold (reuse §P7-F logic) before rendering any aggregate
+- [x] Build HR/insurer dashboard UI (enrollment %, aggregate adherence distribution)
+- [x] Build org seat/billing management (corporate_basic / corporate_plus tiers)
+- [x] Privacy audit: confirm no per-user data is ever queryable from org-facing endpoints
 
 ### §P16-E Grocery Vendor Checkout Integration
 - [ ] Define `GroceryVendorAdapter` interface
