@@ -527,9 +527,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Wire into Transformation Memory
 
 ### §P12-C Wedding Transformation Mode
-- [ ] Implement wedding-mode program generation
-- [ ] Build wedding countdown UI
-- [ ] End-to-end test with synthetic data
+- [x] Implement wedding-mode program generation
+- [x] Build wedding countdown UI
+- [x] End-to-end test with synthetic data
 
 ### §P12-D AI Roast Mode
 - [ ] Implement opt-in "roast" tone variant for AI Coach
@@ -623,8 +623,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [ ] Implement ABHA OAuth linking flow (NDHM Health ID API)
 - [ ] Store `abhaHealthId` encrypted at rest
 - [ ] Build "Link ABHA Health ID" Settings screen
-- [x] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
-- [x] Verify passcode-PDF export remains default/unaffected
+- [ ] Implement FHIR-lite export mode for Doctor Sharing Portal (§P10-J)
+- [ ] Verify passcode-PDF export remains default/unaffected
 - [ ] Apply §P10-M compliance boundary to all ABHA-linked sharing content
 
 ### §P16-D Corporate Wellness & Insurer Tier
@@ -688,8 +688,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [ ] Add `syncBatchId` idempotency to all `CumulativeLog` sync batches; implement server-side dedup
 - [ ] Extract 8 derived score columns off `Users` into `UserScores`; update all read sites to use `latestScore()`
 - [ ] Add `user_id` scoping to `ai_cache`; implement `purgeCacheForUser` in account-deletion workflow
-- [x] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
-- [x] Add Clinical Copy Change Checklist to PR template
+- [ ] Implement `ClinicalCopyLinter` and wire into CI for §P10-I/H/J copy changes
+- [ ] Add Clinical Copy Change Checklist to PR template
 
 ---
 
@@ -713,7 +713,7 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [ ] Measure push notification open rates; A/B test meal reminders
 - [ ] Analyze subscription conversion funnel (trial → paid)
 - [ ] Build home widget (iOS + Android): today's steps + health score
-- [ ] End-to-end test Wedding Mode with synthetic data
+- [x] End-to-end test Wedding Mode with synthetic data
 - [ ] Validate Program Evolution Engine's first real transitions
 - [ ] Validate Transformation Memory accuracy at the 4-week mark
 - [ ] 🆕 Measure WhatsApp logging opt-in rate and message-parse accuracy
