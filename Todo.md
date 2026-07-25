@@ -638,13 +638,13 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Privacy audit: confirm no per-user data is ever queryable from org-facing endpoints
 
 ### §P16-E Grocery Vendor Checkout Integration
-- [ ] Define `GroceryVendorAdapter` interface
-- [ ] Implement first vendor adapter (Blinkit or BigBasket or Zepto)
-- [ ] Implement catalog-mapping logic (FitKarma generic items → vendor SKUs)
-- [ ] Implement deep-link checkout with pre-filled cart + affiliate tag
-- [ ] Wire affiliate order-confirmation webhook
-- [ ] Reuse §P13-C affiliate ledger for revenue tracking (no parallel payout system)
-- [ ] Build "Order groceries" CTA on Grocery Optimization Engine UI (§P5-F)
+- [x] Define `GroceryVendorAdapter` interface
+- [x] Implement first vendor adapter (Blinkit or BigBasket or Zepto)
+- [x] Implement catalog-mapping logic (FitKarma generic items → vendor SKUs)
+- [x] Implement deep-link checkout with pre-filled cart + affiliate tag
+- [x] Wire affiliate order-confirmation webhook
+- [x] Reuse §P13-C affiliate ledger for revenue tracking (no parallel payout system)
+- [x] Build "Order groceries" CTA on Grocery Optimization Engine UI (§P5-F)
 
 ---
 
