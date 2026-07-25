@@ -522,9 +522,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Implement cross-module festival adaptation hooks (nutrition, workout, mission)
 
 ### §P12-B Life Events Engine
-- [ ] Implement life-event detection/logging (wedding, injury, travel, etc.)
-- [ ] Persist to LifeEvents
-- [ ] Wire into Transformation Memory
+- [x] Implement life-event detection/logging (wedding, injury, travel, etc.)
+- [x] Persist to LifeEvents
+- [x] Wire into Transformation Memory
 
 ### §P12-C Wedding Transformation Mode
 - [ ] Implement wedding-mode program generation
