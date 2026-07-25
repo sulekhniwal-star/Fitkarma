@@ -536,9 +536,9 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Build toggle UI
 
 ### §P12-E Travel Intelligence (Travel Mode)
-- [ ] Implement travel detection (timezone/location change)
-- [ ] Implement travel-adjusted mission/nutrition logic
-- [ ] 🔒 Verify DIP scheduling respects Travel Mode timezone (see v1.0 hardening)
+- [x] Implement travel detection (timezone/location change)
+- [x] Implement travel-adjusted mission/nutrition logic
+- [x] 🔒 Verify DIP scheduling respects Travel Mode timezone (see v1.0 hardening)
 
 ### §P12-F Smart Calendar Integration
 - [ ] Integrate device calendar API
