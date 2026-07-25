@@ -695,11 +695,11 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 
 # COMPLIANCE
 
-- [ ] Write and link DPDP Act Privacy Policy
-- [ ] Implement "Revoke All Clinical Access" single-tap wipe (local + Azure SQL)
-- [ ] Implement Non-Diagnostic Shield disclaimer component, applied to all CGM/interaction/bio-age screens
-- [ ] Verify anonymized cohort sync excludes individual lab dates / medication brand names
-- [ ] Schedule pre-launch legal review of medication/interaction-warning copy and Doctor Sharing Portal PDF template
+- [x] Write and link DPDP Act Privacy Policy
+- [x] Implement "Revoke All Clinical Access" single-tap wipe (local + Azure SQL)
+- [x] Implement Non-Diagnostic Shield disclaimer component, applied to all CGM/interaction/bio-age screens
+- [x] Verify anonymized cohort sync excludes individual lab dates / medication brand names
+- [x] Schedule pre-launch legal review of medication/interaction-warning copy and Doctor Sharing Portal PDF template
 
 ---
 
