@@ -505,13 +505,13 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] Widget test
 
 ### §P11-B Progress Photo System
-- [ ] Build photo capture + comparison UI
-- [ ] Implement secure local photo storage (encrypted)
-- [ ] Persist metadata to TransformationChecks
+- [x] Build photo capture + comparison UI
+- [x] Implement secure local photo storage (encrypted)
+- [x] Persist metadata to TransformationChecks
 
 ### §P11-C Wearable-Free Body Composition Estimation
-- [ ] Implement photo-based body composition estimation algorithm
-- [ ] Unit tests against reference dataset
+- [x] Implement photo-based body composition estimation algorithm
+- [x] Unit tests against reference dataset
 
 ---
 
