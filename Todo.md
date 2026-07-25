@@ -665,17 +665,17 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 
 # AZURE FUNCTIONS (CLOUD LAYER)
 
-- [ ] `fitkarma-health-os-trigger` / `healthOSOrchestrator` / `generateDIPForUser` 🔒 — implement Durable Functions fan-out, verify per-user error isolation
-- [ ] `getUsersDueForDIP` activity — implement per-user timezone-window filtering
-- [ ] `fitkarma-social` — implement and deploy
-- [ ] `fitkarma-marketplace` — implement and deploy
-- [ ] `fitkarma-cores` — implement and deploy
-- [ ] `fitkarma-coach` — implement and deploy
-- [ ] `fitkarma-meal-vision` — implement and deploy
-- [ ] `fitkarma-insights` — implement and deploy
-- [ ] `fitkarma-reports` — implement and deploy
-- [ ] `fitkarma-whatsapp` 🆕 — implement and deploy
-- [ ] Load-test the fan-out orchestrator at realistic active-user volume (verify no timeout regression vs. old sequential loop)
+- [x] `fitkarma-health-os-trigger` / `healthOSOrchestrator` / `generateDIPForUser` 🔒 — implement Durable Functions fan-out, verify per-user error isolation
+- [x] `getUsersDueForDIP` activity — implement per-user timezone-window filtering
+- [x] `fitkarma-social` — implement and deploy
+- [x] `fitkarma-marketplace` — implement and deploy
+- [x] `fitkarma-cores` — implement and deploy
+- [x] `fitkarma-coach` — implement and deploy
+- [x] `fitkarma-meal-vision` — implement and deploy
+- [x] `fitkarma-insights` — implement and deploy
+- [x] `fitkarma-reports` — implement and deploy
+- [x] `fitkarma-whatsapp` 🆕 — implement and deploy
+- [x] Load-test the fan-out orchestrator at realistic active-user volume (verify no timeout regression vs. old sequential loop)
 
 ---
 
