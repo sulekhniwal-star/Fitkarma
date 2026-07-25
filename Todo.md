@@ -532,8 +532,8 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 - [x] End-to-end test with synthetic data
 
 ### §P12-D AI Roast Mode
-- [ ] Implement opt-in "roast" tone variant for AI Coach
-- [ ] Build toggle UI
+- [x] Implement opt-in "roast" tone variant for AI Coach
+- [x] Build toggle UI
 
 ### §P12-E Travel Intelligence (Travel Mode)
 - [ ] Implement travel detection (timezone/location change)

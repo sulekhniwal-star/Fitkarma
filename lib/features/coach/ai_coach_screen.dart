@@ -9,6 +9,8 @@ import 'package:fitkarma/core/theme/app_colors.dart';
 import 'package:fitkarma/core/theme/app_spacing.dart';
 import 'package:fitkarma/core/theme/app_typography.dart';
 import 'package:fitkarma/features/coach/ai_coach_controller.dart';
+import 'package:fitkarma/features/coach/ai_coach_tone_controller.dart';
+import 'package:fitkarma/features/coach/ai_coach_tone_toggle_widget.dart';
 import 'package:fitkarma/shared/widgets/bento_card.dart';
 
 class AICoachScreen extends ConsumerStatefulWidget {
@@ -62,6 +64,9 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
   Future<void> _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
     _messageController.clear();
+
+    // Safety evaluation for AI Roast Mode (§P12-D)
+    ref.read(aiCoachToneProvider.notifier).evaluateMessageSafety(text);
 
     final db = ref.read(databaseProvider);
     final notifier = ref.read(aiCoachChatProvider.notifier);
@@ -184,6 +189,13 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(height: 8),
+
+            // AI Roast Mode & Persona Tone Toggle Widget (§P12-D)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH),
+              child: AiCoachToneToggleWidget(),
             ),
             const SizedBox(height: 8),
 
