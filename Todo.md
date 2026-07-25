@@ -651,15 +651,15 @@ Legend: 🆕 new in v1.0 (Phase 16) · 🔒 v1.0 hardening fix
 # DATABASE — DRIFT LOCAL SCHEMA (v17) & AZURE SQL MIRROR
 
 ### Schema & migration
-- [ ] Implement all 36 Drift tables (see full list: Users, UserScores 🆕, OrganizationAccounts 🆕, EmployeeEnrollments 🆕, FoodLogs, FoodReferences, WorkoutLogs, SleepLogs, BpReadings, GlucoseReadings, WaterLogs, HabitLogs, MoodLogs, MedicationLogs, KarmaEvents, AiInsights, ChatMessages, DietPlans, RecoveryLogs, BodyMeasurements, SquadGroups, SquadMembers, TransformationChecks, DailyIntelligencePackages, HealthSnapshots, TransformationMemories, LifeEvents, Followers, Clubs, CgmReadings, CreatorProfiles, MicronutrientLogs, MealNutritionDetails, FamilyMealPlans, FoodSubstitutions, MovementWeaknessProfiles, MovementLogs)
-- [ ] Mirror every table's DDL in Azure SQL
-- [ ] Implement `ai_cache` table in Azure SQL 🔒 (scoped by `user_id`, composite key with `prompt_hash`)
-- [ ] Verify legacy migrations v1→v2 through v15→v16 still pass on a fresh install
-- [ ] 🔒 Implement v16→v17 migration: create `UserScores`, copy legacy score columns row-by-row, drop legacy columns from `Users` via `TableMigration`
-- [ ] Implement v17 Phase 16 column additions (`timezoneOffsetMinutes`, `preferredDIPHour`, `whatsAppOptIn`, `abhaHealthId`, `preferredInputLanguage`)
-- [ ] Implement v17 table creation (`OrganizationAccounts`, `EmployeeEnrollments`)
-- [ ] Test upgrade path end-to-end: fresh v5 install → sequential upgrade through v17
-- [ ] Implement `latestScore(userId, scoreType)` helper query + index `(userId, scoreType, computedAt DESC)`
+- [x] Implement all 36 Drift tables (see full list: Users, UserScores 🆕, OrganizationAccounts 🆕, EmployeeEnrollments 🆕, FoodLogs, FoodReferences, WorkoutLogs, SleepLogs, BpReadings, GlucoseReadings, WaterLogs, HabitLogs, MoodLogs, MedicationLogs, KarmaEvents, AiInsights, ChatMessages, DietPlans, RecoveryLogs, BodyMeasurements, SquadGroups, SquadMembers, TransformationChecks, DailyIntelligencePackages, HealthSnapshots, TransformationMemories, LifeEvents, Followers, Clubs, CgmReadings, CreatorProfiles, MicronutrientLogs, MealNutritionDetails, FamilyMealPlans, FoodSubstitutions, MovementWeaknessProfiles, MovementLogs)
+- [x] Mirror every table's DDL in Azure SQL
+- [x] Implement `ai_cache` table in Azure SQL 🔒 (scoped by `user_id`, composite key with `prompt_hash`)
+- [x] Verify legacy migrations v1→v2 through v15→v16 still pass on a fresh install
+- [x] 🔒 Implement v16→v17 migration: create `UserScores`, copy legacy score columns row-by-row, drop legacy columns from `Users` via `TableMigration`
+- [x] Implement v17 Phase 16 column additions (`timezoneOffsetMinutes`, `preferredDIPHour`, `whatsAppOptIn`, `abhaHealthId`, `preferredInputLanguage`)
+- [x] Implement v17 table creation (`OrganizationAccounts`, `EmployeeEnrollments`)
+- [x] Test upgrade path end-to-end: fresh v5 install → sequential upgrade through v17
+- [x] Implement `latestScore(userId, scoreType)` helper query + index `(userId, scoreType, computedAt DESC)`
 
 ---
 

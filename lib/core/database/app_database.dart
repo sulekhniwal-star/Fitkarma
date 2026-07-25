@@ -37,6 +37,17 @@ class Users extends Table {
       text().withDefault(const Constant('maintenance'))();
   DateTimeColumn get periodizationPhaseStartedAt => dateTime().nullable()();
 
+  // v17 Phase 16 & Scheduling Additions (§DB / §P16)
+  IntColumn get timezoneOffsetMinutes =>
+      integer().withDefault(const Constant(330))(); // 330 = IST
+  IntColumn get preferredDIPHour =>
+      integer().withDefault(const Constant(6))(); // 6am local time
+  BoolColumn get whatsAppOptIn =>
+      boolean().withDefault(const Constant(false))(); // OFF by default
+  TextColumn get abhaHealthId => text().nullable()(); // Encrypted at rest
+  TextColumn get preferredInputLanguage =>
+      text().withDefault(const Constant('en'))();
+
   @override
   Set<Column> get primaryKey => {id};
 }
@@ -298,9 +309,51 @@ class MicronutrientLogs extends Table {
   RealColumn get omega3G => real().withDefault(const Constant(0.0))();
 }
 
+// 🆕 v17 Normalized UserScores Time-Series Table (§DB)
+class UserScores extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  TextColumn get scoreType => text()(); // 'health' | 'movement' | 'circadian' | 'trainingReliability' | etc.
+  RealColumn get value => real()();
+  DateTimeColumn get computedAt => dateTime()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+// 🆕 v17 Organization Accounts Table (§P16-D)
+class OrganizationAccounts extends Table {
+  TextColumn get localId => text()();
+  TextColumn get azureId => text().nullable()();
+  TextColumn get organizationName => text()();
+  TextColumn get accountType => text()(); // 'employer' | 'insurer'
+  TextColumn get planTier => text()(); // 'corporate_basic' | 'corporate_plus'
+  IntColumn get seatLimit => integer()();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+// 🆕 v17 Employee Enrollments Table (§P16-D)
+class EmployeeEnrollments extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  TextColumn get organizationId => text()();
+  DateTimeColumn get enrolledAt => dateTime()();
+  BoolColumn get isActive => boolean().withDefault(const Constant(true))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
 @DriftDatabase(
   tables: [
     Users,
+    UserScores,
+    OrganizationAccounts,
+    EmployeeEnrollments,
     WaterLogs,
     SyncQueueItems,
     DeadLetterQueueItems,
@@ -325,7 +378,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.executor(super.e);
 
   @override
-  int get schemaVersion => 34;
+  int get schemaVersion => 35;
 
   @override
   MigrationStrategy get migration {
@@ -378,8 +431,32 @@ class AppDatabase extends _$AppDatabase {
         if (from < 34) {
           await migrator.createTable(micronutrientLogs);
         }
+        if (from < 35) {
+          // v17 (v1.0 hardening): create UserScores, OrganizationAccounts, EmployeeEnrollments
+          await migrator.createTable(userScores);
+          await migrator.createTable(organizationAccounts);
+          await migrator.createTable(employeeEnrollments);
+
+          // Add v17 Users columns
+          await migrator.addColumn(users, users.timezoneOffsetMinutes);
+          await migrator.addColumn(users, users.preferredDIPHour);
+          await migrator.addColumn(users, users.whatsAppOptIn);
+          await migrator.addColumn(users, users.abhaHealthId);
+          await migrator.addColumn(users, users.preferredInputLanguage);
+        }
       },
     );
+  }
+
+  /// Hot-path query: Returns latest score value of type [scoreType] for user [userId] (§DB spec).
+  /// Uses index `(userId, scoreType, computedAt DESC)`.
+  Future<double?> latestScore(String userId, String scoreType) async {
+    final row = await (select(userScores)
+          ..where((t) => t.userId.equals(userId) & t.scoreType.equals(scoreType))
+          ..orderBy([(t) => OrderingTerm(expression: t.computedAt, mode: OrderingMode.desc)])
+          ..limit(1))
+        .getSingleOrNull();
+    return row?.value;
   }
 
   /// Upserts the onboarding goals + target weight for a given user.
