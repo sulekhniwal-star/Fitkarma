@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:fitkarma/core/brain/health_os_brain.dart';
 import 'package:fitkarma/core/brain/health_snapshot.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/database/app_database.dart' hide HealthSnapshot;
 
 class AIContext {
   AIContext({

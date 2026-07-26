@@ -12,45 +12,368 @@ part 'app_database.g.dart';
 // 1. Users Table
 class Users extends Table {
   TextColumn get id => text()();
+  TextColumn get azureId => text().nullable()();
   TextColumn get name => text().nullable()();
   TextColumn get email => text().nullable()();
   IntColumn get age => integer().nullable()();
   TextColumn get gender => text().nullable()(); // 'male' | 'female'
   RealColumn get weight => real().nullable()();
   RealColumn get height => real().nullable()();
-  TextColumn get activityLevel => text().nullable()(); // ActivityLevel.name
-  TextColumn get goals =>
-      text().nullable()(); // JSON list e.g. '["weight_loss","heart_health"]'
-  RealColumn get targetWeight => real().nullable()(); // kg
+  TextColumn get activityLevel => text().nullable()();
+  TextColumn get goals => text().nullable()(); // JSON list
+  RealColumn get targetWeight => real().nullable()();
   IntColumn get dailyCalorieTarget => integer().nullable()();
-  TextColumn get dosha => text().nullable()(); // Added for §P1-F Dosha Quiz
-  TextColumn get currentProgram =>
-      text().nullable()(); // Added for §P1-G Program Blueprint Selection Screen
+  TextColumn get dosha => text().nullable()();
+  TextColumn get currentProgram => text().nullable()();
   BoolColumn get isCycleTrackingEnabled => boolean().nullable()();
   IntColumn get averageCycleLength => integer().nullable()();
   DateTimeColumn get lastPeriodDate => dateTime().nullable()();
-  TextColumn get subscriptionTier =>
-      text().withDefault(const Constant('free'))();
-  RealColumn get monthlyGroceryBudgetInr =>
-      real().withDefault(const Constant(3000.0))();
-  TextColumn get nutritionPeriodizationPhase =>
-      text().withDefault(const Constant('maintenance'))();
+  TextColumn get subscriptionTier => text().withDefault(const Constant('free'))();
+  RealColumn get monthlyGroceryBudgetInr => real().withDefault(const Constant(3000.0))();
+  TextColumn get nutritionPeriodizationPhase => text().withDefault(const Constant('maintenance'))();
   DateTimeColumn get periodizationPhaseStartedAt => dateTime().nullable()();
-
-  // v17 Phase 16 & Scheduling Additions (§DB / §P16)
-  IntColumn get timezoneOffsetMinutes =>
-      integer().withDefault(const Constant(330))(); // 330 = IST
-  IntColumn get preferredDIPHour =>
-      integer().withDefault(const Constant(6))(); // 6am local time
-  BoolColumn get whatsAppOptIn =>
-      boolean().withDefault(const Constant(false))(); // OFF by default
-  TextColumn get abhaHealthId => text().nullable()(); // Encrypted at rest
-  TextColumn get preferredInputLanguage =>
-      text().withDefault(const Constant('en'))();
+  IntColumn get timezoneOffsetMinutes => integer().withDefault(const Constant(330))();
+  IntColumn get preferredDIPHour => integer().withDefault(const Constant(6))();
+  BoolColumn get whatsAppOptIn => boolean().withDefault(const Constant(false))();
+  TextColumn get abhaHealthId => text().nullable()();
+  TextColumn get preferredInputLanguage => text().withDefault(const Constant('en'))();
+  IntColumn get streak => integer().withDefault(const Constant(0))();
 
   @override
   Set<Column> get primaryKey => {id};
 }
+
+class FoodLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get consumeTime => dateTime()();
+  TextColumn get foodName => text()();
+  RealColumn get calories => real()();
+  RealColumn get proteinG => real()();
+  RealColumn get carbsG => real()();
+  RealColumn get fatG => real()();
+  RealColumn get processingTier => real().withDefault(const Constant(1.0))();
+  BoolColumn get hasGlycemicAnalysis => boolean().withDefault(const Constant(false))();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class WorkoutLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get workoutDate => dateTime()();
+  TextColumn get programId => text().nullable()();
+  TextColumn get workoutName => text()();
+  TextColumn get status => text().withDefault(const Constant('completed'))();
+  RealColumn get intensityFactor => real().withDefault(const Constant(1.0))();
+  IntColumn get durationMinutes => integer()();
+  RealColumn get totalVolumeKg => real().withDefault(const Constant(0.0))();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class SleepLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get sleepDate => dateTime()();
+  IntColumn get durationMinutes => integer()();
+  IntColumn get deepSleepMinutes => integer().withDefault(const Constant(0))();
+  IntColumn get remSleepMinutes => integer().withDefault(const Constant(0))();
+  IntColumn get lightSleepMinutes => integer().withDefault(const Constant(0))();
+  IntColumn get awakeMinutes => integer().withDefault(const Constant(0))();
+  IntColumn get qualityScore => integer().withDefault(const Constant(70))();
+  RealColumn get hrvMs => real().withDefault(const Constant(0.0))();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class BodyMeasurements extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get logDate => dateTime()();
+  RealColumn get weightKg => real()();
+  RealColumn get neckCm => real().nullable()();
+  RealColumn get chestCm => real().nullable()();
+  RealColumn get bicepsCm => real().nullable()();
+  RealColumn get waistCm => real().nullable()();
+  RealColumn get hipsCm => real().nullable()();
+  RealColumn get thighCm => real().nullable()();
+  RealColumn get calvesCm => real().nullable()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class HealthSnapshots extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get snapshotDate => dateTime()();
+  TextColumn get proteinTrend => text()();
+  TextColumn get sleepTrend => text()();
+  RealColumn get weightChange4w => real()();
+  IntColumn get currentStreak => integer()();
+  IntColumn get readinessScore => integer()();
+  IntColumn get healthScore => integer()();
+  BoolColumn get activeRisk => boolean()();
+  TextColumn get primaryConcern => text()();
+  TextColumn get programPhase => text()();
+  IntColumn get daysToGoal => integer()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class HabitLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get logDate => dateTime()();
+  TextColumn get habitId => text()();
+  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class MoodLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get logTime => dateTime()();
+  IntColumn get moodScore => integer()();
+  IntColumn get energyScore => integer()();
+  TextColumn get notes => text().nullable()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class KarmaEvents extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get eventTime => dateTime()();
+  IntColumn get xpAwarded => integer()();
+  TextColumn get eventType => text()();
+  TextColumn get description => text()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class AiInsights extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get generatedAt => dateTime()();
+  TextColumn get category => text()();
+  TextColumn get content => text()();
+  BoolColumn get actionTaken => boolean().withDefault(const Constant(false))();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class TransformationChecks extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get checkDate => dateTime()();
+  RealColumn get weightKg => real()();
+  RealColumn get bodyFatPct => real().nullable()();
+  RealColumn get waistCm => real().nullable()();
+  RealColumn get neckCm => real().nullable()();
+  RealColumn get hipCm => real().nullable()();
+  TextColumn get photoPath => text().nullable()();
+  TextColumn get measurementsJson => text().nullable()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class LifeEvents extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  TextColumn get eventType => text()();
+  TextColumn get eventData => text()();
+  DateTimeColumn get startDate => dateTime()();
+  DateTimeColumn get endDate => dateTime().nullable()();
+  BoolColumn get isActive => boolean()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class Followers extends Table {
+  TextColumn get localId => text()();
+  TextColumn get followerUserId => text()();
+  TextColumn get followedUserId => text()();
+  DateTimeColumn get followedAt => dateTime()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class Clubs extends Table {
+  TextColumn get clubId => text()();
+  TextColumn get name => text()();
+  TextColumn get description => text()();
+  TextColumn get city => text()();
+  TextColumn get type => text()();
+  RealColumn get latitude => real()();
+  RealColumn get longitude => real()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {clubId};
+}
+
+class CgmReadings extends Table {
+  TextColumn get readingId => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get timestamp => dateTime()();
+  RealColumn get glucoseMgDl => real()();
+  TextColumn get trend => text()();
+  TextColumn get status => text()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {readingId};
+}
+
+class CreatorProfiles extends Table {
+  TextColumn get creatorId => text()();
+  TextColumn get userId => text()();
+  TextColumn get name => text()();
+  TextColumn get bio => text()();
+  TextColumn get specialties => text()();
+  RealColumn get rating => real()();
+  RealColumn get rateInr => real()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {creatorId};
+}
+
+class MealNutritionDetails extends Table {
+  TextColumn get localId => text()();
+  TextColumn get mealLogId => text()();
+  RealColumn get mealQualityScore => real()();
+  RealColumn get glycemicSpikeMgDl => real()();
+  RealColumn get proteinTimingScore => real()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class FamilyMealPlans extends Table {
+  TextColumn get localId => text()();
+  TextColumn get familyUnitId => text()();
+  DateTimeColumn get planDate => dateTime()();
+  TextColumn get recipeId => text()();
+  TextColumn get recipeName => text()();
+  TextColumn get portionGuidesJson => text()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class FoodSubstitutions extends Table {
+  TextColumn get localId => text()();
+  TextColumn get cavedFoodKey => text()();
+  TextColumn get alternativeName => text()();
+  IntColumn get calories => integer()();
+  RealColumn get proteinG => real()();
+  TextColumn get swapInstructions => text()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class MovementWeaknessProfiles extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  TextColumn get exerciseKey => text()();
+  TextColumn get activeFaultsJson => text()();
+  TextColumn get remedialDrillsJson => text()();
+  DateTimeColumn get lastCalculatedAt => dateTime()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class MovementLogs extends Table {
+  TextColumn get localId => text()();
+  TextColumn get userId => text()();
+  TextColumn get workoutLogId => text()();
+  TextColumn get exerciseKey => text()();
+  IntColumn get repCount => integer()();
+  RealColumn get averageFormScore => real()();
+  RealColumn get exerciseConfidenceScore => real()();
+  RealColumn get tempoVariance => real().withDefault(const Constant(0.0))();
+  RealColumn get jointPathJitter => real().withDefault(const Constant(0.0))();
+  TextColumn get diagnosedLimiter => text().nullable()();
+  TextColumn get prescribedCorrectivesJson => text()();
+  RealColumn get leftVsRightAsymmetryRatio => real().withDefault(const Constant(0.0))();
+  IntColumn get repDurationMs => integer().withDefault(const Constant(0))();
+  TextColumn get jointAnglesJson => text()();
+  TextColumn get repTemposJson => text()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+class SquadGroups extends Table {
+  TextColumn get squadId => text()();
+  TextColumn get name => text()();
+  TextColumn get inviteCode => text()();
+  DateTimeColumn get createdAt => dateTime()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {squadId};
+}
+
+class SquadMembers extends Table {
+  TextColumn get localId => text()();
+  TextColumn get squadId => text()();
+  TextColumn get userId => text()();
+  TextColumn get role => text().withDefault(const Constant('member'))();
+  DateTimeColumn get joinedAt => dateTime()();
+  TextColumn get syncStatus => text().withDefault(const Constant('pending'))();
+
+  @override
+  Set<Column> get primaryKey => {localId};
+}
+
+// 1. Users Table
 
 // 1.5 Menstrual Symptom Logs Table
 class MenstrualSymptomLogs extends Table {
@@ -241,39 +564,25 @@ class StepLogs extends Table {
   TextColumn get hlcNodeId => text()();
 }
 
-class SleepLogs extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get userId => text()();
-  IntColumn get sleepMinutes => integer()();
-  IntColumn get awakeMinutes => integer()();
-  IntColumn get remMinutes => integer()();
-  IntColumn get lightMinutes => integer()();
-  IntColumn get deepMinutes => integer()();
-  IntColumn get sleepQuality => integer()();
-  RealColumn get hrvMs => real()();
-  DateTimeColumn get sleepDate => dateTime()();
-  TextColumn get syncBatchId => text()();
-
-  // HLC logical components
-  DateTimeColumn get hlcPhysicalTime => dateTime()();
-  IntColumn get hlcLogicalCounter => integer()();
-  TextColumn get hlcNodeId => text()();
-}
 
 class BpReadings extends Table {
   IntColumn get id => integer().autoIncrement()();
+  TextColumn get userId => text()();
   IntColumn get systolic => integer()();
   IntColumn get diastolic => integer()();
   DateTimeColumn get measuredAt => dateTime()();
   TextColumn get recordingMethod => text()(); // 'manual' or 'wearable'
+  DateTimeColumn get createdAt => dateTime()();
 }
 
 class GlucoseReadings extends Table {
   IntColumn get id => integer().autoIncrement()();
-  RealColumn get glucoseValue => real()();
+  TextColumn get userId => text()();
+  RealColumn get valueMgDl => real()();
   TextColumn get mealTag =>
       text()(); // 'Fasting', 'Pre-Meal', 'Post-Meal (1-hour)', 'Post-Meal (2-hour)'
   DateTimeColumn get measuredAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime()();
 }
 
 // FoodReferences — offline seeded Indian food nutrition database (§P5-D)
@@ -371,6 +680,27 @@ class EmployeeEnrollments extends Table {
     GlucoseReadings,
     FoodReferences,
     MicronutrientLogs,
+    FoodLogs,
+    WorkoutLogs,
+    BodyMeasurements,
+    HealthSnapshots,
+    HabitLogs,
+    MoodLogs,
+    KarmaEvents,
+    AiInsights,
+    TransformationChecks,
+    LifeEvents,
+    Followers,
+    Clubs,
+    CgmReadings,
+    CreatorProfiles,
+    MealNutritionDetails,
+    FamilyMealPlans,
+    FoodSubstitutions,
+    MovementWeaknessProfiles,
+    MovementLogs,
+    SquadGroups,
+    SquadMembers,
   ],
 )
 class AppDatabase extends _$AppDatabase {

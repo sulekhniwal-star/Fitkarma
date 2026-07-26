@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:drift/drift.dart';
 import 'package:fitkarma/core/brain/health_snapshot.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/database/app_database.dart' hide HealthSnapshot;
 import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/features/womens_health/womens_health_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

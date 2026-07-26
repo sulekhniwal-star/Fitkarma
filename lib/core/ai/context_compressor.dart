@@ -3,7 +3,7 @@
 // Pure Dart — no AI calls. Used before every cloud AI call.
 
 import 'package:fitkarma/core/brain/health_snapshot.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/database/app_database.dart' hide HealthSnapshot;
 import 'package:drift/drift.dart';
 
 /// §P0-F ContextCompressor — aggregates raw Drift DB logs into a compact HealthSnapshot.
@@ -27,7 +27,7 @@ class ContextCompressor {
     // ── 1. Protein Trend ───────────────────────────────────────────────────
     final foodLogs = await (_db.select(_db.foodLogs)
           ..where(
-            (t) => t.userId.equals(userId) & t.createdAt.isAfterValue(sevenDaysAgo),
+            (t) => t.userId.equals(userId) & t.createdAt.isBiggerThanValue(sevenDaysAgo),
           ))
         .get();
 
@@ -51,7 +51,7 @@ class ContextCompressor {
     // ── 2. Sleep Trend (linear slope) ─────────────────────────────────────
     final sleepLogs = await (_db.select(_db.sleepLogs)
           ..where(
-            (t) => t.userId.equals(userId) & t.createdAt.isAfterValue(sevenDaysAgo),
+            (t) => t.userId.equals(userId) & t.createdAt.isBiggerThanValue(sevenDaysAgo),
           )
           ..orderBy([(t) => OrderingTerm(expression: t.createdAt)]))
         .get();
@@ -70,7 +70,7 @@ class ContextCompressor {
     // ── 3. Weight Change Last 4 Weeks ──────────────────────────────────────
     final weightReadings = await (_db.select(_db.bodyMeasurements)
           ..where(
-            (t) => t.userId.equals(userId) & t.createdAt.isAfterValue(fourWeeksAgo),
+            (t) => t.userId.equals(userId) & t.createdAt.isBiggerThanValue(fourWeeksAgo),
           )
           ..orderBy([(t) => OrderingTerm(expression: t.createdAt)]))
         .get();
