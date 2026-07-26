@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart' hide isNull, isNotNull;
 import 'package:drift/native.dart';
 import 'package:fitkarma/core/brain/adaptive_metabolism_engine.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/database/app_database.dart' hide FoodLog;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

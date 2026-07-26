@@ -90,15 +90,19 @@ void main() {
         final readings = [
           GlucoseReading(
             id: 101,
-            glucoseValue: 90.0,
+            userId: 'onboarding_user',
+            valueMgDl: 90.0,
             mealTag: 'Pre-Meal',
             measuredAt: now.subtract(const Duration(minutes: 95)),
+            createdAt: now,
           ),
           GlucoseReading(
             id: 102,
-            glucoseValue: 142.0,
+            userId: 'onboarding_user',
+            valueMgDl: 142.0,
             mealTag: 'Post-Meal (1-hour)',
             measuredAt: now.subtract(const Duration(minutes: 30)),
+            createdAt: now,
           ),
         ];
 

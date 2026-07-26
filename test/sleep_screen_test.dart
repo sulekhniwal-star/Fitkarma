@@ -94,8 +94,8 @@ void main() {
       // 7. Verify persistence in SQLite
       final logs = await db.select(db.sleepLogs).get();
       expect(logs.length, 1);
-      expect(logs.first.sleepMinutes, 510);
-      expect(logs.first.sleepQuality, 90);
+      expect(logs.first.durationMinutes, 510);
+      expect(logs.first.qualityScore, 90);
       expect(logs.first.hrvMs, 72.0);
     },
   );

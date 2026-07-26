@@ -123,17 +123,19 @@ class RetrospectiveGlycemicPipeline {
         (r) => r.mealTag.contains('Pre') || r.mealTag.contains('Fasting'),
         orElse: () => GlucoseReading(
           id: 0,
-          glucoseValue: defaultBaseline,
+          userId: 'onboarding_user',
+          valueMgDl: defaultBaseline,
           mealTag: 'Baseline',
           measuredAt: now,
+          createdAt: now,
         ),
       );
-      baseline = preMealReading.glucoseValue;
+      baseline = preMealReading.valueMgDl;
 
       double peak = baseline;
       if (postMealReadings.isNotEmpty) {
         peak = postMealReadings
-            .map((r) => r.glucoseValue)
+            .map((r) => r.valueMgDl)
             .reduce((a, b) => a > b ? a : b);
       } else {
         // Estimate peak from food carb/GI if no CGM reading is matched

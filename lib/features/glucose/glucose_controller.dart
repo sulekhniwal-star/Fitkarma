@@ -88,7 +88,7 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
           .where((r) => r.mealTag == 'Fasting')
           .toList();
       final latestFasting = fastingRecord.isNotEmpty
-          ? fastingRecord.first.glucoseValue
+          ? fastingRecord.first.valueMgDl
           : 98.0;
 
       // Latest Post-Meal
@@ -96,7 +96,7 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
           .where((r) => r.mealTag.contains('Post-Meal'))
           .toList();
       final latestPostMeal = postMealRecord.isNotEmpty
-          ? postMealRecord.first.glucoseValue
+          ? postMealRecord.first.valueMgDl
           : 142.0;
 
       // HbA1c estimation
@@ -104,7 +104,7 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
       if (readings.isNotEmpty) {
         double sum = 0.0;
         for (final r in readings) {
-          sum += r.glucoseValue;
+          sum += r.valueMgDl;
         }
         final double avg = sum / readings.length;
         final rawHba1c = (avg + 46.7) / 28.7;
@@ -169,9 +169,11 @@ class GlucoseNotifier extends Notifier<GlucoseState> {
           .into(db.glucoseReadings)
           .insert(
             GlucoseReadingsCompanion.insert(
-              glucoseValue: value,
+              userId: 'onboarding_user',
+              valueMgDl: value,
               mealTag: tag,
               measuredAt: now,
+              createdAt: now,
             ),
           );
 

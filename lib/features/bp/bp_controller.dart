@@ -152,10 +152,12 @@ class BpNotifier extends Notifier<BpState> {
           .into(db.bpReadings)
           .insert(
             BpReadingsCompanion.insert(
+              userId: 'onboarding_user',
               systolic: systolic,
               diastolic: diastolic,
               measuredAt: now,
               recordingMethod: method,
+              createdAt: now,
             ),
           );
 

@@ -182,7 +182,7 @@ void main() {
       );
 
       // Toggle offline switch
-      final switchFinder = find.byType(Switch);
+      final switchFinder = find.byType(Switch).first;
       expect(switchFinder, findsOneWidget);
       await tester.tap(switchFinder);
       await tester.pumpAndSettle();

@@ -275,16 +275,16 @@ class GlucoseScreen extends ConsumerWidget {
                               final item = state.history[index];
                               final isFasting = item.mealTag == 'Fasting';
                               final cat = isFasting
-                                  ? _getFastingCategory(item.glucoseValue)
-                                  : _getPostMealCategory(item.glucoseValue);
+                                  ? _getFastingCategory(item.valueMgDl)
+                                  : _getPostMealCategory(item.valueMgDl);
                               final catColor = isFasting
                                   ? _getFastingColor(
-                                      item.glucoseValue,
+                                      item.valueMgDl,
                                       successColor,
                                       errorColor,
                                     )
                                   : _getPostMealColor(
-                                      item.glucoseValue,
+                                      item.valueMgDl,
                                       successColor,
                                       errorColor,
                                     );
@@ -302,7 +302,7 @@ class GlucoseScreen extends ConsumerWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${item.glucoseValue.round()} mg/dL',
+                                          '${item.valueMgDl.round()} mg/dL',
                                           style: AppTypography.bodyLg.copyWith(
                                             color: textPrimary,
                                             fontWeight: FontWeight.bold,

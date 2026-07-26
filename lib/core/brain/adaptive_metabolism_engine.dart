@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/database/app_database.dart' hide FoodLog;
 
 enum CalibrationConfidence { low, medium, high }
 

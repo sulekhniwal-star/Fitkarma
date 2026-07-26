@@ -120,7 +120,7 @@ class SleepNotifier extends Notifier<SleepState> {
             '${log.sleepDate.year}-${log.sleepDate.month}-${log.sleepDate.day}';
         if (!loggedDates.contains(dateKey)) {
           loggedDates.add(dateKey);
-          debt += (480 - log.sleepMinutes);
+          debt += (480 - log.durationMinutes);
         }
       }
 
@@ -132,12 +132,12 @@ class SleepNotifier extends Notifier<SleepState> {
           .toList();
 
       state = state.copyWith(
-        sleepMinutes: lastNight.sleepMinutes,
+        sleepMinutes: lastNight.durationMinutes,
         awakeMinutes: lastNight.awakeMinutes,
-        remMinutes: lastNight.remMinutes,
-        lightMinutes: lastNight.lightMinutes,
-        deepMinutes: lastNight.deepMinutes,
-        sleepQuality: lastNight.sleepQuality,
+        remMinutes: lastNight.remSleepMinutes,
+        lightMinutes: lastNight.lightSleepMinutes,
+        deepMinutes: lastNight.deepSleepMinutes,
+        sleepQuality: lastNight.qualityScore,
         sleepDebtMinutes: debt,
         hrvTrend: hrvs,
         isLoading: false,
@@ -167,19 +167,17 @@ class SleepNotifier extends Notifier<SleepState> {
           .into(db.sleepLogs)
           .insert(
             SleepLogsCompanion.insert(
+              localId: 'sleep_${date.millisecondsSinceEpoch}',
               userId: userId,
-              sleepMinutes: durationMinutes,
-              awakeMinutes: awakeMinutes,
-              remMinutes: remMinutes,
-              lightMinutes: lightMinutes,
-              deepMinutes: deepMinutes,
-              sleepQuality: quality,
-              hrvMs: hrv,
               sleepDate: date,
-              syncBatchId: 'sleep_${date.millisecondsSinceEpoch}',
-              hlcPhysicalTime: date,
-              hlcLogicalCounter: 0,
-              hlcNodeId: 'device_wearable',
+              durationMinutes: durationMinutes,
+              awakeMinutes: drift.Value(awakeMinutes),
+              remSleepMinutes: drift.Value(remMinutes),
+              lightSleepMinutes: drift.Value(lightMinutes),
+              deepSleepMinutes: drift.Value(deepMinutes),
+              qualityScore: drift.Value(quality),
+              hrvMs: drift.Value(hrv),
+              createdAt: DateTime.now(),
             ),
           );
 

@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart' show Value;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fitkarma/core/database/app_database.dart';
+import 'package:fitkarma/core/database/app_database.dart' hide HealthSnapshot;
 import 'package:fitkarma/core/brain/health_os_brain.dart';
 import 'package:fitkarma/core/sync/sync_worker.dart';
 import 'package:fitkarma/core/ai/ai_context_builder.dart';
