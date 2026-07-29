@@ -1,6 +1,0 @@
-- [ ] Add `permission_handler` to `pubspec.yaml`
-- [ ] Create `lib/features/onboarding/permissions_controller.dart`
-- [ ] Create `lib/features/onboarding/permissions_screen.dart`
-- [ ] Update `lib/core/routing/app_router.dart` to use the new screen
-- [ ] Add unit and widget tests
-- [ ] Verify onboarding flow completion
