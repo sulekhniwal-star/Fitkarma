@@ -28,13 +28,13 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 0 — Foundation
 
-- [x] Flutter project created with `--dart-define` multi-env setup
-- [x] Sub-directory README documentation created in `lib/core`, `lib/data`, `lib/features`, `lib/shared`, `workers`
-- [x] All design tokens in `app_colors.dart`, `app_typography.dart`, `app_spacing.dart`
-- [x] GlassCard tier-aware (blur on Mid/High, solid on Low)
+- [ ] Flutter project created with `--dart-define` multi-env setup
+- [ ] Sub-directory README documentation created in `lib/core`, `lib/data`, `lib/features`, `lib/shared`, `workers`
+- [ ] All design tokens in `app_colors.dart`, `app_typography.dart`, `app_spacing.dart`
+- [ ] GlassCard tier-aware (blur on Mid/High, solid on Low)
 - [ ] All shared components built: GlowingMetric, ActivityRings, QuickLogFab, InsightCard, ShimmerLoader, HealthScoreRing
-- [x] Health OS Brain scaffolded: `daily_intelligence_package.dart`
-- [x] AI Router implemented: rule engine, template engine, model selector
+- [ ] Health OS Brain scaffolded: `daily_intelligence_package.dart`
+- [ ] AI Router implemented: rule engine, template engine, model selector
 - [ ] Decision Hierarchy implemented and tested
 - [ ] Drift schema v6 initialized with all tables including DIP, HealthSnapshot, TransformationMemory, LifeEvents
 - [ ] SQLCipher encryption configured, key generated via `Random.secure()`, stored in keychain
