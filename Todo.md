@@ -8,10 +8,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase -1 — Repo, Environments & CI/CD (do this before Phase 0)
 
-- [ ] `develop` and `main` branches created; `main` protected (require PR + passing checks)
+- [x] `develop` and `main` branches created; `main` protected (require PR + passing checks)
+- [x] Workflow file created in `.github/workflows/ci-cd.yml`
+- [x] `wrangler.toml` created from `wrangler.toml.example` with `[env.staging]` and `[env.production]` blocks
 - [ ] `production` GitHub Environment configured with required reviewers (Settings → Environments)
-- [ ] `wrangler.toml` created from `wrangler.toml.example` with `[env.staging]` and `[env.production]` blocks
-- [ ] `fitkarma-db-staging` and `fitkarma-db-production` D1 databases created (separate, never shared)
+- [x] `fitkarma-db-staging` and `fitkarma-db-production` D1 databases created (separate, never shared)
 - [ ] Per-environment secrets set via `wrangler secret put --env staging` / `--env production`
       (`GROQ_API_KEY`, `GOOGLE_OAUTH_CLIENT_ID`, `JWT_SIGNING_SECRET` — **different secret value per env**)
 - [ ] GitHub Actions secrets configured: `CF_ACCOUNT_ID`, `CF_API_TOKEN_STAGING`, `CF_API_TOKEN_PRODUCTION`,
@@ -43,11 +44,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 1 — Onboarding
 
-- [x] All 7 onboarding screens functional end-to-end on fresh install
-- [x] Demographics: BMI/TDEE/targets computed locally (no AI)
-- [x] Diet plan preferences & Ayurvedic Dosha quiz complete, result stored
-- [x] Program Blueprint with program evolution path shown upfront
-- [x] Permissions screen: HealthKit (iOS) + Health Connect (Android) tested
+- [ ] All 7 onboarding screens functional end-to-end on fresh install
+- [ ] Demographics: BMI/TDEE/targets computed locally (no AI)
+- [ ] Diet plan preferences & Ayurvedic Dosha quiz complete, result stored
+- [ ] Program Blueprint with program evolution path shown upfront
+- [ ] Permissions screen: HealthKit (iOS) + Health Connect (Android) tested
 
 ## Phase 2 — Daily Mission + Readiness
 
