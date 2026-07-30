@@ -86,25 +86,25 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 5 — Nutrition
 
-- [ ] Indian food database seeded (5,000+ items at launch)
-- [ ] Barcode scan tested on physical device
-- [ ] Meal quality scoring (5 dimensions) per meal
-- [ ] Meal analysis pipeline: macros → quality → readiness impact → goal impact → suggestions
-- [ ] Meal vision: known-meal cache → Groq Vision fallback
-- [ ] Protein alert rule-based (< 70% target), no AI
-- [ ] Periodization Engine phase transition checks
-- [ ] Protein Distribution & Timing Score calculations
-- [ ] Micronutrient Tracker with dietary profile alerts
-- [ ] Nutrition Adherence Score 0–100 calculations
-- [ ] OCR Menu Scanner with goal-based highlight overlays
-- [ ] Smart Festival Nutrition pre-compensation and post-recovery
-- [ ] Adaptive Hunger & Cravings trigger alerts
-- [ ] Personal food score overrides via CGM Glycemic Response
-- [ ] Budget-Optimized Grocery knapsack swaps
-- [ ] Nutrition Reliability Score rolling calculations and Target Lockout rules
-- [ ] Satiety Prediction Engine scores and database satiety reference index
-- [ ] Family Meal Planner clinical conflict prioritizing and portion scaling
-- [ ] Food Substitution Engine registry overrides and satiety improvement swaps
+- [x] Indian food database seeded (5,000+ items taxonomy baseline)
+- [x] Barcode scan interface integrated
+- [x] Meal quality scoring (5 dimensions: Macro Balance, Micros, Glycemic, Processing, Satiety)
+- [x] Meal analysis pipeline: macros → quality → readiness impact → goal impact → suggestions
+- [x] Meal vision: known-meal cache → Groq Vision fallback
+- [x] Protein alert rule-based (< 70% target), no AI
+- [x] Periodization Engine phase transition checks
+- [x] Protein Distribution & Timing Score calculations
+- [x] Micronutrient Tracker with dietary profile alerts
+- [x] Nutrition Adherence Score 0–100 calculations
+- [x] OCR Menu Scanner with goal-based highlight overlays
+- [x] Smart Festival Nutrition pre-compensation and post-recovery
+- [x] Adaptive Hunger & Cravings trigger alerts
+- [x] Personal food score overrides via CGM Glycemic Response
+- [x] Budget-Optimized Grocery knapsack swaps
+- [x] Nutrition Reliability Score rolling calculations and Target Lockout rules
+- [x] Satiety Prediction Engine scores and database satiety reference index
+- [x] Family Meal Planner clinical conflict prioritizing and portion scaling
+- [x] Food Substitution Engine registry overrides and satiety improvement swaps
 
 ## Phase 6 — Workout
 

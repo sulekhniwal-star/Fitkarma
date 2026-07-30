@@ -3,6 +3,7 @@ import '../../features/coach/screens/coach_chat_screen.dart';
 import '../../features/daily_mission/screens/daily_briefing_screen.dart';
 import '../../features/daily_mission/screens/recovery_log_screen.dart';
 import '../../features/health_tracking/screens/vitals_tracking_screen.dart';
+import '../../features/nutrition/screens/nutrition_logger_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
 
 /// Central GoRouter configuration
@@ -32,6 +33,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/health_tracking',
       builder: (context, state) => const VitalsTrackingScreen(),
+    ),
+    GoRoute(
+      path: '/nutrition',
+      builder: (context, state) => const NutritionLoggerScreen(),
     ),
   ],
 );
