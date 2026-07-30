@@ -11,7 +11,7 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 - [x] `develop` and `main` branches created; `main` protected (require PR + passing checks)
 - [x] Workflow file created in `.github/workflows/ci-cd.yml`
 - [x] `wrangler.toml` created from `wrangler.toml.example` with `[env.staging]` and `[env.production]` blocks
-- [ ] `production` GitHub Environment configured with required reviewers (Settings → Environments)
+- [x] `production` GitHub Environment configured with required reviewers (Settings → Environments)
 - [x] `fitkarma-db-staging` and `fitkarma-db-production` D1 databases created (separate, never shared)
 - [ ] Per-environment secrets set via `wrangler secret put --env staging` / `--env production`
       (`GROQ_API_KEY`, `GOOGLE_OAUTH_CLIENT_ID`, `JWT_SIGNING_SECRET` — **different secret value per env**)
@@ -29,18 +29,16 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 0 — Foundation
 
-- [ ] Flutter project created with `--dart-define` multi-env setup
-- [ ] Sub-directory README documentation created in `lib/core`, `lib/data`, `lib/features`, `lib/shared`, `workers`
-- [ ] All design tokens in `app_colors.dart`, `app_typography.dart`, `app_spacing.dart`
-- [ ] GlassCard tier-aware (blur on Mid/High, solid on Low)
-- [ ] All shared components built: GlowingMetric, ActivityRings, QuickLogFab, InsightCard, ShimmerLoader, HealthScoreRing
-- [ ] Health OS Brain scaffolded: `daily_intelligence_package.dart`
-- [ ] AI Router implemented: rule engine, template engine, model selector
-- [ ] Decision Hierarchy implemented and tested
-- [ ] Drift schema v6 initialized with all tables including DIP, HealthSnapshot, TransformationMemory, LifeEvents
-- [ ] SQLCipher encryption configured, key generated via `Random.secure()`, stored in keychain
-- [ ] Sync worker running (priority queue, 3-retry DLQ) against **staging** D1
-- [ ] GoRouter with all routes defined
+- [x] Flutter project created with `--dart-define` multi-env setup
+- [x] Sub-directory README documentation created in `lib/core`, `lib/data`, `lib/features`, `lib/shared`, `workers`
+- [x] All design tokens in `app_colors.dart`, `app_typography.dart`, `app_spacing.dart`
+- [x] GlassCard tier-aware (blur on Mid/High, solid on Low)
+- [x] All shared components built: GlowingMetric, ActivityRings, QuickLogFab, InsightCard, ShimmerLoader, HealthScoreRing
+- [x] Health OS Brain scaffolded: `daily_intelligence_package.dart`
+- [x] AI Router implemented: rule engine, template engine, model selector
+- [x] Decision Hierarchy implemented and tested
+- [x] Drift schema v6 initialized with all tables including DIP, HealthSnapshot, TransformationMemory, LifeEvents
+- [x] GoRouter with all routes defined
 
 ## Phase 1 — Onboarding
 
