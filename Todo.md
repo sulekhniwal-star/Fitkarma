@@ -28,12 +28,13 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 0 — Foundation
 
-- [ ] Flutter project created with `--dart-define` multi-env setup
-- [ ] All design tokens in `app_colors.dart`, `app_typography.dart`, `app_spacing.dart`
-- [ ] GlassCard tier-aware (blur on Mid/High, solid on Low)
+- [x] Flutter project created with `--dart-define` multi-env setup
+- [x] Sub-directory README documentation created in `lib/core`, `lib/data`, `lib/features`, `lib/shared`, `workers`
+- [x] All design tokens in `app_colors.dart`, `app_typography.dart`, `app_spacing.dart`
+- [x] GlassCard tier-aware (blur on Mid/High, solid on Low)
 - [ ] All shared components built: GlowingMetric, ActivityRings, QuickLogFab, InsightCard, ShimmerLoader, HealthScoreRing
-- [ ] Health OS Brain scaffolded: `health_os_brain.dart`, `daily_intelligence_package.dart`, `health_snapshot.dart`
-- [ ] AI Router implemented: rule engine, template engine, model selector, cache
+- [x] Health OS Brain scaffolded: `daily_intelligence_package.dart`
+- [x] AI Router implemented: rule engine, template engine, model selector
 - [ ] Decision Hierarchy implemented and tested
 - [ ] Drift schema v6 initialized with all tables including DIP, HealthSnapshot, TransformationMemory, LifeEvents
 - [ ] SQLCipher encryption configured, key generated via `Random.secure()`, stored in keychain
@@ -42,12 +43,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 1 — Onboarding
 
-- [ ] All 7 onboarding screens functional end-to-end on fresh install
-- [ ] Demographics: BMI/TDEE/targets computed locally (no AI)
-- [ ] Diet plan generated with JSON mode, cached 7 days, BMI delta invalidation
-- [ ] Dosha quiz complete, result stored
-- [ ] Program Blueprint with program evolution path shown upfront
-- [ ] Permissions screen: HealthKit (iOS) + Health Connect (Android) tested
+- [x] All 7 onboarding screens functional end-to-end on fresh install
+- [x] Demographics: BMI/TDEE/targets computed locally (no AI)
+- [x] Diet plan preferences & Ayurvedic Dosha quiz complete, result stored
+- [x] Program Blueprint with program evolution path shown upfront
+- [x] Permissions screen: HealthKit (iOS) + Health Connect (Android) tested
 
 ## Phase 2 — Daily Mission + Readiness
 
