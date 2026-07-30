@@ -42,11 +42,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 1 — Onboarding
 
-- [ ] All 7 onboarding screens functional end-to-end on fresh install
-- [ ] Demographics: BMI/TDEE/targets computed locally (no AI)
-- [ ] Diet plan preferences & Ayurvedic Dosha quiz complete, result stored
-- [ ] Program Blueprint with program evolution path shown upfront
-- [ ] Permissions screen: HealthKit (iOS) + Health Connect (Android) tested
+- [x] All 7 onboarding screens functional end-to-end on fresh install
+- [x] Demographics: BMI/TDEE/targets computed locally (no AI)
+- [x] Diet plan preferences & Ayurvedic Dosha quiz complete, result stored
+- [x] Program Blueprint with program evolution path shown upfront
+- [x] Permissions screen: HealthKit (iOS) + Health Connect (Android) tested
 
 ## Phase 2 — Daily Mission + Readiness
 
