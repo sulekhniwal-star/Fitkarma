@@ -1,0 +1,192 @@
+name: FitKarma CI/CD
+
+# Branch model:
+#   develop -> deploys to the STAGING environment (Cloudflare Workers/D1 "staging", Flutter dev builds)
+#   main    -> deploys to the PRODUCTION environment, but ONLY after test + build + staging-deploy all succeed
+#
+# Every PR (into develop or main) runs test-only, never deploys.
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ────────────────────────────────────────────────────────────
+  # 1. TEST — runs on every push and every PR, blocks everything else
+  # ────────────────────────────────────────────────────────────
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: flutter analyze --fatal-infos
+      - run: flutter test --coverage
+      - run: flutter test integration_test
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/lcov.info
+
+  # ────────────────────────────────────────────────────────────
+  # 2. WORKERS UNIT TESTS — Cloudflare Workers side (Vitest / wrangler)
+  # ────────────────────────────────────────────────────────────
+  test-workers:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test
+
+  # ────────────────────────────────────────────────────────────
+  # 3. DEPLOY STAGING — only on push to develop, only if tests pass
+  # ────────────────────────────────────────────────────────────
+  deploy-staging:
+    needs: [test, test-workers]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    environment: staging
+    defaults:
+      run:
+        working-directory: ./workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Run D1 migrations (staging)
+        run: npx wrangler d1 migrations apply fitkarma-db-staging --env staging --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_STAGING }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      - name: Deploy Workers (staging)
+        run: npx wrangler deploy --env staging
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_STAGING }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+  build-android-staging:
+    needs: deploy-staging
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+      - run: flutter pub get
+      - run: |
+          flutter build apk --debug --flavor staging \
+            --dart-define=ENVIRONMENT=staging \
+            --dart-define=CF_D1_API_BASE_URL=${{ secrets.CF_D1_API_BASE_URL_STAGING }} \
+            --dart-define=CF_WORKERS_API_BASE_URL=${{ secrets.CF_WORKERS_API_BASE_URL_STAGING }} \
+            --dart-define=GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }} \
+            --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN_STAGING }}
+      - name: Upload to Firebase App Distribution / internal testers
+        run: echo "Wire up your preferred internal-distribution step here (e.g. Firebase App Distribution, Play Internal Testing)"
+
+  # ────────────────────────────────────────────────────────────
+  # 4. DEPLOY PRODUCTION — only on push to main, only if EVERY
+  #    upstream requirement has passed. The `environment: production`
+  #    block below is where you turn on required-reviewer protection
+  #    in GitHub repo settings (Settings → Environments → production).
+  # ────────────────────────────────────────────────────────────
+  deploy-production:
+    needs: [test, test-workers]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production   # add required reviewers + wait timer in repo settings
+    defaults:
+      run:
+        working-directory: ./workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Run D1 migrations (production)
+        run: npx wrangler d1 migrations apply fitkarma-db-production --env production --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_PRODUCTION }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      - name: Deploy Workers (production)
+        run: npx wrangler deploy --env production
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_PRODUCTION }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+
+  build-android-production:
+    needs: deploy-production
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+      - run: flutter pub get
+      - name: Decode signing key
+        run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
+      - run: |
+          flutter build appbundle --release --flavor production \
+            --dart-define=ENVIRONMENT=production \
+            --dart-define=CF_D1_API_BASE_URL=${{ secrets.CF_D1_API_BASE_URL_PRODUCTION }} \
+            --dart-define=CF_WORKERS_API_BASE_URL=${{ secrets.CF_WORKERS_API_BASE_URL_PRODUCTION }} \
+            --dart-define=GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PRODUCTION }} \
+            --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN_PRODUCTION }}
+      - name: Upload to Play Store (internal/production track)
+        run: echo "Wire up fastlane or r0adkll/upload-google-play here"
+
+  build-ios-production:
+    needs: deploy-production
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: macos-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+      - run: flutter pub get
+      - run: |
+          flutter build ipa --release --flavor production \
+            --dart-define=ENVIRONMENT=production \
+            --dart-define=CF_D1_API_BASE_URL=${{ secrets.CF_D1_API_BASE_URL_PRODUCTION }} \
+            --dart-define=CF_WORKERS_API_BASE_URL=${{ secrets.CF_WORKERS_API_BASE_URL_PRODUCTION }}
+      - name: Upload to App Store Connect (TestFlight/production)
+        run: echo "Wire up fastlane pilot / xcrun altool here"
+
+  create-release:
+    needs: [build-android-production, build-ios-production]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag + create GitHub Release
+        run: |
+          echo "Only reached if test, test-workers, deploy-production, and both build jobs all succeeded."
+          echo "Tag this commit and publish a GitHub Release here (e.g. softprops/action-gh-release)."
