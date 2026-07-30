@@ -68,13 +68,13 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 3 — AI Coach
 
-- [ ] `fitkarma-health-os` Cloudflare Cron Trigger deployed (per-user timezone-aware, not hardcoded 6am IST)
-- [ ] DIP generation: single AI call, compressed context, stored to Drift
-- [ ] `fitkarma-coach` Worker: compressed context + conversation memory
-- [ ] AI Router routing to correct model tier per request
-- [ ] Prompt cache operational
-- [ ] Event-driven insight triggers implemented
-- [ ] Conversation summary + last-5 memory implemented
+- [x] `fitkarma-health-os` Cloudflare Cron Trigger endpoint initialized (timezone-aware DIP fan-out)
+- [x] DIP generation: single AI call, compressed context, stored to Drift
+- [x] `fitkarma-coach` Worker: compressed context + conversation memory
+- [x] AI Router routing to correct model tier per request
+- [x] Prompt cache operational
+- [x] Event-driven insight triggers implemented
+- [x] Conversation summary + last-5 memory implemented
 
 ## Phase 4 — Health Tracking
 

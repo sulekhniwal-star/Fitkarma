@@ -1,0 +1,17 @@
+{
+  "name": "workers",
+  "version": "1.0.0",
+  "description": "Contains Cloudflare Workers microservices serving as FitKarma's edge backend API, D1 database migrations, and Cloudflare Workflows fan-out jobs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260730.1",
+    "typescript": "^7.0.2"
+  }
+}
