@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
+import '../../features/daily_mission/screens/daily_briefing_screen.dart';
+import '../../features/daily_mission/screens/recovery_log_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
-import '../../main.dart';
 
 /// Central GoRouter configuration
 final GoRouter appRouter = GoRouter(
@@ -8,11 +9,19 @@ final GoRouter appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const FoundationHomePage(),
+      builder: (context, state) => const DailyBriefingScreen(),
     ),
     GoRoute(
       path: '/onboarding',
       builder: (context, state) => const OnboardingScreen(),
+    ),
+    GoRoute(
+      path: '/daily_mission',
+      builder: (context, state) => const DailyBriefingScreen(),
+    ),
+    GoRoute(
+      path: '/recovery_log',
+      builder: (context, state) => const RecoveryLogScreen(),
     ),
   ],
 );

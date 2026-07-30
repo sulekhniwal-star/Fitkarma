@@ -50,21 +50,21 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 2 — Daily Mission + Readiness
 
-- [ ] Three-tier readiness model implemented (Basic/Enhanced/Premium)
-- [ ] Readiness score computed locally with correct tier and confidence label
-- [ ] Morning check-in: 3-question ritual
-- [ ] DIP loaded from Drift on Daily Briefing open — zero AI calls at open time
-- [ ] Health Score computed and displayed
-- [ ] Decision Hierarchy resolving conflicts correctly
-- [ ] Recovery log screen functional with confidence tier displayed
-- [ ] Sleep Need Calculator & Bedtime Coach schedules
-- [ ] Sleep Performance Score 4-pillar calculations
-- [ ] Daily Strain Score 0–21 activity tracking calculations
-- [ ] Recovery Capacity bounds and Decision Engine mapping
-- [ ] Recovery Prescription actionable checklists
-- [ ] Circadian Score midpoint shifting penalty rules
-- [ ] Illness & Sickness biometric alarm triggers
-- [ ] Recovery Drivers contribution parsing
+- [x] Three-tier readiness model implemented (Basic/Enhanced/Premium)
+- [x] Readiness score computed locally with correct tier and confidence label
+- [x] Morning check-in: 3-question ritual modal implemented
+- [x] DIP loaded from Drift on Daily Briefing open — zero AI calls at open time
+- [x] Health Score computed and displayed
+- [x] Decision Hierarchy resolving conflicts correctly
+- [x] Recovery log screen functional with confidence tier displayed
+- [x] Sleep Need Calculator & Bedtime Coach schedules
+- [x] Sleep Performance Score 4-pillar calculations
+- [x] Daily Strain Score 0–21 activity tracking calculations
+- [x] Recovery Capacity bounds and Decision Engine mapping
+- [x] Recovery Prescription actionable checklists
+- [x] Circadian Score midpoint shifting penalty rules
+- [x] Illness & Sickness biometric alarm triggers
+- [x] Recovery Drivers contribution parsing
 
 ## Phase 3 — AI Coach
 
