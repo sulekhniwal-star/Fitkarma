@@ -78,11 +78,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 4 — Health Tracking
 
-- [ ] Dashboard reads from DIP — no AI calls on open
-- [ ] Steps auto-detection from HealthKit/Health Connect
-- [ ] Sleep, BP, Glucose screens functional
-- [ ] Preventive Intelligence Engine: all 6 risk patterns, rule-based
-- [ ] Risk alerts feeding into Decision Hierarchy
+- [x] Dashboard reads from DIP — no AI calls on open
+- [x] Steps auto-detection from HealthKit/Health Connect
+- [x] Sleep, BP, Glucose screens functional
+- [x] Preventive Intelligence Engine: all 6 risk patterns, rule-based
+- [x] Risk alerts feeding into Decision Hierarchy
 
 ## Phase 5 — Nutrition
 
