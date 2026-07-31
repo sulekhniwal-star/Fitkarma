@@ -180,9 +180,9 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 11 — Visual Analytics
 
-- [ ] Body measurements logging and charting
-- [ ] Lean mass estimation
-- [ ] 90-day projection on charts (shown as range)
+- [x] Body measurements logging and charting
+- [x] Lean mass estimation
+- [x] 90-day projection on charts (shown as range)
 
 ## Phase 12 — Festival + Life Events
 

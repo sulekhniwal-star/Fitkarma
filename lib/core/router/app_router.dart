@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import '../../features/analytics/screens/visual_analytics_screen.dart';
 import '../../features/coach/screens/coach_chat_screen.dart';
 import '../../features/daily_mission/screens/daily_briefing_screen.dart';
 import '../../features/daily_mission/screens/recovery_log_screen.dart';
@@ -62,6 +63,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/predictive_health',
       builder: (context, state) => const PredictiveHealthScreen(),
+    ),
+    GoRoute(
+      path: '/analytics',
+      builder: (context, state) => const VisualAnalyticsScreen(),
     ),
   ],
 );
