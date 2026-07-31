@@ -1,23 +1,26 @@
 import 'daily_intelligence_package.dart';
 
-/// Morning Check-in Inputs (0–10 rating scale)
+/// Morning Check-in Inputs (1–5 rating scale per v1.0 spec)
 class MorningCheckIn {
-  final int energyLevel; // 1 (exhausted) to 10 (peak energy)
-  final int muscleSoreness; // 1 (no soreness) to 10 (extreme soreness)
-  final int moodRating; // 1 (low) to 10 (great)
+  final int energyLevel; // 1 to 5
+  final int muscleSoreness; // 1 to 5
+  final int moodRating; // 1 to 5
   final bool isCompleted;
 
   const MorningCheckIn({
-    this.energyLevel = 7,
-    this.muscleSoreness = 3,
-    this.moodRating = 8,
+    this.energyLevel = 3,
+    this.muscleSoreness = 1,
+    this.moodRating = 4,
     this.isCompleted = false,
   });
 
   double get compositeScore {
-    final sorenessInverted = 11 - muscleSoreness;
+    // 1-5 scale: max points per category is 5.
+    // Soreness is inverted: 1 (fresh) is best, 5 (very sore) is worst.
+    final sorenessInverted = 6 - muscleSoreness;
     final total = energyLevel + moodRating + sorenessInverted;
-    return (total / 30.0) * 100.0;
+    // Total max is 15.
+    return (total / 15.0) * 100.0;
   }
 
   MorningCheckIn copyWith({

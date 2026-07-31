@@ -14,19 +14,19 @@ This is the first consolidated master release of the FitKarma documentation. It 
 
 Version 1.0 consolidates the full feature set previously scoped — social loops, creator ecosystem, data network effects, and clinical intelligence — **and** adds an architecture hardening pass plus a new India-specific growth layer:
 
-| Area | Status in v1.0 | Notes |
-|------|-------------|----------------------------|
-| **AI Routing** | Multi-model routing (tiny → medium → large) | Cached results for marketplace/program builders |
-| **Social Moat** | Activity Feed, Follow System, Local Clubs, Workout/Route/Transformation sharing | Built on Squad Missions + Challenges foundation |
-| **Creator Ecosystem** | Coach/Trainer Marketplace, Program Store, Affiliate Program | §P13-B, §P13-C |
-| **Data Network Effects** | Demographic Cohort Insights, Community Benchmarks, City & Age-Group Rankings | §P7-E, §P7-F |
-| **Clinical Intelligence** | Clinical Report Parser, Continuous Biomarker (CGM) Sync, Medication Tracker, Doctor Sharing Portal | §P10 — see §P10-K for compliance framework, **hardened in v1.0** (§P10-M) |
-| **Readiness & Recovery** | Recovery OS — Sleep Need Calculator, Daily Strain (0–21), Recovery Capacity, Circadian Score, Illness Detection | §P2-D |
-| **Calorie & Diet model** | Adaptive Metabolism Engine, Periodization, Protein timing, Micronutrients, Glycemic response, Meal Quality, Satiety prediction | §P5 |
-| **Database local schema**| Drift Local Schema **v17** | Normalized score tables added in v1.0 — see §DB Migration Notes |
-| **Cloud architecture** | 8 Cloudflare Workers, **fan-out orchestration** for the daily batch job | Hardened in v1.0 — see §P0-C and §CF |
-| **🆕 India Growth Layer** | WhatsApp Logging, Vernacular Voice Logging, ABHA Health ID, Corporate Wellness Tier, Grocery Checkout Integration | **New in v1.0 — see Phase 16** |
-| **🔒 Security Hardening** | CSPRNG key generation, sync idempotency, per-user timezone scheduling, scoped AI cache | **New in v1.0 — see §P14-A and §P0-C** |
+| Area                      | Status in v1.0                                                                                                                 | Notes                                                                     |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **AI Routing**            | Multi-model routing (tiny → medium → large)                                                                                    | Cached results for marketplace/program builders                           |
+| **Social Moat**           | Activity Feed, Follow System, Local Clubs, Workout/Route/Transformation sharing                                                | Built on Squad Missions + Challenges foundation                           |
+| **Creator Ecosystem**     | Coach/Trainer Marketplace, Program Store, Affiliate Program                                                                    | §P13-B, §P13-C                                                            |
+| **Data Network Effects**  | Demographic Cohort Insights, Community Benchmarks, City & Age-Group Rankings                                                   | §P7-E, §P7-F                                                              |
+| **Clinical Intelligence** | Clinical Report Parser, Continuous Biomarker (CGM) Sync, Medication Tracker, Doctor Sharing Portal                             | §P10 — see §P10-K for compliance framework, **hardened in v1.0** (§P10-M) |
+| **Readiness & Recovery**  | Recovery OS — Sleep Need Calculator, Daily Strain (0–21), Recovery Capacity, Circadian Score, Illness Detection                | §P2-D                                                                     |
+| **Calorie & Diet model**  | Adaptive Metabolism Engine, Periodization, Protein timing, Micronutrients, Glycemic response, Meal Quality, Satiety prediction | §P5                                                                       |
+| **Database local schema** | Drift Local Schema **v17**                                                                                                     | Normalized score tables added in v1.0 — see §DB Migration Notes           |
+| **Cloud architecture**    | 8 Cloudflare Workers, **fan-out orchestration** for the daily batch job                                                        | Hardened in v1.0 — see §P0-C and §CF                                      |
+| **🆕 India Growth Layer** | WhatsApp Logging, Vernacular Voice Logging, ABHA Health ID, Corporate Wellness Tier, Grocery Checkout Integration              | **New in v1.0 — see Phase 16**                                            |
+| **🔒 Security Hardening** | CSPRNG key generation, sync idempotency, per-user timezone scheduling, scoped AI cache                                         | **New in v1.0 — see §P14-A and §P0-C**                                    |
 
 ### v1.0 Architecture Hardening Summary
 
@@ -53,89 +53,89 @@ The v1 architecture realizes this by introducing a **Health OS Brain** — a cen
 
 ## Development Roadmap — Master Order
 
-| Phase | What You Build | Why First |
-|-------|---------------|-----------|
-| **Phase 0** | Foundation — Design System, Architecture, Health OS Core | Everything else depends on this |
-| **Phase 1** | Core Onboarding + User Profile | Personalization data collected before any features |
-| **Phase 2** | Daily Mission + Readiness Engine | The emotional core users return to every morning |
-| **Phase 3** | AI Adaptive Coach (Routed) | Multi-model coaching, not raw Groq passthrough |
-| **Phase 4** | Health Tracking (Steps, Sleep, Vitals, Wearables) | Core data inputs for the Health OS Brain |
-| **Phase 5** | Smart Indian Nutrition System | Strongest moat; deepest Indian food intelligence |
-| **Phase 6** | Workout + Progressive Overload + Form Intelligence | Intelligent progression with movement coaching |
-| **Phase 7** | Gamification + Karma + Adherence + Benchmarks + Cohorts | Retention engine that rewards results with cohort context |
-| **Phase 8** | Transformation Journey + Psychology + Identity | Anti-quit system with long-term memory and identity evolution |
-| **Phase 9** | Social, squads, Family, Feed, Clubs, & Sharing | Growth lever via feed sharing, geolocation circles, and squad accountability |
-| **Phase 10** | Predictive Health, Clinical Reports, CGM, Meds & Doctor Share | Biomarker tracking, medication interaction warnings, and doctor export |
-| **Phase 11** | Visual Body Analytics + Predictions + BF% Estimation | Retention through future projections |
-| **Phase 12** | Festival + Life Events + Travel + Calendar Intelligence | Uniquely Indian; deeply adaptive |
-| **Phase 13** | Premium, Monetisation, Creator & Coach Marketplace | Revenue via elite marketplace, program store, and affiliate commission |
-| **Phase 14** | Enterprise Hardening + CI/CD | Production readiness |
-| **Phase 15** | Advanced Intelligence — Adaptive Metabolism, Longevity Score, Environmental Health | Closes gap with MacroFactor/WHOOP; true Health OS differentiation |
+| Phase           | What You Build                                                                                                                   | Why First                                                                                                                                 |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| **Phase 0**     | Foundation — Design System, Architecture, Health OS Core                                                                         | Everything else depends on this                                                                                                           |
+| **Phase 1**     | Core Onboarding + User Profile                                                                                                   | Personalization data collected before any features                                                                                        |
+| **Phase 2**     | Daily Mission + Readiness Engine                                                                                                 | The emotional core users return to every morning                                                                                          |
+| **Phase 3**     | AI Adaptive Coach (Routed)                                                                                                       | Multi-model coaching, not raw Groq passthrough                                                                                            |
+| **Phase 4**     | Health Tracking (Steps, Sleep, Vitals, Wearables)                                                                                | Core data inputs for the Health OS Brain                                                                                                  |
+| **Phase 5**     | Smart Indian Nutrition System                                                                                                    | Strongest moat; deepest Indian food intelligence                                                                                          |
+| **Phase 6**     | Workout + Progressive Overload + Form Intelligence                                                                               | Intelligent progression with movement coaching                                                                                            |
+| **Phase 7**     | Gamification + Karma + Adherence + Benchmarks + Cohorts                                                                          | Retention engine that rewards results with cohort context                                                                                 |
+| **Phase 8**     | Transformation Journey + Psychology + Identity                                                                                   | Anti-quit system with long-term memory and identity evolution                                                                             |
+| **Phase 9**     | Social, squads, Family, Feed, Clubs, & Sharing                                                                                   | Growth lever via feed sharing, geolocation circles, and squad accountability                                                              |
+| **Phase 10**    | Predictive Health, Clinical Reports, CGM, Meds & Doctor Share                                                                    | Biomarker tracking, medication interaction warnings, and doctor export                                                                    |
+| **Phase 11**    | Visual Body Analytics + Predictions + BF% Estimation                                                                             | Retention through future projections                                                                                                      |
+| **Phase 12**    | Festival + Life Events + Travel + Calendar Intelligence                                                                          | Uniquely Indian; deeply adaptive                                                                                                          |
+| **Phase 13**    | Premium, Monetisation, Creator & Coach Marketplace                                                                               | Revenue via elite marketplace, program store, and affiliate commission                                                                    |
+| **Phase 14**    | Enterprise Hardening + CI/CD                                                                                                     | Production readiness                                                                                                                      |
+| **Phase 15**    | Advanced Intelligence — Adaptive Metabolism, Longevity Score, Environmental Health                                               | Closes gap with MacroFactor/WHOOP; true Health OS differentiation                                                                         |
 | **Phase 16** 🆕 | India Growth & Trust Layer — WhatsApp Logging, Vernacular Voice Input, ABHA Health ID, Corporate Wellness Tier, Grocery Checkout | Removes logging friction for the mass market; adds trust/interoperability and a second monetisation channel beyond consumer subscriptions |
 
 ---
 
 ## Quick Navigation
 
-| Need | Go to |
-|------|--------|
-| Architecture overview | §P0-C Architecture Overview |
-| Health OS Brain | §P0-E Health OS Brain |
-| AI Routing Layer | §P0-F AI Routing Layer |
-| Design tokens / colors | §P0-D Design Tokens |
-| **Shared Foundation Widgets** | §P0-D2 Shared Foundation Widgets |
-| **Adaptive Metabolism Engine** | §P0-I Adaptive Metabolism Engine |
-| **Environmental Health Layer** | §P0-J Environmental Health Layer |
-| Build onboarding | §P1 Onboarding |
-| **Women's Advanced Health** | §P1-H Women's Advanced Health Layer |
-| Daily Readiness + Recovery Debt | §P2-A Readiness Engine |
-| Daily Briefing Screen | §P2-B Daily Mission Screen |
-| AI Adaptive Coach | §P3 AI Coach System |
-| **Human Coach Escalation** | §P3-D Health Coach Escalation |
-| Health tracking screens | §P4 Health Tracking |
-| **Wearable Reliability Engine** | §P4-G Smart Wearable Comparison |
-| Indian nutrition AI | §P5 Smart Nutrition |
-| **Restaurant Intelligence** | §P5-E Restaurant Intelligence |
-| **Grocery Intelligence** | §P5-F Grocery Intelligence |
-| Workout intelligence | §P6 Workout System |
-| **Exercise Form Intelligence** | §P6-E Movement Screening Engine |
-| Karma + gamification | §P7 Karma System |
-| **Adherence Score** | §P7-A Karma System (Adherence Score) |
-| **Benchmarking Engine** | §P7-D Benchmarking Engine |
-| **Demographic Cohort Insights** | §P7-E Demographic Cohort Insights |
-| Anti-quit psychology + Identity | §P8 Transformation Journey |
-| **Habit Identity Layer** | §P8-C Habit Identity Layer |
-| Social + squads | §P9 Community System |
-| **Family Health Hub** | §P9-D Family Health Hub |
-| **Activity Feed & Sharing** | §P9-E Activity Feed & Sharing |
-| **Local Geolocation Clubs** | §P9-F Local Clubs & Geolocation |
-| **Weekly/Monthly Leaderboards** | §P9-G Weekly & Monthly Leaderboards |
-| Predictive health | §P10 Health Intelligence |
-| **Injury Prevention System** | §P10-A Health Risk Prevention |
-| **Stress Detection Engine** | §P10-C Stress Detection Engine |
-| **Clinical Report Intelligence** | §P10-E Clinical Report Intelligence |
-| **Continuous Glucose (CGM) Sync** | §P10-H Continuous Biomarker Tracking |
-| **Medication Tracker & Interactions**| §P10-I Medication Tracker |
-| **Doctor Sharing Portal** | §P10-J Doctor Sharing Portal |
-| **Regulatory Compliance Framework** | §P10-K Compliance Framework |
+| Need                                         | Go to                                           |
+|----------------------------------------------|-------------------------------------------------|
+| Architecture overview                        | §P0-C Architecture Overview                     |
+| Health OS Brain                              | §P0-E Health OS Brain                           |
+| AI Routing Layer                             | §P0-F AI Routing Layer                          |
+| Design tokens / colors                       | §P0-D Design Tokens                             |
+| **Shared Foundation Widgets**                | §P0-D2 Shared Foundation Widgets                |
+| **Adaptive Metabolism Engine**               | §P0-I Adaptive Metabolism Engine                |
+| **Environmental Health Layer**               | §P0-J Environmental Health Layer                |
+| Build onboarding                             | §P1 Onboarding                                  |
+| **Women's Advanced Health**                  | §P1-H Women's Advanced Health Layer             |
+| Daily Readiness + Recovery Debt              | §P2-A Readiness Engine                          |
+| Daily Briefing Screen                        | §P2-B Daily Mission Screen                      |
+| AI Adaptive Coach                            | §P3 AI Coach System                             |
+| **Human Coach Escalation**                   | §P3-D Health Coach Escalation                   |
+| Health tracking screens                      | §P4 Health Tracking                             |
+| **Wearable Reliability Engine**              | §P4-G Smart Wearable Comparison                 |
+| Indian nutrition AI                          | §P5 Smart Nutrition                             |
+| **Restaurant Intelligence**                  | §P5-E Restaurant Intelligence                   |
+| **Grocery Intelligence**                     | §P5-F Grocery Intelligence                      |
+| Workout intelligence                         | §P6 Workout System                              |
+| **Exercise Form Intelligence**               | §P6-E Movement Screening Engine                 |
+| Karma + gamification                         | §P7 Karma System                                |
+| **Adherence Score**                          | §P7-A Karma System (Adherence Score)            |
+| **Benchmarking Engine**                      | §P7-D Benchmarking Engine                       |
+| **Demographic Cohort Insights**              | §P7-E Demographic Cohort Insights               |
+| Anti-quit psychology + Identity              | §P8 Transformation Journey                      |
+| **Habit Identity Layer**                     | §P8-C Habit Identity Layer                      |
+| Social + squads                              | §P9 Community System                            |
+| **Family Health Hub**                        | §P9-D Family Health Hub                         |
+| **Activity Feed & Sharing**                  | §P9-E Activity Feed & Sharing                   |
+| **Local Geolocation Clubs**                  | §P9-F Local Clubs & Geolocation                 |
+| **Weekly/Monthly Leaderboards**              | §P9-G Weekly & Monthly Leaderboards             |
+| Predictive health                            | §P10 Health Intelligence                        |
+| **Injury Prevention System**                 | §P10-A Health Risk Prevention                   |
+| **Stress Detection Engine**                  | §P10-C Stress Detection Engine                  |
+| **Clinical Report Intelligence**             | §P10-E Clinical Report Intelligence             |
+| **Continuous Glucose (CGM) Sync**            | §P10-H Continuous Biomarker Tracking            |
+| **Medication Tracker & Interactions**        | §P10-I Medication Tracker                       |
+| **Doctor Sharing Portal**                    | §P10-J Doctor Sharing Portal                    |
+| **Regulatory Compliance Framework**          | §P10-K Compliance Framework                     |
 | **🔒 Clinical Feature Compliance Hardening** | §P10-M Clinical Compliance Hardening (NEW v1.0) |
-| **Longevity Score** | §P10-F Longevity Score |
-| Body analytics | §P11 Visual Analytics |
-| **Wearable-Free Body Composition** | §P11-C Body Composition Estimation |
-| Festival + life events + travel | §P12 Festival Intelligence |
-| **Smart Calendar Integration** | §P12-E Calendar Integration |
-| Subscriptions & Marketplace | §P13 Monetisation |
-| **Creator Coach/Trainer Marketplace**| §P13-B Creator Marketplace |
-| **Creator Affiliate Program** | §P13-C Creator Affiliate Program |
-| CI/CD + testing | §P14 Enterprise Hardening |
-| **🆕 WhatsApp Logging** | §P16-A WhatsApp Business Logging |
-| **🆕 Vernacular Voice Logging** | §P16-B Vernacular Voice Input |
-| **🆕 ABHA Health ID Integration** | §P16-C ABHA Integration |
-| **🆕 Corporate Wellness / Insurer Tier** | §P16-D Corporate Wellness Tier |
-| **🆕 Grocery Vendor Checkout** | §P16-E Grocery Checkout Integration |
-| Database schema | §DB Database Schema |
-| Cloudflare D1 setup | §CF Cloudflare Setup |
-| Glossary + ADRs | §GLO Glossary |
+| **Longevity Score**                          | §P10-F Longevity Score                          |
+| Body analytics                               | §P11 Visual Analytics                           |
+| **Wearable-Free Body Composition**           | §P11-C Body Composition Estimation              |
+| Festival + life events + travel              | §P12 Festival Intelligence                      |
+| **Smart Calendar Integration**               | §P12-E Calendar Integration                     |
+| Subscriptions & Marketplace                  | §P13 Monetisation                               |
+| **Creator Coach/Trainer Marketplace**        | §P13-B Creator Marketplace                      |
+| **Creator Affiliate Program**                | §P13-C Creator Affiliate Program                |
+| CI/CD + testing                              | §P14 Enterprise Hardening                       |
+| **🆕 WhatsApp Logging**                      | §P16-A WhatsApp Business Logging                |
+| **🆕 Vernacular Voice Logging**              | §P16-B Vernacular Voice Input                   |
+| **🆕 ABHA Health ID Integration**            | §P16-C ABHA Integration                         |
+| **🆕 Corporate Wellness / Insurer Tier**     | §P16-D Corporate Wellness Tier                  |
+| **🆕 Grocery Vendor Checkout**               | §P16-E Grocery Checkout Integration             |
+| Database schema                              | §DB Database Schema                             |
+| Cloudflare D1 setup                          | §CF Cloudflare Setup                            |
+| Glossary + ADRs                              | §GLO Glossary                                   |
 
 ---
 
@@ -147,14 +147,14 @@ The v1 architecture realizes this by introducing a **Health OS Brain** — a cen
 
 ### Six Pillars
 
-| Pillar | Expression |
-|--------|-----------|
-| **Spatial Depth** | Three-layer system: background → mid-layer → foreground. Real blur, shadow, translucency. Every screen has depth, never flat. |
-| **Fluid Motion** | Spring physics everywhere. No linear tweens. 100ms touch-to-response. Animations must feel alive, not mechanical. |
-| **Bold Information** | One dominant metric per screen at 56–72sp. Context recedes, data leads. Hierarchy is the UX. |
-| **Visual Restraint** | Glow reserved for the active metric, primary CTA, and ring fill only. Not every card glows — glow is punctuation, not prose. |
-| **Dark-First** | Dark mode is the primary target. Light mode is a warm, saffron inversion — not an afterthought. |
-| **Cultural Pulse** | Orange-indigo-saffron palette echoes Indian aesthetics. Bilingual labels used surgically — for emotional connection, not everywhere. |
+| Pillar               | Expression                                                                                                                           |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| **Spatial Depth**    | Three-layer system: background → mid-layer → foreground. Real blur, shadow, translucency. Every screen has depth, never flat.        |
+| **Fluid Motion**     | Spring physics everywhere. No linear tweens. 100ms touch-to-response. Animations must feel alive, not mechanical.                    |
+| **Bold Information** | One dominant metric per screen at 56–72sp. Context recedes, data leads. Hierarchy is the UX.                                         |
+| **Visual Restraint** | Glow reserved for the active metric, primary CTA, and ring fill only. Not every card glows — glow is punctuation, not prose.         |
+| **Dark-First**       | Dark mode is the primary target. Light mode is a warm, saffron inversion — not an afterthought.                                      |
+| **Cultural Pulse**   | Orange-indigo-saffron palette echoes Indian aesthetics. Bilingual labels used surgically — for emotional connection, not everywhere. |
 
 ### ❌ Anti-Patterns — Never Do These
 
@@ -483,19 +483,19 @@ abstract class CumulativeLog extends SyncableEntity {
 
 **Never call AI for these — compute locally in Dart:**
 
-| Calculation | Formula | Notes |
-|------------|---------|-------|
-| BMI | `weight / (height_m²)` | Pure math |
-| TDEE | Mifflin-St Jeor × activity multiplier | Deterministic |
-| Daily calories | `TDEE ± goal_offset` | Derived from TDEE |
-| Macros | `protein_g = weight × factor` | Formula-based |
-| Hydration target | `base_l + temp_offset + activity_offset` | Rule-based |
-| Step targets | BMI category lookup table | Rule-based |
-| Readiness score | Weighted sum of sleep + stress + soreness + HRV | Formula |
-| Fatigue index | 7-day load/recovery ratio | Formula |
-| Biological age | Regression formula vs WHO data | Algorithm |
-| Risk detection | Threshold comparisons on vitals | Rule engine |
-| Protein alert | `protein < 70% of target` | Rule engine |
+| Calculation      | Formula                                         | Notes             |
+|------------------|-------------------------------------------------|-------------------|
+| BMI              | `weight / (height_m²)`                          | Pure math         |
+| TDEE             | Mifflin-St Jeor × activity multiplier           | Deterministic     |
+| Daily calories   | `TDEE ± goal_offset`                            | Derived from TDEE |
+| Macros           | `protein_g = weight × factor`                   | Formula-based     |
+| Hydration target | `base_l + temp_offset + activity_offset`        | Rule-based        |
+| Step targets     | BMI category lookup table                       | Rule-based        |
+| Readiness score  | Weighted sum of sleep + stress + soreness + HRV | Formula           |
+| Fatigue index    | 7-day load/recovery ratio                       | Formula           |
+| Biological age   | Regression formula vs WHO data                  | Algorithm         |
+| Risk detection   | Threshold comparisons on vitals                 | Rule engine       |
+| Protein alert    | `protein < 70% of target`                       | Rule engine       |
 
 **Reserve AI for these — decisions humans cannot hardcode:**
 
@@ -564,17 +564,17 @@ class AppColorsDark {
 
 ### Color Semantic Quick-Reference
 
-| Color | Token | Use Case |
-|-------|-------|----------|
-| Orange `#FF6B35` | `primary` | CTA buttons, active nav tab, hero metric glow |
-| Amber `#FFB547` | `accent` | XP coins, streak flames, achievement highlights |
-| Indigo `#7B6FF0` | `secondary` | Level badges, sleep screen gradient, meditation |
-| Teal `#00D4B4` | `teal` | Water tracker, SpO2, medication, Ayurveda |
-| Green `#4ADE80` | `success` | Steps goal achieved, healthy readings, habits done |
-| Amber `#FBBF24` | `warning` | Elevated BP/glucose, moderate risk states |
-| Red `#F87171` | `error` | Crisis readings, destructive actions |
-| Rose `#FB7185` | `rose` | Period tracker, menstrual health |
-| Purple `#C084FC` | `purple` | Active minutes ring, move goal |
+| Color            | Token       | Use Case                                           |
+|------------------|-------------|----------------------------------------------------|
+| Orange `#FF6B35` | `primary`   | CTA buttons, active nav tab, hero metric glow      |
+| Amber `#FFB547`  | `accent`    | XP coins, streak flames, achievement highlights    |
+| Indigo `#7B6FF0` | `secondary` | Level badges, sleep screen gradient, meditation    |
+| Teal `#00D4B4`   | `teal`      | Water tracker, SpO2, medication, Ayurveda          |
+| Green `#4ADE80`  | `success`   | Steps goal achieved, healthy readings, habits done |
+| Amber `#FBBF24`  | `warning`   | Elevated BP/glucose, moderate risk states          |
+| Red `#F87171`    | `error`     | Crisis readings, destructive actions               |
+| Rose `#FB7185`   | `rose`      | Period tracker, menstrual health                   |
+| Purple `#C084FC` | `purple`    | Active minutes ring, move goal                     |
 
 ### Spacing & Radius Tokens
 

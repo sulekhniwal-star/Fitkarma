@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_typography.dart';
 
-/// Hero metric widget with controlled glow punctuation & typography hierarchy
 class GlowingMetric extends StatelessWidget {
   final String value;
-  final String label;
+  final String label; // Adding label back as it's used in current UI
   final String? unit;
-  final Color color;
+  final Color glowColor;
+  final TextStyle? customStyle;
   final bool hasGlow;
 
   const GlowingMetric({
@@ -15,24 +14,35 @@ class GlowingMetric extends StatelessWidget {
     required this.value,
     required this.label,
     this.unit,
-    this.color = AppColors.primaryCyan,
+    required this.glowColor,
+    this.customStyle,
     this.hasGlow = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final baseStyle = customStyle ?? AppTypography.metricXL.copyWith(
+      color: Colors.white,
+    );
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         RichText(
+          textAlign: TextAlign.center,
           text: TextSpan(
-            style: AppTypography.displayLarge.copyWith(
-              color: color,
+            style: baseStyle.copyWith(
               shadows: hasGlow
                   ? [
                       Shadow(
-                        color: color.withValues(alpha: 0.4),
-                        blurRadius: 16.0,
+                        color: glowColor.withOpacity(0.4),
+                        blurRadius: 18,
+                        offset: const Offset(0, 0),
+                      ),
+                      Shadow(
+                        color: glowColor.withOpacity(0.2),
+                        blurRadius: 36,
+                        offset: const Offset(0, 0),
                       ),
                     ]
                   : null,
@@ -42,16 +52,22 @@ class GlowingMetric extends StatelessWidget {
               if (unit != null)
                 TextSpan(
                   text: ' $unit',
-                  style: AppTypography.titleMedium.copyWith(
-                    color: AppColors.textSecondary,
-                    shadows: [],
+                  style: AppTypography.h3.copyWith(
+                    color: Colors.white.withOpacity(0.5),
+                    shadows: [], // Prevent glowing units for visual restraint
                   ),
                 ),
             ],
           ),
         ),
         const SizedBox(height: 4.0),
-        Text(label.toUpperCase(), style: AppTypography.labelSmall),
+        Text(
+          label.toUpperCase(),
+          style: AppTypography.labelMd.copyWith(
+            color: Colors.white.withOpacity(0.5),
+            letterSpacing: 1.2,
+          ),
+        ),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 /// Central Spring Physics Curves for Fluid Motion
@@ -23,14 +24,6 @@ class ElasticOutCurve extends Curve {
   double transformInternal(double t) {
     return (t == 0 || t == 1)
         ? t
-        : (Math.pow(2, -10 * t) * Math.sin((t - period / 4) * (2 * Math.PI) / period) + 1).toDouble();
+        : (math.pow(2, -10 * t) * math.sin((t - period / 4) * (2 * math.pi) / period) + 1).toDouble();
   }
-}
-
-// Utility class for math operations since Math.PI is not available directly in Dart standard library as such, 
-// though dart:math is. I'll use dart:math.
-
-class Math {
-  static double pow(double x, double y) => x.toDouble(); // Placeholder if I don't import
-  // Actually I should just import dart:math
 }

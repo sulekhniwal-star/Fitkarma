@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/theme/app_colors.dart';
 import '../../../shared/theme/app_spacing.dart';
 import '../../../shared/theme/app_typography.dart';
-import '../../../shared/widgets/glass_card.dart';
+import '../../../shared/widgets/bento_card.dart';
+import '../../../shared/widgets/health_score_ring.dart';
+import '../../../shared/widgets/bilingual_label.dart';
 import '../providers/daily_mission_provider.dart';
 
 class DailyBriefingScreen extends ConsumerWidget {
@@ -16,93 +18,73 @@ class DailyBriefingScreen extends ConsumerWidget {
     final checkIn = missionState.checkIn;
 
     return Scaffold(
-      backgroundColor: AppColors.bgPrimary,
+      backgroundColor: AppColors.bg0,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.all(AppSpacing.screenH),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Daily Briefing', style: AppTypography.displayLarge),
-                      Text('Health OS Brain Context', style: AppTypography.bodyMedium),
+                      BilingualLabel(
+                        englishText: 'Daily Briefing',
+                        hindiText: 'दैनिक जानकारी',
+                        englishStyle: AppTypography.displayMd,
+                      ),
+                      Text('Health OS Brain Context', style: AppTypography.bodySm),
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.tune, color: AppColors.primaryCyan),
+                    icon: const Icon(Icons.tune, color: AppColors.primary),
                     onPressed: () {},
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.xl),
+              const SizedBox(height: AppSpacing.lg),
 
-              GlassCard(
+              BentoCard(
                 child: Column(
                   children: [
-                    Stack(
-                      alignment: Alignment.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(
-                          width: 140.0,
-                          height: 140.0,
-                          child: CircularProgressIndicator(
-                            value: readiness.score / 100.0,
-                            strokeWidth: 12.0,
-                            backgroundColor: AppColors.bgSecondary,
-                            color: readiness.score >= 75
-                                ? AppColors.primaryEmerald
-                                : (readiness.score >= 50
-                                    ? AppColors.warningAmber
-                                    : AppColors.errorRed),
-                          ),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              '${readiness.score}',
-                              style: AppTypography.displayLarge.copyWith(fontSize: 44.0),
-                            ),
-                            Text('READINESS', style: AppTypography.labelSmall),
-                          ],
-                        ),
+                        const HealthScoreRing(score: 82, size: 100.0),
+                        _buildReadinessDisplay(readiness),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    Chip(
-                      backgroundColor: AppColors.glassBgMid,
-                      side: const BorderSide(color: AppColors.glassBorder),
-                      label: Text(readiness.confidenceLabel, style: AppTypography.labelSmall),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
                     Text(
                       readiness.adviceSummary,
                       textAlign: TextAlign.center,
-                      style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                      style: AppTypography.bodyMd.copyWith(color: AppColors.textPrimary),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.lg),
+              const SizedBox(height: AppSpacing.md),
 
               if (!checkIn.isCompleted)
-                GlassCard(
+                BentoCard(
                   onTap: () => _showMorningCheckInModal(context, ref),
                   child: Row(
                     children: [
-                      const Icon(Icons.wb_sunny, color: AppColors.warningAmber, size: 28.0),
+                      const Icon(Icons.wb_sunny_rounded, color: AppColors.warning, size: 28.0),
                       const SizedBox(width: AppSpacing.md),
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Morning Check-in Pending', style: AppTypography.titleMedium),
-                            Text('3-question ritual to calibrate readiness', style: AppTypography.labelSmall),
+                            BilingualLabel(
+                              englishText: 'Morning Check-in Pending',
+                              hindiText: 'सुबह का चेक-इन बाकी है',
+                              englishStyle: AppTypography.h2,
+                            ),
+                            Text('3-question ritual to calibrate readiness', style: AppTypography.labelMd),
                           ],
                         ),
                       ),
@@ -110,60 +92,49 @@ class DailyBriefingScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-              if (!checkIn.isCompleted) const SizedBox(height: AppSpacing.lg),
+              if (!checkIn.isCompleted) const SizedBox(height: AppSpacing.md),
 
-              GlassCard(
+              const BentoCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BilingualLabel(
+                      englishText: "Today's Mission",
+                      hindiText: 'आज का मिशन',
+                      englishStyle: AppTypography.h2,
+                    ),
+                    SizedBox(height: 12),
+                    _MissionItem(text: 'Hit 110g protein — you averaged 58g'),
+                    _MissionItem(text: 'Morning-first workout: burn before celebrating'),
+                    _MissionItem(text: 'Target 10,000 steps today'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+
+              BentoCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Daily Strain (0–21)', style: AppTypography.titleMedium),
+                        const Text('Daily Strain (0–21)', style: AppTypography.h2),
                         Text(
                           '${missionState.dailyStrain} / 21.0',
-                          style: AppTypography.titleLarge.copyWith(color: AppColors.primaryCyan),
+                          style: AppTypography.h1.copyWith(color: AppColors.primary),
                         ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     LinearProgressIndicator(
                       value: missionState.dailyStrain / 21.0,
-                      backgroundColor: AppColors.bgSecondary,
-                      color: AppColors.primaryCyan,
+                      backgroundColor: AppColors.surface2,
+                      color: AppColors.primary,
                       minHeight: 8.0,
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ],
-                ),
-              ),
-              const SizedBox(height: AppSpacing.lg),
-
-              Text('Resolved Priority Actions', style: AppTypography.titleLarge),
-              const SizedBox(height: AppSpacing.sm),
-              ...missionState.activeActions.map(
-                (action) => Padding(
-                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                  child: GlassCard(
-                    child: Row(
-                      children: [
-                        Icon(
-                          action.isMandatoryRest ? Icons.warning_amber : Icons.check_circle_outline,
-                          color: action.isMandatoryRest ? AppColors.errorRed : AppColors.primaryEmerald,
-                        ),
-                        const SizedBox(width: AppSpacing.md),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(action.title, style: AppTypography.titleMedium),
-                              Text(action.description, style: AppTypography.bodyMedium),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
             ],
@@ -173,17 +144,43 @@ class DailyBriefingScreen extends ConsumerWidget {
     );
   }
 
+  Widget _buildReadinessDisplay(dynamic readiness) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            SizedBox(
+              width: 100.0,
+              height: 100.0,
+              child: CircularProgressIndicator(
+                value: readiness.score / 100.0,
+                strokeWidth: 8.0,
+                strokeCap: StrokeCap.round,
+                backgroundColor: AppColors.surface2,
+                color: readiness.score >= 75 ? AppColors.success : (readiness.score >= 50 ? AppColors.warning : AppColors.error),
+              ),
+            ),
+            Text('${readiness.score}', style: AppTypography.displayMd.copyWith(fontWeight: FontWeight.w800)),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text('READINESS', style: AppTypography.labelMd.copyWith(letterSpacing: 1.0)),
+      ],
+    );
+  }
+
   void _showMorningCheckInModal(BuildContext context, WidgetRef ref) {
-    int energy = 7;
-    int soreness = 3;
-    int mood = 8;
+    int sleep = 3;
+    int soreness = 1;
+    int stress = 1;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.bgSecondary,
+      backgroundColor: AppColors.bg1,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
       ),
       builder: (context) {
         return StatefulBuilder(
@@ -194,56 +191,85 @@ class DailyBriefingScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Morning Check-in Ritual', style: AppTypography.displayLarge),
+                  const BilingualLabel(
+                    englishText: 'Morning Check-in',
+                    hindiText: 'सुबह का चेक-इन',
+                    englishStyle: AppTypography.displayMd,
+                  ),
+                  const SizedBox(height: AppSpacing.lg),
+
+                  const Text('How did you sleep?', style: AppTypography.h3),
+                  Row(
+                    children: List.generate(5, (index) {
+                      return IconButton(
+                        icon: Icon(
+                          index < sleep ? Icons.star : Icons.star_border,
+                          color: AppColors.accent,
+                        ),
+                        onPressed: () => setModalState(() => sleep = index + 1),
+                      );
+                    }),
+                  ),
                   const SizedBox(height: AppSpacing.md),
 
-                  Text('Energy Level (1-10): $energy', style: AppTypography.bodyMedium),
-                  Slider(
-                    value: energy.toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    activeColor: AppColors.warningAmber,
-                    onChanged: (val) => setModalState(() => energy = val.round()),
+                  const Text('How sore are you?', style: AppTypography.h3),
+                  const SizedBox(height: 8),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _SorenessOption(
+                          label: 'Fresh',
+                          isSelected: soreness == 1,
+                          onTap: () => setModalState(() => soreness = 1),
+                        ),
+                        _SorenessOption(
+                          label: 'Mild',
+                          isSelected: soreness == 2,
+                          onTap: () => setModalState(() => soreness = 2),
+                        ),
+                        _SorenessOption(
+                          label: 'Moderate',
+                          isSelected: soreness == 3,
+                          onTap: () => setModalState(() => soreness = 3),
+                        ),
+                        _SorenessOption(
+                          label: 'Very Sore',
+                          isSelected: soreness == 4,
+                          onTap: () => setModalState(() => soreness = 4),
+                        ),
+                      ],
+                    ),
                   ),
-
-                  Text('Muscle Soreness (1-10): $soreness', style: AppTypography.bodyMedium),
-                  Slider(
-                    value: soreness.toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    activeColor: AppColors.errorRed,
-                    onChanged: (val) => setModalState(() => soreness = val.round()),
-                  ),
-
-                  Text('Mood Rating (1-10): $mood', style: AppTypography.bodyMedium),
-                  Slider(
-                    value: mood.toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    activeColor: AppColors.primaryEmerald,
-                    onChanged: (val) => setModalState(() => mood = val.round()),
-                  ),
-
                   const SizedBox(height: AppSpacing.md),
+
+                  Text('Stress level today? ($stress/5)', style: AppTypography.h3),
+                  Slider(
+                    value: stress.toDouble(),
+                    min: 1,
+                    max: 5,
+                    divisions: 4,
+                    activeColor: AppColors.primary,
+                    onChanged: (val) => setModalState(() => stress = val.round()),
+                  ),
+
+                  const SizedBox(height: AppSpacing.lg),
                   SizedBox(
                     width: double.infinity,
-                    height: 48.0,
+                    height: 52.0,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryCyan,
-                        foregroundColor: AppColors.bgPrimary,
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: AppColors.bg0,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
+                          borderRadius: BorderRadius.circular(AppRadius.md),
                         ),
                       ),
                       onPressed: () {
-                        ref.read(dailyMissionProvider.notifier).submitCheckIn(energy, soreness, mood);
+                        ref.read(dailyMissionProvider.notifier).submitCheckIn(sleep, soreness, stress);
                         Navigator.pop(context);
                       },
-                      child: Text('Submit Check-in', style: AppTypography.titleMedium.copyWith(color: AppColors.bgPrimary)),
+                      child: Text('COMPLETE CHECK-IN', style: AppTypography.h2.copyWith(fontWeight: FontWeight.bold, color: AppColors.bg0)),
                     ),
                   ),
                 ],
@@ -252,6 +278,54 @@ class DailyBriefingScreen extends ConsumerWidget {
           },
         );
       },
+    );
+  }
+}
+
+class _MissionItem extends StatelessWidget {
+  final String text;
+  const _MissionItem({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.check_circle_outline, color: AppColors.success, size: 20),
+          const SizedBox(width: 12),
+          Expanded(child: Text(text, style: AppTypography.bodyMd)),
+        ],
+      ),
+    );
+  }
+}
+
+class _SorenessOption extends StatelessWidget {
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _SorenessOption({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: ChoiceChip(
+        label: Text(label),
+        selected: isSelected,
+        onSelected: (_) => onTap(),
+        selectedColor: AppColors.primary.withOpacity(0.3),
+        labelStyle: AppTypography.labelMd.copyWith(
+          color: isSelected ? AppColors.primary : AppColors.textSecondary,
+        ),
+      ),
     );
   }
 }
