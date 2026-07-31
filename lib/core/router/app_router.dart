@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import '../../features/advanced_intelligence/screens/advanced_intelligence_screen.dart';
 import '../../features/analytics/screens/visual_analytics_screen.dart';
 import '../../features/coach/screens/coach_chat_screen.dart';
 import '../../features/daily_mission/screens/daily_briefing_screen.dart';
@@ -82,6 +83,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/hardening',
       builder: (context, state) => const HardeningVerificationScreen(),
+    ),
+    GoRoute(
+      path: '/advanced_intelligence',
+      builder: (context, state) => const AdvancedIntelligenceScreen(),
     ),
   ],
 );
