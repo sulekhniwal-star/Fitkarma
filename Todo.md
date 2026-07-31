@@ -217,14 +217,14 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 16 — India Growth & Trust Layer
 
-- [ ] WhatsApp Business Cloud API webhook (`fitkarma-whatsapp`) live; reuses existing food-parsing pipeline
-- [ ] WhatsApp opt-in/opt-out flow in Settings, off by default
-- [ ] Vernacular ASR integrated (Hindi, Tamil, Telugu, Marathi, Bengali, Kannada) ahead of existing food/workout parser
-- [ ] ABHA Health ID linking flow (OAuth) and encrypted storage of `abhaHealthId`
-- [ ] Doctor Sharing Portal FHIR-lite export mode (ABHA-linked), passcode PDF remains default
-- [ ] `OrganizationAccounts` / `EmployeeEnrollments` tables live; org dashboard enforces minimum-cohort-size threshold before showing any aggregate
-- [ ] Grocery Vendor Adapter interface implemented for at least one partner (Blinkit/BigBasket/Zepto)
-- [ ] Affiliate order tracking reuses §P13-C ledger, not a parallel system
+- [x] WhatsApp Business Cloud API webhook (`fitkarma-whatsapp`) live; reuses existing food-parsing pipeline
+- [x] WhatsApp opt-in/opt-out flow in Settings, off by default
+- [x] Vernacular ASR integrated (Hindi, Tamil, Telugu, Marathi, Bengali, Kannada) ahead of existing food/workout parser
+- [x] ABHA Health ID linking flow (OAuth) and encrypted storage of `abhaHealthId`
+- [x] Doctor Sharing Portal FHIR-lite export mode (ABHA-linked), passcode PDF remains default
+- [x] `OrganizationAccounts` / `EmployeeEnrollments` tables live; org dashboard enforces minimum-cohort-size threshold before showing any aggregate
+- [x] Grocery Vendor Adapter interface implemented for at least one partner (Blinkit/BigBasket/Zepto)
+- [x] Affiliate order tracking reuses §P13-C ledger, not a parallel system
 
 ## Phase 14 — Hardening
 

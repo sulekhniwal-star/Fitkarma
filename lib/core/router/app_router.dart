@@ -5,6 +5,7 @@ import '../../features/daily_mission/screens/daily_briefing_screen.dart';
 import '../../features/daily_mission/screens/recovery_log_screen.dart';
 import '../../features/festivals/screens/festival_dashboard_screen.dart';
 import '../../features/gamification/screens/karma_hub_screen.dart';
+import '../../features/growth/screens/growth_trust_screen.dart';
 import '../../features/health_tracking/screens/vitals_tracking_screen.dart';
 import '../../features/nutrition/screens/nutrition_logger_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
@@ -72,6 +73,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/festivals',
       builder: (context, state) => const FestivalDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/growth_trust',
+      builder: (context, state) => const GrowthTrustScreen(),
     ),
   ],
 );
