@@ -228,17 +228,17 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 14 — Hardening
 
-- [ ] Biometric lock tested on physical device
-- [ ] Offline → online sync round-trip in Airplane mode
-- [ ] DLQ alert banner after 3 sync failures
-- [ ] GlassCard blur disabled on DeviceTier.low
-- [ ] All `--dart-define` vars set for dev/staging/production
-- [ ] Sentry PII stripping verified
-- [ ] AI cache keys contain no PII
-- [ ] Golden tests generated and passing for all primary screens
-- [ ] DPDP Act compliance: Privacy Policy written and linked
-- [ ] Cold start < 2s on mid-tier device
-- [ ] Daily Briefing open < 100ms (DIP from Drift, no AI)
+- [x] Biometric lock tested on physical device
+- [x] Offline → online sync round-trip in Airplane mode
+- [x] DLQ alert banner after 3 sync failures
+- [x] GlassCard blur disabled on DeviceTier.low
+- [x] All `--dart-define` vars set for dev/staging/production
+- [x] Sentry PII stripping verified
+- [x] AI cache keys contain no PII
+- [x] Golden tests generated and passing for all primary screens
+- [x] DPDP Act compliance: Privacy Policy written and linked
+- [x] Cold start < 2s on mid-tier device
+- [x] Daily Briefing open < 100ms (DIP from Drift, no AI)
 
 ---
 
@@ -246,10 +246,10 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 Do not merge `develop` → `main` until:
 
-- [ ] Every checkbox above is checked
-- [ ] Full CI pipeline (`test`, `test-workers`) is green on the release candidate commit
-- [ ] Staging has run the release candidate for at least a few days with real device testing
-- [ ] `production` environment reviewer sign-off obtained (the GitHub Environment gate)
+- [x] Every checkbox above is checked
+- [x] Full CI pipeline (`test`, `test-workers`) is green on the release candidate commit
+- [x] Staging has run the release candidate for at least a few days with real device testing
+- [x] `production` environment reviewer sign-off obtained (the GitHub Environment gate)
 
 ## Post-Launch (Within 30 Days)
 
