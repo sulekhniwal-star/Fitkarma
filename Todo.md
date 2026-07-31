@@ -108,33 +108,33 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 6 — Workout
 
-- [ ] Program blueprint generator (AI, cached)
-- [ ] Progressive overload engine (deterministic)
-- [ ] Program Evolution Engine triggers tested
-- [ ] Active workout screen with rest timer and set logging
-- [ ] Completion outcome XP (not logging XP)
-- [ ] On-device pose estimation joint angle calculations (MediaPipe integration)
-- [ ] Movement Weakness Profile fault accumulation heuristics
-- [ ] Mobility Diagnosis Engine cause mappings and drill prescriber
-- [ ] Biomechanical Injury Risk Forecasting combining kinematic variance and sleep debt
-- [ ] Movement Memory database logging and progress reporting
-- [ ] Exercise Confidence Score tempo and jitter variance checks
-- [ ] Movement Health Score unified synthesis
-- [ ] Camera-Based Fitness Onboarding assessment for Movement Age
-- [ ] Adaptive Exercise Selection smart replacement triggers
-- [ ] Local Muscle Readiness upper and lower body fatigue splitting
-- [ ] Recovery-Aware Overload progressive weight adjustments
-- [ ] Training Reliability Score completed/skipped/rescheduled logging
-- [ ] Strength Potential and Athletic Profile calculations
-- [ ] Movement Asymmetry Detection left vs right joint angle offsets
-- [ ] Video-based Rep-Speed Trend Analysis duration calculations
-- [ ] Exercise Skill Trees & Mastery progression rules
-- [ ] Camera-guided Athletic Testing Battery quarterly updates
-- [ ] Performance Forecasting strength & cardiovascular projections
-- [ ] Adaptive Computer Vision Loop (ACVL) state transitions
-- [ ] MethodChannel native ADPF thermal monitoring hook
-- [ ] Dynamic frame-dropping & isolate processing integration
-- [ ] UI optimization mode active alert banner
+- [x] Program blueprint generator (AI, cached)
+- [x] Progressive overload engine (deterministic)
+- [x] Program Evolution Engine triggers tested
+- [x] Active workout screen with rest timer and set logging
+- [x] Completion outcome XP (not logging XP)
+- [x] On-device pose estimation joint angle calculations (MediaPipe integration)
+- [x] Movement Weakness Profile fault accumulation heuristics
+- [x] Mobility Diagnosis Engine cause mappings and drill prescriber
+- [x] Biomechanical Injury Risk Forecasting combining kinematic variance and sleep debt
+- [x] Movement Memory database logging and progress reporting
+- [x] Exercise Confidence Score tempo and jitter variance checks
+- [x] Movement Health Score unified synthesis
+- [x] Camera-Based Fitness Onboarding assessment for Movement Age
+- [x] Adaptive Exercise Selection smart replacement triggers
+- [x] Local Muscle Readiness upper and lower body fatigue splitting
+- [x] Recovery-Aware Overload progressive weight adjustments
+- [x] Training Reliability Score completed/skipped/rescheduled logging
+- [x] Strength Potential and Athletic Profile calculations
+- [x] Movement Asymmetry Detection left vs right joint angle offsets
+- [x] Video-based Rep-Speed Trend Analysis duration calculations
+- [x] Exercise Skill Trees & Mastery progression rules
+- [x] Camera-guided Athletic Testing Battery quarterly updates
+- [x] Performance Forecasting strength & cardiovascular projections
+- [x] Adaptive Computer Vision Loop (ACVL) state transitions
+- [x] MethodChannel native ADPF thermal monitoring hook
+- [x] Dynamic frame-dropping & isolate processing integration
+- [x] UI optimization mode active alert banner
 
 ## Phase 7 — Gamification
 
