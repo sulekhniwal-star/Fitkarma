@@ -46,6 +46,13 @@ class AppColors {
   // Legacy mappings for temporary compatibility
   static const bgPrimary = bg0;
   static const bgSecondary = bg1;
+  static const bgCard = surface0;
+  static const glassBgLight = Color(0x1FFFFFFF);
+  static const glassBgMid = Color(0x1AFFFFFF);
   static const primaryCyan = primary;
   static const primaryEmerald = success;
+  static const primaryViolet = secondary;
+  static const warningAmber = warning;
+  static const infoBlue = teal;
+  static const errorRed = error;
 }

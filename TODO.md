@@ -1,0 +1,322 @@
+# FitKarma — Complete Development TODO (AI-IDE Build Spec)
+
+**How to use this file:** every checkbox below maps 1:1 to a named section, engine, screen,
+worker, or schema in [`Fitkarma_documentation.md`](./Fitkarma_documentation.md) — the §-code
+in parentheses is the literal section to read for the exact algorithm, formula, wireframe, or
+schema before implementing that item. **This file is the task graph; the master doc is the
+spec.** If you're an AI coding agent working through this: open the referenced § section
+first, implement exactly what it specifies, then check the box — don't invent behavior that
+isn't in the referenced section, and don't skip an item because its description here looks
+short (short description ≠ small task; some §-sections are 100+ lines of algorithm).
+
+**Priority:** `P0` = blocks everything downstream · `P1` = required for launch · `P2` = safe post-launch
+**Rule reinforced throughout the doc and worth repeating here:** anything marked "Pure Dart",
+"Deterministic", "Rule-Based", or "No AI" must **never** make an LLM call. If you're tempted to
+route one of these through the AI Router, stop — that's a spec violation, not an optimization.
+
+---
+
+## Phase -1 — Repo, Environments & CI/CD (P0)
+
+*(Cross-reference: §P14-D "CI/CD Pipeline" in the master doc — this phase implements that
+section's intent using Cloudflare instead of the doc's original target, plus the dev/staging/
+production split.)*
+
+### Branching & repo protection
+- [ ] `develop` and `main` branches created
+- [ ] Branch protection on `main`: require PR, require `test` + `test-workers` status checks
+- [ ] Branch protection on `develop`: require PR, require `test` status check
+- [ ] `production` GitHub Environment with ≥1 required reviewer
+- [ ] `staging` GitHub Environment, no reviewer required
+
+### Cloudflare setup
+- [ ] `wrangler.toml` created from `workers/wrangler.toml.example`
+- [ ] `fitkarma-db-staging` and `fitkarma-db-production` D1 databases created, IDs pasted in
+- [ ] Local dev D1 database created for `wrangler dev`
+- [ ] Separate scoped Cloudflare API tokens for staging vs. production deploys
+
+### Secrets (staging AND production, independently — never shared)
+- [ ] `GROQ_API_KEY` — both envs
+- [ ] `GOOGLE_OAUTH_CLIENT_ID` — both envs
+- [ ] `JWT_SIGNING_SECRET` — both envs, independently generated
+- [ ] `APPLE_SIGNIN_CLIENT_ID` — both envs
+
+### GitHub Actions secrets
+- [ ] `CF_ACCOUNT_ID`, `CF_API_TOKEN_STAGING`, `CF_API_TOKEN_PRODUCTION`
+- [ ] `CF_D1_API_BASE_URL_*`, `CF_WORKERS_API_BASE_URL_*` (staging + production)
+- [ ] `GOOGLE_OAUTH_CLIENT_ID_*`, `SENTRY_DSN_*` (staging + production)
+- [ ] `ANDROID_KEYSTORE_BASE64` + password secrets
+
+### Pipeline validation
+- [ ] PR triggers `test` + `test-workers` only, never a deploy
+- [ ] Push to `develop` auto-deploys Workers + D1 migrations to staging
+- [ ] Failing test on `main` confirmed to block `deploy-production` (fail-closed test)
+- [ ] Passing `main` push waits for required-reviewer approval before deploying to production
+- [ ] Staging-issued JWT confirmed rejected by production Worker
+
+---
+
+## Phase 0 — Foundation (P0)
+
+- [ ] **§P0-A Design Philosophy** — Six Pillars and Anti-Patterns encoded as team/agent guidelines (consider a lint rule or PR template checklist for the Anti-Patterns list)
+- [ ] **§P0-B Project Structure** — repo scaffolded exactly to the documented folder layout
+- [ ] **§P0-C Architecture Overview** — Offline-First + Health OS Brain principle implemented; Three-Layer Offline Strategy in place; **Drift Sync Merge Resolver** (Pure Dart) implemented per the documented conflict/concurrency rules; "What Is and Is NOT an AI Job" boundary respected everywhere (audit every AI Router call site against this list)
+- [ ] **§P0-D Design Tokens** — Color Tokens, Color Semantic Quick-Reference, Spacing & Radius Tokens, Typography System all implemented as a single source-of-truth token file
+- [ ] **§P0-D2 Shared Foundation Widgets** — `BentoCard` (`lib/shared/widgets/bento_card.dart`), `ActivityRings` (`lib/shared/widgets/activity_rings.dart`), `GlowingMetric` (`lib/shared/widgets/glowing_metric.dart`), `BilingualLabel` (`lib/shared/widgets/bilingual_label.dart`) — each with a golden test
+- [ ] **§P0-E Health OS Brain** — inputs pipeline wired; **Daily Intelligence Package (DIP)** model + generation implemented; Unified Health Score formula implemented; **Decision Hierarchy** conflict-resolution logic implemented and unit tested
+- [ ] **§P0-F AI Routing Layer** — Model Tiers defined; **AI Router** implemented; **RuleEngine** (Pure Dart) implemented; **InsightTemplateEngine** (Pure Dart) implemented; Event-Driven AI Triggers wired (not polling); **ContextCompressor** implemented per spec; Conversation Memory Management implemented; AI Cost Budget per user tier enforced in code (not just documented); Hybrid Insight Engine implemented
+- [ ] **§P0-G Program Evolution Engine** implemented
+- [ ] **§P0-H Prerequisites** — dev environment matches documented prerequisites (Flutter SDK version, Wrangler, Node)
+- [ ] **§P0-I Adaptive Metabolism Engine** (NEW v1) — **AdaptiveMetabolismEngine** (Pure Dart, no AI) implemented; Weekly Recalibration Output implemented; Calibration Schedule implemented; integration with Health OS Brain wired
+- [ ] **§P0-J Environmental Health Layer** (NEW v1) — **EnvironmentalHealthEngine** implemented (AQI + UV + Heat inputs); AQI Warning Banner UI built; Decision Hierarchy integration wired
+
+## Phase 1 — Onboarding + User Profile (P0)
+
+- [ ] **§P1-A Onboarding Flow Order** implemented as the canonical navigation sequence
+- [ ] **§P1-B Welcome Screen** built per wireframe
+- [ ] **§P1-C Goals Screen** built with all documented selection & conditional logic rules
+- [ ] **§P1-D Demographics Screen** — Live BMI Calculation & Target Selection Logic implemented; Adaptive Targets computed **in Dart, never AI**
+- [ ] **§P1-E AI Diet Plan Results Screen** — Loading & Fallback Caching Logic implemented (offline-first compliant); Groq Prompt Template implemented exactly as documented
+- [ ] **§P1-F Dosha Quiz Screen** — **DoshaQuizScoringEngine** (Pure Dart) implemented and unit tested against known quiz combinations
+- [ ] **§P1-G Program Blueprint Selection Screen** — Allocation Rules & Database Integration implemented; full Program Library seeded
+- [ ] **§P1-H Women's Advanced Health Layer** (NEW v1) — Cycle-Aware Training Adapter, Cycle-Aware Nutrition Adapter, Fertility Planning Mode, Menopause Symptom Tracking, and **DynamicCycleCalibrator** (PCOS/irregular cycle, Pure Dart) all implemented; Women's Health Screen UI built
+
+## Phase 2 — Daily Mission + Readiness Engine (P1)
+
+- [ ] **§P2-A Readiness Engine** — Three-Tier Confidence Model implemented; Readiness Score Formula (Pure Dart, no AI) implemented; Readiness Zones + recommended intensity mapping implemented; AI Intensity Adjustment confirmed **computed, not AI-called**
+- [ ] **§P2-B Daily Briefing Screen** — Morning Check-In (3-question, <30s) built; full Daily Briefing layout built, reading from DIP only
+- [ ] **§P2-C Recovery Log Screen** — Interactive Body Soreness Map (tap-to-select) built; Riverpod State Notifier + DB sync implemented
+- [ ] **§P2-D Recovery Operating System** (NEW v1):
+  - [ ] Sleep Need Calculator implemented
+  - [ ] Sleep Performance Score implemented
+  - [ ] Bedtime Coach implemented
+  - [ ] **DailyStrainCalculator** (Pure Dart, 0–21 scale) implemented per the documented mathematical model
+  - [ ] Recovery Capacity & Decision Matrix implemented
+  - [ ] Recovery Behaviors & Actionable Prescriptions implemented
+  - [ ] Circadian Score (0–100) implemented with midpoint-shift penalty
+  - [ ] Illness & Recovery Type Detection implemented
+  - [ ] Recovery Drivers breakdown implemented
+  - [ ] Recovery Age & Forecasting implemented
+
+## Phase 3 — AI Adaptive Coach (P1)
+
+- [ ] **§P3-A AI Coach Philosophy** encoded as prompt/response guardrails
+- [ ] **§P3-B AI Context Builder** implemented
+- [ ] **§P3-C AI Coach Screen** — Local Chat Cache DB Schema (Drift) implemented; Riverpod State Notifier with optimistic state + typewriter effect implemented; **Cloudflare Worker `fitkarma-coach`** deployed; Proactive Insights implemented as event-driven (confirmed not daily polling)
+- [ ] **§P3-D Health Coach Escalation Layer** (NEW v1, Elite Tier) — Escalation Triggers implemented; Coach Briefing Package generation implemented; Escalation Flow UI built
+
+## Phase 4 — Health Tracking (P1)
+
+- [ ] **§P4-A Dashboard Screen** — Orchestration layer + full layout built, DIP-only reads
+- [ ] **§P4-B Steps Screen** — Auto-Detection & Sync Engine implemented
+- [ ] **§P4-C Sleep Screen** — Sleep Stage Metrics and Debt Modeling implemented
+- [ ] **§P4-D Blood Pressure Screen** — Security & Biometric Access Layer implemented
+- [ ] **§P4-E Glucose Screen** — Meal Correlation & HbA1c Estimation implemented
+- [ ] **§P4-F Preventive Intelligence Engine** — all 6 risk patterns implemented, confirmed deterministic (no AI)
+- [ ] **§P4-G Smart Wearable Comparison Layer** (NEW v1) — Device Confidence Matrix implemented; **DeviceReliabilityEngine** implemented; Wearable Data Source Card UI built; **WearableSyncMerger** (Pure Dart, late-sync override & merge rules) implemented
+
+## Phase 5 — Smart Indian Nutrition System (P1)
+
+- [ ] **§P5-A Food Screen Home** built
+- [ ] **§P5-B Meal Analysis Pipeline** implemented end-to-end
+- [ ] **§P5-C "Fix My Meal" — AI Meal Photo Analysis** — Meal Vision Cost Optimization (cache-first) implemented; Full Analysis Result Screen built
+- [ ] **§P5-D Smart Indian Meal Intelligence** — Offline Seeded Food Database Matrix (5,000+ items) seeded; Local Meal Quality Score Calculation Engine implemented; Core Nutrition Adaptations implemented
+- [ ] **§P5-E Indian Restaurant Intelligence 2.0** (NEW v1) — Menu OCR Scan & Goal Overlay flow implemented; Major Chain Menu Optimization Presets seeded; Smart Item Recognition & OCR Parser implemented
+- [ ] **§P5-F Grocery Optimization Engine 2.0** (NEW v1) — Meal Plan → Budget-Optimized Grocery flow implemented; **GroceryOptimizationEngine** (knapsack-based) implemented and edge-case tested
+- [ ] **§P5-G Nutrition Periodization Engine** (NEW v1) — Periodization Phases defined; Periodization Controller implemented
+- [ ] **§P5-H Protein Distribution & Timing Intelligence** (NEW v1) — MPS Threshold Target implemented; Timing Scoring implemented
+- [ ] **§P5-I Micronutrient Intelligence Core** (NEW v1) — Biomarkers Tracked list implemented with target adjustments; Auto-Alert Trigger Engine implemented
+- [ ] **§P5-J Nutrition Adherence Engine** (NEW v1) — Scoring Matrix implemented; Score Calculation Logic implemented
+- [ ] **§P5-K Smart Festival Nutrition Adaptation** (NEW v1) — Diwali Pre-Compensation Protocol implemented; Adaptation Engine Integration wired
+- [ ] **§P5-L Adaptive Hunger & Cravings Engine** (NEW v1) — Craving Log Prompts implemented; Craving Predictor implemented
+- [ ] **§P5-M Glycemic Response & Personal Food Scoring** (NEW v1) — CGM Integration Map implemented; Score Calculation implemented
+- [ ] **§P5-N Multi-Dimensional Meal Quality Score** (NEW v1) — Scoring Formula implemented; validated against Indian Food Score Comparison Examples in the doc
+- [ ] **§P5-O Nutrition Reliability Score & Data Confidence Shield** (NEW v1) — Reliability Equation implemented; Shield Check implemented
+- [ ] **§P5-P Satiety Prediction Engine** (NEW v1) — Satiety Index Score (0–100) implemented; Local Indian Satiety Reference Table seeded
+- [ ] **§P5-Q Family Nutrition Integration** (NEW v1) — Multi-Profile Matching Flow implemented; Family Dinner Engine implemented
+- [ ] **§P5-R Indian Food Substitution & Swap Engine** (NEW v1) — Target Swap Index implemented; Substitution Service implemented
+
+## Phase 6 — Workout System & Movement Intelligence (P1)
+
+- [ ] **§P6-A Workout Screen Home** built
+- [ ] **§P6-B Active Workout Screen** — Active Set Logging & Rest Countdowns implemented, survives backgrounding
+- [ ] **§P6-C Progressive Overload Engine** implemented as fully deterministic (no AI)
+- [ ] **§P6-D Dynamic Fitness Blueprint Generator** implemented
+- [ ] **§P6-E Training Operating System** (NEW v1) — Movement Intelligence Platform, 5 levels:
+  - [ ] Level 1 — Exercise Video Intelligence
+  - [ ] Level 2 — Personalized Weakness Profiling (**MWP**)
+  - [ ] Level 3 — Mobility Diagnosis & Correctives
+  - [ ] Level 4 — Biomechanical Injury Forecasting
+  - [ ] Level 5 — Movement Memory
+  - [ ] Exercise Confidence Score (**ECS**) implemented
+  - [ ] Movement Health Score (**MHS**) implemented
+  - [ ] Camera-Based Fitness Onboarding & Movement Age implemented
+  - [ ] Adaptive Exercise Selection implemented
+  - [ ] Local Muscle Readiness implemented
+  - [ ] Recovery-Aware Overload Progression implemented
+  - [ ] Training Reliability Score (0–100) implemented
+  - [ ] Workout Simulation & Strength Potential implemented
+  - [ ] Movement Asymmetry Detection implemented
+  - [ ] Estimated Rep-Speed Trend Analysis implemented
+  - [ ] Exercise Skill Trees & Mastery Levels implemented
+  - [ ] Athletic Testing Battery implemented
+  - [ ] Performance Forecasting Engine implemented
+- [ ] **§P6-F Adaptive Computer Vision Loop (ACVL)** (NEW v1):
+  - [ ] Thermal-Aware Downsampling Matrix implemented
+  - [ ] Android ADPF Bridge (Kotlin, `MethodChannel`) implemented
+  - [ ] iOS Thermal Bridge (Swift, `MethodChannel`) implemented
+  - [ ] Flutter Frame Processor & Isolate Architecture implemented
+  - [ ] Camera Controller Loop Integration implemented
+  - [ ] UX Transparency Safeguard (throttling banner) implemented
+  - [ ] **PoseLandmarkAdapter** (Pure Dart, downsampling) implemented
+
+## Phase 7 — Gamification + Karma System (P1/P2)
+
+- [ ] **§P7-A Karma System Design** — XP Events audited as outcome-only (not logging-based); Karma Levels implemented
+- [ ] **§P7-B Karma Hub Screen** — **KarmaHubNotifier** (Riverpod) implemented
+- [ ] **§P7-C Habit Automation System** implemented
+- [ ] **§P7-D Adherence Score** (NEW v1) — **AdherenceScoreCalculator** (Pure Dart) implemented; Dashboard widget built; Adherence → XP connection wired
+- [ ] **§P7-E Benchmarking Engine** (NEW v1) — Benchmark Cohorts defined; Benchmark Display screen built
+- [ ] **§P7-F Demographic Cohort Insights & Network Effects** (NEW v1) — Cohort Insights & Benchmarks Service implemented; Community Cohort Insights UI built; Privacy Guarantee (minimum cohort size) enforced and tested
+
+## Phase 8 — Transformation Journey + Anti-Quit Psychology (P1)
+
+- [ ] **§P8-A Transformation Journey Engine** — Long-Term Memory implemented; Consistency Tracker implemented; Relapse Intervention System (all tiers) implemented
+- [ ] **§P8-B Transformation Timeline Screen** — **TransformationJourneyNotifier** implemented
+- [ ] **§P8-C Habit Identity Layer** (NEW v1) — Identity Personas defined; Identity Evolution Engine implemented; "You Are Becoming" Card UI built; Identity → AI Coach integration wired
+
+## Phase 9 — Social + Squad Accountability (P1)
+
+- [ ] **§P9-A Social Screen** — **SquadStateNotifier** implemented
+- [ ] **§P9-B Squad System** (v1 features) implemented
+- [ ] **§P9-C Accountability Communities** implemented
+- [ ] **§P9-D Family Health Hub** (NEW v1) — Family Hub Architecture, Dashboard UI, Privacy Model, and Family Nudges all implemented
+- [ ] **§P9-E Activity Feed & Sharing Architecture** (NEW v1) — Feed Item Data Model implemented; Feed Engagement Logic implemented; **FeedCurationEngine & SyncCoordinator** (Pure Dart, spam prevention) implemented
+- [ ] **§P9-F Local Geolocation Clubs & Interest Circles** (NEW v1) — Data Architecture implemented; Geolocation Matching implemented
+- [ ] **§P9-G Weekly & Monthly Leaderboards** (NEW v1) — Leaderboard Tiers implemented; Gamified Rewards & Anonymity toggle implemented
+
+## Phase 10 — Predictive Health + Preventive Intelligence (P1)
+
+- [ ] **§P10-A Health Risk Prevention System** implemented
+- [ ] **§P10-B Biological Age Estimation** (Monthly, No AI) implemented
+- [ ] **§P10-C Monthly Health Report** — **MonthlyReportNotifier** implemented
+- [ ] **§P10-D Injury Risk Engine** (NEW v1) — **InjuryRiskEngine** (rule-based + heuristics) implemented; Injury Risk UI Card built
+- [ ] **§P10-E Stress Detection Engine** (NEW v1) — **StressDetectionEngine** (rule-based, no AI) implemented; Proactive Stress Alert implemented
+- [ ] **§P10-F Clinical Report Intelligence** (NEW v1) — Supported Lab Reports list implemented; **ClinicalReportParser** implemented; Clinical Insights Integration wired; Privacy Architecture implemented
+- [ ] **§P10-G Longevity Score + Biological Age v1** (NEW v1) — **LongevityScoreCalculator** implemented; Longevity Screen UI built
+- [ ] **§P10-H Continuous Biomarker Tracking (CGM Sync)** (NEW v1) — CGM Data Ingestion implemented; CGM Dashboard UI built
+- [ ] **§P10-I Medication Tracker & Interaction Warning Engine** (NEW v1) — Medication Logger & Scheduler implemented; Local Drift Schema updates applied; **External NIH RxNav API Service** (Pure Dart) implemented
+- [ ] **§P10-J Doctor Sharing Portal** (NEW v1) — Export Report Schema implemented; Share Security & Consent Flow implemented
+- [ ] **§P10-K Regulatory & Clinical Compliance Framework** (NEW v1) — Medical Disclaimer Protocol & Safeguards implemented; Clinical Data Safeguards (DPDP Act & HIPAA guidelines) implemented
+- [ ] **§P10-L Retrospective Glycemic Processing Pipeline (RGPP)** (NEW v1) — Drift Persistence Extension (retrospective status tracking) implemented; **Retrospective Glucose Matcher** implemented; Background Sync Coordination (Riverpod + Workmanager) implemented; Retrospective Insight Card UI built
+- [ ] **§P10-M Clinical Compliance Hardening** (NEW v1.0) — Directive-Language Lint on Interaction Warnings implemented as an automated check; Pre-Ship Legal Review Gate process documented; **Clinical Copy Change Checklist enforced as a required PR template/CI check for any PR touching §P10-I, §P10-H, or §P10-J**
+
+## Phase 11 — Visual Body Analytics (P1/P2)
+
+- [ ] **§P11-A Body Analytics Screen** — **BodyAnalyticsNotifier** implemented
+- [ ] **§P11-B Progress Photo System** — encrypted local storage + biometric lock implemented
+- [ ] **§P11-C Wearable-Free Body Composition Estimation** (NEW v1) — all documented estimation methods implemented in priority order; **BodyCompositionEstimator** (Pure Dart) implemented; UI card built
+
+## Phase 12 — Festival + Life Events Intelligence (P1)
+
+- [ ] **§P12-A Festival Intelligence System** (v1) — Festival Cross-Module Adaptation Engine implemented; all documented Festivals Tracked seeded with correct dates; Festival Survival Mode implemented
+- [ ] **§P12-B Life Events Engine** (NEW) implemented, covering every documented event type
+- [ ] **§P12-C Wedding Transformation Mode** — **WeddingTransformationNotifier** implemented
+- [ ] **§P12-D AI Roast Mode** implemented
+- [ ] **§P12-E Travel Intelligence** (NEW v1) — **TravelIntelligenceEngine** implemented; Travel Mode UI built
+- [ ] **§P12-F Smart Calendar Integration** (NEW v1) — Calendar Intelligence Engine implemented; Calendar-Aware Daily Briefing wired; Privacy boundaries implemented
+
+## Phase 13 — Premium + Monetisation (P0 for revenue)
+
+- [ ] **§P13-A Subscription Tiers** — India-first pricing implemented; Paywall Triggers implemented on every documented gate; **PremiumStateNotifier** implemented; bottom-sheet-only paywall confirmed, "Continue Free" always present
+- [ ] **§P13-B Creator & Coach Marketplace** (NEW v1) — Creator Profile & Program Schemas implemented; Marketplace Matchmaking Engine implemented; Program Store (user-generated blueprints) implemented; Marketplace Trust/Verification/Escrow implemented; Razorpay/Stripe Connect compliance implemented; **Payment Webhook Split-Settlement & Double-Entry Ledger** (Pure Dart) implemented and tested against a sandboxed real payout
+- [ ] **§P13-C Creator Affiliate Program** (NEW v1) — Affiliate Referral Architecture implemented; Creator Earnings Dashboard UI built
+
+## Phase 14 — Enterprise Hardening + CI/CD (P0)
+
+- [ ] **§P14-A Security** — SQLCipher Secure Database Initialization implemented (`Random.secure()` key gen, verified by code review); Biometric Verification Gate + Riverpod state implemented
+- [ ] **§P14-B Performance** — Background Processing & iOS Sync Safeguards implemented; **App Foreground Catch-Up Sync** (Pure Dart) implemented
+- [ ] **§P14-C Testing Strategy** — implemented exactly as documented (unit/widget/integration/golden test layers)
+- [ ] **§P14-D CI/CD Pipeline** — see Phase -1 above (implemented on Cloudflare instead of the doc's original target, with the dev/staging/production split)
+
+## Phase 16 — India Growth & Trust Layer (P1)
+
+- [ ] **§P16-A WhatsApp Business Logging** — Architecture implemented; Data Model implemented; full Implementation built (reusing the existing food-parsing pipeline); Privacy (opt-in/opt-out, off by default) implemented
+- [ ] **§P16-B Vernacular Voice Logging** — Architecture implemented; all Supported Languages (v1.0 launch set: Hindi, Tamil, Telugu, Marathi, Bengali, Kannada) implemented and tested with native-speaker audio; Implementation built ahead of the existing food/workout parser
+- [ ] **§P16-C ABHA Health ID Integration** — Architecture implemented; Data Model implemented (`abhaHealthId` encrypted at rest); Compliance Note requirements met
+- [ ] **§P16-D Corporate Wellness & Insurer Tier** (NEW v1.0) — Architecture implemented; Data Model implemented (`OrganizationAccounts`, `EmployeeEnrollments`); Privacy Boundary (minimum-cohort-size aggregate threshold) implemented and tested with a below-threshold cohort
+- [ ] **§P16-E Grocery Vendor Checkout Integration** — Architecture implemented; Implementation built for at least one partner (Blinkit/BigBasket/Zepto); affiliate order tracking confirmed reusing the §P13-C ledger
+
+---
+
+## §DB — Database Schema (P0, underlies everything above)
+
+- [ ] **Drift Local Schema (v17)** — every table implemented exactly as documented
+- [ ] **§DB-B Drift Migration Strategy** — migration path implemented and tested from a v16 (or earliest supported) install forward
+- [ ] **§DB-C Cloudflare D1 Cloud Database Schema** (SQLite dialect, not the doc's original T-SQL):
+  - [ ] `Users` table
+  - [ ] `UserScores` table (NEW v17 — v1.0 hardening; confirm `Users` no longer holds overwritable score columns)
+  - [ ] `OrganizationAccounts` + `EmployeeEnrollments` tables (NEW v17 — Phase 16)
+  - [ ] `FoodLogs` table
+  - [ ] `DailyIntelligencePackages` table
+  - [ ] `AICache` table (v1.0 hardening — scoped by `user_id`, purged on account deletion)
+  - [ ] `CGMReadings` table
+  - [ ] `RecoveryLogs` table
+  - [ ] `TransformationChecks` table
+  - [ ] `SyncAuditTrail` table
+  - [ ] `SyncDeadLetterQueue` table
+  - [ ] `MarketplaceLedger` table (double-entry)
+
+## §CF — Cloudflare Workers (8 total) (P0)
+
+- [ ] `fitkarma-health-os` — core v1.0 architecture Worker; deployed as **Cloudflare Workflows fan-out** (not a sequential loop), per-user error isolation confirmed; AI Cache Implementation wired
+- [ ] `fitkarma-social`
+- [ ] `fitkarma-marketplace`
+- [ ] `fitkarma-cores`
+- [ ] `fitkarma-coach`
+- [ ] `fitkarma-meal-vision`
+- [ ] `fitkarma-insights`
+- [ ] `fitkarma-reports`
+- [ ] `fitkarma-whatsapp` (Phase 16 — not in the original 8, added by §P16-A; confirm `wrangler.toml` routes/bindings cover it too)
+
+## §GLO — Glossary & Architecture Decision Records (P1)
+
+- [ ] Every term in the **Glossary** used consistently in code identifiers and comments — spot-check for drift (e.g. don't call it "Readiness Index" in code if the doc says "Readiness Score")
+- [ ] Every **Architecture Decision Record (ADR)** cross-checked against the actual implementation; any deviation gets a new ADR explaining why, not a silent divergence
+
+---
+
+## v1.0 Architecture Hardening (P0 — cuts across every phase above, verify explicitly)
+
+- [ ] SQLCipher key generation confirmed `Random.secure()`-based (code review, not spec-reading)
+- [ ] `fitkarma-health-os` confirmed running as Cloudflare Workflows fan-out with per-user error isolation
+- [ ] DIP generation scheduling confirmed per-user via `timezoneOffsetMinutes` + `preferredDIPHour` (test a non-IST user)
+- [ ] Sync conflict resolution confirmed HLC-based (test two devices editing offline simultaneously)
+- [ ] Cumulative log sync batches carry `syncBatchId`, server-side dedup verified
+- [ ] `UserScores` table live; `Users` confirmed to no longer hold overwritable score columns
+- [ ] `AICache` scoped by `user_id`; account deletion verified to purge it
+- [ ] `ClinicalCopyLinter` passing in CI for every §P10-I/H/J copy change
+
+---
+
+## Pre-Launch Gate
+
+- [ ] Every checkbox in every phase above is checked
+- [ ] Full CI pipeline (`test`, `test-workers`) green on the exact release-candidate commit
+- [ ] Release candidate soaked on staging for multiple days with real device testing
+- [ ] `production` GitHub Environment reviewer sign-off obtained
+- [ ] Rollback plan (Worker rollback + D1 migration revert) documented and rehearsed once, not just written down
+
+## Post-Launch (Within 30 Days)
+
+- [ ] Indian food database expanded to 10,000+ items
+- [ ] AI cost per user/day measured against §P0-F budget projections; router tuned if off-target
+- [ ] DIP generation success rate monitored via Cloudflare Workflows dashboard
+- [ ] Model routing tuned from real usage patterns
+- [ ] HealthKit background delivery verified specifically for overnight sleep data
+- [ ] Push notification open rates measured; meal-reminder copy A/B tested
+- [ ] Subscription conversion funnel analyzed (trial → paid)
+- [ ] Home widget (iOS + Android) shipped and verified on lock screen
+- [ ] Wedding mode tested end-to-end with synthetic data
+- [ ] Program Evolution Engine's first real transitions validated against real user data
+- [ ] Transformation Memory accuracy validated at the 4-week mark
