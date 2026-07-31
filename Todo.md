@@ -195,14 +195,14 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 13 — Premium
 
-- [ ] RevenueCat configured with App Store + Play Store product IDs
-- [ ] 7-day free trial tested end-to-end
-- [ ] Paywall triggers for all Pro features
-- [ ] Paywall: bottom sheet only, always shows "Continue Free"
-- [ ] Entitlement checks in all Pro/Elite features
-- [ ] Creator Profiles database and matchmaking service
-- [ ] Program Marketplace store direct purchase & wallet royalty distribution
-- [ ] Creator Affiliate referral links tracking and recurring payouts dashboard
+- [x] RevenueCat configured with App Store + Play Store product IDs
+- [x] 7-day free trial tested end-to-end
+- [x] Paywall triggers for all Pro features
+- [x] Paywall: bottom sheet only, always shows "Continue Free"
+- [x] Entitlement checks in all Pro/Elite features
+- [x] Creator Profiles database and matchmaking service
+- [x] Program Marketplace store direct purchase & wallet royalty distribution
+- [x] Creator Affiliate referral links tracking and recurring payouts dashboard
 
 ## v1.0 Architecture Hardening
 
