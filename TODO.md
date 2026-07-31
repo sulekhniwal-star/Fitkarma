@@ -107,7 +107,7 @@ production split.)*
 
 ## Phase 4 — Health Tracking (P1)
 
-- [ ] **§P4-A Dashboard Screen** — Orchestration layer + full layout built, DIP-only reads
+- [x] **§P4-A Dashboard Screen** — Orchestration layer + full layout built, DIP-only reads
 - [ ] **§P4-B Steps Screen** — Auto-Detection & Sync Engine implemented
 - [ ] **§P4-C Sleep Screen** — Sleep Stage Metrics and Debt Modeling implemented
 - [ ] **§P4-D Blood Pressure Screen** — Security & Biometric Access Layer implemented
