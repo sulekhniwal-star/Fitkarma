@@ -6,6 +6,7 @@ import '../../features/gamification/screens/karma_hub_screen.dart';
 import '../../features/health_tracking/screens/vitals_tracking_screen.dart';
 import '../../features/nutrition/screens/nutrition_logger_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
+import '../../features/predictive_health/screens/predictive_health_screen.dart';
 import '../../features/social/screens/activity_feed_screen.dart';
 import '../../features/transformation/screens/transformation_dashboard_screen.dart';
 import '../../features/workout/screens/active_workout_screen.dart';
@@ -57,6 +58,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/feed',
       builder: (context, state) => const ActivityFeedScreen(),
+    ),
+    GoRoute(
+      path: '/predictive_health',
+      builder: (context, state) => const PredictiveHealthScreen(),
     ),
   ],
 );

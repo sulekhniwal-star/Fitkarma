@@ -165,18 +165,18 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 10 — Predictive Health
 
-- [ ] All 6 risk patterns in PreventiveIntelligenceEngine
-- [ ] Biological age estimation (monthly, algorithm-based)
-- [ ] Monthly report generation
-- [ ] Continuous Glucose Monitor (CGM) integration and spike detection engine
-- [ ] Medication Scheduler & Log Tracker
-- [ ] Drug-Nutrient & Drug-Workout interaction warning checks
-- [ ] Passcode-protected Doctor Sharing Portal PDF export
-- [ ] DPDP Act & Medical Disclaimers compliance logic
-- [ ] Retrospective Glycemic Processing Pipeline (RGPP) scan execution
-- [ ] Retrospective Glucose Matcher baseline and peak logic
-- [ ] Background sync worker for late-arriving CGM batches
-- [ ] Dynamic glucose variant badge rendering on historical logs
+- [x] All 6 risk patterns in PreventiveIntelligenceEngine
+- [x] Biological age estimation (monthly, algorithm-based)
+- [x] Monthly report generation
+- [x] Continuous Glucose Monitor (CGM) integration and spike detection engine
+- [x] Medication Scheduler & Log Tracker
+- [x] Drug-Nutrient & Drug-Workout interaction warning checks
+- [x] Passcode-protected Doctor Sharing Portal PDF export
+- [x] DPDP Act & Medical Disclaimers compliance logic
+- [x] Retrospective Glycemic Processing Pipeline (RGPP) scan execution
+- [x] Retrospective Glucose Matcher baseline and peak logic
+- [x] Background sync worker for late-arriving CGM batches
+- [x] Dynamic glucose variant badge rendering on historical logs
 
 ## Phase 11 — Visual Analytics
 
