@@ -85,7 +85,7 @@ production split.)*
 
 - [x] **§P2-A Readiness Engine** — Three-Tier Confidence Model implemented; Readiness Score Formula (Pure Dart, no AI) implemented; Readiness Zones + recommended intensity mapping implemented; AI Intensity Adjustment confirmed **computed, not AI-called**
 - [x] **§P2-B Daily Briefing Screen** — Morning Check-In (3-question, <30s) built; full Daily Briefing layout built, reading from DIP only
-- [ ] **§P2-C Recovery Log Screen** — Interactive Body Soreness Map (tap-to-select) built; Riverpod State Notifier + DB sync implemented
+- [x] **§P2-C Recovery Log Screen** — Interactive Body Soreness Map (tap-to-select) built; Riverpod State Notifier + DB sync implemented
 - [ ] **§P2-D Recovery Operating System** (NEW v1):
   - [ ] Sleep Need Calculator implemented
   - [ ] Sleep Performance Score implemented
