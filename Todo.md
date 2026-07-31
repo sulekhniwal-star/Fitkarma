@@ -206,14 +206,14 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## v1.0 Architecture Hardening
 
-- [ ] SQLCipher key generation uses `Random.secure()`, not timestamp-based generation
-- [ ] `fitkarma-health-os` runs as Cloudflare Workflows fan-out, not a sequential per-user loop
-- [ ] DIP generation is scheduled per-user by `timezoneOffsetMinutes` + `preferredDIPHour`, not hardcoded to 6am IST
-- [ ] Sync conflict resolution uses HLC timestamps, not raw device clock
-- [ ] Cumulative log sync batches carry a `syncBatchId` and are server-side deduplicated
-- [ ] `UserScores` table live; `Users` no longer holds overwritable score columns
-- [ ] `ai_cache` scoped by `user_id`; account deletion purges cached AI outputs
-- [ ] `ClinicalCopyLinter` passes in CI for all §P10-I/H/J copy changes
+- [x] SQLCipher key generation uses `Random.secure()`, not timestamp-based generation
+- [x] `fitkarma-health-os` runs as Cloudflare Workflows fan-out, not a sequential per-user loop
+- [x] DIP generation is scheduled per-user by `timezoneOffsetMinutes` + `preferredDIPHour`, not hardcoded to 6am IST
+- [x] Sync conflict resolution uses HLC timestamps, not raw device clock
+- [x] Cumulative log sync batches carry a `syncBatchId` and are server-side deduplicated
+- [x] `UserScores` table live; `Users` no longer holds overwritable score columns
+- [x] `ai_cache` scoped by `user_id`; account deletion purges cached AI outputs
+- [x] `ClinicalCopyLinter` passes in CI for all §P10-I/H/J copy changes
 
 ## Phase 16 — India Growth & Trust Layer
 
