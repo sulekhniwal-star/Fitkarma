@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/coach/screens/coach_chat_screen.dart';
 import '../../features/daily_mission/screens/daily_briefing_screen.dart';
 import '../../features/daily_mission/screens/recovery_log_screen.dart';
+import '../../features/gamification/screens/karma_hub_screen.dart';
 import '../../features/health_tracking/screens/vitals_tracking_screen.dart';
 import '../../features/nutrition/screens/nutrition_logger_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
@@ -42,6 +43,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/workout',
       builder: (context, state) => const ActiveWorkoutScreen(),
+    ),
+    GoRoute(
+      path: '/karma_hub',
+      builder: (context, state) => const KarmaHubScreen(),
     ),
   ],
 );

@@ -138,11 +138,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 7 — Gamification
 
-- [ ] All XP events are outcome-based (no logging XP)
-- [ ] Level-up animation on every level change
-- [ ] Habit smart triggers (not fixed-time reminders)
-- [ ] Karma Hub with achievement grid
-- [ ] Demographic Cohort Insights & Benchmarks opt-in and distribution charts
+- [x] All XP events are outcome-based (no logging XP)
+- [x] Level-up animation on every level change
+- [x] Habit smart triggers (not fixed-time reminders)
+- [x] Karma Hub with achievement grid
+- [x] Demographic Cohort Insights & Benchmarks opt-in and distribution charts
 
 ## Phase 8 — Transformation
 
