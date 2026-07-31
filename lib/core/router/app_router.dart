@@ -6,6 +6,7 @@ import '../../features/gamification/screens/karma_hub_screen.dart';
 import '../../features/health_tracking/screens/vitals_tracking_screen.dart';
 import '../../features/nutrition/screens/nutrition_logger_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
+import '../../features/transformation/screens/transformation_dashboard_screen.dart';
 import '../../features/workout/screens/active_workout_screen.dart';
 
 /// Central GoRouter configuration
@@ -47,6 +48,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/karma_hub',
       builder: (context, state) => const KarmaHubScreen(),
+    ),
+    GoRoute(
+      path: '/transformation',
+      builder: (context, state) => const TransformationDashboardScreen(),
     ),
   ],
 );

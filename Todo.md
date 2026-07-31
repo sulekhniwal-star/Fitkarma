@@ -146,11 +146,11 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 8 — Transformation
 
-- [ ] Transformation Memory persisted and updated monthly
-- [ ] Consistency tracker running daily
-- [ ] Relapse intervention messages (3 tiers + squad nudge)
-- [ ] 90-day prediction layer on weight chart (ranges, not exact)
-- [ ] Progress photo system (encrypted local, biometric lock)
+- [x] Transformation Memory persisted and updated monthly
+- [x] Consistency tracker running daily
+- [x] Relapse intervention messages (3 tiers + squad nudge)
+- [x] 90-day prediction layer on weight chart (ranges, not exact)
+- [x] Progress photo system (encrypted local, biometric lock)
 
 ## Phase 9 — Social
 
