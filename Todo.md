@@ -186,12 +186,12 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 12 — Festival + Life Events
 
-- [ ] Festival cross-module adaptation engine implemented and tested
-- [ ] All 10 festivals in calendar
-- [ ] Festival Survival Mode activates 3 days before
-- [ ] Life Events Engine with all supported event types
-- [ ] Navratri fasting food filter
-- [ ] Ramadan Sehri/Iftar mode
+- [x] Festival cross-module adaptation engine implemented and tested
+- [x] All 10 festivals in calendar
+- [x] Festival Survival Mode activates 3 days before
+- [x] Life Events Engine with all supported event types
+- [x] Navratri fasting food filter
+- [x] Ramadan Sehri/Iftar mode
 
 ## Phase 13 — Premium
 
