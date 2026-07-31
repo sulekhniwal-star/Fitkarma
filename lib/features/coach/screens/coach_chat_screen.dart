@@ -16,123 +16,592 @@ class CoachChatScreen extends ConsumerStatefulWidget {
 
 class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
   final TextEditingController _inputController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
+  static const List<String> _suggestedPrompts = [
+    'Why am I plateauing?',
+    'Adjust my macro splits',
+    'What should I eat after training?',
+    'Review my sleep debt recovery plan',
+  ];
 
   @override
   void dispose() {
     _inputController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
   void _send() {
     final text = _inputController.text.trim();
     if (text.isNotEmpty) {
-      ref.read(coachProvider.notifier).sendMessage(text);
+      ref.read(aiCoachChatProvider.notifier).sendMessage(text);
       _inputController.clear();
+      _scrollToBottom();
     }
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final coachState = ref.watch(coachProvider);
+    final state = ref.watch(aiCoachChatProvider);
+
+    // Apply suggested prompt to text field when set
+    ref.listen<AiCoachChatState>(aiCoachChatProvider, (prev, next) {
+      if (next.pendingSuggestedPrompt != null &&
+          next.pendingSuggestedPrompt != prev?.pendingSuggestedPrompt) {
+        _inputController.text = next.pendingSuggestedPrompt!;
+        ref.read(aiCoachChatProvider.notifier).clearSuggestedPrompt();
+      }
+      // Auto-scroll on new messages
+      if ((next.messages.length) > (prev?.messages.length ?? 0)) {
+        _scrollToBottom();
+      }
+    });
 
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      appBar: AppBar(
-        backgroundColor: AppColors.bgPrimary,
-        title: Text('AI Adaptive Coach', style: AppTypography.titleLarge),
-        actions: [
-          Chip(
-            backgroundColor: AppColors.glassBgMid,
-            side: const BorderSide(color: AppColors.glassBorder),
-            label: Text('Groq Multi-Model', style: AppTypography.labelSmall),
-          ),
-          const SizedBox(width: AppSpacing.md),
-        ],
-      ),
+      appBar: _buildAppBar(),
       body: SafeArea(
         child: Column(
           children: [
-            // Chat Message List
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                itemCount: coachState.messages.length,
-                itemBuilder: (context, index) {
-                  final msg = coachState.messages[index];
-                  final isUser = msg.sender == MessageSender.user;
+            // §P3-C Context Banner: Readiness · Streak · Goal
+            _ContextBanner(readinessScore: 82, streak: 12, goal: 'Recomp'),
 
-                  return Align(
-                    alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.78,
-                        child: GlassCard(
-                          padding: const EdgeInsets.all(AppSpacing.md),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (!isUser && msg.modelTierUsed != null) ...[
-                                Text(
-                                  'MODEL: ${msg.modelTierUsed!.toUpperCase()}',
-                                  style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan),
-                                ),
-                                const SizedBox(height: 4.0),
-                              ],
-                              Text(
-                                msg.text,
-                                style: AppTypography.bodyMedium.copyWith(
-                                  color: isUser ? AppColors.primaryCyan : AppColors.textPrimary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+            // Chat messages list
+            Expanded(
+              child: state.messages.isEmpty
+                  ? _EmptyStateView()
+                  : ListView.builder(
+                      controller: _scrollController,
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      itemCount: state.messages.length,
+                      itemBuilder: (ctx, i) =>
+                          _MessageBubble(message: state.messages[i]),
                     ),
-                  );
-                },
-              ),
             ),
 
-            if (coachState.isLoading)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: CircularProgressIndicator(color: AppColors.primaryCyan),
+            // Typing indicator
+            if (state.isAiTyping) const _TypingIndicator(),
+
+            // Suggested prompts strip
+            if (!state.isAiTyping && state.messages.length <= 2)
+              _SuggestedPromptsStrip(
+                prompts: _suggestedPrompts,
+                onTap: (p) =>
+                    ref.read(aiCoachChatProvider.notifier).applySuggestedPrompt(p),
               ),
 
-            // Input Bar
-            Padding(
+            // Error banner
+            if (state.errorOccurred)
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                padding: const EdgeInsets.all(AppSpacing.sm),
+                decoration: BoxDecoration(
+                  color: AppColors.error.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.wifi_off, color: AppColors.error, size: 16),
+                    const SizedBox(width: 8),
+                    Text('Connection error. Check your network.',
+                        style:
+                            AppTypography.bodyMd.copyWith(color: AppColors.error)),
+                  ],
+                ),
+              ),
+
+            // Input bar
+            _InputBar(
+              controller: _inputController,
+              onSend: _send,
+              isEnabled: !state.isAiTyping,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: AppColors.bgPrimary,
+      elevation: 0,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+        onPressed: () => Navigator.maybePop(context),
+      ),
+      title: Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [AppColors.teal, AppColors.secondary],
+              ),
+            ),
+            child: const Icon(Icons.psychology, color: Colors.white, size: 18),
+          ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('AI Karma Coach', style: AppTypography.h3),
+              Text('Powered by Groq · llama-3.3-70b',
+                  style: AppTypography.labelMd.copyWith(
+                      color: AppColors.teal, fontSize: 10)),
+            ],
+          ),
+        ],
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: AppSpacing.md),
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: AppColors.teal.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                  color: AppColors.teal.withValues(alpha: 0.4)),
+            ),
+            child: Text('Online',
+                style:
+                    AppTypography.labelMd.copyWith(color: AppColors.teal)),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Context Banner ──────────────────────────────────────────────────────────
+
+class _ContextBanner extends StatelessWidget {
+  final int readinessScore;
+  final int streak;
+  final String goal;
+
+  const _ContextBanner({
+    required this.readinessScore,
+    required this.streak,
+    required this.goal,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      decoration: BoxDecoration(
+        color: AppColors.glassBgMid,
+        borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+        border: Border.all(color: AppColors.glassBorder),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _BannerChip(
+              icon: Icons.bolt,
+              label: 'Readiness',
+              value: '$readinessScore',
+              color: AppColors.teal),
+          _Divider(),
+          _BannerChip(
+              icon: Icons.local_fire_department,
+              label: 'Streak',
+              value: '$streak days',
+              color: AppColors.warning),
+          _Divider(),
+          _BannerChip(
+              icon: Icons.flag,
+              label: 'Goal',
+              value: goal,
+              color: AppColors.secondary),
+        ],
+      ),
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 1,
+      height: 28,
+      color: AppColors.glassBorder,
+    );
+  }
+}
+
+class _BannerChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  final Color color;
+
+  const _BannerChip({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: color, size: 14),
+        const SizedBox(width: 4),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(label,
+                style: AppTypography.labelMd.copyWith(fontSize: 9)),
+            Text(value,
+                style:
+                    AppTypography.labelLg.copyWith(color: color, fontSize: 12)),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+// ── Message Bubble ──────────────────────────────────────────────────────────
+
+class _MessageBubble extends StatelessWidget {
+  final ChatMessage message;
+
+  const _MessageBubble({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    final isUser = message.sender == MessageSender.user;
+
+    return Align(
+      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: AppSpacing.md),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.78,
+        ),
+        child: Column(
+          crossAxisAlignment:
+              isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          children: [
+            GlassCard(
               padding: const EdgeInsets.all(AppSpacing.md),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _inputController,
-                      style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
-                      decoration: InputDecoration(
-                        hintText: 'Ask your AI Coach...',
-                        hintStyle: AppTypography.bodyMedium,
-                        filled: true,
-                        fillColor: AppColors.bgSecondary,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
-                          borderSide: const BorderSide(color: AppColors.glassBorder),
-                        ),
+                  // Source indicator chips (AI only)
+                  if (!isUser && message.sources.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Wrap(
+                        spacing: 6,
+                        children: message.sources
+                            .map((s) => _SourceChip(label: s))
+                            .toList(),
                       ),
-                      onSubmitted: (_) => _send(),
                     ),
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  IconButton(
-                    icon: const Icon(Icons.send, color: AppColors.primaryCyan),
-                    onPressed: _send,
+                  Text(
+                    message.text,
+                    style: AppTypography.bodyMd.copyWith(
+                      color: isUser
+                          ? AppColors.teal
+                          : AppColors.textPrimary,
+                      height: 1.5,
+                    ),
                   ),
                 ],
               ),
             ),
+            // Model tier badge (AI only)
+            if (!isUser && message.modelTierUsed != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 4),
+                child: Text(
+                  'MODEL: ${message.modelTierUsed!.toUpperCase()}',
+                  style: AppTypography.labelMd
+                      .copyWith(color: AppColors.secondary, fontSize: 9),
+                ),
+              ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _SourceChip extends StatelessWidget {
+  final String label;
+  const _SourceChip({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: AppColors.teal.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.teal.withValues(alpha: 0.3)),
+      ),
+      child: Text(label,
+          style: AppTypography.labelMd
+              .copyWith(color: AppColors.teal, fontSize: 9)),
+    );
+  }
+}
+
+// ── Typing Indicator ────────────────────────────────────────────────────────
+
+class _TypingIndicator extends StatefulWidget {
+  const _TypingIndicator();
+
+  @override
+  State<_TypingIndicator> createState() => _TypingIndicatorState();
+}
+
+class _TypingIndicatorState extends State<_TypingIndicator>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _anim;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl =
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 800))
+          ..repeat(reverse: true);
+    _anim = Tween<double>(begin: 0.4, end: 1.0).animate(_ctrl);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 8),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: AnimatedBuilder(
+          animation: _anim,
+          builder: (_, __) => Opacity(
+            opacity: _anim.value,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.psychology, color: AppColors.teal, size: 16),
+                const SizedBox(width: 8),
+                Text('AI Coach is thinking...',
+                    style: AppTypography.bodyMd
+                        .copyWith(color: AppColors.teal)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Suggested Prompts Strip ──────────────────────────────────────────────────
+
+class _SuggestedPromptsStrip extends StatelessWidget {
+  final List<String> prompts;
+  final void Function(String) onTap;
+
+  const _SuggestedPromptsStrip(
+      {required this.prompts, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 44,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+        itemCount: prompts.length,
+        separatorBuilder: (_, __) =>
+            const SizedBox(width: AppSpacing.sm),
+        itemBuilder: (_, i) => GestureDetector(
+          onTap: () => onTap(prompts[i]),
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: AppColors.glassBgMid,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.glassBorder),
+            ),
+            child: Text(
+              prompts[i],
+              style: AppTypography.labelLg
+                  .copyWith(color: AppColors.textSecondary),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Input Bar ────────────────────────────────────────────────────────────────
+
+class _InputBar extends StatelessWidget {
+  final TextEditingController controller;
+  final VoidCallback onSend;
+  final bool isEnabled;
+
+  const _InputBar({
+    required this.controller,
+    required this.onSend,
+    required this.isEnabled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: AppSpacing.md,
+        right: AppSpacing.md,
+        bottom: AppSpacing.md + MediaQuery.of(context).viewInsets.bottom,
+        top: AppSpacing.sm,
+      ),
+      child: Row(
+        children: [
+          // Mic icon
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.glassBgMid,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.glassBorder),
+            ),
+            child: const Icon(Icons.mic_none,
+                color: AppColors.textMuted, size: 20),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+
+          // Camera icon
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.glassBgMid,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.glassBorder),
+            ),
+            child: const Icon(Icons.camera_alt_outlined,
+                color: AppColors.textMuted, size: 20),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+
+          // Text field
+          Expanded(
+            child: TextField(
+              controller: controller,
+              enabled: isEnabled,
+              style: AppTypography.bodyMd
+                  .copyWith(color: AppColors.textPrimary),
+              maxLines: null,
+              textInputAction: TextInputAction.send,
+              onSubmitted: (_) => onSend(),
+              decoration: InputDecoration(
+                hintText: 'Ask anything...',
+                hintStyle: AppTypography.bodyMd,
+                filled: true,
+                fillColor: AppColors.bgSecondary,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide:
+                      const BorderSide(color: AppColors.glassBorder),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide:
+                      const BorderSide(color: AppColors.glassBorder),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: const BorderSide(color: AppColors.teal),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+
+          // Send button
+          GestureDetector(
+            onTap: isEnabled ? onSend : null,
+            child: Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                gradient: LinearGradient(
+                  colors: isEnabled
+                      ? [AppColors.teal, AppColors.secondary]
+                      : [AppColors.glassBgMid, AppColors.glassBgMid],
+                ),
+              ),
+              child: const Icon(Icons.send, color: Colors.white, size: 20),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Empty State ──────────────────────────────────────────────────────────────
+
+class _EmptyStateView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.psychology_outlined,
+              size: 60, color: AppColors.teal.withValues(alpha: 0.4)),
+          const SizedBox(height: 16),
+          Text('Ask your AI Coach anything',
+              style: AppTypography.h3
+                  .copyWith(color: AppColors.textSecondary)),
+          const SizedBox(height: 8),
+          Text('Every response references your Health Snapshot',
+              style: AppTypography.bodyMd),
+        ],
       ),
     );
   }
