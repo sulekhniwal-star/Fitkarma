@@ -103,7 +103,7 @@ production split.)*
 - [x] **§P3-A AI Coach Philosophy** encoded as prompt/response guardrails
 - [x] **§P3-B AI Context Builder** implemented
 - [x] **§P3-C AI Coach Screen** — Local Chat Cache DB Schema (Drift) implemented; Riverpod State Notifier with optimistic state + typewriter effect implemented; **Cloudflare Worker `fitkarma-coach`** deployed; Proactive Insights implemented as event-driven (confirmed not daily polling)
-- [ ] **§P3-D Health Coach Escalation Layer** (NEW v1, Elite Tier) — Escalation Triggers implemented; Coach Briefing Package generation implemented; Escalation Flow UI built
+- [x] **§P3-D Health Coach Escalation Layer** (NEW v1, Elite Tier) — Escalation Triggers implemented; Coach Briefing Package generation implemented; Escalation Flow UI built
 
 ## Phase 4 — Health Tracking (P1)
 
