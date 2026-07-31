@@ -154,14 +154,14 @@ prerequisite for shipping anything past local dev. Check items off as they land.
 
 ## Phase 9 — Social
 
-- [ ] Squad creation + invite code
-- [ ] Squad Readiness Board implemented (tier only, not score)
-- [ ] Squad Missions generated from aggregate squad data
-- [ ] Squad Challenges system
-- [ ] Relapse detection integrates squad nudge
-- [ ] Activity Feed screen (/feed) displaying workouts, routes, milestones, and high-fives
-- [ ] Geolocation Clubs and Interest Circles scanning & creation
-- [ ] Regional (City) and Cohort (Age-Group) leaderboards with anonymity toggle
+- [x] Squad creation + invite code
+- [x] Squad Readiness Board implemented (tier only, not score)
+- [x] Squad Missions generated from aggregate squad data
+- [x] Squad Challenges system
+- [x] Relapse detection integrates squad nudge
+- [x] Activity Feed screen (/feed) displaying workouts, routes, milestones, and high-fives
+- [x] Geolocation Clubs and Interest Circles scanning & creation
+- [x] Regional (City) and Cohort (Age-Group) leaderboards with anonymity toggle
 
 ## Phase 10 — Predictive Health
 
