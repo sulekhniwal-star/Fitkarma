@@ -23,74 +23,74 @@ section's intent using Cloudflare instead of the doc's original target, plus the
 production split.)*
 
 ### Branching & repo protection
-- [ ] `develop` and `main` branches created
-- [ ] Branch protection on `main`: require PR, require `test` + `test-workers` status checks
-- [ ] Branch protection on `develop`: require PR, require `test` status check
-- [ ] `production` GitHub Environment with ≥1 required reviewer
-- [ ] `staging` GitHub Environment, no reviewer required
+- [x] `develop` and `main` branches created
+- [x] Branch protection on `main`: require PR, require `test` + `test-workers` status checks
+- [x] Branch protection on `develop`: require PR, require `test` status check
+- [x] `production` GitHub Environment with ≥1 required reviewer
+- [x] `staging` GitHub Environment, no reviewer required
 
 ### Cloudflare setup
-- [ ] `wrangler.toml` created from `workers/wrangler.toml.example`
-- [ ] `fitkarma-db-staging` and `fitkarma-db-production` D1 databases created, IDs pasted in
-- [ ] Local dev D1 database created for `wrangler dev`
-- [ ] Separate scoped Cloudflare API tokens for staging vs. production deploys
+- [x] `wrangler.toml` created from `workers/wrangler.toml.example`
+- [x] `fitkarma-db-staging` and `fitkarma-db-production` D1 databases created, IDs pasted in
+- [x] Local dev D1 database created for `wrangler dev`
+- [x] Separate scoped Cloudflare API tokens for staging vs. production deploys
 
 ### Secrets (staging AND production, independently — never shared)
-- [ ] `GROQ_API_KEY` — both envs
-- [ ] `GOOGLE_OAUTH_CLIENT_ID` — both envs
-- [ ] `JWT_SIGNING_SECRET` — both envs, independently generated
-- [ ] `APPLE_SIGNIN_CLIENT_ID` — both envs
+- [x] `GROQ_API_KEY` — both envs
+- [x] `GOOGLE_OAUTH_CLIENT_ID` — both envs
+- [x] `JWT_SIGNING_SECRET` — both envs, independently generated
+- [x] `APPLE_SIGNIN_CLIENT_ID` — both envs
 
 ### GitHub Actions secrets
-- [ ] `CF_ACCOUNT_ID`, `CF_API_TOKEN_STAGING`, `CF_API_TOKEN_PRODUCTION`
-- [ ] `CF_D1_API_BASE_URL_*`, `CF_WORKERS_API_BASE_URL_*` (staging + production)
-- [ ] `GOOGLE_OAUTH_CLIENT_ID_*`, `SENTRY_DSN_*` (staging + production)
-- [ ] `ANDROID_KEYSTORE_BASE64` + password secrets
+- [x] `CF_ACCOUNT_ID`, `CF_API_TOKEN_STAGING`, `CF_API_TOKEN_PRODUCTION`
+- [x] `CF_D1_API_BASE_URL_*`, `CF_WORKERS_API_BASE_URL_*` (staging + production)
+- [x] `GOOGLE_OAUTH_CLIENT_ID_*`, `SENTRY_DSN_*` (staging + production)
+- [x] `ANDROID_KEYSTORE_BASE64` + password secrets
 
 ### Pipeline validation
-- [ ] PR triggers `test` + `test-workers` only, never a deploy
-- [ ] Push to `develop` auto-deploys Workers + D1 migrations to staging
-- [ ] Failing test on `main` confirmed to block `deploy-production` (fail-closed test)
-- [ ] Passing `main` push waits for required-reviewer approval before deploying to production
-- [ ] Staging-issued JWT confirmed rejected by production Worker
+- [x] PR triggers `test` + `test-workers` only, never a deploy
+- [x] Push to `develop` auto-deploys Workers + D1 migrations to staging
+- [x] Failing test on `main` confirmed to block `deploy-production` (fail-closed test)
+- [x] Passing `main` push waits for required-reviewer approval before deploying to production
+- [x] Staging-issued JWT confirmed rejected by production Worker
 
 ---
 
 ## Phase 0 — Foundation (P0)
 
-- [ ] **§P0-A Design Philosophy** — Six Pillars and Anti-Patterns encoded as team/agent guidelines (consider a lint rule or PR template checklist for the Anti-Patterns list)
-- [ ] **§P0-B Project Structure** — repo scaffolded exactly to the documented folder layout
-- [ ] **§P0-C Architecture Overview** — Offline-First + Health OS Brain principle implemented; Three-Layer Offline Strategy in place; **Drift Sync Merge Resolver** (Pure Dart) implemented per the documented conflict/concurrency rules; "What Is and Is NOT an AI Job" boundary respected everywhere (audit every AI Router call site against this list)
-- [ ] **§P0-D Design Tokens** — Color Tokens, Color Semantic Quick-Reference, Spacing & Radius Tokens, Typography System all implemented as a single source-of-truth token file
-- [ ] **§P0-D2 Shared Foundation Widgets** — `BentoCard` (`lib/shared/widgets/bento_card.dart`), `ActivityRings` (`lib/shared/widgets/activity_rings.dart`), `GlowingMetric` (`lib/shared/widgets/glowing_metric.dart`), `BilingualLabel` (`lib/shared/widgets/bilingual_label.dart`) — each with a golden test
-- [ ] **§P0-E Health OS Brain** — inputs pipeline wired; **Daily Intelligence Package (DIP)** model + generation implemented; Unified Health Score formula implemented; **Decision Hierarchy** conflict-resolution logic implemented and unit tested
-- [ ] **§P0-F AI Routing Layer** — Model Tiers defined; **AI Router** implemented; **RuleEngine** (Pure Dart) implemented; **InsightTemplateEngine** (Pure Dart) implemented; Event-Driven AI Triggers wired (not polling); **ContextCompressor** implemented per spec; Conversation Memory Management implemented; AI Cost Budget per user tier enforced in code (not just documented); Hybrid Insight Engine implemented
-- [ ] **§P0-G Program Evolution Engine** implemented
-- [ ] **§P0-H Prerequisites** — dev environment matches documented prerequisites (Flutter SDK version, Wrangler, Node)
-- [ ] **§P0-I Adaptive Metabolism Engine** (NEW v1) — **AdaptiveMetabolismEngine** (Pure Dart, no AI) implemented; Weekly Recalibration Output implemented; Calibration Schedule implemented; integration with Health OS Brain wired
-- [ ] **§P0-J Environmental Health Layer** (NEW v1) — **EnvironmentalHealthEngine** implemented (AQI + UV + Heat inputs); AQI Warning Banner UI built; Decision Hierarchy integration wired
+- [x] **§P0-A Design Philosophy** — Six Pillars and Anti-Patterns encoded as team/agent guidelines (consider a lint rule or PR template checklist for the Anti-Patterns list)
+- [x] **§P0-B Project Structure** — repo scaffolded exactly to the documented folder layout
+- [x] **§P0-C Architecture Overview** — Offline-First + Health OS Brain principle implemented; Three-Layer Offline Strategy in place; **Drift Sync Merge Resolver** (Pure Dart) implemented per the documented conflict/concurrency rules; "What Is and Is NOT an AI Job" boundary respected everywhere (audit every AI Router call site against this list)
+- [x] **§P0-D Design Tokens** — Color Tokens, Color Semantic Quick-Reference, Spacing & Radius Tokens, Typography System all implemented as a single source-of-truth token file
+- [x] **§P0-D2 Shared Foundation Widgets** — `BentoCard` (`lib/shared/widgets/bento_card.dart`), `ActivityRings` (`lib/shared/widgets/activity_rings.dart`), `GlowingMetric` (`lib/shared/widgets/glowing_metric.dart`), `BilingualLabel` (`lib/shared/widgets/bilingual_label.dart`) — each with a golden test
+- [x] **§P0-E Health OS Brain** — inputs pipeline wired; **Daily Intelligence Package (DIP)** model + generation implemented; Unified Health Score formula implemented; **Decision Hierarchy** conflict-resolution logic implemented and unit tested
+- [x] **§P0-F AI Routing Layer** — Model Tiers defined; **AI Router** implemented; **RuleEngine** (Pure Dart) implemented; **InsightTemplateEngine** (Pure Dart) implemented; Event-Driven AI Triggers wired (not polling); **ContextCompressor** implemented per spec; Conversation Memory Management implemented; AI Cost Budget per user tier enforced in code (not just documented); Hybrid Insight Engine implemented
+- [x] **§P0-G Program Evolution Engine** implemented
+- [x] **§P0-H Prerequisites** — dev environment matches documented prerequisites (Flutter SDK version, Wrangler, Node)
+- [x] **§P0-I Adaptive Metabolism Engine** (NEW v1) — **AdaptiveMetabolismEngine** (Pure Dart, no AI) implemented; Weekly Recalibration Output implemented; Calibration Schedule implemented; integration with Health OS Brain wired
+- [x] **§P0-J Environmental Health Layer** (NEW v1) — **EnvironmentalHealthEngine** implemented (AQI + UV + Heat inputs); AQI Warning Banner UI built; Decision Hierarchy integration wired
 
 ## Phase 1 — Onboarding + User Profile (P0)
 
-- [ ] **§P1-A Onboarding Flow Order** implemented as the canonical navigation sequence
-- [ ] **§P1-B Welcome Screen** built per wireframe
-- [ ] **§P1-C Goals Screen** built with all documented selection & conditional logic rules
-- [ ] **§P1-D Demographics Screen** — Live BMI Calculation & Target Selection Logic implemented; Adaptive Targets computed **in Dart, never AI**
-- [ ] **§P1-E AI Diet Plan Results Screen** — Loading & Fallback Caching Logic implemented (offline-first compliant); Groq Prompt Template implemented exactly as documented
-- [ ] **§P1-F Dosha Quiz Screen** — **DoshaQuizScoringEngine** (Pure Dart) implemented and unit tested against known quiz combinations
-- [ ] **§P1-G Program Blueprint Selection Screen** — Allocation Rules & Database Integration implemented; full Program Library seeded
-- [ ] **§P1-H Women's Advanced Health Layer** (NEW v1) — Cycle-Aware Training Adapter, Cycle-Aware Nutrition Adapter, Fertility Planning Mode, Menopause Symptom Tracking, and **DynamicCycleCalibrator** (PCOS/irregular cycle, Pure Dart) all implemented; Women's Health Screen UI built
+- [x] **§P1-A Onboarding Flow Order** implemented as the canonical navigation sequence
+- [x] **§P1-B Welcome Screen** built per wireframe
+- [x] **§P1-C Goals Screen** built with all documented selection & conditional logic rules
+- [x] **§P1-D Demographics Screen** — Live BMI Calculation & Target Selection Logic implemented; Adaptive Targets computed **in Dart, never AI**
+- [x] **§P1-E AI Diet Plan Results Screen** — Loading & Fallback Caching Logic implemented (offline-first compliant); Groq Prompt Template implemented exactly as documented
+- [x] **§P1-F Dosha Quiz Screen** — **DoshaQuizScoringEngine** (Pure Dart) implemented and unit tested against known quiz combinations
+- [x] **§P1-G Program Blueprint Selection Screen** — Allocation Rules & Database Integration implemented; full Program Library seeded
+- [x] **§P1-H Women's Advanced Health Layer** (NEW v1) — Cycle-Aware Training Adapter, Cycle-Aware Nutrition Adapter, Fertility Planning Mode, Menopause Symptom Tracking, and **DynamicCycleCalibrator** (PCOS/irregular cycle, Pure Dart) all implemented; Women's Health Screen UI built
 
 ## Phase 2 — Daily Mission + Readiness Engine (P1)
 
-- [ ] **§P2-A Readiness Engine** — Three-Tier Confidence Model implemented; Readiness Score Formula (Pure Dart, no AI) implemented; Readiness Zones + recommended intensity mapping implemented; AI Intensity Adjustment confirmed **computed, not AI-called**
+- [x] **§P2-A Readiness Engine** — Three-Tier Confidence Model implemented; Readiness Score Formula (Pure Dart, no AI) implemented; Readiness Zones + recommended intensity mapping implemented; AI Intensity Adjustment confirmed **computed, not AI-called**
 - [ ] **§P2-B Daily Briefing Screen** — Morning Check-In (3-question, <30s) built; full Daily Briefing layout built, reading from DIP only
 - [ ] **§P2-C Recovery Log Screen** — Interactive Body Soreness Map (tap-to-select) built; Riverpod State Notifier + DB sync implemented
 - [ ] **§P2-D Recovery Operating System** (NEW v1):
   - [ ] Sleep Need Calculator implemented
   - [ ] Sleep Performance Score implemented
   - [ ] Bedtime Coach implemented
-  - [ ] **DailyStrainCalculator** (Pure Dart, 0–21 scale) implemented per the documented mathematical model
+  - [x] **DailyStrainCalculator** (Pure Dart, 0–21 scale) implemented per the documented mathematical model
   - [ ] Recovery Capacity & Decision Matrix implemented
   - [ ] Recovery Behaviors & Actionable Prescriptions implemented
   - [ ] Circadian Score (0–100) implemented with midpoint-shift penalty
