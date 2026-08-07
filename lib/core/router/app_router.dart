@@ -15,6 +15,7 @@ import '../../features/predictive_health/screens/predictive_health_screen.dart';
 import '../../features/social/screens/activity_feed_screen.dart';
 import '../../features/transformation/screens/transformation_dashboard_screen.dart';
 import '../../features/workout/screens/active_workout_screen.dart';
+import '../../features/workout/screens/workout_home_screen.dart';
 
 /// Central GoRouter configuration
 final GoRouter appRouter = GoRouter(
@@ -50,6 +51,10 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/workout',
+      builder: (context, state) => const WorkoutHomeScreen(),
+    ),
+    GoRoute(
+      path: '/workout/active',
       builder: (context, state) => const ActiveWorkoutScreen(),
     ),
     GoRoute(

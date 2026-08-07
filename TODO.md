@@ -138,7 +138,7 @@ production split.)*
 
 ## Phase 6 — Workout System & Movement Intelligence (P1)
 
-- [ ] **§P6-A Workout Screen Home** built
+- [x] **§P6-A Workout Screen Home** built
 - [ ] **§P6-B Active Workout Screen** — Active Set Logging & Rest Countdowns implemented, survives backgrounding
 - [ ] **§P6-C Progressive Overload Engine** implemented as fully deterministic (no AI)
 - [ ] **§P6-D Dynamic Fitness Blueprint Generator** implemented
