@@ -126,7 +126,7 @@ production split.)*
 - [x] **§P5-G Nutrition Periodization Engine** (NEW v1) — Periodization Phases defined; Periodization Controller implemented
 - [x] **§P5-H Protein Distribution & Timing Intelligence** (NEW v1) — MPS Threshold Target implemented; Timing Scoring implemented
 - [x] **§P5-I Micronutrient Intelligence Core** (NEW v1) — Biomarkers Tracked list implemented with target adjustments; Auto-Alert Trigger Engine implemented
-- [ ] **§P5-J Nutrition Adherence Engine** (NEW v1) — Scoring Matrix implemented; Score Calculation Logic implemented
+- [x] **§P5-J Nutrition Adherence Engine** (NEW v1) — Scoring Matrix implemented; Score Calculation Logic implemented
 - [ ] **§P5-K Smart Festival Nutrition Adaptation** (NEW v1) — Diwali Pre-Compensation Protocol implemented; Adaptation Engine Integration wired
 - [ ] **§P5-L Adaptive Hunger & Cravings Engine** (NEW v1) — Craving Log Prompts implemented; Craving Predictor implemented
 - [ ] **§P5-M Glycemic Response & Personal Food Scoring** (NEW v1) — CGM Integration Map implemented; Score Calculation implemented
