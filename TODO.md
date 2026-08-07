@@ -129,7 +129,7 @@ production split.)*
 - [x] **§P5-J Nutrition Adherence Engine** (NEW v1) — Scoring Matrix implemented; Score Calculation Logic implemented
 - [x] **§P5-K Smart Festival Nutrition Adaptation** (NEW v1) — Diwali Pre-Compensation Protocol implemented; Adaptation Engine Integration wired
 - [x] **§P5-L Adaptive Hunger & Cravings Engine** (NEW v1) — Craving Log Prompts implemented; Craving Predictor implemented
-- [ ] **§P5-M Glycemic Response & Personal Food Scoring** (NEW v1) — CGM Integration Map implemented; Score Calculation implemented
+- [x] **§P5-M Glycemic Response & Personal Food Scoring** (NEW v1) — CGM Integration Map implemented; Score Calculation implemented
 - [ ] **§P5-N Multi-Dimensional Meal Quality Score** (NEW v1) — Scoring Formula implemented; validated against Indian Food Score Comparison Examples in the doc
 - [ ] **§P5-O Nutrition Reliability Score & Data Confidence Shield** (NEW v1) — Reliability Equation implemented; Shield Check implemented
 - [ ] **§P5-P Satiety Prediction Engine** (NEW v1) — Satiety Index Score (0–100) implemented; Local Indian Satiety Reference Table seeded
