@@ -140,7 +140,7 @@ production split.)*
 
 - [x] **§P6-A Workout Screen Home** built
 - [x] **§P6-B Active Workout Screen** — Active Set Logging & Rest Countdowns implemented, survives backgrounding
-- [ ] **§P6-C Progressive Overload Engine** implemented as fully deterministic (no AI)
+- [x] **§P6-C Progressive Overload Engine** implemented as fully deterministic (no AI)
 - [ ] **§P6-D Dynamic Fitness Blueprint Generator** implemented
 - [ ] **§P6-E Training Operating System** (NEW v1) — Movement Intelligence Platform, 5 levels:
   - [ ] Level 1 — Exercise Video Intelligence
