@@ -109,7 +109,7 @@ production split.)*
 
 - [x] **§P4-A Dashboard Screen** — Orchestration layer + full layout built, DIP-only reads
 - [x] **§P4-B Steps Screen** — Auto-Detection & Sync Engine implemented
-- [ ] **§P4-C Sleep Screen** — Sleep Stage Metrics and Debt Modeling implemented
+- [x] **§P4-C Sleep Screen** — Sleep Stage Metrics and Debt Modeling implemented
 - [ ] **§P4-D Blood Pressure Screen** — Security & Biometric Access Layer implemented
 - [ ] **§P4-E Glucose Screen** — Meal Correlation & HbA1c Estimation implemented
 - [ ] **§P4-F Preventive Intelligence Engine** — all 6 risk patterns implemented, confirmed deterministic (no AI)
