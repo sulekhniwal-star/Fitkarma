@@ -131,7 +131,7 @@ production split.)*
 - [x] **§P5-L Adaptive Hunger & Cravings Engine** (NEW v1) — Craving Log Prompts implemented; Craving Predictor implemented
 - [x] **§P5-M Glycemic Response & Personal Food Scoring** (NEW v1) — CGM Integration Map implemented; Score Calculation implemented
 - [x] **§P5-N Multi-Dimensional Meal Quality Score** (NEW v1) — Scoring Formula implemented; validated against Indian Food Score Comparison Examples in the doc
-- [ ] **§P5-O Nutrition Reliability Score & Data Confidence Shield** (NEW v1) — Reliability Equation implemented; Shield Check implemented
+- [x] **§P5-O Nutrition Reliability Score & Data Confidence Shield** (NEW v1) — Reliability Equation implemented; Shield Check implemented
 - [ ] **§P5-P Satiety Prediction Engine** (NEW v1) — Satiety Index Score (0–100) implemented; Local Indian Satiety Reference Table seeded
 - [ ] **§P5-Q Family Nutrition Integration** (NEW v1) — Multi-Profile Matching Flow implemented; Family Dinner Engine implemented
 - [ ] **§P5-R Indian Food Substitution & Swap Engine** (NEW v1) — Target Swap Index implemented; Substitution Service implemented
