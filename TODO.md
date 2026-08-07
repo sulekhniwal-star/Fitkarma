@@ -122,7 +122,7 @@ production split.)*
 - [x] **§P5-C "Fix My Meal" — AI Meal Photo Analysis** — Meal Vision Cost Optimization (cache-first) implemented; Full Analysis Result Screen built
 - [x] **§P5-D Smart Indian Meal Intelligence** — Offline Seeded Food Database Matrix (5,000+ items) seeded; Local Meal Quality Score Calculation Engine implemented; Core Nutrition Adaptations implemented
 - [x] **§P5-E Indian Restaurant Intelligence 2.0** (NEW v1) — Menu OCR Scan & Goal Overlay flow implemented; Major Chain Menu Optimization Presets seeded; Smart Item Recognition & OCR Parser implemented
-- [ ] **§P5-F Grocery Optimization Engine 2.0** (NEW v1) — Meal Plan → Budget-Optimized Grocery flow implemented; **GroceryOptimizationEngine** (knapsack-based) implemented and edge-case tested
+- [x] **§P5-F Grocery Optimization Engine 2.0** (NEW v1) — Meal Plan → Budget-Optimized Grocery flow implemented; **GroceryOptimizationEngine** (knapsack-based) implemented and edge-case tested
 - [ ] **§P5-G Nutrition Periodization Engine** (NEW v1) — Periodization Phases defined; Periodization Controller implemented
 - [ ] **§P5-H Protein Distribution & Timing Intelligence** (NEW v1) — MPS Threshold Target implemented; Timing Scoring implemented
 - [ ] **§P5-I Micronutrient Intelligence Core** (NEW v1) — Biomarkers Tracked list implemented with target adjustments; Auto-Alert Trigger Engine implemented
