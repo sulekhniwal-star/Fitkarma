@@ -142,25 +142,25 @@ production split.)*
 - [x] **§P6-B Active Workout Screen** — Active Set Logging & Rest Countdowns implemented, survives backgrounding
 - [x] **§P6-C Progressive Overload Engine** implemented as fully deterministic (no AI)
 - [x] **§P6-D Dynamic Fitness Blueprint Generator** implemented
-- [ ] **§P6-E Training Operating System** (NEW v1) — Movement Intelligence Platform, 5 levels:
-  - [ ] Level 1 — Exercise Video Intelligence
-  - [ ] Level 2 — Personalized Weakness Profiling (**MWP**)
-  - [ ] Level 3 — Mobility Diagnosis & Correctives
-  - [ ] Level 4 — Biomechanical Injury Forecasting
-  - [ ] Level 5 — Movement Memory
-  - [ ] Exercise Confidence Score (**ECS**) implemented
-  - [ ] Movement Health Score (**MHS**) implemented
-  - [ ] Camera-Based Fitness Onboarding & Movement Age implemented
-  - [ ] Adaptive Exercise Selection implemented
-  - [ ] Local Muscle Readiness implemented
-  - [ ] Recovery-Aware Overload Progression implemented
-  - [ ] Training Reliability Score (0–100) implemented
-  - [ ] Workout Simulation & Strength Potential implemented
-  - [ ] Movement Asymmetry Detection implemented
-  - [ ] Estimated Rep-Speed Trend Analysis implemented
-  - [ ] Exercise Skill Trees & Mastery Levels implemented
-  - [ ] Athletic Testing Battery implemented
-  - [ ] Performance Forecasting Engine implemented
+- [x] **§P6-E Training Operating System** (NEW v1) — Movement Intelligence Platform, 5 levels:
+  - [x] Level 1 — Exercise Video Intelligence
+  - [x] Level 2 — Personalized Weakness Profiling (**MWP**)
+  - [x] Level 3 — Mobility Diagnosis & Correctives
+  - [x] Level 4 — Biomechanical Injury Forecasting
+  - [x] Level 5 — Movement Memory
+  - [x] Exercise Confidence Score (**ECS**) implemented
+  - [x] Movement Health Score (**MHS**) implemented
+  - [x] Camera-Based Fitness Onboarding & Movement Age implemented
+  - [x] Adaptive Exercise Selection implemented
+  - [x] Local Muscle Readiness implemented
+  - [x] Recovery-Aware Overload Progression implemented
+  - [x] Training Reliability Score (0–100) implemented
+  - [x] Workout Simulation & Strength Potential implemented
+  - [x] Movement Asymmetry Detection implemented
+  - [x] Estimated Rep-Speed Trend Analysis implemented
+  - [x] Exercise Skill Trees & Mastery Levels implemented
+  - [x] Athletic Testing Battery implemented
+  - [x] Performance Forecasting Engine implemented
 - [ ] **§P6-F Adaptive Computer Vision Loop (ACVL)** (NEW v1):
   - [ ] Thermal-Aware Downsampling Matrix implemented
   - [ ] Android ADPF Bridge (Kotlin, `MethodChannel`) implemented
