@@ -125,7 +125,7 @@ production split.)*
 - [x] **§P5-F Grocery Optimization Engine 2.0** (NEW v1) — Meal Plan → Budget-Optimized Grocery flow implemented; **GroceryOptimizationEngine** (knapsack-based) implemented and edge-case tested
 - [x] **§P5-G Nutrition Periodization Engine** (NEW v1) — Periodization Phases defined; Periodization Controller implemented
 - [x] **§P5-H Protein Distribution & Timing Intelligence** (NEW v1) — MPS Threshold Target implemented; Timing Scoring implemented
-- [ ] **§P5-I Micronutrient Intelligence Core** (NEW v1) — Biomarkers Tracked list implemented with target adjustments; Auto-Alert Trigger Engine implemented
+- [x] **§P5-I Micronutrient Intelligence Core** (NEW v1) — Biomarkers Tracked list implemented with target adjustments; Auto-Alert Trigger Engine implemented
 - [ ] **§P5-J Nutrition Adherence Engine** (NEW v1) — Scoring Matrix implemented; Score Calculation Logic implemented
 - [ ] **§P5-K Smart Festival Nutrition Adaptation** (NEW v1) — Diwali Pre-Compensation Protocol implemented; Adaptation Engine Integration wired
 - [ ] **§P5-L Adaptive Hunger & Cravings Engine** (NEW v1) — Craving Log Prompts implemented; Craving Predictor implemented
