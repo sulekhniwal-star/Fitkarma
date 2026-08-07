@@ -106,7 +106,9 @@ void main() {
       await Future.delayed(const Duration(milliseconds: 300));
       expect(notifier.state.isReady, isTrue);
 
-      await notifier.refresh();
+      final future = notifier.refresh();
+      await Future.delayed(const Duration(milliseconds: 300));
+      await future;
       expect(notifier.state.isReady, isTrue);
     });
 
