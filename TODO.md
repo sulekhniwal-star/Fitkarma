@@ -134,7 +134,7 @@ production split.)*
 - [x] **§P5-O Nutrition Reliability Score & Data Confidence Shield** (NEW v1) — Reliability Equation implemented; Shield Check implemented
 - [x] **§P5-P Satiety Prediction Engine** (NEW v1) — Satiety Index Score (0–100) implemented; Local Indian Satiety Reference Table seeded
 - [x] **§P5-Q Family Nutrition Integration** (NEW v1) — Multi-Profile Matching Flow implemented; Family Dinner Engine implemented
-- [ ] **§P5-R Indian Food Substitution & Swap Engine** (NEW v1) — Target Swap Index implemented; Substitution Service implemented
+- [x] **§P5-R Indian Food Substitution & Swap Engine** (NEW v1) — Target Swap Index implemented; Substitution Service implemented
 
 ## Phase 6 — Workout System & Movement Intelligence (P1)
 
