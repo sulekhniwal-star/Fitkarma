@@ -183,7 +183,7 @@ production split.)*
 
 - [x] **§P8-A Transformation Journey Engine** — Long-Term Memory implemented; Consistency Tracker implemented; Relapse Intervention System (all tiers) implemented
 - [x] **§P8-B Transformation Timeline Screen** — **TransformationJourneyNotifier** implemented
-- [ ] **§P8-C Habit Identity Layer** (NEW v1) — Identity Personas defined; Identity Evolution Engine implemented; "You Are Becoming" Card UI built; Identity → AI Coach integration wired
+- [x] **§P8-C Habit Identity Layer** (NEW v1) — Identity Personas defined; Identity Evolution Engine implemented; "You Are Becoming" Card UI built; Identity → AI Coach integration wired
 
 ## Phase 9 — Social + Squad Accountability (P1)
 
