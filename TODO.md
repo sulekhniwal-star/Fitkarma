@@ -190,7 +190,7 @@ production split.)*
 - [x] **§P9-A Social Screen** — **SquadStateNotifier** implemented
 - [x] **§P9-B Squad System** (v1 features) implemented
 - [x] **§P9-C Accountability Communities** implemented
-- [ ] **§P9-D Family Health Hub** (NEW v1) — Family Hub Architecture, Dashboard UI, Privacy Model, and Family Nudges all implemented
+- [x] **§P9-D Family Health Hub** (NEW v1) — Family Hub Architecture, Dashboard UI, Privacy Model, and Family Nudges all implemented
 - [ ] **§P9-E Activity Feed & Sharing Architecture** (NEW v1) — Feed Item Data Model implemented; Feed Engagement Logic implemented; **FeedCurationEngine & SyncCoordinator** (Pure Dart, spam prevention) implemented
 - [ ] **§P9-F Local Geolocation Clubs & Interest Circles** (NEW v1) — Data Architecture implemented; Geolocation Matching implemented
 - [ ] **§P9-G Weekly & Monthly Leaderboards** (NEW v1) — Leaderboard Tiers implemented; Gamified Rewards & Anonymity toggle implemented
