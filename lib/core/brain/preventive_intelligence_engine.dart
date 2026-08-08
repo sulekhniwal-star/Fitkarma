@@ -76,37 +76,99 @@ class PreventiveIntelligenceEngine {
       rhrSpikeBpm: data.rhrSpikeBpm,
     );
 
-    // Multi-factor Trend Overrides per §P4-F specification:
+    // Multi-factor Trend Overrides per §P4-F / §P10-A specification:
 
-    // 1. Hypertension Risk Pattern Override (Rising BP + Declining Sleep + Rising Weight + Declining Steps)
-    if (data.bpTrend == TrendDirection.rising &&
-        data.sleepTrend == TrendDirection.declining &&
-        data.weightTrend == TrendDirection.rising &&
-        data.stepsTrend == TrendDirection.declining &&
-        !alerts.any((a) => a.id == 'p1_hypertension')) {
-      alerts.add(const HealthRiskAlert(
-        id: 'p1_hypertension',
-        patternName: 'Hypertension Risk Pattern',
-        description: 'Rising BP + declining sleep + reduced activity detected.',
-        severity: RiskSeverity.moderate,
-        recommendation: 'Rising BP + declining sleep + reduced activity is a hypertension risk pattern. Prioritize walking.',
-        actions: ['Log a 20-min walk', 'Reduce sodium', 'Check BP tomorrow'],
-      ));
+    // 1. Hypertension Risk Pattern (BP rising + steps declining 7+ days)
+    if ((data.bpTrend == TrendDirection.rising && data.stepsTrend == TrendDirection.declining) ||
+        (data.bpTrend == TrendDirection.rising &&
+            data.sleepTrend == TrendDirection.declining &&
+            data.weightTrend == TrendDirection.rising &&
+            data.stepsTrend == TrendDirection.declining)) {
+      if (!alerts.any((a) => a.id == 'p1_hypertension')) {
+        alerts.add(const HealthRiskAlert(
+          id: 'p1_hypertension',
+          patternName: 'Hypertension Risk Pattern',
+          description: 'BP rising + declining steps detected.',
+          severity: RiskSeverity.moderate,
+          recommendation: 'Rising BP + declining steps is a hypertension risk pattern. Prioritize walking and sodium control.',
+          actions: ['Log a 20-min walk', 'Reduce sodium', 'Check BP tomorrow'],
+        ));
+      }
     }
 
-    // 2. Type 2 Diabetes Pattern Override (Rising Glucose + BMI >= 27 + Steps < 5000)
-    if (data.glucoseTrend == TrendDirection.rising &&
-        data.bmi >= 27.0 &&
-        data.stepAvg7d < 5000 &&
-        !alerts.any((a) => a.id == 'p2_glycemic')) {
-      alerts.add(const HealthRiskAlert(
-        id: 'p2_glycemic',
-        patternName: 'Type 2 Diabetes Pattern',
-        description: 'Elevated glucose trend + high BMI + low physical activity.',
-        severity: RiskSeverity.moderate,
-        recommendation: 'Elevated glucose + low activity. A 15-min post-meal walk reduces glucose spikes significantly.',
-        actions: ['Walk after meals', 'Reduce refined carbs', 'Log fasting glucose'],
-      ));
+    // 2. Type 2 Diabetes Pattern (Glucose up + BMI >= 27)
+    if ((data.glucoseTrend == TrendDirection.rising && data.bmi >= 27.0) ||
+        (data.glucoseTrend == TrendDirection.rising && data.bmi >= 27.0 && data.stepAvg7d < 5000)) {
+      if (!alerts.any((a) => a.id == 'p2_glycemic')) {
+        alerts.add(const HealthRiskAlert(
+          id: 'p2_glycemic',
+          patternName: 'Type 2 Diabetes Pattern',
+          description: 'Elevated glucose trend + high BMI.',
+          severity: RiskSeverity.moderate,
+          recommendation: 'Elevated glucose + high BMI detected. A 15-min post-meal walk reduces glucose spikes significantly.',
+          actions: ['Walk after meals', 'Reduce refined carbs', 'Log fasting glucose'],
+        ));
+      }
+    }
+
+    // 3. Heart Disease Pattern (HR + BP elevated + poor sleep)
+    if (data.rhrSpikeBpm >= 5 && (data.systolicBp > 130.0 || data.bpTrend == TrendDirection.rising) && data.sleepTrend == TrendDirection.declining) {
+      if (!alerts.any((a) => a.id == 'p3_heart_disease')) {
+        alerts.add(const HealthRiskAlert(
+          id: 'p3_heart_disease',
+          patternName: 'Heart Disease Prevention Risk',
+          description: 'Elevated resting HR + elevated BP + poor sleep trend detected.',
+          severity: RiskSeverity.high,
+          recommendation: 'Cardiovascular stress detected. Prioritize sleep recovery and consult doctor if persistent.',
+          actions: ['Prioritize 8h sleep', 'Avoid high caffeine', 'Schedule relaxation session'],
+        ));
+      }
+    }
+
+    // 4. Metabolic Syndrome Pattern (3+ risk factors present: high BP, high glucose, high BMI/waist)
+    int metabolicRiskFactors = 0;
+    if (data.systolicBp >= 130.0 || data.diastolicBp >= 85.0) metabolicRiskFactors++;
+    if (data.fastingGlucoseMgDl >= 100.0 || data.glucoseTrend == TrendDirection.rising) metabolicRiskFactors++;
+    if (data.bmi >= 27.0 || data.weightTrend == TrendDirection.rising) metabolicRiskFactors++;
+    if (metabolicRiskFactors >= 3) {
+      if (!alerts.any((a) => a.id == 'p4_metabolic_syndrome')) {
+        alerts.add(const HealthRiskAlert(
+          id: 'p4_metabolic_syndrome',
+          patternName: 'Metabolic Syndrome Risk',
+          description: '3+ metabolic risk factors present (BP, glucose, BMI).',
+          severity: RiskSeverity.high,
+          recommendation: 'Comprehensive lifestyle intervention required: daily 30-min walking + Satvik diet.',
+          actions: ['30-min daily walk', 'Satvik diet swap', 'Biometric health review'],
+        ));
+      }
+    }
+
+    // 5. Burnout / Overtraining Pattern (HRV declining + HR elevated + performance dropping)
+    if (data.hrvDropRatio >= 0.20 && data.rhrSpikeBpm >= 5 && data.sleepTrend == TrendDirection.declining) {
+      if (!alerts.any((a) => a.id == 'p5_burnout')) {
+        alerts.add(const HealthRiskAlert(
+          id: 'p5_burnout',
+          patternName: 'Burnout / Overtraining Risk',
+          description: 'Declining HRV + elevated resting HR + sleep degradation detected.',
+          severity: RiskSeverity.critical,
+          recommendation: 'Immediate recovery protocol mandatory. Reduce training load by 50%.',
+          actions: ['Deload training', '8h sleep target', 'Breathwork session'],
+        ));
+      }
+    }
+
+    // 6. Vitamin D Deficiency Pattern (Low outdoor steps + high fatigue 5+ days)
+    if (data.stepAvg7d < 4000 && data.consecutiveSedentaryDays >= 5) {
+      if (!alerts.any((a) => a.id == 'p6_vitamin_d')) {
+        alerts.add(const HealthRiskAlert(
+          id: 'p6_vitamin_d',
+          patternName: 'Vitamin D Deficiency Risk',
+          description: 'Low outdoor activity + sedentary stagnation 5+ days.',
+          severity: RiskSeverity.low,
+          recommendation: 'Get 15-20 mins of direct morning sunlight daily and check Vitamin D levels.',
+          actions: ['15-min morning sunlight', 'Log outdoor walk', 'Vitamin D check'],
+        ));
+      }
     }
 
     return alerts;

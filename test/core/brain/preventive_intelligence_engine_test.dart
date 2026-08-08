@@ -131,5 +131,50 @@ void main() {
       expect(alerts.any((a) => a.id == 'p6_rhr_spike'), isTrue);
       expect(alerts.firstWhere((a) => a.id == 'p6_rhr_spike').severity, equals(RiskSeverity.critical));
     });
+
+    test('§P10-A Risk 3: Heart Disease risk triggers on elevated HR + BP + poor sleep', () {
+      final snapshot = UserHealthDataSnapshot(
+        rhrSpikeBpm: 6,
+        systolicBp: 138.0,
+        sleepTrend: TrendDirection.declining,
+      );
+
+      final alerts = engine.analyze(snapshot);
+      expect(alerts.any((a) => a.id == 'p3_heart_disease'), isTrue);
+      expect(alerts.firstWhere((a) => a.id == 'p3_heart_disease').severity, equals(RiskSeverity.high));
+    });
+
+    test('§P10-A Risk 4: Metabolic Syndrome risk triggers when 3+ risk factors present', () {
+      final snapshot = UserHealthDataSnapshot(
+        systolicBp: 135.0,
+        fastingGlucoseMgDl: 105.0,
+        bmi: 28.0,
+      );
+
+      final alerts = engine.analyze(snapshot);
+      expect(alerts.any((a) => a.id == 'p4_metabolic_syndrome'), isTrue);
+    });
+
+    test('§P10-A Risk 5: Burnout / Overtraining risk triggers on HRV drop + elevated HR + sleep decline', () {
+      final snapshot = UserHealthDataSnapshot(
+        hrvDropRatio: 0.22,
+        rhrSpikeBpm: 6,
+        sleepTrend: TrendDirection.declining,
+      );
+
+      final alerts = engine.analyze(snapshot);
+      expect(alerts.any((a) => a.id == 'p5_burnout'), isTrue);
+      expect(alerts.firstWhere((a) => a.id == 'p5_burnout').severity, equals(RiskSeverity.critical));
+    });
+
+    test('§P10-A Risk 6: Vitamin D Deficiency risk triggers on low outdoor steps + 5+ sedentary days', () {
+      final snapshot = UserHealthDataSnapshot(
+        stepAvg7d: 3200,
+        consecutiveSedentaryDays: 6,
+      );
+
+      final alerts = engine.analyze(snapshot);
+      expect(alerts.any((a) => a.id == 'p6_vitamin_d'), isTrue);
+    });
   });
 }

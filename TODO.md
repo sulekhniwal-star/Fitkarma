@@ -197,8 +197,8 @@ production split.)*
 
 ## Phase 10 — Predictive Health + Preventive Intelligence (P1)
 
-- [ ] **§P10-A Health Risk Prevention System** implemented
-- [ ] **§P10-B Biological Age Estimation** (Monthly, No AI) implemented
+- [x] **§P10-A Health Risk Prevention System** implemented
+- [x] **§P10-B Biological Age Estimation** (Monthly, No AI) implemented
 - [ ] **§P10-C Monthly Health Report** — **MonthlyReportNotifier** implemented
 - [ ] **§P10-D Injury Risk Engine** (NEW v1) — **InjuryRiskEngine** (rule-based + heuristics) implemented; Injury Risk UI Card built
 - [ ] **§P10-E Stress Detection Engine** (NEW v1) — **StressDetectionEngine** (rule-based, no AI) implemented; Proactive Stress Alert implemented
