@@ -177,7 +177,7 @@ production split.)*
 - [x] **§P7-C Habit Automation System** implemented
 - [x] **§P7-D Adherence Score** (NEW v1) — **AdherenceScoreCalculator** (Pure Dart) implemented; Dashboard widget built; Adherence → XP connection wired
 - [x] **§P7-E Benchmarking Engine** (NEW v1) — Benchmark Cohorts defined; Benchmark Display screen built
-- [ ] **§P7-F Demographic Cohort Insights & Network Effects** (NEW v1) — Cohort Insights & Benchmarks Service implemented; Community Cohort Insights UI built; Privacy Guarantee (minimum cohort size) enforced and tested
+- [x] **§P7-F Demographic Cohort Insights & Network Effects** (NEW v1) — Cohort Insights & Benchmarks Service implemented; Community Cohort Insights UI built; Privacy Guarantee (minimum cohort size) enforced and tested
 
 ## Phase 8 — Transformation Journey + Anti-Quit Psychology (P1)
 
