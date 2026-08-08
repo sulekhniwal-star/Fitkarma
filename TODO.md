@@ -193,7 +193,7 @@ production split.)*
 - [x] **§P9-D Family Health Hub** (NEW v1) — Family Hub Architecture, Dashboard UI, Privacy Model, and Family Nudges all implemented
 - [x] **§P9-E Activity Feed & Sharing Architecture** (NEW v1) — Feed Item Data Model implemented; Feed Engagement Logic implemented; **FeedCurationEngine & SyncCoordinator** (Pure Dart, spam prevention) implemented
 - [x] **§P9-F Local Geolocation Clubs & Interest Circles** (NEW v1) — Data Architecture implemented; Geolocation Matching implemented
-- [ ] **§P9-G Weekly & Monthly Leaderboards** (NEW v1) — Leaderboard Tiers implemented; Gamified Rewards & Anonymity toggle implemented
+- [x] **§P9-G Weekly & Monthly Leaderboards** (NEW v1) — Leaderboard Tiers implemented; Gamified Rewards & Anonymity toggle implemented
 
 ## Phase 10 — Predictive Health + Preventive Intelligence (P1)
 
