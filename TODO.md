@@ -188,7 +188,7 @@ production split.)*
 ## Phase 9 — Social + Squad Accountability (P1)
 
 - [x] **§P9-A Social Screen** — **SquadStateNotifier** implemented
-- [ ] **§P9-B Squad System** (v1 features) implemented
+- [x] **§P9-B Squad System** (v1 features) implemented
 - [ ] **§P9-C Accountability Communities** implemented
 - [ ] **§P9-D Family Health Hub** (NEW v1) — Family Hub Architecture, Dashboard UI, Privacy Model, and Family Nudges all implemented
 - [ ] **§P9-E Activity Feed & Sharing Architecture** (NEW v1) — Feed Item Data Model implemented; Feed Engagement Logic implemented; **FeedCurationEngine & SyncCoordinator** (Pure Dart, spam prevention) implemented
