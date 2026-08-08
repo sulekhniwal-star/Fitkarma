@@ -181,7 +181,7 @@ production split.)*
 
 ## Phase 8 — Transformation Journey + Anti-Quit Psychology (P1)
 
-- [ ] **§P8-A Transformation Journey Engine** — Long-Term Memory implemented; Consistency Tracker implemented; Relapse Intervention System (all tiers) implemented
+- [x] **§P8-A Transformation Journey Engine** — Long-Term Memory implemented; Consistency Tracker implemented; Relapse Intervention System (all tiers) implemented
 - [ ] **§P8-B Transformation Timeline Screen** — **TransformationJourneyNotifier** implemented
 - [ ] **§P8-C Habit Identity Layer** (NEW v1) — Identity Personas defined; Identity Evolution Engine implemented; "You Are Becoming" Card UI built; Identity → AI Coach integration wired
 
