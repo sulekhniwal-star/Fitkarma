@@ -173,7 +173,7 @@ production split.)*
 ## Phase 7 — Gamification + Karma System (P1/P2)
 
 - [x] **§P7-A Karma System Design** — XP Events audited as outcome-only (not logging-based); Karma Levels implemented
-- [ ] **§P7-B Karma Hub Screen** — **KarmaHubNotifier** (Riverpod) implemented
+- [x] **§P7-B Karma Hub Screen** — **KarmaHubNotifier** (Riverpod) implemented
 - [ ] **§P7-C Habit Automation System** implemented
 - [ ] **§P7-D Adherence Score** (NEW v1) — **AdherenceScoreCalculator** (Pure Dart) implemented; Dashboard widget built; Adherence → XP connection wired
 - [ ] **§P7-E Benchmarking Engine** (NEW v1) — Benchmark Cohorts defined; Benchmark Display screen built

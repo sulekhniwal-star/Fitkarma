@@ -5,13 +5,10 @@ void main() {
   group('GamificationEngine Outcome-Based XP & Level Tests', () {
     const engine = GamificationEngine();
 
-    test('Level calculation matches formula floor(sqrt(XP / 100)) + 1', () {
-      // 0 XP -> Level 1
+    test('Level calculation matches Karma Levels hierarchy per §P7-A spec', () {
       expect(engine.calculateLevel(0).currentLevel, equals(1));
-      // 400 XP -> Level 3
-      expect(engine.calculateLevel(400).currentLevel, equals(3));
-      // 900 XP -> Level 4
-      expect(engine.calculateLevel(900).currentLevel, equals(4));
+      expect(engine.calculateLevel(250).currentLevel, equals(2));
+      expect(engine.calculateLevel(1450).currentLevel, equals(4));
     });
 
     test('Logging actions strictly yield ZERO XP (anti-spam rule)', () {
@@ -21,9 +18,9 @@ void main() {
     });
 
     test('Outcome completion actions yield valid XP rewards', () {
-      expect(engine.getOutcomeXpReward('workout_completed'), equals(150));
-      expect(engine.getOutcomeXpReward('protein_target_met'), equals(100));
-      expect(engine.getOutcomeXpReward('readiness_streak_7d'), equals(300));
+      expect(engine.getOutcomeXpReward('protein_target_met'), equals(50));
+      expect(engine.getOutcomeXpReward('sleep_streak_7d'), equals(80));
+      expect(engine.getOutcomeXpReward('program_week_completed'), equals(150));
     });
   });
 }

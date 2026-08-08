@@ -10,6 +10,8 @@ class LevelResult {
   final double levelProgressRatio;
   final bool didLevelUp;
 
+  int get xpForNextLevel => totalXp + (xpNeededForNextLevel - xpInCurrentLevel);
+
   const LevelResult({
     required this.currentLevel,
     required this.levelName,
