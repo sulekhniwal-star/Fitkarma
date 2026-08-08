@@ -161,14 +161,14 @@ production split.)*
   - [x] Exercise Skill Trees & Mastery Levels implemented
   - [x] Athletic Testing Battery implemented
   - [x] Performance Forecasting Engine implemented
-- [ ] **§P6-F Adaptive Computer Vision Loop (ACVL)** (NEW v1):
-  - [ ] Thermal-Aware Downsampling Matrix implemented
-  - [ ] Android ADPF Bridge (Kotlin, `MethodChannel`) implemented
-  - [ ] iOS Thermal Bridge (Swift, `MethodChannel`) implemented
-  - [ ] Flutter Frame Processor & Isolate Architecture implemented
-  - [ ] Camera Controller Loop Integration implemented
-  - [ ] UX Transparency Safeguard (throttling banner) implemented
-  - [ ] **PoseLandmarkAdapter** (Pure Dart, downsampling) implemented
+- [x] **§P6-F Adaptive Computer Vision Loop (ACVL)** (NEW v1):
+  - [x] Thermal-Aware Downsampling Matrix implemented
+  - [x] Android ADPF Bridge (Kotlin, `MethodChannel`) implemented
+  - [x] iOS Thermal Bridge (Swift, `MethodChannel`) implemented
+  - [x] Flutter Frame Processor & Isolate Architecture implemented
+  - [x] Camera Controller Loop Integration implemented
+  - [x] UX Transparency Safeguard (throttling banner) implemented
+  - [x] **PoseLandmarkAdapter** (Pure Dart, downsampling) implemented
 
 ## Phase 7 — Gamification + Karma System (P1/P2)
 
