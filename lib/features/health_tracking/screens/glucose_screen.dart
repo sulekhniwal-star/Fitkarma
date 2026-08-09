@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/theme/app_colors.dart';
@@ -185,7 +184,7 @@ class _GlucoseUnlockedView extends ConsumerWidget {
                   ),
                   const SizedBox(height: AppSpacing.md),
                   DropdownButtonFormField<GlucoseContextTag>(
-                    value: selectedTag,
+                    initialValue: selectedTag,
                     decoration: const InputDecoration(
                       labelText: 'Measurement Context',
                       border: OutlineInputBorder(),
@@ -386,7 +385,7 @@ class _GlucoseCurvePainter extends CustomPainter {
     final n = sorted.length;
     final step = n > 1 ? size.width / (n - 1) : size.width;
 
-    Offset _pt(int i) {
+    Offset pt(int i) {
       final x = n > 1 ? i * step : size.width / 2;
       final norm = (sorted[i].mgDl - minVal) / range;
       final y = size.height - (norm * size.height);
@@ -402,10 +401,10 @@ class _GlucoseCurvePainter extends CustomPainter {
     canvas.drawLine(Offset(0, y140), Offset(size.width, y140), dashedPaint);
 
     final path = Path();
-    path.moveTo(_pt(0).dx, _pt(0).dy);
+    path.moveTo(pt(0).dx, pt(0).dy);
 
     for (int i = 1; i < n; i++) {
-      path.lineTo(_pt(i).dx, _pt(i).dy);
+      path.lineTo(pt(i).dx, pt(i).dy);
     }
 
     final linePaint = Paint()
@@ -417,10 +416,10 @@ class _GlucoseCurvePainter extends CustomPainter {
 
     for (int i = 0; i < n; i++) {
       final record = sorted[i];
-      final pt = _pt(i);
+      final ptPos = pt(i);
       final isSpike = record.mgDl >= 140.0;
       final dotColor = isSpike ? AppColors.primary : AppColors.teal;
-      canvas.drawCircle(pt, 4.0, Paint()..color = dotColor);
+      canvas.drawCircle(ptPos, 4.0, Paint()..color = dotColor);
     }
   }
 

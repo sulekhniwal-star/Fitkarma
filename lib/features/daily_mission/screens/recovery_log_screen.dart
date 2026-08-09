@@ -52,9 +52,9 @@ class RecoveryLogScreen extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppColors.success.withOpacity(0.15),
+                            color: AppColors.success.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: AppColors.success.withOpacity(0.4)),
+                            border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             state.readinessScore >= 80

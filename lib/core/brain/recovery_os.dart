@@ -429,11 +429,17 @@ class RecoveryForecastingEngine {
   }) {
     int ageDelta = 0;
 
-    if (avgHrv >= 70) ageDelta -= 4;
-    else if (avgHrv <= 35) ageDelta += 3;
+    if (avgHrv >= 70) {
+      ageDelta -= 4;
+    } else if (avgHrv <= 35) {
+      ageDelta += 3;
+    }
 
-    if (restingHr <= 55) ageDelta -= 3;
-    else if (restingHr >= 75) ageDelta += 2;
+    if (restingHr <= 55) {
+      ageDelta -= 3;
+    } else if (restingHr >= 75) {
+      ageDelta += 2;
+    }
 
     if (sleepEfficiencyRatio >= 0.90) ageDelta -= 2;
 

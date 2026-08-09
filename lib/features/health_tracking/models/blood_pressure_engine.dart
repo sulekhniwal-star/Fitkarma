@@ -1,7 +1,7 @@
-/// §P4-D Blood Pressure Engine (Pure Dart)
-///
-/// Models AHA (American Heart Association) categories, BP records,
-/// rising trend detection, and security/biometric state logic.
+// §P4-D Blood Pressure Engine (Pure Dart)
+//
+// Models AHA (American Heart Association) categories, BP records,
+// rising trend detection, and security/biometric state logic.
 
 // ── Blood Pressure Category ───────────────────────────────────────────────────
 

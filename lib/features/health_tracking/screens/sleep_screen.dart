@@ -557,18 +557,18 @@ class _HrvLinePainter extends CustomPainter {
     final n = points.length;
     final step = size.width / (n - 1);
 
-    Offset _pt(int i) {
+    Offset pt(int i) {
       final x = i * step;
       final norm = (points[i] - minVal) / effectiveRange;
       final y = size.height - (norm * size.height * 0.85) - 4;
       return Offset(x, y.clamp(0.0, size.height));
     }
 
-    path.moveTo(_pt(0).dx, _pt(0).dy);
+    path.moveTo(pt(0).dx, pt(0).dy);
     for (int i = 1; i < n; i++) {
       // Smooth cubic bezier
-      final prev = _pt(i - 1);
-      final curr = _pt(i);
+      final prev = pt(i - 1);
+      final curr = pt(i);
       final cp1 = Offset((prev.dx + curr.dx) / 2, prev.dy);
       final cp2 = Offset((prev.dx + curr.dx) / 2, curr.dy);
       path.cubicTo(cp1.dx, cp1.dy, cp2.dx, cp2.dy, curr.dx, curr.dy);
@@ -576,8 +576,8 @@ class _HrvLinePainter extends CustomPainter {
 
     // Area fill
     final fillPath = Path.from(path)
-      ..lineTo(_pt(n - 1).dx, size.height)
-      ..lineTo(_pt(0).dx, size.height)
+      ..lineTo(pt(n - 1).dx, size.height)
+      ..lineTo(pt(0).dx, size.height)
       ..close();
     canvas.drawPath(fillPath, fillPaint);
 
@@ -586,7 +586,7 @@ class _HrvLinePainter extends CustomPainter {
 
     // Dots
     for (int i = 0; i < n; i++) {
-      canvas.drawCircle(_pt(i), 3.5, dotPaint);
+      canvas.drawCircle(pt(i), 3.5, dotPaint);
     }
   }
 

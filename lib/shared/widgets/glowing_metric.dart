@@ -35,12 +35,12 @@ class GlowingMetric extends StatelessWidget {
               shadows: hasGlow
                   ? [
                       Shadow(
-                        color: glowColor.withOpacity(0.4),
+                        color: glowColor.withValues(alpha: 0.4),
                         blurRadius: 18,
                         offset: const Offset(0, 0),
                       ),
                       Shadow(
-                        color: glowColor.withOpacity(0.2),
+                        color: glowColor.withValues(alpha: 0.2),
                         blurRadius: 36,
                         offset: const Offset(0, 0),
                       ),
@@ -53,7 +53,7 @@ class GlowingMetric extends StatelessWidget {
                 TextSpan(
                   text: ' $unit',
                   style: AppTypography.h3.copyWith(
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withValues(alpha: 0.5),
                     shadows: [], // Prevent glowing units for visual restraint
                   ),
                 ),
@@ -64,7 +64,7 @@ class GlowingMetric extends StatelessWidget {
         Text(
           label.toUpperCase(),
           style: AppTypography.labelMd.copyWith(
-            color: Colors.white.withOpacity(0.5),
+            color: Colors.white.withValues(alpha: 0.5),
             letterSpacing: 1.2,
           ),
         ),

@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/core/brain/habit_automation_system.dart';
-import 'package:fitkarma/features/gamification/providers/habit_automation_provider.dart';
 import 'package:fitkarma/features/gamification/screens/habit_automation_screen.dart';
 
 void main() {

@@ -70,10 +70,7 @@ class EscalateToHumanCoachButton extends ConsumerWidget {
       context: ctx,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => ProviderScope(
-        parent: ProviderScope.containerOf(ctx),
-        child: const _EscalationBottomSheet(),
-      ),
+      builder: (_) => const _EscalationBottomSheet(),
     );
   }
 }

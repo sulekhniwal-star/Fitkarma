@@ -19,10 +19,9 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
   final _engine = const TrainingOperatingSystemEngine();
 
   // Demo State
-  double _mhsScore = 82.0;
-  double _ecsScore = 88.0;
-  double _upperReadiness = 85.0;
-  double _lowerReadiness = 52.0;
+  final double _mhsScore = 82.0;
+  final double _upperReadiness = 85.0;
+  final double _lowerReadiness = 52.0;
 
   late MobilityReport _mobilityReport;
   late AsymmetryReport _asymmetryReport;

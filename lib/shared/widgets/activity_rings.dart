@@ -59,7 +59,7 @@ class _ActivityRingsPainter extends CustomPainter {
 
       // 1. Draw track background
       final bgPaint = Paint()
-        ..color = ring.colors.first.withOpacity(0.12)
+        ..color = ring.colors.first.withValues(alpha: 0.12)
         ..style = PaintingStyle.stroke
         ..strokeWidth = ring.strokeWidth;
       

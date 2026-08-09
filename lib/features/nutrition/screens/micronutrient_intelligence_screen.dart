@@ -87,7 +87,7 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                       Text('Vegetarian Diet (1.8x Non-Heme Iron)', style: AppTypography.bodySm),
                       Switch(
                         value: _isVegetarian,
-                        activeColor: AppColors.primary,
+                        activeThumbColor: AppColors.primary,
                         onChanged: (val) {
                           setState(() => _isVegetarian = val);
                           _reevaluate();
@@ -101,7 +101,7 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                       Text('Female Target Adjustments', style: AppTypography.bodySm),
                       Switch(
                         value: _isFemale,
-                        activeColor: AppColors.primary,
+                        activeThumbColor: AppColors.primary,
                         onChanged: (val) {
                           setState(() => _isFemale = val);
                           _reevaluate();
@@ -115,7 +115,7 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                       Text('PCOS / Fertility Goals', style: AppTypography.bodySm),
                       Switch(
                         value: _hasPcosGoal,
-                        activeColor: AppColors.primary,
+                        activeThumbColor: AppColors.primary,
                         onChanged: (val) {
                           setState(() => _hasPcosGoal = val);
                           _reevaluate();

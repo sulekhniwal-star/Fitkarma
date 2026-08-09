@@ -94,8 +94,8 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> with WidgetsBindingObs
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState lifecycleState) {
-    if (lifecycleState == AppLifecycleState.resumed) {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
       _recalculateRestTimer();
     }
   }

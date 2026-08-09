@@ -1,9 +1,9 @@
-/// §P4-B Auto-Detection & Sync Engine (Pure Dart)
-///
-/// Platform Bridging: Wraps the `health` package to read from
-///   HealthConnect (Android) and HealthKit (iOS).
-/// Background Sync: Fired every 15 min by Workmanager.
-///   Fetches step delta, compares with Drift cache, writes locally.
+// §P4-B Auto-Detection & Sync Engine (Pure Dart)
+//
+// Platform Bridging: Wraps the `health` package to read from
+//   HealthConnect (Android) and HealthKit (iOS).
+// Background Sync: Fired every 15 min by Workmanager.
+//   Fetches step delta, compares with Drift cache, writes locally.
 
 // ── Sync Status ───────────────────────────────────────────────────────────────
 
@@ -168,7 +168,7 @@ class StepsSyncEngine {
     );
   }
 
-  /// Build hourly distribution from a Map<hour, steps>
+  /// Build hourly distribution from hourly step data Map
   List<HourlyStepBucket> buildHourlyDistribution(Map<int, int> hourlyData) {
     return List.generate(24, (h) {
       return HourlyStepBucket(hour: h, steps: hourlyData[h] ?? 0);

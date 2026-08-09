@@ -1,4 +1,4 @@
-/// §P4-C Sleep Stage Metrics and Debt Modeling (Pure Dart)
+// §P4-C Sleep Stage Metrics and Debt Modeling (Pure Dart)
 
 // ── Sleep Stage ───────────────────────────────────────────────────────────────
 
@@ -158,7 +158,7 @@ class NightSleepRecord {
 
 // ── Sleep Debt Engine ─────────────────────────────────────────────────────────
 
-/// §P4-C Sleep Debt Engine (Pure Dart)
+// §P4-C Sleep Debt Engine (Pure Dart)
 ///
 /// Formula (per spec):
 ///   Sleep Debt = Σᵢ₌₁⁷ (480 − sleepMinutesᵢ)

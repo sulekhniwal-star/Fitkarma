@@ -59,9 +59,7 @@ class HabitAutomationState {
 }
 
 class HabitAutomationNotifier extends StateNotifier<HabitAutomationState> {
-  final HabitAutomationSystem _system;
-
-  HabitAutomationNotifier(this._system) : super(HabitAutomationState.initial());
+  HabitAutomationNotifier() : super(HabitAutomationState.initial());
 
   void markTriggerCompleted(String triggerId) {
     final updated = state.activeTriggers.map((t) {
@@ -80,5 +78,5 @@ class HabitAutomationNotifier extends StateNotifier<HabitAutomationState> {
 
 final habitAutomationProvider =
     StateNotifierProvider<HabitAutomationNotifier, HabitAutomationState>((ref) {
-  return HabitAutomationNotifier(const HabitAutomationSystem());
+  return HabitAutomationNotifier();
 });

@@ -20,9 +20,7 @@ class BilingualLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // For now, let's assume english is primary unless specified. 
-    // In a real app, we would use Localizations.localeOf(context).
-    const isHindiActive = false; 
+    final isHindiActive = Localizations.maybeLocaleOf(context)?.languageCode == 'hi'; 
 
     if (hindiText == null || hindiText!.isEmpty) {
       return Text(

@@ -100,7 +100,7 @@ class LocalMealQualityCalculator {
     IndianRegionOilProfile region = IndianRegionOilProfile.northGheeMustard,
   }) {
     int cals = 0;
-    double protein = 0.0, carbs = 0.0, fat = 0.0, fiber = 0.0, avgGi = 0.0;
+    double protein = 0.0, carbs = 0.0, fat = 0.0, avgGi = 0.0;
 
     for (final item in components) {
       cals += item.calories;

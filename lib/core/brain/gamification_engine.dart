@@ -1,5 +1,3 @@
-import 'dart:math';
-
 /// Level Calculation Result with Karma Title & Bounds per §P7-A spec
 class LevelResult {
   final int currentLevel;

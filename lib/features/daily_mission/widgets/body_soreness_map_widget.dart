@@ -42,7 +42,7 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                   onSelected: (selected) {
                     if (selected) setState(() => _isFrontView = true);
                   },
-                  selectedColor: AppColors.primary.withOpacity(0.3),
+                  selectedColor: AppColors.primary.withValues(alpha: 0.3),
                   labelStyle: AppTypography.labelMd.copyWith(
                     color: _isFrontView ? AppColors.primary : AppColors.textSecondary,
                   ),
@@ -54,7 +54,7 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                   onSelected: (selected) {
                     if (selected) setState(() => _isFrontView = false);
                   },
-                  selectedColor: AppColors.primary.withOpacity(0.3),
+                  selectedColor: AppColors.primary.withValues(alpha: 0.3),
                   labelStyle: AppTypography.labelMd.copyWith(
                     color: !_isFrontView ? AppColors.primary : AppColors.textSecondary,
                   ),
@@ -199,7 +199,7 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: _getSeverityColor(entry.value).withOpacity(0.2),
+                  color: _getSeverityColor(entry.value).withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(color: _getSeverityColor(entry.value)),
                 ),
@@ -303,13 +303,13 @@ class _BodyMapPainter extends CustomPainter {
   Color _getFillColor(SorenessSeverity severity) {
     switch (severity) {
       case SorenessSeverity.none:
-        return AppColors.surface1.withOpacity(0.6);
+        return AppColors.surface1.withValues(alpha: 0.6);
       case SorenessSeverity.mild:
-        return AppColors.warning.withOpacity(0.35);
+        return AppColors.warning.withValues(alpha: 0.35);
       case SorenessSeverity.moderate:
-        return AppColors.primary.withOpacity(0.45);
+        return AppColors.primary.withValues(alpha: 0.45);
       case SorenessSeverity.severe:
-        return AppColors.error.withOpacity(0.65);
+        return AppColors.error.withValues(alpha: 0.65);
     }
   }
 

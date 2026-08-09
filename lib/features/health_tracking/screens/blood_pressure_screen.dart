@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/theme/app_colors.dart';
@@ -601,14 +600,14 @@ class _BpDualLinePainter extends CustomPainter {
     final n = sorted.length;
     final step = n > 1 ? size.width / (n - 1) : size.width;
 
-    Offset _ptSys(int i) {
+    Offset ptSys(int i) {
       final x = n > 1 ? i * step : size.width / 2;
       final norm = (sorted[i].systolic - minVal) / range;
       final y = size.height - (norm * size.height);
       return Offset(x, y.clamp(0.0, size.height));
     }
 
-    Offset _ptDia(int i) {
+    Offset ptDia(int i) {
       final x = n > 1 ? i * step : size.width / 2;
       final norm = (sorted[i].diastolic - minVal) / range;
       final y = size.height - (norm * size.height);
@@ -638,12 +637,12 @@ class _BpDualLinePainter extends CustomPainter {
     final sysPath = Path();
     final diaPath = Path();
 
-    sysPath.moveTo(_ptSys(0).dx, _ptSys(0).dy);
-    diaPath.moveTo(_ptDia(0).dx, _ptDia(0).dy);
+    sysPath.moveTo(ptSys(0).dx, ptSys(0).dy);
+    diaPath.moveTo(ptDia(0).dx, ptDia(0).dy);
 
     for (int i = 1; i < n; i++) {
-      sysPath.lineTo(_ptSys(i).dx, _ptSys(i).dy);
-      diaPath.lineTo(_ptDia(i).dx, _ptDia(i).dy);
+      sysPath.lineTo(ptSys(i).dx, ptSys(i).dy);
+      diaPath.lineTo(ptDia(i).dx, ptDia(i).dy);
     }
 
     final sysPaint = Paint()
@@ -661,8 +660,8 @@ class _BpDualLinePainter extends CustomPainter {
 
     // Render points
     for (int i = 0; i < n; i++) {
-      canvas.drawCircle(_ptSys(i), 3.5, Paint()..color = AppColors.primary);
-      canvas.drawCircle(_ptDia(i), 3.5, Paint()..color = AppColors.teal);
+      canvas.drawCircle(ptSys(i), 3.5, Paint()..color = AppColors.primary);
+      canvas.drawCircle(ptDia(i), 3.5, Paint()..color = AppColors.teal);
     }
   }
 

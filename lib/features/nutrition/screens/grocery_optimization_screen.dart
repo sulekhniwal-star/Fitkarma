@@ -18,7 +18,7 @@ class GroceryOptimizationScreen extends StatefulWidget {
 class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
   final _engine = const GroceryOptimizationEngine();
   double _monthlyBudget = 3000.0;
-  int _dailyProteinTarget = 110;
+  final int _dailyProteinTarget = 110;
   OptimizedGroceryList? _optimizedResult;
 
   @override

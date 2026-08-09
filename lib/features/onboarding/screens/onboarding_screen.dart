@@ -445,7 +445,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ),
                 Switch(
                   value: true,
-                  activeColor: AppColors.success,
+                  activeThumbColor: AppColors.success,
                   onChanged: (val) {},
                 ),
               ],

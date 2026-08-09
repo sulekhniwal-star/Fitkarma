@@ -1,4 +1,4 @@
-/// §P3-A AI Coach Philosophy & Response Guardrails System (Pure Dart)
+// §P3-A AI Coach Philosophy & Response Guardrails System (Pure Dart)
 
 /// System Prompt & Response Validation Result
 class GuardrailValidationResult {

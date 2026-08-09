@@ -166,9 +166,9 @@ class DailyBriefingScreen extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
-                          color: AppColors.error.withOpacity(0.15),
+                          color: AppColors.error.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: AppColors.error.withOpacity(0.4)),
+                          border: Border.all(color: AppColors.error.withValues(alpha: 0.4)),
                         ),
                         child: Row(
                           children: [
@@ -534,7 +534,7 @@ class _SorenessOption extends StatelessWidget {
         label: Text(label),
         selected: isSelected,
         onSelected: (_) => onTap(),
-        selectedColor: AppColors.primary.withOpacity(0.3),
+        selectedColor: AppColors.primary.withValues(alpha: 0.3),
         labelStyle: AppTypography.labelMd.copyWith(
           color: isSelected ? AppColors.primary : AppColors.textSecondary,
         ),

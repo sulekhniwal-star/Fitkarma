@@ -1,4 +1,4 @@
-/// §P4-G Smart Wearable Comparison Layer & Device Reliability Engine (Pure Dart)
+// §P4-G Smart Wearable Comparison Layer & Device Reliability Engine (Pure Dart)
 
 // ── Wearable Sources ──────────────────────────────────────────────────────────
 

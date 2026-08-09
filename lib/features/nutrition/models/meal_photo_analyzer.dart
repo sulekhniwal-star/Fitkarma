@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 import '../models/indian_food_item.dart';
 import '../models/meal_analysis_pipeline.dart';
-import 'package:fitkarma/core/brain/nutrition_engine.dart';
 
 /// Recognized Meal Cache Entry
 class RecognizedMealMatch {

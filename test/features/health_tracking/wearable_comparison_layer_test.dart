@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/health_tracking/models/device_reliability_engine.dart';
 import 'package:fitkarma/features/health_tracking/models/wearable_sync_merger.dart';
-import 'package:fitkarma/features/health_tracking/providers/wearable_comparison_provider.dart';
 import 'package:fitkarma/shared/widgets/wearable_data_source_card.dart';
 
 void main() {

@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:fitkarma/core/brain/nutrition_engine.dart';
 import 'package:fitkarma/features/nutrition/models/indian_food_item.dart';
 import 'package:fitkarma/features/nutrition/models/meal_analysis_pipeline.dart';
 import 'package:fitkarma/features/nutrition/widgets/meal_analysis_result_sheet.dart';

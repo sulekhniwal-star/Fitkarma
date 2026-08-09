@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/daily_mission/screens/daily_briefing_screen.dart';
-import 'package:fitkarma/features/daily_mission/providers/daily_mission_provider.dart';
 
 void main() {
   group('DailyBriefingScreen Widget & Provider Tests (§P2-B)', () {

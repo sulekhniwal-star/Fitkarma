@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-/// §P3-D Health Coach Escalation Layer (Pure Dart, Elite Tier)
+// §P3-D Health Coach Escalation Layer (Pure Dart, Elite Tier)
 
 // ── Risk Severity ─────────────────────────────────────────────────────────────
 
@@ -134,7 +132,7 @@ class CoachBriefingPackage {
     sb.writeln('  Weight change (4w):  ${weightChange4wKg >= 0 ? '+' : ''}${weightChange4wKg.toStringAsFixed(1)} kg (expected ${expectedWeightChange4wKg >= 0 ? '+' : ''}${expectedWeightChange4wKg.toStringAsFixed(1)} kg)');
     sb.writeln('  Calorie target:      $calorieTarget (after $adaptiveAdjustmentCount adaptive adjustment${adaptiveAdjustmentCount == 1 ? '' : 's'})');
     sb.writeln('  Adherence:           Nutrition ${nutritionAdherencePct.round()}% / Training ${trainingAdherencePct.round()}%');
-    sb.writeln('  Recovery Debt:       $recoveryDebtLevel (${sleepDeficitDays}-day sleep deficit)');
+    sb.writeln('  Recovery Debt:       $recoveryDebtLevel ($sleepDeficitDays-day sleep deficit)');
     sb.writeln();
     sb.writeln('AI Limitations Hit:');
     for (final limitation in aiLimitationsHit) {

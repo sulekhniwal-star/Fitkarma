@@ -33,13 +33,13 @@ void main() {
 
     test('RecoveryLogNotifier state updates and readiness recalculation', () {
       final notifier = RecoveryLogNotifier();
-      expect(notifier.debugState.readinessScore, greaterThan(0));
+      expect(notifier.state.readinessScore, greaterThan(0));
 
       notifier.toggleMuscleSoreness(MuscleGroup.chest);
-      expect(notifier.debugState.soreness.sorenessMap[MuscleGroup.chest], equals(SorenessSeverity.mild));
+      expect(notifier.state.soreness.sorenessMap[MuscleGroup.chest], equals(SorenessSeverity.mild));
 
       notifier.commitLog();
-      expect(notifier.debugState.isCommitted, isTrue);
+      expect(notifier.state.isCommitted, isTrue);
     });
 
     testWidgets('RecoveryLogScreen renders body soreness map & HRV trend', (tester) async {

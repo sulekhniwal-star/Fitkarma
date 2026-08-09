@@ -1,4 +1,4 @@
-/// §P4-E Glucose Engine & HbA1c Estimator (Pure Dart)
+// §P4-E Glucose & HbA1c Engine (Pure Dart)
 
 // ── Glucose Measurement Context Tag ───────────────────────────────────────────
 

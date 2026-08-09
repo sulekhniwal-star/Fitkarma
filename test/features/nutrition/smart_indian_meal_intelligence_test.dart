@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fitkarma/features/nutrition/models/indian_food_item.dart';
 import 'package:fitkarma/features/nutrition/models/seeded_indian_food_database_matrix.dart';
 import 'package:fitkarma/features/nutrition/models/local_meal_quality_calculator.dart';
 

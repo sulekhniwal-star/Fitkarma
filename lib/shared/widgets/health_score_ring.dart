@@ -31,7 +31,7 @@ class HealthScoreRing extends StatelessWidget {
             value: score / 100.0,
             strokeWidth: size * 0.08,
             strokeCap: StrokeCap.round,
-            backgroundColor: AppColors.surface2.withOpacity(0.3),
+            backgroundColor: AppColors.surface2.withValues(alpha: 0.3),
             color: _scoreColor,
           ),
         ),
@@ -50,7 +50,7 @@ class HealthScoreRing extends StatelessWidget {
               'HEALTH',
               style: AppTypography.labelMd.copyWith(
                 fontSize: size * 0.08,
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.white.withValues(alpha: 0.5),
                 letterSpacing: 1.0,
               ),
             ),

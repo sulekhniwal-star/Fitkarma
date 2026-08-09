@@ -230,7 +230,7 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                     onChanged: (val) {
                       ref.read(cohortProvider.notifier).toggleOptOut(val);
                     },
-                    activeColor: AppColors.warning,
+                    activeThumbColor: AppColors.warning,
                   ),
                 ],
               ),

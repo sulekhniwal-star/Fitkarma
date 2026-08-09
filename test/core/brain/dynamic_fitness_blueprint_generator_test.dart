@@ -37,7 +37,7 @@ void main() {
     });
 
     test('triggerProgramEvolutionEvent forces regeneration of blueprint', () {
-      final blueprint1 = generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
+      generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
 
       // Simulate time passing
       final evolvedBlueprint = generator.triggerProgramEvolutionEvent(
