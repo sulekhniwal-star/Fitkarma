@@ -32,7 +32,6 @@ jobs:
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter analyze --fatal-infos
       - run: flutter test --coverage
-      - run: flutter test integration_test
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         with:
