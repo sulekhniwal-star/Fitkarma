@@ -208,7 +208,7 @@ production split.)*
 - [x] **§P10-I Medication Tracker & Interaction Warning Engine** (NEW v1) — Medication Logger & Scheduler implemented; Local Drift Schema updates applied; **External NIH RxNav API Service** (Pure Dart) implemented
 - [x] **§P10-J Doctor Sharing Portal** (NEW v1) — Export Report Schema implemented; Share Security & Consent Flow implemented
 - [x] **§P10-K Regulatory & Clinical Compliance Framework** (NEW v1) — Medical Disclaimer Protocol & Safeguards implemented; Clinical Data Safeguards (DPDP Act & HIPAA guidelines) implemented
-- [ ] **§P10-L Retrospective Glycemic Processing Pipeline (RGPP)** (NEW v1) — Drift Persistence Extension (retrospective status tracking) implemented; **Retrospective Glucose Matcher** implemented; Background Sync Coordination (Riverpod + Workmanager) implemented; Retrospective Insight Card UI built
+- [x] **§P10-L Retrospective Glycemic Processing Pipeline (RGPP)** (NEW v1) — Drift Persistence Extension (retrospective status tracking) implemented; **Retrospective Glucose Matcher** implemented; Background Sync Coordination (Riverpod + Workmanager) implemented; Retrospective Insight Card UI built
 - [ ] **§P10-M Clinical Compliance Hardening** (NEW v1.0) — Directive-Language Lint on Interaction Warnings implemented as an automated check; Pre-Ship Legal Review Gate process documented; **Clinical Copy Change Checklist enforced as a required PR template/CI check for any PR touching §P10-I, §P10-H, or §P10-J**
 
 ## Phase 11 — Visual Body Analytics (P1/P2)
