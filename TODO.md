@@ -220,7 +220,7 @@ production split.)*
 ## Phase 12 — Festival + Life Events Intelligence (P1)
 
 - [x] **§P12-A Festival Intelligence System** (v1) — Festival Cross-Module Adaptation Engine implemented; all documented Festivals Tracked seeded with correct dates; Festival Survival Mode implemented
-- [ ] **§P12-B Life Events Engine** (NEW) implemented, covering every documented event type
+- [x] **§P12-B Life Events Engine** (NEW) implemented, covering every documented event type
 - [ ] **§P12-C Wedding Transformation Mode** — **WeddingTransformationNotifier** implemented
 - [ ] **§P12-D AI Roast Mode** implemented
 - [ ] **§P12-E Travel Intelligence** (NEW v1) — **TravelIntelligenceEngine** implemented; Travel Mode UI built
