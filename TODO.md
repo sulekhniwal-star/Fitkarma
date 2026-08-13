@@ -213,9 +213,9 @@ production split.)*
 
 ## Phase 11 — Visual Body Analytics (P1/P2)
 
-- [ ] **§P11-A Body Analytics Screen** — **BodyAnalyticsNotifier** implemented
-- [ ] **§P11-B Progress Photo System** — encrypted local storage + biometric lock implemented
-- [ ] **§P11-C Wearable-Free Body Composition Estimation** (NEW v1) — all documented estimation methods implemented in priority order; **BodyCompositionEstimator** (Pure Dart) implemented; UI card built
+- [x] **§P11-A Body Analytics Screen** — **BodyAnalyticsNotifier** implemented
+- [x] **§P11-B Progress Photo System** — encrypted local storage + biometric lock implemented
+- [x] **§P11-C Wearable-Free Body Composition Estimation** (NEW v1) — all documented estimation methods implemented in priority order; **BodyCompositionEstimator** (Pure Dart) implemented; UI card built
 
 ## Phase 12 — Festival + Life Events Intelligence (P1)
 
