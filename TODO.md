@@ -205,7 +205,7 @@ production split.)*
 - [x] **§P10-F Clinical Report Intelligence** (NEW v1) — Supported Lab Reports list implemented; **ClinicalReportParser** implemented; Clinical Insights Integration wired; Privacy Architecture implemented
 - [x] **§P10-G Longevity Score + Biological Age v1** (NEW v1) — **LongevityScoreCalculator** implemented; Longevity Screen UI built
 - [x] **§P10-H Continuous Biomarker Tracking (CGM Sync)** (NEW v1) — CGM Data Ingestion implemented; CGM Dashboard UI built
-- [ ] **§P10-I Medication Tracker & Interaction Warning Engine** (NEW v1) — Medication Logger & Scheduler implemented; Local Drift Schema updates applied; **External NIH RxNav API Service** (Pure Dart) implemented
+- [x] **§P10-I Medication Tracker & Interaction Warning Engine** (NEW v1) — Medication Logger & Scheduler implemented; Local Drift Schema updates applied; **External NIH RxNav API Service** (Pure Dart) implemented
 - [ ] **§P10-J Doctor Sharing Portal** (NEW v1) — Export Report Schema implemented; Share Security & Consent Flow implemented
 - [ ] **§P10-K Regulatory & Clinical Compliance Framework** (NEW v1) — Medical Disclaimer Protocol & Safeguards implemented; Clinical Data Safeguards (DPDP Act & HIPAA guidelines) implemented
 - [ ] **§P10-L Retrospective Glycemic Processing Pipeline (RGPP)** (NEW v1) — Drift Persistence Extension (retrospective status tracking) implemented; **Retrospective Glucose Matcher** implemented; Background Sync Coordination (Riverpod + Workmanager) implemented; Retrospective Insight Card UI built
