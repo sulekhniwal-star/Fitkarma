@@ -202,7 +202,7 @@ production split.)*
 - [x] **§P10-C Monthly Health Report** — **MonthlyReportNotifier** implemented
 - [x] **§P10-D Injury Risk Engine** (NEW v1) — **InjuryRiskEngine** (rule-based + heuristics) implemented; Injury Risk UI Card built
 - [x] **§P10-E Stress Detection Engine** (NEW v1) — **StressDetectionEngine** (rule-based, no AI) implemented; Proactive Stress Alert implemented
-- [ ] **§P10-F Clinical Report Intelligence** (NEW v1) — Supported Lab Reports list implemented; **ClinicalReportParser** implemented; Clinical Insights Integration wired; Privacy Architecture implemented
+- [x] **§P10-F Clinical Report Intelligence** (NEW v1) — Supported Lab Reports list implemented; **ClinicalReportParser** implemented; Clinical Insights Integration wired; Privacy Architecture implemented
 - [ ] **§P10-G Longevity Score + Biological Age v1** (NEW v1) — **LongevityScoreCalculator** implemented; Longevity Screen UI built
 - [ ] **§P10-H Continuous Biomarker Tracking (CGM Sync)** (NEW v1) — CGM Data Ingestion implemented; CGM Dashboard UI built
 - [ ] **§P10-I Medication Tracker & Interaction Warning Engine** (NEW v1) — Medication Logger & Scheduler implemented; Local Drift Schema updates applied; **External NIH RxNav API Service** (Pure Dart) implemented
