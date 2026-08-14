@@ -228,7 +228,7 @@ production split.)*
 
 ## Phase 13 — Premium + Monetisation (P0 for revenue)
 
-- [ ] **§P13-A Subscription Tiers** — India-first pricing implemented; Paywall Triggers implemented on every documented gate; **PremiumStateNotifier** implemented; bottom-sheet-only paywall confirmed, "Continue Free" always present
+- [x] **§P13-A Subscription Tiers** — India-first pricing implemented; Paywall Triggers implemented on every documented gate; **PremiumStateNotifier** implemented; bottom-sheet-only paywall confirmed, "Continue Free" always present
 - [ ] **§P13-B Creator & Coach Marketplace** (NEW v1) — Creator Profile & Program Schemas implemented; Marketplace Matchmaking Engine implemented; Program Store (user-generated blueprints) implemented; Marketplace Trust/Verification/Escrow implemented; Razorpay/Stripe Connect compliance implemented; **Payment Webhook Split-Settlement & Double-Entry Ledger** (Pure Dart) implemented and tested against a sandboxed real payout
 - [ ] **§P13-C Creator Affiliate Program** (NEW v1) — Affiliate Referral Architecture implemented; Creator Earnings Dashboard UI built
 
