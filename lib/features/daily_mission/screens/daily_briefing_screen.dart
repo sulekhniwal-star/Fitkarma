@@ -9,6 +9,8 @@ import '../../../shared/widgets/health_score_ring.dart';
 import '../../../shared/widgets/bilingual_label.dart';
 import '../../../shared/widgets/insight_card.dart';
 import '../providers/daily_mission_provider.dart';
+import '../../lifestyle/providers/calendar_provider.dart';
+import '../widgets/calendar_briefing_card.dart';
 
 /// Daily Briefing Screen (§P2-B specification)
 /// First morning screen reading entirely from Daily Intelligence Package (DIP).
@@ -18,6 +20,7 @@ class DailyBriefingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final missionState = ref.watch(dailyMissionProvider);
+    final calendarState = ref.watch(calendarProvider);
     final readiness = missionState.readiness;
     final checkIn = missionState.checkIn;
     final dip = missionState.dip;
@@ -96,6 +99,12 @@ class DailyBriefingScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: AppSpacing.md),
+
+                    // §P12-F Calendar-Aware Daily Briefing Card
+                    if (calendarState.isConnected && calendarState.insight != null) ...[
+                      CalendarIntelligenceCard(insight: calendarState.insight!),
+                      const SizedBox(height: AppSpacing.md),
+                    ],
 
                     // 3. Today's Mission Card (reading from DIP only)
                     BentoCard(
