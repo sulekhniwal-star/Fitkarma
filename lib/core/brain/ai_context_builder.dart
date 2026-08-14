@@ -1,6 +1,7 @@
+import 'ai_roast_mode_engine.dart';
 import 'daily_intelligence_package.dart';
 
-/// §P3-B AI Context Builder & Compressed Context Payload (Pure Dart)
+/// §P3-B & §P12-D AI Context Builder & Compressed Context Payload (Pure Dart)
 
 class HealthSnapshotSummary {
   final double avg7DayProteinG;
@@ -30,6 +31,7 @@ class AIContext {
   final String program;
   final String dietType;
   final String tone;
+  final CoachTone? coachTone;
   final List<String> injuries;
   final HealthSnapshotSummary snapshot;
   final int readinessScore;
@@ -48,6 +50,7 @@ class AIContext {
     required this.program,
     required this.dietType,
     this.tone = 'Empathetic',
+    this.coachTone,
     this.injuries = const [],
     required this.snapshot,
     required this.readinessScore,
@@ -67,6 +70,7 @@ class AIContext {
         'program': program,
         'diet_type': dietType,
         'tone': tone,
+        'coach_tone': coachTone?.name ?? tone,
         'injuries': injuries,
         'snapshot': snapshot.toJson(),
         'readiness_score': readinessScore,
@@ -80,7 +84,7 @@ class AIContext {
       };
 
   String toCompressedPromptString() {
-    return 'Profile: $name ($dietType, Goals: ${goals.join(', ')}, Program: $program)\n'
+    return 'Profile: $name ($dietType, Goals: ${goals.join(', ')}, Program: $program, Tone: $tone)\n'
         'State: Readiness $readinessScore ($readinessTier), Focus: $primaryFocus, Sleep Debt: ${sleepDebtMin}m, Strain: $dailyStrain\n'
         'Trends: 7d Protein ${snapshot.avg7DayProteinG}g, 7d Sleep ${snapshot.avg7DaySleepHours}h, Concern: $primaryConcern\n'
         'Context: Weather: ${weather ?? 'Normal'}, Festival: ${festival ?? 'None'}';
@@ -101,12 +105,14 @@ class AIContextBuilder {
     HealthSnapshotSummary? snapshot,
     List<String> injuries = const [],
     String tone = 'Empathetic',
+    CoachTone? coachTone,
     int sleepDebtMin = -45,
     double dailyStrain = 8.5,
     String? weather = 'AQI 180 (Poor), 34°C',
     String? festival = 'Diwali (in 3 days)',
   }) {
     final healthSnapshot = snapshot ?? const HealthSnapshotSummary();
+    final effectiveToneString = coachTone != null ? coachTone.displayName : tone;
 
     return AIContext(
       userId: userId,
@@ -114,7 +120,8 @@ class AIContextBuilder {
       goals: goals,
       program: program,
       dietType: dietType,
-      tone: tone,
+      tone: effectiveToneString,
+      coachTone: coachTone ?? CoachTone.fromString(tone),
       injuries: injuries,
       snapshot: healthSnapshot,
       readinessScore: dip.readinessScore,

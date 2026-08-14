@@ -7,6 +7,9 @@ import '../../../shared/widgets/glass_card.dart';
 import '../models/chat_message.dart';
 import '../providers/coach_provider.dart';
 
+import '../../../core/brain/ai_roast_mode_engine.dart';
+import '../providers/coach_tone_provider.dart';
+
 class CoachChatScreen extends ConsumerStatefulWidget {
   const CoachChatScreen({super.key});
 
@@ -35,7 +38,19 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
   void _send() {
     final text = _inputController.text.trim();
     if (text.isNotEmpty) {
-      ref.read(aiCoachChatProvider.notifier).sendMessage(text);
+      // Evaluate for distress / crisis triggers before dispatching
+      final isDistress = ref
+          .read(coachToneProvider.notifier)
+          .evaluateDistressTrigger(userMessage: text);
+
+      final toneState = ref.read(coachToneProvider);
+      final effectiveTone = toneState.effectiveTone;
+
+      ref.read(aiCoachChatProvider.notifier).sendMessage(
+            text,
+            tone: effectiveTone,
+            isDistress: isDistress,
+          );
       _inputController.clear();
       _scrollToBottom();
     }
@@ -53,9 +68,66 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
     });
   }
 
+  void _onToneSelected(CoachTone tone) {
+    final toneState = ref.read(coachToneProvider);
+    if (tone == CoachTone.roast && !toneState.isRoastOptedIn) {
+      _showRoastOptInDialog();
+    } else {
+      ref.read(coachToneProvider.notifier).setTone(tone);
+    }
+  }
+
+  void _showRoastOptInDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.bgSecondary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+          side: const BorderSide(color: AppColors.glassBorder),
+        ),
+        title: Row(
+          children: [
+            const Text('🔥 ', style: TextStyle(fontSize: 22)),
+            Text('Enable AI Roast Mode?', style: AppTypography.h3),
+          ],
+        ),
+        content: Text(
+          'Roast Mode delivers witty, sarcastic, and bluntly honest feedback on your diet and workouts. '
+          'It is strictly for motivation and will automatically disable if distress or crisis is detected.\n\n'
+          'Example: "You burned 400 calories and then attacked 900 calories of biryani. Respect the hustle. Your goals don\'t."',
+          style: AppTypography.bodyMd.copyWith(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text('Cancel',
+                style: AppTypography.labelLg
+                    .copyWith(color: AppColors.textSecondary)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.warning,
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            onPressed: () {
+              ref.read(coachToneProvider.notifier).optInToRoast();
+              Navigator.of(ctx).pop();
+            },
+            child: const Text('I Can Take It'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(aiCoachChatProvider);
+    final toneState = ref.watch(coachToneProvider);
 
     // Apply suggested prompt to text field when set
     ref.listen<AiCoachChatState>(aiCoachChatProvider, (prev, next) {
@@ -78,6 +150,21 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
           children: [
             // §P3-C Context Banner: Readiness · Streak · Goal
             _ContextBanner(readinessScore: 82, streak: 12, goal: 'Recomp'),
+
+            // §P12-D Coach Tone Selector Strip [Gentle] [Motivational] [Roast] [No Nonsense]
+            _ToneSelectorBar(
+              selectedTone: toneState.selectedTone,
+              effectiveTone: toneState.effectiveTone,
+              onToneSelected: _onToneSelected,
+            ),
+
+            // §P12-D Crisis Mode Suppression Notice
+            if (toneState.isRoastSuppressedByCrisis)
+              _CrisisSuppressionBanner(
+                reason: toneState.distressTriggerReason,
+                onDismiss: () =>
+                    ref.read(coachToneProvider.notifier).clearDistress(),
+              ),
 
             // Chat messages list
             Expanded(
@@ -606,3 +693,150 @@ class _EmptyStateView extends StatelessWidget {
     );
   }
 }
+
+// ── §P12-D Tone Selector Bar ─────────────────────────────────────────────────
+
+class _ToneSelectorBar extends StatelessWidget {
+  final CoachTone selectedTone;
+  final CoachTone effectiveTone;
+  final ValueChanged<CoachTone> onToneSelected;
+
+  const _ToneSelectorBar({
+    required this.selectedTone,
+    required this.effectiveTone,
+    required this.onToneSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: 4,
+      ),
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: AppColors.glassBgMid,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.glassBorder),
+      ),
+      child: Row(
+        children: CoachTone.values.map((tone) {
+          final isSelected = selectedTone == tone;
+          final isEffective = effectiveTone == tone;
+
+          Color activeColor = AppColors.teal;
+          if (tone == CoachTone.roast) {
+            activeColor = AppColors.warning;
+          } else if (tone == CoachTone.noNonsense) {
+            activeColor = AppColors.secondary;
+          }
+
+          return Expanded(
+            child: GestureDetector(
+              onTap: () => onToneSelected(tone),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? activeColor.withValues(alpha: 0.2)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(12),
+                  border: isSelected
+                      ? Border.all(color: activeColor.withValues(alpha: 0.6))
+                      : null,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (tone == CoachTone.roast)
+                      const Padding(
+                        padding: EdgeInsets.only(right: 2),
+                        child: Text('🔥', style: TextStyle(fontSize: 12)),
+                      ),
+                    Text(
+                      tone.displayName,
+                      style: AppTypography.labelMd.copyWith(
+                        color: isSelected ? activeColor : AppColors.textMuted,
+                        fontWeight:
+                            isSelected ? FontWeight.w700 : FontWeight.w500,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+// ── §P12-D Crisis Suppression Banner ─────────────────────────────────────────
+
+class _CrisisSuppressionBanner extends StatelessWidget {
+  final String? reason;
+  final VoidCallback onDismiss;
+
+  const _CrisisSuppressionBanner({
+    this.reason,
+    required this.onDismiss,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: 4,
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.error.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.error.withValues(alpha: 0.4)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.shield_outlined, color: AppColors.error, size: 18),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Safety Safeguard Active',
+                  style: AppTypography.labelLg.copyWith(
+                    color: AppColors.error,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Roast mode auto-adjusted to Gentle for your well-being (${reason ?? 'distress detected'}).',
+                  style: AppTypography.bodySm.copyWith(
+                    color: AppColors.textSecondary,
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.close, color: AppColors.textMuted, size: 16),
+            onPressed: onDismiss,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

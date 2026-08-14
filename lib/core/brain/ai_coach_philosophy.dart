@@ -1,4 +1,6 @@
-// §P3-A AI Coach Philosophy & Response Guardrails System (Pure Dart)
+import 'ai_roast_mode_engine.dart';
+
+// §P3-A & §P12-D AI Coach Philosophy & Response Guardrails System (Pure Dart)
 
 /// System Prompt & Response Validation Result
 class GuardrailValidationResult {
@@ -36,7 +38,7 @@ class AiCoachPhilosophyEngine {
     'cure your condition',
   ];
 
-  /// Generates system prompt with §P3-A Guardrail directives
+  /// Generates system prompt with §P3-A & §P12-D Guardrail directives
   String generateSystemPrompt({
     required String userName,
     required String userGoal,
@@ -46,7 +48,15 @@ class AiCoachPhilosophyEngine {
     required int currentProteinG,
     required int targetProteinG,
     required String sorenessSummary,
+    CoachTone tone = CoachTone.motivational,
+    bool isDistressDetected = false,
   }) {
+    const toneEngine = AiRoastModeEngine();
+    final toneInstruction = toneEngine.getInstruction(
+      selectedTone: tone,
+      isDistressDetected: isDistressDetected,
+    );
+
     return '''
 You are FitKarma's Intelligent Health & Fitness Coach for $userName.
 
@@ -59,7 +69,7 @@ CRITICAL §P3-A AI COACH PHILOSOPHY GUARDRAILS:
    - Muscle Soreness: $sorenessSummary
    - Dietary Preference: $dietType
 3. Always suggest authentic Indian food items (e.g. paneer bhurji, moong dal, chana, sprouts, curd) matching their $dietType diet.
-4. Tone: Empathetic, data-driven, and actionable. Keep responses concise (<4 sentences).
+4. ${toneInstruction.systemPromptDirective}
 5. Never diagnose medical conditions or give clinical prescriptions.
 ''';
   }
