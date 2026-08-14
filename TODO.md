@@ -222,7 +222,7 @@ production split.)*
 - [x] **§P12-A Festival Intelligence System** (v1) — Festival Cross-Module Adaptation Engine implemented; all documented Festivals Tracked seeded with correct dates; Festival Survival Mode implemented
 - [x] **§P12-B Life Events Engine** (NEW) implemented, covering every documented event type
 - [x] **§P12-C Wedding Transformation Mode** — **WeddingTransformationNotifier** implemented
-- [x] **§P12-D AI Roast Mode** implemented
+- [ ] **§P12-D AI Roast Mode** implemented
 - [ ] **§P12-E Travel Intelligence** (NEW v1) — **TravelIntelligenceEngine** implemented; Travel Mode UI built
 - [ ] **§P12-F Smart Calendar Integration** (NEW v1) — Calendar Intelligence Engine implemented; Calendar-Aware Daily Briefing wired; Privacy boundaries implemented
 
