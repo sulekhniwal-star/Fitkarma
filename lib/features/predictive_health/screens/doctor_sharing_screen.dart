@@ -6,6 +6,7 @@ import '../../../shared/theme/app_typography.dart';
 import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/glass_card.dart';
 import '../../../core/brain/doctor_sharing_service.dart';
+import '../providers/abha_provider.dart';
 
 final doctorSharingServiceProvider = Provider<DoctorSharingService>((ref) => const DoctorSharingService());
 
@@ -138,6 +139,89 @@ class DoctorSharingScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppSpacing.md),
               ],
+
+              // §P16-C ABHA Health ID & FHIR-Lite Export Card
+              Consumer(
+                builder: (context, ref, child) {
+                  final abhaProfile = ref.watch(abhaProvider);
+                  return BentoCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(Icons.verified_user, color: AppColors.teal, size: 22),
+                                const SizedBox(width: 8),
+                                Text('ABHA Health ID (NDHM)', style: AppTypography.labelLg),
+                              ],
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: abhaProfile.isLinked ? AppColors.teal.withAlpha(40) : AppColors.surface1,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                abhaProfile.isLinked ? 'VERIFIED' : 'NOT LINKED',
+                                style: AppTypography.labelSmall.copyWith(
+                                  color: abhaProfile.isLinked ? AppColors.teal : AppColors.textMuted,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: AppSpacing.xs),
+                        Text(
+                          abhaProfile.isLinked
+                              ? 'Linked: ${abhaProfile.abhaNumber} (${abhaProfile.abhaAddress})'
+                              : 'Link your national ABHA ID for structured FHIR bundle sharing with network doctors.',
+                          style: AppTypography.bodySm,
+                        ),
+                        const SizedBox(height: AppSpacing.sm),
+                        if (abhaProfile.isLinked)
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.teal,
+                              foregroundColor: AppColors.bg0,
+                              minimumSize: const Size.fromHeight(38),
+                            ),
+                            icon: const Icon(Icons.share, size: 16),
+                            label: const Text('Export FHIR-Lite JSON Bundle'),
+                            onPressed: () {
+                              ref.read(abhaProvider.notifier).exportFhirBundle(summary);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('FHIR-Lite Clinical Bundle Generated for NDHM Network')),
+                              );
+                            },
+                          )
+                        else
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: AppColors.teal,
+                              side: const BorderSide(color: AppColors.teal),
+                              minimumSize: const Size.fromHeight(38),
+                            ),
+                            onPressed: () {
+                              ref.read(abhaProvider.notifier).linkAbha(
+                                    rawAbhaNumber: '91-1234-5678-9012',
+                                    abhaAddress: 'arjun.sharma@abdm',
+                                  );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('ABHA ID 91-1234-5678-9012 Successfully Linked')),
+                              );
+                            },
+                            child: const Text('Link ABHA ID'),
+                          ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: AppSpacing.md),
 
               // CTA Action Buttons
               Row(

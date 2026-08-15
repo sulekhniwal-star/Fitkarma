@@ -30,6 +30,13 @@ void main() {
     // ── Widget Tests ────────────────────────────────────────────────────────
 
     testWidgets('DoctorSharingScreen renders Security Protocol banner, report summary, and export PDF button', (tester) async {
+      tester.view.physicalSize = const Size(800, 1400);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -44,6 +51,7 @@ void main() {
       expect(find.text('Included Report Contents (90-Day Overview)'), findsOneWidget);
       expect(find.text('Export Encrypted PDF'), findsOneWidget);
 
+      await tester.ensureVisible(find.text('Export Encrypted PDF'));
       await tester.tap(find.text('Export Encrypted PDF'));
       await tester.pumpAndSettle();
 
