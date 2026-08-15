@@ -30,12 +30,14 @@ android {
         create("staging") {
             dimension = "default"
             applicationIdSuffix = ".staging"
-            resValue("string", "app_name", "FitKarma Staging")
         }
         create("production") {
             dimension = "default"
-            resValue("string", "app_name", "FitKarma")
         }
+    }
+
+    buildFeatures {
+        resValues = true
     }
 
     buildTypes {
