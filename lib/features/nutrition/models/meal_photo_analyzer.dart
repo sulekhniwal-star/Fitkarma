@@ -23,35 +23,43 @@ class CommonIndianMealRecognizer {
     // Match filename/path patterns or return cached sample for instant lookups
     if (fileName.contains('poha')) {
       return RecognizedMealMatch(
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f6'),
+        foodItem:
+            SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f6'),
         confidence: 0.92,
       );
     } else if (fileName.contains('paneer')) {
       return RecognizedMealMatch(
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'),
+        foodItem:
+            SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'),
         confidence: 0.88,
       );
     } else if (fileName.contains('dal') || fileName.contains('roti')) {
       return RecognizedMealMatch(
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f2'),
+        foodItem:
+            SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f2'),
         confidence: 0.85,
       );
     } else if (fileName.contains('idli') || fileName.contains('dosa')) {
       return RecognizedMealMatch(
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f4'),
+        foodItem:
+            SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f4'),
         confidence: 0.90,
       );
     } else if (fileName.contains('chicken')) {
       return RecognizedMealMatch(
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f8'),
+        foodItem:
+            SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f8'),
         confidence: 0.95,
       );
     }
 
     // Default fallback pattern match for common Indian thali test cases (confidence 0.82)
-    if (fileName.contains('common') || fileName.contains('thali') || fileName.contains('meal')) {
+    if (fileName.contains('common') ||
+        fileName.contains('thali') ||
+        fileName.contains('meal')) {
       return RecognizedMealMatch(
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'),
+        foodItem:
+            SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'),
         confidence: 0.85,
       );
     }
@@ -76,7 +84,8 @@ class MealPhotoAnalyzer {
   /// Step 1: Pattern-match against common Indian meals (threshold confidence >= 0.80)
   /// Step 2: Client-side image downscaling & JPEG compression to optimize payload size
   /// Step 3: Vision API call fallback for complex/unrecognized meals
-  Future<FullMealAnalysisResult> analyze(File photo, {String userGoal = 'Fat Loss'}) async {
+  Future<FullMealAnalysisResult> analyze(File photo,
+      {String userGoal = 'Fat Loss'}) async {
     // Step 1: Cache-First Recognition
     final recognized = await _recognizer.recognize(photo);
 
@@ -127,7 +136,8 @@ class MealPhotoAnalyzer {
 
       final compressedBytes = img.encodeJpg(resized, quality: 80);
       final tempDir = originalFile.parent;
-      final compressedFile = File('${tempDir.path}/compressed_meal_${DateTime.now().millisecondsSinceEpoch}.jpg');
+      final compressedFile = File(
+          '${tempDir.path}/compressed_meal_${DateTime.now().millisecondsSinceEpoch}.jpg');
       return await compressedFile.writeAsBytes(compressedBytes);
     } catch (e) {
       debugPrint('Photo compression fallback: $e');
@@ -136,7 +146,8 @@ class MealPhotoAnalyzer {
   }
 
   /// Vision API call simulation returning structured analysis result
-  Future<FullMealAnalysisResult> _callGroqVision(File compressedPhoto, {required String userGoal}) async {
+  Future<FullMealAnalysisResult> _callGroqVision(File compressedPhoto,
+      {required String userGoal}) async {
     // Simulated Groq Llama-3.2 Vision response for novel meal
     const customFood = IndianFoodItem(
       id: 'vision_1',

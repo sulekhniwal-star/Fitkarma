@@ -4,10 +4,10 @@ import '../models/blood_pressure_engine.dart';
 // ── Security Access Lock State ────────────────────────────────────────────────
 
 enum BiometricLockStatus {
-  locked,         // Requires auth
+  locked, // Requires auth
   authenticating, // Local auth prompt open
-  unlocked,       // Biometric/PIN verified
-  failed,         // Biometric failed, PIN fallback ready
+  unlocked, // Biometric/PIN verified
+  failed, // Biometric failed, PIN fallback ready
 }
 
 // ── Blood Pressure Screen State ───────────────────────────────────────────────
@@ -52,10 +52,10 @@ class BloodPressureState {
 
 class BloodPressureNotifier extends StateNotifier<BloodPressureState> {
   final BloodPressureEngine _engine;
-  static const String _defaultBackupPin = '123456'; // Default 6-digit security PIN
+  static const String _defaultBackupPin =
+      '123456'; // Default 6-digit security PIN
 
-  BloodPressureNotifier(this._engine)
-      : super(_buildInitialState(_engine));
+  BloodPressureNotifier(this._engine) : super(_buildInitialState(_engine));
 
   static BloodPressureState _buildInitialState(BloodPressureEngine engine) {
     final now = DateTime.now();

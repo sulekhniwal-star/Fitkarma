@@ -70,7 +70,8 @@ class WorkoutRecommendation {
     return const WorkoutRecommendation(
       type: '45-min strength session',
       standardType: '45-min strength session',
-      rationale: 'Standard workout duration aligned with your daily program blueprint.',
+      rationale:
+          'Standard workout duration aligned with your daily program blueprint.',
       targetMinutes: 45,
       isAdapted: false,
     );
@@ -80,7 +81,8 @@ class WorkoutRecommendation {
     return const WorkoutRecommendation(
       type: '20-min HIIT (meeting-day protocol)',
       standardType: '45-min strength session',
-      rationale: 'Heavy meeting day — shortened workout better than skipping entirely.',
+      rationale:
+          'Heavy meeting day — shortened workout better than skipping entirely.',
       targetMinutes: 20,
       isAdapted: true,
     );
@@ -90,7 +92,8 @@ class WorkoutRecommendation {
     return const WorkoutRecommendation(
       type: 'Light 20-min morning workout',
       standardType: '45-min strength session',
-      rationale: 'Wedding day — brief workout keeps energy high without fatigue for the celebration.',
+      rationale:
+          'Wedding day — brief workout keeps energy high without fatigue for the celebration.',
       targetMinutes: 20,
       isAdapted: true,
     );
@@ -141,21 +144,62 @@ class LocalCalendarApi implements CalendarApi {
   const LocalCalendarApi([this._mockEvents]);
 
   @override
-  Future<List<CalendarEvent>> getEvents(DateTime date, CalendarSource source) async {
+  Future<List<CalendarEvent>> getEvents(
+      DateTime date, CalendarSource source) async {
     if (_mockEvents != null) {
       return _mockEvents!;
     }
 
     // Default simulated busy work schedule (8 meetings, ~6.5 hours of calls)
     return [
-      CalendarEvent(id: '1', title: 'Sprint Standup', startHour: 8, durationMinutes: 30, date: date),
-      CalendarEvent(id: '2', title: 'Product Architecture Review', startHour: 10, durationMinutes: 60, date: date),
-      CalendarEvent(id: '3', title: 'Client Quarterly Sync', startHour: 11, durationMinutes: 45, date: date),
-      CalendarEvent(id: '4', title: 'Engineering 1:1', startHour: 13, durationMinutes: 45, date: date),
-      CalendarEvent(id: '5', title: 'Design System Sprint', startHour: 14, durationMinutes: 60, date: date),
-      CalendarEvent(id: '6', title: 'Executive Briefing', startHour: 15, durationMinutes: 60, date: date),
-      CalendarEvent(id: '7', title: 'Operations Catch-up', startHour: 16, durationMinutes: 30, date: date),
-      CalendarEvent(id: '8', title: 'Evening Wrap-up & Planning', startHour: 18, durationMinutes: 60, date: date),
+      CalendarEvent(
+          id: '1',
+          title: 'Sprint Standup',
+          startHour: 8,
+          durationMinutes: 30,
+          date: date),
+      CalendarEvent(
+          id: '2',
+          title: 'Product Architecture Review',
+          startHour: 10,
+          durationMinutes: 60,
+          date: date),
+      CalendarEvent(
+          id: '3',
+          title: 'Client Quarterly Sync',
+          startHour: 11,
+          durationMinutes: 45,
+          date: date),
+      CalendarEvent(
+          id: '4',
+          title: 'Engineering 1:1',
+          startHour: 13,
+          durationMinutes: 45,
+          date: date),
+      CalendarEvent(
+          id: '5',
+          title: 'Design System Sprint',
+          startHour: 14,
+          durationMinutes: 60,
+          date: date),
+      CalendarEvent(
+          id: '6',
+          title: 'Executive Briefing',
+          startHour: 15,
+          durationMinutes: 60,
+          date: date),
+      CalendarEvent(
+          id: '7',
+          title: 'Operations Catch-up',
+          startHour: 16,
+          durationMinutes: 30,
+          date: date),
+      CalendarEvent(
+          id: '8',
+          title: 'Evening Wrap-up & Planning',
+          startHour: 18,
+          durationMinutes: 60,
+          date: date),
     ];
   }
 }
@@ -173,7 +217,8 @@ class CalendarIntegrationService {
     CalendarSource source = CalendarSource.google,
     List<CalendarEvent>? mockEvents,
   }) async {
-    final api = mockEvents != null ? LocalCalendarApi(mockEvents) : _calendarApi;
+    final api =
+        mockEvents != null ? LocalCalendarApi(mockEvents) : _calendarApi;
     final events = await api.getEvents(date, source);
 
     int meetingMinutes = 0;
@@ -189,9 +234,11 @@ class CalendarIntegrationService {
 
       // On-device title keyword scanning
       final lowerTitle = event.title.toLowerCase();
-      if (_containsAny(lowerTitle, ['wedding', 'marriage', 'reception', 'sangeet', 'mehendi'])) {
+      if (_containsAny(lowerTitle,
+          ['wedding', 'marriage', 'reception', 'sangeet', 'mehendi'])) {
         specialEvent = SpecialEvent.wedding;
-      } else if (_containsAny(lowerTitle, ['travel', 'flight', 'airport', 'boarding', 'train journey'])) {
+      } else if (_containsAny(lowerTitle,
+          ['travel', 'flight', 'airport', 'boarding', 'train journey'])) {
         specialEvent = SpecialEvent.travel;
       }
     }
@@ -204,7 +251,8 @@ class CalendarIntegrationService {
       hasMorningCommitment: hasMorningCommitment,
       hasEveningEvent: hasEveningEvent,
       specialEvent: specialEvent,
-      workoutRecommendation: _workoutRecommendation(meetingMinutes, specialEvent),
+      workoutRecommendation:
+          _workoutRecommendation(meetingMinutes, specialEvent),
       nutritionNote: _nutritionNote(specialEvent, meetingMinutes),
       isConnected: true,
     );
@@ -218,15 +266,18 @@ class CalendarIntegrationService {
       return WorkoutRecommendation.wedding();
     }
 
-    if (meetingMinutes > 360) { // >6h meetings (§P12-F)
+    if (meetingMinutes > 360) {
+      // >6h meetings (§P12-F)
       return WorkoutRecommendation.shortenedHIIT();
     }
 
-    if (meetingMinutes > 300) { // >5h meetings
+    if (meetingMinutes > 300) {
+      // >5h meetings
       return const WorkoutRecommendation(
         type: '30-min Express Workout',
         standardType: '45-min strength session',
-        rationale: 'Busy schedule (>5h calls) — condensed training session to protect recovery.',
+        rationale:
+            'Busy schedule (>5h calls) — condensed training session to protect recovery.',
         targetMinutes: 30,
         isAdapted: true,
       );
@@ -244,7 +295,8 @@ class CalendarIntegrationService {
       return 'Travel day protocol: Carry a 1L water bottle and healthy nuts/sprouts for on-the-go nutrition.';
     }
 
-    if (meetingMinutes > 300) { // Heavy cognitive load day
+    if (meetingMinutes > 300) {
+      // Heavy cognitive load day
       return 'Heavy cognitive load day → craving more carbs is normal. Keep a healthy snack nearby to avoid vending machine.';
     }
 

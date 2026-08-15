@@ -6,7 +6,9 @@ import 'package:fitkarma/features/workout/screens/active_workout_screen.dart';
 
 void main() {
   group('§P6-B Active Workout Screen Tests', () {
-    test('WorkoutNotifier startRestCountdown sets restTimerEndTime and survives background recalculation', () {
+    test(
+        'WorkoutNotifier startRestCountdown sets restTimerEndTime and survives background recalculation',
+        () {
       final container = ProviderContainer();
       addTearDown(container.dispose);
 
@@ -39,7 +41,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('ActiveWorkoutScreen renders set logging list, overload target card, and completion button', (tester) async {
+    testWidgets(
+        'ActiveWorkoutScreen renders set logging list, overload target card, and completion button',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: ActiveWorkoutScreen()),

@@ -6,7 +6,8 @@ void main() {
     const engine = WomensHealthEngine();
 
     test('Follicular phase boosts strength target by +5%', () {
-      final res = engine.calculatePrescription(phase: MenstrualPhase.follicular);
+      final res =
+          engine.calculatePrescription(phase: MenstrualPhase.follicular);
       expect(res.strengthTargetMultiplier, equals(1.05));
       expect(res.nutritionAdvice, contains('High energy phase'));
     });

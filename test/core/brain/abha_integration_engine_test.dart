@@ -13,7 +13,8 @@ void main() {
       expect(engine.validateAbhaNumber('12345'), isFalse);
       expect(engine.validateAbhaNumber('91-1234-5678-ABCD'), isFalse);
 
-      expect(engine.formatAbhaNumber('91123456789012'), equals('91-1234-5678-9012'));
+      expect(engine.formatAbhaNumber('91123456789012'),
+          equals('91-1234-5678-9012'));
     });
 
     test('Validates NDHM ABHA addresses (@abdm, @sbx, @ndhm)', () {
@@ -23,7 +24,8 @@ void main() {
       expect(engine.validateAbhaAddress('invalid@gmail.com'), isFalse);
     });
 
-    test('Generates valid FHIR-Lite structured bundle for NDHM network doctors', () {
+    test('Generates valid FHIR-Lite structured bundle for NDHM network doctors',
+        () {
       const profile = AbhaHealthProfile(
         abhaNumber: '91-1234-5678-9012',
         abhaAddress: 'arjun.sharma@abdm',
@@ -32,7 +34,8 @@ void main() {
       );
 
       const doctorService = DoctorSharingService();
-      final reportSummary = doctorService.generateSampleReportSummary('Arjun Sharma');
+      final reportSummary =
+          doctorService.generateSampleReportSummary('Arjun Sharma');
 
       final fhirBundle = engine.generateFhirLiteBundle(
         profile: profile,
@@ -49,7 +52,8 @@ void main() {
       expect((json['entry'] as List).length, greaterThanOrEqualTo(3));
     });
 
-    test('AbhaNotifier links, formats, and unlinks ABHA profiles correctly', () {
+    test('AbhaNotifier links, formats, and unlinks ABHA profiles correctly',
+        () {
       final notifier = AbhaNotifier();
 
       expect(notifier.state.isLinked, isFalse);

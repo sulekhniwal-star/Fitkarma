@@ -7,7 +7,8 @@ import 'package:fitkarma/features/lifestyle/providers/calendar_provider.dart';
 import 'package:fitkarma/core/brain/calendar_intelligence_engine.dart';
 
 void main() {
-  testWidgets('CalendarIntelligenceCard renders §P12-F wireframe content properly',
+  testWidgets(
+      'CalendarIntelligenceCard renders §P12-F wireframe content properly',
       (tester) async {
     final testInsight = DayCalendarInsight(
       date: DateTime.now(),
@@ -19,7 +20,8 @@ void main() {
       workoutRecommendation: const WorkoutRecommendation(
         type: '20-min HIIT (meeting-day protocol)',
         standardType: '45-min strength session',
-        rationale: 'Heavy meeting day — shortened workout better than skipping entirely.',
+        rationale:
+            'Heavy meeting day — shortened workout better than skipping entirely.',
         targetMinutes: 20,
         isAdapted: true,
       ),
@@ -60,7 +62,8 @@ void main() {
     expect(find.text('Keep Original Plan'), findsOneWidget);
   });
 
-  testWidgets('Tapping Confirm Adapted Plan shows confirmed state', (tester) async {
+  testWidgets('Tapping Confirm Adapted Plan shows confirmed state',
+      (tester) async {
     final container = ProviderContainer();
 
     await tester.pumpWidget(
@@ -100,7 +103,8 @@ void main() {
     expect(find.text('Confirm Adapted Plan'), findsNothing);
   });
 
-  testWidgets('DailyBriefingScreen renders CalendarIntelligenceCard when connected',
+  testWidgets(
+      'DailyBriefingScreen renders CalendarIntelligenceCard when connected',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;

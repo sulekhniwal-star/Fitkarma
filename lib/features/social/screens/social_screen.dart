@@ -33,15 +33,18 @@ class SocialScreen extends ConsumerWidget {
               if (state.nudgeMessage.isNotEmpty) ...[
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     color: AppColors.success.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
+                    border: Border.all(
+                        color: AppColors.success.withValues(alpha: 0.4)),
                   ),
                   child: Text(
                     state.nudgeMessage,
-                    style: AppTypography.bodySm.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodySm.copyWith(
+                        color: AppColors.success, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -57,14 +60,17 @@ class SocialScreen extends ConsumerWidget {
                       children: [
                         Text(state.squadName, style: AppTypography.h3),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.warning.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             '🔥 ${state.collectiveStreakDays}-Day Squad Streak',
-                            style: AppTypography.labelSmall.copyWith(color: AppColors.warning, fontWeight: FontWeight.bold),
+                            style: AppTypography.labelSmall.copyWith(
+                                color: AppColors.warning,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -76,7 +82,8 @@ class SocialScreen extends ConsumerWidget {
                         const SizedBox(width: 4),
                         Text(
                           'Team Avg Readiness: ${state.averageReadinessScore.toStringAsFixed(1)}%',
-                          style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.teal),
                         ),
                       ],
                     ),
@@ -94,19 +101,22 @@ class SocialScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(state.activeMission!.missionTitle, style: AppTypography.labelLg),
+                      Text(state.activeMission!.missionTitle,
+                          style: AppTypography.labelLg),
                       const SizedBox(height: 8),
                       LinearProgressIndicator(
                         value: state.activeMission!.progressPercent,
                         backgroundColor: AppColors.bg0,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            AppColors.primary),
                         minHeight: 8,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         state.activeMission!.targetStatusText,
-                        style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -115,7 +125,8 @@ class SocialScreen extends ConsumerWidget {
               ],
 
               // 3. Squad Member Readiness & Activity List
-              Text('Squad Members (${state.members.length})', style: AppTypography.h3),
+              Text('Squad Members (${state.members.length})',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
               Column(
                 children: [
@@ -127,17 +138,21 @@ class SocialScreen extends ConsumerWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundColor: member.readinessTier == SquadReadinessTier.high
+                              backgroundColor: member.readinessTier ==
+                                      SquadReadinessTier.high
                                   ? AppColors.success.withValues(alpha: 0.2)
-                                  : member.readinessTier == SquadReadinessTier.moderate
+                                  : member.readinessTier ==
+                                          SquadReadinessTier.moderate
                                       ? AppColors.warning.withValues(alpha: 0.2)
                                       : AppColors.error.withValues(alpha: 0.2),
                               child: Text(
                                 member.name.substring(0, 1),
                                 style: AppTypography.labelLg.copyWith(
-                                  color: member.readinessTier == SquadReadinessTier.high
+                                  color: member.readinessTier ==
+                                          SquadReadinessTier.high
                                       ? AppColors.success
-                                      : member.readinessTier == SquadReadinessTier.moderate
+                                      : member.readinessTier ==
+                                              SquadReadinessTier.moderate
                                           ? AppColors.warning
                                           : AppColors.error,
                                 ),
@@ -148,10 +163,13 @@ class SocialScreen extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(member.name, style: AppTypography.labelLg),
+                                  Text(member.name,
+                                      style: AppTypography.labelLg),
                                   Text(
                                     'Readiness: ${member.readinessTier.name.toUpperCase()} • ${member.hasLoggedToday ? "Logged Today" : "Not Logged"}',
-                                    style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                                    style: AppTypography.bodySm.copyWith(
+                                        color: AppColors.textSecondary,
+                                        fontSize: 11),
                                   ),
                                 ],
                               ),
@@ -160,13 +178,20 @@ class SocialScreen extends ConsumerWidget {
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.warning,
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 4),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
                                 ),
                                 onPressed: () {
-                                  ref.read(squadStateProvider.notifier).sendSquadNudge(member.name, 'Rest & Recover');
+                                  ref
+                                      .read(squadStateProvider.notifier)
+                                      .sendSquadNudge(
+                                          member.name, 'Rest & Recover');
                                 },
-                                child: Text('Nudge to Rest', style: AppTypography.labelSmall.copyWith(color: Colors.black)),
+                                child: Text('Nudge to Rest',
+                                    style: AppTypography.labelSmall
+                                        .copyWith(color: Colors.black)),
                               ),
                           ],
                         ),
@@ -183,13 +208,19 @@ class SocialScreen extends ConsumerWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                   ),
-                  icon: const Icon(Icons.rocket_launch, color: Colors.white, size: 20),
+                  icon: const Icon(Icons.rocket_launch,
+                      color: Colors.white, size: 20),
                   onPressed: () {
-                    ref.read(squadStateProvider.notifier).proposeChallenge('🔥 100,000 Step Squad Challenge');
+                    ref
+                        .read(squadStateProvider.notifier)
+                        .proposeChallenge('🔥 100,000 Step Squad Challenge');
                   },
-                  label: Text('Propose Squad Challenge', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                  label: Text('Propose Squad Challenge',
+                      style:
+                          AppTypography.labelLg.copyWith(color: Colors.white)),
                 ),
               ),
               const SizedBox(height: 30),

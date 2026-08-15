@@ -7,7 +7,8 @@ import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/glass_card.dart';
 import '../../../core/brain/longevity_score_calculator.dart';
 
-final longevityCalculatorProvider = Provider<LongevityScoreCalculator>((ref) => const LongevityScoreCalculator());
+final longevityCalculatorProvider = Provider<LongevityScoreCalculator>(
+    (ref) => const LongevityScoreCalculator());
 
 final longevityResultStateProvider = Provider<LongevityResult>((ref) {
   final calculator = ref.watch(longevityCalculatorProvider);
@@ -43,7 +44,8 @@ class LongevityScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('🌱 Longevity Score', style: AppTypography.h2),
@@ -58,7 +60,9 @@ class LongevityScreen extends ConsumerWidget {
               BentoCard(
                 child: Column(
                   children: [
-                    Text('Longevity Score: ${result.longevityScore}', style: AppTypography.h1.copyWith(color: AppColors.primary)),
+                    Text('Longevity Score: ${result.longevityScore}',
+                        style: AppTypography.h1
+                            .copyWith(color: AppColors.primary)),
                     const SizedBox(height: 8),
 
                     // Score Progress Bar
@@ -68,7 +72,8 @@ class LongevityScreen extends ConsumerWidget {
                         value: result.longevityScore / 100.0,
                         minHeight: 12,
                         backgroundColor: AppColors.bg1,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            AppColors.primary),
                       ),
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -78,15 +83,25 @@ class LongevityScreen extends ConsumerWidget {
                       children: [
                         Column(
                           children: [
-                            Text('Biological Age', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
-                            Text('${result.biologicalAge}', style: AppTypography.h2.copyWith(color: AppColors.teal)),
+                            Text('Biological Age',
+                                style: AppTypography.labelSmall
+                                    .copyWith(color: AppColors.textSecondary)),
+                            Text('${result.biologicalAge}',
+                                style: AppTypography.h2
+                                    .copyWith(color: AppColors.teal)),
                           ],
                         ),
-                        Container(width: 1, height: 35, color: AppColors.textMuted.withValues(alpha: 0.3)),
+                        Container(
+                            width: 1,
+                            height: 35,
+                            color: AppColors.textMuted.withValues(alpha: 0.3)),
                         Column(
                           children: [
-                            Text('Chronological Age', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
-                            Text('${result.chronologicalAge}', style: AppTypography.h2),
+                            Text('Chronological Age',
+                                style: AppTypography.labelSmall
+                                    .copyWith(color: AppColors.textSecondary)),
+                            Text('${result.chronologicalAge}',
+                                style: AppTypography.h2),
                           ],
                         ),
                       ],
@@ -94,14 +109,17 @@ class LongevityScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
 
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: AppColors.success.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         'You are ${result.ageDelta} years younger than your actual age ✓',
-                        style: AppTypography.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                        style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.success,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -116,15 +134,22 @@ class LongevityScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(14),
                 child: Column(
                   children: [
-                    _FactorRow(label: '❤️ Cardio (HRV/HR)', score: result.cardioScore),
+                    _FactorRow(
+                        label: '❤️ Cardio (HRV/HR)', score: result.cardioScore),
                     const Divider(height: 16),
-                    _FactorRow(label: '😴 Sleep Quality', score: result.sleepScore),
+                    _FactorRow(
+                        label: '😴 Sleep Quality', score: result.sleepScore),
                     const Divider(height: 16),
-                    _FactorRow(label: '🏃 Activity Volume', score: result.activityScore),
+                    _FactorRow(
+                        label: '🏃 Activity Volume',
+                        score: result.activityScore),
                     const Divider(height: 16),
-                    _FactorRow(label: '⚖️ Body Composition', score: result.bodyFatScore),
+                    _FactorRow(
+                        label: '⚖️ Body Composition',
+                        score: result.bodyFatScore),
                     const Divider(height: 16),
-                    _FactorRow(label: '🩺 Biomarkers', score: result.biomarkerScore),
+                    _FactorRow(
+                        label: '🩺 Biomarkers', score: result.biomarkerScore),
                   ],
                 ),
               ),
@@ -138,16 +163,19 @@ class LongevityScreen extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                  border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.lightbulb_outline, color: AppColors.primary, size: 24),
+                    const Icon(Icons.lightbulb_outline,
+                        color: AppColors.primary, size: 24),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         result.biggestOpportunity,
-                        style: AppTypography.bodySm.copyWith(color: AppColors.primary),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.primary),
                       ),
                     ),
                   ],
@@ -158,7 +186,8 @@ class LongevityScreen extends ConsumerWidget {
               Center(
                 child: Text(
                   'Updated monthly. Next update: Aug 1.',
-                  style: AppTypography.bodySm.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTypography.bodySm
+                      .copyWith(color: AppColors.textMuted, fontSize: 11),
                 ),
               ),
               const SizedBox(height: 30),
@@ -187,8 +216,11 @@ class _FactorRow extends StatelessWidget {
         Text(label, style: AppTypography.bodySm),
         Row(
           children: [
-            Text('$rounded ', style: AppTypography.labelLg.copyWith(color: AppColors.textPrimary)),
-            Text(stars, style: const TextStyle(color: Colors.amber, fontSize: 12)),
+            Text('$rounded ',
+                style: AppTypography.labelLg
+                    .copyWith(color: AppColors.textPrimary)),
+            Text(stars,
+                style: const TextStyle(color: Colors.amber, fontSize: 12)),
           ],
         ),
       ],

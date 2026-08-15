@@ -36,9 +36,11 @@ class AiCoachChatState {
       messages: messages ?? this.messages,
       isAiTyping: isAiTyping ?? this.isAiTyping,
       errorOccurred: errorOccurred ?? this.errorOccurred,
-      currentConversationId: currentConversationId ?? this.currentConversationId,
+      currentConversationId:
+          currentConversationId ?? this.currentConversationId,
       memory: memory ?? this.memory,
-      pendingSuggestedPrompt: pendingSuggestedPrompt ?? this.pendingSuggestedPrompt,
+      pendingSuggestedPrompt:
+          pendingSuggestedPrompt ?? this.pendingSuggestedPrompt,
     );
   }
 }
@@ -70,7 +72,9 @@ class AiCoachChatNotifier extends StateNotifier<AiCoachChatState> {
       DateTime.now().millisecondsSinceEpoch.toString();
 
   /// Send a user message with optimistic updates
-  Future<void> sendMessage(String text, {CoachTone tone = CoachTone.motivational, bool isDistress = false}) async {
+  Future<void> sendMessage(String text,
+      {CoachTone tone = CoachTone.motivational,
+      bool isDistress = false}) async {
     final conversationId =
         state.currentConversationId ?? _generateConversationId();
 
@@ -97,7 +101,8 @@ class AiCoachChatNotifier extends StateNotifier<AiCoachChatState> {
 
     try {
       // 2. Fetch response from Cloudflare Worker (mocked in Pure Dart)
-      final response = await _callCoachWorker(text, conversationId, tone: tone, isDistress: isDistress);
+      final response = await _callCoachWorker(text, conversationId,
+          tone: tone, isDistress: isDistress);
 
       // 3. Trigger typewriter simulation for AI response
       await _streamTypewriterResponse(
@@ -179,10 +184,11 @@ class AiCoachChatNotifier extends StateNotifier<AiCoachChatState> {
   }
 
   /// Cloudflare Worker `fitkarma-coach` call wrapper (mocked in Pure Dart)
-  Future<CoachWorkerResponse> _callCoachWorker(
-      String message, String convId, {CoachTone tone = CoachTone.motivational, bool isDistress = false}) async {
+  Future<CoachWorkerResponse> _callCoachWorker(String message, String convId,
+      {CoachTone tone = CoachTone.motivational,
+      bool isDistress = false}) async {
     await Future.delayed(const Duration(milliseconds: 600));
-    
+
     final effective = const AiRoastModeEngine().resolveEffectiveTone(
       selectedTone: tone,
       isDistressDetected: isDistress,
@@ -191,16 +197,20 @@ class AiCoachChatNotifier extends StateNotifier<AiCoachChatState> {
     final String reply;
     switch (effective) {
       case CoachTone.roast:
-        reply = 'You burned 400 calories and then attacked 900 calories of biryani. Respect the hustle. Your goals don\'t. Let\'s make the next meal high-protein and hit your macros.';
+        reply =
+            'You burned 400 calories and then attacked 900 calories of biryani. Respect the hustle. Your goals don\'t. Let\'s make the next meal high-protein and hit your macros.';
         break;
       case CoachTone.gentle:
-        reply = 'I hear you. Recovery is part of progress. Let\'s prioritize getting 7.5 hours of restful sleep and a nourishing meal with paneer or dal tonight.';
+        reply =
+            'I hear you. Recovery is part of progress. Let\'s prioritize getting 7.5 hours of restful sleep and a nourishing meal with paneer or dal tonight.';
         break;
       case CoachTone.noNonsense:
-        reply = 'Readiness: 82/100. Protein: 58g/110g. Sleep debt: -45m. Immediate action: 30g protein intake required, target 1,900 kcal today.';
+        reply =
+            'Readiness: 82/100. Protein: 58g/110g. Sleep debt: -45m. Immediate action: 30g protein intake required, target 1,900 kcal today.';
         break;
       case CoachTone.motivational:
-        reply = 'Since your sleep debt is -45m and you have mild quad soreness, your recovery capacity is moderate. I have adjusted your calorie intake to 1,900 kcal (+100 kcal for repair). Let\'s keep this momentum going!';
+        reply =
+            'Since your sleep debt is -45m and you have mild quad soreness, your recovery capacity is moderate. I have adjusted your calorie intake to 1,900 kcal (+100 kcal for repair). Let\'s keep this momentum going!';
         break;
     }
 

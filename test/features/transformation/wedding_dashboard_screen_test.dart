@@ -6,7 +6,9 @@ import 'package:fitkarma/features/transformation/screens/wedding_dashboard_scree
 
 void main() {
   group('§P12-C Wedding Transformation Mode Tests', () {
-    test('setWeddingDate calculates days remaining and resolves Peak Shred vs Final Taper phase', () {
+    test(
+        'setWeddingDate calculates days remaining and resolves Peak Shred vs Final Taper phase',
+        () {
       final notifier = WeddingTransformationNotifier();
 
       final taperDate = DateTime.now().add(const Duration(days: 15));
@@ -22,7 +24,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('WeddingDashboardScreen renders countdown, action checklist, and macro guidelines', (tester) async {
+    testWidgets(
+        'WeddingDashboardScreen renders countdown, action checklist, and macro guidelines',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

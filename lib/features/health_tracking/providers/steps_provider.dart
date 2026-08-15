@@ -24,8 +24,7 @@ class StepsState {
     return StepsState(
       record: record ?? this.record,
       coachNudge: coachNudge ?? this.coachNudge,
-      isPermissionGranted:
-          isPermissionGranted ?? this.isPermissionGranted,
+      isPermissionGranted: isPermissionGranted ?? this.isPermissionGranted,
       isSyncing: isSyncing ?? this.isSyncing,
     );
   }
@@ -178,6 +177,5 @@ class StepsNotifier extends StateNotifier<StepsState> {
   }
 }
 
-final stepsProvider =
-    StateNotifierProvider<StepsNotifier, StepsState>(
-        (_) => StepsNotifier(const StepsSyncEngine()));
+final stepsProvider = StateNotifierProvider<StepsNotifier, StepsState>(
+    (_) => StepsNotifier(const StepsSyncEngine()));

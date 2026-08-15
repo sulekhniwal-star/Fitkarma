@@ -14,7 +14,8 @@ class BenchmarkDisplayScreen extends StatelessWidget {
 
   const BenchmarkDisplayScreen({
     super.key,
-    this.user = const UserProfileData(age: 28, gender: 'Male', country: 'India'),
+    this.user =
+        const UserProfileData(age: 28, gender: 'Male', country: 'India'),
     this.metrics = const UserHealthMetricsData(
       avgSteps7d: 9400,
       avgProtein7d: 78,
@@ -35,7 +36,8 @@ class BenchmarkDisplayScreen extends StatelessWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Fitness Percentiles', style: AppTypography.h2),
@@ -48,7 +50,8 @@ class BenchmarkDisplayScreen extends StatelessWidget {
             children: [
               Text(
                 'Compared to: ${result.cohortLabel}',
-                style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                style: AppTypography.bodySm
+                    .copyWith(color: AppColors.textSecondary),
               ),
               const SizedBox(height: AppSpacing.md),
 
@@ -60,16 +63,19 @@ class BenchmarkDisplayScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Your Fitness Percentile', style: AppTypography.h3),
+                        Text('Your Fitness Percentile',
+                            style: AppTypography.h3),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             topOverall,
-                            style: AppTypography.labelLg.copyWith(color: AppColors.primary),
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.primary),
                           ),
                         ),
                       ],
@@ -87,7 +93,8 @@ class BenchmarkDisplayScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       'Overall Score: ${result.overallPercentile}th percentile',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -128,7 +135,8 @@ class BenchmarkDisplayScreen extends StatelessWidget {
                 icon: Icons.fitness_center,
                 title: 'Workouts',
                 percentile: result.workoutsPercentile,
-                metricValue: '${metrics.workoutsPerWeek.toStringAsFixed(1)}/week',
+                metricValue:
+                    '${metrics.workoutsPerWeek.toStringAsFixed(1)}/week',
                 color: AppColors.accent,
                 topLabel: result.topLabel(result.workoutsPercentile),
               ),
@@ -143,15 +151,18 @@ class BenchmarkDisplayScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.lightbulb_outline, color: AppColors.warning, size: 22),
+                        const Icon(Icons.lightbulb_outline,
+                            color: AppColors.warning, size: 22),
                         const SizedBox(width: 8),
-                        Text('Your biggest opportunity:', style: AppTypography.h3),
+                        Text('Your biggest opportunity:',
+                            style: AppTypography.h3),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Text(
                       result.opportunityTip,
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, height: 1.3),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, height: 1.3),
                     ),
                   ],
                 ),
@@ -183,7 +194,9 @@ class BenchmarkDisplayScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTypography.labelLg),
-                Text(metricValue, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                Text(metricValue,
+                    style: AppTypography.bodySm
+                        .copyWith(color: AppColors.textSecondary)),
               ],
             ),
           ),

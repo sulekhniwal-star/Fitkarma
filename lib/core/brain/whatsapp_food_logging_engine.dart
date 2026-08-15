@@ -48,7 +48,9 @@ class WhatsAppFoodLoggingEngine {
       final nameLower = item.name.toLowerCase();
       // Check if food name or primary keyword is mentioned in the message
       if (lower.contains(nameLower) ||
-          nameLower.split(' ').any((word) => word.length > 3 && lower.contains(word))) {
+          nameLower
+              .split(' ')
+              .any((word) => word.length > 3 && lower.contains(word))) {
         calories += item.calories;
         proteinG += item.proteinGrams;
         matchedFoods.add(item.name);

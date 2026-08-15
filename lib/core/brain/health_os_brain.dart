@@ -37,7 +37,8 @@ class HealthOsBrain {
       illnessAlarmTriggered: illnessAlarmTriggered,
     );
 
-    final primaryFocus = actions.isNotEmpty ? actions.first.title : 'Maintain Baseline Habits';
+    final primaryFocus =
+        actions.isNotEmpty ? actions.first.title : 'Maintain Baseline Habits';
 
     // 3. Formulate Daily Missions tailored to primary focus
     final activeMissions = availableMissions.take(3).toList();

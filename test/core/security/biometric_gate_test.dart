@@ -19,10 +19,13 @@ class MockBiometricPlatform implements BiometricAuthPlatform {
 
 void main() {
   group('§P14-A Biometric Verification Gate & Provider Tests', () {
-    test('BiometricGateNotifier unlocks when authentication succeeds', () async {
-      final mockPlatform = MockBiometricPlatform(isCapable: true, shouldSucceed: true);
+    test('BiometricGateNotifier unlocks when authentication succeeds',
+        () async {
+      final mockPlatform =
+          MockBiometricPlatform(isCapable: true, shouldSucceed: true);
       final service = BiometricLockService(mockPlatform);
-      final notifier = BiometricGateNotifier(service, 'Test unlock', autoVerify: false);
+      final notifier =
+          BiometricGateNotifier(service, 'Test unlock', autoVerify: false);
 
       expect(notifier.state.isUnlocked, isFalse);
       expect(notifier.state.isAuthenticating, isFalse);
@@ -38,18 +41,24 @@ void main() {
       expect(notifier.state.isUnlocked, isFalse);
     });
 
-    test('BiometricGateNotifier sets error when authentication fails or device incapable', () async {
-      final mockPlatform = MockBiometricPlatform(isCapable: false, shouldSucceed: false);
+    test(
+        'BiometricGateNotifier sets error when authentication fails or device incapable',
+        () async {
+      final mockPlatform =
+          MockBiometricPlatform(isCapable: false, shouldSucceed: false);
       final service = BiometricLockService(mockPlatform);
-      final notifier = BiometricGateNotifier(service, 'Failed unlock', autoVerify: false);
+      final notifier =
+          BiometricGateNotifier(service, 'Failed unlock', autoVerify: false);
 
       await notifier.triggerVerification();
 
       expect(notifier.state.isUnlocked, isFalse);
-      expect(notifier.state.error, contains('Biometric authorization required'));
+      expect(
+          notifier.state.error, contains('Biometric authorization required'));
     });
 
-    test('biometricGateProvider isolates state across multiple route IDs', () async {
+    test('biometricGateProvider isolates state across multiple route IDs',
+        () async {
       final container = ProviderContainer(
         overrides: [
           biometricServiceProvider.overrideWithValue(
@@ -58,7 +67,8 @@ void main() {
         ],
       );
 
-      final glucoseState = container.read(biometricGateProvider('/health/glucose'));
+      final glucoseState =
+          container.read(biometricGateProvider('/health/glucose'));
       final bpState = container.read(biometricGateProvider('/health/bp'));
 
       expect(glucoseState, isNotNull);

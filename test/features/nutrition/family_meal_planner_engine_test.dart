@@ -8,19 +8,35 @@ void main() {
     const engine = FamilyMealPlannerEngine();
 
     final family = const [
-      FamilyMemberProfile(id: 'fam_1', name: 'Father (Rajesh)', role: 'Father', goals: ['diabetes_reversal']),
-      FamilyMemberProfile(id: 'fam_2', name: 'Mother (Sunita)', role: 'Mother', goals: ['weight_loss']),
-      FamilyMemberProfile(id: 'fam_3', name: 'Child (Aarav)', role: 'Child', goals: ['growth_stage']),
+      FamilyMemberProfile(
+          id: 'fam_1',
+          name: 'Father (Rajesh)',
+          role: 'Father',
+          goals: ['diabetes_reversal']),
+      FamilyMemberProfile(
+          id: 'fam_2',
+          name: 'Mother (Sunita)',
+          role: 'Mother',
+          goals: ['weight_loss']),
+      FamilyMemberProfile(
+          id: 'fam_3',
+          name: 'Child (Aarav)',
+          role: 'Child',
+          goals: ['growth_stage']),
     ];
 
-    test('planDinner enforces Low GI <= 55 base dish when diabetic member is present', () {
+    test(
+        'planDinner enforces Low GI <= 55 base dish when diabetic member is present',
+        () {
       final plan = engine.planDinner(familyMembers: family);
 
       expect(plan.selectedRecipe.glycemicIndex, lessThanOrEqualTo(55.0));
       expect(plan.conflictResolutionSummary, contains('Low Glycemic Index'));
     });
 
-    test('planDinner calculates member portion multipliers per clinical goal (Father 1 Roti, Mother 2 Rotis, Child 3 Rotis)', () {
+    test(
+        'planDinner calculates member portion multipliers per clinical goal (Father 1 Roti, Mother 2 Rotis, Child 3 Rotis)',
+        () {
       final plan = engine.planDinner(familyMembers: family);
 
       final fatherPortion = plan.memberPortions['fam_1']!;
@@ -37,7 +53,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('FamilyDinnerScreen renders unified base dish, conflict summary, and 3 member portion cards', (tester) async {
+    testWidgets(
+        'FamilyDinnerScreen renders unified base dish, conflict summary, and 3 member portion cards',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(home: FamilyDinnerScreen()),
       );

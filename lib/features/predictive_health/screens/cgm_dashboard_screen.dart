@@ -7,23 +7,46 @@ import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/glass_card.dart';
 import '../../../core/brain/cgm_analysis_engine.dart';
 
-final cgmEngineProvider = Provider<CgmAnalysisEngine>((ref) => const CgmAnalysisEngine());
+final cgmEngineProvider =
+    Provider<CgmAnalysisEngine>((ref) => const CgmAnalysisEngine());
 
 final cgmReadingsProvider = Provider<List<GlucoseReading>>((ref) {
   final now = DateTime.now();
   return [
-    GlucoseReading(readingId: 'g1', timestamp: now.subtract(const Duration(hours: 3)), glucoseValueMgDl: 95.0, trendDirection: GlucoseTrend.flat),
-    GlucoseReading(readingId: 'g2', timestamp: now.subtract(const Duration(hours: 2)), glucoseValueMgDl: 120.0, trendDirection: GlucoseTrend.rising),
-    GlucoseReading(readingId: 'g3', timestamp: now.subtract(const Duration(hours: 1, minutes: 45)), glucoseValueMgDl: 172.0, trendDirection: GlucoseTrend.rapidlyRising),
-    GlucoseReading(readingId: 'g4', timestamp: now.subtract(const Duration(minutes: 5)), glucoseValueMgDl: 124.0, trendDirection: GlucoseTrend.rising),
+    GlucoseReading(
+        readingId: 'g1',
+        timestamp: now.subtract(const Duration(hours: 3)),
+        glucoseValueMgDl: 95.0,
+        trendDirection: GlucoseTrend.flat),
+    GlucoseReading(
+        readingId: 'g2',
+        timestamp: now.subtract(const Duration(hours: 2)),
+        glucoseValueMgDl: 120.0,
+        trendDirection: GlucoseTrend.rising),
+    GlucoseReading(
+        readingId: 'g3',
+        timestamp: now.subtract(const Duration(hours: 1, minutes: 45)),
+        glucoseValueMgDl: 172.0,
+        trendDirection: GlucoseTrend.rapidlyRising),
+    GlucoseReading(
+        readingId: 'g4',
+        timestamp: now.subtract(const Duration(minutes: 5)),
+        glucoseValueMgDl: 124.0,
+        trendDirection: GlucoseTrend.rising),
   ];
 });
 
 final cgmFoodLogsProvider = Provider<List<CgmFoodLogSnapshot>>((ref) {
   final now = DateTime.now();
   return [
-    CgmFoodLogSnapshot(foodName: 'White Rice (Thali)', consumeTime: now.subtract(const Duration(hours: 2, minutes: 15)), calories: 520),
-    CgmFoodLogSnapshot(foodName: 'Oats & Eggs Chilla', consumeTime: now.subtract(const Duration(hours: 5)), calories: 380),
+    CgmFoodLogSnapshot(
+        foodName: 'White Rice (Thali)',
+        consumeTime: now.subtract(const Duration(hours: 2, minutes: 15)),
+        calories: 520),
+    CgmFoodLogSnapshot(
+        foodName: 'Oats & Eggs Chilla',
+        consumeTime: now.subtract(const Duration(hours: 5)),
+        calories: 380),
   ];
 });
 
@@ -42,7 +65,13 @@ class CgmDashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final readings = ref.watch(cgmReadingsProvider);
-    final latestReading = readings.isNotEmpty ? readings.last : GlucoseReading(readingId: '0', timestamp: DateTime.now(), glucoseValueMgDl: 110.0, trendDirection: GlucoseTrend.flat);
+    final latestReading = readings.isNotEmpty
+        ? readings.last
+        : GlucoseReading(
+            readingId: '0',
+            timestamp: DateTime.now(),
+            glucoseValueMgDl: 110.0,
+            trendDirection: GlucoseTrend.flat);
     final spikes = ref.watch(cgmDetectedSpikesProvider);
 
     return Scaffold(
@@ -51,7 +80,8 @@ class CgmDashboardScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('🩺 CGM Glucose Stream', style: AppTypography.h2),
@@ -60,7 +90,9 @@ class CgmDashboardScreen extends ConsumerWidget {
             icon: const Icon(Icons.sync, color: AppColors.primary),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Syncing latest CGM glucose readings from Health Connect...')),
+                const SnackBar(
+                    content: Text(
+                        'Syncing latest CGM glucose readings from Health Connect...')),
               );
             },
           ),
@@ -80,14 +112,20 @@ class CgmDashboardScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Live Glucose Stream', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+                        Text('Live Glucose Stream',
+                            style: AppTypography.labelSmall
+                                .copyWith(color: AppColors.textSecondary)),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.teal.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text('SENSOR ACTIVE', style: AppTypography.labelSmall.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold)),
+                          child: Text('SENSOR ACTIVE',
+                              style: AppTypography.labelSmall.copyWith(
+                                  color: AppColors.teal,
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -97,9 +135,15 @@ class CgmDashboardScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Text('${latestReading.glucoseValueMgDl.round()} ', style: AppTypography.h1.copyWith(color: AppColors.primary)),
-                        Text('mg/dL ', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
-                        Text('[↗ ${_trendLabel(latestReading.trendDirection)}]', style: AppTypography.labelLg.copyWith(color: AppColors.warning)),
+                        Text('${latestReading.glucoseValueMgDl.round()} ',
+                            style: AppTypography.h1
+                                .copyWith(color: AppColors.primary)),
+                        Text('mg/dL ',
+                            style: AppTypography.bodySm
+                                .copyWith(color: AppColors.textSecondary)),
+                        Text('[↗ ${_trendLabel(latestReading.trendDirection)}]',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.warning)),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -108,21 +152,26 @@ class CgmDashboardScreen extends ConsumerWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: LinearProgressIndicator(
-                        value: (latestReading.glucoseValueMgDl / 200.0).clamp(0.0, 1.0),
+                        value: (latestReading.glucoseValueMgDl / 200.0)
+                            .clamp(0.0, 1.0),
                         minHeight: 10,
                         backgroundColor: AppColors.bg1,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.teal),
+                        valueColor:
+                            const AlwaysStoppedAnimation<Color>(AppColors.teal),
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text('Last updated: 2 mins ago (Health Connect Stream)', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted, fontSize: 11)),
+                    Text('Last updated: 2 mins ago (Health Connect Stream)',
+                        style: AppTypography.bodySm.copyWith(
+                            color: AppColors.textMuted, fontSize: 11)),
                   ],
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
 
               // Detected Spikes Section
-              Text('⚠️ Detected Spikes (Last 24 Hours)', style: AppTypography.h3),
+              Text('⚠️ Detected Spikes (Last 24 Hours)',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
 
               if (spikes.isEmpty)
@@ -130,12 +179,14 @@ class CgmDashboardScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(12),
                   child: Row(
                     children: [
-                      const Icon(Icons.check_circle_outline, color: AppColors.success, size: 20),
+                      const Icon(Icons.check_circle_outline,
+                          color: AppColors.success, size: 20),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'No major glucose spikes detected (+40 mg/dL rise). Glycemic variability is optimal.',
-                          style: AppTypography.bodySm.copyWith(color: AppColors.success),
+                          style: AppTypography.bodySm
+                              .copyWith(color: AppColors.success),
                         ),
                       ),
                     ],
@@ -150,7 +201,8 @@ class CgmDashboardScreen extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: AppColors.error.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
+                        border: Border.all(
+                            color: AppColors.error.withValues(alpha: 0.3)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,17 +210,23 @@ class CgmDashboardScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('🚨 Spike: +${spike.glucoseDelta.round()} mg/dL', style: AppTypography.labelLg.copyWith(color: AppColors.error, fontWeight: FontWeight.bold)),
-                              Text('Peak: ${spike.peakGlucose.round()} mg/dL', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+                              Text(
+                                  '🚨 Spike: +${spike.glucoseDelta.round()} mg/dL',
+                                  style: AppTypography.labelLg.copyWith(
+                                      color: AppColors.error,
+                                      fontWeight: FontWeight.bold)),
+                              Text('Peak: ${spike.peakGlucose.round()} mg/dL',
+                                  style: AppTypography.labelSmall.copyWith(
+                                      color: AppColors.textSecondary)),
                             ],
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Correlated food: ${spike.correlatedFoods.isNotEmpty ? spike.correlatedFoods.first.foodName : "Unlogged Snack"}',
-                            style: AppTypography.bodySm.copyWith(fontWeight: FontWeight.w600),
+                            style: AppTypography.bodySm
+                                .copyWith(fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(height: 8),
-
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -178,12 +236,15 @@ class CgmDashboardScreen extends ConsumerWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(Icons.lightbulb, color: AppColors.warning, size: 18),
+                                const Icon(Icons.lightbulb,
+                                    color: AppColors.warning, size: 18),
                                 const SizedBox(width: 6),
                                 Expanded(
                                   child: Text(
                                     'AI Insight: ${spike.correlatedFoods.isNotEmpty ? spike.correlatedFoods.first.foodName : "High GI food"} triggers rapid digestion. Next time, add 150g salad (fiber) or paneer (protein) before eating to reduce the spike by ~30%.',
-                                    style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                                    style: AppTypography.bodySm.copyWith(
+                                        color: AppColors.textSecondary,
+                                        fontSize: 12),
                                   ),
                                 ),
                               ],

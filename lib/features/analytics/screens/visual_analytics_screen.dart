@@ -32,7 +32,8 @@ class VisualAnalyticsScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Lean Body Mass (Boer Model)', style: AppTypography.titleMedium),
+                    Text('Lean Body Mass (Boer Model)',
+                        style: AppTypography.titleMedium),
                     const SizedBox(height: AppSpacing.md),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,17 +44,21 @@ class VisualAnalyticsScreen extends ConsumerWidget {
                             Text('Lean Mass', style: AppTypography.labelSmall),
                             Text(
                               '${lean.leanMassKg.toStringAsFixed(1)} kg',
-                              style: AppTypography.titleLarge.copyWith(color: AppColors.primaryEmerald),
+                              style: AppTypography.titleLarge
+                                  .copyWith(color: AppColors.primaryEmerald),
                             ),
                           ],
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Fat Mass (${lean.bodyFatPercentage.round()}%)', style: AppTypography.labelSmall),
+                            Text(
+                                'Fat Mass (${lean.bodyFatPercentage.round()}%)',
+                                style: AppTypography.labelSmall),
                             Text(
                               '${lean.fatMassKg.toStringAsFixed(1)} kg',
-                              style: AppTypography.titleLarge.copyWith(color: AppColors.warningAmber),
+                              style: AppTypography.titleLarge
+                                  .copyWith(color: AppColors.warningAmber),
                             ),
                           ],
                         ),
@@ -80,11 +85,14 @@ class VisualAnalyticsScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('90-Day Trajectory Range Band', style: AppTypography.titleMedium),
+                        Text('90-Day Trajectory Range Band',
+                            style: AppTypography.titleMedium),
                         Chip(
                           backgroundColor: AppColors.glassBgMid,
                           side: const BorderSide(color: AppColors.glassBorder),
-                          label: Text('Range: 68.5kg - 72.0kg', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan)),
+                          label: Text('Range: 68.5kg - 72.0kg',
+                              style: AppTypography.labelSmall
+                                  .copyWith(color: AppColors.primaryCyan)),
                         ),
                       ],
                     ),
@@ -99,11 +107,14 @@ class VisualAnalyticsScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Body Measurement Logging Action Card
-              Text('Body Circumference Logging', style: AppTypography.titleLarge),
+              Text('Body Circumference Logging',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               GlassCard(
                 onTap: () {
-                  ref.read(analyticsProvider.notifier).logMeasurement(82.0, 98.0, 34.0, 56.0);
+                  ref
+                      .read(analyticsProvider.notifier)
+                      .logMeasurement(82.0, 98.0, 34.0, 56.0);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,11 +122,14 @@ class VisualAnalyticsScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Quick Log Body Circumference', style: AppTypography.titleMedium),
-                        Text('Waist (82cm) • Chest (98cm) • Arms (34cm)', style: AppTypography.labelSmall),
+                        Text('Quick Log Body Circumference',
+                            style: AppTypography.titleMedium),
+                        Text('Waist (82cm) • Chest (98cm) • Arms (34cm)',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
-                    const Icon(Icons.add_circle_outline, color: AppColors.primaryCyan),
+                    const Icon(Icons.add_circle_outline,
+                        color: AppColors.primaryCyan),
                   ],
                 ),
               ),

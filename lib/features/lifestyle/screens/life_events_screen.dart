@@ -25,7 +25,8 @@ class LifeEventsScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Life Events Engine 🌟', style: AppTypography.h2),
@@ -44,26 +45,37 @@ class LifeEventsScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: AppColors.teal.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.teal.withValues(alpha: 0.4)),
+                    border: Border.all(
+                        color: AppColors.teal.withValues(alpha: 0.4)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.event_available, color: AppColors.teal, size: 28),
+                      const Icon(Icons.event_available,
+                          color: AppColors.teal, size: 28),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('ACTIVE LIFE EVENT', style: AppTypography.labelSmall.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold)),
+                            Text('ACTIVE LIFE EVENT',
+                                style: AppTypography.labelSmall.copyWith(
+                                    color: AppColors.teal,
+                                    fontWeight: FontWeight.bold)),
                             Text(primary.title, style: AppTypography.h3),
-                            Text('DIP Priority: ${adapt.DIPPriority}', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                            Text('DIP Priority: ${adapt.DIPPriority}',
+                                style: AppTypography.bodySm.copyWith(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 11)),
                           ],
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, color: AppColors.textMuted, size: 20),
+                        icon: const Icon(Icons.close,
+                            color: AppColors.textMuted, size: 20),
                         onPressed: () {
-                          ref.read(lifeEventsProvider.notifier).clearPrimaryEvent();
+                          ref
+                              .read(lifeEventsProvider.notifier)
+                              .clearPrimaryEvent();
                         },
                       ),
                     ],
@@ -77,14 +89,40 @@ class LifeEventsScreen extends ConsumerWidget {
                   children: [
                     Text('Active Module Adaptations', style: AppTypography.h3),
                     const SizedBox(height: AppSpacing.sm),
-
-                    _EventRow(icon: Icons.timer, label: 'Max Workout', value: '${adapt.workoutDurationMins} mins/day (${adapt.workoutFocus})'),
-                    _EventRow(icon: Icons.healing, label: 'Recovery Focus', value: adapt.isRecoveryFirst ? 'High (Recovery First)' : 'Standard progression'),
-                    _EventRow(icon: Icons.restaurant, label: 'Nutrition Mode', value: adapt.simplifyNutrition ? 'Quick & Low Friction' : 'Standard tracking'),
-                    _EventRow(icon: Icons.local_fire_department, label: 'Calorie Buffer', value: '${adapt.calorieBuffer >= 0 ? '+' : ''}${adapt.calorieBuffer} kcal'),
-                    _EventRow(icon: Icons.water_drop, label: 'Hydration Target', value: '${adapt.hydrationMultiplier}x baseline'),
-                    _EventRow(icon: Icons.bedtime, label: 'Sleep Strategy', value: adapt.sleepStrategy),
-                    _EventRow(icon: Icons.psychology, label: 'Coach Tone', value: adapt.coachTone),
+                    _EventRow(
+                        icon: Icons.timer,
+                        label: 'Max Workout',
+                        value:
+                            '${adapt.workoutDurationMins} mins/day (${adapt.workoutFocus})'),
+                    _EventRow(
+                        icon: Icons.healing,
+                        label: 'Recovery Focus',
+                        value: adapt.isRecoveryFirst
+                            ? 'High (Recovery First)'
+                            : 'Standard progression'),
+                    _EventRow(
+                        icon: Icons.restaurant,
+                        label: 'Nutrition Mode',
+                        value: adapt.simplifyNutrition
+                            ? 'Quick & Low Friction'
+                            : 'Standard tracking'),
+                    _EventRow(
+                        icon: Icons.local_fire_department,
+                        label: 'Calorie Buffer',
+                        value:
+                            '${adapt.calorieBuffer >= 0 ? '+' : ''}${adapt.calorieBuffer} kcal'),
+                    _EventRow(
+                        icon: Icons.water_drop,
+                        label: 'Hydration Target',
+                        value: '${adapt.hydrationMultiplier}x baseline'),
+                    _EventRow(
+                        icon: Icons.bedtime,
+                        label: 'Sleep Strategy',
+                        value: adapt.sleepStrategy),
+                    _EventRow(
+                        icon: Icons.psychology,
+                        label: 'Coach Tone',
+                        value: adapt.coachTone),
                   ],
                 ),
               ),
@@ -99,8 +137,12 @@ class LifeEventsScreen extends ConsumerWidget {
                 subtitle: '15-min quick workouts & stress management',
                 onTap: () {
                   ref.read(lifeEventsProvider.notifier).setPrimaryEvent(
-                    LifeEvent(id: 'le_deadline', title: 'Office Deadline', type: LifeEventType.officeDeadline, startDate: DateTime.now()),
-                  );
+                        LifeEvent(
+                            id: 'le_deadline',
+                            title: 'Office Deadline',
+                            type: LifeEventType.officeDeadline,
+                            startDate: DateTime.now()),
+                      );
                 },
               ),
               _LifeEventTile(
@@ -108,8 +150,12 @@ class LifeEventsScreen extends ConsumerWidget {
                 subtitle: 'Polyphasic sleep support & home workouts',
                 onTap: () {
                   ref.read(lifeEventsProvider.notifier).setPrimaryEvent(
-                    LifeEvent(id: 'le_baby', title: 'New Baby', type: LifeEventType.newBaby, startDate: DateTime.now()),
-                  );
+                        LifeEvent(
+                            id: 'le_baby',
+                            title: 'New Baby',
+                            type: LifeEventType.newBaby,
+                            startDate: DateTime.now()),
+                      );
                 },
               ),
               _LifeEventTile(
@@ -117,8 +163,13 @@ class LifeEventsScreen extends ConsumerWidget {
                 subtitle: 'Isolation workouts & healing nutrition',
                 onTap: () {
                   ref.read(lifeEventsProvider.notifier).setPrimaryEvent(
-                    LifeEvent(id: 'le_injury', title: 'Knee Injury Recovery', type: LifeEventType.injury, startDate: DateTime.now(), injuredRegion: 'Knee'),
-                  );
+                        LifeEvent(
+                            id: 'le_injury',
+                            title: 'Knee Injury Recovery',
+                            type: LifeEventType.injury,
+                            startDate: DateTime.now(),
+                            injuredRegion: 'Knee'),
+                      );
                 },
               ),
               _LifeEventTile(
@@ -126,8 +177,13 @@ class LifeEventsScreen extends ConsumerWidget {
                 subtitle: 'Jet lag hydration & hotel room circuits',
                 onTap: () {
                   ref.read(lifeEventsProvider.notifier).setPrimaryEvent(
-                    LifeEvent(id: 'le_travel', title: 'Travel to London', type: LifeEventType.travelAbroad, startDate: DateTime.now(), timezone: 'BST'),
-                  );
+                        LifeEvent(
+                            id: 'le_travel',
+                            title: 'Travel to London',
+                            type: LifeEventType.travelAbroad,
+                            startDate: DateTime.now(),
+                            timezone: 'BST'),
+                      );
                 },
               ),
               _LifeEventTile(
@@ -135,8 +191,12 @@ class LifeEventsScreen extends ConsumerWidget {
                 subtitle: 'Cognitive energy focus & memory sleep cutoff',
                 onTap: () {
                   ref.read(lifeEventsProvider.notifier).setPrimaryEvent(
-                    LifeEvent(id: 'le_exam', title: 'Final Exams', type: LifeEventType.examSeason, startDate: DateTime.now()),
-                  );
+                        LifeEvent(
+                            id: 'le_exam',
+                            title: 'Final Exams',
+                            type: LifeEventType.examSeason,
+                            startDate: DateTime.now()),
+                      );
                 },
               ),
 
@@ -154,7 +214,8 @@ class _EventRow extends StatelessWidget {
   final String label;
   final String value;
 
-  const _EventRow({required this.icon, required this.label, required this.value});
+  const _EventRow(
+      {required this.icon, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +225,11 @@ class _EventRow extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: AppColors.teal),
           const SizedBox(width: 10),
-          SizedBox(width: 110, child: Text(label, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary))),
+          SizedBox(
+              width: 110,
+              child: Text(label,
+                  style: AppTypography.bodySm
+                      .copyWith(color: AppColors.textSecondary))),
           Expanded(child: Text(value, style: AppTypography.labelLg)),
         ],
       ),
@@ -177,7 +242,8 @@ class _LifeEventTile extends StatelessWidget {
   final String subtitle;
   final VoidCallback onTap;
 
-  const _LifeEventTile({required this.title, required this.subtitle, required this.onTap});
+  const _LifeEventTile(
+      {required this.title, required this.subtitle, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -190,8 +256,11 @@ class _LifeEventTile extends StatelessWidget {
           child: ListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(title, style: AppTypography.labelLg),
-            subtitle: Text(subtitle, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
-            trailing: const Icon(Icons.chevron_right, color: AppColors.textMuted),
+            subtitle: Text(subtitle,
+                style: AppTypography.bodySm
+                    .copyWith(color: AppColors.textSecondary, fontSize: 11)),
+            trailing:
+                const Icon(Icons.chevron_right, color: AppColors.textMuted),
             onTap: onTap,
           ),
         ),

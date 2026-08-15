@@ -187,7 +187,8 @@ class FestivalCrossModuleEngine {
   /// Checks if festival survival mode should activate (starts 3 days before festival)
   bool isSurvivalModeActive(Festival festival, DateTime currentDate) {
     final survivalStart = festival.startDate.subtract(const Duration(days: 3));
-    return currentDate.isAfter(survivalStart) && currentDate.isBefore(festival.endDate.add(const Duration(days: 1)));
+    return currentDate.isAfter(survivalStart) &&
+        currentDate.isBefore(festival.endDate.add(const Duration(days: 1)));
   }
 
   /// Seeded list of top Indian & international festivals per §P12-A spec

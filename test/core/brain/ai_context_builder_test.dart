@@ -6,7 +6,9 @@ void main() {
   group('§P3-B AI Context Builder Tests', () {
     const builder = AIContextBuilder();
 
-    test('buildCompressed compiles profile, DIP, snapshot trends, and environmental context', () {
+    test(
+        'buildCompressed compiles profile, DIP, snapshot trends, and environmental context',
+        () {
       final dip = DailyIntelligencePackage(
         userId: 'user_456',
         date: DateTime.now(),

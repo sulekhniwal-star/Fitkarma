@@ -5,7 +5,8 @@ class AiRouter {
   const AiRouter();
 
   /// Determine target AI model tier based on task complexity and user readiness context
-  AiModelTier routeTask({required String taskType, bool requiresDeepReasoning = false}) {
+  AiModelTier routeTask(
+      {required String taskType, bool requiresDeepReasoning = false}) {
     if (requiresDeepReasoning) {
       return AiModelTier.large; // e.g. Llama 3 70B via Groq
     }

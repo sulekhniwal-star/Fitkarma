@@ -69,15 +69,21 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                               : AppColors.glassBgMid,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: isSelected ? AppColors.teal : AppColors.glassBorder,
+                            color: isSelected
+                                ? AppColors.teal
+                                : AppColors.glassBorder,
                           ),
                         ),
                         child: Center(
                           child: Text(
                             mode.displayName,
                             style: AppTypography.labelMd.copyWith(
-                              color: isSelected ? AppColors.teal : AppColors.textSecondary,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                              color: isSelected
+                                  ? AppColors.teal
+                                  : AppColors.textSecondary,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
                           ),
                         ),
@@ -106,7 +112,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
               ),
               if (selectedMode == TravelMode.international) ...[
                 const SizedBox(height: AppSpacing.md),
-                Text('Flight Direction (Jet Lag Calibration)', style: AppTypography.labelLg),
+                Text('Flight Direction (Jet Lag Calibration)',
+                    style: AppTypography.labelLg),
                 const SizedBox(height: AppSpacing.xs),
                 Row(
                   children: [
@@ -114,7 +121,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                       child: ChoiceChip(
                         label: const Text('East (e.g. Bangkok / Tokyo)'),
                         selected: direction == TravelDirection.east,
-                        onSelected: (s) => setSheetState(() => direction = TravelDirection.east),
+                        onSelected: (s) => setSheetState(
+                            () => direction = TravelDirection.east),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -122,7 +130,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                       child: ChoiceChip(
                         label: const Text('West (e.g. London / NYC)'),
                         selected: direction == TravelDirection.west,
-                        onSelected: (s) => setSheetState(() => direction = TravelDirection.west),
+                        onSelected: (s) => setSheetState(
+                            () => direction = TravelDirection.west),
                       ),
                     ),
                   ],
@@ -149,7 +158,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                         );
                     Navigator.of(ctx).pop();
                   },
-                  child: const Text('Activate Travel Mode', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: const Text('Activate Travel Mode',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -171,13 +181,15 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
         backgroundColor: AppColors.bgPrimary,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Travel Intelligence', style: AppTypography.h3),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add_location_alt_outlined, color: AppColors.teal),
+            icon: const Icon(Icons.add_location_alt_outlined,
+                color: AppColors.teal),
             tooltip: 'Change Travel Context',
             onPressed: () => _showNewTravelSheet(context),
           ),
@@ -227,7 +239,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                   const Spacer(),
                   if (state.extendedDays > 0)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.warning.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12),
@@ -235,7 +248,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                       ),
                       child: Text(
                         '+${state.extendedDays}d Extended',
-                        style: AppTypography.labelMd.copyWith(color: AppColors.warning, fontSize: 11),
+                        style: AppTypography.labelMd
+                            .copyWith(color: AppColors.warning, fontSize: 11),
                       ),
                     ),
                 ],
@@ -251,7 +265,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
               const SizedBox(height: 4),
               Text(
                 'Your entire daily health blueprint has been adapted for travel context.',
-                style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                style: AppTypography.bodySm
+                    .copyWith(color: AppColors.textSecondary),
               ),
             ],
           ),
@@ -272,18 +287,21 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                   Expanded(
                     child: Text(
                       'Workout: ${adaptation.workoutPlan.title}',
-                      style: AppTypography.labelLg.copyWith(fontWeight: FontWeight.bold),
+                      style: AppTypography.labelLg
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
                       color: AppColors.teal.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       '${adaptation.workoutPlan.minutes} min',
-                      style: AppTypography.labelMd.copyWith(color: AppColors.teal),
+                      style:
+                          AppTypography.labelMd.copyWith(color: AppColors.teal),
                     ),
                   ),
                 ],
@@ -306,7 +324,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
               const SizedBox(height: 6),
               Text(
                 adaptation.workoutPlan.tip,
-                style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                style: AppTypography.bodySm
+                    .copyWith(color: AppColors.textSecondary),
               ),
             ],
           ),
@@ -325,7 +344,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                   Expanded(
                     child: Text(
                       'Nutrition: ${adaptation.calorieBudget}',
-                      style: AppTypography.labelLg.copyWith(fontWeight: FontWeight.bold),
+                      style: AppTypography.labelLg
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -333,10 +353,13 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
               const SizedBox(height: 6),
               Text(
                 'Strategy: ${adaptation.nutritionPlan.strategy}',
-                style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary),
+                style:
+                    AppTypography.bodySm.copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: 8),
-              Text('Best Bets:', style: AppTypography.labelMd.copyWith(color: AppColors.textSecondary)),
+              Text('Best Bets:',
+                  style: AppTypography.labelMd
+                      .copyWith(color: AppColors.textSecondary)),
               const SizedBox(height: 4),
               Wrap(
                 spacing: 6,
@@ -344,7 +367,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                 children: adaptation.nutritionPlan.bestBets
                     .map(
                       (b) => Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.glassBgMid,
                           borderRadius: BorderRadius.circular(8),
@@ -380,7 +404,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                     Text('Hydration Target', style: AppTypography.labelLg),
                     Text(
                       adaptation.hydrationNote,
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -405,7 +430,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                       Text('Sleep Protocol', style: AppTypography.labelLg),
                       Text(
                         adaptation.sleepNote!,
-                        style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -429,7 +455,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                     Text('Readiness Expectation', style: AppTypography.labelLg),
                     Text(
                       adaptation.readinessExpectationSummary,
-                      style: AppTypography.bodySm.copyWith(color: AppColors.warning),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.warning),
                     ),
                   ],
                 ),
@@ -450,7 +477,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                     const Text('🌐 ', style: TextStyle(fontSize: 18)),
                     Text(
                       'Jet Lag Protocol (${adaptation.jetLagProtocol!.direction.displayName})',
-                      style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                      style:
+                          AppTypography.labelLg.copyWith(color: AppColors.teal),
                     ),
                   ],
                 ),
@@ -461,11 +489,13 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('• ', style: TextStyle(color: AppColors.teal)),
+                        const Text('• ',
+                            style: TextStyle(color: AppColors.teal)),
                         Expanded(
                           child: Text(
                             rec,
-                            style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                            style: AppTypography.bodySm
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                         ),
                       ],
@@ -492,7 +522,8 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onPressed: () => ref.read(travelModeProvider.notifier).endTravelMode(),
+                onPressed: () =>
+                    ref.read(travelModeProvider.notifier).endTravelMode(),
                 child: const Text('End Travel Mode'),
               ),
             ),
@@ -507,8 +538,11 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onPressed: () => ref.read(travelModeProvider.notifier).extendTravelMode(days: 1),
-                child: const Text('Extend by 1 day', style: TextStyle(fontWeight: FontWeight.bold)),
+                onPressed: () => ref
+                    .read(travelModeProvider.notifier)
+                    .extendTravelMode(days: 1),
+                child: const Text('Extend by 1 day',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ],
@@ -532,17 +566,20 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
             Text(
               'Traveling soon? Activate Travel Mode to auto-adapt your workouts, nutrition buffers, and circadian sleep schedules.',
               textAlign: TextAlign.center,
-              style: AppTypography.bodyMd.copyWith(color: AppColors.textSecondary),
+              style:
+                  AppTypography.bodyMd.copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.teal,
                 foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
               ),
               icon: const Icon(Icons.flight_takeoff),
-              label: const Text('Activate Travel Mode', style: TextStyle(fontWeight: FontWeight.bold)),
+              label: const Text('Activate Travel Mode',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onPressed: () => _showNewTravelSheet(context),
             ),
           ],

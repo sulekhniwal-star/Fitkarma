@@ -5,7 +5,9 @@ import 'package:fitkarma/features/daily_mission/screens/daily_briefing_screen.da
 
 void main() {
   group('DailyBriefingScreen Widget & Provider Tests (§P2-B)', () {
-    testWidgets('Renders Hero Section, Health Score, DIP missions and Focus tiles', (tester) async {
+    testWidgets(
+        'Renders Hero Section, Health Score, DIP missions and Focus tiles',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -41,7 +43,8 @@ void main() {
       expect(find.text('Log Water'), findsOneWidget);
     });
 
-    testWidgets('Shows Morning Check-in Pending banner and opens modal on tap', (tester) async {
+    testWidgets('Shows Morning Check-in Pending banner and opens modal on tap',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

@@ -10,13 +10,16 @@ void main() {
 
     test('CoachTone parses from string properly', () {
       expect(CoachTone.fromString('gentle'), equals(CoachTone.gentle));
-      expect(CoachTone.fromString('motivational'), equals(CoachTone.motivational));
+      expect(
+          CoachTone.fromString('motivational'), equals(CoachTone.motivational));
       expect(CoachTone.fromString('roast'), equals(CoachTone.roast));
       expect(CoachTone.fromString('no_nonsense'), equals(CoachTone.noNonsense));
       expect(CoachTone.fromString('no nonsense'), equals(CoachTone.noNonsense));
     });
 
-    test('resolveEffectiveTone returns selected tone when no distress is detected', () {
+    test(
+        'resolveEffectiveTone returns selected tone when no distress is detected',
+        () {
       for (final tone in CoachTone.values) {
         final effective = engine.resolveEffectiveTone(
           selectedTone: tone,
@@ -26,7 +29,9 @@ void main() {
       }
     });
 
-    test('resolveEffectiveTone auto-downgrades Roast to Gentle when distress is detected (§P12-D Safeguard)', () {
+    test(
+        'resolveEffectiveTone auto-downgrades Roast to Gentle when distress is detected (§P12-D Safeguard)',
+        () {
       final effective = engine.resolveEffectiveTone(
         selectedTone: CoachTone.roast,
         isDistressDetected: true,
@@ -34,7 +39,9 @@ void main() {
       expect(effective, equals(CoachTone.gentle));
     });
 
-    test('resolveEffectiveTone preserves other tones even when distress detected', () {
+    test(
+        'resolveEffectiveTone preserves other tones even when distress detected',
+        () {
       expect(
         engine.resolveEffectiveTone(
           selectedTone: CoachTone.motivational,
@@ -52,10 +59,20 @@ void main() {
     });
 
     test('detectDistress flags crisis keywords correctly', () {
-      expect(engine.detectDistress(userMessage: "I'm feeling so depressed and overwhelmed today"), isTrue);
-      expect(engine.detectDistress(userMessage: "I had a panic attack earlier"), isTrue);
-      expect(engine.detectDistress(userMessage: "Giving up on this plan, hate myself"), isTrue);
-      expect(engine.detectDistress(userMessage: "What should I eat after workout?"), isFalse);
+      expect(
+          engine.detectDistress(
+              userMessage: "I'm feeling so depressed and overwhelmed today"),
+          isTrue);
+      expect(engine.detectDistress(userMessage: "I had a panic attack earlier"),
+          isTrue);
+      expect(
+          engine.detectDistress(
+              userMessage: "Giving up on this plan, hate myself"),
+          isTrue);
+      expect(
+          engine.detectDistress(
+              userMessage: "What should I eat after workout?"),
+          isFalse);
     });
 
     test('detectDistress flags acute physiological crisis conditions', () {
@@ -65,19 +82,25 @@ void main() {
       expect(engine.detectDistress(), isFalse);
     });
 
-    test('getInstruction returns proper system prompt directive for each tone', () {
-      final roastInstruction = engine.getInstruction(selectedTone: CoachTone.roast);
+    test('getInstruction returns proper system prompt directive for each tone',
+        () {
+      final roastInstruction =
+          engine.getInstruction(selectedTone: CoachTone.roast);
       expect(roastInstruction.effectiveTone, equals(CoachTone.roast));
       expect(roastInstruction.isDistressOverridden, isFalse);
       expect(roastInstruction.systemPromptDirective, contains('AI Roast Mode'));
 
-      final gentleInstruction = engine.getInstruction(selectedTone: CoachTone.gentle);
+      final gentleInstruction =
+          engine.getInstruction(selectedTone: CoachTone.gentle);
       expect(gentleInstruction.effectiveTone, equals(CoachTone.gentle));
-      expect(gentleInstruction.systemPromptDirective, contains('Gentle, compassionate'));
+      expect(gentleInstruction.systemPromptDirective,
+          contains('Gentle, compassionate'));
 
-      final noNonsenseInstruction = engine.getInstruction(selectedTone: CoachTone.noNonsense);
+      final noNonsenseInstruction =
+          engine.getInstruction(selectedTone: CoachTone.noNonsense);
       expect(noNonsenseInstruction.effectiveTone, equals(CoachTone.noNonsense));
-      expect(noNonsenseInstruction.systemPromptDirective, contains('No Nonsense'));
+      expect(
+          noNonsenseInstruction.systemPromptDirective, contains('No Nonsense'));
 
       // Test distress override instruction
       final overridden = engine.getInstruction(
@@ -88,7 +111,8 @@ void main() {
       expect(overridden.isDistressOverridden, isTrue);
     });
 
-    test('generateOfflineRoast outputs §P12-D documented humorous responses', () {
+    test('generateOfflineRoast outputs §P12-D documented humorous responses',
+        () {
       final biryaniRoast = engine.generateOfflineRoast(
         caloriesBurned: 400,
         caloriesConsumed: 900,
@@ -110,7 +134,9 @@ void main() {
       expect(missingPersonRoast, contains('missing persons report'));
     });
 
-    test('AiCoachPhilosophyEngine incorporates CoachTone in generateSystemPrompt', () {
+    test(
+        'AiCoachPhilosophyEngine incorporates CoachTone in generateSystemPrompt',
+        () {
       const philosophy = AiCoachPhilosophyEngine();
       final roastPrompt = philosophy.generateSystemPrompt(
         userName: 'Aarav',

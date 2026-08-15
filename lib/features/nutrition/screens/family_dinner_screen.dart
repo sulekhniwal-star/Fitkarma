@@ -18,9 +18,21 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
   final _engine = const FamilyMealPlannerEngine();
 
   final List<FamilyMemberProfile> _familyMembers = const [
-    FamilyMemberProfile(id: 'fam_1', name: 'Father (Rajesh)', role: 'Father', goals: ['diabetes_reversal']),
-    FamilyMemberProfile(id: 'fam_2', name: 'Mother (Sunita)', role: 'Mother', goals: ['weight_loss']),
-    FamilyMemberProfile(id: 'fam_3', name: 'Child (Aarav)', role: 'Child', goals: ['growth_stage']),
+    FamilyMemberProfile(
+        id: 'fam_1',
+        name: 'Father (Rajesh)',
+        role: 'Father',
+        goals: ['diabetes_reversal']),
+    FamilyMemberProfile(
+        id: 'fam_2',
+        name: 'Mother (Sunita)',
+        role: 'Mother',
+        goals: ['weight_loss']),
+    FamilyMemberProfile(
+        id: 'fam_3',
+        name: 'Child (Aarav)',
+        role: 'Child',
+        goals: ['growth_stage']),
   ];
 
   late UnifiedFamilyMealPlan _plan;
@@ -46,7 +58,8 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Family Dinner Engine', style: AppTypography.h2),
@@ -65,21 +78,28 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Unified Family Main Dish', style: AppTypography.bodySm),
+                      Text('Unified Family Main Dish',
+                          style: AppTypography.bodySm),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.success.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Text('GI ${_plan.selectedRecipe.glycemicIndex.round()} (Low GI)', style: AppTypography.labelMd.copyWith(color: AppColors.success)),
+                        child: Text(
+                            'GI ${_plan.selectedRecipe.glycemicIndex.round()} (Low GI)',
+                            style: AppTypography.labelMd
+                                .copyWith(color: AppColors.success)),
                       ),
                     ],
                   ),
                   const SizedBox(height: 4),
                   Text(_plan.selectedRecipe.name, style: AppTypography.h2),
                   const SizedBox(height: AppSpacing.sm),
-                  Text(_plan.selectedRecipe.description, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                  Text(_plan.selectedRecipe.description,
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary)),
                   const SizedBox(height: AppSpacing.sm),
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -89,7 +109,8 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
                     ),
                     child: Text(
                       _plan.conflictResolutionSummary,
-                      style: AppTypography.bodySm.copyWith(fontSize: 11, color: AppColors.primary),
+                      style: AppTypography.bodySm
+                          .copyWith(fontSize: 11, color: AppColors.primary),
                     ),
                   ),
                 ],
@@ -98,7 +119,8 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
             const SizedBox(height: AppSpacing.lg),
 
             // Adapted Portions per Member Section
-            Text('Adapted Portions per Family Member:', style: AppTypography.h3),
+            Text('Adapted Portions per Family Member:',
+                style: AppTypography.h3),
             const SizedBox(height: AppSpacing.sm),
 
             for (final member in _familyMembers) ...[
@@ -123,7 +145,9 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
                               Icon(
                                 member.role == 'Father'
                                     ? Icons.person
-                                    : (member.role == 'Mother' ? Icons.person_3 : Icons.child_care),
+                                    : (member.role == 'Mother'
+                                        ? Icons.person_3
+                                        : Icons.child_care),
                                 color: AppColors.teal,
                                 size: 20,
                               ),
@@ -132,21 +156,25 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
                             ],
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
                               color: AppColors.teal.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
                               '${(portion.portionMultiplier * 100).round()}% Portion',
-                              style: AppTypography.bodySm.copyWith(color: AppColors.teal, fontSize: 11),
+                              style: AppTypography.bodySm.copyWith(
+                                  color: AppColors.teal, fontSize: 11),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: AppSpacing.sm),
-                      Text('Roti: ${portion.rotiGuidance}', style: AppTypography.labelLg.copyWith(fontSize: 13)),
-                      Text('Sides: ${portion.sideDishGuidance}', style: AppTypography.bodySm),
+                      Text('Roti: ${portion.rotiGuidance}',
+                          style: AppTypography.labelLg.copyWith(fontSize: 13)),
+                      Text('Sides: ${portion.sideDishGuidance}',
+                          style: AppTypography.bodySm),
                       const SizedBox(height: 6),
                       Container(
                         padding: const EdgeInsets.all(8),
@@ -156,7 +184,8 @@ class _FamilyDinnerScreenState extends State<FamilyDinnerScreen> {
                         ),
                         child: Text(
                           portion.customInstruction,
-                          style: AppTypography.bodySm.copyWith(fontSize: 11, color: AppColors.accent),
+                          style: AppTypography.bodySm
+                              .copyWith(fontSize: 11, color: AppColors.accent),
                         ),
                       ),
                     ],

@@ -71,7 +71,8 @@ class WorkoutState {
       exerciseName: exerciseName ?? this.exerciseName,
       sets: sets ?? this.sets,
       restTimerSeconds: restTimerSeconds ?? this.restTimerSeconds,
-      initialRestDurationSeconds: initialRestDurationSeconds ?? this.initialRestDurationSeconds,
+      initialRestDurationSeconds:
+          initialRestDurationSeconds ?? this.initialRestDurationSeconds,
       restTimerEndTime: restTimerEndTime ?? this.restTimerEndTime,
       isTimerActive: isTimerActive ?? this.isTimerActive,
       earnedXp: earnedXp ?? this.earnedXp,
@@ -79,7 +80,8 @@ class WorkoutState {
   }
 }
 
-class WorkoutNotifier extends StateNotifier<WorkoutState> with WidgetsBindingObserver {
+class WorkoutNotifier extends StateNotifier<WorkoutState>
+    with WidgetsBindingObserver {
   Timer? _timer;
 
   WorkoutNotifier() : super(const WorkoutState()) {
@@ -149,7 +151,8 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> with WidgetsBindingObs
 
   void _tickTimer() {
     if (state.restTimerEndTime == null) return;
-    final remaining = state.restTimerEndTime!.difference(DateTime.now()).inSeconds;
+    final remaining =
+        state.restTimerEndTime!.difference(DateTime.now()).inSeconds;
 
     if (remaining <= 0) {
       _timer?.cancel();
@@ -165,7 +168,8 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> with WidgetsBindingObs
 
   void _recalculateRestTimer() {
     if (state.isTimerActive && state.restTimerEndTime != null) {
-      final remaining = state.restTimerEndTime!.difference(DateTime.now()).inSeconds;
+      final remaining =
+          state.restTimerEndTime!.difference(DateTime.now()).inSeconds;
       if (remaining <= 0) {
         _timer?.cancel();
         state = state.copyWith(

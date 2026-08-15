@@ -33,14 +33,16 @@ class ProteinTimingIntelligenceCard extends ConsumerWidget {
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: _getScoreColor(result.score).withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   'Timing Score: ${result.score.round()}/100',
-                  style: AppTypography.labelMd.copyWith(color: _getScoreColor(result.score)),
+                  style: AppTypography.labelMd
+                      .copyWith(color: _getScoreColor(result.score)),
                 ),
               ),
             ],
@@ -54,7 +56,8 @@ class ProteinTimingIntelligenceCard extends ConsumerWidget {
                 child: _MpsMealPill(
                   label: 'Breakfast',
                   proteinG: result.breakfastProteinG,
-                  isMet: result.breakfastProteinG >= ProteinTimingEvaluator.mpsThresholdGrams,
+                  isMet: result.breakfastProteinG >=
+                      ProteinTimingEvaluator.mpsThresholdGrams,
                 ),
               ),
               const SizedBox(width: 8),
@@ -62,7 +65,8 @@ class ProteinTimingIntelligenceCard extends ConsumerWidget {
                 child: _MpsMealPill(
                   label: 'Lunch',
                   proteinG: result.lunchProteinG,
-                  isMet: result.lunchProteinG >= ProteinTimingEvaluator.mpsThresholdGrams,
+                  isMet: result.lunchProteinG >=
+                      ProteinTimingEvaluator.mpsThresholdGrams,
                 ),
               ),
               const SizedBox(width: 8),
@@ -70,7 +74,8 @@ class ProteinTimingIntelligenceCard extends ConsumerWidget {
                 child: _MpsMealPill(
                   label: 'Dinner',
                   proteinG: result.dinnerProteinG,
-                  isMet: result.dinnerProteinG >= ProteinTimingEvaluator.mpsThresholdGrams,
+                  isMet: result.dinnerProteinG >=
+                      ProteinTimingEvaluator.mpsThresholdGrams,
                 ),
               ),
             ],
@@ -80,7 +85,8 @@ class ProteinTimingIntelligenceCard extends ConsumerWidget {
           // AI Timing Nudge Message
           Text(
             result.feedback,
-            style: AppTypography.bodySm.copyWith(height: 1.4, color: AppColors.textPrimary),
+            style: AppTypography.bodySm
+                .copyWith(height: 1.4, color: AppColors.textPrimary),
           ),
         ],
       ),
@@ -123,7 +129,8 @@ class _MpsMealPill extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             '${proteinG.round()}g',
-            style: AppTypography.labelLg.copyWith(color: color, fontWeight: FontWeight.bold),
+            style: AppTypography.labelLg
+                .copyWith(color: color, fontWeight: FontWeight.bold),
           ),
           Text(
             isMet ? 'MPS Met' : '<25g Target',

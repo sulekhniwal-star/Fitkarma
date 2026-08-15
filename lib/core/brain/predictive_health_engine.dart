@@ -68,7 +68,9 @@ class PredictiveHealthEngine {
       biologicalAge: bioAge,
       chronologicalAge: chronologicalAge,
       ageDeltaYears: -delta, // Positive delta means younger
-      primaryContributor: delta <= 0 ? 'Optimal Cardiovascular & Sleep Quality' : 'Elevated Resting HR & Sleep Debt',
+      primaryContributor: delta <= 0
+          ? 'Optimal Cardiovascular & Sleep Quality'
+          : 'Elevated Resting HR & Sleep Debt',
     );
   }
 
@@ -84,14 +86,20 @@ class PredictiveHealthEngine {
     return CgmSpikeResult(
       isSpikeDetected: isSpike,
       glucoseDeltaMgDl: delta,
-      severity: isSpike ? (delta >= 50.0 ? 'High Spike' : 'Moderate Spike') : 'Normal Variation',
-      recommendation: isSpike ? 'Take a 10-minute post-meal walk to accelerate glucose clearance.' : 'Glucose response within target range.',
+      severity: isSpike
+          ? (delta >= 50.0 ? 'High Spike' : 'Moderate Spike')
+          : 'Normal Variation',
+      recommendation: isSpike
+          ? 'Take a 10-minute post-meal walk to accelerate glucose clearance.'
+          : 'Glucose response within target range.',
     );
   }
 
   /// Check Drug-Nutrient & Workout Interactions
-  String? checkDrugInteraction({required String medicationName, required String nutrientCategory}) {
-    if (medicationName.toLowerCase().contains('metformin') && nutrientCategory.toLowerCase().contains('high carbs')) {
+  String? checkDrugInteraction(
+      {required String medicationName, required String nutrientCategory}) {
+    if (medicationName.toLowerCase().contains('metformin') &&
+        nutrientCategory.toLowerCase().contains('high carbs')) {
       return 'Drug-Nutrient Warning: High-carb meals may delay Metformin absorption. Pair with fiber.';
     }
     return null;

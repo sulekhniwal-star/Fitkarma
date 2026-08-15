@@ -30,7 +30,8 @@ class SeededTargetSwapIndex {
       substituteCalories: 160.0,
       originalProtein: 4.0,
       substituteProtein: 4.5,
-      swapInstructions: 'Brush lightly with olive oil and bake/air-fry at 180°C for 15 mins instead of deep-frying.',
+      swapInstructions:
+          'Brush lightly with olive oil and bake/air-fry at 180°C for 15 mins instead of deep-frying.',
     ),
     'paneer_butter_masala': SmartSubstitute(
       originalFoodName: 'Paneer Butter Masala',
@@ -39,7 +40,8 @@ class SeededTargetSwapIndex {
       substituteCalories: 290.0,
       originalProtein: 14.0,
       substituteProtein: 26.0,
-      swapInstructions: 'Substitute cashew cream with low-fat Greek yogurt & skimmed milk; cut butter by 75%.',
+      swapInstructions:
+          'Substitute cashew cream with low-fat Greek yogurt & skimmed milk; cut butter by 75%.',
     ),
     'gulab_jamun': SmartSubstitute(
       originalFoodName: 'Gulab Jamun / Mithai',
@@ -48,7 +50,8 @@ class SeededTargetSwapIndex {
       substituteCalories: 140.0,
       originalProtein: 0.0,
       substituteProtein: 18.0,
-      swapInstructions: 'Boil skimmed milk with roasted sattu, sweeten with stevia, fold in 0.5 scoop vanilla whey.',
+      swapInstructions:
+          'Boil skimmed milk with roasted sattu, sweeten with stevia, fold in 0.5 scoop vanilla whey.',
     ),
     'laccha_paratha': SmartSubstitute(
       originalFoodName: 'Maida Laccha Paratha',
@@ -57,7 +60,8 @@ class SeededTargetSwapIndex {
       substituteCalories: 160.0,
       originalProtein: 5.0,
       substituteProtein: 9.0,
-      swapInstructions: 'Blend whole wheat atta with 30% besan and powdered oats for high-fiber & protein boost.',
+      swapInstructions:
+          'Blend whole wheat atta with 30% besan and powdered oats for high-fiber & protein boost.',
     ),
   };
 }
@@ -75,7 +79,9 @@ class FoodSwapService {
 
     // Fuzzy matcher fallback
     for (final entry in SeededTargetSwapIndex.registry.entries) {
-      if (entry.value.originalFoodName.toLowerCase().contains(foodKey.toLowerCase()) ||
+      if (entry.value.originalFoodName
+              .toLowerCase()
+              .contains(foodKey.toLowerCase()) ||
           key.contains(entry.key)) {
         return entry.value;
       }

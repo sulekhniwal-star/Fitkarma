@@ -34,7 +34,8 @@ class AdaptiveMetabolismEngine {
   }) {
     // 7700 kcal = 1 kg fat
     final dailyWeightEnergyOffset = (weightDelta7DaysKg * 7700.0) / 7.0;
-    final dynamicTdee = (averageCaloricIntake - dailyWeightEnergyOffset).clamp(1200.0, 4500.0);
+    final dynamicTdee =
+        (averageCaloricIntake - dailyWeightEnergyOffset).clamp(1200.0, 4500.0);
 
     String state;
     if (dynamicTdee > baseTdee + 150.0) {
@@ -59,7 +60,9 @@ class AdaptiveMetabolismEngine {
     required double vo2MaxEstimate,
     required int aqi,
   }) {
-    double score = (0.35 * readinessScore) + (0.35 * sleepScore) + (0.30 * (vo2MaxEstimate / 50.0 * 100.0));
+    double score = (0.35 * readinessScore) +
+        (0.35 * sleepScore) +
+        (0.30 * (vo2MaxEstimate / 50.0 * 100.0));
     if (aqi > 150) {
       score -= 10.0; // Penalty for poor environmental AQI exposure
     }
@@ -68,7 +71,9 @@ class AdaptiveMetabolismEngine {
 
     return LongevityScoreResult(
       longevityScore: finalScore,
-      primaryDriver: finalScore >= 80 ? 'Optimal VO2Max & Recovery' : 'Requires Better Sleep & AQI Protection',
+      primaryDriver: finalScore >= 80
+          ? 'Optimal VO2Max & Recovery'
+          : 'Requires Better Sleep & AQI Protection',
     );
   }
 }

@@ -25,7 +25,8 @@ void main() {
       expect(adapt.workoutStrategy, contains('Morning-first'));
     });
 
-    test('adapt produces fasting food mode and garba recovery for Navratri', () {
+    test('adapt produces fasting food mode and garba recovery for Navratri',
+        () {
       final fest = Festival(
         id: 'f2',
         name: 'Navratri',
@@ -59,7 +60,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('FestivalSurvivalScreen renders Survival Mode banner and cross-module matrix', (tester) async {
+    testWidgets(
+        'FestivalSurvivalScreen renders Survival Mode banner and cross-module matrix',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

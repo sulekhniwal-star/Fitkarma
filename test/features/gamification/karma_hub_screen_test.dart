@@ -6,7 +6,9 @@ import 'package:fitkarma/features/gamification/screens/karma_hub_screen.dart';
 
 void main() {
   group('§P7-B Karma Hub Screen & KarmaHubNotifier Tests', () {
-    test('KarmaHubNotifier calculates initial level L4 Builder for 1450 XP per §P7-B spec', () {
+    test(
+        'KarmaHubNotifier calculates initial level L4 Builder for 1450 XP per §P7-B spec',
+        () {
       final container = ProviderContainer();
       final state = container.read(karmaHubProvider);
 
@@ -27,7 +29,8 @@ void main() {
       final container = ProviderContainer();
       final notifier = container.read(karmaHubProvider.notifier);
 
-      notifier.awardOutcomeXp('bmi_category_improved', customEventTitle: 'BMI Category Improved');
+      notifier.awardOutcomeXp('bmi_category_improved',
+          customEventTitle: 'BMI Category Improved');
 
       final state = container.read(karmaHubProvider);
       expect(state.totalXp, equals(1750)); // 1450 + 300
@@ -52,7 +55,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('KarmaHubScreen renders Karma level header, cohort rank card, achievements grid, and XP feed', (tester) async {
+    testWidgets(
+        'KarmaHubScreen renders Karma level header, cohort rank card, achievements grid, and XP feed',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: KarmaHubScreen()),
@@ -62,7 +67,9 @@ void main() {
 
       expect(find.textContaining('Karma Hub — Level 4'), findsOneWidget);
       expect(find.textContaining('Level 4 — Builder'), findsOneWidget);
-      expect(find.textContaining('You score higher than 82% of Noida Builders!'), findsOneWidget);
+      expect(
+          find.textContaining('You score higher than 82% of Noida Builders!'),
+          findsOneWidget);
       expect(find.text('Cohort Rank: #142 of 4210 members'), findsOneWidget);
       expect(find.text('Achievements'), findsOneWidget);
       expect(find.text('Prote-King'), findsOneWidget);

@@ -74,14 +74,16 @@ class HabitAutomationSystem {
     required DateTime usualBedtime,
     required double sleepDebtHours,
   }) {
-    final int advanceMinutes = (45 + (sleepDebtHours * 10).round()).clamp(30, 90);
+    final int advanceMinutes =
+        (45 + (sleepDebtHours * 10).round()).clamp(30, 90);
     final scheduled = usualBedtime.subtract(Duration(minutes: advanceMinutes));
 
     return HabitAutomationTrigger(
       id: 'habit_sleep_winddown',
       type: HabitTriggerType.sleepWindDown,
       title: '🌙 Sleep OS Wind-Down Routine',
-      message: 'Bedtime in $advanceMinutes mins. Dim lights, turn off screens, and start your 15m relaxation.',
+      message:
+          'Bedtime in $advanceMinutes mins. Dim lights, turn off screens, and start your 15m relaxation.',
       scheduledTime: scheduled,
       isTriggered: false,
     );
@@ -145,7 +147,8 @@ class HabitAutomationSystem {
       id: 'habit_post_meal_walk',
       type: HabitTriggerType.postMealWalk,
       title: '🚶 10-Minute Postprandial Walk',
-      message: '20 mins after your ${mealCarbsGrams.round()}g carb meal! A 10-minute light stroll prevents glucose spikes.',
+      message:
+          '20 mins after your ${mealCarbsGrams.round()}g carb meal! A 10-minute light stroll prevents glucose spikes.',
       scheduledTime: scheduled,
       isTriggered: false,
     );

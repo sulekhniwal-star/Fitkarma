@@ -51,22 +51,29 @@ class HungerCravingEngine {
         log.stressLevel >= 3.5);
 
     // 2. Proactive intervention trigger around 7:00 PM (hour 19) when stress is elevated (>=3.5)
-    if (hasBingePattern && currentTime.hour >= 18 && currentTime.hour <= 20 && currentStressLevel >= 3.5) {
+    if (hasBingePattern &&
+        currentTime.hour >= 18 &&
+        currentTime.hour <= 20 &&
+        currentStressLevel >= 3.5) {
       return const HungerIntervention(
         shouldTriggerNudge: true,
         nudgeTitle: 'Pre-Emptive Snacking Alert',
-        nudgeBody: 'We notice you tend to crave sweet snacks at 9 PM on stressful days. Add a 25g protein snack (Greek yogurt or sattu drink) now to stabilize insulin and prevent late-night binging.',
-        recommendedSnack: '1 cup Greek yogurt with walnuts, or a high-protein sattu drink.',
+        nudgeBody:
+            'We notice you tend to crave sweet snacks at 9 PM on stressful days. Add a 25g protein snack (Greek yogurt or sattu drink) now to stabilize insulin and prevent late-night binging.',
+        recommendedSnack:
+            '1 cup Greek yogurt with walnuts, or a high-protein sattu drink.',
       );
     }
 
     // 3. Starving condition prompt (hunger score 5)
-    final recentStarving = logs.any((l) => l.hungerScore >= 4 && currentTime.difference(l.timestamp).inHours <= 2);
+    final recentStarving = logs.any((l) =>
+        l.hungerScore >= 4 && currentTime.difference(l.timestamp).inHours <= 2);
     if (recentStarving) {
       return const HungerIntervention(
         shouldTriggerNudge: true,
         nudgeTitle: 'High Hunger Warning',
-        nudgeBody: 'Your logged hunger score is high. Eat a high-satiety fiber & protein meal to avoid impulsive high-calorie snacking.',
+        nudgeBody:
+            'Your logged hunger score is high. Eat a high-satiety fiber & protein meal to avoid impulsive high-calorie snacking.',
         recommendedSnack: 'Roasted chana or boiled eggs with cucumber slices.',
       );
     }

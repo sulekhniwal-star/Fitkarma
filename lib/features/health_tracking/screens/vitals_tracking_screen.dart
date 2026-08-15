@@ -34,13 +34,16 @@ class VitalsTrackingScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Daily Steps (Health Connect)', style: AppTypography.titleMedium),
-                        Text('Auto-detected via on-device sensor', style: AppTypography.labelSmall),
+                        Text('Daily Steps (Health Connect)',
+                            style: AppTypography.titleMedium),
+                        Text('Auto-detected via on-device sensor',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
                     Text(
                       '${state.steps}',
-                      style: AppTypography.displayLarge.copyWith(color: AppColors.primaryCyan),
+                      style: AppTypography.displayLarge
+                          .copyWith(color: AppColors.primaryCyan),
                     ),
                   ],
                 ),
@@ -55,10 +58,12 @@ class VitalsTrackingScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Blood Pressure', style: AppTypography.titleMedium),
+                        Text('Blood Pressure',
+                            style: AppTypography.titleMedium),
                         Text(
                           '${state.systolicBp.round()}/${state.diastolicBp.round()} mmHg',
-                          style: AppTypography.titleLarge.copyWith(color: AppColors.primaryEmerald),
+                          style: AppTypography.titleLarge
+                              .copyWith(color: AppColors.primaryEmerald),
                         ),
                       ],
                     ),
@@ -67,17 +72,26 @@ class VitalsTrackingScreen extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.bgSecondary),
-                            onPressed: () => ref.read(healthTrackingProvider.notifier).logBloodPressure(120, 80),
-                            child: Text('Normal (120/80)', style: AppTypography.labelSmall),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.bgSecondary),
+                            onPressed: () => ref
+                                .read(healthTrackingProvider.notifier)
+                                .logBloodPressure(120, 80),
+                            child: Text('Normal (120/80)',
+                                style: AppTypography.labelSmall),
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.bgSecondary),
-                            onPressed: () => ref.read(healthTrackingProvider.notifier).logBloodPressure(138, 88),
-                            child: Text('Elevated (138/88)', style: AppTypography.labelSmall.copyWith(color: AppColors.warningAmber)),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.bgSecondary),
+                            onPressed: () => ref
+                                .read(healthTrackingProvider.notifier)
+                                .logBloodPressure(138, 88),
+                            child: Text('Elevated (138/88)',
+                                style: AppTypography.labelSmall
+                                    .copyWith(color: AppColors.warningAmber)),
                           ),
                         ),
                       ],
@@ -98,7 +112,8 @@ class VitalsTrackingScreen extends ConsumerWidget {
                         Text('Blood Glucose', style: AppTypography.titleMedium),
                         Text(
                           '${state.glucoseMgDl.round()} mg/dL',
-                          style: AppTypography.titleLarge.copyWith(color: AppColors.infoBlue),
+                          style: AppTypography.titleLarge
+                              .copyWith(color: AppColors.infoBlue),
                         ),
                       ],
                     ),
@@ -107,17 +122,26 @@ class VitalsTrackingScreen extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.bgSecondary),
-                            onPressed: () => ref.read(healthTrackingProvider.notifier).logGlucose(95),
-                            child: Text('Fasting (95)', style: AppTypography.labelSmall),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.bgSecondary),
+                            onPressed: () => ref
+                                .read(healthTrackingProvider.notifier)
+                                .logGlucose(95),
+                            child: Text('Fasting (95)',
+                                style: AppTypography.labelSmall),
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.bgSecondary),
-                            onPressed: () => ref.read(healthTrackingProvider.notifier).logGlucose(165),
-                            child: Text('Postprandial (165)', style: AppTypography.labelSmall.copyWith(color: AppColors.warningAmber)),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.bgSecondary),
+                            onPressed: () => ref
+                                .read(healthTrackingProvider.notifier)
+                                .logGlucose(165),
+                            child: Text('Postprandial (165)',
+                                style: AppTypography.labelSmall
+                                    .copyWith(color: AppColors.warningAmber)),
                           ),
                         ),
                       ],
@@ -128,7 +152,8 @@ class VitalsTrackingScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Active Risk Alerts Section
-              Text('Preventive Intelligence Risk Alerts', style: AppTypography.titleLarge),
+              Text('Preventive Intelligence Risk Alerts',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               if (state.activeAlerts.isEmpty)
                 GlassCard(
@@ -136,7 +161,8 @@ class VitalsTrackingScreen extends ConsumerWidget {
                     children: [
                       const Icon(Icons.shield, color: AppColors.primaryEmerald),
                       const SizedBox(width: AppSpacing.md),
-                      Text('No active health risk patterns detected.', style: AppTypography.bodyMedium),
+                      Text('No active health risk patterns detected.',
+                          style: AppTypography.bodyMedium),
                     ],
                   ),
                 )
@@ -147,15 +173,20 @@ class VitalsTrackingScreen extends ConsumerWidget {
                     child: GlassCard(
                       child: Row(
                         children: [
-                          const Icon(Icons.warning, color: AppColors.warningAmber),
+                          const Icon(Icons.warning,
+                              color: AppColors.warningAmber),
                           const SizedBox(width: AppSpacing.md),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(alert.patternName, style: AppTypography.titleMedium),
-                                Text(alert.description, style: AppTypography.bodyMedium),
-                                Text('Rec: ${alert.recommendation}', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan)),
+                                Text(alert.patternName,
+                                    style: AppTypography.titleMedium),
+                                Text(alert.description,
+                                    style: AppTypography.bodyMedium),
+                                Text('Rec: ${alert.recommendation}',
+                                    style: AppTypography.labelSmall.copyWith(
+                                        color: AppColors.primaryCyan)),
                               ],
                             ),
                           ),

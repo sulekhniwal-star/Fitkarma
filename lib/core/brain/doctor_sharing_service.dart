@@ -54,7 +54,8 @@ class DoctorSharingService {
     required String passCodePin,
     int validDays = 7,
   }) {
-    final shareId = DateTime.now().millisecondsSinceEpoch.toRadixString(36).toUpperCase();
+    final shareId =
+        DateTime.now().millisecondsSinceEpoch.toRadixString(36).toUpperCase();
     return DoctorShareConfig(
       shareId: shareId,
       passCodePin: passCodePin,

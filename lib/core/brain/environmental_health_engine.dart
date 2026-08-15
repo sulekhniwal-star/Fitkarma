@@ -29,9 +29,11 @@ class EnvironmentalHealthEngine {
     String rec;
 
     if (shiftIndoor) {
-      rec = 'Unhealthy Air Quality (AQI $aqi). Automatically shifted outdoor runs to indoor strength/treadmill.';
+      rec =
+          'Unhealthy Air Quality (AQI $aqi). Automatically shifted outdoor runs to indoor strength/treadmill.';
     } else if (uvIndex > 8.0) {
-      rec = 'Very High UV Index ($uvIndex). Recommend sun protection or early morning outdoor workout.';
+      rec =
+          'Very High UV Index ($uvIndex). Recommend sun protection or early morning outdoor workout.';
     } else {
       rec = 'Optimal Environmental Conditions for Outdoor Training.';
     }

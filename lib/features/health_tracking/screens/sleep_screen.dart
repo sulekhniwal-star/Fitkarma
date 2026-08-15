@@ -16,10 +16,10 @@ class SleepScreen extends ConsumerWidget {
   const SleepScreen({super.key});
 
   // Spec-defined stage colours
-  static const _awakeColor  = Color(0xFFFB7185); // rose
-  static const _remColor    = Color(0xFF7B6FF0); // indigo/secondary
-  static const _lightColor  = Color(0xFF00D4B4); // teal
-  static const _deepColor   = Color(0xFF4ADE80); // success green
+  static const _awakeColor = Color(0xFFFB7185); // rose
+  static const _remColor = Color(0xFF7B6FF0); // indigo/secondary
+  static const _lightColor = Color(0xFF00D4B4); // teal
+  static const _deepColor = Color(0xFF4ADE80); // success green
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +44,8 @@ class SleepScreen extends ConsumerWidget {
             ),
             title: Text('Sleep OS', style: AppTypography.h2),
             flexibleSpace: FlexibleSpaceBar(
-              background: _IndigoHero(record: record, state: state, engine: engine),
+              background:
+                  _IndigoHero(record: record, state: state, engine: engine),
             ),
           ),
 
@@ -151,11 +152,16 @@ class _QualityBadge extends StatelessWidget {
 
   Color get _color {
     switch (quality) {
-      case SleepQuality.excellent: return AppColors.success;
-      case SleepQuality.good:      return AppColors.teal;
-      case SleepQuality.normal:    return AppColors.secondary;
-      case SleepQuality.fair:      return AppColors.warning;
-      case SleepQuality.poor:      return AppColors.error;
+      case SleepQuality.excellent:
+        return AppColors.success;
+      case SleepQuality.good:
+        return AppColors.teal;
+      case SleepQuality.normal:
+        return AppColors.secondary;
+      case SleepQuality.fair:
+        return AppColors.warning;
+      case SleepQuality.poor:
+        return AppColors.error;
     }
   }
 
@@ -202,11 +208,16 @@ class _SleepDebtChip extends StatelessWidget {
 
   Color get _color {
     switch (level) {
-      case SleepDebtLevel.none:     return AppColors.success;
-      case SleepDebtLevel.low:      return AppColors.teal;
-      case SleepDebtLevel.moderate: return AppColors.warning;
-      case SleepDebtLevel.high:     return AppColors.rose;
-      case SleepDebtLevel.severe:   return AppColors.error;
+      case SleepDebtLevel.none:
+        return AppColors.success;
+      case SleepDebtLevel.low:
+        return AppColors.teal;
+      case SleepDebtLevel.moderate:
+        return AppColors.warning;
+      case SleepDebtLevel.high:
+        return AppColors.rose;
+      case SleepDebtLevel.severe:
+        return AppColors.error;
     }
   }
 
@@ -242,9 +253,9 @@ class _SleepStagesCard extends StatelessWidget {
 
   static const _stageColors = {
     SleepStage.awake: SleepScreen._awakeColor,
-    SleepStage.rem:   SleepScreen._remColor,
+    SleepStage.rem: SleepScreen._remColor,
     SleepStage.light: SleepScreen._lightColor,
-    SleepStage.deep:  SleepScreen._deepColor,
+    SleepStage.deep: SleepScreen._deepColor,
   };
 
   @override
@@ -355,7 +366,8 @@ class _PerformanceCard extends StatelessWidget {
             children: [
               Text('Sleep Performance', style: AppTypography.h3),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.secondary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
@@ -399,7 +411,8 @@ class _PillarBar extends StatelessWidget {
   final String label;
   final double value; // 0–100
   final Color color;
-  const _PillarBar({required this.label, required this.value, required this.color});
+  const _PillarBar(
+      {required this.label, required this.value, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -461,7 +474,8 @@ class _HrvTrendCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.teal.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.teal.withValues(alpha: 0.3)),
+                  border:
+                      Border.all(color: AppColors.teal.withValues(alpha: 0.3)),
                 ),
                 child: Text(
                   'Wearable',
@@ -499,8 +513,7 @@ class _HrvTrendCard extends StatelessWidget {
               ),
               Text(
                 '${maxHrv.toStringAsFixed(0)} ms max',
-                style:
-                    AppTypography.bodySm.copyWith(color: AppColors.teal),
+                style: AppTypography.bodySm.copyWith(color: AppColors.teal),
               ),
             ],
           ),
@@ -591,8 +604,7 @@ class _HrvLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _HrvLinePainter old) =>
-      old.points != points;
+  bool shouldRepaint(covariant _HrvLinePainter old) => old.points != points;
 }
 
 // ── 7-Day Sleep Minutes Bar Chart ─────────────────────────────────────────────
@@ -623,8 +635,8 @@ class _WeeklySleepCard extends StatelessWidget {
               Text('7-Day Sleep', style: AppTypography.h3),
               Text(
                 'Goal: ${baselineMinutes ~/ 60}h',
-                style: AppTypography.bodySm
-                    .copyWith(color: AppColors.textMuted),
+                style:
+                    AppTypography.bodySm.copyWith(color: AppColors.textMuted),
               ),
             ],
           ),
@@ -637,11 +649,11 @@ class _WeeklySleepCard extends StatelessWidget {
                 final minutes = display[i];
                 final ratio = (minutes / baselineMinutes).clamp(0.0, 1.2);
                 final isGoalMet = minutes >= baselineMinutes;
-                final barColor = isGoalMet ? AppColors.secondary : AppColors.warning;
+                final barColor =
+                    isGoalMet ? AppColors.secondary : AppColors.warning;
                 final labelIdx = (7 - display.length) + i;
-                final label = labelIdx >= 0 && labelIdx < 7
-                    ? dayLabels[labelIdx]
-                    : '?';
+                final label =
+                    labelIdx >= 0 && labelIdx < 7 ? dayLabels[labelIdx] : '?';
                 final h = minutes ~/ 60;
                 final m = minutes % 60;
 

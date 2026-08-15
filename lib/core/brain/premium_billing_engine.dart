@@ -33,7 +33,8 @@ class PremiumBillingEngine {
     SubscriptionTier tier = SubscriptionTier.free,
   }) {
     if (hasActiveSubscription || isTrialActive) {
-      final effectiveTier = tier == SubscriptionTier.free ? SubscriptionTier.pro : tier;
+      final effectiveTier =
+          tier == SubscriptionTier.free ? SubscriptionTier.pro : tier;
       return EntitlementResult(
         isProActive: true,
         isInFreeTrial: isTrialActive && !hasActiveSubscription,

@@ -28,16 +28,16 @@ extension SyncStatusLabel on SyncStatus {
 
 enum StepDataSource {
   healthConnect, // Android 14+ HealthConnect
-  healthKit,     // iOS HealthKit
-  manual,        // User-entered fallback
+  healthKit, // iOS HealthKit
+  manual, // User-entered fallback
   unknown,
 }
 
 // ── Hourly Step Bucket ────────────────────────────────────────────────────────
 
 class HourlyStepBucket {
-  final int hour;   // 0–23
-  final int steps;  // accumulated in this hour
+  final int hour; // 0–23
+  final int steps; // accumulated in this hour
 
   const HourlyStepBucket({required this.hour, required this.steps});
 }
@@ -117,7 +117,8 @@ class StepsSyncEngine {
   /// [readFromPlatform] wraps `Health().getTotalStepsInInterval(midnight, now)`.
   /// Returns the new step count written, or null if nothing to sync.
   Future<int?> syncStepsWithDeviceHealth({
-    required Future<int?> Function(DateTime start, DateTime end) readFromPlatform,
+    required Future<int?> Function(DateTime start, DateTime end)
+        readFromPlatform,
     required Future<int?> Function(DateTime date) readFromDrift,
     required Future<void> Function(DateTime date, int steps) writeToDrift,
   }) async {
@@ -154,9 +155,7 @@ class StepsSyncEngine {
     // MET-based approximation: steps × 0.04 kcal (70kg average)
     final calories = (steps * 0.04).round().clamp(0, 9999);
 
-    final progress = goalSteps > 0
-        ? (steps / goalSteps).clamp(0.0, 1.0)
-        : 0.0;
+    final progress = goalSteps > 0 ? (steps / goalSteps).clamp(0.0, 1.0) : 0.0;
 
     return StepMetrics(
       steps: steps,

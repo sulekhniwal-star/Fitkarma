@@ -3,13 +3,13 @@
 // ── Wearable Sources ──────────────────────────────────────────────────────────
 
 enum WearableSource {
-  appleWatch,       // Apple Watch Series 9+
-  whoop,            // WHOOP 4.0
-  garmin,           // Garmin Fenix / Forerunner
-  samsungGalaxy,    // Samsung Galaxy Watch 6
-  fitbitSense,      // Fitbit Sense 2
-  miBandNoise,      // Mi Band / Noise / Consumer entry
-  manualInput,      // User manual entry
+  appleWatch, // Apple Watch Series 9+
+  whoop, // WHOOP 4.0
+  garmin, // Garmin Fenix / Forerunner
+  samsungGalaxy, // Samsung Galaxy Watch 6
+  fitbitSense, // Fitbit Sense 2
+  miBandNoise, // Mi Band / Noise / Consumer entry
+  manualInput, // User manual entry
 }
 
 extension WearableSourceInfo on WearableSource {
@@ -57,7 +57,7 @@ extension WearableSourceInfo on WearableSource {
 class DeviceConfidenceProfile {
   final WearableSource source;
   final double hrvConfidence; // 0.0 - 1.0
-  final double hrConfidence;  // 0.0 - 1.0
+  final double hrConfidence; // 0.0 - 1.0
 
   const DeviceConfidenceProfile({
     required this.source,
@@ -153,7 +153,8 @@ class DeviceReliabilityEngine {
     required double rawHRV,
     required double rawHR,
   }) {
-    final profile = deviceProfiles[source] ?? deviceProfiles[WearableSource.manualInput]!;
+    final profile =
+        deviceProfiles[source] ?? deviceProfiles[WearableSource.manualInput]!;
 
     final readinessW = calculateReadinessWeight(profile.hrvConfidence);
 
@@ -163,7 +164,8 @@ class DeviceReliabilityEngine {
       hrvConfidence: profile.hrvConfidence,
       hrConfidence: profile.hrConfidence,
       readinessWeight: readinessW,
-      displayLabel: '${source.displayName} · ${profile.confidenceLabel} confidence',
+      displayLabel:
+          '${source.displayName} · ${profile.confidenceLabel} confidence',
     );
   }
 

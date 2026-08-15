@@ -22,7 +22,8 @@ class SquadEngine {
   String generateInviteCode() {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     final random = Random();
-    return List.generate(6, (index) => chars[random.nextInt(chars.length)]).join();
+    return List.generate(6, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 
   /// Convert raw readiness into privacy-filtered tier-only status

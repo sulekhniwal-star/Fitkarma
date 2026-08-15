@@ -3,11 +3,15 @@ enum CyclePhase { menstrual, follicular, ovulatory, luteal }
 class MenstrualSymptomLog {
   final DateTime logDate;
   final bool hasMenstrualFlow; // Declares Day 1 of cycle
-  final double? basalBodyTemperatureCelsius; // Post-ovulation BBT rises 0.2°C - 0.5°C
+  final double?
+      basalBodyTemperatureCelsius; // Post-ovulation BBT rises 0.2°C - 0.5°C
   final bool? positiveLhTest; // LH surge indicators
-  final List<String> physicalSymptoms; // e.g., ['cramps', 'bloating', 'egg_white_mucus', 'ovulation_pain']
-  final int? restingHeartRateBpm; // Progesterone surge causes RHR to rise 2-4 bpm
-  final double? heartRateVariabilityMs; // Progesterone surge causes HRV to decrease
+  final List<String>
+      physicalSymptoms; // e.g., ['cramps', 'bloating', 'egg_white_mucus', 'ovulation_pain']
+  final int?
+      restingHeartRateBpm; // Progesterone surge causes RHR to rise 2-4 bpm
+  final double?
+      heartRateVariabilityMs; // Progesterone surge causes HRV to decrease
 
   MenstrualSymptomLog({
     required this.logDate,
@@ -53,7 +57,8 @@ class DynamicCycleCalibrator {
     required int defaultCycleLengthDays, // e.g. 28 days onboarding fallback
   }) {
     if (symptomLogs.isEmpty) {
-      return DynamicCycleState.defaultCalendar(defaultCycleLengthDays, CyclePhase.follicular);
+      return DynamicCycleState.defaultCalendar(
+          defaultCycleLengthDays, CyclePhase.follicular);
     }
 
     // Sort logs chronologically
@@ -61,13 +66,18 @@ class DynamicCycleCalibrator {
       ..sort((a, b) => a.logDate.compareTo(b.logDate));
 
     // 1. Identify start of current cycle (first day of flow)
-    final flowStarts = sortedLogs.where((l) => l.hasMenstrualFlow).map((l) => l.logDate).toList();
+    final flowStarts = sortedLogs
+        .where((l) => l.hasMenstrualFlow)
+        .map((l) => l.logDate)
+        .toList();
     if (flowStarts.isEmpty) {
-      return DynamicCycleState.defaultCalendar(defaultCycleLengthDays, CyclePhase.follicular);
+      return DynamicCycleState.defaultCalendar(
+          defaultCycleLengthDays, CyclePhase.follicular);
     }
 
     final currentCycleStart = flowStarts.last;
-    final daysInCurrentCycle = DateTime.now().difference(currentCycleStart).inDays + 1;
+    final daysInCurrentCycle =
+        DateTime.now().difference(currentCycleStart).inDays + 1;
 
     // Calculate historical cycle lengths to detect variance (irregularity indicator)
     final historicalLengths = <int>[];
@@ -76,19 +86,29 @@ class DynamicCycleCalibrator {
     }
 
     final isIrregular = historicalLengths.isNotEmpty &&
-        (historicalLengths.map((l) => (l - defaultCycleLengthDays).abs()).reduce((a, b) => a + b) / historicalLengths.length > 4);
+        (historicalLengths
+                    .map((l) => (l - defaultCycleLengthDays).abs())
+                    .reduce((a, b) => a + b) /
+                historicalLengths.length >
+            4);
 
     // 2. Scan logs of current cycle for ovulation events
     DateTime? detectedOvulationDate;
-    final currentCycleLogs = sortedLogs.where((l) => !l.logDate.isBefore(currentCycleStart)).toList();
+    final currentCycleLogs = sortedLogs
+        .where((l) => !l.logDate.isBefore(currentCycleStart))
+        .toList();
 
     // Check for positive LH strip test
     final lhPositiveLog = currentCycleLogs.firstWhere(
       (l) => l.positiveLhTest == true,
-      orElse: () => MenstrualSymptomLog(logDate: DateTime(1970), hasMenstrualFlow: false, physicalSymptoms: []),
+      orElse: () => MenstrualSymptomLog(
+          logDate: DateTime(1970),
+          hasMenstrualFlow: false,
+          physicalSymptoms: []),
     );
     if (lhPositiveLog.logDate.year != 1970) {
-      detectedOvulationDate = lhPositiveLog.logDate.add(const Duration(days: 1)); // Ovulation roughly 24h post-LH surge
+      detectedOvulationDate = lhPositiveLog.logDate
+          .add(const Duration(days: 1)); // Ovulation roughly 24h post-LH surge
     }
 
     // If no LH test, check for basal body temperature (BBT) shift: sustained rise of 0.2°C - 0.5°C
@@ -99,7 +119,8 @@ class DynamicCycleCalibrator {
         final t2 = currentCycleLogs[i].basalBodyTemperatureCelsius;
         if (t0 != null && t1 != null && t2 != null) {
           if (t1 - t0 >= 0.2 && t2 - t0 >= 0.2) {
-            detectedOvulationDate = currentCycleLogs[i - 1].logDate; // Temp shifted on day i-1
+            detectedOvulationDate =
+                currentCycleLogs[i - 1].logDate; // Temp shifted on day i-1
             break;
           }
         }
@@ -109,7 +130,9 @@ class DynamicCycleCalibrator {
     // Fallback: If BBT and LH are missing, run continuous resting heart rate (RHR) and symptom tracking
     if (detectedOvulationDate == null && currentCycleLogs.isNotEmpty) {
       final follicularRhrLogs = currentCycleLogs
-          .where((l) => l.logDate.difference(currentCycleStart).inDays <= 10 && l.restingHeartRateBpm != null)
+          .where((l) =>
+              l.logDate.difference(currentCycleStart).inDays <= 10 &&
+              l.restingHeartRateBpm != null)
           .toList();
 
       if (follicularRhrLogs.isNotEmpty) {
@@ -123,11 +146,13 @@ class DynamicCycleCalibrator {
           final rhr = log.restingHeartRateBpm;
 
           if (rhr != null && rhr - follicularBaselineRhr >= 2.0) {
-            final hasSubjectiveSymptoms = log.physicalSymptoms.contains('egg_white_mucus') ||
-                log.physicalSymptoms.contains('ovulation_pain') ||
-                log.physicalSymptoms.contains('mittelschmerz');
+            final hasSubjectiveSymptoms =
+                log.physicalSymptoms.contains('egg_white_mucus') ||
+                    log.physicalSymptoms.contains('ovulation_pain') ||
+                    log.physicalSymptoms.contains('mittelschmerz');
 
-            if (hasSubjectiveSymptoms && log.logDate.difference(currentCycleStart).inDays > 10) {
+            if (hasSubjectiveSymptoms &&
+                log.logDate.difference(currentCycleStart).inDays > 10) {
               detectedOvulationDate = log.logDate;
               break;
             }
@@ -141,7 +166,8 @@ class DynamicCycleCalibrator {
     int adjustedCycleLength = defaultCycleLengthDays;
 
     if (detectedOvulationDate != null) {
-      final daysPostOvulation = DateTime.now().difference(detectedOvulationDate).inDays;
+      final daysPostOvulation =
+          DateTime.now().difference(detectedOvulationDate).inDays;
       if (daysPostOvulation < 0) {
         phase = CyclePhase.ovulatory;
       } else if (daysPostOvulation <= 14) {
@@ -149,12 +175,15 @@ class DynamicCycleCalibrator {
       } else {
         phase = CyclePhase.menstrual;
       }
-      adjustedCycleLength = detectedOvulationDate.difference(currentCycleStart).inDays + 14;
+      adjustedCycleLength =
+          detectedOvulationDate.difference(currentCycleStart).inDays + 14;
     } else {
       if (isIrregular) {
         final avgLength = historicalLengths.isEmpty
             ? defaultCycleLengthDays
-            : (historicalLengths.reduce((a, b) => a + b) / historicalLengths.length).round();
+            : (historicalLengths.reduce((a, b) => a + b) /
+                    historicalLengths.length)
+                .round();
         adjustedCycleLength = avgLength;
       }
 

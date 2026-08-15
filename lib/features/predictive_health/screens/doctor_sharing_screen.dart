@@ -8,9 +8,11 @@ import '../../../shared/widgets/glass_card.dart';
 import '../../../core/brain/doctor_sharing_service.dart';
 import '../providers/abha_provider.dart';
 
-final doctorSharingServiceProvider = Provider<DoctorSharingService>((ref) => const DoctorSharingService());
+final doctorSharingServiceProvider =
+    Provider<DoctorSharingService>((ref) => const DoctorSharingService());
 
-final doctorShareConfigProvider = StateProvider<DoctorShareConfig?>((ref) => null);
+final doctorShareConfigProvider =
+    StateProvider<DoctorShareConfig?>((ref) => null);
 
 final doctorReportSummaryProvider = Provider<DoctorReportSummary>((ref) {
   final service = ref.watch(doctorSharingServiceProvider);
@@ -33,7 +35,8 @@ class DoctorSharingScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('🩺 Doctor Sharing Portal', style: AppTypography.h2),
@@ -51,14 +54,19 @@ class DoctorSharingScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.lock_person_outlined, color: AppColors.primary, size: 28),
+                        const Icon(Icons.lock_person_outlined,
+                            color: AppColors.primary, size: 28),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Patient Consent & Security Protocol', style: AppTypography.labelLg),
-                              Text('AES-256 Encrypted PDF • 4-Digit Passcode PIN', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                              Text('Patient Consent & Security Protocol',
+                                  style: AppTypography.labelLg),
+                              Text(
+                                  'AES-256 Encrypted PDF • 4-Digit Passcode PIN',
+                                  style: AppTypography.bodySm.copyWith(
+                                      color: AppColors.textSecondary)),
                             ],
                           ),
                         ),
@@ -67,7 +75,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Export a comprehensive 90-day clinical overview protected by a 4-digit PIN of your choice, or generate a 7-day time-decaying link for your doctor.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 12),
                     ),
                   ],
                 ),
@@ -75,7 +84,8 @@ class DoctorSharingScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.lg),
 
               // Report Data Preview Section
-              Text('Included Report Contents (90-Day Overview)', style: AppTypography.h3),
+              Text('Included Report Contents (90-Day Overview)',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
 
               GlassCard(
@@ -83,13 +93,22 @@ class DoctorSharingScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _DetailRow(label: 'Blood Pressure (90-Day Avg)', value: '${summary.averageSystolicBp}/${summary.averageDiastolicBp} mmHg'),
+                    _DetailRow(
+                        label: 'Blood Pressure (90-Day Avg)',
+                        value:
+                            '${summary.averageSystolicBp}/${summary.averageDiastolicBp} mmHg'),
                     const Divider(height: 16),
-                    _DetailRow(label: 'Fasting Glucose (Avg)', value: '${summary.averageFastingGlucoseMgDl} mg/dL'),
+                    _DetailRow(
+                        label: 'Fasting Glucose (Avg)',
+                        value: '${summary.averageFastingGlucoseMgDl} mg/dL'),
                     const Divider(height: 16),
-                    _DetailRow(label: 'Nutrition Adherence', value: '${summary.adherencePct90Days}%'),
+                    _DetailRow(
+                        label: 'Nutrition Adherence',
+                        value: '${summary.adherencePct90Days}%'),
                     const Divider(height: 16),
-                    _DetailRow(label: 'Workout Consistency', value: '${summary.consistencyPct90Days}%'),
+                    _DetailRow(
+                        label: 'Workout Consistency',
+                        value: '${summary.consistencyPct90Days}%'),
                   ],
                 ),
               ),
@@ -103,7 +122,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: Row(
                     children: [
-                      const Icon(Icons.warning_amber_rounded, color: AppColors.warning, size: 16),
+                      const Icon(Icons.warning_amber_rounded,
+                          color: AppColors.warning, size: 16),
                       const SizedBox(width: 6),
                       Expanded(child: Text(flag, style: AppTypography.bodySm)),
                     ],
@@ -118,7 +138,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: AppColors.teal.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.teal.withValues(alpha: 0.3)),
+                    border: Border.all(
+                        color: AppColors.teal.withValues(alpha: 0.3)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,14 +147,25 @@ class DoctorSharingScreen extends ConsumerWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('🌐 Active Time-Decaying Link', style: AppTypography.labelLg.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold)),
-                          Text('PIN: ${activeConfig.passCodePin}', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+                          Text('🌐 Active Time-Decaying Link',
+                              style: AppTypography.labelLg.copyWith(
+                                  color: AppColors.teal,
+                                  fontWeight: FontWeight.bold)),
+                          Text('PIN: ${activeConfig.passCodePin}',
+                              style: AppTypography.labelSmall
+                                  .copyWith(color: AppColors.textSecondary)),
                         ],
                       ),
                       const SizedBox(height: 4),
-                      Text(activeConfig.shareUrl, style: AppTypography.bodySm.copyWith(color: AppColors.primary, fontWeight: FontWeight.w600)),
+                      Text(activeConfig.shareUrl,
+                          style: AppTypography.bodySm.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w600)),
                       const SizedBox(height: 4),
-                      Text('Valid for ${activeConfig.validDays} days (Expires ${activeConfig.expiresAt.day}/${activeConfig.expiresAt.month})', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted, fontSize: 11)),
+                      Text(
+                          'Valid for ${activeConfig.validDays} days (Expires ${activeConfig.expiresAt.day}/${activeConfig.expiresAt.month})',
+                          style: AppTypography.bodySm.copyWith(
+                              color: AppColors.textMuted, fontSize: 11)),
                     ],
                   ),
                 ),
@@ -153,21 +185,30 @@ class DoctorSharingScreen extends ConsumerWidget {
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.verified_user, color: AppColors.teal, size: 22),
+                                const Icon(Icons.verified_user,
+                                    color: AppColors.teal, size: 22),
                                 const SizedBox(width: 8),
-                                Text('ABHA Health ID (NDHM)', style: AppTypography.labelLg),
+                                Text('ABHA Health ID (NDHM)',
+                                    style: AppTypography.labelLg),
                               ],
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 2),
                               decoration: BoxDecoration(
-                                color: abhaProfile.isLinked ? AppColors.teal.withAlpha(40) : AppColors.surface1,
+                                color: abhaProfile.isLinked
+                                    ? AppColors.teal.withAlpha(40)
+                                    : AppColors.surface1,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
-                                abhaProfile.isLinked ? 'VERIFIED' : 'NOT LINKED',
+                                abhaProfile.isLinked
+                                    ? 'VERIFIED'
+                                    : 'NOT LINKED',
                                 style: AppTypography.labelSmall.copyWith(
-                                  color: abhaProfile.isLinked ? AppColors.teal : AppColors.textMuted,
+                                  color: abhaProfile.isLinked
+                                      ? AppColors.teal
+                                      : AppColors.textMuted,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -192,9 +233,13 @@ class DoctorSharingScreen extends ConsumerWidget {
                             icon: const Icon(Icons.share, size: 16),
                             label: const Text('Export FHIR-Lite JSON Bundle'),
                             onPressed: () {
-                              ref.read(abhaProvider.notifier).exportFhirBundle(summary);
+                              ref
+                                  .read(abhaProvider.notifier)
+                                  .exportFhirBundle(summary);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('FHIR-Lite Clinical Bundle Generated for NDHM Network')),
+                                const SnackBar(
+                                    content: Text(
+                                        'FHIR-Lite Clinical Bundle Generated for NDHM Network')),
                               );
                             },
                           )
@@ -211,7 +256,9 @@ class DoctorSharingScreen extends ConsumerWidget {
                                     abhaAddress: 'arjun.sharma@abdm',
                                   );
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('ABHA ID 91-1234-5678-9012 Successfully Linked')),
+                                const SnackBar(
+                                    content: Text(
+                                        'ABHA ID 91-1234-5678-9012 Successfully Linked')),
                               );
                             },
                             child: const Text('Link ABHA ID'),
@@ -231,14 +278,22 @@ class DoctorSharingScreen extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      icon: const Icon(Icons.picture_as_pdf, color: AppColors.bg0, size: 18),
-                      label: Text('Export Encrypted PDF', style: AppTypography.labelLg.copyWith(color: AppColors.bg0)),
+                      icon: const Icon(Icons.picture_as_pdf,
+                          color: AppColors.bg0, size: 18),
+                      label: Text('Export Encrypted PDF',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.bg0)),
                       onPressed: () {
-                        ref.read(doctorShareConfigProvider.notifier).state = ref.read(doctorSharingServiceProvider).generateShareToken(passCodePin: '4829');
+                        ref.read(doctorShareConfigProvider.notifier).state = ref
+                            .read(doctorSharingServiceProvider)
+                            .generateShareToken(passCodePin: '4829');
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Generated Encrypted PDF with PIN 4829')),
+                          const SnackBar(
+                              content: Text(
+                                  'Generated Encrypted PDF with PIN 4829')),
                         );
                       },
                     ),
@@ -266,7 +321,9 @@ class _DetailRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+        Text(label,
+            style:
+                AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
         Text(value, style: AppTypography.labelLg),
       ],
     );

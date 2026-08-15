@@ -13,7 +13,8 @@ class BillingStorage {
   Future<void> setInt(String key, int val) async => _inMemoryStore[key] = val;
 
   Future<String?> getString(String key) async => _inMemoryStore[key] as String?;
-  Future<void> setString(String key, String val) async => _inMemoryStore[key] = val;
+  Future<void> setString(String key, String val) async =>
+      _inMemoryStore[key] = val;
 
   Future<bool?> getBool(String key) async => _inMemoryStore[key] as bool?;
   Future<void> setBool(String key, bool val) async => _inMemoryStore[key] = val;
@@ -52,7 +53,8 @@ class PremiumState {
         billingErrorMessage: '',
         isTrialActive: false,
         packages: RevenueCatConfig.availablePackages,
-        selectedPackage: RevenueCatConfig.availablePackages[2], // Annual by default (best value)
+        selectedPackage: RevenueCatConfig
+            .availablePackages[2], // Annual by default (best value)
       );
 
   bool get isProActive => activeTier != SubscriptionTier.free || isTrialActive;
@@ -119,7 +121,8 @@ class PremiumStateNotifier extends StateNotifier<PremiumState> {
         photos = 0;
       }
 
-      final trialActive = await storage.getBool('billing_trial_active') ?? false;
+      final trialActive =
+          await storage.getBool('billing_trial_active') ?? false;
       final renewalMilli = await storage.getInt('billing_renewal_milli');
       final renewal = renewalMilli != null
           ? DateTime.fromMillisecondsSinceEpoch(renewalMilli)
@@ -184,7 +187,8 @@ class PremiumStateNotifier extends StateNotifier<PremiumState> {
 
     try {
       await storage.setInt('premium_tier_index', selected.tier.index);
-      await storage.setInt('billing_renewal_milli', renewal.millisecondsSinceEpoch);
+      await storage.setInt(
+          'billing_renewal_milli', renewal.millisecondsSinceEpoch);
       await storage.setBool('billing_trial_active', true);
     } catch (_) {}
   }
@@ -201,7 +205,8 @@ class PremiumStateNotifier extends StateNotifier<PremiumState> {
 
     try {
       await storage.setInt('premium_tier_index', tier.index);
-      await storage.setInt('billing_renewal_milli', renewal.millisecondsSinceEpoch);
+      await storage.setInt(
+          'billing_renewal_milli', renewal.millisecondsSinceEpoch);
       await storage.setBool('billing_trial_active', false);
     } catch (_) {}
   }

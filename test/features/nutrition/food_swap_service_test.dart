@@ -7,7 +7,9 @@ void main() {
   group('§P5-R Indian Food Substitution & Swap Engine Tests', () {
     const service = FoodSwapService();
 
-    test('checkSubstitution returns correct smart swap & deltas for Deep-Fried Samosa per §P5-R spec', () {
+    test(
+        'checkSubstitution returns correct smart swap & deltas for Deep-Fried Samosa per §P5-R spec',
+        () {
       final sub = service.checkSubstitution('samosa_fried');
 
       expect(sub, isNotNull);
@@ -16,7 +18,9 @@ void main() {
       expect(sub.swapInstructions, contains('air-fry at 180°C'));
     });
 
-    test('checkSubstitution returns correct smart swap & deltas for Paneer Butter Masala (-220 kcal, +12g protein)', () {
+    test(
+        'checkSubstitution returns correct smart swap & deltas for Paneer Butter Masala (-220 kcal, +12g protein)',
+        () {
       final sub = service.checkSubstitution('paneer_butter_masala');
 
       expect(sub, isNotNull);
@@ -27,7 +31,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('IndianFoodSwapScreen renders craving selector, smart swap card, and delta badges', (tester) async {
+    testWidgets(
+        'IndianFoodSwapScreen renders craving selector, smart swap card, and delta badges',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(home: IndianFoodSwapScreen()),
       );

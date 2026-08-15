@@ -97,7 +97,8 @@ class FamilyHubScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Family Health Hub', style: AppTypography.h2),
@@ -116,11 +117,13 @@ class FamilyHubScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: AppColors.success.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
+                    border: Border.all(
+                        color: AppColors.success.withValues(alpha: 0.4)),
                   ),
                   child: Text(
                     nudgeStatus,
-                    style: AppTypography.bodySm.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                    style: AppTypography.bodySm.copyWith(
+                        color: AppColors.success, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -136,14 +139,17 @@ class FamilyHubScreen extends ConsumerWidget {
                       children: [
                         Text(eval.familyName, style: AppTypography.h3),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.teal.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             '👨‍👩‍👧‍👦 ${eval.members.length} Household Members',
-                            style: AppTypography.labelSmall.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold),
+                            style: AppTypography.labelSmall.copyWith(
+                                color: AppColors.teal,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -151,7 +157,8 @@ class FamilyHubScreen extends ConsumerWidget {
                     const SizedBox(height: 6),
                     Text(
                       'One household subscription • Consented privacy sharing',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
                 ),
@@ -187,27 +194,46 @@ class FamilyHubScreen extends ConsumerWidget {
                                       style: const TextStyle(fontSize: 22),
                                     ),
                                     const SizedBox(width: 8),
-                                    Text('${m.relationship} (${m.firstName}, ${m.age})', style: AppTypography.labelLg),
+                                    Text(
+                                        '${m.relationship} (${m.firstName}, ${m.age})',
+                                        style: AppTypography.labelLg),
                                   ],
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 3),
                                   decoration: BoxDecoration(
-                                    color: AppColors.primary.withValues(alpha: 0.15),
+                                    color: AppColors.primary
+                                        .withValues(alpha: 0.15),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: Text('Health Score: ${m.healthScore}', style: AppTypography.labelSmall.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                                  child: Text('Health Score: ${m.healthScore}',
+                                      style: AppTypography.labelSmall.copyWith(
+                                          color: AppColors.primary,
+                                          fontWeight: FontWeight.bold)),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 6),
                             Row(
                               children: [
-                                Text('Steps: ${m.stepsToday.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12)),
+                                Text(
+                                    'Steps: ${m.stepsToday.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}',
+                                    style: AppTypography.bodySm.copyWith(
+                                        color: AppColors.textSecondary,
+                                        fontSize: 12)),
                                 const SizedBox(width: 12),
-                                Text('Sleep: ${m.sleepHours}h', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12)),
+                                Text('Sleep: ${m.sleepHours}h',
+                                    style: AppTypography.bodySm.copyWith(
+                                        color: AppColors.textSecondary,
+                                        fontSize: 12)),
                                 const SizedBox(width: 12),
-                                Text('BP: ${m.bpStatus}', style: AppTypography.bodySm.copyWith(color: m.bpStatus.contains('⚠️') ? AppColors.warning : AppColors.success, fontSize: 12)),
+                                Text('BP: ${m.bpStatus}',
+                                    style: AppTypography.bodySm.copyWith(
+                                        color: m.bpStatus.contains('⚠️')
+                                            ? AppColors.warning
+                                            : AppColors.success,
+                                        fontSize: 12)),
                               ],
                             ),
                           ],
@@ -245,19 +271,31 @@ class FamilyHubScreen extends ConsumerWidget {
                               Expanded(
                                 child: Text(
                                   alert.message,
-                                  style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary),
+                                  style: AppTypography.bodySm
+                                      .copyWith(color: AppColors.textPrimary),
                                 ),
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: alert.severity == FamilyNudgeSeverity.high ? AppColors.error : AppColors.warning,
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  backgroundColor:
+                                      alert.severity == FamilyNudgeSeverity.high
+                                          ? AppColors.error
+                                          : AppColors.warning,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 4),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
                                 ),
                                 onPressed: () {
-                                  ref.read(familyNudgeStatusProvider.notifier).state = 'Sent "${alert.actionText}" to ${alert.targetMemberName} 💪';
+                                  ref
+                                          .read(familyNudgeStatusProvider.notifier)
+                                          .state =
+                                      'Sent "${alert.actionText}" to ${alert.targetMemberName} 💪';
                                 },
-                                child: Text(alert.actionText, style: AppTypography.labelSmall.copyWith(color: Colors.black, fontWeight: FontWeight.bold)),
+                                child: Text(alert.actionText,
+                                    style: AppTypography.labelSmall.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),

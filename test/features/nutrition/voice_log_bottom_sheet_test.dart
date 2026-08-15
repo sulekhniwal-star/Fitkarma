@@ -6,7 +6,8 @@ import 'package:fitkarma/features/nutrition/providers/voice_log_provider.dart';
 import 'package:fitkarma/core/brain/voice_log_service.dart';
 
 void main() {
-  testWidgets('§P16-B VoiceLogBottomSheet renders mic, language picker, and confirms transcribed meal',
+  testWidgets(
+      '§P16-B VoiceLogBottomSheet renders mic, language picker, and confirms transcribed meal',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1200);
     tester.view.devicePixelRatio = 1.0;
@@ -18,7 +19,8 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         speechToTextClientProvider.overrideWithValue(
-          const MockSpeechToTextClient(simulatedTranscript: '2 Paneer Tikka and Roti'),
+          const MockSpeechToTextClient(
+              simulatedTranscript: '2 Paneer Tikka and Roti'),
         ),
       ],
     );

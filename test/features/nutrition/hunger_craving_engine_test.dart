@@ -8,7 +8,9 @@ void main() {
     const engine = HungerCravingEngine();
     final now = DateTime.now();
 
-    test('evaluateCravingRisk triggers 7 PM pre-emptive snacking nudge when late-night stress-binge history is detected', () {
+    test(
+        'evaluateCravingRisk triggers 7 PM pre-emptive snacking nudge when late-night stress-binge history is detected',
+        () {
       final historyLogs = [
         CravingLog(
           timestamp: DateTime(2026, 8, 6, 21, 30), // 9:30 PM
@@ -31,7 +33,9 @@ void main() {
       expect(intervention.recommendedSnack, contains('Greek yogurt'));
     });
 
-    test('evaluateCravingRisk triggers High Hunger Warning when recent hunger score is 5', () {
+    test(
+        'evaluateCravingRisk triggers High Hunger Warning when recent hunger score is 5',
+        () {
       final recentStarvingLog = [
         CravingLog(
           timestamp: now.subtract(const Duration(minutes: 30)),
@@ -54,7 +58,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('AdaptiveHungerCravingsScreen renders sliders, choice chips, and pre-emptive nudge', (tester) async {
+    testWidgets(
+        'AdaptiveHungerCravingsScreen renders sliders, choice chips, and pre-emptive nudge',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(home: AdaptiveHungerCravingsScreen()),
       );

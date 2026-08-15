@@ -159,7 +159,9 @@ class FeedCurationEngine {
       return workout.durationMinutes >= 20 && workout.caloriesBurned > 100;
     }
 
-    if (type == FeedItemType.milestone || type == FeedItemType.transformation || type == FeedItemType.routeShare) {
+    if (type == FeedItemType.milestone ||
+        type == FeedItemType.transformation ||
+        type == FeedItemType.routeShare) {
       return true;
     }
 
@@ -175,7 +177,8 @@ class FeedCurationEngine {
       if (uri.scheme != 'https') return false;
 
       final host = uri.host.toLowerCase();
-      final isWhitelisted = _allowedDomains.any((domain) => host == domain || host.endsWith('.$domain'));
+      final isWhitelisted = _allowedDomains
+          .any((domain) => host == domain || host.endsWith('.$domain'));
       if (!isWhitelisted) return false;
 
       if (uri.queryParameters.containsKey('redirect') ||
@@ -193,7 +196,8 @@ class FeedCurationEngine {
 
   /// Validates route GPX structures and photo sizes to prevent database bloat and abuse
   bool validatePayload(FeedItemPayload payload) {
-    if (payload.imageSizeBytes != null && payload.imageSizeBytes! > maxImageSizeBytes) {
+    if (payload.imageSizeBytes != null &&
+        payload.imageSizeBytes! > maxImageSizeBytes) {
       return false;
     }
 
@@ -253,17 +257,20 @@ class FeedEngagementEngine {
     final hasAlreadyHighFived = item.highFivedUserIds.contains(actionUserId);
 
     if (hasAlreadyHighFived) {
-      final updatedUserIds = List<String>.from(item.highFivedUserIds)..remove(actionUserId);
+      final updatedUserIds = List<String>.from(item.highFivedUserIds)
+        ..remove(actionUserId);
       final updatedItem = item.copyWith(
         highFiveCount: (item.highFiveCount - 1).clamp(0, 9999),
         highFivedUserIds: updatedUserIds,
       );
-      return FeedEngagementResult(updatedItem: updatedItem, xpAwardedToPoster: 0, isCapped: false);
+      return FeedEngagementResult(
+          updatedItem: updatedItem, xpAwardedToPoster: 0, isCapped: false);
     }
 
     // Check Giver daily cap (max 10 high-fives given per day)
     if (giverDailyHighFiveCount >= maxGiverDailyHighFives) {
-      return FeedEngagementResult(updatedItem: item, xpAwardedToPoster: 0, isCapped: true);
+      return FeedEngagementResult(
+          updatedItem: item, xpAwardedToPoster: 0, isCapped: true);
     }
 
     // Calculate poster XP award (capped at 10 XP per day received)

@@ -6,7 +6,7 @@ class GroceryOptimizationEngine {
 
   /// Protein-per-Rupee index mapping (INR per gram of protein)
   static const Map<String, double> proteinCostIndex = {
-    'soya_chunks': 0.15,        // INR per gram of protein
+    'soya_chunks': 0.15, // INR per gram of protein
     'eggs': 0.38,
     'double_toned_curd': 0.45,
     'black_chana': 0.60,
@@ -40,11 +40,13 @@ class GroceryOptimizationEngine {
     double accumulatedCost = 0.0;
 
     for (final item in rawList) {
-      if (item.category == FoodCategory.protein && item.costPerGramOfProtein > 1.0) {
+      if (item.category == FoodCategory.protein &&
+          item.costPerGramOfProtein > 1.0) {
         final substitute = findCheaperProteinSubstitute(item);
         optimizedItems.add(substitute);
         accumulatedCost += substitute.price;
-        swapsApplied.add('Swapped ${item.name} (₹${item.price.round()}) → ${substitute.name} (₹${substitute.price.round()})');
+        swapsApplied.add(
+            'Swapped ${item.name} (₹${item.price.round()}) → ${substitute.name} (₹${substitute.price.round()})');
       } else {
         optimizedItems.add(item);
         accumulatedCost += item.price;
@@ -67,7 +69,8 @@ class GroceryOptimizationEngine {
 
   /// Finds budget-optimized protein substitute maintaining protein yield
   GroceryItem findCheaperProteinSubstitute(GroceryItem expensiveItem) {
-    if (expensiveItem.name.toLowerCase().contains('greek') || expensiveItem.name.toLowerCase().contains('yogurt')) {
+    if (expensiveItem.name.toLowerCase().contains('greek') ||
+        expensiveItem.name.toLowerCase().contains('yogurt')) {
       return GroceryItem(
         id: '${expensiveItem.id}_swap',
         name: 'Double-Toned Curd + Soya Chunks (Budget Swap)',
@@ -78,7 +81,8 @@ class GroceryOptimizationEngine {
       );
     }
 
-    if (expensiveItem.name.toLowerCase().contains('salmon') || expensiveItem.name.toLowerCase().contains('whey')) {
+    if (expensiveItem.name.toLowerCase().contains('salmon') ||
+        expensiveItem.name.toLowerCase().contains('whey')) {
       return GroceryItem(
         id: '${expensiveItem.id}_swap',
         name: 'Paneer & Boiled Eggs Pack (Budget Swap)',

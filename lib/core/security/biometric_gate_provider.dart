@@ -65,7 +65,8 @@ class BiometricGateNotifier extends StateNotifier<BiometricGateState> {
 
   /// Re-locks the gated route/feature
   void resetLock() {
-    state = const BiometricGateState(isUnlocked: false, isAuthenticating: false);
+    state =
+        const BiometricGateState(isUnlocked: false, isAuthenticating: false);
   }
 
   /// Allows explicit unlock during tests

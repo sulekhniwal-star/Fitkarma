@@ -70,8 +70,11 @@ class GamificationEngine {
     }
 
     final int xpInCurrent = totalXp - current.xpRequired;
-    final int xpNeeded = next != null ? (next.xpRequired - current.xpRequired) : 10000;
-    final double ratio = next != null ? (xpInCurrent / xpNeeded.toDouble()).clamp(0.0, 1.0) : 1.0;
+    final int xpNeeded =
+        next != null ? (next.xpRequired - current.xpRequired) : 10000;
+    final double ratio = next != null
+        ? (xpInCurrent / xpNeeded.toDouble()).clamp(0.0, 1.0)
+        : 1.0;
 
     return LevelResult(
       currentLevel: current.level,

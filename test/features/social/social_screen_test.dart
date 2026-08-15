@@ -24,7 +24,8 @@ void main() {
       final notifier = container.read(squadStateProvider.notifier);
 
       notifier.sendSquadNudge('Sneha K.', 'Rest & Recover');
-      expect(container.read(squadStateProvider).nudgeMessage, contains('Sent "Rest & Recover" nudge to Sneha K.'));
+      expect(container.read(squadStateProvider).nudgeMessage,
+          contains('Sent "Rest & Recover" nudge to Sneha K.'));
 
       container.dispose();
     });
@@ -36,7 +37,8 @@ void main() {
       notifier.proposeChallenge('🔥 100,000 Step Squad Challenge');
 
       final state = container.read(squadStateProvider);
-      expect(state.activeMission?.missionTitle, equals('🔥 100,000 Step Squad Challenge'));
+      expect(state.activeMission?.missionTitle,
+          equals('🔥 100,000 Step Squad Challenge'));
       expect(state.nudgeMessage, contains('Proposed new challenge'));
 
       container.dispose();
@@ -44,7 +46,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('SocialScreen renders squad name, streak counter, active mission, member list, and nudge buttons', (tester) async {
+    testWidgets(
+        'SocialScreen renders squad name, streak counter, active mission, member list, and nudge buttons',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: SocialScreen()),
@@ -63,7 +67,8 @@ void main() {
       await tester.tap(find.text('Nudge to Rest'));
       await tester.pumpAndSettle();
 
-      expect(find.textContaining('Sent "Rest & Recover" nudge to Sneha K.'), findsOneWidget);
+      expect(find.textContaining('Sent "Rest & Recover" nudge to Sneha K.'),
+          findsOneWidget);
     });
   });
 }

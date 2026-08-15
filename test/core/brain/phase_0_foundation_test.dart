@@ -19,7 +19,8 @@ void main() {
       final dip = brain.generateDailyPackage(
         userId: 'user_123',
         date: DateTime(2026, 7, 31),
-        checkIn: const MorningCheckIn(energyLevel: 8, muscleSoreness: 2, moodRating: 8),
+        checkIn: const MorningCheckIn(
+            energyLevel: 8, muscleSoreness: 2, moodRating: 8),
         sleepHours: 7.5,
         hrvRatio: 1.05,
         availableMissions: ['Log Morning Meal', '10k Steps', '30m Workout'],
@@ -32,15 +33,20 @@ void main() {
     });
 
     test('AiRouter correctly routes simple, medium, and complex tasks', () {
-      expect(aiRouter.routeTask(TaskComplexity.simpleExtraction), equals(AiModelTier.tiny));
-      expect(aiRouter.routeTask(TaskComplexity.coachingNudge), equals(AiModelTier.medium));
-      expect(aiRouter.routeTask(TaskComplexity.clinicalAnalysis), equals(AiModelTier.large));
+      expect(aiRouter.routeTask(TaskComplexity.simpleExtraction),
+          equals(AiModelTier.tiny));
+      expect(aiRouter.routeTask(TaskComplexity.coachingNudge),
+          equals(AiModelTier.medium));
+      expect(aiRouter.routeTask(TaskComplexity.clinicalAnalysis),
+          equals(AiModelTier.large));
 
       expect(aiRouter.getModelIdentifier(AiModelTier.tiny), contains('8b'));
       expect(aiRouter.getModelIdentifier(AiModelTier.medium), contains('70b'));
     });
 
-    test('Decision Hierarchy prioritizes illness alert over regular progression', () {
+    test(
+        'Decision Hierarchy prioritizes illness alert over regular progression',
+        () {
       const hierarchy = DecisionHierarchy();
       final actions = hierarchy.resolveActions(
         readinessScore: 85,

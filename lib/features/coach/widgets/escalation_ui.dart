@@ -43,8 +43,8 @@ class EscalateToHumanCoachButton extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(right: AppSpacing.sm),
       child: TextButton.icon(
-        icon: const Icon(Icons.support_agent,
-            color: AppColors.warning, size: 16),
+        icon:
+            const Icon(Icons.support_agent, color: AppColors.warning, size: 16),
         label: Text(
           'Human Coach',
           style: AppTypography.labelMd
@@ -52,12 +52,10 @@ class EscalateToHumanCoachButton extends ConsumerWidget {
         ),
         style: TextButton.styleFrom(
           backgroundColor: AppColors.warning.withValues(alpha: 0.12),
-          padding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-                color: AppColors.warning.withValues(alpha: 0.4)),
+            side: BorderSide(color: AppColors.warning.withValues(alpha: 0.4)),
           ),
         ),
         onPressed: () => _showEscalationSheet(context, ref),
@@ -92,136 +90,137 @@ class _EscalationBottomSheet extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-            // Handle bar
-            Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.only(bottom: AppSpacing.lg),
-              decoration: BoxDecoration(
-                color: AppColors.glassBorder,
-                borderRadius: BorderRadius.circular(2),
+              // Handle bar
+              Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+                decoration: BoxDecoration(
+                  color: AppColors.glassBorder,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
 
-            // Elite badge
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.warning.withValues(alpha: 0.2),
-                    AppColors.accent.withValues(alpha: 0.1),
+              // Elite badge
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.warning.withValues(alpha: 0.2),
+                      AppColors.accent.withValues(alpha: 0.1),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                      color: AppColors.warning.withValues(alpha: 0.4)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.star, color: AppColors.warning, size: 14),
+                    const SizedBox(width: 5),
+                    Text('ELITE TIER FEATURE',
+                        style: AppTypography.labelMd
+                            .copyWith(color: AppColors.warning, fontSize: 10)),
                   ],
                 ),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                    color: AppColors.warning.withValues(alpha: 0.4)),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.star, color: AppColors.warning, size: 14),
-                  const SizedBox(width: 5),
-                  Text('ELITE TIER FEATURE',
-                      style: AppTypography.labelMd
-                          .copyWith(color: AppColors.warning, fontSize: 10)),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpacing.lg),
+              const SizedBox(height: AppSpacing.lg),
 
-            // Coach icon
-            Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppColors.warning.withValues(alpha: 0.3),
-                    AppColors.warning.withValues(alpha: 0.05),
-                  ],
+              // Coach icon
+              Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      AppColors.warning.withValues(alpha: 0.3),
+                      AppColors.warning.withValues(alpha: 0.05),
+                    ],
+                  ),
+                  border: Border.all(
+                      color: AppColors.warning.withValues(alpha: 0.4)),
                 ),
-                border:
-                    Border.all(color: AppColors.warning.withValues(alpha: 0.4)),
+                child: const Icon(Icons.support_agent,
+                    color: AppColors.warning, size: 32),
               ),
-              child: const Icon(Icons.support_agent,
-                  color: AppColors.warning, size: 32),
-            ),
-            const SizedBox(height: AppSpacing.md),
+              const SizedBox(height: AppSpacing.md),
 
-            // Title
-            Text(
-              'Talk to a Human Coach',
-              style: AppTypography.h2,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AppSpacing.sm),
-
-            // Description
-            Text(
-              'Your health coach will review your full plan and respond within 24 hours via in-app message.',
-              style: AppTypography.bodyMd.copyWith(height: 1.6),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AppSpacing.lg),
-
-            // What gets shared
-            _WhatGetsSharedCard(),
-            const SizedBox(height: AppSpacing.xl),
-
-            // Error
-            if (state.errorMessage != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                child: Text(
-                  state.errorMessage!,
-                  style:
-                      AppTypography.bodyMd.copyWith(color: AppColors.error),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-
-            // CTA buttons
-            if (state.isPending)
-              const _LoadingButton()
-            else ...[
-              SizedBox(
-                width: double.infinity,
-                child: _RequestReviewButton(
-                  onTap: () async {
-                    await ref
-                        .read(escalationProvider.notifier)
-                        .requestHumanCoach(
-                          userId: 'user_current',
-                          userName: 'You',
-                        );
-                    if (context.mounted) Navigator.pop(context);
-                  },
-                ),
+              // Title
+              Text(
+                'Talk to a Human Coach',
+                style: AppTypography.h2,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppSpacing.sm),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    side: const BorderSide(color: AppColors.glassBorder),
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(AppSpacing.buttonRadius),
-                    ),
-                  ),
+
+              // Description
+              Text(
+                'Your health coach will review your full plan and respond within 24 hours via in-app message.',
+                style: AppTypography.bodyMd.copyWith(height: 1.6),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: AppSpacing.lg),
+
+              // What gets shared
+              _WhatGetsSharedCard(),
+              const SizedBox(height: AppSpacing.xl),
+
+              // Error
+              if (state.errorMessage != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: AppSpacing.md),
                   child: Text(
-                    'Continue with AI Coach',
+                    state.errorMessage!,
                     style:
-                        AppTypography.bodyMd.copyWith(color: AppColors.textSecondary),
+                        AppTypography.bodyMd.copyWith(color: AppColors.error),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-            ],
-            const SizedBox(height: AppSpacing.md),
+
+              // CTA buttons
+              if (state.isPending)
+                const _LoadingButton()
+              else ...[
+                SizedBox(
+                  width: double.infinity,
+                  child: _RequestReviewButton(
+                    onTap: () async {
+                      await ref
+                          .read(escalationProvider.notifier)
+                          .requestHumanCoach(
+                            userId: 'user_current',
+                            userName: 'You',
+                          );
+                      if (context.mounted) Navigator.pop(context);
+                    },
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      side: const BorderSide(color: AppColors.glassBorder),
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(AppSpacing.buttonRadius),
+                      ),
+                    ),
+                    child: Text(
+                      'Continue with AI Coach',
+                      style: AppTypography.bodyMd
+                          .copyWith(color: AppColors.textSecondary),
+                    ),
+                  ),
+                ),
+              ],
+              const SizedBox(height: AppSpacing.md),
             ],
           ),
         ),
@@ -245,7 +244,8 @@ class _WhatGetsSharedCard extends StatelessWidget {
         children: [
           Text(
             'What your coach will receive:',
-            style: AppTypography.labelLg.copyWith(color: AppColors.textSecondary),
+            style:
+                AppTypography.labelLg.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.sm),
           ...[
@@ -364,8 +364,8 @@ class EscalationSuccessBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(result.userNotificationTitle,
-                    style:
-                        AppTypography.labelLg.copyWith(color: AppColors.success)),
+                    style: AppTypography.labelLg
+                        .copyWith(color: AppColors.success)),
                 Text(result.userNotificationBody, style: AppTypography.bodyMd),
               ],
             ),

@@ -32,7 +32,8 @@ class BentoCard extends StatefulWidget {
   State<BentoCard> createState() => _BentoCardState();
 }
 
-class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMixin {
+class _BentoCardState extends State<BentoCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -62,7 +63,8 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
     Widget cardBody = ClipRRect(
       borderRadius: BorderRadius.circular(widget.borderRadius),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: widget.blurRadius, sigmaY: widget.blurRadius),
+        filter: ImageFilter.blur(
+            sigmaX: widget.blurRadius, sigmaY: widget.blurRadius),
         child: Container(
           width: widget.width,
           height: widget.height,
@@ -74,7 +76,7 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
               color: AppColors.glassBorder,
               width: 1.0,
             ),
-            boxShadow: widget.hasSecondaryGlow 
+            boxShadow: widget.hasSecondaryGlow
                 ? [
                     const BoxShadow(
                       color: AppColors.primaryMuted,

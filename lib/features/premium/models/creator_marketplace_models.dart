@@ -70,7 +70,8 @@ class CoachClientAssignment {
   final String clientUserId;
   final DateTime activeFrom;
   final DateTime? activeUntil;
-  final bool hasWritePermission; // Allows the coach to override client's Daily Targets
+  final bool
+      hasWritePermission; // Allows the coach to override client's Daily Targets
 
   const CoachClientAssignment({
     required this.assignmentId,

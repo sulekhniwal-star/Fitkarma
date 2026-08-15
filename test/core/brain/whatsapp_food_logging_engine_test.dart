@@ -25,10 +25,13 @@ void main() {
 
       expect(result.isSuccess, isFalse);
       expect(result.isOptInError, isTrue);
-      expect(result.responseMessage, contains("isn't linked to a FitKarma account"));
+      expect(result.responseMessage,
+          contains("isn't linked to a FitKarma account"));
     });
 
-    test('Parses text meal description for opted-in user and creates formatted reply', () {
+    test(
+        'Parses text meal description for opted-in user and creates formatted reply',
+        () {
       final payload = WhatsAppMessagePayload(
         senderPhone: '+919876543210',
         type: WhatsAppMessageType.text,
@@ -78,10 +81,12 @@ void main() {
       expect(result.foodSummary, contains('Dal Tadka'));
       expect(result.calories, equals(450));
       expect(result.proteinG, equals(16.0));
-      expect(result.responseMessage, contains('Logged: Dal Tadka, 2 Roti, Sabzi — 450 kcal, 16g protein'));
+      expect(result.responseMessage,
+          contains('Logged: Dal Tadka, 2 Roti, Sabzi — 450 kcal, 16g protein'));
     });
 
-    test('WhatsAppNotifier links, unlinks, and tracks logged count accurately', () {
+    test('WhatsAppNotifier links, unlinks, and tracks logged count accurately',
+        () {
       final notifier = WhatsAppNotifier();
 
       expect(notifier.state.isOptedIn, isFalse);

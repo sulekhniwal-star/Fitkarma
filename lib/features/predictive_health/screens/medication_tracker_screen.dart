@@ -44,7 +44,8 @@ final proposedWorkoutLevelProvider = Provider<WorkoutIntensityLevel>((ref) {
   return WorkoutIntensityLevel.high;
 });
 
-final activeInteractionWarningsProvider = Provider<List<InteractionWarning>>((ref) {
+final activeInteractionWarningsProvider =
+    Provider<List<InteractionWarning>>((ref) {
   final service = const RxNavInteractionService();
   final meds = ref.watch(medicationListProvider);
   final meal = ref.watch(currentMealSnapshotProvider);
@@ -68,7 +69,8 @@ class MedicationTrackerScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('💊 Medication Tracker', style: AppTypography.h2),
@@ -77,7 +79,8 @@ class MedicationTrackerScreen extends ConsumerWidget {
             icon: const Icon(Icons.add_task, color: AppColors.primary),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Adding new scheduled medication...')),
+                const SnackBar(
+                    content: Text('Adding new scheduled medication...')),
               );
             },
           ),
@@ -91,7 +94,8 @@ class MedicationTrackerScreen extends ConsumerWidget {
             children: [
               // Active Warnings Section
               if (warnings.isNotEmpty) ...[
-                Text('⚠️ Interaction Warnings (Real-Time)', style: AppTypography.h3),
+                Text('⚠️ Interaction Warnings (Real-Time)',
+                    style: AppTypography.h3),
                 const SizedBox(height: AppSpacing.sm),
                 for (final warn in warnings)
                   Padding(
@@ -118,14 +122,19 @@ class MedicationTrackerScreen extends ConsumerWidget {
                               Text(
                                 '${warn.severity == InteractionSeverity.high ? "🔴 High Conflict" : "🟡 Moderate Conflict"}: ${warn.sourceMedication}',
                                 style: AppTypography.labelLg.copyWith(
-                                  color: warn.severity == InteractionSeverity.high ? AppColors.error : AppColors.warning,
+                                  color:
+                                      warn.severity == InteractionSeverity.high
+                                          ? AppColors.error
+                                          : AppColors.warning,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 6),
-                          Text(warn.message, style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary)),
+                          Text(warn.message,
+                              style: AppTypography.bodySm
+                                  .copyWith(color: AppColors.textPrimary)),
                         ],
                       ),
                     ),
@@ -143,28 +152,39 @@ class MedicationTrackerScreen extends ConsumerWidget {
                   child: BentoCard(
                     child: Row(
                       children: [
-                        const Icon(Icons.medication_liquid_outlined, color: AppColors.primary, size: 28),
+                        const Icon(Icons.medication_liquid_outlined,
+                            color: AppColors.primary, size: 28),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(med.medicationName, style: AppTypography.labelLg),
+                              Text(med.medicationName,
+                                  style: AppTypography.labelLg),
                               const SizedBox(height: 2),
-                              Text('Dosage: ${med.dosage} • Times: ${med.scheduledTimes.join(", ")}', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                              Text(
+                                  'Dosage: ${med.dosage} • Times: ${med.scheduledTimes.join(", ")}',
+                                  style: AppTypography.bodySm.copyWith(
+                                      color: AppColors.textSecondary)),
                               if (med.requiresFood)
-                                Text('• Take with food', style: AppTypography.labelSmall.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold)),
+                                Text('• Take with food',
+                                    style: AppTypography.labelSmall.copyWith(
+                                        color: AppColors.teal,
+                                        fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
                         if (med.rxcui != null)
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
                               color: AppColors.bg1,
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Text('RxCUI: ${med.rxcui}', style: AppTypography.labelSmall.copyWith(color: AppColors.textMuted, fontSize: 10)),
+                            child: Text('RxCUI: ${med.rxcui}',
+                                style: AppTypography.labelSmall.copyWith(
+                                    color: AppColors.textMuted, fontSize: 10)),
                           ),
                       ],
                     ),
@@ -178,12 +198,14 @@ class MedicationTrackerScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
-                    const Icon(Icons.cloud_done_outlined, color: AppColors.teal, size: 20),
+                    const Icon(Icons.cloud_done_outlined,
+                        color: AppColors.teal, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'NIH RxNav Service Active: Local Indian brand dictionary mapped to RxNorm concept IDs.',
-                        style: AppTypography.bodySm.copyWith(color: AppColors.teal, fontSize: 11),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.teal, fontSize: 11),
                       ),
                     ),
                   ],

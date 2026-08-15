@@ -35,11 +35,14 @@ class _QuickLogFabState extends State<QuickLogFab> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         if (_isOpen) ...[
-          _buildOptionFab(Icons.local_hospital, 'Water', widget.onLogWater, AppColors.infoBlue),
+          _buildOptionFab(Icons.local_hospital, 'Water', widget.onLogWater,
+              AppColors.infoBlue),
           const SizedBox(height: AppSpacing.sm),
-          _buildOptionFab(Icons.fitness_center, 'Workout', widget.onLogWorkout, AppColors.primaryEmerald),
+          _buildOptionFab(Icons.fitness_center, 'Workout', widget.onLogWorkout,
+              AppColors.primaryEmerald),
           const SizedBox(height: AppSpacing.sm),
-          _buildOptionFab(Icons.restaurant, 'Food', widget.onLogFood, AppColors.warningAmber),
+          _buildOptionFab(Icons.restaurant, 'Food', widget.onLogFood,
+              AppColors.warningAmber),
           const SizedBox(height: AppSpacing.md),
         ],
         FloatingActionButton(
@@ -53,7 +56,8 @@ class _QuickLogFabState extends State<QuickLogFab> {
     );
   }
 
-  Widget _buildOptionFab(IconData icon, String tooltip, VoidCallback onTap, Color color) {
+  Widget _buildOptionFab(
+      IconData icon, String tooltip, VoidCallback onTap, Color color) {
     return FloatingActionButton.small(
       heroTag: tooltip,
       backgroundColor: color,

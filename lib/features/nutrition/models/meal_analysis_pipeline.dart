@@ -36,7 +36,8 @@ class FullMealAnalysisResult {
 class MealAnalysisPipeline {
   final NutritionEngine _nutritionEngine;
 
-  const MealAnalysisPipeline({NutritionEngine nutritionEngine = const NutritionEngine()})
+  const MealAnalysisPipeline(
+      {NutritionEngine nutritionEngine = const NutritionEngine()})
       : _nutritionEngine = nutritionEngine;
 
   /// Executes the 5-stage end-to-end Meal Analysis Pipeline:
@@ -67,20 +68,25 @@ class MealAnalysisPipeline {
     final suggestions = <String>[];
 
     if (protein < 12.0) {
-      suggestions.add('Add 100g Paneer or 2 boiled eggs (+14g protein) to meet meal protein target.');
+      suggestions.add(
+          'Add 100g Paneer or 2 boiled eggs (+14g protein) to meet meal protein target.');
     }
     if (foodItem.glycemicIndex > 60.0) {
-      suggestions.add('Pair with a green salad or cucumber slices (+4g fiber) to blunt glucose spike.');
+      suggestions.add(
+          'Pair with a green salad or cucumber slices (+4g fiber) to blunt glucose spike.');
     }
     if (fat > 18.0 && userGoal == 'Fat Loss') {
-      suggestions.add('Reduce added ghee/butter topping by half to save ~80 kcal.');
+      suggestions
+          .add('Reduce added ghee/butter topping by half to save ~80 kcal.');
     }
     if (foodItem.satietyIndex < 60.0) {
-      suggestions.add('Include a bowl of curd or buttermilk (chhaach) to boost satiety duration.');
+      suggestions.add(
+          'Include a bowl of curd or buttermilk (chhaach) to boost satiety duration.');
     }
 
     if (suggestions.isEmpty) {
-      suggestions.add('Great meal balance! No immediate adjustments needed for your $userGoal goal.');
+      suggestions.add(
+          'Great meal balance! No immediate adjustments needed for your $userGoal goal.');
     }
 
     return FullMealAnalysisResult(

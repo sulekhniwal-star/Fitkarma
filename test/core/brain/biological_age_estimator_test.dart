@@ -5,7 +5,8 @@ void main() {
   group('§P10-B Biological Age Estimator Tests', () {
     const estimator = BiologicalAgeEstimator();
 
-    test('estimate computes younger biological age for optimal health inputs', () {
+    test('estimate computes younger biological age for optimal health inputs',
+        () {
       const inputs = BiologicalAgeInputs(
         chronologicalAge: 32,
         restingHeartRateBpm: 56.0,
@@ -22,7 +23,8 @@ void main() {
       expect(result.biologicalAge, lessThan(32.0));
       expect(result.ageDeltaYears, lessThan(0.0));
       expect(result.positiveContributors, contains('High HRV (≥65 ms)'));
-      expect(result.positiveContributors, contains('Low Resting Heart Rate (<60 bpm)'));
+      expect(result.positiveContributors,
+          contains('Low Resting Heart Rate (<60 bpm)'));
     });
 
     test('estimate computes older biological age for sub-optimal inputs', () {
@@ -41,7 +43,8 @@ void main() {
       expect(result.chronologicalAge, equals(40));
       expect(result.biologicalAge, greaterThan(40.0));
       expect(result.ageDeltaYears, greaterThan(0.0));
-      expect(result.riskFactors, contains('Elevated Resting Heart Rate (>75 bpm)'));
+      expect(result.riskFactors,
+          contains('Elevated Resting Heart Rate (>75 bpm)'));
       expect(result.riskFactors, contains('Elevated BMI (≥27.0)'));
     });
   });

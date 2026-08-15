@@ -1,4 +1,10 @@
-enum PeriodizationPhase { fatLoss, dietBreak, maintenance, recomposition, leanGain }
+enum PeriodizationPhase {
+  fatLoss,
+  dietBreak,
+  maintenance,
+  recomposition,
+  leanGain
+}
 
 extension PeriodizationPhaseInfo on PeriodizationPhase {
   String get displayName {
@@ -84,17 +90,20 @@ class PeriodizationController {
         currentPhase: currentPhase,
         nextPhase: PeriodizationPhase.dietBreak,
         actionRequired: true,
-        reason: 'Deficit active for 8+ weeks. Triggering a 10-day Diet Break to restore leptin and prevent metabolic adaptation.',
+        reason:
+            'Deficit active for 8+ weeks. Triggering a 10-day Diet Break to restore leptin and prevent metabolic adaptation.',
       );
     }
 
     // Rule 2: If weight plateau detected during Fat Loss (variance < 200g over 3 weeks)
-    if (currentPhase == PeriodizationPhase.fatLoss && isPlateaued(weightHistory, durationWeeks: 3)) {
+    if (currentPhase == PeriodizationPhase.fatLoss &&
+        isPlateaued(weightHistory, durationWeeks: 3)) {
       return PeriodizationStatus(
         currentPhase: currentPhase,
         nextPhase: PeriodizationPhase.dietBreak,
         actionRequired: true,
-        reason: 'Plateau detected (no weight change in 3 weeks). Exiting deficit to maintenance for 7 days to reset metabolism.',
+        reason:
+            'Plateau detected (no weight change in 3 weeks). Exiting deficit to maintenance for 7 days to reset metabolism.',
       );
     }
 
@@ -104,7 +113,8 @@ class PeriodizationController {
         currentPhase: currentPhase,
         nextPhase: PeriodizationPhase.fatLoss,
         actionRequired: true,
-        reason: 'Diet Break completed (2 weeks). Resuming Fat Loss phase with refreshed metabolic rate.',
+        reason:
+            'Diet Break completed (2 weeks). Resuming Fat Loss phase with refreshed metabolic rate.',
       );
     }
 
@@ -120,9 +130,13 @@ class PeriodizationController {
     if (logs.length < 5) return false;
 
     // Sort descending by date
-    final sorted = List<WeightLog>.from(logs)..sort((a, b) => b.loggedAt.compareTo(a.loggedAt));
+    final sorted = List<WeightLog>.from(logs)
+      ..sort((a, b) => b.loggedAt.compareTo(a.loggedAt));
     final cutoff = DateTime.now().subtract(Duration(days: durationWeeks * 7));
-    final recentLogs = sorted.where((l) => l.loggedAt.isAfter(cutoff)).map((l) => l.weightKg).toList();
+    final recentLogs = sorted
+        .where((l) => l.loggedAt.isAfter(cutoff))
+        .map((l) => l.weightKg)
+        .toList();
 
     if (recentLogs.length < 3) return false;
 

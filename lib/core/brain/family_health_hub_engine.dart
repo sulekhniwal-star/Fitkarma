@@ -4,9 +4,9 @@ enum HealthRiskType { hypertension, glycemicInstability, lowProtein, sedentary }
 
 class FamilyPrivacyConsent {
   final bool shareHealthScore; // Default: true
-  final bool shareSteps;       // Default: true
-  final bool shareWeight;      // Default: false
-  final bool shareClinicalData;// Default: false (always)
+  final bool shareSteps; // Default: true
+  final bool shareWeight; // Default: false
+  final bool shareClinicalData; // Default: false (always)
 
   const FamilyPrivacyConsent({
     this.shareHealthScore = true,
@@ -97,22 +97,26 @@ class FamilyHealthHubEngine {
 
     for (final member in members) {
       // 1. High-risk hypertension BP check reminder (> 2 days ago)
-      if (member.activeRisks.contains(HealthRiskType.hypertension) && member.bpCheckDaysAgo > 2) {
+      if (member.activeRisks.contains(HealthRiskType.hypertension) &&
+          member.bpCheckDaysAgo > 2) {
         nudges.add(FamilyNudge(
           targetMemberId: member.id,
           targetMemberName: member.firstName,
-          message: '🔴 ${member.firstName} (Dad): BP elevated ${member.bpCheckDaysAgo} days — remind him to check tomorrow',
+          message:
+              '🔴 ${member.firstName} (Dad): BP elevated ${member.bpCheckDaysAgo} days — remind him to check tomorrow',
           actionText: 'Send BP Reminder',
           severity: FamilyNudgeSeverity.high,
         ));
       }
 
       // 2. Low protein alert (4+ days deficit)
-      if (member.activeRisks.contains(HealthRiskType.lowProtein) && member.lowProteinDays >= 4) {
+      if (member.activeRisks.contains(HealthRiskType.lowProtein) &&
+          member.lowProteinDays >= 4) {
         nudges.add(FamilyNudge(
           targetMemberId: member.id,
           targetMemberName: member.firstName,
-          message: '🟡 ${member.firstName}: Protein low ${member.lowProteinDays} days — suggest adding eggs or paneer',
+          message:
+              '🟡 ${member.firstName}: Protein low ${member.lowProteinDays} days — suggest adding eggs or paneer',
           actionText: 'Suggest Protein Snack',
           severity: FamilyNudgeSeverity.moderate,
         ));
@@ -130,7 +134,8 @@ class FamilyHealthHubEngine {
     return {
       'firstName': member.firstName,
       'age': member.age,
-      'healthScore': member.consent.shareHealthScore ? member.healthScore : null,
+      'healthScore':
+          member.consent.shareHealthScore ? member.healthScore : null,
       'stepsToday': member.consent.shareSteps ? member.stepsToday : null,
       'isWeightHidden': isMinor || !member.consent.shareWeight,
       'isClinicalHidden': !member.consent.shareClinicalData,

@@ -72,7 +72,8 @@ class LongevityScoreCalculator {
 
   LongevityResult calculate(LongevityInputData data) {
     // 1. VO2Max Score (25% weight)
-    final vo2maxScore = _scoreVO2Max(data.estimatedVO2Max, data.age, data.gender);
+    final vo2maxScore =
+        _scoreVO2Max(data.estimatedVO2Max, data.age, data.gender);
 
     // 2. Body Composition Score (15% weight)
     final bodyFatScore = _scoreBodyFat(data.bodyFatPct, data.gender);
@@ -89,16 +90,15 @@ class LongevityScoreCalculator {
         : 75.0;
 
     // 6. Cardiovascular Efficiency Score (10% weight)
-    final cardioScore = _scoreCardio(data.restingHR, data.hrv, data.baselineHRV);
+    final cardioScore =
+        _scoreCardio(data.restingHR, data.hrv, data.baselineHRV);
 
-    final rawLongevityScore = (
-      vo2maxScore * 0.25 +
-      bodyFatScore * 0.15 +
-      sleepScore * 0.20 +
-      activityScore * 0.15 +
-      biomarkerScore * 0.15 +
-      cardioScore * 0.10
-    );
+    final rawLongevityScore = (vo2maxScore * 0.25 +
+        bodyFatScore * 0.15 +
+        sleepScore * 0.20 +
+        activityScore * 0.15 +
+        biomarkerScore * 0.15 +
+        cardioScore * 0.10);
 
     final longevityScore = rawLongevityScore.round().clamp(0, 100);
 
@@ -194,7 +194,8 @@ class LongevityScoreCalculator {
       'Biomarkers': biomarkerScore,
     };
 
-    final lowestEntry = scores.entries.reduce((a, b) => a.value < b.value ? a : b);
+    final lowestEntry =
+        scores.entries.reduce((a, b) => a.value < b.value ? a : b);
     return '${lowestEntry.key}: Improving this metric would add +3 points and improve your biological age by ~1 year.';
   }
 }

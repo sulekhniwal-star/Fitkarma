@@ -120,7 +120,9 @@ class AbhaIntegrationEngine {
           'value': profile.abhaAddress,
         },
       ],
-      'name': [{'text': reportSummary.patientName}],
+      'name': [
+        {'text': reportSummary.patientName}
+      ],
     };
 
     final observations = <Map<String, dynamic>>[
@@ -131,17 +133,27 @@ class AbhaIntegrationEngine {
         'status': 'final',
         'code': {
           'coding': [
-            {'system': 'http://loinc.org', 'code': '85354-9', 'display': 'Blood pressure panel'}
+            {
+              'system': 'http://loinc.org',
+              'code': '85354-9',
+              'display': 'Blood pressure panel'
+            }
           ]
         },
         'component': [
           {
             'code': {'text': 'Systolic'},
-            'valueQuantity': {'value': reportSummary.averageSystolicBp, 'unit': 'mmHg'}
+            'valueQuantity': {
+              'value': reportSummary.averageSystolicBp,
+              'unit': 'mmHg'
+            }
           },
           {
             'code': {'text': 'Diastolic'},
-            'valueQuantity': {'value': reportSummary.averageDiastolicBp, 'unit': 'mmHg'}
+            'valueQuantity': {
+              'value': reportSummary.averageDiastolicBp,
+              'unit': 'mmHg'
+            }
           },
         ],
       },
@@ -152,7 +164,11 @@ class AbhaIntegrationEngine {
         'status': 'final',
         'code': {
           'coding': [
-            {'system': 'http://loinc.org', 'code': '1558-6', 'display': 'Fasting Glucose'}
+            {
+              'system': 'http://loinc.org',
+              'code': '1558-6',
+              'display': 'Fasting Glucose'
+            }
           ]
         },
         'valueQuantity': {

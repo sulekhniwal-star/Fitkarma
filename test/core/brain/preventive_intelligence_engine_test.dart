@@ -2,7 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fitkarma/core/brain/preventive_intelligence_engine.dart';
 
 void main() {
-  group('PreventiveIntelligenceEngine 6 Risk Patterns & Trend Analysis Test', () {
+  group('PreventiveIntelligenceEngine 6 Risk Patterns & Trend Analysis Test',
+      () {
     const engine = PreventiveIntelligenceEngine();
 
     test('Pattern 1: Hypertension risk triggers on elevated BP', () {
@@ -18,10 +19,13 @@ void main() {
       );
 
       expect(alerts.any((a) => a.id == 'p1_hypertension'), isTrue);
-      expect(alerts.firstWhere((a) => a.id == 'p1_hypertension').actions, isNotEmpty);
+      expect(alerts.firstWhere((a) => a.id == 'p1_hypertension').actions,
+          isNotEmpty);
     });
 
-    test('Pattern 1 Override: Hypertension risk triggers on multi-factor trend alignment', () {
+    test(
+        'Pattern 1 Override: Hypertension risk triggers on multi-factor trend alignment',
+        () {
       final snapshot = UserHealthDataSnapshot(
         bpTrend: TrendDirection.rising,
         sleepTrend: TrendDirection.declining,
@@ -39,7 +43,9 @@ void main() {
       expect(alert.actions, contains('Log a 20-min walk'));
     });
 
-    test('Pattern 2: Glycemic instability triggers on postprandial glucose spike', () {
+    test(
+        'Pattern 2: Glycemic instability triggers on postprandial glucose spike',
+        () {
       final alerts = engine.evaluateRiskPatterns(
         systolicBp: 120.0,
         diastolicBp: 80.0,
@@ -54,7 +60,9 @@ void main() {
       expect(alerts.any((a) => a.id == 'p2_glycemic'), isTrue);
     });
 
-    test('Pattern 2 Override: Type 2 Diabetes pattern triggers on rising glucose + BMI >= 27 + low steps', () {
+    test(
+        'Pattern 2 Override: Type 2 Diabetes pattern triggers on rising glucose + BMI >= 27 + low steps',
+        () {
       final snapshot = UserHealthDataSnapshot(
         glucoseTrend: TrendDirection.rising,
         bmi: 28.5,
@@ -129,10 +137,13 @@ void main() {
       );
 
       expect(alerts.any((a) => a.id == 'p6_rhr_spike'), isTrue);
-      expect(alerts.firstWhere((a) => a.id == 'p6_rhr_spike').severity, equals(RiskSeverity.critical));
+      expect(alerts.firstWhere((a) => a.id == 'p6_rhr_spike').severity,
+          equals(RiskSeverity.critical));
     });
 
-    test('§P10-A Risk 3: Heart Disease risk triggers on elevated HR + BP + poor sleep', () {
+    test(
+        '§P10-A Risk 3: Heart Disease risk triggers on elevated HR + BP + poor sleep',
+        () {
       final snapshot = UserHealthDataSnapshot(
         rhrSpikeBpm: 6,
         systolicBp: 138.0,
@@ -141,10 +152,13 @@ void main() {
 
       final alerts = engine.analyze(snapshot);
       expect(alerts.any((a) => a.id == 'p3_heart_disease'), isTrue);
-      expect(alerts.firstWhere((a) => a.id == 'p3_heart_disease').severity, equals(RiskSeverity.high));
+      expect(alerts.firstWhere((a) => a.id == 'p3_heart_disease').severity,
+          equals(RiskSeverity.high));
     });
 
-    test('§P10-A Risk 4: Metabolic Syndrome risk triggers when 3+ risk factors present', () {
+    test(
+        '§P10-A Risk 4: Metabolic Syndrome risk triggers when 3+ risk factors present',
+        () {
       final snapshot = UserHealthDataSnapshot(
         systolicBp: 135.0,
         fastingGlucoseMgDl: 105.0,
@@ -155,7 +169,9 @@ void main() {
       expect(alerts.any((a) => a.id == 'p4_metabolic_syndrome'), isTrue);
     });
 
-    test('§P10-A Risk 5: Burnout / Overtraining risk triggers on HRV drop + elevated HR + sleep decline', () {
+    test(
+        '§P10-A Risk 5: Burnout / Overtraining risk triggers on HRV drop + elevated HR + sleep decline',
+        () {
       final snapshot = UserHealthDataSnapshot(
         hrvDropRatio: 0.22,
         rhrSpikeBpm: 6,
@@ -164,10 +180,13 @@ void main() {
 
       final alerts = engine.analyze(snapshot);
       expect(alerts.any((a) => a.id == 'p5_burnout'), isTrue);
-      expect(alerts.firstWhere((a) => a.id == 'p5_burnout').severity, equals(RiskSeverity.critical));
+      expect(alerts.firstWhere((a) => a.id == 'p5_burnout').severity,
+          equals(RiskSeverity.critical));
     });
 
-    test('§P10-A Risk 6: Vitamin D Deficiency risk triggers on low outdoor steps + 5+ sedentary days', () {
+    test(
+        '§P10-A Risk 6: Vitamin D Deficiency risk triggers on low outdoor steps + 5+ sedentary days',
+        () {
       final snapshot = UserHealthDataSnapshot(
         stepAvg7d: 3200,
         consecutiveSedentaryDays: 6,

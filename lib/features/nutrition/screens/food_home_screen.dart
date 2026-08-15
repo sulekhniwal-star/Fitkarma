@@ -24,7 +24,8 @@ class FoodHomeScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Smart Indian Nutrition', style: AppTypography.h2),
@@ -40,7 +41,8 @@ class FoodHomeScreen extends ConsumerWidget {
 
             // ── 2. Rule-Based Protein Deficit Alert Banner ───────────────────
             if (state.isProteinDeficit) ...[
-              _ProteinDeficitAlertCard(alertText: engine.generateProteinAlertText()),
+              _ProteinDeficitAlertCard(
+                  alertText: engine.generateProteinAlertText()),
               const SizedBox(height: AppSpacing.lg),
             ],
 
@@ -52,7 +54,9 @@ class FoodHomeScreen extends ConsumerWidget {
                   type: sectionType,
                   entries: state.getMealsForSection(sectionType),
                   isExpanded: state.sectionExpanded[sectionType] ?? true,
-                  onToggle: () => ref.read(nutritionProvider.notifier).toggleSection(sectionType),
+                  onToggle: () => ref
+                      .read(nutritionProvider.notifier)
+                      .toggleSection(sectionType),
                   onAddFood: () => _showAddFoodModal(context, ref, sectionType),
                 ),
               ),
@@ -61,7 +65,8 @@ class FoodHomeScreen extends ConsumerWidget {
 
             // ── 4. DIP Nutrition Focus Insight Card ──────────────────────────
             if (state.dipNutritionFocus != null)
-              _DipNutritionFocusInsightCard(focusMessage: state.dipNutritionFocus!),
+              _DipNutritionFocusInsightCard(
+                  focusMessage: state.dipNutritionFocus!),
 
             const SizedBox(height: 40),
           ],
@@ -70,13 +75,15 @@ class FoodHomeScreen extends ConsumerWidget {
     );
   }
 
-  void _showAddFoodModal(BuildContext context, WidgetRef ref, MealType sectionType) {
+  void _showAddFoodModal(
+      BuildContext context, WidgetRef ref, MealType sectionType) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface0,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
       ),
       builder: (ctx) {
         return Container(
@@ -85,7 +92,8 @@ class FoodHomeScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Log Food to ${sectionType.displayName}', style: AppTypography.h3),
+              Text('Log Food to ${sectionType.displayName}',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.md),
               Expanded(
                 child: ListView.builder(
@@ -99,7 +107,8 @@ class FoodHomeScreen extends ConsumerWidget {
                         style: AppTypography.bodySm,
                       ),
                       trailing: IconButton(
-                        icon: const Icon(Icons.add_circle, color: AppColors.primary),
+                        icon: const Icon(Icons.add_circle,
+                            color: AppColors.primary),
                         onPressed: () {
                           ref.read(nutritionProvider.notifier).logMeal(
                                 type: sectionType,
@@ -130,7 +139,8 @@ class _TodayNutritionSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final calorieRatio = (state.totalCalories / state.targetCalories).clamp(0.0, 1.0);
+    final calorieRatio =
+        (state.totalCalories / state.targetCalories).clamp(0.0, 1.0);
     final isProteinLow = state.isProteinDeficit;
     final proteinColor = isProteinLow ? AppColors.error : AppColors.success;
 
@@ -154,13 +164,16 @@ class _TodayNutritionSummaryCard extends StatelessWidget {
                       value: calorieRatio,
                       strokeWidth: 8,
                       backgroundColor: AppColors.surface2,
-                      valueColor: const AlwaysStoppedAnimation(AppColors.primary),
+                      valueColor:
+                          const AlwaysStoppedAnimation(AppColors.primary),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('${state.totalCalories.round()}', style: AppTypography.h3),
-                        Text('/${state.targetCalories.round()} kcal', style: AppTypography.bodySm.copyWith(fontSize: 9)),
+                        Text('${state.totalCalories.round()}',
+                            style: AppTypography.h3),
+                        Text('/${state.targetCalories.round()} kcal',
+                            style: AppTypography.bodySm.copyWith(fontSize: 9)),
                       ],
                     ),
                   ],
@@ -237,7 +250,11 @@ class _MacroProgressBar extends StatelessWidget {
               ),
             ),
             if (isAlert)
-              Text('LOW', style: AppTypography.bodySm.copyWith(color: AppColors.error, fontSize: 9, fontWeight: FontWeight.bold)),
+              Text('LOW',
+                  style: AppTypography.bodySm.copyWith(
+                      color: AppColors.error,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold)),
           ],
         ),
         const SizedBox(height: 3),
@@ -272,12 +289,14 @@ class _ProteinDeficitAlertCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 22),
+          const Icon(Icons.warning_amber_rounded,
+              color: AppColors.error, size: 22),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               alertText,
-              style: AppTypography.bodyMd.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.w500),
+              style: AppTypography.bodyMd.copyWith(
+                  color: AppColors.textPrimary, fontWeight: FontWeight.w500),
             ),
           ),
         ],
@@ -325,7 +344,8 @@ class _CollapsibleMealSectionCard extends StatelessWidget {
                     Text(type.displayName, style: AppTypography.h3),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.surface2,
                         borderRadius: BorderRadius.circular(10),
@@ -338,7 +358,9 @@ class _CollapsibleMealSectionCard extends StatelessWidget {
                   ],
                 ),
                 Icon(
-                  isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                  isExpanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
                   color: AppColors.textSecondary,
                 ),
               ],
@@ -350,18 +372,20 @@ class _CollapsibleMealSectionCard extends StatelessWidget {
             if (entries.isEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text('No food logged yet for this meal.', style: AppTypography.bodySm),
+                child: Text('No food logged yet for this meal.',
+                    style: AppTypography.bodySm),
               )
             else
-              for (final entry in entries)
-                _MealEntryTile(entry: entry),
+              for (final entry in entries) _MealEntryTile(entry: entry),
             const SizedBox(height: AppSpacing.sm),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton.icon(
                 onPressed: onAddFood,
                 icon: const Icon(Icons.add, size: 16, color: AppColors.primary),
-                label: Text('Add Food', style: AppTypography.labelMd.copyWith(color: AppColors.primary)),
+                label: Text('Add Food',
+                    style: AppTypography.labelMd
+                        .copyWith(color: AppColors.primary)),
               ),
             ),
           ],
@@ -423,14 +447,18 @@ class _MealEntryTile extends StatelessWidget {
                 ),
                 child: Text(
                   'Quality Score: ${quality.overallScore}/100',
-                  style: AppTypography.bodySm.copyWith(color: AppColors.secondary, fontSize: 9, fontWeight: FontWeight.bold),
+                  style: AppTypography.bodySm.copyWith(
+                      color: AppColors.secondary,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   quality.readinessImpact,
-                  style: AppTypography.bodySm.copyWith(fontSize: 9, color: AppColors.success),
+                  style: AppTypography.bodySm
+                      .copyWith(fontSize: 9, color: AppColors.success),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -439,7 +467,8 @@ class _MealEntryTile extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             quality.goalImpact,
-            style: AppTypography.bodySm.copyWith(fontSize: 9, color: AppColors.textMuted),
+            style: AppTypography.bodySm
+                .copyWith(fontSize: 9, color: AppColors.textMuted),
           ),
         ],
       ),
@@ -461,13 +490,16 @@ class _DipNutritionFocusInsightCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.lightbulb_outline, color: AppColors.accent, size: 20),
+          const Icon(Icons.lightbulb_outline,
+              color: AppColors.accent, size: 20),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Daily Intelligence Insight', style: AppTypography.labelMd.copyWith(color: AppColors.accent)),
+                Text('Daily Intelligence Insight',
+                    style: AppTypography.labelMd
+                        .copyWith(color: AppColors.accent)),
                 const SizedBox(height: 2),
                 Text(
                   focusMessage,

@@ -8,14 +8,24 @@ void main() {
   group('§P10-F Clinical Report Intelligence Tests', () {
     const parser = ClinicalReportParser();
 
-    test('identifyReportType identifies CBC and Lipid Profile reports from raw text', () {
-      expect(parser.identifyReportType('Patient Hemoglobin count: 12.5 g/dL'), equals(LabReportType.cbc));
-      expect(parser.identifyReportType('Lipid Panel: Total Cholesterol 210 mg/dL, LDL 148 mg/dL'), equals(LabReportType.lipidProfile));
-      expect(parser.identifyReportType('Liver Function ALT 45 U/L'), equals(LabReportType.lft));
-      expect(parser.identifyReportType('Serum Creatinine 1.1 mg/dL'), equals(LabReportType.kft));
+    test(
+        'identifyReportType identifies CBC and Lipid Profile reports from raw text',
+        () {
+      expect(parser.identifyReportType('Patient Hemoglobin count: 12.5 g/dL'),
+          equals(LabReportType.cbc));
+      expect(
+          parser.identifyReportType(
+              'Lipid Panel: Total Cholesterol 210 mg/dL, LDL 148 mg/dL'),
+          equals(LabReportType.lipidProfile));
+      expect(parser.identifyReportType('Liver Function ALT 45 U/L'),
+          equals(LabReportType.lft));
+      expect(parser.identifyReportType('Serum Creatinine 1.1 mg/dL'),
+          equals(LabReportType.kft));
     });
 
-    test('parseText extracts low Hemoglobin and generates mild anemia clinical insight', () async {
+    test(
+        'parseText extracts low Hemoglobin and generates mild anemia clinical insight',
+        () async {
       const sampleText = 'Complete Blood Count: Hemoglobin 10.8 g/dL.';
       final result = await parser.parseText(sampleText);
 
@@ -28,7 +38,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('ClinicalReportScreen renders Privacy Shield banner, Key Findings, and Insights', (tester) async {
+    testWidgets(
+        'ClinicalReportScreen renders Privacy Shield banner, Key Findings, and Insights',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -39,8 +51,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Lab Report Intelligence'), findsOneWidget);
-      expect(find.textContaining('On-Device Privacy Guaranteed'), findsOneWidget);
-      expect(find.text('Lab Report Uploaded: CBC + Lipid Profile'), findsOneWidget);
+      expect(
+          find.textContaining('On-Device Privacy Guaranteed'), findsOneWidget);
+      expect(find.text('Lab Report Uploaded: CBC + Lipid Profile'),
+          findsOneWidget);
       expect(find.text('Hemoglobin'), findsOneWidget);
       expect(find.text('LDL Cholesterol'), findsOneWidget);
       expect(find.textContaining('Mild Anemia Detected'), findsOneWidget);

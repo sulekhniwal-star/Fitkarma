@@ -38,7 +38,8 @@ class ActiveWorkoutScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text(state.exerciseName, style: AppTypography.h2),
@@ -63,23 +64,30 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.timer, color: AppColors.primary, size: 24),
+                          const Icon(Icons.timer,
+                              color: AppColors.primary, size: 24),
                           const SizedBox(width: 8),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('REST COUNTDOWN (Background Resilient)', style: AppTypography.labelMd.copyWith(color: AppColors.primary)),
+                              Text('REST COUNTDOWN (Background Resilient)',
+                                  style: AppTypography.labelMd
+                                      .copyWith(color: AppColors.primary)),
                               Text(
                                 '${state.restTimerSeconds ~/ 60}:${(state.restTimerSeconds % 60).toString().padLeft(2, '0')}',
-                                style: AppTypography.h1.copyWith(color: AppColors.primary),
+                                style: AppTypography.h1
+                                    .copyWith(color: AppColors.primary),
                               ),
                             ],
                           ),
                         ],
                       ),
                       TextButton(
-                        onPressed: () => ref.read(workoutProvider.notifier).skipRestTimer(),
-                        child: Text('Skip Rest', style: AppTypography.labelLg.copyWith(color: AppColors.teal)),
+                        onPressed: () =>
+                            ref.read(workoutProvider.notifier).skipRestTimer(),
+                        child: Text('Skip Rest',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.teal)),
                       ),
                     ],
                   ),
@@ -96,19 +104,26 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Progressive Overload Target', style: AppTypography.h3),
+                        Text('Progressive Overload Target',
+                            style: AppTypography.h3),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.teal.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Text('${nextTarget.weightKg} kg x ${nextTarget.reps}', style: AppTypography.labelLg.copyWith(color: AppColors.teal)),
+                          child: Text(
+                              '${nextTarget.weightKg} kg x ${nextTarget.reps}',
+                              style: AppTypography.labelLg
+                                  .copyWith(color: AppColors.teal)),
                         ),
                       ],
                     ),
                     const SizedBox(height: 6),
-                    Text(nextTarget.recommendationReason, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                    Text(nextTarget.recommendationReason,
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
                   ],
                 ),
               ),
@@ -119,14 +134,18 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(AppSpacing.md),
                 child: Row(
                   children: [
-                    const Icon(Icons.camera_front, color: AppColors.success, size: 24),
+                    const Icon(Icons.camera_front,
+                        color: AppColors.success, size: 24),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('MediaPipe Form Feedback', style: AppTypography.h3),
-                          Text(poseResult.formFeedback, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                          Text('MediaPipe Form Feedback',
+                              style: AppTypography.h3),
+                          Text(poseResult.formFeedback,
+                              style: AppTypography.bodySm
+                                  .copyWith(color: AppColors.textSecondary)),
                         ],
                       ),
                     ),
@@ -140,7 +159,9 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Sets & Reps Logging', style: AppTypography.h3),
-                  Text('${state.sets.where((s) => s.isCompleted).length}/${state.sets.length} Completed', style: AppTypography.bodySm),
+                  Text(
+                      '${state.sets.where((s) => s.isCompleted).length}/${state.sets.length} Completed',
+                      style: AppTypography.bodySm),
                 ],
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -151,12 +172,17 @@ class ActiveWorkoutScreen extends ConsumerWidget {
 
                 return Container(
                   margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md, vertical: 8),
                   decoration: BoxDecoration(
-                    color: set.isCompleted ? AppColors.success.withValues(alpha: 0.1) : AppColors.surface1,
+                    color: set.isCompleted
+                        ? AppColors.success.withValues(alpha: 0.1)
+                        : AppColors.surface1,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: set.isCompleted ? AppColors.success : AppColors.glassBorder,
+                      color: set.isCompleted
+                          ? AppColors.success
+                          : AppColors.glassBorder,
                     ),
                   ),
                   child: Row(
@@ -172,10 +198,12 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                               color: AppColors.surface0,
                               shape: BoxShape.circle,
                             ),
-                            child: Text('${set.setNumber}', style: AppTypography.labelMd),
+                            child: Text('${set.setNumber}',
+                                style: AppTypography.labelMd),
                           ),
                           const SizedBox(width: 12),
-                          Text('${set.weightKg} kg x ${set.reps} reps', style: AppTypography.labelLg),
+                          Text('${set.weightKg} kg x ${set.reps} reps',
+                              style: AppTypography.labelLg),
                         ],
                       ),
                       Row(
@@ -184,12 +212,17 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                           const SizedBox(width: 8),
                           IconButton(
                             icon: Icon(
-                              set.isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
-                              color: set.isCompleted ? AppColors.success : AppColors.textSecondary,
+                              set.isCompleted
+                                  ? Icons.check_circle
+                                  : Icons.radio_button_unchecked,
+                              color: set.isCompleted
+                                  ? AppColors.success
+                                  : AppColors.textSecondary,
                               size: 26,
                             ),
                             onPressed: () {
-                              ref.read(workoutProvider.notifier).logSet(index, set.weightKg, set.reps, set.rpe);
+                              ref.read(workoutProvider.notifier).logSet(
+                                  index, set.weightKg, set.reps, set.rpe);
                             },
                           ),
                         ],
@@ -209,15 +242,18 @@ class ActiveWorkoutScreen extends ConsumerWidget {
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                      borderRadius:
+                          BorderRadius.circular(AppSpacing.cardRadius),
                     ),
                   ),
                   onPressed: () {
                     ref.read(workoutProvider.notifier).completeWorkout();
-                    _showOutcomeXpDialog(context, ref, state.earnedXp > 0 ? state.earnedXp : 150);
+                    _showOutcomeXpDialog(context, ref,
+                        state.earnedXp > 0 ? state.earnedXp : 150);
                   },
                   icon: const Icon(Icons.verified, size: 22),
-                  label: Text('Complete Workout & Claim XP', style: AppTypography.h3.copyWith(color: Colors.white)),
+                  label: Text('Complete Workout & Claim XP',
+                      style: AppTypography.h3.copyWith(color: Colors.white)),
                 ),
               ),
               const SizedBox(height: 30),
@@ -234,22 +270,28 @@ class ActiveWorkoutScreen extends ConsumerWidget {
       builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.surface1,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text('Workout Complete!', style: AppTypography.h2),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.workspace_premium, color: AppColors.accent, size: 64.0),
+              const Icon(Icons.workspace_premium,
+                  color: AppColors.accent, size: 64.0),
               const SizedBox(height: AppSpacing.md),
-              Text('Earned +$xp Outcome XP!', style: AppTypography.h2.copyWith(color: AppColors.success)),
+              Text('Earned +$xp Outcome XP!',
+                  style: AppTypography.h2.copyWith(color: AppColors.success)),
               const SizedBox(height: AppSpacing.xs),
-              Text('XP awarded for full workout completion, not logging.', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+              Text('XP awarded for full workout completion, not logging.',
+                  style: AppTypography.bodySm
+                      .copyWith(color: AppColors.textSecondary)),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Awesome', style: AppTypography.h3.copyWith(color: AppColors.primary)),
+              child: Text('Awesome',
+                  style: AppTypography.h3.copyWith(color: AppColors.primary)),
             ),
           ],
         );

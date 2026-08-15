@@ -11,13 +11,16 @@ class NutritionPeriodizationScreen extends StatefulWidget {
   const NutritionPeriodizationScreen({super.key});
 
   @override
-  State<NutritionPeriodizationScreen> createState() => _NutritionPeriodizationScreenState();
+  State<NutritionPeriodizationScreen> createState() =>
+      _NutritionPeriodizationScreenState();
 }
 
-class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScreen> {
+class _NutritionPeriodizationScreenState
+    extends State<NutritionPeriodizationScreen> {
   final _controller = const PeriodizationController();
   PeriodizationPhase _currentPhase = PeriodizationPhase.fatLoss;
-  DateTime _phaseStartAt = DateTime.now().subtract(const Duration(days: 60)); // 8.5 weeks in fat loss
+  DateTime _phaseStartAt = DateTime.now()
+      .subtract(const Duration(days: 60)); // 8.5 weeks in fat loss
   late List<WeightLog> _weightLogs;
   PeriodizationStatus? _status;
 
@@ -32,9 +35,12 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
     final now = DateTime.now();
     _weightLogs = [
       WeightLog(loggedAt: now, weightKg: 78.0),
-      WeightLog(loggedAt: now.subtract(const Duration(days: 7)), weightKg: 78.1),
-      WeightLog(loggedAt: now.subtract(const Duration(days: 14)), weightKg: 78.0),
-      WeightLog(loggedAt: now.subtract(const Duration(days: 21)), weightKg: 78.0),
+      WeightLog(
+          loggedAt: now.subtract(const Duration(days: 7)), weightKg: 78.1),
+      WeightLog(
+          loggedAt: now.subtract(const Duration(days: 14)), weightKg: 78.0),
+      WeightLog(
+          loggedAt: now.subtract(const Duration(days: 21)), weightKg: 78.0),
     ];
   }
 
@@ -60,7 +66,8 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Nutrition Periodization', style: AppTypography.h2),
@@ -81,14 +88,16 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                     children: [
                       Text('Active Phase', style: AppTypography.bodySm),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.primary.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '$weeksInPhase weeks active',
-                          style: AppTypography.labelMd.copyWith(color: AppColors.primary),
+                          style: AppTypography.labelMd
+                              .copyWith(color: AppColors.primary),
                         ),
                       ),
                     ],
@@ -112,16 +121,20 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                 decoration: BoxDecoration(
                   color: AppColors.accent.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                  border: Border.all(color: AppColors.accent.withValues(alpha: 0.4)),
+                  border: Border.all(
+                      color: AppColors.accent.withValues(alpha: 0.4)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.bolt, color: AppColors.accent, size: 20),
+                        const Icon(Icons.bolt,
+                            color: AppColors.accent, size: 20),
                         const SizedBox(width: 6),
-                        Text('Periodization Transition Prompt', style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                        Text('Periodization Transition Prompt',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.accent)),
                       ],
                     ),
                     const SizedBox(height: 6),
@@ -141,10 +154,14 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                           _checkProgression();
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Switched phase to ${_currentPhase.displayName}')),
+                          SnackBar(
+                              content: Text(
+                                  'Switched phase to ${_currentPhase.displayName}')),
                         );
                       },
-                      child: Text('Switch to ${_status!.nextPhase.displayName}', style: AppTypography.labelMd.copyWith(color: Colors.black)),
+                      child: Text('Switch to ${_status!.nextPhase.displayName}',
+                          style: AppTypography.labelMd
+                              .copyWith(color: Colors.black)),
                     ),
                   ],
                 ),
@@ -160,10 +177,14 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: phase == _currentPhase ? AppColors.surface1 : AppColors.surface0,
+                  color: phase == _currentPhase
+                      ? AppColors.surface1
+                      : AppColors.surface0,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: phase == _currentPhase ? AppColors.primary : AppColors.glassBorder,
+                    color: phase == _currentPhase
+                        ? AppColors.primary
+                        : AppColors.glassBorder,
                   ),
                 ),
                 child: Row(
@@ -172,8 +193,12 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                     Row(
                       children: [
                         Icon(
-                          phase == _currentPhase ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                          color: phase == _currentPhase ? AppColors.primary : AppColors.textMuted,
+                          phase == _currentPhase
+                              ? Icons.radio_button_checked
+                              : Icons.radio_button_unchecked,
+                          color: phase == _currentPhase
+                              ? AppColors.primary
+                              : AppColors.textMuted,
                           size: 18,
                         ),
                         const SizedBox(width: 10),
@@ -182,7 +207,8 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                     ),
                     Text(
                       '${(phase.calorieModifier * 100).round()}% TDEE',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.teal),
+                      style:
+                          AppTypography.bodySm.copyWith(color: AppColors.teal),
                     ),
                   ],
                 ),

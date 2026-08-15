@@ -41,7 +41,8 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Smart Indian Food Swaps', style: AppTypography.h2),
@@ -57,7 +58,8 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Craving & Caved Food Selector', style: AppTypography.h3),
+                  Text('Craving & Caved Food Selector',
+                      style: AppTypography.h3),
                   const SizedBox(height: AppSpacing.sm),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,7 +71,9 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
                         items: SeededTargetSwapIndex.registry.entries
                             .map((e) => DropdownMenuItem(
                                   value: e.key,
-                                  child: Text(e.value.originalFoodName, style: AppTypography.labelLg.copyWith(color: AppColors.error)),
+                                  child: Text(e.value.originalFoodName,
+                                      style: AppTypography.labelLg
+                                          .copyWith(color: AppColors.error)),
                                 ))
                             .toList(),
                         onChanged: (val) {
@@ -92,7 +96,8 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
               decoration: BoxDecoration(
                 color: AppColors.surface1,
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
+                border:
+                    Border.all(color: AppColors.success.withValues(alpha: 0.4)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,12 +105,16 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('High-Adherence Smart Swap', style: AppTypography.h3),
-                      const Icon(Icons.swap_horiz, color: AppColors.success, size: 24),
+                      Text('High-Adherence Smart Swap',
+                          style: AppTypography.h3),
+                      const Icon(Icons.swap_horiz,
+                          color: AppColors.success, size: 24),
                     ],
                   ),
                   const SizedBox(height: 4),
-                  Text(_activeSubstitute.alternativeName, style: AppTypography.h2.copyWith(color: AppColors.success)),
+                  Text(_activeSubstitute.alternativeName,
+                      style:
+                          AppTypography.h2.copyWith(color: AppColors.success)),
                   const SizedBox(height: AppSpacing.md),
 
                   // Calorie & Protein Deltas
@@ -137,9 +146,12 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Swap Preparation Instructions:', style: AppTypography.labelLg.copyWith(color: AppColors.teal)),
+                        Text('Swap Preparation Instructions:',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.teal)),
                         const SizedBox(height: 4),
-                        Text(_activeSubstitute.swapInstructions, style: AppTypography.bodySm.copyWith(height: 1.4)),
+                        Text(_activeSubstitute.swapInstructions,
+                            style: AppTypography.bodySm.copyWith(height: 1.4)),
                       ],
                     ),
                   ),
@@ -156,10 +168,14 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
                 margin: const EdgeInsets.only(bottom: 6),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: entry.key == _selectedKey ? AppColors.surface1 : AppColors.surface0,
+                  color: entry.key == _selectedKey
+                      ? AppColors.surface1
+                      : AppColors.surface0,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: entry.key == _selectedKey ? AppColors.success : AppColors.glassBorder,
+                    color: entry.key == _selectedKey
+                        ? AppColors.success
+                        : AppColors.glassBorder,
                   ),
                 ),
                 child: Row(
@@ -168,10 +184,13 @@ class _IndianFoodSwapScreenState extends State<IndianFoodSwapScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${entry.value.originalFoodName} ➔ ${entry.value.alternativeName}', style: AppTypography.labelLg),
+                        Text(
+                            '${entry.value.originalFoodName} ➔ ${entry.value.alternativeName}',
+                            style: AppTypography.labelLg),
                         Text(
                           '${entry.value.calorieDelta.round()} kcal · +${entry.value.proteinDelta.round()}g Protein',
-                          style: AppTypography.bodySm.copyWith(color: AppColors.teal),
+                          style: AppTypography.bodySm
+                              .copyWith(color: AppColors.teal),
                         ),
                       ],
                     ),
@@ -191,7 +210,8 @@ class _SwapDeltaBadge extends StatelessWidget {
   final String value;
   final bool isPositive;
 
-  const _SwapDeltaBadge({required this.label, required this.value, required this.isPositive});
+  const _SwapDeltaBadge(
+      {required this.label, required this.value, required this.isPositive});
 
   @override
   Widget build(BuildContext context) {

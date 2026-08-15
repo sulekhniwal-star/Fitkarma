@@ -20,7 +20,8 @@ class ProteinTimingResult {
 
 /// Pure-Dart Protein Distribution & Timing Intelligence Evaluator per §P5-H spec
 class ProteinTimingEvaluator {
-  static const double mpsThresholdGrams = 25.0; // Minimum protein required per main meal to trigger MPS
+  static const double mpsThresholdGrams =
+      25.0; // Minimum protein required per main meal to trigger MPS
 
   const ProteinTimingEvaluator();
 
@@ -41,13 +42,13 @@ class ProteinTimingEvaluator {
         timingScore = 100.0; // Optimal MPS signaling
         break;
       case 2:
-        timingScore = 70.0;  // Sub-optimal MPS distribution
+        timingScore = 70.0; // Sub-optimal MPS distribution
         break;
       case 1:
-        timingScore = 40.0;  // Poor recovery efficiency
+        timingScore = 40.0; // Poor recovery efficiency
         break;
       default:
-        timingScore = 10.0;  // Critical deficit across main meals
+        timingScore = 10.0; // Critical deficit across main meals
         break;
     }
 

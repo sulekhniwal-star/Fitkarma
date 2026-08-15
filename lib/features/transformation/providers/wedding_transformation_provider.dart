@@ -59,15 +59,18 @@ class WeddingTransformationState {
       currentPhase: currentPhase ?? this.currentPhase,
       calorieTarget: calorieTarget ?? this.calorieTarget,
       proteinTargetG: proteinTargetG ?? this.proteinTargetG,
-      hydrationTargetLiters: hydrationTargetLiters ?? this.hydrationTargetLiters,
-      hasSkinNutritionChecked: hasSkinNutritionChecked ?? this.hasSkinNutritionChecked,
+      hydrationTargetLiters:
+          hydrationTargetLiters ?? this.hydrationTargetLiters,
+      hasSkinNutritionChecked:
+          hasSkinNutritionChecked ?? this.hasSkinNutritionChecked,
       hasStressChecked: hasStressChecked ?? this.hasStressChecked,
       isLoading: isLoading ?? this.isLoading,
     );
   }
 }
 
-class WeddingTransformationNotifier extends StateNotifier<WeddingTransformationState> {
+class WeddingTransformationNotifier
+    extends StateNotifier<WeddingTransformationState> {
   WeddingTransformationNotifier() : super(WeddingTransformationState.initial());
 
   void setWeddingDate(DateTime newDate) {
@@ -109,6 +112,7 @@ class WeddingTransformationNotifier extends StateNotifier<WeddingTransformationS
   }
 }
 
-final weddingTransformationProvider = StateNotifierProvider<WeddingTransformationNotifier, WeddingTransformationState>((ref) {
+final weddingTransformationProvider = StateNotifierProvider<
+    WeddingTransformationNotifier, WeddingTransformationState>((ref) {
   return WeddingTransformationNotifier();
 });

@@ -27,7 +27,8 @@ class NutritionState {
     this.targetCarbs = 250.0,
     this.targetFat = 65.0,
     this.isProteinDeficit = false,
-    this.dipNutritionFocus = 'Prioritize 30g protein at lunch & post-workout hydration',
+    this.dipNutritionFocus =
+        'Prioritize 30g protein at lunch & post-workout hydration',
     this.sectionExpanded = const {
       MealType.breakfast: true,
       MealType.lunch: true,
@@ -82,28 +83,32 @@ class NutritionNotifier extends StateNotifier<NutritionState> {
       MealEntry(
         id: 'm1',
         type: MealType.breakfast,
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f6'), // Poha
+        foodItem: SeededIndianFoodDatabase.items
+            .firstWhere((i) => i.id == 'f6'), // Poha
         quantityServings: 1.0,
         loggedAt: now.subtract(const Duration(hours: 6)),
       ),
       MealEntry(
         id: 'm2',
         type: MealType.breakfast,
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'), // Paneer Tikka
+        foodItem: SeededIndianFoodDatabase.items
+            .firstWhere((i) => i.id == 'f1'), // Paneer Tikka
         quantityServings: 1.0,
         loggedAt: now.subtract(const Duration(hours: 6)),
       ),
       MealEntry(
         id: 'm3',
         type: MealType.lunch,
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f2'), // Dal Tadka
+        foodItem: SeededIndianFoodDatabase.items
+            .firstWhere((i) => i.id == 'f2'), // Dal Tadka
         quantityServings: 1.5,
         loggedAt: now.subtract(const Duration(hours: 3)),
       ),
       MealEntry(
         id: 'm4',
         type: MealType.lunch,
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f3'), // Roti
+        foodItem: SeededIndianFoodDatabase.items
+            .firstWhere((i) => i.id == 'f3'), // Roti
         quantityServings: 2.0,
         loggedAt: now.subtract(const Duration(hours: 3)),
       ),
@@ -118,7 +123,8 @@ class NutritionNotifier extends StateNotifier<NutritionState> {
     }
 
     const targetProt = 110.0;
-    final isDeficit = engine.isProteinDeficitAlert(loggedProtein: prot, targetProtein: targetProt);
+    final isDeficit = engine.isProteinDeficitAlert(
+        loggedProtein: prot, targetProtein: targetProt);
 
     return NutritionState(
       loggedMeals: sampleMeals,
@@ -203,6 +209,7 @@ class NutritionNotifier extends StateNotifier<NutritionState> {
   }
 }
 
-final nutritionProvider = StateNotifierProvider<NutritionNotifier, NutritionState>(
+final nutritionProvider =
+    StateNotifierProvider<NutritionNotifier, NutritionState>(
   (_) => NutritionNotifier(const NutritionEngine()),
 );

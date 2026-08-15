@@ -102,7 +102,8 @@ class ProactiveInsight {
 /// AI Trigger Condition — event-driven, fire only when threshold met
 class AITrigger {
   final String userId;
-  final String triggerType; // e.g. 'protein_deficit', 'sleep_debt_excess', 'plateau'
+  final String
+      triggerType; // e.g. 'protein_deficit', 'sleep_debt_excess', 'plateau'
   final double value;
   final double threshold;
 
@@ -113,7 +114,8 @@ class AITrigger {
     required this.threshold,
   });
 
-  bool get isTriggered => true; // If an AITrigger was created, it is triggered by definition
+  bool get isTriggered =>
+      true; // If an AITrigger was created, it is triggered by definition
 }
 
 /// Proactive Insights Engine — checks event thresholds before generating

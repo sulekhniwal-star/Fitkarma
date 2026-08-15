@@ -27,12 +27,17 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
   final int _estimatedMinutes = 45;
   final int _exerciseCount = 4;
   final int _totalSetsCount = 16;
-  final String _progressionNudge = 'Suggesting +2.5kg on Bench Press today based on last week RPE 7.0';
+  final String _progressionNudge =
+      'Suggesting +2.5kg on Bench Press today based on last week RPE 7.0';
 
   final List<Map<String, String>> _recentHistory = const [
     {'title': 'Lower Body Core', 'time': 'Yesterday', 'status': 'Completed ✓'},
     {'title': 'Upper Body Pull', 'time': '3 days ago', 'status': 'Completed ✓'},
-    {'title': 'Push Hypertrophy', 'time': '5 days ago', 'status': 'Completed ✓'},
+    {
+      'title': 'Push Hypertrophy',
+      'time': '5 days ago',
+      'status': 'Completed ✓'
+    },
   ];
 
   @override
@@ -43,7 +48,8 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Workout Home', style: AppTypography.h2),
@@ -68,19 +74,22 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.primary.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           'ACTIVE PROGRAM',
-                          style: AppTypography.labelMd.copyWith(color: AppColors.primary),
+                          style: AppTypography.labelMd
+                              .copyWith(color: AppColors.primary),
                         ),
                       ),
                       Text(
                         'Week $_currentWeek / Day $_currentDay',
-                        style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                        style: AppTypography.labelLg
+                            .copyWith(color: AppColors.teal),
                       ),
                     ],
                   ),
@@ -93,7 +102,8 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Weekly Progress', style: AppTypography.bodySm),
-                      Text('$_completedDays of $_totalDaysInWeek days', style: AppTypography.labelMd),
+                      Text('$_completedDays of $_totalDaysInWeek days',
+                          style: AppTypography.labelMd),
                     ],
                   ),
                   const SizedBox(height: 6),
@@ -124,17 +134,23 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      const Icon(Icons.timer_outlined, size: 16, color: AppColors.textSecondary),
+                      const Icon(Icons.timer_outlined,
+                          size: 16, color: AppColors.textSecondary),
                       const SizedBox(width: 4),
-                      Text('$_estimatedMinutes mins', style: AppTypography.bodySm),
+                      Text('$_estimatedMinutes mins',
+                          style: AppTypography.bodySm),
                       const SizedBox(width: 12),
-                      const Icon(Icons.fitness_center, size: 16, color: AppColors.textSecondary),
+                      const Icon(Icons.fitness_center,
+                          size: 16, color: AppColors.textSecondary),
                       const SizedBox(width: 4),
-                      Text('$_exerciseCount Exercises', style: AppTypography.bodySm),
+                      Text('$_exerciseCount Exercises',
+                          style: AppTypography.bodySm),
                       const SizedBox(width: 12),
-                      const Icon(Icons.repeat, size: 16, color: AppColors.textSecondary),
+                      const Icon(Icons.repeat,
+                          size: 16, color: AppColors.textSecondary),
                       const SizedBox(width: 4),
-                      Text('$_totalSetsCount sets', style: AppTypography.bodySm),
+                      Text('$_totalSetsCount sets',
+                          style: AppTypography.bodySm),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.md),
@@ -145,16 +161,19 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                     decoration: BoxDecoration(
                       color: AppColors.accent.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.accent.withValues(alpha: 0.3)),
+                      border: Border.all(
+                          color: AppColors.accent.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.bolt, color: AppColors.accent, size: 20),
+                        const Icon(Icons.bolt,
+                            color: AppColors.accent, size: 20),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             _progressionNudge,
-                            style: AppTypography.bodySm.copyWith(color: AppColors.accent, height: 1.3),
+                            style: AppTypography.bodySm
+                                .copyWith(color: AppColors.accent, height: 1.3),
                           ),
                         ),
                       ],
@@ -171,14 +190,17 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                          borderRadius:
+                              BorderRadius.circular(AppSpacing.cardRadius),
                         ),
                       ),
                       onPressed: () {
                         context.push('/workout/active');
                       },
                       icon: const Icon(Icons.play_arrow_rounded, size: 24),
-                      label: Text('Start Workout', style: AppTypography.h3.copyWith(color: Colors.white)),
+                      label: Text('Start Workout',
+                          style:
+                              AppTypography.h3.copyWith(color: Colors.white)),
                     ),
                   ),
                 ],
@@ -204,12 +226,14 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.check_circle_outline, color: AppColors.success, size: 20),
+                        const Icon(Icons.check_circle_outline,
+                            color: AppColors.success, size: 20),
                         const SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(history['title']!, style: AppTypography.labelLg),
+                            Text(history['title']!,
+                                style: AppTypography.labelLg),
                             Text(history['time']!, style: AppTypography.bodySm),
                           ],
                         ),
@@ -217,7 +241,9 @@ class _WorkoutHomeScreenState extends State<WorkoutHomeScreen> {
                     ),
                     Text(
                       history['status']!,
-                      style: AppTypography.bodySm.copyWith(color: AppColors.success, fontWeight: FontWeight.w600),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.success,
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),

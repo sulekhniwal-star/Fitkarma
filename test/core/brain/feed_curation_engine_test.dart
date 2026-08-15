@@ -6,21 +6,45 @@ void main() {
     const curationEngine = FeedCurationEngine();
     const engagementEngine = FeedEngagementEngine();
 
-    test('isActionEligibleForFeedShare requires workouts >= 20 mins and > 100 active calories', () {
-      const shortWorkout = WorkoutSummaryPayload(workoutTitle: 'Quick Stretch', durationMinutes: 10, caloriesBurned: 50);
-      const validWorkout = WorkoutSummaryPayload(workoutTitle: 'Athletic Lean Build', durationMinutes: 45, caloriesBurned: 320);
+    test(
+        'isActionEligibleForFeedShare requires workouts >= 20 mins and > 100 active calories',
+        () {
+      const shortWorkout = WorkoutSummaryPayload(
+          workoutTitle: 'Quick Stretch',
+          durationMinutes: 10,
+          caloriesBurned: 50);
+      const validWorkout = WorkoutSummaryPayload(
+          workoutTitle: 'Athletic Lean Build',
+          durationMinutes: 45,
+          caloriesBurned: 320);
 
-      expect(curationEngine.isActionEligibleForFeedShare(type: FeedItemType.workout, workout: shortWorkout), isFalse);
-      expect(curationEngine.isActionEligibleForFeedShare(type: FeedItemType.workout, workout: validWorkout), isTrue);
-      expect(curationEngine.isActionEligibleForFeedShare(type: FeedItemType.milestone), isTrue);
+      expect(
+          curationEngine.isActionEligibleForFeedShare(
+              type: FeedItemType.workout, workout: shortWorkout),
+          isFalse);
+      expect(
+          curationEngine.isActionEligibleForFeedShare(
+              type: FeedItemType.workout, workout: validWorkout),
+          isTrue);
+      expect(
+          curationEngine.isActionEligibleForFeedShare(
+              type: FeedItemType.milestone),
+          isTrue);
     });
 
     test('scanFeedLink enforces HTTPS and allowed domain whitelist', () {
-      expect(curationEngine.scanFeedLink('https://fitkarma.com/route/12'), isTrue);
-      expect(curationEngine.scanFeedLink('https://strava.com/activities/99'), isTrue);
-      expect(curationEngine.scanFeedLink('http://fitkarma.com/route/12'), isFalse); // Non-HTTPS
-      expect(curationEngine.scanFeedLink('https://phishing-site.xyz/login'), isFalse); // Domain not whitelisted
-      expect(curationEngine.scanFeedLink('https://fitkarma.com?redirect=http://evil.com'), isFalse); // Redirect parameter
+      expect(
+          curationEngine.scanFeedLink('https://fitkarma.com/route/12'), isTrue);
+      expect(curationEngine.scanFeedLink('https://strava.com/activities/99'),
+          isTrue);
+      expect(curationEngine.scanFeedLink('http://fitkarma.com/route/12'),
+          isFalse); // Non-HTTPS
+      expect(curationEngine.scanFeedLink('https://phishing-site.xyz/login'),
+          isFalse); // Domain not whitelisted
+      expect(
+          curationEngine
+              .scanFeedLink('https://fitkarma.com?redirect=http://evil.com'),
+          isFalse); // Redirect parameter
     });
 
     test('validatePayload blocks images > 5MB and GPX > 2000 trackpoints', () {
@@ -30,8 +54,10 @@ void main() {
       expect(curationEngine.validatePayload(oversizedImage), isFalse);
       expect(curationEngine.validatePayload(validImage), isTrue);
 
-      final validGpx = FeedItemPayload(gpxData: '<gpx><trkpt lat="28.6" lon="77.2"/></gpx>');
-      final invalidGpx = FeedItemPayload(gpxData: 'plain text data without XML tags');
+      final validGpx =
+          FeedItemPayload(gpxData: '<gpx><trkpt lat="28.6" lon="77.2"/></gpx>');
+      final invalidGpx =
+          FeedItemPayload(gpxData: 'plain text data without XML tags');
 
       expect(curationEngine.validatePayload(validGpx), isTrue);
       expect(curationEngine.validatePayload(invalidGpx), isFalse);
@@ -44,7 +70,10 @@ void main() {
         userName: 'Priya',
         type: FeedItemType.workout,
         timestamp: DateTime.now(),
-        workoutPayload: const WorkoutSummaryPayload(workoutTitle: 'Morning Run', durationMinutes: 30, caloriesBurned: 220),
+        workoutPayload: const WorkoutSummaryPayload(
+            workoutTitle: 'Morning Run',
+            durationMinutes: 30,
+            caloriesBurned: 220),
       );
 
       // First High-Five -> +2 XP awarded

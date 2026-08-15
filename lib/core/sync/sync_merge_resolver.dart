@@ -21,9 +21,12 @@ class SyncResolution<T extends SyncableEntity> {
 
   const SyncResolution._(this.resolvedRecord, this.action);
 
-  factory SyncResolution.merged(T record) => SyncResolution._(record, SyncAction.merged);
-  factory SyncResolution.keepLocal() => const SyncResolution._(null, SyncAction.keepLocal);
-  factory SyncResolution.keepRemote() => const SyncResolution._(null, SyncAction.keepRemote);
+  factory SyncResolution.merged(T record) =>
+      SyncResolution._(record, SyncAction.merged);
+  factory SyncResolution.keepLocal() =>
+      const SyncResolution._(null, SyncAction.keepLocal);
+  factory SyncResolution.keepRemote() =>
+      const SyncResolution._(null, SyncAction.keepRemote);
 }
 
 enum SyncAction { merged, keepLocal, keepRemote }
@@ -39,7 +42,8 @@ class SyncMergeResolver {
   }) {
     // 1. If cumulative metric (e.g., step log), merge deltas deduplicated by syncBatchId
     if (localRecord is CumulativeLog && remoteRecord is CumulativeLog) {
-      final merged = (localRecord as CumulativeLog).mergeWith(remoteRecord as CumulativeLog);
+      final merged = (localRecord as CumulativeLog)
+          .mergeWith(remoteRecord as CumulativeLog);
       return SyncResolution.merged(merged as T);
     }
 

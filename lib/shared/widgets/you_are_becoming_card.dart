@@ -25,31 +25,35 @@ class YouAreBecomingCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.emoji_events, color: AppColors.warning, size: 22),
+                  const Icon(Icons.emoji_events,
+                      color: AppColors.warning, size: 22),
                   const SizedBox(width: 8),
                   Text('🏆 Identity Evolution', style: AppTypography.h3),
                 ],
               ),
               if (evolution.isUnlocked)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.success.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
+                    border: Border.all(
+                        color: AppColors.success.withValues(alpha: 0.4)),
                   ),
                   child: Text(
                     '+${evolution.xpBonus} XP Bonus',
-                    style: AppTypography.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                    style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.success, fontWeight: FontWeight.bold),
                   ),
                 ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-
           Text(
             'You are becoming:',
-            style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+            style:
+                AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: 4),
           Text(
@@ -59,21 +63,22 @@ class YouAreBecomingCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             evolution.milestoneText,
-            style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, height: 1.3),
+            style: AppTypography.bodySm
+                .copyWith(color: AppColors.textSecondary, height: 1.3),
           ),
           const SizedBox(height: AppSpacing.md),
-
           if (evolution.evidenceList.isNotEmpty) ...[
             Text('Evidence:', style: AppTypography.labelLg),
             const SizedBox(height: 4),
             for (final ev in evolution.evidenceList)
               Padding(
                 padding: const EdgeInsets.only(bottom: 2.0),
-                child: Text('  • $ev', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                child: Text('  • $ev',
+                    style: AppTypography.bodySm
+                        .copyWith(color: AppColors.textSecondary)),
               ),
             const SizedBox(height: AppSpacing.md),
           ],
-
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -94,7 +99,8 @@ class YouAreBecomingCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   'Next evolution: ${evolution.nextEvolutionPrompt}',
-                  style: AppTypography.labelSmall.copyWith(color: AppColors.textMuted),
+                  style: AppTypography.labelSmall
+                      .copyWith(color: AppColors.textMuted),
                 ),
               ],
             ),

@@ -97,7 +97,9 @@ class WearableSyncMerger {
           if (incoming.type == MetricType.sleepDuration) {
             sleepDeltaMinutes += (incoming.value - existing.value).abs();
           } else if (incoming.type == MetricType.hrvMs && existing.value > 0) {
-            final delta = ((incoming.value - existing.value) / existing.value).abs() * 100.0;
+            final delta =
+                ((incoming.value - existing.value) / existing.value).abs() *
+                    100.0;
             if (delta > hrvDeltaPct) hrvDeltaPct = delta;
           }
         }

@@ -2,8 +2,10 @@
 enum AiModelTier {
   /// Fast, low latency model for basic classification & quick extraction
   tiny,
+
   /// Balanced model for coaching responses & meal quality analysis
   medium,
+
   /// High reasoning model for clinical report parsing & complex trajectory forecasting
   large,
 }

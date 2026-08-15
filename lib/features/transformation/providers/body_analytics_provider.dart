@@ -144,6 +144,7 @@ class BodyAnalyticsNotifier extends StateNotifier<BodyAnalyticsState> {
   }
 }
 
-final bodyAnalyticsProvider = StateNotifierProvider<BodyAnalyticsNotifier, BodyAnalyticsState>((ref) {
+final bodyAnalyticsProvider =
+    StateNotifierProvider<BodyAnalyticsNotifier, BodyAnalyticsState>((ref) {
   return BodyAnalyticsNotifier();
 });

@@ -8,9 +8,12 @@ void main() {
   group('§P14-C Integration: DIP Generation & Multi-Module Consumption', () {
     const readinessEngine = ReadinessEngine();
 
-    test('6 AM DIP Generation compiles readiness, nutrition targets, workout adaptation, and missions', () {
+    test(
+        '6 AM DIP Generation compiles readiness, nutrition targets, workout adaptation, and missions',
+        () {
       final readiness = readinessEngine.calculateReadiness(
-        checkIn: const MorningCheckIn(energyLevel: 4, muscleSoreness: 1, moodRating: 4),
+        checkIn: const MorningCheckIn(
+            energyLevel: 4, muscleSoreness: 1, moodRating: 4),
         sleepHours: 7.5,
       );
 
@@ -34,7 +37,9 @@ void main() {
       expect(dip.primaryFocus, contains('Upper Body'));
     });
 
-    test('DailyMissionNotifier state seamlessly consumes DIP package and propagates to UI', () {
+    test(
+        'DailyMissionNotifier state seamlessly consumes DIP package and propagates to UI',
+        () {
       final notifier = DailyMissionNotifier(
         const ReadinessEngine(),
         const DecisionHierarchy(),

@@ -11,10 +11,12 @@ class AdaptiveHungerCravingsScreen extends StatefulWidget {
   const AdaptiveHungerCravingsScreen({super.key});
 
   @override
-  State<AdaptiveHungerCravingsScreen> createState() => _AdaptiveHungerCravingsScreenState();
+  State<AdaptiveHungerCravingsScreen> createState() =>
+      _AdaptiveHungerCravingsScreenState();
 }
 
-class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScreen> {
+class _AdaptiveHungerCravingsScreenState
+    extends State<AdaptiveHungerCravingsScreen> {
   final _engine = const HungerCravingEngine();
   int _hungerScore = 3; // 1 = Stuffed, 5 = Starving
   CravingType _activeCraving = CravingType.sweet;
@@ -34,7 +36,8 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
     final now = DateTime.now();
     _history = [
       CravingLog(
-        timestamp: DateTime(now.year, now.month, now.day - 1, 21, 30), // 9:30 PM yesterday
+        timestamp: DateTime(
+            now.year, now.month, now.day - 1, 21, 30), // 9:30 PM yesterday
         hungerScore: 4,
         cravingType: CravingType.sweet,
         isUltraProcessed: true,
@@ -54,7 +57,8 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
     final now = DateTime.now();
     final intervention = _engine.evaluateCravingRisk(
       logs: _history,
-      currentTime: DateTime(now.year, now.month, now.day, 19, 0), // 7:00 PM simulate
+      currentTime:
+          DateTime(now.year, now.month, now.day, 19, 0), // 7:00 PM simulate
       currentStressLevel: _stressLevel,
     );
     setState(() {
@@ -67,7 +71,8 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
       timestamp: DateTime.now(),
       hungerScore: _hungerScore,
       cravingType: _activeCraving,
-      isUltraProcessed: _activeCraving == CravingType.sweet || _activeCraving == CravingType.salty,
+      isUltraProcessed: _activeCraving == CravingType.sweet ||
+          _activeCraving == CravingType.salty,
       stressLevel: _stressLevel,
     );
 
@@ -77,7 +82,8 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Craving logged successfully! Engine evaluated risk.')),
+      const SnackBar(
+          content: Text('Craving logged successfully! Engine evaluated risk.')),
     );
   }
 
@@ -89,7 +95,8 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Hunger & Cravings Predictor', style: AppTypography.h2),
@@ -112,8 +119,11 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Hunger Score (1=Stuffed, 5=Starving)', style: AppTypography.bodySm),
-                      Text('$_hungerScore/5', style: AppTypography.labelLg.copyWith(color: AppColors.primary)),
+                      Text('Hunger Score (1=Stuffed, 5=Starving)',
+                          style: AppTypography.bodySm),
+                      Text('$_hungerScore/5',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.primary)),
                     ],
                   ),
                   Slider(
@@ -132,8 +142,11 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Work / Life Stress Level', style: AppTypography.bodySm),
-                      Text('${_stressLevel.toStringAsFixed(1)}/5.0', style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                      Text('Work / Life Stress Level',
+                          style: AppTypography.bodySm),
+                      Text('${_stressLevel.toStringAsFixed(1)}/5.0',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.accent)),
                     ],
                   ),
                   Slider(
@@ -159,7 +172,8 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
                         child: ChoiceChip(
                           label: Text(type.name.toUpperCase()),
                           selected: selected,
-                          selectedColor: AppColors.primary.withValues(alpha: 0.3),
+                          selectedColor:
+                              AppColors.primary.withValues(alpha: 0.3),
                           onSelected: (_) {
                             setState(() => _activeCraving = type);
                             _evaluate();
@@ -176,7 +190,9 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
                       minimumSize: const Size.fromHeight(44),
                     ),
                     icon: const Icon(Icons.add, color: Colors.black),
-                    label: Text('Log Hunger & Craving Prompt', style: AppTypography.labelLg.copyWith(color: Colors.black)),
+                    label: Text('Log Hunger & Craving Prompt',
+                        style: AppTypography.labelLg
+                            .copyWith(color: Colors.black)),
                     onPressed: _logCurrentCraving,
                   ),
                 ],
@@ -191,23 +207,31 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
                 decoration: BoxDecoration(
                   color: AppColors.accent.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                  border: Border.all(color: AppColors.accent.withValues(alpha: 0.4)),
+                  border: Border.all(
+                      color: AppColors.accent.withValues(alpha: 0.4)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.bolt, color: AppColors.accent, size: 20),
+                        const Icon(Icons.bolt,
+                            color: AppColors.accent, size: 20),
                         const SizedBox(width: 6),
-                        Text(_intervention!.nudgeTitle, style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                        Text(_intervention!.nudgeTitle,
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.accent)),
                       ],
                     ),
                     const SizedBox(height: 6),
                     Text(_intervention!.nudgeBody, style: AppTypography.bodyMd),
                     const SizedBox(height: AppSpacing.sm),
-                    Text('Recommended Pre-Emptive Snack:', style: AppTypography.labelMd.copyWith(color: AppColors.teal)),
-                    Text(_intervention!.recommendedSnack, style: AppTypography.bodySm.copyWith(color: AppColors.teal)),
+                    Text('Recommended Pre-Emptive Snack:',
+                        style: AppTypography.labelMd
+                            .copyWith(color: AppColors.teal)),
+                    Text(_intervention!.recommendedSnack,
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.teal)),
                   ],
                 ),
               ),
@@ -232,13 +256,17 @@ class _AdaptiveHungerCravingsScreenState extends State<AdaptiveHungerCravingsScr
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Craving: ${log.cravingType.name.toUpperCase()}', style: AppTypography.labelLg),
-                        Text('Hunger: ${log.hungerScore}/5 · Stress: ${log.stressLevel}', style: AppTypography.bodySm),
+                        Text('Craving: ${log.cravingType.name.toUpperCase()}',
+                            style: AppTypography.labelLg),
+                        Text(
+                            'Hunger: ${log.hungerScore}/5 · Stress: ${log.stressLevel}',
+                            style: AppTypography.bodySm),
                       ],
                     ),
                     Text(
                       '${log.timestamp.hour}:${log.timestamp.minute.toString().padLeft(2, '0')}',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),

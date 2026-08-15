@@ -60,21 +60,24 @@ class TransformationEngine {
       return RelapseInterventionResult(
         tier: RelapseTier.tier3SquadNudge,
         title: 'Squad Support Alert',
-        message: 'You have been away for $missedDays days. We have sent a gentle nudge to your Squad!',
+        message:
+            'You have been away for $missedDays days. We have sent a gentle nudge to your Squad!',
         actionButtonText: 'Rejoin Squad Challenge',
       );
     } else if (missedDays >= 6) {
       return const RelapseInterventionResult(
         tier: RelapseTier.tier2Recalibrate,
         title: 'Program Recalibration',
-        message: 'Life gets busy! Let us recalibrate your daily goals to lower stress.',
+        message:
+            'Life gets busy! Let us recalibrate your daily goals to lower stress.',
         actionButtonText: 'Recalibrate Goals',
       );
     } else if (missedDays >= 3) {
       return const RelapseInterventionResult(
         tier: RelapseTier.tier1Support,
         title: 'Supportive Check-in',
-        message: 'Missing a few days is completely normal. Resume with a gentle 5min mobility session today!',
+        message:
+            'Missing a few days is completely normal. Resume with a gentle 5min mobility session today!',
         actionButtonText: 'Start 5min Mobility',
       );
     } else {

@@ -9,7 +9,8 @@ void main() {
   group('§P4-A Dashboard Screen & Orchestration Tests', () {
     // ── DIP Model Tests ─────────────────────────────────────────────────────
 
-    test('DailyIntelligencePackage includes healthScore and primaryInsight', () {
+    test('DailyIntelligencePackage includes healthScore and primaryInsight',
+        () {
       final dip = DailyIntelligencePackage(
         userId: 'user_1',
         date: DateTime.now(),
@@ -29,7 +30,8 @@ void main() {
       expect(dip.dailyMissions, hasLength(2));
     });
 
-    test('DailyIntelligencePackage.toJson / fromJson round-trips correctly', () {
+    test('DailyIntelligencePackage.toJson / fromJson round-trips correctly',
+        () {
       final dip = DailyIntelligencePackage(
         userId: 'user_2',
         date: DateTime(2026, 8, 1),
@@ -54,7 +56,8 @@ void main() {
 
     // ── DashboardLiveMetrics Tests ─────────────────────────────────────────
 
-    test('DashboardLiveMetrics holds correct step, calorie, water defaults', () {
+    test('DashboardLiveMetrics holds correct step, calorie, water defaults',
+        () {
       const live = DashboardLiveMetrics();
       expect(live.steps, equals(8420));
       expect(live.stepGoal, equals(10000));
@@ -76,7 +79,8 @@ void main() {
 
     // ── Orchestration Tests ────────────────────────────────────────────────
 
-    test('DashboardNotifier starts in idle/loading and reaches ready', () async {
+    test('DashboardNotifier starts in idle/loading and reaches ready',
+        () async {
       final notifier = DashboardNotifier();
       // Just instantiated — orchestration runs immediately, await it
       await Future.delayed(const Duration(milliseconds: 300));
@@ -85,7 +89,8 @@ void main() {
       expect(notifier.state.isReady, isTrue);
     });
 
-    test('DashboardNotifier DIP has zero AI calls (DIP-only orchestration)', () async {
+    test('DashboardNotifier DIP has zero AI calls (DIP-only orchestration)',
+        () async {
       final notifier = DashboardNotifier();
       await Future.delayed(const Duration(milliseconds: 300));
       // Validate the DIP is loaded from Drift — primaryFocus set, no AI source marker
@@ -114,7 +119,8 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('DashboardScreen renders after orchestration completes', (tester) async {
+    testWidgets('DashboardScreen renders after orchestration completes',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: DashboardScreen()),
@@ -129,13 +135,15 @@ void main() {
       expect(find.textContaining('k', skipOffstage: false), findsWidgets);
 
       // AI Coach Insight section visible
-      expect(find.text('AI Coach Insight', skipOffstage: false), findsOneWidget);
+      expect(
+          find.text('AI Coach Insight', skipOffstage: false), findsOneWidget);
 
       // Streak visible
       expect(find.textContaining('day', skipOffstage: false), findsWidgets);
     });
 
-    testWidgets('DashboardScreen shows Bento Row 1 (Water + Calories)', (tester) async {
+    testWidgets('DashboardScreen shows Bento Row 1 (Water + Calories)',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: DashboardScreen()),
@@ -148,7 +156,8 @@ void main() {
       expect(find.text('Calories', skipOffstage: false), findsWidgets);
     });
 
-    testWidgets('DashboardScreen shows Bento Row 2 (Sleep + HR)', (tester) async {
+    testWidgets('DashboardScreen shows Bento Row 2 (Sleep + HR)',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: DashboardScreen()),
@@ -175,10 +184,12 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
       await tester.pumpAndSettle();
 
-      expect(find.textContaining("Today's Missions", skipOffstage: false), findsOneWidget);
+      expect(find.textContaining("Today's Missions", skipOffstage: false),
+          findsOneWidget);
     });
 
-    testWidgets('DashboardScreen pull-to-refresh calls refresh()', (tester) async {
+    testWidgets('DashboardScreen pull-to-refresh calls refresh()',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: DashboardScreen()),
@@ -188,7 +199,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Simulate pull-to-refresh gesture
-      await tester.fling(find.byType(CustomScrollView), const Offset(0, 300), 800);
+      await tester.fling(
+          find.byType(CustomScrollView), const Offset(0, 300), 800);
       await tester.pump(const Duration(milliseconds: 200));
       // RefreshIndicator should have triggered
       expect(find.byType(RefreshIndicator), findsOneWidget);

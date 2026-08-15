@@ -44,13 +44,17 @@ class TransformationDashboardScreen extends ConsumerWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.favorite, color: AppColors.warningAmber),
+                          const Icon(Icons.favorite,
+                              color: AppColors.warningAmber),
                           const SizedBox(width: AppSpacing.sm),
-                          Text(intervention.title, style: AppTypography.titleMedium.copyWith(color: AppColors.warningAmber)),
+                          Text(intervention.title,
+                              style: AppTypography.titleMedium
+                                  .copyWith(color: AppColors.warningAmber)),
                         ],
                       ),
                       const SizedBox(height: 4.0),
-                      Text(intervention.message, style: AppTypography.bodyMedium),
+                      Text(intervention.message,
+                          style: AppTypography.bodyMedium),
                     ],
                   ),
                 ),
@@ -63,22 +67,26 @@ class TransformationDashboardScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('90-Day Weight Trajectory Forecast', style: AppTypography.titleMedium),
+                        Text('90-Day Weight Trajectory Forecast',
+                            style: AppTypography.titleMedium),
                         Chip(
                           backgroundColor: AppColors.glassBgMid,
                           side: const BorderSide(color: AppColors.glassBorder),
-                          label: Text('Probabilistic Range', style: AppTypography.labelSmall),
+                          label: Text('Probabilistic Range',
+                              style: AppTypography.labelSmall),
                         ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       '${forecast.expectedKg.toStringAsFixed(1)} kg',
-                      style: AppTypography.displayLarge.copyWith(color: AppColors.primaryEmerald),
+                      style: AppTypography.displayLarge
+                          .copyWith(color: AppColors.primaryEmerald),
                     ),
                     Text(
                       'Expected Range: ${forecast.minKg.toStringAsFixed(1)} kg – ${forecast.maxKg.toStringAsFixed(1)} kg',
-                      style: AppTypography.bodyMedium.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodyMedium
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -89,14 +97,17 @@ class TransformationDashboardScreen extends ConsumerWidget {
               GlassCard(
                 child: Row(
                   children: [
-                    const Icon(Icons.lock, color: AppColors.primaryViolet, size: 32.0),
+                    const Icon(Icons.lock,
+                        color: AppColors.primaryViolet, size: 32.0),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Encrypted Progress Photo Vault', style: AppTypography.titleMedium),
-                          Text('AES-256 local encryption with Biometric Lock', style: AppTypography.labelSmall),
+                          Text('Encrypted Progress Photo Vault',
+                              style: AppTypography.titleMedium),
+                          Text('AES-256 local encryption with Biometric Lock',
+                              style: AppTypography.labelSmall),
                         ],
                       ),
                     ),
@@ -107,7 +118,8 @@ class TransformationDashboardScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Monthly Transformation Memory Snapshots
-              Text('Monthly Transformation Memory', style: AppTypography.titleLarge),
+              Text('Monthly Transformation Memory',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               ...state.monthlySnapshots.map(
                 (snap) => Padding(
@@ -119,14 +131,20 @@ class TransformationDashboardScreen extends ConsumerWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(snap.monthYear, style: AppTypography.titleMedium),
-                            Text('${snap.weightKg} kg • ${snap.bodyFatPercentage}% Body Fat', style: AppTypography.labelSmall),
+                            Text(snap.monthYear,
+                                style: AppTypography.titleMedium),
+                            Text(
+                                '${snap.weightKg} kg • ${snap.bodyFatPercentage}% Body Fat',
+                                style: AppTypography.labelSmall),
                           ],
                         ),
                         Chip(
                           backgroundColor: AppColors.glassBgMid,
                           side: const BorderSide(color: AppColors.glassBorder),
-                          label: Text('Avg Readiness: ${snap.averageReadinessScore}', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan)),
+                          label: Text(
+                              'Avg Readiness: ${snap.averageReadinessScore}',
+                              style: AppTypography.labelSmall
+                                  .copyWith(color: AppColors.primaryCyan)),
                         ),
                       ],
                     ),

@@ -48,8 +48,9 @@ class MealQualityResult {
   final double glycemicScore;
   final double processingScore;
   final double satietyScore;
-  final String readinessImpact; // e.g. "This meal will support recovery (+2% readiness)"
-  final String goalImpact;      // e.g. "This meal aligns with your fat-loss goal ✓"
+  final String
+      readinessImpact; // e.g. "This meal will support recovery (+2% readiness)"
+  final String goalImpact; // e.g. "This meal aligns with your fat-loss goal ✓"
 
   const MealQualityResult({
     required this.overallScore,
@@ -122,7 +123,8 @@ class NutritionEngine {
   }
 
   /// Check rule-based protein deficit alert (< 70% of daily target)
-  bool isProteinDeficitAlert({required double loggedProtein, required double targetProtein}) {
+  bool isProteinDeficitAlert(
+      {required double loggedProtein, required double targetProtein}) {
     return loggedProtein < (0.70 * targetProtein);
   }
 

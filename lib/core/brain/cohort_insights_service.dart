@@ -49,7 +49,8 @@ class CohortInsightsData {
   final AgeGroupRankData ageGroupRank;
   final ProgramComparisonStatData programSuccessStat;
   final String cohortName;
-  final bool isAnonymityPreserved; // Enforces minimum cohort size threshold (N >= 50)
+  final bool
+      isAnonymityPreserved; // Enforces minimum cohort size threshold (N >= 50)
 
   const CohortInsightsData({
     required this.cohortSize,
@@ -95,12 +96,17 @@ class CohortInsightsService {
     required List<double> readinessDistribution,
   }) {
     final bool isPreserved = rawCohortSize >= minCohortSizeThreshold;
-    final displayCity = isPreserved ? metrics.city : 'Regional Cohort (State Level)';
-    final displayCohortSize = isPreserved ? rawCohortSize : max(minCohortSizeThreshold, rawCohortSize);
+    final displayCity =
+        isPreserved ? metrics.city : 'Regional Cohort (State Level)';
+    final displayCohortSize = isPreserved
+        ? rawCohortSize
+        : max(minCohortSizeThreshold, rawCohortSize);
 
     final stepPct = _calculatePercentile(metrics.avgSteps, stepsDistribution);
-    final proteinPct = _calculatePercentile(metrics.avgProtein, proteinDistribution);
-    final readinessPct = _calculatePercentile(metrics.avgReadiness, readinessDistribution);
+    final proteinPct =
+        _calculatePercentile(metrics.avgProtein, proteinDistribution);
+    final readinessPct =
+        _calculatePercentile(metrics.avgReadiness, readinessDistribution);
 
     final cityRank = CityRankData(
       city: displayCity,

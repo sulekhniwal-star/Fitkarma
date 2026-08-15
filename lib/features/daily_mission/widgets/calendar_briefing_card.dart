@@ -39,7 +39,8 @@ class CalendarIntelligenceCard extends ConsumerWidget {
               if (insight.specialEvent != null &&
                   insight.specialEvent != SpecialEvent.none)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.warning.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(10),
@@ -95,11 +96,13 @@ class CalendarIntelligenceCard extends ConsumerWidget {
                     children: [
                       Text(
                         'Standard: ',
-                        style: AppTypography.bodySm.copyWith(color: AppColors.textMuted),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textMuted),
                       ),
                       Text(
                         insight.workoutRecommendation.standardType,
-                        style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -138,7 +141,8 @@ class CalendarIntelligenceCard extends ConsumerWidget {
           ] else ...[
             Text(
               'Workout: ${insight.workoutRecommendation.type}',
-              style: AppTypography.labelLg.copyWith(color: AppColors.textPrimary),
+              style:
+                  AppTypography.labelLg.copyWith(color: AppColors.textPrimary),
             ),
           ],
 
@@ -176,11 +180,13 @@ class CalendarIntelligenceCard extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.check_circle, color: AppColors.success, size: 16),
+                    const Icon(Icons.check_circle,
+                        color: AppColors.success, size: 16),
                     const SizedBox(width: 6),
                     Text(
                       'Adapted Plan Confirmed',
-                      style: AppTypography.labelMd.copyWith(color: AppColors.success),
+                      style: AppTypography.labelMd
+                          .copyWith(color: AppColors.success),
                     ),
                   ],
                 ),
@@ -198,7 +204,8 @@ class CalendarIntelligenceCard extends ConsumerWidget {
               child: Center(
                 child: Text(
                   'Original Plan Retained',
-                  style: AppTypography.labelMd.copyWith(color: AppColors.secondary),
+                  style: AppTypography.labelMd
+                      .copyWith(color: AppColors.secondary),
                 ),
               ),
             ),
@@ -215,11 +222,13 @@ class CalendarIntelligenceCard extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: () =>
-                        ref.read(calendarProvider.notifier).confirmAdaptedPlan(),
+                    onPressed: () => ref
+                        .read(calendarProvider.notifier)
+                        .confirmAdaptedPlan(),
                     child: const Text(
                       'Confirm Adapted Plan',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

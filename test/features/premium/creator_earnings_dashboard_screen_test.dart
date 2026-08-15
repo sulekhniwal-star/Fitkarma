@@ -5,7 +5,8 @@ import 'package:fitkarma/features/premium/screens/creator_earnings_dashboard_scr
 import 'package:fitkarma/features/premium/providers/affiliate_provider.dart';
 
 void main() {
-  testWidgets('CreatorEarningsDashboardScreen renders §P13-C wireframe components properly',
+  testWidgets(
+      'CreatorEarningsDashboardScreen renders §P13-C wireframe components properly',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
@@ -49,10 +50,12 @@ void main() {
 
     // Actions
     expect(find.text('Request Instant Bank Transfer'), findsOneWidget);
-    expect(find.text('Share Referral Link: fitkarma.com/ref/sharma10'), findsOneWidget);
+    expect(find.text('Share Referral Link: fitkarma.com/ref/sharma10'),
+        findsOneWidget);
   });
 
-  testWidgets('Tapping Request Instant Bank Transfer triggers payout', (tester) async {
+  testWidgets('Tapping Request Instant Bank Transfer triggers payout',
+      (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
@@ -78,6 +81,7 @@ void main() {
 
     // Balance resets to ₹0
     expect(find.text('₹0'), findsOneWidget);
-    expect(container.read(affiliateProvider).stats.availableBalanceInr, equals(0.0));
+    expect(container.read(affiliateProvider).stats.availableBalanceInr,
+        equals(0.0));
   });
 }

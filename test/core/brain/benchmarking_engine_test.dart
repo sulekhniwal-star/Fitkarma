@@ -15,11 +15,14 @@ void main() {
       workoutsPerWeek: 4.2,
     );
 
-    test('BenchmarkingEngine compares user metrics against demographic cohort distribution', () {
+    test(
+        'BenchmarkingEngine compares user metrics against demographic cohort distribution',
+        () {
       final res = engine.compare(user: user, data: metrics);
 
       expect(res.cohortLabel, equals('Age 28 · Male · India'));
-      expect(res.stepsPercentile, greaterThanOrEqualTo(75)); // 9400 steps is above p75 (9000)
+      expect(res.stepsPercentile,
+          greaterThanOrEqualTo(75)); // 9400 steps is above p75 (9000)
       expect(res.proteinPercentile, greaterThanOrEqualTo(50)); // 78g protein
       expect(res.sleepPercentile, greaterThanOrEqualTo(50)); // 7.1h sleep
       expect(res.workoutsPercentile, greaterThanOrEqualTo(75)); // 4.2 workouts
@@ -36,7 +39,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('BenchmarkDisplayScreen renders overall percentile BentoCard, metric breakdowns, and opportunity tip', (tester) async {
+    testWidgets(
+        'BenchmarkDisplayScreen renders overall percentile BentoCard, metric breakdowns, and opportunity tip',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: BenchmarkDisplayScreen(user: user, metrics: metrics),
@@ -53,7 +58,8 @@ void main() {
       expect(find.text('Sleep'), findsOneWidget);
       expect(find.text('Workouts'), findsOneWidget);
       expect(find.text('Your biggest opportunity:'), findsOneWidget);
-      expect(find.textContaining('Protein is your lowest percentile'), findsOneWidget);
+      expect(find.textContaining('Protein is your lowest percentile'),
+          findsOneWidget);
     });
   });
 }

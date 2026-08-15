@@ -5,7 +5,9 @@ void main() {
   group('DoshaQuizScoringEngine Unit Tests', () {
     const engine = DoshaQuizScoringEngine();
 
-    test('calculateDoshaProfile returns Vata dominant when Vata answers majority', () {
+    test(
+        'calculateDoshaProfile returns Vata dominant when Vata answers majority',
+        () {
       final answers = [
         const DoshaAnswer(questionId: 'q1', associatedDosha: DoshaType.vata),
         const DoshaAnswer(questionId: 'q2', associatedDosha: DoshaType.vata),
@@ -21,7 +23,9 @@ void main() {
       expect(result.guidelines.recommendedSpices, contains('Ginger'));
     });
 
-    test('calculateDoshaProfile returns Pitta dominant when Pitta answers majority', () {
+    test(
+        'calculateDoshaProfile returns Pitta dominant when Pitta answers majority',
+        () {
       final answers = [
         const DoshaAnswer(questionId: 'q1', associatedDosha: DoshaType.pitta),
         const DoshaAnswer(questionId: 'q2', associatedDosha: DoshaType.pitta),
@@ -35,7 +39,9 @@ void main() {
       expect(result.guidelines.recommendedSpices, contains('Fennel'));
     });
 
-    test('calculateDoshaProfile returns Kapha dominant when Kapha answers majority', () {
+    test(
+        'calculateDoshaProfile returns Kapha dominant when Kapha answers majority',
+        () {
       final answers = [
         const DoshaAnswer(questionId: 'q1', associatedDosha: DoshaType.kapha),
         const DoshaAnswer(questionId: 'q2', associatedDosha: DoshaType.kapha),
@@ -49,7 +55,9 @@ void main() {
       expect(result.guidelines.recommendedSpices, contains('Black Pepper'));
     });
 
-    test('calculateDoshaProfile returns equal distribution fallback when empty answers', () {
+    test(
+        'calculateDoshaProfile returns equal distribution fallback when empty answers',
+        () {
       final result = engine.calculateDoshaProfile([]);
 
       expect(result.vataPct, equals(33.3));

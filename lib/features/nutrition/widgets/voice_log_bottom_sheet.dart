@@ -83,10 +83,14 @@ class VoiceLogBottomSheet extends ConsumerWidget {
                   shape: BoxShape.circle,
                   color: state.isRecording
                       ? AppColors.error
-                      : (state.isProcessing ? AppColors.accent : AppColors.primary),
+                      : (state.isProcessing
+                          ? AppColors.accent
+                          : AppColors.primary),
                   boxShadow: [
                     BoxShadow(
-                      color: (state.isRecording ? AppColors.error : AppColors.primary)
+                      color: (state.isRecording
+                              ? AppColors.error
+                              : AppColors.primary)
                           .withAlpha(80),
                       blurRadius: state.isRecording ? 24 : 12,
                       spreadRadius: state.isRecording ? 8 : 2,
@@ -108,9 +112,13 @@ class VoiceLogBottomSheet extends ConsumerWidget {
             child: Text(
               state.isRecording
                   ? 'Listening... Tap to stop'
-                  : (state.isProcessing ? 'Transcribing & Parsing...' : 'Tap mic to speak'),
+                  : (state.isProcessing
+                      ? 'Transcribing & Parsing...'
+                      : 'Tap mic to speak'),
               style: AppTypography.labelLg.copyWith(
-                color: state.isRecording ? AppColors.error : AppColors.textSecondary,
+                color: state.isRecording
+                    ? AppColors.error
+                    : AppColors.textSecondary,
               ),
             ),
           ),
@@ -127,11 +135,13 @@ class VoiceLogBottomSheet extends ConsumerWidget {
                     children: [
                       Text('Transcribed:', style: AppTypography.labelSmall),
                       Text(state.result!.detectedLanguageLocale,
-                          style: AppTypography.labelSmall.copyWith(color: AppColors.teal)),
+                          style: AppTypography.labelSmall
+                              .copyWith(color: AppColors.teal)),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xs),
-                  Text('"${state.result!.rawTranscript}"', style: AppTypography.bodyMd),
+                  Text('"${state.result!.rawTranscript}"',
+                      style: AppTypography.bodyMd),
                   const Divider(color: AppColors.glassBorder),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +149,8 @@ class VoiceLogBottomSheet extends ConsumerWidget {
                       Text('Parsed:', style: AppTypography.labelSmall),
                       Text(
                         '${state.result!.totalCalories} kcal · ${state.result!.totalProteinGrams.round()}g P',
-                        style: AppTypography.h3.copyWith(color: AppColors.primary),
+                        style:
+                            AppTypography.h3.copyWith(color: AppColors.primary),
                       ),
                     ],
                   ),

@@ -8,21 +8,88 @@ class RestaurantDatabaseService {
       : _seededLocalDishes = customDishes ?? _defaultSeededDishes;
 
   static const List<RestaurantMenuItem> _defaultSeededDishes = [
-    RestaurantMenuItem(name: "Paneer Tikka", calories: 280, proteinG: 22.0, glycemicIndex: 15, isDeepFried: false, sugarG: 2),
-    RestaurantMenuItem(name: "Paneer Tikka Masala", calories: 450, proteinG: 18.0, glycemicIndex: 35, isDeepFried: false, sugarG: 5),
-    RestaurantMenuItem(name: "Chole Bhature", calories: 850, proteinG: 12.0, glycemicIndex: 65, isDeepFried: true, sugarG: 4),
-    RestaurantMenuItem(name: "Sprouted Moong Chaat", calories: 180, proteinG: 9.0, glycemicIndex: 25, isDeepFried: false, sugarG: 3),
-    RestaurantMenuItem(name: "Grilled Soya Chaap", calories: 240, proteinG: 22.0, glycemicIndex: 20, isDeepFried: false, sugarG: 1),
-    RestaurantMenuItem(name: "Special Thali", calories: 1100, proteinG: 28.0, glycemicIndex: 55, isDeepFried: true, sugarG: 12),
-    RestaurantMenuItem(name: "Tandoori Roti", calories: 120, proteinG: 4.0, glycemicIndex: 60, isDeepFried: false, sugarG: 0),
-    RestaurantMenuItem(name: "Mix Veg", calories: 150, proteinG: 3.0, glycemicIndex: 40, isDeepFried: false, sugarG: 2),
-    RestaurantMenuItem(name: "Butter Naan", calories: 350, proteinG: 8.0, glycemicIndex: 70, isDeepFried: false, sugarG: 1),
-    RestaurantMenuItem(name: "Dal Makhani", calories: 350, proteinG: 12.0, glycemicIndex: 45, isDeepFried: false, sugarG: 2),
-    RestaurantMenuItem(name: "Yellow Dal Tadka", calories: 180, proteinG: 9.0, glycemicIndex: 30, isDeepFried: false, sugarG: 1),
+    RestaurantMenuItem(
+        name: "Paneer Tikka",
+        calories: 280,
+        proteinG: 22.0,
+        glycemicIndex: 15,
+        isDeepFried: false,
+        sugarG: 2),
+    RestaurantMenuItem(
+        name: "Paneer Tikka Masala",
+        calories: 450,
+        proteinG: 18.0,
+        glycemicIndex: 35,
+        isDeepFried: false,
+        sugarG: 5),
+    RestaurantMenuItem(
+        name: "Chole Bhature",
+        calories: 850,
+        proteinG: 12.0,
+        glycemicIndex: 65,
+        isDeepFried: true,
+        sugarG: 4),
+    RestaurantMenuItem(
+        name: "Sprouted Moong Chaat",
+        calories: 180,
+        proteinG: 9.0,
+        glycemicIndex: 25,
+        isDeepFried: false,
+        sugarG: 3),
+    RestaurantMenuItem(
+        name: "Grilled Soya Chaap",
+        calories: 240,
+        proteinG: 22.0,
+        glycemicIndex: 20,
+        isDeepFried: false,
+        sugarG: 1),
+    RestaurantMenuItem(
+        name: "Special Thali",
+        calories: 1100,
+        proteinG: 28.0,
+        glycemicIndex: 55,
+        isDeepFried: true,
+        sugarG: 12),
+    RestaurantMenuItem(
+        name: "Tandoori Roti",
+        calories: 120,
+        proteinG: 4.0,
+        glycemicIndex: 60,
+        isDeepFried: false,
+        sugarG: 0),
+    RestaurantMenuItem(
+        name: "Mix Veg",
+        calories: 150,
+        proteinG: 3.0,
+        glycemicIndex: 40,
+        isDeepFried: false,
+        sugarG: 2),
+    RestaurantMenuItem(
+        name: "Butter Naan",
+        calories: 350,
+        proteinG: 8.0,
+        glycemicIndex: 70,
+        isDeepFried: false,
+        sugarG: 1),
+    RestaurantMenuItem(
+        name: "Dal Makhani",
+        calories: 350,
+        proteinG: 12.0,
+        glycemicIndex: 45,
+        isDeepFried: false,
+        sugarG: 2),
+    RestaurantMenuItem(
+        name: "Yellow Dal Tadka",
+        calories: 180,
+        proteinG: 9.0,
+        glycemicIndex: 30,
+        isDeepFried: false,
+        sugarG: 1),
   ];
 
   /// OCR Menu Parser processing raw OCR text lines per §P5-E spec
-  List<ParsedMenuItemOverlay> parseMenuText(List<String> rawOcrLines, {String userGoal = 'Fat Loss'}) {
+  List<ParsedMenuItemOverlay> parseMenuText(List<String> rawOcrLines,
+      {String userGoal = 'Fat Loss'}) {
     return rawOcrLines.map((line) {
       final matchedItem = matchDishInDatabase(line);
       final overlayColor = computeGoalOverlay(matchedItem, userGoal: userGoal);
@@ -36,7 +103,8 @@ class RestaurantDatabaseService {
   }
 
   /// Computes Goal Overlay Color Badge based on item attributes per §P5-E
-  MenuGoalOverlayCategory computeGoalOverlay(RestaurantMenuItem? item, {required String userGoal}) {
+  MenuGoalOverlayCategory computeGoalOverlay(RestaurantMenuItem? item,
+      {required String userGoal}) {
     if (item == null) return MenuGoalOverlayCategory.neutral;
 
     // 🔴 Red Highlights (Avoid/Alert): Deep-fried or high-glycemic/empty-calorie items
@@ -79,9 +147,12 @@ class RestaurantDatabaseService {
       }
 
       // 2. Substring containment check
-      if (normalizedOcr.contains(normalizedDb) || normalizedDb.contains(normalizedOcr)) {
-        final double containmentScore = normalizedDb.length / normalizedOcr.length;
-        final score = containmentScore > 1.0 ? 1.0 / containmentScore : containmentScore;
+      if (normalizedOcr.contains(normalizedDb) ||
+          normalizedDb.contains(normalizedOcr)) {
+        final double containmentScore =
+            normalizedDb.length / normalizedOcr.length;
+        final score =
+            containmentScore > 1.0 ? 1.0 / containmentScore : containmentScore;
         if (score > highestSimilarity && score >= 0.6) {
           highestSimilarity = score;
           bestMatch = item;
@@ -89,8 +160,11 @@ class RestaurantDatabaseService {
       }
 
       // 3. Levenshtein edit distance calculation
-      final distance = _calculateLevenshteinDistance(normalizedOcr, normalizedDb);
-      final maxLength = normalizedOcr.length > normalizedDb.length ? normalizedOcr.length : normalizedDb.length;
+      final distance =
+          _calculateLevenshteinDistance(normalizedOcr, normalizedDb);
+      final maxLength = normalizedOcr.length > normalizedDb.length
+          ? normalizedOcr.length
+          : normalizedDb.length;
       final similarity = maxLength > 0 ? 1.0 - (distance / maxLength) : 0.0;
 
       if (similarity > highestSimilarity) {

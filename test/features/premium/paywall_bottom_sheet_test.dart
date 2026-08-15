@@ -6,7 +6,8 @@ import 'package:fitkarma/features/premium/models/subscription_model.dart';
 import 'package:fitkarma/features/premium/providers/premium_provider.dart';
 
 void main() {
-  testWidgets('PaywallBottomSheet renders §P13-A wireframe layout and India pricing',
+  testWidgets(
+      'PaywallBottomSheet renders §P13-A wireframe layout and India pricing',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
@@ -28,13 +29,16 @@ void main() {
 
     // Header
     expect(find.text('Unlock FitKarma Pro'), findsOneWidget);
-    expect(find.text('Supercharge your health journey with Pro:'), findsOneWidget);
+    expect(
+        find.text('Supercharge your health journey with Pro:'), findsOneWidget);
 
     // Feature Checkmarks
     expect(find.text('Unlimited AI Coach Chats'), findsOneWidget);
-    expect(find.text('90-Day Predictive Health Insights & Charts'), findsOneWidget);
+    expect(find.text('90-Day Predictive Health Insights & Charts'),
+        findsOneWidget);
     expect(find.text('Comprehensive Monthly Health Reports'), findsOneWidget);
-    expect(find.text('Advanced Body Composition & Measurements Engine'), findsOneWidget);
+    expect(find.text('Advanced Body Composition & Measurements Engine'),
+        findsOneWidget);
     expect(find.text('Unlimited Meal Photo Analyses'), findsOneWidget);
     expect(find.text('Squad Creation & Challenge Host'), findsOneWidget);
 
@@ -85,7 +89,8 @@ void main() {
     expect(find.text('Start Free Trial (₹299 / month)'), findsOneWidget);
   });
 
-  testWidgets('PaywallBottomSheet displays trigger banner when trigger is provided',
+  testWidgets(
+      'PaywallBottomSheet displays trigger banner when trigger is provided',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;

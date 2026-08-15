@@ -80,8 +80,7 @@ class StepsScreen extends ConsumerWidget {
       actions: [
         // Sync status chip
         Padding(
-          padding:
-              const EdgeInsets.only(right: AppSpacing.md, top: 4),
+          padding: const EdgeInsets.only(right: AppSpacing.md, top: 4),
           child: _SyncChip(state: state),
         ),
       ],
@@ -134,8 +133,8 @@ class _SyncChip extends StatelessWidget {
               ? SizedBox(
                   width: 12,
                   height: 12,
-                  child: CircularProgressIndicator(
-                      strokeWidth: 1.5, color: color),
+                  child:
+                      CircularProgressIndicator(strokeWidth: 1.5, color: color),
                 )
               : Icon(icon, color: color, size: 12),
           const SizedBox(width: 5),
@@ -172,8 +171,7 @@ class _DailyProgressCard extends StatelessWidget {
               Text('Daily Progress', style: AppTypography.bodySm),
               Text(
                 '${_fmt(record.totalSteps)} / ${_fmt(record.stepGoal)} steps',
-                style:
-                    AppTypography.labelLg.copyWith(color: AppColors.teal),
+                style: AppTypography.labelLg.copyWith(color: AppColors.teal),
               ),
             ],
           ),
@@ -186,8 +184,7 @@ class _DailyProgressCard extends StatelessWidget {
             children: [
               Text(
                 _fmt(record.totalSteps),
-                style: AppTypography.metricLg
-                    .copyWith(color: AppColors.teal),
+                style: AppTypography.metricLg.copyWith(color: AppColors.teal),
               ),
               const SizedBox(width: 6),
               Text('steps',
@@ -205,8 +202,7 @@ class _DailyProgressCard extends StatelessWidget {
           if (remaining > 0)
             Text(
               '${_fmt(remaining)} steps remaining',
-              style: AppTypography.bodySm
-                  .copyWith(color: AppColors.textMuted),
+              style: AppTypography.bodySm.copyWith(color: AppColors.textMuted),
             )
           else
             Row(
@@ -216,8 +212,8 @@ class _DailyProgressCard extends StatelessWidget {
                 const SizedBox(width: 5),
                 Text(
                   'Daily goal achieved! 🎉',
-                  style: AppTypography.bodySm
-                      .copyWith(color: AppColors.success),
+                  style:
+                      AppTypography.bodySm.copyWith(color: AppColors.success),
                 ),
               ],
             ),
@@ -226,8 +222,7 @@ class _DailyProgressCard extends StatelessWidget {
     );
   }
 
-  String _fmt(int n) =>
-      n >= 1000 ? '${(n / 1000).toStringAsFixed(1)}k' : '$n';
+  String _fmt(int n) => n >= 1000 ? '${(n / 1000).toStringAsFixed(1)}k' : '$n';
 }
 
 // ── Step Progress Bar ─────────────────────────────────────────────────────────
@@ -366,9 +361,8 @@ class _HourlyDistributionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Only display hours 6–22 (where activity typically happens)
-    final displayBuckets = buckets
-        .where((b) => b.hour >= 6 && b.hour <= 22)
-        .toList();
+    final displayBuckets =
+        buckets.where((b) => b.hour >= 6 && b.hour <= 22).toList();
 
     return GlassCard(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -395,13 +389,11 @@ class _HourlyBarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     if (buckets.isEmpty) {
       return Center(
-        child: Text('No step data yet today',
-            style: AppTypography.bodySm),
+        child: Text('No step data yet today', style: AppTypography.bodySm),
       );
     }
 
-    final maxSteps =
-        buckets.map((b) => b.steps).reduce(math.max).toDouble();
+    final maxSteps = buckets.map((b) => b.steps).reduce(math.max).toDouble();
 
     return CustomPaint(
       size: const Size(double.infinity, 100),
@@ -441,9 +433,8 @@ class _HourlyBarPainter extends CustomPainter {
     for (int i = 0; i < n; i++) {
       final bucket = buckets[i];
       final x = i * (barW + gap) + gap / 2;
-      final barH = bucket.steps > 0
-          ? (bucket.steps / maxSteps) * chartH * 0.9
-          : 0.0;
+      final barH =
+          bucket.steps > 0 ? (bucket.steps / maxSteps) * chartH * 0.9 : 0.0;
 
       if (barH > 0) {
         // Bar gradient fill
@@ -527,11 +518,10 @@ class _CoachInsightCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Coach',
-                    style: AppTypography.labelLg
-                        .copyWith(color: AppColors.teal)),
+                    style:
+                        AppTypography.labelLg.copyWith(color: AppColors.teal)),
                 const SizedBox(height: 5),
-                Text(nudge,
-                    style: AppTypography.bodyMd.copyWith(height: 1.5)),
+                Text(nudge, style: AppTypography.bodyMd.copyWith(height: 1.5)),
               ],
             ),
           ),
@@ -569,8 +559,7 @@ class _DataSourceCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Data Source: $sourceLabel',
-                    style: AppTypography.labelLg),
+                Text('Data Source: $sourceLabel', style: AppTypography.labelLg),
                 Text(
                   'Last synced: ${_formatSyncTime(lastSynced)}',
                   style: AppTypography.bodySm,
@@ -582,17 +571,14 @@ class _DataSourceCard extends StatelessWidget {
             onPressed: onSync,
             style: TextButton.styleFrom(
               backgroundColor: AppColors.teal.withValues(alpha: 0.1),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 14, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
-                side: BorderSide(
-                    color: AppColors.teal.withValues(alpha: 0.35)),
+                side: BorderSide(color: AppColors.teal.withValues(alpha: 0.35)),
               ),
             ),
             child: Text('Sync',
-                style: AppTypography.labelLg
-                    .copyWith(color: AppColors.teal)),
+                style: AppTypography.labelLg.copyWith(color: AppColors.teal)),
           ),
         ],
       ),

@@ -23,7 +23,8 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.bg0,
         elevation: 0,
-        title: const Text('Creator Earnings & Referral Center', style: AppTypography.h2),
+        title: const Text('Creator Earnings & Referral Center',
+            style: AppTypography.h2),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,17 +59,20 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
                           children: [
                             Text(
                               'Available Balance:',
-                              style: AppTypography.bodySm.copyWith(color: AppColors.textMuted),
+                              style: AppTypography.bodySm
+                                  .copyWith(color: AppColors.textMuted),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               stats.formattedBalance,
-                              style: AppTypography.metricLg.copyWith(color: AppColors.success),
+                              style: AppTypography.metricLg
+                                  .copyWith(color: AppColors.success),
                             ),
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
                             color: AppColors.glassBgMid,
                             borderRadius: BorderRadius.circular(8),
@@ -79,7 +83,8 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 'Next Payout Date:',
-                                style: AppTypography.labelMd.copyWith(fontSize: 10, color: AppColors.textMuted),
+                                style: AppTypography.labelMd.copyWith(
+                                    fontSize: 10, color: AppColors.textMuted),
                               ),
                               const SizedBox(height: 2),
                               Text(
@@ -97,7 +102,8 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       '15% recurring creator commission on every active Pro referral',
-                      style: AppTypography.labelMd.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.labelMd
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -152,7 +158,8 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
                     Row(
                       children: [
                         const Text('💵 ', style: TextStyle(fontSize: 16)),
-                        Text('Monthly Payout History:', style: AppTypography.h3),
+                        Text('Monthly Payout History:',
+                            style: AppTypography.h3),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -164,12 +171,15 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
                           children: [
                             Text(
                               '• ${payout.periodLabel}:   ${payout.formattedAmount}',
-                              style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary),
+                              style: AppTypography.bodySm
+                                  .copyWith(color: AppColors.textPrimary),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
-                                color: AppColors.success.withValues(alpha: 0.15),
+                                color:
+                                    AppColors.success.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -236,14 +246,16 @@ class CreatorEarningsDashboardScreen extends ConsumerWidget {
                     Clipboard.setData(ClipboardData(text: referral.fullUrl));
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Copied referral link: ${referral.fullUrl}'),
+                        content:
+                            Text('Copied referral link: ${referral.fullUrl}'),
                         backgroundColor: AppColors.secondary,
                       ),
                     );
                   },
                   child: Text(
                     'Share Referral Link: ${referral.fullUrl}',
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 13),
                   ),
                 ),
               ),
@@ -271,7 +283,8 @@ class _MetricRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: AppTypography.bodySm.copyWith(color: AppColors.textMuted)),
+        Text(label,
+            style: AppTypography.bodySm.copyWith(color: AppColors.textMuted)),
         Text(
           value,
           style: AppTypography.bodySm.copyWith(

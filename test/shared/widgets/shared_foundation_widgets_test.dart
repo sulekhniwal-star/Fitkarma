@@ -7,7 +7,8 @@ import 'package:fitkarma/shared/widgets/bilingual_label.dart';
 
 void main() {
   group('Shared Foundation Widgets Tests', () {
-    testWidgets('BentoCard renders child and triggers onTap callback on click', (WidgetTester tester) async {
+    testWidgets('BentoCard renders child and triggers onTap callback on click',
+        (WidgetTester tester) async {
       bool tapped = false;
 
       await tester.pumpWidget(
@@ -31,7 +32,8 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('ActivityRings renders CustomPaint canvas', (WidgetTester tester) async {
+    testWidgets('ActivityRings renders CustomPaint canvas',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -57,7 +59,8 @@ void main() {
       expect(find.byType(CustomPaint), findsWidgets);
     });
 
-    testWidgets('GlowingMetric renders value, label, and unit correctly', (WidgetTester tester) async {
+    testWidgets('GlowingMetric renders value, label, and unit correctly',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -75,7 +78,8 @@ void main() {
       expect(find.byType(GlowingMetric), findsOneWidget);
     });
 
-    testWidgets('BilingualLabel renders English and Hindi text when provided', (WidgetTester tester) async {
+    testWidgets('BilingualLabel renders English and Hindi text when provided',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(

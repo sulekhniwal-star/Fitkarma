@@ -3,7 +3,9 @@ import 'package:fitkarma/core/brain/recovery_os.dart';
 
 void main() {
   group('§P2-D Recovery Operating System Tests', () {
-    test('SleepNeedCalculator incorporates sleep debt, strain, stress, and illness additives with 600m cap', () {
+    test(
+        'SleepNeedCalculator incorporates sleep debt, strain, stress, and illness additives with 600m cap',
+        () {
       const calculator = SleepNeedCalculator();
 
       // Normal baseline
@@ -26,7 +28,8 @@ void main() {
       expect(heavy.totalSleepNeedMin, equals(600)); // Hard capped at 600 min
     });
 
-    test('BedtimeCoach calculates target bedtime with 15min wind-down buffer', () {
+    test('BedtimeCoach calculates target bedtime with 15min wind-down buffer',
+        () {
       const coach = BedtimeCoach();
       final wakeTime = DateTime(2026, 8, 1, 6, 30); // 6:30 AM
       final result = coach.calculateBedtime(
@@ -52,7 +55,8 @@ void main() {
       expect(decision.trainingAdvice, contains('High Capacity'));
     });
 
-    test('RecoveryPrescriptionEngine generates checklist based on readiness', () {
+    test('RecoveryPrescriptionEngine generates checklist based on readiness',
+        () {
       const engine = RecoveryPrescriptionEngine();
 
       final lowPrescription = engine.generatePrescription(
@@ -61,7 +65,8 @@ void main() {
         isIllnessActive: false,
       );
       expect(lowPrescription.any((p) => p.title == 'Active Recovery'), isTrue);
-      expect(lowPrescription.any((p) => p.title == 'Training Restriction'), isTrue);
+      expect(lowPrescription.any((p) => p.title == 'Training Restriction'),
+          isTrue);
 
       final highPrescription = engine.generatePrescription(
         readinessScore: 85,
@@ -71,7 +76,9 @@ void main() {
       expect(highPrescription.any((p) => p.title == 'Full Training'), isTrue);
     });
 
-    test('CircadianScoreEngine applies midpoint shift penalty and morning light bonus', () {
+    test(
+        'CircadianScoreEngine applies midpoint shift penalty and morning light bonus',
+        () {
       const engine = CircadianScoreEngine();
 
       final scoreNormal = engine.calculateCircadianScore(
@@ -87,7 +94,8 @@ void main() {
       expect(scoreShifted, equals(90.0));
     });
 
-    test('IllnessRecoveryDetector identifies illness fatigue vs sleep fatigue', () {
+    test('IllnessRecoveryDetector identifies illness fatigue vs sleep fatigue',
+        () {
       const detector = IllnessRecoveryDetector();
 
       final illness = detector.detect(
@@ -129,7 +137,8 @@ void main() {
       expect(result.detractors.length, equals(3));
     });
 
-    test('RecoveryForecastingEngine calculates recovery age and 5-day forecast', () {
+    test('RecoveryForecastingEngine calculates recovery age and 5-day forecast',
+        () {
       const engine = RecoveryForecastingEngine();
       final ageResult = engine.calculateRecoveryAge(
         chronologicalAge: 34,

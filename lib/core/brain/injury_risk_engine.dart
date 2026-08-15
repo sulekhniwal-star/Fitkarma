@@ -64,16 +64,22 @@ class InjuryRiskEngine {
         .where((w) => w.exerciseCategory == 'pressing')
         .fold(0.0, (sum, item) => sum + item.volumeKg);
 
-    final shoulderSorenessLogs = recoveryLogs.where((r) => r.region.toLowerCase() == 'shoulder').toList();
+    final shoulderSorenessLogs = recoveryLogs
+        .where((r) => r.region.toLowerCase() == 'shoulder')
+        .toList();
     final avgShoulderSoreness = shoulderSorenessLogs.isNotEmpty
-        ? shoulderSorenessLogs.map((r) => r.sorenessLevel).reduce((a, b) => a + b) / shoulderSorenessLogs.length
+        ? shoulderSorenessLogs
+                .map((r) => r.sorenessLevel)
+                .reduce((a, b) => a + b) /
+            shoulderSorenessLogs.length
         : 0.0;
 
     if (pressingVolume > 12000 && avgShoulderSoreness > 3.0) {
       risks.add(InjuryRiskAlert(
         region: 'Shoulder',
         risk: InjuryRiskLevel.moderate,
-        message: 'High pressing volume (${pressingVolume.round()} kg this week) + elevated shoulder soreness (${avgShoulderSoreness.toStringAsFixed(1)}/5). Risk of rotator cuff strain.',
+        message:
+            'High pressing volume (${pressingVolume.round()} kg this week) + elevated shoulder soreness (${avgShoulderSoreness.toStringAsFixed(1)}/5). Risk of rotator cuff strain.',
         actions: const [
           'Reduce pressing volume by 20% this week',
           'Add 2 sets of face pulls or band pull-aparts',
@@ -91,7 +97,8 @@ class InjuryRiskEngine {
       risks.add(InjuryRiskAlert(
         region: 'Knee',
         risk: InjuryRiskLevel.moderate,
-        message: 'Knee valgus detected in recent squat sessions + high volume. Patellar tendon stress building.',
+        message:
+            'Knee valgus detected in recent squat sessions + high volume. Patellar tendon stress building.',
         actions: const [
           'Add glute activation (clamshells, band walks)',
           'Reduce squat depth temporarily',
@@ -101,9 +108,12 @@ class InjuryRiskEngine {
     }
 
     // 3. Lower Back Injury Risk: Elevated lower back soreness (>3.5) + HRV decline
-    final lbSorenessLogs = recoveryLogs.where((r) => r.region.toLowerCase() == 'lower_back').toList();
+    final lbSorenessLogs = recoveryLogs
+        .where((r) => r.region.toLowerCase() == 'lower_back')
+        .toList();
     final avgLbSoreness = lbSorenessLogs.isNotEmpty
-        ? lbSorenessLogs.map((r) => r.sorenessLevel).reduce((a, b) => a + b) / lbSorenessLogs.length
+        ? lbSorenessLogs.map((r) => r.sorenessLevel).reduce((a, b) => a + b) /
+            lbSorenessLogs.length
         : 0.0;
     final isHrvDeclining = recoveryLogs.any((r) => r.isHrvDeclining);
 
@@ -111,7 +121,8 @@ class InjuryRiskEngine {
       risks.add(InjuryRiskAlert(
         region: 'Lower Back',
         risk: InjuryRiskLevel.high,
-        message: 'Persistent lower back soreness (${avgLbSoreness.toStringAsFixed(1)}/5) with HRV decline. High risk of muscle strain or disc irritation.',
+        message:
+            'Persistent lower back soreness (${avgLbSoreness.toStringAsFixed(1)}/5) with HRV decline. High risk of muscle strain or disc irritation.',
         actions: const [
           'Skip deadlifts and heavy rows this week',
           'Focus on core stability (bird-dog, dead bug)',

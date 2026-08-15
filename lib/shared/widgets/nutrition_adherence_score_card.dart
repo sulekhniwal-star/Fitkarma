@@ -38,20 +38,23 @@ class NutritionAdherenceScoreCard extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.check_circle_outline, color: AppColors.teal, size: 20),
+                  const Icon(Icons.check_circle_outline,
+                      color: AppColors.teal, size: 20),
                   const SizedBox(width: 6),
                   Text('Nutrition Adherence Score', style: AppTypography.h3),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.teal.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   '${result.totalScore.round()}/100',
-                  style: AppTypography.labelMd.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold),
+                  style: AppTypography.labelMd.copyWith(
+                      color: AppColors.teal, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -59,19 +62,32 @@ class NutritionAdherenceScoreCard extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
 
           // 4 Matrix Breakdown Rows
-          _AdherenceMatrixRow(label: 'Calorie Target (±10%)', pts: result.caloriePoints, maxPts: 30),
+          _AdherenceMatrixRow(
+              label: 'Calorie Target (±10%)',
+              pts: result.caloriePoints,
+              maxPts: 30),
           const SizedBox(height: 6),
-          _AdherenceMatrixRow(label: 'Protein Target (±15%)', pts: result.proteinPoints, maxPts: 35),
+          _AdherenceMatrixRow(
+              label: 'Protein Target (±15%)',
+              pts: result.proteinPoints,
+              maxPts: 35),
           const SizedBox(height: 6),
-          _AdherenceMatrixRow(label: 'Logging Completeness (≥3 meals)', pts: result.loggingCompletenessPoints, maxPts: 20),
+          _AdherenceMatrixRow(
+              label: 'Logging Completeness (≥3 meals)',
+              pts: result.loggingCompletenessPoints,
+              maxPts: 20),
           const SizedBox(height: 6),
-          _AdherenceMatrixRow(label: 'Meal Timing Stability (±60 min)', pts: result.timingStabilityPoints, maxPts: 15),
+          _AdherenceMatrixRow(
+              label: 'Meal Timing Stability (±60 min)',
+              pts: result.timingStabilityPoints,
+              maxPts: 15),
           const SizedBox(height: AppSpacing.md),
 
           // Feedback Message
           Text(
             result.feedback,
-            style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, height: 1.3),
+            style: AppTypography.bodySm
+                .copyWith(color: AppColors.textSecondary, height: 1.3),
           ),
         ],
       ),
@@ -93,7 +109,9 @@ class _AdherenceMatrixRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ratio = pts / maxPts;
-    final color = ratio >= 0.8 ? AppColors.success : (ratio >= 0.4 ? AppColors.accent : AppColors.error);
+    final color = ratio >= 0.8
+        ? AppColors.success
+        : (ratio >= 0.4 ? AppColors.accent : AppColors.error);
 
     return Column(
       children: [
@@ -103,7 +121,8 @@ class _AdherenceMatrixRow extends StatelessWidget {
             Text(label, style: AppTypography.bodySm.copyWith(fontSize: 11)),
             Text(
               '${pts.round()}/${maxPts.round()} pts',
-              style: AppTypography.bodySm.copyWith(fontSize: 11, color: color, fontWeight: FontWeight.bold),
+              style: AppTypography.bodySm.copyWith(
+                  fontSize: 11, color: color, fontWeight: FontWeight.bold),
             ),
           ],
         ),

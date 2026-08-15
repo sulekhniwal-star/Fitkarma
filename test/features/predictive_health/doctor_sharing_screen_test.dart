@@ -8,8 +8,11 @@ void main() {
   group('§P10-J Doctor Sharing Portal Tests', () {
     const service = DoctorSharingService();
 
-    test('generateShareToken creates token with 4-digit PIN and 7-day expiration', () {
-      final token = service.generateShareToken(passCodePin: '1234', validDays: 7);
+    test(
+        'generateShareToken creates token with 4-digit PIN and 7-day expiration',
+        () {
+      final token =
+          service.generateShareToken(passCodePin: '1234', validDays: 7);
 
       expect(token.passCodePin, equals('1234'));
       expect(token.validDays, equals(7));
@@ -17,7 +20,9 @@ void main() {
       expect(token.shareUrl, contains('share.fitkarma.app/portal/'));
     });
 
-    test('generateSampleReportSummary compiles 90-day averages and active risk flags', () {
+    test(
+        'generateSampleReportSummary compiles 90-day averages and active risk flags',
+        () {
       final summary = service.generateSampleReportSummary('Dr. Sharma Patient');
 
       expect(summary.patientName, equals('Dr. Sharma Patient'));
@@ -29,7 +34,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('DoctorSharingScreen renders Security Protocol banner, report summary, and export PDF button', (tester) async {
+    testWidgets(
+        'DoctorSharingScreen renders Security Protocol banner, report summary, and export PDF button',
+        (tester) async {
       tester.view.physicalSize = const Size(800, 1400);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {
@@ -48,7 +55,8 @@ void main() {
 
       expect(find.text('🩺 Doctor Sharing Portal'), findsOneWidget);
       expect(find.text('Patient Consent & Security Protocol'), findsOneWidget);
-      expect(find.text('Included Report Contents (90-Day Overview)'), findsOneWidget);
+      expect(find.text('Included Report Contents (90-Day Overview)'),
+          findsOneWidget);
       expect(find.text('Export Encrypted PDF'), findsOneWidget);
 
       await tester.ensureVisible(find.text('Export Encrypted PDF'));

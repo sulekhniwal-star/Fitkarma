@@ -59,7 +59,8 @@ void main() {
 
     // ── Engine: syncStepsWithDeviceHealth ────────────────────────────────────
 
-    test('syncStepsWithDeviceHealth writes to Drift when delta exists', () async {
+    test('syncStepsWithDeviceHealth writes to Drift when delta exists',
+        () async {
       int? writtenSteps;
       final result = await engine.syncStepsWithDeviceHealth(
         readFromPlatform: (_, __) async => 9000,
@@ -83,7 +84,8 @@ void main() {
       expect(written, isFalse);
     });
 
-    test('syncStepsWithDeviceHealth returns null when platform unavailable', () async {
+    test('syncStepsWithDeviceHealth returns null when platform unavailable',
+        () async {
       final result = await engine.syncStepsWithDeviceHealth(
         readFromPlatform: (_, __) async => null, // HealthConnect unavailable
         readFromDrift: (_) async => 5000,
@@ -93,7 +95,8 @@ void main() {
       expect(result, isNull);
     });
 
-    test('syncStepsWithDeviceHealth writes when no Drift cache exists', () async {
+    test('syncStepsWithDeviceHealth writes when no Drift cache exists',
+        () async {
       int? writtenSteps;
       final result = await engine.syncStepsWithDeviceHealth(
         readFromPlatform: (_, __) async => 3500,
@@ -116,7 +119,8 @@ void main() {
       expect(nudge, contains('Goal achieved'));
     });
 
-    test('generateCoachNudge references remaining minutes at 85%+ progress', () {
+    test('generateCoachNudge references remaining minutes at 85%+ progress',
+        () {
       final nudge = engine.generateCoachNudge(
         currentSteps: 8700,
         goalSteps: 10000,
@@ -174,7 +178,8 @@ void main() {
       expect(notifier.state.coachNudge, isNotEmpty);
     });
 
-    test('StepsNotifier.logManualSteps updates steps and regenerates nudge', () {
+    test('StepsNotifier.logManualSteps updates steps and regenerates nudge',
+        () {
       final notifier = StepsNotifier(const StepsSyncEngine());
       notifier.logManualSteps(10000);
 
@@ -182,7 +187,8 @@ void main() {
       expect(notifier.state.coachNudge, contains('Goal achieved'));
     });
 
-    test('StepsNotifier.triggerSync updates steps to 8850 (simulated delta)', () async {
+    test('StepsNotifier.triggerSync updates steps to 8850 (simulated delta)',
+        () async {
       final notifier = StepsNotifier(const StepsSyncEngine());
       await notifier.triggerSync();
 
@@ -191,7 +197,8 @@ void main() {
       expect(notifier.state.isSyncing, isFalse);
     });
 
-    test('StepsNotifier.triggerSync sets isSyncing=false after completion', () async {
+    test('StepsNotifier.triggerSync sets isSyncing=false after completion',
+        () async {
       final notifier = StepsNotifier(const StepsSyncEngine());
       final future = notifier.triggerSync();
       await future;
@@ -200,7 +207,8 @@ void main() {
 
     // ── Widget Tests ─────────────────────────────────────────────────────────
 
-    testWidgets('StepsScreen renders AppBar with "Steps Tracker"', (tester) async {
+    testWidgets('StepsScreen renders AppBar with "Steps Tracker"',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: StepsScreen()),
@@ -222,7 +230,8 @@ void main() {
       expect(find.text('Daily Progress'), findsOneWidget);
     });
 
-    testWidgets('StepsScreen renders stat row (Distance, Active, Calories)', (tester) async {
+    testWidgets('StepsScreen renders stat row (Distance, Active, Calories)',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: StepsScreen()),
@@ -235,7 +244,8 @@ void main() {
       expect(find.text('Calories'), findsOneWidget);
     });
 
-    testWidgets('StepsScreen renders Hourly Step Distribution section', (tester) async {
+    testWidgets('StepsScreen renders Hourly Step Distribution section',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: StepsScreen()),
@@ -268,7 +278,8 @@ void main() {
       expect(find.textContaining('Sync:'), findsOneWidget);
     });
 
-    testWidgets('Tapping Sync button triggers sync and shows updated status', (tester) async {
+    testWidgets('Tapping Sync button triggers sync and shows updated status',
+        (tester) async {
       // Expand viewport so DataSourceCard is fully visible
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 1.0;

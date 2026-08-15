@@ -57,10 +57,26 @@ class SquadState {
       averageReadinessScore: 82.5,
       isChallengeEligible: true,
       members: const [
-        SquadMemberStatus(userId: 'u1', name: 'You (Rahul)', readinessTier: SquadReadinessTier.high, hasLoggedToday: true),
-        SquadMemberStatus(userId: 'u2', name: 'Priya M.', readinessTier: SquadReadinessTier.high, hasLoggedToday: true),
-        SquadMemberStatus(userId: 'u3', name: 'Sneha K.', readinessTier: SquadReadinessTier.low, hasLoggedToday: false),
-        SquadMemberStatus(userId: 'u4', name: 'Amit S.', readinessTier: SquadReadinessTier.moderate, hasLoggedToday: true),
+        SquadMemberStatus(
+            userId: 'u1',
+            name: 'You (Rahul)',
+            readinessTier: SquadReadinessTier.high,
+            hasLoggedToday: true),
+        SquadMemberStatus(
+            userId: 'u2',
+            name: 'Priya M.',
+            readinessTier: SquadReadinessTier.high,
+            hasLoggedToday: true),
+        SquadMemberStatus(
+            userId: 'u3',
+            name: 'Sneha K.',
+            readinessTier: SquadReadinessTier.low,
+            hasLoggedToday: false),
+        SquadMemberStatus(
+            userId: 'u4',
+            name: 'Amit S.',
+            readinessTier: SquadReadinessTier.moderate,
+            hasLoggedToday: true),
       ],
       activeMission: const ActiveSquadMission(
         missionTitle: '⚡ 50,000 Step Squad Sprint',
@@ -85,7 +101,8 @@ class SquadState {
       squadId: squadId ?? this.squadId,
       squadName: squadName ?? this.squadName,
       collectiveStreakDays: collectiveStreakDays ?? this.collectiveStreakDays,
-      averageReadinessScore: averageReadinessScore ?? this.averageReadinessScore,
+      averageReadinessScore:
+          averageReadinessScore ?? this.averageReadinessScore,
       isChallengeEligible: isChallengeEligible ?? this.isChallengeEligible,
       members: members ?? this.members,
       activeMission: activeMission ?? this.activeMission,
@@ -107,7 +124,8 @@ class SquadStateNotifier extends StateNotifier<SquadState> {
   void proposeChallenge(String challengeTitle) {
     if (!state.isChallengeEligible) {
       state = state.copyWith(
-        nudgeMessage: 'Squad readiness is too low for a new challenge (requires >= 60% high readiness).',
+        nudgeMessage:
+            'Squad readiness is too low for a new challenge (requires >= 60% high readiness).',
       );
       return;
     }

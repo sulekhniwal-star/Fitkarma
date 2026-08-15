@@ -7,9 +7,13 @@ void main() {
   group('§P5-M Glycemic Response & Personal Food Scoring Tests', () {
     const engine = GlycemicScoringEngine();
 
-    test('computeScore assigns 10/10 for delta < 25 mg/dL with optimal energy stability feedback', () {
+    test(
+        'computeScore assigns 10/10 for delta < 25 mg/dL with optimal energy stability feedback',
+        () {
       final readings = [
-        CgmReading(timestamp: DateTime.now(), glucoseMgDl: 115.0), // Peak 115 - Baseline 95 = +20 delta
+        CgmReading(
+            timestamp: DateTime.now(),
+            glucoseMgDl: 115.0), // Peak 115 - Baseline 95 = +20 delta
       ];
 
       final score = engine.computeScore(
@@ -23,7 +27,9 @@ void main() {
       expect(score.recommendation, contains('Great glycemic response'));
     });
 
-    test('computeScore assigns 7/10 for delta in 25..45 mg/dL and 3/10 for delta > 45 mg/dL with mitigation prompt', () {
+    test(
+        'computeScore assigns 7/10 for delta in 25..45 mg/dL and 3/10 for delta > 45 mg/dL with mitigation prompt',
+        () {
       // 1. Moderate spike (+35 delta -> 7/10)
       final moderateReadings = [
         CgmReading(timestamp: DateTime.now(), glucoseMgDl: 130.0),
@@ -50,13 +56,16 @@ void main() {
 
       expect(highScore.score, equals(3.0));
       expect(highScore.glucoseDelta, equals(48.0));
-      expect(highScore.recommendation, contains('Ripe Banana spikes your glucose by +48 mg/dL'));
+      expect(highScore.recommendation,
+          contains('Ripe Banana spikes your glucose by +48 mg/dL'));
       expect(highScore.recommendation, contains('pairing it with 10 almonds'));
     });
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('GlycemicResponseScreen renders CGM map, sliders, food score, and mitigation prompt', (tester) async {
+    testWidgets(
+        'GlycemicResponseScreen renders CGM map, sliders, food score, and mitigation prompt',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(home: GlycemicResponseScreen()),
       );
@@ -65,7 +74,8 @@ void main() {
       expect(find.text('Glycemic Response & Food Score'), findsOneWidget);
       expect(find.text('Continuous Glucose Monitor (CGM) Map'), findsOneWidget);
       expect(find.text('Personal Food Score'), findsOneWidget);
-      expect(find.textContaining('Insulin Spike Mitigation Prompt:'), findsOneWidget);
+      expect(find.textContaining('Insulin Spike Mitigation Prompt:'),
+          findsOneWidget);
     });
   });
 }

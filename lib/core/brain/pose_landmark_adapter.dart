@@ -45,7 +45,21 @@ class PoseLandmarkAdapter {
   /// Standard MediaPipe landmarks retained in downsampled modes:
   /// Nose (0), Shoulders (11, 12), Elbows (13, 14), Wrists (15, 16),
   /// Hips (23, 24), Knees (25, 26), Ankles (27, 28).
-  static const Set<int> coreIndices = {0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28};
+  static const Set<int> coreIndices = {
+    0,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+  };
 
   double _cameraTiltAngleRad = 0.0;
   double _torsoScaleFactor = 1.0;
@@ -62,7 +76,10 @@ class PoseLandmarkAdapter {
     final leftHip = calibrationPose[23];
     final rightHip = calibrationPose[24];
 
-    if (leftShoulder.isEmpty || rightShoulder.isEmpty || leftHip.isEmpty || rightHip.isEmpty) {
+    if (leftShoulder.isEmpty ||
+        rightShoulder.isEmpty ||
+        leftHip.isEmpty ||
+        rightHip.isEmpty) {
       return; // Cannot calibrate with missing reference landmarks
     }
 

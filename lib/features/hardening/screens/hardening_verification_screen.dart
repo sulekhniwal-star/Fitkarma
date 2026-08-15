@@ -44,14 +44,21 @@ class HardeningVerificationScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('DLQ Alert: 3 Consecutive Sync Failures', style: AppTypography.titleMedium.copyWith(color: AppColors.errorRed)),
-                            Text('Offline queue backed up. Tap to retry sync.', style: AppTypography.labelSmall),
+                            Text('DLQ Alert: 3 Consecutive Sync Failures',
+                                style: AppTypography.titleMedium
+                                    .copyWith(color: AppColors.errorRed)),
+                            Text('Offline queue backed up. Tap to retry sync.',
+                                style: AppTypography.labelSmall),
                           ],
                         ),
                       ),
                       TextButton(
-                        onPressed: () => ref.read(hardeningProvider.notifier).resetSyncFailures(),
-                        child: Text('Retry', style: AppTypography.titleMedium.copyWith(color: AppColors.primaryCyan)),
+                        onPressed: () => ref
+                            .read(hardeningProvider.notifier)
+                            .resetSyncFailures(),
+                        child: Text('Retry',
+                            style: AppTypography.titleMedium
+                                .copyWith(color: AppColors.primaryCyan)),
                       ),
                     ],
                   ),
@@ -65,14 +72,18 @@ class HardeningVerificationScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Performance Glass Tier', style: AppTypography.titleMedium),
-                        Text('Cold Start <2s • Daily Briefing <100ms', style: AppTypography.labelSmall),
+                        Text('Performance Glass Tier',
+                            style: AppTypography.titleMedium),
+                        Text('Cold Start <2s • Daily Briefing <100ms',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
                     Chip(
                       backgroundColor: AppColors.glassBgMid,
                       side: const BorderSide(color: AppColors.glassBorder),
-                      label: Text('TIER: ${state.deviceTier.toUpperCase()}', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan)),
+                      label: Text('TIER: ${state.deviceTier.toUpperCase()}',
+                          style: AppTypography.labelSmall
+                              .copyWith(color: AppColors.primaryCyan)),
                     ),
                   ],
                 ),
@@ -89,8 +100,11 @@ class HardeningVerificationScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Sentry PII Stripping Verified', style: AppTypography.titleMedium),
-                          Text('Emails, phone numbers, & names redacted before telemetry transmit', style: AppTypography.labelSmall),
+                          Text('Sentry PII Stripping Verified',
+                              style: AppTypography.titleMedium),
+                          Text(
+                              'Emails, phone numbers, & names redacted before telemetry transmit',
+                              style: AppTypography.labelSmall),
                         ],
                       ),
                     ),
@@ -107,11 +121,14 @@ class HardeningVerificationScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('DPDP Act Privacy Policy', style: AppTypography.titleMedium),
-                        Text('Written and linked in privacy_policy.md', style: AppTypography.labelSmall),
+                        Text('DPDP Act Privacy Policy',
+                            style: AppTypography.titleMedium),
+                        Text('Written and linked in privacy_policy.md',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
-                    const Icon(Icons.description, color: AppColors.primaryViolet),
+                    const Icon(Icons.description,
+                        color: AppColors.primaryViolet),
                   ],
                 ),
               ),

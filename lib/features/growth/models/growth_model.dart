@@ -1,5 +1,13 @@
 /// Vernacular Language Enum
-enum VernacularLanguage { hindi, tamil, telugu, marathi, bengali, kannada, english }
+enum VernacularLanguage {
+  hindi,
+  tamil,
+  telugu,
+  marathi,
+  bengali,
+  kannada,
+  english
+}
 
 /// ABHA Account Link Status
 class AbhaAccount {

@@ -11,10 +11,12 @@ class MultiDimensionalMealQualityScreen extends StatefulWidget {
   const MultiDimensionalMealQualityScreen({super.key});
 
   @override
-  State<MultiDimensionalMealQualityScreen> createState() => _MultiDimensionalMealQualityScreenState();
+  State<MultiDimensionalMealQualityScreen> createState() =>
+      _MultiDimensionalMealQualityScreenState();
 }
 
-class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMealQualityScreen> {
+class _MultiDimensionalMealQualityScreenState
+    extends State<MultiDimensionalMealQualityScreen> {
   final _engine = const MultiDimensionalMealQualityEngine();
 
   double _calories = 600.0;
@@ -73,7 +75,8 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Meal Quality Score Engine', style: AppTypography.h2),
@@ -92,7 +95,9 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.success),
                     ),
-                    child: Text('600 kcal Rajma Thali', style: AppTypography.labelMd.copyWith(color: AppColors.success)),
+                    child: Text('600 kcal Rajma Thali',
+                        style: AppTypography.labelMd
+                            .copyWith(color: AppColors.success)),
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
@@ -102,7 +107,9 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.error),
                     ),
-                    child: Text('600 kcal Fast Food Pizza', style: AppTypography.labelMd.copyWith(color: AppColors.error)),
+                    child: Text('600 kcal Fast Food Pizza',
+                        style: AppTypography.labelMd
+                            .copyWith(color: AppColors.error)),
                   ),
                 ),
               ],
@@ -122,8 +129,10 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Calories: ${_calories.round()} kcal', style: AppTypography.bodySm),
-                      Text('Protein: ${_proteinG.round()} g', style: AppTypography.bodySm),
+                      Text('Calories: ${_calories.round()} kcal',
+                          style: AppTypography.bodySm),
+                      Text('Protein: ${_proteinG.round()} g',
+                          style: AppTypography.bodySm),
                     ],
                   ),
                   Slider(
@@ -142,7 +151,8 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Dietary Fiber', style: AppTypography.bodySm),
-                      Text('${_fiberG.toStringAsFixed(1)} g', style: AppTypography.labelLg),
+                      Text('${_fiberG.toStringAsFixed(1)} g',
+                          style: AppTypography.labelLg),
                     ],
                   ),
                   Slider(
@@ -160,8 +170,11 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Satiety Index (1=Low, 5=High)', style: AppTypography.bodySm),
-                      Text('${_satietyIndex.toStringAsFixed(1)}/5', style: AppTypography.labelLg.copyWith(color: AppColors.teal)),
+                      Text('Satiety Index (1=Low, 5=High)',
+                          style: AppTypography.bodySm),
+                      Text('${_satietyIndex.toStringAsFixed(1)}/5',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.teal)),
                     ],
                   ),
                   Slider(
@@ -180,8 +193,11 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Processing Tier (0=Whole, 3=NOVA 4)', style: AppTypography.bodySm),
-                      Text('Tier $_processingTier', style: AppTypography.labelLg.copyWith(color: AppColors.error)),
+                      Text('Processing Tier (0=Whole, 3=NOVA 4)',
+                          style: AppTypography.bodySm),
+                      Text('Tier $_processingTier',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.error)),
                     ],
                   ),
                   Slider(
@@ -206,7 +222,9 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
               decoration: BoxDecoration(
                 color: AppColors.surface1,
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                border: Border.all(color: _getScoreColor(_result.score).withValues(alpha: 0.4)),
+                border: Border.all(
+                    color:
+                        _getScoreColor(_result.score).withValues(alpha: 0.4)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,27 +234,41 @@ class _MultiDimensionalMealQualityScreenState extends State<MultiDimensionalMeal
                     children: [
                       Text('Meal Quality Score', style: AppTypography.h3),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 6),
                         decoration: BoxDecoration(
-                          color: _getScoreColor(_result.score).withValues(alpha: 0.15),
+                          color: _getScoreColor(_result.score)
+                              .withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '${_result.score.round()} / 100',
-                          style: AppTypography.h2.copyWith(color: _getScoreColor(_result.score), fontWeight: FontWeight.bold),
+                          style: AppTypography.h2.copyWith(
+                              color: _getScoreColor(_result.score),
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 6),
-                  Text(_result.gradeLabel, style: AppTypography.labelLg.copyWith(color: _getScoreColor(_result.score))),
+                  Text(_result.gradeLabel,
+                      style: AppTypography.labelLg
+                          .copyWith(color: _getScoreColor(_result.score))),
                   const SizedBox(height: AppSpacing.md),
 
                   // Breakdown formula values
-                  _FormulaRow(label: 'Protein Density (2.5x)', value: '${_result.proteinDensity} %'),
-                  _FormulaRow(label: 'Fiber Contribution (3.0x)', value: '+${(_result.fiberG * 3).round()} pts'),
-                  _FormulaRow(label: 'Satiety Score (20.0x)', value: '+${(_result.satietyIndex * 20).round()} pts'),
-                  _FormulaRow(label: 'Processing Penalty (-15.0x)', value: '-${(_result.processingTier * 15).round()} pts'),
+                  _FormulaRow(
+                      label: 'Protein Density (2.5x)',
+                      value: '${_result.proteinDensity} %'),
+                  _FormulaRow(
+                      label: 'Fiber Contribution (3.0x)',
+                      value: '+${(_result.fiberG * 3).round()} pts'),
+                  _FormulaRow(
+                      label: 'Satiety Score (20.0x)',
+                      value: '+${(_result.satietyIndex * 20).round()} pts'),
+                  _FormulaRow(
+                      label: 'Processing Penalty (-15.0x)',
+                      value: '-${(_result.processingTier * 15).round()} pts'),
                 ],
               ),
             ),

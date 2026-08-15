@@ -5,7 +5,9 @@ void main() {
   group('DailyStrainCalculator Unit Tests', () {
     const calculator = DailyStrainCalculator();
 
-    test('calculateStrain computes rest/light strain for low step count and no workouts', () {
+    test(
+        'calculateStrain computes rest/light strain for low step count and no workouts',
+        () {
       final strain = calculator.calculateStrain(
         dailySteps: 3000,
         heatIndexCelsius: 28.0,
@@ -15,7 +17,9 @@ void main() {
       expect(strain, lessThan(6.0));
     });
 
-    test('calculateStrain computes strain score for 10k steps and aerobic activity', () {
+    test(
+        'calculateStrain computes strain score for 10k steps and aerobic activity',
+        () {
       final strain = calculator.calculateStrain(
         zoneDurationsMinutes: {
           1: 20,
@@ -29,7 +33,9 @@ void main() {
       expect(strain, lessThanOrEqualTo(21.0));
     });
 
-    test('calculateStrain applies heat factor multiplier when heat index exceeds 32C', () {
+    test(
+        'calculateStrain applies heat factor multiplier when heat index exceeds 32C',
+        () {
       final normalStrain = calculator.calculateStrain(
         zoneDurationsMinutes: {
           3: 30,

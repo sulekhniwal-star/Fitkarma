@@ -36,13 +36,15 @@ void main() {
       expect(engine.calculateRolling7DayDebt(minutes), equals(290));
     });
 
-    test('calculateRolling7DayDebt: fewer than 7 entries pads with baseline', () {
+    test('calculateRolling7DayDebt: fewer than 7 entries pads with baseline',
+        () {
       // 3 nights at 450 → padded with 4×480, debt = 3×30 + 4×0 = 90
       final minutes = [450, 450, 450];
       expect(engine.calculateRolling7DayDebt(minutes), equals(90));
     });
 
-    test('calculateRolling7DayDebt: only last 7 of more than 7 entries used', () {
+    test('calculateRolling7DayDebt: only last 7 of more than 7 entries used',
+        () {
       // 8 entries: ignore first [480], use last 7 at 450
       final minutes = [480, 450, 450, 450, 450, 450, 450, 450];
       expect(engine.calculateRolling7DayDebt(minutes), equals(210));
@@ -186,7 +188,10 @@ void main() {
         totalHours: 7.25,
         quality: SleepQuality.normal,
         stages: const SleepStageBreakdown(
-          awakePct: 0.05, remPct: 0.20, lightPct: 0.55, deepPct: 0.20,
+          awakePct: 0.05,
+          remPct: 0.20,
+          lightPct: 0.55,
+          deepPct: 0.20,
         ),
       );
       expect(record.durationLabel, equals('7h 15m'));
@@ -232,7 +237,10 @@ void main() {
       notifier.logSleep(
         hours: 8.5,
         stages: const SleepStageBreakdown(
-          awakePct: 0.05, remPct: 0.22, lightPct: 0.52, deepPct: 0.21,
+          awakePct: 0.05,
+          remPct: 0.22,
+          lightPct: 0.52,
+          deepPct: 0.21,
         ),
       );
 
@@ -253,7 +261,8 @@ void main() {
       expect(find.text('Sleep OS'), findsOneWidget);
     });
 
-    testWidgets('SleepScreen shows last night duration in hero', (tester) async {
+    testWidgets('SleepScreen shows last night duration in hero',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: SleepScreen()),
@@ -285,9 +294,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.textContaining('Awake:', skipOffstage: false), findsOneWidget);
+      expect(
+          find.textContaining('Awake:', skipOffstage: false), findsOneWidget);
       expect(find.textContaining('REM:', skipOffstage: false), findsOneWidget);
-      expect(find.textContaining('Light:', skipOffstage: false), findsOneWidget);
+      expect(
+          find.textContaining('Light:', skipOffstage: false), findsOneWidget);
       expect(find.textContaining('Deep:', skipOffstage: false), findsOneWidget);
     });
 
@@ -314,7 +325,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.textContaining('Sleep Debt:', skipOffstage: false), findsOneWidget);
+      expect(find.textContaining('Sleep Debt:', skipOffstage: false),
+          findsOneWidget);
     });
   });
 }

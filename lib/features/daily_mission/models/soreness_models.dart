@@ -95,7 +95,9 @@ class SorenessState {
   });
 
   factory SorenessState.initial() => SorenessState(
-        sorenessMap: {for (var m in MuscleGroup.values) m: SorenessSeverity.none},
+        sorenessMap: {
+          for (var m in MuscleGroup.values) m: SorenessSeverity.none
+        },
       );
 
   int get compositeSorenessValue {

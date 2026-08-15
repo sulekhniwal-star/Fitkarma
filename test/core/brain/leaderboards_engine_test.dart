@@ -5,7 +5,9 @@ void main() {
   group('§P9-G Weekly & Monthly Leaderboards Tests', () {
     const engine = LeaderboardsEngine();
 
-    test('generateRankedLeaderboard assigns Gold, Silver, Bronze, and Top 10% badges correctly', () {
+    test(
+        'generateRankedLeaderboard assigns Gold, Silver, Bronze, and Top 10% badges correctly',
+        () {
       final rawEntries = List.generate(20, (i) {
         return LeaderboardUserEntry(
           userId: 'user_$i',
@@ -31,7 +33,9 @@ void main() {
       expect(ranked[3].badge, equals(LeaderboardBadge.none));
     });
 
-    test('applyAnonymityToggle replaces name and photo with "Anonymous Athlete" when anonymized', () {
+    test(
+        'applyAnonymityToggle replaces name and photo with "Anonymous Athlete" when anonymized',
+        () {
       const entry = LeaderboardUserEntry(
         userId: 'u1',
         displayName: 'Rahul Sharma',
@@ -46,9 +50,13 @@ void main() {
       expect(anonymized.avatarUrl, isNull);
     });
 
-    test('evaluateWeeklyRewards awards Golden Karma Aura and +100 XP for Top 10% placement', () {
-      final topResult = engine.evaluateWeeklyRewards(userRank: 2, totalParticipants: 30);
-      final normalResult = engine.evaluateWeeklyRewards(userRank: 15, totalParticipants: 30);
+    test(
+        'evaluateWeeklyRewards awards Golden Karma Aura and +100 XP for Top 10% placement',
+        () {
+      final topResult =
+          engine.evaluateWeeklyRewards(userRank: 2, totalParticipants: 30);
+      final normalResult =
+          engine.evaluateWeeklyRewards(userRank: 15, totalParticipants: 30);
 
       expect(topResult.isTop10Percent, isTrue);
       expect(topResult.hasGoldenKarmaAura, isTrue);

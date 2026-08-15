@@ -11,10 +11,12 @@ class FestivalNutritionAdaptationScreen extends StatefulWidget {
   const FestivalNutritionAdaptationScreen({super.key});
 
   @override
-  State<FestivalNutritionAdaptationScreen> createState() => _FestivalNutritionAdaptationScreenState();
+  State<FestivalNutritionAdaptationScreen> createState() =>
+      _FestivalNutritionAdaptationScreenState();
 }
 
-class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAdaptationScreen> {
+class _FestivalNutritionAdaptationScreenState
+    extends State<FestivalNutritionAdaptationScreen> {
   final _adapter = const FestivalNutritionAdapter();
   FestivalType _selectedFestival = FestivalType.diwali;
   FestivalDayRelative _selectedPhase = FestivalDayRelative.festivalDay;
@@ -41,7 +43,8 @@ class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAda
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Festival Nutrition Adaptation', style: AppTypography.h2),
@@ -69,10 +72,13 @@ class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAda
                         items: FestivalType.values
                             .map((f) => DropdownMenuItem(
                                   value: f,
-                                  child: Text(f.name.toUpperCase(), style: AppTypography.labelLg.copyWith(color: AppColors.primary)),
+                                  child: Text(f.name.toUpperCase(),
+                                      style: AppTypography.labelLg
+                                          .copyWith(color: AppColors.primary)),
                                 ))
                             .toList(),
-                        onChanged: (val) => setState(() => _selectedFestival = val!),
+                        onChanged: (val) =>
+                            setState(() => _selectedFestival = val!),
                       ),
                     ],
                   ),
@@ -81,12 +87,19 @@ class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAda
                   const SizedBox(height: 6),
                   SegmentedButton<FestivalDayRelative>(
                     segments: const [
-                      ButtonSegment(value: FestivalDayRelative.pre3Days, label: Text('Pre (3D)')),
-                      ButtonSegment(value: FestivalDayRelative.festivalDay, label: Text('Festival')),
-                      ButtonSegment(value: FestivalDayRelative.post1Day, label: Text('Post (1D)')),
+                      ButtonSegment(
+                          value: FestivalDayRelative.pre3Days,
+                          label: Text('Pre (3D)')),
+                      ButtonSegment(
+                          value: FestivalDayRelative.festivalDay,
+                          label: Text('Festival')),
+                      ButtonSegment(
+                          value: FestivalDayRelative.post1Day,
+                          label: Text('Post (1D)')),
                     ],
                     selected: {_selectedPhase},
-                    onSelectionChanged: (set) => setState(() => _selectedPhase = set.first),
+                    onSelectionChanged: (set) =>
+                        setState(() => _selectedPhase = set.first),
                   ),
                 ],
               ),
@@ -99,7 +112,8 @@ class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAda
               decoration: BoxDecoration(
                 color: AppColors.surface1,
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                border:
+                    Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,8 +121,10 @@ class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAda
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Adapted Nutrition Targets', style: AppTypography.h3),
-                      Icon(Icons.celebration, color: AppColors.accent, size: 22),
+                      Text('Adapted Nutrition Targets',
+                          style: AppTypography.h3),
+                      Icon(Icons.celebration,
+                          color: AppColors.accent, size: 22),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.md),
@@ -138,26 +154,32 @@ class _FestivalNutritionAdaptationScreenState extends State<FestivalNutritionAda
                     decoration: BoxDecoration(
                       color: AppColors.accent.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.accent.withValues(alpha: 0.3)),
+                      border: Border.all(
+                          color: AppColors.accent.withValues(alpha: 0.3)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Satiety & Protocol Alert:', style: AppTypography.labelMd.copyWith(color: AppColors.accent)),
+                        Text('Satiety & Protocol Alert:',
+                            style: AppTypography.labelMd
+                                .copyWith(color: AppColors.accent)),
                         const SizedBox(height: 4),
-                        Text(adapted.alertMessage, style: AppTypography.bodySm.copyWith(height: 1.3)),
+                        Text(adapted.alertMessage,
+                            style: AppTypography.bodySm.copyWith(height: 1.3)),
                       ],
                     ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   Row(
                     children: [
-                      const Icon(Icons.directions_walk, color: AppColors.teal, size: 18),
+                      const Icon(Icons.directions_walk,
+                          color: AppColors.teal, size: 18),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           'Cardio Protocol: ${adapted.recoveryWalkRecommendation}',
-                          style: AppTypography.bodySm.copyWith(color: AppColors.teal),
+                          style: AppTypography.bodySm
+                              .copyWith(color: AppColors.teal),
                         ),
                       ),
                     ],
@@ -178,12 +200,15 @@ class _TargetStat extends StatelessWidget {
   final String value;
   final double diff;
 
-  const _TargetStat({required this.label, required this.value, required this.diff});
+  const _TargetStat(
+      {required this.label, required this.value, required this.diff});
 
   @override
   Widget build(BuildContext context) {
     final diffStr = diff > 0 ? '+${diff.round()}' : '${diff.round()}';
-    final diffColor = diff > 0 ? AppColors.accent : (diff < 0 ? AppColors.teal : AppColors.textMuted);
+    final diffColor = diff > 0
+        ? AppColors.accent
+        : (diff < 0 ? AppColors.teal : AppColors.textMuted);
 
     return Column(
       children: [
@@ -191,7 +216,9 @@ class _TargetStat extends StatelessWidget {
         const SizedBox(height: 2),
         Text(value, style: AppTypography.h3),
         if (diff != 0)
-          Text(diffStr, style: AppTypography.labelMd.copyWith(color: diffColor, fontWeight: FontWeight.bold)),
+          Text(diffStr,
+              style: AppTypography.labelMd
+                  .copyWith(color: diffColor, fontWeight: FontWeight.bold)),
       ],
     );
   }

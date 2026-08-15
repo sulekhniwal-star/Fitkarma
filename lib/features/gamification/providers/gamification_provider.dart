@@ -12,14 +12,44 @@ class GamificationState {
     this.totalXp = 450,
     required this.levelInfo,
     this.achievements = const [
-      Achievement(id: 'a1', title: 'First Workout Complete', description: 'Finished 1 full workout session', iconName: 'fitness_center', isUnlocked: true, category: 'Workout'),
-      Achievement(id: 'a2', title: 'Protein Master', description: 'Met daily protein target 5 times', iconName: 'restaurant', isUnlocked: true, category: 'Nutrition'),
-      Achievement(id: 'a3', title: '7-Day Consistency', description: 'Achieved 7-day readiness streak', iconName: 'local_fire_department', isUnlocked: false, category: 'Streak'),
-      Achievement(id: 'a4', title: 'MediaPipe Master', description: 'Completed squat session with zero asymmetry faults', iconName: 'camera', isUnlocked: false, category: 'Form'),
+      Achievement(
+          id: 'a1',
+          title: 'First Workout Complete',
+          description: 'Finished 1 full workout session',
+          iconName: 'fitness_center',
+          isUnlocked: true,
+          category: 'Workout'),
+      Achievement(
+          id: 'a2',
+          title: 'Protein Master',
+          description: 'Met daily protein target 5 times',
+          iconName: 'restaurant',
+          isUnlocked: true,
+          category: 'Nutrition'),
+      Achievement(
+          id: 'a3',
+          title: '7-Day Consistency',
+          description: 'Achieved 7-day readiness streak',
+          iconName: 'local_fire_department',
+          isUnlocked: false,
+          category: 'Streak'),
+      Achievement(
+          id: 'a4',
+          title: 'MediaPipe Master',
+          description: 'Completed squat session with zero asymmetry faults',
+          iconName: 'camera',
+          isUnlocked: false,
+          category: 'Form'),
     ],
     this.benchmarks = const [
-      CohortBenchmark(metricName: 'Weekly Consistency', userPercentile: 'Top 12%', cohortName: 'Indian Age 25-30 Cohort'),
-      CohortBenchmark(metricName: 'Protein Target Adherence', userPercentile: 'Top 18%', cohortName: 'Active Male Cohort'),
+      CohortBenchmark(
+          metricName: 'Weekly Consistency',
+          userPercentile: 'Top 12%',
+          cohortName: 'Indian Age 25-30 Cohort'),
+      CohortBenchmark(
+          metricName: 'Protein Target Adherence',
+          userPercentile: 'Top 18%',
+          cohortName: 'Active Male Cohort'),
     ],
   });
 
@@ -52,7 +82,8 @@ class GamificationNotifier extends StateNotifier<GamificationState> {
     final reward = _engine.getOutcomeXpReward(actionType);
     if (reward > 0) {
       final newXp = state.totalXp + reward;
-      final newLevel = _engine.calculateLevel(newXp, previousLevel: state.levelInfo.currentLevel);
+      final newLevel = _engine.calculateLevel(newXp,
+          previousLevel: state.levelInfo.currentLevel);
       state = state.copyWith(totalXp: newXp, levelInfo: newLevel);
     }
   }

@@ -6,7 +6,9 @@ import 'package:fitkarma/features/transformation/screens/transformation_timeline
 
 void main() {
   group('§P8-B Transformation Timeline Screen & Notifier Tests', () {
-    test('TransformationJourneyNotifier calculates 90-day prediction bounds (ADR-025)', () {
+    test(
+        'TransformationJourneyNotifier calculates 90-day prediction bounds (ADR-025)',
+        () {
       final container = ProviderContainer();
       final state = container.read(transformationJourneyProvider);
 
@@ -19,17 +21,22 @@ void main() {
       container.dispose();
     });
 
-    test('authenticateBiometrics unlocks progress photos when authentication succeeds', () {
+    test(
+        'authenticateBiometrics unlocks progress photos when authentication succeeds',
+        () {
       final container = ProviderContainer();
       final notifier = container.read(transformationJourneyProvider.notifier);
 
       notifier.authenticateBiometrics(mockSuccess: true);
-      expect(container.read(transformationJourneyProvider).arePhotosUnlocked, isTrue);
+      expect(container.read(transformationJourneyProvider).arePhotosUnlocked,
+          isTrue);
 
       container.dispose();
     });
 
-    test('addWeightCheckpoint updates weight history and recalculates projected bounds', () {
+    test(
+        'addWeightCheckpoint updates weight history and recalculates projected bounds',
+        () {
       final container = ProviderContainer();
       final notifier = container.read(transformationJourneyProvider.notifier);
 
@@ -44,7 +51,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('TransformationTimelineScreen renders weight projection BentoCard, forecast stats, and biometric photo lock', (tester) async {
+    testWidgets(
+        'TransformationTimelineScreen renders weight projection BentoCard, forecast stats, and biometric photo lock',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: TransformationTimelineScreen()),

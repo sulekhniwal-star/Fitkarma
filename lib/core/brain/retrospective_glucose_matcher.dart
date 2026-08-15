@@ -65,14 +65,18 @@ class RetrospectiveGlucoseMatcher {
     // 1. Baseline Window (-30 mins to 0 mins relative to meal)
     final preMealStart = mealConsumeTime.subtract(const Duration(minutes: 30));
     final baselineReadings = syncedReadings
-        .where((r) => r.timestamp.isAfter(preMealStart) && r.timestamp.isBefore(mealConsumeTime))
+        .where((r) =>
+            r.timestamp.isAfter(preMealStart) &&
+            r.timestamp.isBefore(mealConsumeTime))
         .map((r) => r.glucoseMgDl)
         .toList();
 
     // 2. Post-Meal Window (0 mins to 120 mins post-meal)
     final postMealEnd = mealConsumeTime.add(const Duration(minutes: 120));
     final postMealReadings = syncedReadings
-        .where((r) => r.timestamp.isAfter(mealConsumeTime) && r.timestamp.isBefore(postMealEnd))
+        .where((r) =>
+            r.timestamp.isAfter(mealConsumeTime) &&
+            r.timestamp.isBefore(postMealEnd))
         .map((r) => r.glucoseMgDl)
         .toList();
 
@@ -82,7 +86,8 @@ class RetrospectiveGlucoseMatcher {
     }
 
     // 4. Deterministic tracking mathematics
-    final double avgBaseline = baselineReadings.reduce((a, b) => a + b) / baselineReadings.length;
+    final double avgBaseline =
+        baselineReadings.reduce((a, b) => a + b) / baselineReadings.length;
     final double maxPeak = postMealReadings.reduce(math.max);
     final double calculatedSpike = maxPeak - avgBaseline;
 

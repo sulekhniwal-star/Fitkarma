@@ -6,7 +6,8 @@ class LeaderboardUserEntry {
   final String userId;
   final String displayName;
   final String? avatarUrl;
-  final int metricValue; // Steps count, active minutes, or adherence score points
+  final int
+      metricValue; // Steps count, active minutes, or adherence score points
   final int rank;
   final LeaderboardBadge badge;
   final bool isCurrentUser;

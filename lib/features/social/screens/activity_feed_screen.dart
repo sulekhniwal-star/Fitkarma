@@ -22,9 +22,12 @@ class ActivityFeedScreen extends ConsumerWidget {
           IconButton(
             icon: Icon(
               state.isAnonymousMode ? Icons.visibility_off : Icons.visibility,
-              color: state.isAnonymousMode ? AppColors.warningAmber : AppColors.primaryCyan,
+              color: state.isAnonymousMode
+                  ? AppColors.warningAmber
+                  : AppColors.primaryCyan,
             ),
-            onPressed: () => ref.read(socialProvider.notifier).toggleAnonymity(),
+            onPressed: () =>
+                ref.read(socialProvider.notifier).toggleAnonymity(),
           ),
           const SizedBox(width: AppSpacing.sm),
         ],
@@ -44,14 +47,18 @@ class ActivityFeedScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Your Squad Invite Code', style: AppTypography.titleMedium),
-                        Text('Share with friends to form a squad', style: AppTypography.labelSmall),
+                        Text('Your Squad Invite Code',
+                            style: AppTypography.titleMedium),
+                        Text('Share with friends to form a squad',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
                     Chip(
                       backgroundColor: AppColors.glassBgMid,
                       side: const BorderSide(color: AppColors.glassBorder),
-                      label: Text(state.squadInviteCode, style: AppTypography.titleLarge.copyWith(color: AppColors.primaryCyan)),
+                      label: Text(state.squadInviteCode,
+                          style: AppTypography.titleLarge
+                              .copyWith(color: AppColors.primaryCyan)),
                     ),
                   ],
                 ),
@@ -59,26 +66,33 @@ class ActivityFeedScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.lg),
 
               // Privacy-First Squad Readiness Board
-              Text('Squad Readiness Board (Tiers Only)', style: AppTypography.titleLarge),
+              Text('Squad Readiness Board (Tiers Only)',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               GlassCard(
                 child: Column(
                   children: state.squadReadinessBoard.map((member) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: AppSpacing.xs),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(member.memberName, style: AppTypography.titleMedium),
+                          Text(member.memberName,
+                              style: AppTypography.titleMedium),
                           Row(
                             children: [
                               Chip(
                                 backgroundColor: AppColors.glassBgMid,
-                                side: const BorderSide(color: AppColors.glassBorder),
-                                label: Text(member.tier.name.toUpperCase(), style: AppTypography.labelSmall),
+                                side: const BorderSide(
+                                    color: AppColors.glassBorder),
+                                label: Text(member.tier.name.toUpperCase(),
+                                    style: AppTypography.labelSmall),
                               ),
                               const SizedBox(width: AppSpacing.sm),
-                              Text(member.statusLabel, style: AppTypography.bodyMedium.copyWith(color: AppColors.primaryEmerald)),
+                              Text(member.statusLabel,
+                                  style: AppTypography.bodyMedium.copyWith(
+                                      color: AppColors.primaryEmerald)),
                             ],
                           ),
                         ],
@@ -93,7 +107,10 @@ class ActivityFeedScreen extends ConsumerWidget {
               Text('Community Activity Feed', style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               ...state.feedItems.map((item) {
-                final displayName = state.isAnonymousMode && item.userName == 'You' ? 'Anonymous User' : item.userName;
+                final displayName =
+                    state.isAnonymousMode && item.userName == 'You'
+                        ? 'Anonymous User'
+                        : item.userName;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                   child: GlassCard(
@@ -104,11 +121,14 @@ class ActivityFeedScreen extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(displayName, style: AppTypography.titleMedium),
-                            Text(item.timestamp, style: AppTypography.labelSmall),
+                            Text(item.timestamp,
+                                style: AppTypography.labelSmall),
                           ],
                         ),
                         const SizedBox(height: 4.0),
-                        Text(item.title, style: AppTypography.bodyMedium.copyWith(color: AppColors.primaryCyan)),
+                        Text(item.title,
+                            style: AppTypography.bodyMedium
+                                .copyWith(color: AppColors.primaryCyan)),
                         Text(item.description, style: AppTypography.bodyMedium),
                         const SizedBox(height: AppSpacing.sm),
                         Row(
@@ -117,11 +137,16 @@ class ActivityFeedScreen extends ConsumerWidget {
                             IconButton(
                               icon: Icon(
                                 Icons.back_hand,
-                                color: item.isHighFived ? AppColors.warningAmber : AppColors.textMuted,
+                                color: item.isHighFived
+                                    ? AppColors.warningAmber
+                                    : AppColors.textMuted,
                               ),
-                              onPressed: () => ref.read(socialProvider.notifier).toggleHighFive(item.id),
+                              onPressed: () => ref
+                                  .read(socialProvider.notifier)
+                                  .toggleHighFive(item.id),
                             ),
-                            Text('${item.highFiveCount} High-Fives', style: AppTypography.labelSmall),
+                            Text('${item.highFiveCount} High-Fives',
+                                style: AppTypography.labelSmall),
                           ],
                         ),
                       ],

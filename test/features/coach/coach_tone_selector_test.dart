@@ -23,7 +23,8 @@ void main() {
     expect(find.text('No Nonsense'), findsOneWidget);
   });
 
-  testWidgets('Tapping Roast mode triggers opt-in confirmation dialog if not opted-in',
+  testWidgets(
+      'Tapping Roast mode triggers opt-in confirmation dialog if not opted-in',
       (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
@@ -50,7 +51,8 @@ void main() {
     expect(find.text('Enable AI Roast Mode?'), findsNothing);
   });
 
-  testWidgets('Crisis mode suppression banner appears when distress is detected on roast mode',
+  testWidgets(
+      'Crisis mode suppression banner appears when distress is detected on roast mode',
       (tester) async {
     final container = ProviderContainer();
     container.read(coachToneProvider.notifier).optInToRoast();
@@ -69,6 +71,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Safety Safeguard Active'), findsOneWidget);
-    expect(find.textContaining('Roast mode auto-adjusted to Gentle'), findsOneWidget);
+    expect(find.textContaining('Roast mode auto-adjusted to Gentle'),
+        findsOneWidget);
   });
 }

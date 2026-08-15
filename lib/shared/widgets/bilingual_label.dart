@@ -20,18 +20,21 @@ class BilingualLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isHindiActive = Localizations.maybeLocaleOf(context)?.languageCode == 'hi'; 
+    final isHindiActive =
+        Localizations.maybeLocaleOf(context)?.languageCode == 'hi';
 
     if (hindiText == null || hindiText!.isEmpty) {
       return Text(
         englishText,
-        style: englishStyle ?? AppTypography.bodyMd.copyWith(color: AppColors.textPrimary),
+        style: englishStyle ??
+            AppTypography.bodyMd.copyWith(color: AppColors.textPrimary),
       );
     }
 
-    final TextStyle baseEnglishStyle = englishStyle ?? AppTypography.bodyMd.copyWith(
-      color: AppColors.textPrimary,
-    );
+    final TextStyle baseEnglishStyle = englishStyle ??
+        AppTypography.bodyMd.copyWith(
+          color: AppColors.textPrimary,
+        );
 
     return Column(
       crossAxisAlignment: alignment,
@@ -39,7 +42,7 @@ class BilingualLabel extends StatelessWidget {
       children: [
         Text(
           englishText,
-          style: isHindiActive 
+          style: isHindiActive
               ? baseEnglishStyle.copyWith(color: AppColors.textSecondary)
               : baseEnglishStyle,
         ),
@@ -47,14 +50,12 @@ class BilingualLabel extends StatelessWidget {
         Text(
           hindiText!,
           style: AppTypography.hindi(
-            size: baseEnglishStyle.fontSize != null 
-                ? baseEnglishStyle.fontSize! * hindiFontSizeScale 
+            size: baseEnglishStyle.fontSize != null
+                ? baseEnglishStyle.fontSize! * hindiFontSizeScale
                 : 12.0,
             weight: isHindiActive ? FontWeight.bold : FontWeight.w400,
           ).copyWith(
-            color: isHindiActive 
-                ? AppColors.textPrimary 
-                : AppColors.textMuted,
+            color: isHindiActive ? AppColors.textPrimary : AppColors.textMuted,
           ),
         ),
       ],

@@ -74,7 +74,9 @@ class LifeEventAdaptation {
   factory LifeEventAdaptation.injury({String? region}) {
     return LifeEventAdaptation(
       workoutDurationMins: 20,
-      workoutFocus: region != null ? 'Uninjured limbs only ($region isolated)' : 'Rehab & gentle mobility',
+      workoutFocus: region != null
+          ? 'Uninjured limbs only ($region isolated)'
+          : 'Rehab & gentle mobility',
       isRecoveryFirst: true,
       calorieBuffer: 100, // Healing maintenance buffer
       simplifyNutrition: true,

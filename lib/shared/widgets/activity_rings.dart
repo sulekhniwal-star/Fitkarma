@@ -51,18 +51,20 @@ class _ActivityRingsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    double currentRadius = math.min(size.width, size.height) / 2 - (rings.isNotEmpty ? rings.first.strokeWidth / 2 : 0);
+    double currentRadius = math.min(size.width, size.height) / 2 -
+        (rings.isNotEmpty ? rings.first.strokeWidth / 2 : 0);
 
     for (int i = 0; i < rings.length; i++) {
       final ring = rings[i];
-      final pct = (ring.target > 0) ? (ring.value / ring.target).clamp(0.0, 1.0) : 0.0;
+      final pct =
+          (ring.target > 0) ? (ring.value / ring.target).clamp(0.0, 1.0) : 0.0;
 
       // 1. Draw track background
       final bgPaint = Paint()
         ..color = ring.colors.first.withValues(alpha: 0.12)
         ..style = PaintingStyle.stroke
         ..strokeWidth = ring.strokeWidth;
-      
+
       canvas.drawCircle(center, currentRadius, bgPaint);
 
       // 2. Draw progress arc

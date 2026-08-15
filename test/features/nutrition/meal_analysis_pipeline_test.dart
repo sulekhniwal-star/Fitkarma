@@ -8,9 +8,13 @@ void main() {
   group('§P5-B Meal Analysis Pipeline End-to-End Tests', () {
     const pipeline = MealAnalysisPipeline();
 
-    test('processMealEntry runs 5-stage pipeline: Macros, 5D Score, Readiness/Goal Impact, Fix Suggestions', () {
-      final item = SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f6'); // Poha
-      final result = pipeline.processMealEntry(foodItem: item, servings: 1.0, userGoal: 'Fat Loss');
+    test(
+        'processMealEntry runs 5-stage pipeline: Macros, 5D Score, Readiness/Goal Impact, Fix Suggestions',
+        () {
+      final item = SeededIndianFoodDatabase.items
+          .firstWhere((i) => i.id == 'f6'); // Poha
+      final result = pipeline.processMealEntry(
+          foodItem: item, servings: 1.0, userGoal: 'Fat Loss');
 
       // Stage 2: Macros
       expect(result.totalCalories, equals(250.0));
@@ -25,19 +29,28 @@ void main() {
 
       // Stage 5: Fix Suggestions
       expect(result.fixSuggestions, isNotEmpty);
-      expect(result.fixSuggestions.any((s) => s.contains('Paneer') || s.contains('eggs')), isTrue);
+      expect(
+          result.fixSuggestions
+              .any((s) => s.contains('Paneer') || s.contains('eggs')),
+          isTrue);
     });
 
-    test('processMealEntry generates clean result for balanced high-protein item', () {
-      final item = SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f8'); // Chicken Curry
-      final result = pipeline.processMealEntry(foodItem: item, servings: 1.0, userGoal: 'Fat Loss');
+    test(
+        'processMealEntry generates clean result for balanced high-protein item',
+        () {
+      final item = SeededIndianFoodDatabase.items
+          .firstWhere((i) => i.id == 'f8'); // Chicken Curry
+      final result = pipeline.processMealEntry(
+          foodItem: item, servings: 1.0, userGoal: 'Fat Loss');
 
       expect(result.totalProteinGrams, equals(28.0));
       expect(result.quality.overallScore, greaterThan(70));
     });
 
-    testWidgets('MealAnalysisResultSheet renders pipeline outputs correctly', (tester) async {
-      final item = SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'); // Paneer Tikka
+    testWidgets('MealAnalysisResultSheet renders pipeline outputs correctly',
+        (tester) async {
+      final item = SeededIndianFoodDatabase.items
+          .firstWhere((i) => i.id == 'f1'); // Paneer Tikka
       final result = pipeline.processMealEntry(foodItem: item, servings: 1.0);
 
       await tester.pumpWidget(

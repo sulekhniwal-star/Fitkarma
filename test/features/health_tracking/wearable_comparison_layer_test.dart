@@ -12,13 +12,33 @@ void main() {
 
     // ── DeviceReliabilityEngine Unit Tests ───────────────────────────────────
 
-    test('Device Confidence Matrix maps Apple Watch, WHOOP, Garmin, Samsung, Fitbit, Mi Band correctly', () {
-      expect(DeviceReliabilityEngine.deviceProfiles[WearableSource.whoop]?.hrvConfidence, equals(0.95));
-      expect(DeviceReliabilityEngine.deviceProfiles[WearableSource.appleWatch]?.hrConfidence, equals(0.95));
-      expect(DeviceReliabilityEngine.deviceProfiles[WearableSource.garmin]?.hrvConfidence, equals(0.88));
-      expect(DeviceReliabilityEngine.deviceProfiles[WearableSource.samsungGalaxy]?.hrvConfidence, equals(0.70));
-      expect(DeviceReliabilityEngine.deviceProfiles[WearableSource.fitbitSense]?.hrConfidence, equals(0.75));
-      expect(DeviceReliabilityEngine.deviceProfiles[WearableSource.miBandNoise]?.hrvConfidence, equals(0.40));
+    test(
+        'Device Confidence Matrix maps Apple Watch, WHOOP, Garmin, Samsung, Fitbit, Mi Band correctly',
+        () {
+      expect(
+          DeviceReliabilityEngine
+              .deviceProfiles[WearableSource.whoop]?.hrvConfidence,
+          equals(0.95));
+      expect(
+          DeviceReliabilityEngine
+              .deviceProfiles[WearableSource.appleWatch]?.hrConfidence,
+          equals(0.95));
+      expect(
+          DeviceReliabilityEngine
+              .deviceProfiles[WearableSource.garmin]?.hrvConfidence,
+          equals(0.88));
+      expect(
+          DeviceReliabilityEngine
+              .deviceProfiles[WearableSource.samsungGalaxy]?.hrvConfidence,
+          equals(0.70));
+      expect(
+          DeviceReliabilityEngine
+              .deviceProfiles[WearableSource.fitbitSense]?.hrConfidence,
+          equals(0.75));
+      expect(
+          DeviceReliabilityEngine
+              .deviceProfiles[WearableSource.miBandNoise]?.hrvConfidence,
+          equals(0.40));
     });
 
     test('applyConfidence computes readiness weight thresholds correctly', () {
@@ -41,50 +61,83 @@ void main() {
 
     // ── WearableSyncMerger Unit Tests ─────────────────────────────────────────
 
-    test('Resolution Rule 1: Higher confidence cardiac data overrides lower confidence in same bucket', () {
+    test(
+        'Resolution Rule 1: Higher confidence cardiac data overrides lower confidence in same bucket',
+        () {
       final now = DateTime(2026, 8, 7, 8, 30);
       final local = [
-        WearableDataPoint(timestamp: now, source: WearableSource.miBandNoise, type: MetricType.hrvMs, value: 45.0),
+        WearableDataPoint(
+            timestamp: now,
+            source: WearableSource.miBandNoise,
+            type: MetricType.hrvMs,
+            value: 45.0),
       ];
 
       final incoming = [
-        WearableDataPoint(timestamp: now, source: WearableSource.garmin, type: MetricType.hrvMs, value: 58.0),
+        WearableDataPoint(
+            timestamp: now,
+            source: WearableSource.garmin,
+            type: MetricType.hrvMs,
+            value: 58.0),
       ];
 
-      final result = syncMerger.mergeDataStreams(localHistory: local, incomingStream: incoming);
+      final result = syncMerger.mergeDataStreams(
+          localHistory: local, incomingStream: incoming);
 
       expect(result.mergedPoints.length, equals(1));
       expect(result.mergedPoints.first.source, equals(WearableSource.garmin));
       expect(result.mergedPoints.first.value, equals(58.0));
     });
 
-    test('Resolution Rule 2: Smartwatch hourly step bucket overrides phone steps without double counting', () {
+    test(
+        'Resolution Rule 2: Smartwatch hourly step bucket overrides phone steps without double counting',
+        () {
       final now = DateTime(2026, 8, 7, 10, 0);
       final local = [
-        WearableDataPoint(timestamp: now, source: WearableSource.manualInput, type: MetricType.cumulativeSteps, value: 500.0),
+        WearableDataPoint(
+            timestamp: now,
+            source: WearableSource.manualInput,
+            type: MetricType.cumulativeSteps,
+            value: 500.0),
       ];
 
       final incoming = [
-        WearableDataPoint(timestamp: now, source: WearableSource.appleWatch, type: MetricType.cumulativeSteps, value: 1200.0),
+        WearableDataPoint(
+            timestamp: now,
+            source: WearableSource.appleWatch,
+            type: MetricType.cumulativeSteps,
+            value: 1200.0),
       ];
 
-      final result = syncMerger.mergeDataStreams(localHistory: local, incomingStream: incoming);
+      final result = syncMerger.mergeDataStreams(
+          localHistory: local, incomingStream: incoming);
 
       expect(result.mergedPoints.length, equals(1));
       expect(result.mergedPoints.first.value, equals(1200.0));
     });
 
-    test('Resolution Rule 3: Triggers readiness recalculation when late sync sleep delta > 30m or HRV delta > 10%', () {
+    test(
+        'Resolution Rule 3: Triggers readiness recalculation when late sync sleep delta > 30m or HRV delta > 10%',
+        () {
       final now = DateTime(2026, 8, 7, 6, 0);
       final local = [
-        WearableDataPoint(timestamp: now, source: WearableSource.manualInput, type: MetricType.sleepDuration, value: 360.0), // 6h
+        WearableDataPoint(
+            timestamp: now,
+            source: WearableSource.manualInput,
+            type: MetricType.sleepDuration,
+            value: 360.0), // 6h
       ];
 
       final incoming = [
-        WearableDataPoint(timestamp: now, source: WearableSource.whoop, type: MetricType.sleepDuration, value: 450.0), // 7.5h (90m delta)
+        WearableDataPoint(
+            timestamp: now,
+            source: WearableSource.whoop,
+            type: MetricType.sleepDuration,
+            value: 450.0), // 7.5h (90m delta)
       ];
 
-      final result = syncMerger.mergeDataStreams(localHistory: local, incomingStream: incoming);
+      final result = syncMerger.mergeDataStreams(
+          localHistory: local, incomingStream: incoming);
 
       expect(result.requiresReadinessRecalculation, isTrue);
       expect(result.summaryMessage, contains('Readiness score recalibrated'));
@@ -92,7 +145,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('WearableDataSourceCard renders active wearable and confidence info', (tester) async {
+    testWidgets(
+        'WearableDataSourceCard renders active wearable and confidence info',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

@@ -112,7 +112,8 @@ class AIContextBuilder {
     String? festival = 'Diwali (in 3 days)',
   }) {
     final healthSnapshot = snapshot ?? const HealthSnapshotSummary();
-    final effectiveToneString = coachTone != null ? coachTone.displayName : tone;
+    final effectiveToneString =
+        coachTone != null ? coachTone.displayName : tone;
 
     return AIContext(
       userId: userId,

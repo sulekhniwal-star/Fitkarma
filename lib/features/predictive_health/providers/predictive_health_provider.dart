@@ -13,10 +13,21 @@ class PredictiveHealthState {
     required this.bioAge,
     required this.latestCgmSpike,
     this.medications = const [
-      MedicationLog(id: 'm1', medicationName: 'Metformin', dosage: '500mg', scheduledTime: '08:00 AM', isTaken: true),
-      MedicationLog(id: 'm2', medicationName: 'Omega-3 Fish Oil', dosage: '1000mg', scheduledTime: '01:00 PM', isTaken: false),
+      MedicationLog(
+          id: 'm1',
+          medicationName: 'Metformin',
+          dosage: '500mg',
+          scheduledTime: '08:00 AM',
+          isTaken: true),
+      MedicationLog(
+          id: 'm2',
+          medicationName: 'Omega-3 Fish Oil',
+          dosage: '1000mg',
+          scheduledTime: '01:00 PM',
+          isTaken: false),
     ],
-    this.activeDrugWarning = 'Drug-Nutrient Warning: High-carb meals may delay Metformin absorption. Pair with fiber.',
+    this.activeDrugWarning =
+        'Drug-Nutrient Warning: High-carb meals may delay Metformin absorption. Pair with fiber.',
     this.doctorPortalPasscode = 'FK-8942-DOC',
   });
 
@@ -59,6 +70,7 @@ class PredictiveHealthNotifier extends StateNotifier<PredictiveHealthState> {
 }
 
 final predictiveHealthProvider =
-    StateNotifierProvider<PredictiveHealthNotifier, PredictiveHealthState>((ref) {
+    StateNotifierProvider<PredictiveHealthNotifier, PredictiveHealthState>(
+        (ref) {
   return PredictiveHealthNotifier(const PredictiveHealthEngine());
 });

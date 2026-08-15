@@ -12,7 +12,8 @@ class GroceryOptimizationScreen extends StatefulWidget {
   const GroceryOptimizationScreen({super.key});
 
   @override
-  State<GroceryOptimizationScreen> createState() => _GroceryOptimizationScreenState();
+  State<GroceryOptimizationScreen> createState() =>
+      _GroceryOptimizationScreenState();
 }
 
 class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
@@ -33,10 +34,34 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
       return DayMealPlan(
         dayName: 'Day ${i + 1}',
         ingredients: const [
-          GroceryItem(id: 'g1', name: 'Greek Yogurt 200g', quantityGrams: 200, price: 180, proteinG: 20, category: FoodCategory.protein),
-          GroceryItem(id: 'g2', name: 'Salmon Fillet 150g', quantityGrams: 150, price: 450, proteinG: 34, category: FoodCategory.protein),
-          GroceryItem(id: 'g3', name: 'Whole Wheat Roti Pack', quantityGrams: 300, price: 50, proteinG: 12, category: FoodCategory.staples),
-          GroceryItem(id: 'g4', name: 'Mixed Green Salad', quantityGrams: 200, price: 60, proteinG: 3, category: FoodCategory.produce),
+          GroceryItem(
+              id: 'g1',
+              name: 'Greek Yogurt 200g',
+              quantityGrams: 200,
+              price: 180,
+              proteinG: 20,
+              category: FoodCategory.protein),
+          GroceryItem(
+              id: 'g2',
+              name: 'Salmon Fillet 150g',
+              quantityGrams: 150,
+              price: 450,
+              proteinG: 34,
+              category: FoodCategory.protein),
+          GroceryItem(
+              id: 'g3',
+              name: 'Whole Wheat Roti Pack',
+              quantityGrams: 300,
+              price: 50,
+              proteinG: 12,
+              category: FoodCategory.staples),
+          GroceryItem(
+              id: 'g4',
+              name: 'Mixed Green Salad',
+              quantityGrams: 200,
+              price: 60,
+              proteinG: 3,
+              category: FoodCategory.produce),
         ],
       );
     });
@@ -60,7 +85,8 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Grocery Optimizer 2.0', style: AppTypography.h2),
@@ -79,8 +105,11 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Monthly Budget Limit:', style: AppTypography.labelLg),
-                      Text('₹${_monthlyBudget.round()}/mo', style: AppTypography.h3.copyWith(color: AppColors.primary)),
+                      Text('Monthly Budget Limit:',
+                          style: AppTypography.labelLg),
+                      Text('₹${_monthlyBudget.round()}/mo',
+                          style: AppTypography.h3
+                              .copyWith(color: AppColors.primary)),
                     ],
                   ),
                   Slider(
@@ -98,8 +127,11 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Daily Protein Target:', style: AppTypography.labelLg),
-                      Text('${_dailyProteinTarget}g/day', style: AppTypography.h3.copyWith(color: AppColors.teal)),
+                      Text('Daily Protein Target:',
+                          style: AppTypography.labelLg),
+                      Text('${_dailyProteinTarget}g/day',
+                          style:
+                              AppTypography.h3.copyWith(color: AppColors.teal)),
                     ],
                   ),
                 ],
@@ -126,8 +158,12 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                   child: Row(
                     children: [
                       Icon(
-                        _optimizedResult!.isWithinBudget ? Icons.check_circle_outline : Icons.warning_amber_rounded,
-                        color: _optimizedResult!.isWithinBudget ? AppColors.success : AppColors.error,
+                        _optimizedResult!.isWithinBudget
+                            ? Icons.check_circle_outline
+                            : Icons.warning_amber_rounded,
+                        color: _optimizedResult!.isWithinBudget
+                            ? AppColors.success
+                            : AppColors.error,
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
@@ -153,16 +189,23 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                     Column(
                       children: [
                         Text('Weekly Cost', style: AppTypography.bodySm),
-                        Text('₹${_optimizedResult!.costInr.round()}', style: AppTypography.h2.copyWith(color: AppColors.primary)),
-                        Text('Limit: ₹${(_monthlyBudget / 4.33).round()}', style: AppTypography.bodySm.copyWith(fontSize: 10)),
+                        Text('₹${_optimizedResult!.costInr.round()}',
+                            style: AppTypography.h2
+                                .copyWith(color: AppColors.primary)),
+                        Text('Limit: ₹${(_monthlyBudget / 4.33).round()}',
+                            style: AppTypography.bodySm.copyWith(fontSize: 10)),
                       ],
                     ),
-                    Container(height: 35, width: 1, color: AppColors.glassBorder),
+                    Container(
+                        height: 35, width: 1, color: AppColors.glassBorder),
                     Column(
                       children: [
                         Text('Monthly Est.', style: AppTypography.bodySm),
-                        Text('₹${(_optimizedResult!.costInr * 4.33).round()}', style: AppTypography.h2.copyWith(color: AppColors.teal)),
-                        Text('Budget: ₹${_monthlyBudget.round()}', style: AppTypography.bodySm.copyWith(fontSize: 10)),
+                        Text('₹${(_optimizedResult!.costInr * 4.33).round()}',
+                            style: AppTypography.h2
+                                .copyWith(color: AppColors.teal)),
+                        Text('Budget: ₹${_monthlyBudget.round()}',
+                            style: AppTypography.bodySm.copyWith(fontSize: 10)),
                       ],
                     ),
                   ],
@@ -172,7 +215,8 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
 
               // Applied Swaps Section
               if (_optimizedResult!.appliedSwaps.isNotEmpty) ...[
-                Text('Protein-per-Rupee Swaps Applied:', style: AppTypography.h3),
+                Text('Protein-per-Rupee Swaps Applied:',
+                    style: AppTypography.h3),
                 const SizedBox(height: AppSpacing.sm),
                 for (final swap in _optimizedResult!.appliedSwaps)
                   Padding(
@@ -185,9 +229,11 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.swap_horiz, color: AppColors.accent, size: 18),
+                          const Icon(Icons.swap_horiz,
+                              color: AppColors.accent, size: 18),
                           const SizedBox(width: 8),
-                          Expanded(child: Text(swap, style: AppTypography.bodySm)),
+                          Expanded(
+                              child: Text(swap, style: AppTypography.bodySm)),
                         ],
                       ),
                     ),
@@ -214,10 +260,14 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(item.name, style: AppTypography.labelLg),
-                          Text('${item.quantityGrams.round()}g · P: ${item.proteinG.round()}g', style: AppTypography.bodySm),
+                          Text(
+                              '${item.quantityGrams.round()}g · P: ${item.proteinG.round()}g',
+                              style: AppTypography.bodySm),
                         ],
                       ),
-                      Text('₹${item.price.round()}', style: AppTypography.h3.copyWith(color: AppColors.primary)),
+                      Text('₹${item.price.round()}',
+                          style: AppTypography.h3
+                              .copyWith(color: AppColors.primary)),
                     ],
                   ),
                 ),

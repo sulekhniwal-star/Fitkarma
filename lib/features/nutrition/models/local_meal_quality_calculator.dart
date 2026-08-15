@@ -1,7 +1,12 @@
 import 'indian_food_item.dart';
 
 /// Regional Cooking Oil Profiles
-enum IndianRegionOilProfile { northGheeMustard, southCoconut, westGroundnut, eastMustard }
+enum IndianRegionOilProfile {
+  northGheeMustard,
+  southCoconut,
+  westGroundnut,
+  eastMustard
+}
 
 extension IndianRegionOilProfileEst on IndianRegionOilProfile {
   double get estimatedAddedFatGrams {
@@ -9,7 +14,7 @@ extension IndianRegionOilProfileEst on IndianRegionOilProfile {
       case IndianRegionOilProfile.northGheeMustard:
         return 12.0; // ~1.5 tbsp ghee/oil per curry
       case IndianRegionOilProfile.southCoconut:
-        return 8.0;  // Coconut oil tempering
+        return 8.0; // Coconut oil tempering
       case IndianRegionOilProfile.westGroundnut:
         return 10.0;
       case IndianRegionOilProfile.eastMustard:
@@ -19,7 +24,12 @@ extension IndianRegionOilProfileEst on IndianRegionOilProfile {
 }
 
 /// Fasting Protocol Modes
-enum FastingProtocolMode { none, navratriGrainFree, ramadanSehriIftar, ekadashiNoGrains }
+enum FastingProtocolMode {
+  none,
+  navratriGrainFree,
+  ramadanSehriIftar,
+  ekadashiNoGrains
+}
 
 /// Pure Dart Local Meal Quality Score Calculator & Core Nutrition Adaptations Engine per §P5-D
 class LocalMealQualityCalculator {
@@ -47,9 +57,8 @@ class LocalMealQualityCalculator {
 
     // 2. Fiber Density Score (Up to 2.5 pts)
     final double targetFiber = (calories / 1000.0) * 14.0;
-    final double fiberScore = targetFiber > 0
-        ? ((fiberG / targetFiber) * 2.5).clamp(0.0, 2.5)
-        : 0.0;
+    final double fiberScore =
+        targetFiber > 0 ? ((fiberG / targetFiber) * 2.5).clamp(0.0, 2.5) : 0.0;
 
     // 3. Glycemic Load Impact Score (Up to 2.5 pts)
     final double glycemicLoad = (carbsG * glycemicIndex) / 100.0;
@@ -61,7 +70,8 @@ class LocalMealQualityCalculator {
     }
 
     // 4. Satiety Index Score (Up to 2.0 pts)
-    final double satietyIndex = calculateSatietyIndex(proteinG, fiberG, fatG, carbsG);
+    final double satietyIndex =
+        calculateSatietyIndex(proteinG, fiberG, fatG, carbsG);
     final double satietyScore = (satietyIndex / 100.0) * 2.0;
 
     final total = proteinScore + fiberScore + glScore + satietyScore;
@@ -69,13 +79,16 @@ class LocalMealQualityCalculator {
   }
 
   /// Computes Satiety Index (10.0 - 100.0) based on macronutrient/fiber satiating effects
-  double calculateSatietyIndex(double protein, double fiber, double fat, double carbs) {
-    final double base = (protein * 2.5) + (fiber * 3.0) + (fat * 1.0) + (carbs * 0.5);
+  double calculateSatietyIndex(
+      double protein, double fiber, double fat, double carbs) {
+    final double base =
+        (protein * 2.5) + (fiber * 3.0) + (fat * 1.0) + (carbs * 0.5);
     return double.parse(base.clamp(10.0, 100.0).toStringAsFixed(1));
   }
 
   /// Evaluates readiness and muscle repair impact per §P5-D
-  int calculateReadinessImpact(double proteinG, int glycemicIndex, double carbsG) {
+  int calculateReadinessImpact(
+      double proteinG, int glycemicIndex, double carbsG) {
     int impact = 0;
 
     // High protein post-workout aids muscle recovery
@@ -128,7 +141,8 @@ class LocalMealQualityCalculator {
   }
 
   /// 2. Fasting Protocol Filter: Evaluates item compliance against active fasting mode
-  bool isFoodCompliantWithFasting(IndianFoodItem item, FastingProtocolMode mode) {
+  bool isFoodCompliantWithFasting(
+      IndianFoodItem item, FastingProtocolMode mode) {
     switch (mode) {
       case FastingProtocolMode.none:
         return true;
@@ -143,7 +157,8 @@ class LocalMealQualityCalculator {
             !name.contains('poha') &&
             !name.contains('dosa');
       case FastingProtocolMode.ramadanSehriIftar:
-        return item.satietyIndex >= 50.0; // High satiety filter for fasting endurance
+        return item.satietyIndex >=
+            50.0; // High satiety filter for fasting endurance
     }
   }
 

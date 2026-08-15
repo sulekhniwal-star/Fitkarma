@@ -12,7 +12,8 @@ class RestaurantMenuScanScreen extends StatefulWidget {
   const RestaurantMenuScanScreen({super.key});
 
   @override
-  State<RestaurantMenuScanScreen> createState() => _RestaurantMenuScanScreenState();
+  State<RestaurantMenuScanScreen> createState() =>
+      _RestaurantMenuScanScreenState();
 }
 
 class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
@@ -48,7 +49,8 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Restaurant Intelligence 2.0', style: AppTypography.h2),
@@ -66,7 +68,8 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.document_scanner, color: AppColors.primary, size: 24),
+                      const Icon(Icons.document_scanner,
+                          color: AppColors.primary, size: 24),
                       const SizedBox(width: AppSpacing.sm),
                       Text('Menu OCR Scanner', style: AppTypography.h3),
                     ],
@@ -84,12 +87,16 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
                         backgroundColor: AppColors.primary,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                          borderRadius:
+                              BorderRadius.circular(AppSpacing.cardRadius),
                         ),
                       ),
                       onPressed: _simulateMenuScan,
-                      icon: const Icon(Icons.camera_alt, size: 18, color: Colors.white),
-                      label: Text('Scan Menu Photo / OCR', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                      icon: const Icon(Icons.camera_alt,
+                          size: 18, color: Colors.white),
+                      label: Text('Scan Menu Photo / OCR',
+                          style: AppTypography.labelLg
+                              .copyWith(color: Colors.white)),
                     ),
                   ),
                 ],
@@ -106,15 +113,20 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
               children: [
                 for (final cat in MenuGoalOverlayCategory.values)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: cat.color.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: cat.color.withValues(alpha: 0.4)),
+                      border:
+                          Border.all(color: cat.color.withValues(alpha: 0.4)),
                     ),
                     child: Text(
                       cat.label,
-                      style: AppTypography.bodySm.copyWith(color: cat.color, fontWeight: FontWeight.bold, fontSize: 11),
+                      style: AppTypography.bodySm.copyWith(
+                          color: cat.color,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11),
                     ),
                   ),
               ],
@@ -132,7 +144,9 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
                   decoration: BoxDecoration(
                     color: overlay.colorOverlay.color.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: overlay.colorOverlay.color.withValues(alpha: 0.3)),
+                    border: Border.all(
+                        color:
+                            overlay.colorOverlay.color.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,14 +163,18 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
                         ],
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: overlay.colorOverlay.color,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
                           overlay.colorOverlay.name,
-                          style: AppTypography.bodySm.copyWith(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+                          style: AppTypography.bodySm.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10),
                         ),
                       ),
                     ],
@@ -166,7 +184,8 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
             ],
 
             // Major Chain Menu Presets Section per §P5-E Table
-            Text('Major Indian Chain Optimization Presets:', style: AppTypography.h3),
+            Text('Major Indian Chain Optimization Presets:',
+                style: AppTypography.h3),
             const SizedBox(height: AppSpacing.sm),
             DropdownButton<String>(
               value: _selectedChain,
@@ -183,7 +202,8 @@ class _RestaurantMenuScanScreenState extends State<RestaurantMenuScanScreen> {
             ),
             const SizedBox(height: AppSpacing.sm),
             _ChainPresetCard(
-              preset: MajorChainPresetsDatabase.presets.firstWhere((p) => p.chainName == _selectedChain),
+              preset: MajorChainPresetsDatabase.presets
+                  .firstWhere((p) => p.chainName == _selectedChain),
             ),
             const SizedBox(height: 30),
           ],
@@ -205,7 +225,8 @@ class _ChainPresetCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(preset.chainName, style: AppTypography.h3.copyWith(color: AppColors.primary)),
+          Text(preset.chainName,
+              style: AppTypography.h3.copyWith(color: AppColors.primary)),
           const SizedBox(height: AppSpacing.sm),
           _PresetRow(
             icon: '🟢',
@@ -255,7 +276,9 @@ class _PresetRow extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTypography.bodySm.copyWith(color: color, fontWeight: FontWeight.bold)),
+            Text(title,
+                style: AppTypography.bodySm
+                    .copyWith(color: color, fontWeight: FontWeight.bold)),
             Text(detail, style: AppTypography.labelLg.copyWith(fontSize: 13)),
           ],
         ),

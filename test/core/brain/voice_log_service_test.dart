@@ -16,7 +16,8 @@ void main() {
       expect(service.toWhisperLocale('en'), equals('en-IN'));
     });
 
-    test('Transcribes and parses Hindi voice utterance with code-mixing', () async {
+    test('Transcribes and parses Hindi voice utterance with code-mixing',
+        () async {
       final customClient = MockSpeechToTextClient(
         simulatedTranscript: 'मैंने 2 रोटी और दाल तड़का खाया',
       );
@@ -81,7 +82,8 @@ void main() {
       expect(result.parsedSummary, contains('Masala Dosa'));
     });
 
-    test('Transcribes and parses Bengali fish & rice food voice utterance', () async {
+    test('Transcribes and parses Bengali fish & rice food voice utterance',
+        () async {
       final customClient = MockSpeechToTextClient(
         simulatedTranscript: 'আমি ভাত আর মাছ খেয়েছি',
       );
@@ -115,7 +117,8 @@ void main() {
 
     test('Transcribes and parses Workout voice utterance', () async {
       final customClient = MockSpeechToTextClient(
-        simulatedTranscript: 'I did a 35 minute morning running and pushup workout',
+        simulatedTranscript:
+            'I did a 35 minute morning running and pushup workout',
       );
       final voiceService = VoiceLogService(customClient);
 

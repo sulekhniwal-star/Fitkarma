@@ -25,7 +25,8 @@ class ThermalFrameProcessor extends StateNotifier<ThermalWorkloadState> {
 
   Future<void> pollThermalHeadroom() async {
     try {
-      final double headroom = await _thermalChannel.invokeMethod('getThermalHeadroom') ?? 0.0;
+      final double headroom =
+          await _thermalChannel.invokeMethod('getThermalHeadroom') ?? 0.0;
       _evaluateHeadroom(headroom);
     } catch (_) {
       state = ThermalWorkloadState.normal; // Graceful fallback
@@ -57,11 +58,13 @@ class ThermalFrameProcessor extends StateNotifier<ThermalWorkloadState> {
       case ThermalWorkloadState.normal:
         return true; // Analyze 100% of incoming camera frames (30 fps target)
       case ThermalWorkloadState.moderate:
-        return _frameCount % 2 == 0; // Skip every alternate frame (15 fps target)
+        return _frameCount % 2 ==
+            0; // Skip every alternate frame (15 fps target)
       case ThermalWorkloadState.severe:
         return _frameCount % 3 == 0; // Skip 2 out of 3 frames (10 fps target)
       case ThermalWorkloadState.critical:
-        return _frameCount % 6 == 0; // Drop to emergency trace metrics (5 fps target)
+        return _frameCount % 6 ==
+            0; // Drop to emergency trace metrics (5 fps target)
     }
   }
 

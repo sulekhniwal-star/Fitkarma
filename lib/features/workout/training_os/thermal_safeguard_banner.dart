@@ -22,15 +22,18 @@ class ThermalSafeguardBanner extends ConsumerWidget {
 
     switch (state) {
       case ThermalWorkloadState.moderate:
-        message = '⚡ Optimization Active: Device temperature moderate. Skips 1:2 frames to preserve battery.';
+        message =
+            '⚡ Optimization Active: Device temperature moderate. Skips 1:2 frames to preserve battery.';
         badgeColor = AppColors.warning;
         break;
       case ThermalWorkloadState.severe:
-        message = '🔥 Thermal Safeguard Active: High temperature detected. Tracking core 11 skeletal joints at 10 fps.';
+        message =
+            '🔥 Thermal Safeguard Active: High temperature detected. Tracking core 11 skeletal joints at 10 fps.';
         badgeColor = AppColors.accent;
         break;
       case ThermalWorkloadState.critical:
-        message = '⚠️ Critical Thermal Protection: Extreme device heat. Switched to minimal depth tracing at 5 fps.';
+        message =
+            '⚠️ Critical Thermal Protection: Extreme device heat. Switched to minimal depth tracing at 5 fps.';
         badgeColor = AppColors.error;
         icon = Icons.local_fire_department;
         break;

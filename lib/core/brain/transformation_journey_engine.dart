@@ -32,12 +32,14 @@ class InjuryRecord {
 
 class TransformationMemory {
   final List<WeightCheckpoint> weightHistory;
-  final List<String> majorStruggles;       // e.g. ["Evening snacking, 3 weeks"]
+  final List<String> majorStruggles; // e.g. ["Evening snacking, 3 weeks"]
   final List<InjuryRecord> injuries;
-  final List<String> successPatterns;      // e.g. ["Tuesdays: highest compliance"]
-  final List<String> motivationTriggers;   // e.g. ["Wedding countdown", "squad fire"]
-  final List<String> quitAttempts;         // For relapse pattern modeling
-  final String primaryPersonality;         // Competitive / Routine / Social / Data-driven
+  final List<String> successPatterns; // e.g. ["Tuesdays: highest compliance"]
+  final List<String>
+      motivationTriggers; // e.g. ["Wedding countdown", "squad fire"]
+  final List<String> quitAttempts; // For relapse pattern modeling
+  final String
+      primaryPersonality; // Competitive / Routine / Social / Data-driven
 
   const TransformationMemory({
     required this.weightHistory,
@@ -53,16 +55,25 @@ class TransformationMemory {
     final now = DateTime.now();
     return TransformationMemory(
       weightHistory: [
-        WeightCheckpoint(weightKg: 82.0, date: now.subtract(const Duration(days: 90))),
-        WeightCheckpoint(weightKg: 78.5, date: now.subtract(const Duration(days: 60))),
-        WeightCheckpoint(weightKg: 75.0, date: now.subtract(const Duration(days: 30))),
+        WeightCheckpoint(
+            weightKg: 82.0, date: now.subtract(const Duration(days: 90))),
+        WeightCheckpoint(
+            weightKg: 78.5, date: now.subtract(const Duration(days: 60))),
+        WeightCheckpoint(
+            weightKg: 75.0, date: now.subtract(const Duration(days: 30))),
         WeightCheckpoint(weightKg: 72.0, date: now),
       ],
       majorStruggles: const ['Evening snacking', 'Weekend travel routines'],
       injuries: [
-        InjuryRecord(bodyPart: 'Lower Back', severity: 'Mild', reportedDate: now.subtract(const Duration(days: 45))),
+        InjuryRecord(
+            bodyPart: 'Lower Back',
+            severity: 'Mild',
+            reportedDate: now.subtract(const Duration(days: 45))),
       ],
-      successPatterns: const ['Morning 7 AM workouts: highest compliance', 'High protein breakfast prevents cravings'],
+      successPatterns: const [
+        'Morning 7 AM workouts: highest compliance',
+        'High protein breakfast prevents cravings'
+      ],
       motivationTriggers: const ['Wedding countdown', 'Squad fire streak'],
       quitAttempts: const ['Quit in Week 3 last summer due to travel fatigue'],
       primaryPersonality: 'Routine',
@@ -133,28 +144,32 @@ class TransformationJourneyEngine {
       return RelapseIntervention(
         tier: RelapseTier.day5SquadConnection,
         title: '👥 Squad Connection Nudge',
-        message: 'Your squad member $squadMemberName logged a workout today — want to send her a 🔥?',
+        message:
+            'Your squad member $squadMemberName logged a workout today — want to send her a 🔥?',
         recommendedAction: 'Send 🔥 Squad Cheer',
       );
     } else if (consecutiveMissedDays >= 3) {
       return RelapseIntervention(
         tier: RelapseTier.day3EmergencyReframe,
         title: '🔥 Emergency Mindset Reframe',
-        message: 'Missing workouts doesn\'t erase your $previousStreakDays-day streak last month. That version of you still exists.',
+        message:
+            'Missing workouts doesn\'t erase your $previousStreakDays-day streak last month. That version of you still exists.',
         recommendedAction: 'View Past Achievements',
       );
     } else if (consecutiveMissedDays >= 2) {
       return RelapseIntervention(
         tier: RelapseTier.day2PlanAdjustment,
         title: '⚡ 3-Day Lite Plan Switch',
-        message: 'I\'ve switched you to the Lite Plan for 3 days — 20-min workouts, no calorie counting. Just show up.',
+        message:
+            'I\'ve switched you to the Lite Plan for 3 days — 20-min workouts, no calorie counting. Just show up.',
         recommendedAction: 'Start 20-Min Lite Workout',
       );
     } else if (consecutiveMissedDays >= 1) {
       return RelapseIntervention(
         tier: RelapseTier.day1GentleNudge,
         title: '🌱 Gentle Restart Nudge',
-        message: 'You\'ve been quieter than usual this week. No pressure — let\'s restart with something small. A 10-minute walk today counts as a win.',
+        message:
+            'You\'ve been quieter than usual this week. No pressure — let\'s restart with something small. A 10-minute walk today counts as a win.',
         recommendedAction: 'Log 10-Minute Walk',
       );
     }

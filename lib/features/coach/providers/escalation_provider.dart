@@ -108,7 +108,8 @@ class EscalationNotifier extends StateNotifier<EscalationState> {
   }
 
   /// User explicitly requests human coach
-  Future<void> requestHumanCoach({required String userId, required String userName}) async {
+  Future<void> requestHumanCoach(
+      {required String userId, required String userName}) async {
     final userState = const UserEscalationState(userRequestedHumanCoach: true);
 
     await triggerEscalation(
@@ -127,7 +128,8 @@ class EscalationNotifier extends StateNotifier<EscalationState> {
       trainingAdherencePct: 65,
       sleepDeficitDays: 0,
       aiLimitationsHit: const ['User requested expert review'],
-      aiCoachNotesSummary: 'User initiated escalation for personalized human coaching.',
+      aiCoachNotesSummary:
+          'User initiated escalation for personalized human coaching.',
     );
   }
 

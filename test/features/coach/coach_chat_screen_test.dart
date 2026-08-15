@@ -15,7 +15,9 @@ void main() {
       expect(notifier.state.messages.first.text, contains('Namaste'));
     });
 
-    test('sendMessage adds user message optimistically and triggers typewriter AI reply', () async {
+    test(
+        'sendMessage adds user message optimistically and triggers typewriter AI reply',
+        () async {
       final notifier = AiCoachChatNotifier(const AiRouter());
       final initialCount = notifier.state.messages.length;
 
@@ -51,19 +53,20 @@ void main() {
       const engine = ProactiveInsightsEngine();
       final trigger = engine.checkAITrigger(
         userId: 'user_1',
-        avg7DayProteinG: 90,  // >70% of 100g target
+        avg7DayProteinG: 90, // >70% of 100g target
         proteinTargetG: 100,
-        sleepDebtHours: 1.0,  // <3h
-        plateauWeeks: 1,       // <3 weeks
+        sleepDebtHours: 1.0, // <3h
+        plateauWeeks: 1, // <3 weeks
       );
       expect(trigger, isNull); // No insight needed — skip LLM call
     });
 
-    test('ProactiveInsightsEngine triggers protein_deficit when <70% target', () {
+    test('ProactiveInsightsEngine triggers protein_deficit when <70% target',
+        () {
       const engine = ProactiveInsightsEngine();
       final trigger = engine.checkAITrigger(
         userId: 'user_2',
-        avg7DayProteinG: 58,   // <70% of 110g
+        avg7DayProteinG: 58, // <70% of 110g
         proteinTargetG: 110,
         sleepDebtHours: 0.5,
         plateauWeeks: 0,
@@ -73,7 +76,9 @@ void main() {
       expect(trigger.isTriggered, isTrue);
     });
 
-    test('ProactiveInsightsEngine generates data-grounded protein insight (not generic)', () {
+    test(
+        'ProactiveInsightsEngine generates data-grounded protein insight (not generic)',
+        () {
       const engine = ProactiveInsightsEngine();
       final trigger = engine.checkAITrigger(
         userId: 'user_3',
@@ -97,20 +102,23 @@ void main() {
       expect(insight.message, isNot(contains('Eat more protein')));
     });
 
-    test('ProactiveInsightsEngine triggers sleep_debt_excess at 3h+ accumulated debt', () {
+    test(
+        'ProactiveInsightsEngine triggers sleep_debt_excess at 3h+ accumulated debt',
+        () {
       const engine = ProactiveInsightsEngine();
       final trigger = engine.checkAITrigger(
         userId: 'user_4',
         avg7DayProteinG: 90,
         proteinTargetG: 110,
-        sleepDebtHours: 3.5,  // >=3h threshold
+        sleepDebtHours: 3.5, // >=3h threshold
         plateauWeeks: 0,
       );
       expect(trigger, isNotNull);
       expect(trigger!.triggerType, equals('sleep_debt_excess'));
     });
 
-    testWidgets('CoachChatScreen renders context banner, and input bar', (tester) async {
+    testWidgets('CoachChatScreen renders context banner, and input bar',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: CoachChatScreen()),
@@ -134,7 +142,8 @@ void main() {
       expect(find.byIcon(Icons.mic_none), findsOneWidget);
     });
 
-    testWidgets('CoachChatScreen sends a user message and shows reply', (tester) async {
+    testWidgets('CoachChatScreen sends a user message and shows reply',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: CoachChatScreen()),

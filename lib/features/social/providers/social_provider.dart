@@ -13,13 +13,36 @@ class SocialState {
   const SocialState({
     required this.squadInviteCode,
     this.squadReadinessBoard = const [
-      SquadReadinessStatus(memberName: 'Aarav M.', tier: ReadinessTier.premium, statusLabel: 'Peak Readiness'),
-      SquadReadinessStatus(memberName: 'Priya K.', tier: ReadinessTier.enhanced, statusLabel: 'Moderate Active'),
-      SquadReadinessStatus(memberName: 'Rohan S.', tier: ReadinessTier.basic, statusLabel: 'Active Recovery'),
+      SquadReadinessStatus(
+          memberName: 'Aarav M.',
+          tier: ReadinessTier.premium,
+          statusLabel: 'Peak Readiness'),
+      SquadReadinessStatus(
+          memberName: 'Priya K.',
+          tier: ReadinessTier.enhanced,
+          statusLabel: 'Moderate Active'),
+      SquadReadinessStatus(
+          memberName: 'Rohan S.',
+          tier: ReadinessTier.basic,
+          statusLabel: 'Active Recovery'),
     ],
     this.feedItems = const [
-      ActivityFeedItem(id: 'feed_1', userName: 'Priya K.', userAvatarUrl: '', title: 'Completed Barbell Squat Session', description: 'Earned +150 Outcome XP • Form Quality 98%', timestamp: '2h ago', highFiveCount: 5),
-      ActivityFeedItem(id: 'feed_2', userName: 'Aarav M.', userAvatarUrl: '', title: 'Hit Daily Protein Target', description: '135g Protein Logged (Pure Veg)', timestamp: '4h ago', highFiveCount: 8),
+      ActivityFeedItem(
+          id: 'feed_1',
+          userName: 'Priya K.',
+          userAvatarUrl: '',
+          title: 'Completed Barbell Squat Session',
+          description: 'Earned +150 Outcome XP • Form Quality 98%',
+          timestamp: '2h ago',
+          highFiveCount: 5),
+      ActivityFeedItem(
+          id: 'feed_2',
+          userName: 'Aarav M.',
+          userAvatarUrl: '',
+          title: 'Hit Daily Protein Target',
+          description: '135g Protein Logged (Pure Veg)',
+          timestamp: '4h ago',
+          highFiveCount: 8),
     ],
     this.leaderboard = const [
       LeaderboardEntry(rank: 1, name: 'Aarav M.', outcomeXp: 1450),
@@ -59,8 +82,10 @@ class SocialNotifier extends StateNotifier<SocialState> {
   void toggleHighFive(String feedItemId) {
     final updatedList = state.feedItems.map((item) {
       if (item.id == feedItemId) {
-        final newCount = item.isHighFived ? item.highFiveCount - 1 : item.highFiveCount + 1;
-        return item.copyWith(highFiveCount: newCount, isHighFived: !item.isHighFived);
+        final newCount =
+            item.isHighFived ? item.highFiveCount - 1 : item.highFiveCount + 1;
+        return item.copyWith(
+            highFiveCount: newCount, isHighFived: !item.isHighFived);
       }
       return item;
     }).toList();
@@ -73,6 +98,7 @@ class SocialNotifier extends StateNotifier<SocialState> {
   }
 }
 
-final socialProvider = StateNotifierProvider<SocialNotifier, SocialState>((ref) {
+final socialProvider =
+    StateNotifierProvider<SocialNotifier, SocialState>((ref) {
   return SocialNotifier(const SquadEngine());
 });

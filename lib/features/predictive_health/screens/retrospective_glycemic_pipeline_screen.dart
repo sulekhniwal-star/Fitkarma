@@ -7,9 +7,11 @@ import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/glass_card.dart';
 import '../../../core/brain/retrospective_glucose_matcher.dart';
 
-final retrospectiveMatcherProvider = Provider<RetrospectiveGlucoseMatcher>((ref) => const RetrospectiveGlucoseMatcher());
+final retrospectiveMatcherProvider = Provider<RetrospectiveGlucoseMatcher>(
+    (ref) => const RetrospectiveGlucoseMatcher());
 
-final sampleMealsAwaitingAnalysisProvider = StateProvider<List<RetrospectiveFoodLog>>((ref) {
+final sampleMealsAwaitingAnalysisProvider =
+    StateProvider<List<RetrospectiveFoodLog>>((ref) {
   final now = DateTime.now();
   return [
     RetrospectiveFoodLog(
@@ -48,10 +50,12 @@ class RetrospectiveGlycemicPipelineScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
-        title: Text('🔄 Retrospective Glycemic Pipeline', style: AppTypography.h2),
+        title:
+            Text('🔄 Retrospective Glycemic Pipeline', style: AppTypography.h2),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -66,14 +70,19 @@ class RetrospectiveGlycemicPipelineScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.sync_rounded, color: AppColors.teal, size: 28),
+                        const Icon(Icons.sync_rounded,
+                            color: AppColors.teal, size: 28),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Retrospective Sync & Backfill', style: AppTypography.labelLg),
-                              Text('Background Sync • Late-Arriving Sensor Streams', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                              Text('Retrospective Sync & Backfill',
+                                  style: AppTypography.labelLg),
+                              Text(
+                                  'Background Sync • Late-Arriving Sensor Streams',
+                                  style: AppTypography.bodySm.copyWith(
+                                      color: AppColors.textSecondary)),
                             ],
                           ),
                         ),
@@ -82,7 +91,8 @@ class RetrospectiveGlycemicPipelineScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Health Connect sync latency can delay CGM readings. RGPP automatically retroactively links late-arriving CGM batches to your past 24h food logs.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 12),
                     ),
                   ],
                 ),
@@ -90,7 +100,8 @@ class RetrospectiveGlycemicPipelineScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.lg),
 
               // Analyzed & Pending Meals Section
-              Text('Recent Meals & Glycemic Audit Status', style: AppTypography.h3),
+              Text('Recent Meals & Glycemic Audit Status',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
 
               for (final meal in meals)
@@ -102,14 +113,19 @@ class RetrospectiveGlycemicPipelineScreen extends ConsumerWidget {
                           padding: const EdgeInsets.all(14),
                           child: Row(
                             children: [
-                              Icon(Icons.hourglass_top_rounded, color: AppColors.warning, size: 20),
+                              Icon(Icons.hourglass_top_rounded,
+                                  color: AppColors.warning, size: 20),
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(meal.foodName, style: AppTypography.labelLg),
-                                    Text('Awaiting CGM sensor stream sync...', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                                    Text(meal.foodName,
+                                        style: AppTypography.labelLg),
+                                    Text('Awaiting CGM sensor stream sync...',
+                                        style: AppTypography.bodySm.copyWith(
+                                            color: AppColors.textSecondary,
+                                            fontSize: 11)),
                                   ],
                                 ),
                               ),
@@ -140,10 +156,14 @@ class _ProcessedInsightCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: isSpikeHigh ? AppColors.warning.withValues(alpha: 0.1) : AppColors.success.withValues(alpha: 0.1),
+        color: isSpikeHigh
+            ? AppColors.warning.withValues(alpha: 0.1)
+            : AppColors.success.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isSpikeHigh ? AppColors.warning.withValues(alpha: 0.3) : AppColors.success.withValues(alpha: 0.3),
+          color: isSpikeHigh
+              ? AppColors.warning.withValues(alpha: 0.3)
+              : AppColors.success.withValues(alpha: 0.3),
         ),
       ),
       child: Column(
@@ -152,18 +172,28 @@ class _ProcessedInsightCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('🩺 Glycemic Response Audit (Processed)', style: AppTypography.labelLg.copyWith(color: isSpikeHigh ? AppColors.warning : AppColors.success, fontWeight: FontWeight.bold)),
-              Text('Quality: ${meal.mealQualityScore?.round()}/100', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+              Text('🩺 Glycemic Response Audit (Processed)',
+                  style: AppTypography.labelLg.copyWith(
+                      color:
+                          isSpikeHigh ? AppColors.warning : AppColors.success,
+                      fontWeight: FontWeight.bold)),
+              Text('Quality: ${meal.mealQualityScore?.round()}/100',
+                  style: AppTypography.labelSmall
+                      .copyWith(color: AppColors.textSecondary)),
             ],
           ),
           const SizedBox(height: 6),
-          Text('Meal: ${meal.foodName}', style: AppTypography.bodySm.copyWith(fontWeight: FontWeight.w600)),
+          Text('Meal: ${meal.foodName}',
+              style:
+                  AppTypography.bodySm.copyWith(fontWeight: FontWeight.w600)),
           Text(
-            isSpikeHigh ? '⚠️ +${spike.round()} mg/dL spike detected post-meal' : '✓ Normal response (+${spike.round()} mg/dL)',
-            style: AppTypography.bodySm.copyWith(color: isSpikeHigh ? AppColors.warning : AppColors.success),
+            isSpikeHigh
+                ? '⚠️ +${spike.round()} mg/dL spike detected post-meal'
+                : '✓ Normal response (+${spike.round()} mg/dL)',
+            style: AppTypography.bodySm.copyWith(
+                color: isSpikeHigh ? AppColors.warning : AppColors.success),
           ),
           const SizedBox(height: 8),
-
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -173,12 +203,14 @@ class _ProcessedInsightCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.lightbulb_outline, color: AppColors.primary, size: 18),
+                const Icon(Icons.lightbulb_outline,
+                    color: AppColors.primary, size: 18),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
                     'AI Retrospective Rule: Carbohydrate surge detected. Next time, add 100g curd or a fresh fiber salad BEFORE parsing to blunt this surge.',
-                    style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                    style: AppTypography.bodySm
+                        .copyWith(color: AppColors.textSecondary, fontSize: 12),
                   ),
                 ),
               ],

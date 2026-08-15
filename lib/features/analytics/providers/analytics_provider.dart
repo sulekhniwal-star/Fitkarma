@@ -55,6 +55,7 @@ class AnalyticsNotifier extends StateNotifier<AnalyticsState> {
   }
 }
 
-final analyticsProvider = StateNotifierProvider<AnalyticsNotifier, AnalyticsState>((ref) {
+final analyticsProvider =
+    StateNotifierProvider<AnalyticsNotifier, AnalyticsState>((ref) {
   return AnalyticsNotifier(const AnalyticsEngine());
 });

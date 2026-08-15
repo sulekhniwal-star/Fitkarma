@@ -8,7 +8,9 @@ void main() {
   group('Phase 11 — Visual Body Analytics Tests (§P11-A, §P11-B, §P11-C)', () {
     const estimator = BodyCompositionEstimator();
 
-    test('BodyCompositionEstimator U.S. Navy Formula calculates accurate body fat & lean mass for male', () {
+    test(
+        'BodyCompositionEstimator U.S. Navy Formula calculates accurate body fat & lean mass for male',
+        () {
       final result = estimator.estimate(
         heightCm: 175.0,
         weightKg: 78.0,
@@ -25,7 +27,9 @@ void main() {
       expect(result.leanMassKg + result.fatMassKg, closeTo(78.0, 0.2));
     });
 
-    test('BodyCompositionEstimator uses BMI fallback when neck/waist measurements are absent', () {
+    test(
+        'BodyCompositionEstimator uses BMI fallback when neck/waist measurements are absent',
+        () {
       final result = estimator.estimate(
         heightCm: 175.0,
         weightKg: 78.0,
@@ -40,7 +44,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('BodyAnalyticsScreen renders Body Fat BentoCard, 3-month trend deltas, and biometric lock', (tester) async {
+    testWidgets(
+        'BodyAnalyticsScreen renders Body Fat BentoCard, 3-month trend deltas, and biometric lock',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -56,7 +62,8 @@ void main() {
       expect(find.text('Fat Mass'), findsOneWidget);
       expect(find.text('3-Month Trend (Deltas)'), findsOneWidget);
       expect(find.text('Anthropometric Checkpoints'), findsOneWidget);
-      expect(find.textContaining('§P11-B Progress Photo System'), findsOneWidget);
+      expect(
+          find.textContaining('§P11-B Progress Photo System'), findsOneWidget);
       expect(find.text('Authenticate to Unlock Photos'), findsOneWidget);
 
       final unlockBtn = find.text('Authenticate to Unlock Photos');

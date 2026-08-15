@@ -243,8 +243,7 @@ class _TrendChip extends StatelessWidget {
           const SizedBox(width: 3),
           Text(
             '${isUp ? '+' : ''}${pct.toStringAsFixed(0)}% vs yesterday',
-            style:
-                AppTypography.labelMd.copyWith(color: color, fontSize: 10),
+            style: AppTypography.labelMd.copyWith(color: color, fontSize: 10),
           ),
         ],
       ),
@@ -282,8 +281,7 @@ class _LegendDot extends StatelessWidget {
         Container(
             width: 6,
             height: 6,
-            decoration:
-                BoxDecoration(color: color, shape: BoxShape.circle)),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 4),
         Text(label, style: AppTypography.bodySm.copyWith(fontSize: 9)),
       ],
@@ -320,16 +318,17 @@ class _ScoreRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Today\'s Focus',
-                    style: AppTypography.bodySm),
+                Text('Today\'s Focus', style: AppTypography.bodySm),
                 const SizedBox(height: 4),
-                Text(focus, style: AppTypography.h3.copyWith(color: AppColors.teal)),
+                Text(focus,
+                    style: AppTypography.h3.copyWith(color: AppColors.teal)),
                 const SizedBox(height: 8),
                 Row(
                   children: [
                     Text(
                       'Tap to see today\'s mission',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textMuted),
                     ),
                     const SizedBox(width: 4),
                     const Icon(Icons.arrow_forward_ios,
@@ -543,14 +542,15 @@ class _DipInsightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final insight = dip?.primaryInsight ??
-        'Your daily intelligence package is loading...';
+    final insight =
+        dip?.primaryInsight ?? 'Your daily intelligence package is loading...';
     final source = dip?.insightSource ?? 'DIP';
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1.2),
+        border: Border.all(
+            color: AppColors.primary.withValues(alpha: 0.4), width: 1.2),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -675,8 +675,7 @@ class _StatBento extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(label, style: AppTypography.bodySm),
-              Text(value,
-                  style: AppTypography.h2.copyWith(color: color)),
+              Text(value, style: AppTypography.h2.copyWith(color: color)),
             ],
           ),
         ],
@@ -722,8 +721,8 @@ class _DailyMissionsCard extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text('${e.key + 1}',
-                              style: AppTypography.bodySm
-                                  .copyWith(color: AppColors.teal, fontSize: 9)),
+                              style: AppTypography.bodySm.copyWith(
+                                  color: AppColors.teal, fontSize: 9)),
                         ),
                       ),
                       const SizedBox(width: 10),

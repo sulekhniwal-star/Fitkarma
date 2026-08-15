@@ -11,15 +11,17 @@ class DataConfidenceShieldScreen extends StatefulWidget {
   const DataConfidenceShieldScreen({super.key});
 
   @override
-  State<DataConfidenceShieldScreen> createState() => _DataConfidenceShieldScreenState();
+  State<DataConfidenceShieldScreen> createState() =>
+      _DataConfidenceShieldScreenState();
 }
 
-class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen> {
+class _DataConfidenceShieldScreenState
+    extends State<DataConfidenceShieldScreen> {
   final _shield = const DataConfidenceShield();
 
   int _loggedDaysCount = 3; // Out of 7 days with >=3 meals
   int _proteinMetCount = 3; // Out of 7 days
-  int _waterMetCount = 4;   // Out of 7 days
+  int _waterMetCount = 4; // Out of 7 days
 
   late ShieldStatus _status;
 
@@ -56,7 +58,8 @@ class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen>
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Data Confidence Shield', style: AppTypography.h2),
@@ -70,10 +73,14 @@ class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen>
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: _status.isLockoutActive ? AppColors.accent.withValues(alpha: 0.12) : AppColors.success.withValues(alpha: 0.12),
+                color: _status.isLockoutActive
+                    ? AppColors.accent.withValues(alpha: 0.12)
+                    : AppColors.success.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
                 border: Border.all(
-                  color: _status.isLockoutActive ? AppColors.accent : AppColors.success,
+                  color: _status.isLockoutActive
+                      ? AppColors.accent
+                      : AppColors.success,
                 ),
               ),
               child: Column(
@@ -82,16 +89,24 @@ class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen>
                   Row(
                     children: [
                       Icon(
-                        _status.isLockoutActive ? Icons.shield : Icons.verified_user,
-                        color: _status.isLockoutActive ? AppColors.accent : AppColors.success,
+                        _status.isLockoutActive
+                            ? Icons.shield
+                            : Icons.verified_user,
+                        color: _status.isLockoutActive
+                            ? AppColors.accent
+                            : AppColors.success,
                         size: 24,
                       ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          _status.isLockoutActive ? 'METABOLIC TARGET LOCKOUT ACTIVE' : 'DATA CONFIDENCE HIGH — ADAPTATIONS UNLOCKED',
+                          _status.isLockoutActive
+                              ? 'METABOLIC TARGET LOCKOUT ACTIVE'
+                              : 'DATA CONFIDENCE HIGH — ADAPTATIONS UNLOCKED',
                           style: AppTypography.labelLg.copyWith(
-                            color: _status.isLockoutActive ? AppColors.accent : AppColors.success,
+                            color: _status.isLockoutActive
+                                ? AppColors.accent
+                                : AppColors.success,
                           ),
                         ),
                       ),
@@ -125,8 +140,10 @@ class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Days with >=3 Meals Logged (40%)', style: AppTypography.bodySm),
-                      Text('$_loggedDaysCount / 7 days', style: AppTypography.labelLg),
+                      Text('Days with >=3 Meals Logged (40%)',
+                          style: AppTypography.bodySm),
+                      Text('$_loggedDaysCount / 7 days',
+                          style: AppTypography.labelLg),
                     ],
                   ),
                   Slider(
@@ -145,8 +162,11 @@ class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Protein Consistency Days (30%)', style: AppTypography.bodySm),
-                      Text('$_proteinMetCount / 7 days', style: AppTypography.labelLg.copyWith(color: AppColors.teal)),
+                      Text('Protein Consistency Days (30%)',
+                          style: AppTypography.bodySm),
+                      Text('$_proteinMetCount / 7 days',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.teal)),
                     ],
                   ),
                   Slider(
@@ -165,8 +185,11 @@ class _DataConfidenceShieldScreenState extends State<DataConfidenceShieldScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Hydration Logged Days (30%)', style: AppTypography.bodySm),
-                      Text('$_waterMetCount / 7 days', style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                      Text('Hydration Logged Days (30%)',
+                          style: AppTypography.bodySm),
+                      Text('$_waterMetCount / 7 days',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.accent)),
                     ],
                   ),
                   Slider(

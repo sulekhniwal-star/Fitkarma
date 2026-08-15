@@ -46,7 +46,8 @@ class TransformationJourneyState {
     const adherence = 84.0;
 
     // 90-day prediction channel calculation (ADR-025 compliance bounds)
-    final projectedDrop = (adherence / 100.0) * 6.0; // 6kg max drop for 90 days at 100%
+    final projectedDrop =
+        (adherence / 100.0) * 6.0; // 6kg max drop for 90 days at 100%
     final minW = (currentWeight - projectedDrop - 0.8).clamp(50.0, 150.0);
     final maxW = (currentWeight - projectedDrop + 0.8).clamp(50.0, 150.0);
 
@@ -99,19 +100,22 @@ class TransformationJourneyState {
       weightHistory: weightHistory ?? this.weightHistory,
       arePhotosUnlocked: arePhotosUnlocked ?? this.arePhotosUnlocked,
       biometricAuthError: biometricAuthError ?? this.biometricAuthError,
-      currentAdherenceScore: currentAdherenceScore ?? this.currentAdherenceScore,
+      currentAdherenceScore:
+          currentAdherenceScore ?? this.currentAdherenceScore,
       projectedWeightMin: projectedWeightMin ?? this.projectedWeightMin,
       projectedWeightMax: projectedWeightMax ?? this.projectedWeightMax,
       projectedBodyFatMin: projectedBodyFatMin ?? this.projectedBodyFatMin,
       projectedBodyFatMax: projectedBodyFatMax ?? this.projectedBodyFatMax,
-      completedProgramWeeks: completedProgramWeeks ?? this.completedProgramWeeks,
+      completedProgramWeeks:
+          completedProgramWeeks ?? this.completedProgramWeeks,
       progressPhotos: progressPhotos ?? this.progressPhotos,
     );
   }
 }
 
 /// TransformationJourneyNotifier Riverpod Provider per §P8-B spec
-class TransformationJourneyNotifier extends StateNotifier<TransformationJourneyState> {
+class TransformationJourneyNotifier
+    extends StateNotifier<TransformationJourneyState> {
   TransformationJourneyNotifier() : super(TransformationJourneyState.initial());
 
   void authenticateBiometrics({bool mockSuccess = true, String? mockError}) {
@@ -143,7 +147,7 @@ class TransformationJourneyNotifier extends StateNotifier<TransformationJourneyS
   }
 }
 
-final transformationJourneyProvider =
-    StateNotifierProvider<TransformationJourneyNotifier, TransformationJourneyState>((ref) {
+final transformationJourneyProvider = StateNotifierProvider<
+    TransformationJourneyNotifier, TransformationJourneyState>((ref) {
   return TransformationJourneyNotifier();
 });

@@ -41,7 +41,8 @@ class InsightCard extends StatelessWidget {
                     onTap: onAction,
                     child: Text(
                       actionLabel!,
-                      style: AppTypography.titleMedium.copyWith(color: AppColors.primaryCyan, fontSize: 13.0),
+                      style: AppTypography.titleMedium.copyWith(
+                          color: AppColors.primaryCyan, fontSize: 13.0),
                     ),
                   ),
                 ],

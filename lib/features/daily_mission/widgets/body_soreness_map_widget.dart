@@ -32,7 +32,8 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
           children: [
             Text(
               _isFrontView ? 'Anterior (Front View)' : 'Posterior (Back View)',
-              style: AppTypography.labelMd.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.labelMd
+                  .copyWith(color: AppColors.textSecondary),
             ),
             Row(
               children: [
@@ -44,7 +45,9 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                   },
                   selectedColor: AppColors.primary.withValues(alpha: 0.3),
                   labelStyle: AppTypography.labelMd.copyWith(
-                    color: _isFrontView ? AppColors.primary : AppColors.textSecondary,
+                    color: _isFrontView
+                        ? AppColors.primary
+                        : AppColors.textSecondary,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -56,7 +59,9 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                   },
                   selectedColor: AppColors.primary.withValues(alpha: 0.3),
                   labelStyle: AppTypography.labelMd.copyWith(
-                    color: !_isFrontView ? AppColors.primary : AppColors.textSecondary,
+                    color: !_isFrontView
+                        ? AppColors.primary
+                        : AppColors.textSecondary,
                   ),
                 ),
               ],
@@ -81,7 +86,8 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return GestureDetector(
-                      onTapUp: (details) => _handleTap(details.localPosition, constraints.biggest),
+                      onTapUp: (details) => _handleTap(
+                          details.localPosition, constraints.biggest),
                       child: CustomPaint(
                         size: Size(constraints.maxWidth, constraints.maxHeight),
                         painter: _BodyMapPainter(
@@ -121,9 +127,11 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                       children: [
                         const Text('Cumulative:', style: AppTypography.labelMd),
                         Text(
-                          _getCumulativeLabel(widget.sorenessState.compositeSorenessValue),
+                          _getCumulativeLabel(
+                              widget.sorenessState.compositeSorenessValue),
                           style: AppTypography.h3.copyWith(
-                            color: _getCumulativeColor(widget.sorenessState.compositeSorenessValue),
+                            color: _getCumulativeColor(
+                                widget.sorenessState.compositeSorenessValue),
                           ),
                         ),
                       ],
@@ -143,29 +151,49 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
     final height = size.height;
 
     if (_isFrontView) {
-      if (Rect.fromLTWH(width * 0.35, height * 0.15, width * 0.3, height * 0.1).contains(pos)) {
+      if (Rect.fromLTWH(width * 0.35, height * 0.15, width * 0.3, height * 0.1)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.shoulders);
-      } else if (Rect.fromLTWH(width * 0.38, height * 0.25, width * 0.24, height * 0.12).contains(pos)) {
+      } else if (Rect.fromLTWH(
+              width * 0.38, height * 0.25, width * 0.24, height * 0.12)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.chest);
-      } else if (Rect.fromLTWH(width * 0.4, height * 0.38, width * 0.2, height * 0.15).contains(pos)) {
+      } else if (Rect.fromLTWH(
+              width * 0.4, height * 0.38, width * 0.2, height * 0.15)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.abs);
-      } else if (Rect.fromLTWH(width * 0.32, height * 0.55, width * 0.36, height * 0.25).contains(pos)) {
+      } else if (Rect.fromLTWH(
+              width * 0.32, height * 0.55, width * 0.36, height * 0.25)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.quads);
-      } else if (Rect.fromLTWH(width * 0.2, height * 0.24, width * 0.16, height * 0.3).contains(pos) ||
-          Rect.fromLTWH(width * 0.64, height * 0.24, width * 0.16, height * 0.3).contains(pos)) {
+      } else if (Rect.fromLTWH(
+                  width * 0.2, height * 0.24, width * 0.16, height * 0.3)
+              .contains(pos) ||
+          Rect.fromLTWH(width * 0.64, height * 0.24, width * 0.16, height * 0.3)
+              .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.arms);
       }
     } else {
-      if (Rect.fromLTWH(width * 0.35, height * 0.15, width * 0.3, height * 0.1).contains(pos)) {
+      if (Rect.fromLTWH(width * 0.35, height * 0.15, width * 0.3, height * 0.1)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.shoulders);
-      } else if (Rect.fromLTWH(width * 0.36, height * 0.35, width * 0.28, height * 0.15).contains(pos)) {
+      } else if (Rect.fromLTWH(
+              width * 0.36, height * 0.35, width * 0.28, height * 0.15)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.lowerBack);
-      } else if (Rect.fromLTWH(width * 0.34, height * 0.51, width * 0.32, height * 0.14).contains(pos)) {
+      } else if (Rect.fromLTWH(
+              width * 0.34, height * 0.51, width * 0.32, height * 0.14)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.glutes);
-      } else if (Rect.fromLTWH(width * 0.32, height * 0.66, width * 0.36, height * 0.24).contains(pos)) {
+      } else if (Rect.fromLTWH(
+              width * 0.32, height * 0.66, width * 0.36, height * 0.24)
+          .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.hamstrings);
-      } else if (Rect.fromLTWH(width * 0.2, height * 0.24, width * 0.16, height * 0.3).contains(pos) ||
-          Rect.fromLTWH(width * 0.64, height * 0.24, width * 0.16, height * 0.3).contains(pos)) {
+      } else if (Rect.fromLTWH(
+                  width * 0.2, height * 0.24, width * 0.16, height * 0.3)
+              .contains(pos) ||
+          Rect.fromLTWH(width * 0.64, height * 0.24, width * 0.16, height * 0.3)
+              .contains(pos)) {
         widget.onToggleMuscle(MuscleGroup.arms);
       }
     }
@@ -205,7 +233,8 @@ class _BodySorenessMapWidgetState extends State<BodySorenessMapWidget> {
                 ),
                 child: Text(
                   entry.value.displayName,
-                  style: AppTypography.labelMd.copyWith(color: _getSeverityColor(entry.value)),
+                  style: AppTypography.labelMd
+                      .copyWith(color: _getSeverityColor(entry.value)),
                 ),
               ),
             ],
@@ -267,19 +296,76 @@ class _BodyMapPainter extends CustomPainter {
     canvas.drawCircle(headCenter, width * 0.08, outlinePaint);
 
     if (isFrontView) {
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.35, height * 0.15, width * 0.3, height * 0.09), MuscleGroup.shoulders, 'Shoulders');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.38, height * 0.25, width * 0.24, height * 0.12), MuscleGroup.chest, 'Chest');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.4, height * 0.38, width * 0.2, height * 0.15), MuscleGroup.abs, 'Abs');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.32, height * 0.55, width * 0.36, height * 0.25), MuscleGroup.quads, 'Quads');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.2, height * 0.24, width * 0.16, height * 0.3), MuscleGroup.arms, 'L.Arm');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.64, height * 0.24, width * 0.16, height * 0.3), MuscleGroup.arms, 'R.Arm');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.35, height * 0.15, width * 0.3, height * 0.09),
+          MuscleGroup.shoulders,
+          'Shoulders');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.38, height * 0.25, width * 0.24, height * 0.12),
+          MuscleGroup.chest,
+          'Chest');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(width * 0.4, height * 0.38, width * 0.2, height * 0.15),
+          MuscleGroup.abs,
+          'Abs');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.32, height * 0.55, width * 0.36, height * 0.25),
+          MuscleGroup.quads,
+          'Quads');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(width * 0.2, height * 0.24, width * 0.16, height * 0.3),
+          MuscleGroup.arms,
+          'L.Arm');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.64, height * 0.24, width * 0.16, height * 0.3),
+          MuscleGroup.arms,
+          'R.Arm');
     } else {
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.35, height * 0.15, width * 0.3, height * 0.09), MuscleGroup.shoulders, 'Traps/Sh');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.36, height * 0.35, width * 0.28, height * 0.15), MuscleGroup.lowerBack, 'Lower Back');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.34, height * 0.51, width * 0.32, height * 0.14), MuscleGroup.glutes, 'Glutes');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.32, height * 0.66, width * 0.36, height * 0.24), MuscleGroup.hamstrings, 'Hamstrings');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.2, height * 0.24, width * 0.16, height * 0.3), MuscleGroup.arms, 'L.Arm');
-      _drawRegion(canvas, Rect.fromLTWH(width * 0.64, height * 0.24, width * 0.16, height * 0.3), MuscleGroup.arms, 'R.Arm');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.35, height * 0.15, width * 0.3, height * 0.09),
+          MuscleGroup.shoulders,
+          'Traps/Sh');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.36, height * 0.35, width * 0.28, height * 0.15),
+          MuscleGroup.lowerBack,
+          'Lower Back');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.34, height * 0.51, width * 0.32, height * 0.14),
+          MuscleGroup.glutes,
+          'Glutes');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.32, height * 0.66, width * 0.36, height * 0.24),
+          MuscleGroup.hamstrings,
+          'Hamstrings');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(width * 0.2, height * 0.24, width * 0.16, height * 0.3),
+          MuscleGroup.arms,
+          'L.Arm');
+      _drawRegion(
+          canvas,
+          Rect.fromLTWH(
+              width * 0.64, height * 0.24, width * 0.16, height * 0.3),
+          MuscleGroup.arms,
+          'R.Arm');
     }
   }
 

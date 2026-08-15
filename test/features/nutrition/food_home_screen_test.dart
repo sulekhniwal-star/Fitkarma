@@ -12,8 +12,11 @@ void main() {
 
     // ── NutritionEngine Unit Tests ───────────────────────────────────────────
 
-    test('calculateMealQuality computes 5-dimension score, readiness & goal impact', () {
-      final item = SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f1'); // Paneer Tikka
+    test(
+        'calculateMealQuality computes 5-dimension score, readiness & goal impact',
+        () {
+      final item = SeededIndianFoodDatabase.items
+          .firstWhere((i) => i.id == 'f1'); // Paneer Tikka
       final result = engine.calculateMealQuality(item);
 
       expect(result.overallScore, greaterThan(0));
@@ -21,12 +24,20 @@ void main() {
       expect(result.goalImpact, contains('fat-loss goal'));
     });
 
-    test('isProteinDeficitAlert triggers when logged protein < 70% of target', () {
-      expect(engine.isProteinDeficitAlert(loggedProtein: 50.0, targetProtein: 110.0), isTrue); // 50 < 77
-      expect(engine.isProteinDeficitAlert(loggedProtein: 80.0, targetProtein: 110.0), isFalse); // 80 >= 77
+    test('isProteinDeficitAlert triggers when logged protein < 70% of target',
+        () {
+      expect(
+          engine.isProteinDeficitAlert(
+              loggedProtein: 50.0, targetProtein: 110.0),
+          isTrue); // 50 < 77
+      expect(
+          engine.isProteinDeficitAlert(
+              loggedProtein: 80.0, targetProtein: 110.0),
+          isFalse); // 80 >= 77
     });
 
-    test('generateProteinAlertText returns expected rule-based guidance string', () {
+    test('generateProteinAlertText returns expected rule-based guidance string',
+        () {
       final text = engine.generateProteinAlertText();
       expect(text, contains('Protein low'));
       expect(text, contains('paneer'));
@@ -34,7 +45,9 @@ void main() {
 
     // ── NutritionNotifier Unit Tests ─────────────────────────────────────────
 
-    test('NutritionNotifier initializes with sample logged meals and computes macros', () {
+    test(
+        'NutritionNotifier initializes with sample logged meals and computes macros',
+        () {
       final notifier = NutritionNotifier(const NutritionEngine());
       expect(notifier.state.loggedMeals, isNotEmpty);
       expect(notifier.state.totalCalories, greaterThan(0));
@@ -47,11 +60,13 @@ void main() {
 
       notifier.logMeal(
         type: MealType.dinner,
-        foodItem: SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f8'), // Chicken Curry
+        foodItem: SeededIndianFoodDatabase.items
+            .firstWhere((i) => i.id == 'f8'), // Chicken Curry
       );
 
       expect(notifier.state.totalCalories, greaterThan(prevCals));
-      expect(notifier.state.loggedMeals.last.foodItem.name, equals('Chicken Curry'));
+      expect(notifier.state.loggedMeals.last.foodItem.name,
+          equals('Chicken Curry'));
     });
 
     test('toggleSection collapses and expands section visibility', () {
@@ -64,7 +79,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('FoodHomeScreen renders Summary card, meal sections, and DIP insight', (tester) async {
+    testWidgets(
+        'FoodHomeScreen renders Summary card, meal sections, and DIP insight',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: FoodHomeScreen()),

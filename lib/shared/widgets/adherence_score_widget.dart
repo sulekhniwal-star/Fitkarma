@@ -37,15 +37,18 @@ class AdherenceScoreWidget extends StatelessWidget {
               Text('📊 Adherence Score', style: AppTypography.h3),
               if (result.xpMultiplier > 1.0)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.warning.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.warning.withValues(alpha: 0.5)),
+                    border: Border.all(
+                        color: AppColors.warning.withValues(alpha: 0.5)),
                   ),
                   child: Text(
                     '⚡ +50% XP Boost Active',
-                    style: AppTypography.labelSmall.copyWith(color: AppColors.warning, fontWeight: FontWeight.bold),
+                    style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.warning, fontWeight: FontWeight.bold),
                   ),
                 ),
             ],
@@ -85,19 +88,22 @@ class AdherenceScoreWidget extends StatelessWidget {
               children: [
                 Text(
                   'Your weakest area: ${result.weakestArea}',
-                  style: AppTypography.labelLg.copyWith(color: AppColors.accent),
+                  style:
+                      AppTypography.labelLg.copyWith(color: AppColors.accent),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   'Tip: ${result.coachingTip}',
-                  style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                  style: AppTypography.bodySm
+                      .copyWith(color: AppColors.textSecondary),
                 ),
                 if (result.triggersCoachCheckIn)
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(
                       '🤖 AI Coach proactive check-in triggered due to < 70% adherence.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.warning),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.warning),
                     ),
                   ),
               ],
@@ -129,7 +135,8 @@ class AdherenceScoreWidget extends StatelessWidget {
         const SizedBox(width: 10),
         SizedBox(
           width: 35,
-          child: Text('$score%', style: AppTypography.labelLg, textAlign: TextAlign.right),
+          child: Text('$score%',
+              style: AppTypography.labelLg, textAlign: TextAlign.right),
         ),
       ],
     );

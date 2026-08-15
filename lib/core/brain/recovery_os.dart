@@ -20,7 +20,8 @@ class SleepNeedResult {
     required this.illnessAdditiveMin,
   });
 
-  double get totalSleepNeedHours => double.parse((totalSleepNeedMin / 60.0).toStringAsFixed(2));
+  double get totalSleepNeedHours =>
+      double.parse((totalSleepNeedMin / 60.0).toStringAsFixed(2));
 }
 
 class SleepNeedCalculator {
@@ -53,7 +54,11 @@ class SleepNeedCalculator {
     // 4. Illness Additive: +60 mins
     final illnessAdditive = isIllnessActive ? 60 : 0;
 
-    final unscaledTotal = baselineNeedMin + debtAdditive + strainAdditive + stressAdditive + illnessAdditive;
+    final unscaledTotal = baselineNeedMin +
+        debtAdditive +
+        strainAdditive +
+        stressAdditive +
+        illnessAdditive;
     // Hard cap at 600 mins (10 hours)
     final totalSleepNeedMin = min(600, unscaledTotal);
 
@@ -94,13 +99,15 @@ class BedtimeCoach {
     int windDownBufferMin = 15,
   }) {
     final totalOffsetMin = sleepNeedMin + windDownBufferMin;
-    final targetBedtime = targetWakeTime.subtract(Duration(minutes: totalOffsetMin));
+    final targetBedtime =
+        targetWakeTime.subtract(Duration(minutes: totalOffsetMin));
 
     final hours = (sleepNeedMin / 60).floor();
     final mins = sleepNeedMin % 60;
     final formattedNeed = '${hours}h ${mins > 0 ? '${mins}m' : ''}';
 
-    final bedtimeFormatted = '${targetBedtime.hour.toString().padLeft(2, '0')}:${targetBedtime.minute.toString().padLeft(2, '0')}';
+    final bedtimeFormatted =
+        '${targetBedtime.hour.toString().padLeft(2, '0')}:${targetBedtime.minute.toString().padLeft(2, '0')}';
 
     final nudgeMessage =
         'Bedtime Coach: Wind down now to meet your $formattedNeed sleep target. Aim to sleep by $bedtimeFormatted to maintain recovery capacity.';
@@ -144,11 +151,14 @@ class RecoveryDecisionEngine {
 
     String trainingAdvice;
     if (readinessScore >= 80 && dailyStrain < strainCap) {
-      trainingAdvice = 'High Capacity. Body is fully primed for heavy training load.';
+      trainingAdvice =
+          'High Capacity. Body is fully primed for heavy training load.';
     } else if (readinessScore >= 50 && dailyStrain < strainCap) {
-      trainingAdvice = 'Standard Capacity. Maintain standard training; avoid extra sets.';
+      trainingAdvice =
+          'Standard Capacity. Maintain standard training; avoid extra sets.';
     } else {
-      trainingAdvice = 'Low Capacity / Overreaching. Limit strain to active recovery or rest.';
+      trainingAdvice =
+          'Low Capacity / Overreaching. Limit strain to active recovery or rest.';
     }
 
     return RecoveryDecision(
@@ -300,7 +310,8 @@ class IllnessRecoveryDetector {
       return const RecoveryTypeDetectionResult(
         type: FatigueType.illnessFatigue,
         label: 'Illness Fatigue',
-        description: 'Elevated biometric signals suggest potential illness. Mandatory rest day prescribed.',
+        description:
+            'Elevated biometric signals suggest potential illness. Mandatory rest day prescribed.',
         isIllnessDetected: true,
       );
     }
@@ -309,7 +320,8 @@ class IllnessRecoveryDetector {
       return const RecoveryTypeDetectionResult(
         type: FatigueType.sleepFatigue,
         label: 'Sleep Fatigue',
-        description: 'Accumulated sleep debt is limiting physical recovery capacity.',
+        description:
+            'Accumulated sleep debt is limiting physical recovery capacity.',
         isIllnessDetected: false,
       );
     }
@@ -318,7 +330,8 @@ class IllnessRecoveryDetector {
       return const RecoveryTypeDetectionResult(
         type: FatigueType.trainingFatigue,
         label: 'Training Fatigue',
-        description: 'Heavy cardiovascular strain load accumulated. Prioritize muscle repair.',
+        description:
+            'Heavy cardiovascular strain load accumulated. Prioritize muscle repair.',
         isIllnessDetected: false,
       );
     }
@@ -327,7 +340,8 @@ class IllnessRecoveryDetector {
       return const RecoveryTypeDetectionResult(
         type: FatigueType.stressFatigue,
         label: 'Stress Fatigue',
-        description: 'Elevated daytime stress load detected. Incorporate parasympathetic breathwork.',
+        description:
+            'Elevated daytime stress load detected. Incorporate parasympathetic breathwork.',
         isIllnessDetected: false,
       );
     }
@@ -379,23 +393,33 @@ class RecoveryDriversEngine {
     final detractors = <DriverItem>[];
 
     if (sleepQuality >= 4) {
-      contributors.add(DriverItem(name: 'Sleep Quality', points: (sleepQuality * 4), isContributor: true));
+      contributors.add(DriverItem(
+          name: 'Sleep Quality',
+          points: (sleepQuality * 4),
+          isContributor: true));
     }
     if (proteinG >= 100) {
-      contributors.add(const DriverItem(name: 'Protein Intake', points: 12, isContributor: true));
+      contributors.add(const DriverItem(
+          name: 'Protein Intake', points: 12, isContributor: true));
     }
     if (hydrationL >= 2.5) {
-      contributors.add(const DriverItem(name: 'Hydration Target', points: 8, isContributor: true));
+      contributors.add(const DriverItem(
+          name: 'Hydration Target', points: 8, isContributor: true));
     }
 
     if (stressScore >= 3) {
-      detractors.add(DriverItem(name: 'Daily Stress', points: -(stressScore * 4), isContributor: false));
+      detractors.add(DriverItem(
+          name: 'Daily Stress',
+          points: -(stressScore * 4),
+          isContributor: false));
     }
     if (aqi > 150) {
-      detractors.add(const DriverItem(name: 'Poor Ambient AQI', points: -7, isContributor: false));
+      detractors.add(const DriverItem(
+          name: 'Poor Ambient AQI', points: -7, isContributor: false));
     }
     if (heatIndexC > 35) {
-      detractors.add(const DriverItem(name: 'Extreme Heat', points: -4, isContributor: false));
+      detractors.add(const DriverItem(
+          name: 'Extreme Heat', points: -4, isContributor: false));
     }
 
     return RecoveryDriversResult(

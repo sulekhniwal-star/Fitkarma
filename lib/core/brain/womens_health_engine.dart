@@ -19,26 +19,30 @@ class WomensHealthEngine {
   const WomensHealthEngine();
 
   /// Calculate hormone-aware workout and nutrition prescription
-  WomensHealthPrescription calculatePrescription({required MenstrualPhase phase}) {
+  WomensHealthPrescription calculatePrescription(
+      {required MenstrualPhase phase}) {
     switch (phase) {
       case MenstrualPhase.follicular:
       case MenstrualPhase.ovulatory:
         return const WomensHealthPrescription(
           phase: MenstrualPhase.follicular,
           strengthTargetMultiplier: 1.05, // Boost strength target +5%
-          nutritionAdvice: 'High energy phase. Optimize protein intake and complex carbohydrates.',
+          nutritionAdvice:
+              'High energy phase. Optimize protein intake and complex carbohydrates.',
         );
       case MenstrualPhase.luteal:
         return const WomensHealthPrescription(
           phase: MenstrualPhase.luteal,
           strengthTargetMultiplier: 0.95, // Reduce target -5%
-          nutritionAdvice: 'Fluid retention & higher metabolic rate. Increase magnesium & hydrating fluids.',
+          nutritionAdvice:
+              'Fluid retention & higher metabolic rate. Increase magnesium & hydrating fluids.',
         );
       case MenstrualPhase.menstrual:
         return const WomensHealthPrescription(
           phase: MenstrualPhase.menstrual,
           strengthTargetMultiplier: 0.90, // Reduce target -10%
-          nutritionAdvice: 'Active recovery focus. Prioritize iron-rich foods and gentle mobility.',
+          nutritionAdvice:
+              'Active recovery focus. Prioritize iron-rich foods and gentle mobility.',
         );
     }
   }

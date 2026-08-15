@@ -108,7 +108,8 @@ class AppTypography {
   );
 
   // Devanagari — NEVER use PlusJakartaSans for Hindi
-  static TextStyle hindi({double size = 14, FontWeight weight = FontWeight.w400}) =>
+  static TextStyle hindi(
+          {double size = 14, FontWeight weight = FontWeight.w400}) =>
       GoogleFonts.notoSansDevanagari(
         fontSize: size,
         fontWeight: weight,

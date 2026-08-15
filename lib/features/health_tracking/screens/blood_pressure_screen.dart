@@ -13,7 +13,8 @@ class BloodPressureScreen extends ConsumerStatefulWidget {
   const BloodPressureScreen({super.key});
 
   @override
-  ConsumerState<BloodPressureScreen> createState() => _BloodPressureScreenState();
+  ConsumerState<BloodPressureScreen> createState() =>
+      _BloodPressureScreenState();
 }
 
 class _BloodPressureScreenState extends ConsumerState<BloodPressureScreen> {
@@ -36,15 +37,18 @@ class _BloodPressureScreenState extends ConsumerState<BloodPressureScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Blood Pressure', style: AppTypography.h2),
         actions: [
           if (state.lockStatus == BiometricLockStatus.unlocked)
             IconButton(
-              icon: const Icon(Icons.lock_outline, color: AppColors.textSecondary, size: 20),
-              onPressed: () => ref.read(bloodPressureProvider.notifier).lockScreen(),
+              icon: const Icon(Icons.lock_outline,
+                  color: AppColors.textSecondary, size: 20),
+              onPressed: () =>
+                  ref.read(bloodPressureProvider.notifier).lockScreen(),
             ),
         ],
       ),
@@ -60,20 +64,26 @@ class _BloodPressureScreenState extends ConsumerState<BloodPressureScreen> {
       case BiometricLockStatus.locked:
       case BiometricLockStatus.authenticating:
         return _BiometricPromptView(
-          isAuthenticating: state.lockStatus == BiometricLockStatus.authenticating,
-          onAuthenticate: () =>
-              ref.read(bloodPressureProvider.notifier).authenticateWithBiometrics(),
-          onUsePin: () =>
-              ref.read(bloodPressureProvider.notifier).authenticateWithBiometrics(simulateSuccess: false),
+          isAuthenticating:
+              state.lockStatus == BiometricLockStatus.authenticating,
+          onAuthenticate: () => ref
+              .read(bloodPressureProvider.notifier)
+              .authenticateWithBiometrics(),
+          onUsePin: () => ref
+              .read(bloodPressureProvider.notifier)
+              .authenticateWithBiometrics(simulateSuccess: false),
         );
       case BiometricLockStatus.failed:
         return _PinFallbackView(
           pinInput: state.pinInput,
           hasError: state.pinError,
-          onDigitTap: (d) => ref.read(bloodPressureProvider.notifier).appendPinDigit(d),
-          onDeleteTap: () => ref.read(bloodPressureProvider.notifier).deletePinDigit(),
-          onRetryBiometric: () =>
-              ref.read(bloodPressureProvider.notifier).authenticateWithBiometrics(),
+          onDigitTap: (d) =>
+              ref.read(bloodPressureProvider.notifier).appendPinDigit(d),
+          onDeleteTap: () =>
+              ref.read(bloodPressureProvider.notifier).deletePinDigit(),
+          onRetryBiometric: () => ref
+              .read(bloodPressureProvider.notifier)
+              .authenticateWithBiometrics(),
         );
       case BiometricLockStatus.unlocked:
         return _UnlockedBpContentView(
@@ -94,7 +104,8 @@ class _BloodPressureScreenState extends ConsumerState<BloodPressureScreen> {
       backgroundColor: AppColors.surface0,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
       ),
       builder: (ctx) {
         return Padding(
@@ -152,7 +163,9 @@ class _BloodPressureScreenState extends ConsumerState<BloodPressureScreen> {
                         );
                     Navigator.pop(ctx);
                   },
-                  child: Text('Save Reading', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                  child: Text('Save Reading',
+                      style:
+                          AppTypography.labelLg.copyWith(color: Colors.white)),
                 ),
               ),
             ],
@@ -193,10 +206,12 @@ class _BiometricPromptView extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: AppColors.primary.withValues(alpha: 0.15),
                 ),
-                child: const Icon(Icons.fingerprint, color: AppColors.primary, size: 40),
+                child: const Icon(Icons.fingerprint,
+                    color: AppColors.primary, size: 40),
               ),
               const SizedBox(height: AppSpacing.lg),
-              Text('Biometric Verification Required', style: AppTypography.h3, textAlign: TextAlign.center),
+              Text('Biometric Verification Required',
+                  style: AppTypography.h3, textAlign: TextAlign.center),
               const SizedBox(height: 8),
               Text(
                 'Unlock sensitive health records using Face ID, Fingerprint, or PIN.',
@@ -215,13 +230,17 @@ class _BiometricPromptView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     onPressed: onAuthenticate,
-                    child: Text('Unlock with Biometrics', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                    child: Text('Unlock with Biometrics',
+                        style: AppTypography.labelLg
+                            .copyWith(color: Colors.white)),
                   ),
                 ),
                 const SizedBox(height: 12),
                 TextButton(
                   onPressed: onUsePin,
-                  child: Text('Use 6-Digit Backup PIN', style: AppTypography.labelMd.copyWith(color: AppColors.textSecondary)),
+                  child: Text('Use 6-Digit Backup PIN',
+                      style: AppTypography.labelMd
+                          .copyWith(color: AppColors.textSecondary)),
                 ),
               ],
             ],
@@ -261,7 +280,8 @@ class _PinFallbackView extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm),
             Text('Enter Backup PIN', style: AppTypography.h3),
             const SizedBox(height: 4),
-            Text('Default test PIN: 123456', style: AppTypography.bodySm.copyWith(fontSize: 11)),
+            Text('Default test PIN: 123456',
+                style: AppTypography.bodySm.copyWith(fontSize: 11)),
             const SizedBox(height: AppSpacing.lg),
 
             // PIN Dots Indicator
@@ -287,7 +307,8 @@ class _PinFallbackView extends StatelessWidget {
             ),
             if (hasError) ...[
               const SizedBox(height: 8),
-              Text('Incorrect PIN. Try again.', style: AppTypography.bodySm.copyWith(color: AppColors.error)),
+              Text('Incorrect PIN. Try again.',
+                  style: AppTypography.bodySm.copyWith(color: AppColors.error)),
             ],
             const SizedBox(height: AppSpacing.xl),
 
@@ -303,7 +324,10 @@ class _PinFallbackView extends StatelessWidget {
                   ])
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: row.map((digit) => _KeypadButton(text: digit, onTap: () => onDigitTap(digit))).toList(),
+                      children: row
+                          .map((digit) => _KeypadButton(
+                              text: digit, onTap: () => onDigitTap(digit)))
+                          .toList(),
                     ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -412,7 +436,8 @@ class _UnlockedBpContentView extends StatelessWidget {
               ),
               onPressed: onLogNewReading,
               icon: const Icon(Icons.add, color: Colors.white),
-              label: Text('Log New Reading', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+              label: Text('Log New Reading',
+                  style: AppTypography.labelLg.copyWith(color: Colors.white)),
             ),
           ),
           const SizedBox(height: 40),
@@ -430,11 +455,16 @@ class _LatestReadingCard extends StatelessWidget {
 
   Color get _categoryColor {
     switch (latest.category) {
-      case BpCategory.normal:   return AppColors.success;
-      case BpCategory.elevated: return AppColors.warning;
-      case BpCategory.stage1:   return AppColors.primary;
-      case BpCategory.stage2:   return AppColors.rose;
-      case BpCategory.crisis:   return AppColors.error;
+      case BpCategory.normal:
+        return AppColors.success;
+      case BpCategory.elevated:
+        return AppColors.warning;
+      case BpCategory.stage1:
+        return AppColors.primary;
+      case BpCategory.stage2:
+        return AppColors.rose;
+      case BpCategory.crisis:
+        return AppColors.error;
     }
   }
 
@@ -450,15 +480,18 @@ class _LatestReadingCard extends StatelessWidget {
             children: [
               Text('Latest Reading', style: AppTypography.bodySm),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: _categoryColor.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: _categoryColor.withValues(alpha: 0.4)),
+                  border:
+                      Border.all(color: _categoryColor.withValues(alpha: 0.4)),
                 ),
                 child: Text(
                   latest.category.label,
-                  style: AppTypography.labelMd.copyWith(color: _categoryColor, fontSize: 11),
+                  style: AppTypography.labelMd
+                      .copyWith(color: _categoryColor, fontSize: 11),
                 ),
               ),
             ],
@@ -486,7 +519,8 @@ class _LatestReadingCard extends StatelessWidget {
   String _formatRecordedTime(DateTime dt) {
     final diff = DateTime.now().difference(dt);
     if (diff.inHours < 1) return 'Today, ${dt.minute}m ago';
-    if (diff.inHours < 24) return 'Today, ${dt.hour}:${dt.minute.toString().padLeft(2, '0')}';
+    if (diff.inHours < 24)
+      return 'Today, ${dt.hour}:${dt.minute.toString().padLeft(2, '0')}';
     return '${dt.day}/${dt.month} at ${dt.hour}:${dt.minute.toString().padLeft(2, '0')}';
   }
 }
@@ -509,12 +543,14 @@ class _BpWarningCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 22),
+          const Icon(Icons.warning_amber_rounded,
+              color: AppColors.error, size: 22),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               message,
-              style: AppTypography.bodyMd.copyWith(color: AppColors.textPrimary, height: 1.4),
+              style: AppTypography.bodyMd
+                  .copyWith(color: AppColors.textPrimary, height: 1.4),
             ),
           ),
         ],
@@ -666,5 +702,6 @@ class _BpDualLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _BpDualLinePainter old) => old.history != history;
+  bool shouldRepaint(covariant _BpDualLinePainter old) =>
+      old.history != history;
 }

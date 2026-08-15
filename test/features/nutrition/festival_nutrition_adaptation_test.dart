@@ -12,7 +12,9 @@ void main() {
     const double baseCarbs = 220.0;
     const double baseWater = 2.5;
 
-    test('adjustTargets executes Diwali Pre-Compensation Protocol correctly across phases', () {
+    test(
+        'adjustTargets executes Diwali Pre-Compensation Protocol correctly across phases',
+        () {
       // 1. Pre-3Days (-150 kcal buffer)
       final pre = adapter.adjustTargets(
         baseCalories: baseCalories,
@@ -38,7 +40,8 @@ void main() {
 
       expect(festival.calories, equals(2400.0));
       expect(festival.proteinG, equals(135.0));
-      expect(festival.alertMessage, contains('Diwali sweets are expected today'));
+      expect(
+          festival.alertMessage, contains('Diwali sweets are expected today'));
 
       // 3. Post-1Day (+1L water, recovery walk)
       final post = adapter.adjustTargets(
@@ -51,12 +54,15 @@ void main() {
       );
 
       expect(post.waterLers, equals(3.5));
-      expect(post.recoveryWalkRecommendation, contains('45-minute steady-state recovery walk'));
+      expect(post.recoveryWalkRecommendation,
+          contains('45-minute steady-state recovery walk'));
     });
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('FestivalNutritionAdaptationScreen renders timeline selector, adapted stats, and satiety alert', (tester) async {
+    testWidgets(
+        'FestivalNutritionAdaptationScreen renders timeline selector, adapted stats, and satiety alert',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(home: FestivalNutritionAdaptationScreen()),
       );
@@ -65,7 +71,8 @@ void main() {
       expect(find.text('Festival Nutrition Adaptation'), findsOneWidget);
       expect(find.text('Active Festival Protocol'), findsOneWidget);
       expect(find.text('Adapted Nutrition Targets'), findsOneWidget);
-      expect(find.textContaining('Diwali sweets are expected today'), findsOneWidget);
+      expect(find.textContaining('Diwali sweets are expected today'),
+          findsOneWidget);
     });
   });
 }

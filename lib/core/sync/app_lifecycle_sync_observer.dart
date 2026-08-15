@@ -76,7 +76,8 @@ class AppLifecycleSyncObserver extends WidgetsBindingObserver {
   }
 
   /// Handles silent push notification ({ "content-available": 1 }) in background
-  Future<bool> handleSilentPushNotification(Map<String, dynamic> payload) async {
+  Future<bool> handleSilentPushNotification(
+      Map<String, dynamic> payload) async {
     if (payload['content-available'] == 1 ||
         payload['content_available'] == 1 ||
         payload['content_available'] == true) {
@@ -90,8 +91,7 @@ class AppLifecycleSyncObserver extends WidgetsBindingObserver {
 final syncCoordinatorProvider =
     Provider<SyncCoordinator>((ref) => DefaultSyncCoordinator());
 
-final lifecycleSyncObserverProvider =
-    Provider<AppLifecycleSyncObserver>((ref) {
+final lifecycleSyncObserverProvider = Provider<AppLifecycleSyncObserver>((ref) {
   final coordinator = ref.watch(syncCoordinatorProvider);
   return AppLifecycleSyncObserver(coordinator);
 });

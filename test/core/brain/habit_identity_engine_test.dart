@@ -7,7 +7,9 @@ void main() {
   group('§P8-C Habit Identity Layer Tests', () {
     const engine = HabitIdentityEngine();
 
-    test('checkEvolution unlocks Athlete persona when workouts >= 30 and training adherence >= 85%', () {
+    test(
+        'checkEvolution unlocks Athlete persona when workouts >= 30 and training adherence >= 85%',
+        () {
       const progress = UserProgressData(
         workoutsCompletedTotal: 32,
         consecutiveCompliantWeeks: 5,
@@ -30,7 +32,9 @@ void main() {
       expect(evolution.xpBonus, equals(500));
     });
 
-    test('checkEvolution unlocks Strength Builder when bench press increase >= 10kg & adherence >= 80%', () {
+    test(
+        'checkEvolution unlocks Strength Builder when bench press increase >= 10kg & adherence >= 80%',
+        () {
       const progress = UserProgressData(
         workoutsCompletedTotal: 28,
         consecutiveCompliantWeeks: 4,
@@ -53,7 +57,9 @@ void main() {
       expect(evolution.evidenceList.first, contains('28 workouts completed'));
     });
 
-    test('buildAiCoachSystemPrompt incorporates unlocked identity quote for coaching reinforcement', () {
+    test(
+        'buildAiCoachSystemPrompt incorporates unlocked identity quote for coaching reinforcement',
+        () {
       const progress = UserProgressData(
         workoutsCompletedTotal: 35,
         consecutiveCompliantWeeks: 6,
@@ -70,12 +76,17 @@ void main() {
       );
 
       final prompt = engine.buildAiCoachSystemPrompt(evolution);
-      expect(prompt, contains('Identity Context: User identity is "You are becoming an Athlete"'));
+      expect(
+          prompt,
+          contains(
+              'Identity Context: User identity is "You are becoming an Athlete"'));
     });
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('YouAreBecomingCard renders identity title, evidence, quote, and bonus badge', (tester) async {
+    testWidgets(
+        'YouAreBecomingCard renders identity title, evidence, quote, and bonus badge',
+        (tester) async {
       const progress = UserProgressData(
         workoutsCompletedTotal: 28,
         consecutiveCompliantWeeks: 4,
@@ -103,7 +114,8 @@ void main() {
       expect(find.text('🏋️ Strength Builder'), findsOneWidget);
       expect(find.text('Evidence:'), findsOneWidget);
       expect(find.textContaining('28 workouts completed'), findsOneWidget);
-      expect(find.textContaining('Bench press +12kg since Week 1'), findsWidgets);
+      expect(
+          find.textContaining('Bench press +12kg since Week 1'), findsWidgets);
       expect(find.textContaining('Strength isn\'t given'), findsOneWidget);
     });
   });

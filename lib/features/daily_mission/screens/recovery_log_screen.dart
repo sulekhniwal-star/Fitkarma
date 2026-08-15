@@ -18,7 +18,8 @@ class RecoveryLogScreen extends ConsumerWidget {
     final state = ref.watch(recoveryLogProvider);
     final notifier = ref.read(recoveryLogProvider.notifier);
 
-    final sleepHoursStr = '${(state.sleepDurationMin / 60).floor()}h ${state.sleepDurationMin % 60}m';
+    final sleepHoursStr =
+        '${(state.sleepDurationMin / 60).floor()}h ${state.sleepDurationMin % 60}m';
 
     return Scaffold(
       backgroundColor: AppColors.bg0,
@@ -47,20 +48,27 @@ class RecoveryLogScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Recovery Score: ${state.readinessScore}',
-                          style: AppTypography.h2.copyWith(color: AppColors.textPrimary),
+                          style: AppTypography.h2
+                              .copyWith(color: AppColors.textPrimary),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.success.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color:
+                                    AppColors.success.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             state.readinessScore >= 80
                                 ? 'Optimal Capacity'
-                                : (state.readinessScore >= 65 ? 'Moderate' : 'Rest Advised'),
-                            style: AppTypography.labelMd.copyWith(color: AppColors.success),
+                                : (state.readinessScore >= 65
+                                    ? 'Moderate'
+                                    : 'Rest Advised'),
+                            style: AppTypography.labelMd
+                                .copyWith(color: AppColors.success),
                           ),
                         ),
                       ],
@@ -71,14 +79,17 @@ class RecoveryLogScreen extends ConsumerWidget {
                       backgroundColor: AppColors.surface2,
                       color: state.readinessScore >= 75
                           ? AppColors.success
-                          : (state.readinessScore >= 50 ? AppColors.warning : AppColors.error),
+                          : (state.readinessScore >= 50
+                              ? AppColors.warning
+                              : AppColors.error),
                       minHeight: 8.0,
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       'Sleep: $sleepHoursStr · HRV: ${state.hrv.round()} ms · Resting HR: ${state.restingHR.round()} bpm',
-                      style: AppTypography.labelMd.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.labelMd
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -90,7 +101,8 @@ class RecoveryLogScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.sm),
               BodySorenessMapWidget(
                 sorenessState: state.soreness,
-                onToggleMuscle: (muscle) => notifier.toggleMuscleSoreness(muscle),
+                onToggleMuscle: (muscle) =>
+                    notifier.toggleMuscleSoreness(muscle),
               ),
               const SizedBox(height: AppSpacing.md),
 
@@ -102,10 +114,12 @@ class RecoveryLogScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('HRV Trend (7-Day)', style: AppTypography.h3),
+                        const Text('HRV Trend (7-Day)',
+                            style: AppTypography.h3),
                         Text(
                           '${state.hrv.round()} ms (Optimal)',
-                          style: AppTypography.h3.copyWith(color: AppColors.teal),
+                          style:
+                              AppTypography.h3.copyWith(color: AppColors.teal),
                         ),
                       ],
                     ),
@@ -137,7 +151,9 @@ class RecoveryLogScreen extends ConsumerWidget {
                 height: 52.0,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: state.isCommitted ? AppColors.success : AppColors.primary,
+                    backgroundColor: state.isCommitted
+                        ? AppColors.success
+                        : AppColors.primary,
                     foregroundColor: AppColors.bg0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppRadius.md),
@@ -157,8 +173,11 @@ class RecoveryLogScreen extends ConsumerWidget {
                     );
                   },
                   child: Text(
-                    state.isCommitted ? '✓ LOG COMMITTED' : 'COMMIT RECOVERY LOG',
-                    style: AppTypography.h2.copyWith(fontWeight: FontWeight.bold, color: AppColors.bg0),
+                    state.isCommitted
+                        ? '✓ LOG COMMITTED'
+                        : 'COMMIT RECOVERY LOG',
+                    style: AppTypography.h2.copyWith(
+                        fontWeight: FontWeight.bold, color: AppColors.bg0),
                   ),
                 ),
               ),
@@ -205,4 +224,3 @@ class _HrvBar extends StatelessWidget {
     );
   }
 }
-

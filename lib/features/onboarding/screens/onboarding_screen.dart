@@ -57,7 +57,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 children: [
                   if (currentStep > 0)
                     IconButton(
-                      icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+                      icon: const Icon(Icons.arrow_back,
+                          color: AppColors.textPrimary),
                       onPressed: _prevPage,
                     ),
                   Expanded(
@@ -154,9 +155,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             englishStyle: AppTypography.displayLg,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text('Local calculations only — privacy protected', style: AppTypography.bodyMd),
+          Text('Local calculations only — privacy protected',
+              style: AppTypography.bodyMd),
           const SizedBox(height: AppSpacing.lg),
-
           BentoCard(
             child: Column(
               children: [
@@ -164,7 +165,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Height (cm)', style: AppTypography.h2),
-                    Text('${profile.heightCm.round()} cm', style: AppTypography.h1),
+                    Text('${profile.heightCm.round()} cm',
+                        style: AppTypography.h1),
                   ],
                 ),
                 Slider(
@@ -173,14 +175,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   max: 220,
                   activeColor: AppColors.primary,
                   onChanged: (val) {
-                    ref.read(onboardingProvider.notifier).updateProfile(profile.copyWith(heightCm: val));
+                    ref
+                        .read(onboardingProvider.notifier)
+                        .updateProfile(profile.copyWith(heightCm: val));
                   },
                 ),
               ],
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-
           BentoCard(
             child: Column(
               children: [
@@ -188,7 +191,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Weight (kg)', style: AppTypography.h2),
-                    Text('${profile.weightKg.toStringAsFixed(1)} kg', style: AppTypography.h1),
+                    Text('${profile.weightKg.toStringAsFixed(1)} kg',
+                        style: AppTypography.h1),
                   ],
                 ),
                 Slider(
@@ -197,13 +201,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   max: 150,
                   activeColor: AppColors.accent,
                   onChanged: (val) {
-                    ref.read(onboardingProvider.notifier).updateProfile(profile.copyWith(weightKg: val));
+                    ref
+                        .read(onboardingProvider.notifier)
+                        .updateProfile(profile.copyWith(weightKg: val));
                   },
                 ),
               ],
             ),
           ),
-
           const Spacer(),
           _buildActionButton('Next', _nextPage),
         ],
@@ -227,28 +232,35 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             englishStyle: AppTypography.displayLg,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text('Choose your main focus for the program', style: AppTypography.bodyMd),
+          Text('Choose your main focus for the program',
+              style: AppTypography.bodyMd),
           const SizedBox(height: AppSpacing.lg),
-
           ...PrimaryGoal.values.map((goal) {
             final isSelected = profile.primaryGoal == goal;
             return Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.sm),
               child: BentoCard(
                 onTap: () {
-                  ref.read(onboardingProvider.notifier).updateProfile(profile.copyWith(primaryGoal: goal));
+                  ref
+                      .read(onboardingProvider.notifier)
+                      .updateProfile(profile.copyWith(primaryGoal: goal));
                 },
                 child: Row(
                   children: [
                     Icon(
-                      isSelected ? Icons.check_circle : Icons.radio_button_unchecked,
-                      color: isSelected ? AppColors.primary : AppColors.textMuted,
+                      isSelected
+                          ? Icons.check_circle
+                          : Icons.radio_button_unchecked,
+                      color:
+                          isSelected ? AppColors.primary : AppColors.textMuted,
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Text(
                       goal.name.toUpperCase(),
                       style: AppTypography.h2.copyWith(
-                        color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.textPrimary,
                       ),
                     ),
                   ],
@@ -256,7 +268,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ),
             );
           }),
-
           const Spacer(),
           _buildActionButton('Next', _nextPage),
         ],
@@ -280,28 +291,33 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             englishStyle: AppTypography.displayLg,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text('Tailored for Indian food intelligence', style: AppTypography.bodyMd),
+          Text('Tailored for Indian food intelligence',
+              style: AppTypography.bodyMd),
           const SizedBox(height: AppSpacing.lg),
-
           ...DietaryPreference.values.map((diet) {
             final isSelected = profile.dietaryPreference == diet;
             return Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.sm),
               child: BentoCard(
                 onTap: () {
-                  ref.read(onboardingProvider.notifier).updateProfile(profile.copyWith(dietaryPreference: diet));
+                  ref
+                      .read(onboardingProvider.notifier)
+                      .updateProfile(profile.copyWith(dietaryPreference: diet));
                 },
                 child: Row(
                   children: [
                     Icon(
                       isSelected ? Icons.restaurant : Icons.restaurant_menu,
-                      color: isSelected ? AppColors.success : AppColors.textMuted,
+                      color:
+                          isSelected ? AppColors.success : AppColors.textMuted,
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Text(
                       diet.name.toUpperCase(),
                       style: AppTypography.h2.copyWith(
-                        color: isSelected ? AppColors.success : AppColors.textPrimary,
+                        color: isSelected
+                            ? AppColors.success
+                            : AppColors.textPrimary,
                       ),
                     ),
                   ],
@@ -309,7 +325,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ),
             );
           }),
-
           const Spacer(),
           _buildActionButton('Next', _nextPage),
         ],
@@ -333,28 +348,34 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             englishStyle: AppTypography.displayLg,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text('Select your primary body constitution', style: AppTypography.bodyMd),
+          Text('Select your primary body constitution',
+              style: AppTypography.bodyMd),
           const SizedBox(height: AppSpacing.lg),
-
           ...DoshaType.values.map((dosha) {
             final isSelected = profile.doshaType == dosha;
             return Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.sm),
               child: BentoCard(
                 onTap: () {
-                  ref.read(onboardingProvider.notifier).updateProfile(profile.copyWith(doshaType: dosha));
+                  ref
+                      .read(onboardingProvider.notifier)
+                      .updateProfile(profile.copyWith(doshaType: dosha));
                 },
                 child: Row(
                   children: [
                     Icon(
                       Icons.spa,
-                      color: isSelected ? AppColors.secondary : AppColors.textMuted,
+                      color: isSelected
+                          ? AppColors.secondary
+                          : AppColors.textMuted,
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Text(
                       dosha.name.toUpperCase(),
                       style: AppTypography.h2.copyWith(
-                        color: isSelected ? AppColors.secondary : AppColors.textPrimary,
+                        color: isSelected
+                            ? AppColors.secondary
+                            : AppColors.textPrimary,
                       ),
                     ),
                   ],
@@ -362,7 +383,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ),
             );
           }),
-
           const Spacer(),
           _buildActionButton('Generate Program Blueprint', _nextPage),
         ],
@@ -387,21 +407,25 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               englishStyle: AppTypography.displayLg,
             ),
             const SizedBox(height: AppSpacing.sm),
-            Text('Locally computed metabolic baseline', style: AppTypography.bodyMd),
+            Text('Locally computed metabolic baseline',
+                style: AppTypography.bodyMd),
             const SizedBox(height: AppSpacing.lg),
-
             BentoCard(
               child: Column(
                 children: [
                   _buildMetricRow('BMI', profile.bmi.toStringAsFixed(1)),
                   const Divider(color: AppColors.divider),
-                  _buildMetricRow('BMR (Basal Rate)', '${profile.bmr.round()} kcal'),
+                  _buildMetricRow(
+                      'BMR (Basal Rate)', '${profile.bmr.round()} kcal'),
                   const Divider(color: AppColors.divider),
-                  _buildMetricRow('TDEE (Daily Expenditure)', '${profile.tdee.round()} kcal'),
+                  _buildMetricRow('TDEE (Daily Expenditure)',
+                      '${profile.tdee.round()} kcal'),
                   const Divider(color: AppColors.divider),
-                  _buildMetricRow('Target Daily Calories', '${profile.targetCalories} kcal'),
+                  _buildMetricRow('Target Daily Calories',
+                      '${profile.targetCalories} kcal'),
                   const Divider(color: AppColors.divider),
-                  _buildMetricRow('Target Daily Protein', '${profile.targetProteinGrams} g'),
+                  _buildMetricRow('Target Daily Protein',
+                      '${profile.targetProteinGrams} g'),
                 ],
               ),
             ),
@@ -426,9 +450,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             englishStyle: AppTypography.displayLg,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text('Connect Health Connect / HealthKit for step & sleep tracking', style: AppTypography.bodyMd),
+          Text('Connect Health Connect / HealthKit for step & sleep tracking',
+              style: AppTypography.bodyMd),
           const SizedBox(height: AppSpacing.xl),
-
           BentoCard(
             child: Row(
               children: [
@@ -439,7 +463,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Health Connect (Android)', style: AppTypography.h2),
-                      Text('Auto-sync steps, sleep, and vitals', style: AppTypography.labelMd),
+                      Text('Auto-sync steps, sleep, and vitals',
+                          style: AppTypography.labelMd),
                     ],
                   ),
                 ),
@@ -451,7 +476,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ],
             ),
           ),
-
           const Spacer(),
           _buildActionButton('Complete Onboarding', () {
             ref.read(onboardingProvider.notifier).nextStep();
@@ -468,7 +492,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: AppTypography.bodyMd),
-          Text(value, style: AppTypography.h2.copyWith(color: AppColors.primary)),
+          Text(value,
+              style: AppTypography.h2.copyWith(color: AppColors.primary)),
         ],
       ),
     );
@@ -489,7 +514,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         onPressed: onPressed,
         child: Text(
           label,
-          style: AppTypography.h2.copyWith(color: AppColors.bg0, fontWeight: FontWeight.bold),
+          style: AppTypography.h2
+              .copyWith(color: AppColors.bg0, fontWeight: FontWeight.bold),
         ),
       ),
     );

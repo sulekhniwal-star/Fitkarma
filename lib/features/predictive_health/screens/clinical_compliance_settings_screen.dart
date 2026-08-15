@@ -7,7 +7,8 @@ import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/glass_card.dart';
 import '../../../shared/widgets/medical_disclaimer_banner.dart';
 
-final clinicalPrivacyGuardStateProvider = StateProvider<ClinicalDataPrivacyGuard>((ref) {
+final clinicalPrivacyGuardStateProvider =
+    StateProvider<ClinicalDataPrivacyGuard>((ref) {
   return const ClinicalDataPrivacyGuard();
 });
 
@@ -26,10 +27,12 @@ class ClinicalComplianceSettingsScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
-        title: Text('⚖️ Regulatory & Clinical Compliance', style: AppTypography.h2),
+        title: Text('⚖️ Regulatory & Clinical Compliance',
+            style: AppTypography.h2),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -48,14 +51,18 @@ class ClinicalComplianceSettingsScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.shield_outlined, color: AppColors.teal, size: 28),
+                        const Icon(Icons.shield_outlined,
+                            color: AppColors.teal, size: 28),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Clinical Data Isolation (DPDP & HIPAA)', style: AppTypography.labelLg),
-                              Text('AES-256 SQLCipher • On-Device Local First', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                              Text('Clinical Data Isolation (DPDP & HIPAA)',
+                                  style: AppTypography.labelLg),
+                              Text('AES-256 SQLCipher • On-Device Local First',
+                                  style: AppTypography.bodySm.copyWith(
+                                      color: AppColors.textSecondary)),
                             ],
                           ),
                         ),
@@ -64,7 +71,8 @@ class ClinicalComplianceSettingsScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'All medication logs, CGM streams, and uploaded PDF lab reports are encrypted on-device and never leave your phone unless cloud backup is explicitly turned on.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 12),
                     ),
                   ],
                 ),
@@ -101,32 +109,47 @@ class ClinicalComplianceSettingsScreen extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: AppColors.error.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
+                  border:
+                      Border.all(color: AppColors.error.withValues(alpha: 0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('⚠️ Single-Tap DPDP Data Revocation', style: AppTypography.labelLg.copyWith(color: AppColors.error, fontWeight: FontWeight.bold)),
+                    Text('⚠️ Single-Tap DPDP Data Revocation',
+                        style: AppTypography.labelLg.copyWith(
+                            color: AppColors.error,
+                            fontWeight: FontWeight.bold)),
                     const SizedBox(height: 4),
                     Text(
                       'Under the Digital Personal Data Protection Act, tapping below immediately wipes all CGM readings, medication schedules, and lab PDFs from local memory.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                     const SizedBox(height: AppSpacing.sm),
-
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.error,
                         minimumSize: const Size.fromHeight(42),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
                       ),
-                      icon: const Icon(Icons.delete_forever, color: Colors.white, size: 18),
-                      label: const Text('Revoke All Clinical Access', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      icon: const Icon(Icons.delete_forever,
+                          color: Colors.white, size: 18),
+                      label: const Text('Revoke All Clinical Access',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                       onPressed: () {
-                        ref.read(clinicalPrivacyGuardStateProvider.notifier).state =
-                            ref.read(clinicalPrivacyGuardStateProvider).revokeAllClinicalConsent();
+                        ref
+                                .read(clinicalPrivacyGuardStateProvider.notifier)
+                                .state =
+                            ref
+                                .read(clinicalPrivacyGuardStateProvider)
+                                .revokeAllClinicalConsent();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('All clinical data consent revoked and local stores wiped clean.')),
+                          const SnackBar(
+                              content: Text(
+                                  'All clinical data consent revoked and local stores wiped clean.')),
                         );
                       },
                     ),
@@ -158,7 +181,9 @@ class _ComplianceStatusRow extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
-            color: isActive ? AppColors.success.withValues(alpha: 0.15) : AppColors.error.withValues(alpha: 0.15),
+            color: isActive
+                ? AppColors.success.withValues(alpha: 0.15)
+                : AppColors.error.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(6),
           ),
           child: Text(

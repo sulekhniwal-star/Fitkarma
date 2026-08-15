@@ -57,8 +57,18 @@ class AffiliatePayout {
 
   String get periodLabel {
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
     ];
     final monthName = months[periodStart.month - 1];
     return '$monthName ${periodStart.year}';
@@ -87,8 +97,7 @@ class AffiliateStats {
 
   String get formattedBalance => '₹${availableBalanceInr.toStringAsFixed(0)}';
 
-  String get formattedConversionRate =>
-      '${conversionRate.toStringAsFixed(1)}%';
+  String get formattedConversionRate => '${conversionRate.toStringAsFixed(1)}%';
 
   AffiliateStats copyWith({
     double? availableBalanceInr,

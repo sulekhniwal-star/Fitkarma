@@ -35,7 +35,8 @@ class _GlucoseScreenState extends ConsumerState<GlucoseScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Blood Glucose', style: AppTypography.h2),
@@ -58,7 +59,9 @@ class _GlucoseScreenState extends ConsumerState<GlucoseScreen> {
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
-        child: state.isLocked ? const _GlucoseLockedView() : _GlucoseUnlockedView(state: state),
+        child: state.isLocked
+            ? const _GlucoseLockedView()
+            : _GlucoseUnlockedView(state: state),
       ),
     );
   }
@@ -81,7 +84,8 @@ class _GlucoseLockedView extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Text('Biometric Security Lock', style: AppTypography.h3),
             const SizedBox(height: 8),
-            Text('Authentication required to view sensitive glucose readings.', style: AppTypography.bodySm, textAlign: TextAlign.center),
+            Text('Authentication required to view sensitive glucose readings.',
+                style: AppTypography.bodySm, textAlign: TextAlign.center),
           ],
         ),
       ),
@@ -137,7 +141,8 @@ class _GlucoseUnlockedView extends ConsumerWidget {
               ),
               onPressed: () => _showAddGlucoseSheet(context, ref),
               icon: const Icon(Icons.add, color: Colors.white),
-              label: Text('Log Glucose Reading', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+              label: Text('Log Glucose Reading',
+                  style: AppTypography.labelLg.copyWith(color: Colors.white)),
             ),
           ),
           const SizedBox(height: 40),
@@ -156,7 +161,8 @@ class _GlucoseUnlockedView extends ConsumerWidget {
       backgroundColor: AppColors.surface0,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
       ),
       builder: (ctx) {
         return StatefulBuilder(
@@ -216,15 +222,20 @@ class _GlucoseUnlockedView extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
                       onPressed: () {
-                        final mg = double.tryParse(valueController.text) ?? 110.0;
+                        final mg =
+                            double.tryParse(valueController.text) ?? 110.0;
                         ref.read(glucoseProvider.notifier).logGlucoseReading(
                               mgDl: mg,
                               tag: selectedTag,
-                              correlatedMealName: mealController.text.isNotEmpty ? mealController.text : null,
+                              correlatedMealName: mealController.text.isNotEmpty
+                                  ? mealController.text
+                                  : null,
                             );
                         Navigator.pop(ctx);
                       },
-                      child: Text('Save Log', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                      child: Text('Save Log',
+                          style: AppTypography.labelLg
+                              .copyWith(color: Colors.white)),
                     ),
                   ),
                 ],
@@ -300,7 +311,9 @@ class _GlucoseMetricColumn extends StatelessWidget {
             color: color.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Text(category, style: AppTypography.labelMd.copyWith(color: color, fontSize: 10)),
+          child: Text(category,
+              style:
+                  AppTypography.labelMd.copyWith(color: color, fontSize: 10)),
         ),
       ],
     );
@@ -328,7 +341,8 @@ class _GlucoseSpikeCard extends StatelessWidget {
           const Icon(Icons.bolt, color: AppColors.primary, size: 22),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Text(nudge, style: AppTypography.bodyMd.copyWith(height: 1.4)),
+            child:
+                Text(nudge, style: AppTypography.bodyMd.copyWith(height: 1.4)),
           ),
         ],
       ),
@@ -351,7 +365,8 @@ class _GlucoseResponseCurveCard extends StatelessWidget {
         children: [
           Text('Glucose Response Curve', style: AppTypography.h3),
           const SizedBox(height: 4),
-          Text('Response curve mapped to logged meals', style: AppTypography.bodySm),
+          Text('Response curve mapped to logged meals',
+              style: AppTypography.bodySm),
           const SizedBox(height: AppSpacing.md),
           SizedBox(
             height: 120,
@@ -424,7 +439,8 @@ class _GlucoseCurvePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _GlucoseCurvePainter old) => old.records != records;
+  bool shouldRepaint(covariant _GlucoseCurvePainter old) =>
+      old.records != records;
 }
 
 // ── Estimated HbA1c Card ──────────────────────────────────────────────────────
@@ -448,9 +464,13 @@ class _Hba1cCard extends StatelessWidget {
             children: [
               Text('Estimated HbA1c', style: AppTypography.h3),
               Text(
-                hba1c.isSufficientData ? '${hba1c.estimatedHba1cPct}%' : 'Pending Data',
+                hba1c.isSufficientData
+                    ? '${hba1c.estimatedHba1cPct}%'
+                    : 'Pending Data',
                 style: AppTypography.h2.copyWith(
-                  color: hba1c.estimatedHba1cPct >= 5.7 ? AppColors.warning : AppColors.teal,
+                  color: hba1c.estimatedHba1cPct >= 5.7
+                      ? AppColors.warning
+                      : AppColors.teal,
                 ),
               ),
             ],
@@ -467,7 +487,9 @@ class _Hba1cCard extends StatelessWidget {
               minHeight: 8,
               backgroundColor: AppColors.surface2,
               valueColor: AlwaysStoppedAnimation(
-                hba1c.estimatedHba1cPct >= 5.7 ? AppColors.warning : AppColors.teal,
+                hba1c.estimatedHba1cPct >= 5.7
+                    ? AppColors.warning
+                    : AppColors.teal,
               ),
             ),
           ),
@@ -475,9 +497,12 @@ class _Hba1cCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Normal (<5.7%)', style: AppTypography.bodySm.copyWith(fontSize: 10)),
-              Text('Pre-Diabetic (5.7%-6.4%)', style: AppTypography.bodySm.copyWith(fontSize: 10)),
-              Text('Diabetic (>=6.5%)', style: AppTypography.bodySm.copyWith(fontSize: 10)),
+              Text('Normal (<5.7%)',
+                  style: AppTypography.bodySm.copyWith(fontSize: 10)),
+              Text('Pre-Diabetic (5.7%-6.4%)',
+                  style: AppTypography.bodySm.copyWith(fontSize: 10)),
+              Text('Diabetic (>=6.5%)',
+                  style: AppTypography.bodySm.copyWith(fontSize: 10)),
             ],
           ),
         ],

@@ -28,7 +28,8 @@ class WeddingDashboardScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Wedding Prep Dashboard 💍', style: AppTypography.h2),
@@ -58,27 +59,37 @@ class WeddingDashboardScreen extends ConsumerWidget {
                 ),
                 child: Column(
                   children: [
-                    Text('WEDDING COUNTDOWN', style: AppTypography.labelSmall.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                    Text('WEDDING COUNTDOWN',
+                        style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold)),
                     const SizedBox(height: 6),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Text('${wedding.daysRemaining} ', style: AppTypography.h1.copyWith(color: AppColors.bg0, fontSize: 42)),
-                        Text('Days Left', style: AppTypography.h3.copyWith(color: AppColors.bg0.withValues(alpha: 0.9))),
+                        Text('${wedding.daysRemaining} ',
+                            style: AppTypography.h1
+                                .copyWith(color: AppColors.bg0, fontSize: 42)),
+                        Text('Days Left',
+                            style: AppTypography.h3.copyWith(
+                                color: AppColors.bg0.withValues(alpha: 0.9))),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.black26,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         'Phase: [$phaseName]',
-                        style: AppTypography.labelSmall.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold),
+                        style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -86,7 +97,8 @@ class WeddingDashboardScreen extends ConsumerWidget {
               ),
 
               // Specialized Daily Action Checklist
-              Text('Specialized Daily Action Checklist', style: AppTypography.h3),
+              Text('Specialized Daily Action Checklist',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
 
               GlassCard(
@@ -97,21 +109,34 @@ class WeddingDashboardScreen extends ConsumerWidget {
                     children: [
                       CheckboxListTile(
                         activeColor: AppColors.primary,
-                        title: Text('Skin Hydration Target (${wedding.hydrationTargetLiters} L)', style: AppTypography.labelLg),
-                        subtitle: Text('3.5L water with electrolytes for skin radiance', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                        title: Text(
+                            'Skin Hydration Target (${wedding.hydrationTargetLiters} L)',
+                            style: AppTypography.labelLg),
+                        subtitle: Text(
+                            '3.5L water with electrolytes for skin radiance',
+                            style: AppTypography.bodySm.copyWith(
+                                color: AppColors.textSecondary, fontSize: 11)),
                         value: wedding.hasSkinNutritionChecked,
                         onChanged: (val) {
-                          ref.read(weddingTransformationProvider.notifier).toggleSkinNutrition(val ?? false);
+                          ref
+                              .read(weddingTransformationProvider.notifier)
+                              .toggleSkinNutrition(val ?? false);
                         },
                       ),
                       const Divider(height: 1),
                       CheckboxListTile(
                         activeColor: AppColors.primary,
-                        title: Text('Cortisol Control Check', style: AppTypography.labelLg),
-                        subtitle: Text('10-min deep breathing to prevent wedding stress breakouts', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                        title: Text('Cortisol Control Check',
+                            style: AppTypography.labelLg),
+                        subtitle: Text(
+                            '10-min deep breathing to prevent wedding stress breakouts',
+                            style: AppTypography.bodySm.copyWith(
+                                color: AppColors.textSecondary, fontSize: 11)),
                         value: wedding.hasStressChecked,
                         onChanged: (val) {
-                          ref.read(weddingTransformationProvider.notifier).toggleStressCheck(val ?? false);
+                          ref
+                              .read(weddingTransformationProvider.notifier)
+                              .toggleStressCheck(val ?? false);
                         },
                       ),
                     ],
@@ -125,15 +150,21 @@ class WeddingDashboardScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Phase-Shifted Macro Guidelines', style: AppTypography.h3),
+                    Text('Phase-Shifted Macro Guidelines',
+                        style: AppTypography.h3),
                     const SizedBox(height: AppSpacing.sm),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _MacroStat(label: 'Calories', value: '${wedding.calorieTarget.toInt()} kcal'),
-                        _MacroStat(label: 'Protein', value: '${wedding.proteinTargetG.toInt()}g'),
-                        _MacroStat(label: 'Hydration', value: '${wedding.hydrationTargetLiters}L'),
+                        _MacroStat(
+                            label: 'Calories',
+                            value: '${wedding.calorieTarget.toInt()} kcal'),
+                        _MacroStat(
+                            label: 'Protein',
+                            value: '${wedding.proteinTargetG.toInt()}g'),
+                        _MacroStat(
+                            label: 'Hydration',
+                            value: '${wedding.hydrationTargetLiters}L'),
                       ],
                     ),
                   ],
@@ -159,7 +190,9 @@ class _MacroStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label, style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+        Text(label,
+            style: AppTypography.labelSmall
+                .copyWith(color: AppColors.textSecondary)),
         const SizedBox(height: 2),
         Text(value, style: AppTypography.h3.copyWith(color: AppColors.primary)),
       ],

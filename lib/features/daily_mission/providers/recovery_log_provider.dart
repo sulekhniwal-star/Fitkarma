@@ -57,15 +57,17 @@ class RecoveryLogState {
 class RecoveryLogNotifier extends StateNotifier<RecoveryLogState> {
   final ReadinessScoreCalculator _calculator;
 
-  RecoveryLogNotifier({ReadinessScoreCalculator calculator = const ReadinessScoreCalculator()})
+  RecoveryLogNotifier(
+      {ReadinessScoreCalculator calculator = const ReadinessScoreCalculator()})
       : _calculator = calculator,
         super(const RecoveryLogState()) {
     _recalculateReadiness();
   }
 
   void updateSoreness(MuscleGroup muscle, SorenessSeverity severity) {
-    final updatedMap = Map<MuscleGroup, SorenessSeverity>.from(state.soreness.sorenessMap)
-      ..[muscle] = severity;
+    final updatedMap =
+        Map<MuscleGroup, SorenessSeverity>.from(state.soreness.sorenessMap)
+          ..[muscle] = severity;
     state = state.copyWith(soreness: SorenessState(sorenessMap: updatedMap));
     _recalculateReadiness();
   }

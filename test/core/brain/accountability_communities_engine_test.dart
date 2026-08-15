@@ -47,7 +47,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('CommunitiesScreen renders 8 communities, privacy banner, and activity feed', (tester) async {
+    testWidgets(
+        'CommunitiesScreen renders 8 communities, privacy banner, and activity feed',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: CommunitiesScreen()),
@@ -56,12 +58,16 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Accountability Communities'), findsOneWidget);
-      expect(find.textContaining('Zero personal health data visible in communities'), findsOneWidget);
+      expect(
+          find.textContaining(
+              'Zero personal health data visible in communities'),
+          findsOneWidget);
       expect(find.text('Explore Communities (8)'), findsOneWidget);
       expect(find.text('10K Steps India'), findsOneWidget);
       expect(find.text('Office Fat Loss'), findsOneWidget);
       expect(find.text('Community Activity Feed'), findsOneWidget);
-      expect(find.textContaining('Logged 11,400 steps on morning walk'), findsOneWidget);
+      expect(find.textContaining('Logged 11,400 steps on morning walk'),
+          findsOneWidget);
     });
   });
 }

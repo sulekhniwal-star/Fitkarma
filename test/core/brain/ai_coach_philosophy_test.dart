@@ -5,7 +5,8 @@ void main() {
   group('§P3-A AI Coach Philosophy & Guardrails Tests', () {
     const engine = AiCoachPhilosophyEngine();
 
-    test('Generates system prompt containing user metrics and §P3-A directives', () {
+    test('Generates system prompt containing user metrics and §P3-A directives',
+        () {
       final prompt = engine.generateSystemPrompt(
         userName: 'Arjun',
         userGoal: 'Muscle Gain',
@@ -41,8 +42,11 @@ void main() {
       expect(result.sanitizedResponse, equals(goodResponse));
     });
 
-    test('Flags generic advice anti-pattern and enriches response with user metrics', () {
-      const genericResponse = 'You should eat more protein and drink more water.';
+    test(
+        'Flags generic advice anti-pattern and enriches response with user metrics',
+        () {
+      const genericResponse =
+          'You should eat more protein and drink more water.';
 
       final result = engine.validateResponse(
         responseText: genericResponse,
@@ -54,12 +58,16 @@ void main() {
 
       expect(result.isValid, isFalse);
       expect(result.violations, isNotEmpty);
-      expect(result.violations.any((v) => v.contains('Generic response detected')), isTrue);
-      expect(result.sanitizedResponse, contains('58g against your 110g target'));
+      expect(
+          result.violations.any((v) => v.contains('Generic response detected')),
+          isTrue);
+      expect(
+          result.sanitizedResponse, contains('58g against your 110g target'));
     });
 
     test('Flags medical diagnosis terms and enforces boundary rules', () {
-      const medicalResponse = 'I will diagnose your joint pain and prescribe medication.';
+      const medicalResponse =
+          'I will diagnose your joint pain and prescribe medication.';
 
       final result = engine.validateResponse(
         responseText: medicalResponse,
@@ -70,7 +78,10 @@ void main() {
       );
 
       expect(result.isValid, isFalse);
-      expect(result.violations.any((v) => v.contains('Medical scope boundary violation')), isTrue);
+      expect(
+          result.violations
+              .any((v) => v.contains('Medical scope boundary violation')),
+          isTrue);
     });
   });
 }

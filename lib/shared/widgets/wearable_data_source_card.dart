@@ -19,8 +19,12 @@ class WearableDataSourceCard extends ConsumerWidget {
     final profile = DeviceReliabilityEngine.deviceProfiles[state.activeSource]!;
     final result = state.readingResult;
 
-    final hrvDeltaPct = ((state.rawHrvMs - state.userBaselineHrvMs) / state.userBaselineHrvMs) * 100.0;
-    final hrvDeltaLabel = hrvDeltaPct >= 0 ? '+${hrvDeltaPct.round()}%' : '${hrvDeltaPct.round()}%';
+    final hrvDeltaPct =
+        ((state.rawHrvMs - state.userBaselineHrvMs) / state.userBaselineHrvMs) *
+            100.0;
+    final hrvDeltaLabel = hrvDeltaPct >= 0
+        ? '+${hrvDeltaPct.round()}%'
+        : '${hrvDeltaPct.round()}%';
 
     return GlassCard(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -54,7 +58,9 @@ class WearableDataSourceCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Today\'s HRV', style: AppTypography.bodySm),
-                  Text('${state.rawHrvMs.round()} ms', style: AppTypography.metricLg.copyWith(color: AppColors.teal)),
+                  Text('${state.rawHrvMs.round()} ms',
+                      style: AppTypography.metricLg
+                          .copyWith(color: AppColors.teal)),
                 ],
               ),
               Column(
@@ -64,7 +70,9 @@ class WearableDataSourceCard extends ConsumerWidget {
                   Text(
                     '${state.userBaselineHrvMs.round()} ms ($hrvDeltaLabel)',
                     style: AppTypography.labelLg.copyWith(
-                      color: hrvDeltaPct >= 0 ? AppColors.success : AppColors.warning,
+                      color: hrvDeltaPct >= 0
+                          ? AppColors.success
+                          : AppColors.warning,
                     ),
                   ),
                 ],
@@ -108,12 +116,16 @@ class WearableDataSourceCard extends ConsumerWidget {
                 items: WearableSource.values.map((source) {
                   return DropdownMenuItem(
                     value: source,
-                    child: Text(source.displayName, style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary)),
+                    child: Text(source.displayName,
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textPrimary)),
                   );
                 }).toList(),
                 onChanged: (source) {
                   if (source != null) {
-                    ref.read(wearableComparisonProvider.notifier).selectSource(source);
+                    ref
+                        .read(wearableComparisonProvider.notifier)
+                        .selectSource(source);
                   }
                 },
               ),
@@ -139,7 +151,9 @@ class _ConfidenceStarsBadge extends StatelessWidget {
           children: List.generate(5, (i) {
             return Icon(
               i < profile.starRating ? Icons.star : Icons.star_border,
-              color: i < profile.starRating ? AppColors.warning : AppColors.textMuted,
+              color: i < profile.starRating
+                  ? AppColors.warning
+                  : AppColors.textMuted,
               size: 14,
             );
           }),
@@ -147,7 +161,8 @@ class _ConfidenceStarsBadge extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           profile.confidenceLabel,
-          style: AppTypography.bodySm.copyWith(color: AppColors.warning, fontSize: 10),
+          style: AppTypography.bodySm
+              .copyWith(color: AppColors.warning, fontSize: 10),
         ),
       ],
     );

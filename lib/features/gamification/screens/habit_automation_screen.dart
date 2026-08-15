@@ -22,7 +22,8 @@ class HabitAutomationScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Smart Habit Automation', style: AppTypography.h2),
@@ -41,15 +42,18 @@ class HabitAutomationScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Contextual Smart Triggers', style: AppTypography.h3),
+                        Text('Contextual Smart Triggers',
+                            style: AppTypography.h3),
                         const SizedBox(height: 4),
                         Text(
                           '${state.completedHabitsToday} of ${state.activeTriggers.length} habits completed today',
-                          style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                          style: AppTypography.bodySm
+                              .copyWith(color: AppColors.textSecondary),
                         ),
                       ],
                     ),
-                    const Icon(Icons.auto_awesome, color: AppColors.primary, size: 28),
+                    const Icon(Icons.auto_awesome,
+                        color: AppColors.primary, size: 28),
                   ],
                 ),
               ),
@@ -73,17 +77,25 @@ class HabitAutomationScreen extends ConsumerWidget {
                               child: Text(
                                 trigger.title,
                                 style: AppTypography.labelLg.copyWith(
-                                  color: trigger.isTriggered ? AppColors.textMuted : AppColors.textPrimary,
+                                  color: trigger.isTriggered
+                                      ? AppColors.textMuted
+                                      : AppColors.textPrimary,
                                 ),
                               ),
                             ),
                             IconButton(
                               icon: Icon(
-                                trigger.isTriggered ? Icons.check_circle : Icons.radio_button_unchecked,
-                                color: trigger.isTriggered ? AppColors.success : AppColors.primary,
+                                trigger.isTriggered
+                                    ? Icons.check_circle
+                                    : Icons.radio_button_unchecked,
+                                color: trigger.isTriggered
+                                    ? AppColors.success
+                                    : AppColors.primary,
                               ),
                               onPressed: () {
-                                ref.read(habitAutomationProvider.notifier).markTriggerCompleted(trigger.id);
+                                ref
+                                    .read(habitAutomationProvider.notifier)
+                                    .markTriggerCompleted(trigger.id);
                               },
                             ),
                           ],
@@ -92,7 +104,9 @@ class HabitAutomationScreen extends ConsumerWidget {
                         Text(
                           trigger.message,
                           style: AppTypography.bodySm.copyWith(
-                            color: trigger.isTriggered ? AppColors.textMuted : AppColors.textSecondary,
+                            color: trigger.isTriggered
+                                ? AppColors.textMuted
+                                : AppColors.textSecondary,
                             height: 1.3,
                           ),
                         ),

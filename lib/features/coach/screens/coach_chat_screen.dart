@@ -186,8 +186,9 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
             if (!state.isAiTyping && state.messages.length <= 2)
               _SuggestedPromptsStrip(
                 prompts: _suggestedPrompts,
-                onTap: (p) =>
-                    ref.read(aiCoachChatProvider.notifier).applySuggestedPrompt(p),
+                onTap: (p) => ref
+                    .read(aiCoachChatProvider.notifier)
+                    .applySuggestedPrompt(p),
               ),
 
             // Error banner
@@ -201,11 +202,12 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.wifi_off, color: AppColors.error, size: 16),
+                    const Icon(Icons.wifi_off,
+                        color: AppColors.error, size: 16),
                     const SizedBox(width: 8),
                     Text('Connection error. Check your network.',
-                        style:
-                            AppTypography.bodyMd.copyWith(color: AppColors.error)),
+                        style: AppTypography.bodyMd
+                            .copyWith(color: AppColors.error)),
                   ],
                 ),
               ),
@@ -227,7 +229,8 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
       backgroundColor: AppColors.bgPrimary,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+        icon: const Icon(Icons.arrow_back_ios,
+            color: AppColors.textPrimary, size: 20),
         onPressed: () => Navigator.maybePop(context),
       ),
       title: Row(
@@ -249,8 +252,8 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
             children: [
               Text('AI Karma Coach', style: AppTypography.h3),
               Text('Powered by Groq · llama-3.3-70b',
-                  style: AppTypography.labelMd.copyWith(
-                      color: AppColors.teal, fontSize: 10)),
+                  style: AppTypography.labelMd
+                      .copyWith(color: AppColors.teal, fontSize: 10)),
             ],
           ),
         ],
@@ -259,17 +262,14 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
         Padding(
           padding: const EdgeInsets.only(right: AppSpacing.md),
           child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: AppColors.teal.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                  color: AppColors.teal.withValues(alpha: 0.4)),
+              border: Border.all(color: AppColors.teal.withValues(alpha: 0.4)),
             ),
             child: Text('Online',
-                style:
-                    AppTypography.labelMd.copyWith(color: AppColors.teal)),
+                style: AppTypography.labelMd.copyWith(color: AppColors.teal)),
           ),
         ),
       ],
@@ -362,8 +362,7 @@ class _BannerChip extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label,
-                style: AppTypography.labelMd.copyWith(fontSize: 9)),
+            Text(label, style: AppTypography.labelMd.copyWith(fontSize: 9)),
             Text(value,
                 style:
                     AppTypography.labelLg.copyWith(color: color, fontSize: 12)),
@@ -415,9 +414,7 @@ class _MessageBubble extends StatelessWidget {
                   Text(
                     message.text,
                     style: AppTypography.bodyMd.copyWith(
-                      color: isUser
-                          ? AppColors.teal
-                          : AppColors.textPrimary,
+                      color: isUser ? AppColors.teal : AppColors.textPrimary,
                       height: 1.5,
                     ),
                   ),
@@ -478,9 +475,9 @@ class _TypingIndicatorState extends State<_TypingIndicator>
   @override
   void initState() {
     super.initState();
-    _ctrl =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 800))
-          ..repeat(reverse: true);
+    _ctrl = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 800))
+      ..repeat(reverse: true);
     _anim = Tween<double>(begin: 0.4, end: 1.0).animate(_ctrl);
   }
 
@@ -493,7 +490,8 @@ class _TypingIndicatorState extends State<_TypingIndicator>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 8),
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 8),
       child: Align(
         alignment: Alignment.centerLeft,
         child: AnimatedBuilder(
@@ -506,8 +504,8 @@ class _TypingIndicatorState extends State<_TypingIndicator>
                 const Icon(Icons.psychology, color: AppColors.teal, size: 16),
                 const SizedBox(width: 8),
                 Text('AI Coach is thinking...',
-                    style: AppTypography.bodyMd
-                        .copyWith(color: AppColors.teal)),
+                    style:
+                        AppTypography.bodyMd.copyWith(color: AppColors.teal)),
               ],
             ),
           ),
@@ -523,8 +521,7 @@ class _SuggestedPromptsStrip extends StatelessWidget {
   final List<String> prompts;
   final void Function(String) onTap;
 
-  const _SuggestedPromptsStrip(
-      {required this.prompts, required this.onTap});
+  const _SuggestedPromptsStrip({required this.prompts, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -535,13 +532,11 @@ class _SuggestedPromptsStrip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.md, vertical: AppSpacing.xs),
         itemCount: prompts.length,
-        separatorBuilder: (_, __) =>
-            const SizedBox(width: AppSpacing.sm),
+        separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.sm),
         itemBuilder: (_, i) => GestureDetector(
           onTap: () => onTap(prompts[i]),
           child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.glassBgMid,
               borderRadius: BorderRadius.circular(20),
@@ -616,8 +611,8 @@ class _InputBar extends StatelessWidget {
             child: TextField(
               controller: controller,
               enabled: isEnabled,
-              style: AppTypography.bodyMd
-                  .copyWith(color: AppColors.textPrimary),
+              style:
+                  AppTypography.bodyMd.copyWith(color: AppColors.textPrimary),
               maxLines: null,
               textInputAction: TextInputAction.send,
               onSubmitted: (_) => onSend(),
@@ -630,13 +625,11 @@ class _InputBar extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24),
-                  borderSide:
-                      const BorderSide(color: AppColors.glassBorder),
+                  borderSide: const BorderSide(color: AppColors.glassBorder),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24),
-                  borderSide:
-                      const BorderSide(color: AppColors.glassBorder),
+                  borderSide: const BorderSide(color: AppColors.glassBorder),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24),
@@ -683,8 +676,7 @@ class _EmptyStateView extends StatelessWidget {
               size: 60, color: AppColors.teal.withValues(alpha: 0.4)),
           const SizedBox(height: 16),
           Text('Ask your AI Coach anything',
-              style: AppTypography.h3
-                  .copyWith(color: AppColors.textSecondary)),
+              style: AppTypography.h3.copyWith(color: AppColors.textSecondary)),
           const SizedBox(height: 8),
           Text('Every response references your Health Snapshot',
               style: AppTypography.bodyMd),
@@ -839,4 +831,3 @@ class _CrisisSuppressionBanner extends StatelessWidget {
     );
   }
 }
-

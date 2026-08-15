@@ -15,7 +15,9 @@ class TransformationTimelineScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(transformationJourneyProvider);
-    final currentWeight = state.weightHistory.isNotEmpty ? state.weightHistory.last.weightKg : 72.0;
+    final currentWeight = state.weightHistory.isNotEmpty
+        ? state.weightHistory.last.weightKg
+        : 72.0;
 
     return Scaffold(
       backgroundColor: AppColors.bg0,
@@ -23,7 +25,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Transformation Journey', style: AppTypography.h2),
@@ -42,16 +45,19 @@ class TransformationTimelineScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Weight Projection & 90-Day Range', style: AppTypography.h3),
+                        Text('Weight Projection & 90-Day Range',
+                            style: AppTypography.h3),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             'Current: ${currentWeight.toStringAsFixed(1)} kg',
-                            style: AppTypography.labelLg.copyWith(color: AppColors.primary),
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.primary),
                           ),
                         ),
                       ],
@@ -71,10 +77,18 @@ class TransformationTimelineScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('80 kg', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted)),
-                              Text('Month 1', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted)),
-                              Text('Month 2', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted)),
-                              Text('Month 3 (Forecast Range)', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted)),
+                              Text('80 kg',
+                                  style: AppTypography.bodySm
+                                      .copyWith(color: AppColors.textMuted)),
+                              Text('Month 1',
+                                  style: AppTypography.bodySm
+                                      .copyWith(color: AppColors.textMuted)),
+                              Text('Month 2',
+                                  style: AppTypography.bodySm
+                                      .copyWith(color: AppColors.textMuted)),
+                              Text('Month 3 (Forecast Range)',
+                                  style: AppTypography.bodySm
+                                      .copyWith(color: AppColors.textMuted)),
                             ],
                           ),
                           const SizedBox(height: 12),
@@ -97,7 +111,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                                   alignment: Alignment.center,
                                   child: Text(
                                     'Projected Zone: ${state.projectedWeightMin} kg - ${state.projectedWeightMax} kg',
-                                    style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                                    style: AppTypography.labelLg
+                                        .copyWith(color: AppColors.teal),
                                   ),
                                 ),
                               ),
@@ -108,18 +123,29 @@ class TransformationTimelineScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.md),
 
-                    Text('Target Prediction (At Current Pace):', style: AppTypography.labelLg),
+                    Text('Target Prediction (At Current Pace):',
+                        style: AppTypography.labelLg),
                     const SizedBox(height: 4),
-                    Text('  • Projected Weight (90 days): ${state.projectedWeightMin} kg - ${state.projectedWeightMax} kg', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
-                    Text('  • Projected Body Fat: ${state.projectedBodyFatMin}% - ${state.projectedBodyFatMax}%', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
-                    Text('  • Program Target: Week ${state.completedProgramWeeks} of 12 complete', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                    Text(
+                        '  • Projected Weight (90 days): ${state.projectedWeightMin} kg - ${state.projectedWeightMax} kg',
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
+                    Text(
+                        '  • Projected Body Fat: ${state.projectedBodyFatMin}% - ${state.projectedBodyFatMax}%',
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
+                    Text(
+                        '  • Program Target: Week ${state.completedProgramWeeks} of 12 complete',
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
                   ],
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
 
               // 2. Biometric Locked Secure Progress Photos Section
-              Text('🔒 Secure Progress Photos (Biometric Locked)', style: AppTypography.h3),
+              Text('🔒 Secure Progress Photos (Biometric Locked)',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
 
               if (!state.arePhotosUnlocked) ...[
@@ -127,25 +153,33 @@ class TransformationTimelineScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Column(
                     children: [
-                      const Icon(Icons.fingerprint, color: AppColors.primary, size: 48),
+                      const Icon(Icons.fingerprint,
+                          color: AppColors.primary, size: 48),
                       const SizedBox(height: 8),
-                      Text('Photos are Biometric Encrypted', style: AppTypography.labelLg),
+                      Text('Photos are Biometric Encrypted',
+                          style: AppTypography.labelLg),
                       const SizedBox(height: 4),
                       Text(
                         'Unlock with FaceID / TouchID to view locked progress snapshots.',
                         textAlign: TextAlign.center,
-                        style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary),
                       ),
                       const SizedBox(height: 12),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                         onPressed: () {
-                          ref.read(transformationJourneyProvider.notifier).authenticateBiometrics(mockSuccess: true);
+                          ref
+                              .read(transformationJourneyProvider.notifier)
+                              .authenticateBiometrics(mockSuccess: true);
                         },
-                        child: Text('Tap to Unlock Photos', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                        child: Text('Tap to Unlock Photos',
+                            style: AppTypography.labelLg
+                                .copyWith(color: Colors.white)),
                       ),
                     ],
                   ),
@@ -161,10 +195,15 @@ class TransformationTimelineScreen extends ConsumerWidget {
                             padding: const EdgeInsets.all(10),
                             child: Column(
                               children: [
-                                const Icon(Icons.photo, color: AppColors.accent, size: 36),
+                                const Icon(Icons.photo,
+                                    color: AppColors.accent, size: 36),
                                 const SizedBox(height: 4),
-                                Text(photo.weekLabel, style: AppTypography.labelLg),
-                                Text('Unlocked', style: AppTypography.bodySm.copyWith(color: AppColors.success, fontSize: 11)),
+                                Text(photo.weekLabel,
+                                    style: AppTypography.labelLg),
+                                Text('Unlocked',
+                                    style: AppTypography.bodySm.copyWith(
+                                        color: AppColors.success,
+                                        fontSize: 11)),
                               ],
                             ),
                           ),

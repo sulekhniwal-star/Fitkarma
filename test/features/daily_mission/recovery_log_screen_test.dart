@@ -36,13 +36,15 @@ void main() {
       expect(notifier.state.readinessScore, greaterThan(0));
 
       notifier.toggleMuscleSoreness(MuscleGroup.chest);
-      expect(notifier.state.soreness.sorenessMap[MuscleGroup.chest], equals(SorenessSeverity.mild));
+      expect(notifier.state.soreness.sorenessMap[MuscleGroup.chest],
+          equals(SorenessSeverity.mild));
 
       notifier.commitLog();
       expect(notifier.state.isCommitted, isTrue);
     });
 
-    testWidgets('RecoveryLogScreen renders body soreness map & HRV trend', (tester) async {
+    testWidgets('RecoveryLogScreen renders body soreness map & HRV trend',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

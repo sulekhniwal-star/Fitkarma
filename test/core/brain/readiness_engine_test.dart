@@ -11,7 +11,8 @@ void main() {
     const targetAdjuster = DailyTargetAdjuster();
 
     test('Basic tier computes readiness based on check-in only', () {
-      const checkIn = MorningCheckIn(energyLevel: 8, muscleSoreness: 2, moodRating: 9);
+      const checkIn =
+          MorningCheckIn(energyLevel: 8, muscleSoreness: 2, moodRating: 9);
       final result = engine.calculateReadiness(checkIn: checkIn);
 
       expect(result.tier, equals(ReadinessTier.basic));
@@ -19,14 +20,17 @@ void main() {
     });
 
     test('Enhanced tier incorporates sleep hours sync', () {
-      const checkIn = MorningCheckIn(energyLevel: 6, muscleSoreness: 4, moodRating: 6);
-      final result = engine.calculateReadiness(checkIn: checkIn, sleepHours: 8.0);
+      const checkIn =
+          MorningCheckIn(energyLevel: 6, muscleSoreness: 4, moodRating: 6);
+      final result =
+          engine.calculateReadiness(checkIn: checkIn, sleepHours: 8.0);
 
       expect(result.tier, equals(ReadinessTier.enhanced));
     });
 
     test('Premium tier incorporates HRV ratio', () {
-      const checkIn = MorningCheckIn(energyLevel: 8, muscleSoreness: 2, moodRating: 8);
+      const checkIn =
+          MorningCheckIn(energyLevel: 8, muscleSoreness: 2, moodRating: 8);
       final result = engine.calculateReadiness(
         checkIn: checkIn,
         sleepHours: 8.0,
@@ -37,7 +41,9 @@ void main() {
       expect(result.confidenceLabel, contains('Very high confidence'));
     });
 
-    test('Decision Hierarchy enforces Safety Alarm priority over workout progression', () {
+    test(
+        'Decision Hierarchy enforces Safety Alarm priority over workout progression',
+        () {
       final actions = hierarchy.resolveActions(
         readinessScore: 90,
         illnessAlarmTriggered: true,
@@ -48,13 +54,17 @@ void main() {
       expect(actions.first.isMandatoryRest, isTrue);
     });
 
-    test('Decision Hierarchy resolves Rest Prescription for low readiness score', () {
+    test(
+        'Decision Hierarchy resolves Rest Prescription for low readiness score',
+        () {
       final actions = hierarchy.resolveActions(
         readinessScore: 40,
         illnessAlarmTriggered: false,
       );
 
-      expect(actions.any((a) => a.priority == ActionPriority.recoveryPrescription), isTrue);
+      expect(
+          actions.any((a) => a.priority == ActionPriority.recoveryPrescription),
+          isTrue);
       expect(actions.first.isMandatoryRest, isTrue);
     });
 
@@ -71,7 +81,8 @@ void main() {
         expect(result.tier, equals(ReadinessTier.basic));
         expect(result.confidenceLabel, equals('Medium confidence'));
         expect(result.zone, equals(ReadinessZone.high));
-        expect(result.displayString, equals('Readiness 100 · Medium confidence'));
+        expect(
+            result.displayString, equals('Readiness 100 · Medium confidence'));
       });
 
       test('Applies sleep duration penalty for <6h and cumulative for <5h', () {
@@ -92,7 +103,9 @@ void main() {
         expect(result4h.score, equals(80)); // -10 for <6h, -10 for <5h
       });
 
-      test('Applies resting HR and HRV deviation penalties and sets Premium tier', () {
+      test(
+          'Applies resting HR and HRV deviation penalties and sets Premium tier',
+          () {
         final result = calculator.calculate(
           sleepQuality: 5,
           sleepDurationMin: 480,
@@ -118,7 +131,8 @@ void main() {
         protein: 140,
       );
 
-      test('High readiness (>=80) keeps full intensity and adds +10g protein', () {
+      test('High readiness (>=80) keeps full intensity and adds +10g protein',
+          () {
         final adjusted = targetAdjuster.adjust(85, baseTargets);
         expect(adjusted.workoutIntensityFactor, equals(1.0));
         expect(adjusted.calorieTarget, equals(2000));
@@ -126,7 +140,9 @@ void main() {
         expect(adjusted.hydrationL, equals(2.5));
       });
 
-      test('Moderate readiness (65-79) applies slight intensity reduction (0.85)', () {
+      test(
+          'Moderate readiness (65-79) applies slight intensity reduction (0.85)',
+          () {
         final adjusted = targetAdjuster.adjust(70, baseTargets);
         expect(adjusted.workoutIntensityFactor, equals(0.85));
         expect(adjusted.calorieTarget, equals(2015)); // 2000 + 100 * 0.15
@@ -141,7 +157,9 @@ void main() {
         expect(adjusted.proteinTarget, equals(140));
       });
 
-      test('Critical readiness (<50) sets rest day factor 0.0 with recovery calories', () {
+      test(
+          'Critical readiness (<50) sets rest day factor 0.0 with recovery calories',
+          () {
         final adjusted = targetAdjuster.adjust(40, baseTargets);
         expect(adjusted.workoutIntensityFactor, equals(0.0));
         expect(adjusted.calorieTarget, equals(2200)); // +200 for recovery
@@ -150,4 +168,3 @@ void main() {
     });
   });
 }
-

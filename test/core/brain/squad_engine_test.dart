@@ -13,7 +13,9 @@ void main() {
       expect(code, equals(code.toUpperCase()));
     });
 
-    test('filterReadinessPrivacy returns confidence tier & status without sharing numerical score', () {
+    test(
+        'filterReadinessPrivacy returns confidence tier & status without sharing numerical score',
+        () {
       final status = engine.filterReadinessPrivacy(
         memberName: 'Aarav M.',
         readinessScore: 85, // Score must be hidden from return object

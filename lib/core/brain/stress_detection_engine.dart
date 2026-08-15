@@ -53,9 +53,11 @@ class StressDetectionEngine {
     final signalDescs = <String>[];
 
     // 1. HRV declining (strongest physiological stress marker: +3 points)
-    if (data.hrv7dTrend == TrendDirection.declining && data.hrv < data.baselineHRV * 0.85) {
+    if (data.hrv7dTrend == TrendDirection.declining &&
+        data.hrv < data.baselineHRV * 0.85) {
       stressSignals += 3;
-      final pctDrop = (((data.baselineHRV - data.hrv) / data.baselineHRV) * 100).round();
+      final pctDrop =
+          (((data.baselineHRV - data.hrv) / data.baselineHRV) * 100).round();
       signalDescs.add('HRV: -${pctDrop}% below baseline');
     }
 
@@ -75,7 +77,8 @@ class StressDetectionEngine {
     // 4. Missed workouts (behavioral signal: +1 point)
     if (data.missedWorkoutsLast7Days >= 2) {
       stressSignals += 1;
-      signalDescs.add('Missed workouts (${data.missedWorkoutsLast7Days} missed in last 7 days)');
+      signalDescs.add(
+          'Missed workouts (${data.missedWorkoutsLast7Days} missed in last 7 days)');
     }
 
     // 5. App engagement drop (behavioral signal: +1 point)
@@ -88,7 +91,8 @@ class StressDetectionEngine {
     // 6. Late-night food logging (behavioral + lifestyle signal: +1 point)
     if (data.lateNightLogsPerWeek >= 3) {
       stressSignals += 1;
-      signalDescs.add('Late-night food logging (${data.lateNightLogsPerWeek} logs after 11 PM)');
+      signalDescs.add(
+          'Late-night food logging (${data.lateNightLogsPerWeek} logs after 11 PM)');
     }
 
     final level = switch (stressSignals) {
@@ -109,10 +113,14 @@ class StressDetectionEngine {
 
   String _buildRecommendation(StressLevel level) {
     return switch (level) {
-      StressLevel.high => 'High stress pattern detected! Switch to 20-min decompression workout, perform 5-min bedtime breathing, and consult AI Coach.',
-      StressLevel.elevated => 'Elevated stress trending. Reduce training intensity by 20% and prioritize 8+ hours sleep.',
-      StressLevel.moderate => 'Mild stress indicators present. Maintain active recovery & hydration.',
-      StressLevel.normal => 'Autonomic nervous system operating in optimal recovery equilibrium.',
+      StressLevel.high =>
+        'High stress pattern detected! Switch to 20-min decompression workout, perform 5-min bedtime breathing, and consult AI Coach.',
+      StressLevel.elevated =>
+        'Elevated stress trending. Reduce training intensity by 20% and prioritize 8+ hours sleep.',
+      StressLevel.moderate =>
+        'Mild stress indicators present. Maintain active recovery & hydration.',
+      StressLevel.normal =>
+        'Autonomic nervous system operating in optimal recovery equilibrium.',
     };
   }
 }

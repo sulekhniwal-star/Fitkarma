@@ -25,7 +25,8 @@ class PoseEstimationEngine {
     required Point<double> p2,
     required Point<double> p3,
   }) {
-    final radians = atan2(p3.y - p2.y, p3.x - p2.x) - atan2(p1.y - p2.y, p1.x - p2.x);
+    final radians =
+        atan2(p3.y - p2.y, p3.x - p2.x) - atan2(p1.y - p2.y, p1.x - p2.x);
     double degrees = (radians * 180.0 / pi).abs();
     if (degrees > 180.0) {
       degrees = 360.0 - degrees;
@@ -43,11 +44,13 @@ class PoseEstimationEngine {
     String feedback;
 
     if (asymmetry > 12.0) {
-      feedback = 'Movement Asymmetry Detected: Shift weight evenly to balance left/right knees.';
+      feedback =
+          'Movement Asymmetry Detected: Shift weight evenly to balance left/right knees.';
     } else if (leftKneeAngle < 90.0) {
       feedback = 'Good Depth: Parallel squat depth achieved.';
     } else {
-      feedback = 'Depth Alert: Descend slightly lower to reach 90-degree knee flex.';
+      feedback =
+          'Depth Alert: Descend slightly lower to reach 90-degree knee flex.';
     }
 
     return PoseAngleResult(

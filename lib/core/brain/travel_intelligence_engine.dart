@@ -118,7 +118,8 @@ class NutritionPlan {
   factory NutritionPlan.airportSurvival({required String tip}) {
     return NutritionPlan(
       title: 'Airport Survival Nutrition',
-      strategy: 'Low glycemic, portable protein options with zero heavy sugar spikes.',
+      strategy:
+          'Low glycemic, portable protein options with zero heavy sugar spikes.',
       bestBets: const [
         'Protein bars',
         'Roasted almonds / walnuts',
@@ -182,7 +183,8 @@ class TravelIntelligenceEngine {
                 'Carry nuts/seeds for snacks.',
           ),
           calorieBudget: '+150 kcal buffer for eating out',
-          hydrationNote: 'Carry water bottle — airports/hotels are dehydrating (+500ml)',
+          hydrationNote:
+              'Carry water bottle — airports/hotels are dehydrating (+500ml)',
           readinessAdjustment: -5, // Travel fatigue
           sleepNote: 'Hotel blackout curtains on. '
               'Target same sleep time as home.',
@@ -204,7 +206,8 @@ class TravelIntelligenceEngine {
           calorieBudget: '+200 kcal buffer for travel days',
           hydrationNote: '+750ml aggressive hydration for dry cabin air',
           readinessAdjustment: -12,
-          sleepNote: 'Align with destination timezone immediately upon landing.',
+          sleepNote:
+              'Align with destination timezone immediately upon landing.',
         ),
       TravelMode.airport => TravelAdaptation(
           workoutPlan: WorkoutPlan.airportWalk(

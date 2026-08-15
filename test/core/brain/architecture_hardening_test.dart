@@ -8,12 +8,15 @@ void main() {
     const vault = SecurityVault();
     const linter = ClinicalCopyLinter();
 
-    test('SQLCipher key generation uses Random.secure() producing 64-char hex key', () {
+    test(
+        'SQLCipher key generation uses Random.secure() producing 64-char hex key',
+        () {
       final key1 = vault.generateSecureEncryptionKey();
       final key2 = vault.generateSecureEncryptionKey();
 
       expect(key1.length, equals(64)); // 32 bytes = 64 hex chars
-      expect(key1, isNot(equals(key2))); // Cryptographically secure random uniqueness
+      expect(key1,
+          isNot(equals(key2))); // Cryptographically secure random uniqueness
     });
 
     test('Hybrid Logical Clock (HLC) guarantees strict monotonicity', () {
@@ -23,8 +26,11 @@ void main() {
       expect(t2.compareTo(t1), greaterThan(0));
     });
 
-    test('ClinicalCopyLinter validates DPDP Act & Medical Disclaimer copy compliance', () {
-      const validCopy = 'Passcode-Protected Doctor Share Portal (DPDP Act & Medical Disclaimer Compliant).';
+    test(
+        'ClinicalCopyLinter validates DPDP Act & Medical Disclaimer copy compliance',
+        () {
+      const validCopy =
+          'Passcode-Protected Doctor Share Portal (DPDP Act & Medical Disclaimer Compliant).';
       const invalidCopy = 'Random text without medical disclosures.';
 
       expect(linter.validateMedicalCopy(validCopy), isTrue);

@@ -6,9 +6,9 @@ import '../../../core/brain/sleep_engine.dart';
 class SleepState {
   final NightSleepRecord lastNight;
   final List<HrvDataPoint> hrvTrend; // 7-day wearable rMSSD values
-  final int debtMinutes;             // rolling 7-day debt (per §P4-C formula)
+  final int debtMinutes; // rolling 7-day debt (per §P4-C formula)
   final SleepDebtLevel debtLevel;
-  final List<int> weeklyMinutes;     // last 7 days actual sleep minutes
+  final List<int> weeklyMinutes; // last 7 days actual sleep minutes
   final SleepPerformanceResult? performance;
   final bool isLoading;
 

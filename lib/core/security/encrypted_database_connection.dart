@@ -54,7 +54,8 @@ class EncryptedDatabaseConnection {
           try {
             rawDb.execute("SELECT count(*) FROM sqlite_master;");
           } catch (e) {
-            throw Exception("SQLCipher Database initialization failed or invalid password.");
+            throw Exception(
+                "SQLCipher Database initialization failed or invalid password.");
           }
         },
       );

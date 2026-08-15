@@ -14,7 +14,9 @@ void main() {
       expect(engine.validateFamilyCapacity(7), isFalse);
     });
 
-    test('generateFamilyNudges generates high severity BP check alerts and moderate low protein nudges', () {
+    test(
+        'generateFamilyNudges generates high severity BP check alerts and moderate low protein nudges',
+        () {
       const members = [
         FamilyMemberProfile(
           id: 'm1',
@@ -56,7 +58,9 @@ void main() {
       expect(nudges.last.severity, equals(FamilyNudgeSeverity.moderate));
     });
 
-    test('filterPrivacyForDisplay hides weight and body composition for minors (<18)', () {
+    test(
+        'filterPrivacyForDisplay hides weight and body composition for minors (<18)',
+        () {
       const minorMember = FamilyMemberProfile(
         id: 'm5',
         firstName: 'Anand',
@@ -79,7 +83,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('FamilyHubScreen renders family name, members list, active alerts, and nudge buttons', (tester) async {
+    testWidgets(
+        'FamilyHubScreen renders family name, members list, active alerts, and nudge buttons',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: FamilyHubScreen()),
@@ -93,7 +99,6 @@ void main() {
       expect(find.textContaining('Dad (Ramesh, 54)'), findsOneWidget);
       expect(find.textContaining('Mom (Sunita, 51)'), findsOneWidget);
       expect(find.text('Family Alerts & Nudges'), findsOneWidget);
-
     });
   });
 }

@@ -60,7 +60,8 @@ class PaywallBottomSheet extends ConsumerWidget {
                           color: AppColors.warning.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.star, color: AppColors.warning, size: 20),
+                        child: const Icon(Icons.star,
+                            color: AppColors.warning, size: 20),
                       ),
                       const SizedBox(width: 8),
                       Text('Unlock FitKarma Pro', style: AppTypography.h2),
@@ -77,15 +78,18 @@ class PaywallBottomSheet extends ConsumerWidget {
               if (trigger != null) ...[
                 const SizedBox(height: AppSpacing.xs),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     color: AppColors.teal.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.teal.withValues(alpha: 0.3)),
+                    border: Border.all(
+                        color: AppColors.teal.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.info_outline, color: AppColors.teal, size: 16),
+                      const Icon(Icons.info_outline,
+                          color: AppColors.teal, size: 16),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
@@ -104,7 +108,8 @@ class PaywallBottomSheet extends ConsumerWidget {
               const SizedBox(height: AppSpacing.sm),
               Text(
                 'Supercharge your health journey with Pro:',
-                style: AppTypography.bodyMd.copyWith(color: AppColors.textSecondary),
+                style: AppTypography.bodyMd
+                    .copyWith(color: AppColors.textSecondary),
               ),
               const SizedBox(height: AppSpacing.sm),
 
@@ -113,9 +118,12 @@ class PaywallBottomSheet extends ConsumerWidget {
                 child: Column(
                   children: [
                     _FeatureRow(text: 'Unlimited AI Coach Chats'),
-                    _FeatureRow(text: '90-Day Predictive Health Insights & Charts'),
+                    _FeatureRow(
+                        text: '90-Day Predictive Health Insights & Charts'),
                     _FeatureRow(text: 'Comprehensive Monthly Health Reports'),
-                    _FeatureRow(text: 'Advanced Body Composition & Measurements Engine'),
+                    _FeatureRow(
+                        text:
+                            'Advanced Body Composition & Measurements Engine'),
                     _FeatureRow(text: 'Unlimited Meal Photo Analyses'),
                     _FeatureRow(text: 'Squad Creation & Challenge Host'),
                   ],
@@ -123,7 +131,8 @@ class PaywallBottomSheet extends ConsumerWidget {
               ),
 
               const SizedBox(height: AppSpacing.md),
-              Text('Select Plan (7-Day Free Trial):', style: AppTypography.labelLg),
+              Text('Select Plan (7-Day Free Trial):',
+                  style: AppTypography.labelLg),
               const SizedBox(height: AppSpacing.xs),
 
               // Plan Selection Grid
@@ -131,7 +140,8 @@ class PaywallBottomSheet extends ConsumerWidget {
                 children: state.packages
                     .where((pkg) => pkg.tier == SubscriptionTier.pro)
                     .map((pkg) {
-                  final isSelected = state.selectedPackage.productId == pkg.productId;
+                  final isSelected =
+                      state.selectedPackage.productId == pkg.productId;
                   return Expanded(
                     child: GestureDetector(
                       onTap: () => notifier.selectPackage(pkg),
@@ -144,7 +154,9 @@ class PaywallBottomSheet extends ConsumerWidget {
                               : AppColors.glassBgMid,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: isSelected ? AppColors.teal : AppColors.glassBorder,
+                            color: isSelected
+                                ? AppColors.teal
+                                : AppColors.glassBorder,
                             width: isSelected ? 2 : 1,
                           ),
                         ),
@@ -153,9 +165,11 @@ class PaywallBottomSheet extends ConsumerWidget {
                             if (pkg.savingsBadge != null)
                               Container(
                                 margin: const EdgeInsets.only(bottom: 4),
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: AppColors.success.withValues(alpha: 0.2),
+                                  color:
+                                      AppColors.success.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -173,7 +187,9 @@ class PaywallBottomSheet extends ConsumerWidget {
                             Text(
                               pkg.period,
                               style: AppTypography.labelMd.copyWith(
-                                color: isSelected ? AppColors.teal : AppColors.textSecondary,
+                                color: isSelected
+                                    ? AppColors.teal
+                                    : AppColors.textSecondary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -220,7 +236,8 @@ class PaywallBottomSheet extends ConsumerWidget {
                   },
                   child: Text(
                     'Start Free Trial (${state.selectedPackage.priceFormatted})',
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
               ),

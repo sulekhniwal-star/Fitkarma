@@ -8,7 +8,9 @@ void main() {
   group('§P12-B Life Events Engine Tests', () {
     const engine = LifeEventsEngine();
 
-    test('LifeEventsEngine adapt returns injury isolation & recovery-first adaptation', () {
+    test(
+        'LifeEventsEngine adapt returns injury isolation & recovery-first adaptation',
+        () {
       final event = LifeEvent(
         id: 'e1',
         title: 'Knee Injury',
@@ -24,7 +26,9 @@ void main() {
       expect(adapt.coachTone, contains('Empathetic'));
     });
 
-    test('LifeEventsEngine adapt returns time-compressed 15-min workout for office deadline', () {
+    test(
+        'LifeEventsEngine adapt returns time-compressed 15-min workout for office deadline',
+        () {
       final event = LifeEvent(
         id: 'e2',
         title: 'Q3 Product Release',
@@ -38,7 +42,9 @@ void main() {
       expect(adapt.coachTone, contains('Focused'));
     });
 
-    test('LifeEventsEngine adapt handles travel abroad with jet lag hydration multiplier', () {
+    test(
+        'LifeEventsEngine adapt handles travel abroad with jet lag hydration multiplier',
+        () {
       final event = LifeEvent(
         id: 'e3',
         title: 'Trip to Tokyo',
@@ -54,7 +60,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('LifeEventsScreen renders selector tiles and updates active module adaptations', (tester) async {
+    testWidgets(
+        'LifeEventsScreen renders selector tiles and updates active module adaptations',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

@@ -65,14 +65,16 @@ class ProgressiveOverloadEngine {
     if (rpe <= 7.0 && readinessScore >= 75) {
       newWeight += 2.5;
       type = ProgressionType.increaseWeight;
-      reason = 'Peak Readiness (75+) & Low RPE (<= 7) — Increment weight +2.5kg.';
+      reason =
+          'Peak Readiness (75+) & Low RPE (<= 7) — Increment weight +2.5kg.';
     } else if (rpe >= 9.5 || readinessScore < 50) {
       newWeight = (previousWeightKg - 2.5).clamp(0.0, 500.0);
       type = ProgressionType.deload;
       reason = 'Low Readiness / High RPE — Deload -2.5kg for recovery.';
     } else {
       type = ProgressionType.maintain;
-      reason = 'Moderate Readiness & Controlled RPE — Maintain weight and target +1 rep.';
+      reason =
+          'Moderate Readiness & Controlled RPE — Maintain weight and target +1 rep.';
       newReps += 1;
     }
 
@@ -93,7 +95,8 @@ class ProgressiveOverloadEngine {
       return OverloadTarget(
         weightKg: exercise.currentWeight,
         reps: 8,
-        recommendationReason: 'Initial baseline set at ${exercise.currentWeight}kg.',
+        recommendationReason:
+            'Initial baseline set at ${exercise.currentWeight}kg.',
         progressionType: ProgressionType.maintain,
       );
     }
@@ -111,17 +114,20 @@ class ProgressiveOverloadEngine {
       return OverloadTarget(
         weightKg: nextWeight,
         reps: last3.last.repsTarget,
-        recommendationReason: 'You completed 3 sessions at ${exercise.currentWeight}kg comfortably (RPE <= 7). Increase to ${nextWeight}kg.',
+        recommendationReason:
+            'You completed 3 sessions at ${exercise.currentWeight}kg comfortably (RPE <= 7). Increase to ${nextWeight}kg.',
         progressionType: ProgressionType.increaseWeight,
       );
     }
 
     if (_isPlateau(recentSessions)) {
-      final deloadWeight = double.parse((exercise.currentWeight * 0.60).toStringAsFixed(1));
+      final deloadWeight =
+          double.parse((exercise.currentWeight * 0.60).toStringAsFixed(1));
       return OverloadTarget(
         weightKg: deloadWeight,
         reps: last3.last.repsTarget,
-        recommendationReason: 'Same weight plateau for 4 weeks. Take a deload week at 60% intensity (${deloadWeight}kg).',
+        recommendationReason:
+            'Same weight plateau for 4 weeks. Take a deload week at 60% intensity (${deloadWeight}kg).',
         progressionType: ProgressionType.deload,
       );
     }
@@ -129,8 +135,11 @@ class ProgressiveOverloadEngine {
     final last = recentSessions.last;
     return OverloadTarget(
       weightKg: exercise.currentWeight,
-      reps: last.repsCompleted < last.repsTarget ? last.repsTarget : last.repsTarget + 1,
-      recommendationReason: 'Maintain ${exercise.currentWeight}kg and focus on hitting clean form reps.',
+      reps: last.repsCompleted < last.repsTarget
+          ? last.repsTarget
+          : last.repsTarget + 1,
+      recommendationReason:
+          'Maintain ${exercise.currentWeight}kg and focus on hitting clean form reps.',
       progressionType: ProgressionType.maintain,
     );
   }

@@ -50,7 +50,9 @@ class BodyCompositionEstimator {
         } else {
           final logWaistNeck = _log10(diff);
           final logHeight = _log10(heightCm);
-          bodyFatPct = 495 / (1.0324 - 0.19077 * logWaistNeck + 0.15456 * logHeight) - 450;
+          bodyFatPct =
+              495 / (1.0324 - 0.19077 * logWaistNeck + 0.15456 * logHeight) -
+                  450;
           method = 'U.S. Navy Formula';
           confidence = 'Medium (±3-4%)';
         }
@@ -63,7 +65,9 @@ class BodyCompositionEstimator {
         } else {
           final logWaistHipNeck = _log10(sumDiff);
           final logHeight = _log10(heightCm);
-          bodyFatPct = 495 / (1.29579 - 0.35004 * logWaistHipNeck + 0.22100 * logHeight) - 450;
+          bodyFatPct = 495 /
+                  (1.29579 - 0.35004 * logWaistHipNeck + 0.22100 * logHeight) -
+              450;
           method = 'U.S. Navy Formula';
           confidence = 'Medium (±3-4%)';
         }
@@ -78,7 +82,8 @@ class BodyCompositionEstimator {
 
     bodyFatPct = bodyFatPct.clamp(3.0, 60.0);
     final roundedBf = double.parse(bodyFatPct.toStringAsFixed(1));
-    final fatMassKg = double.parse((weightKg * (roundedBf / 100.0)).toStringAsFixed(1));
+    final fatMassKg =
+        double.parse((weightKg * (roundedBf / 100.0)).toStringAsFixed(1));
     final leanMassKg = double.parse((weightKg - fatMassKg).toStringAsFixed(1));
 
     return BodyCompositionResult(

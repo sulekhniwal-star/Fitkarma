@@ -20,14 +20,20 @@ class InjuryRiskCard extends StatelessWidget {
       return BentoCard(
         child: Row(
           children: [
-            const Icon(Icons.verified_user_outlined, color: AppColors.success, size: 24),
+            const Icon(Icons.verified_user_outlined,
+                color: AppColors.success, size: 24),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('No Active Injury Risks', style: AppTypography.labelLg.copyWith(color: AppColors.success)),
-                  Text('All movement patterns & volumes operating in safe zones.', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                  Text('No Active Injury Risks',
+                      style: AppTypography.labelLg
+                          .copyWith(color: AppColors.success)),
+                  Text(
+                      'All movement patterns & volumes operating in safe zones.',
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11)),
                 ],
               ),
             ),
@@ -42,13 +48,13 @@ class InjuryRiskCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.warning_amber_rounded, color: AppColors.warning, size: 24),
+              const Icon(Icons.warning_amber_rounded,
+                  color: AppColors.warning, size: 24),
               const SizedBox(width: 8),
               Text('⚠️ Injury Risk Alerts', style: AppTypography.h3),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-
           for (final alert in alerts)
             Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.md),
@@ -74,24 +80,36 @@ class InjuryRiskCard extends StatelessWidget {
                         Text(
                           '${alert.risk == InjuryRiskLevel.high ? "🔴" : "🟡"} ${alert.region} — ${alert.risk == InjuryRiskLevel.high ? "High Risk" : "Moderate Risk"}',
                           style: AppTypography.labelLg.copyWith(
-                            color: alert.risk == InjuryRiskLevel.high ? AppColors.error : AppColors.warning,
+                            color: alert.risk == InjuryRiskLevel.high
+                                ? AppColors.error
+                                : AppColors.warning,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(alert.message, style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary)),
+                    Text(alert.message,
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textPrimary)),
                     const SizedBox(height: 8),
-                    Text('Actions:', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary, fontWeight: FontWeight.bold)),
+                    Text('Actions:',
+                        style: AppTypography.labelSmall.copyWith(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.bold)),
                     const SizedBox(height: 4),
                     for (final action in alert.actions)
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('• ', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                          const Text('• ',
+                              style: TextStyle(
+                                  color: AppColors.textMuted, fontSize: 12)),
                           Expanded(
-                            child: Text(action, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 12)),
+                            child: Text(action,
+                                style: AppTypography.bodySm.copyWith(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 12)),
                           ),
                         ],
                       ),

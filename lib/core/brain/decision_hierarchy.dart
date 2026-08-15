@@ -1,5 +1,10 @@
 /// Decision Hierarchy priority levels
-enum ActionPriority { medicalSafety, recoveryPrescription, workoutProgression, habitGuidance }
+enum ActionPriority {
+  medicalSafety,
+  recoveryPrescription,
+  workoutProgression,
+  habitGuidance
+}
 
 /// Decision Action item resolved by Decision Hierarchy
 class DecisionAction {
@@ -33,7 +38,8 @@ class DecisionHierarchy {
     if (illnessAlarmTriggered) {
       actions.add(const DecisionAction(
         title: 'Biometric Illness Alert',
-        description: 'Elevated resting HR & temperature detected. Take a rest day.',
+        description:
+            'Elevated resting HR & temperature detected. Take a rest day.',
         priority: ActionPriority.medicalSafety,
         isMandatoryRest: true,
       ));
@@ -44,7 +50,8 @@ class DecisionHierarchy {
     if (readinessScore < 45) {
       actions.add(const DecisionAction(
         title: 'Active Recovery Protocol',
-        description: 'Readiness is under 45%. Substitute high-intensity training with 20min mobility walk.',
+        description:
+            'Readiness is under 45%. Substitute high-intensity training with 20min mobility walk.',
         priority: ActionPriority.recoveryPrescription,
         isMandatoryRest: true,
       ));
@@ -54,7 +61,8 @@ class DecisionHierarchy {
     if (readinessScore >= 75) {
       actions.add(const DecisionAction(
         title: 'Progressive Overload Target',
-        description: 'Readiness is peak (75+). Attempt +2.5kg increment on primary compound lift.',
+        description:
+            'Readiness is peak (75+). Attempt +2.5kg increment on primary compound lift.',
         priority: ActionPriority.workoutProgression,
       ));
     }

@@ -46,7 +46,8 @@ class DailyBriefingScreen extends ConsumerWidget {
                         onTap: () => _showMorningCheckInModal(context, ref),
                         child: Row(
                           children: [
-                            const Icon(Icons.wb_sunny_rounded, color: AppColors.warning, size: 28.0),
+                            const Icon(Icons.wb_sunny_rounded,
+                                color: AppColors.warning, size: 28.0),
                             const SizedBox(width: AppSpacing.md),
                             const Expanded(
                               child: Column(
@@ -57,11 +58,14 @@ class DailyBriefingScreen extends ConsumerWidget {
                                     hindiText: 'सुबह का चेक-इन बाकी है',
                                     englishStyle: AppTypography.h2,
                                   ),
-                                  Text('3-question ritual to calibrate readiness (<30s)', style: AppTypography.labelMd),
+                                  Text(
+                                      '3-question ritual to calibrate readiness (<30s)',
+                                      style: AppTypography.labelMd),
                                 ],
                               ),
                             ),
-                            const Icon(Icons.chevron_right, color: AppColors.textMuted),
+                            const Icon(Icons.chevron_right,
+                                color: AppColors.textMuted),
                           ],
                         ),
                       ),
@@ -72,26 +76,32 @@ class DailyBriefingScreen extends ConsumerWidget {
                     BentoCard(
                       child: Row(
                         children: [
-                          HealthScoreRing(score: missionState.healthScore, size: 80.0),
+                          HealthScoreRing(
+                              score: missionState.healthScore, size: 80.0),
                           const SizedBox(width: AppSpacing.lg),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Unified Health Score', style: AppTypography.h3),
+                                const Text('Unified Health Score',
+                                    style: AppTypography.h3),
                                 const SizedBox(height: 4),
                                 Row(
                                   children: [
-                                    const Icon(Icons.trending_up, color: AppColors.success, size: 18),
+                                    const Icon(Icons.trending_up,
+                                        color: AppColors.success, size: 18),
                                     const SizedBox(width: 4),
                                     Text(
                                       '↑ ${missionState.healthScoreTrend} pts from yesterday',
-                                      style: AppTypography.bodyMd.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                                      style: AppTypography.bodyMd.copyWith(
+                                          color: AppColors.success,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 2),
-                                const Text('Consistency improving', style: AppTypography.labelMd),
+                                const Text('Consistency improving',
+                                    style: AppTypography.labelMd),
                               ],
                             ),
                           ),
@@ -101,7 +111,8 @@ class DailyBriefingScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.md),
 
                     // §P12-F Calendar-Aware Daily Briefing Card
-                    if (calendarState.isConnected && calendarState.insight != null) ...[
+                    if (calendarState.isConnected &&
+                        calendarState.insight != null) ...[
                       CalendarIntelligenceCard(insight: calendarState.insight!),
                       const SizedBox(height: AppSpacing.md),
                     ],
@@ -117,7 +128,8 @@ class DailyBriefingScreen extends ConsumerWidget {
                             englishStyle: AppTypography.h2,
                           ),
                           const SizedBox(height: AppSpacing.sm),
-                          ...dip.dailyMissions.map((mission) => _MissionItem(text: mission)),
+                          ...dip.dailyMissions
+                              .map((mission) => _MissionItem(text: mission)),
                         ],
                       ),
                     ),
@@ -144,7 +156,9 @@ class DailyBriefingScreen extends ConsumerWidget {
                           icon: Icons.bolt,
                           iconColor: AppColors.accent,
                           label: 'Energy',
-                          value: checkIn.energyLevel >= 4 ? 'High' : (checkIn.energyLevel >= 3 ? 'Moderate' : 'Low'),
+                          value: checkIn.energyLevel >= 4
+                              ? 'High'
+                              : (checkIn.energyLevel >= 3 ? 'Moderate' : 'Low'),
                         ),
                         _FocusTile(
                           icon: Icons.local_fire_department,
@@ -169,19 +183,21 @@ class DailyBriefingScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.md),
 
-
                     // 6. Conditional Recovery Alert (if readiness < 55 or medical risk active)
-                    if (readiness.score < 55 || missionState.medicalRiskActive) ...[
+                    if (readiness.score < 55 ||
+                        missionState.medicalRiskActive) ...[
                       Container(
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
                           color: AppColors.error.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: AppColors.error.withValues(alpha: 0.4)),
+                          border: Border.all(
+                              color: AppColors.error.withValues(alpha: 0.4)),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 28),
+                            const Icon(Icons.warning_amber_rounded,
+                                color: AppColors.error, size: 28),
                             const SizedBox(width: AppSpacing.md),
                             Expanded(
                               child: Column(
@@ -189,14 +205,16 @@ class DailyBriefingScreen extends ConsumerWidget {
                                 children: [
                                   Text(
                                     'Decision Hierarchy: Recovery Priority',
-                                    style: AppTypography.h3.copyWith(color: AppColors.error),
+                                    style: AppTypography.h3
+                                        .copyWith(color: AppColors.error),
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
                                     missionState.medicalRiskActive
                                         ? 'Medical alarm active. Mandatory rest day prescribed.'
                                         : 'Readiness ${readiness.score}/100. Lower intensity & prioritize recovery.',
-                                    style: AppTypography.bodySm.copyWith(color: AppColors.textPrimary),
+                                    style: AppTypography.bodySm
+                                        .copyWith(color: AppColors.textPrimary),
                                   ),
                                 ],
                               ),
@@ -281,7 +299,8 @@ class DailyBriefingScreen extends ConsumerWidget {
         children: [
           Text(
             'Good morning, ${state.userName} 👋',
-            style: AppTypography.displayMd.copyWith(color: AppColors.textPrimary),
+            style:
+                AppTypography.displayMd.copyWith(color: AppColors.textPrimary),
           ),
           const SizedBox(height: AppSpacing.md),
 
@@ -299,7 +318,9 @@ class DailyBriefingScreen extends ConsumerWidget {
                   backgroundColor: AppColors.surface2,
                   color: readiness.score >= 75
                       ? AppColors.success
-                      : (readiness.score >= 50 ? AppColors.warning : AppColors.error),
+                      : (readiness.score >= 50
+                          ? AppColors.warning
+                          : AppColors.error),
                 ),
               ),
               Column(
@@ -374,7 +395,6 @@ class DailyBriefingScreen extends ConsumerWidget {
                     englishStyle: AppTypography.displayMd,
                   ),
                   const SizedBox(height: AppSpacing.lg),
-
                   const Text('1. How did you sleep?', style: AppTypography.h3),
                   Row(
                     children: List.generate(5, (index) {
@@ -389,7 +409,6 @@ class DailyBriefingScreen extends ConsumerWidget {
                     }),
                   ),
                   const SizedBox(height: AppSpacing.md),
-
                   const Text('2. How sore are you?', style: AppTypography.h3),
                   const SizedBox(height: 8),
                   SingleChildScrollView(
@@ -420,17 +439,17 @@ class DailyBriefingScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
-
-                  Text('3. Stress level today? ($stress/5)', style: AppTypography.h3),
+                  Text('3. Stress level today? ($stress/5)',
+                      style: AppTypography.h3),
                   Slider(
                     value: stress.toDouble(),
                     min: 1,
                     max: 5,
                     divisions: 4,
                     activeColor: AppColors.primary,
-                    onChanged: (val) => setModalState(() => stress = val.round()),
+                    onChanged: (val) =>
+                        setModalState(() => stress = val.round()),
                   ),
-
                   const SizedBox(height: AppSpacing.lg),
                   SizedBox(
                     width: double.infinity,
@@ -444,12 +463,15 @@ class DailyBriefingScreen extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        ref.read(dailyMissionProvider.notifier).submitCheckIn(sleep, soreness, stress);
+                        ref
+                            .read(dailyMissionProvider.notifier)
+                            .submitCheckIn(sleep, soreness, stress);
                         Navigator.pop(context);
                       },
                       child: Text(
                         'COMPLETE CHECK-IN',
-                        style: AppTypography.h2.copyWith(fontWeight: FontWeight.bold, color: AppColors.bg0),
+                        style: AppTypography.h2.copyWith(
+                            fontWeight: FontWeight.bold, color: AppColors.bg0),
                       ),
                     ),
                   ),
@@ -474,7 +496,8 @@ class _MissionItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.success, size: 20),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.success, size: 20),
           const SizedBox(width: 12),
           Expanded(child: Text(text, style: AppTypography.bodyMd)),
         ],
@@ -513,11 +536,14 @@ class _FocusTile extends StatelessWidget {
             children: [
               Icon(icon, color: iconColor, size: 20),
               const SizedBox(width: 6),
-              Text(label, style: AppTypography.labelMd.copyWith(color: AppColors.textSecondary)),
+              Text(label,
+                  style: AppTypography.labelMd
+                      .copyWith(color: AppColors.textSecondary)),
             ],
           ),
           const SizedBox(height: 6),
-          Text(value, style: AppTypography.h2.copyWith(color: AppColors.textPrimary)),
+          Text(value,
+              style: AppTypography.h2.copyWith(color: AppColors.textPrimary)),
         ],
       ),
     );
@@ -551,4 +577,3 @@ class _SorenessOption extends StatelessWidget {
     );
   }
 }
-

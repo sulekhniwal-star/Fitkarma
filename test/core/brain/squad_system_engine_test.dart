@@ -5,15 +5,19 @@ void main() {
   group('§P9-B Squad System Engine Tests', () {
     const engine = SquadSystemEngine();
 
-    test('validateSquadSize enforces ADR-022 size boundaries (3 to 8 members)', () {
+    test('validateSquadSize enforces ADR-022 size boundaries (3 to 8 members)',
+        () {
       expect(engine.validateSquadSize(2), isFalse); // < 3 invalid
-      expect(engine.validateSquadSize(3), isTrue);  // Min valid
-      expect(engine.validateSquadSize(5), isTrue);  // Optimal
-      expect(engine.validateSquadSize(8), isTrue);  // Max valid
-      expect(engine.validateSquadSize(9), isFalse); // > 8 invalid (reduces accountability)
+      expect(engine.validateSquadSize(3), isTrue); // Min valid
+      expect(engine.validateSquadSize(5), isTrue); // Optimal
+      expect(engine.validateSquadSize(8), isTrue); // Max valid
+      expect(engine.validateSquadSize(9),
+          isFalse); // > 8 invalid (reduces accountability)
     });
 
-    test('evaluateSquad anonymizes raw readiness score into tier labels only (Privacy Safeguard)', () {
+    test(
+        'evaluateSquad anonymizes raw readiness score into tier labels only (Privacy Safeguard)',
+        () {
       final eval = engine.evaluateSquad(
         squadId: 'sq_101',
         squadName: 'Noida Fitness Warriors',
@@ -36,7 +40,8 @@ void main() {
       expect(eval.squadLevel, equals(4)); // 3500 XP / 1000 = Level 4
     });
 
-    test('evaluateSquad triggers rest pause when team average recovery is < 50', () {
+    test('evaluateSquad triggers rest pause when team average recovery is < 50',
+        () {
       final eval = engine.evaluateSquad(
         squadId: 'sq_102',
         squadName: 'Recovery Squad',

@@ -22,7 +22,8 @@ class MealAnalysisResultSheet extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: const BoxDecoration(
         color: AppColors.surface0,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(AppSpacing.cardRadius)),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -35,14 +36,16 @@ class MealAnalysisResultSheet extends StatelessWidget {
               children: [
                 Text(result.foodItem.name, style: AppTypography.h2),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: AppColors.secondary.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
                     'Score: ${result.quality.overallScore}/100',
-                    style: AppTypography.labelMd.copyWith(color: AppColors.secondary),
+                    style: AppTypography.labelMd
+                        .copyWith(color: AppColors.secondary),
                   ),
                 ),
               ],
@@ -58,9 +61,18 @@ class MealAnalysisResultSheet extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _MacroPill(label: 'Protein', value: '${result.totalProteinGrams.round()}g', color: AppColors.primary),
-                _MacroPill(label: 'Carbs', value: '${result.totalCarbsGrams.round()}g', color: AppColors.teal),
-                _MacroPill(label: 'Fat', value: '${result.totalFatGrams.round()}g', color: AppColors.accent),
+                _MacroPill(
+                    label: 'Protein',
+                    value: '${result.totalProteinGrams.round()}g',
+                    color: AppColors.primary),
+                _MacroPill(
+                    label: 'Carbs',
+                    value: '${result.totalCarbsGrams.round()}g',
+                    color: AppColors.teal),
+                _MacroPill(
+                    label: 'Fat',
+                    value: '${result.totalFatGrams.round()}g',
+                    color: AppColors.accent),
               ],
             ),
             const SizedBox(height: AppSpacing.lg),
@@ -73,9 +85,12 @@ class MealAnalysisResultSheet extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.bolt, color: AppColors.success, size: 18),
+                      const Icon(Icons.bolt,
+                          color: AppColors.success, size: 18),
                       const SizedBox(width: 6),
-                      Text('Readiness Impact', style: AppTypography.labelMd.copyWith(color: AppColors.success)),
+                      Text('Readiness Impact',
+                          style: AppTypography.labelMd
+                              .copyWith(color: AppColors.success)),
                     ],
                   ),
                   const SizedBox(height: 2),
@@ -83,9 +98,12 @@ class MealAnalysisResultSheet extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.check_circle_outline, color: AppColors.teal, size: 18),
+                      const Icon(Icons.check_circle_outline,
+                          color: AppColors.teal, size: 18),
                       const SizedBox(width: 6),
-                      Text('Goal Impact', style: AppTypography.labelMd.copyWith(color: AppColors.teal)),
+                      Text('Goal Impact',
+                          style: AppTypography.labelMd
+                              .copyWith(color: AppColors.teal)),
                     ],
                   ),
                   const SizedBox(height: 2),
@@ -128,7 +146,8 @@ class MealAnalysisResultSheet extends StatelessWidget {
                   ),
                 ),
                 onPressed: onConfirmLog,
-                child: Text('Add to Food Log', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                child: Text('Add to Food Log',
+                    style: AppTypography.labelLg.copyWith(color: Colors.white)),
               ),
             ),
           ],
@@ -143,7 +162,8 @@ class _MacroPill extends StatelessWidget {
   final String value;
   final Color color;
 
-  const _MacroPill({required this.label, required this.value, required this.color});
+  const _MacroPill(
+      {required this.label, required this.value, required this.color});
 
   @override
   Widget build(BuildContext context) {

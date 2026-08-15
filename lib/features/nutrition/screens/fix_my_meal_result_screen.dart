@@ -18,7 +18,8 @@ class FixMyMealResultScreen extends ConsumerStatefulWidget {
   const FixMyMealResultScreen({super.key, this.photoFile});
 
   @override
-  ConsumerState<FixMyMealResultScreen> createState() => _FixMyMealResultScreenState();
+  ConsumerState<FixMyMealResultScreen> createState() =>
+      _FixMyMealResultScreenState();
 }
 
 class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
@@ -57,7 +58,8 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Fix My Meal — Vision AI', style: AppTypography.h2),
@@ -79,7 +81,8 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Cost Optimization Badge
-                  _CostOptimizationBadge(isAiFallbackUsed: _analysisResult!.isAiFallbackUsed),
+                  _CostOptimizationBadge(
+                      isAiFallbackUsed: _analysisResult!.isAiFallbackUsed),
                   const SizedBox(height: AppSpacing.md),
 
                   // Detected Meal Header Card
@@ -96,14 +99,18 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                               style: AppTypography.h3,
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                color: AppColors.secondary.withValues(alpha: 0.15),
+                                color:
+                                    AppColors.secondary.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 'Quality: ${_analysisResult!.quality.overallScore}/100',
-                                style: AppTypography.bodySm.copyWith(color: AppColors.secondary, fontWeight: FontWeight.bold),
+                                style: AppTypography.bodySm.copyWith(
+                                    color: AppColors.secondary,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ],
@@ -111,7 +118,8 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                         const SizedBox(height: AppSpacing.sm),
                         Text(
                           '~${(_analysisResult!.totalCalories * _servings).round()} kcal · ${(_analysisResult!.totalProteinGrams * _servings).round()}g protein',
-                          style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.teal),
                         ),
                       ],
                     ),
@@ -124,10 +132,13 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Meal Quality Breakdown:', style: AppTypography.h3),
+                        Text('Meal Quality Breakdown:',
+                            style: AppTypography.h3),
                         const SizedBox(height: AppSpacing.sm),
                         _QualityMetricRow(
-                          icon: _analysisResult!.totalProteinGrams < 20 ? '⚠️' : '✓',
+                          icon: _analysisResult!.totalProteinGrams < 20
+                              ? '⚠️'
+                              : '✓',
                           text: _analysisResult!.totalProteinGrams < 20
                               ? 'Protein low for muscle & fat-loss goal'
                               : 'Optimal protein for recovery',
@@ -141,11 +152,14 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                         ),
                         const SizedBox(height: 6),
                         _QualityMetricRow(
-                          icon: _analysisResult!.foodItem.glycemicIndex > 60 ? '⚠️' : '✓',
+                          icon: _analysisResult!.foodItem.glycemicIndex > 60
+                              ? '⚠️'
+                              : '✓',
                           text: _analysisResult!.foodItem.glycemicIndex > 60
                               ? 'High glycemic load — risk of glucose dip'
                               : 'Balanced glycemic response',
-                          isWarning: _analysisResult!.foodItem.glycemicIndex > 60,
+                          isWarning:
+                              _analysisResult!.foodItem.glycemicIndex > 60,
                         ),
                       ],
                     ),
@@ -158,9 +172,13 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Readiness Impact: ${_analysisResult!.readinessImpact}', style: AppTypography.bodyMd),
+                        Text(
+                            'Readiness Impact: ${_analysisResult!.readinessImpact}',
+                            style: AppTypography.bodyMd),
                         const SizedBox(height: 6),
-                        Text('Goal Impact: ${_analysisResult!.goalImpact}', style: AppTypography.bodyMd.copyWith(color: AppColors.accent)),
+                        Text('Goal Impact: ${_analysisResult!.goalImpact}',
+                            style: AppTypography.bodyMd
+                                .copyWith(color: AppColors.accent)),
                       ],
                     ),
                   ),
@@ -182,8 +200,13 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('+ ', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 16)),
-                            Expanded(child: Text(fix, style: AppTypography.bodyMd)),
+                            const Text('+ ',
+                                style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
+                            Expanded(
+                                child: Text(fix, style: AppTypography.bodyMd)),
                           ],
                         ),
                       ),
@@ -194,8 +217,11 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Adjust Serving Portion:', style: AppTypography.labelLg),
-                      Text('${_servings.toStringAsFixed(1)}x', style: AppTypography.h3.copyWith(color: AppColors.primary)),
+                      Text('Adjust Serving Portion:',
+                          style: AppTypography.labelLg),
+                      Text('${_servings.toStringAsFixed(1)}x',
+                          style: AppTypography.h3
+                              .copyWith(color: AppColors.primary)),
                     ],
                   ),
                   Slider(
@@ -217,7 +243,8 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                             backgroundColor: AppColors.primary,
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                              borderRadius:
+                                  BorderRadius.circular(AppSpacing.cardRadius),
                             ),
                           ),
                           onPressed: () {
@@ -227,11 +254,14 @@ class _FixMyMealResultScreenState extends ConsumerState<FixMyMealResultScreen> {
                                   servings: _servings,
                                 );
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Meal logged successfully!')),
+                              const SnackBar(
+                                  content: Text('Meal logged successfully!')),
                             );
                             Navigator.maybePop(context);
                           },
-                          child: Text('Log This Meal', style: AppTypography.labelLg.copyWith(color: Colors.white)),
+                          child: Text('Log This Meal',
+                              style: AppTypography.labelLg
+                                  .copyWith(color: Colors.white)),
                         ),
                       ),
                     ],
@@ -253,10 +283,14 @@ class _CostOptimizationBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isAiFallbackUsed ? AppColors.secondary.withValues(alpha: 0.15) : AppColors.success.withValues(alpha: 0.15),
+        color: isAiFallbackUsed
+            ? AppColors.secondary.withValues(alpha: 0.15)
+            : AppColors.success.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isAiFallbackUsed ? AppColors.secondary.withValues(alpha: 0.3) : AppColors.success.withValues(alpha: 0.3),
+          color: isAiFallbackUsed
+              ? AppColors.secondary.withValues(alpha: 0.3)
+              : AppColors.success.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -269,7 +303,9 @@ class _CostOptimizationBadge extends StatelessWidget {
           ),
           const SizedBox(width: 6),
           Text(
-            isAiFallbackUsed ? 'Vision AI Analyzed (Groq Llama-3.2)' : 'Instant Cache Match (Zero API Cost)',
+            isAiFallbackUsed
+                ? 'Vision AI Analyzed (Groq Llama-3.2)'
+                : 'Instant Cache Match (Zero API Cost)',
             style: AppTypography.bodySm.copyWith(
               color: isAiFallbackUsed ? AppColors.secondary : AppColors.success,
               fontWeight: FontWeight.bold,
@@ -286,7 +322,8 @@ class _QualityMetricRow extends StatelessWidget {
   final String text;
   final bool isWarning;
 
-  const _QualityMetricRow({required this.icon, required this.text, required this.isWarning});
+  const _QualityMetricRow(
+      {required this.icon, required this.text, required this.isWarning});
 
   @override
   Widget build(BuildContext context) {

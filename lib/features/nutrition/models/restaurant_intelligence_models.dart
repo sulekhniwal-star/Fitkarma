@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 /// Goal Overlay Color Categories
 enum MenuGoalOverlayCategory {
-  greenHighProtein,   // > 20g protein
-  blueLowCalorie,     // < 300 kcal
+  greenHighProtein, // > 20g protein
+  blueLowCalorie, // < 300 kcal
   orangeDiabeticPcos, // Low GI <= 45, high fiber/healthy fat
-  redAvoidAlert,      // Deep-fried or high GI / empty calories
+  redAvoidAlert, // Deep-fried or high GI / empty calories
   neutral,
 }
 

@@ -31,7 +31,8 @@ class AdvancedIntelligenceState {
   }
 }
 
-class AdvancedIntelligenceNotifier extends StateNotifier<AdvancedIntelligenceState> {
+class AdvancedIntelligenceNotifier
+    extends StateNotifier<AdvancedIntelligenceState> {
   final AdaptiveMetabolismEngine metabolismEngine;
   final EnvironmentalHealthEngine envEngine;
   final WomensHealthEngine womensEngine;
@@ -70,8 +71,8 @@ class AdvancedIntelligenceNotifier extends StateNotifier<AdvancedIntelligenceSta
   }
 }
 
-final advancedIntelligenceProvider =
-    StateNotifierProvider<AdvancedIntelligenceNotifier, AdvancedIntelligenceState>((ref) {
+final advancedIntelligenceProvider = StateNotifierProvider<
+    AdvancedIntelligenceNotifier, AdvancedIntelligenceState>((ref) {
   return AdvancedIntelligenceNotifier(
     metabolismEngine: const AdaptiveMetabolismEngine(),
     envEngine: const EnvironmentalHealthEngine(),

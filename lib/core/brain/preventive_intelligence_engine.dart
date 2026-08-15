@@ -79,7 +79,8 @@ class PreventiveIntelligenceEngine {
     // Multi-factor Trend Overrides per §P4-F / §P10-A specification:
 
     // 1. Hypertension Risk Pattern (BP rising + steps declining 7+ days)
-    if ((data.bpTrend == TrendDirection.rising && data.stepsTrend == TrendDirection.declining) ||
+    if ((data.bpTrend == TrendDirection.rising &&
+            data.stepsTrend == TrendDirection.declining) ||
         (data.bpTrend == TrendDirection.rising &&
             data.sleepTrend == TrendDirection.declining &&
             data.weightTrend == TrendDirection.rising &&
@@ -90,7 +91,8 @@ class PreventiveIntelligenceEngine {
           patternName: 'Hypertension Risk Pattern',
           description: 'BP rising + declining steps detected.',
           severity: RiskSeverity.moderate,
-          recommendation: 'Rising BP + declining steps is a hypertension risk pattern. Prioritize walking and sodium control.',
+          recommendation:
+              'Rising BP + declining steps is a hypertension risk pattern. Prioritize walking and sodium control.',
           actions: ['Log a 20-min walk', 'Reduce sodium', 'Check BP tomorrow'],
         ));
       }
@@ -98,38 +100,56 @@ class PreventiveIntelligenceEngine {
 
     // 2. Type 2 Diabetes Pattern (Glucose up + BMI >= 27)
     if ((data.glucoseTrend == TrendDirection.rising && data.bmi >= 27.0) ||
-        (data.glucoseTrend == TrendDirection.rising && data.bmi >= 27.0 && data.stepAvg7d < 5000)) {
+        (data.glucoseTrend == TrendDirection.rising &&
+            data.bmi >= 27.0 &&
+            data.stepAvg7d < 5000)) {
       if (!alerts.any((a) => a.id == 'p2_glycemic')) {
         alerts.add(const HealthRiskAlert(
           id: 'p2_glycemic',
           patternName: 'Type 2 Diabetes Pattern',
           description: 'Elevated glucose trend + high BMI.',
           severity: RiskSeverity.moderate,
-          recommendation: 'Elevated glucose + high BMI detected. A 15-min post-meal walk reduces glucose spikes significantly.',
-          actions: ['Walk after meals', 'Reduce refined carbs', 'Log fasting glucose'],
+          recommendation:
+              'Elevated glucose + high BMI detected. A 15-min post-meal walk reduces glucose spikes significantly.',
+          actions: [
+            'Walk after meals',
+            'Reduce refined carbs',
+            'Log fasting glucose'
+          ],
         ));
       }
     }
 
     // 3. Heart Disease Pattern (HR + BP elevated + poor sleep)
-    if (data.rhrSpikeBpm >= 5 && (data.systolicBp > 130.0 || data.bpTrend == TrendDirection.rising) && data.sleepTrend == TrendDirection.declining) {
+    if (data.rhrSpikeBpm >= 5 &&
+        (data.systolicBp > 130.0 || data.bpTrend == TrendDirection.rising) &&
+        data.sleepTrend == TrendDirection.declining) {
       if (!alerts.any((a) => a.id == 'p3_heart_disease')) {
         alerts.add(const HealthRiskAlert(
           id: 'p3_heart_disease',
           patternName: 'Heart Disease Prevention Risk',
-          description: 'Elevated resting HR + elevated BP + poor sleep trend detected.',
+          description:
+              'Elevated resting HR + elevated BP + poor sleep trend detected.',
           severity: RiskSeverity.high,
-          recommendation: 'Cardiovascular stress detected. Prioritize sleep recovery and consult doctor if persistent.',
-          actions: ['Prioritize 8h sleep', 'Avoid high caffeine', 'Schedule relaxation session'],
+          recommendation:
+              'Cardiovascular stress detected. Prioritize sleep recovery and consult doctor if persistent.',
+          actions: [
+            'Prioritize 8h sleep',
+            'Avoid high caffeine',
+            'Schedule relaxation session'
+          ],
         ));
       }
     }
 
     // 4. Metabolic Syndrome Pattern (3+ risk factors present: high BP, high glucose, high BMI/waist)
     int metabolicRiskFactors = 0;
-    if (data.systolicBp >= 130.0 || data.diastolicBp >= 85.0) metabolicRiskFactors++;
-    if (data.fastingGlucoseMgDl >= 100.0 || data.glucoseTrend == TrendDirection.rising) metabolicRiskFactors++;
-    if (data.bmi >= 27.0 || data.weightTrend == TrendDirection.rising) metabolicRiskFactors++;
+    if (data.systolicBp >= 130.0 || data.diastolicBp >= 85.0)
+      metabolicRiskFactors++;
+    if (data.fastingGlucoseMgDl >= 100.0 ||
+        data.glucoseTrend == TrendDirection.rising) metabolicRiskFactors++;
+    if (data.bmi >= 27.0 || data.weightTrend == TrendDirection.rising)
+      metabolicRiskFactors++;
     if (metabolicRiskFactors >= 3) {
       if (!alerts.any((a) => a.id == 'p4_metabolic_syndrome')) {
         alerts.add(const HealthRiskAlert(
@@ -137,21 +157,30 @@ class PreventiveIntelligenceEngine {
           patternName: 'Metabolic Syndrome Risk',
           description: '3+ metabolic risk factors present (BP, glucose, BMI).',
           severity: RiskSeverity.high,
-          recommendation: 'Comprehensive lifestyle intervention required: daily 30-min walking + Satvik diet.',
-          actions: ['30-min daily walk', 'Satvik diet swap', 'Biometric health review'],
+          recommendation:
+              'Comprehensive lifestyle intervention required: daily 30-min walking + Satvik diet.',
+          actions: [
+            '30-min daily walk',
+            'Satvik diet swap',
+            'Biometric health review'
+          ],
         ));
       }
     }
 
     // 5. Burnout / Overtraining Pattern (HRV declining + HR elevated + performance dropping)
-    if (data.hrvDropRatio >= 0.20 && data.rhrSpikeBpm >= 5 && data.sleepTrend == TrendDirection.declining) {
+    if (data.hrvDropRatio >= 0.20 &&
+        data.rhrSpikeBpm >= 5 &&
+        data.sleepTrend == TrendDirection.declining) {
       if (!alerts.any((a) => a.id == 'p5_burnout')) {
         alerts.add(const HealthRiskAlert(
           id: 'p5_burnout',
           patternName: 'Burnout / Overtraining Risk',
-          description: 'Declining HRV + elevated resting HR + sleep degradation detected.',
+          description:
+              'Declining HRV + elevated resting HR + sleep degradation detected.',
           severity: RiskSeverity.critical,
-          recommendation: 'Immediate recovery protocol mandatory. Reduce training load by 50%.',
+          recommendation:
+              'Immediate recovery protocol mandatory. Reduce training load by 50%.',
           actions: ['Deload training', '8h sleep target', 'Breathwork session'],
         ));
       }
@@ -165,8 +194,13 @@ class PreventiveIntelligenceEngine {
           patternName: 'Vitamin D Deficiency Risk',
           description: 'Low outdoor activity + sedentary stagnation 5+ days.',
           severity: RiskSeverity.low,
-          recommendation: 'Get 15-20 mins of direct morning sunlight daily and check Vitamin D levels.',
-          actions: ['15-min morning sunlight', 'Log outdoor walk', 'Vitamin D check'],
+          recommendation:
+              'Get 15-20 mins of direct morning sunlight daily and check Vitamin D levels.',
+          actions: [
+            '15-min morning sunlight',
+            'Log outdoor walk',
+            'Vitamin D check'
+          ],
         ));
       }
     }
@@ -192,10 +226,16 @@ class PreventiveIntelligenceEngine {
       alerts.add(HealthRiskAlert(
         id: 'p1_hypertension',
         patternName: 'Hypertension Risk Pattern',
-        description: 'Elevated blood pressure (${systolicBp.round()}/${diastolicBp.round()} mmHg) detected.',
+        description:
+            'Elevated blood pressure (${systolicBp.round()}/${diastolicBp.round()} mmHg) detected.',
         severity: RiskSeverity.high,
-        recommendation: 'Reduce sodium intake, avoid high-intensity max-effort lifts today.',
-        actions: const ['Log a 20-min walk', 'Reduce sodium', 'Check BP tomorrow'],
+        recommendation:
+            'Reduce sodium intake, avoid high-intensity max-effort lifts today.',
+        actions: const [
+          'Log a 20-min walk',
+          'Reduce sodium',
+          'Check BP tomorrow'
+        ],
       ));
     }
 
@@ -204,10 +244,16 @@ class PreventiveIntelligenceEngine {
       alerts.add(HealthRiskAlert(
         id: 'p2_glycemic',
         patternName: 'Glycemic Instability Pattern',
-        description: 'Postprandial/fasting glucose spike detected (${postprandialGlucoseMgDl.round()} mg/dL).',
+        description:
+            'Postprandial/fasting glucose spike detected (${postprandialGlucoseMgDl.round()} mg/dL).',
         severity: RiskSeverity.moderate,
-        recommendation: 'Opt for low glycemic-index complex carbs and take a 10min post-meal walk.',
-        actions: const ['Walk after meals', 'Reduce refined carbs', 'Log fasting glucose'],
+        recommendation:
+            'Opt for low glycemic-index complex carbs and take a 10min post-meal walk.',
+        actions: const [
+          'Walk after meals',
+          'Reduce refined carbs',
+          'Log fasting glucose'
+        ],
       ));
     }
 
@@ -216,10 +262,16 @@ class PreventiveIntelligenceEngine {
       alerts.add(HealthRiskAlert(
         id: 'p3_hrv_collapse',
         patternName: 'Overtraining / HRV Collapse Pattern',
-        description: '3-day consecutive HRV drop of ${(hrvDropRatio * 100).round()}% detected.',
+        description:
+            '3-day consecutive HRV drop of ${(hrvDropRatio * 100).round()}% detected.',
         severity: RiskSeverity.high,
-        recommendation: 'Mandatory active recovery day. Focus on sleep hygiene.',
-        actions: const ['Schedule active recovery', 'Aim for 8h sleep', 'Hydrate with electrolytes'],
+        recommendation:
+            'Mandatory active recovery day. Focus on sleep hygiene.',
+        actions: const [
+          'Schedule active recovery',
+          'Aim for 8h sleep',
+          'Hydrate with electrolytes'
+        ],
       ));
     }
 
@@ -228,10 +280,16 @@ class PreventiveIntelligenceEngine {
       alerts.add(HealthRiskAlert(
         id: 'p4_sleep_debt',
         patternName: 'Sleep Debt Accumulation Pattern',
-        description: 'Cumulative sleep deficit of ${cumulativeSleepDeficitHours.toStringAsFixed(1)}h over rolling window.',
+        description:
+            'Cumulative sleep deficit of ${cumulativeSleepDeficitHours.toStringAsFixed(1)}h over rolling window.',
         severity: RiskSeverity.moderate,
-        recommendation: 'Schedule a 20min power nap and advance bedtime by 45 minutes.',
-        actions: const ['Take 20min nap', 'Advance bedtime', 'Avoid late caffeine'],
+        recommendation:
+            'Schedule a 20min power nap and advance bedtime by 45 minutes.',
+        actions: const [
+          'Take 20min nap',
+          'Advance bedtime',
+          'Avoid late caffeine'
+        ],
       ));
     }
 
@@ -240,9 +298,11 @@ class PreventiveIntelligenceEngine {
       alerts.add(HealthRiskAlert(
         id: 'p5_sedentary',
         patternName: 'Sedentary Stagnation Pattern',
-        description: '< 3,500 steps logged for $consecutiveSedentaryDays consecutive days.',
+        description:
+            '< 3,500 steps logged for $consecutiveSedentaryDays consecutive days.',
         severity: RiskSeverity.low,
-        recommendation: 'Break sedentary streak with a light 15-minute walking session.',
+        recommendation:
+            'Break sedentary streak with a light 15-minute walking session.',
         actions: const ['Log 15-min walk', 'Perform desk stretches'],
       ));
     }
@@ -252,10 +312,16 @@ class PreventiveIntelligenceEngine {
       alerts.add(HealthRiskAlert(
         id: 'p6_rhr_spike',
         patternName: 'Cardiovascular Strain Spike Pattern',
-        description: 'Resting Heart Rate spiked by +$rhrSpikeBpm bpm above baseline.',
+        description:
+            'Resting Heart Rate spiked by +$rhrSpikeBpm bpm above baseline.',
         severity: RiskSeverity.critical,
-        recommendation: 'Monitor temperature and rest. Possible systemic fatigue or infection onset.',
-        actions: const ['Monitor temperature', 'Rest completely', 'Consult physician if symptomatic'],
+        recommendation:
+            'Monitor temperature and rest. Possible systemic fatigue or infection onset.',
+        actions: const [
+          'Monitor temperature',
+          'Rest completely',
+          'Consult physician if symptomatic'
+        ],
       ));
     }
 

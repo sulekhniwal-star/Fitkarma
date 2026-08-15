@@ -18,8 +18,12 @@ class GrowthState {
       fhirLiteExportUrl: 'https://api.fitkarma.in/fhir/export/v1',
     ),
     this.vendorAdapters = const [
-      GroceryVendorItem(partnerName: 'Blinkit Quick-Cart', cartExportUrl: 'blinkit://cart/export'),
-      GroceryVendorItem(partnerName: 'BigBasket Smart Basket', cartExportUrl: 'bigbasket://cart/export'),
+      GroceryVendorItem(
+          partnerName: 'Blinkit Quick-Cart',
+          cartExportUrl: 'blinkit://cart/export'),
+      GroceryVendorItem(
+          partnerName: 'BigBasket Smart Basket',
+          cartExportUrl: 'bigbasket://cart/export'),
     ],
   });
 
@@ -52,6 +56,7 @@ class GrowthNotifier extends StateNotifier<GrowthState> {
   }
 }
 
-final growthProvider = StateNotifierProvider<GrowthNotifier, GrowthState>((ref) {
+final growthProvider =
+    StateNotifierProvider<GrowthNotifier, GrowthState>((ref) {
   return GrowthNotifier(const GrowthEngine());
 });

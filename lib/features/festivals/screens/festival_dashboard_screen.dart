@@ -30,14 +30,18 @@ class FestivalDashboardScreen extends ConsumerWidget {
               GlassCard(
                 child: Row(
                   children: [
-                    const Icon(Icons.celebration, color: AppColors.warningAmber, size: 32.0),
+                    const Icon(Icons.celebration,
+                        color: AppColors.warningAmber, size: 32.0),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('3-Day Festival Survival Mode', style: AppTypography.titleMedium),
-                          Text('Pre-compensation caloric buffer & workout scaling', style: AppTypography.labelSmall),
+                          Text('3-Day Festival Survival Mode',
+                              style: AppTypography.titleMedium),
+                          Text(
+                              'Pre-compensation caloric buffer & workout scaling',
+                              style: AppTypography.labelSmall),
                         ],
                       ),
                     ),
@@ -51,19 +55,29 @@ class FestivalDashboardScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     SwitchListTile(
-                      title: Text('Navratri Fasting Filter', style: AppTypography.titleMedium),
-                      subtitle: Text('Restricts non-veg, onion, garlic; surfaces Satvik foods', style: AppTypography.labelSmall),
+                      title: Text('Navratri Fasting Filter',
+                          style: AppTypography.titleMedium),
+                      subtitle: Text(
+                          'Restricts non-veg, onion, garlic; surfaces Satvik foods',
+                          style: AppTypography.labelSmall),
                       value: state.fastingConfig.isNavratriFastingActive,
                       activeThumbColor: AppColors.primaryEmerald,
-                      onChanged: (_) => ref.read(festivalProvider.notifier).toggleNavratriFasting(),
+                      onChanged: (_) => ref
+                          .read(festivalProvider.notifier)
+                          .toggleNavratriFasting(),
                     ),
                     const Divider(color: AppColors.glassBorder),
                     SwitchListTile(
-                      title: Text('Ramadan Sehri & Iftar Mode', style: AppTypography.titleMedium),
-                      subtitle: Text('Splits timing into pre-dawn & post-sunset windows', style: AppTypography.labelSmall),
+                      title: Text('Ramadan Sehri & Iftar Mode',
+                          style: AppTypography.titleMedium),
+                      subtitle: Text(
+                          'Splits timing into pre-dawn & post-sunset windows',
+                          style: AppTypography.labelSmall),
                       value: state.fastingConfig.isRamadanModeActive,
                       activeThumbColor: AppColors.primaryCyan,
-                      onChanged: (_) => ref.read(festivalProvider.notifier).toggleRamadanMode(),
+                      onChanged: (_) => ref
+                          .read(festivalProvider.notifier)
+                          .toggleRamadanMode(),
                     ),
                   ],
                 ),
@@ -71,7 +85,8 @@ class FestivalDashboardScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Seeded 10-Festival Calendar
-              Text('Indian Cultural Festival Calendar (10 Festivals)', style: AppTypography.titleLarge),
+              Text('Indian Cultural Festival Calendar (10 Festivals)',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               ...state.festivals.map(
                 (fest) => Padding(
@@ -84,7 +99,9 @@ class FestivalDashboardScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(fest.name, style: AppTypography.titleMedium),
-                            Text('${fest.durationDays} Days • ${fest.description}', style: AppTypography.labelSmall),
+                            Text(
+                                '${fest.durationDays} Days • ${fest.description}',
+                                style: AppTypography.labelSmall),
                           ],
                         ),
                         const Icon(Icons.event, color: AppColors.primaryViolet),

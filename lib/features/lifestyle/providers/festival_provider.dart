@@ -60,12 +60,14 @@ class FestivalNotifier extends StateNotifier<FestivalState> {
     state = state.copyWith(
       activeFestival: festival,
       activeAdaptation: adaptation,
-      isSurvivalModeActive: isSurvival || true, // Enable for UI preview when tapped
+      isSurvivalModeActive:
+          isSurvival || true, // Enable for UI preview when tapped
       isFastingModeActive: adaptation.isFastingActive,
     );
   }
 }
 
-final festivalProvider = StateNotifierProvider<FestivalNotifier, FestivalState>((ref) {
+final festivalProvider =
+    StateNotifierProvider<FestivalNotifier, FestivalState>((ref) {
   return FestivalNotifier();
 });

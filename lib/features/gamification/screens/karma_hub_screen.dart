@@ -23,10 +23,12 @@ class KarmaHubScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
-        title: Text('Karma Hub — Level ${level.currentLevel}', style: AppTypography.h2),
+        title: Text('Karma Hub — Level ${level.currentLevel}',
+            style: AppTypography.h2),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -44,17 +46,20 @@ class KarmaHubScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Level ${level.currentLevel} — ${level.levelName}',
-                          style: AppTypography.h2.copyWith(color: AppColors.primary),
+                          style: AppTypography.h2
+                              .copyWith(color: AppColors.primary),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             '${state.totalXp} XP',
-                            style: AppTypography.labelLg.copyWith(color: AppColors.primary),
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.primary),
                           ),
                         ),
                       ],
@@ -62,7 +67,8 @@ class KarmaHubScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Progress to Next Level (${level.xpInCurrentLevel} / ${level.xpNeededForNextLevel} XP):',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 8.0),
                     ClipRRect(
@@ -85,23 +91,27 @@ class KarmaHubScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Demographic Cohort Percentile', style: AppTypography.h3),
+                    Text('Demographic Cohort Percentile',
+                        style: AppTypography.h3),
                     const SizedBox(height: AppSpacing.sm),
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: AppColors.teal.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: AppColors.teal.withValues(alpha: 0.3)),
+                        border: Border.all(
+                            color: AppColors.teal.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.emoji_events, color: AppColors.teal, size: 24),
+                          const Icon(Icons.emoji_events,
+                              color: AppColors.teal, size: 24),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               'You score higher than ${state.cohortPercentile}% of Noida Builders!',
-                              style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                              style: AppTypography.labelLg
+                                  .copyWith(color: AppColors.teal),
                             ),
                           ),
                         ],
@@ -110,7 +120,8 @@ class KarmaHubScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Cohort Rank: #${state.cohortRank} of ${state.totalCohortMembers} members',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -139,7 +150,9 @@ class KarmaHubScreen extends ConsumerWidget {
                       children: [
                         Icon(
                           ach.isUnlocked ? Icons.verified : Icons.lock_outline,
-                          color: ach.isUnlocked ? AppColors.accent : AppColors.textMuted,
+                          color: ach.isUnlocked
+                              ? AppColors.accent
+                              : AppColors.textMuted,
                           size: 28.0,
                         ),
                         const SizedBox(height: 4),
@@ -147,14 +160,17 @@ class KarmaHubScreen extends ConsumerWidget {
                           ach.title,
                           textAlign: TextAlign.center,
                           style: AppTypography.labelLg.copyWith(
-                            color: ach.isUnlocked ? AppColors.textPrimary : AppColors.textMuted,
+                            color: ach.isUnlocked
+                                ? AppColors.textPrimary
+                                : AppColors.textMuted,
                           ),
                         ),
                         const SizedBox(height: 2),
                         Text(
                           ach.category,
                           textAlign: TextAlign.center,
-                          style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                          style: AppTypography.bodySm.copyWith(
+                              color: AppColors.textSecondary, fontSize: 11),
                         ),
                       ],
                     ),
@@ -170,20 +186,23 @@ class KarmaHubScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: AppSpacing.xs),
                   child: GlassCard(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.star, color: AppColors.warning, size: 18),
+                            const Icon(Icons.star,
+                                color: AppColors.warning, size: 18),
                             const SizedBox(width: 8),
                             Text(event.title, style: AppTypography.bodySm),
                           ],
                         ),
                         Text(
                           '+${event.xpAwarded} XP',
-                          style: AppTypography.labelLg.copyWith(color: AppColors.success),
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.success),
                         ),
                       ],
                     ),

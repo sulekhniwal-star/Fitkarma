@@ -146,7 +146,8 @@ CRITICAL §P3-A AI COACH PHILOSOPHY GUARDRAILS:
       return 'Your protein intake is currently ${currentProteinG}g against your ${targetProteinG}g target (deficit: ${deltaProtein}g). Add paneer, moong dal, or eggs to your next meal to optimize recovery capacity.';
     }
 
-    if (originalText.toLowerCase().contains('sleep') || originalText.toLowerCase().contains('rest')) {
+    if (originalText.toLowerCase().contains('sleep') ||
+        originalText.toLowerCase().contains('rest')) {
       return 'Your sleep debt is currently at ${sleepDebtMin.abs()} mins with a readiness score of $readinessScore/100. Aim to sleep 30 mins earlier tonight to clear recovery debt.';
     }
 

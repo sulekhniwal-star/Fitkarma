@@ -46,7 +46,8 @@ class NutritionLoggerScreen extends ConsumerWidget {
                       Expanded(
                         child: Text(
                           'Protein Deficit Alert: Current intake is under 70% of target (${state.targetProtein.round()}g).',
-                          style: AppTypography.bodyMedium.copyWith(color: AppColors.warningAmber),
+                          style: AppTypography.bodyMedium
+                              .copyWith(color: AppColors.warningAmber),
                         ),
                       ),
                     ],
@@ -60,26 +61,32 @@ class NutritionLoggerScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Daily Calories', style: AppTypography.titleMedium),
+                        Text('Daily Calories',
+                            style: AppTypography.titleMedium),
                         Text(
                           '${state.totalCalories.round()} / ${state.targetCalories.round()} kcal',
-                          style: AppTypography.titleLarge.copyWith(color: AppColors.primaryCyan),
+                          style: AppTypography.titleLarge
+                              .copyWith(color: AppColors.primaryCyan),
                         ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    _buildMacroProgressBar('Protein', state.totalProtein, state.targetProtein, AppColors.primaryEmerald),
+                    _buildMacroProgressBar('Protein', state.totalProtein,
+                        state.targetProtein, AppColors.primaryEmerald),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildMacroProgressBar('Carbs', state.totalCarbs, 250.0, AppColors.warningAmber),
+                    _buildMacroProgressBar('Carbs', state.totalCarbs, 250.0,
+                        AppColors.warningAmber),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildMacroProgressBar('Fats', state.totalFat, 65.0, AppColors.infoBlue),
+                    _buildMacroProgressBar(
+                        'Fats', state.totalFat, 65.0, AppColors.infoBlue),
                   ],
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),
 
               // Seeded Indian Food Database Search List
-              Text('Seeded Indian Food Taxonomy', style: AppTypography.titleLarge),
+              Text('Seeded Indian Food Taxonomy',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               ...SeededIndianFoodDatabase.items.map((item) {
                 final quality = engine.calculateMealQuality(item);
@@ -96,13 +103,17 @@ class NutritionLoggerScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(item.name, style: AppTypography.titleMedium),
-                            Text('${item.calories} kcal • P: ${item.proteinGrams}g | C: ${item.carbsGrams}g | F: ${item.fatGrams}g', style: AppTypography.labelSmall),
+                            Text(
+                                '${item.calories} kcal • P: ${item.proteinGrams}g | C: ${item.carbsGrams}g | F: ${item.fatGrams}g',
+                                style: AppTypography.labelSmall),
                           ],
                         ),
                         Chip(
                           backgroundColor: AppColors.glassBgMid,
                           side: const BorderSide(color: AppColors.glassBorder),
-                          label: Text('Q-Score: ${quality.overallScore}', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan)),
+                          label: Text('Q-Score: ${quality.overallScore}',
+                              style: AppTypography.labelSmall
+                                  .copyWith(color: AppColors.primaryCyan)),
                         ),
                       ],
                     ),
@@ -116,7 +127,8 @@ class NutritionLoggerScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildMacroProgressBar(String label, double current, double target, Color color) {
+  Widget _buildMacroProgressBar(
+      String label, double current, double target, Color color) {
     final progress = (current / target).clamp(0.0, 1.0);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +137,8 @@ class NutritionLoggerScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label, style: AppTypography.bodyMedium),
-            Text('${current.round()} / ${target.round()} g', style: AppTypography.labelSmall),
+            Text('${current.round()} / ${target.round()} g',
+                style: AppTypography.labelSmall),
           ],
         ),
         const SizedBox(height: 4.0),

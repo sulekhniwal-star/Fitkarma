@@ -44,8 +44,7 @@ class GlucoseState {
 class GlucoseNotifier extends StateNotifier<GlucoseState> {
   final GlucoseEngine _engine;
 
-  GlucoseNotifier(this._engine)
-      : super(_buildInitialState(_engine));
+  GlucoseNotifier(this._engine) : super(_buildInitialState(_engine));
 
   static GlucoseState _buildInitialState(GlucoseEngine engine) {
     final now = DateTime.now();
@@ -84,7 +83,9 @@ class GlucoseNotifier extends StateNotifier<GlucoseState> {
     );
 
     final latestPostMeal = sampleRecords.lastWhere(
-      (r) => r.tag == GlucoseContextTag.postMeal1h || r.tag == GlucoseContextTag.postMeal2h,
+      (r) =>
+          r.tag == GlucoseContextTag.postMeal1h ||
+          r.tag == GlucoseContextTag.postMeal2h,
       orElse: () => sampleRecords.first,
     );
 
@@ -130,8 +131,10 @@ class GlucoseNotifier extends StateNotifier<GlucoseState> {
 
     final updated = [...state.records, record];
 
-    final latestFasting = tag == GlucoseContextTag.fasting ? record : state.latestFasting;
-    final latestPostMeal = (tag == GlucoseContextTag.postMeal1h || tag == GlucoseContextTag.postMeal2h)
+    final latestFasting =
+        tag == GlucoseContextTag.fasting ? record : state.latestFasting;
+    final latestPostMeal = (tag == GlucoseContextTag.postMeal1h ||
+            tag == GlucoseContextTag.postMeal2h)
         ? record
         : state.latestPostMeal;
 

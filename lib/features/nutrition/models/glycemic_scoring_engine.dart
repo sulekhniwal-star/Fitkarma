@@ -34,7 +34,8 @@ class GlycemicScoringEngine {
       return FoodGlycemicScore(
         score: 10.0,
         glucoseDelta: 0.0,
-        recommendation: 'No post-meal CGM readings available to compute spike delta.',
+        recommendation:
+            'No post-meal CGM readings available to compute spike delta.',
       );
     }
 
@@ -45,14 +46,17 @@ class GlycemicScoringEngine {
     final spikeDelta = peakReading - baselineGlucose;
 
     double rating = 10.0;
-    String recommendation = 'Great glycemic response. Enjoy this food with optimal energy stability.';
+    String recommendation =
+        'Great glycemic response. Enjoy this food with optimal energy stability.';
 
     if (spikeDelta > 45.0) {
       rating = 3.0;
-      recommendation = '$foodItemName spikes your glucose by +${spikeDelta.round()} mg/dL. Try pairing it with 10 almonds, healthy fats, or half a scoop of protein to blunt the insulin spike.';
+      recommendation =
+          '$foodItemName spikes your glucose by +${spikeDelta.round()} mg/dL. Try pairing it with 10 almonds, healthy fats, or half a scoop of protein to blunt the insulin spike.';
     } else if (spikeDelta >= 25.0) {
       rating = 7.0;
-      recommendation = 'Moderate glucose spike (+${spikeDelta.round()} mg/dL). Keep portion size in check or eat protein/fiber first.';
+      recommendation =
+          'Moderate glucose spike (+${spikeDelta.round()} mg/dL). Keep portion size in check or eat protein/fiber first.';
     }
 
     return FoodGlycemicScore(

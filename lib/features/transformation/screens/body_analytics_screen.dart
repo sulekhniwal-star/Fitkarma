@@ -22,7 +22,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Row(
@@ -46,14 +47,20 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Estimated Body Fat Range', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+                        Text('Estimated Body Fat Range',
+                            style: AppTypography.labelSmall
+                                .copyWith(color: AppColors.textSecondary)),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.teal.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Text(analytics.categoryLabel, style: AppTypography.labelSmall.copyWith(color: AppColors.teal, fontWeight: FontWeight.bold)),
+                          child: Text(analytics.categoryLabel,
+                              style: AppTypography.labelSmall.copyWith(
+                                  color: AppColors.teal,
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -63,8 +70,12 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Text('${analytics.bodyFatPct}% ', style: AppTypography.h1.copyWith(color: AppColors.primary)),
-                        Text('Body Fat', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                        Text('${analytics.bodyFatPct}% ',
+                            style: AppTypography.h1
+                                .copyWith(color: AppColors.primary)),
+                        Text('Body Fat',
+                            style: AppTypography.bodySm
+                                .copyWith(color: AppColors.textSecondary)),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -76,7 +87,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                         value: (analytics.bodyFatPct / 40.0).clamp(0.0, 1.0),
                         minHeight: 10,
                         backgroundColor: AppColors.bg1,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.teal),
+                        valueColor:
+                            const AlwaysStoppedAnimation<Color>(AppColors.teal),
                       ),
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -86,21 +98,35 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                       children: [
                         Column(
                           children: [
-                            Text('Lean Mass', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
-                            Text('${analytics.leanMassKg} kg', style: AppTypography.h3.copyWith(color: AppColors.success)),
+                            Text('Lean Mass',
+                                style: AppTypography.labelSmall
+                                    .copyWith(color: AppColors.textSecondary)),
+                            Text('${analytics.leanMassKg} kg',
+                                style: AppTypography.h3
+                                    .copyWith(color: AppColors.success)),
                           ],
                         ),
-                        Container(width: 1, height: 30, color: AppColors.textMuted.withValues(alpha: 0.3)),
+                        Container(
+                            width: 1,
+                            height: 30,
+                            color: AppColors.textMuted.withValues(alpha: 0.3)),
                         Column(
                           children: [
-                            Text('Fat Mass', style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
-                            Text('${analytics.fatMassKg} kg', style: AppTypography.h3.copyWith(color: AppColors.warning)),
+                            Text('Fat Mass',
+                                style: AppTypography.labelSmall
+                                    .copyWith(color: AppColors.textSecondary)),
+                            Text('${analytics.fatMassKg} kg',
+                                style: AppTypography.h3
+                                    .copyWith(color: AppColors.warning)),
                           ],
                         ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.sm),
-                    Text('Confidence: ${analytics.confidence} (${analytics.estimationMethod})', style: AppTypography.bodySm.copyWith(color: AppColors.textMuted, fontSize: 11)),
+                    Text(
+                        'Confidence: ${analytics.confidence} (${analytics.estimationMethod})',
+                        style: AppTypography.bodySm.copyWith(
+                            color: AppColors.textMuted, fontSize: 11)),
                   ],
                 ),
               ),
@@ -120,7 +146,9 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                         Text('Body Fat %', style: AppTypography.bodySm),
                         Text(
                           '${analytics.bodyFatDelta3Months}% ✓',
-                          style: AppTypography.labelLg.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                          style: AppTypography.labelLg.copyWith(
+                              color: AppColors.success,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -131,7 +159,9 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                         Text('Lean Mass', style: AppTypography.bodySm),
                         Text(
                           '+${analytics.leanMassDelta3Months} kg ✓',
-                          style: AppTypography.labelLg.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                          style: AppTypography.labelLg.copyWith(
+                              color: AppColors.success,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -149,9 +179,13 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _CheckMetric(label: 'Neck', value: '${analytics.neckCm} cm'),
-                    _CheckMetric(label: 'Waist', value: '${analytics.waistCm} cm'),
-                    if (analytics.hipCm != null) _CheckMetric(label: 'Hips', value: '${analytics.hipCm} cm'),
+                    _CheckMetric(
+                        label: 'Neck', value: '${analytics.neckCm} cm'),
+                    _CheckMetric(
+                        label: 'Waist', value: '${analytics.waistCm} cm'),
+                    if (analytics.hipCm != null)
+                      _CheckMetric(
+                          label: 'Hips', value: '${analytics.hipCm} cm'),
                   ],
                 ),
               ),
@@ -180,8 +214,12 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                     Row(
                       children: [
                         Icon(
-                          analytics.isBiometricUnlocked ? Icons.lock_open : Icons.fingerprint,
-                          color: analytics.isBiometricUnlocked ? AppColors.teal : AppColors.primary,
+                          analytics.isBiometricUnlocked
+                              ? Icons.lock_open
+                              : Icons.fingerprint,
+                          color: analytics.isBiometricUnlocked
+                              ? AppColors.teal
+                              : AppColors.primary,
                           size: 24,
                         ),
                         const SizedBox(width: 10),
@@ -198,22 +236,30 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                     const SizedBox(height: 6),
                     Text(
                       'Photos are stored encrypted on-device only. Auto-cropping face safeguards photos during side-by-side comparison.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                     const SizedBox(height: AppSpacing.sm),
-
                     if (!analytics.isBiometricUnlocked)
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                         ),
-                        icon: const Icon(Icons.fingerprint, color: AppColors.bg0, size: 18),
-                        label: Text('Authenticate to Unlock Photos', style: AppTypography.labelLg.copyWith(color: AppColors.bg0)),
+                        icon: const Icon(Icons.fingerprint,
+                            color: AppColors.bg0, size: 18),
+                        label: Text('Authenticate to Unlock Photos',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.bg0)),
                         onPressed: () {
-                          ref.read(bodyAnalyticsProvider.notifier).unlockBiometrics();
+                          ref
+                              .read(bodyAnalyticsProvider.notifier)
+                              .unlockBiometrics();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Biometric authentication successful! Progress photos unlocked.')),
+                            const SnackBar(
+                                content: Text(
+                                    'Biometric authentication successful! Progress photos unlocked.')),
                           );
                         },
                       ),
@@ -240,7 +286,9 @@ class _CheckMetric extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label, style: AppTypography.labelSmall.copyWith(color: AppColors.textSecondary)),
+        Text(label,
+            style: AppTypography.labelSmall
+                .copyWith(color: AppColors.textSecondary)),
         const SizedBox(height: 2),
         Text(value, style: AppTypography.labelLg),
       ],

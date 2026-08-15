@@ -9,8 +9,11 @@ void main() {
       DynamicFitnessBlueprintGenerator.clearCache();
     });
 
-    test('getOrGenerateBlueprint builds Corporate Fat Loss 12-week blueprint per §P6-D spec', () {
-      final blueprint = generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
+    test(
+        'getOrGenerateBlueprint builds Corporate Fat Loss 12-week blueprint per §P6-D spec',
+        () {
+      final blueprint =
+          generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
 
       expect(blueprint.programName, equals('Corporate Fat Loss'));
       expect(blueprint.durationWeeks, equals(12));
@@ -28,9 +31,13 @@ void main() {
       expect(blueprint.isCachedLocally, isTrue);
     });
 
-    test('getOrGenerateBlueprint retrieves locally cached blueprint on subsequent calls without regenerating', () {
-      final blueprint1 = generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
-      final blueprint2 = generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
+    test(
+        'getOrGenerateBlueprint retrieves locally cached blueprint on subsequent calls without regenerating',
+        () {
+      final blueprint1 =
+          generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
+      final blueprint2 =
+          generator.getOrGenerateBlueprint(programName: 'Corporate Fat Loss');
 
       expect(blueprint2.generatedAt, equals(blueprint1.generatedAt));
       expect(blueprint2.toRawJson(), equals(blueprint1.toRawJson()));

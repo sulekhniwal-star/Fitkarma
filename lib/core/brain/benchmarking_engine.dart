@@ -77,12 +77,12 @@ class CohortBenchmarks {
 }
 
 class BenchmarkResult {
-  final int stepsPercentile;    // e.g. 78 -> Top 22%
-  final int proteinPercentile;  // e.g. 55 -> Top 45%
-  final int sleepPercentile;    // e.g. 62 -> Top 38%
+  final int stepsPercentile; // e.g. 78 -> Top 22%
+  final int proteinPercentile; // e.g. 55 -> Top 45%
+  final int sleepPercentile; // e.g. 62 -> Top 38%
   final int workoutsPercentile; // e.g. 82 -> Top 18%
-  final int overallPercentile;  // composite e.g. 70th pct (Top 30%)
-  final String cohortLabel;     // e.g., 'Age 28 · Male · India'
+  final int overallPercentile; // composite e.g. 70th pct (Top 30%)
+  final String cohortLabel; // e.g., 'Age 28 · Male · India'
   final String biggestOpportunityArea;
   final String opportunityTip;
 
@@ -109,10 +109,20 @@ class BenchmarkingEngine {
 
   static const Map<String, CohortBenchmarks> _cohortDatabase = {
     '25-30_Male_India': CohortBenchmarks(
-      steps: BenchmarkDistribution(p25: 5000, p50: 7500, p75: 9000, p90: 11500), // 9400 -> ~78th pct (Top 22%)
-      protein: BenchmarkDistribution(p25: 50, p50: 74, p75: 95, p90: 120),       // 78g -> ~55th pct (Top 45%)
-      sleep: BenchmarkDistribution(p25: 6.0, p50: 6.8, p75: 7.8, p90: 8.5),       // 7.1h -> ~62nd pct (Top 38%)
-      workouts: BenchmarkDistribution(p25: 1.5, p50: 2.5, p75: 3.8, p90: 5.0),   // 4.2 -> ~82nd pct (Top 18%)
+      steps: BenchmarkDistribution(
+          p25: 5000,
+          p50: 7500,
+          p75: 9000,
+          p90: 11500), // 9400 -> ~78th pct (Top 22%)
+      protein: BenchmarkDistribution(
+          p25: 50, p50: 74, p75: 95, p90: 120), // 78g -> ~55th pct (Top 45%)
+      sleep: BenchmarkDistribution(
+          p25: 6.0,
+          p50: 6.8,
+          p75: 7.8,
+          p90: 8.5), // 7.1h -> ~62nd pct (Top 38%)
+      workouts: BenchmarkDistribution(
+          p25: 1.5, p50: 2.5, p75: 3.8, p90: 5.0), // 4.2 -> ~82nd pct (Top 18%)
     ),
     '25-30_Female_India': CohortBenchmarks(
       steps: BenchmarkDistribution(p25: 4500, p50: 6800, p75: 8500, p90: 10500),
@@ -149,7 +159,12 @@ class BenchmarkingEngine {
     final sleepPct = benchmarks.sleep.percentileOf(data.avgSleepH);
     final workoutsPct = benchmarks.workouts.percentileOf(data.workoutsPerWeek);
 
-    final overallPct = ((stepsPct * 0.25) + (proteinPct * 0.30) + (sleepPct * 0.20) + (workoutsPct * 0.25)).round().clamp(1, 99);
+    final overallPct = ((stepsPct * 0.25) +
+            (proteinPct * 0.30) +
+            (sleepPct * 0.20) +
+            (workoutsPct * 0.25))
+        .round()
+        .clamp(1, 99);
 
     // Find lowest percentile metric as biggest opportunity area
     final pcts = {
@@ -159,18 +174,23 @@ class BenchmarkingEngine {
       'Workouts': workoutsPct,
     };
 
-    final lowestEntry = pcts.entries.reduce((a, b) => a.value < b.value ? a : b);
+    final lowestEntry =
+        pcts.entries.reduce((a, b) => a.value < b.value ? a : b);
     final oppArea = lowestEntry.key;
 
     String tip = '';
     if (oppArea == 'Protein') {
-      tip = 'Protein is your lowest percentile. Hitting your 110g target would move you to Top 25%.';
+      tip =
+          'Protein is your lowest percentile. Hitting your 110g target would move you to Top 25%.';
     } else if (oppArea == 'Steps') {
-      tip = 'Steps is your lowest percentile. Adding a 15-minute post-lunch walk moves you to Top 30%.';
+      tip =
+          'Steps is your lowest percentile. Adding a 15-minute post-lunch walk moves you to Top 30%.';
     } else if (oppArea == 'Sleep') {
-      tip = 'Sleep is your lowest percentile. Locking in a consistent 11 PM bedtime moves you to Top 20%.';
+      tip =
+          'Sleep is your lowest percentile. Locking in a consistent 11 PM bedtime moves you to Top 20%.';
     } else {
-      tip = 'Workouts is your lowest percentile. Completing 1 more session this week moves you to Top 20%.';
+      tip =
+          'Workouts is your lowest percentile. Completing 1 more session this week moves you to Top 20%.';
     }
 
     return BenchmarkResult(

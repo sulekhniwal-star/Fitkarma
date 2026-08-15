@@ -16,7 +16,8 @@ class HlcTimestamp implements Comparable<HlcTimestamp> {
   factory HlcTimestamp.now(String nodeId, {HlcTimestamp? lastHlc}) {
     final nowPhysical = DateTime.now().millisecondsSinceEpoch;
     if (lastHlc == null) {
-      return HlcTimestamp(physicalTimeMillis: nowPhysical, logicalCounter: 0, nodeId: nodeId);
+      return HlcTimestamp(
+          physicalTimeMillis: nowPhysical, logicalCounter: 0, nodeId: nodeId);
     }
 
     final maxPhysical = max(nowPhysical, lastHlc.physicalTimeMillis);

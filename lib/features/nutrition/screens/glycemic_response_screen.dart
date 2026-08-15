@@ -17,7 +17,7 @@ class GlycemicResponseScreen extends StatefulWidget {
 class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
   final _engine = const GlycemicScoringEngine();
   double _baselineGlucose = 95.0; // mg/dL
-  double _peakGlucose = 143.0;   // +48 mg/dL spike simulate
+  double _peakGlucose = 143.0; // +48 mg/dL spike simulate
   String _selectedFood = 'Ripe Banana';
 
   late FoodGlycemicScore _scoreResult;
@@ -31,10 +31,18 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
   void _recalculate() {
     final now = DateTime.now();
     final sampleReadings = [
-      CgmReading(timestamp: now.add(const Duration(minutes: 30)), glucoseMgDl: _baselineGlucose + 15.0),
-      CgmReading(timestamp: now.add(const Duration(minutes: 60)), glucoseMgDl: _peakGlucose),
-      CgmReading(timestamp: now.add(const Duration(minutes: 90)), glucoseMgDl: _peakGlucose - 10.0),
-      CgmReading(timestamp: now.add(const Duration(minutes: 120)), glucoseMgDl: _baselineGlucose + 5.0),
+      CgmReading(
+          timestamp: now.add(const Duration(minutes: 30)),
+          glucoseMgDl: _baselineGlucose + 15.0),
+      CgmReading(
+          timestamp: now.add(const Duration(minutes: 60)),
+          glucoseMgDl: _peakGlucose),
+      CgmReading(
+          timestamp: now.add(const Duration(minutes: 90)),
+          glucoseMgDl: _peakGlucose - 10.0),
+      CgmReading(
+          timestamp: now.add(const Duration(minutes: 120)),
+          glucoseMgDl: _baselineGlucose + 5.0),
     ];
 
     final result = _engine.computeScore(
@@ -56,7 +64,8 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Glycemic Response & Food Score', style: AppTypography.h2),
@@ -72,7 +81,8 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Continuous Glucose Monitor (CGM) Map', style: AppTypography.h3),
+                  Text('Continuous Glucose Monitor (CGM) Map',
+                      style: AppTypography.h3),
                   const SizedBox(height: AppSpacing.sm),
 
                   // Food Item Dropdown
@@ -84,9 +94,14 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
                         value: _selectedFood,
                         dropdownColor: AppColors.surface1,
                         items: const [
-                          DropdownMenuItem(value: 'Ripe Banana', child: Text('Ripe Banana')),
-                          DropdownMenuItem(value: 'White Rice Thali', child: Text('White Rice Thali')),
-                          DropdownMenuItem(value: 'Paneer Tikka', child: Text('Paneer Tikka')),
+                          DropdownMenuItem(
+                              value: 'Ripe Banana', child: Text('Ripe Banana')),
+                          DropdownMenuItem(
+                              value: 'White Rice Thali',
+                              child: Text('White Rice Thali')),
+                          DropdownMenuItem(
+                              value: 'Paneer Tikka',
+                              child: Text('Paneer Tikka')),
                         ],
                         onChanged: (val) {
                           if (val != null) {
@@ -112,8 +127,10 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Baseline Pre-Meal Glucose', style: AppTypography.bodySm),
-                      Text('${_baselineGlucose.round()} mg/dL', style: AppTypography.labelLg),
+                      Text('Baseline Pre-Meal Glucose',
+                          style: AppTypography.bodySm),
+                      Text('${_baselineGlucose.round()} mg/dL',
+                          style: AppTypography.labelLg),
                     ],
                   ),
                   Slider(
@@ -130,8 +147,11 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Peak Post-Meal Glucose (90 min)', style: AppTypography.bodySm),
-                      Text('${_peakGlucose.round()} mg/dL', style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                      Text('Peak Post-Meal Glucose (90 min)',
+                          style: AppTypography.bodySm),
+                      Text('${_peakGlucose.round()} mg/dL',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.accent)),
                     ],
                   ),
                   Slider(
@@ -155,7 +175,9 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
               decoration: BoxDecoration(
                 color: AppColors.surface1,
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                border: Border.all(color: _getScoreColor(_scoreResult.score).withValues(alpha: 0.4)),
+                border: Border.all(
+                    color: _getScoreColor(_scoreResult.score)
+                        .withValues(alpha: 0.4)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,14 +187,17 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
                     children: [
                       Text('Personal Food Score', style: AppTypography.h3),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: _getScoreColor(_scoreResult.score).withValues(alpha: 0.15),
+                          color: _getScoreColor(_scoreResult.score)
+                              .withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '${_scoreResult.score.round()}/10',
-                          style: AppTypography.h2.copyWith(color: _getScoreColor(_scoreResult.score)),
+                          style: AppTypography.h2.copyWith(
+                              color: _getScoreColor(_scoreResult.score)),
                         ),
                       ),
                     ],
@@ -180,7 +205,8 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
                   const SizedBox(height: 6),
                   Text(
                     'Sugar Spike Delta: +${_scoreResult.glucoseDelta.round()} mg/dL',
-                    style: AppTypography.labelLg.copyWith(color: _getScoreColor(_scoreResult.score)),
+                    style: AppTypography.labelLg
+                        .copyWith(color: _getScoreColor(_scoreResult.score)),
                   ),
                   const SizedBox(height: AppSpacing.md),
 
@@ -195,9 +221,12 @@ class _GlycemicResponseScreenState extends State<GlycemicResponseScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Insulin Spike Mitigation Prompt:', style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                        Text('Insulin Spike Mitigation Prompt:',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.accent)),
                         const SizedBox(height: 4),
-                        Text(_scoreResult.recommendation, style: AppTypography.bodySm.copyWith(height: 1.4)),
+                        Text(_scoreResult.recommendation,
+                            style: AppTypography.bodySm.copyWith(height: 1.4)),
                       ],
                     ),
                   ),

@@ -45,7 +45,8 @@ class MarketplaceState {
       clientProfile: clientProfile ?? this.clientProfile,
       selectedTab: selectedTab ?? this.selectedTab,
       ledger: ledger ?? this.ledger,
-      purchaseStatusMessage: purchaseStatusMessage ?? this.purchaseStatusMessage,
+      purchaseStatusMessage:
+          purchaseStatusMessage ?? this.purchaseStatusMessage,
     );
   }
 }
@@ -71,9 +72,13 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
     const CreatorProfile(
       creatorId: 'coach_ananya',
       name: 'Dr. Ananya Iyer',
-      bio: 'Clinical Nutritionist & CSCS Coach specializing in Indian PCOS & hormonal reset protocols.',
+      bio:
+          'Clinical Nutritionist & CSCS Coach specializing in Indian PCOS & hormonal reset protocols.',
       certifications: ['CSCS', 'M.Sc Clinical Nutrition', 'ACE Certified'],
-      specialties: [CoachSpecialty.pcosManagement, CoachSpecialty.muscleBuilding],
+      specialties: [
+        CoachSpecialty.pcosManagement,
+        CoachSpecialty.muscleBuilding
+      ],
       averageRating: 4.95,
       activeClientsCount: 42,
       monthlyCoachingRateInr: 2999.0,
@@ -82,7 +87,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
     const CreatorProfile(
       creatorId: 'coach_rohit',
       name: 'Rohit Deshmukh',
-      bio: 'Hypertrophy and strength specialist. 10+ years coaching national powerlifters and desk athletes.',
+      bio:
+          'Hypertrophy and strength specialist. 10+ years coaching national powerlifters and desk athletes.',
       certifications: ['ACSM-CPT', 'NSCA Strength Specialist'],
       specialties: [CoachSpecialty.muscleBuilding],
       averageRating: 4.88,
@@ -93,7 +99,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
     const CreatorProfile(
       creatorId: 'coach_simran',
       name: 'Simran Kaur',
-      bio: 'Endurance athlete & certified marathon coach. Specialized in sub-4hr marathon preparation.',
+      bio:
+          'Endurance athlete & certified marathon coach. Specialized in sub-4hr marathon preparation.',
       certifications: ['RRCA Marathon Coach', 'Precision Nutrition L2'],
       specialties: [CoachSpecialty.runningMarathon],
       averageRating: 4.92,
@@ -104,9 +111,13 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
     const CreatorProfile(
       creatorId: 'coach_vijay',
       name: 'Dr. Vijay Kulkarni',
-      bio: 'Metabolic physician & lifestyle coach specializing in Type-2 diabetes reversal and insulin resistance.',
+      bio:
+          'Metabolic physician & lifestyle coach specializing in Type-2 diabetes reversal and insulin resistance.',
       certifications: ['MBBS', 'Fellowship in Diabetology'],
-      specialties: [CoachSpecialty.diabeticReversal, CoachSpecialty.pcosManagement],
+      specialties: [
+        CoachSpecialty.diabeticReversal,
+        CoachSpecialty.pcosManagement
+      ],
       averageRating: 4.98,
       activeClientsCount: 50,
       monthlyCoachingRateInr: 3499.0,
@@ -122,7 +133,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
       title: 'Navratri Fasting & Fat Loss Blueprint',
       durationWeeks: 6,
       priceInr: 499.0,
-      description: 'Structured 6-week progressive program maintaining protein goals through traditional Indian fasting dishes.',
+      description:
+          'Structured 6-week progressive program maintaining protein goals through traditional Indian fasting dishes.',
       tags: ['Fasting', 'PCOS', 'Vegetarian'],
     ),
     const BlueprintProgram(
@@ -132,7 +144,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
       title: 'Desk Athlete to 10K Blueprint',
       durationWeeks: 8,
       priceInr: 699.0,
-      description: 'Postural correction + gradual cardiovascular base building designed for Indian corporate professionals.',
+      description:
+          'Postural correction + gradual cardiovascular base building designed for Indian corporate professionals.',
       tags: ['Running', 'Cardio', 'Mobility'],
     ),
     const BlueprintProgram(
@@ -142,7 +155,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
       title: '12-Week Desi Gym Hypertrophy Matrix',
       durationWeeks: 12,
       priceInr: 999.0,
-      description: 'Periodized RPE progression with vegetarian protein substitution guides for standard commercial gym setups.',
+      description:
+          'Periodized RPE progression with vegetarian protein substitution guides for standard commercial gym setups.',
       tags: ['Strength', 'Hypertrophy', 'Gym'],
     ),
   ];
@@ -171,7 +185,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
 
     state = state.copyWith(
       activeAssignments: [...state.activeAssignments, assignment],
-      purchaseStatusMessage: '🎉 Assigned to ${coach.name}! Escrow secured for 7 days.',
+      purchaseStatusMessage:
+          '🎉 Assigned to ${coach.name}! Escrow secured for 7 days.',
     );
   }
 
@@ -185,7 +200,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
     );
 
     state = state.copyWith(
-      purchaseStatusMessage: 'Unlocked "${blueprint.title}"! Added to your workouts.',
+      purchaseStatusMessage:
+          'Unlocked "${blueprint.title}"! Added to your workouts.',
     );
   }
 }

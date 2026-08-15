@@ -8,7 +8,8 @@ void main() {
   group('§P10-E Stress Detection Engine Tests', () {
     const engine = StressDetectionEngine();
 
-    test('detect computes High stress level for 7+ accumulated stress signals', () {
+    test('detect computes High stress level for 7+ accumulated stress signals',
+        () {
       const inputs = StressHealthInputData(
         hrv7dTrend: TrendDirection.declining,
         hrv: 40.0,
@@ -27,10 +28,13 @@ void main() {
       expect(assessment.level, equals(StressLevel.high));
       expect(assessment.signals, greaterThanOrEqualTo(7));
       expect(assessment.trendingUp, isTrue);
-      expect(assessment.detectedSignalDescriptions.length, greaterThanOrEqualTo(5));
+      expect(assessment.detectedSignalDescriptions.length,
+          greaterThanOrEqualTo(5));
     });
 
-    test('detect computes Normal stress level when no stress thresholds breached', () {
+    test(
+        'detect computes Normal stress level when no stress thresholds breached',
+        () {
       const inputs = StressHealthInputData(
         hrv7dTrend: TrendDirection.improving,
         hrv: 60.0,
@@ -52,12 +56,15 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('ProactiveStressAlertCard renders stress trending up alert card correctly', (tester) async {
+    testWidgets(
+        'ProactiveStressAlertCard renders stress trending up alert card correctly',
+        (tester) async {
       const assessment = StressAssessment(
         level: StressLevel.elevated,
         signals: 5,
         trendingUp: true,
-        recommendation: 'Reduce training intensity by 20% and prioritize sleep.',
+        recommendation:
+            'Reduce training intensity by 20% and prioritize sleep.',
         detectedSignalDescriptions: [
           'HRV: -16% below baseline',
           'Resting HR: +8 bpm above baseline',

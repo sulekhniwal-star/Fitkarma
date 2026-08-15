@@ -51,7 +51,10 @@ class MonthlyReportNotifier extends StateNotifier<MonthlyReportState> {
               chronologicalAge: 32,
               biologicalAge: 29.0,
               ageDeltaYears: -3.0,
-              positiveContributors: ['High HRV (≥65 ms)', 'Low Resting Heart Rate (<60 bpm)'],
+              positiveContributors: [
+                'High HRV (≥65 ms)',
+                'Low Resting Heart Rate (<60 bpm)'
+              ],
               riskFactors: [],
             ),
             averageSystolicBp: 118.0,
@@ -62,13 +65,16 @@ class MonthlyReportNotifier extends StateNotifier<MonthlyReportState> {
               HealthRiskAlert(
                 id: 'r_shoulder',
                 patternName: 'Shoulder Strain Risk',
-                description: 'High volume pressing + reported anterior deltoid soreness.',
+                description:
+                    'High volume pressing + reported anterior deltoid soreness.',
                 severity: RiskSeverity.moderate,
-                recommendation: 'Swap heavy overhead presses for cable face-pulls.',
+                recommendation:
+                    'Swap heavy overhead presses for cable face-pulls.',
                 actions: ['Incorporate face-pulls', 'Deload pressing volume'],
               ),
             ],
-            nextMonthFocusStrategy: 'Swap high volume dumbbell presses for face-pulls and maintain 8,000+ daily steps.',
+            nextMonthFocusStrategy:
+                'Swap high volume dumbbell presses for face-pulls and maintain 8,000+ daily steps.',
           ),
         );
 

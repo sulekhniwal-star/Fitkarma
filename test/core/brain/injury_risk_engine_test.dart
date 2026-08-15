@@ -8,12 +8,15 @@ void main() {
   group('§P10-D Injury Risk Engine Tests', () {
     const engine = InjuryRiskEngine();
 
-    test('analyze detects Shoulder injury risk on high pressing volume (>12,000 kg) and soreness (>3.0)', () {
+    test(
+        'analyze detects Shoulder injury risk on high pressing volume (>12,000 kg) and soreness (>3.0)',
+        () {
       final recoveryLogs = [
         const RecoveryLogSnapshot(region: 'shoulder', sorenessLevel: 3.4),
       ];
       final workoutLogs = [
-        const WorkoutLogSnapshot(exerciseCategory: 'pressing', volumeKg: 14200.0),
+        const WorkoutLogSnapshot(
+            exerciseCategory: 'pressing', volumeKg: 14200.0),
       ];
 
       final alerts = engine.analyze(
@@ -25,12 +28,16 @@ void main() {
       expect(alerts.length, equals(1));
       expect(alerts.first.region, equals('Shoulder'));
       expect(alerts.first.risk, equals(InjuryRiskLevel.moderate));
-      expect(alerts.first.actions, contains('Reduce pressing volume by 20% this week'));
+      expect(alerts.first.actions,
+          contains('Reduce pressing volume by 20% this week'));
     });
 
-    test('analyze detects Knee injury risk on knee valgus incidents (>2) and lower body volume (>15,000 kg)', () {
+    test(
+        'analyze detects Knee injury risk on knee valgus incidents (>2) and lower body volume (>15,000 kg)',
+        () {
       final workoutLogs = [
-        const WorkoutLogSnapshot(exerciseCategory: 'lower_body', volumeKg: 16500.0),
+        const WorkoutLogSnapshot(
+            exerciseCategory: 'lower_body', volumeKg: 16500.0),
       ];
 
       final alerts = engine.analyze(
@@ -44,9 +51,12 @@ void main() {
       expect(alerts.first.risk, equals(InjuryRiskLevel.moderate));
     });
 
-    test('analyze detects Lower Back high injury risk on soreness (>3.5) and HRV decline', () {
+    test(
+        'analyze detects Lower Back high injury risk on soreness (>3.5) and HRV decline',
+        () {
       final recoveryLogs = [
-        const RecoveryLogSnapshot(region: 'lower_back', sorenessLevel: 4.0, isHrvDeclining: true),
+        const RecoveryLogSnapshot(
+            region: 'lower_back', sorenessLevel: 4.0, isHrvDeclining: true),
       ];
 
       final alerts = engine.analyze(
@@ -58,12 +68,15 @@ void main() {
       expect(alerts.length, equals(1));
       expect(alerts.first.region, equals('Lower Back'));
       expect(alerts.first.risk, equals(InjuryRiskLevel.high));
-      expect(alerts.first.actions, contains('Skip deadlifts and heavy rows this week'));
+      expect(alerts.first.actions,
+          contains('Skip deadlifts and heavy rows this week'));
     });
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('InjuryRiskCard renders high/moderate risk alerts and action items correctly', (tester) async {
+    testWidgets(
+        'InjuryRiskCard renders high/moderate risk alerts and action items correctly',
+        (tester) async {
       const alerts = [
         InjuryRiskAlert(
           region: 'Shoulder',

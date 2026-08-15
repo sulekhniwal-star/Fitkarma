@@ -5,7 +5,8 @@ import 'package:fitkarma/features/premium/screens/coach_marketplace_screen.dart'
 import 'package:fitkarma/features/premium/providers/marketplace_provider.dart';
 
 void main() {
-  testWidgets('CoachMarketplaceScreen renders tab switcher, escrow banner, and coach list',
+  testWidgets(
+      'CoachMarketplaceScreen renders tab switcher, escrow banner, and coach list',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
@@ -95,7 +96,8 @@ void main() {
     await tester.tap(find.text('Book Coach').first);
     await tester.pumpAndSettle();
 
-    expect(container.read(marketplaceProvider).activeAssignments.length, equals(1));
+    expect(container.read(marketplaceProvider).activeAssignments.length,
+        equals(1));
     expect(find.textContaining('Secured 1:1 coaching'), findsOneWidget);
   });
 }

@@ -138,9 +138,10 @@ class TrainingOperatingSystemEngine {
       ]);
     }
 
-    final mobilityIdx = (100 - ((valgusRatio + heelLiftRatio + shallowRatio) * 33.3))
-        .clamp(0.0, 100.0)
-        .round();
+    final mobilityIdx =
+        (100 - ((valgusRatio + heelLiftRatio + shallowRatio) * 33.3))
+            .clamp(0.0, 100.0)
+            .round();
 
     return MobilityReport(
       identifiedIssues: diagnostics,
@@ -155,7 +156,9 @@ class TrainingOperatingSystemEngine {
     required double asymmetryRatePct,
     required double jointJitterIndex,
   }) {
-    final penalty = (tempoVariancePct * 0.4) + (asymmetryRatePct * 0.3) + (jointJitterIndex * 0.3);
+    final penalty = (tempoVariancePct * 0.4) +
+        (asymmetryRatePct * 0.3) +
+        (jointJitterIndex * 0.3);
     return (100.0 - penalty).clamp(0.0, 100.0);
   }
 
@@ -240,9 +243,11 @@ class TrainingOperatingSystemEngine {
     String rec = 'All segments ready for high intensity.';
     if ((upper - lower).abs() > 20.0) {
       if (lower < upper) {
-        rec = 'Readiness overall is high, but your legs need recovery. Swap Leg Day with Upper Body Day to maximize training capacity.';
+        rec =
+            'Readiness overall is high, but your legs need recovery. Swap Leg Day with Upper Body Day to maximize training capacity.';
       } else {
-        rec = 'Legs are fresh, but upper body is fatigued. Prioritize Lower Body Day today.';
+        rec =
+            'Legs are fresh, but upper body is fatigued. Prioritize Lower Body Day today.';
       }
     }
 
@@ -279,7 +284,8 @@ class TrainingOperatingSystemEngine {
   }) {
     if (scheduledWorkouts <= 0) return 100.0;
 
-    final ratio = (completedWorkouts / scheduledWorkouts.toDouble()).clamp(0.0, 1.0);
+    final ratio =
+        (completedWorkouts / scheduledWorkouts.toDouble()).clamp(0.0, 1.0);
     final base = ratio * 100.0;
     final penalties = (skippedSetsCount * 2.0) + (rescheduledDaysCount * 3.0);
 
@@ -298,11 +304,13 @@ class TrainingOperatingSystemEngine {
     final deltaPct = ((leftAngleDeg - rightAngleDeg).abs() / maxVal) * 100.0;
 
     final isImbalanced = deltaPct > 10.0;
-    String feedback = 'Excellent symmetry detected (${deltaPct.toStringAsFixed(1)}% delta).';
+    String feedback =
+        'Excellent symmetry detected (${deltaPct.toStringAsFixed(1)}% delta).';
 
     if (isImbalanced) {
       final weakerSide = leftAngleDeg < rightAngleDeg ? 'left' : 'right';
-      feedback = 'Imbalance detected: Your $weakerSide side is compensating (${deltaPct.toStringAsFixed(1)}% delta). Focus on stability.';
+      feedback =
+          'Imbalance detected: Your $weakerSide side is compensating (${deltaPct.toStringAsFixed(1)}% delta). Focus on stability.';
     }
 
     return AsymmetryReport(
@@ -318,22 +326,29 @@ class TrainingOperatingSystemEngine {
     required double reliabilityScore, // 0 to 100
   }) {
     if (historicWeights.length < 3) {
-      return ProjectedPerformance.empty('Insufficient data history to project strength trajectory.');
+      return ProjectedPerformance.empty(
+          'Insufficient data history to project strength trajectory.');
     }
 
-    final recentAvg = historicWeights.sublist(historicWeights.length - 3).reduce((a, b) => a + b) / 3.0;
+    final recentAvg = historicWeights
+            .sublist(historicWeights.length - 3)
+            .reduce((a, b) => a + b) /
+        3.0;
     final adherenceFactor = (reliabilityScore / 100.0).clamp(0.0, 1.0);
 
     final projectedGain8Weeks = 5.0 * adherenceFactor;
     final projectedGain12Weeks = 8.5 * adherenceFactor;
 
-    final weight8W = double.parse((recentAvg + projectedGain8Weeks).toStringAsFixed(1));
-    final weight12W = double.parse((recentAvg + projectedGain12Weeks).toStringAsFixed(1));
+    final weight8W =
+        double.parse((recentAvg + projectedGain8Weeks).toStringAsFixed(1));
+    final weight12W =
+        double.parse((recentAvg + projectedGain12Weeks).toStringAsFixed(1));
 
     return ProjectedPerformance(
       projected8WeekWeight: weight8W,
       projected12WeekWeight: weight12W,
-      forecastSummary: 'Maintaining a ${reliabilityScore.round()}% Reliability Score will progress your load to $weight8W kg in 8 weeks and $weight12W kg in 12 weeks.',
+      forecastSummary:
+          'Maintaining a ${reliabilityScore.round()}% Reliability Score will progress your load to $weight8W kg in 8 weeks and $weight12W kg in 12 weeks.',
     );
   }
 }

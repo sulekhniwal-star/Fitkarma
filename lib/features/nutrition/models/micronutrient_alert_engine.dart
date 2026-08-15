@@ -136,7 +136,8 @@ class MicronutrientAlertEngine {
     if (isVegetarian && b12Pct < 0.50) {
       alerts.add(MicroAlert(
         title: 'B12 Depletion Risk',
-        message: 'Your vegetarian diet yields only ${(b12Pct * 100).round()}% of Vitamin B12 targets. Consider adding fortified milk, curd, or an oral B12 supplement.',
+        message:
+            'Your vegetarian diet yields only ${(b12Pct * 100).round()}% of Vitamin B12 targets. Consider adding fortified milk, curd, or an oral B12 supplement.',
         severity: MicronutrientAlertSeverity.high,
       ));
     }
@@ -145,7 +146,8 @@ class MicronutrientAlertEngine {
     if (isFemale && ironPct < 0.60) {
       alerts.add(MicroAlert(
         title: 'Iron Deficit Warning',
-        message: 'Your logged meals reach only ${(ironPct * 100).round()}% of iron targets. Pair plant-iron (spinach, chana) with Vitamin C (lemon juice) to double non-heme absorption.',
+        message:
+            'Your logged meals reach only ${(ironPct * 100).round()}% of iron targets. Pair plant-iron (spinach, chana) with Vitamin C (lemon juice) to double non-heme absorption.',
         severity: MicronutrientAlertSeverity.medium,
       ));
     }
@@ -154,7 +156,8 @@ class MicronutrientAlertEngine {
     if (d3Pct < 0.40) {
       alerts.add(MicroAlert(
         title: 'Vitamin D3 Sub-Optimal Intake',
-        message: 'Current D3 intake is at ${(d3Pct * 100).round()}% of target. Include 15-min morning sunlight exposure or D3-fortified foods.',
+        message:
+            'Current D3 intake is at ${(d3Pct * 100).round()}% of target. Include 15-min morning sunlight exposure or D3-fortified foods.',
         severity: MicronutrientAlertSeverity.medium,
       ));
     }
@@ -163,7 +166,8 @@ class MicronutrientAlertEngine {
     if (isVegetarian && zincPct < 0.50) {
       alerts.add(MicroAlert(
         title: 'Zinc Bioavailability Deficit',
-        message: 'Zinc intake is low on a plant-based diet. Soak legumes and seeds to reduce phytates and boost absorption.',
+        message:
+            'Zinc intake is low on a plant-based diet. Soak legumes and seeds to reduce phytates and boost absorption.',
         severity: MicronutrientAlertSeverity.low,
       ));
     }

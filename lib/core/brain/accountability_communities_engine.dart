@@ -106,7 +106,8 @@ class AccountabilityCommunitiesEngine {
       CommunityInfo(
         id: 'comm_pcos',
         title: 'PCOS Warriors',
-        description: 'Women managing hormone balance through fitness & nutrition.',
+        description:
+            'Women managing hormone balance through fitness & nutrition.',
         category: CommunityCategory.womenHealth,
         targetAudience: 'Women with PCOS',
         memberCount: 6400,
@@ -115,7 +116,8 @@ class AccountabilityCommunitiesEngine {
       CommunityInfo(
         id: 'comm_veg',
         title: 'Vegetarian Muscle Builders',
-        description: 'High-protein Satvik and Indian vegetarian recipes & strength gains.',
+        description:
+            'High-protein Satvik and Indian vegetarian recipes & strength gains.',
         category: CommunityCategory.vegNutrition,
         targetAudience: 'Veg users building muscle',
         memberCount: 11200,
@@ -124,7 +126,8 @@ class AccountabilityCommunitiesEngine {
       CommunityInfo(
         id: 'comm_diabetes',
         title: 'Diabetes Reversal Support',
-        description: 'Glycemic control and glucose stabilization through lifestyle.',
+        description:
+            'Glycemic control and glucose stabilization through lifestyle.',
         category: CommunityCategory.metabolicHealth,
         targetAudience: 'High glucose users',
         memberCount: 5100,
@@ -151,7 +154,8 @@ class AccountabilityCommunitiesEngine {
       CommunityInfo(
         id: 'comm_senior',
         title: 'Senior Strength India',
-        description: 'Joint-friendly strength, balance & vitality for 50+ members.',
+        description:
+            'Joint-friendly strength, balance & vitality for 50+ members.',
         category: CommunityCategory.seniorHealth,
         targetAudience: 'Users 50+',
         memberCount: 2900,
@@ -164,7 +168,10 @@ class AccountabilityCommunitiesEngine {
   bool isPostPrivacyCompliant(CommunityActivityPost post) {
     final lower = post.activityTitle.toLowerCase();
     // Block raw metrics / sensitive medical data leakage (BP values, raw weight kg, medical diagnoses)
-    if (lower.contains('bp ') || lower.contains('mmhg') || lower.contains('glucose') || lower.contains('diagnosis')) {
+    if (lower.contains('bp ') ||
+        lower.contains('mmhg') ||
+        lower.contains('glucose') ||
+        lower.contains('diagnosis')) {
       return false;
     }
     return true;

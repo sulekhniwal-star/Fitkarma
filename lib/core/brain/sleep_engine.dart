@@ -35,13 +35,15 @@ class SleepEngine {
     double midpointShiftMinutes = 15.0, // 15 mins shift from baseline
   }) {
     // Pillar 1: Duration Ratio
-    final durationScore = ((actualSleepHours / sleepNeedHours) * 100.0).clamp(0.0, 100.0);
+    final durationScore =
+        ((actualSleepHours / sleepNeedHours) * 100.0).clamp(0.0, 100.0);
 
     // Pillar 2: Efficiency Ratio
     final efficiencyScore = (efficiencyRatio * 100.0).clamp(0.0, 100.0);
 
     // Pillar 3: Restfulness Ratio (Deep + REM sleep quality)
-    final restfulnessScore = ((deepSleepRatio / 0.22) * 100.0).clamp(0.0, 100.0);
+    final restfulnessScore =
+        ((deepSleepRatio / 0.22) * 100.0).clamp(0.0, 100.0);
 
     // Pillar 4: Circadian Timing Penalty (Penalize shifts > 45 minutes)
     double circadianScore = 100.0;

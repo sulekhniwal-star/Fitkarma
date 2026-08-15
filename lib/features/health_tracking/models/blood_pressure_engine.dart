@@ -64,7 +64,8 @@ class BloodPressureRecord {
     this.recordingMethod = BpRecordingMethod.manual,
   });
 
-  BpCategory get category => BloodPressureEngine.categorizeBp(systolic, diastolic);
+  BpCategory get category =>
+      BloodPressureEngine.categorizeBp(systolic, diastolic);
 
   String get readingLabel => '$systolic / $diastolic mmHg';
 }
@@ -97,9 +98,10 @@ class BloodPressureEngine {
   }
 
   /// Detects consecutive rising BP trend (e.g. 3 rising readings in a row)
-  bool detectRisingTrend(List<BloodPressureRecord> history, {int consecutiveCount = 3}) {
+  bool detectRisingTrend(List<BloodPressureRecord> history,
+      {int consecutiveCount = 3}) {
     if (history.length < consecutiveCount) return false;
-    
+
     // Sort ascending by measuredAt to trace timeline
     final sorted = List<BloodPressureRecord>.from(history)
       ..sort((a, b) => a.measuredAt.compareTo(b.measuredAt));
@@ -127,7 +129,8 @@ class BloodPressureEngine {
       return 'Warning: 3 consecutive rising BP readings recorded. Limit caffeine and record again tonight.';
     }
 
-    if (latest.category == BpCategory.stage2 || latest.category == BpCategory.stage1) {
+    if (latest.category == BpCategory.stage2 ||
+        latest.category == BpCategory.stage1) {
       return 'Elevated blood pressure trend (${latest.readingLabel}). Consider light cardio over max-effort lifts today.';
     }
 

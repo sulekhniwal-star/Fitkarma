@@ -79,10 +79,10 @@ extension SleepQualityLabel on SleepQuality {
 // ── Sleep Stage Breakdown ─────────────────────────────────────────────────────
 
 class SleepStageBreakdown {
-  final double awakePct;  // 0.0–1.0
-  final double remPct;    // 0.0–1.0
-  final double lightPct;  // 0.0–1.0
-  final double deepPct;   // 0.0–1.0
+  final double awakePct; // 0.0–1.0
+  final double remPct; // 0.0–1.0
+  final double lightPct; // 0.0–1.0
+  final double deepPct; // 0.0–1.0
 
   const SleepStageBreakdown({
     required this.awakePct,
@@ -129,10 +129,10 @@ class HrvDataPoint {
 
 class NightSleepRecord {
   final DateTime date;
-  final double totalHours;         // e.g. 7.25 = 7h 15m
+  final double totalHours; // e.g. 7.25 = 7h 15m
   final SleepQuality quality;
   final SleepStageBreakdown stages;
-  final double efficiencyPct;      // 0–100
+  final double efficiencyPct; // 0–100
   final DateTime? bedtime;
   final DateTime? wakeTime;
 
@@ -183,7 +183,8 @@ class SleepDebtEngine {
       padded.insert(0, baselineMinutes); // Assume target on missing days
     }
     // Use last 7 entries
-    final window = padded.length > 7 ? padded.sublist(padded.length - 7) : padded;
+    final window =
+        padded.length > 7 ? padded.sublist(padded.length - 7) : padded;
     int debt = 0;
     for (final minutes in window) {
       debt += baselineMinutes - minutes;
@@ -222,9 +223,11 @@ class SleepDebtEngine {
     final durationRatio = needHours > 0 ? actualHours / needHours : 0.0;
     final restfulness = deepPct + remPct; // combined restorative %
 
-    if (durationRatio >= 0.95 && restfulness >= 0.38) return SleepQuality.excellent;
+    if (durationRatio >= 0.95 && restfulness >= 0.38)
+      return SleepQuality.excellent;
     if (durationRatio >= 0.87 && restfulness >= 0.33) return SleepQuality.good;
-    if (durationRatio >= 0.75 && restfulness >= 0.25) return SleepQuality.normal;
+    if (durationRatio >= 0.75 && restfulness >= 0.25)
+      return SleepQuality.normal;
     if (durationRatio >= 0.60) return SleepQuality.fair;
     return SleepQuality.poor;
   }

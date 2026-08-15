@@ -22,7 +22,8 @@ class MonthlyReportScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Monthly Health Report', style: AppTypography.h2),
@@ -32,7 +33,8 @@ class MonthlyReportScreen extends ConsumerWidget {
             onPressed: () {
               ref.read(monthlyReportProvider.notifier).triggerExportPdf();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Exporting Monthly Health Report PDF...')),
+                const SnackBar(
+                    content: Text('Exporting Monthly Health Report PDF...')),
               );
             },
           ),
@@ -40,7 +42,8 @@ class MonthlyReportScreen extends ConsumerWidget {
             icon: const Icon(Icons.share, color: AppColors.teal),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Sharing Monthly Health Report...')),
+                const SnackBar(
+                    content: Text('Sharing Monthly Health Report...')),
               );
             },
           ),
@@ -52,7 +55,9 @@ class MonthlyReportScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Report Period: May 2026', style: AppTypography.labelLg.copyWith(color: AppColors.textSecondary)),
+              Text('Report Period: May 2026',
+                  style: AppTypography.labelLg
+                      .copyWith(color: AppColors.textSecondary)),
               const SizedBox(height: AppSpacing.md),
 
               // Biological Age vs Chronological Age BentoCard
@@ -60,21 +65,27 @@ class MonthlyReportScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Biological Age vs. Chronological Age', style: AppTypography.h3),
+                    Text('Biological Age vs. Chronological Age',
+                        style: AppTypography.h3),
                     const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Chronological Age: ${report.biologicalAgeResult.chronologicalAge} Years', style: AppTypography.bodySm),
+                        Text(
+                            'Chronological Age: ${report.biologicalAgeResult.chronologicalAge} Years',
+                            style: AppTypography.bodySm),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.success.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
                             'Bio Age: ${report.biologicalAgeResult.biologicalAge.round()} Yrs (${report.biologicalAgeResult.ageDeltaYears.round()} yrs)',
-                            style: AppTypography.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold),
+                            style: AppTypography.labelSmall.copyWith(
+                                color: AppColors.success,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -82,7 +93,8 @@ class MonthlyReportScreen extends ConsumerWidget {
                     const SizedBox(height: 6),
                     Text(
                       'Summary: Excellent cardiovascular recovery trends & high HRV.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -100,7 +112,10 @@ class MonthlyReportScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Systolic BP:', style: AppTypography.bodySm),
-                        Text('${report.averageSystolicBp.round()} mmHg (Normal)', style: AppTypography.labelLg.copyWith(color: AppColors.success)),
+                        Text(
+                            '${report.averageSystolicBp.round()} mmHg (Normal)',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.success)),
                       ],
                     ),
                     const Divider(height: 16),
@@ -108,7 +123,10 @@ class MonthlyReportScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Fasting Glucose:', style: AppTypography.bodySm),
-                        Text('${report.averageFastingGlucoseMgDl.round()} mg/dL (Normal)', style: AppTypography.labelLg.copyWith(color: AppColors.success)),
+                        Text(
+                            '${report.averageFastingGlucoseMgDl.round()} mg/dL (Normal)',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.success)),
                       ],
                     ),
                     const Divider(height: 16),
@@ -116,7 +134,10 @@ class MonthlyReportScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('HRV Average:', style: AppTypography.bodySm),
-                        Text('${report.averageHrvMs.round()} ms (+8% vs last month)', style: AppTypography.labelLg.copyWith(color: AppColors.primary)),
+                        Text(
+                            '${report.averageHrvMs.round()} ms (+8% vs last month)',
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.primary)),
                       ],
                     ),
                   ],
@@ -135,12 +156,15 @@ class MonthlyReportScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: AppColors.warning.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
+                      border: Border.all(
+                          color: AppColors.warning.withValues(alpha: 0.3)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(risk.patternName, style: AppTypography.labelLg.copyWith(color: AppColors.warning)),
+                        Text(risk.patternName,
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.warning)),
                         const SizedBox(height: 2),
                         Text(risk.description, style: AppTypography.bodySm),
                       ],
@@ -157,11 +181,13 @@ class MonthlyReportScreen extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                  border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.3)),
                 ),
                 child: Text(
                   report.nextMonthFocusStrategy,
-                  style: AppTypography.bodySm.copyWith(color: AppColors.primary),
+                  style:
+                      AppTypography.bodySm.copyWith(color: AppColors.primary),
                 ),
               ),
               const SizedBox(height: 30),

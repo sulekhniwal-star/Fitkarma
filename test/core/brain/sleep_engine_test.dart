@@ -7,7 +7,9 @@ void main() {
     const sleepEngine = SleepEngine();
     const illnessDetector = IllnessDetector();
 
-    test('4-pillar sleep score calculates correctly with high duration & efficiency', () {
+    test(
+        '4-pillar sleep score calculates correctly with high duration & efficiency',
+        () {
       final result = sleepEngine.calculateSleepPerformance(
         actualSleepHours: 8.0,
         sleepNeedHours: 8.0,
@@ -42,7 +44,8 @@ void main() {
       expect(result.reason, contains('Resting HR elevated'));
     });
 
-    test('Illness Detector triggers alarm when HRV drops below 70% baseline', () {
+    test('Illness Detector triggers alarm when HRV drops below 70% baseline',
+        () {
       final result = illnessDetector.checkIllnessAlarm(
         currentRhr: 60,
         baselineRhr: 60,

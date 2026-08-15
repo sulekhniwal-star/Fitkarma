@@ -129,10 +129,14 @@ class CoachBriefingPackage {
     sb.writeln('Program:      $programName');
     sb.writeln();
     sb.writeln('Current Status:');
-    sb.writeln('  Weight change (4w):  ${weightChange4wKg >= 0 ? '+' : ''}${weightChange4wKg.toStringAsFixed(1)} kg (expected ${expectedWeightChange4wKg >= 0 ? '+' : ''}${expectedWeightChange4wKg.toStringAsFixed(1)} kg)');
-    sb.writeln('  Calorie target:      $calorieTarget (after $adaptiveAdjustmentCount adaptive adjustment${adaptiveAdjustmentCount == 1 ? '' : 's'})');
-    sb.writeln('  Adherence:           Nutrition ${nutritionAdherencePct.round()}% / Training ${trainingAdherencePct.round()}%');
-    sb.writeln('  Recovery Debt:       $recoveryDebtLevel ($sleepDeficitDays-day sleep deficit)');
+    sb.writeln(
+        '  Weight change (4w):  ${weightChange4wKg >= 0 ? '+' : ''}${weightChange4wKg.toStringAsFixed(1)} kg (expected ${expectedWeightChange4wKg >= 0 ? '+' : ''}${expectedWeightChange4wKg.toStringAsFixed(1)} kg)');
+    sb.writeln(
+        '  Calorie target:      $calorieTarget (after $adaptiveAdjustmentCount adaptive adjustment${adaptiveAdjustmentCount == 1 ? '' : 's'})');
+    sb.writeln(
+        '  Adherence:           Nutrition ${nutritionAdherencePct.round()}% / Training ${trainingAdherencePct.round()}%');
+    sb.writeln(
+        '  Recovery Debt:       $recoveryDebtLevel ($sleepDeficitDays-day sleep deficit)');
     sb.writeln();
     sb.writeln('AI Limitations Hit:');
     for (final limitation in aiLimitationsHit) {
@@ -199,7 +203,8 @@ class EscalationResult {
     this.userNotificationBody = '',
   });
 
-  static const EscalationResult noEscalation = EscalationResult(escalated: false);
+  static const EscalationResult noEscalation =
+      EscalationResult(escalated: false);
 }
 
 class CoachEscalationService {
@@ -229,22 +234,26 @@ class CoachEscalationService {
   /// Identify the primary escalation reason (highest priority first)
   EscalationReason identifyReason(UserEscalationState state) {
     if (state.activeRisks.any((r) => r.severity == RiskSeverity.high)) {
-      final risk = state.activeRisks.firstWhere((r) => r.severity == RiskSeverity.high);
+      final risk =
+          state.activeRisks.firstWhere((r) => r.severity == RiskSeverity.high);
       return EscalationReason(
         triggerType: EscalationTriggerType.highRiskMedical,
-        clinicalNote: 'High-risk biometric signal: ${risk.description}. Possible ${risk.riskType} involvement requiring clinical review.',
+        clinicalNote:
+            'High-risk biometric signal: ${risk.description}. Possible ${risk.riskType} involvement requiring clinical review.',
       );
     }
     if (state.plateauWeeks >= 4 && state.adaptiveCaloriesAlreadyAdjusted) {
       return EscalationReason(
         triggerType: EscalationTriggerType.unresolvedPlateau,
-        clinicalNote: 'Metabolic plateau for ${state.plateauWeeks} consecutive weeks post-recalibration. Possible thyroid/cortisol involvement.',
+        clinicalNote:
+            'Metabolic plateau for ${state.plateauWeeks} consecutive weeks post-recalibration. Possible thyroid/cortisol involvement.',
       );
     }
     if (state.consecutiveRelapseAttempts >= 3) {
       return EscalationReason(
         triggerType: EscalationTriggerType.psychologicalDistress,
-        clinicalNote: '${state.consecutiveRelapseAttempts} consecutive relapse attempts detected. Behavioural support beyond AI scope.',
+        clinicalNote:
+            '${state.consecutiveRelapseAttempts} consecutive relapse attempts detected. Behavioural support beyond AI scope.',
       );
     }
     return const EscalationReason(

@@ -25,7 +25,8 @@ class SquadMissionSpec {
 class SquadMemberPrivacyStatus {
   final String userId;
   final String name;
-  final String readinessTierLabel; // High / Moderate / Low (NO raw numerical score shared!)
+  final String
+      readinessTierLabel; // High / Moderate / Low (NO raw numerical score shared!)
   final bool hasLoggedToday;
 
   const SquadMemberPrivacyStatus({
@@ -95,7 +96,8 @@ class SquadSystemEngine {
     for (int i = 0; i < memberCount; i++) {
       final score = memberReadinessScores[i];
       final name = memberNames.length > i ? memberNames[i] : 'Member ${i + 1}';
-      final hasLogged = memberLoggedTodayList.length > i ? memberLoggedTodayList[i] : false;
+      final hasLogged =
+          memberLoggedTodayList.length > i ? memberLoggedTodayList[i] : false;
 
       totalReadiness += score;
 
@@ -118,7 +120,8 @@ class SquadSystemEngine {
     }
 
     final avgRecovery = memberCount > 0 ? (totalReadiness / memberCount) : 70.0;
-    final isChallengeEligible = memberCount > 0 ? (highCount / memberCount) >= 0.60 : false;
+    final isChallengeEligible =
+        memberCount > 0 ? (highCount / memberCount) >= 0.60 : false;
     final isRestPaused = avgRecovery < 50.0;
 
     // Mission Generation from Aggregate Data
@@ -156,7 +159,8 @@ class SquadSystemEngine {
         type: SquadMissionType.readinessBoost,
         title: '🧘 Squad Active Recovery Sprint',
         progressPercent: 0.40,
-        targetStatusText: 'Team Recovery < 50%. Focus on 8h sleep & gentle walking.',
+        targetStatusText:
+            'Team Recovery < 50%. Focus on 8h sleep & gentle walking.',
         collectiveXpReward: 300,
       );
     }
@@ -184,6 +188,7 @@ class SquadSystemEngine {
   String generateInviteCode() {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     final random = Random();
-    return List.generate(6, (index) => chars[random.nextInt(chars.length)]).join();
+    return List.generate(6, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 }

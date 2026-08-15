@@ -37,9 +37,18 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
   void _recalculate() {
     final mob = _engine.diagnoseSquatPattern(
       setLogs: const [
-        FormAnalysisResult(kneeValgusDetected: false, heelLiftDetected: true, squatDepthAngle: 75.0),
-        FormAnalysisResult(kneeValgusDetected: true, heelLiftDetected: true, squatDepthAngle: 85.0),
-        FormAnalysisResult(kneeValgusDetected: false, heelLiftDetected: true, squatDepthAngle: 72.0),
+        FormAnalysisResult(
+            kneeValgusDetected: false,
+            heelLiftDetected: true,
+            squatDepthAngle: 75.0),
+        FormAnalysisResult(
+            kneeValgusDetected: true,
+            heelLiftDetected: true,
+            squatDepthAngle: 85.0),
+        FormAnalysisResult(
+            kneeValgusDetected: false,
+            heelLiftDetected: true,
+            squatDepthAngle: 72.0),
       ],
     );
 
@@ -75,7 +84,8 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Training OS — TOS 5.0', style: AppTypography.h2),
@@ -93,26 +103,32 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Movement Health Score (MHS)', style: AppTypography.bodySm),
+                      Text('Movement Health Score (MHS)',
+                          style: AppTypography.bodySm),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.teal.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           'Movement Age: ${_movementProfile.movementAge} yrs',
-                          style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.teal),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 6),
-                  Text('${_movementProfile.movementHealthScore} / 100 (${_movementProfile.athleticTier})', style: AppTypography.h1),
+                  Text(
+                      '${_movementProfile.movementHealthScore} / 100 (${_movementProfile.athleticTier})',
+                      style: AppTypography.h1),
                   const SizedBox(height: AppSpacing.sm),
                   Text(
                     'Synthesized across Mobility (25%), Stability (25%), Balance (15%), Coordination (15%), and Form Accuracy (20%).',
-                    style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                    style: AppTypography.bodySm
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                 ],
               ),
@@ -125,7 +141,8 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Segmented Local Muscle Readiness', style: AppTypography.h3),
+                  Text('Segmented Local Muscle Readiness',
+                      style: AppTypography.h3),
                   const SizedBox(height: AppSpacing.sm),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -133,14 +150,19 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
                       Column(
                         children: [
                           Text('Upper Body', style: AppTypography.bodySm),
-                          Text('${_upperReadiness.round()}%', style: AppTypography.h2.copyWith(color: AppColors.success)),
+                          Text('${_upperReadiness.round()}%',
+                              style: AppTypography.h2
+                                  .copyWith(color: AppColors.success)),
                         ],
                       ),
-                      Container(width: 1, height: 35, color: AppColors.glassBorder),
+                      Container(
+                          width: 1, height: 35, color: AppColors.glassBorder),
                       Column(
                         children: [
                           Text('Lower Body', style: AppTypography.bodySm),
-                          Text('${_lowerReadiness.round()}%', style: AppTypography.h2.copyWith(color: AppColors.accent)),
+                          Text('${_lowerReadiness.round()}%',
+                              style: AppTypography.h2
+                                  .copyWith(color: AppColors.accent)),
                         ],
                       ),
                     ],
@@ -155,7 +177,8 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
                     ),
                     child: Text(
                       '⚡ Smart Swap Suggestion: Readiness overall is high, but your legs need recovery. Swap Leg Day with Upper Body Day to maximize training capacity.',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.accent, height: 1.3),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.accent, height: 1.3),
                     ),
                   ),
                 ],
@@ -172,22 +195,32 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Mobility Diagnosis & Correctives', style: AppTypography.h3),
-                      Text('Index: ${_mobilityReport.mobilityIndex}/100', style: AppTypography.labelLg.copyWith(color: AppColors.primary)),
+                      Text('Mobility Diagnosis & Correctives',
+                          style: AppTypography.h3),
+                      Text('Index: ${_mobilityReport.mobilityIndex}/100',
+                          style: AppTypography.labelLg
+                              .copyWith(color: AppColors.primary)),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.sm),
-                  Text('Identified Faults: ${_mobilityReport.identifiedIssues.join(", ")}', style: AppTypography.labelLg.copyWith(color: AppColors.accent)),
+                  Text(
+                      'Identified Faults: ${_mobilityReport.identifiedIssues.join(", ")}',
+                      style: AppTypography.labelLg
+                          .copyWith(color: AppColors.accent)),
                   const SizedBox(height: 6),
-                  Text('Prescribed Warm-up Drills:', style: AppTypography.bodySm.copyWith(color: AppColors.teal)),
+                  Text('Prescribed Warm-up Drills:',
+                      style:
+                          AppTypography.bodySm.copyWith(color: AppColors.teal)),
                   for (final drill in _mobilityReport.prescribedDrills)
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Row(
                         children: [
-                          const Icon(Icons.check_circle_outline, size: 14, color: AppColors.teal),
+                          const Icon(Icons.check_circle_outline,
+                              size: 14, color: AppColors.teal),
                           const SizedBox(width: 6),
-                          Expanded(child: Text(drill, style: AppTypography.bodySm)),
+                          Expanded(
+                              child: Text(drill, style: AppTypography.bodySm)),
                         ],
                       ),
                     ),
@@ -202,21 +235,28 @@ class _TrainingOsScreenState extends State<TrainingOsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Biomechanical Asymmetry & Forecasting', style: AppTypography.h3),
+                  Text('Biomechanical Asymmetry & Forecasting',
+                      style: AppTypography.h3),
                   const SizedBox(height: AppSpacing.sm),
                   Row(
                     children: [
-                      const Icon(Icons.warning_amber_rounded, color: AppColors.accent, size: 20),
+                      const Icon(Icons.warning_amber_rounded,
+                          color: AppColors.accent, size: 20),
                       const SizedBox(width: 6),
                       Expanded(
-                        child: Text(_asymmetryReport.recommendedAdjustment, style: AppTypography.bodySm.copyWith(color: AppColors.accent)),
+                        child: Text(_asymmetryReport.recommendedAdjustment,
+                            style: AppTypography.bodySm
+                                .copyWith(color: AppColors.accent)),
                       ),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  Text('12-Week Performance Projection:', style: AppTypography.labelLg),
+                  Text('12-Week Performance Projection:',
+                      style: AppTypography.labelLg),
                   const SizedBox(height: 4),
-                  Text(_forecast.forecastSummary, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, height: 1.3)),
+                  Text(_forecast.forecastSummary,
+                      style: AppTypography.bodySm.copyWith(
+                          color: AppColors.textSecondary, height: 1.3)),
                 ],
               ),
             ),

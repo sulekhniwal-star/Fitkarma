@@ -79,7 +79,8 @@ class AffiliateNotifier extends StateNotifier<AffiliateState> {
   /// Requests instant payout to bank account via RazorpayX / Payout API
   Future<void> requestInstantBankTransfer() async {
     if (state.stats.availableBalanceInr <= 0) {
-      state = state.copyWith(statusMessage: 'No available balance to withdraw.');
+      state =
+          state.copyWith(statusMessage: 'No available balance to withdraw.');
       return;
     }
 
@@ -93,7 +94,8 @@ class AffiliateNotifier extends StateNotifier<AffiliateState> {
     state = state.copyWith(
       stats: updatedStats,
       isRequestingPayout: false,
-      statusMessage: '🎉 Instant transfer of ₹${state.stats.availableBalanceInr.toStringAsFixed(0)} initiated!',
+      statusMessage:
+          '🎉 Instant transfer of ₹${state.stats.availableBalanceInr.toStringAsFixed(0)} initiated!',
     );
   }
 

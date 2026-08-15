@@ -42,7 +42,8 @@ void main() {
       expect(service.shouldEscalate(state), isFalse);
     });
 
-    test('shouldEscalate triggers on 4+ week plateau after adaptive adjustment', () {
+    test('shouldEscalate triggers on 4+ week plateau after adaptive adjustment',
+        () {
       const state = UserEscalationState(
         plateauWeeks: 4,
         adaptiveCaloriesAlreadyAdjusted: true,
@@ -50,7 +51,8 @@ void main() {
       expect(service.shouldEscalate(state), isTrue);
     });
 
-    test('shouldEscalate does NOT trigger on 3-week plateau (threshold is 4)', () {
+    test('shouldEscalate does NOT trigger on 3-week plateau (threshold is 4)',
+        () {
       const state = UserEscalationState(
         plateauWeeks: 3,
         adaptiveCaloriesAlreadyAdjusted: true,
@@ -63,7 +65,8 @@ void main() {
       expect(service.shouldEscalate(state), isTrue);
     });
 
-    test('shouldEscalate triggers when user explicitly requests human coach', () {
+    test('shouldEscalate triggers when user explicitly requests human coach',
+        () {
       const state = UserEscalationState(userRequestedHumanCoach: true);
       expect(service.shouldEscalate(state), isTrue);
     });
@@ -95,7 +98,8 @@ void main() {
 
     // ── Coach Briefing Package Tests ────────────────────────────────────────
 
-    test('buildBriefing generates HIGH recovery debt label for 5+ day deficit', () {
+    test('buildBriefing generates HIGH recovery debt label for 5+ day deficit',
+        () {
       const state = UserEscalationState(userRequestedHumanCoach: true);
       final reason = service.identifyReason(state);
       final briefing = service.buildBriefing(
@@ -117,7 +121,8 @@ void main() {
           'User reports extreme fatigue + mood changes',
         ],
         escalationReason: reason,
-        aiCoachNotesSummary: 'User flagged extreme fatigue and requested human review.',
+        aiCoachNotesSummary:
+            'User flagged extreme fatigue and requested human review.',
       );
 
       expect(briefing.userName, equals('Arjun Sharma'));
@@ -126,7 +131,8 @@ void main() {
       expect(briefing.aiLimitationsHit, hasLength(2));
     });
 
-    test('toFormattedBriefing produces structured output matching §P3-D spec', () {
+    test('toFormattedBriefing produces structured output matching §P3-D spec',
+        () {
       const state = UserEscalationState(userRequestedHumanCoach: true);
       final reason = service.identifyReason(state);
       final briefing = service.buildBriefing(
@@ -187,7 +193,8 @@ void main() {
 
     // ── EscalationNotifier Tests ────────────────────────────────────────────
 
-    test('EscalationNotifier.requestHumanCoach sets isEscalated = true', () async {
+    test('EscalationNotifier.requestHumanCoach sets isEscalated = true',
+        () async {
       final notifier = EscalationNotifier(const CoachEscalationService());
       expect(notifier.state.isEscalated, isFalse);
 
@@ -205,7 +212,8 @@ void main() {
 
     // ── UI Widget Tests ─────────────────────────────────────────────────────
 
-    testWidgets('EscalateToHumanCoachButton renders Elite tier button', (tester) async {
+    testWidgets('EscalateToHumanCoachButton renders Elite tier button',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -238,10 +246,12 @@ void main() {
       expect(find.text('Talk to a Human Coach'), findsOneWidget);
       expect(find.text('Continue with AI Coach'), findsOneWidget);
       // Request button may require scroll in small viewport — confirm it exists somewhere
-      expect(find.textContaining('Request Coach Review', skipOffstage: false), findsOneWidget);
+      expect(find.textContaining('Request Coach Review', skipOffstage: false),
+          findsOneWidget);
     });
 
-    testWidgets('EscalationSuccessBanner shows notification title', (tester) async {
+    testWidgets('EscalationSuccessBanner shows notification title',
+        (tester) async {
       const result = EscalationResult(
         escalated: true,
         reason: EscalationTriggerType.userRequested,
@@ -257,8 +267,10 @@ void main() {
         ),
       );
 
-      expect(find.text('Your health coach will review your plan'), findsOneWidget);
-      expect(find.text('A certified coach is reviewing your data.'), findsOneWidget);
+      expect(
+          find.text('Your health coach will review your plan'), findsOneWidget);
+      expect(find.text('A certified coach is reviewing your data.'),
+          findsOneWidget);
     });
   });
 }

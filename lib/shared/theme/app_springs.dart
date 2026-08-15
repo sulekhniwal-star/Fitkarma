@@ -24,6 +24,9 @@ class ElasticOutCurve extends Curve {
   double transformInternal(double t) {
     return (t == 0 || t == 1)
         ? t
-        : (math.pow(2, -10 * t) * math.sin((t - period / 4) * (2 * math.pi) / period) + 1).toDouble();
+        : (math.pow(2, -10 * t) *
+                    math.sin((t - period / 4) * (2 * math.pi) / period) +
+                1)
+            .toDouble();
   }
 }

@@ -47,7 +47,8 @@ class PredictiveHealthScreen extends ConsumerWidget {
                         ),
                         Text(
                           '${bioAge.biologicalAge.round()}',
-                          style: AppTypography.displayLarge.copyWith(color: AppColors.primaryEmerald),
+                          style: AppTypography.displayLarge
+                              .copyWith(color: AppColors.primaryEmerald),
                         ),
                       ],
                     ),
@@ -56,12 +57,15 @@ class PredictiveHealthScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Biological Age', style: AppTypography.titleLarge),
+                          Text('Biological Age',
+                              style: AppTypography.titleLarge),
                           Text(
                             'Chrono: ${bioAge.chronologicalAge.round()} yrs (${bioAge.ageDeltaYears >= 0 ? "${bioAge.ageDeltaYears.toStringAsFixed(1)} yrs younger!" : "Elevated"})',
-                            style: AppTypography.titleMedium.copyWith(color: AppColors.primaryEmerald),
+                            style: AppTypography.titleMedium
+                                .copyWith(color: AppColors.primaryEmerald),
                           ),
-                          Text(bioAge.primaryContributor, style: AppTypography.labelSmall),
+                          Text(bioAge.primaryContributor,
+                              style: AppTypography.labelSmall),
                         ],
                       ),
                     ),
@@ -78,11 +82,14 @@ class PredictiveHealthScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('CGM Spike Detection', style: AppTypography.titleMedium),
+                        Text('CGM Spike Detection',
+                            style: AppTypography.titleMedium),
                         Chip(
                           backgroundColor: AppColors.glassBgMid,
                           side: const BorderSide(color: AppColors.glassBorder),
-                          label: Text(cgm.severity, style: AppTypography.labelSmall.copyWith(color: AppColors.warningAmber)),
+                          label: Text(cgm.severity,
+                              style: AppTypography.labelSmall
+                                  .copyWith(color: AppColors.warningAmber)),
                         ),
                       ],
                     ),
@@ -92,7 +99,9 @@ class PredictiveHealthScreen extends ConsumerWidget {
                       style: AppTypography.bodyMedium,
                     ),
                     const SizedBox(height: 4.0),
-                    Text('Rec: ${cgm.recommendation}', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryCyan)),
+                    Text('Rec: ${cgm.recommendation}',
+                        style: AppTypography.labelSmall
+                            .copyWith(color: AppColors.primaryCyan)),
                   ],
                 ),
               ),
@@ -109,10 +118,13 @@ class PredictiveHealthScreen extends ConsumerWidget {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.medication_liquid, color: AppColors.warningAmber),
+                      const Icon(Icons.medication_liquid,
+                          color: AppColors.warningAmber),
                       const SizedBox(width: AppSpacing.md),
                       Expanded(
-                        child: Text(state.activeDrugWarning!, style: AppTypography.bodyMedium.copyWith(color: AppColors.warningAmber)),
+                        child: Text(state.activeDrugWarning!,
+                            style: AppTypography.bodyMedium
+                                .copyWith(color: AppColors.warningAmber)),
                       ),
                     ],
                   ),
@@ -127,14 +139,18 @@ class PredictiveHealthScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Passcode Doctor Share PDF', style: AppTypography.titleMedium),
-                        Text('DPDP Act & Medical Disclaimer Compliant', style: AppTypography.labelSmall),
+                        Text('Passcode Doctor Share PDF',
+                            style: AppTypography.titleMedium),
+                        Text('DPDP Act & Medical Disclaimer Compliant',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
                     Chip(
                       backgroundColor: AppColors.glassBgMid,
                       side: const BorderSide(color: AppColors.glassBorder),
-                      label: Text(state.doctorPortalPasscode, style: AppTypography.titleMedium.copyWith(color: AppColors.primaryCyan)),
+                      label: Text(state.doctorPortalPasscode,
+                          style: AppTypography.titleMedium
+                              .copyWith(color: AppColors.primaryCyan)),
                     ),
                   ],
                 ),

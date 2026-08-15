@@ -22,7 +22,9 @@ void main() {
       expect(res.metabolicAdaptationState, contains('Metabolic Acceleration'));
     });
 
-    test('Environmental Health Engine shifts outdoor workouts to indoor when AQI > 150', () {
+    test(
+        'Environmental Health Engine shifts outdoor workouts to indoor when AQI > 150',
+        () {
       final res = envEngine.evaluateEnvironmentalSafety(
         aqi: 165,
         uvIndex: 5.0,
@@ -33,9 +35,13 @@ void main() {
       expect(res.workoutRecommendation, contains('Unhealthy Air Quality'));
     });
 
-    test('Women\'s Health Engine adjusts strength target and nutrition per phase', () {
-      final follicular = womensEngine.calculatePrescription(phase: MenstrualPhase.follicular);
-      final luteal = womensEngine.calculatePrescription(phase: MenstrualPhase.luteal);
+    test(
+        'Women\'s Health Engine adjusts strength target and nutrition per phase',
+        () {
+      final follicular =
+          womensEngine.calculatePrescription(phase: MenstrualPhase.follicular);
+      final luteal =
+          womensEngine.calculatePrescription(phase: MenstrualPhase.luteal);
 
       expect(follicular.strengthTargetMultiplier, equals(1.05));
       expect(luteal.strengthTargetMultiplier, equals(0.95));

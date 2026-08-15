@@ -100,7 +100,8 @@ class BiologicalAgeEstimator {
 
     // Clamp total biological age calculation to reasonable limits (-7 to +7 years vs chronological age)
     final clampedAdjustment = ageAdjustment.clamp(-7.0, 7.0);
-    final bioAge = (inputs.chronologicalAge + clampedAdjustment).clamp(18.0, 100.0);
+    final bioAge =
+        (inputs.chronologicalAge + clampedAdjustment).clamp(18.0, 100.0);
 
     return BiologicalAgeEstimationResult(
       chronologicalAge: inputs.chronologicalAge,

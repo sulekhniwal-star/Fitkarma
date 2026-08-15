@@ -6,7 +6,9 @@ import 'package:fitkarma/features/predictive_health/screens/monthly_report_scree
 
 void main() {
   group('§P10-C Monthly Health Report & MonthlyReportNotifier Tests', () {
-    test('MonthlyReportNotifier initializes with report period and biological age results', () {
+    test(
+        'MonthlyReportNotifier initializes with report period and biological age results',
+        () {
       final notifier = MonthlyReportNotifier();
       final state = notifier.state;
 
@@ -16,7 +18,9 @@ void main() {
       expect(state.detectedRisks.length, equals(1));
     });
 
-    testWidgets('MonthlyReportScreen renders report month, biological age, biomarkers, and export buttons', (tester) async {
+    testWidgets(
+        'MonthlyReportScreen renders report month, biological age, biomarkers, and export buttons',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(home: MonthlyReportScreen()),
@@ -36,7 +40,8 @@ void main() {
       await tester.tap(find.byIcon(Icons.picture_as_pdf));
       await tester.pump();
 
-      expect(find.text('Exporting Monthly Health Report PDF...'), findsOneWidget);
+      expect(
+          find.text('Exporting Monthly Health Report PDF...'), findsOneWidget);
     });
   });
 }

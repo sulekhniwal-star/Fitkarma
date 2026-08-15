@@ -5,7 +5,9 @@ void main() {
   group('§P14-C Integration: Festival Cross-Module Adaptation Engine', () {
     const engine = FestivalCrossModuleEngine();
 
-    test('Active Diwali festival applies +200 kcal feast buffer and morning workout strategy', () {
+    test(
+        'Active Diwali festival applies +200 kcal feast buffer and morning workout strategy',
+        () {
       final festivals = FestivalCrossModuleEngine.getSeededFestivals(2026);
       final diwali = festivals.firstWhere((f) => f.type == FestivalType.diwali);
 
@@ -20,7 +22,8 @@ void main() {
 
     test('Navratri Fasting festival enables fasting macro protocol', () {
       final festivals = FestivalCrossModuleEngine.getSeededFestivals(2026);
-      final navratri = festivals.firstWhere((f) => f.type == FestivalType.navratri);
+      final navratri =
+          festivals.firstWhere((f) => f.type == FestivalType.navratri);
 
       final adaptation = engine.adapt(navratri);
 

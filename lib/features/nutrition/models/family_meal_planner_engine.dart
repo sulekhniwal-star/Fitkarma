@@ -2,7 +2,8 @@ class FamilyMemberProfile {
   final String id;
   final String name;
   final String role; // "Father", "Mother", "Child", etc.
-  final List<String> goals; // 'diabetes_reversal', 'weight_loss', 'muscle_gain', 'growth_stage'
+  final List<String>
+      goals; // 'diabetes_reversal', 'weight_loss', 'muscle_gain', 'growth_stage'
   final bool isDairyHeavyAllowed;
 
   const FamilyMemberProfile({
@@ -65,9 +66,10 @@ class FamilyMealPlannerEngine {
       id: 'rec_1',
       name: 'Palak Paneer + Multigrain Rotis',
       glycemicIndex: 42.0, // Low GI safe for diabetics
-      isDairyHeavy: false,  // Paneer is protein-rich moderate dairy
+      isDairyHeavy: false, // Paneer is protein-rich moderate dairy
       baseCalories: 450.0,
-      description: 'Iron & spinach enriched paneer gravy paired with high-fiber multigrain rotis.',
+      description:
+          'Iron & spinach enriched paneer gravy paired with high-fiber multigrain rotis.',
     ),
     FamilyRecipe(
       id: 'rec_2',
@@ -87,7 +89,8 @@ class FamilyMealPlannerEngine {
     List<FamilyRecipe> recipeDatabase = seededRecipes,
   }) {
     // 1. Identify active medical constraints across all family members
-    final hasDiabeticMember = familyMembers.any((m) => m.goals.contains('diabetes_reversal'));
+    final hasDiabeticMember =
+        familyMembers.any((m) => m.goals.contains('diabetes_reversal'));
     final hasPcosMember = familyMembers.any((m) => m.goals.contains('pcos'));
 
     // 2. Filter base dish to fit clinical conflict hierarchy (Low GI <= 55 for Diabetes, Non-Dairy-Heavy for PCOS)
@@ -97,7 +100,9 @@ class FamilyMealPlannerEngine {
       return true;
     }).toList();
 
-    final baseRecipe = suitableRecipes.isNotEmpty ? suitableRecipes.first : recipeDatabase.first;
+    final baseRecipe = suitableRecipes.isNotEmpty
+        ? suitableRecipes.first
+        : recipeDatabase.first;
 
     final summary = hasDiabeticMember
         ? 'Medical Priority: Low Glycemic Index (GI ≤ 55) enforced for diabetic health defense.'
@@ -119,12 +124,15 @@ class FamilyMealPlannerEngine {
         sideText = 'Double Paneer & 200g Salad (Glycemic defense)';
       } else if (member.goals.contains('weight_loss')) {
         multiplier = 0.80;
-        customNote = 'Deficit Control: Portion 2 Rotis, double curd, high salad.';
+        customNote =
+            'Deficit Control: Portion 2 Rotis, double curd, high salad.';
         rotiText = '2 Multigrain Rotis';
         sideText = 'Double Curd + High Salad (Deficit control)';
-      } else if (member.goals.contains('growth_stage') || member.goals.contains('muscle_gain')) {
+      } else if (member.goals.contains('growth_stage') ||
+          member.goals.contains('muscle_gain')) {
         multiplier = 1.30;
-        customNote = 'Calorie Surplus: Portion 3 Rotis, high paneer, curd with honey.';
+        customNote =
+            'Calorie Surplus: Portion 3 Rotis, high paneer, curd with honey.';
         rotiText = '3 Multigrain Rotis';
         sideText = 'High Paneer + Curd with Honey (Calorie surplus)';
       }

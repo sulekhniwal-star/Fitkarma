@@ -57,9 +57,12 @@ class NutritionAdherenceEngine {
     required double targetCalories,
     required double targetProtein,
     List<MealTimeMedian> historicalMedians = const [
-      MealTimeMedian(type: MealType.breakfast, time: TimeOfDay(hour: 8, minute: 30)),
-      MealTimeMedian(type: MealType.lunch, time: TimeOfDay(hour: 13, minute: 0)),
-      MealTimeMedian(type: MealType.dinner, time: TimeOfDay(hour: 20, minute: 30)),
+      MealTimeMedian(
+          type: MealType.breakfast, time: TimeOfDay(hour: 8, minute: 30)),
+      MealTimeMedian(
+          type: MealType.lunch, time: TimeOfDay(hour: 13, minute: 0)),
+      MealTimeMedian(
+          type: MealType.dinner, time: TimeOfDay(hour: 20, minute: 30)),
     ],
   }) {
     double caloriePts = 0.0;
@@ -97,14 +100,18 @@ class NutritionAdherenceEngine {
 
     final totalScore = caloriePts + proteinPts + completenessPts + timingPts;
 
-    String feedback = 'Excellent consistency! Your nutrition adherence is on track.';
+    String feedback =
+        'Excellent consistency! Your nutrition adherence is on track.';
     if (totalScore < 70) {
       if (proteinPts < 35) {
-        feedback = 'Protein intake was outside your ±15% target range. Aim to distribute protein evenly across main meals.';
+        feedback =
+            'Protein intake was outside your ±15% target range. Aim to distribute protein evenly across main meals.';
       } else if (completenessPts < 20) {
-        feedback = 'Log at least 3 main meals to maintain full tracking completeness.';
+        feedback =
+            'Log at least 3 main meals to maintain full tracking completeness.';
       } else {
-        feedback = 'Keep your calories within ±10% of target to maintain metabolic momentum.';
+        feedback =
+            'Keep your calories within ±10% of target to maintain metabolic momentum.';
       }
     }
 
@@ -119,13 +126,15 @@ class NutritionAdherenceEngine {
   }
 
   /// Verifies main meals are logged close (within ±60 min) to customary median meal times
-  bool checkTimingStability(List<MealEntry> meals, List<MealTimeMedian> medians) {
+  bool checkTimingStability(
+      List<MealEntry> meals, List<MealTimeMedian> medians) {
     int onTimeCount = 0;
 
     for (final meal in meals) {
       final median = medians.firstWhere(
         (m) => m.type == meal.type,
-        orElse: () => MealTimeMedian(type: meal.type, time: const TimeOfDay(hour: 12, minute: 0)),
+        orElse: () => MealTimeMedian(
+            type: meal.type, time: const TimeOfDay(hour: 12, minute: 0)),
       );
 
       final mealMinutes = meal.loggedAt.hour * 60 + meal.loggedAt.minute;

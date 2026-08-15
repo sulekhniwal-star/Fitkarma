@@ -21,7 +21,8 @@ class HealthClub {
   final String name;
   final String description;
   final String city;
-  final String? microLocation; // e.g. "Noida Sector 62", "Indiranagar Bangalore"
+  final String?
+      microLocation; // e.g. "Noida Sector 62", "Indiranagar Bangalore"
   final ClubType type;
   final double latitude;
   final double longitude;
@@ -70,7 +71,10 @@ class GeolocationClubsEngine {
     final dLon = _degreesToRadians(lon2 - lon1);
 
     final a = sin(dLat / 2) * sin(dLat / 2) +
-        cos(_degreesToRadians(lat1)) * cos(_degreesToRadians(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+        cos(_degreesToRadians(lat1)) *
+            cos(_degreesToRadians(lat2)) *
+            sin(dLon / 2) *
+            sin(dLon / 2);
 
     final c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return r * c;
@@ -120,7 +124,8 @@ class GeolocationClubsEngine {
       HealthClub(
         clubId: 'circle_veg_muscle',
         name: 'Vegetarian Muscle Builders Circle',
-        description: 'Nationwide interest circle for Satvik & vegetarian strength athletes.',
+        description:
+            'Nationwide interest circle for Satvik & vegetarian strength athletes.',
         city: 'India Nationwide',
         microLocation: null,
         type: ClubType.interestCircle,
@@ -150,7 +155,8 @@ class GeolocationClubsEngine {
     for (final club in clubList) {
       if (club.type == ClubType.interestCircle) {
         // Interest circles are nationwide (always matched)
-        matches.add(GeolocationClubMatch(club: club, distanceKm: 0.0, isNearby: true));
+        matches.add(
+            GeolocationClubMatch(club: club, distanceKm: 0.0, isNearby: true));
         continue;
       }
 

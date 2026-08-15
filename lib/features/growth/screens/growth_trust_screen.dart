@@ -18,7 +18,8 @@ class GrowthTrustScreen extends ConsumerWidget {
       backgroundColor: AppColors.bgPrimary,
       appBar: AppBar(
         backgroundColor: AppColors.bgPrimary,
-        title: Text('India Growth & Trust Layer', style: AppTypography.titleLarge),
+        title:
+            Text('India Growth & Trust Layer', style: AppTypography.titleLarge),
         elevation: 0,
       ),
       body: SafeArea(
@@ -30,11 +31,15 @@ class GrowthTrustScreen extends ConsumerWidget {
               // WhatsApp Cloud API Integration Switch Card
               GlassCard(
                 child: SwitchListTile(
-                  title: Text('WhatsApp Business Cloud Assistant', style: AppTypography.titleMedium),
-                  subtitle: Text('Log meals & workouts via WhatsApp voice notes (Off by default)', style: AppTypography.labelSmall),
+                  title: Text('WhatsApp Business Cloud Assistant',
+                      style: AppTypography.titleMedium),
+                  subtitle: Text(
+                      'Log meals & workouts via WhatsApp voice notes (Off by default)',
+                      style: AppTypography.labelSmall),
                   value: state.isWhatsappOptedIn,
                   activeThumbColor: AppColors.primaryEmerald,
-                  onChanged: (_) => ref.read(growthProvider.notifier).toggleWhatsappOptIn(),
+                  onChanged: (_) =>
+                      ref.read(growthProvider.notifier).toggleWhatsappOptIn(),
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
@@ -44,7 +49,8 @@ class GrowthTrustScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Vernacular ASR Voice Language', style: AppTypography.titleMedium),
+                    Text('Vernacular ASR Voice Language',
+                        style: AppTypography.titleMedium),
                     const SizedBox(height: AppSpacing.sm),
                     Wrap(
                       spacing: AppSpacing.xs,
@@ -55,7 +61,9 @@ class GrowthTrustScreen extends ConsumerWidget {
                           selected: isSelected,
                           selectedColor: AppColors.primaryCyan,
                           backgroundColor: AppColors.bgSecondary,
-                          onSelected: (_) => ref.read(growthProvider.notifier).selectLanguage(lang),
+                          onSelected: (_) => ref
+                              .read(growthProvider.notifier)
+                              .selectLanguage(lang),
                         );
                       }).toList(),
                     ),
@@ -72,14 +80,18 @@ class GrowthTrustScreen extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('ABHA Health ID (ABDM OAuth)', style: AppTypography.titleMedium),
-                        Text('Encrypted ID: ${state.abhaAccount.abhaNumber}', style: AppTypography.labelSmall),
+                        Text('ABHA Health ID (ABDM OAuth)',
+                            style: AppTypography.titleMedium),
+                        Text('Encrypted ID: ${state.abhaAccount.abhaNumber}',
+                            style: AppTypography.labelSmall),
                       ],
                     ),
                     Chip(
                       backgroundColor: AppColors.glassBgMid,
                       side: const BorderSide(color: AppColors.glassBorder),
-                      label: Text('FHIR-Lite Active', style: AppTypography.labelSmall.copyWith(color: AppColors.primaryEmerald)),
+                      label: Text('FHIR-Lite Active',
+                          style: AppTypography.labelSmall
+                              .copyWith(color: AppColors.primaryEmerald)),
                     ),
                   ],
                 ),
@@ -87,7 +99,8 @@ class GrowthTrustScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
 
               // Grocery Vendor Adapters Section
-              Text('Quick-Commerce Grocery Cart Adapters', style: AppTypography.titleLarge),
+              Text('Quick-Commerce Grocery Cart Adapters',
+                  style: AppTypography.titleLarge),
               const SizedBox(height: AppSpacing.sm),
               ...state.vendorAdapters.map(
                 (vendor) => Padding(
@@ -96,8 +109,10 @@ class GrowthTrustScreen extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(vendor.partnerName, style: AppTypography.titleMedium),
-                        const Icon(Icons.shopping_cart, color: AppColors.primaryCyan),
+                        Text(vendor.partnerName,
+                            style: AppTypography.titleMedium),
+                        const Icon(Icons.shopping_cart,
+                            color: AppColors.primaryCyan),
                       ],
                     ),
                   ),

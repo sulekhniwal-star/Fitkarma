@@ -21,9 +21,10 @@ class GlowingMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseStyle = customStyle ?? AppTypography.metricXL.copyWith(
-      color: Colors.white,
-    );
+    final baseStyle = customStyle ??
+        AppTypography.metricXL.copyWith(
+          color: Colors.white,
+        );
 
     return Column(
       mainAxisSize: MainAxisSize.min,

@@ -11,10 +11,12 @@ class MicronutrientIntelligenceScreen extends StatefulWidget {
   const MicronutrientIntelligenceScreen({super.key});
 
   @override
-  State<MicronutrientIntelligenceScreen> createState() => _MicronutrientIntelligenceScreenState();
+  State<MicronutrientIntelligenceScreen> createState() =>
+      _MicronutrientIntelligenceScreenState();
 }
 
-class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntelligenceScreen> {
+class _MicronutrientIntelligenceScreenState
+    extends State<MicronutrientIntelligenceScreen> {
   final _engine = const MicronutrientAlertEngine();
   bool _isFemale = true;
   bool _isVegetarian = true;
@@ -38,9 +40,33 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
 
     // Sample 3-day micronutrient log
     final sampleLogs = [
-      DailyMicroLog(ironMg: 9.0, b12Mcg: 1.0, d3Iu: 200, calciumMg: 800, magnesiumMg: 280, zincMg: 6.0, folateMcg: 300, omega3G: 1.0),
-      DailyMicroLog(ironMg: 10.0, b12Mcg: 1.2, d3Iu: 250, calciumMg: 850, magnesiumMg: 300, zincMg: 7.0, folateMcg: 350, omega3G: 1.2),
-      DailyMicroLog(ironMg: 8.5, b12Mcg: 0.9, d3Iu: 180, calciumMg: 780, magnesiumMg: 260, zincMg: 5.5, folateMcg: 280, omega3G: 0.9),
+      DailyMicroLog(
+          ironMg: 9.0,
+          b12Mcg: 1.0,
+          d3Iu: 200,
+          calciumMg: 800,
+          magnesiumMg: 280,
+          zincMg: 6.0,
+          folateMcg: 300,
+          omega3G: 1.0),
+      DailyMicroLog(
+          ironMg: 10.0,
+          b12Mcg: 1.2,
+          d3Iu: 250,
+          calciumMg: 850,
+          magnesiumMg: 300,
+          zincMg: 7.0,
+          folateMcg: 350,
+          omega3G: 1.2),
+      DailyMicroLog(
+          ironMg: 8.5,
+          b12Mcg: 0.9,
+          d3Iu: 180,
+          calciumMg: 780,
+          magnesiumMg: 260,
+          zincMg: 5.5,
+          folateMcg: 280,
+          omega3G: 0.9),
     ];
 
     final alerts = _engine.evaluateLogs(
@@ -63,7 +89,8 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Micronutrient Intelligence Core', style: AppTypography.h2),
@@ -79,12 +106,14 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Demographic Profile Adjustments', style: AppTypography.h3),
+                  Text('Demographic Profile Adjustments',
+                      style: AppTypography.h3),
                   const SizedBox(height: AppSpacing.sm),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Vegetarian Diet (1.8x Non-Heme Iron)', style: AppTypography.bodySm),
+                      Text('Vegetarian Diet (1.8x Non-Heme Iron)',
+                          style: AppTypography.bodySm),
                       Switch(
                         value: _isVegetarian,
                         activeThumbColor: AppColors.primary,
@@ -98,7 +127,8 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Female Target Adjustments', style: AppTypography.bodySm),
+                      Text('Female Target Adjustments',
+                          style: AppTypography.bodySm),
                       Switch(
                         value: _isFemale,
                         activeThumbColor: AppColors.primary,
@@ -112,7 +142,8 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('PCOS / Fertility Goals', style: AppTypography.bodySm),
+                      Text('PCOS / Fertility Goals',
+                          style: AppTypography.bodySm),
                       Switch(
                         value: _hasPcosGoal,
                         activeThumbColor: AppColors.primary,
@@ -137,9 +168,12 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                   margin: const EdgeInsets.only(bottom: 8),
                   padding: const EdgeInsets.all(AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: _getSeverityColor(alert.severity).withValues(alpha: 0.1),
+                    color: _getSeverityColor(alert.severity)
+                        .withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                    border: Border.all(color: _getSeverityColor(alert.severity).withValues(alpha: 0.4)),
+                    border: Border.all(
+                        color: _getSeverityColor(alert.severity)
+                            .withValues(alpha: 0.4)),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +190,9 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(alert.title, style: AppTypography.labelLg.copyWith(color: _getSeverityColor(alert.severity))),
+                            Text(alert.title,
+                                style: AppTypography.labelLg.copyWith(
+                                    color: _getSeverityColor(alert.severity))),
                             const SizedBox(height: 2),
                             Text(alert.message, style: AppTypography.bodySm),
                           ],
@@ -171,14 +207,38 @@ class _MicronutrientIntelligenceScreenState extends State<MicronutrientIntellige
             // Biomarkers Tracked Target Table per §P5-I Spec
             Text('Biomarkers Tracked & Targets:', style: AppTypography.h3),
             const SizedBox(height: AppSpacing.sm),
-            _MicroTargetRow(name: 'Iron', value: '${_targets.targetIronMg.toStringAsFixed(1)} mg', note: 'Hemoglobin & Oxygen'),
-            _MicroTargetRow(name: 'Vitamin B12', value: '${_targets.targetB12Mcg.toStringAsFixed(1)} mcg', note: 'Nerve tissue & DNA'),
-            _MicroTargetRow(name: 'Vitamin D3', value: '${_targets.targetD3Iu.round()} IU', note: 'Immunity & Bone density'),
-            _MicroTargetRow(name: 'Calcium', value: '${_targets.targetCalciumMg.round()} mg', note: 'Bone & Muscle firing'),
-            _MicroTargetRow(name: 'Magnesium', value: '${_targets.targetMagnesiumMg.round()} mg', note: 'Insulin sensitivity & Stress'),
-            _MicroTargetRow(name: 'Zinc', value: '${_targets.targetZincMg.round()} mg', note: 'Immunity & Testosterone'),
-            _MicroTargetRow(name: 'Folate', value: '${_targets.targetFolateMcg.round()} mcg', note: 'Cellular division'),
-            _MicroTargetRow(name: 'Omega-3', value: '${_targets.targetOmega3G.toStringAsFixed(1)} g', note: 'Anti-inflammatory recovery'),
+            _MicroTargetRow(
+                name: 'Iron',
+                value: '${_targets.targetIronMg.toStringAsFixed(1)} mg',
+                note: 'Hemoglobin & Oxygen'),
+            _MicroTargetRow(
+                name: 'Vitamin B12',
+                value: '${_targets.targetB12Mcg.toStringAsFixed(1)} mcg',
+                note: 'Nerve tissue & DNA'),
+            _MicroTargetRow(
+                name: 'Vitamin D3',
+                value: '${_targets.targetD3Iu.round()} IU',
+                note: 'Immunity & Bone density'),
+            _MicroTargetRow(
+                name: 'Calcium',
+                value: '${_targets.targetCalciumMg.round()} mg',
+                note: 'Bone & Muscle firing'),
+            _MicroTargetRow(
+                name: 'Magnesium',
+                value: '${_targets.targetMagnesiumMg.round()} mg',
+                note: 'Insulin sensitivity & Stress'),
+            _MicroTargetRow(
+                name: 'Zinc',
+                value: '${_targets.targetZincMg.round()} mg',
+                note: 'Immunity & Testosterone'),
+            _MicroTargetRow(
+                name: 'Folate',
+                value: '${_targets.targetFolateMcg.round()} mcg',
+                note: 'Cellular division'),
+            _MicroTargetRow(
+                name: 'Omega-3',
+                value: '${_targets.targetOmega3G.toStringAsFixed(1)} g',
+                note: 'Anti-inflammatory recovery'),
             const SizedBox(height: 30),
           ],
         ),
@@ -203,7 +263,8 @@ class _MicroTargetRow extends StatelessWidget {
   final String value;
   final String note;
 
-  const _MicroTargetRow({required this.name, required this.value, required this.note});
+  const _MicroTargetRow(
+      {required this.name, required this.value, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +286,8 @@ class _MicroTargetRow extends StatelessWidget {
               Text(note, style: AppTypography.bodySm.copyWith(fontSize: 11)),
             ],
           ),
-          Text(value, style: AppTypography.h3.copyWith(color: AppColors.primary)),
+          Text(value,
+              style: AppTypography.h3.copyWith(color: AppColors.primary)),
         ],
       ),
     );

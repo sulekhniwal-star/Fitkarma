@@ -10,24 +10,30 @@ void main() {
     test('Pricing configuration matches India-first pricing specification', () {
       final packages = RevenueCatConfig.availablePackages;
 
-      final monthly = packages.firstWhere((p) => p.productId == RevenueCatConfig.proMonthlyId);
+      final monthly = packages
+          .firstWhere((p) => p.productId == RevenueCatConfig.proMonthlyId);
       expect(monthly.priceInr, equals(299.0));
       expect(monthly.priceFormatted, equals('₹299 / month'));
 
-      final quarterly = packages.firstWhere((p) => p.productId == RevenueCatConfig.proQuarterlyId);
+      final quarterly = packages
+          .firstWhere((p) => p.productId == RevenueCatConfig.proQuarterlyId);
       expect(quarterly.priceInr, equals(699.0));
       expect(quarterly.savingsBadge, contains('Saves 22%'));
 
-      final annual = packages.firstWhere((p) => p.productId == RevenueCatConfig.proAnnualId);
+      final annual = packages
+          .firstWhere((p) => p.productId == RevenueCatConfig.proAnnualId);
       expect(annual.priceInr, equals(1999.0));
       expect(annual.savingsBadge, contains('Saves 44%'));
 
-      final elite = packages.firstWhere((p) => p.productId == RevenueCatConfig.eliteCoachMonthlyId);
+      final elite = packages.firstWhere(
+          (p) => p.productId == RevenueCatConfig.eliteCoachMonthlyId);
       expect(elite.priceInr, equals(1499.0));
       expect(elite.tier, equals(SubscriptionTier.eliteCoach));
     });
 
-    test('checkAccess enforces AI message limit (5/day for free, unlimited for pro)', () {
+    test(
+        'checkAccess enforces AI message limit (5/day for free, unlimited for pro)',
+        () {
       // Free tier with 4 messages -> allowed
       expect(
         engine.checkAccess(
@@ -62,7 +68,9 @@ void main() {
       );
     });
 
-    test('checkAccess enforces meal photo limit (2/day for free, unlimited for pro)', () {
+    test(
+        'checkAccess enforces meal photo limit (2/day for free, unlimited for pro)',
+        () {
       // Free tier with 1 photo -> allowed
       expect(
         engine.checkAccess(
@@ -97,7 +105,9 @@ void main() {
       );
     });
 
-    test('checkAccess locks squad creation, monthly report, predictive body, and life events for free tier', () {
+    test(
+        'checkAccess locks squad creation, monthly report, predictive body, and life events for free tier',
+        () {
       for (final trigger in [
         PaywallTrigger.squadCreation,
         PaywallTrigger.monthlyReport,
@@ -128,7 +138,8 @@ void main() {
       }
     });
 
-    test('PremiumStateNotifier starts 7-day trial and increments quotas', () async {
+    test('PremiumStateNotifier starts 7-day trial and increments quotas',
+        () async {
       final notifier = PremiumStateNotifier(engine);
 
       expect(notifier.state.activeTier, equals(SubscriptionTier.free));

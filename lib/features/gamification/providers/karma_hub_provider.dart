@@ -88,9 +88,18 @@ class KarmaHubState {
         ),
       ],
       recentEvents: [
-        KarmaEventRecord(title: 'Readiness Streak 7d', xpAwarded: 100, timestamp: DateTime.now().subtract(const Duration(hours: 4))),
-        KarmaEventRecord(title: '7-Day Sleep Streak', xpAwarded: 80, timestamp: DateTime.now().subtract(const Duration(days: 1))),
-        KarmaEventRecord(title: 'Protein Target Achieved', xpAwarded: 50, timestamp: DateTime.now().subtract(const Duration(days: 2))),
+        KarmaEventRecord(
+            title: 'Readiness Streak 7d',
+            xpAwarded: 100,
+            timestamp: DateTime.now().subtract(const Duration(hours: 4))),
+        KarmaEventRecord(
+            title: '7-Day Sleep Streak',
+            xpAwarded: 80,
+            timestamp: DateTime.now().subtract(const Duration(days: 1))),
+        KarmaEventRecord(
+            title: 'Protein Target Achieved',
+            xpAwarded: 50,
+            timestamp: DateTime.now().subtract(const Duration(days: 2))),
       ],
       cohortRank: 142,
       totalCohortMembers: 4210,
@@ -131,9 +140,11 @@ class KarmaHubNotifier extends StateNotifier<KarmaHubState> {
     final reward = _engine.getOutcomeXpReward(actionType);
     if (reward > 0) {
       final newXp = state.totalXp + reward;
-      final newLevel = _engine.calculateLevel(newXp, previousLevel: state.levelInfo.currentLevel);
+      final newLevel = _engine.calculateLevel(newXp,
+          previousLevel: state.levelInfo.currentLevel);
 
-      final eventTitle = customEventTitle ?? actionType.replaceAll('_', ' ').toUpperCase();
+      final eventTitle =
+          customEventTitle ?? actionType.replaceAll('_', ' ').toUpperCase();
       final newEvent = KarmaEventRecord(
         title: eventTitle,
         xpAwarded: reward,

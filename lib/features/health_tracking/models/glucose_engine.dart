@@ -102,7 +102,8 @@ class GlucoseEngine {
       if (mgDl >= 126) return GlucoseCategory.high;
       if (mgDl >= 100) return GlucoseCategory.elevated;
       return GlucoseCategory.normal;
-    } else if (tag == GlucoseContextTag.postMeal1h || tag == GlucoseContextTag.postMeal2h) {
+    } else if (tag == GlucoseContextTag.postMeal1h ||
+        tag == GlucoseContextTag.postMeal2h) {
       if (mgDl >= 200) return GlucoseCategory.critical;
       if (mgDl >= 140) return GlucoseCategory.elevated;
       return GlucoseCategory.normal;
@@ -149,7 +150,9 @@ class GlucoseEngine {
       averageGlucoseMgDl: double.parse(avg.toStringAsFixed(1)),
       totalLoggedDays: totalLoggedDays,
       isSufficientData: isSufficient,
-      statusLabel: isSufficient ? status : 'Estimation requires >= 90 days of logs ($totalLoggedDays logged)',
+      statusLabel: isSufficient
+          ? status
+          : 'Estimation requires >= 90 days of logs ($totalLoggedDays logged)',
     );
   }
 
@@ -158,7 +161,8 @@ class GlucoseEngine {
     if (records.isEmpty) return null;
 
     final postMealSpikes = records.where((r) =>
-        (r.tag == GlucoseContextTag.postMeal1h || r.tag == GlucoseContextTag.postMeal2h) &&
+        (r.tag == GlucoseContextTag.postMeal1h ||
+            r.tag == GlucoseContextTag.postMeal2h) &&
         r.mgDl >= 140.0);
 
     if (postMealSpikes.isNotEmpty) {

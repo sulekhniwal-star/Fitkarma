@@ -40,9 +40,9 @@ class MorningCheckIn {
 
 /// Readiness Zones per §P2-A spec
 enum ReadinessZone {
-  high,     // 80–100
+  high, // 80–100
   moderate, // 65–79
-  low,      // 50–64
+  low, // 50–64
   critical, // < 50
 }
 
@@ -223,21 +223,21 @@ class DailyTargetAdjuster {
 
   AdjustedTargets adjust(int readinessScore, UserTargets baseTargets) {
     final factor = switch (readinessScore) {
-      >= 80 => 1.0,  // Full intensity
+      >= 80 => 1.0, // Full intensity
       >= 65 => 0.85, // Slight reduction
       >= 50 => 0.70, // Meaningful reduction
-      _     => 0.0,  // Rest day
+      _ => 0.0, // Rest day
     };
 
     return AdjustedTargets(
       workoutIntensityFactor: factor,
       calorieTarget: factor >= 0.7
           ? baseTargets.calories + (100 * (1 - factor)).round()
-          : baseTargets.calories + 200, // Recovery day: extra calories for repair
+          : baseTargets.calories +
+              200, // Recovery day: extra calories for repair
       hydrationL: baseTargets.hydrationL + (readinessScore < 65 ? 0.3 : 0.0),
-      proteinTarget: factor >= 0.85
-          ? baseTargets.protein + 10
-          : baseTargets.protein,
+      proteinTarget:
+          factor >= 0.85 ? baseTargets.protein + 10 : baseTargets.protein,
     );
   }
 }
@@ -246,7 +246,8 @@ class DailyTargetAdjuster {
 class ReadinessEngine {
   final ReadinessScoreCalculator _calculator;
 
-  const ReadinessEngine({ReadinessScoreCalculator calculator = const ReadinessScoreCalculator()})
+  const ReadinessEngine(
+      {ReadinessScoreCalculator calculator = const ReadinessScoreCalculator()})
       : _calculator = calculator;
 
   /// Calculate Readiness Score locally across Basic, Enhanced, and Premium confidence tiers
@@ -271,13 +272,22 @@ class ReadinessEngine {
     }
 
     final checkInScore = checkIn.compositeScore;
-    final sleepScore = (sleepHours != null) ? ((sleepHours / 8.0) * 100.0).clamp(0.0, 100.0) : checkInScore;
-    final hrvScore = (hrvRatio != null) ? (hrvRatio * 100.0).clamp(0.0, 100.0) : checkInScore;
-    final strainPenalty = (dailyStrain != null && dailyStrain > 14.0) ? (dailyStrain - 14.0) * 4.0 : 0.0;
+    final sleepScore = (sleepHours != null)
+        ? ((sleepHours / 8.0) * 100.0).clamp(0.0, 100.0)
+        : checkInScore;
+    final hrvScore = (hrvRatio != null)
+        ? (hrvRatio * 100.0).clamp(0.0, 100.0)
+        : checkInScore;
+    final strainPenalty = (dailyStrain != null && dailyStrain > 14.0)
+        ? (dailyStrain - 14.0) * 4.0
+        : 0.0;
 
     double rawScore;
     if (tier == ReadinessTier.premium) {
-      rawScore = (0.35 * sleepScore) + (0.35 * hrvScore) + (0.30 * checkInScore) - strainPenalty;
+      rawScore = (0.35 * sleepScore) +
+          (0.35 * hrvScore) +
+          (0.30 * checkInScore) -
+          strainPenalty;
     } else if (tier == ReadinessTier.enhanced) {
       rawScore = (0.50 * sleepScore) + (0.50 * checkInScore) - strainPenalty;
     } else {
@@ -319,4 +329,3 @@ class ReadinessEngine {
     );
   }
 }
-

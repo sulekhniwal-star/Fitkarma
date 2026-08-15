@@ -41,16 +41,18 @@ class FestivalNutritionAdapter {
             proteinG: baseProteinG + 5.0,
             carbsG: baseCarbsG - 30.0,
             waterLers: baseWaterLers,
-            alertMessage: 'Diwali Pre-Compensation: Calorie target lowered by 150 kcal/day for 3 days to bank a buffer for celebrations.',
+            alertMessage:
+                'Diwali Pre-Compensation: Calorie target lowered by 150 kcal/day for 3 days to bank a buffer for celebrations.',
             recoveryWalkRecommendation: 'Standard daily activity',
           );
         case FestivalDayRelative.festivalDay:
           return FestivalNutritionTargets(
             calories: baseCalories + 400.0, // Accommodate sweets
-            proteinG: baseProteinG + 15.0,  // Early satiety trigger
+            proteinG: baseProteinG + 15.0, // Early satiety trigger
             carbsG: baseCarbsG + 60.0,
             waterLers: baseWaterLers + 0.5,
-            alertMessage: 'Diwali sweets are expected today! Eat your high-protein sources (whey/paneer) first before indulging to blunt blood sugar spikes.',
+            alertMessage:
+                'Diwali sweets are expected today! Eat your high-protein sources (whey/paneer) first before indulging to blunt blood sugar spikes.',
             recoveryWalkRecommendation: '30-minute evening celebratory walk',
           );
         case FestivalDayRelative.post1Day:
@@ -59,8 +61,10 @@ class FestivalNutritionAdapter {
             proteinG: baseProteinG + 10.0,
             carbsG: baseCarbsG - 50.0,
             waterLers: baseWaterLers + 1.0, // High hydration target
-            alertMessage: 'Post-Diwali Recovery: High hydration (+1L water) and carb moderation activated.',
-            recoveryWalkRecommendation: '45-minute steady-state recovery walk recommended',
+            alertMessage:
+                'Post-Diwali Recovery: High hydration (+1L water) and carb moderation activated.',
+            recoveryWalkRecommendation:
+                '45-minute steady-state recovery walk recommended',
           );
         case FestivalDayRelative.normal:
           break;

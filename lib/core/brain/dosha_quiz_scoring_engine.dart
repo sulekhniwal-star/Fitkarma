@@ -124,7 +124,12 @@ class DoshaQuizScoringEngine {
               "Warm, light, and dry foods. Favor pungent, bitter, and astringent tastes. Avoid heavy dairy and sweets.",
           stressFocus:
               "Vigorous daily physical activity, stimulating dynamic breathing (Kapalabhati), and warm-up stretches.",
-          recommendedSpices: ["Black Pepper", "Ginger", "Mustard Seeds", "Cayenne"],
+          recommendedSpices: [
+            "Black Pepper",
+            "Ginger",
+            "Mustard Seeds",
+            "Cayenne"
+          ],
         );
     }
   }

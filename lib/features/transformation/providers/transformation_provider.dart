@@ -14,9 +14,21 @@ class TransformationState {
     required this.forecast90Days,
     required this.relapseIntervention,
     this.monthlySnapshots = const [
-      TransformationMemory(monthYear: 'May 2026', weightKg: 78.5, bodyFatPercentage: 22.0, averageReadinessScore: 78),
-      TransformationMemory(monthYear: 'Jun 2026', weightKg: 76.8, bodyFatPercentage: 20.5, averageReadinessScore: 82),
-      TransformationMemory(monthYear: 'Jul 2026', weightKg: 75.0, bodyFatPercentage: 19.2, averageReadinessScore: 85),
+      TransformationMemory(
+          monthYear: 'May 2026',
+          weightKg: 78.5,
+          bodyFatPercentage: 22.0,
+          averageReadinessScore: 78),
+      TransformationMemory(
+          monthYear: 'Jun 2026',
+          weightKg: 76.8,
+          bodyFatPercentage: 20.5,
+          averageReadinessScore: 82),
+      TransformationMemory(
+          monthYear: 'Jul 2026',
+          weightKg: 75.0,
+          bodyFatPercentage: 19.2,
+          averageReadinessScore: 85),
     ],
     this.photoVault = const [],
   });
@@ -48,7 +60,8 @@ class TransformationNotifier extends StateNotifier<TransformationState> {
               currentWeightKg: 75.0,
               dailyCalorieDeficit: 400.0,
             ),
-            relapseIntervention: const TransformationEngine().evaluateRelapseTier(0),
+            relapseIntervention:
+                const TransformationEngine().evaluateRelapseTier(0),
           ),
         );
 

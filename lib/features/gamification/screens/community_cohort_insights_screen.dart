@@ -81,7 +81,8 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Demographic Cohort Insights', style: AppTypography.h2),
@@ -94,7 +95,8 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
             children: [
               Text(
                 '📊 Cohort: ${insights.cohortName} (n = ${insights.cohortSize})',
-                style: AppTypography.bodySm.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold),
+                style: AppTypography.bodySm.copyWith(
+                    color: AppColors.primary, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: AppSpacing.md),
 
@@ -107,16 +109,19 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: AppColors.warning.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.warning.withValues(alpha: 0.4)),
+                      border: Border.all(
+                          color: AppColors.warning.withValues(alpha: 0.4)),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.security, color: AppColors.warning, size: 22),
+                        const Icon(Icons.security,
+                            color: AppColors.warning, size: 22),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
                             '🛡️ Privacy Guarantee Enforced: City cohort size < 50. Aggregated into State-level category for regional anonymity.',
-                            style: AppTypography.bodySm.copyWith(color: AppColors.warning),
+                            style: AppTypography.bodySm
+                                .copyWith(color: AppColors.warning),
                           ),
                         ),
                       ],
@@ -138,7 +143,8 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                           child: Text(
                             'Top ${100 - insights.stepPercentile}% in ${insights.cityRank.city}',
                             textAlign: TextAlign.right,
-                            style: AppTypography.labelLg.copyWith(color: AppColors.teal),
+                            style: AppTypography.labelLg
+                                .copyWith(color: AppColors.teal),
                           ),
                         ),
                       ],
@@ -146,7 +152,8 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                     const SizedBox(height: 8),
                     Text(
                       'Your 14-day average: 9,420 steps (Percentile: ${insights.stepPercentile}th)',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 10),
                     ClipRRect(
@@ -170,9 +177,11 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.location_city, color: AppColors.primary, size: 22),
+                        const Icon(Icons.location_city,
+                            color: AppColors.primary, size: 22),
                         const SizedBox(width: 8),
-                        Text('🏙️ ${insights.cityRank.city} Leaderboard', style: AppTypography.h3),
+                        Text('🏙️ ${insights.cityRank.city} Leaderboard',
+                            style: AppTypography.h3),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -182,12 +191,14 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                     ),
                     Text(
                       'Percentile: Top ${insights.cityRank.percentile}% in City',
-                      style: AppTypography.labelLg.copyWith(color: AppColors.primary),
+                      style: AppTypography.labelLg
+                          .copyWith(color: AppColors.primary),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Next Rank Reward: +150 Karma XP at Rank #400',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.warning),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.warning),
                     ),
                   ],
                 ),
@@ -207,14 +218,24 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
                     const SizedBox(height: 8),
                     Text(
                       '${(insights.programSuccessStat.completionRate * 100).round()}% of corporate workers completed this program!',
-                      style: AppTypography.bodySm.copyWith(color: AppColors.success),
+                      style: AppTypography.bodySm
+                          .copyWith(color: AppColors.success),
                     ),
                     const SizedBox(height: 8),
-                    Text('Completed Users Average Outcomes:', style: AppTypography.bodySm),
+                    Text('Completed Users Average Outcomes:',
+                        style: AppTypography.bodySm),
                     const SizedBox(height: 4),
-                    Text('  • Weight loss: ${insights.programSuccessStat.averageWeightLossKg}kg average', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
-                    Text('  • HRV baseline: +${insights.programSuccessStat.averageHrvImprovementMs}ms recovery capacity', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
-                    Text('  • Sleep duration increase: +45 mins/night', style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                    Text(
+                        '  • Weight loss: ${insights.programSuccessStat.averageWeightLossKg}kg average',
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
+                    Text(
+                        '  • HRV baseline: +${insights.programSuccessStat.averageHrvImprovementMs}ms recovery capacity',
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
+                    Text('  • Sleep duration increase: +45 mins/night',
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.textSecondary)),
                   ],
                 ),
               ),
@@ -224,7 +245,8 @@ class CommunityCohortInsightsScreen extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Opt-Out of Cohort Sharing (Anonymized)', style: AppTypography.bodySm),
+                  Text('Opt-Out of Cohort Sharing (Anonymized)',
+                      style: AppTypography.bodySm),
                   Switch(
                     value: !insights.isAnonymityPreserved,
                     onChanged: (val) {

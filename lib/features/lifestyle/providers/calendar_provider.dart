@@ -48,7 +48,8 @@ class CalendarNotifier extends StateNotifier<CalendarState> {
   }
 
   /// Loads and analyzes calendar events for the given date (default today)
-  Future<void> loadTodayInsight({DateTime? date, List<CalendarEvent>? mockEvents}) async {
+  Future<void> loadTodayInsight(
+      {DateTime? date, List<CalendarEvent>? mockEvents}) async {
     state = state.copyWith(isLoading: true);
     final targetDate = date ?? DateTime.now();
 
@@ -102,7 +103,6 @@ class CalendarNotifier extends StateNotifier<CalendarState> {
   }
 }
 
-final calendarProvider =
-    StateNotifierProvider<CalendarNotifier, CalendarState>(
+final calendarProvider = StateNotifierProvider<CalendarNotifier, CalendarState>(
   (ref) => CalendarNotifier(),
 );

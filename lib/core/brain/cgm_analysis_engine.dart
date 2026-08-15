@@ -64,12 +64,15 @@ class CgmAnalysisEngine {
 
       // Spike condition: glucose rises > 40 mg/dL within a 90-minute window
       final delta = current.glucoseValueMgDl - prev.glucoseValueMgDl;
-      if (delta > 40.0 && current.timestamp.difference(prev.timestamp).inMinutes <= 90) {
+      if (delta > 40.0 &&
+          current.timestamp.difference(prev.timestamp).inMinutes <= 90) {
         // Correlate foods consumed in the 2 hours preceding the spike peak
-        final correlated = foodLogs.where((log) =>
-          log.consumeTime.isBefore(current.timestamp) &&
-          log.consumeTime.isAfter(current.timestamp.subtract(const Duration(hours: 2)))
-        ).toList();
+        final correlated = foodLogs
+            .where((log) =>
+                log.consumeTime.isBefore(current.timestamp) &&
+                log.consumeTime.isAfter(
+                    current.timestamp.subtract(const Duration(hours: 2))))
+            .toList();
 
         spikes.add(GlucoseSpikeEvent(
           spikeTime: current.timestamp,

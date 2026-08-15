@@ -11,7 +11,8 @@ class SatietyPredictionScreen extends StatefulWidget {
   const SatietyPredictionScreen({super.key});
 
   @override
-  State<SatietyPredictionScreen> createState() => _SatietyPredictionScreenState();
+  State<SatietyPredictionScreen> createState() =>
+      _SatietyPredictionScreenState();
 }
 
 class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
@@ -41,7 +42,8 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Satiety Prediction Engine', style: AppTypography.h2),
@@ -57,7 +59,8 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Indian Food Satiety Reference Table', style: AppTypography.h3),
+                  Text('Indian Food Satiety Reference Table',
+                      style: AppTypography.h3),
                   const SizedBox(height: AppSpacing.sm),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,7 +72,9 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
                         items: SeededIndianSatietyTable.items
                             .map((item) => DropdownMenuItem(
                                   value: item,
-                                  child: Text(item.name, style: AppTypography.labelLg.copyWith(color: AppColors.primary)),
+                                  child: Text(item.name,
+                                      style: AppTypography.labelLg
+                                          .copyWith(color: AppColors.primary)),
                                 ))
                             .toList(),
                         onChanged: (val) {
@@ -92,7 +97,9 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
               decoration: BoxDecoration(
                 color: AppColors.surface1,
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                border: Border.all(color: _getScoreColor(_result.satietyScore).withValues(alpha: 0.4)),
+                border: Border.all(
+                    color: _getScoreColor(_result.satietyScore)
+                        .withValues(alpha: 0.4)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,9 +109,11 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
                     children: [
                       Text('Satiety Index Score', style: AppTypography.h3),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 6),
                         decoration: BoxDecoration(
-                          color: _getScoreColor(_result.satietyScore).withValues(alpha: 0.15),
+                          color: _getScoreColor(_result.satietyScore)
+                              .withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -129,7 +138,8 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.restaurant, color: AppColors.teal, size: 20),
+                        const Icon(Icons.restaurant,
+                            color: AppColors.teal, size: 20),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -143,10 +153,18 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
                   const SizedBox(height: AppSpacing.md),
 
                   // Formula breakdown rows
-                  _ScoreFactorRow(label: 'Protein Fullness (+2.8x)', value: '+${_result.proteinContribution} pts'),
-                  _ScoreFactorRow(label: 'Fiber Expansion (+4.0x)', value: '+${_result.fiberContribution} pts'),
-                  _ScoreFactorRow(label: 'Gastric Volume (+1.2x)', value: '+${_result.volumeContribution} pts'),
-                  _ScoreFactorRow(label: 'Processing Penalty (-12.0x)', value: '-${_result.processingPenalty} pts'),
+                  _ScoreFactorRow(
+                      label: 'Protein Fullness (+2.8x)',
+                      value: '+${_result.proteinContribution} pts'),
+                  _ScoreFactorRow(
+                      label: 'Fiber Expansion (+4.0x)',
+                      value: '+${_result.fiberContribution} pts'),
+                  _ScoreFactorRow(
+                      label: 'Gastric Volume (+1.2x)',
+                      value: '+${_result.volumeContribution} pts'),
+                  _ScoreFactorRow(
+                      label: 'Processing Penalty (-12.0x)',
+                      value: '-${_result.processingPenalty} pts'),
                 ],
               ),
             ),
@@ -160,10 +178,14 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
                 margin: const EdgeInsets.only(bottom: 6),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: item == _selectedItem ? AppColors.surface1 : AppColors.surface0,
+                  color: item == _selectedItem
+                      ? AppColors.surface1
+                      : AppColors.surface0,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: item == _selectedItem ? AppColors.primary : AppColors.glassBorder,
+                    color: item == _selectedItem
+                        ? AppColors.primary
+                        : AppColors.glassBorder,
                   ),
                 ),
                 child: Row(
@@ -173,13 +195,16 @@ class _SatietyPredictionScreenState extends State<SatietyPredictionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(item.name, style: AppTypography.labelLg),
-                        Text('${item.calories.round()} kcal · Protein: ${item.proteinG.round()}g', style: AppTypography.bodySm),
+                        Text(
+                            '${item.calories.round()} kcal · Protein: ${item.proteinG.round()}g',
+                            style: AppTypography.bodySm),
                       ],
                     ),
                     Text(
                       'Score: ${_engine.computeForSeededItem(item).satietyScore.round()}/100',
                       style: AppTypography.labelLg.copyWith(
-                        color: _getScoreColor(_engine.computeForSeededItem(item).satietyScore),
+                        color: _getScoreColor(
+                            _engine.computeForSeededItem(item).satietyScore),
                       ),
                     ),
                   ],

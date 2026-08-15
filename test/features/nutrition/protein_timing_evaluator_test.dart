@@ -11,14 +11,30 @@ void main() {
     const evaluator = ProteinTimingEvaluator();
     final now = DateTime.now();
 
-    final highProteinItem = SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f8'); // Chicken Curry (28g)
-    final lowProteinItem = SeededIndianFoodDatabase.items.firstWhere((i) => i.id == 'f3');  // Roti (3.5g)
+    final highProteinItem = SeededIndianFoodDatabase.items
+        .firstWhere((i) => i.id == 'f8'); // Chicken Curry (28g)
+    final lowProteinItem = SeededIndianFoodDatabase.items
+        .firstWhere((i) => i.id == 'f3'); // Roti (3.5g)
 
-    test('evaluateDistribution awards 100 timing score when all 3 main meals meet 25g MPS threshold', () {
+    test(
+        'evaluateDistribution awards 100 timing score when all 3 main meals meet 25g MPS threshold',
+        () {
       final meals = [
-        MealEntry(id: 'm1', type: MealType.breakfast, foodItem: highProteinItem, loggedAt: now),
-        MealEntry(id: 'm2', type: MealType.lunch, foodItem: highProteinItem, loggedAt: now),
-        MealEntry(id: 'm3', type: MealType.dinner, foodItem: highProteinItem, loggedAt: now),
+        MealEntry(
+            id: 'm1',
+            type: MealType.breakfast,
+            foodItem: highProteinItem,
+            loggedAt: now),
+        MealEntry(
+            id: 'm2',
+            type: MealType.lunch,
+            foodItem: highProteinItem,
+            loggedAt: now),
+        MealEntry(
+            id: 'm3',
+            type: MealType.dinner,
+            foodItem: highProteinItem,
+            loggedAt: now),
       ];
 
       final result = evaluator.evaluateDistribution(meals);
@@ -28,11 +44,25 @@ void main() {
       expect(result.feedback, contains('Optimal Muscle Protein Synthesis'));
     });
 
-    test('evaluateDistribution awards 70 timing score for 2 meals met and 40 for 1 meal met', () {
+    test(
+        'evaluateDistribution awards 70 timing score for 2 meals met and 40 for 1 meal met',
+        () {
       final mealsTwoMet = [
-        MealEntry(id: 'm1', type: MealType.breakfast, foodItem: highProteinItem, loggedAt: now),
-        MealEntry(id: 'm2', type: MealType.lunch, foodItem: highProteinItem, loggedAt: now),
-        MealEntry(id: 'm3', type: MealType.dinner, foodItem: lowProteinItem, loggedAt: now),
+        MealEntry(
+            id: 'm1',
+            type: MealType.breakfast,
+            foodItem: highProteinItem,
+            loggedAt: now),
+        MealEntry(
+            id: 'm2',
+            type: MealType.lunch,
+            foodItem: highProteinItem,
+            loggedAt: now),
+        MealEntry(
+            id: 'm3',
+            type: MealType.dinner,
+            foodItem: lowProteinItem,
+            loggedAt: now),
       ];
 
       final resultTwo = evaluator.evaluateDistribution(mealsTwoMet);
@@ -40,9 +70,21 @@ void main() {
       expect(resultTwo.mpsMealsMetCount, equals(2));
 
       final mealsOneMet = [
-        MealEntry(id: 'm1', type: MealType.breakfast, foodItem: lowProteinItem, loggedAt: now),
-        MealEntry(id: 'm2', type: MealType.lunch, foodItem: lowProteinItem, loggedAt: now),
-        MealEntry(id: 'm3', type: MealType.dinner, foodItem: highProteinItem, loggedAt: now),
+        MealEntry(
+            id: 'm1',
+            type: MealType.breakfast,
+            foodItem: lowProteinItem,
+            loggedAt: now),
+        MealEntry(
+            id: 'm2',
+            type: MealType.lunch,
+            foodItem: lowProteinItem,
+            loggedAt: now),
+        MealEntry(
+            id: 'm3',
+            type: MealType.dinner,
+            foodItem: highProteinItem,
+            loggedAt: now),
       ];
 
       final resultOne = evaluator.evaluateDistribution(mealsOneMet);
@@ -50,11 +92,26 @@ void main() {
       expect(resultOne.mpsMealsMetCount, equals(1));
     });
 
-    test('generateTimingNudge suggests shifting protein from dinner to breakfast when dinner is skewed', () {
+    test(
+        'generateTimingNudge suggests shifting protein from dinner to breakfast when dinner is skewed',
+        () {
       final skewedMeals = [
-        MealEntry(id: 'm1', type: MealType.breakfast, foodItem: lowProteinItem, loggedAt: now), // 3.5g
-        MealEntry(id: 'm2', type: MealType.lunch, foodItem: lowProteinItem, loggedAt: now),     // 3.5g
-        MealEntry(id: 'm3', type: MealType.dinner, foodItem: highProteinItem, quantityServings: 2.5, loggedAt: now), // 70g
+        MealEntry(
+            id: 'm1',
+            type: MealType.breakfast,
+            foodItem: lowProteinItem,
+            loggedAt: now), // 3.5g
+        MealEntry(
+            id: 'm2',
+            type: MealType.lunch,
+            foodItem: lowProteinItem,
+            loggedAt: now), // 3.5g
+        MealEntry(
+            id: 'm3',
+            type: MealType.dinner,
+            foodItem: highProteinItem,
+            quantityServings: 2.5,
+            loggedAt: now), // 70g
       ];
 
       final result = evaluator.evaluateDistribution(skewedMeals);
@@ -64,7 +121,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('ProteinTimingIntelligenceCard renders MPS pills and timing score', (tester) async {
+    testWidgets(
+        'ProteinTimingIntelligenceCard renders MPS pills and timing score',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

@@ -8,7 +8,9 @@ void main() {
   group('§P10-G Longevity Score & Biological Age Tests', () {
     const calculator = LongevityScoreCalculator();
 
-    test('calculate computes high Longevity Score and younger biological age for optimal inputs', () {
+    test(
+        'calculate computes high Longevity Score and younger biological age for optimal inputs',
+        () {
       const inputs = LongevityInputData(
         age: 28,
         gender: 'male',
@@ -33,7 +35,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('LongevityScreen renders Longevity score, factor breakdown, and biggest opportunity', (tester) async {
+    testWidgets(
+        'LongevityScreen renders Longevity score, factor breakdown, and biggest opportunity',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

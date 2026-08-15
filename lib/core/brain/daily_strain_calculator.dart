@@ -28,7 +28,8 @@ class DailyStrainCalculator {
     int? averageHeartRate,
     List<ActivityLog>? dailyActivities,
   }) {
-    final Map<int, int> resolvedZones = Map<int, int>.from(zoneDurationsMinutes ?? {});
+    final Map<int, int> resolvedZones =
+        Map<int, int>.from(zoneDurationsMinutes ?? {});
 
     // 1. If detailed zones are missing, estimate them using fallback parameters
     if (resolvedZones.isEmpty) {
@@ -63,7 +64,8 @@ class DailyStrainCalculator {
     // 4. Factor in environmental heat strain
     double heatFactor = 1.0;
     if (heatIndexCelsius > 32.0) {
-      heatFactor += (heatIndexCelsius - 32.0) * 0.02; // +2% strain per degree Celsius above 32C
+      heatFactor += (heatIndexCelsius - 32.0) *
+          0.02; // +2% strain per degree Celsius above 32C
     }
 
     final totalImpulse = (cardiacImpulse + stepsImpulse) * heatFactor;

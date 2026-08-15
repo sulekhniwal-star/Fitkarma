@@ -5,7 +5,9 @@ void main() {
   group('PredictiveHealthEngine Biological Age & CGM Spike Tests', () {
     const engine = PredictiveHealthEngine();
 
-    test('Biological age calculation computes younger age for optimal biometrics', () {
+    test(
+        'Biological age calculation computes younger age for optimal biometrics',
+        () {
       final res = engine.calculateBiologicalAge(
         chronologicalAge: 30.0,
         restingHeartRateBpm: 54, // -2 yrs
@@ -17,7 +19,9 @@ void main() {
       expect(res.ageDeltaYears, equals(5.0));
     });
 
-    test('CGM spike detector triggers alert for +35 mg/dL spike within 45 minutes', () {
+    test(
+        'CGM spike detector triggers alert for +35 mg/dL spike within 45 minutes',
+        () {
       final res = engine.detectCgmSpike(
         startGlucoseMgDl: 95.0,
         peakGlucoseMgDl: 140.0, // +45 mg/dL
@@ -28,7 +32,9 @@ void main() {
       expect(res.severity, contains('Spike'));
     });
 
-    test('Drug-Nutrient interaction check produces warning for Metformin & High Carbs', () {
+    test(
+        'Drug-Nutrient interaction check produces warning for Metformin & High Carbs',
+        () {
       final warning = engine.checkDrugInteraction(
         medicationName: 'Metformin 500mg',
         nutrientCategory: 'High Carbs',

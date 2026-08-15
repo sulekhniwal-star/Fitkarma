@@ -6,7 +6,9 @@ import 'package:fitkarma/features/predictive_health/screens/clinical_compliance_
 
 void main() {
   group('§P10-K Regulatory & Clinical Compliance Framework Tests', () {
-    test('ClinicalDataPrivacyGuard revokeAllClinicalConsent updates consent state to false', () {
+    test(
+        'ClinicalDataPrivacyGuard revokeAllClinicalConsent updates consent state to false',
+        () {
       const guard = ClinicalDataPrivacyGuard();
       expect(guard.isDpdpConsentActive, isTrue);
 
@@ -18,7 +20,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('ClinicalComplianceSettingsScreen renders disclaimer, compliance status, and Revoke CTA', (tester) async {
+    testWidgets(
+        'ClinicalComplianceSettingsScreen renders disclaimer, compliance status, and Revoke CTA',
+        (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -29,8 +33,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('⚖️ Regulatory & Clinical Compliance'), findsOneWidget);
-      expect(find.textContaining('educational wellness tool and is not certified for diagnostic medical use'), findsOneWidget);
-      expect(find.text('Clinical Data Isolation (DPDP & HIPAA)'), findsOneWidget);
+      expect(
+          find.textContaining(
+              'educational wellness tool and is not certified for diagnostic medical use'),
+          findsOneWidget);
+      expect(
+          find.text('Clinical Data Isolation (DPDP & HIPAA)'), findsOneWidget);
       expect(find.text('Revoke All Clinical Access'), findsOneWidget);
 
       await tester.tap(find.text('Revoke All Clinical Access'));

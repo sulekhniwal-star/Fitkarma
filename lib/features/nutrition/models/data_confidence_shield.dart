@@ -45,26 +45,30 @@ class DataConfidenceShield {
       if (log.wasWaterTargetMet) hydrationComplianceSum += 1.0;
     }
 
-    final totalDays = pastWeekLogs.isEmpty ? 7.0 : pastWeekLogs.length.toDouble();
+    final totalDays =
+        pastWeekLogs.isEmpty ? 7.0 : pastWeekLogs.length.toDouble();
     final loggingRatio = (validLogDays / totalDays).clamp(0.0, 1.0);
     final proteinRatio = (proteinComplianceSum / totalDays).clamp(0.0, 1.0);
     final hydrationRatio = (hydrationComplianceSum / totalDays).clamp(0.0, 1.0);
 
-    final reliabilityScore = (loggingRatio * 0.40) + (proteinRatio * 0.30) + (hydrationRatio * 0.30);
+    final reliabilityScore =
+        (loggingRatio * 0.40) + (proteinRatio * 0.30) + (hydrationRatio * 0.30);
 
     if (reliabilityScore < minimumReliabilityThreshold) {
       final percentage = (reliabilityScore * 100.0).round();
       return ShieldStatus(
         isLockoutActive: true,
         reliabilityScore: double.parse(reliabilityScore.toStringAsFixed(2)),
-        alertMessage: '⚠️ Your weight loss has plateaued, but your log reliability is only $percentage%. We cannot safely lower your calories without stable logging. Focus on logging all meals for 5 consecutive days to re-enable calorie adaptations.',
+        alertMessage:
+            '⚠️ Your weight loss has plateaued, but your log reliability is only $percentage%. We cannot safely lower your calories without stable logging. Focus on logging all meals for 5 consecutive days to re-enable calorie adaptations.',
       );
     }
 
     return ShieldStatus(
       isLockoutActive: false,
       reliabilityScore: double.parse(reliabilityScore.toStringAsFixed(2)),
-      alertMessage: 'Data confidence high (${(reliabilityScore * 100).round()}%). Metabolic adaptation targets unlocked.',
+      alertMessage:
+          'Data confidence high (${(reliabilityScore * 100).round()}%). Metabolic adaptation targets unlocked.',
     );
   }
 }

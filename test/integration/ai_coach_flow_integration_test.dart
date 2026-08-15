@@ -5,8 +5,11 @@ import 'package:fitkarma/core/brain/context_compressor.dart';
 import 'package:fitkarma/core/brain/daily_intelligence_package.dart';
 
 void main() {
-  group('§P14-C Integration: AI Coach Message Flow (Context Compression, Tone Safeguards)', () {
-    test('Context compressor maintains strict token budget for LLM payload', () {
+  group(
+      '§P14-C Integration: AI Coach Message Flow (Context Compression, Tone Safeguards)',
+      () {
+    test('Context compressor maintains strict token budget for LLM payload',
+        () {
       const compressor = ContextCompressor();
       final dip = DailyIntelligencePackage(
         userId: 'user_123',
@@ -14,7 +17,10 @@ void main() {
         readinessScore: 78,
         readinessTier: ReadinessTier.enhanced,
         primaryFocus: 'Upper Body Hypertrophy & Protein Adherence',
-        dailyMissions: const ['Complete 45-min Strength Routine', 'Hit 135g Protein'],
+        dailyMissions: const [
+          'Complete 45-min Strength Routine',
+          'Hit 135g Protein'
+        ],
       );
 
       final compressed = compressor.compressContext(
@@ -32,11 +38,13 @@ void main() {
       expect(compressed['diet'], equals('Vegetarian'));
     });
 
-    test('Roast Mode automatically downgrades to Gentle on distress detection', () {
+    test('Roast Mode automatically downgrades to Gentle on distress detection',
+        () {
       const roastEngine = AiRoastModeEngine();
 
       const normalMessage = "I had two samosas and missed my workout today!";
-      final isDistressNormal = roastEngine.detectDistress(userMessage: normalMessage);
+      final isDistressNormal =
+          roastEngine.detectDistress(userMessage: normalMessage);
       expect(isDistressNormal, isFalse);
 
       final normalInstruction = roastEngine.getInstruction(
@@ -44,11 +52,14 @@ void main() {
         isDistressDetected: isDistressNormal,
       );
       expect(normalInstruction.effectiveTone, equals(CoachTone.roast));
-      expect(normalInstruction.systemPromptDirective, contains('Witty, sarcastic'));
+      expect(normalInstruction.systemPromptDirective,
+          contains('Witty, sarcastic'));
 
       // Distress phrase
-      const crisisMessage = "I feel hopeless, I can't take this anymore and want to hurt myself";
-      final isDistressCrisis = roastEngine.detectDistress(userMessage: crisisMessage);
+      const crisisMessage =
+          "I feel hopeless, I can't take this anymore and want to hurt myself";
+      final isDistressCrisis =
+          roastEngine.detectDistress(userMessage: crisisMessage);
       expect(isDistressCrisis, isTrue);
 
       final safeInstruction = roastEngine.getInstruction(
@@ -59,7 +70,9 @@ void main() {
       expect(safeInstruction.isDistressOverridden, isTrue);
     });
 
-    test('AiCoachPhilosophyEngine generates system prompt with Indian context and guardrails', () {
+    test(
+        'AiCoachPhilosophyEngine generates system prompt with Indian context and guardrails',
+        () {
       const philosophyEngine = AiCoachPhilosophyEngine();
       final systemPrompt = philosophyEngine.generateSystemPrompt(
         userName: 'Arjun',

@@ -21,7 +21,8 @@ class IndianSatietyItem {
     required this.fullnessFactorNote,
   });
 
-  double get weightVolumeFraction => volumeMl > 0 ? (weightGrams / volumeMl) * 50.0 : 50.0;
+  double get weightVolumeFraction =>
+      volumeMl > 0 ? (weightGrams / volumeMl) * 50.0 : 50.0;
 }
 
 class SeededIndianSatietyTable {
@@ -35,7 +36,8 @@ class SeededIndianSatietyTable {
       weightGrams: 200.0,
       volumeMl: 250.0,
       novaProcessingTier: 0,
-      fullnessFactorNote: 'High Protein density & slow digesting casein protein',
+      fullnessFactorNote:
+          'High Protein density & slow digesting casein protein',
     ),
     IndianSatietyItem(
       id: 'sat_2',
@@ -116,7 +118,8 @@ class SatietyPredictionEngine {
     required int novaProcessingTier,
     String note = '',
   }) {
-    final weightVolumeFraction = volumeMl > 0 ? (weightGrams / volumeMl) * 50.0 : 50.0;
+    final weightVolumeFraction =
+        volumeMl > 0 ? (weightGrams / volumeMl) * 50.0 : 50.0;
 
     final proteinContrib = 2.8 * proteinG;
     final fiberContrib = 4.0 * fiberG;

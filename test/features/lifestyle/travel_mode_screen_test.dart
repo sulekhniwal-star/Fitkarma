@@ -6,7 +6,8 @@ import 'package:fitkarma/features/lifestyle/providers/travel_mode_provider.dart'
 import 'package:fitkarma/core/brain/travel_intelligence_engine.dart';
 
 void main() {
-  testWidgets('TravelModeScreen renders Active Travel Mode cards per §P12-E wireframe',
+  testWidgets(
+      'TravelModeScreen renders Active Travel Mode cards per §P12-E wireframe',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
@@ -30,14 +31,16 @@ void main() {
     expect(find.text('Your Plan is Adapted:'), findsOneWidget);
 
     // Verify Workout Card
-    expect(find.text('Workout: 30-min hotel bodyweight session'), findsOneWidget);
+    expect(
+        find.text('Workout: 30-min hotel bodyweight session'), findsOneWidget);
     expect(find.text('Push-ups'), findsOneWidget);
     expect(find.text('Squats'), findsOneWidget);
     expect(find.text('Lunges'), findsOneWidget);
     expect(find.text('Plank'), findsOneWidget);
 
     // Verify Nutrition Card
-    expect(find.text('Nutrition: +150 kcal buffer for eating out'), findsOneWidget);
+    expect(find.text('Nutrition: +150 kcal buffer for eating out'),
+        findsOneWidget);
     expect(find.text('Grilled paneer'), findsOneWidget);
 
     // Verify Action Buttons
@@ -45,7 +48,8 @@ void main() {
     expect(find.text('Extend by 1 day'), findsOneWidget);
   });
 
-  testWidgets('Extending travel mode increments extended days tag', (tester) async {
+  testWidgets('Extending travel mode increments extended days tag',
+      (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
@@ -94,7 +98,8 @@ void main() {
     expect(find.text('Activate Travel Mode'), findsOneWidget);
   });
 
-  testWidgets('International travel renders Jet Lag Protocol Card', (tester) async {
+  testWidgets('International travel renders Jet Lag Protocol Card',
+      (tester) async {
     tester.view.physicalSize = const Size(800, 1600);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
@@ -124,6 +129,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Jet Lag Protocol (West)'), findsOneWidget);
-    expect(find.textContaining('Avoid caffeine 6h before new sleep time'), findsOneWidget);
+    expect(find.textContaining('Avoid caffeine 6h before new sleep time'),
+        findsOneWidget);
   });
 }

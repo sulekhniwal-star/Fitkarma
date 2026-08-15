@@ -12,13 +12,15 @@ final communitiesListProvider = StateProvider<List<CommunityInfo>>((ref) {
   return engine.getAvailableCommunities();
 });
 
-final communityPostsProvider = StateProvider<List<CommunityActivityPost>>((ref) {
+final communityPostsProvider =
+    StateProvider<List<CommunityActivityPost>>((ref) {
   return const [
     CommunityActivityPost(
       id: 'post_1',
       communityId: 'comm_10k',
       authorName: 'Vikram R.',
-      activityTitle: 'Logged 11,400 steps on morning walk in Lodhi Garden! 🏃‍♂️',
+      activityTitle:
+          'Logged 11,400 steps on morning walk in Lodhi Garden! 🏃‍♂️',
       timeAgo: '15m ago',
       cheerCount: 14,
     ),
@@ -26,7 +28,8 @@ final communityPostsProvider = StateProvider<List<CommunityActivityPost>>((ref) 
       id: 'post_2',
       communityId: 'comm_office',
       authorName: 'Ananya M.',
-      activityTitle: 'Hit 100g protein target today with Soya Chunks + Paneer lunch! 💪',
+      activityTitle:
+          'Hit 100g protein target today with Soya Chunks + Paneer lunch! 💪',
       timeAgo: '45m ago',
       cheerCount: 8,
     ),
@@ -57,7 +60,8 @@ class CommunitiesScreen extends ConsumerWidget {
         backgroundColor: AppColors.bg0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary, size: 20),
+          icon: const Icon(Icons.arrow_back_ios,
+              color: AppColors.textPrimary, size: 20),
           onPressed: () => Navigator.maybePop(context),
         ),
         title: Text('Accountability Communities', style: AppTypography.h2),
@@ -75,16 +79,19 @@ class CommunitiesScreen extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                  border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.privacy_tip, color: AppColors.primary, size: 20),
+                    const Icon(Icons.privacy_tip,
+                        color: AppColors.primary, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Zero personal health data visible in communities — activity & milestone feeds only.',
-                        style: AppTypography.bodySm.copyWith(color: AppColors.primary, fontSize: 11),
+                        style: AppTypography.bodySm
+                            .copyWith(color: AppColors.primary, fontSize: 11),
                       ),
                     ),
                   ],
@@ -93,7 +100,8 @@ class CommunitiesScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.lg),
 
               // Communities Grid (2 Columns)
-              Text('Explore Communities (${communities.length})', style: AppTypography.h3),
+              Text('Explore Communities (${communities.length})',
+                  style: AppTypography.h3),
               const SizedBox(height: AppSpacing.sm),
               GridView.builder(
                 shrinkWrap: true,
@@ -115,23 +123,33 @@ class CommunitiesScreen extends ConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(comm.iconEmoji, style: const TextStyle(fontSize: 24)),
+                            Text(comm.iconEmoji,
+                                style: const TextStyle(fontSize: 24)),
                             GestureDetector(
                               onTap: () {
                                 final updated = [...communities];
-                                updated[index] = comm.copyWith(isJoined: !comm.isJoined);
-                                ref.read(communitiesListProvider.notifier).state = updated;
+                                updated[index] =
+                                    comm.copyWith(isJoined: !comm.isJoined);
+                                ref
+                                    .read(communitiesListProvider.notifier)
+                                    .state = updated;
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 3),
                                 decoration: BoxDecoration(
-                                  color: comm.isJoined ? AppColors.success.withValues(alpha: 0.2) : AppColors.primary.withValues(alpha: 0.2),
+                                  color: comm.isJoined
+                                      ? AppColors.success.withValues(alpha: 0.2)
+                                      : AppColors.primary
+                                          .withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
                                   comm.isJoined ? 'Joined' : '+ Join',
                                   style: AppTypography.labelSmall.copyWith(
-                                    color: comm.isJoined ? AppColors.success : AppColors.primary,
+                                    color: comm.isJoined
+                                        ? AppColors.success
+                                        : AppColors.primary,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -140,11 +158,20 @@ class CommunitiesScreen extends ConsumerWidget {
                           ],
                         ),
                         const SizedBox(height: 6),
-                        Text(comm.title, style: AppTypography.labelLg, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        Text(comm.title,
+                            style: AppTypography.labelLg,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis),
                         const SizedBox(height: 2),
-                        Text(comm.targetAudience, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11), maxLines: 1, overflow: TextOverflow.ellipsis),
+                        Text(comm.targetAudience,
+                            style: AppTypography.bodySm.copyWith(
+                                color: AppColors.textSecondary, fontSize: 11),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis),
                         const Spacer(),
-                        Text('${comm.memberCount} members', style: AppTypography.labelSmall.copyWith(color: AppColors.textMuted)),
+                        Text('${comm.memberCount} members',
+                            style: AppTypography.labelSmall
+                                .copyWith(color: AppColors.textMuted)),
                       ],
                     ),
                   );
@@ -165,8 +192,11 @@ class CommunitiesScreen extends ConsumerWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundColor: AppColors.primary.withValues(alpha: 0.2),
-                              child: Text(posts[i].authorName.substring(0, 1), style: AppTypography.labelLg.copyWith(color: AppColors.primary)),
+                              backgroundColor:
+                                  AppColors.primary.withValues(alpha: 0.2),
+                              child: Text(posts[i].authorName.substring(0, 1),
+                                  style: AppTypography.labelLg
+                                      .copyWith(color: AppColors.primary)),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -174,31 +204,46 @@ class CommunitiesScreen extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(posts[i].authorName, style: AppTypography.labelLg),
-                                      Text(posts[i].timeAgo, style: AppTypography.bodySm.copyWith(color: AppColors.textMuted, fontSize: 11)),
+                                      Text(posts[i].authorName,
+                                          style: AppTypography.labelLg),
+                                      Text(posts[i].timeAgo,
+                                          style: AppTypography.bodySm.copyWith(
+                                              color: AppColors.textMuted,
+                                              fontSize: 11)),
                                     ],
                                   ),
                                   const SizedBox(height: 2),
-                                  Text(posts[i].activityTitle, style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary)),
+                                  Text(posts[i].activityTitle,
+                                      style: AppTypography.bodySm.copyWith(
+                                          color: AppColors.textSecondary)),
                                 ],
                               ),
                             ),
                             const SizedBox(width: 8),
                             IconButton(
                               icon: Icon(
-                                posts[i].isCheered ? Icons.local_fire_department : Icons.local_fire_department_outlined,
-                                color: posts[i].isCheered ? AppColors.warning : AppColors.textMuted,
+                                posts[i].isCheered
+                                    ? Icons.local_fire_department
+                                    : Icons.local_fire_department_outlined,
+                                color: posts[i].isCheered
+                                    ? AppColors.warning
+                                    : AppColors.textMuted,
                               ),
                               onPressed: () {
                                 final updated = [...posts];
                                 final current = posts[i];
                                 updated[i] = current.copyWith(
-                                  cheerCount: current.isCheered ? current.cheerCount - 1 : current.cheerCount + 1,
+                                  cheerCount: current.isCheered
+                                      ? current.cheerCount - 1
+                                      : current.cheerCount + 1,
                                   isCheered: !current.isCheered,
                                 );
-                                ref.read(communityPostsProvider.notifier).state = updated;
+                                ref
+                                    .read(communityPostsProvider.notifier)
+                                    .state = updated;
                               },
                             ),
                           ],

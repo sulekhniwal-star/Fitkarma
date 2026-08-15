@@ -50,14 +50,16 @@ class WearableComparisonState {
 
 // ── Wearable Provider / Notifier ───────────────────────────────────────────────
 
-class WearableComparisonNotifier extends StateNotifier<WearableComparisonState> {
+class WearableComparisonNotifier
+    extends StateNotifier<WearableComparisonState> {
   final DeviceReliabilityEngine _reliabilityEngine;
   final WearableSyncMerger _syncMerger;
 
   WearableComparisonNotifier(this._reliabilityEngine, this._syncMerger)
       : super(_buildInitialState(_reliabilityEngine));
 
-  static WearableComparisonState _buildInitialState(DeviceReliabilityEngine engine) {
+  static WearableComparisonState _buildInitialState(
+      DeviceReliabilityEngine engine) {
     const source = WearableSource.whoop;
     const rawHrv = 58.0;
     const rawHr = 62.0;
@@ -96,7 +98,8 @@ class WearableComparisonNotifier extends StateNotifier<WearableComparisonState> 
   }
 
   /// Trigger late-sync merge job
-  Future<void> performLateSyncMerge(List<WearableDataPoint> incomingStream) async {
+  Future<void> performLateSyncMerge(
+      List<WearableDataPoint> incomingStream) async {
     state = state.copyWith(isSyncing: true);
     await Future.delayed(const Duration(milliseconds: 200));
 

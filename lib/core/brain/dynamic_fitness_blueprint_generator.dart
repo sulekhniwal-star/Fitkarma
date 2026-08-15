@@ -127,7 +127,8 @@ class DynamicFitnessBlueprintGenerator {
         daysPerWeek: 4,
         sessionDuration: 45,
         phases: const [
-          BlueprintPhase(name: 'Foundation', weeks: '1-3', intensity: 'RPE 6-7'),
+          BlueprintPhase(
+              name: 'Foundation', weeks: '1-3', intensity: 'RPE 6-7'),
           BlueprintPhase(name: 'Build', weeks: '4-8', intensity: 'RPE 7-8'),
           BlueprintPhase(name: 'Peak', weeks: '9-12', intensity: 'RPE 8-9'),
         ],
@@ -144,9 +145,14 @@ class DynamicFitnessBlueprintGenerator {
       daysPerWeek: 5,
       sessionDuration: 50,
       phases: const [
-        BlueprintPhase(name: 'Hypertrophy Prep', weeks: '1-3', intensity: 'RPE 6.5-7.5'),
-        BlueprintPhase(name: 'Overload Accumulation', weeks: '4-8', intensity: 'RPE 7.5-8.5'),
-        BlueprintPhase(name: 'Intensity Peak', weeks: '9-12', intensity: 'RPE 8.5-9.5'),
+        BlueprintPhase(
+            name: 'Hypertrophy Prep', weeks: '1-3', intensity: 'RPE 6.5-7.5'),
+        BlueprintPhase(
+            name: 'Overload Accumulation',
+            weeks: '4-8',
+            intensity: 'RPE 7.5-8.5'),
+        BlueprintPhase(
+            name: 'Intensity Peak', weeks: '9-12', intensity: 'RPE 8.5-9.5'),
       ],
       deloadWeeks: const [4, 8, 12],
       generatedAt: DateTime.now(),

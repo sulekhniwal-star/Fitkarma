@@ -9,7 +9,8 @@ import 'package:fitkarma/features/transformation/screens/transformation_timeline
 
 void main() {
   group('§P14-C Golden & Snapshot Screen Tests (Dark Mode)', () {
-    testWidgets('Snapshot: Daily Briefing Screen renders full layout without overflow',
+    testWidgets(
+        'Snapshot: Daily Briefing Screen renders full layout without overflow',
         (tester) async {
       tester.view.physicalSize = const Size(800, 1800);
       tester.view.devicePixelRatio = 1.0;
@@ -31,7 +32,8 @@ void main() {
       expect(find.byType(DailyBriefingScreen), findsOneWidget);
     });
 
-    testWidgets('Snapshot: Workout Home Screen renders session card and history',
+    testWidgets(
+        'Snapshot: Workout Home Screen renders session card and history',
         (tester) async {
       tester.view.physicalSize = const Size(800, 1600);
       tester.view.devicePixelRatio = 1.0;
@@ -52,7 +54,8 @@ void main() {
       expect(find.byType(WorkoutHomeScreen), findsOneWidget);
     });
 
-    testWidgets('Snapshot: Social & Karma Squad Screen renders active squad and leaderboard',
+    testWidgets(
+        'Snapshot: Social & Karma Squad Screen renders active squad and leaderboard',
         (tester) async {
       tester.view.physicalSize = const Size(800, 1600);
       tester.view.devicePixelRatio = 1.0;
@@ -73,7 +76,8 @@ void main() {
       expect(find.byType(SocialScreen), findsOneWidget);
     });
 
-    testWidgets('Snapshot: Transformation Timeline Screen renders weight forecast',
+    testWidgets(
+        'Snapshot: Transformation Timeline Screen renders weight forecast',
         (tester) async {
       tester.view.physicalSize = const Size(800, 1600);
       tester.view.devicePixelRatio = 1.0;

@@ -12,30 +12,43 @@ void main() {
     // ── Engine Tests ────────────────────────────────────────────────────────
 
     test('categorizeBp: Normal reading (<120 and <80)', () {
-      expect(BloodPressureEngine.categorizeBp(118, 76), equals(BpCategory.normal));
+      expect(
+          BloodPressureEngine.categorizeBp(118, 76), equals(BpCategory.normal));
     });
 
     test('categorizeBp: Elevated reading (120-129 and <80)', () {
-      expect(BloodPressureEngine.categorizeBp(125, 78), equals(BpCategory.elevated));
+      expect(BloodPressureEngine.categorizeBp(125, 78),
+          equals(BpCategory.elevated));
     });
 
     test('categorizeBp: Stage 1 reading (130-139 or 80-89)', () {
-      expect(BloodPressureEngine.categorizeBp(132, 84), equals(BpCategory.stage1));
+      expect(
+          BloodPressureEngine.categorizeBp(132, 84), equals(BpCategory.stage1));
     });
 
     test('categorizeBp: Stage 2 reading (>=140 or >=90)', () {
-      expect(BloodPressureEngine.categorizeBp(145, 92), equals(BpCategory.stage2));
+      expect(
+          BloodPressureEngine.categorizeBp(145, 92), equals(BpCategory.stage2));
     });
 
     test('categorizeBp: Crisis reading (>180 or >120)', () {
-      expect(BloodPressureEngine.categorizeBp(185, 122), equals(BpCategory.crisis));
+      expect(BloodPressureEngine.categorizeBp(185, 122),
+          equals(BpCategory.crisis));
     });
 
-    test('detectRisingTrend: returns true for 3 strictly rising systolic readings', () {
+    test(
+        'detectRisingTrend: returns true for 3 strictly rising systolic readings',
+        () {
       final now = DateTime.now();
       final records = [
-        BloodPressureRecord(systolic: 120, diastolic: 80, measuredAt: now.subtract(const Duration(days: 2))),
-        BloodPressureRecord(systolic: 125, diastolic: 82, measuredAt: now.subtract(const Duration(days: 1))),
+        BloodPressureRecord(
+            systolic: 120,
+            diastolic: 80,
+            measuredAt: now.subtract(const Duration(days: 2))),
+        BloodPressureRecord(
+            systolic: 125,
+            diastolic: 82,
+            measuredAt: now.subtract(const Duration(days: 1))),
         BloodPressureRecord(systolic: 130, diastolic: 85, measuredAt: now),
       ];
 
@@ -45,8 +58,14 @@ void main() {
     test('detectRisingTrend: returns false when reading drops or flattens', () {
       final now = DateTime.now();
       final records = [
-        BloodPressureRecord(systolic: 120, diastolic: 80, measuredAt: now.subtract(const Duration(days: 2))),
-        BloodPressureRecord(systolic: 125, diastolic: 82, measuredAt: now.subtract(const Duration(days: 1))),
+        BloodPressureRecord(
+            systolic: 120,
+            diastolic: 80,
+            measuredAt: now.subtract(const Duration(days: 2))),
+        BloodPressureRecord(
+            systolic: 125,
+            diastolic: 82,
+            measuredAt: now.subtract(const Duration(days: 1))),
         BloodPressureRecord(systolic: 124, diastolic: 81, measuredAt: now),
       ];
 
@@ -67,7 +86,9 @@ void main() {
       expect(notifier.state.lockStatus, equals(BiometricLockStatus.unlocked));
     });
 
-    test('authenticateWithBiometrics shifts to failed state when failed simulated', () async {
+    test(
+        'authenticateWithBiometrics shifts to failed state when failed simulated',
+        () async {
       final notifier = BloodPressureNotifier(const BloodPressureEngine());
       await notifier.authenticateWithBiometrics(simulateSuccess: false);
       expect(notifier.state.lockStatus, equals(BiometricLockStatus.failed));
@@ -104,7 +125,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('BloodPressureScreen renders Biometric Verification prompt initially', (tester) async {
+    testWidgets(
+        'BloodPressureScreen renders Biometric Verification prompt initially',
+        (tester) async {
       final notifier = BloodPressureNotifier(const BloodPressureEngine());
       await tester.pumpWidget(
         ProviderScope(
@@ -119,7 +142,9 @@ void main() {
       expect(find.text('Latest Reading'), findsOneWidget);
     });
 
-    testWidgets('Tapping Use Backup PIN renders 6-digit keypad when biometrics fails', (tester) async {
+    testWidgets(
+        'Tapping Use Backup PIN renders 6-digit keypad when biometrics fails',
+        (tester) async {
       final notifier = BloodPressureNotifier(const BloodPressureEngine());
       notifier.lockScreen();
 
@@ -138,7 +163,8 @@ void main() {
       expect(find.text('Enter Backup PIN'), findsOneWidget);
     });
 
-    testWidgets('Unlocked state displays Blood Pressure readings and chart', (tester) async {
+    testWidgets('Unlocked state displays Blood Pressure readings and chart',
+        (tester) async {
       final notifier = BloodPressureNotifier(const BloodPressureEngine());
       await tester.pumpWidget(
         ProviderScope(

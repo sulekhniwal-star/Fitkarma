@@ -1,7 +1,17 @@
 enum Gender { male, female, other }
+
 enum PrimaryGoal { weightLoss, muscleGain, stamina, maintenance }
-enum ActivityLevel { sedentary, lightlyActive, moderatelyActive, veryActive, extraActive }
+
+enum ActivityLevel {
+  sedentary,
+  lightlyActive,
+  moderatelyActive,
+  veryActive,
+  extraActive
+}
+
 enum DietaryPreference { pureVeg, nonVeg, eggetarian, jain, vegan }
+
 enum DoshaType { vata, pitta, kapha, tridoshic }
 
 /// User Profile Model containing biometrics & local metabolic calculations

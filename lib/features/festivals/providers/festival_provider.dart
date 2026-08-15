@@ -57,6 +57,7 @@ class FestivalNotifier extends StateNotifier<FestivalState> {
   }
 }
 
-final festivalProvider = StateNotifierProvider<FestivalNotifier, FestivalState>((ref) {
+final festivalProvider =
+    StateNotifierProvider<FestivalNotifier, FestivalState>((ref) {
   return FestivalNotifier(const FestivalEngine());
 });

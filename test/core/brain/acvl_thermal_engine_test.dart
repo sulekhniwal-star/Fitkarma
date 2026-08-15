@@ -7,11 +7,14 @@ import 'package:fitkarma/features/workout/training_os/thermal_safeguard_banner.d
 
 void main() {
   group('§P6-F Adaptive Computer Vision Loop (ACVL) Tests', () {
-    test('PoseLandmarkAdapter downsamples 33 joint landmarks to 11 core joints in downsampled mode', () {
+    test(
+        'PoseLandmarkAdapter downsamples 33 joint landmarks to 11 core joints in downsampled mode',
+        () {
       final adapter = PoseLandmarkAdapter();
       final raw33 = List.generate(
         33,
-        (i) => PoseKeypoint(index: i, x: (i + 1) * 10.0, y: (i + 1) * 12.0, z: 0.0, score: 0.9),
+        (i) => PoseKeypoint(
+            index: i, x: (i + 1) * 10.0, y: (i + 1) * 12.0, z: 0.0, score: 0.9),
       );
 
       final normalized = adapter.filterAndNormalizeLandmarks(
@@ -32,7 +35,8 @@ void main() {
       expect(normalized[5].isEmpty, isTrue);
     });
 
-    test('PoseLandmarkAdapter calibrates tilt angle and torso scale accurately', () {
+    test('PoseLandmarkAdapter calibrates tilt angle and torso scale accurately',
+        () {
       final adapter = PoseLandmarkAdapter();
 
       final pose = List.generate(
@@ -41,16 +45,22 @@ void main() {
       );
 
       // Set shoulder & hip landmarks
-      pose[11] = PoseKeypoint(index: 11, x: 100, y: 100, z: 0, score: 0.9); // Left Shoulder
-      pose[12] = PoseKeypoint(index: 12, x: 200, y: 100, z: 0, score: 0.9); // Right Shoulder
-      pose[23] = PoseKeypoint(index: 23, x: 100, y: 300, z: 0, score: 0.9); // Left Hip
-      pose[24] = PoseKeypoint(index: 24, x: 200, y: 300, z: 0, score: 0.9); // Right Hip
+      pose[11] = PoseKeypoint(
+          index: 11, x: 100, y: 100, z: 0, score: 0.9); // Left Shoulder
+      pose[12] = PoseKeypoint(
+          index: 12, x: 200, y: 100, z: 0, score: 0.9); // Right Shoulder
+      pose[23] =
+          PoseKeypoint(index: 23, x: 100, y: 300, z: 0, score: 0.9); // Left Hip
+      pose[24] = PoseKeypoint(
+          index: 24, x: 200, y: 300, z: 0, score: 0.9); // Right Hip
 
       adapter.calibrateCamera(pose);
       expect(adapter.isCalibrated, isTrue);
     });
 
-    test('ThermalFrameProcessor transitions state based on thermal headroom thresholds per §P6-F matrix', () {
+    test(
+        'ThermalFrameProcessor transitions state based on thermal headroom thresholds per §P6-F matrix',
+        () {
       final processor = ThermalFrameProcessor();
 
       // Normal state (< 0.75)
@@ -75,7 +85,9 @@ void main() {
 
     // ── Widget Tests ────────────────────────────────────────────────────────
 
-    testWidgets('ThermalSafeguardBanner renders optimization banner when thermal state is non-normal', (tester) async {
+    testWidgets(
+        'ThermalSafeguardBanner renders optimization banner when thermal state is non-normal',
+        (tester) async {
       final processor = ThermalFrameProcessor();
       final container = ProviderContainer(
         overrides: [

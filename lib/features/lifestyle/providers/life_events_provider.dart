@@ -60,6 +60,7 @@ class LifeEventsNotifier extends StateNotifier<LifeEventsState> {
   }
 }
 
-final lifeEventsProvider = StateNotifierProvider<LifeEventsNotifier, LifeEventsState>((ref) {
+final lifeEventsProvider =
+    StateNotifierProvider<LifeEventsNotifier, LifeEventsState>((ref) {
   return LifeEventsNotifier();
 });

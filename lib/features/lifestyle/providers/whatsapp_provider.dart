@@ -50,8 +50,8 @@ class WhatsAppNotifier extends StateNotifier<WhatsAppUserLinkState> {
   }
 }
 
-final whatsAppLoggingEngineProvider =
-    Provider<WhatsAppFoodLoggingEngine>((ref) => const WhatsAppFoodLoggingEngine());
+final whatsAppLoggingEngineProvider = Provider<WhatsAppFoodLoggingEngine>(
+    (ref) => const WhatsAppFoodLoggingEngine());
 
 final whatsAppProvider =
     StateNotifierProvider<WhatsAppNotifier, WhatsAppUserLinkState>((ref) {
