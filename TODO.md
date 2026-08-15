@@ -252,7 +252,7 @@ production split.)*
 ## §DB — Database Schema (P0, underlies everything above)
 
 - [x] **Drift Local Schema (v17)** — every table implemented exactly as documented
-- [ ] **§DB-B Drift Migration Strategy** — migration path implemented and tested from a v16 (or earliest supported) install forward
+- [x] **§DB-B Drift Migration Strategy** — migration path implemented and tested from a v16 (or earliest supported) install forward
 - [ ] **§DB-C Cloudflare D1 Cloud Database Schema** (SQLite dialect, not the doc's original T-SQL):
   - [ ] `Users` table
   - [ ] `UserScores` table (NEW v17 — v1.0 hardening; confirm `Users` no longer holds overwritable score columns)
