@@ -253,19 +253,19 @@ production split.)*
 
 - [x] **Drift Local Schema (v17)** — every table implemented exactly as documented
 - [x] **§DB-B Drift Migration Strategy** — migration path implemented and tested from a v16 (or earliest supported) install forward
-- [ ] **§DB-C Cloudflare D1 Cloud Database Schema** (SQLite dialect, not the doc's original T-SQL):
-  - [ ] `Users` table
-  - [ ] `UserScores` table (NEW v17 — v1.0 hardening; confirm `Users` no longer holds overwritable score columns)
-  - [ ] `OrganizationAccounts` + `EmployeeEnrollments` tables (NEW v17 — Phase 16)
-  - [ ] `FoodLogs` table
-  - [ ] `DailyIntelligencePackages` table
-  - [ ] `AICache` table (v1.0 hardening — scoped by `user_id`, purged on account deletion)
-  - [ ] `CGMReadings` table
-  - [ ] `RecoveryLogs` table
-  - [ ] `TransformationChecks` table
-  - [ ] `SyncAuditTrail` table
-  - [ ] `SyncDeadLetterQueue` table
-  - [ ] `MarketplaceLedger` table (double-entry)
+- [x] **§DB-C Cloudflare D1 Cloud Database Schema** (SQLite dialect, not the doc's original T-SQL):
+  - [x] `Users` table
+  - [x] `UserScores` table (NEW v17 — v1.0 hardening; confirm `Users` no longer holds overwritable score columns)
+  - [x] `OrganizationAccounts` + `EmployeeEnrollments` tables (NEW v17 — Phase 16)
+  - [x] `FoodLogs` table
+  - [x] `DailyIntelligencePackages` table
+  - [x] `AICache` table (v1.0 hardening — scoped by `user_id`, purged on account deletion)
+  - [x] `CGMReadings` table
+  - [x] `RecoveryLogs` table
+  - [x] `TransformationChecks` table
+  - [x] `SyncAuditTrail` table
+  - [x] `SyncDeadLetterQueue` table
+  - [x] `MarketplaceLedger` table (double-entry)
 
 ## §CF — Cloudflare Workers (8 total) (P0)
 
