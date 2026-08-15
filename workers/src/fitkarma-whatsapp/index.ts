@@ -5,7 +5,7 @@
 
 export interface Env {
   DB: D1Database;
-  WHATSAPP_API_TOKEN: string;
+  WHATSAPP_API_TOKEN?: string;
   GROQ_API_KEY: string;
 }
 

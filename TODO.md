@@ -269,15 +269,15 @@ production split.)*
 
 ## §CF — Cloudflare Workers (8 total) (P0)
 
-- [ ] `fitkarma-health-os` — core v1.0 architecture Worker; deployed as **Cloudflare Workflows fan-out** (not a sequential loop), per-user error isolation confirmed; AI Cache Implementation wired
-- [ ] `fitkarma-social`
-- [ ] `fitkarma-marketplace`
-- [ ] `fitkarma-cores`
-- [ ] `fitkarma-coach`
-- [ ] `fitkarma-meal-vision`
-- [ ] `fitkarma-insights`
-- [ ] `fitkarma-reports`
-- [ ] `fitkarma-whatsapp` (Phase 16 — not in the original 8, added by §P16-A; confirm `wrangler.toml` routes/bindings cover it too)
+- [x] `fitkarma-health-os` — core v1.0 architecture Worker; deployed as **Cloudflare Workflows fan-out** (not a sequential loop), per-user error isolation confirmed; AI Cache Implementation wired
+- [x] `fitkarma-social`
+- [x] `fitkarma-marketplace`
+- [x] `fitkarma-cores`
+- [x] `fitkarma-coach`
+- [x] `fitkarma-meal-vision`
+- [x] `fitkarma-insights`
+- [x] `fitkarma-reports`
+- [x] `fitkarma-whatsapp` (Phase 16 — not in the original 8, added by §P16-A; confirm `wrangler.toml` routes/bindings cover it too)
 
 ## §GLO — Glossary & Architecture Decision Records (P1)
 
