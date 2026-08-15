@@ -244,7 +244,7 @@ production split.)*
 - [x] **§P16-A WhatsApp Business Logging** — Architecture implemented; Data Model implemented; full Implementation built (reusing the existing food-parsing pipeline); Privacy (opt-in/opt-out, off by default) implemented
 - [x] **§P16-B Vernacular Voice Logging** — Architecture implemented; all Supported Languages (v1.0 launch set: Hindi, Tamil, Telugu, Marathi, Bengali, Kannada) implemented and tested with native-speaker audio; Implementation built ahead of the existing food/workout parser
 - [x] **§P16-C ABHA Health ID Integration** — Architecture implemented; Data Model implemented (`abhaHealthId` encrypted at rest); Compliance Note requirements met
-- [ ] **§P16-D Corporate Wellness & Insurer Tier** (NEW v1.0) — Architecture implemented; Data Model implemented (`OrganizationAccounts`, `EmployeeEnrollments`); Privacy Boundary (minimum-cohort-size aggregate threshold) implemented and tested with a below-threshold cohort
+- [x] **§P16-D Corporate Wellness & Insurer Tier** (NEW v1.0) — Architecture implemented; Data Model implemented (`OrganizationAccounts`, `EmployeeEnrollments`); Privacy Boundary (minimum-cohort-size aggregate threshold) implemented and tested with a below-threshold cohort
 - [ ] **§P16-E Grocery Vendor Checkout Integration** — Architecture implemented; Implementation built for at least one partner (Blinkit/BigBasket/Zepto); affiliate order tracking confirmed reusing the §P13-C ledger
 
 ---
