@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # Monitoring
-  sentry_flutter: ^8.0.0
+  sentry_flutter: ^9.0.0
   image: ^4.9.1
 
 dev_dependencies:
