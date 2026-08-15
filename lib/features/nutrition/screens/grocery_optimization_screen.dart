@@ -3,6 +3,7 @@ import '../../../shared/theme/app_colors.dart';
 import '../../../shared/theme/app_spacing.dart';
 import '../../../shared/theme/app_typography.dart';
 import '../../../shared/widgets/glass_card.dart';
+import '../../../core/brain/grocery_vendor_adapter.dart';
 import '../models/grocery_models.dart';
 import '../models/grocery_optimization_engine.dart';
 
@@ -271,6 +272,76 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                     ],
                   ),
                 ),
+
+              const SizedBox(height: AppSpacing.lg),
+
+              // §P16-E Quick-Commerce Vendor Instant Checkout Section
+              Text('Instant 10-Minute Cart Checkout:', style: AppTypography.h3),
+              const SizedBox(height: AppSpacing.xs),
+              Text('Deep-link with pre-filled cart & affiliate kickback to FitKarma ledger',
+                  style: AppTypography.bodySm.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+              const SizedBox(height: AppSpacing.sm),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      key: const Key('btn_checkout_blinkit'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFF8CB46),
+                        foregroundColor: Colors.black87,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                      ),
+                      icon: const Icon(Icons.shopping_bag, size: 16),
+                      label: const Text('Blinkit', style: TextStyle(fontWeight: FontWeight.bold)),
+                      onPressed: () {
+                        const BlinkitAdapter().buildCheckoutDeepLink(_optimizedResult!.items);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening Blinkit with pre-filled cart & affiliate tag...')),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      key: const Key('btn_checkout_zepto'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF8B2CF5),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                      ),
+                      icon: const Icon(Icons.flash_on, size: 16),
+                      label: const Text('Zepto', style: TextStyle(fontWeight: FontWeight.bold)),
+                      onPressed: () {
+                        const ZeptoAdapter().buildCheckoutDeepLink(_optimizedResult!.items);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening Zepto with pre-filled cart & affiliate tag...')),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      key: const Key('btn_checkout_bigbasket'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF84C225),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                      ),
+                      icon: const Icon(Icons.storefront, size: 16),
+                      label: const Text('BigBasket', style: TextStyle(fontWeight: FontWeight.bold)),
+                      onPressed: () {
+                        const BigBasketAdapter().buildCheckoutDeepLink(_optimizedResult!.items);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening BigBasket with pre-filled cart & affiliate tag...')),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ],
             const SizedBox(height: 30),
           ],
