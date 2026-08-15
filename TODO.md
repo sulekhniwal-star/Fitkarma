@@ -236,7 +236,7 @@ production split.)*
 
 - [x] **§P14-A Security** — SQLCipher Secure Database Initialization implemented (`Random.secure()` key gen, verified by code review); Biometric Verification Gate + Riverpod state implemented
 - [x] **§P14-B Performance** — Background Processing & iOS Sync Safeguards implemented; **App Foreground Catch-Up Sync** (Pure Dart) implemented
-- [ ] **§P14-C Testing Strategy** — implemented exactly as documented (unit/widget/integration/golden test layers)
+- [x] **§P14-C Testing Strategy** — implemented exactly as documented (unit/widget/integration/golden test layers)
 - [ ] **§P14-D CI/CD Pipeline** — see Phase -1 above (implemented on Cloudflare instead of the doc's original target, with the dev/staging/production split)
 
 ## Phase 16 — India Growth & Trust Layer (P1)
