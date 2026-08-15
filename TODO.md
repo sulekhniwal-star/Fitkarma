@@ -282,7 +282,7 @@ production split.)*
 ## §GLO — Glossary & Architecture Decision Records (P1)
 
 - [x] Every term in the **Glossary** used consistently in code identifiers and comments — spot-check for drift (e.g. don't call it "Readiness Index" in code if the doc says "Readiness Score")
-- [ ] Every **Architecture Decision Record (ADR)** cross-checked against the actual implementation; any deviation gets a new ADR explaining why, not a silent divergence
+- [x] Every **Architecture Decision Record (ADR)** cross-checked against the actual implementation; any deviation gets a new ADR explaining why, not a silent divergence
 
 ---
 
