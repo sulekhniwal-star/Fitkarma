@@ -48,6 +48,8 @@ class GroceryCheckoutNotifier extends StateNotifier<GroceryCheckoutState> {
           selectedAdapter: (service ?? const GroceryCheckoutService()).supportedAdapters.first,
         ));
 
+  GroceryCheckoutService get service => _service;
+
   void selectAdapter(GroceryVendorAdapter adapter) {
     state = state.copyWith(selectedAdapter: adapter);
   }

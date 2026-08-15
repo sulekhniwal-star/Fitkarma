@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/coach/screens/coach_chat_screen.dart';
 import 'package:fitkarma/features/coach/providers/coach_tone_provider.dart';
-import 'package:fitkarma/core/brain/ai_roast_mode_engine.dart';
 
 void main() {
   testWidgets('CoachChatScreen renders Tone Selector with 4 tones per §P12-D',

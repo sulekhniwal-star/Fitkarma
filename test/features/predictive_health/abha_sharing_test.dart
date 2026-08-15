@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/predictive_health/screens/doctor_sharing_screen.dart';
 import 'package:fitkarma/features/predictive_health/providers/abha_provider.dart';
-import 'package:fitkarma/core/brain/abha_integration_engine.dart';
 
 void main() {
   testWidgets(

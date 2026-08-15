@@ -518,9 +518,12 @@ class _LatestReadingCard extends StatelessWidget {
 
   String _formatRecordedTime(DateTime dt) {
     final diff = DateTime.now().difference(dt);
-    if (diff.inHours < 1) return 'Today, ${dt.minute}m ago';
-    if (diff.inHours < 24)
+    if (diff.inHours < 1) {
+      return 'Today, ${dt.minute}m ago';
+    }
+    if (diff.inHours < 24) {
       return 'Today, ${dt.hour}:${dt.minute.toString().padLeft(2, '0')}';
+    }
     return '${dt.day}/${dt.month} at ${dt.hour}:${dt.minute.toString().padLeft(2, '0')}';
   }
 }

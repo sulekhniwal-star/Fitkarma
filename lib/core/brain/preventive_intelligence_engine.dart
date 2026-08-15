@@ -144,12 +144,16 @@ class PreventiveIntelligenceEngine {
 
     // 4. Metabolic Syndrome Pattern (3+ risk factors present: high BP, high glucose, high BMI/waist)
     int metabolicRiskFactors = 0;
-    if (data.systolicBp >= 130.0 || data.diastolicBp >= 85.0)
+    if (data.systolicBp >= 130.0 || data.diastolicBp >= 85.0) {
       metabolicRiskFactors++;
+    }
     if (data.fastingGlucoseMgDl >= 100.0 ||
-        data.glucoseTrend == TrendDirection.rising) metabolicRiskFactors++;
-    if (data.bmi >= 27.0 || data.weightTrend == TrendDirection.rising)
+        data.glucoseTrend == TrendDirection.rising) {
       metabolicRiskFactors++;
+    }
+    if (data.bmi >= 27.0 || data.weightTrend == TrendDirection.rising) {
+      metabolicRiskFactors++;
+    }
     if (metabolicRiskFactors >= 3) {
       if (!alerts.any((a) => a.id == 'p4_metabolic_syndrome')) {
         alerts.add(const HealthRiskAlert(

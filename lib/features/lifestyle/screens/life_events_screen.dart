@@ -62,7 +62,7 @@ class LifeEventsScreen extends ConsumerWidget {
                                     color: AppColors.teal,
                                     fontWeight: FontWeight.bold)),
                             Text(primary.title, style: AppTypography.h3),
-                            Text('DIP Priority: ${adapt.DIPPriority}',
+                            Text('DIP Priority: ${adapt.dipPriority}',
                                 style: AppTypography.bodySm.copyWith(
                                     color: AppColors.textSecondary,
                                     fontSize: 11)),

@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/core/brain/stress_detection_engine.dart';
 import 'package:fitkarma/shared/widgets/proactive_stress_alert_card.dart';
 

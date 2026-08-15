@@ -43,7 +43,7 @@ class LifeEventAdaptation {
   final double hydrationMultiplier;
   final String sleepStrategy;
   final String coachTone;
-  final String DIPPriority;
+  final String dipPriority;
 
   const LifeEventAdaptation({
     required this.workoutDurationMins,
@@ -54,7 +54,7 @@ class LifeEventAdaptation {
     required this.hydrationMultiplier,
     required this.sleepStrategy,
     required this.coachTone,
-    required this.DIPPriority,
+    required this.dipPriority,
   });
 
   factory LifeEventAdaptation.standard() {
@@ -67,7 +67,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.0,
       sleepStrategy: 'Standard 7-8h bedtime',
       coachTone: 'Balanced',
-      DIPPriority: 'Balanced progression',
+      dipPriority: 'Balanced progression',
     );
   }
 
@@ -83,7 +83,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.2,
       sleepStrategy: 'Extended tissue repair sleep (8-9h)',
       coachTone: 'Empathetic & safety-first',
-      DIPPriority: 'Injury isolation & recovery',
+      dipPriority: 'Injury isolation & recovery',
     );
   }
 
@@ -97,7 +97,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.4, // Jet lag hydration
       sleepStrategy: 'Circadian anchor timing ${timezone ?? 'local time'}',
       coachTone: 'Adaptable & encouraging',
-      DIPPriority: 'Jet lag & circadian alignment',
+      dipPriority: 'Jet lag & circadian alignment',
     );
   }
 
@@ -111,7 +111,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.1,
       sleepStrategy: 'Power naps & deep sleep optimization',
       coachTone: 'Focused & efficient',
-      DIPPriority: 'Time-compressed consistency',
+      dipPriority: 'Time-compressed consistency',
     );
   }
 
@@ -125,7 +125,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.2,
       sleepStrategy: 'Polyphasic sleep logging & recovery priority',
       coachTone: 'Supportive & non-judgmental',
-      DIPPriority: 'Parental stress & fatigue mitigation',
+      dipPriority: 'Parental stress & fatigue mitigation',
     );
   }
 
@@ -139,7 +139,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.1,
       sleepStrategy: 'Strict 7h memory consolidation cutoff',
       coachTone: 'Calming & encouraging',
-      DIPPriority: 'Cognitive energy maintenance',
+      dipPriority: 'Cognitive energy maintenance',
     );
   }
 
@@ -153,7 +153,7 @@ class LifeEventAdaptation {
       hydrationMultiplier: 1.2,
       sleepStrategy: 'Dark room circadian shift protocol',
       coachTone: 'Adaptive',
-      DIPPriority: 'Circadian shift realignment',
+      dipPriority: 'Circadian shift realignment',
     );
   }
 }
@@ -194,7 +194,7 @@ class LifeEventsEngine {
           hydrationMultiplier: 1.3,
           sleepStrategy: 'Beauty sleep & stress management',
           coachTone: 'Festive & high-accountability',
-          DIPPriority: 'Wedding prep transformation',
+          dipPriority: 'Wedding prep transformation',
         );
 
       case LifeEventType.ramadan:
@@ -207,7 +207,7 @@ class LifeEventsEngine {
           hydrationMultiplier: 1.5,
           sleepStrategy: 'Split night sleep schedule',
           coachTone: 'Mindful',
-          DIPPriority: 'Fasting energy preservation',
+          dipPriority: 'Fasting energy preservation',
         );
 
       case LifeEventType.relocation:
@@ -222,7 +222,7 @@ class LifeEventsEngine {
           hydrationMultiplier: 1.2,
           sleepStrategy: 'Maximum rest & stress recovery',
           coachTone: 'Gentle & compassionate',
-          DIPPriority: 'Emotional & physical recovery',
+          dipPriority: 'Emotional & physical recovery',
         );
     }
   }

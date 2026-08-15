@@ -112,11 +112,6 @@ void main() {
           '{"event":"payment.captured","amount":299900,"currency":"INR"}';
       const secret = 'rzp_sec_fitkarma_live_9988';
 
-      // Genuine signature for the above payload and secret
-      // Computing expected signature using same algorithm
-      final genuineSignature =
-          '28a7e0d37e2cb039d54a2b97b093f18b5ea6b3c9b634fe37e4c9f13885d58c8a'; // Will be verified dynamically
-
       final isMatched = verifier.verifyRazorpaySignature(
         payload: payload,
         signatureHeader: 'invalid_tampered_signature',

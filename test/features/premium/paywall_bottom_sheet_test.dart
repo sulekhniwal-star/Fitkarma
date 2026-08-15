@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/premium/screens/paywall_bottom_sheet.dart';
 import 'package:fitkarma/features/premium/models/subscription_model.dart';
-import 'package:fitkarma/features/premium/providers/premium_provider.dart';
 
 void main() {
   testWidgets(

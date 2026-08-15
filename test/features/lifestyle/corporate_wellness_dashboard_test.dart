@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/lifestyle/screens/corporate_wellness_dashboard_screen.dart';
-import 'package:fitkarma/features/lifestyle/providers/corporate_wellness_provider.dart';
 
 void main() {
   testWidgets('§P16-D CorporateWellnessDashboardScreen displays aggregate metrics and switches to below-threshold privacy alert',

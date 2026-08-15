@@ -147,7 +147,7 @@ class LocalCalendarApi implements CalendarApi {
   Future<List<CalendarEvent>> getEvents(
       DateTime date, CalendarSource source) async {
     if (_mockEvents != null) {
-      return _mockEvents!;
+      return _mockEvents;
     }
 
     // Default simulated busy work schedule (8 meetings, ~6.5 hours of calls)

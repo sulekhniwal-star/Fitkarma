@@ -223,12 +223,18 @@ class SleepDebtEngine {
     final durationRatio = needHours > 0 ? actualHours / needHours : 0.0;
     final restfulness = deepPct + remPct; // combined restorative %
 
-    if (durationRatio >= 0.95 && restfulness >= 0.38)
+    if (durationRatio >= 0.95 && restfulness >= 0.38) {
       return SleepQuality.excellent;
-    if (durationRatio >= 0.87 && restfulness >= 0.33) return SleepQuality.good;
-    if (durationRatio >= 0.75 && restfulness >= 0.25)
+    }
+    if (durationRatio >= 0.87 && restfulness >= 0.33) {
+      return SleepQuality.good;
+    }
+    if (durationRatio >= 0.75 && restfulness >= 0.25) {
       return SleepQuality.normal;
-    if (durationRatio >= 0.60) return SleepQuality.fair;
+    }
+    if (durationRatio >= 0.60) {
+      return SleepQuality.fair;
+    }
     return SleepQuality.poor;
   }
 }

@@ -5,7 +5,6 @@ import '../../../shared/theme/app_spacing.dart';
 import '../../../shared/theme/app_typography.dart';
 import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/glass_card.dart';
-import '../../../core/brain/festival_adaptation_engine.dart';
 import '../providers/festival_provider.dart';
 
 /// §P12-A Festival Intelligence System & Survival Mode Screen

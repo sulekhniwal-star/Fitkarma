@@ -715,7 +715,6 @@ class _ToneSelectorBar extends StatelessWidget {
       child: Row(
         children: CoachTone.values.map((tone) {
           final isSelected = selectedTone == tone;
-          final isEffective = effectiveTone == tone;
 
           Color activeColor = AppColors.teal;
           if (tone == CoachTone.roast) {

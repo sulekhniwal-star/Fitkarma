@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fitkarma/features/daily_mission/widgets/calendar_briefing_card.dart';
 import 'package:fitkarma/features/daily_mission/screens/daily_briefing_screen.dart';
-import 'package:fitkarma/features/lifestyle/providers/calendar_provider.dart';
 import 'package:fitkarma/core/brain/calendar_intelligence_engine.dart';
 
 void main() {

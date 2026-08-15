@@ -58,14 +58,14 @@ class StressDetectionEngine {
       stressSignals += 3;
       final pctDrop =
           (((data.baselineHRV - data.hrv) / data.baselineHRV) * 100).round();
-      signalDescs.add('HRV: -${pctDrop}% below baseline');
+      signalDescs.add('HRV: -$pctDrop% below baseline');
     }
 
     // 2. Resting HR elevated above baseline (+2 points)
     if (data.restingHR > data.baselineHR * 1.10) {
       stressSignals += 2;
       final bpmIncrease = (data.restingHR - data.baselineHR).round();
-      signalDescs.add('Resting HR: +${bpmIncrease} bpm above baseline');
+      signalDescs.add('Resting HR: +$bpmIncrease bpm above baseline');
     }
 
     // 3. Sleep quality declining (+2 points)
@@ -85,7 +85,7 @@ class StressDetectionEngine {
     if (data.appOpenFrequencyDrop > 0.40) {
       stressSignals += 1;
       final pctDrop = (data.appOpenFrequencyDrop * 100).round();
-      signalDescs.add('App engagement drop (${pctDrop}% decrease in opens)');
+      signalDescs.add('App engagement drop ($pctDrop% decrease in opens)');
     }
 
     // 6. Late-night food logging (behavioral + lifestyle signal: +1 point)
