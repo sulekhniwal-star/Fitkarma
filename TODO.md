@@ -288,24 +288,24 @@ production split.)*
 
 ## v1.0 Architecture Hardening (P0 — cuts across every phase above, verify explicitly)
 
-- [ ] SQLCipher key generation confirmed `Random.secure()`-based (code review, not spec-reading)
-- [ ] `fitkarma-health-os` confirmed running as Cloudflare Workflows fan-out with per-user error isolation
-- [ ] DIP generation scheduling confirmed per-user via `timezoneOffsetMinutes` + `preferredDIPHour` (test a non-IST user)
-- [ ] Sync conflict resolution confirmed HLC-based (test two devices editing offline simultaneously)
-- [ ] Cumulative log sync batches carry `syncBatchId`, server-side dedup verified
-- [ ] `UserScores` table live; `Users` confirmed to no longer hold overwritable score columns
-- [ ] `AICache` scoped by `user_id`; account deletion verified to purge it
-- [ ] `ClinicalCopyLinter` passing in CI for every §P10-I/H/J copy change
+- [x] SQLCipher key generation confirmed `Random.secure()`-based (code review, not spec-reading)
+- [x] `fitkarma-health-os` confirmed running as Cloudflare Workflows fan-out with per-user error isolation
+- [x] DIP generation scheduling confirmed per-user via `timezoneOffsetMinutes` + `preferredDIPHour` (test a non-IST user)
+- [x] Sync conflict resolution confirmed HLC-based (test two devices editing offline simultaneously)
+- [x] Cumulative log sync batches carry `syncBatchId`, server-side dedup verified
+- [x] `UserScores` table live; `Users` confirmed to no longer hold overwritable score columns
+- [x] `AICache` scoped by `user_id`; account deletion verified to purge it
+- [x] `ClinicalCopyLinter` passing in CI for every §P10-I/H/J copy change
 
 ---
 
 ## Pre-Launch Gate
 
-- [ ] Every checkbox in every phase above is checked
-- [ ] Full CI pipeline (`test`, `test-workers`) green on the exact release-candidate commit
+- [x] Every checkbox in every phase above is checked
+- [x] Full CI pipeline (`test`, `test-workers`) green on the exact release-candidate commit
 - [ ] Release candidate soaked on staging for multiple days with real device testing
 - [ ] `production` GitHub Environment reviewer sign-off obtained
-- [ ] Rollback plan (Worker rollback + D1 migration revert) documented and rehearsed once, not just written down
+- [x] Rollback plan (Worker rollback + D1 migration revert) documented and rehearsed once, not just written down
 
 ## Post-Launch (Within 30 Days)
 
