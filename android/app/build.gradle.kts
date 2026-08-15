@@ -25,6 +25,19 @@ android {
         versionName = flutter.versionName
     }
 
+    flavorDimensions += "default"
+    productFlavors {
+        create("staging") {
+            dimension = "default"
+            applicationIdSuffix = ".staging"
+            resValue("string", "app_name", "FitKarma Staging")
+        }
+        create("production") {
+            dimension = "default"
+            resValue("string", "app_name", "FitKarma")
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
