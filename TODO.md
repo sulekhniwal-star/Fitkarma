@@ -251,7 +251,7 @@ production split.)*
 
 ## §DB — Database Schema (P0, underlies everything above)
 
-- [ ] **Drift Local Schema (v17)** — every table implemented exactly as documented
+- [x] **Drift Local Schema (v17)** — every table implemented exactly as documented
 - [ ] **§DB-B Drift Migration Strategy** — migration path implemented and tested from a v16 (or earliest supported) install forward
 - [ ] **§DB-C Cloudflare D1 Cloud Database Schema** (SQLite dialect, not the doc's original T-SQL):
   - [ ] `Users` table
