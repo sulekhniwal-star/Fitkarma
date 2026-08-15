@@ -241,7 +241,7 @@ production split.)*
 
 ## Phase 16 — India Growth & Trust Layer (P1)
 
-- [ ] **§P16-A WhatsApp Business Logging** — Architecture implemented; Data Model implemented; full Implementation built (reusing the existing food-parsing pipeline); Privacy (opt-in/opt-out, off by default) implemented
+- [x] **§P16-A WhatsApp Business Logging** — Architecture implemented; Data Model implemented; full Implementation built (reusing the existing food-parsing pipeline); Privacy (opt-in/opt-out, off by default) implemented
 - [ ] **§P16-B Vernacular Voice Logging** — Architecture implemented; all Supported Languages (v1.0 launch set: Hindi, Tamil, Telugu, Marathi, Bengali, Kannada) implemented and tested with native-speaker audio; Implementation built ahead of the existing food/workout parser
 - [ ] **§P16-C ABHA Health ID Integration** — Architecture implemented; Data Model implemented (`abhaHealthId` encrypted at rest); Compliance Note requirements met
 - [ ] **§P16-D Corporate Wellness & Insurer Tier** (NEW v1.0) — Architecture implemented; Data Model implemented (`OrganizationAccounts`, `EmployeeEnrollments`); Privacy Boundary (minimum-cohort-size aggregate threshold) implemented and tested with a below-threshold cohort
