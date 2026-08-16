@@ -9,8 +9,8 @@ import 'package:fitkarma/core/security/encrypted_database_connection.dart';
 
 void main() {
   group('§GLO Architecture Decision Records (ADR-001 to ADR-030) Compliance Tests', () {
-    test('ADR-001 & ADR-004: Drift Schema v17 and SQLCipher Key Generation', () {
-      expect(kAppDatabaseSchemaVersion, equals(17));
+    test('ADR-001 & ADR-004: Drift Schema v18 and SQLCipher Key Generation', () {
+      expect(kAppDatabaseSchemaVersion, equals(18));
       expect(driftV17Tables.length, equals(36));
 
       // SQLCipher key generation confirmed Random.secure()
