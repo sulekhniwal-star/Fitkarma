@@ -23,26 +23,47 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const ENV_ARG = process.argv.find(a => a.startsWith('--env='))?.split('=')[1]
-  ?? process.argv[process.argv.indexOf('--env') + 1]
+const envIdx = process.argv.indexOf('--env');
+const rawEnv = process.argv.find(a => a.startsWith('--env='))?.split('=')[1]
+  ?? (envIdx !== -1 && process.argv[envIdx + 1] ? process.argv[envIdx + 1] : undefined)
   ?? 'staging';
 
-// DB IDs: prefer GitHub secret env vars, fall back to wrangler.toml values.
-// Add CF_D1_DB_ID_STAGING and CF_D1_DB_ID_PRODUCTION to your GitHub repo secrets.
+const ENV_ARG = rawEnv.trim().toLowerCase();
+
+const validEnvs = ['dev', 'staging', 'production'];
+if (!validEnvs.includes(ENV_ARG)) {
+  console.error(`Invalid env "${ENV_ARG}". Expected one of: ${validEnvs.join(' | ')}`);
+  process.exit(1);
+}
+
+// DB IDs: prefer non-empty GitHub secret env vars, fall back to wrangler.toml values.
+const rawStagingId = (process.env.CF_D1_DB_ID_STAGING || '').trim();
+const rawProdId = (process.env.CF_D1_DB_ID_PRODUCTION || '').trim();
+
 const DB_IDS = {
-  dev:        process.env.CF_D1_DB_ID_STAGING    ?? '39cc4384-437f-44d8-939c-65325dff0fa7',
-  staging:    process.env.CF_D1_DB_ID_STAGING    ?? '39cc4384-437f-44d8-939c-65325dff0fa7',
-  production: process.env.CF_D1_DB_ID_PRODUCTION ?? 'bd8e12fe-2f17-4d42-a847-930d41f90fd5',
+  dev:        rawStagingId || '39cc4384-437f-44d8-939c-65325dff0fa7',
+  staging:    rawStagingId || '39cc4384-437f-44d8-939c-65325dff0fa7',
+  production: rawProdId || 'bd8e12fe-2f17-4d42-a847-930d41f90fd5',
 };
 
 const DB_ID = DB_IDS[ENV_ARG];
 if (!DB_ID) {
-  console.error(`Unknown env "${ENV_ARG}". Use: dev | staging | production`);
+  console.error(`No database ID configured for environment "${ENV_ARG}".`);
   process.exit(1);
 }
 
-const API_TOKEN  = process.env.CLOUDFLARE_API_TOKEN;
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+const API_TOKEN = (
+  process.env.CLOUDFLARE_API_TOKEN ||
+  process.env.CF_API_TOKEN ||
+  (ENV_ARG === 'production' ? process.env.CF_API_TOKEN_PRODUCTION : process.env.CF_API_TOKEN_STAGING) ||
+  ''
+).trim();
+
+const ACCOUNT_ID = (
+  process.env.CLOUDFLARE_ACCOUNT_ID ||
+  process.env.CF_ACCOUNT_ID ||
+  ''
+).trim();
 
 if (!API_TOKEN || !ACCOUNT_ID) {
   console.error('Missing env vars: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are required.');
