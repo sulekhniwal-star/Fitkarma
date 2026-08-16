@@ -160,8 +160,13 @@ class FoodReferences extends Table {
   RealColumn get carbsG => real()();
   RealColumn get fatG => real()();
   IntColumn get glycemicIndex => integer()();
-  RealColumn get fiberG => real()();
+  RealColumn get fiberG => real().withDefault(const Constant(0.0))(); // NEW v18
   IntColumn get satietyIndex => integer()();
+  // Extended columns — v18 (mirrors D1 migration 0002)
+  TextColumn get category => text().withDefault(const Constant('Indian'))(); // NEW v18
+  TextColumn get region => text().withDefault(const Constant(''))(); // NEW v18
+  RealColumn get servingGrams => real().withDefault(const Constant(100.0))(); // NEW v18
+  TextColumn get sourceTag => text().withDefault(const Constant('unknown'))(); // NEW v18
 
   @override
   Set<Column> get primaryKey => {foodId};
@@ -631,4 +636,4 @@ final driftV17Tables = <Type>[
   EmployeeEnrollments,
 ];
 
-const int kAppDatabaseSchemaVersion = 17;
+const int kAppDatabaseSchemaVersion = 18;

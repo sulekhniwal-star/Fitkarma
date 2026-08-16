@@ -40,6 +40,9 @@ dependencies:
   sentry_flutter: ^9.0.0
   image: ^4.9.1
 
+  # Utilities
+  uuid: ^4.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,3 +55,4 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/food_db/

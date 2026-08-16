@@ -161,6 +161,20 @@ class DriftMigrationEngine {
       ));
     }
 
+    if (fromVersion < 18 && toVersion >= 18) {
+      steps.add(const MigrationStepInfo(
+        targetVersion: 18,
+        description: 'v18: Extended food_references with category, region, servingGrams, sourceTag for real food DB seed',
+        createdTables: [],
+        addedColumns: [
+          'food_references.category',
+          'food_references.region',
+          'food_references.servingGrams',
+          'food_references.sourceTag',
+        ],
+      ));
+    }
+
     return steps;
   }
 

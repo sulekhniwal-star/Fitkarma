@@ -5,12 +5,12 @@ void main() {
   group('§DB-B Drift Migration Strategy Tests', () {
     const engine = DriftMigrationEngine();
 
-    test('Computes full progressive migration path from v1 to v17', () {
-      final steps = engine.getMigrationSteps(1, 17);
+    test('Computes full progressive migration path from v1 to v18', () {
+      final steps = engine.getMigrationSteps(1, 18);
 
-      expect(steps.length, equals(12)); // v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17
+      expect(steps.length, equals(13)); // v6-v17 (12 steps) + v18
       expect(steps.first.targetVersion, equals(6));
-      expect(steps.last.targetVersion, equals(17));
+      expect(steps.last.targetVersion, equals(18));
     });
 
     test('Computes direct migration path from v16 to v17', () {
@@ -25,6 +25,18 @@ void main() {
       expect(v17Step.addedColumns, contains('users.timezoneOffsetMinutes'));
       expect(v17Step.addedColumns, contains('users.whatsAppOptIn'));
       expect(v17Step.addedColumns, contains('users.abhaHealthId'));
+    });
+
+    test('Computes v17 to v18 migration step with food_references columns', () {
+      final steps = engine.getMigrationSteps(17, 18);
+
+      expect(steps.length, equals(1));
+      final v18Step = steps.first;
+      expect(v18Step.targetVersion, equals(18));
+      expect(v18Step.addedColumns, contains('food_references.category'));
+      expect(v18Step.addedColumns, contains('food_references.region'));
+      expect(v18Step.addedColumns, contains('food_references.servingGrams'));
+      expect(v18Step.addedColumns, contains('food_references.sourceTag'));
     });
 
     test('Extracts all 8 legacy scalar scores into normalized UserScores records', () {

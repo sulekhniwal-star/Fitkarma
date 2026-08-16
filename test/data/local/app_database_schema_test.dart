@@ -2,10 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fitkarma/data/local/app_database.dart';
 
 void main() {
-  group('§DB Drift Local Schema (v17) Table Registration Tests', () {
-    test('Verifies exactly 36 tables defined in Drift Schema v17', () {
+  group('§DB Drift Local Schema (v18) Table Registration Tests', () {
+    test('Verifies exactly 36 tables defined in Drift Schema v18', () {
       expect(driftV17Tables.length, equals(36));
-      expect(kAppDatabaseSchemaVersion, equals(17));
+      expect(kAppDatabaseSchemaVersion, equals(18));
     });
 
     test('Verifies key v17 tables exist in schema registry', () {

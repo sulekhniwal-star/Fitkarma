@@ -9,6 +9,7 @@ import mealVisionWorker from './fitkarma-meal-vision/index';
 import insightsWorker from './fitkarma-insights/index';
 import reportsWorker from './fitkarma-reports/index';
 import whatsappWorker from './fitkarma-whatsapp/index';
+import foodDbWorker from './fitkarma-food-db/index';
 
 export interface Env {
   DB: D1Database;
@@ -51,6 +52,9 @@ export default {
     if (path.startsWith('/whatsapp')) {
       return whatsappWorker.fetch(request, env, ctx);
     }
+    if (path.startsWith('/food-db')) {
+      return foodDbWorker.fetch(request, env, ctx);
+    }
 
     // Default Health Status
     return new Response(
@@ -68,6 +72,7 @@ export default {
           'fitkarma-insights',
           'fitkarma-reports',
           'fitkarma-whatsapp',
+          'fitkarma-food-db',
         ],
       }),
       { headers: { 'Content-Type': 'application/json' } }

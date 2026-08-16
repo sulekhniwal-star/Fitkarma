@@ -55,3 +55,26 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ── Food Database — raw downloads & generated output ──────────────────────────
+# Raw dataset downloads (huge — never commit these)
+Food-db/*.zip
+Food-db/*.gz
+Food-db/*.pdf
+Food-db/*.tsv
+Food-db/*.csv
+
+# Extracted archive folders (raw source data, regenerable from downloads)
+Food-db/archive1_extract/
+Food-db/archive2_extract/
+Food-db/archive3_extract/
+Food-db/archive_extract/
+Food-db/opennutrition_extract/
+Food-db/FoodData_Central_csv*/
+
+# Generated output (large, regenerable by running build_food_db.py)
+# Keep food_references_seed.json tracked so CI can seed without re-running ETL.
+# Uncomment the line below only if you want CI to run the ETL script itself instead.
+# Food-db/output/
+Food-db/output/food_references_seed.sql
+Food-db/output/food_seed_5000.json
