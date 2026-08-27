@@ -86,11 +86,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Demographics Screen (live BMI + adaptive targets)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Demographics Screen (live BMI + adaptive targets)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **AI Diet Plan Results Screen**
   - [ ] Implement
   - [ ] Offline-verified
