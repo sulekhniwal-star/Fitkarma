@@ -238,11 +238,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Smart Indian Meal Intelligence (offline seeded food DB, local meal-quality scoring)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Smart Indian Meal Intelligence (offline seeded food DB, local meal-quality scoring)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Indian Restaurant Intelligence (menu OCR, chain presets)**
   - [ ] Implement
   - [ ] Offline-verified
