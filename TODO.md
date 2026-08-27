@@ -58,11 +58,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Adaptive Metabolism Engine (base version)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Adaptive Metabolism Engine (base version)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Environmental Health Layer (AQI/UV/Heat, base version)**
   - [ ] Implement
   - [ ] Offline-verified
