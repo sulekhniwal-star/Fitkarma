@@ -1,45 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'app_colors.dart';
+import 'app_radii.dart';
 
 class AppTheme {
-  // Brand Colors (Deep rich dark theme)
-  static const Color background = Color(0xFF0D0F12);
-  static const Color surface = Color(0xFF161A20);
-  static const Color surfaceElevated = Color(0xFF1E232B);
-  
-  // Accents
-  static const Color primary = Color(0xFF00E676); // Vibrant Karma Green
-  static const Color primaryGlow = Color(0x3300E676);
-  static const Color secondary = Color(0xFF00B0FF); // Focus Blue
-  static const Color accent = Color(0xFFFF9100); // Energy Orange
-  static const Color alert = Color(0xFFFF5252); // Alert Red
-
-  // Text Colors
-  static const Color textPrimary = Color(0xFFF1F5F9);
-  static const Color textSecondary = Color(0xFF94A3B8);
-  static const Color textMuted = Color(0xFF64748B);
-
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: background,
-      primaryColor: primary,
+      scaffoldBackgroundColor: AppColors.background,
+      primaryColor: AppColors.karmaGreen,
+      canvasColor: AppColors.background,
+      cardColor: AppColors.surface,
       colorScheme: const ColorScheme.dark(
-        primary: primary,
-        secondary: secondary,
-        surface: surface,
-        error: alert,
+        primary: AppColors.karmaGreen,
+        secondary: AppColors.focusBlue,
+        tertiary: AppColors.energyOrange,
+        surface: AppColors.surface,
+        error: AppColors.alertRed,
+        onPrimary: AppColors.textInverse,
+        onSurface: AppColors.textPrimary,
       ),
-      textTheme: GoogleFonts.outfitTextTheme(
+      textTheme: GoogleFonts.interTextTheme(
         ThemeData.dark().textTheme,
       ).apply(
-        bodyColor: textPrimary,
-        displayColor: textPrimary,
+        bodyColor: AppColors.textPrimary,
+        displayColor: AppColors.textPrimary,
+      ),
+      cardTheme: CardTheme(
+        color: AppColors.surface,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: AppRadii.radiusMd,
+          side: const BorderSide(color: AppColors.glassBorder, width: 1),
+        ),
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
+        iconTheme: IconThemeData(color: AppColors.textPrimary),
       ),
     );
   }
