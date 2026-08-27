@@ -24,7 +24,7 @@ class HealthOsCalculator {
     if (isIll) readinessScore = readinessScore.clamp(0, 30);
 
     // Readiness Zone
-    ReadinessZone zone;
+    final ReadinessZone zone;
     if (readinessScore >= 80) {
       zone = ReadinessZone.optimal;
     } else if (readinessScore >= 60) {
@@ -40,7 +40,7 @@ class HealthOsCalculator {
 
     // 3. Adaptive Targets & Safety Alerts
     var targetCalories = baseCalories;
-    var targetProtein = baseProtein;
+    final targetProtein = baseProtein;
     var targetSteps = baseSteps;
     String workoutRecommendation = 'Standard Training Split';
     final List<String> safetyAlerts = [];

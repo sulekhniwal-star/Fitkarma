@@ -96,8 +96,8 @@ class GlowingMetric extends StatelessWidget {
   }
 
   Widget _buildTrendIcon() {
-    IconData iconData;
-    Color color = _getTrendColor();
+    final IconData iconData;
+    final Color color = _getTrendColor();
 
     switch (trend!) {
       case MetricTrend.up:

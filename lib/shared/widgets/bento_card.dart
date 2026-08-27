@@ -61,7 +61,7 @@ class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMix
     final effectiveRadius = widget.borderRadius ?? AppRadii.radiusLg;
     final effectiveBg = widget.backgroundColor ?? AppColors.surface;
 
-    Widget card = Container(
+    final Widget card = Container(
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
