@@ -200,11 +200,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Blood Pressure Screen (biometric-gated access)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Blood Pressure Screen (biometric-gated access)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Glucose Screen (meal correlation, HbA1c estimation)**
   - [ ] Implement
   - [ ] Offline-verified
