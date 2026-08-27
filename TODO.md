@@ -23,11 +23,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Architecture Overview (offline-first, Health OS Brain)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Architecture Overview (offline-first, Health OS Brain)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Design Tokens**
   - [ ] Implement
   - [ ] Offline-verified
