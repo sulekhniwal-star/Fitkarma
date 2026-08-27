@@ -243,11 +243,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Indian Restaurant Intelligence (menu OCR, chain presets)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Indian Restaurant Intelligence (menu OCR, chain presets)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Grocery Optimization Engine (budget-optimized flow)**
   - [ ] Implement
   - [ ] Offline-verified
