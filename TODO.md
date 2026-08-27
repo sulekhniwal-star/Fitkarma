@@ -215,11 +215,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 
 ## Phase 5 — Smart Indian Nutrition
 
