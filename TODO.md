@@ -195,11 +195,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Sleep Screen (stage metrics, debt modeling)**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Sleep Screen (stage metrics, debt modeling)**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Blood Pressure Screen (biometric-gated access)**
   - [ ] Implement
   - [ ] Offline-verified
