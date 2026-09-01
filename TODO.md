@@ -258,11 +258,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Protein Distribution & Timing Intelligence**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Protein Distribution & Timing Intelligence**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Micronutrient Intelligence Core**
   - [ ] Implement
   - [ ] Offline-verified
