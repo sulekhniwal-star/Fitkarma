@@ -8,6 +8,7 @@ class WorkoutState {
   final bool isSessionActive;
   final int completedWorkoutsThisWeek;
   final double totalVolumeTonnageThisWeek;
+  final int? activeRestTimerSeconds;
 
   const WorkoutState({
     required this.todaysSession,
@@ -15,6 +16,7 @@ class WorkoutState {
     this.isSessionActive = false,
     this.completedWorkoutsThisWeek = 3,
     this.totalVolumeTonnageThisWeek = 14250.0,
+    this.activeRestTimerSeconds,
   });
 
   WorkoutState copyWith({
@@ -23,6 +25,8 @@ class WorkoutState {
     bool? isSessionActive,
     int? completedWorkoutsThisWeek,
     double? totalVolumeTonnageThisWeek,
+    int? activeRestTimerSeconds,
+    bool clearRestTimer = false,
   }) {
     return WorkoutState(
       todaysSession: todaysSession ?? this.todaysSession,
@@ -30,6 +34,7 @@ class WorkoutState {
       isSessionActive: isSessionActive ?? this.isSessionActive,
       completedWorkoutsThisWeek: completedWorkoutsThisWeek ?? this.completedWorkoutsThisWeek,
       totalVolumeTonnageThisWeek: totalVolumeTonnageThisWeek ?? this.totalVolumeTonnageThisWeek,
+      activeRestTimerSeconds: clearRestTimer ? null : (activeRestTimerSeconds ?? this.activeRestTimerSeconds),
     );
   }
 }
@@ -133,10 +138,161 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
   }
 
   void completeWorkout() {
+    final currentSession = state.todaysSession;
+    final sessionVolume = currentSession.totalVolumeTonnage;
+
     state = state.copyWith(
       isSessionActive: false,
       completedWorkoutsThisWeek: state.completedWorkoutsThisWeek + 1,
+      totalVolumeTonnageThisWeek: state.totalVolumeTonnageThisWeek + sessionVolume,
+      clearRestTimer: true,
     );
+  }
+
+  void toggleSetCompletion(int exerciseIndex, int setIndex) {
+    final session = state.todaysSession;
+    final planned = List<PlannedExercise>.from(session.plannedExercises);
+    if (exerciseIndex >= planned.length) return;
+
+    final targetEx = planned[exerciseIndex];
+    final sets = List<WorkoutSet>.from(targetEx.completedSets);
+    if (setIndex >= sets.length) return;
+
+    final currentSet = sets[setIndex];
+    final isNowCompleted = !currentSet.isCompleted;
+
+    sets[setIndex] = currentSet.copyWith(isCompleted: isNowCompleted);
+    planned[exerciseIndex] = PlannedExercise(
+      exercise: targetEx.exercise,
+      targetSets: targetEx.targetSets,
+      targetRepsMin: targetEx.targetRepsMin,
+      targetRepsMax: targetEx.targetRepsMax,
+      suggestedWeightKg: targetEx.suggestedWeightKg,
+      completedSets: sets,
+    );
+
+    state = state.copyWith(
+      todaysSession: WorkoutSession(
+        id: session.id,
+        title: session.title,
+        regionalTitle: session.regionalTitle,
+        splitCategory: session.splitCategory,
+        estimatedDurationMinutes: session.estimatedDurationMinutes,
+        plannedExercises: planned,
+        scheduledDate: session.scheduledDate,
+        isCompleted: session.isCompleted,
+      ),
+      activeRestTimerSeconds: isNowCompleted ? 90 : null,
+      clearRestTimer: !isNowCompleted,
+    );
+  }
+
+  void updateSetWeight(int exerciseIndex, int setIndex, double newWeight) {
+    final session = state.todaysSession;
+    final planned = List<PlannedExercise>.from(session.plannedExercises);
+    if (exerciseIndex >= planned.length) return;
+
+    final targetEx = planned[exerciseIndex];
+    final sets = List<WorkoutSet>.from(targetEx.completedSets);
+    if (setIndex >= sets.length) return;
+
+    sets[setIndex] = sets[setIndex].copyWith(weightKg: newWeight);
+    planned[exerciseIndex] = PlannedExercise(
+      exercise: targetEx.exercise,
+      targetSets: targetEx.targetSets,
+      targetRepsMin: targetEx.targetRepsMin,
+      targetRepsMax: targetEx.targetRepsMax,
+      suggestedWeightKg: targetEx.suggestedWeightKg,
+      completedSets: sets,
+    );
+
+    state = state.copyWith(
+      todaysSession: WorkoutSession(
+        id: session.id,
+        title: session.title,
+        regionalTitle: session.regionalTitle,
+        splitCategory: session.splitCategory,
+        estimatedDurationMinutes: session.estimatedDurationMinutes,
+        plannedExercises: planned,
+        scheduledDate: session.scheduledDate,
+      ),
+    );
+  }
+
+  void updateSetReps(int exerciseIndex, int setIndex, int newReps) {
+    final session = state.todaysSession;
+    final planned = List<PlannedExercise>.from(session.plannedExercises);
+    if (exerciseIndex >= planned.length) return;
+
+    final targetEx = planned[exerciseIndex];
+    final sets = List<WorkoutSet>.from(targetEx.completedSets);
+    if (setIndex >= sets.length) return;
+
+    sets[setIndex] = sets[setIndex].copyWith(reps: newReps);
+    planned[exerciseIndex] = PlannedExercise(
+      exercise: targetEx.exercise,
+      targetSets: targetEx.targetSets,
+      targetRepsMin: targetEx.targetRepsMin,
+      targetRepsMax: targetEx.targetRepsMax,
+      suggestedWeightKg: targetEx.suggestedWeightKg,
+      completedSets: sets,
+    );
+
+    state = state.copyWith(
+      todaysSession: WorkoutSession(
+        id: session.id,
+        title: session.title,
+        regionalTitle: session.regionalTitle,
+        splitCategory: session.splitCategory,
+        estimatedDurationMinutes: session.estimatedDurationMinutes,
+        plannedExercises: planned,
+        scheduledDate: session.scheduledDate,
+      ),
+    );
+  }
+
+  void addSet(int exerciseIndex) {
+    final session = state.todaysSession;
+    final planned = List<PlannedExercise>.from(session.plannedExercises);
+    if (exerciseIndex >= planned.length) return;
+
+    final targetEx = planned[exerciseIndex];
+    final sets = List<WorkoutSet>.from(targetEx.completedSets);
+    final lastSet = sets.isNotEmpty ? sets.last : null;
+
+    final newSet = WorkoutSet(
+      setNumber: sets.length + 1,
+      weightKg: lastSet?.weightKg ?? targetEx.suggestedWeightKg,
+      reps: lastSet?.reps ?? targetEx.targetRepsMin,
+      rpe: 8.0,
+      isCompleted: false,
+    );
+
+    sets.add(newSet);
+    planned[exerciseIndex] = PlannedExercise(
+      exercise: targetEx.exercise,
+      targetSets: sets.length,
+      targetRepsMin: targetEx.targetRepsMin,
+      targetRepsMax: targetEx.targetRepsMax,
+      suggestedWeightKg: targetEx.suggestedWeightKg,
+      completedSets: sets,
+    );
+
+    state = state.copyWith(
+      todaysSession: WorkoutSession(
+        id: session.id,
+        title: session.title,
+        regionalTitle: session.regionalTitle,
+        splitCategory: session.splitCategory,
+        estimatedDurationMinutes: session.estimatedDurationMinutes,
+        plannedExercises: planned,
+        scheduledDate: session.scheduledDate,
+      ),
+    );
+  }
+
+  void clearRestTimer() {
+    state = state.copyWith(clearRestTimer: true);
   }
 }
 
