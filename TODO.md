@@ -316,11 +316,11 @@
 
 ## Phase 6 — Workout System
 
-- [ ] **Workout Screen Home**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Workout Screen Home**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Active Workout Screen**
   - [ ] Implement
   - [ ] Offline-verified
