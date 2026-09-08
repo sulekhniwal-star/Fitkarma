@@ -44,6 +44,13 @@ service cloud.firestore {
       }
     }
 
+    // Public Sangha Activity Feed
+    match /publicFeed/{feedId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && resource.data.authorId == request.auth.uid;
+    }
+
     // Anonymized Cohort Benchmarks (Read-only for authenticated users, written by Cloud Functions)
     match /cohortBenchmarks/{cohortKey} {
       allow read: if isAuthenticated();
