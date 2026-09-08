@@ -57,6 +57,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Leaderboards (Read-only for authenticated users, compiled by Cloud Functions)
+    match /leaderboards/{leaderboardKey} {
+      allow read: if isAuthenticated();
+      allow write: if false;
+    }
+
     // Creator & Coach Marketplace listings
     match /marketplace/{listingId} {
       allow read: if isAuthenticated();
