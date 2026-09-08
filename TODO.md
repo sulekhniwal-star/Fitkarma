@@ -369,11 +369,11 @@
 
 ## Phase 7 — Gamification
 
-- [ ] **Karma System Design**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Karma System Design**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Karma Hub Screen**
   - [ ] Implement
   - [ ] Offline-verified
