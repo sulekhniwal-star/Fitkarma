@@ -402,11 +402,11 @@
 
 ## Phase 8 — Transformation Journey
 
-- [ ] **Transformation Journey Engine**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Transformation Journey Engine**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Transformation Timeline Screen**
   - [ ] Implement
   - [ ] Offline-verified
