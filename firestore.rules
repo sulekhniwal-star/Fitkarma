@@ -27,10 +27,21 @@ service cloud.firestore {
       allow update, delete: if isAuthenticated() && (resource.data.creatorId == request.auth.uid || request.resource.data.members[request.auth.uid] != null);
     }
 
-    // Geolocation Clubs
+    // Geolocation Clubs & Accountability Communities
     match /clubs/{clubId} {
       allow read: if isAuthenticated();
       allow write: if isAuthenticated();
+    }
+
+    match /communities/{communityId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+
+      match /discussions/{threadId} {
+        allow read: if isAuthenticated();
+        allow create: if isAuthenticated();
+        allow update, delete: if isAuthenticated() && resource.data.authorId == request.auth.uid;
+      }
     }
 
     // Anonymized Cohort Benchmarks (Read-only for authenticated users, written by Cloud Functions)
