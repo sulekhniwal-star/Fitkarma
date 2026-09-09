@@ -468,11 +468,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Monthly Health Report**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Monthly Health Report**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Injury Risk Engine**
   - [ ] Implement
   - [ ] Offline-verified
