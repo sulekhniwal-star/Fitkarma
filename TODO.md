@@ -521,11 +521,11 @@
 
 ## Phase 11 — Visual Body Analytics
 
-- [ ] **Body Analytics Screen**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Body Analytics Screen**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Progress Photo System**
   - [ ] Implement
   - [ ] Offline-verified
