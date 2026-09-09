@@ -11,9 +11,23 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
 
+    // Helper to ensure clients cannot tamper with server-verified subscription fields
+    function notModifyingSubscriptionFields() {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+        'subscriptionTier',
+        'subscriptionStatus',
+        'subscriptionExpiresAt',
+        'serverVerificationHash',
+        'willRenew'
+      ]);
+    }
+
     // User data isolation: All collections under /users/{userId} belong strictly to that user
     match /users/{userId} {
-      allow read, write: if isOwner(userId);
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && (!request.resource.data.keys().hasAny(['subscriptionTier']) || request.resource.data.subscriptionTier == 'free');
+      allow update: if isOwner(userId) && notModifyingSubscriptionFields();
+      allow delete: if isOwner(userId);
       
       match /{subcollection=**} {
         allow read, write: if isOwner(userId);

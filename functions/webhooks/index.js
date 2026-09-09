@@ -1,12 +1,10 @@
 /**
  * Webhooks Handlers — RevenueCat, WhatsApp Business, etc.
  */
-
-async function handleRevenueCatEvent(eventData) {
-  // Webhook event receiver for subscription status sync
-  return { status: 'received' };
-}
+const { handleRevenueCatEvent, computeEntitlementHash, PRODUCT_TIER_MAP } = require('./revenuecat');
 
 module.exports = {
-  handleRevenueCatEvent
+  handleRevenueCatEvent,
+  computeEntitlementHash,
+  PRODUCT_TIER_MAP
 };
