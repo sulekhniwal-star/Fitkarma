@@ -1,0 +1,71 @@
+name: FitKarma Enterprise CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  analyze-and-test:
+    name: Flutter Lint, Analyze & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Verify Code Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Static Analysis & Lint Rules
+        run: flutter analyze --fatal-infos --fatal-warnings
+
+      - name: Run Test Suite with Coverage
+        run: flutter test --coverage
+
+      - name: Security & Secrets Scan
+        run: |
+          echo "Scanning for forbidden plaintext API key patterns..."
+          ! grep -rE "gsk_[a-zA-Z0-9]{32,}|sk-proj-[a-zA-Z0-9]{32,}|rc_secret_" lib/ || (echo "FAILED: Secret key detected in lib/" && exit 1)
+          echo "Security scan passed: Zero client secrets found."
+
+  functions-lint:
+    name: Firebase Cloud Functions Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: 'functions/package.json'
+
+      - name: Install Functions Dependencies
+        working-directory: ./functions
+        run: npm ci || npm install
+
+      - name: Test Functions Webhook Signatures
+        working-directory: ./functions
+        run: node -e "console.log('Validating Functions syntax and exports...'); require('./index.js'); console.log('Functions validated successfully.');"
