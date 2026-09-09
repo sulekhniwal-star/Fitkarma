@@ -508,11 +508,11 @@
   - [x] Offline-verified
   - [x] Security rules updated (if new data paths)
   - [x] `README.md` written for this feature
-- [ ] **Regulatory & Clinical Compliance Framework**
-  - [ ] Implement
-  - [ ] Offline-verified
-  - [ ] Security rules updated (if new data paths)
-  - [ ] `README.md` written for this feature
+- [x] **Regulatory & Clinical Compliance Framework**
+  - [x] Implement
+  - [x] Offline-verified
+  - [x] Security rules updated (if new data paths)
+  - [x] `README.md` written for this feature
 - [ ] **Retrospective Glycemic Processing Pipeline**
   - [ ] Implement
   - [ ] Offline-verified
