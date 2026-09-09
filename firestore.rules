@@ -99,6 +99,13 @@ service cloud.firestore {
       }
     }
 
+    // Doctor Sharing Grants (Time-bound clinical dossiers)
+    match /doctorGrants/{grantId} {
+      allow read: if isAuthenticated() && (resource.data.patientId == request.auth.uid || resource.data.doctorId == request.auth.uid);
+      allow create: if isAuthenticated() && request.resource.data.patientId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && resource.data.patientId == request.auth.uid;
+    }
+
     // Deny anything else by default
     match /{document=**} {
       allow read, write: if false;
