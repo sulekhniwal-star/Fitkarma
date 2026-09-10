@@ -254,11 +254,10 @@
     },
     {
       "name": "flutter_riverpod",
-      "version": "3.4.3",
+      "version": "2.6.1",
       "dependencies": [
         "collection",
         "flutter",
-        "flutter_test",
         "meta",
         "riverpod",
         "state_notifier"
@@ -946,17 +945,12 @@
     },
     {
       "name": "riverpod",
-      "version": "3.4.3",
+      "version": "2.6.1",
       "dependencies": [
-        "async",
-        "clock",
         "collection",
-        "listen",
         "meta",
         "stack_trace",
-        "state_notifier",
-        "test_api",
-        "uuid"
+        "state_notifier"
       ]
     },
     {
@@ -1174,13 +1168,6 @@
         "firebase_core",
         "firebase_core_platform_interface",
         "flutter",
-        "meta"
-      ]
-    },
-    {
-      "name": "listen",
-      "version": "1.0.1",
-      "dependencies": [
         "meta"
       ]
     },
