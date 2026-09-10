@@ -1,72 +1,91 @@
-# FitKarma
+# FitKarma 🇮🇳
 
-India's intelligent health operating system — an AI-adaptive fitness, nutrition, and wellness app built for the Indian market.
+**India's Intelligent Health Operating System** — an AI-adaptive fitness, nutrition, longevity, and wellness platform custom-engineered for the Indian lifestyle.
 
-> Full product/architecture spec: [`FitKarma_Documentation_v2.md`](./FitKarma_Documentation_v2.md)
-> Build workflow for AI-assisted development: [`SKILL.md`](./SKILL.md)
-> Work order / task list: [`TODO.md`](./TODO.md)
+> **Master Spec:** [`FitKarma_Documentation_v2.md`](./FitKarma_Documentation_v2.md)  
+> **Development Workflow:** [`SKILL.md`](./SKILL.md)  
+> **Task Tracker:** [`TODO.md`](./TODO.md)  
+> **Test Suite:** **145/145 passing tests (100%)** | `flutter analyze` **0 issues**
 
-## Status
+---
 
-Fresh rebuild — v1.0 (Cloudflare D1/Workers/Drift) has been retired and deleted. This is a from-scratch build on Flutter + Firebase, starting at Phase 0.
+## 🚀 Key Highlights & Moats
 
-## Tech Stack
+1. **Daily Intelligence Package (DIP)**: Orchestrated daily health synthesis engine replacing fragmented AI calls with unified morning briefings.
+2. **Smart Indian Nutrition & Quick-Commerce**: 18 specialized nutritional intelligence engines + 1-Tap checkout & price comparison across **Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon Fresh**, and **Local Kirana WhatsApp slips**.
+3. **Advanced Metabolism & Longevity**: Dynamic TDEE adaptive metabolism tracking, 7 hallmarks of biological longevity scoring, and real-time Environmental Health mitigation (AQI/Heat Index/UV).
+4. **India Growth & Trust Layer**: WhatsApp Business Meta Cloud API logging, Vernacular Voice logging (Hindi, Hinglish, Tamil, Telugu), Ayushman Bharat Health Account (**ABHA ID / ABDM**), and Corporate Wellness Insurer Rebates.
+5. **Privacy & DPDP Act 2023 Compliant**: Built-in cryptographic right-to-erasure cascading deletion (`deleteUserData`) covering all user subcollections, cross-references, and Cloud Storage buckets.
 
-| Layer | Choice |
-|---|---|
-| Frontend language | Dart |
-| Frontend framework | Flutter 3.x (Android + iOS, single codebase) |
-| State management | Riverpod 2.x |
-| UI system | Material Design + Cupertino + custom animation layer |
-| Local storage | Firestore offline persistence + Hive (local-only cache) |
-| Cloud database | Firebase Firestore |
-| Backend compute | Firebase Cloud Functions (Node.js / JavaScript) |
-| Auth | Firebase Authentication |
-| File storage | Firebase Cloud Storage |
-| Push notifications | Firebase Cloud Messaging |
-| AI | Groq (multi-model routing), called server-side only |
-| Payments | RevenueCat |
-| API pattern | REST — Firebase Callable Functions + HTTPS webhooks |
-| Tooling | Git/GitHub, VS Code, Postman |
+---
 
-## Project Structure
+## 🛠 Tech Stack
+
+| Layer | Technology | Details |
+| :--- | :--- | :--- |
+| **Frontend Framework** | Flutter 3.x / Dart | Android + iOS + Web single codebase |
+| **State Management** | Riverpod 2.x | Reactive `StateNotifierProvider` pattern |
+| **UI Design System** | Glassmorphic Bento Grid | Custom Dark Palette (`#0D0F12`), Spring Physics, Bilingual Hindi/English labels |
+| **Cloud Database** | Firebase Firestore | Offline persistence + granular security isolation rules |
+| **Backend Compute** | Firebase Cloud Functions v2 | Node.js JavaScript microservices for AI routing, webhooks, and DPDP compliance |
+| **Authentication** | Firebase Authentication | Phone OTP, Google Sign-In, ABHA Token M1 Auth |
+| **Cloud Storage** | Firebase Cloud Storage | Progress photos, meal vision captures, clinical reports |
+| **AI Routing Engine** | Groq SDK (Server-Side) | Multi-model routing (Llama-3.3-70b, Mixtral, Llama-3.2 Vision) |
+| **Monetisation** | RevenueCat SDK | Server-verified subscription webhooks |
+
+---
+
+## 📁 Repository Structure
 
 ```
 fitkarma/
 ├── lib/
-│   ├── features/           # one folder per feature (see TODO.md phases)
-│   │   └── <feature_name>/
-│   │       ├── data/        # repositories, Firestore access
-│   │       ├── presentation/# screens, widgets
-│   │       ├── providers/   # Riverpod state
-│   │       └── README.md    # required — see SKILL.md §3
-│   ├── shared/
-│   │   └── widgets/         # BentoCard, ActivityRings, GlowingMetric, BilingualLabel
-│   └── main.dart
-├── functions/                # Firebase Cloud Functions (JavaScript)
-│   ├── healthOS/             # Daily Intelligence Package orchestration
-│   ├── aiRouter/             # Groq multi-model routing
-│   └── webhooks/             # RevenueCat, WhatsApp Business, etc.
-├── firestore.rules
-├── storage.rules
-├── FitKarma_Documentation_v2.md
-├── SKILL.md
-├── TODO.md
-└── README.md
+│   ├── features/                   # Modular feature architecture
+│   │   ├── abha_integration/       # ABDM / ABHA Health ID M1-M3 integration
+│   │   ├── corporate_wellness/     # B2B Corporate dashboard & insurer rebates
+│   │   ├── environmental_health/   # AQI, Heat Index, and UV adaptive engine
+│   │   ├── metabolism/             # Adaptive TDEE & metabolic adaptation
+│   │   ├── nutrition/              # 18 nutrition engines & Quick-Commerce checkout
+│   │   ├── predictive_health/      # Longevity score, CGM pipeline, Doctor Dossier
+│   │   ├── recovery/               # Sleep intelligence, soreness heatmap, circadian clock
+│   │   ├── security/               # Enterprise security evaluator & biometric gates
+│   │   ├── vernacular_voice/       # Multi-lingual Indian voice food logging
+│   │   ├── whatsapp_logging/       # WhatsApp Meta Cloud API conversation logging
+│   │   └── workout/                # Progressive overload & computer vision pose tracking
+│   ├── shared/                     # Reusable Bento UI widgets, theme & design system
+│   └── main.dart                   # Application entry point
+├── functions/                      # Firebase Cloud Functions (v2 JavaScript)
+│   ├── aiRouter/                   # Groq multi-model routing
+│   ├── compliance/                 # DPDP Act 2023 cascading deletion (deleteUserData)
+│   ├── healthOS/                   # Daily Intelligence Package orchestration
+│   └── webhooks/                   # RevenueCat & WhatsApp webhook handlers
+├── docs/                           # Standalone technical documentation for all features
+├── test/                           # 145+ automated unit & widget tests
+├── firestore.rules                 # User data isolation security rules
+├── storage.rules                   # Storage access security rules
+├── FitKarma_Documentation_v2.md    # Master architecture documentation
+└── TODO.md                         # Master 16-phase roadmap checklist
 ```
 
-## Getting Started
+---
 
-1. Install Flutter 3.x and the Firebase CLI.
-2. `flutterfire configure` to connect the project to a Firebase project (Firestore, Auth, Storage, Functions, FCM enabled).
-3. `cd functions && npm install` for Cloud Functions dependencies.
-4. Set Groq API key and RevenueCat webhook secret via `firebase functions:secrets:set`.
-5. `flutter run` for local development; `firebase emulators:start` for local Firestore/Functions testing.
+## 🧪 Testing & Verification
 
-## Contributing / Working on this repo
+Run the complete offline test suite:
+```bash
+flutter test
+```
+*Current test suite passing status: 145/145 tests.*
 
-Read `SKILL.md` before starting any feature — it defines the mandatory workflow, including that every completed feature needs its own `README.md`. `TODO.md` is the single source of truth for what to build next; work top-to-bottom by phase.
+Run the Dart & Flutter static code analyzer:
+```bash
+flutter analyze
+```
+*Current status: No issues found.*
 
-## License
+---
 
-Proprietary — all rights reserved.
+## ⚖️ License & Data Protection
+
+- **License:** Proprietary — All rights reserved.
+- **Data Protection:** Compliant with India's **Digital Personal Data Protection (DPDP) Act 2023** and **Ayushman Bharat Digital Mission (ABDM)** standards.

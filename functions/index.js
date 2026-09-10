@@ -6,6 +6,7 @@ admin.initializeApp();
 const { generateDailyIntelligencePackage } = require('./healthOS');
 const { routeAiRequest } = require('./aiRouter');
 const { handleRevenueCatEvent } = require('./webhooks');
+const { deleteUserData } = require('./compliance/deleteUserData');
 
 // Callable: Generate or retrieve DIP
 exports.getDailyIntelligence = onCall(async (request) => {
@@ -26,6 +27,16 @@ exports.askAiCoach = onCall(async (request) => {
     messages: request.data.messages || [],
     userId: request.auth.uid
   });
+});
+
+// Callable: DPDP Section 12 Right-to-Erasure cascading user data deletion
+exports.deleteUserData = onCall(async (request) => {
+  if (!request.auth) {
+    throw new Error('Unauthenticated user.');
+  }
+  const userId = request.auth.uid;
+  const reason = request.data.reason || 'USER_REQUESTED_ERASURE';
+  return await deleteUserData(userId, reason);
 });
 
 // Webhook HTTPS endpoint: RevenueCat
