@@ -67,7 +67,8 @@ class TestingNotifier extends StateNotifier<TestingState> {
     state = state.copyWith(
       report: report,
       isRunningAll: false,
-      successMessage: 'All ${report.totalTestsCount} tests passed with ${report.overallCoveragePercent}% code coverage!',
+      successMessage:
+          'All ${report.totalTestsCount} tests passed with ${report.overallCoveragePercent}% code coverage!',
     );
   }
 }

@@ -20,10 +20,12 @@ class MultiDimensionalQualityScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<MultiDimensionalQualityScreen> createState() => _MultiDimensionalQualityScreenState();
+  ConsumerState<MultiDimensionalQualityScreen> createState() =>
+      _MultiDimensionalQualityScreenState();
 }
 
-class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensionalQualityScreen> {
+class _MultiDimensionalQualityScreenState
+    extends ConsumerState<MultiDimensionalQualityScreen> {
   late MealPhase _selectedPhase;
 
   @override
@@ -36,7 +38,8 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
   Widget build(BuildContext context) {
     final nutrition = ref.watch(nutritionProvider);
     final meals = nutrition.getMealsForPhase(_selectedPhase);
-    final report = MultiDimensionalQualityEngine.evaluateMealQuality(entries: meals);
+    final report =
+        MultiDimensionalQualityEngine.evaluateMealQuality(entries: meals);
 
     final Color tierColor = Color(report.tier.colorCode);
 
@@ -66,15 +69,21 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                       child: ChoiceChip(
                         label: Text(phase.name.split('/')[0].trim()),
                         selected: isSelected,
-                        selectedColor: AppColors.karmaGreen.withValues(alpha: 0.2),
+                        selectedColor:
+                            AppColors.karmaGreen.withValues(alpha: 0.2),
                         backgroundColor: AppColors.surface,
                         labelStyle: TextStyle(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.w700 : FontWeight.w500,
                           fontSize: 12,
                         ),
                         side: BorderSide(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.glassBorder,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.glassBorder,
                         ),
                         onSelected: (val) {
                           if (val) setState(() => _selectedPhase = phase);
@@ -97,26 +106,35 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         BilingualLabel(
-                          primaryText: '${_selectedPhase.name.split('/')[0].trim()} Quality Index',
+                          primaryText:
+                              '${_selectedPhase.name.split('/')[0].trim()} Quality Index',
                           regionalText: report.tier.regionalLabel,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: tierColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: tierColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: tierColor.withValues(alpha: 0.4)),
                           ),
                           child: Row(
                             children: [
                               Text(
                                 report.tier.grade,
-                                style: TextStyle(color: tierColor, fontSize: 14, fontWeight: FontWeight.w900),
+                                style: TextStyle(
+                                    color: tierColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w900),
                               ),
                               const SizedBox(width: 4),
                               Text(
                                 '• ${report.tier.label.split('/')[0].trim()}',
-                                style: TextStyle(color: tierColor, fontSize: 10, fontWeight: FontWeight.w700),
+                                style: TextStyle(
+                                    color: tierColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
@@ -142,7 +160,8 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                         ),
                         GlowingMetric(
                           label: 'Total Energy',
-                          value: '${meals.fold<int>(0, (s, m) => s + m.totalCalories)}',
+                          value:
+                              '${meals.fold<int>(0, (s, m) => s + m.totalCalories)}',
                           unit: 'kcal',
                           accentColor: AppColors.energyOrange,
                         ),
@@ -151,7 +170,10 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       report.executiveSummary,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 11,
+                          height: 1.3),
                     ),
                   ],
                 ),
@@ -174,7 +196,11 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                 final double scoreFrac = (dim.score / 100.0).clamp(0.0, 1.0);
                 final Color dimColor = dim.score >= 80
                     ? AppColors.karmaGreen
-                    : (dim.score >= 60 ? AppColors.focusBlue : (dim.score >= 40 ? AppColors.gold : AppColors.alertRed));
+                    : (dim.score >= 60
+                        ? AppColors.focusBlue
+                        : (dim.score >= 40
+                            ? AppColors.gold
+                            : AppColors.alertRed));
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
@@ -194,25 +220,34 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                                     children: [
                                       Text(
                                         dim.name,
-                                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 13,
+                                            color: AppColors.textPrimary),
                                       ),
                                       const SizedBox(width: 6),
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 1),
                                         decoration: const BoxDecoration(
                                           color: AppColors.surface,
                                           borderRadius: AppRadii.radiusSm,
                                         ),
                                         child: Text(
                                           '${(dim.weight * 100).toInt()}% wt',
-                                          style: const TextStyle(fontSize: 9, color: AppColors.textMuted, fontWeight: FontWeight.w600),
+                                          style: const TextStyle(
+                                              fontSize: 9,
+                                              color: AppColors.textMuted,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Text(
                                     dim.regionalName,
-                                    style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textMuted),
                                   ),
                                 ],
                               ),
@@ -222,11 +257,17 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                               children: [
                                 Text(
                                   '${dim.score.round()}/100',
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: dimColor),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w800,
+                                      color: dimColor),
                                 ),
                                 Text(
                                   dim.status,
-                                  style: TextStyle(fontSize: 10, color: dimColor, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: dimColor,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -245,18 +286,25 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                         const SizedBox(height: 8),
                         Text(
                           dim.insight,
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 11,
+                              height: 1.3),
                         ),
                         const SizedBox(height: 4),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.bolt_rounded, color: AppColors.gold, size: 14),
+                            const Icon(Icons.bolt_rounded,
+                                color: AppColors.gold, size: 14),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
                                 dim.actionableOptimization,
-                                style: const TextStyle(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    color: AppColors.gold,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],
@@ -274,7 +322,8 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.spa_rounded, color: AppColors.karmaGreen, size: 22),
+                    const Icon(Icons.spa_rounded,
+                        color: AppColors.karmaGreen, size: 22),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
@@ -282,12 +331,18 @@ class _MultiDimensionalQualityScreenState extends ConsumerState<MultiDimensional
                         children: [
                           const Text(
                             'Ayurvedic Shad-Rasa Synergy',
-                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13,
+                                color: AppColors.textPrimary),
                           ),
                           const SizedBox(height: 3),
                           Text(
                             report.ayurvedicSynergyNote,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textSecondary,
+                                fontSize: 11,
+                                height: 1.3),
                           ),
                         ],
                       ),

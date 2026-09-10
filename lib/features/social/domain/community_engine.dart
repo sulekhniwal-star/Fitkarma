@@ -12,10 +12,13 @@ class CommunityEngine {
     required double mentorResponseRatePercent,
   }) {
     final adherenceComponent = averageMemberAdherence * 0.50;
-    final activityComponent = (activeDailyThreads / 20.0).clamp(0.0, 1.0) * 30.0;
-    final mentorComponent = (mentorResponseRatePercent / 100.0).clamp(0.0, 1.0) * 20.0;
+    final activityComponent =
+        (activeDailyThreads / 20.0).clamp(0.0, 1.0) * 30.0;
+    final mentorComponent =
+        (mentorResponseRatePercent / 100.0).clamp(0.0, 1.0) * 20.0;
 
-    return (adherenceComponent + activityComponent + mentorComponent).clamp(0.0, 100.0);
+    return (adherenceComponent + activityComponent + mentorComponent)
+        .clamp(0.0, 100.0);
   }
 
   /// Filters communities by category or joined status

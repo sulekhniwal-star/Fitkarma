@@ -12,7 +12,8 @@ class NutritionAdherenceScreen extends StatefulWidget {
   const NutritionAdherenceScreen({super.key});
 
   @override
-  State<NutritionAdherenceScreen> createState() => _NutritionAdherenceScreenState();
+  State<NutritionAdherenceScreen> createState() =>
+      _NutritionAdherenceScreenState();
 }
 
 class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
@@ -22,13 +23,49 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
   void initState() {
     super.initState();
     final samples = [
-      const DailyAdherenceSample(dayName: 'Mon', targetCalories: 2100, consumedCalories: 2050, targetProtein: 135, consumedProtein: 138),
-      const DailyAdherenceSample(dayName: 'Tue', targetCalories: 2100, consumedCalories: 2140, targetProtein: 135, consumedProtein: 132),
-      const DailyAdherenceSample(dayName: 'Wed', targetCalories: 1950, consumedCalories: 1900, targetProtein: 135, consumedProtein: 140),
-      const DailyAdherenceSample(dayName: 'Thu', targetCalories: 2250, consumedCalories: 2200, targetProtein: 135, consumedProtein: 136),
-      const DailyAdherenceSample(dayName: 'Fri', targetCalories: 2100, consumedCalories: 2350, targetProtein: 135, consumedProtein: 120),
-      const DailyAdherenceSample(dayName: 'Sat', targetCalories: 2300, consumedCalories: 2450, targetProtein: 135, consumedProtein: 130, isShieldApplied: true),
-      const DailyAdherenceSample(dayName: 'Sun', targetCalories: 1850, consumedCalories: 1820, targetProtein: 135, consumedProtein: 135),
+      const DailyAdherenceSample(
+          dayName: 'Mon',
+          targetCalories: 2100,
+          consumedCalories: 2050,
+          targetProtein: 135,
+          consumedProtein: 138),
+      const DailyAdherenceSample(
+          dayName: 'Tue',
+          targetCalories: 2100,
+          consumedCalories: 2140,
+          targetProtein: 135,
+          consumedProtein: 132),
+      const DailyAdherenceSample(
+          dayName: 'Wed',
+          targetCalories: 1950,
+          consumedCalories: 1900,
+          targetProtein: 135,
+          consumedProtein: 140),
+      const DailyAdherenceSample(
+          dayName: 'Thu',
+          targetCalories: 2250,
+          consumedCalories: 2200,
+          targetProtein: 135,
+          consumedProtein: 136),
+      const DailyAdherenceSample(
+          dayName: 'Fri',
+          targetCalories: 2100,
+          consumedCalories: 2350,
+          targetProtein: 135,
+          consumedProtein: 120),
+      const DailyAdherenceSample(
+          dayName: 'Sat',
+          targetCalories: 2300,
+          consumedCalories: 2450,
+          targetProtein: 135,
+          consumedProtein: 130,
+          isShieldApplied: true),
+      const DailyAdherenceSample(
+          dayName: 'Sun',
+          targetCalories: 1850,
+          consumedCalories: 1820,
+          targetProtein: 135,
+          consumedProtein: 135),
     ];
     _report = NutritionAdherenceEngine.evaluateWeeklyAdherence(samples);
   }
@@ -70,7 +107,8 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
                           primaryText: 'Weekly Adherence Index',
                           regionalText: '7-दिवसीय पोषण स्कोर',
                         ),
-                        Icon(Icons.verified_rounded, color: AppColors.karmaGreen, size: 22),
+                        Icon(Icons.verified_rounded,
+                            color: AppColors.karmaGreen, size: 22),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -101,7 +139,8 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       _report.compassionateFeedback,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.35),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textPrimary, height: 1.35),
                     ),
                   ],
                 ),
@@ -113,12 +152,16 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
                 backgroundColor: AppColors.surfaceElevated,
                 child: Row(
                   children: [
-                    const Icon(Icons.shield_outlined, color: AppColors.focusBlue, size: 22),
+                    const Icon(Icons.shield_outlined,
+                        color: AppColors.focusBlue, size: 22),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Streak Armor active: Occasional family gatherings or weddings use your weekly freeze shield without resetting your streak.',
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                        style: AppTypography.bodySmall.copyWith(
+                            color: AppColors.textSecondary,
+                            fontSize: 11,
+                            height: 1.3),
                       ),
                     ),
                   ],
@@ -158,7 +201,11 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
                                 color: AppColors.surfaceElevated,
                                 borderRadius: AppRadii.radiusSm,
                               ),
-                              child: Text(day.dayName, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.textPrimary)),
+                              child: Text(day.dayName,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 12,
+                                      color: AppColors.textPrimary)),
                             ),
                             const SizedBox(width: 10),
                             Column(
@@ -166,11 +213,14 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
                               children: [
                                 Text(
                                   '${day.consumedCalories} / ${day.targetCalories} kcal',
-                                  style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700),
+                                  style: AppTypography.titleSmall.copyWith(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700),
                                 ),
                                 Text(
                                   'Protein: ${day.consumedProtein}g / ${day.targetProtein}g',
-                                  style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                                  style: const TextStyle(
+                                      fontSize: 11, color: AppColors.textMuted),
                                 ),
                               ],
                             ),
@@ -178,24 +228,36 @@ class _NutritionAdherenceScreenState extends State<NutritionAdherenceScreen> {
                         ),
                         if (isProtected)
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.focusBlue.withValues(alpha: 0.15),
+                              color:
+                                  AppColors.focusBlue.withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusSm,
                             ),
-                            child: const Text('SHIELD USED', style: TextStyle(color: AppColors.focusBlue, fontSize: 10, fontWeight: FontWeight.w800)),
+                            child: const Text('SHIELD USED',
+                                style: TextStyle(
+                                    color: AppColors.focusBlue,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800)),
                           )
                         else
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: (isOver ? AppColors.energyOrange : AppColors.karmaGreen).withValues(alpha: 0.15),
+                              color: (isOver
+                                      ? AppColors.energyOrange
+                                      : AppColors.karmaGreen)
+                                  .withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusSm,
                             ),
                             child: Text(
                               '${isOver ? "+${day.calorieVariance}" : day.calorieVariance} kcal',
                               style: TextStyle(
-                                color: isOver ? AppColors.energyOrange : AppColors.karmaGreen,
+                                color: isOver
+                                    ? AppColors.energyOrange
+                                    : AppColors.karmaGreen,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w800,
                               ),

@@ -30,7 +30,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showMethodologyModal(context),
           ),
         ],
@@ -102,7 +103,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: zoneColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -220,10 +222,14 @@ class BodyAnalyticsScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildMassChip('Lean Muscle', '${report.leanMuscleMassKg} kg', AppColors.focusBlue),
-              _buildMassChip('Fat Mass', '${report.fatMassKg} kg', AppColors.energyOrange),
-              _buildMassChip('Bone Mass', '${report.boneMassKg} kg', AppColors.karmaGreen),
-              _buildMassChip('Hydration', '${report.totalBodyWaterPercent}%', AppColors.focusBlue),
+              _buildMassChip('Lean Muscle', '${report.leanMuscleMassKg} kg',
+                  AppColors.focusBlue),
+              _buildMassChip(
+                  'Fat Mass', '${report.fatMassKg} kg', AppColors.energyOrange),
+              _buildMassChip(
+                  'Bone Mass', '${report.boneMassKg} kg', AppColors.karmaGreen),
+              _buildMassChip('Hydration', '${report.totalBodyWaterPercent}%',
+                  AppColors.focusBlue),
             ],
           ),
         ],
@@ -237,18 +243,26 @@ class BodyAnalyticsScreen extends ConsumerWidget {
       children: [
         Row(
           children: [
-            Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+            Container(
+                width: 8,
+                height: 8,
+                decoration:
+                    BoxDecoration(color: color, shape: BoxShape.circle)),
             const SizedBox(width: 4),
             Text(
               label,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary, fontSize: 10),
             ),
           ],
         ),
         const SizedBox(height: 2),
         Text(
           value,
-          style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12),
+          style: AppTypography.titleSmall.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.bold,
+              fontSize: 12),
         ),
       ],
     );
@@ -260,25 +274,41 @@ class BodyAnalyticsScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Expanded(child: _buildCircumferenceTile('Neck', '${c.neckCm} cm', Icons.person_outline)),
+              Expanded(
+                  child: _buildCircumferenceTile(
+                      'Neck', '${c.neckCm} cm', Icons.person_outline)),
               const SizedBox(width: AppSpacing.sm),
-              Expanded(child: _buildCircumferenceTile('Chest', '${c.chestCm} cm', Icons.accessibility_new)),
+              Expanded(
+                  child: _buildCircumferenceTile(
+                      'Chest', '${c.chestCm} cm', Icons.accessibility_new)),
             ],
           ),
           const SizedBox(height: AppSpacing.xs),
           Row(
             children: [
-              Expanded(child: _buildCircumferenceTile('Waist (Navel)', '${c.waistCm} cm', Icons.straighten)),
+              Expanded(
+                  child: _buildCircumferenceTile(
+                      'Waist (Navel)', '${c.waistCm} cm', Icons.straighten)),
               const SizedBox(width: AppSpacing.sm),
-              Expanded(child: _buildCircumferenceTile('Hips', '${c.hipsCm} cm', Icons.line_weight)),
+              Expanded(
+                  child: _buildCircumferenceTile(
+                      'Hips', '${c.hipsCm} cm', Icons.line_weight)),
             ],
           ),
           const SizedBox(height: AppSpacing.xs),
           Row(
             children: [
-              Expanded(child: _buildCircumferenceTile('Biceps (L / R)', '${c.bicepLeftCm} / ${c.bicepRightCm} cm', Icons.fitness_center)),
+              Expanded(
+                  child: _buildCircumferenceTile(
+                      'Biceps (L / R)',
+                      '${c.bicepLeftCm} / ${c.bicepRightCm} cm',
+                      Icons.fitness_center)),
               const SizedBox(width: AppSpacing.sm),
-              Expanded(child: _buildCircumferenceTile('Thighs (L / R)', '${c.thighLeftCm} / ${c.thighRightCm} cm', Icons.directions_walk)),
+              Expanded(
+                  child: _buildCircumferenceTile(
+                      'Thighs (L / R)',
+                      '${c.thighLeftCm} / ${c.thighRightCm} cm',
+                      Icons.directions_walk)),
             ],
           ),
         ],
@@ -288,7 +318,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
 
   Widget _buildCircumferenceTile(String label, String value, IconData icon) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 8),
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 8),
       decoration: const BoxDecoration(
         color: AppColors.surfaceElevated,
         borderRadius: AppRadii.radiusSm,
@@ -303,11 +334,15 @@ class BodyAnalyticsScreen extends ConsumerWidget {
               children: [
                 Text(
                   label,
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 10),
                 ),
                 Text(
                   value,
-                  style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12),
+                  style: AppTypography.titleSmall.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12),
                 ),
               ],
             ),
@@ -356,22 +391,40 @@ class BodyAnalyticsScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Waist-to-Height (WHtR)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
-                  Text('${report.waistToHeightRatio} (Target < 0.50)', style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12)),
+                  Text('Waist-to-Height (WHtR)',
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 10)),
+                  Text('${report.waistToHeightRatio} (Target < 0.50)',
+                      style: AppTypography.titleSmall.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Waist-to-Hip (WHR)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
-                  Text('${report.waistToHipRatio} (Target < 0.90)', style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12)),
+                  Text('Waist-to-Hip (WHR)',
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 10)),
+                  Text('${report.waistToHipRatio} (Target < 0.90)',
+                      style: AppTypography.titleSmall.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Visceral Fat Index', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
-                  Text('${report.visceralFatIndex} (Optimal 1-9)', style: AppTypography.titleSmall.copyWith(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 12)),
+                  Text('Visceral Fat Index',
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 10)),
+                  Text('${report.visceralFatIndex} (Optimal 1-9)',
+                      style: AppTypography.titleSmall.copyWith(
+                          color: AppColors.karmaGreen,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
                 ],
               ),
             ],
@@ -407,20 +460,27 @@ class BodyAnalyticsScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
-          _buildDhatuBar('Rasa (रस - Hydration & Lymph)', dhatu.rasaQualityScore),
-          _buildDhatuBar('Rakta (रक्त - Vitality & Hemoglobin)', dhatu.raktaQualityScore),
-          _buildDhatuBar('Mamsa (मांस - Muscle Density)', dhatu.mamsaQualityScore),
+          _buildDhatuBar(
+              'Rasa (रस - Hydration & Lymph)', dhatu.rasaQualityScore),
+          _buildDhatuBar(
+              'Rakta (रक्त - Vitality & Hemoglobin)', dhatu.raktaQualityScore),
+          _buildDhatuBar(
+              'Mamsa (मांस - Muscle Density)', dhatu.mamsaQualityScore),
           _buildDhatuBar('Meda (मेद - Lipid Balance)', dhatu.medaQualityScore),
-          _buildDhatuBar('Asthi (अस्थि - Bone Matrix)', dhatu.asthiQualityScore),
-          _buildDhatuBar('Majja (मज्जा - Neuromuscular Tone)', dhatu.majjaQualityScore),
+          _buildDhatuBar(
+              'Asthi (अस्थि - Bone Matrix)', dhatu.asthiQualityScore),
+          _buildDhatuBar(
+              'Majja (मज्जा - Neuromuscular Tone)', dhatu.majjaQualityScore),
           const SizedBox(height: AppSpacing.xs),
           Text(
             dhatu.dominantDhatuObservation,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.karmaGreen, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.karmaGreen, fontSize: 11),
           ),
           Text(
             dhatu.regionalDhatuObservation,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 10),
           ),
         ],
       ),
@@ -436,8 +496,14 @@ class BodyAnalyticsScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(name, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
-              Text('${score.toInt()}%', style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 10)),
+              Text(name,
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 10)),
+              Text('${score.toInt()}%',
+                  style: AppTypography.bodySmall.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10)),
             ],
           ),
           const SizedBox(height: 2),
@@ -446,7 +512,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
             child: LinearProgressIndicator(
               value: (score / 100.0).clamp(0.0, 1.0),
               backgroundColor: AppColors.surfaceElevated,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.focusBlue),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(AppColors.focusBlue),
               minHeight: 4,
             ),
           ),
@@ -462,7 +529,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.fitness_center, color: AppColors.focusBlue, size: 20),
+              const Icon(Icons.fitness_center,
+                  color: AppColors.focusBlue, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Personalized Body Recomposition Guidance',
@@ -532,7 +600,8 @@ class BodyAnalyticsScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

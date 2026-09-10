@@ -14,7 +14,8 @@ class HabitAutomationScreen extends ConsumerStatefulWidget {
   const HabitAutomationScreen({super.key});
 
   @override
-  ConsumerState<HabitAutomationScreen> createState() => _HabitAutomationScreenState();
+  ConsumerState<HabitAutomationScreen> createState() =>
+      _HabitAutomationScreenState();
 }
 
 class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
@@ -25,7 +26,9 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
     final habitSummary = ref.watch(habitProvider);
     final filteredHabits = _selectedTimeSlot == null
         ? habitSummary.habits
-        : habitSummary.habits.where((h) => h.timeSlot == _selectedTimeSlot).toList();
+        : habitSummary.habits
+            .where((h) => h.timeSlot == _selectedTimeSlot)
+            .toList();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -41,7 +44,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
             ),
             Text(
               'Circadian Behavioral Loops • Auto-Triggered',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
+              style:
+                  AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
             ),
           ],
         ),
@@ -81,7 +85,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(AppRadii.lg),
-        border: Border.all(color: AppColors.focusBlue.withAlpha(120), width: 1.5),
+        border:
+            Border.all(color: AppColors.focusBlue.withAlpha(120), width: 1.5),
         boxShadow: [
           BoxShadow(
             color: AppColors.focusBlue.withAlpha(30),
@@ -105,7 +110,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                       : 0.0,
                   strokeWidth: 8,
                   backgroundColor: AppColors.surfaceElevated,
-                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+                  valueColor:
+                      const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
                 ),
                 Text(
                   '${summary.adherencePercent.toInt()}%',
@@ -202,7 +208,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
             child: FilterChip(
-              label: const Text('All Day (24h)', style: TextStyle(fontSize: 11)),
+              label:
+                  const Text('All Day (24h)', style: TextStyle(fontSize: 11)),
               selected: _selectedTimeSlot == null,
               selectedColor: AppColors.focusBlue,
               backgroundColor: AppColors.surfaceElevated,
@@ -215,12 +222,16 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
               },
             ),
           ),
-          ...HabitTimeSlot.values.where((slot) => slot != HabitTimeSlot.anytime).map((slot) {
+          ...HabitTimeSlot.values
+              .where((slot) => slot != HabitTimeSlot.anytime)
+              .map((slot) {
             final isSelected = _selectedTimeSlot == slot;
             return Padding(
               padding: const EdgeInsets.only(right: 6.0),
               child: FilterChip(
-                label: Text('${slot.label.split(' ').first} (${slot.timeRange})', style: const TextStyle(fontSize: 11)),
+                label: Text(
+                    '${slot.label.split(' ').first} (${slot.timeRange})',
+                    style: const TextStyle(fontSize: 11)),
                 selected: isSelected,
                 selectedColor: AppColors.focusBlue,
                 backgroundColor: AppColors.surfaceElevated,
@@ -250,10 +261,14 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: habit.isCompletedToday ? AppColors.surfaceElevated : AppColors.surface,
+        color: habit.isCompletedToday
+            ? AppColors.surfaceElevated
+            : AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadii.md),
         border: Border.all(
-          color: habit.isCompletedToday ? AppColors.karmaGreen.withAlpha(120) : AppColors.glassBorder,
+          color: habit.isCompletedToday
+              ? AppColors.karmaGreen.withAlpha(120)
+              : AppColors.glassBorder,
           width: habit.isCompletedToday ? 1.5 : 1.0,
         ),
       ),
@@ -272,10 +287,14 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: habit.isCompletedToday ? AppColors.karmaGreen : Colors.transparent,
+                    color: habit.isCompletedToday
+                        ? AppColors.karmaGreen
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: habit.isCompletedToday ? AppColors.karmaGreen : AppColors.textMuted,
+                      color: habit.isCompletedToday
+                          ? AppColors.karmaGreen
+                          : AppColors.textMuted,
                       width: 2.0,
                     ),
                   ),
@@ -298,13 +317,18 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                             habit.title,
                             style: AppTypography.titleSmall.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: habit.isCompletedToday ? AppColors.textPrimary : AppColors.textSecondary,
-                              decoration: habit.isCompletedToday ? TextDecoration.none : null,
+                              color: habit.isCompletedToday
+                                  ? AppColors.textPrimary
+                                  : AppColors.textSecondary,
+                              decoration: habit.isCompletedToday
+                                  ? TextDecoration.none
+                                  : null,
                             ),
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: AppColors.karmaGreen.withAlpha(30),
                             borderRadius: BorderRadius.circular(4),
@@ -324,7 +348,9 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                     Text(
                       habit.regionalTitle,
                       style: AppTypography.bodySmall.copyWith(
-                        color: habit.isCompletedToday ? AppColors.focusBlue : AppColors.textMuted,
+                        color: habit.isCompletedToday
+                            ? AppColors.focusBlue
+                            : AppColors.textMuted,
                         fontSize: 11,
                       ),
                     ),
@@ -365,7 +391,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.local_fire_department, color: AppColors.energyOrange, size: 14),
+                            const Icon(Icons.local_fire_department,
+                                color: AppColors.energyOrange, size: 14),
                             const SizedBox(width: 4),
                             Text(
                               '${habit.streakDays}d Streak',
@@ -386,7 +413,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: tierColor.withAlpha(30),
                             borderRadius: BorderRadius.circular(4),
@@ -435,7 +463,8 @@ class _HabitAutomationScreenState extends ConsumerState<HabitAutomationScreen> {
                 const SizedBox(height: 2),
                 Text(
                   'Habits anchored to Ayurvedic daily phases (Dinacharya) require 40% less willpower and automate through multi-sensor triggers.',
-                  style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.textSecondary),
+                  style: AppTypography.bodySmall
+                      .copyWith(fontSize: 11, color: AppColors.textSecondary),
                 ),
               ],
             ),

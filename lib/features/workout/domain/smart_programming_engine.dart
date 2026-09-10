@@ -42,7 +42,8 @@ enum VolumeLandmarkZone {
   belowMev(label: 'Below MEV (Sub-stimulative)', colorCode: 0xff64748B),
   mevToMav(label: 'MEV → MAV (Optimal Growth Zone)', colorCode: 0xff22C55E),
   mavToMrv(label: 'MAV → MRV (High Volume Overreach)', colorCode: 0xff3B82F6),
-  exceedingMrv(label: 'Exceeding MRV (Overtraining Risk)', colorCode: 0xffEF4444);
+  exceedingMrv(
+      label: 'Exceeding MRV (Overtraining Risk)', colorCode: 0xffEF4444);
 
   final String label;
   final int colorCode;
@@ -153,7 +154,8 @@ class SmartProgrammingEngine {
         advice = 'High volume threshold. Prepare for upcoming deload.';
       } else {
         zone = VolumeLandmarkZone.exceedingMrv;
-        advice = 'Exceeding recovery capacity. Trim 3-4 sets to avoid chronic joint inflammation.';
+        advice =
+            'Exceeding recovery capacity. Trim 3-4 sets to avoid chronic joint inflammation.';
       }
 
       landmarks.add(MuscleVolumeLandmark(
@@ -176,7 +178,8 @@ class SmartProgrammingEngine {
       totalWeeksInCycle: 6,
       volumeLandmarks: landmarks,
       autoRegulation: autoReg,
-      periodizationSummary: 'Currently in Week $currentWeek of 6 (${phase.name}). '
+      periodizationSummary:
+          'Currently in Week $currentWeek of 6 (${phase.name}). '
           'Targeting RPE ${phase.rpeTargetRange} with volume modifier at ${(phase.volumeModifierPercent * 100).toInt()}%.',
     );
   }
@@ -187,21 +190,24 @@ class SmartProgrammingEngine {
         loggedRpe: 6.5,
         loadAdjustmentPercent: 0.05,
         directiveTitle: 'Under-Stimulated: Increase Load +5%',
-        rationale: 'RPE < 7.0 indicates 3+ Reps In Reserve (RIR). Elevate working load by +5% to hit target mechanical tension.',
+        rationale:
+            'RPE < 7.0 indicates 3+ Reps In Reserve (RIR). Elevate working load by +5% to hit target mechanical tension.',
       );
     } else if (rpe <= 9.0) {
       return AutoRegulationDirective(
         loggedRpe: rpe,
         loadAdjustmentPercent: 0.0,
         directiveTitle: 'Optimal RPE Sweet Spot (1–2 RIR)',
-        rationale: 'RPE ${rpe.toStringAsFixed(1)} aligns with the hyper-productive hypertrophy zone. Maintain planned double progression.',
+        rationale:
+            'RPE ${rpe.toStringAsFixed(1)} aligns with the hyper-productive hypertrophy zone. Maintain planned double progression.',
       );
     } else {
       return AutoRegulationDirective(
         loggedRpe: rpe,
         loadAdjustmentPercent: -0.05,
         directiveTitle: 'Near Failure (0 RIR): Hold Load',
-        rationale: 'RPE ${rpe.toStringAsFixed(1)} reaches technical threshold. Avoid premature failure to keep systemic fatigue manageable.',
+        rationale:
+            'RPE ${rpe.toStringAsFixed(1)} reaches technical threshold. Avoid premature failure to keep systemic fatigue manageable.',
       );
     }
   }

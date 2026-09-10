@@ -115,7 +115,8 @@ class ReadinessGaugeCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
                       decoration: const BoxDecoration(
                         color: AppColors.surfaceElevated,
                         borderRadius: AppRadii.radiusSm,
@@ -174,16 +175,19 @@ class ReadinessGaugeCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.alertRed.withValues(alpha: 0.12),
                 borderRadius: AppRadii.radiusSm,
-                border: Border.all(color: AppColors.alertRed.withValues(alpha: 0.3)),
+                border: Border.all(
+                    color: AppColors.alertRed.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.warning_amber_rounded, color: AppColors.alertRed, size: 16),
+                  const Icon(Icons.warning_amber_rounded,
+                      color: AppColors.alertRed, size: 16),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
                       readiness.safetyAlerts.first,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.alertRed),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.alertRed),
                     ),
                   ),
                 ],

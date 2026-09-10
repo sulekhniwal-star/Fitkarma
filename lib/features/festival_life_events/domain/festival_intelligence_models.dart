@@ -126,7 +126,8 @@ class FestivalIntelligencePlan {
   final bool isFestivalModeActive;
   final int daysUntilFestival;
   final int festivalDurationDays;
-  final int calorieDeltaTarget; // e.g. +400 kcal for Diwali or -300 kcal for Vrat
+  final int
+      calorieDeltaTarget; // e.g. +400 kcal for Diwali or -300 kcal for Vrat
   final List<PillarAdaptationStrategy> pillarStrategies;
   final List<ResetProtocolDay> postFestivalResetProtocol;
   final String mindfulFeastingTip;

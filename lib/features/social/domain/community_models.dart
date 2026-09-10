@@ -52,7 +52,8 @@ class CommunityMentor {
   final String id;
   final String name;
   final String regionalName;
-  final String title; // e.g. "Ayurvedic Physician (BAMS)", "CSCS Strength Coach"
+  final String
+      title; // e.g. "Ayurvedic Physician (BAMS)", "CSCS Strength Coach"
   final String avatarUrl;
   final double rating;
   final int verifiedAnswersCount;

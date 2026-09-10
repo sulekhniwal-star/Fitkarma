@@ -16,7 +16,8 @@ class VernacularVoiceScreen extends ConsumerStatefulWidget {
   const VernacularVoiceScreen({super.key});
 
   @override
-  ConsumerState<VernacularVoiceScreen> createState() => _VernacularVoiceScreenState();
+  ConsumerState<VernacularVoiceScreen> createState() =>
+      _VernacularVoiceScreenState();
 }
 
 class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
@@ -56,7 +57,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -89,7 +91,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
     );
   }
 
-  Widget _buildLanguageSelector(VernacularLanguage current, VernacularVoiceNotifier notifier) {
+  Widget _buildLanguageSelector(
+      VernacularLanguage current, VernacularVoiceNotifier notifier) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -98,18 +101,21 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              avatar: Text(lang.flagEmoji, style: const TextStyle(fontSize: 13)),
+              avatar:
+                  Text(lang.flagEmoji, style: const TextStyle(fontSize: 13)),
               label: Text('${lang.name} (${lang.nativeName})'),
               selected: isSelected,
               selectedColor: AppColors.karmaGreen.withValues(alpha: 0.2),
               backgroundColor: AppColors.surfaceElevated,
               labelStyle: TextStyle(
-                color: isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
+                color:
+                    isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
                 fontSize: 12,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
               side: BorderSide(
-                color: isSelected ? AppColors.karmaGreen : AppColors.glassBorder,
+                color:
+                    isSelected ? AppColors.karmaGreen : AppColors.glassBorder,
               ),
               onSelected: (_) => notifier.selectLanguage(lang),
             ),
@@ -119,7 +125,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
     );
   }
 
-  Widget _buildHeroMicrophoneCard(VoiceState state, VernacularVoiceNotifier notifier) {
+  Widget _buildHeroMicrophoneCard(
+      VoiceState state, VernacularVoiceNotifier notifier) {
     final isListening = state.recordingState == VoiceRecordingState.listening;
     final isProcessing = state.recordingState == VoiceRecordingState.processing;
 
@@ -150,13 +157,17 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                       : AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
                   border: Border.all(
-                    color: isListening ? AppColors.alertRed : AppColors.karmaGreen,
+                    color:
+                        isListening ? AppColors.alertRed : AppColors.karmaGreen,
                   ),
                 ),
                 child: Text(
-                  isListening ? 'Listening...' : (isProcessing ? 'Transcribing...' : 'Ready'),
+                  isListening
+                      ? 'Listening...'
+                      : (isProcessing ? 'Transcribing...' : 'Ready'),
                   style: TextStyle(
-                    color: isListening ? AppColors.alertRed : AppColors.karmaGreen,
+                    color:
+                        isListening ? AppColors.alertRed : AppColors.karmaGreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 11,
                   ),
@@ -188,10 +199,13 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isListening
-                        ? AppColors.alertRed.withValues(alpha: 0.2 + (_micPulseController.value * 0.2))
+                        ? AppColors.alertRed.withValues(
+                            alpha: 0.2 + (_micPulseController.value * 0.2))
                         : AppColors.karmaGreen.withValues(alpha: 0.15),
                     border: Border.all(
-                      color: isListening ? AppColors.alertRed : AppColors.karmaGreen,
+                      color: isListening
+                          ? AppColors.alertRed
+                          : AppColors.karmaGreen,
                       width: 2.5,
                     ),
                     boxShadow: [
@@ -199,7 +213,9 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                         color: isListening
                             ? AppColors.alertRed.withValues(alpha: 0.4)
                             : AppColors.karmaGreen.withValues(alpha: 0.3),
-                        blurRadius: isListening ? (16 + (_micPulseController.value * 12)) : 16,
+                        blurRadius: isListening
+                            ? (16 + (_micPulseController.value * 12))
+                            : 16,
                         spreadRadius: isListening ? 4 : 1,
                       ),
                     ],
@@ -207,7 +223,9 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                   child: Center(
                     child: Icon(
                       isListening ? Icons.mic : Icons.mic_none,
-                      color: isListening ? AppColors.alertRed : AppColors.karmaGreen,
+                      color: isListening
+                          ? AppColors.alertRed
+                          : AppColors.karmaGreen,
                       size: 38,
                     ),
                   ),
@@ -217,8 +235,13 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
-            isListening ? 'Tap mic to stop and process speech' : 'Tap microphone and speak in your mother tongue',
-            style: const TextStyle(color: AppColors.textPrimary, fontSize: 13, fontWeight: FontWeight.w600),
+            isListening
+                ? 'Tap mic to stop and process speech'
+                : 'Tap microphone and speak in your mother tongue',
+            style: const TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 13,
+                fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: AppSpacing.sm),
 
@@ -228,13 +251,16 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
               Expanded(
                 child: TextField(
                   controller: _customSpeechController,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 13),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary, fontSize: 13),
                   decoration: InputDecoration(
                     hintText: 'Or type speech phrase to simulate voice...',
-                    hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+                    hintStyle: const TextStyle(
+                        color: AppColors.textMuted, fontSize: 12),
                     filled: true,
                     fillColor: AppColors.surfaceElevated,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppRadii.sm),
                       borderSide: BorderSide.none,
@@ -252,8 +278,10 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.karmaGreen,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadii.sm)),
                 ),
                 onPressed: () {
                   if (_customSpeechController.text.trim().isNotEmpty) {
@@ -261,7 +289,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                     _customSpeechController.clear();
                   }
                 },
-                child: const Icon(Icons.arrow_forward, color: AppColors.background, size: 18),
+                child: const Icon(Icons.arrow_forward,
+                    color: AppColors.background, size: 18),
               ),
             ],
           ),
@@ -274,7 +303,9 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
             children: promptExamples.map((prompt) {
               return ActionChip(
                 backgroundColor: AppColors.surfaceElevated,
-                label: Text(prompt, style: const TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                label: Text(prompt,
+                    style: const TextStyle(
+                        color: AppColors.focusBlue, fontSize: 11)),
                 onPressed: () {
                   _customSpeechController.text = prompt;
                   notifier.processVoiceInput(prompt);
@@ -299,11 +330,15 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
             children: [
               Row(
                 children: [
-                  Text(result.detectedLanguage.flagEmoji, style: const TextStyle(fontSize: 16)),
+                  Text(result.detectedLanguage.flagEmoji,
+                      style: const TextStyle(fontSize: 16)),
                   const SizedBox(width: 6),
                   Text(
                     '${result.detectedLanguage.name} • ${(result.confidenceScore * 100).toInt()}% Confidence',
-                    style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 13),
+                    style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
                   ),
                 ],
               ),
@@ -315,7 +350,10 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                 ),
                 child: Text(
                   entity.intentType.label,
-                  style: const TextStyle(color: AppColors.focusBlue, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.focusBlue,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -327,12 +365,14 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
             decoration: BoxDecoration(
               color: AppColors.surfaceElevated.withValues(alpha: 0.6),
               borderRadius: AppRadii.radiusSm,
-              border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.3)),
+              border: Border.all(
+                  color: AppColors.karmaGreen.withValues(alpha: 0.3)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.record_voice_over, color: AppColors.karmaGreen, size: 16),
+                const Icon(Icons.record_voice_over,
+                    color: AppColors.karmaGreen, size: 16),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -361,7 +401,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                     accentColor: AppColors.karmaGreen,
                   ),
                 ),
-                Container(width: 1, height: 40, color: AppColors.surfaceElevated),
+                Container(
+                    width: 1, height: 40, color: AppColors.surfaceElevated),
                 const SizedBox(width: 12),
                 Expanded(
                   flex: 2,
@@ -371,10 +412,22 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _buildMacroPill('Protein', '${entity.proteinGrams.toStringAsFixed(1)}g', AppColors.focusBlue),
-                          _buildMacroPill('Carbs', '${entity.carbsGrams.toStringAsFixed(1)}g', AppColors.energyOrange),
-                          _buildMacroPill('Fat', '${entity.fatGrams.toStringAsFixed(1)}g', AppColors.alertRed),
-                          _buildMacroPill('Fiber', '${entity.fiberGrams.toStringAsFixed(1)}g', AppColors.karmaGreen),
+                          _buildMacroPill(
+                              'Protein',
+                              '${entity.proteinGrams.toStringAsFixed(1)}g',
+                              AppColors.focusBlue),
+                          _buildMacroPill(
+                              'Carbs',
+                              '${entity.carbsGrams.toStringAsFixed(1)}g',
+                              AppColors.energyOrange),
+                          _buildMacroPill(
+                              'Fat',
+                              '${entity.fatGrams.toStringAsFixed(1)}g',
+                              AppColors.alertRed),
+                          _buildMacroPill(
+                              'Fiber',
+                              '${entity.fiberGrams.toStringAsFixed(1)}g',
+                              AppColors.karmaGreen),
                         ],
                       ),
                     ],
@@ -392,12 +445,16 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.directions_walk, color: AppColors.karmaGreen, size: 16),
+                  const Icon(Icons.directions_walk,
+                      color: AppColors.karmaGreen, size: 16),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       entity.regionalPostMealGuidance,
-                      style: const TextStyle(color: AppColors.karmaGreen, fontSize: 11, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                          color: AppColors.karmaGreen,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
@@ -410,7 +467,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
               label: 'Water Intake Logged',
               accentColor: AppColors.focusBlue,
             ),
-          ] else if (entity.intentType == VoiceIntentType.workoutPhysicalActivity) ...[
+          ] else if (entity.intentType ==
+              VoiceIntentType.workoutPhysicalActivity) ...[
             Row(
               children: [
                 Expanded(
@@ -441,7 +499,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
   Widget _buildMacroPill(String label, String value, Color color) {
     return Column(
       children: [
-        Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
+        Text(label,
+            style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
         const SizedBox(height: 2),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -451,7 +510,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
           ),
           child: Text(
             value,
-            style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 11),
+            style: TextStyle(
+                color: color, fontWeight: FontWeight.bold, fontSize: 11),
           ),
         ),
       ],
@@ -476,14 +536,16 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Chronological stream of speech transcripts and parsed physiological events.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           if (history.isEmpty)
             const Center(
               child: Padding(
                 padding: EdgeInsets.all(AppSpacing.md),
-                child: Text('No voice logs yet. Tap the microphone to record.', style: TextStyle(color: AppColors.textMuted)),
+                child: Text('No voice logs yet. Tap the microphone to record.',
+                    style: TextStyle(color: AppColors.textMuted)),
               ),
             )
           else
@@ -505,7 +567,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(item.detectedLanguage.flagEmoji, style: const TextStyle(fontSize: 16)),
+          Text(item.detectedLanguage.flagEmoji,
+              style: const TextStyle(fontSize: 16)),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -516,18 +579,25 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
                   children: [
                     Text(
                       item.parsedEntity.primarySummary,
-                      style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
                     ),
                     Text(
                       '${item.recordedAt.hour.toString().padLeft(2, '0')}:${item.recordedAt.minute.toString().padLeft(2, '0')}',
-                      style: const TextStyle(color: AppColors.textMuted, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.textMuted, fontSize: 10),
                     ),
                   ],
                 ),
                 const SizedBox(height: 2),
                 Text(
                   '"${item.rawTranscript}"',
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontStyle: FontStyle.italic),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic),
                 ),
               ],
             ),
@@ -557,7 +627,8 @@ class _VernacularVoiceScreenState extends ConsumerState<VernacularVoiceScreen>
             const SizedBox(height: AppSpacing.md),
             Text(
               'FitKarma\'s Vernacular Voice OS overcomes literacy and typing friction across Bharat by processing natural speech transcripts across 10 Indian languages. It pairs on-device phonetic token extraction with an extensive database of Indian regional culinary preparations (Bhakri, Roti, Idli, Dosa, Pesarattu, Dal, Fish curry) to instantly log calories, macros, and hydration with zero keyboard input.',
-              style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
           ],

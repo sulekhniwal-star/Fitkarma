@@ -1,9 +1,18 @@
 import 'nutrition_models.dart';
 
 enum GlycemicRiskTier {
-  low(label: 'Low Impact / Steady Energy', colorCode: 0xff22C55E, maxExcursionMgDl: 25),
-  moderate(label: 'Moderate Impact / Mild Rise', colorCode: 0xff3B82F6, maxExcursionMgDl: 45),
-  high(label: 'High Spike Risk / Rapid Insulin Surge', colorCode: 0xffEF4444, maxExcursionMgDl: 80);
+  low(
+      label: 'Low Impact / Steady Energy',
+      colorCode: 0xff22C55E,
+      maxExcursionMgDl: 25),
+  moderate(
+      label: 'Moderate Impact / Mild Rise',
+      colorCode: 0xff3B82F6,
+      maxExcursionMgDl: 45),
+  high(
+      label: 'High Spike Risk / Rapid Insulin Surge',
+      colorCode: 0xffEF4444,
+      maxExcursionMgDl: 80);
 
   final String label;
   final int colorCode;
@@ -50,15 +59,21 @@ class GlycemicResponseEngine {
         riskTier: GlycemicRiskTier.low,
         personalFoodScore: 8.0,
         predictedGlucoseRiseMgDl: 10,
-        bufferingInterventions: ['Log meals to simulate glucose excursion curves.'],
-        sequencingPrescription: 'Sequence meals: Fiber first, Protein second, Carbs last.',
+        bufferingInterventions: [
+          'Log meals to simulate glucose excursion curves.'
+        ],
+        sequencingPrescription:
+            'Sequence meals: Fiber first, Protein second, Carbs last.',
       );
     }
 
-    final totalCarbs = entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
-    final totalProtein = entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
+    final totalCarbs =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
+    final totalProtein =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
     final totalFats = entries.fold<double>(0.0, (sum, e) => sum + e.totalFats);
-    final totalFiber = entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
+    final totalFiber =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
 
     // Assume average Indian mixed meal GI is ~65 (Rotis, Rice, Lentils)
     const double baseGi = 65.0;
@@ -70,22 +85,27 @@ class GlycemicResponseEngine {
 
     if (totalFiber >= 6.0) {
       bufferMultiplier *= 0.85;
-      appliedBuffers.add('High Fiber Buffer: ${totalFiber.toStringAsFixed(1)}g fiber slows enzymatic carbohydrate breakdown (-15% GL).');
+      appliedBuffers.add(
+          'High Fiber Buffer: ${totalFiber.toStringAsFixed(1)}g fiber slows enzymatic carbohydrate breakdown (-15% GL).');
     }
     if (totalProtein >= 25.0 || totalFats >= 15.0) {
       bufferMultiplier *= 0.80;
-      appliedBuffers.add('Protein & Lipid Co-ingestion: Delays gastric emptying into the duodenum (-20% peak glucose).');
+      appliedBuffers.add(
+          'Protein & Lipid Co-ingestion: Delays gastric emptying into the duodenum (-20% peak glucose).');
     }
     if (isSaladEatenFirst) {
       bufferMultiplier *= 0.70;
-      appliedBuffers.add('Meal Sequencing Applied: Raw fiber lining the small intestine reduces postprandial spike amplitude (-30%).');
+      appliedBuffers.add(
+          'Meal Sequencing Applied: Raw fiber lining the small intestine reduces postprandial spike amplitude (-30%).');
     }
     if (isPostMealWalkPlanned) {
       bufferMultiplier *= 0.75;
-      appliedBuffers.add('Shatpawali Walk (+1,000 steps): Active muscle GLUT4 translocation clears glucose independent of insulin (-25%).');
+      appliedBuffers.add(
+          'Shatpawali Walk (+1,000 steps): Active muscle GLUT4 translocation clears glucose independent of insulin (-25%).');
     }
 
-    final double bufferedGl = double.parse((rawGl * bufferMultiplier).toStringAsFixed(1));
+    final double bufferedGl =
+        double.parse((rawGl * bufferMultiplier).toStringAsFixed(1));
 
     // Risk tier assignment
     final GlycemicRiskTier tier;
@@ -102,7 +122,8 @@ class GlycemicResponseEngine {
 
     // Personal Food Score: 1.0 (worst) to 10.0 (optimal)
     final double rawScore = 10.0 - (bufferedGl * 0.35);
-    final double personalScore = double.parse(rawScore.clamp(2.0, 10.0).toStringAsFixed(1));
+    final double personalScore =
+        double.parse(rawScore.clamp(2.0, 10.0).toStringAsFixed(1));
 
     return GlycemicEvaluationReport(
       rawGlycemicLoad: double.parse(rawGl.toStringAsFixed(1)),
@@ -111,9 +132,12 @@ class GlycemicResponseEngine {
       personalFoodScore: personalScore,
       predictedGlucoseRiseMgDl: predictedRise,
       bufferingInterventions: appliedBuffers.isEmpty
-          ? ['Add raw cucumber/salad or take a 15-minute Shatpawali walk to blunt this meal\'s glycemic rise.']
+          ? [
+              'Add raw cucumber/salad or take a 15-minute Shatpawali walk to blunt this meal\'s glycemic rise.'
+            ]
           : appliedBuffers,
-      sequencingPrescription: 'Optimal Indian Meal Sequencing: Eat Cucumbers/Kakdi Salad first ➔ Paneer/Daal/Eggs second ➔ Rotis/Rice last.',
+      sequencingPrescription:
+          'Optimal Indian Meal Sequencing: Eat Cucumbers/Kakdi Salad first ➔ Paneer/Daal/Eggs second ➔ Rotis/Rice last.',
     );
   }
 }

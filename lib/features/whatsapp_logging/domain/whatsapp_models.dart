@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 /// WhatsApp Account Linking & Verification Status
 enum WhatsAppLinkStatus {
   unlinked(label: 'Not Linked', regionalLabel: 'लिंक नहीं है'),
-  pendingVerification(label: 'Verification Pending (OTP Sent)', regionalLabel: 'ओटीपी सत्यापन लंबित'),
+  pendingVerification(
+      label: 'Verification Pending (OTP Sent)',
+      regionalLabel: 'ओटीपी सत्यापन लंबित'),
   activeLinked(label: 'Active & Linked', regionalLabel: 'सत्यापित व सक्रिय'),
   optedOut(label: 'Opted Out / Paused', regionalLabel: 'स्थगित');
 
@@ -57,10 +59,12 @@ class WhatsAppUserProfile {
       linkStatus: linkStatus ?? this.linkStatus,
       verificationOtp: verificationOtp ?? this.verificationOtp,
       preferredLanguage: preferredLanguage ?? this.preferredLanguage,
-      enableMorningBriefing: enableMorningBriefing ?? this.enableMorningBriefing,
+      enableMorningBriefing:
+          enableMorningBriefing ?? this.enableMorningBriefing,
       enableMealLogging: enableMealLogging ?? this.enableMealLogging,
       enableWaterNudges: enableWaterNudges ?? this.enableWaterNudges,
-      enablePostDinnerWalkAlert: enablePostDinnerWalkAlert ?? this.enablePostDinnerWalkAlert,
+      enablePostDinnerWalkAlert:
+          enablePostDinnerWalkAlert ?? this.enablePostDinnerWalkAlert,
       linkedAt: linkedAt ?? this.linkedAt,
     );
   }
@@ -72,7 +76,8 @@ enum WhatsAppLogType {
   water(label: 'Water Hydration', regionalLabel: 'जलयोजन / पानी'),
   workout(label: 'Workout & Steps', regionalLabel: 'व्यायाम व कदम'),
   weight(label: 'Weight & Body Comp', regionalLabel: 'वजन व शारीरिक माप'),
-  quickCommand(label: 'Summary / Command', regionalLabel: 'दैनिक सारांश / कमांड'),
+  quickCommand(
+      label: 'Summary / Command', regionalLabel: 'दैनिक सारांश / कमांड'),
   general(label: 'General Inquiry', regionalLabel: 'सामान्य प्रश्न');
 
   final String label;
@@ -150,10 +155,18 @@ class WhatsAppMessageRecord {
 
 /// Interactive WhatsApp Template Type
 enum WhatsAppTemplateType {
-  morningReadiness(title: 'Morning Readiness & Agni Briefing', regionalTitle: 'प्रातःकालीन स्वास्थ्य व अग्नि संदेश'),
-  postMealShatapadi(title: 'Post-Meal Shatapadi Walk Reminder', regionalTitle: 'भोजनोपरांत शतपावली स्मरण'),
-  waterHydrationNudge(title: 'Hydration & Nimbu-Pani Nudge', regionalTitle: 'जल व नींबू-पानी जलयोजन सूचना'),
-  eveningRecap(title: 'Nightly Macro & Sleep Recap', regionalTitle: 'रात्रि मैक्रोज़ व नींद सारांश');
+  morningReadiness(
+      title: 'Morning Readiness & Agni Briefing',
+      regionalTitle: 'प्रातःकालीन स्वास्थ्य व अग्नि संदेश'),
+  postMealShatapadi(
+      title: 'Post-Meal Shatapadi Walk Reminder',
+      regionalTitle: 'भोजनोपरांत शतपावली स्मरण'),
+  waterHydrationNudge(
+      title: 'Hydration & Nimbu-Pani Nudge',
+      regionalTitle: 'जल व नींबू-पानी जलयोजन सूचना'),
+  eveningRecap(
+      title: 'Nightly Macro & Sleep Recap',
+      regionalTitle: 'रात्रि मैक्रोज़ व नींद सारांश');
 
   final String title;
   final String regionalTitle;

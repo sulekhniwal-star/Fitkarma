@@ -64,8 +64,12 @@ class WhatsAppEngine {
       final (int mins, int steps, double cals) = _extractWorkoutAndSteps(lower);
       return ParsedWhatsAppEntity(
         logType: WhatsAppLogType.workout,
-        parsedSummary: mins > 0 ? 'Workout logged: $mins mins (~${cals.toInt()} kcal)' : 'Steps logged: $steps steps',
-        regionalParsedSummary: mins > 0 ? 'व्यायाम दर्ज: $mins मिनट (~${cals.toInt()} कैलोरी)' : 'कदम दर्ज: $steps कदम',
+        parsedSummary: mins > 0
+            ? 'Workout logged: $mins mins (~${cals.toInt()} kcal)'
+            : 'Steps logged: $steps steps',
+        regionalParsedSummary: mins > 0
+            ? 'व्यायाम दर्ज: $mins मिनट (~${cals.toInt()} कैलोरी)'
+            : 'कदम दर्ज: $steps कदम',
         workoutDurationMinutes: mins,
         stepsCount: steps,
         calories: cals,
@@ -78,7 +82,8 @@ class WhatsAppEngine {
       return ParsedWhatsAppEntity(
         logType: WhatsAppLogType.weight,
         parsedSummary: 'Body Weight logged: ${weight.toStringAsFixed(1)} kg',
-        regionalParsedSummary: 'शारीरिक वजन दर्ज: ${weight.toStringAsFixed(1)} किग्रा',
+        regionalParsedSummary:
+            'शारीरिक वजन दर्ज: ${weight.toStringAsFixed(1)} किग्रा',
         weightKg: weight,
       );
     }
@@ -120,14 +125,16 @@ class WhatsAppEngine {
     }
 
     // Check for liters (e.g. 1 liter, 1.5l)
-    final literMatch = RegExp(r'(\d+(?:\.\d+)?)\s*(?:l|liter|litre|लीटर)').firstMatch(text);
+    final literMatch =
+        RegExp(r'(\d+(?:\.\d+)?)\s*(?:l|liter|litre|लीटर)').firstMatch(text);
     if (literMatch != null) {
       final double l = double.tryParse(literMatch.group(1)!) ?? 1.0;
       return (l * 1000).toInt();
     }
 
     // Check for glasses (e.g. 2 glasses, 1 glass)
-    final glassMatch = RegExp(r'(\d+)\s*(?:glass|glaas|गिलास|ग्लास)').firstMatch(text);
+    final glassMatch =
+        RegExp(r'(\d+)\s*(?:glass|glaas|गिलास|ग्लास)').firstMatch(text);
     if (glassMatch != null) {
       final int count = int.tryParse(glassMatch.group(1)!) ?? 1;
       return count * 250;
@@ -167,7 +174,8 @@ class WhatsAppEngine {
     }
 
     // Duration (e.g. 45 mins, 30 min, 1 hour)
-    final minsMatch = RegExp(r'(\d+)\s*(?:min|mins|minute|minutes|मिनट)').firstMatch(text);
+    final minsMatch =
+        RegExp(r'(\d+)\s*(?:min|mins|minute|minutes|मिनट)').firstMatch(text);
     if (minsMatch != null) {
       durationMins = int.tryParse(minsMatch.group(1)!) ?? 30;
     } else if (text.contains('1 hour') || text.contains('१ घंटा')) {
@@ -183,12 +191,15 @@ class WhatsAppEngine {
   }
 
   bool _isWeightLog(String text) {
-    return (text.contains('wt') || text.contains('weight') || text.contains('वजन')) &&
+    return (text.contains('wt') ||
+            text.contains('weight') ||
+            text.contains('वजन')) &&
         (text.contains('kg') || RegExp(r'\d+(\.\d+)?').hasMatch(text));
   }
 
   double _extractWeight(String text) {
-    final match = RegExp(r'(\d+(?:\.\d+)?)\s*(?:kg|kilos|किग्रा)?').firstMatch(text);
+    final match =
+        RegExp(r'(\d+(?:\.\d+)?)\s*(?:kg|kilos|किग्रा)?').firstMatch(text);
     if (match != null) {
       return double.tryParse(match.group(1)!) ?? 70.0;
     }
@@ -204,7 +215,9 @@ class WhatsAppEngine {
     double totalFiber = 0;
 
     // 1. Roti / Chapati / Phulka
-    final rotiMatch = RegExp(r'(\d+)?\s*(?:roti|rotis|chapati|chapatis|phulka|phulke|रोटी|रोटियां)').firstMatch(lower);
+    final rotiMatch = RegExp(
+            r'(\d+)?\s*(?:roti|rotis|chapati|chapatis|phulka|phulke|रोटी|रोटियां)')
+        .firstMatch(lower);
     if (rotiMatch != null) {
       final int qty = int.tryParse(rotiMatch.group(1) ?? '1') ?? 1;
       identified.add('$qty Roti(s)');
@@ -216,10 +229,17 @@ class WhatsAppEngine {
     }
 
     // 2. Dal / Sambhar / Moong Dal
-    if (lower.contains('dal') || lower.contains('daal') || lower.contains('दाल') || lower.contains('sambhar')) {
+    if (lower.contains('dal') ||
+        lower.contains('daal') ||
+        lower.contains('दाल') ||
+        lower.contains('sambhar')) {
       int qty = 1;
-      final match = RegExp(r'(\d+)?\s*(?:bowl|katori|plate)?\s*(?:dal|daal|दाल)').firstMatch(lower);
-      if (match != null && match.group(1) != null) qty = int.tryParse(match.group(1)!) ?? 1;
+      final match =
+          RegExp(r'(\d+)?\s*(?:bowl|katori|plate)?\s*(?:dal|daal|दाल)')
+              .firstMatch(lower);
+      if (match != null && match.group(1) != null) {
+        qty = int.tryParse(match.group(1)!) ?? 1;
+      }
       identified.add('$qty Bowl Dal Tadka');
       totalCals += qty * 140.0;
       totalProtein += qty * 7.0;
@@ -229,9 +249,13 @@ class WhatsAppEngine {
     }
 
     // 3. Rice / Chawal / Biryani
-    if (lower.contains('rice') || lower.contains('chawal') || lower.contains('चावल') || lower.contains('biryani')) {
+    if (lower.contains('rice') ||
+        lower.contains('chawal') ||
+        lower.contains('चावल') ||
+        lower.contains('biryani')) {
       final bool isBiryani = lower.contains('biryani');
-      identified.add(isBiryani ? '1 Plate Chicken Biryani' : '1 Bowl Steamed Rice');
+      identified
+          .add(isBiryani ? '1 Plate Chicken Biryani' : '1 Bowl Steamed Rice');
       totalCals += isBiryani ? 450.0 : 170.0;
       totalProtein += isBiryani ? 22.0 : 3.0;
       totalCarbs += isBiryani ? 52.0 : 38.0;
@@ -250,7 +274,9 @@ class WhatsAppEngine {
     }
 
     // 5. Chicken / Fish / Meat
-    if (lower.contains('chicken') || lower.contains('fish') || lower.contains('चिकन')) {
+    if (lower.contains('chicken') ||
+        lower.contains('fish') ||
+        lower.contains('चिकन')) {
       identified.add('150g Grilled/Curry Chicken');
       totalCals += 220.0;
       totalProtein += 28.0;
@@ -260,7 +286,9 @@ class WhatsAppEngine {
     }
 
     // 6. Eggs / Omelette / Bhurji
-    final eggMatch = RegExp(r'(\d+)?\s*(?:egg|eggs|अंडे|अंडा|omelet|omelette|bhurji)').firstMatch(lower);
+    final eggMatch =
+        RegExp(r'(\d+)?\s*(?:egg|eggs|अंडे|अंडा|omelet|omelette|bhurji)')
+            .firstMatch(lower);
     if (eggMatch != null) {
       final int qty = int.tryParse(eggMatch.group(1) ?? '2') ?? 2;
       identified.add('$qty Eggs / Omelette');
@@ -271,7 +299,10 @@ class WhatsAppEngine {
     }
 
     // 7. Curd / Dahi / Raita
-    if (lower.contains('curd') || lower.contains('dahi') || lower.contains('दही') || lower.contains('raita')) {
+    if (lower.contains('curd') ||
+        lower.contains('dahi') ||
+        lower.contains('दही') ||
+        lower.contains('raita')) {
       identified.add('1 Bowl Fresh Dahi / Curd');
       totalCals += 90.0;
       totalProtein += 4.0;
@@ -280,7 +311,10 @@ class WhatsAppEngine {
     }
 
     // 8. Salad / Cucumber / Tomatoes
-    if (lower.contains('salad') || lower.contains('ककड़ी') || lower.contains('खीरा') || lower.contains('सलाद')) {
+    if (lower.contains('salad') ||
+        lower.contains('ककड़ी') ||
+        lower.contains('खीरा') ||
+        lower.contains('सलाद')) {
       identified.add('1 Bowl Fresh Green Salad');
       totalCals += 40.0;
       totalProtein += 1.0;
@@ -330,7 +364,8 @@ class WhatsAppEngine {
   }
 
   /// Formats WhatsApp Bot Outbound Response in Markdown with emojis
-  String formatBotReply(ParsedWhatsAppEntity parsed, {required String language}) {
+  String formatBotReply(ParsedWhatsAppEntity parsed,
+      {required String language}) {
     final bool isHindi = language == 'hi';
 
     switch (parsed.logType) {
@@ -438,8 +473,14 @@ Successfully synced with your Body Analytics Blueprint.''';
             },
             'action': {
               'buttons': [
-                {'type': 'reply', 'reply': {'id': 'log_breakfast', 'title': '🍳 Log Breakfast'}},
-                {'type': 'reply', 'reply': {'id': 'view_plan', 'title': '🏋️ View Workout'}},
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'log_breakfast', 'title': '🍳 Log Breakfast'}
+                },
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'view_plan', 'title': '🏋️ View Workout'}
+                },
               ]
             }
           }
@@ -452,14 +493,24 @@ Successfully synced with your Body Analytics Blueprint.''';
           'type': 'interactive',
           'interactive': {
             'type': 'button',
-            'header': {'type': 'text', 'text': '🚶 100-Step Shatapadi Reminder'},
+            'header': {
+              'type': 'text',
+              'text': '🚶 100-Step Shatapadi Reminder'
+            },
             'body': {
-              'text': 'Post-meal glycemic window active! A light 10-minute stroll will blunt blood sugar spikes and boost digestion.'
+              'text':
+                  'Post-meal glycemic window active! A light 10-minute stroll will blunt blood sugar spikes and boost digestion.'
             },
             'action': {
               'buttons': [
-                {'type': 'reply', 'reply': {'id': 'start_walk', 'title': '✅ Walking Now'}},
-                {'type': 'reply', 'reply': {'id': 'log_water', 'title': '💧 Log Water'}},
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'start_walk', 'title': '✅ Walking Now'}
+                },
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'log_water', 'title': '💧 Log Water'}
+                },
               ]
             }
           }
@@ -474,12 +525,19 @@ Successfully synced with your Body Analytics Blueprint.''';
             'type': 'button',
             'header': {'type': 'text', 'text': '💧 Afternoon Hydration Check'},
             'body': {
-              'text': 'You are at 1,400 mL / 3,000 mL daily target. Grab a glass of water, coconut water, or Nimbu-Pani!'
+              'text':
+                  'You are at 1,400 mL / 3,000 mL daily target. Grab a glass of water, coconut water, or Nimbu-Pani!'
             },
             'action': {
               'buttons': [
-                {'type': 'reply', 'reply': {'id': 'log_250ml', 'title': '+250 mL'}},
-                {'type': 'reply', 'reply': {'id': 'log_500ml', 'title': '+500 mL'}},
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'log_250ml', 'title': '+250 mL'}
+                },
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'log_500ml', 'title': '+500 mL'}
+                },
               ]
             }
           }
@@ -492,13 +550,20 @@ Successfully synced with your Body Analytics Blueprint.''';
           'type': 'interactive',
           'interactive': {
             'type': 'button',
-            'header': {'type': 'text', 'text': '🌙 Nightly Karma & Macro Recap'},
+            'header': {
+              'type': 'text',
+              'text': '🌙 Nightly Karma & Macro Recap'
+            },
             'body': {
-              'text': 'Daily mission completed: 92% adherence. Digital sunset begins at 21:30 for melatonin optimization.'
+              'text':
+                  'Daily mission completed: 92% adherence. Digital sunset begins at 21:30 for melatonin optimization.'
             },
             'action': {
               'buttons': [
-                {'type': 'reply', 'reply': {'id': 'view_score', 'title': '✨ Karma Score'}},
+                {
+                  'type': 'reply',
+                  'reply': {'id': 'view_score', 'title': '✨ Karma Score'}
+                },
               ]
             }
           }

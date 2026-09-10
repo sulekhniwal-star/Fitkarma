@@ -41,9 +41,16 @@ enum PerformancePillar {
 
 /// Status of benchmark execution
 enum PerformanceGrade {
-  gradeA(name: 'A+ Elite (Sub-16ms)', regionalName: 'सर्वोत्तम गति (ए+)', score: 95),
-  gradeB(name: 'B Smooth (16-33ms)', regionalName: 'संतोषजनक गति (बी)', score: 80),
-  gradeC(name: 'C Needs Optimization', regionalName: 'सुधार योग्य गति (सी)', score: 60);
+  gradeA(
+      name: 'A+ Elite (Sub-16ms)',
+      regionalName: 'सर्वोत्तम गति (ए+)',
+      score: 95),
+  gradeB(
+      name: 'B Smooth (16-33ms)', regionalName: 'संतोषजनक गति (बी)', score: 80),
+  gradeC(
+      name: 'C Needs Optimization',
+      regionalName: 'सुधार योग्य गति (सी)',
+      score: 60);
 
   final String name;
   final String regionalName;
@@ -105,8 +112,10 @@ class PerformanceSettings {
   }) {
     return PerformanceSettings(
       targetFps: targetFps ?? this.targetFps,
-      enableRepaintBoundaries: enableRepaintBoundaries ?? this.enableRepaintBoundaries,
-      enableAggressiveLruCache: enableAggressiveLruCache ?? this.enableAggressiveLruCache,
+      enableRepaintBoundaries:
+          enableRepaintBoundaries ?? this.enableRepaintBoundaries,
+      enableAggressiveLruCache:
+          enableAggressiveLruCache ?? this.enableAggressiveLruCache,
       maxCacheSizeMb: maxCacheSizeMb ?? this.maxCacheSizeMb,
       telemetryBatchSize: telemetryBatchSize ?? this.telemetryBatchSize,
       batterySaverMode: batterySaverMode ?? this.batterySaverMode,

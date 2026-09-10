@@ -64,7 +64,9 @@ class StepsScreen extends ConsumerWidget {
                         Text(
                           'Target: ${metrics.targetSteps} (${(metrics.progressPercent * 100).round()}%)',
                           style: AppTypography.bodySmall.copyWith(
-                            color: metrics.isGoalAchieved ? AppColors.karmaGreen : AppColors.textSecondary,
+                            color: metrics.isGoalAchieved
+                                ? AppColors.karmaGreen
+                                : AppColors.textSecondary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -98,7 +100,8 @@ class StepsScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.route_rounded, color: AppColors.karmaGreen, size: 20),
+                          const Icon(Icons.route_rounded,
+                              color: AppColors.karmaGreen, size: 20),
                           const SizedBox(height: 8),
                           GlowingMetric(
                             label: 'Estimated Distance',
@@ -116,7 +119,8 @@ class StepsScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.local_fire_department_rounded, color: AppColors.energyOrange, size: 20),
+                          const Icon(Icons.local_fire_department_rounded,
+                              color: AppColors.energyOrange, size: 20),
                           const SizedBox(height: 8),
                           GlowingMetric(
                             label: 'Active Burn',
@@ -143,7 +147,8 @@ class StepsScreen extends ConsumerWidget {
                         color: AppColors.karmaGreen.withValues(alpha: 0.15),
                         borderRadius: AppRadii.radiusSm,
                       ),
-                      child: const Icon(Icons.snowshoeing_rounded, color: AppColors.karmaGreen, size: 24),
+                      child: const Icon(Icons.snowshoeing_rounded,
+                          color: AppColors.karmaGreen, size: 24),
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -171,13 +176,18 @@ class StepsScreen extends ConsumerWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.karmaGreen,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 6),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: AppRadii.radiusSm),
                       ),
                       onPressed: () {
                         ref.read(dashboardProvider.notifier).addSteps(1000);
                       },
-                      child: const Text('+1,000', style: TextStyle(color: AppColors.textInverse, fontWeight: FontWeight.w800)),
+                      child: const Text('+1,000',
+                          style: TextStyle(
+                              color: AppColors.textInverse,
+                              fontWeight: FontWeight.w800)),
                     ),
                   ],
                 ),
@@ -200,13 +210,15 @@ class StepsScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: metrics.hourlyCadence.map((block) {
-                          final heightFactor = (block.steps / 2000.0).clamp(0.1, 1.0);
+                          final heightFactor =
+                              (block.steps / 2000.0).clamp(0.1, 1.0);
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
                                 '${block.steps}',
-                                style: const TextStyle(fontSize: 9, color: AppColors.textMuted),
+                                style: const TextStyle(
+                                    fontSize: 9, color: AppColors.textMuted),
                               ),
                               const SizedBox(height: 4),
                               Container(
@@ -217,17 +229,21 @@ class StepsScreen extends ConsumerWidget {
                                     begin: Alignment.bottomCenter,
                                     end: Alignment.topCenter,
                                     colors: [
-                                      AppColors.focusBlue.withValues(alpha: 0.4),
+                                      AppColors.focusBlue
+                                          .withValues(alpha: 0.4),
                                       AppColors.focusBlue,
                                     ],
                                   ),
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(4)),
                                 ),
                               ),
                               const SizedBox(height: 6),
                               Text(
                                 '${block.hour}:00',
-                                style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                                style: const TextStyle(
+                                    fontSize: 10,
+                                    color: AppColors.textSecondary),
                               ),
                             ],
                           );
@@ -245,7 +261,8 @@ class StepsScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.insights_rounded, color: AppColors.focusBlue, size: 20),
+                    const Icon(Icons.insights_rounded,
+                        color: AppColors.focusBlue, size: 20),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(

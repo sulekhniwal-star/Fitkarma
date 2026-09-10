@@ -6,7 +6,8 @@ void main() {
   group('StressDetectionEngine Tests', () {
     const engine = StressDetectionEngine();
 
-    test('Infers calm / low stress state when autonomic signals match baseline', () {
+    test('Infers calm / low stress state when autonomic signals match baseline',
+        () {
       final report = engine.inferStressState(
         currentRmssd: 55.0,
         baselineRmssd: 52.0,
@@ -25,7 +26,9 @@ void main() {
       expect(report.recommendedProtocols.isNotEmpty, isTrue);
     });
 
-    test('Infers acute sympathetic overload when HRV is suppressed and pulse spikes', () {
+    test(
+        'Infers acute sympathetic overload when HRV is suppressed and pulse spikes',
+        () {
       final report = engine.inferStressState(
         currentRmssd: 22.0,
         baselineRmssd: 55.0,
@@ -39,7 +42,8 @@ void main() {
 
       expect(report.currentStressScore, greaterThan(75.0));
       expect(report.currentTier, equals(StressLevelTier.acuteOverload));
-      expect(report.recommendedProtocols.any((p) => p.id.contains('478')), isTrue);
+      expect(
+          report.recommendedProtocols.any((p) => p.id.contains('478')), isTrue);
     });
   });
 }

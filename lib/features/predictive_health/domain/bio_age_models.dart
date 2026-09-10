@@ -21,13 +21,15 @@ enum OrganSystemType {
     regionalName: 'मांसपेशी, अस्थि व फेफड़े की कार्यक्षमता',
     iconName: 'fitness_center',
     description: 'VO2 Max aerobic reserve, lean muscle mass & movement density',
-    regionalDescription: 'VO2 Max एरोबिक क्षमता, मांसपेशी द्रव्यमान व दैनिक सक्रियता',
+    regionalDescription:
+        'VO2 Max एरोबिक क्षमता, मांसपेशी द्रव्यमान व दैनिक सक्रियता',
   ),
   cellularRecovery(
     name: 'Cellular Recovery & Neuro-Circadian',
     regionalName: 'कोशिकीय पुनर्जनन व जैविक घड़ी',
     iconName: 'nights_stay',
-    description: 'Deep sleep architecture, chronic debt clearance & vagal recovery',
+    description:
+        'Deep sleep architecture, chronic debt clearance & vagal recovery',
     regionalDescription: 'गहरी नींद संरचना, नींद ऋण निवारण व तनाव मुक्ति',
   );
 
@@ -52,7 +54,8 @@ enum AgingPaceStatus {
     label: 'Decelerated (Rejuvenating)',
     regionalLabel: 'धीमी जैविक आयु गति (पुनर्जनन)',
     description: 'Aging slower than chronological time passage',
-    regionalDescription: 'वास्तविक समय की तुलना में शरीर धीमी गति से वृद्ध हो रहा है',
+    regionalDescription:
+        'वास्तविक समय की तुलना में शरीर धीमी गति से वृद्ध हो रहा है',
     colorCode: 0xFF00E676,
   ),
   equilibrium(
@@ -66,7 +69,8 @@ enum AgingPaceStatus {
     label: 'Accelerated Aging',
     regionalLabel: 'तीव्र जैविक आयु गति (सतर्कता आवश्यक)',
     description: 'Aging faster than chronological time passage',
-    regionalDescription: 'शरीर वास्तविक समय की तुलना में तेजी से वृद्ध हो रहा है',
+    regionalDescription:
+        'शरीर वास्तविक समय की तुलना में तेजी से वृद्ध हो रहा है',
     colorCode: 0xFFFF5252,
   );
 
@@ -110,7 +114,7 @@ class OrganSystemAge {
 /// Impact status of an individual biomarker
 enum BiomarkerImpactType {
   rejuvenating, // Reduces biological age
-  neutral,      // Minimal deviation
+  neutral, // Minimal deviation
   accelerating, // Adds years to biological age
 }
 
@@ -203,7 +207,8 @@ class MonthlyBioAgeSnapshot {
 class BiologicalAgeReport {
   final double chronologicalAge;
   final double biologicalAge;
-  final double ageDelta; // biologicalAge - chronologicalAge (negative is younger)
+  final double
+      ageDelta; // biologicalAge - chronologicalAge (negative is younger)
   final double agingPace; // years aged per calendar year (e.g. 0.88x)
   final AgingPaceStatus paceStatus;
   final List<OrganSystemAge> systemAges;

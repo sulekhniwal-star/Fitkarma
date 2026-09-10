@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
 enum ReadinessZone {
-  optimal,    // 80-100: Green / Prime capacity
-  moderate,   // 60-79: Blue / Normal training capacity
-  recovery,   // 40-59: Amber / Active recovery recommended
-  rest,       // 0-39: Red / Rest & stress management priority
+  optimal, // 80-100: Green / Prime capacity
+  moderate, // 60-79: Blue / Normal training capacity
+  recovery, // 40-59: Amber / Active recovery recommended
+  rest, // 0-39: Red / Rest & stress management priority
 }
 
 @immutable
@@ -16,9 +16,11 @@ class DailyIntelligencePackage {
   final int targetCalories;
   final int targetProteinGrams;
   final int targetSteps;
-  final String workoutRecommendation; // e.g. "Hypertrophy Push" or "Low-Intensity Zone 2"
+  final String
+      workoutRecommendation; // e.g. "Hypertrophy Push" or "Low-Intensity Zone 2"
   final String aiBriefing; // Groq generated personalized morning narrative
-  final List<String> safetyAlerts; // Deterministic safety overrides (e.g. "High Heatwave Index", "Elevated Resting HR")
+  final List<String>
+      safetyAlerts; // Deterministic safety overrides (e.g. "High Heatwave Index", "Elevated Resting HR")
   final DateTime generatedAt;
 
   const DailyIntelligencePackage({
@@ -35,7 +37,8 @@ class DailyIntelligencePackage {
     required this.generatedAt,
   });
 
-  factory DailyIntelligencePackage.fromMap(Map<String, dynamic> map, String docDate) {
+  factory DailyIntelligencePackage.fromMap(
+      Map<String, dynamic> map, String docDate) {
     final readiness = (map['readinessScore'] as num?)?.toInt() ?? 70;
     ReadinessZone zone;
     if (readiness >= 80) {
@@ -56,8 +59,10 @@ class DailyIntelligencePackage {
       targetCalories: (map['targetCalories'] as num?)?.toInt() ?? 2000,
       targetProteinGrams: (map['targetProteinGrams'] as num?)?.toInt() ?? 120,
       targetSteps: (map['targetSteps'] as num?)?.toInt() ?? 8000,
-      workoutRecommendation: map['workoutRecommendation'] as String? ?? 'Moderate Full Body',
-      aiBriefing: map['aiBriefing'] as String? ?? 'Welcome to FitKarma. Ready to conquer the day!',
+      workoutRecommendation:
+          map['workoutRecommendation'] as String? ?? 'Moderate Full Body',
+      aiBriefing: map['aiBriefing'] as String? ??
+          'Welcome to FitKarma. Ready to conquer the day!',
       safetyAlerts: List<String>.from(map['safetyAlerts'] ?? []),
       generatedAt: map['generatedAt'] != null
           ? DateTime.tryParse(map['generatedAt']) ?? DateTime.now()

@@ -5,7 +5,8 @@ import 'environmental_health_engine.dart';
 @immutable
 class PollutantBreakdown {
   final double pm25; // Fine particulate matter (ug/m3) - Standard: <= 30 ug/m3
-  final double pm10; // Coarse particulate matter (ug/m3) - Standard: <= 60 ug/m3
+  final double
+      pm10; // Coarse particulate matter (ug/m3) - Standard: <= 60 ug/m3
   final double no2; // Nitrogen Dioxide (ppb) - Traffic emissions
   final double so2; // Sulfur Dioxide (ppb) - Industrial / thermal power
   final double co; // Carbon Monoxide (ppm) - Incomplete combustion
@@ -112,10 +113,17 @@ class RituCharyaGuidance {
 
 /// Respiratory & Cardio-Pulmonary Exercise Stress Evaluation
 enum TrainingEnvironmentMode {
-  outdoorUnrestricted(label: 'Unrestricted Outdoor', regionalLabel: 'खुली हवा में व्यायाम सुरक्षित'),
-  outdoorLowIntensityOnly(label: 'Outdoor Zone 1-2 Only', regionalLabel: 'केवल हल्का धीमा व्यायाम'),
-  indoorAirPurifiedOnly(label: 'Indoor Air-Purified Only', regionalLabel: 'केवल एयर-प्यूरिफाइड इनडोर'),
-  hazardousHalt(label: 'Hazardous — Rest / Light Mobility', regionalLabel: 'प्रतिकूल — केवल विश्राम/स्ट्रेचिंग');
+  outdoorUnrestricted(
+      label: 'Unrestricted Outdoor',
+      regionalLabel: 'खुली हवा में व्यायाम सुरक्षित'),
+  outdoorLowIntensityOnly(
+      label: 'Outdoor Zone 1-2 Only', regionalLabel: 'केवल हल्का धीमा व्यायाम'),
+  indoorAirPurifiedOnly(
+      label: 'Indoor Air-Purified Only',
+      regionalLabel: 'केवल एयर-प्यूरिफाइड इनडोर'),
+  hazardousHalt(
+      label: 'Hazardous — Rest / Light Mobility',
+      regionalLabel: 'प्रतिकूल — केवल विश्राम/स्ट्रेचिंग');
 
   final String label;
   final String regionalLabel;
@@ -128,8 +136,10 @@ enum TrainingEnvironmentMode {
 
 enum ProtectiveMaskTier {
   none(label: 'No Mask Required', regionalLabel: 'मास्क आवश्यक नहीं'),
-  n95Recommended(label: 'N95 Respirator Recommended', regionalLabel: 'N95 मास्क अनुशंसित'),
-  n99Mandatory(label: 'N99 / FFP3 Mandatory', regionalLabel: 'N99 मास्क अनिवार्य');
+  n95Recommended(
+      label: 'N95 Respirator Recommended', regionalLabel: 'N95 मास्क अनुशंसित'),
+  n99Mandatory(
+      label: 'N99 / FFP3 Mandatory', regionalLabel: 'N99 मास्क अनिवार्य');
 
   final String label;
   final String regionalLabel;
@@ -142,8 +152,10 @@ enum ProtectiveMaskTier {
 
 @immutable
 class CardioPulmonaryStressIndex {
-  final double stressScore; // 0 (pristine) to 100 (extreme cardiopulmonary strain)
-  final double inhaledPm25MicrogramsPerHour; // Estimated PM2.5 mass deposited in lungs during 60-min run
+  final double
+      stressScore; // 0 (pristine) to 100 (extreme cardiopulmonary strain)
+  final double
+      inhaledPm25MicrogramsPerHour; // Estimated PM2.5 mass deposited in lungs during 60-min run
   final TrainingEnvironmentMode recommendedMode;
   final ProtectiveMaskTier maskTier;
   final bool hasThermalInversionWarning;

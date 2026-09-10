@@ -52,7 +52,8 @@ class ProactiveInsightCard extends StatelessWidget {
     final urgencyColor = _getUrgencyColor(insight.urgency);
 
     return BentoCard(
-      hasGlow: insight.urgency == InsightUrgency.alert || insight.urgency == InsightUrgency.high,
+      hasGlow: insight.urgency == InsightUrgency.alert ||
+          insight.urgency == InsightUrgency.high,
       glowColor: urgencyColor,
       backgroundColor: AppColors.surfaceElevated,
       border: Border.all(
@@ -73,7 +74,8 @@ class ProactiveInsightCard extends StatelessWidget {
                       color: urgencyColor.withValues(alpha: 0.15),
                       borderRadius: AppRadii.radiusSm,
                     ),
-                    child: Icon(_getTypeIcon(insight.type), color: urgencyColor, size: 18),
+                    child: Icon(_getTypeIcon(insight.type),
+                        color: urgencyColor, size: 18),
                   ),
                   const SizedBox(width: 8),
                   BilingualLabel(
@@ -90,7 +92,8 @@ class ProactiveInsightCard extends StatelessWidget {
                 IconButton(
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
-                  icon: const Icon(Icons.close_rounded, size: 16, color: AppColors.textMuted),
+                  icon: const Icon(Icons.close_rounded,
+                      size: 16, color: AppColors.textMuted),
                   onPressed: onDismiss,
                 ),
             ],
@@ -111,10 +114,13 @@ class ProactiveInsightCard extends StatelessWidget {
             child: TextButton.icon(
               style: TextButton.styleFrom(
                 backgroundColor: urgencyColor.withValues(alpha: 0.12),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadii.radiusSm),
               ),
-              icon: Icon(Icons.arrow_forward_rounded, size: 14, color: urgencyColor),
+              icon: Icon(Icons.arrow_forward_rounded,
+                  size: 14, color: urgencyColor),
               label: Text(
                 insight.actionLabel,
                 style: TextStyle(

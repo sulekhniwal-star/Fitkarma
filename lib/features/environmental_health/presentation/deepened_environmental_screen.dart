@@ -36,7 +36,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
             onPressed: () => _showAtmosphericSimulationModal(context, ref),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -86,7 +87,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                 regionalText: 'पर्यावरणीय सुरक्षा व वायु गुणवत्ता',
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: aqiColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -114,7 +116,9 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                   label: 'Safety Score',
                   accentColor: report.environmentalSafetyIndex >= 75
                       ? AppColors.karmaGreen
-                      : (report.environmentalSafetyIndex >= 50 ? AppColors.energyOrange : AppColors.alertRed),
+                      : (report.environmentalSafetyIndex >= 50
+                          ? AppColors.energyOrange
+                          : AppColors.alertRed),
                 ),
               ),
               Container(width: 1, height: 50, color: AppColors.surfaceElevated),
@@ -135,11 +139,14 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                     const SizedBox(height: 2),
                     Text(
                       'UV Index: ${report.baseSnapshot.uvIndex.toStringAsFixed(1)} (${report.baseSnapshot.uvCategory.name.toUpperCase()})',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     Text(
                       'Heat Index: ${report.baseSnapshot.heatIndexC.toStringAsFixed(1)}°C',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue, fontWeight: FontWeight.w600),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.focusBlue,
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -156,7 +163,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
             ),
             child: Text(
               report.primaryActionAdvisory,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -182,7 +190,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Granular chemical speciation tracking alveolar penetration and respiratory irritants.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           Row(
@@ -190,14 +199,18 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
               _buildPollutantTile(
                 name: 'PM 2.5',
                 value: '${pollutants.pm25} µg/m³',
-                status: pollutants.pm25 <= 30.0 ? 'Optimal' : (pollutants.pm25 <= 60.0 ? 'Moderate' : 'Unhealthy'),
+                status: pollutants.pm25 <= 30.0
+                    ? 'Optimal'
+                    : (pollutants.pm25 <= 60.0 ? 'Moderate' : 'Unhealthy'),
                 isSafe: pollutants.pm25 <= 60.0,
               ),
               const SizedBox(width: AppSpacing.sm),
               _buildPollutantTile(
                 name: 'PM 10',
                 value: '${pollutants.pm10} µg/m³',
-                status: pollutants.pm10 <= 60.0 ? 'Optimal' : (pollutants.pm10 <= 100.0 ? 'Moderate' : 'Elevated'),
+                status: pollutants.pm10 <= 60.0
+                    ? 'Optimal'
+                    : (pollutants.pm10 <= 100.0 ? 'Moderate' : 'Elevated'),
                 isSafe: pollutants.pm10 <= 100.0,
               ),
             ],
@@ -256,7 +269,9 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
           color: AppColors.surfaceElevated.withValues(alpha: 0.4),
           borderRadius: AppRadii.radiusSm,
           border: Border.all(
-            color: isSafe ? AppColors.glassBorder : AppColors.energyOrange.withValues(alpha: 0.4),
+            color: isSafe
+                ? AppColors.glassBorder
+                : AppColors.energyOrange.withValues(alpha: 0.4),
           ),
         ),
         child: Column(
@@ -267,12 +282,16 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
                   status,
                   style: TextStyle(
-                    color: isSafe ? AppColors.karmaGreen : AppColors.energyOrange,
+                    color:
+                        isSafe ? AppColors.karmaGreen : AppColors.energyOrange,
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                   ),
@@ -282,7 +301,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
             const SizedBox(height: 4),
             Text(
               value,
-              style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+              style:
+                  const TextStyle(color: AppColors.textSecondary, fontSize: 12),
             ),
           ],
         ),
@@ -304,15 +324,20 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
               ),
               if (stress.hasThermalInversionWarning)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.alertRed.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: AppColors.alertRed.withValues(alpha: 0.4)),
+                    border: Border.all(
+                        color: AppColors.alertRed.withValues(alpha: 0.4)),
                   ),
                   child: const Text(
                     'Smog Inversion',
-                    style: TextStyle(color: AppColors.alertRed, fontSize: 10, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: AppColors.alertRed,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
             ],
@@ -330,11 +355,16 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Exercise Mode', style: TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                      const Text('Exercise Mode',
+                          style: TextStyle(
+                              color: AppColors.textMuted, fontSize: 10)),
                       const SizedBox(height: 2),
                       Text(
                         stress.recommendedMode.label,
-                        style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12),
+                        style: const TextStyle(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12),
                       ),
                     ],
                   ),
@@ -351,12 +381,16 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Inhaled PM2.5 / Hr', style: TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                      const Text('Inhaled PM2.5 / Hr',
+                          style: TextStyle(
+                              color: AppColors.textMuted, fontSize: 10)),
                       const SizedBox(height: 2),
                       Text(
                         '${stress.inhaledPm25MicrogramsPerHour} µg',
                         style: TextStyle(
-                          color: stress.inhaledPm25MicrogramsPerHour > 150.0 ? AppColors.alertRed : AppColors.focusBlue,
+                          color: stress.inhaledPm25MicrogramsPerHour > 150.0
+                              ? AppColors.alertRed
+                              : AppColors.focusBlue,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
@@ -376,12 +410,16 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Mask Protection', style: TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                      const Text('Mask Protection',
+                          style: TextStyle(
+                              color: AppColors.textMuted, fontSize: 10)),
                       const SizedBox(height: 2),
                       Text(
                         stress.maskTier.label.split(' ').first,
                         style: TextStyle(
-                          color: stress.maskTier == ProtectiveMaskTier.none ? AppColors.karmaGreen : AppColors.energyOrange,
+                          color: stress.maskTier == ProtectiveMaskTier.none
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
@@ -401,7 +439,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
             ),
             child: Text(
               stress.clinicalRationale,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -461,7 +500,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
             ),
             child: Text(
               thermal.heatIllnessRisk,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -480,12 +520,15 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
         color: AppColors.surfaceElevated.withValues(alpha: 0.4),
         borderRadius: AppRadii.radiusSm,
         border: Border.all(
-          color: isWarning ? AppColors.energyOrange.withValues(alpha: 0.4) : AppColors.glassBorder,
+          color: isWarning
+              ? AppColors.energyOrange.withValues(alpha: 0.4)
+              : AppColors.glassBorder,
         ),
       ),
       child: Column(
         children: [
-          Text(title, style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
+          Text(title,
+              style: const TextStyle(color: AppColors.textMuted, fontSize: 10)),
           const SizedBox(height: 2),
           Text(
             value,
@@ -518,7 +561,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(
             'Dosha Dynamic: ${ritu.season.doshaDynamic}',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue, fontWeight: FontWeight.w600),
+            style: AppTypography.bodySmall.copyWith(
+                color: AppColors.focusBlue, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: AppSpacing.md),
           _buildRituFeatureRow(
@@ -571,12 +615,16 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
               children: [
                 Text(
                   label,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   description,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 11),
                 ),
               ],
             ),
@@ -641,7 +689,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                 left: AppSpacing.md,
                 right: AppSpacing.md,
                 top: AppSpacing.md,
-                bottom: MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
+                bottom:
+                    MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -655,7 +704,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                         regionalText: 'पर्यावरणीय परिस्थिति सिमुलेशन',
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                        icon: const Icon(Icons.close,
+                            color: AppColors.textSecondary),
                         onPressed: () => Navigator.pop(ctx),
                       ),
                     ],
@@ -696,10 +746,13 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.karmaGreen,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.md)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadii.md)),
                       ),
                       onPressed: () {
-                        ref.read(deepenedEnvironmentalProvider.notifier).updateAtmosphericReadings(
+                        ref
+                            .read(deepenedEnvironmentalProvider.notifier)
+                            .updateAtmosphericReadings(
                               aqi: simAqi,
                               uvIndex: simUv,
                               temperatureC: simTemp,
@@ -709,7 +762,9 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
                       },
                       child: const Text(
                         'Apply Simulation',
-                        style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: AppColors.background,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -732,7 +787,9 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+        Text(label,
+            style:
+                const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
         Slider(
           value: value,
           min: min,
@@ -765,7 +822,8 @@ class DeepenedEnvironmentalScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               'FitKarma\'s Deepened Environmental Health OS dynamically models pollutant speciation (PM2.5, PM10, NO2, O3) and evaluates real-time cardiopulmonary burden during physical exercise. It detects winter thermal inversion smog traps and integrates the 6 classical Indian Ayurvedic seasons (Ritu-Charya) with calibrated herbal respiratory shields and electrolyte rehydration formulas.',
-              style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
           ],

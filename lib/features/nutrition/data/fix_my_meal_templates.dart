@@ -51,19 +51,22 @@ class FixMyMealTemplates {
         FixMyMealSuggestion(
           title: 'Swap 1 Roti for 100g Paneer Bhurji',
           regionalTitle: '1 रोटी की जगह 100g पनीर भुर्जी लें',
-          description: 'Replaces refined carbs with high-quality dairy protein to stimulate muscle recovery.',
+          description:
+              'Replaces refined carbs with high-quality dairy protein to stimulate muscle recovery.',
           macroImpact: '+18g Protein, -15g Carbs',
         ),
         FixMyMealSuggestion(
           title: 'Add 1 Katori Cucumber-Tomato Salad',
           regionalTitle: '1 कटोरी खीरा-टमाटर सलाद जोड़ें',
-          description: 'Adds soluble fiber to slow glucose gastric emptying and reduce postprandial spike.',
+          description:
+              'Adds soluble fiber to slow glucose gastric emptying and reduce postprandial spike.',
           macroImpact: '+4g Fiber, 0 Glycemic Load',
         ),
         FixMyMealSuggestion(
           title: 'Reduce Tadka Ghee/Oil by 1 Tsp',
           regionalTitle: 'तड़के में 1 चम्मच तेल/घी कम करें',
-          description: 'Cuts hidden saturated cooking fats without sacrificing taste.',
+          description:
+              'Cuts hidden saturated cooking fats without sacrificing taste.',
           macroImpact: '-90 kcal, -10g Fats',
         ),
       ],
@@ -109,13 +112,15 @@ class FixMyMealTemplates {
         FixMyMealSuggestion(
           title: 'Pair with 2 Boiled Eggs or Sattu Drink',
           regionalTitle: '2 उबले अंडे या सत्तू ड्रिंक साथ लें',
-          description: 'Boosts total meal protein from 14g to 26g to hit target satiety.',
+          description:
+              'Boosts total meal protein from 14g to 26g to hit target satiety.',
           macroImpact: '+12g Protein, +140 kcal',
         ),
         FixMyMealSuggestion(
           title: 'Swap Coconut Chutney with Mint-Coriander Chutney',
           regionalTitle: 'पुदीना-धनिया चटनी का उपयोग करें',
-          description: 'Cuts calorie-dense coconut fats by 70% while boosting antioxidants.',
+          description:
+              'Cuts calorie-dense coconut fats by 70% while boosting antioxidants.',
           macroImpact: '-95 kcal, -10g Fats',
         ),
       ],

@@ -7,7 +7,8 @@ void main() {
   group('TestingEngine Deterministic Tests', () {
     const engine = TestingEngine();
 
-    test('Compiles comprehensive Testing Pyramid Report across all modules', () {
+    test('Compiles comprehensive Testing Pyramid Report across all modules',
+        () {
       final report = engine.compileTestingPyramidReport();
 
       expect(report.totalTestsCount, greaterThanOrEqualTo(100));
@@ -17,7 +18,9 @@ void main() {
       expect(report.featureSuites.length, greaterThanOrEqualTo(7));
     });
 
-    test('All default test suites have valid layers and passing execution status', () {
+    test(
+        'All default test suites have valid layers and passing execution status',
+        () {
       final report = engine.compileTestingPyramidReport();
 
       for (final suite in report.featureSuites) {
@@ -29,15 +32,19 @@ void main() {
   });
 
   group('Testing StateNotifier Provider Tests', () {
-    test('StateNotifier filters suites by layer and executes full suite run', () async {
+    test('StateNotifier filters suites by layer and executes full suite run',
+        () async {
       final notifier = TestingNotifier();
 
       expect(notifier.state.selectedLayer, isNull);
-      expect(notifier.state.filteredSuites.length, equals(notifier.state.report.featureSuites.length));
+      expect(notifier.state.filteredSuites.length,
+          equals(notifier.state.report.featureSuites.length));
 
       notifier.selectLayer(TestLayer.unit);
       expect(notifier.state.selectedLayer, equals(TestLayer.unit));
-      expect(notifier.state.filteredSuites.every((s) => s.layer == TestLayer.unit), isTrue);
+      expect(
+          notifier.state.filteredSuites.every((s) => s.layer == TestLayer.unit),
+          isTrue);
 
       notifier.selectLayer(null);
       expect(notifier.state.selectedLayer, isNull);

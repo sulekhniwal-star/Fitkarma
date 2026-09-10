@@ -30,7 +30,8 @@ class LifeEventScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -54,15 +55,19 @@ class LifeEventScreen extends ConsumerWidget {
                     label: Text(
                       cat.name.split('/').first.trim(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.white : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                         fontSize: 12,
                       ),
                     ),
                     selected: isSelected,
                     selectedColor: AppColors.focusBlue,
                     backgroundColor: AppColors.surfaceElevated,
-                    onSelected: (_) => ref.read(lifeEventProvider.notifier).selectLifeEvent(cat),
+                    onSelected: (_) => ref
+                        .read(lifeEventProvider.notifier)
+                        .selectLifeEvent(cat),
                   );
                 },
               ),
@@ -115,7 +120,8 @@ class LifeEventScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -225,7 +231,8 @@ class LifeEventScreen extends ConsumerWidget {
         children: [
           const Row(
             children: [
-              Icon(Icons.favorite_border, color: AppColors.karmaGreen, size: 18),
+              Icon(Icons.favorite_border,
+                  color: AppColors.karmaGreen, size: 18),
               SizedBox(width: 6),
               Text(
                 'Compassionate Coaching Note',
@@ -296,15 +303,23 @@ class LifeEventScreen extends ConsumerWidget {
             activeColor: AppColors.focusBlue,
             inactiveColor: AppColors.surfaceElevated,
             onChanged: (val) {
-              ref.read(lifeEventProvider.notifier).updateDaysElapsed(val.toInt());
+              ref
+                  .read(lifeEventProvider.notifier)
+                  .updateDaysElapsed(val.toInt());
             },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Acute (Days 1–7)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 9)),
-              Text('Stabilization (Days 8–21)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 9)),
-              Text('Re-entry (Days 22+)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 9)),
+              Text('Acute (Days 1–7)',
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 9)),
+              Text('Stabilization (Days 8–21)',
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 9)),
+              Text('Re-entry (Days 22+)',
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 9)),
             ],
           ),
         ],
@@ -444,7 +459,8 @@ class LifeEventScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'Life is non-linear. Whether you are welcoming a newborn, preparing for competitive exams, or recovering from illness, FitKarma activates Grace Streak Freezes and automatically scales targets to keep your habit identity intact without cognitive burden.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -457,7 +473,8 @@ class LifeEventScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

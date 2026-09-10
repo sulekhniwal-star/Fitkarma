@@ -16,10 +16,12 @@ class CorporateWellnessScreen extends ConsumerStatefulWidget {
   const CorporateWellnessScreen({super.key});
 
   @override
-  ConsumerState<CorporateWellnessScreen> createState() => _CorporateWellnessScreenState();
+  ConsumerState<CorporateWellnessScreen> createState() =>
+      _CorporateWellnessScreenState();
 }
 
-class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScreen> {
+class _CorporateWellnessScreenState
+    extends ConsumerState<CorporateWellnessScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _otpController = TextEditingController();
   final TextEditingController _policyController = TextEditingController();
@@ -48,7 +50,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -59,10 +62,12 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Feedback Banner
-            if (state.statusMessage != null) _buildStatusBanner(state.statusMessage!),
+            if (state.statusMessage != null)
+              _buildStatusBanner(state.statusMessage!),
 
             // 1. Corporate Employee Profile & Employer Tier Card
-            _buildCorporateProfileCard(state.employeeProfile, state.organization, notifier),
+            _buildCorporateProfileCard(
+                state.employeeProfile, state.organization, notifier),
             const SizedBox(height: AppSpacing.md),
 
             // 2. IRDAI Dynamic Health Insurance Premium Rebate Card
@@ -94,12 +99,16 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.karmaGreen, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -122,21 +131,29 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
                       color: AppColors.focusBlue.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: AppColors.focusBlue.withValues(alpha: 0.4)),
+                      border: Border.all(
+                          color: AppColors.focusBlue.withValues(alpha: 0.4)),
                     ),
                     child: Text(
                       org.activeTier,
-                      style: const TextStyle(color: AppColors.focusBlue, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.focusBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Text(
                     org.companyName,
-                    style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 13),
+                    style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
                   ),
                 ],
               ),
@@ -148,7 +165,10 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 ),
                 child: const Text(
                   '100% Sponsored',
-                  style: TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10),
+                  style: TextStyle(
+                      color: AppColors.karmaGreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10),
                 ),
               ),
             ],
@@ -172,7 +192,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                     const SizedBox(height: 2),
                     Text(
                       'ID: ${employee.employeeId} • ${employee.workEmail}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
                 ),
@@ -186,11 +207,15 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                   children: [
                     Text(
                       '#${employee.corporateRank} in Org',
-                      style: const TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 13),
+                      style: const TextStyle(
+                          color: AppColors.gold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13),
                     ),
                     Text(
                       '${employee.earnedWellnessPoints} Wellness Pts',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 10),
                     ),
                   ],
                 ),
@@ -203,12 +228,15 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
             children: [
               Text(
                 'Org Health Index: ${org.averageOrgHealthScore.toStringAsFixed(1)} / 100',
-                style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                style:
+                    const TextStyle(color: AppColors.textMuted, fontSize: 11),
               ),
               TextButton(
-                style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: Size.zero),
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero, minimumSize: Size.zero),
                 onPressed: () => _showCorporateLinkModal(context, notifier),
-                child: const Text('Change Org', style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                child: const Text('Change Org',
+                    style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
               ),
             ],
           ),
@@ -217,7 +245,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
     );
   }
 
-  Widget _buildInsurerRebateCard(InsurerPremiumRebate rebate, CorporateWellnessNotifier notifier) {
+  Widget _buildInsurerRebateCard(
+      InsurerPremiumRebate rebate, CorporateWellnessNotifier notifier) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,11 +256,15 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
             children: [
               Row(
                 children: [
-                  const Icon(Icons.health_and_safety, color: AppColors.karmaGreen, size: 20),
+                  const Icon(Icons.health_and_safety,
+                      color: AppColors.karmaGreen, size: 20),
                   const SizedBox(width: 6),
                   Text(
                     rebate.insurer.name,
-                    style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 13),
+                    style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
                   ),
                 ],
               ),
@@ -240,11 +273,15 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.4)),
+                  border: Border.all(
+                      color: AppColors.karmaGreen.withValues(alpha: 0.4)),
                 ),
                 child: Text(
                   rebate.riskTier.label.split('(').first.trim(),
-                  style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.karmaGreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10),
                 ),
               ),
             ],
@@ -255,7 +292,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
               Expanded(
                 flex: 5,
                 child: GlowingMetric(
-                  value: '${rebate.calculatedDiscountPercentage.toStringAsFixed(1)}%',
+                  value:
+                      '${rebate.calculatedDiscountPercentage.toStringAsFixed(1)}%',
                   unit: 'Discount',
                   label: 'Dynamic Rebate',
                   accentColor: AppColors.karmaGreen,
@@ -279,11 +317,13 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                     const SizedBox(height: 2),
                     Text(
                       'Base Premium: ₹${rebate.baseAnnualPremiumInr.toInt()} / yr',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                     Text(
                       'Policy: ${rebate.policyNumber}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 10),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted, fontSize: 10),
                     ),
                   ],
                 ),
@@ -303,21 +343,31 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('IRDAI Wellness Certificate:', style: TextStyle(color: AppColors.textMuted, fontSize: 10)),
+                    const Text('IRDAI Wellness Certificate:',
+                        style: TextStyle(
+                            color: AppColors.textMuted, fontSize: 10)),
                     Text(
                       rebate.renewalDiscountCertificateId,
-                      style: const TextStyle(color: AppColors.focusBlue, fontFamily: 'monospace', fontSize: 10, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          color: AppColors.focusBlue,
+                          fontFamily: 'monospace',
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.surfaceElevated,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
                   ),
                   onPressed: () => _showInsurerLinkModal(context, notifier),
-                  child: const Text('Link Policy', style: TextStyle(color: AppColors.textPrimary, fontSize: 11)),
+                  child: const Text('Link Policy',
+                      style: TextStyle(
+                          color: AppColors.textPrimary, fontSize: 11)),
                 ),
               ],
             ),
@@ -345,7 +395,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Compete with cross-functional teams to earn corporate wellness points and charity pool funds.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           ...challenges.map((ch) => _buildChallengeItem(ch)),
@@ -372,7 +423,10 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
               Expanded(
                 child: Text(
                   challenge.title,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Container(
@@ -383,7 +437,10 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 ),
                 child: Text(
                   '${challenge.prizePoolWellnessPoints} Pts Pool',
-                  style: const TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.gold,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10),
                 ),
               ),
             ],
@@ -400,7 +457,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
               value: (challenge.progressPercentage / 100.0).clamp(0.0, 1.0),
               minHeight: 5,
               backgroundColor: AppColors.surface,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
             ),
           ),
           const SizedBox(height: 4),
@@ -409,11 +467,15 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
             children: [
               Text(
                 '${challenge.participantCount} active colleagues',
-                style: const TextStyle(color: AppColors.textMuted, fontSize: 10),
+                style:
+                    const TextStyle(color: AppColors.textMuted, fontSize: 10),
               ),
               Text(
                 '${challenge.progressPercentage.toInt()}% achieved',
-                style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10),
+                style: const TextStyle(
+                    color: AppColors.karmaGreen,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10),
               ),
             ],
           ),
@@ -434,13 +496,15 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 primaryText: 'Workplace Ergonomics & Anti-Sedentary',
                 regionalText: 'कार्यस्थल एर्गोनॉमिक्स व गतिशीलता',
               ),
-              Icon(Icons.accessibility_new, color: AppColors.energyOrange, size: 20),
+              Icon(Icons.accessibility_new,
+                  color: AppColors.energyOrange, size: 20),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Mitigate cervical spine strain, screen fatigue, and prolonged sitting during corporate workdays.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           ...alerts.map((alert) => _buildErgonomicItem(alert)),
@@ -460,7 +524,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.timer_outlined, color: AppColors.energyOrange, size: 16),
+          const Icon(Icons.timer_outlined,
+              color: AppColors.energyOrange, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -468,12 +533,16 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
               children: [
                 Text(
                   alert.title,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   alert.actionPrompt,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 11),
                 ),
               ],
             ),
@@ -483,7 +552,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
     );
   }
 
-  void _showCorporateLinkModal(BuildContext context, CorporateWellnessNotifier notifier) {
+  void _showCorporateLinkModal(
+      BuildContext context, CorporateWellnessNotifier notifier) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
@@ -499,7 +569,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 left: AppSpacing.md,
                 right: AppSpacing.md,
                 top: AppSpacing.md,
-                bottom: MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
+                bottom:
+                    MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -513,7 +584,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                         regionalText: 'कॉर्पोरेट ईमेल सत्यापन',
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                        icon: const Icon(Icons.close,
+                            color: AppColors.textSecondary),
                         onPressed: () => Navigator.pop(ctx),
                       ),
                     ],
@@ -525,10 +597,12 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                     style: const TextStyle(color: AppColors.textPrimary),
                     decoration: InputDecoration(
                       labelText: 'Work Email (e.g. rahul@tcs.com)',
-                      labelStyle: const TextStyle(color: AppColors.textSecondary),
+                      labelStyle:
+                          const TextStyle(color: AppColors.textSecondary),
                       filled: true,
                       fillColor: AppColors.surfaceElevated,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.sm)),
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
@@ -538,10 +612,12 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                     style: const TextStyle(color: AppColors.textPrimary),
                     decoration: InputDecoration(
                       labelText: '6-Digit Work OTP',
-                      labelStyle: const TextStyle(color: AppColors.textSecondary),
+                      labelStyle:
+                          const TextStyle(color: AppColors.textSecondary),
                       filled: true,
                       fillColor: AppColors.surfaceElevated,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.sm)),
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
@@ -555,7 +631,10 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
                           onPressed: () {
-                            notifier.initiateWorkEmailVerification(_emailController.text, 'Tata Consultancy Services', 'Engineering');
+                            notifier.initiateWorkEmailVerification(
+                                _emailController.text,
+                                'Tata Consultancy Services',
+                                'Engineering');
                           },
                           child: const Text('Send OTP'),
                         ),
@@ -568,10 +647,14 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
                           onPressed: () {
-                            final success = notifier.verifyOtp(_otpController.text);
+                            final success =
+                                notifier.verifyOtp(_otpController.text);
                             if (success) Navigator.pop(ctx);
                           },
-                          child: const Text('Verify Member', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold)),
+                          child: const Text('Verify Member',
+                              style: TextStyle(
+                                  color: AppColors.background,
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
@@ -585,7 +668,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
     );
   }
 
-  void _showInsurerLinkModal(BuildContext context, CorporateWellnessNotifier notifier) {
+  void _showInsurerLinkModal(
+      BuildContext context, CorporateWellnessNotifier notifier) {
     InsurerPartner selected = InsurerPartner.hdfcErgo;
     _policyController.text = 'HE-FIT-884920-BLR';
 
@@ -604,7 +688,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                 left: AppSpacing.md,
                 right: AppSpacing.md,
                 top: AppSpacing.md,
-                bottom: MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
+                bottom:
+                    MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -618,7 +703,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                         regionalText: 'स्वास्थ्य बीमा पॉलिसी लिंक करें',
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                        icon: const Icon(Icons.close,
+                            color: AppColors.textSecondary),
                         onPressed: () => Navigator.pop(ctx),
                       ),
                     ],
@@ -630,15 +716,18 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                     style: const TextStyle(color: AppColors.textPrimary),
                     decoration: InputDecoration(
                       labelText: 'Insurer Partner',
-                      labelStyle: const TextStyle(color: AppColors.textSecondary),
+                      labelStyle:
+                          const TextStyle(color: AppColors.textSecondary),
                       filled: true,
                       fillColor: AppColors.surfaceElevated,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.sm)),
                     ),
                     items: InsurerPartner.values.map((ins) {
                       return DropdownMenuItem(
                         value: ins,
-                        child: Text('${ins.name} (Max ${ins.maxDiscountPercent.toInt()}%)'),
+                        child: Text(
+                            '${ins.name} (Max ${ins.maxDiscountPercent.toInt()}%)'),
                       );
                     }).toList(),
                     onChanged: (val) {
@@ -651,10 +740,12 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                     style: const TextStyle(color: AppColors.textPrimary),
                     decoration: InputDecoration(
                       labelText: 'Policy / Member ID Number',
-                      labelStyle: const TextStyle(color: AppColors.textSecondary),
+                      labelStyle:
+                          const TextStyle(color: AppColors.textSecondary),
                       filled: true,
                       fillColor: AppColors.surfaceElevated,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.sm)),
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
@@ -673,7 +764,10 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                         );
                         Navigator.pop(ctx);
                       },
-                      child: const Text('Apply Policy Rebate', style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold)),
+                      child: const Text('Apply Policy Rebate',
+                          style: TextStyle(
+                              color: AppColors.background,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],
@@ -705,7 +799,8 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
             const SizedBox(height: AppSpacing.md),
             Text(
               'FitKarma aligns employer productivity with healthcare economics. Under IRDAI Wellness Regulations, consistent daily steps, circadian sleep, and glycemic management earn direct dynamic discounts (up to 30%) on annual health insurance premiums, while enterprise team challenges and ergonomic desk alerts prevent workplace burnout.',
-              style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
           ],

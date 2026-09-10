@@ -8,7 +8,8 @@ void main() {
   group('DeepenedMetabolismEngine Deterministic Tests', () {
     const engine = DeepenedMetabolismEngine();
 
-    test('Decomposes TDEE into BMR, TEF, EAT, and NEAT components accurately', () {
+    test('Decomposes TDEE into BMR, TEF, EAT, and NEAT components accurately',
+        () {
       final report = engine.synthesizeDeepenedMetabolism(
         weightKg: 75.0,
         heightCm: 178.0,
@@ -28,7 +29,8 @@ void main() {
       expect(decomp.totalDecomposedTdee, greaterThan(2200));
     });
 
-    test('Severe adaptive thermogenesis triggers 48-Hour Refeed or Diet Break', () {
+    test('Severe adaptive thermogenesis triggers 48-Hour Refeed or Diet Break',
+        () {
       // User with prolonged deficit and suppressed dynamic TDEE
       final suppressedReport = engine.synthesizeDeepenedMetabolism(
         weightKg: 80.0,
@@ -42,12 +44,15 @@ void main() {
       );
 
       expect(suppressedReport.isMetabolicAdaptationSevere, isTrue);
-      expect(suppressedReport.jatharagniState, equals(JatharagniState.mandagni));
-      expect(suppressedReport.recommendedRefeed, equals(RefeedProtocol.fullDietBreak));
+      expect(
+          suppressedReport.jatharagniState, equals(JatharagniState.mandagni));
+      expect(suppressedReport.recommendedRefeed,
+          equals(RefeedProtocol.fullDietBreak));
       expect(suppressedReport.metabolicResistanceScore, greaterThan(50));
     });
 
-    test('Calculates distinct macro-cycling targets for Training vs Rest days', () {
+    test('Calculates distinct macro-cycling targets for Training vs Rest days',
+        () {
       final report = engine.synthesizeDeepenedMetabolism(
         weightKg: 70.0,
         heightCm: 172.0,
@@ -58,8 +63,10 @@ void main() {
 
       final cycling = report.macroCycling;
       expect(cycling.trainingDayCalories, greaterThan(cycling.restDayCalories));
-      expect(cycling.trainingDayCarbsGrams, greaterThan(cycling.restDayCarbsGrams));
-      expect(cycling.trainingDayProteinGrams, equals(cycling.restDayProteinGrams));
+      expect(cycling.trainingDayCarbsGrams,
+          greaterThan(cycling.restDayCarbsGrams));
+      expect(
+          cycling.trainingDayProteinGrams, equals(cycling.restDayProteinGrams));
     });
   });
 
@@ -75,7 +82,8 @@ void main() {
 
       notifier.toggleRefeedMode();
       expect(notifier.state.isRefeedActive, isTrue);
-      expect(notifier.state.successMessage, contains('Refeed protocol activated'));
+      expect(
+          notifier.state.successMessage, contains('Refeed protocol activated'));
 
       notifier.toggleRefeedMode();
       expect(notifier.state.isRefeedActive, isFalse);

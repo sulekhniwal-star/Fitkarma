@@ -27,14 +27,18 @@ class MedicationSafetyEngine {
     // 2. Adherence Metrics
     final dosesTaken = medications.where((m) => m.isTakenToday).length;
     final totalDoses = medications.length;
-    final adherenceScore = totalDoses == 0 ? 100.0 : (dosesTaken / totalDoses) * 100.0;
+    final adherenceScore =
+        totalDoses == 0 ? 100.0 : (dosesTaken / totalDoses) * 100.0;
 
     // 3. Check for Critical Severity
-    final hasCritical = interactions.any((i) => i.severity == InteractionSeverity.critical);
+    final hasCritical =
+        interactions.any((i) => i.severity == InteractionSeverity.critical);
 
     // 4. Clinical Safety Summaries
-    final summary = _generateSummary(medications.length, interactions, hasCritical);
-    final regionalSummary = _generateRegionalSummary(medications.length, interactions, hasCritical);
+    final summary =
+        _generateSummary(medications.length, interactions, hasCritical);
+    final regionalSummary =
+        _generateRegionalSummary(medications.length, interactions, hasCritical);
 
     return MedicationScheduleReport(
       activeMedications: medications,
@@ -59,7 +63,8 @@ class MedicationSafetyEngine {
     final keyB = b.genericOrHerbName.toLowerCase();
 
     // Rule 1: Curcumin / Turmeric + Antiplatelet / Anticoagulants (Aspirin, Clopidogrel, Warfarin)
-    if (_matchesPair(keyA, keyB, ['curcumin', 'turmeric', 'haldi'], ['aspirin', 'clopidogrel', 'warfarin'])) {
+    if (_matchesPair(keyA, keyB, ['curcumin', 'turmeric', 'haldi'],
+        ['aspirin', 'clopidogrel', 'warfarin'])) {
       return MedicationInteractionAlert(
         id: 'inter_curcumin_aspirin',
         primaryAgent: a.name,
@@ -78,7 +83,11 @@ class MedicationSafetyEngine {
     }
 
     // Rule 2: Karela / Fenugreek / Gymnema + Metformin / Glycomet / Glimepiride (Synergistic Hypoglycemia)
-    if (_matchesPair(keyA, keyB, ['karela', 'fenugreek', 'methi', 'gymnema', 'gurmar'], ['metformin', 'glycomet', 'glimepiride', 'insulin'])) {
+    if (_matchesPair(
+        keyA,
+        keyB,
+        ['karela', 'fenugreek', 'methi', 'gymnema', 'gurmar'],
+        ['metformin', 'glycomet', 'glimepiride', 'insulin'])) {
       return MedicationInteractionAlert(
         id: 'inter_karela_metformin',
         primaryAgent: a.name,
@@ -92,12 +101,14 @@ class MedicationSafetyEngine {
             'Monitor continuous glucose (CGM) closely during morning fasting windows. Ensure meals contain complex carbohydrates.',
         regionalClinicalAction:
             'रक्त शर्करा की नियमित जांच करें और भोजन में पर्याप्त पोषण शामिल रखें।',
-        safeSpacingGuideline: 'Take Karela juice 30 mins before breakfast; Metformin post-meal',
+        safeSpacingGuideline:
+            'Take Karela juice 30 mins before breakfast; Metformin post-meal',
       );
     }
 
     // Rule 3: Levothyroxine (Thyronorm/Eltroxin) + Calcium / Iron / Ashwagandha
-    if (_matchesPair(keyA, keyB, ['levothyroxine', 'thyronorm', 'eltroxin'], ['calcium', 'iron', 'ferrous', 'ashwagandha'])) {
+    if (_matchesPair(keyA, keyB, ['levothyroxine', 'thyronorm', 'eltroxin'],
+        ['calcium', 'iron', 'ferrous', 'ashwagandha'])) {
       return MedicationInteractionAlert(
         id: 'inter_thyroid_chelates',
         primaryAgent: a.name,
@@ -116,7 +127,8 @@ class MedicationSafetyEngine {
     }
 
     // Rule 4: Telmisartan / Amlodipine + High-Dose Garlic Extract (Lasuna)
-    if (_matchesPair(keyA, keyB, ['telmisartan', 'amlodipine', 'losartan'], ['garlic', 'lasuna', 'allicin'])) {
+    if (_matchesPair(keyA, keyB, ['telmisartan', 'amlodipine', 'losartan'],
+        ['garlic', 'lasuna', 'allicin'])) {
       return MedicationInteractionAlert(
         id: 'inter_bp_garlic',
         primaryAgent: a.name,
@@ -135,7 +147,8 @@ class MedicationSafetyEngine {
     }
 
     // Rule 5: Triphala + Allopathic Prescriptions (Tannin Binding)
-    if (_matchesPair(keyA, keyB, ['triphala', 'haritaki', 'bibhitaki'], ['metformin', 'atorvastatin', 'rosuvastatin', 'telmisartan'])) {
+    if (_matchesPair(keyA, keyB, ['triphala', 'haritaki', 'bibhitaki'],
+        ['metformin', 'atorvastatin', 'rosuvastatin', 'telmisartan'])) {
       return MedicationInteractionAlert(
         id: 'inter_triphala_binding',
         primaryAgent: a.name,
@@ -149,14 +162,16 @@ class MedicationSafetyEngine {
             'Take Triphala at night right before bed (with warm water), ensuring at least 2 hours after evening prescriptions.',
         regionalClinicalAction:
             'त्रिफला रात को सोने से ठीक पहले गुनगुने पानी से लें (दवा के २ घंटे बाद)।',
-        safeSpacingGuideline: '2-hour evening buffer between pills and Triphala',
+        safeSpacingGuideline:
+            '2-hour evening buffer between pills and Triphala',
       );
     }
 
     return null;
   }
 
-  bool _matchesPair(String keyA, String keyB, List<String> group1, List<String> group2) {
+  bool _matchesPair(
+      String keyA, String keyB, List<String> group1, List<String> group2) {
     final aIn1 = group1.any((g) => keyA.contains(g));
     final bIn2 = group2.any((g) => keyB.contains(g));
     if (aIn1 && bIn2) return true;
@@ -166,7 +181,8 @@ class MedicationSafetyEngine {
     return aIn2 && bIn1;
   }
 
-  String _generateSummary(int medCount, List<MedicationInteractionAlert> alerts, bool hasCritical) {
+  String _generateSummary(
+      int medCount, List<MedicationInteractionAlert> alerts, bool hasCritical) {
     if (hasCritical) {
       return 'CRITICAL SAFETY ALERT: Severe drug/herb contraindication detected across your active prescriptions. Consult your physician immediately to adjust dosages.';
     }
@@ -176,7 +192,8 @@ class MedicationSafetyEngine {
     return 'SAFETY CLEAR: All $medCount active medications, Ayurvedic rasayanas, and vitamins are fully compatible with zero known cross-interaction risks.';
   }
 
-  String _generateRegionalSummary(int medCount, List<MedicationInteractionAlert> alerts, bool hasCritical) {
+  String _generateRegionalSummary(
+      int medCount, List<MedicationInteractionAlert> alerts, bool hasCritical) {
     if (hasCritical) {
       return 'गंभीर चेतावनी: दवाओं व जड़ी-बूटियों के बीच गंभीर विरोध पाया गया है। कृपया तुरंत अपने चिकित्सक से संपर्क करें।';
     }

@@ -21,7 +21,8 @@ class WorkoutScreenHome extends ConsumerWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.surfaceElevated,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (ctx) {
         return StatefulBuilder(
           builder: (context, setModalState) {
@@ -40,10 +41,13 @@ class WorkoutScreenHome extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     TextField(
-                      onChanged: (val) => setModalState(() => searchQuery = val),
+                      onChanged: (val) =>
+                          setModalState(() => searchQuery = val),
                       decoration: const InputDecoration(
-                        hintText: 'Search movements (e.g. Bench Press, Desi Dand, Squat)...',
-                        prefixIcon: Icon(Icons.search_rounded, color: AppColors.textMuted),
+                        hintText:
+                            'Search movements (e.g. Bench Press, Desi Dand, Squat)...',
+                        prefixIcon: Icon(Icons.search_rounded,
+                            color: AppColors.textMuted),
                         filled: true,
                         fillColor: AppColors.surface,
                         border: OutlineInputBorder(
@@ -59,7 +63,8 @@ class WorkoutScreenHome extends ConsumerWidget {
                         separatorBuilder: (_, __) => const SizedBox(height: 8),
                         itemBuilder: (context, index) {
                           final ex = results[index];
-                          final isIndianTrad = ex.equipment == EquipmentType.traditionalIndian;
+                          final isIndianTrad =
+                              ex.equipment == EquipmentType.traditionalIndian;
 
                           return BentoCard(
                             backgroundColor: AppColors.surface,
@@ -69,47 +74,70 @@ class WorkoutScreenHome extends ConsumerWidget {
                                 Container(
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: (isIndianTrad ? AppColors.energyOrange : AppColors.focusBlue).withValues(alpha: 0.15),
+                                    color: (isIndianTrad
+                                            ? AppColors.energyOrange
+                                            : AppColors.focusBlue)
+                                        .withValues(alpha: 0.15),
                                     borderRadius: AppRadii.radiusSm,
                                   ),
                                   child: Icon(
-                                    isIndianTrad ? Icons.sports_kabaddi_rounded : Icons.fitness_center_rounded,
-                                    color: isIndianTrad ? AppColors.energyOrange : AppColors.focusBlue,
+                                    isIndianTrad
+                                        ? Icons.sports_kabaddi_rounded
+                                        : Icons.fitness_center_rounded,
+                                    color: isIndianTrad
+                                        ? AppColors.energyOrange
+                                        : AppColors.focusBlue,
                                     size: 20,
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Expanded(
                                             child: Text(
                                               ex.name,
-                                              style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700),
+                                              style: AppTypography.titleSmall
+                                                  .copyWith(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w700),
                                             ),
                                           ),
                                           Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 6, vertical: 2),
                                             decoration: const BoxDecoration(
                                               color: AppColors.surfaceElevated,
                                               borderRadius: AppRadii.radiusSm,
                                             ),
                                             child: Text(
                                               ex.targetMuscle.name,
-                                              style: const TextStyle(fontSize: 9, color: AppColors.karmaGreen, fontWeight: FontWeight.w700),
+                                              style: const TextStyle(
+                                                  fontSize: 9,
+                                                  color: AppColors.karmaGreen,
+                                                  fontWeight: FontWeight.w700),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      Text(ex.regionalName, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                      Text(ex.regionalName,
+                                          style: const TextStyle(
+                                              fontSize: 10,
+                                              color: AppColors.textMuted)),
                                       const SizedBox(height: 4),
                                       Text(
                                         ex.instructions,
-                                        style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.2),
+                                        style: AppTypography.bodySmall.copyWith(
+                                            color: AppColors.textSecondary,
+                                            fontSize: 11,
+                                            height: 1.2),
                                       ),
                                     ],
                                   ),
@@ -145,7 +173,8 @@ class WorkoutScreenHome extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu_book_rounded, color: AppColors.focusBlue),
+            icon:
+                const Icon(Icons.menu_book_rounded, color: AppColors.focusBlue),
             tooltip: 'Exercise Library',
             onPressed: () => _showExerciseLibraryBottomSheet(context),
           ),
@@ -172,11 +201,15 @@ class WorkoutScreenHome extends ConsumerWidget {
                           regionalText: session.regionalTitle,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
-                            color: AppColors.energyOrange.withValues(alpha: 0.15),
+                            color:
+                                AppColors.energyOrange.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: AppColors.energyOrange.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: AppColors.energyOrange
+                                    .withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             session.splitCategory.toUpperCase(),
@@ -221,11 +254,13 @@ class WorkoutScreenHome extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: AppRadii.radiusSm,
-                        border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.3)),
+                        border: Border.all(
+                            color: AppColors.karmaGreen.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.bolt_rounded, color: AppColors.karmaGreen, size: 16),
+                          const Icon(Icons.bolt_rounded,
+                              color: AppColors.karmaGreen, size: 16),
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
@@ -249,19 +284,24 @@ class WorkoutScreenHome extends ConsumerWidget {
                           backgroundColor: AppColors.energyOrange,
                           foregroundColor: AppColors.textInverse,
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: AppRadii.radiusSm),
                         ),
                         icon: const Icon(Icons.play_arrow_rounded, size: 22),
                         label: const Text(
                           'Start Workout / कसरत शुरू करें',
-                          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 14),
                         ),
                         onPressed: () {
                           ref.read(workoutProvider.notifier).startWorkout();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               backgroundColor: AppColors.surfaceElevated,
-                              content: Text('Session Started! Open Active Workout Screen to log live sets.', style: TextStyle(color: AppColors.karmaGreen)),
+                              content: Text(
+                                  'Session Started! Open Active Workout Screen to log live sets.',
+                                  style:
+                                      TextStyle(color: AppColors.karmaGreen)),
                             ),
                           );
                         },
@@ -289,13 +329,41 @@ class WorkoutScreenHome extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildDaySchedulePill(day: 'Mon', split: 'Push', isCompleted: true, isToday: true),
-                    _buildDaySchedulePill(day: 'Tue', split: 'Pull', isCompleted: false, isToday: false),
-                    _buildDaySchedulePill(day: 'Wed', split: 'Legs', isCompleted: false, isToday: false),
-                    _buildDaySchedulePill(day: 'Thu', split: 'Rest', isCompleted: false, isToday: false),
-                    _buildDaySchedulePill(day: 'Fri', split: 'Upper', isCompleted: false, isToday: false),
-                    _buildDaySchedulePill(day: 'Sat', split: 'Lower', isCompleted: false, isToday: false),
-                    _buildDaySchedulePill(day: 'Sun', split: 'Yoga', isCompleted: false, isToday: false),
+                    _buildDaySchedulePill(
+                        day: 'Mon',
+                        split: 'Push',
+                        isCompleted: true,
+                        isToday: true),
+                    _buildDaySchedulePill(
+                        day: 'Tue',
+                        split: 'Pull',
+                        isCompleted: false,
+                        isToday: false),
+                    _buildDaySchedulePill(
+                        day: 'Wed',
+                        split: 'Legs',
+                        isCompleted: false,
+                        isToday: false),
+                    _buildDaySchedulePill(
+                        day: 'Thu',
+                        split: 'Rest',
+                        isCompleted: false,
+                        isToday: false),
+                    _buildDaySchedulePill(
+                        day: 'Fri',
+                        split: 'Upper',
+                        isCompleted: false,
+                        isToday: false),
+                    _buildDaySchedulePill(
+                        day: 'Sat',
+                        split: 'Lower',
+                        isCompleted: false,
+                        isToday: false),
+                    _buildDaySchedulePill(
+                        day: 'Sun',
+                        split: 'Yoga',
+                        isCompleted: false,
+                        isToday: false),
                   ],
                 ),
               ),
@@ -309,31 +377,47 @@ class WorkoutScreenHome extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Weekly Tonnage Volume', style: TextStyle(fontSize: 12, color: AppColors.textMuted, fontWeight: FontWeight.w600)),
+                        const Text('Weekly Tonnage Volume',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textMuted,
+                                fontWeight: FontWeight.w600)),
                         const SizedBox(height: 2),
                         Text(
                           '${workoutState.totalVolumeTonnageThisWeek.round()} kg',
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textPrimary),
+                          style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.textPrimary),
                         ),
                         const SizedBox(height: 2),
                         const Text(
                           '📈 +4.8% Progressive Overload vs last week',
-                          style: TextStyle(fontSize: 11, color: AppColors.karmaGreen, fontWeight: FontWeight.w700),
+                          style: TextStyle(
+                              fontSize: 11,
+                              color: AppColors.karmaGreen,
+                              fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 8),
                       decoration: const BoxDecoration(
                         color: AppColors.surfaceElevated,
                         borderRadius: AppRadii.radiusSm,
                       ),
                       child: Column(
                         children: [
-                          const Text('Sessions', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                          const Text('Sessions',
+                              style: TextStyle(
+                                  fontSize: 10, color: AppColors.textMuted)),
                           Text(
                             '${workoutState.completedWorkoutsThisWeek}/5',
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.focusBlue),
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.focusBlue),
                           ),
                         ],
                       ),
@@ -369,12 +453,19 @@ class WorkoutScreenHome extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: (isDesi ? AppColors.energyOrange : AppColors.focusBlue).withValues(alpha: 0.15),
+                            color: (isDesi
+                                    ? AppColors.energyOrange
+                                    : AppColors.focusBlue)
+                                .withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Icon(
-                            isDesi ? Icons.sports_kabaddi_rounded : Icons.fitness_center_rounded,
-                            color: isDesi ? AppColors.energyOrange : AppColors.focusBlue,
+                            isDesi
+                                ? Icons.sports_kabaddi_rounded
+                                : Icons.fitness_center_rounded,
+                            color: isDesi
+                                ? AppColors.energyOrange
+                                : AppColors.focusBlue,
                             size: 18,
                           ),
                         ),
@@ -383,8 +474,15 @@ class WorkoutScreenHome extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(ex.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
-                              Text(ex.regionalName, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                              Text(ex.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13,
+                                      color: AppColors.textPrimary)),
+                              Text(ex.regionalName,
+                                  style: const TextStyle(
+                                      fontSize: 10,
+                                      color: AppColors.textMuted)),
                             ],
                           ),
                         ),
@@ -393,17 +491,24 @@ class WorkoutScreenHome extends ConsumerWidget {
                           children: [
                             Text(
                               '${planned.targetSets} sets • ${planned.targetRepsMin}-${planned.targetRepsMax} reps',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.karmaGreen),
+                              style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.karmaGreen),
                             ),
                             if (planned.suggestedWeightKg > 0)
                               Text(
                                 '${planned.suggestedWeightKg} kg suggested',
-                                style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                                style: const TextStyle(
+                                    fontSize: 10,
+                                    color: AppColors.textSecondary),
                               )
                             else
                               const Text(
                                 'Bodyweight / Akhara',
-                                style: TextStyle(fontSize: 10, color: AppColors.energyOrange),
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: AppColors.energyOrange),
                               ),
                           ],
                         ),
@@ -428,17 +533,25 @@ class WorkoutScreenHome extends ConsumerWidget {
   }) {
     return Column(
       children: [
-        Text(day, style: TextStyle(fontSize: 10, color: isToday ? AppColors.karmaGreen : AppColors.textMuted, fontWeight: isToday ? FontWeight.w800 : FontWeight.w500)),
+        Text(day,
+            style: TextStyle(
+                fontSize: 10,
+                color: isToday ? AppColors.karmaGreen : AppColors.textMuted,
+                fontWeight: isToday ? FontWeight.w800 : FontWeight.w500)),
         const SizedBox(height: 4),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
           decoration: BoxDecoration(
             color: isToday
                 ? AppColors.karmaGreen.withValues(alpha: 0.2)
-                : (isCompleted ? AppColors.focusBlue.withValues(alpha: 0.15) : AppColors.surface),
+                : (isCompleted
+                    ? AppColors.focusBlue.withValues(alpha: 0.15)
+                    : AppColors.surface),
             borderRadius: AppRadii.radiusSm,
             border: Border.all(
-              color: isToday ? AppColors.karmaGreen : (isCompleted ? AppColors.focusBlue : AppColors.glassBorder),
+              color: isToday
+                  ? AppColors.karmaGreen
+                  : (isCompleted ? AppColors.focusBlue : AppColors.glassBorder),
             ),
           ),
           child: Column(
@@ -448,11 +561,16 @@ class WorkoutScreenHome extends ConsumerWidget {
                 style: TextStyle(
                   fontSize: 9,
                   fontWeight: FontWeight.w700,
-                  color: isToday ? AppColors.karmaGreen : (isCompleted ? AppColors.focusBlue : AppColors.textSecondary),
+                  color: isToday
+                      ? AppColors.karmaGreen
+                      : (isCompleted
+                          ? AppColors.focusBlue
+                          : AppColors.textSecondary),
                 ),
               ),
               if (isCompleted)
-                const Icon(Icons.check_rounded, color: AppColors.focusBlue, size: 10),
+                const Icon(Icons.check_rounded,
+                    color: AppColors.focusBlue, size: 10),
             ],
           ),
         ),

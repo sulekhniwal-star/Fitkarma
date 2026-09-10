@@ -125,7 +125,8 @@ class ShareableActivityPayload {
   final int karmaPointsEarned;
   final DateTime recordedAt;
   final bool isVerifiedBiometric;
-  final String verificationSource; // e.g. "Apple Health Sync", "Vision AI Form Check"
+  final String
+      verificationSource; // e.g. "Apple Health Sync", "Vision AI Form Check"
   final ShareCardTheme cardTheme;
 
   const ShareableActivityPayload({
@@ -215,10 +216,12 @@ class ActivitySharingState {
   }) {
     return ActivitySharingState(
       activePayload: activePayload ?? this.activePayload,
-      availableAchievements: availableAchievements ?? this.availableAchievements,
+      availableAchievements:
+          availableAchievements ?? this.availableAchievements,
       shareHistory: shareHistory ?? this.shareHistory,
       totalSharesCount: totalSharesCount ?? this.totalSharesCount,
-      totalShareBonusKarmaEarned: totalShareBonusKarmaEarned ?? this.totalShareBonusKarmaEarned,
+      totalShareBonusKarmaEarned:
+          totalShareBonusKarmaEarned ?? this.totalShareBonusKarmaEarned,
     );
   }
 }

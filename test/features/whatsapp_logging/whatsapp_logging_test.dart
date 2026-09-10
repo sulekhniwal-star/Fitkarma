@@ -8,9 +8,12 @@ void main() {
     const engine = WhatsAppEngine();
 
     test('Normalizes Indian mobile numbers correctly to E.164', () {
-      expect(WhatsAppEngine.normalizeIndianPhoneNumber('9876543210'), equals('+919876543210'));
-      expect(WhatsAppEngine.normalizeIndianPhoneNumber('+919876543210'), equals('+919876543210'));
-      expect(WhatsAppEngine.normalizeIndianPhoneNumber('919876543210'), equals('+919876543210'));
+      expect(WhatsAppEngine.normalizeIndianPhoneNumber('9876543210'),
+          equals('+919876543210'));
+      expect(WhatsAppEngine.normalizeIndianPhoneNumber('+919876543210'),
+          equals('+919876543210'));
+      expect(WhatsAppEngine.normalizeIndianPhoneNumber('919876543210'),
+          equals('+919876543210'));
       expect(WhatsAppEngine.normalizeIndianPhoneNumber('12345'), isNull);
     });
 
@@ -23,7 +26,8 @@ void main() {
     });
 
     test('Parses natural Indian meal messages with macros and calories', () {
-      final parsed = engine.parseInboundMessage('2 roti, 1 bowl dal tadka, cucumber salad');
+      final parsed = engine
+          .parseInboundMessage('2 roti, 1 bowl dal tadka, cucumber salad');
       expect(parsed.logType, equals(WhatsAppLogType.meal));
       expect(parsed.identifiedItems.length, greaterThanOrEqualTo(2));
       expect(parsed.calories, greaterThan(300.0));
@@ -64,7 +68,8 @@ void main() {
       expect(wt.weightKg, equals(73.5));
     });
 
-    test('Constructs interactive Meta Business Cloud API template payloads', () {
+    test('Constructs interactive Meta Business Cloud API template payloads',
+        () {
       final payload = engine.buildInteractiveTemplatePayload(
         templateType: WhatsAppTemplateType.morningReadiness,
         recipientPhone: '+919876543210',
@@ -80,23 +85,27 @@ void main() {
   group('WhatsAppLoggingNotifier State Tests', () {
     test('Simulates OTP linking flow and conversational messaging', () {
       final notifier = WhatsAppLoggingNotifier();
-      expect(notifier.state.profile.linkStatus, equals(WhatsAppLinkStatus.activeLinked));
+      expect(notifier.state.profile.linkStatus,
+          equals(WhatsAppLinkStatus.activeLinked));
 
       // Initiate linking on new phone
       notifier.initiatePhoneLinking('9876543210');
-      expect(notifier.state.profile.linkStatus, equals(WhatsAppLinkStatus.pendingVerification));
+      expect(notifier.state.profile.linkStatus,
+          equals(WhatsAppLinkStatus.pendingVerification));
       expect(notifier.state.profile.verificationOtp, isNotNull);
 
       final otp = notifier.state.profile.verificationOtp!;
       final success = notifier.confirmOtp(otp);
       expect(success, isTrue);
-      expect(notifier.state.profile.linkStatus, equals(WhatsAppLinkStatus.activeLinked));
+      expect(notifier.state.profile.linkStatus,
+          equals(WhatsAppLinkStatus.activeLinked));
 
       // Simulate Inbound WhatsApp meal
       final initialCount = notifier.state.messageHistory.length;
       notifier.simulateInboundMessage('1 plate chicken biryani');
       expect(notifier.state.messageHistory.length, equals(initialCount + 1));
-      expect(notifier.state.messageHistory.first.parsedEntity?.calories, greaterThan(400.0));
+      expect(notifier.state.messageHistory.first.parsedEntity?.calories,
+          greaterThan(400.0));
 
       // Toggle preferences
       notifier.togglePreference(morningBriefing: false);
@@ -104,7 +113,8 @@ void main() {
 
       // Unlink
       notifier.unlinkAccount();
-      expect(notifier.state.profile.linkStatus, equals(WhatsAppLinkStatus.unlinked));
+      expect(notifier.state.profile.linkStatus,
+          equals(WhatsAppLinkStatus.unlinked));
     });
   });
 }

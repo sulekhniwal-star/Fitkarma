@@ -49,13 +49,33 @@ class SleepDetailScreen extends StatelessWidget {
                       regionalText: 'नींद के विभिन्न चरण',
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    _buildStageRow('Deep Sleep (गहरी नींद)', '${session.deepSleepMinutes} min', '${(analysis.deepSleepPercent * 100).round()}%', AppColors.focusBlue, 'Physical repair & GH release'),
+                    _buildStageRow(
+                        'Deep Sleep (गहरी नींद)',
+                        '${session.deepSleepMinutes} min',
+                        '${(analysis.deepSleepPercent * 100).round()}%',
+                        AppColors.focusBlue,
+                        'Physical repair & GH release'),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildStageRow('REM Sleep (सपनों की नींद)', '${session.remSleepMinutes} min', '${(analysis.remSleepPercent * 100).round()}%', AppColors.aiPurple, 'Memory consolidation & mental recovery'),
+                    _buildStageRow(
+                        'REM Sleep (सपनों की नींद)',
+                        '${session.remSleepMinutes} min',
+                        '${(analysis.remSleepPercent * 100).round()}%',
+                        AppColors.aiPurple,
+                        'Memory consolidation & mental recovery'),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildStageRow('Light Sleep (हल्की नींद)', '${session.lightSleepMinutes} min', '${((session.lightSleepMinutes / session.actualAsleepMinutes) * 100).round()}%', AppColors.energyOrange, 'Base rest and muscle relaxation'),
+                    _buildStageRow(
+                        'Light Sleep (हल्की नींद)',
+                        '${session.lightSleepMinutes} min',
+                        '${((session.lightSleepMinutes / session.actualAsleepMinutes) * 100).round()}%',
+                        AppColors.energyOrange,
+                        'Base rest and muscle relaxation'),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildStageRow('Awake / Latency (जागने का समय)', '${session.awakeMinutes} min', '${session.latencyMinutes}m latency', AppColors.alertRed, 'Nighttime awakenings'),
+                    _buildStageRow(
+                        'Awake / Latency (जागने का समय)',
+                        '${session.awakeMinutes} min',
+                        '${session.latencyMinutes}m latency',
+                        AppColors.alertRed,
+                        'Nighttime awakenings'),
                   ],
                 ),
               ),
@@ -94,7 +114,8 @@ class SleepDetailScreen extends StatelessWidget {
                   children: [
                     const Row(
                       children: [
-                        Icon(Icons.bedtime_rounded, color: AppColors.aiPurple, size: 20),
+                        Icon(Icons.bedtime_rounded,
+                            color: AppColors.aiPurple, size: 20),
                         SizedBox(width: 8),
                         BilingualLabel(
                           primaryText: 'Circadian Wind-Down Rituals',
@@ -109,7 +130,8 @@ class SleepDetailScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+                            const Icon(Icons.check_circle_outline,
+                                color: AppColors.karmaGreen, size: 16),
                             const SizedBox(width: 6),
                             Expanded(
                               child: Text(
@@ -135,7 +157,8 @@ class SleepDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStageRow(String stage, String duration, String percent, Color color, String subtitle) {
+  Widget _buildStageRow(String stage, String duration, String percent,
+      Color color, String subtitle) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -147,18 +170,25 @@ class SleepDetailScreen extends StatelessWidget {
                 Container(
                   width: 10,
                   height: 10,
-                  decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                  decoration:
+                      BoxDecoration(color: color, shape: BoxShape.circle),
                 ),
                 const SizedBox(width: 8),
-                Text(stage, style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w600)),
+                Text(stage,
+                    style: AppTypography.bodySmall
+                        .copyWith(fontWeight: FontWeight.w600)),
               ],
             ),
-            Text('$duration ($percent)', style: AppTypography.bodySmall.copyWith(color: color, fontWeight: FontWeight.w700)),
+            Text('$duration ($percent)',
+                style: AppTypography.bodySmall
+                    .copyWith(color: color, fontWeight: FontWeight.w700)),
           ],
         ),
         Padding(
           padding: const EdgeInsets.only(left: 18, top: 2),
-          child: Text(subtitle, style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11)),
+          child: Text(subtitle,
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textMuted, fontSize: 11)),
         ),
       ],
     );

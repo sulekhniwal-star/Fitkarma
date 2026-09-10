@@ -29,7 +29,8 @@ class FamilyHealthScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showFamilyPhilosophyModal(context),
           ),
         ],
@@ -91,7 +92,8 @@ class FamilyHealthScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.focusBlue.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusFull,
@@ -99,7 +101,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.family_restroom, color: AppColors.focusBlue, size: 16),
+                    const Icon(Icons.family_restroom,
+                        color: AppColors.focusBlue, size: 16),
                     const SizedBox(width: 6),
                     Text(
                       '${state.familyMembers.length} Household Members',
@@ -112,7 +115,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: const BoxDecoration(
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusFull,
@@ -137,7 +141,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Household Health Index',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -150,7 +155,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       'Aggregated vitals stability, daily movement, and Shatpawali adherence.',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -205,7 +211,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.karmaGreen.withValues(alpha: 0.2),
                         borderRadius: AppRadii.radiusFull,
@@ -231,7 +238,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                 const SizedBox(height: 2),
                 Text(
                   tip.description,
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.3),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, height: 1.3),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -268,7 +276,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                     radius: 18,
                     backgroundColor: AppColors.surfaceElevated,
                     child: Icon(
-                      member.relation == FamilyRelationType.father || member.relation == FamilyRelationType.mother
+                      member.relation == FamilyRelationType.father ||
+                              member.relation == FamilyRelationType.mother
                           ? Icons.elderly
                           : member.relation == FamilyRelationType.spouse
                               ? Icons.favorite
@@ -283,11 +292,13 @@ class FamilyHealthScreen extends ConsumerWidget {
                     children: [
                       Text(
                         member.name,
-                        style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                        style: AppTypography.titleMedium
+                            .copyWith(color: AppColors.textPrimary),
                       ),
                       Text(
                         '${member.relation.regionalLabel} • ${member.age} yrs',
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        style: AppTypography.bodySmall
+                            .copyWith(color: AppColors.textMuted, fontSize: 11),
                       ),
                     ],
                   ),
@@ -320,13 +331,17 @@ class FamilyHealthScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Blood Pressure', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Blood Pressure',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     member.hasBpLogged
                         ? '${member.latestSystolicBp}/${member.latestDiastolicBp} mmHg'
                         : 'Not Logged',
                     style: AppTypography.bodyLarge.copyWith(
-                      color: member.hasBpLogged ? AppColors.textPrimary : AppColors.textMuted,
+                      color: member.hasBpLogged
+                          ? AppColors.textPrimary
+                          : AppColors.textMuted,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -337,7 +352,9 @@ class FamilyHealthScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Daily Movement', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Daily Movement',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     '${member.todaySteps} / ${member.dailyStepTarget}',
                     style: AppTypography.bodyLarge.copyWith(
@@ -352,11 +369,15 @@ class FamilyHealthScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Shatpawali', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Shatpawali',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     member.completedShatpawaliToday ? 'Completed' : 'Pending',
                     style: AppTypography.bodyLarge.copyWith(
-                      color: member.completedShatpawaliToday ? AppColors.karmaGreen : AppColors.energyOrange,
+                      color: member.completedShatpawaliToday
+                          ? AppColors.karmaGreen
+                          : AppColors.energyOrange,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -373,7 +394,9 @@ class FamilyHealthScreen extends ConsumerWidget {
               value: member.stepProgressFraction,
               backgroundColor: AppColors.surfaceElevated,
               valueColor: AlwaysStoppedAnimation<Color>(
-                member.stepProgressFraction >= 1.0 ? AppColors.karmaGreen : AppColors.focusBlue,
+                member.stepProgressFraction >= 1.0
+                    ? AppColors.karmaGreen
+                    : AppColors.focusBlue,
               ),
               minHeight: 5,
             ),
@@ -383,7 +406,8 @@ class FamilyHealthScreen extends ConsumerWidget {
           // Caregiver Note
           Text(
             member.caregiverNote,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
           ),
           const SizedBox(height: AppSpacing.sm),
 
@@ -394,9 +418,11 @@ class FamilyHealthScreen extends ConsumerWidget {
               if (!member.completedShatpawaliToday)
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.energyOrange.withValues(alpha: 0.15),
+                    backgroundColor:
+                        AppColors.energyOrange.withValues(alpha: 0.15),
                     foregroundColor: AppColors.energyOrange,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     minimumSize: Size.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
@@ -407,8 +433,10 @@ class FamilyHealthScreen extends ConsumerWidget {
                           memberId: member.id,
                           memberName: member.name,
                           nudgeType: 'Shatpawali Prompt',
-                          message: 'Sent caring post-dinner Shatpawali walk prompt to ${member.name}.',
-                          regionalMessage: '${member.name} को शतपावली का स्नेहपूर्ण स्मरण भेजा गया।',
+                          message:
+                              'Sent caring post-dinner Shatpawali walk prompt to ${member.name}.',
+                          regionalMessage:
+                              '${member.name} को शतपावली का स्नेहपूर्ण स्मरण भेजा गया।',
                         );
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -422,7 +450,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                 OutlinedButton.icon(
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.karmaGreen,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     minimumSize: Size.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
@@ -446,17 +475,20 @@ class FamilyHealthScreen extends ConsumerWidget {
             padding: const EdgeInsets.only(bottom: AppSpacing.xs),
             child: Row(
               children: [
-                const Icon(Icons.mark_email_read, color: AppColors.focusBlue, size: 16),
+                const Icon(Icons.mark_email_read,
+                    color: AppColors.focusBlue, size: 16),
                 const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
                     nudge.message,
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textPrimary, fontSize: 11),
                   ),
                 ),
                 Text(
                   '${DateTime.now().difference(nudge.sentAt).inMinutes}m ago',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 10),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textMuted, fontSize: 10),
                 ),
               ],
             ),
@@ -482,7 +514,8 @@ class FamilyHealthScreen extends ConsumerWidget {
             children: [
               Text(
                 'Intergenerational Family Care (Parivar)',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -490,7 +523,8 @@ class FamilyHealthScreen extends ConsumerWidget {
                 '• Remote Blood Pressure & Fasting Glucose tracking.\n'
                 '• One-Tap Seva Nudges to gently remind elders of post-meal Shatpawali.\n'
                 '• Seasonal Ayurvedic kitchen medicine remedies for natural digestive and joint support.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

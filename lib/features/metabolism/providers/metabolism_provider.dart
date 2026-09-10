@@ -7,7 +7,8 @@ final metabolismRepositoryProvider = Provider<MetabolismRepository>((ref) {
   return MetabolismRepository();
 });
 
-final metabolismProfileProvider = FutureProvider.autoDispose<AdaptiveMetabolismProfile>((ref) async {
+final metabolismProfileProvider =
+    FutureProvider.autoDispose<AdaptiveMetabolismProfile>((ref) async {
   final repo = ref.watch(metabolismRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);
 

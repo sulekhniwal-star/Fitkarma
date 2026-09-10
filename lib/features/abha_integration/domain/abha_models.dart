@@ -3,8 +3,12 @@ import 'package:flutter/foundation.dart';
 /// ABDM KYC & ABHA Verification Status
 enum AbhaVerificationStatus {
   unlinked(label: 'Not Linked', regionalLabel: 'लिंक नहीं है'),
-  pendingOtp(label: 'Aadhaar / Mobile OTP Pending', regionalLabel: 'ओटीपी सत्यापन लंबित'),
-  verifiedAadhaar(label: 'Aadhaar Verified (ABDM Official)', regionalLabel: 'आधार सत्यापित (आधिकारिक)'),
+  pendingOtp(
+      label: 'Aadhaar / Mobile OTP Pending',
+      regionalLabel: 'ओटीपी सत्यापन लंबित'),
+  verifiedAadhaar(
+      label: 'Aadhaar Verified (ABDM Official)',
+      regionalLabel: 'आधार सत्यापित (आधिकारिक)'),
   verifiedMobile(label: 'Mobile Verified', regionalLabel: 'मोबाइल सत्यापित');
 
   final String label;
@@ -18,9 +22,18 @@ enum AbhaVerificationStatus {
 
 /// ABDM Purpose Codes for Consent Management (NHA / ABDM v0.5)
 enum AbdmPurposeCode {
-  careManagement(code: 'CARETREE', label: 'Care Management & Preventive Health', regionalLabel: 'स्वास्थ्य प्रबंधन व निवारक देखभाल'),
-  selfSharing(code: 'BTG', label: 'Self Health Tracking & Analytics', regionalLabel: 'स्व-स्वास्थ्य विश्लेषण'),
-  clinicalConsult(code: 'PUBHLTH', label: 'Doctor & Hospital Sharing', regionalLabel: 'चिकित्सक व अस्पताल परामर्श');
+  careManagement(
+      code: 'CARETREE',
+      label: 'Care Management & Preventive Health',
+      regionalLabel: 'स्वास्थ्य प्रबंधन व निवारक देखभाल'),
+  selfSharing(
+      code: 'BTG',
+      label: 'Self Health Tracking & Analytics',
+      regionalLabel: 'स्व-स्वास्थ्य विश्लेषण'),
+  clinicalConsult(
+      code: 'PUBHLTH',
+      label: 'Doctor & Hospital Sharing',
+      regionalLabel: 'चिकित्सक व अस्पताल परामर्श');
 
   final String code;
   final String label;
@@ -106,9 +119,11 @@ class AbhaProfile {
 @immutable
 class AbhaConsentGrant {
   final String consentRequestId;
-  final String requesterEntityName; // e.g. "Apollo Hospitals", "Max Healthcare", "AIIMS New Delhi"
+  final String
+      requesterEntityName; // e.g. "Apollo Hospitals", "Max Healthcare", "AIIMS New Delhi"
   final AbdmPurposeCode purpose;
-  final List<String> hiTypes; // ["DiagnosticReport", "Observation", "WellnessRecord"]
+  final List<String>
+      hiTypes; // ["DiagnosticReport", "Observation", "WellnessRecord"]
   final AbhaConsentStatus status;
   final DateTime requestedAt;
   final DateTime validUntil;
@@ -123,7 +138,8 @@ class AbhaConsentGrant {
     required this.validUntil,
   });
 
-  bool get isActive => status == AbhaConsentStatus.granted && validUntil.isAfter(DateTime.now());
+  bool get isActive =>
+      status == AbhaConsentStatus.granted && validUntil.isAfter(DateTime.now());
 
   AbhaConsentGrant copyWith({
     String? consentRequestId,

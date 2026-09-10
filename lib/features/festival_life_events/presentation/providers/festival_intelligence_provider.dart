@@ -2,15 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/festival_intelligence_engine.dart';
 import '../../domain/festival_intelligence_models.dart';
 
-final festivalIntelligenceProvider =
-    StateNotifierProvider<FestivalIntelligenceNotifier, FestivalIntelligencePlan>((ref) {
+final festivalIntelligenceProvider = StateNotifierProvider<
+    FestivalIntelligenceNotifier, FestivalIntelligencePlan>((ref) {
   return FestivalIntelligenceNotifier();
 });
 
-class FestivalIntelligenceNotifier extends StateNotifier<FestivalIntelligencePlan> {
+class FestivalIntelligenceNotifier
+    extends StateNotifier<FestivalIntelligencePlan> {
   FestivalIntelligenceNotifier() : super(_buildInitialPlan());
 
-  static final FestivalIntelligenceEngine _engine = const FestivalIntelligenceEngine();
+  static final FestivalIntelligenceEngine _engine =
+      const FestivalIntelligenceEngine();
 
   static FestivalIntelligencePlan _buildInitialPlan() {
     return _engine.generateFestivalPlan(

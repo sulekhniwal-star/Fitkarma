@@ -17,18 +17,23 @@ class ContinuousBiomarkerEngine {
     final now = syncTime ?? DateTime.now();
 
     // 1. Generate or use provided 24-hour telemetry stream
-    final stream = customStream24h ?? _generate24HourStream(now, currentGlucose);
+    final stream =
+        customStream24h ?? _generate24HourStream(now, currentGlucose);
 
     // 2. Statistical Analysis
     final values = stream.map((p) => p.glucoseValue).toList();
     final meanGlucose = _round(values.reduce((a, b) => a + b) / values.length);
 
     // Standard Deviation
-    final variance = values.map((v) => math.pow(v - meanGlucose, 2)).reduce((a, b) => a + b) / values.length;
+    final variance = values
+            .map((v) => math.pow(v - meanGlucose, 2))
+            .reduce((a, b) => a + b) /
+        values.length;
     final standardDeviation = math.sqrt(variance);
 
     // Glycemic Variability (Coefficient of Variation CV %)
-    final cvPercent = _round((standardDeviation / (meanGlucose <= 0 ? 1 : meanGlucose)) * 100.0);
+    final cvPercent = _round(
+        (standardDeviation / (meanGlucose <= 0 ? 1 : meanGlucose)) * 100.0);
 
     // Time in Range (TIR), Time Below (TBR), Time Above (TAR)
     final inRangeCount = values.where((v) => v >= 70.0 && v <= 140.0).length;
@@ -44,7 +49,8 @@ class ContinuousBiomarkerEngine {
     final gmiHbA1c = _round(3.31 + (0.02392 * meanGlucose));
 
     // Glycemic Stability Score (0 to 100)
-    final rawStability = (tirPercent * 0.70) + ((100.0 - cvPercent.clamp(0.0, 50.0) * 2.0) * 0.30);
+    final rawStability = (tirPercent * 0.70) +
+        ((100.0 - cvPercent.clamp(0.0, 50.0) * 2.0) * 0.30);
     final stabilityScore = _round(rawStability.clamp(30.0, 99.0));
 
     // 3. Postprandial Meal Spikes Detection
@@ -54,8 +60,10 @@ class ContinuousBiomarkerEngine {
     final protocols = _generateGlycemicProtocols(tirPercent, cvPercent);
 
     // 5. Clinical Summaries
-    final summary = _generateSummary(meanGlucose, tirPercent, cvPercent, gmiHbA1c);
-    final regionalSummary = _generateRegionalSummary(meanGlucose, tirPercent, cvPercent, gmiHbA1c);
+    final summary =
+        _generateSummary(meanGlucose, tirPercent, cvPercent, gmiHbA1c);
+    final regionalSummary =
+        _generateRegionalSummary(meanGlucose, tirPercent, cvPercent, gmiHbA1c);
 
     return ContinuousGlucoseReport(
       sensorId: sensorId,
@@ -72,7 +80,8 @@ class ContinuousBiomarkerEngine {
       telemetryStream24h: stream,
       detectedMealSpikes: mealSpikes,
       activeProtocols: protocols,
-      glycemicStabilityScore: '${stabilityScore.toInt()}/100 (${tirPercent >= 85.0 ? "Optimal" : "Stable"})',
+      glycemicStabilityScore:
+          '${stabilityScore.toInt()}/100 (${tirPercent >= 85.0 ? "Optimal" : "Stable"})',
       clinicalSummary: summary,
       regionalClinicalSummary: regionalSummary,
     );
@@ -80,7 +89,8 @@ class ContinuousBiomarkerEngine {
 
   // --- Internal Stream Generator & Analytics Helpers ---
 
-  List<GlucoseTelemetryPoint> _generate24HourStream(DateTime now, double currentGlucose) {
+  List<GlucoseTelemetryPoint> _generate24HourStream(
+      DateTime now, double currentGlucose) {
     final stream = <GlucoseTelemetryPoint>[];
 
     // 48 intervals (every 30 mins) across 24h
@@ -169,7 +179,8 @@ class ContinuousBiomarkerEngine {
     return GlucoseTrendDirection.steady;
   }
 
-  List<MealGlycemicSpikeEvent> _detectMealSpikes(List<GlucoseTelemetryPoint> stream, DateTime now) {
+  List<MealGlycemicSpikeEvent> _detectMealSpikes(
+      List<GlucoseTelemetryPoint> stream, DateTime now) {
     return [
       MealGlycemicSpikeEvent(
         id: 'spike_breakfast',
@@ -180,8 +191,10 @@ class ContinuousBiomarkerEngine {
         peakGlucose: 124.0,
         spikeDelta: 36.0,
         shatpawaliCompleted: true,
-        clinicalAssessment: 'Spike blunted efficiently (+36 mg/dL); returned to baseline within 55 minutes.',
-        regionalClinicalAssessment: 'शर्करा स्पाइक नियंत्रित रहा (+३६ mg/dL); ५५ मिनट में पुनः सामान्य।',
+        clinicalAssessment:
+            'Spike blunted efficiently (+36 mg/dL); returned to baseline within 55 minutes.',
+        regionalClinicalAssessment:
+            'शर्करा स्पाइक नियंत्रित रहा (+३६ mg/dL); ५५ मिनट में पुनः सामान्य।',
       ),
       MealGlycemicSpikeEvent(
         id: 'spike_lunch',
@@ -192,8 +205,10 @@ class ContinuousBiomarkerEngine {
         peakGlucose: 132.0,
         spikeDelta: 38.0,
         shatpawaliCompleted: true,
-        clinicalAssessment: 'Fiber preload delayed gastric emptying; peak remained safely below 140 mg/dL threshold.',
-        regionalClinicalAssessment: 'सलाद के फाइबर ने भोजन पाचन को धीमा किया; स्पाइक १४० mg/dL से नीचे रहा।',
+        clinicalAssessment:
+            'Fiber preload delayed gastric emptying; peak remained safely below 140 mg/dL threshold.',
+        regionalClinicalAssessment:
+            'सलाद के फाइबर ने भोजन पाचन को धीमा किया; स्पाइक १४० mg/dL से नीचे रहा।',
       ),
       MealGlycemicSpikeEvent(
         id: 'spike_dinner',
@@ -204,21 +219,27 @@ class ContinuousBiomarkerEngine {
         peakGlucose: 128.0,
         spikeDelta: 37.0,
         shatpawaliCompleted: true,
-        clinicalAssessment: 'Shatpawali 100-step walk accelerated GLUT-4 muscular glucose disposal.',
-        regionalClinicalAssessment: 'शतपावली चलने से मांसपेशियों ने तुरंत रक्त शर्करा का उपयोग किया।',
+        clinicalAssessment:
+            'Shatpawali 100-step walk accelerated GLUT-4 muscular glucose disposal.',
+        regionalClinicalAssessment:
+            'शतपावली चलने से मांसपेशियों ने तुरंत रक्त शर्करा का उपयोग किया।',
       ),
     ];
   }
 
-  List<GlycemicOptimizationProtocol> _generateGlycemicProtocols(double tir, double cv) {
+  List<GlycemicOptimizationProtocol> _generateGlycemicProtocols(
+      double tir, double cv) {
     return const [
       GlycemicOptimizationProtocol(
         id: 'prot_shatpawali_glucose',
         title: 'Immediate 10-Min Post-Meal Shatpawali Walk',
         regionalTitle: 'भोजनोपरांत १० मिनट शतपावली चाल',
-        mechanism: 'Stimulates insulin-independent GLUT-4 glucose transporters in quadriceps and calves.',
-        regionalMechanism: 'बिना इंसुलिन के मांसपेशियों द्वारा रक्त शर्करा के अवशोषण को तेज करता है।',
-        instruction: 'Walk at a gentle conversational pace within 15 minutes of finishing lunch & dinner.',
+        mechanism:
+            'Stimulates insulin-independent GLUT-4 glucose transporters in quadriceps and calves.',
+        regionalMechanism:
+            'बिना इंसुलिन के मांसपेशियों द्वारा रक्त शर्करा के अवशोषण को तेज करता है।',
+        instruction:
+            'Walk at a gentle conversational pace within 15 minutes of finishing lunch & dinner.',
         expectedSpikeReduction: '-22% Peak Glucose Amplitude',
         karmaReward: 50,
       ),
@@ -226,9 +247,12 @@ class ContinuousBiomarkerEngine {
         id: 'prot_food_sequencing',
         title: 'Indian Plate Sequencing: Fiber → Protein → Carbs',
         regionalTitle: 'भोजन क्रम: फाइबर (सलाद) → प्रोटीन → अनाज (रोटी/चावल)',
-        mechanism: 'Soluble viscous fibers create a jejunal mesh layer delaying alpha-amylase carbohydrate hydrolysis.',
-        regionalMechanism: 'फाइबर आंतों में परत बनाकर अनाज से शर्करा के तीव्र अवशोषण को रोकता है।',
-        instruction: 'Eat cucumber/salad and dal/paneer first; consume roti or rice last in the meal.',
+        mechanism:
+            'Soluble viscous fibers create a jejunal mesh layer delaying alpha-amylase carbohydrate hydrolysis.',
+        regionalMechanism:
+            'फाइबर आंतों में परत बनाकर अनाज से शर्करा के तीव्र अवशोषण को रोकता है।',
+        instruction:
+            'Eat cucumber/salad and dal/paneer first; consume roti or rice last in the meal.',
         expectedSpikeReduction: '-18% Postprandial Area Under Curve',
         karmaReward: 45,
       ),
@@ -236,9 +260,12 @@ class ContinuousBiomarkerEngine {
         id: 'prot_apple_cider_preload',
         title: '1 Tbsp ACV / Lemon Water Preload',
         regionalTitle: 'भोजन पूर्व १ चम्मच सेब का सिरका / नींबू जल',
-        mechanism: 'Acetic acid inhibits disaccharidase enzyme activity and improves peripheral insulin sensitivity.',
-        regionalMechanism: 'एसिटिक एसिड शर्करा एंजाइम्स को धीमा कर इंसुलिन प्रभाव को बढ़ाता है।',
-        instruction: 'Dilute 1 tbsp organic apple cider vinegar in 200ml warm water 10 minutes prior to starch-heavy meals.',
+        mechanism:
+            'Acetic acid inhibits disaccharidase enzyme activity and improves peripheral insulin sensitivity.',
+        regionalMechanism:
+            'एसिटिक एसिड शर्करा एंजाइम्स को धीमा कर इंसुलिन प्रभाव को बढ़ाता है।',
+        instruction:
+            'Dilute 1 tbsp organic apple cider vinegar in 200ml warm water 10 minutes prior to starch-heavy meals.',
         expectedSpikeReduction: '-15% Glycemic Variance',
         karmaReward: 35,
       ),
@@ -249,7 +276,8 @@ class ContinuousBiomarkerEngine {
     return 'CGM stream reflects superior glycemic regulation with ${tir.toInt()}% Time in Range (70-140 mg/dL) and a tight Coefficient of Variation of ${cv.toStringAsFixed(1)}% (Longevity target < 20%). Estimated GMI stands at ${gmi.toStringAsFixed(2)}% with zero nocturnal hypoglycemic events.';
   }
 
-  String _generateRegionalSummary(double mean, double tir, double cv, double gmi) {
+  String _generateRegionalSummary(
+      double mean, double tir, double cv, double gmi) {
     return 'निरंतर शर्करा निगरानी में ${tir.toInt()}% समय आदर्श सीमा (७०-१४० mg/dL) में दर्ज हुआ। शर्करा उतार-चढ़ाव केवल ${cv.toStringAsFixed(1)}% रहा (लक्ष्य < २०%)। अनुमानित GMI ${gmi.toStringAsFixed(2)}% पर पूर्णतः सुरक्षित है।';
   }
 

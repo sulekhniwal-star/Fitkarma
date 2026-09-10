@@ -3,25 +3,29 @@ enum AthleticPersona {
     title: 'Akhara Pehlwan / Functional Powerhouse',
     regionalTitle: 'अखाड़ा पहलवान / कार्यात्मक शक्ति',
     colorCode: 0xffFF9100, // Energy Orange
-    description: 'High bodyweight calisthenic endurance, rotational core torque, and joint durability.',
+    description:
+        'High bodyweight calisthenic endurance, rotational core torque, and joint durability.',
   ),
   hypertrophyArchitect(
     title: 'Hypertrophy Architect / Muscle Builder',
     regionalTitle: 'मांसपेशी शिल्पी (हाइपरट्रॉफी)',
     colorCode: 0xff22C55E, // Karma Green
-    description: 'Specialized in mechanical tension, controlled tempo, and optimal volume accumulation.',
+    description:
+        'Specialized in mechanical tension, controlled tempo, and optimal volume accumulation.',
   ),
   strengthAthlete(
     title: 'Compound Strength & Neural Power',
     regionalTitle: 'कंपाउंड शक्ति एवं न्यूरल पावर',
     colorCode: 0xff3B82F6, // Focus Blue
-    description: 'High 1RM force production, heavy compound lift proficiency, and neuromuscular efficiency.',
+    description:
+        'High 1RM force production, heavy compound lift proficiency, and neuromuscular efficiency.',
   ),
   metabolicWarrior(
     title: 'Metabolic Conditioning Warrior',
     regionalTitle: 'कंडीशनिंग एवं सहनशक्ति योद्धा',
     colorCode: 0xff7C4DFF, // AI Purple
-    description: 'High work capacity, short rest tolerance, and cardiovascular/muscular endurance synergy.',
+    description:
+        'High work capacity, short rest tolerance, and cardiovascular/muscular endurance synergy.',
   );
 
   final String title;
@@ -82,18 +86,23 @@ class AthleticProfilingEngine {
     required double totalTonnage30Days,
     bool includesIndianTraditionalMovements = true,
   }) {
-    final int scheduled = scheduledWorkouts30Days > 0 ? scheduledWorkouts30Days : 20;
+    final int scheduled =
+        scheduledWorkouts30Days > 0 ? scheduledWorkouts30Days : 20;
     final int completed = completedWorkouts30Days.clamp(0, scheduled);
 
     // 1. Adherence Score Calculation
-    final int adherenceScore = ((completed / scheduled) * 100.0).round().clamp(0, 100);
+    final int adherenceScore =
+        ((completed / scheduled) * 100.0).round().clamp(0, 100);
 
     // 2. Athletic Vectors (0 - 100)
     // Vector 1: Max Strength & 1RM Output
-    final int strengthScore = (75 + (adherenceScore * 0.20)).round().clamp(50, 98);
+    final int strengthScore =
+        (75 + (adherenceScore * 0.20)).round().clamp(50, 98);
 
     // Vector 2: Work Capacity & Tonnage
-    final int workCapacityScore = (totalTonnage30Days > 30000 ? 92 : (totalTonnage30Days > 15000 ? 82 : 68));
+    final int workCapacityScore = (totalTonnage30Days > 30000
+        ? 92
+        : (totalTonnage30Days > 15000 ? 82 : 68));
 
     // Vector 3: Rotational & Joint Mobility
     final int mobilityScore = includesIndianTraditionalMovements ? 94 : 72;
@@ -102,7 +111,8 @@ class AthleticProfilingEngine {
     final int consistencyScore = adherenceScore;
 
     // Vector 5: Neuromuscular Recovery Speed
-    final int recoveryScore = (currentStreakDays >= 10 ? 90 : (currentStreakDays >= 5 ? 80 : 65));
+    final int recoveryScore =
+        (currentStreakDays >= 10 ? 90 : (currentStreakDays >= 5 ? 80 : 65));
 
     final vectors = [
       AthleticVectorScore(
@@ -156,9 +166,11 @@ class AthleticProfilingEngine {
       completedWorkouts30Days: completed,
       scheduledWorkouts30Days: scheduled,
       radarVectors: vectors,
-      athleteSummary: 'Your 30-day training profile classifies you as a "${persona.title}". '
+      athleteSummary:
+          'Your 30-day training profile classifies you as a "${persona.title}". '
           'You have achieved an outstanding $adherenceScore% adherence with a $currentStreakDays-day active streak.',
-      timeCrunchedRecommendation: 'Time-Crunched Protocol (20-min alternative): 4 rounds of Desi Dand (15 reps), '
+      timeCrunchedRecommendation:
+          'Time-Crunched Protocol (20-min alternative): 4 rounds of Desi Dand (15 reps), '
           'Desi Baithak (25 reps), and Mudgar Swings (30s) if full session is impossible today.',
     );
   }

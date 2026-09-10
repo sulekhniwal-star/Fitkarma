@@ -6,7 +6,9 @@ void main() {
   group('WeddingModeEngine Deterministic Tests', () {
     const engine = WeddingModeEngine();
 
-    test('Generates tailored Bridal plan with Definition phase and Ojas skin protocol', () {
+    test(
+        'Generates tailored Bridal plan with Definition phase and Ojas skin protocol',
+        () {
       final now = DateTime(2026, 9, 9, 12, 0);
       final weddingDate = now.add(const Duration(days: 45)); // 6.5 weeks
 
@@ -23,7 +25,10 @@ void main() {
       expect(report.daysUntilWedding, equals(45));
       expect(report.currentPhase, equals(WeddingTimelinePhase.definition));
       expect(report.activePillarActions.length, equals(3));
-      expect(report.activePillarActions.any((a) => a.pillar.contains('Bridal Posture')), isTrue);
+      expect(
+          report.activePillarActions
+              .any((a) => a.pillar.contains('Bridal Posture')),
+          isTrue);
       expect(report.ojasSkinRadianceProtocol, contains('saffron-turmeric'));
       expect(report.regionalOjasSkinRadianceProtocol, contains('केसर-हल्दी'));
     });
@@ -43,7 +48,10 @@ void main() {
 
       expect(report.role, equals(WeddingRole.groom));
       expect(report.currentPhase, equals(WeddingTimelinePhase.foundation));
-      expect(report.activePillarActions.any((a) => a.actionTitle.contains('Lateral Deltoids')), isTrue);
+      expect(
+          report.activePillarActions
+              .any((a) => a.actionTitle.contains('Lateral Deltoids')),
+          isTrue);
     });
 
     test('Activates Peak Week protocol when wedding is within 7 days', () {
@@ -60,12 +68,16 @@ void main() {
       );
 
       expect(report.currentPhase, equals(WeddingTimelinePhase.peakWeek));
-      expect(report.activePillarActions.any((a) => a.pillar.contains('Peak Week Nutrition')), isTrue);
+      expect(
+          report.activePillarActions
+              .any((a) => a.pillar.contains('Peak Week Nutrition')),
+          isTrue);
       expect(report.peakWeekDeBloatTip, contains('Final 7 Days Peak Protocol'));
       expect(report.regionalPeakWeekDeBloatTip, contains('पीक वीक नियम'));
     });
 
-    test('All WeddingRole values generate complete valid transformation plans', () {
+    test('All WeddingRole values generate complete valid transformation plans',
+        () {
       final now = DateTime(2026, 9, 9);
       for (final role in WeddingRole.values) {
         final report = engine.generateWeddingPlan(

@@ -106,7 +106,8 @@ class SecurityNotifier extends StateNotifier<SecurityState> {
     state = state.copyWith(
       isLoading: false,
       isBiometricUnlocked: true,
-      successMessage: 'Biometric verification successful. Health vault unlocked.',
+      successMessage:
+          'Biometric verification successful. Health vault unlocked.',
     );
     return true;
   }

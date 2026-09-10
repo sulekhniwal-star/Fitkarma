@@ -6,25 +6,29 @@ enum ComplianceStandard {
     name: 'ABDM (Ayushman Bharat Digital Mission)',
     regionalName: 'आयुष्मान भारत डिजिटल मिशन (ABDM)',
     jurisdiction: 'India (National Health Authority)',
-    description: 'Consent manager integration, health data encryption, and FHIR interoperability.',
+    description:
+        'Consent manager integration, health data encryption, and FHIR interoperability.',
   ),
   dpdpActIndia(
     name: 'DPDP Act 2023 (Digital Data Protection)',
     regionalName: 'डिजिटल व्यक्तिगत डेटा संरक्षण अधिनियम २०२३',
     jurisdiction: 'India',
-    description: 'Explicit informed consent, purpose limitation, and user right to erasure.',
+    description:
+        'Explicit informed consent, purpose limitation, and user right to erasure.',
   ),
   hipaaSecurity(
     name: 'HIPAA Privacy & Security Rules',
     regionalName: 'HIPAA डेटा गोपनीयता व सुरक्षा मानक',
     jurisdiction: 'United States / Global Healthcare',
-    description: 'End-to-end telemetry encryption, audit trail integrity, and minimum necessary rule.',
+    description:
+        'End-to-end telemetry encryption, audit trail integrity, and minimum necessary rule.',
   ),
   ayushGuidelines(
     name: 'AYUSH Ministry Practice Guidelines',
     regionalName: 'आयुष मंत्रालय पारंपरिक स्वास्थ्य दिशानिर्देश',
     jurisdiction: 'India (Ministry of AYUSH)',
-    description: 'Standardized terminology for Dosha, Dinacharya, and Rasayana lifestyle guidance.',
+    description:
+        'Standardized terminology for Dosha, Dinacharya, and Rasayana lifestyle guidance.',
   );
 
   final String name;

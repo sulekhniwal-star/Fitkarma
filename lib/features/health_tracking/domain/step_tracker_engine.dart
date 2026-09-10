@@ -46,7 +46,8 @@ class StepTrackerEngine {
     final activeCalories = (totalSteps * 0.04 * calorieMultiplier).round();
 
     // 3. Progress
-    final progress = (totalSteps / targetSteps.clamp(1, 100000)).clamp(0.0, 1.5);
+    final progress =
+        (totalSteps / targetSteps.clamp(1, 100000)).clamp(0.0, 1.5);
     final isGoal = totalSteps >= targetSteps;
 
     // 4. Default Mock Hourly Cadence if none provided
@@ -55,13 +56,17 @@ class StepTrackerEngine {
     // 5. Actionable Metabolic Insight
     final String insight;
     if (isGoal) {
-      insight = 'Daily step target achieved! Excellent insulin sensitivity and non-exercise activity thermogenesis (NEAT).';
+      insight =
+          'Daily step target achieved! Excellent insulin sensitivity and non-exercise activity thermogenesis (NEAT).';
     } else if (totalSteps >= 7500) {
-      insight = 'You are in the optimal cardiovascular zone. A 15-minute evening stroll will easily complete your target.';
+      insight =
+          'You are in the optimal cardiovascular zone. A 15-minute evening stroll will easily complete your target.';
     } else if (totalSteps >= 4000) {
-      insight = 'Moderate activity logged. Schedule a 10-minute post-meal walk (शतपावली) to boost glucose clearance.';
+      insight =
+          'Moderate activity logged. Schedule a 10-minute post-meal walk (शतपावली) to boost glucose clearance.';
     } else {
-      insight = 'Sedentary pattern detected. Take a 5-minute movement break to stimulate venous blood flow.';
+      insight =
+          'Sedentary pattern detected. Take a 5-minute movement break to stimulate venous blood flow.';
     }
 
     return StepMetricsResult(

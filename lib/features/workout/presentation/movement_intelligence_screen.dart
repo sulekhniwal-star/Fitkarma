@@ -22,7 +22,9 @@ class MovementIntelligenceScreen extends ConsumerWidget {
 
     final scoreColor = report.overallMovementQualityScore >= 80
         ? AppColors.karmaGreen
-        : (report.overallMovementQualityScore >= 60 ? AppColors.focusBlue : AppColors.alertRed);
+        : (report.overallMovementQualityScore >= 60
+            ? AppColors.focusBlue
+            : AppColors.alertRed);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -54,15 +56,20 @@ class MovementIntelligenceScreen extends ConsumerWidget {
                           regionalText: 'संरचनात्मक समरूपता सूचकांक',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: scoreColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: scoreColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: scoreColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             'SYMMETRY GRADE A',
-                            style: TextStyle(color: scoreColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: scoreColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -136,11 +143,22 @@ class MovementIntelligenceScreen extends ConsumerWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(pattern.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.textPrimary)),
-                                  Text(pattern.regionalName, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                  Text(pattern.name,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 12,
+                                          color: AppColors.textPrimary)),
+                                  Text(pattern.regionalName,
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          color: AppColors.textMuted)),
                                 ],
                               ),
-                              Text('$sets sets / wk', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.karmaGreen)),
+                              Text('$sets sets / wk',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 12,
+                                      color: AppColors.karmaGreen)),
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -149,7 +167,8 @@ class MovementIntelligenceScreen extends ConsumerWidget {
                             child: LinearProgressIndicator(
                               value: frac,
                               backgroundColor: AppColors.surface,
-                              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                  AppColors.karmaGreen),
                               minHeight: 5,
                             ),
                           ),
@@ -181,12 +200,14 @@ class MovementIntelligenceScreen extends ConsumerWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.check_circle_rounded, color: AppColors.karmaGreen, size: 16),
+                        const Icon(Icons.check_circle_rounded,
+                            color: AppColors.karmaGreen, size: 16),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             diag,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary, height: 1.3),
                           ),
                         ),
                       ],
@@ -216,12 +237,14 @@ class MovementIntelligenceScreen extends ConsumerWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.sports_kabaddi_rounded, color: AppColors.energyOrange, size: 18),
+                        const Icon(Icons.sports_kabaddi_rounded,
+                            color: AppColors.energyOrange, size: 18),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             presc,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary, height: 1.3),
                           ),
                         ),
                       ],

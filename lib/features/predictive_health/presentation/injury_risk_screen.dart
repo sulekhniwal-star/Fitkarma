@@ -31,7 +31,8 @@ class InjuryRiskScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showAcwrMethodologyModal(context),
           ),
         ],
@@ -140,7 +141,8 @@ class InjuryRiskScreen extends ConsumerWidget {
             children: [
               GlowingMetric(
                 label: 'ACWR Ratio',
-                value: '${report.acuteChronicWorkloadRatio.toStringAsFixed(2)}x',
+                value:
+                    '${report.acuteChronicWorkloadRatio.toStringAsFixed(2)}x',
                 unit: 'ratio',
                 accentColor: tierColor,
                 isHero: true,
@@ -174,23 +176,38 @@ class InjuryRiskScreen extends ConsumerWidget {
               ),
             ],
           ),
-          const Divider(height: AppSpacing.lg, color: AppColors.surfaceElevated),
+          const Divider(
+              height: AppSpacing.lg, color: AppColors.surfaceElevated),
           Row(
             children: [
               Expanded(
-                child: _buildAcwrZoneIndicator('Under (<0.8x)', report.acuteChronicWorkloadRatio < 0.85, AppColors.focusBlue),
+                child: _buildAcwrZoneIndicator(
+                    'Under (<0.8x)',
+                    report.acuteChronicWorkloadRatio < 0.85,
+                    AppColors.focusBlue),
               ),
               const SizedBox(width: 4),
               Expanded(
-                child: _buildAcwrZoneIndicator('Sweet Spot (0.85-1.25x)', report.acuteChronicWorkloadRatio >= 0.85 && report.acuteChronicWorkloadRatio <= 1.25, AppColors.karmaGreen),
+                child: _buildAcwrZoneIndicator(
+                    'Sweet Spot (0.85-1.25x)',
+                    report.acuteChronicWorkloadRatio >= 0.85 &&
+                        report.acuteChronicWorkloadRatio <= 1.25,
+                    AppColors.karmaGreen),
               ),
               const SizedBox(width: 4),
               Expanded(
-                child: _buildAcwrZoneIndicator('Caution (1.25-1.45x)', report.acuteChronicWorkloadRatio > 1.25 && report.acuteChronicWorkloadRatio <= 1.45, AppColors.energyOrange),
+                child: _buildAcwrZoneIndicator(
+                    'Caution (1.25-1.45x)',
+                    report.acuteChronicWorkloadRatio > 1.25 &&
+                        report.acuteChronicWorkloadRatio <= 1.45,
+                    AppColors.energyOrange),
               ),
               const SizedBox(width: 4),
               Expanded(
-                child: _buildAcwrZoneIndicator('Spike (>1.45x)', report.acuteChronicWorkloadRatio > 1.45, AppColors.alertRed),
+                child: _buildAcwrZoneIndicator(
+                    'Spike (>1.45x)',
+                    report.acuteChronicWorkloadRatio > 1.45,
+                    AppColors.alertRed),
               ),
             ],
           ),
@@ -203,7 +220,9 @@ class InjuryRiskScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
       decoration: BoxDecoration(
-        color: isActive ? color.withValues(alpha: 0.25) : AppColors.surfaceElevated,
+        color: isActive
+            ? color.withValues(alpha: 0.25)
+            : AppColors.surfaceElevated,
         borderRadius: AppRadii.radiusSm,
         border: Border.all(
           color: isActive ? color : AppColors.surfaceElevated,
@@ -233,7 +252,8 @@ class InjuryRiskScreen extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.warning_rounded, color: AppColors.alertRed, size: 24),
+          const Icon(Icons.warning_rounded,
+              color: AppColors.alertRed, size: 24),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Column(
@@ -313,7 +333,8 @@ class InjuryRiskScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Icon(_getJointIcon(joint.area.iconName), color: AppColors.focusBlue, size: 18),
+                  Icon(_getJointIcon(joint.area.iconName),
+                      color: AppColors.focusBlue, size: 18),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     joint.area.name,
@@ -363,7 +384,9 @@ class InjuryRiskScreen extends ConsumerWidget {
               Text(
                 '• Soreness: ${joint.sorenessLevel}/10',
                 style: AppTypography.bodySmall.copyWith(
-                  color: joint.sorenessLevel > 4 ? AppColors.energyOrange : AppColors.textSecondary,
+                  color: joint.sorenessLevel > 4
+                      ? AppColors.energyOrange
+                      : AppColors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -387,7 +410,8 @@ class InjuryRiskScreen extends ConsumerWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.health_and_safety, color: AppColors.karmaGreen, size: 14),
+                const Icon(Icons.health_and_safety,
+                    color: AppColors.karmaGreen, size: 14),
                 const SizedBox(width: 4),
                 Expanded(
                   child: Text(
@@ -548,7 +572,8 @@ class InjuryRiskScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

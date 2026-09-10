@@ -31,7 +31,8 @@ class AppBootstrap {
       await Firebase.initializeApp();
       debugPrint('Firebase initialized successfully.');
     } catch (e) {
-      debugPrint('Notice: Firebase initialization deferred or running in offline mode: $e');
+      debugPrint(
+          'Notice: Firebase initialization deferred or running in offline mode: $e');
     }
 
     // 4. Global Error Handling

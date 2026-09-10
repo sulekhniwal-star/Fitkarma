@@ -3,7 +3,8 @@ import '../../domain/health_risk_engine.dart';
 import '../../domain/health_risk_models.dart';
 
 final healthRiskProvider =
-    StateNotifierProvider<HealthRiskNotifier, HealthRiskPreventionReport>((ref) {
+    StateNotifierProvider<HealthRiskNotifier, HealthRiskPreventionReport>(
+        (ref) {
   return HealthRiskNotifier();
 });
 

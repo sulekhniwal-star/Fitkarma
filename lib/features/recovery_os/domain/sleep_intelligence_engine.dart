@@ -20,7 +20,8 @@ class SleepSessionData {
   });
 
   int get totalDurationMinutes => sleepEnd.difference(sleepStart).inMinutes;
-  int get actualAsleepMinutes => deepSleepMinutes + remSleepMinutes + lightSleepMinutes;
+  int get actualAsleepMinutes =>
+      deepSleepMinutes + remSleepMinutes + lightSleepMinutes;
   double get totalSleepHours => actualAsleepMinutes / 60.0;
   double get sleepEfficiency => totalDurationMinutes > 0
       ? (actualAsleepMinutes / totalDurationMinutes).clamp(0.0, 1.0)
@@ -29,7 +30,8 @@ class SleepSessionData {
   factory SleepSessionData.fromMap(Map<String, dynamic> map) {
     return SleepSessionData(
       sleepStart: map['sleepStart'] != null
-          ? DateTime.tryParse(map['sleepStart']) ?? DateTime.now().subtract(const Duration(hours: 8))
+          ? DateTime.tryParse(map['sleepStart']) ??
+              DateTime.now().subtract(const Duration(hours: 8))
           : DateTime.now().subtract(const Duration(hours: 8)),
       sleepEnd: map['sleepEnd'] != null
           ? DateTime.tryParse(map['sleepEnd']) ?? DateTime.now()
@@ -59,7 +61,8 @@ class SleepSessionData {
   static SleepSessionData defaultSession() {
     final now = DateTime.now();
     return SleepSessionData(
-      sleepStart: DateTime(now.year, now.month, now.day, 23, 0).subtract(const Duration(days: 1)),
+      sleepStart: DateTime(now.year, now.month, now.day, 23, 0)
+          .subtract(const Duration(days: 1)),
       sleepEnd: DateTime(now.year, now.month, now.day, 7, 0),
       deepSleepMinutes: 80,
       remSleepMinutes: 100,
@@ -102,7 +105,8 @@ class SleepIntelligenceEngine {
     final remPercent = session.remSleepMinutes / totalMins;
 
     // 1. Duration Score (40 pts)
-    final durationRatio = (session.totalSleepHours / session.userSleepNeedHours).clamp(0.0, 1.0);
+    final durationRatio =
+        (session.totalSleepHours / session.userSleepNeedHours).clamp(0.0, 1.0);
     final durationScore = durationRatio * 40.0;
 
     // 2. Deep Sleep Score (25 pts) - optimal is >= 15% (0.15)
@@ -116,7 +120,8 @@ class SleepIntelligenceEngine {
     // 4. Efficiency Score (15 pts)
     final effScore = (session.sleepEfficiency * 15.0).clamp(0.0, 15.0);
 
-    final finalScore = (durationScore + deepScore + remScore + effScore).round().clamp(0, 100);
+    final finalScore =
+        (durationScore + deepScore + remScore + effScore).round().clamp(0, 100);
 
     final String category;
     if (finalScore >= 85) {

@@ -33,7 +33,8 @@ class CoachMessage {
 
   factory CoachMessage.fromMap(Map<String, dynamic> map) {
     return CoachMessage(
-      id: map['id'] as String? ?? 'msg_${DateTime.now().microsecondsSinceEpoch}',
+      id: map['id'] as String? ??
+          'msg_${DateTime.now().microsecondsSinceEpoch}',
       text: map['text'] as String? ?? '',
       sender: (map['sender'] as String? ?? 'coach') == 'user'
           ? MessageSender.user

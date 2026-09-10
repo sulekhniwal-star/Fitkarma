@@ -2,12 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/glycemic_pipeline_engine.dart';
 import '../../domain/glycemic_pipeline_models.dart';
 
-final glycemicPipelineProvider =
-    StateNotifierProvider<GlycemicPipelineNotifier, RetrospectiveGlycemicReport>((ref) {
+final glycemicPipelineProvider = StateNotifierProvider<GlycemicPipelineNotifier,
+    RetrospectiveGlycemicReport>((ref) {
   return GlycemicPipelineNotifier();
 });
 
-class GlycemicPipelineNotifier extends StateNotifier<RetrospectiveGlycemicReport> {
+class GlycemicPipelineNotifier
+    extends StateNotifier<RetrospectiveGlycemicReport> {
   GlycemicPipelineNotifier() : super(_buildInitialReport());
 
   static final GlycemicPipelineEngine _engine = const GlycemicPipelineEngine();
@@ -95,7 +96,8 @@ class GlycemicPipelineNotifier extends StateNotifier<RetrospectiveGlycemicReport
     );
   }
 
-  void recalculateWithCustomDataset(List<HistoricalGlucoseSample> customSamples, List<PostprandialExcursion> excursions) {
+  void recalculateWithCustomDataset(List<HistoricalGlucoseSample> customSamples,
+      List<PostprandialExcursion> excursions) {
     state = _engine.processRetrospectiveGlucoseTelemetry(
       samples: customSamples,
       mealExcursions: excursions,

@@ -22,7 +22,8 @@ class MarketplaceEngine {
       }
 
       // 3. Max Price filter
-      if (filter.maxPriceInr != null && listing.priceInr > filter.maxPriceInr!) {
+      if (filter.maxPriceInr != null &&
+          listing.priceInr > filter.maxPriceInr!) {
         return false;
       }
 
@@ -42,7 +43,8 @@ class MarketplaceEngine {
         final matchTitle = listing.title.toLowerCase().contains(query);
         final matchCoach = listing.coachName.toLowerCase().contains(query);
         final matchDesc = listing.description.toLowerCase().contains(query);
-        final matchRegional = listing.regionalTitle.toLowerCase().contains(query);
+        final matchRegional =
+            listing.regionalTitle.toLowerCase().contains(query);
         if (!matchTitle && !matchCoach && !matchDesc && !matchRegional) {
           return false;
         }
@@ -99,8 +101,10 @@ class MarketplaceEngine {
         isCoachVerified: true,
         title: '12-Week Desi Muscle Hypertrophy & Recomposition',
         regionalTitle: '१२-सप्ताह देसी स्ट्रेंथ व मसल बिल्डिंग प्रोग्राम',
-        description: 'Periodized barbell, dumbbell, and calisthenics training with vegetarian & non-veg Indian macro meal plans.',
-        regionalDescription: 'शाकाहारी व मांसाहारी देसी डाइट चार्ट के साथ वैज्ञानिक स्ट्रेंथ ट्रेनिंग।',
+        description:
+            'Periodized barbell, dumbbell, and calisthenics training with vegetarian & non-veg Indian macro meal plans.',
+        regionalDescription:
+            'शाकाहारी व मांसाहारी देसी डाइट चार्ट के साथ वैज्ञानिक स्ट्रेंथ ट्रेनिंग।',
         type: ListingType.structuredProgram,
         specialty: CoachSpecialty.hypertrophyStrength,
         priceInr: 2499,
@@ -128,8 +132,10 @@ class MarketplaceEngine {
         isCoachVerified: true,
         title: 'Metabolic Health & PCOS/Insulin Reversal Protocol',
         regionalTitle: 'पीसीओएस एवं इंसुलिन संतुलन क्लिनिकल डाइट प्रोग्राम',
-        description: 'Evidence-based hormonal balancing through low-glycemic Indian grains, seed cycling, and anti-inflammatory spices.',
-        regionalDescription: 'कम ग्लाइसेमिक भारतीय अनाजों व हार्मोन संतुलन आहार द्वारा पीसीओएस नियंत्रण।',
+        description:
+            'Evidence-based hormonal balancing through low-glycemic Indian grains, seed cycling, and anti-inflammatory spices.',
+        regionalDescription:
+            'कम ग्लाइसेमिक भारतीय अनाजों व हार्मोन संतुलन आहार द्वारा पीसीओएस नियंत्रण।',
         type: ListingType.customDietProtocol,
         specialty: CoachSpecialty.clinicalNutrition,
         priceInr: 1999,
@@ -157,8 +163,10 @@ class MarketplaceEngine {
         isCoachVerified: true,
         title: '30-Day Agni & Gut Detox (Ayurvedic Protocol)',
         regionalTitle: '३०-दिवसीय जठराग्नि व आंत डिटॉक्स आयुर्वेदिक पद्धति',
-        description: 'Deep digestive reset, eliminating Ama (toxins) through seasonal Ritucharya and customized herbal churnas.',
-        regionalDescription: 'ऋतुचर्या व आयुर्वेदिक जड़ी-बूटियों द्वारा आम दोष का निष्कासन व पाचन सुधार।',
+        description:
+            'Deep digestive reset, eliminating Ama (toxins) through seasonal Ritucharya and customized herbal churnas.',
+        regionalDescription:
+            'ऋतुचर्या व आयुर्वेदिक जड़ी-बूटियों द्वारा आम दोष का निष्कासन व पाचन सुधार।',
         type: ListingType.structuredProgram,
         specialty: CoachSpecialty.ayurvedicVaidya,
         priceInr: 1499,
@@ -186,8 +194,10 @@ class MarketplaceEngine {
         isCoachVerified: true,
         title: '1-on-1 Video Biomechanics & Form Clinic (45 Min)',
         regionalTitle: '१-ऑन-१ वीडियो बायोमैकेनिक्स व पोस्चर परामर्श',
-        description: 'Live 1-on-1 video call assessing your squat, bench press, deadlift mechanics, and joint mobility restrictions.',
-        regionalDescription: 'लाइव वीडियो कॉल पर आपके व्यायाम पोस्चर और जोड़ों के लचीलेपन की विस्तृत जांच।',
+        description:
+            'Live 1-on-1 video call assessing your squat, bench press, deadlift mechanics, and joint mobility restrictions.',
+        regionalDescription:
+            'लाइव वीडियो कॉल पर आपके व्यायाम पोस्चर और जोड़ों के लचीलेपन की विस्तृत जांच।',
         type: ListingType.oneOnOneConsultation,
         specialty: CoachSpecialty.hypertrophyStrength,
         priceInr: 999,
@@ -215,8 +225,10 @@ class MarketplaceEngine {
         isCoachVerified: true,
         title: 'Ashtanga Vinyasa & Spinal Mobility Mastery',
         regionalTitle: 'अष्टांग विन्यास योग व मेरुदंड लचीलापन कोर्स',
-        description: 'Comprehensive breath-synchronized asana sequence for desk workers suffering from upper cross syndrome and tight hips.',
-        regionalDescription: 'डेस्क जॉब वालों की पीठ दर्द व जकड़न दूर करने हेतु अष्टांग योग सत्र।',
+        description:
+            'Comprehensive breath-synchronized asana sequence for desk workers suffering from upper cross syndrome and tight hips.',
+        regionalDescription:
+            'डेस्क जॉब वालों की पीठ दर्द व जकड़न दूर करने हेतु अष्टांग योग सत्र।',
         type: ListingType.structuredProgram,
         specialty: CoachSpecialty.yogaMobility,
         priceInr: 1299,

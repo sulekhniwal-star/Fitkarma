@@ -1,10 +1,16 @@
 import 'nutrition_models.dart';
 
 enum MealQualityGrade {
-  elite(grade: 'A+', label: 'Elite Muscle & Metabolic Fuel', colorCode: 0xff22C55E),
+  elite(
+      grade: 'A+',
+      label: 'Elite Muscle & Metabolic Fuel',
+      colorCode: 0xff22C55E),
   good(grade: 'A', label: 'Balanced Indian Nutrition', colorCode: 0xff3B82F6),
   moderate(grade: 'B', label: 'Moderate / Carb Heavy', colorCode: 0xffF97316),
-  suboptimal(grade: 'C', label: 'Protein Deficient / High Glycemic', colorCode: 0xffEF4444);
+  suboptimal(
+      grade: 'C',
+      label: 'Protein Deficient / High Glycemic',
+      colorCode: 0xffEF4444);
 
   final String grade;
   final String label;
@@ -62,16 +68,21 @@ class MealAnalysisEngine {
         totalCarbsGrams: 0.0,
         totalFatsGrams: 0.0,
         totalFiberGrams: 0.0,
-        calibrationSuggestions: ['Log food items to view multi-factor meal analysis.'],
+        calibrationSuggestions: [
+          'Log food items to view multi-factor meal analysis.'
+        ],
         metabolicImpactSummary: 'No food items evaluated.',
       );
     }
 
     final totalCals = entries.fold<int>(0, (sum, e) => sum + e.totalCalories);
-    final totalProtein = entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
-    final totalCarbs = entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
+    final totalProtein =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
+    final totalCarbs =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
     final totalFats = entries.fold<double>(0.0, (sum, e) => sum + e.totalFats);
-    final totalFiber = entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
+    final totalFiber =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
 
     // 1. Protein Density Score (Protein calories / Total calories)
     final proteinCals = totalProtein * 4.0;
@@ -101,10 +112,14 @@ class MealAnalysisEngine {
     }
 
     // 3. Satiety Index Score
-    final int satietyScore = ((proteinScore * 0.5) + (fiberScore * 0.5)).round();
+    final int satietyScore =
+        ((proteinScore * 0.5) + (fiberScore * 0.5)).round();
 
     // 4. Composite Meal Score
-    final compScore = ((proteinScore * 0.45) + (fiberScore * 0.35) + (satietyScore * 0.20)).round().clamp(0, 100);
+    final compScore =
+        ((proteinScore * 0.45) + (fiberScore * 0.35) + (satietyScore * 0.20))
+            .round()
+            .clamp(0, 100);
 
     // Grade assignment
     final MealQualityGrade grade;
@@ -121,25 +136,32 @@ class MealAnalysisEngine {
     // 5. Actionable Indian Food Calibrations
     final List<String> suggestions = [];
     if (totalProtein < 25.0) {
-      suggestions.add('Protein Booster: Add 100g low-fat Paneer (+18g P) or 1 scoop Whey Protein (+24g P) to trigger muscle protein synthesis (MPS).');
+      suggestions.add(
+          'Protein Booster: Add 100g low-fat Paneer (+18g P) or 1 scoop Whey Protein (+24g P) to trigger muscle protein synthesis (MPS).');
     }
     if (fiberRatio < 0.10 && totalCarbs > 40.0) {
-      suggestions.add('Glycemic Buffer: Pair refined rotis/rice with a raw cucumber-tomato salad or a katori of sprouted moong to blunt the insulin spike.');
+      suggestions.add(
+          'Glycemic Buffer: Pair refined rotis/rice with a raw cucumber-tomato salad or a katori of sprouted moong to blunt the insulin spike.');
     }
     if (totalFats > 30.0) {
-      suggestions.add('Oil & Ghee Calibration: Reduce cooking oil/tadka by 1 teaspoon to save ~120 surplus calories.');
+      suggestions.add(
+          'Oil & Ghee Calibration: Reduce cooking oil/tadka by 1 teaspoon to save ~120 surplus calories.');
     }
     if (suggestions.isEmpty) {
-      suggestions.add('Excellent meal architecture! Ideal macro distribution for muscle preservation and sustained metabolic energy.');
+      suggestions.add(
+          'Excellent meal architecture! Ideal macro distribution for muscle preservation and sustained metabolic energy.');
     }
 
     final String summary;
     if (grade == MealQualityGrade.elite) {
-      summary = 'Exceptional high-protein, low-glycemic meal structure. Optimizes muscle protein synthesis and keeps insulin steady.';
+      summary =
+          'Exceptional high-protein, low-glycemic meal structure. Optimizes muscle protein synthesis and keeps insulin steady.';
     } else if (grade == MealQualityGrade.good) {
-      summary = 'Well-balanced Indian meal. Solid macronutrient distribution for daily energy demands.';
+      summary =
+          'Well-balanced Indian meal. Solid macronutrient distribution for daily energy demands.';
     } else {
-      summary = 'High carbohydrate load with suboptimal protein density. Consider applying the smart protein booster suggestions.';
+      summary =
+          'High carbohydrate load with suboptimal protein density. Consider applying the smart protein booster suggestions.';
     }
 
     return MealAnalysisReport(

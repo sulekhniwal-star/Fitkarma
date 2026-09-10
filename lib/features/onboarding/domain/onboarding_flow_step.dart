@@ -16,5 +16,6 @@ enum OnboardingFlowStep {
   });
 
   /// Computes linear progress (0.0 to 1.0)
-  double get progressPercentage => (index + 1) / OnboardingFlowStep.values.length;
+  double get progressPercentage =>
+      (index + 1) / OnboardingFlowStep.values.length;
 }

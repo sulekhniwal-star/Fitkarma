@@ -19,10 +19,12 @@ class ComputerVisionFormScreen extends StatefulWidget {
   });
 
   @override
-  State<ComputerVisionFormScreen> createState() => _ComputerVisionFormScreenState();
+  State<ComputerVisionFormScreen> createState() =>
+      _ComputerVisionFormScreenState();
 }
 
-class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> with SingleTickerProviderStateMixin {
+class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen>
+    with SingleTickerProviderStateMixin {
   late Exercise _selectedExercise;
   late AnimationController _pulseController;
 
@@ -57,14 +59,16 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
       concentricSeconds: 1.5,
       peakAngleDegrees: 96.5,
       qualityTier: FormFeedbackTier.warning,
-      primaryFeedback: 'Slightly above parallel; maintain full hip crease depth',
+      primaryFeedback:
+          'Slightly above parallel; maintain full hip crease depth',
     ),
   ];
 
   @override
   void initState() {
     super.initState();
-    _selectedExercise = widget.initialExercise ?? ExerciseDatabase.exercises.first;
+    _selectedExercise =
+        widget.initialExercise ?? ExerciseDatabase.exercises.first;
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1400),
@@ -86,7 +90,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
               _selectedExercise.name.toLowerCase().contains('dand') ||
               _selectedExercise.name.toLowerCase().contains('pushup')) {
             _primaryJointAngle = 120.0 + 45.0 * wave; // 75 to 165 deg (Elbow)
-            _secondaryJointAngle = 55.0 + 20.0 * sin(_simTime * 0.5); // Shoulder tuck angle
+            _secondaryJointAngle =
+                55.0 + 20.0 * sin(_simTime * 0.5); // Shoulder tuck angle
           } else {
             _primaryJointAngle = 125.0 + 50.0 * wave; // 75 to 175 deg (Knee)
             _secondaryJointAngle = 110.0 + 35.0 * wave; // Hip angle
@@ -127,16 +132,20 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
             ),
             Text(
               '100% On-Device Pose Kinematics • 60 FPS',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
+              style:
+                  AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
             ),
           ],
         ),
         actions: [
           IconButton(
-            tooltip: _audioCuesEnabled ? 'Mute Biomechanical Voice' : 'Enable Biomechanical Voice',
+            tooltip: _audioCuesEnabled
+                ? 'Mute Biomechanical Voice'
+                : 'Enable Biomechanical Voice',
             icon: Icon(
               _audioCuesEnabled ? Icons.volume_up : Icons.volume_off,
-              color: _audioCuesEnabled ? AppColors.focusBlue : AppColors.textMuted,
+              color:
+                  _audioCuesEnabled ? AppColors.focusBlue : AppColors.textMuted,
             ),
             onPressed: () {
               setState(() {
@@ -145,9 +154,13 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
             },
           ),
           IconButton(
-            tooltip: _isAutoSimulating ? 'Pause Motion Simulator' : 'Play Motion Simulator',
+            tooltip: _isAutoSimulating
+                ? 'Pause Motion Simulator'
+                : 'Play Motion Simulator',
             icon: Icon(
-              _isAutoSimulating ? Icons.pause_circle_outline : Icons.play_circle_outline,
+              _isAutoSimulating
+                  ? Icons.pause_circle_outline
+                  : Icons.play_circle_outline,
               color: AppColors.karmaGreen,
             ),
             onPressed: () {
@@ -208,8 +221,11 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
                       ex.name,
                       style: TextStyle(
                         fontSize: 12,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected ? AppColors.surface : AppColors.textPrimary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected
+                            ? AppColors.surface
+                            : AppColors.textPrimary,
                       ),
                     ),
                     selected: isSelected,
@@ -272,7 +288,9 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
                 primaryAngle: _primaryJointAngle,
                 secondaryAngle: _secondaryJointAngle,
                 accentColor: tierColor,
-                isSquatMode: !_selectedExercise.name.toLowerCase().contains('bench') &&
+                isSquatMode: !_selectedExercise.name
+                        .toLowerCase()
+                        .contains('bench') &&
                     !_selectedExercise.name.toLowerCase().contains('pushup') &&
                     !_selectedExercise.name.toLowerCase().contains('dand'),
               ),
@@ -282,7 +300,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
               top: 12,
               left: 12,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: Colors.black.withAlpha(180),
                   borderRadius: BorderRadius.circular(8),
@@ -318,7 +337,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
               bottom: 12,
               right: 12,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.black.withAlpha(200),
                   borderRadius: BorderRadius.circular(10),
@@ -386,14 +406,20 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   decoration: BoxDecoration(
-                    color: isCurrent ? AppColors.focusBlue : AppColors.surfaceElevated,
+                    color: isCurrent
+                        ? AppColors.focusBlue
+                        : AppColors.surfaceElevated,
                     borderRadius: BorderRadius.circular(8),
-                    border: isCurrent ? Border.all(color: Colors.white, width: 1.5) : null,
+                    border: isCurrent
+                        ? Border.all(color: Colors.white, width: 1.5)
+                        : null,
                   ),
                   child: Column(
                     children: [
                       Text(
-                        phase.name.substring(0, min(3, phase.name.length)).toUpperCase(),
+                        phase.name
+                            .substring(0, min(3, phase.name.length))
+                            .toUpperCase(),
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -405,7 +431,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
                         phase.regionalLabel.split(' ').first,
                         style: TextStyle(
                           fontSize: 8,
-                          color: isCurrent ? Colors.black87 : AppColors.textMuted,
+                          color:
+                              isCurrent ? Colors.black87 : AppColors.textMuted,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -506,7 +533,9 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
             child: GlowingMetric(
               label: 'Primary Joint',
               value: '${frame.primaryJointAngleDegrees.toStringAsFixed(1)}°',
-              unit: frame.exercise.name.toLowerCase().contains('bench') ? 'Elbow' : 'Knee',
+              unit: frame.exercise.name.toLowerCase().contains('bench')
+                  ? 'Elbow'
+                  : 'Knee',
               accentColor: AppColors.focusBlue,
             ),
           ),
@@ -517,7 +546,9 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
             child: GlowingMetric(
               label: 'Secondary Joint',
               value: '${frame.secondaryJointAngleDegrees.toStringAsFixed(1)}°',
-              unit: frame.exercise.name.toLowerCase().contains('bench') ? 'Torso Tuck' : 'Hip Crease',
+              unit: frame.exercise.name.toLowerCase().contains('bench')
+                  ? 'Torso Tuck'
+                  : 'Hip Crease',
               accentColor: AppColors.focusBlue,
             ),
           ),
@@ -654,7 +685,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: qColor.withAlpha(30),
                       borderRadius: BorderRadius.circular(4),
@@ -687,7 +719,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
       ),
       child: Row(
         children: [
-          const Icon(Icons.shield_outlined, color: AppColors.focusBlue, size: 24),
+          const Icon(Icons.shield_outlined,
+              color: AppColors.focusBlue, size: 24),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
@@ -704,7 +737,8 @@ class _ComputerVisionFormScreenState extends State<ComputerVisionFormScreen> wit
                 const SizedBox(height: 2),
                 Text(
                   'Video frames are processed in-memory directly on device and are never uploaded or saved to any cloud servers.',
-                  style: AppTypography.bodySmall.copyWith(fontSize: 10, color: AppColors.textMuted),
+                  style: AppTypography.bodySmall
+                      .copyWith(fontSize: 10, color: AppColors.textMuted),
                 ),
               ],
             ),
@@ -764,8 +798,10 @@ class _SkeletonCanvasPainter extends CustomPainter {
       final hip = Offset(cx + (180 - secondaryAngle) * 0.3, 150);
 
       final kneeDisplacement = (180 - primaryAngle) * 0.5;
-      final leftKnee = Offset(cx - 35 - kneeDisplacement * 0.2, 190 + kneeDisplacement * 0.3);
-      final rightKnee = Offset(cx + 35 + kneeDisplacement * 0.2, 190 + kneeDisplacement * 0.3);
+      final leftKnee = Offset(
+          cx - 35 - kneeDisplacement * 0.2, 190 + kneeDisplacement * 0.3);
+      final rightKnee = Offset(
+          cx + 35 + kneeDisplacement * 0.2, 190 + kneeDisplacement * 0.3);
 
       final leftAnkle = Offset(cx - 35, 250);
       final rightAnkle = Offset(cx + 35, 250);
@@ -788,8 +824,18 @@ class _SkeletonCanvasPainter extends CustomPainter {
       canvas.drawLine(rightShoulder, rightElbow, bonePaint);
 
       final joints = [
-        head, neck, spine, hip, leftShoulder, rightShoulder, leftElbow, rightElbow,
-        leftKnee, rightKnee, leftAnkle, rightAnkle
+        head,
+        neck,
+        spine,
+        hip,
+        leftShoulder,
+        rightShoulder,
+        leftElbow,
+        rightElbow,
+        leftKnee,
+        rightKnee,
+        leftAnkle,
+        rightAnkle
       ];
       for (final j in joints) {
         canvas.drawCircle(j, 5, jointPaint);

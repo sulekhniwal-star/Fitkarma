@@ -19,7 +19,8 @@ class FestivalNutritionScreen extends StatefulWidget {
   });
 
   @override
-  State<FestivalNutritionScreen> createState() => _FestivalNutritionScreenState();
+  State<FestivalNutritionScreen> createState() =>
+      _FestivalNutritionScreenState();
 }
 
 class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
@@ -63,13 +64,19 @@ class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
                       selected: isSelected,
                       selectedColor: AppColors.gold.withValues(alpha: 0.2),
                       backgroundColor: AppColors.surfaceElevated,
-                      side: BorderSide(color: isSelected ? AppColors.gold : AppColors.glassBorder),
+                      side: BorderSide(
+                          color: isSelected
+                              ? AppColors.gold
+                              : AppColors.glassBorder),
                       label: Text(
                         f.name.split('(')[0].trim(),
                         style: TextStyle(
-                          color: isSelected ? AppColors.gold : AppColors.textPrimary,
+                          color: isSelected
+                              ? AppColors.gold
+                              : AppColors.textPrimary,
                           fontSize: 12,
-                          fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
+                          fontWeight:
+                              isSelected ? FontWeight.w800 : FontWeight.w500,
                         ),
                       ),
                       onSelected: (_) => setState(() => _selectedFestival = f),
@@ -94,14 +101,20 @@ class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
                           regionalText: _selectedFestival.regionalName,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.gold.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Text(
-                            _selectedFestival.isFasting ? 'FASTING PROTOCOL' : 'FEAST PROTOCOL',
-                            style: const TextStyle(color: AppColors.gold, fontSize: 10, fontWeight: FontWeight.w800),
+                            _selectedFestival.isFasting
+                                ? 'FASTING PROTOCOL'
+                                : 'FEAST PROTOCOL',
+                            style: const TextStyle(
+                                color: AppColors.gold,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -119,9 +132,13 @@ class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
                         ),
                         GlowingMetric(
                           label: 'Calorie Buffer',
-                          value: '${_selectedFestival.calorieAllowanceDelta > 0 ? "+${_selectedFestival.calorieAllowanceDelta}" : _selectedFestival.calorieAllowanceDelta}',
+                          value:
+                              '${_selectedFestival.calorieAllowanceDelta > 0 ? "+${_selectedFestival.calorieAllowanceDelta}" : _selectedFestival.calorieAllowanceDelta}',
                           unit: 'kcal',
-                          accentColor: _selectedFestival.calorieAllowanceDelta >= 0 ? AppColors.karmaGreen : AppColors.focusBlue,
+                          accentColor:
+                              _selectedFestival.calorieAllowanceDelta >= 0
+                                  ? AppColors.karmaGreen
+                                  : AppColors.focusBlue,
                         ),
                         GlowingMetric(
                           label: 'Protein Anchor',
@@ -134,7 +151,8 @@ class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       strategy.culturalCoachingNote,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.35),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textPrimary, height: 1.35),
                     ),
                   ],
                 ),
@@ -161,12 +179,14 @@ class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.shield_rounded, color: AppColors.karmaGreen, size: 18),
+                        const Icon(Icons.shield_rounded,
+                            color: AppColors.karmaGreen, size: 18),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             step,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary, height: 1.3),
                           ),
                         ),
                       ],
@@ -195,12 +215,14 @@ class _FestivalNutritionScreenState extends State<FestivalNutritionScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.swap_horiz_rounded, color: AppColors.focusBlue, size: 18),
+                        const Icon(Icons.swap_horiz_rounded,
+                            color: AppColors.focusBlue, size: 18),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             swap,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary, height: 1.3),
                           ),
                         ),
                       ],

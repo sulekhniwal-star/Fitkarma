@@ -3,7 +3,8 @@ import '../../domain/clinical_lab_engine.dart';
 import '../../domain/clinical_lab_models.dart';
 
 final clinicalLabProvider =
-    StateNotifierProvider<ClinicalLabNotifier, ClinicalReportIntelligence>((ref) {
+    StateNotifierProvider<ClinicalLabNotifier, ClinicalReportIntelligence>(
+        (ref) {
   return ClinicalLabNotifier();
 });
 

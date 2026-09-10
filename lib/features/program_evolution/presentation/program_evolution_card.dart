@@ -63,7 +63,8 @@ class ProgramEvolutionCard extends StatelessWidget {
                 regionalText: 'कार्यक्रम विकास प्रणाली',
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: actionColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -87,7 +88,9 @@ class ProgramEvolutionCard extends StatelessWidget {
                 label: 'Cycle Adherence',
                 value: '${(evolution.adherenceRate * 100).round()}%',
                 accentColor: actionColor,
-                trend: evolution.adherenceRate >= 0.8 ? MetricTrend.up : MetricTrend.down,
+                trend: evolution.adherenceRate >= 0.8
+                    ? MetricTrend.up
+                    : MetricTrend.down,
               ),
               GlowingMetric(
                 label: 'Avg Readiness',
@@ -97,7 +100,8 @@ class ProgramEvolutionCard extends StatelessWidget {
               ),
               GlowingMetric(
                 label: 'Vol Adjust',
-                value: '${((evolution.volumeMultiplier - 1.0) * 100).round() >= 0 ? '+' : ''}${((evolution.volumeMultiplier - 1.0) * 100).round()}%',
+                value:
+                    '${((evolution.volumeMultiplier - 1.0) * 100).round() >= 0 ? '+' : ''}${((evolution.volumeMultiplier - 1.0) * 100).round()}%',
                 accentColor: actionColor,
               ),
             ],

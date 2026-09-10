@@ -56,10 +56,14 @@ class ProgressPhotoScreen extends ConsumerWidget {
                     borderRadius: AppRadii.radiusMd,
                   ),
                 ),
-                icon: const Icon(Icons.camera_alt_outlined, color: Colors.white),
+                icon:
+                    const Icon(Icons.camera_alt_outlined, color: Colors.white),
                 label: const Text(
                   'Capture New Milestone Photo',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
                 ),
                 onPressed: () => _showCaptureModal(context, ref),
               ),
@@ -85,7 +89,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.sm),
             ...report.entries.map((entry) => Padding(
                   padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                  child: _buildPhotoEntryCard(context, ref, entry, report.entries),
+                  child:
+                      _buildPhotoEntryCard(context, ref, entry, report.entries),
                 )),
             const SizedBox(height: AppSpacing.xl),
           ],
@@ -103,7 +108,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -112,7 +118,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.enhanced_encryption, color: AppColors.karmaGreen, size: 14),
+                    Icon(Icons.enhanced_encryption,
+                        color: AppColors.karmaGreen, size: 14),
                     SizedBox(width: 4),
                     Text(
                       'Encrypted Local Vault',
@@ -219,7 +226,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
               Expanded(
                 child: _buildComparisonPhotoTile(
                   label: 'BEFORE (${comp.beforePhoto.milestoneTag.name})',
-                  date: '${comp.beforePhoto.capturedAt.day}/${comp.beforePhoto.capturedAt.month}/${comp.beforePhoto.capturedAt.year}',
+                  date:
+                      '${comp.beforePhoto.capturedAt.day}/${comp.beforePhoto.capturedAt.month}/${comp.beforePhoto.capturedAt.year}',
                   weight: '${comp.beforePhoto.weightKgAtCapture} kg',
                   fat: '${comp.beforePhoto.bodyFatPercentAtCapture}% BF',
                   color: AppColors.surfaceElevated,
@@ -230,7 +238,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
               Expanded(
                 child: _buildComparisonPhotoTile(
                   label: 'AFTER (${comp.afterPhoto.milestoneTag.name})',
-                  date: '${comp.afterPhoto.capturedAt.day}/${comp.afterPhoto.capturedAt.month}/${comp.afterPhoto.capturedAt.year}',
+                  date:
+                      '${comp.afterPhoto.capturedAt.day}/${comp.afterPhoto.capturedAt.month}/${comp.afterPhoto.capturedAt.year}',
                   weight: '${comp.afterPhoto.weightKgAtCapture} kg',
                   fat: '${comp.afterPhoto.bodyFatPercentAtCapture}% BF',
                   color: AppColors.focusBlue.withValues(alpha: 0.1),
@@ -298,9 +307,12 @@ class ProgressPhotoScreen extends ConsumerWidget {
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.accessibility_new, size: 54, color: AppColors.focusBlue),
+                Icon(Icons.accessibility_new,
+                    size: 54, color: AppColors.focusBlue),
                 SizedBox(height: 4),
-                Text('Encrypted Photo', style: TextStyle(color: AppColors.textSecondary, fontSize: 9)),
+                Text('Encrypted Photo',
+                    style:
+                        TextStyle(color: AppColors.textSecondary, fontSize: 9)),
               ],
             ),
           ),
@@ -343,7 +355,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
               color: AppColors.surfaceElevated,
               borderRadius: AppRadii.radiusSm,
             ),
-            child: const Icon(Icons.photo_camera_back, color: AppColors.focusBlue, size: 28),
+            child: const Icon(Icons.photo_camera_back,
+                color: AppColors.focusBlue, size: 28),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
@@ -392,13 +405,17 @@ class ProgressPhotoScreen extends ConsumerWidget {
           ),
           const SizedBox(width: AppSpacing.xs),
           IconButton(
-            icon: const Icon(Icons.compare_arrows, color: AppColors.focusBlue, size: 20),
+            icon: const Icon(Icons.compare_arrows,
+                color: AppColors.focusBlue, size: 20),
             tooltip: 'Compare with Day 1',
             onPressed: () {
-              ref.read(progressPhotoProvider.notifier).selectComparison(allEntries.first, entry);
+              ref
+                  .read(progressPhotoProvider.notifier)
+                  .selectComparison(allEntries.first, entry);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Comparing ${allEntries.first.milestoneTag.name} vs ${entry.milestoneTag.name}'),
+                  content: Text(
+                      'Comparing ${allEntries.first.milestoneTag.name} vs ${entry.milestoneTag.name}'),
                   backgroundColor: AppColors.focusBlue,
                 ),
               );
@@ -430,12 +447,14 @@ class ProgressPhotoScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma displays a translucent ghost silhouette of your baseline photo to ensure consistent standing posture, distance, and framing.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 '• Stand 2 meters from camera at eye level\n• Same lighting conditions for reliable shadows\n• Encrypted immediately upon capture in local vault',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -448,7 +467,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
                     ),
                   ),
                   icon: const Icon(Icons.camera, color: Colors.white),
-                  label: const Text('Simulate Front Pose Capture', style: TextStyle(color: Colors.white)),
+                  label: const Text('Simulate Front Pose Capture',
+                      style: TextStyle(color: Colors.white)),
                   onPressed: () {
                     ref.read(progressPhotoProvider.notifier).addPhotoEntry(
                           poseAngle: PhotoPoseAngle.front,
@@ -461,7 +481,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Photo encrypted and stored in local vault!'),
+                        content:
+                            Text('Photo encrypted and stored in local vault!'),
                         backgroundColor: AppColors.karmaGreen,
                       ),
                     );
@@ -496,7 +517,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'All transformation photos are encrypted using on-device AES-256 keys tied to your biometric secure enclave. FitKarma never uploads unencrypted visual media to external servers.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -509,7 +531,8 @@ class ProgressPhotoScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Dismiss', style: TextStyle(color: Colors.white)),
+                  child: const Text('Dismiss',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

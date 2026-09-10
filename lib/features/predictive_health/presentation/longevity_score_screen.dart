@@ -31,7 +31,8 @@ class LongevityScoreScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showLongevityMethodologyModal(context),
           ),
         ],
@@ -158,7 +159,9 @@ class LongevityScoreScreen extends ConsumerWidget {
                       Text(
                         '($bonusSign${report.healthspanBonusYears.toStringAsFixed(1)}y)',
                         style: AppTypography.bodySmall.copyWith(
-                          color: report.healthspanBonusYears >= 0 ? AppColors.karmaGreen : AppColors.alertRed,
+                          color: report.healthspanBonusYears >= 0
+                              ? AppColors.karmaGreen
+                              : AppColors.alertRed,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -184,10 +187,12 @@ class LongevityScoreScreen extends ConsumerWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const Divider(height: AppSpacing.lg, color: AppColors.surfaceElevated),
+          const Divider(
+              height: AppSpacing.lg, color: AppColors.surfaceElevated),
           Row(
             children: [
-              const Icon(Icons.thumb_up_alt_outlined, color: AppColors.karmaGreen, size: 16),
+              const Icon(Icons.thumb_up_alt_outlined,
+                  color: AppColors.karmaGreen, size: 16),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -269,7 +274,9 @@ class LongevityScoreScreen extends ConsumerWidget {
 
   Widget _buildPillarCard(LongevityPillarScore pillar) {
     final isHigh = pillar.score >= 80;
-    final pillarColor = isHigh ? AppColors.karmaGreen : (pillar.score >= 60 ? AppColors.focusBlue : AppColors.energyOrange);
+    final pillarColor = isHigh
+        ? AppColors.karmaGreen
+        : (pillar.score >= 60 ? AppColors.focusBlue : AppColors.energyOrange);
 
     return BentoCard(
       child: Column(
@@ -280,7 +287,8 @@ class LongevityScoreScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Icon(_getPillarIcon(pillar.pillar.iconName), color: AppColors.focusBlue, size: 18),
+                  Icon(_getPillarIcon(pillar.pillar.iconName),
+                      color: AppColors.focusBlue, size: 18),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     pillar.pillar.name,
@@ -511,7 +519,8 @@ class LongevityScoreScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

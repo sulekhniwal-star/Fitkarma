@@ -2,7 +2,8 @@ enum MuscleGroup {
   chest(name: 'Chest', regionalName: 'छाती'),
   back(name: 'Back & Lats', regionalName: 'पीठ'),
   quads(name: 'Quadriceps', regionalName: 'जांघ (क्वाड्स)'),
-  hamstrings(name: 'Hamstrings & Glutes', regionalName: 'कूल्हे व हैमस्ट्रिंग्स'),
+  hamstrings(
+      name: 'Hamstrings & Glutes', regionalName: 'कूल्हे व हैमस्ट्रिंग्स'),
   shoulders(name: 'Shoulders & Delts', regionalName: 'कंधे'),
   arms(name: 'Biceps & Triceps', regionalName: 'भुजाएँ (बाइसेप्स/ट्राइसेप्स)'),
   core(name: 'Core & Abs', regionalName: 'पेट (कोर)'),
@@ -105,7 +106,8 @@ class PlannedExercise {
   });
 
   bool get isFullyCompleted =>
-      completedSets.where((s) => s.isCompleted && !s.isWarmup).length >= targetSets;
+      completedSets.where((s) => s.isCompleted && !s.isWarmup).length >=
+      targetSets;
 
   double get totalVolumeTonnage => completedSets
       .where((s) => s.isCompleted)
@@ -116,7 +118,8 @@ class WorkoutSession {
   final String id;
   final String title;
   final String regionalTitle;
-  final String splitCategory; // e.g. "Push Day", "Pull Day", "Legs", "Upper Power"
+  final String
+      splitCategory; // e.g. "Push Day", "Pull Day", "Legs", "Upper Power"
   final int estimatedDurationMinutes;
   final List<PlannedExercise> plannedExercises;
   final DateTime scheduledDate;
@@ -137,6 +140,8 @@ class WorkoutSession {
     this.strainRating,
   });
 
-  int get totalSets => plannedExercises.fold<int>(0, (sum, e) => sum + e.targetSets);
-  double get totalVolumeTonnage => plannedExercises.fold<double>(0.0, (sum, e) => sum + e.totalVolumeTonnage);
+  int get totalSets =>
+      plannedExercises.fold<int>(0, (sum, e) => sum + e.targetSets);
+  double get totalVolumeTonnage => plannedExercises.fold<double>(
+      0.0, (sum, e) => sum + e.totalVolumeTonnage);
 }

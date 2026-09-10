@@ -21,17 +21,22 @@ class WearableFreeCompositionEngine {
     final now = executionTime ?? DateTime.now();
     final heightM = heightCm / 100.0;
     final bmi = heightM > 0 ? weightKg / (heightM * heightM) : 22.0;
-    final effectiveHipsCm = hipsCm ?? (sex == AnthropometricSex.female ? waistCm * 1.3 : waistCm * 1.15);
+    final effectiveHipsCm = hipsCm ??
+        (sex == AnthropometricSex.female ? waistCm * 1.3 : waistCm * 1.15);
 
     // 1. Model 1: US Navy Anthropometric Model
     double usNavyBf;
     if (sex == AnthropometricSex.male) {
       final diff = max(1.0, waistCm - neckCm);
-      final denominator = 1.0324 - (0.19077 * (log(diff) / ln10)) + (0.15456 * (log(heightCm) / ln10));
+      final denominator = 1.0324 -
+          (0.19077 * (log(diff) / ln10)) +
+          (0.15456 * (log(heightCm) / ln10));
       usNavyBf = denominator > 0 ? (495.0 / denominator) - 450.0 : 18.0;
     } else {
       final sum = max(1.0, waistCm + effectiveHipsCm - neckCm);
-      final denominator = 1.29579 - (0.35004 * (log(sum) / ln10)) + (0.22100 * (log(heightCm) / ln10));
+      final denominator = 1.29579 -
+          (0.35004 * (log(sum) / ln10)) +
+          (0.22100 * (log(heightCm) / ln10));
       usNavyBf = denominator > 0 ? (495.0 / denominator) - 450.0 : 24.0;
     }
     usNavyBf = usNavyBf.clamp(5.0, 50.0);
@@ -41,31 +46,48 @@ class WearableFreeCompositionEngine {
     final weightLbs = weightKg * 2.20462;
     double ymcaBf;
     if (sex == AnthropometricSex.male) {
-      ymcaBf = (((4.15 * waistInches) - (0.082 * weightLbs) - 98.42) / weightLbs) * 100.0;
+      ymcaBf =
+          (((4.15 * waistInches) - (0.082 * weightLbs) - 98.42) / weightLbs) *
+              100.0;
     } else {
-      ymcaBf = (((4.15 * waistInches) - (0.082 * weightLbs) - 76.76) / weightLbs) * 100.0;
+      ymcaBf =
+          (((4.15 * waistInches) - (0.082 * weightLbs) - 76.76) / weightLbs) *
+              100.0;
     }
     ymcaBf = ymcaBf.clamp(5.0, 50.0);
 
     // 3. Model 3: Deurenberg Clinical Equation
     final sexFactor = sex == AnthropometricSex.male ? 1 : 0;
-    double deurenbergBf = (1.20 * bmi) + (0.23 * age) - (10.8 * sexFactor) - 5.4;
+    double deurenbergBf =
+        (1.20 * bmi) + (0.23 * age) - (10.8 * sexFactor) - 5.4;
     deurenbergBf = deurenbergBf.clamp(5.0, 50.0);
 
     // 4. Model 4: Gallagher Clinical Dual-Energy Surrogate
     double gallagherBf;
     if (sex == AnthropometricSex.male) {
-      gallagherBf = ((1.46 * bmi) + (0.14 * age) - 21.6 + (applySouthAsianCalibrations ? 1.5 : 0.0)).clamp(5.0, 50.0);
+      gallagherBf = ((1.46 * bmi) +
+              (0.14 * age) -
+              21.6 +
+              (applySouthAsianCalibrations ? 1.5 : 0.0))
+          .clamp(5.0, 50.0);
     } else {
-      gallagherBf = ((1.46 * bmi) + (0.14 * age) - 10.0 + (applySouthAsianCalibrations ? 1.5 : 0.0)).clamp(5.0, 50.0);
+      gallagherBf = ((1.46 * bmi) +
+              (0.14 * age) -
+              10.0 +
+              (applySouthAsianCalibrations ? 1.5 : 0.0))
+          .clamp(5.0, 50.0);
     }
 
     // 5. Individual Model Summaries
     final modelEstimates = [
-      _buildSingleEstimate(CompositionEstimationModel.usNavyCircumference, usNavyBf, weightKg, 0.35),
-      _buildSingleEstimate(CompositionEstimationModel.ymcaBodyFatModel, ymcaBf, weightKg, 0.25),
-      _buildSingleEstimate(CompositionEstimationModel.deurenbergRegression, deurenbergBf, weightKg, 0.20),
-      _buildSingleEstimate(CompositionEstimationModel.gallagherClinical, gallagherBf, weightKg, 0.20),
+      _buildSingleEstimate(CompositionEstimationModel.usNavyCircumference,
+          usNavyBf, weightKg, 0.35),
+      _buildSingleEstimate(
+          CompositionEstimationModel.ymcaBodyFatModel, ymcaBf, weightKg, 0.25),
+      _buildSingleEstimate(CompositionEstimationModel.deurenbergRegression,
+          deurenbergBf, weightKg, 0.20),
+      _buildSingleEstimate(CompositionEstimationModel.gallagherClinical,
+          gallagherBf, weightKg, 0.20),
     ];
 
     // 6. Weighted Ensemble Consensus
@@ -76,8 +98,12 @@ class WearableFreeCompositionEngine {
     final ensembleBf = weightedSum.clamp(5.0, 50.0);
 
     // Standard deviation between models
-    final meanBf = modelEstimates.fold<double>(0.0, (acc, m) => acc + m.estimatedBodyFatPercent) / modelEstimates.length;
-    final variance = modelEstimates.fold<double>(0.0, (acc, m) => acc + pow(m.estimatedBodyFatPercent - meanBf, 2)) / modelEstimates.length;
+    final meanBf = modelEstimates.fold<double>(
+            0.0, (acc, m) => acc + m.estimatedBodyFatPercent) /
+        modelEstimates.length;
+    final variance = modelEstimates.fold<double>(
+            0.0, (acc, m) => acc + pow(m.estimatedBodyFatPercent - meanBf, 2)) /
+        modelEstimates.length;
     final stdDev = sqrt(variance);
 
     // Confidence score based on low variance between models
@@ -86,7 +112,8 @@ class WearableFreeCompositionEngine {
     // Mass Breakdown
     final fatMassKg = weightKg * (ensembleBf / 100.0);
     final leanMassKg = weightKg - fatMassKg;
-    final boneMassKg = weightKg * (sex == AnthropometricSex.male ? 0.046 : 0.042);
+    final boneMassKg =
+        weightKg * (sex == AnthropometricSex.male ? 0.046 : 0.042);
     final tbwPercent = ((leanMassKg * 0.73) / weightKg) * 100.0;
 
     // Classification Zone
@@ -117,11 +144,15 @@ class WearableFreeCompositionEngine {
     String interpretation;
     String regInterpretation;
     if (stdDev < 2.5) {
-      interpretation = 'High model concordance (${confidenceScore.toInt()}% confidence). Low variance across all 4 clinical equations.';
-      regInterpretation = 'सभी ४ नैदानिक समीकरणों में उच्च समानता (${confidenceScore.toInt()}% विश्वसनीयता)।';
+      interpretation =
+          'High model concordance (${confidenceScore.toInt()}% confidence). Low variance across all 4 clinical equations.';
+      regInterpretation =
+          'सभी ४ नैदानिक समीकरणों में उच्च समानता (${confidenceScore.toInt()}% विश्वसनीयता)।';
     } else {
-      interpretation = 'Moderate variance across models. Anthropometric measurements remain primary anchor.';
-      regInterpretation = 'मॉडल परिणामों में मध्यम अंतर। शारीरिक माप मुख्य आधार हैं।';
+      interpretation =
+          'Moderate variance across models. Anthropometric measurements remain primary anchor.';
+      regInterpretation =
+          'मॉडल परिणामों में मध्यम अंतर। शारीरिक माप मुख्य आधार हैं।';
     }
 
     return WearableFreeCompositionReport(
@@ -129,7 +160,8 @@ class WearableFreeCompositionEngine {
       ensembleLeanMassKg: double.parse(leanMassKg.toStringAsFixed(1)),
       ensembleFatMassKg: double.parse(fatMassKg.toStringAsFixed(1)),
       ensembleBoneMassKg: double.parse(boneMassKg.toStringAsFixed(2)),
-      ensembleTotalBodyWaterPercent: double.parse(tbwPercent.toStringAsFixed(1)),
+      ensembleTotalBodyWaterPercent:
+          double.parse(tbwPercent.toStringAsFixed(1)),
       confidenceScorePercent: double.parse(confidenceScore.toStringAsFixed(1)),
       modelVarianceStdDev: double.parse(stdDev.toStringAsFixed(2)),
       individualEstimates: modelEstimates,

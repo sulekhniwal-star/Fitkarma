@@ -27,8 +27,10 @@ class FamilyHealthNotifier extends StateNotifier<FamilyHealthHubState> {
         restingHeartRateBpm: 68,
         lastVitalsLoggedAt: DateTime.now().subtract(const Duration(hours: 4)),
         status: FamilyVitalsStatus.optimal,
-        caregiverNote: 'Blood Pressure in optimal normal range (<125/80). Completed morning & post-lunch strolls.',
-        regionalCaregiverNote: 'रक्तचाप पूर्णतः सामान्य स्तर पर। प्रातः व दोपहर की चहलकदमी पूर्ण।',
+        caregiverNote:
+            'Blood Pressure in optimal normal range (<125/80). Completed morning & post-lunch strolls.',
+        regionalCaregiverNote:
+            'रक्तचाप पूर्णतः सामान्य स्तर पर। प्रातः व दोपहर की चहलकदमी पूर्ण।',
       ),
       FamilyMemberProfile(
         id: 'fam_mataji',
@@ -45,8 +47,10 @@ class FamilyHealthNotifier extends StateNotifier<FamilyHealthHubState> {
         restingHeartRateBpm: 72,
         lastVitalsLoggedAt: DateTime.now().subtract(const Duration(hours: 7)),
         status: FamilyVitalsStatus.attention,
-        caregiverNote: '900 steps remaining to reach daily 5k baseline. Evening Shatpawali prompt recommended.',
-        regionalCaregiverNote: 'दैनिक ५,००० कदम के लिए ९०० कदम शेष। रात्रि शतपावली हेतु स्मरण अपेक्षित।',
+        caregiverNote:
+            '900 steps remaining to reach daily 5k baseline. Evening Shatpawali prompt recommended.',
+        regionalCaregiverNote:
+            'दैनिक ५,००० कदम के लिए ९०० कदम शेष। रात्रि शतपावली हेतु स्मरण अपेक्षित।',
       ),
       FamilyMemberProfile(
         id: 'fam_jeevansathi',
@@ -63,17 +67,22 @@ class FamilyHealthNotifier extends StateNotifier<FamilyHealthHubState> {
         restingHeartRateBpm: 60,
         lastVitalsLoggedAt: DateTime.now().subtract(const Duration(hours: 2)),
         status: FamilyVitalsStatus.optimal,
-        caregiverNote: 'Excellent activity & hydration. On track for 10k daily step goal.',
-        regionalCaregiverNote: 'उत्कृष्ट गतिशीलता व जल सेवन। १०,००० कदमों का लक्ष्य पूर्ण होने के समीप।',
+        caregiverNote:
+            'Excellent activity & hydration. On track for 10k daily step goal.',
+        regionalCaregiverNote:
+            'उत्कृष्ट गतिशीलता व जल सेवन। १०,००० कदमों का लक्ष्य पूर्ण होने के समीप।',
       ),
     ];
 
     const seasonalTip = SeasonalFamilyAyurvedaTip(
       title: 'Warm Ajwain & Saunf Digestive Infusion',
       regionalTitle: 'अजवाइन व सौंफ पाचक काढ़ा (वरिष्ठ जनों हेतु)',
-      description: 'A gentle carminative decoction after dinner alleviates gas, improves nutrient assimilation, and supports deep sleep in elders.',
-      regionalDescription: 'रात्रि भोजन के उपरांत अजवाइन व सौंफ का हल्का गुनगुना जल पाचन अग्नि को बढ़ाता है व आरामदायक निद्रा प्रदान करता है।',
-      keyIngredients: 'Ajwain (Carom seeds), Saunf (Fennel), Pinch of Kala Namak',
+      description:
+          'A gentle carminative decoction after dinner alleviates gas, improves nutrient assimilation, and supports deep sleep in elders.',
+      regionalDescription:
+          'रात्रि भोजन के उपरांत अजवाइन व सौंफ का हल्का गुनगुना जल पाचन अग्नि को बढ़ाता है व आरामदायक निद्रा प्रदान करता है।',
+      keyIngredients:
+          'Ajwain (Carom seeds), Saunf (Fennel), Pinch of Kala Namak',
       benefitCategory: 'Digestion & Gas Relief',
     );
 

@@ -1,5 +1,7 @@
 enum AqiCategory { good, satisfactory, moderate, poor, veryPoor, severe }
+
 enum UvCategory { low, moderate, high, veryHigh, extreme }
+
 enum HeatRiskLevel { low, caution, high, extreme }
 
 class EnvironmentalHealthSnapshot {
@@ -38,16 +40,20 @@ class EnvironmentalHealthSnapshot {
 
     return EnvironmentalHealthSnapshot(
       aqi: (map['aqi'] as num?)?.toInt() ?? 120,
-      aqiCategory: AqiCategory.values.firstWhere((e) => e.name == aqiName, orElse: () => AqiCategory.moderate),
+      aqiCategory: AqiCategory.values.firstWhere((e) => e.name == aqiName,
+          orElse: () => AqiCategory.moderate),
       uvIndex: (map['uvIndex'] as num?)?.toDouble() ?? 4.0,
-      uvCategory: UvCategory.values.firstWhere((e) => e.name == uvName, orElse: () => UvCategory.low),
+      uvCategory: UvCategory.values
+          .firstWhere((e) => e.name == uvName, orElse: () => UvCategory.low),
       temperatureC: (map['temperatureC'] as num?)?.toDouble() ?? 28.0,
       humidityPercent: (map['humidityPercent'] as num?)?.toDouble() ?? 55.0,
       heatIndexC: (map['heatIndexC'] as num?)?.toDouble() ?? 30.0,
-      heatRisk: HeatRiskLevel.values.firstWhere((e) => e.name == heatName, orElse: () => HeatRiskLevel.low),
+      heatRisk: HeatRiskLevel.values.firstWhere((e) => e.name == heatName,
+          orElse: () => HeatRiskLevel.low),
       outdoorWorkoutAllowed: map['outdoorWorkoutAllowed'] as bool? ?? true,
       extraHydrationMl: (map['extraHydrationMl'] as num?)?.toInt() ?? 0,
-      recommendation: map['recommendation'] as String? ?? 'Environment is suitable for regular training.',
+      recommendation: map['recommendation'] as String? ??
+          'Environment is suitable for regular training.',
       capturedAt: map['capturedAt'] != null
           ? DateTime.tryParse(map['capturedAt']) ?? DateTime.now()
           : DateTime.now(),
@@ -93,7 +99,8 @@ class EnvironmentalHealthEngine {
   }
 
   /// Calculates simplified Heat Index (°C) based on temperature and humidity
-  static double calculateHeatIndex({required double tempC, required double humidity}) {
+  static double calculateHeatIndex(
+      {required double tempC, required double humidity}) {
     if (tempC < 27.0) return tempC;
     // Rothfusz simplified regression approximation for Celsius
     final t = tempC;
@@ -119,7 +126,8 @@ class EnvironmentalHealthEngine {
   }) {
     final aqiCategory = categorizeAqi(aqi);
     final uvCategory = categorizeUv(uvIndex);
-    final heatIndexC = calculateHeatIndex(tempC: temperatureC, humidity: humidityPercent);
+    final heatIndexC =
+        calculateHeatIndex(tempC: temperatureC, humidity: humidityPercent);
 
     final HeatRiskLevel heatRisk;
     if (heatIndexC >= 41.0) {
@@ -155,11 +163,13 @@ class EnvironmentalHealthEngine {
 
     if (heatRisk == HeatRiskLevel.extreme || heatRisk == HeatRiskLevel.high) {
       outdoorAllowed = false;
-      notices.add('Extreme heat index (${heatIndexC.round()}°C). Train indoors or before 7:00 AM.');
+      notices.add(
+          'Extreme heat index (${heatIndexC.round()}°C). Train indoors or before 7:00 AM.');
     }
 
     if (uvCategory == UvCategory.veryHigh || uvCategory == UvCategory.extreme) {
-      notices.add('Peak UV index ($uvIndex). Apply SPF 50+ and wear protective headwear.');
+      notices.add(
+          'Peak UV index ($uvIndex). Apply SPF 50+ and wear protective headwear.');
     }
 
     final recommendation = notices.isNotEmpty

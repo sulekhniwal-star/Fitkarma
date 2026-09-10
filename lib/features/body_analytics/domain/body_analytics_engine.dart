@@ -29,7 +29,11 @@ class BodyAnalyticsEngine {
         bodyFatPercent = 18.0;
       }
     } else {
-      final sum = max(1.0, circumferences.waistCm + circumferences.hipsCm - circumferences.neckCm);
+      final sum = max(
+          1.0,
+          circumferences.waistCm +
+              circumferences.hipsCm -
+              circumferences.neckCm);
       final logSum = log(sum) / ln10;
       final logHeight = log(heightCm) / ln10;
       final denominator = 1.29579 - (0.35004 * logSum) + (0.22100 * logHeight);
@@ -46,19 +50,29 @@ class BodyAnalyticsEngine {
     // 2. Mass Breakdown
     final fatMassKg = weightKg * (bodyFatPercent / 100.0);
     final leanMuscleMassKg = weightKg - fatMassKg;
-    final boneMassKg = weightKg * (sex == AnthropometricSex.male ? 0.046 : 0.042);
-    final totalBodyWaterPercent = ((leanMuscleMassKg * 0.73) / weightKg) * 100.0;
+    final boneMassKg =
+        weightKg * (sex == AnthropometricSex.male ? 0.046 : 0.042);
+    final totalBodyWaterPercent =
+        ((leanMuscleMassKg * 0.73) / weightKg) * 100.0;
 
     // 3. Basal Metabolic Rate (BMR kcal) - Mifflin-St Jeor Equation
     double bmr;
     if (sex == AnthropometricSex.male) {
-      bmr = (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * chronologicalAge) + 5.0;
+      bmr = (10.0 * weightKg) +
+          (6.25 * heightCm) -
+          (5.0 * chronologicalAge) +
+          5.0;
     } else {
-      bmr = (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * chronologicalAge) - 161.0;
+      bmr = (10.0 * weightKg) +
+          (6.25 * heightCm) -
+          (5.0 * chronologicalAge) -
+          161.0;
     }
 
     // 4. Ratios
-    final whr = circumferences.hipsCm > 0 ? circumferences.waistCm / circumferences.hipsCm : 0.85;
+    final whr = circumferences.hipsCm > 0
+        ? circumferences.waistCm / circumferences.hipsCm
+        : 0.85;
     final whtr = heightCm > 0 ? circumferences.waistCm / heightCm : 0.48;
 
     // 5. Visceral Fat Index (1 - 20)
@@ -71,9 +85,12 @@ class BodyAnalyticsEngine {
     final metabolicAge = max(18, chronologicalAge + ageDelta);
 
     // 7. Left-Right Symmetry Index Score (0 - 100%)
-    final bicepDiff = (circumferences.bicepLeftCm - circumferences.bicepRightCm).abs();
-    final thighDiff = (circumferences.thighLeftCm - circumferences.thighRightCm).abs();
-    final calfDiff = (circumferences.calfLeftCm - circumferences.calfRightCm).abs();
+    final bicepDiff =
+        (circumferences.bicepLeftCm - circumferences.bicepRightCm).abs();
+    final thighDiff =
+        (circumferences.thighLeftCm - circumferences.thighRightCm).abs();
+    final calfDiff =
+        (circumferences.calfLeftCm - circumferences.calfRightCm).abs();
     final symmetryPenalty = (bicepDiff + thighDiff + calfDiff) * 5.0;
     final symmetryScore = (100.0 - symmetryPenalty).clamp(60.0, 100.0);
 
@@ -111,7 +128,8 @@ class BodyAnalyticsEngine {
     );
 
     // 10. Recommendations
-    final (rec, regRec) = _generateRecommendations(zone, bodyFatPercent, whtr, symmetryScore);
+    final (rec, regRec) =
+        _generateRecommendations(zone, bodyFatPercent, whtr, symmetryScore);
 
     return BodyAnalyticsReport(
       weightKg: double.parse(weightKg.toStringAsFixed(1)),
@@ -121,7 +139,8 @@ class BodyAnalyticsEngine {
       leanMuscleMassKg: double.parse(leanMuscleMassKg.toStringAsFixed(1)),
       fatMassKg: double.parse(fatMassKg.toStringAsFixed(1)),
       boneMassKg: double.parse(boneMassKg.toStringAsFixed(2)),
-      totalBodyWaterPercent: double.parse(totalBodyWaterPercent.toStringAsFixed(1)),
+      totalBodyWaterPercent:
+          double.parse(totalBodyWaterPercent.toStringAsFixed(1)),
       basalMetabolicRateKcal: double.parse(bmr.toStringAsFixed(0)),
       metabolicAge: metabolicAge,
       visceralFatIndex: double.parse(visceralIndex.toStringAsFixed(1)),
@@ -154,7 +173,8 @@ class BodyAnalyticsEngine {
     final mamsa = (leanMassKg / 60.0 * 90.0).clamp(45.0, 98.0);
 
     // Meda Dhatu (Adipose lipid homeostasis)
-    final meda = (100.0 - (bodyFatPercent - 15.0).abs() * 2.5).clamp(40.0, 98.0);
+    final meda =
+        (100.0 - (bodyFatPercent - 15.0).abs() * 2.5).clamp(40.0, 98.0);
 
     // Asthi Dhatu (Bone & structural frame)
     final asthi = 92.0;
@@ -163,19 +183,25 @@ class BodyAnalyticsEngine {
     final majja = symmetryScore;
 
     // Shukra / Ojas (Deep cellular reserve)
-    final shukra = ((rasa + rakta + mamsa + meda + asthi + majja) / 6.0).clamp(50.0, 98.0);
+    final shukra =
+        ((rasa + rakta + mamsa + meda + asthi + majja) / 6.0).clamp(50.0, 98.0);
 
     String obs;
     String regObs;
     if (mamsa >= 85.0 && meda >= 80.0) {
-      obs = 'Samadhatu State: Optimal Mamsa (muscle) & Meda (lipid) equilibrium.';
+      obs =
+          'Samadhatu State: Optimal Mamsa (muscle) & Meda (lipid) equilibrium.';
       regObs = 'समधातु अवस्था: मांस व मेद धातु का उत्कृष्ट संतुलन।';
     } else if (meda < 65.0) {
-      obs = 'Meda Dhatu Vriddhi: Elevated lipid accumulation; stimulate Medagni with warming spices.';
-      regObs = 'मेद धातु वृद्धि: दीपन-पाचन औषधियों एवं व्यायाम द्वारा मेद संतुलित करें।';
+      obs =
+          'Meda Dhatu Vriddhi: Elevated lipid accumulation; stimulate Medagni with warming spices.';
+      regObs =
+          'मेद धातु वृद्धि: दीपन-पाचन औषधियों एवं व्यायाम द्वारा मेद संतुलित करें।';
     } else {
-      obs = 'Mamsa Dhatu Kshaya: Build structural muscle tone with nourishing Ahara.';
-      regObs = 'मांस धातु क्षय: बलवर्धक आहार व शक्ति प्रशिक्षण द्वारा मांसपेशी घनत्व बढ़ाएं।';
+      obs =
+          'Mamsa Dhatu Kshaya: Build structural muscle tone with nourishing Ahara.';
+      regObs =
+          'मांस धातु क्षय: बलवर्धक आहार व शक्ति प्रशिक्षण द्वारा मांसपेशी घनत्व बढ़ाएं।';
     }
 
     return AyurvedicDhatuProfile(

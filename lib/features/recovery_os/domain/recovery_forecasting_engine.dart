@@ -48,7 +48,8 @@ class RecoveryForecastingEngine {
   }) {
     // 1. HRV Age Baseline Offset (Population average at age 30 is ~45-55ms)
     // Every 10ms above expected adds ~ -1.5 years of biological recovery vitality
-    final expectedHrvForAge = (70.0 - (chronologicalAge * 0.55)).clamp(20.0, 75.0);
+    final expectedHrvForAge =
+        (70.0 - (chronologicalAge * 0.55)).clamp(20.0, 75.0);
     final hrvDelta = rolling14DayHrvMs - expectedHrvForAge;
     final hrvAgeShift = -(hrvDelta / 7.0).clamp(-5.0, 5.0);
 
@@ -112,11 +113,14 @@ class RecoveryForecastingEngine {
     // 5. Longevity Insight
     final String longevityInsight;
     if (totalDelta <= -2.0) {
-      longevityInsight = 'Your autonomic recovery efficiency is operating ${totalDelta.abs().toStringAsFixed(1)} years younger than your chronological age.';
+      longevityInsight =
+          'Your autonomic recovery efficiency is operating ${totalDelta.abs().toStringAsFixed(1)} years younger than your chronological age.';
     } else if (totalDelta >= 2.0) {
-      longevityInsight = 'Autonomic fatigue is elevating biological strain by +${totalDelta.toStringAsFixed(1)} years. Focus on deep sleep and breathwork.';
+      longevityInsight =
+          'Autonomic fatigue is elevating biological strain by +${totalDelta.toStringAsFixed(1)} years. Focus on deep sleep and breathwork.';
     } else {
-      longevityInsight = 'Biological recovery is perfectly aligned with your chronological baseline.';
+      longevityInsight =
+          'Biological recovery is perfectly aligned with your chronological baseline.';
     }
 
     return RecoveryAgeReport(

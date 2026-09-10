@@ -73,7 +73,8 @@ class BiologicalAgeEngine {
     );
 
     // Blood Pressure Delta
-    final bpDelta = _calculateBpDelta(systolicBloodPressure, diastolicBloodPressure);
+    final bpDelta =
+        _calculateBpDelta(systolicBloodPressure, diastolicBloodPressure);
     cardioDeltas.add(
       BiomarkerAgeContribution(
         id: 'bio_bp',
@@ -122,7 +123,8 @@ class BiologicalAgeEngine {
     );
 
     // Glycemic / HbA1c Delta
-    final glycemicDelta = _calculateGlycemicDelta(fastingGlucoseMgDl, estimatedHbA1c);
+    final glycemicDelta =
+        _calculateGlycemicDelta(fastingGlucoseMgDl, estimatedHbA1c);
     metabolicDeltas.add(
       BiomarkerAgeContribution(
         id: 'bio_glycemic',
@@ -171,7 +173,8 @@ class BiologicalAgeEngine {
     );
 
     // Movement & Strength Delta
-    final movementDelta = _calculateMovementDelta(dailyStepsAverage, weeklyStrengthSessions);
+    final movementDelta =
+        _calculateMovementDelta(dailyStepsAverage, weeklyStrengthSessions);
     musculoDeltas.add(
       BiomarkerAgeContribution(
         id: 'bio_movement_strength',
@@ -198,7 +201,8 @@ class BiologicalAgeEngine {
     final recoveryDeltas = <BiomarkerAgeContribution>[];
 
     // Deep Sleep & Sleep Debt Delta
-    final sleepDelta = _calculateSleepDelta(deepSleepPercentage, weeklySleepDebtHours);
+    final sleepDelta =
+        _calculateSleepDelta(deepSleepPercentage, weeklySleepDebtHours);
     recoveryDeltas.add(
       BiomarkerAgeContribution(
         id: 'bio_sleep',
@@ -255,39 +259,51 @@ class BiologicalAgeEngine {
     final systemAges = [
       OrganSystemAge(
         system: OrganSystemType.cardiovascular,
-        estimatedAge: _round((chronologicalAge + totalCardioDelta).clamp(18.0, 90.0)),
+        estimatedAge:
+            _round((chronologicalAge + totalCardioDelta).clamp(18.0, 90.0)),
         chronologicalAge: chronologicalAge,
         ageDelta: _round(totalCardioDelta),
         performanceScore: _scoreForDelta(totalCardioDelta),
-        keyBiomarkerSummary: 'RHR ${restingHeartRate.toInt()} bpm • SBP ${systolicBloodPressure.toInt()} mmHg • HRV ${rmssdHeartRateVariability.toInt()} ms',
-        regionalKeyBiomarkerSummary: 'हृदय गति ${restingHeartRate.toInt()} bpm • रक्तचाप ${systolicBloodPressure.toInt()} • HRV ${rmssdHeartRateVariability.toInt()} ms',
+        keyBiomarkerSummary:
+            'RHR ${restingHeartRate.toInt()} bpm • SBP ${systolicBloodPressure.toInt()} mmHg • HRV ${rmssdHeartRateVariability.toInt()} ms',
+        regionalKeyBiomarkerSummary:
+            'हृदय गति ${restingHeartRate.toInt()} bpm • रक्तचाप ${systolicBloodPressure.toInt()} • HRV ${rmssdHeartRateVariability.toInt()} ms',
       ),
       OrganSystemAge(
         system: OrganSystemType.metabolic,
-        estimatedAge: _round((chronologicalAge + totalMetabolicDelta).clamp(18.0, 90.0)),
+        estimatedAge:
+            _round((chronologicalAge + totalMetabolicDelta).clamp(18.0, 90.0)),
         chronologicalAge: chronologicalAge,
         ageDelta: _round(totalMetabolicDelta),
         performanceScore: _scoreForDelta(totalMetabolicDelta),
-        keyBiomarkerSummary: 'HbA1c ${estimatedHbA1c.toStringAsFixed(1)}% • WHtR ${waistToHeightRatio.toStringAsFixed(2)} • Glucose ${fastingGlucoseMgDl.toInt()} mg/dL',
-        regionalKeyBiomarkerSummary: 'HbA1c ${estimatedHbA1c.toStringAsFixed(1)}% • कमर अनुपात ${waistToHeightRatio.toStringAsFixed(2)} • शर्करा ${fastingGlucoseMgDl.toInt()} mg/dL',
+        keyBiomarkerSummary:
+            'HbA1c ${estimatedHbA1c.toStringAsFixed(1)}% • WHtR ${waistToHeightRatio.toStringAsFixed(2)} • Glucose ${fastingGlucoseMgDl.toInt()} mg/dL',
+        regionalKeyBiomarkerSummary:
+            'HbA1c ${estimatedHbA1c.toStringAsFixed(1)}% • कमर अनुपात ${waistToHeightRatio.toStringAsFixed(2)} • शर्करा ${fastingGlucoseMgDl.toInt()} mg/dL',
       ),
       OrganSystemAge(
         system: OrganSystemType.musculoskeletal,
-        estimatedAge: _round((chronologicalAge + totalMusculoDelta).clamp(18.0, 90.0)),
+        estimatedAge:
+            _round((chronologicalAge + totalMusculoDelta).clamp(18.0, 90.0)),
         chronologicalAge: chronologicalAge,
         ageDelta: _round(totalMusculoDelta),
         performanceScore: _scoreForDelta(totalMusculoDelta),
-        keyBiomarkerSummary: 'VO2 Max ${estimatedVo2Max.toStringAsFixed(1)} • ${(dailyStepsAverage / 1000).toStringAsFixed(1)}k steps/day • $weeklyStrengthSessions lifts/wk',
-        regionalKeyBiomarkerSummary: 'VO2 Max ${estimatedVo2Max.toStringAsFixed(1)} • ${(dailyStepsAverage / 1000).toStringAsFixed(1)}k कदम/दिन • $weeklyStrengthSessions शक्ति व्यायाम/सप्ताह',
+        keyBiomarkerSummary:
+            'VO2 Max ${estimatedVo2Max.toStringAsFixed(1)} • ${(dailyStepsAverage / 1000).toStringAsFixed(1)}k steps/day • $weeklyStrengthSessions lifts/wk',
+        regionalKeyBiomarkerSummary:
+            'VO2 Max ${estimatedVo2Max.toStringAsFixed(1)} • ${(dailyStepsAverage / 1000).toStringAsFixed(1)}k कदम/दिन • $weeklyStrengthSessions शक्ति व्यायाम/सप्ताह',
       ),
       OrganSystemAge(
         system: OrganSystemType.cellularRecovery,
-        estimatedAge: _round((chronologicalAge + totalRecoveryDelta).clamp(18.0, 90.0)),
+        estimatedAge:
+            _round((chronologicalAge + totalRecoveryDelta).clamp(18.0, 90.0)),
         chronologicalAge: chronologicalAge,
         ageDelta: _round(totalRecoveryDelta),
         performanceScore: _scoreForDelta(totalRecoveryDelta),
-        keyBiomarkerSummary: 'Deep Sleep ${deepSleepPercentage.toStringAsFixed(1)}% • Sleep Debt ${weeklySleepDebtHours.toStringAsFixed(1)}h • Diet ${antiInflammatoryDietScore.toInt()}/100',
-        regionalKeyBiomarkerSummary: 'गहरी नींद ${deepSleepPercentage.toStringAsFixed(1)}% • नींद ऋण ${weeklySleepDebtHours.toStringAsFixed(1)}घं • आहार ${antiInflammatoryDietScore.toInt()}/100',
+        keyBiomarkerSummary:
+            'Deep Sleep ${deepSleepPercentage.toStringAsFixed(1)}% • Sleep Debt ${weeklySleepDebtHours.toStringAsFixed(1)}h • Diet ${antiInflammatoryDietScore.toInt()}/100',
+        regionalKeyBiomarkerSummary:
+            'गहरी नींद ${deepSleepPercentage.toStringAsFixed(1)}% • नींद ऋण ${weeklySleepDebtHours.toStringAsFixed(1)}घं • आहार ${antiInflammatoryDietScore.toInt()}/100',
       ),
     ];
 
@@ -350,8 +366,10 @@ class BiologicalAgeEngine {
     final bestBiomarker = sortedBiomarkers.first;
     final worstBiomarker = sortedBiomarkers.last;
 
-    final topAsset = '${bestBiomarker.name} (${bestBiomarker.yearsImpact <= 0 ? "" : "+"}${bestBiomarker.yearsImpact.toStringAsFixed(1)} yrs)';
-    final regionalTopAsset = '${bestBiomarker.regionalName} (${bestBiomarker.yearsImpact <= 0 ? "" : "+"}${bestBiomarker.yearsImpact.toStringAsFixed(1)} वर्ष)';
+    final topAsset =
+        '${bestBiomarker.name} (${bestBiomarker.yearsImpact <= 0 ? "" : "+"}${bestBiomarker.yearsImpact.toStringAsFixed(1)} yrs)';
+    final regionalTopAsset =
+        '${bestBiomarker.regionalName} (${bestBiomarker.yearsImpact <= 0 ? "" : "+"}${bestBiomarker.yearsImpact.toStringAsFixed(1)} वर्ष)';
 
     final primaryDriver = worstBiomarker.yearsImpact > 0
         ? '${worstBiomarker.name} (+${worstBiomarker.yearsImpact.toStringAsFixed(1)} yrs)'
@@ -544,8 +562,10 @@ class BiologicalAgeEngine {
           targetedSystem: OrganSystemType.musculoskeletal,
           title: '3x 35-min Zone 2 Aerobic Base Progression',
           regionalTitle: 'सप्ताह में 3 बार 35 मिनट ज़ोन 2 कार्डियो',
-          description: 'Expands mitochondrial cristae density and boosts cellular bio-energetics.',
-          regionalDescription: 'माइटोकॉन्ड्रियल घनत्व बढ़ाता है और एरोबिक शक्ति को सुदृढ़ करता है।',
+          description:
+              'Expands mitochondrial cristae density and boosts cellular bio-energetics.',
+          regionalDescription:
+              'माइटोकॉन्ड्रियल घनत्व बढ़ाता है और एरोबिक शक्ति को सुदृढ़ करता है।',
           potentialYearsSaved: 1.4,
           timeframe: '8-12 weeks',
           difficulty: 'Moderate',
@@ -561,8 +581,10 @@ class BiologicalAgeEngine {
           targetedSystem: OrganSystemType.metabolic,
           title: 'Shatpawali (100-step walk) & 35g Preload Fiber',
           regionalTitle: 'भोजनोपरांत शतपावली (100 कदम) व फाइबर सेवन',
-          description: 'Blunts postprandial glucose excursions and reduces hepatic visceral fat accumulation.',
-          regionalDescription: 'भोजन के बाद शर्करा की वृद्धि रोकता है और यकृत की चर्बी कम करता है।',
+          description:
+              'Blunts postprandial glucose excursions and reduces hepatic visceral fat accumulation.',
+          regionalDescription:
+              'भोजन के बाद शर्करा की वृद्धि रोकता है और यकृत की चर्बी कम करता है।',
           potentialYearsSaved: 1.1,
           timeframe: '6-8 weeks',
           difficulty: 'Gentle',
@@ -578,8 +600,10 @@ class BiologicalAgeEngine {
           targetedSystem: OrganSystemType.cellularRecovery,
           title: 'Strict 10:30 PM Bedtime & Evening Blue Light Fast',
           regionalTitle: 'नियमित 10:30 PM शयन व नीली रोशनी प्रतिबंध',
-          description: 'Synchronizes melatonin pulse and increases restorative slow-wave delta sleep by 25%.',
-          regionalDescription: 'मेलाटोनिन स्राव को संतुलित कर गहरी रीस्टोरेटिव नींद 25% बढ़ाता है।',
+          description:
+              'Synchronizes melatonin pulse and increases restorative slow-wave delta sleep by 25%.',
+          regionalDescription:
+              'मेलाटोनिन स्राव को संतुलित कर गहरी रीस्टोरेटिव नींद 25% बढ़ाता है।',
           potentialYearsSaved: 0.9,
           timeframe: '4-6 weeks',
           difficulty: 'Moderate',
@@ -595,8 +619,10 @@ class BiologicalAgeEngine {
           targetedSystem: OrganSystemType.musculoskeletal,
           title: '3x Weekly Progressive Resistance Lifts',
           regionalTitle: 'सप्ताह में 3 बार प्रगतिशील शक्ति प्रशिक्षण',
-          description: 'Preserves fast-twitch type II muscle fibers and maintains bone mineral density.',
-          regionalDescription: 'मांसपेशियों के क्षय को रोकता है और अस्थि घनत्व को मजबूत रखता है।',
+          description:
+              'Preserves fast-twitch type II muscle fibers and maintains bone mineral density.',
+          regionalDescription:
+              'मांसपेशियों के क्षय को रोकता है और अस्थि घनत्व को मजबूत रखता है।',
           potentialYearsSaved: 0.8,
           timeframe: '10-14 weeks',
           difficulty: 'Rigorous',
@@ -612,8 +638,10 @@ class BiologicalAgeEngine {
           targetedSystem: OrganSystemType.cardiovascular,
           title: 'Daily 10-Min Anulom Vilom & Resonance Breathing',
           regionalTitle: 'प्रतिदिन 10 मिनट अनुलोम-विलोम व गहरी सांस',
-          description: 'Enhances baroreflex sensitivity and reduces baseline systolic blood pressure by 4-6 mmHg.',
-          regionalDescription: 'रक्तचाप को 4-6 mmHg कम करता है और वेगल टोन को सक्रिय करता है।',
+          description:
+              'Enhances baroreflex sensitivity and reduces baseline systolic blood pressure by 4-6 mmHg.',
+          regionalDescription:
+              'रक्तचाप को 4-6 mmHg कम करता है और वेगल टोन को सक्रिय करता है।',
           potentialYearsSaved: 0.7,
           timeframe: '4 weeks',
           difficulty: 'Gentle',
@@ -636,12 +664,26 @@ class BiologicalAgeEngine {
     required double totalRecoveryDelta,
   }) {
     final list = <MonthlyBioAgeSnapshot>[];
-    final monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
 
     // Backtrack 11 months + current month (total 12 months)
     for (int i = 11; i >= 0; i--) {
       final monthDate = DateTime(currentDate.year, currentDate.month - i, 1);
-      final monthLabel = '${monthNames[monthDate.month - 1]} ${monthDate.year.toString().substring(2)}';
+      final monthLabel =
+          '${monthNames[monthDate.month - 1]} ${monthDate.year.toString().substring(2)}';
 
       // Past chronological age adjusted slightly for the 12 month window
       final pastChrono = chronologicalAge - (i / 12.0);
@@ -651,7 +693,8 @@ class BiologicalAgeEngine {
       final progressFraction = (11 - i) / 11.0;
       final initialBioAgeDelta = 2.2; // Start from +2.2 years older initially
       final currentDelta = currentBioAge - chronologicalAge;
-      final interpolatedDelta = initialBioAgeDelta + (currentDelta - initialBioAgeDelta) * progressFraction;
+      final interpolatedDelta = initialBioAgeDelta +
+          (currentDelta - initialBioAgeDelta) * progressFraction;
 
       final histBioAge = _round(pastChrono + interpolatedDelta);
       final histPace = _round(1.0 + (interpolatedDelta / (pastChrono * 0.65)));
@@ -663,10 +706,18 @@ class BiologicalAgeEngine {
           chronologicalAge: _round(pastChrono),
           biologicalAge: histBioAge,
           agingPace: histPace,
-          metabolicAge: _round(pastChrono + (totalMetabolicDelta * progressFraction) + (1.5 * (1 - progressFraction))),
-          cardiovascularAge: _round(pastChrono + (totalCardioDelta * progressFraction) + (1.2 * (1 - progressFraction))),
-          musculoskeletalAge: _round(pastChrono + (totalMusculoDelta * progressFraction) + (1.8 * (1 - progressFraction))),
-          recoveryAge: _round(pastChrono + (totalRecoveryDelta * progressFraction) + (1.0 * (1 - progressFraction))),
+          metabolicAge: _round(pastChrono +
+              (totalMetabolicDelta * progressFraction) +
+              (1.5 * (1 - progressFraction))),
+          cardiovascularAge: _round(pastChrono +
+              (totalCardioDelta * progressFraction) +
+              (1.2 * (1 - progressFraction))),
+          musculoskeletalAge: _round(pastChrono +
+              (totalMusculoDelta * progressFraction) +
+              (1.8 * (1 - progressFraction))),
+          recoveryAge: _round(pastChrono +
+              (totalRecoveryDelta * progressFraction) +
+              (1.0 * (1 - progressFraction))),
         ),
       );
     }

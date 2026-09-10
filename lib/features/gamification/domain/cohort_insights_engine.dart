@@ -31,11 +31,17 @@ class DemographicCohortEngine {
     required int activeStreakDays,
     required double adherenceScore,
   }) {
-    if (compositePercentile >= 90.0 && activeStreakDays >= 21 && adherenceScore >= 85.0) {
+    if (compositePercentile >= 90.0 &&
+        activeStreakDays >= 21 &&
+        adherenceScore >= 85.0) {
       return NetworkInfluenceTier.luminary;
-    } else if (compositePercentile >= 75.0 && activeStreakDays >= 14 && adherenceScore >= 75.0) {
+    } else if (compositePercentile >= 75.0 &&
+        activeStreakDays >= 14 &&
+        adherenceScore >= 75.0) {
       return NetworkInfluenceTier.vanguard;
-    } else if (compositePercentile >= 55.0 && activeStreakDays >= 7 && adherenceScore >= 60.0) {
+    } else if (compositePercentile >= 55.0 &&
+        activeStreakDays >= 7 &&
+        adherenceScore >= 60.0) {
       return NetworkInfluenceTier.catalyst;
     }
     return NetworkInfluenceTier.seed;
@@ -51,8 +57,9 @@ class DemographicCohortEngine {
     final adherenceComponent = adherenceScore * 0.40;
     final streakComponent = (activeStreakDays / 30.0).clamp(0.0, 1.0) * 30.0;
     final percentileComponent = compositePercentile * 0.30;
-    
-    return (adherenceComponent + streakComponent + percentileComponent).clamp(10.0, 99.0);
+
+    return (adherenceComponent + streakComponent + percentileComponent)
+        .clamp(10.0, 99.0);
   }
 
   /// Generates the complete Demographic Cohort Report
@@ -82,7 +89,8 @@ class DemographicCohortEngine {
                     : '55+ yrs';
 
     // 2. Persona-adjusted baseline statistics
-    final stepMean = persona.baselineDailySteps.toDouble() * (cityTier == IndianCityTier.tier1 ? 0.95 : 1.05);
+    final stepMean = persona.baselineDailySteps.toDouble() *
+        (cityTier == IndianCityTier.tier1 ? 0.95 : 1.05);
     const stepStdDev = 2200.0;
 
     const shatpawaliMean = 45.0; // 45% compliance
@@ -222,12 +230,17 @@ class DemographicCohortEngine {
 
     // 5. Cohort Group
     final cohortGroup = DemographicCohortGroup(
-      cohortId: 'IN_${cityTier.name.toUpperCase()}_${ageBracket.replaceAll(' ', '_')}',
+      cohortId:
+          'IN_${cityTier.name.toUpperCase()}_${ageBracket.replaceAll(' ', '_')}',
       ageBracket: ageBracket,
       biologicalSex: biologicalSex,
       cityTier: cityTier,
       persona: persona,
-      activePeersCount: cityTier == IndianCityTier.tier1 ? 14820 : cityTier == IndianCityTier.tier2 ? 8940 : 5410,
+      activePeersCount: cityTier == IndianCityTier.tier1
+          ? 14820
+          : cityTier == IndianCityTier.tier2
+              ? 8940
+              : 5410,
       cohortAverageAdherence: 68.5,
       cohortAverageKarma: 850.0,
     );
@@ -236,8 +249,10 @@ class DemographicCohortEngine {
     final recentActivities = [
       AnonymizedPeerActivity(
         id: 'act_1',
-        peerAlias: 'Athlete from ${cityTier == IndianCityTier.tier1 ? 'Bengaluru' : 'Pune'}',
-        regionalPeerAlias: '${cityTier == IndianCityTier.tier1 ? 'बेंगलुरु' : 'पुणे'} के साधक',
+        peerAlias:
+            'Athlete from ${cityTier == IndianCityTier.tier1 ? 'Bengaluru' : 'Pune'}',
+        regionalPeerAlias:
+            '${cityTier == IndianCityTier.tier1 ? 'बेंगलुरु' : 'पुणे'} के साधक',
         actionDescription: 'Completed 100-step Shatpawali post-dinner',
         regionalActionDescription: 'रात्रि भोजनोपरांत १०० कदम शतपावली पूर्ण की',
         karmaGenerated: 25,
@@ -249,15 +264,18 @@ class DemographicCohortEngine {
         peerAlias: 'Practitioner in your age cluster',
         regionalPeerAlias: 'आपके आयु वर्ग के सह-साधक',
         actionDescription: 'Hit 1.3g/kg Protein goal with Sattu & Paneer',
-        regionalActionDescription: 'सत्तू व पनीर द्वारा प्रोटीन लक्ष्य हासिल किया',
+        regionalActionDescription:
+            'सत्तू व पनीर द्वारा प्रोटीन लक्ष्य हासिल किया',
         karmaGenerated: 40,
         timestamp: DateTime.now().subtract(const Duration(minutes: 19)),
         iconName: 'restaurant',
       ),
       AnonymizedPeerActivity(
         id: 'act_3',
-        peerAlias: 'Runner from ${cityTier == IndianCityTier.tier1 ? 'Mumbai' : 'Ahmedabad'}',
-        regionalPeerAlias: '${cityTier == IndianCityTier.tier1 ? 'मुंबई' : 'अहमदाबाद'} के धावक',
+        peerAlias:
+            'Runner from ${cityTier == IndianCityTier.tier1 ? 'Mumbai' : 'Ahmedabad'}',
+        regionalPeerAlias:
+            '${cityTier == IndianCityTier.tier1 ? 'मुंबई' : 'अहमदाबाद'} के धावक',
         actionDescription: 'Maintained 8+ hrs sleep with 88% Recovery score',
         regionalActionDescription: '८+ घंटे निद्रा व ८८% रिकवरी स्तर बनाए रखा',
         karmaGenerated: 35,
@@ -266,12 +284,15 @@ class DemographicCohortEngine {
       ),
       AnonymizedPeerActivity(
         id: 'act_4',
-        peerAlias: 'Yogi from ${cityTier == IndianCityTier.tier1 ? 'Delhi NCR' : 'Jaipur'}',
-        regionalPeerAlias: '${cityTier == IndianCityTier.tier1 ? 'दिल्ली एनसीआर' : 'जयपुर'} के साधक',
+        peerAlias:
+            'Yogi from ${cityTier == IndianCityTier.tier1 ? 'Delhi NCR' : 'Jaipur'}',
+        regionalPeerAlias:
+            '${cityTier == IndianCityTier.tier1 ? 'दिल्ली एनसीआर' : 'जयपुर'} के साधक',
         actionDescription: 'Completed Surya Namaskar & Pranayama flow',
         regionalActionDescription: 'सूर्य नमस्कार व प्राणायाम सत्र संपन्न किया',
         karmaGenerated: 30,
-        timestamp: DateTime.now().subtract(const Duration(hours: 1, minutes: 15)),
+        timestamp:
+            DateTime.now().subtract(const Duration(hours: 1, minutes: 15)),
         iconName: 'self_improvement',
       ),
     ];
@@ -281,8 +302,10 @@ class DemographicCohortEngine {
       id: 'sangha_10m_steps',
       title: '${cityTier.label.split(' ')[0]} 10-Million Step Challenge',
       regionalTitle: '${cityTier.regionalLabel} १ करोड़ कदम सामूहिक संकल्प',
-      description: 'Collective movement milestone across all active members in your regional cluster.',
-      regionalDescription: 'आपके क्षेत्र के सभी सक्रिय साधकों का सामूहिक गतिशीलता संकल्प।',
+      description:
+          'Collective movement milestone across all active members in your regional cluster.',
+      regionalDescription:
+          'आपके क्षेत्र के सभी सक्रिय साधकों का सामूहिक गतिशीलता संकल्प।',
       targetQuantity: 10000000,
       currentQuantity: 7420000 + (userDailySteps * 45),
       unit: 'steps',
@@ -295,14 +318,20 @@ class DemographicCohortEngine {
     String regionalPositiveNudge;
 
     if (compositePercentile >= 75.0) {
-      positiveNudge = 'Your consistency puts you in the top quartile of ${persona.label}s in ${cityTier.name.toUpperCase()}. You are actively lifting the Sangha energy!';
-      regionalPositiveNudge = 'आपकी साधना आपको अपने वर्ग में शीर्ष २५% में स्थापित करती है। आप संघ की ऊर्जा का संवर्धन कर रहे हैं!';
+      positiveNudge =
+          'Your consistency puts you in the top quartile of ${persona.label}s in ${cityTier.name.toUpperCase()}. You are actively lifting the Sangha energy!';
+      regionalPositiveNudge =
+          'आपकी साधना आपको अपने वर्ग में शीर्ष २५% में स्थापित करती है। आप संघ की ऊर्जा का संवर्धन कर रहे हैं!';
     } else if (shatpawaliPercentile < 50.0) {
-      positiveNudge = 'Peers in your cohort who practice post-dinner Shatpawali report 22% better morning recovery. A 10-minute stroll tonight will elevate your rank.';
-      regionalPositiveNudge = 'रात्रि शतपावली करने वाले साथियों की सुबह की रिकवरी २२% बेहतर होती है। आज १० मिनट की चहलकदमी से अपनी स्थिति उन्नत करें।';
+      positiveNudge =
+          'Peers in your cohort who practice post-dinner Shatpawali report 22% better morning recovery. A 10-minute stroll tonight will elevate your rank.';
+      regionalPositiveNudge =
+          'रात्रि शतपावली करने वाले साथियों की सुबह की रिकवरी २२% बेहतर होती है। आज १० मिनट की चहलकदमी से अपनी स्थिति उन्नत करें।';
     } else {
-      positiveNudge = 'You are steadily building momentum alongside ${cohortGroup.activePeersCount} peers. Consistency is the true multiplier.';
-      regionalPositiveNudge = 'आप ${cohortGroup.activePeersCount} साथियों के साथ निरंतर प्रगति कर रहे हैं। नियमितता ही सबसे बड़ी शक्ति है।';
+      positiveNudge =
+          'You are steadily building momentum alongside ${cohortGroup.activePeersCount} peers. Consistency is the true multiplier.';
+      regionalPositiveNudge =
+          'आप ${cohortGroup.activePeersCount} साथियों के साथ निरंतर प्रगति कर रहे हैं। नियमितता ही सबसे बड़ी शक्ति है।';
     }
 
     return DemographicCohortReport(

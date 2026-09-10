@@ -33,12 +33,15 @@ class AffiliateScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.account_balance_wallet_outlined, color: AppColors.textSecondary),
+            icon: const Icon(Icons.account_balance_wallet_outlined,
+                color: AppColors.textSecondary),
             tooltip: 'Payout Settings',
-            onPressed: () => _showUpiSettingsBottomSheet(context, notifier, profile.upiId),
+            onPressed: () =>
+                _showUpiSettingsBottomSheet(context, notifier, profile.upiId),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showAffiliateTermsModal(context),
           ),
         ],
@@ -71,12 +74,15 @@ class AffiliateScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BilingualLabel(
-                  primaryText: 'Recent Referrals (${profile.recentReferrals.length})',
+                  primaryText:
+                      'Recent Referrals (${profile.recentReferrals.length})',
                   regionalText: 'हालिया रेफरल व कमीशन',
                 ),
                 TextButton.icon(
-                  icon: const Icon(Icons.flash_on, color: AppColors.gold, size: 14),
-                  label: const Text('Simulate Sale', style: TextStyle(color: AppColors.gold, fontSize: 11)),
+                  icon: const Icon(Icons.flash_on,
+                      color: AppColors.gold, size: 14),
+                  label: const Text('Simulate Sale',
+                      style: TextStyle(color: AppColors.gold, fontSize: 11)),
                   onPressed: () {
                     notifier.simulateReferralSale(
                       plan: 'FitKarma Pro (Annual Plan - ₹3,999)',
@@ -123,12 +129,14 @@ class AffiliateScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          Icon(isError ? Icons.error_outline : Icons.check_circle_outline, color: color, size: 16),
+          Icon(isError ? Icons.error_outline : Icons.check_circle_outline,
+              color: color, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: color, fontSize: 12, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -150,7 +158,8 @@ class AffiliateScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -159,11 +168,15 @@ class AffiliateScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.payments_outlined, color: AppColors.karmaGreen, size: 14),
+                    const Icon(Icons.payments_outlined,
+                        color: AppColors.karmaGreen, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       'UPI: ${profile.upiId}',
-                      style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.karmaGreen,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ],
                 ),
@@ -176,7 +189,8 @@ class AffiliateScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   '${profile.totalClicks} Clicks (${profile.conversionRate.toStringAsFixed(1)}% CVR)',
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 10),
                 ),
               ),
             ],
@@ -208,7 +222,9 @@ class AffiliateScreen extends ConsumerWidget {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: profile.pendingPayoutInr > 0 ? AppColors.focusBlue : AppColors.surfaceElevated,
+                backgroundColor: profile.pendingPayoutInr > 0
+                    ? AppColors.focusBlue
+                    : AppColors.surfaceElevated,
                 shape: const RoundedRectangleBorder(
                   borderRadius: AppRadii.radiusMd,
                 ),
@@ -218,13 +234,19 @@ class AffiliateScreen extends ConsumerWidget {
                   ? () => notifier.requestPayout()
                   : null,
               child: state.isLoading
-                  ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                  ? const SizedBox(
+                      height: 16,
+                      width: 16,
+                      child: CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2))
                   : Text(
                       profile.pendingPayoutInr > 0
                           ? 'Transfer ₹${profile.pendingPayoutInr} via UPI'
                           : 'No Pending Balance',
                       style: TextStyle(
-                        color: profile.pendingPayoutInr > 0 ? Colors.white : AppColors.textSecondary,
+                        color: profile.pendingPayoutInr > 0
+                            ? Colors.white
+                            : AppColors.textSecondary,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
                       ),
@@ -236,7 +258,8 @@ class AffiliateScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildReferralShareCard(BuildContext context, AffiliateProfile profile) {
+  Widget _buildReferralShareCard(
+      BuildContext context, AffiliateProfile profile) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +273,10 @@ class AffiliateScreen extends ConsumerWidget {
                   SizedBox(width: 6),
                   Text(
                     'Your Referral Link & Promo Code',
-                    style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
                   ),
                 ],
               ),
@@ -262,14 +288,18 @@ class AffiliateScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   '${profile.tier.commissionPercent}% Commission',
-                  style: const TextStyle(color: AppColors.energyOrange, fontSize: 9, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.energyOrange,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 8),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm, vertical: 8),
             decoration: const BoxDecoration(
               color: AppColors.surfaceElevated,
               borderRadius: AppRadii.radiusSm,
@@ -292,7 +322,8 @@ class AffiliateScreen extends ConsumerWidget {
                       ),
                       Text(
                         profile.customLink,
-                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                        style: const TextStyle(
+                            color: AppColors.textSecondary, fontSize: 10),
                       ),
                     ],
                   ),
@@ -300,11 +331,16 @@ class AffiliateScreen extends ConsumerWidget {
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.surfaceElevatedHigh,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusSm),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   ),
-                  icon: const Icon(Icons.copy, color: AppColors.focusBlue, size: 13),
-                  label: const Text('Copy', style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                  icon: const Icon(Icons.copy,
+                      color: AppColors.focusBlue, size: 13),
+                  label: const Text('Copy',
+                      style:
+                          TextStyle(color: AppColors.focusBlue, fontSize: 11)),
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: profile.customLink));
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -341,13 +377,19 @@ class AffiliateScreen extends ConsumerWidget {
                   const SizedBox(width: 6),
                   Text(
                     profile.tier.name,
-                    style: TextStyle(color: tierColor, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: TextStyle(
+                        color: tierColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
                   ),
                 ],
               ),
               Text(
                 '${profile.tier.commissionPercent}% Flat Cut',
-                style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 11),
+                style: const TextStyle(
+                    color: AppColors.karmaGreen,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11),
               ),
             ],
           ),
@@ -356,7 +398,8 @@ class AffiliateScreen extends ConsumerWidget {
             remaining > 0
                 ? '$remaining more conversions to unlock next tier commission rate.'
                 : 'Maximum tier unlocked! Enjoying top-tier revenue splits.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
           ),
           const SizedBox(height: AppSpacing.sm),
           ClipRRect(
@@ -384,7 +427,8 @@ class AffiliateScreen extends ConsumerWidget {
               color: AppColors.surfaceElevated,
               borderRadius: AppRadii.radiusSm,
             ),
-            child: const Icon(Icons.person_add_alt_1, color: AppColors.karmaGreen, size: 18),
+            child: const Icon(Icons.person_add_alt_1,
+                color: AppColors.karmaGreen, size: 18),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
@@ -454,14 +498,18 @@ class AffiliateScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   asset.dimension,
-                  style: const TextStyle(color: AppColors.focusBlue, fontSize: 9, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.focusBlue,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
           ),
           Text(
             asset.regionalTitle,
-            style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+            style:
+                const TextStyle(color: AppColors.textSecondary, fontSize: 10),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
@@ -482,7 +530,8 @@ class AffiliateScreen extends ConsumerWidget {
     );
   }
 
-  void _showUpiSettingsBottomSheet(BuildContext context, AffiliateNotifier notifier, String currentUpi) {
+  void _showUpiSettingsBottomSheet(
+      BuildContext context, AffiliateNotifier notifier, String currentUpi) {
     final upiController = TextEditingController(text: currentUpi);
 
     showModalBottomSheet(
@@ -529,7 +578,8 @@ class AffiliateScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () {
                     if (upiController.text.trim().isNotEmpty) {
@@ -537,7 +587,9 @@ class AffiliateScreen extends ConsumerWidget {
                       Navigator.pop(ctx);
                     }
                   },
-                  child: const Text('Save Payout Account', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  child: const Text('Save Payout Account',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -568,7 +620,8 @@ class AffiliateScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'Affiliates earn 15% to 30% flat commission on all FitKarma Pro and Elite subscription referrals, and 10% to 20% on Marketplace coach programs. Commissions clear after the 7-day refund buffer and are paid instantly via UPI.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -576,10 +629,12 @@ class AffiliateScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Got it', style: TextStyle(color: Colors.white)),
+                  child: const Text('Got it',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

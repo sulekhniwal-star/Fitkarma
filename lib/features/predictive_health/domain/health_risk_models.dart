@@ -115,7 +115,8 @@ class PreventiveProtocol {
   final String protocolDescription;
   final String regionalProtocolDescription;
   final String frequency; // e.g. "Daily after dinner", "3x per week"
-  final String expectedBiometricImpact; // e.g. "Reduces postprandial glucose spike by 24%"
+  final String
+      expectedBiometricImpact; // e.g. "Reduces postprandial glucose spike by 24%"
   final int karmaReward;
 
   const PreventiveProtocol({

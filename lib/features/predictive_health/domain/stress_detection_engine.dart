@@ -43,10 +43,10 @@ class StressDetectionEngine {
         baselineValue: baselineRmssd,
         stressPointsContribution: hrvStressPts,
         insight: hrvRatio < 0.80
-            ? 'Vagal tone is suppressed by ${( (1 - hrvRatio) * 100 ).toInt()}% vs personal baseline.'
+            ? 'Vagal tone is suppressed by ${((1 - hrvRatio) * 100).toInt()}% vs personal baseline.'
             : 'Heart rate variability reflects stable parasympathetic braking.',
         regionalInsight: hrvRatio < 0.80
-            ? 'हृदय परिवर्तनशीलता (HRV) सामान्य स्तर से ${( (1 - hrvRatio) * 100 ).toInt()}% कम है।'
+            ? 'हृदय परिवर्तनशीलता (HRV) सामान्य स्तर से ${((1 - hrvRatio) * 100).toInt()}% कम है।'
             : 'वेगल तंत्रिका संतुलन सामान्य व स्थिर अवस्था में है।',
       ),
     );
@@ -134,7 +134,8 @@ class StressDetectionEngine {
     );
 
     // 2. Calculate Composite Current Stress Score (0 to 100)
-    final rawComposite = hrvStressPts + rhrStressPts + respStressPts + sleepStressPts;
+    final rawComposite =
+        hrvStressPts + rhrStressPts + respStressPts + sleepStressPts;
     final currentStressScore = _round(rawComposite.clamp(5.0, 98.0));
     final currentTier = _tierForScore(currentStressScore);
 
@@ -148,7 +149,8 @@ class StressDetectionEngine {
 
     // Calculate daily metrics from timeline
     final dailyScores = timeline.map((e) => e.stressScore).toList();
-    final dailyAvgScore = _round(dailyScores.reduce((a, b) => a + b) / dailyScores.length);
+    final dailyAvgScore =
+        _round(dailyScores.reduce((a, b) => a + b) / dailyScores.length);
 
     int peakHour = 14;
     double maxHourScore = -1.0;
@@ -174,8 +176,10 @@ class StressDetectionEngine {
     final protocols = _generateVagalProtocols(currentStressScore, currentTier);
 
     // 5. Clinical Autonomic Summary
-    final summary = _generateSummary(currentStressScore, currentTier, peakHour, calmHour, currentRmssd);
-    final regionalSummary = _generateRegionalSummary(currentStressScore, currentTier, peakHour, calmHour, currentRmssd);
+    final summary = _generateSummary(
+        currentStressScore, currentTier, peakHour, calmHour, currentRmssd);
+    final regionalSummary = _generateRegionalSummary(
+        currentStressScore, currentTier, peakHour, calmHour, currentRmssd);
 
     return InferredStressReport(
       currentStressScore: currentStressScore,
@@ -229,12 +233,15 @@ class StressDetectionEngine {
       if (h == currentHour) {
         score = currentScore;
       } else {
-        score = _round((currentScore * hourFactor + 12.0 * math.sin(h * 0.4)).clamp(10.0, 95.0));
+        score = _round((currentScore * hourFactor + 12.0 * math.sin(h * 0.4))
+            .clamp(10.0, 95.0));
       }
 
       final tier = _tierForScore(score);
-      final rhr = _round((currentRhr * (0.85 + (score / 100.0) * 0.25)).clamp(50.0, 110.0));
-      final rmssd = _round((currentRmssd * (1.35 - (score / 100.0) * 0.65)).clamp(18.0, 85.0));
+      final rhr = _round(
+          (currentRhr * (0.85 + (score / 100.0) * 0.25)).clamp(50.0, 110.0));
+      final rmssd = _round(
+          (currentRmssd * (1.35 - (score / 100.0) * 0.65)).clamp(18.0, 85.0));
 
       timeline.add(
         HourlyStressReading(
@@ -264,7 +271,8 @@ class StressDetectionEngine {
     return StressLevelTier.acuteOverload;
   }
 
-  List<VagalRecoveryProtocol> _generateVagalProtocols(double score, StressLevelTier tier) {
+  List<VagalRecoveryProtocol> _generateVagalProtocols(
+      double score, StressLevelTier tier) {
     final protocols = <VagalRecoveryProtocol>[];
 
     if (score >= 51.0) {
@@ -273,8 +281,10 @@ class StressDetectionEngine {
           id: 'vagal_478_breathing',
           title: '4-7-8 Parasympathetic Vagal Reset',
           regionalTitle: '४-७-८ वेगल तंत्रिका शांति प्राणायाम',
-          description: 'Prolonged 8-second exhale stimulates pulmonary stretch receptors and drops acute heart rate.',
-          regionalDescription: '८ सेकंड तक सांस छोड़ना हृदय गति को तुरंत शांत करता है।',
+          description:
+              'Prolonged 8-second exhale stimulates pulmonary stretch receptors and drops acute heart rate.',
+          regionalDescription:
+              '८ सेकंड तक सांस छोड़ना हृदय गति को तुरंत शांत करता है।',
           breathingCadence: 'Inhale 4s • Hold 7s • Exhale 8s',
           durationMinutes: 5,
           karmaReward: 40,
@@ -287,8 +297,10 @@ class StressDetectionEngine {
         id: 'vagal_bhramari',
         title: 'Bhramari Pranayama (Humming Vagal Nerve Tone)',
         regionalTitle: 'भ्रामरी प्राणायाम (गुंजन ध्वनि से शांति)',
-        description: 'Vocal acoustic resonance stimulates the vagus nerve and triggers nitric oxide release in nasal sinuses.',
-        regionalDescription: 'भ्रामरी गुंजन नाइट्रिक ऑक्साइड बढ़ाता है और मन को गहरी शांति देता है।',
+        description:
+            'Vocal acoustic resonance stimulates the vagus nerve and triggers nitric oxide release in nasal sinuses.',
+        regionalDescription:
+            'भ्रामरी गुंजन नाइट्रिक ऑक्साइड बढ़ाता है और मन को गहरी शांति देता है।',
         breathingCadence: 'Deep Inhale 4s • Humming Exhale 10s',
         durationMinutes: 4,
         karmaReward: 35,
@@ -300,8 +312,10 @@ class StressDetectionEngine {
         id: 'vagal_box_breathing',
         title: 'Sama Vritti / 4x4 Box Breathing',
         regionalTitle: 'सम वृत्ति (४x४ बॉक्स श्वास नियंत्रण)',
-        description: 'Equalized breath pacing restores balance between sympathetic alertness and parasympathetic calm.',
-        regionalDescription: 'समान गति से श्वास लेना मस्तिष्क को एकाग्र व तनावमुक्त करता है।',
+        description:
+            'Equalized breath pacing restores balance between sympathetic alertness and parasympathetic calm.',
+        regionalDescription:
+            'समान गति से श्वास लेना मस्तिष्क को एकाग्र व तनावमुक्त करता है।',
         breathingCadence: 'Inhale 4s • Hold 4s • Exhale 4s • Hold 4s',
         durationMinutes: 5,
         karmaReward: 30,
@@ -311,7 +325,8 @@ class StressDetectionEngine {
     return protocols;
   }
 
-  String _generateSummary(double score, StressLevelTier tier, int peakH, int calmH, double hrv) {
+  String _generateSummary(
+      double score, StressLevelTier tier, int peakH, int calmH, double hrv) {
     final peakLabel = '${peakH.toString().padLeft(2, '0')}:00';
 
     if (tier == StressLevelTier.calm || tier == StressLevelTier.eustress) {
@@ -323,7 +338,8 @@ class StressDetectionEngine {
     return 'ACUTE AUTONOMIC OVERLOAD: Vagal tone severely suppressed (Score ${score.toInt()}/100) with compounded sedentary tachycardia. Discontinue screen work and perform 5 minutes of Bhramari Pranayama immediately.';
   }
 
-  String _generateRegionalSummary(double score, StressLevelTier tier, int peakH, int calmH, double hrv) {
+  String _generateRegionalSummary(
+      double score, StressLevelTier tier, int peakH, int calmH, double hrv) {
     final peakLabel = '${peakH.toString().padLeft(2, '0')}:00';
 
     if (tier == StressLevelTier.calm || tier == StressLevelTier.eustress) {

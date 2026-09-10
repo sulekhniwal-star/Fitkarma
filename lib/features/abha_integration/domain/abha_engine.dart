@@ -25,7 +25,8 @@ class AbhaEngine {
 
   /// Validates ABHA PHR Address Handle format (e.g. rahul.sharma@abdm)
   static bool isValidAbhaAddress(String address) {
-    final pattern = RegExp(r'^[a-zA-Z0-9._]{3,32}@(abdm|sbx|fitkarma|aarogyasetu|ndhm)$');
+    final pattern =
+        RegExp(r'^[a-zA-Z0-9._]{3,32}@(abdm|sbx|fitkarma|aarogyasetu|ndhm)$');
     return pattern.hasMatch(address.trim().toLowerCase());
   }
 
@@ -62,7 +63,8 @@ class AbhaEngine {
           : '14882249128734',
     );
 
-    final cleanName = fullName.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '.');
+    final cleanName =
+        fullName.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '.');
     final phrAddress = preferredAbhaAddress ?? '$cleanName@abdm';
 
     final qrPayload = jsonEncode({
@@ -103,7 +105,8 @@ class AbhaEngine {
     required int weeklyStepsAverage,
   }) {
     final nowIso = DateTime.now().toIso8601String();
-    final bundleId = 'fitkarma-fhir-bundle-${DateTime.now().millisecondsSinceEpoch}';
+    final bundleId =
+        'fitkarma-fhir-bundle-${DateTime.now().millisecondsSinceEpoch}';
 
     return {
       'resourceType': 'Bundle',
@@ -111,7 +114,9 @@ class AbhaEngine {
       'meta': {
         'versionId': '1',
         'lastUpdated': nowIso,
-        'profile': ['https://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentBundle'],
+        'profile': [
+          'https://nrces.in/ndhm/fhir/r4/StructureDefinition/DocumentBundle'
+        ],
       },
       'type': 'document',
       'timestamp': nowIso,
@@ -134,7 +139,9 @@ class AbhaEngine {
             'name': [
               {'text': profile.fullName}
             ],
-            'gender': profile.gender == 'M' ? 'male' : (profile.gender == 'F' ? 'female' : 'other'),
+            'gender': profile.gender == 'M'
+                ? 'male'
+                : (profile.gender == 'F' ? 'female' : 'other'),
             'birthDate': profile.dateOfBirth,
           }
         },

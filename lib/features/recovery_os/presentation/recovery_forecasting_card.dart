@@ -21,7 +21,8 @@ class RecoveryForecastingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isYounger = report.ageDelta <= 0;
-    final accentColor = isYounger ? AppColors.karmaGreen : AppColors.energyOrange;
+    final accentColor =
+        isYounger ? AppColors.karmaGreen : AppColors.energyOrange;
 
     return BentoCard(
       hasGlow: isYounger,
@@ -133,7 +134,9 @@ class RecoveryForecastingCard extends StatelessWidget {
                     color: AppColors.surfaceElevated,
                     borderRadius: AppRadii.radiusSm,
                     border: Border.all(
-                      color: f.isPrWindow ? AppColors.karmaGreen.withValues(alpha: 0.5) : AppColors.glassBorder,
+                      color: f.isPrWindow
+                          ? AppColors.karmaGreen.withValues(alpha: 0.5)
+                          : AppColors.glassBorder,
                     ),
                   ),
                   child: Column(
@@ -162,7 +165,9 @@ class RecoveryForecastingCard extends StatelessWidget {
                       Text(
                         f.optimalFocus,
                         style: AppTypography.bodySmall.copyWith(
-                          color: f.isPrWindow ? AppColors.karmaGreen : AppColors.textSecondary,
+                          color: f.isPrWindow
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
                           fontSize: 11,
                           height: 1.2,
                         ),

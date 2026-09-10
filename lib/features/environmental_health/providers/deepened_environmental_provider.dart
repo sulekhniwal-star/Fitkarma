@@ -2,15 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/deepened_environmental_engine.dart';
 import '../domain/deepened_environmental_models.dart';
 
-final deepenedEnvironmentalProvider =
-    StateNotifierProvider<DeepenedEnvironmentalNotifier, DeepenedEnvironmentalReport>((ref) {
+final deepenedEnvironmentalProvider = StateNotifierProvider<
+    DeepenedEnvironmentalNotifier, DeepenedEnvironmentalReport>((ref) {
   return DeepenedEnvironmentalNotifier();
 });
 
-class DeepenedEnvironmentalNotifier extends StateNotifier<DeepenedEnvironmentalReport> {
+class DeepenedEnvironmentalNotifier
+    extends StateNotifier<DeepenedEnvironmentalReport> {
   DeepenedEnvironmentalNotifier() : super(_buildInitialReport());
 
-  static const DeepenedEnvironmentalEngine _engine = DeepenedEnvironmentalEngine();
+  static const DeepenedEnvironmentalEngine _engine =
+      DeepenedEnvironmentalEngine();
 
   static DeepenedEnvironmentalReport _buildInitialReport() {
     return _engine.synthesizeReport(

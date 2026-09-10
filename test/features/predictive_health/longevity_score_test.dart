@@ -6,7 +6,8 @@ void main() {
   group('LongevityScoreEngine Tests', () {
     const engine = LongevityScoreEngine();
 
-    test('Computes centenarian trajectory for optimal longevity biometrics', () {
+    test('Computes centenarian trajectory for optimal longevity biometrics',
+        () {
       final report = engine.calculateLongevityScore(
         chronologicalAge: 32.0,
         biologicalAge: 27.5,
@@ -36,7 +37,8 @@ void main() {
       expect(report.topAccelerators.isNotEmpty, isTrue);
     });
 
-    test('Computes compromised tier when multi-pillar risk factors compound', () {
+    test('Computes compromised tier when multi-pillar risk factors compound',
+        () {
       final report = engine.calculateLongevityScore(
         chronologicalAge: 45.0,
         biologicalAge: 52.0,

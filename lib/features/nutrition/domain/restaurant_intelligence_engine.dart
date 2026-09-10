@@ -39,28 +39,32 @@ class RestaurantIntelligenceEngine {
       goodItemName: 'Tandoori Roti (110 kcal)',
       caloriesSaved: '-210 kcal',
       proteinGain: 'Same Protein',
-      rationale: 'Avoids refined maida and butter brushing; saves 210 surplus calories per bread.',
+      rationale:
+          'Avoids refined maida and butter brushing; saves 210 surplus calories per bread.',
     ),
     SmartFoodSwap(
       badItemName: 'Paneer Makhani / Butter Masala',
       goodItemName: 'Paneer Tikka (Tandoori)',
       caloriesSaved: '-180 kcal',
       proteinGain: '+8g Protein',
-      rationale: 'Skips heavy cashew-cream gravy while maximizing direct curd-marinated paneer protein.',
+      rationale:
+          'Skips heavy cashew-cream gravy while maximizing direct curd-marinated paneer protein.',
     ),
     SmartFoodSwap(
       badItemName: 'Sweet Mango Lassi (290 kcal)',
       goodItemName: 'Masala Chaas / Buttermilk (45 kcal)',
       caloriesSaved: '-245 kcal',
       proteinGain: '+3g Protein, 0g Sugar',
-      rationale: 'Cuts 40g refined sugar while providing active probiotics and electrolytes.',
+      rationale:
+          'Cuts 40g refined sugar while providing active probiotics and electrolytes.',
     ),
     SmartFoodSwap(
       badItemName: 'Fried Samosa (280 kcal)',
       goodItemName: 'Sprouts Chaat / Moong Chilla',
       caloriesSaved: '-140 kcal',
       proteinGain: '+10g Protein',
-      rationale: 'Replaces deep-fried palm oil crust with high-fiber sprouted legume protein.',
+      rationale:
+          'Replaces deep-fried palm oil crust with high-fiber sprouted legume protein.',
     ),
   ];
 
@@ -114,7 +118,8 @@ class RestaurantIntelligenceEngine {
           goodItemName: 'Tandoori Chicken + Green Chutney',
           caloriesSaved: '-260 kcal',
           proteinGain: '+14g Protein',
-          rationale: 'Avoids heavy cashew cream gravy while maximizing lean tandoori protein.',
+          rationale:
+              'Avoids heavy cashew cream gravy while maximizing lean tandoori protein.',
         ),
       ],
     ),
@@ -154,7 +159,8 @@ class RestaurantIntelligenceEngine {
           goodItemName: 'Steamed Idli + Extra Sambar (230 kcal)',
           caloriesSaved: '-250 kcal',
           proteinGain: '+3g Protein',
-          rationale: 'Cuts 25g saturated ghee while doubling legume lentil intake from sambar.',
+          rationale:
+              'Cuts 25g saturated ghee while doubling legume lentil intake from sambar.',
         ),
       ],
     ),

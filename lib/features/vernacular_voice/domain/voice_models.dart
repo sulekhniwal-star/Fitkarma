@@ -2,16 +2,26 @@ import 'package:flutter/foundation.dart';
 
 /// Supported Indian Vernacular Languages & Dialects
 enum VernacularLanguage {
-  hinglish(code: 'hi-Latn', name: 'Hinglish', nativeName: 'Hinglish', flagEmoji: '🇮🇳'),
+  hinglish(
+      code: 'hi-Latn',
+      name: 'Hinglish',
+      nativeName: 'Hinglish',
+      flagEmoji: '🇮🇳'),
   hindi(code: 'hi-IN', name: 'Hindi', nativeName: 'हिन्दी', flagEmoji: '🇮🇳'),
   marathi(code: 'mr-IN', name: 'Marathi', nativeName: 'मराठी', flagEmoji: '🚩'),
   tamil(code: 'ta-IN', name: 'Tamil', nativeName: 'தமிழ்', flagEmoji: '🏛️'),
   telugu(code: 'te-IN', name: 'Telugu', nativeName: 'తెలుగు', flagEmoji: '🪷'),
   kannada(code: 'kn-IN', name: 'Kannada', nativeName: 'ಕನ್ನಡ', flagEmoji: '🐘'),
   bengali(code: 'bn-IN', name: 'Bengali', nativeName: 'বাংলা', flagEmoji: '🐅'),
-  gujarati(code: 'gu-IN', name: 'Gujarati', nativeName: 'ગુજરાતી', flagEmoji: '🦁'),
-  punjabi(code: 'pa-IN', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ', flagEmoji: '🌾'),
-  english(code: 'en-IN', name: 'Indian English', nativeName: 'English', flagEmoji: '🌐');
+  gujarati(
+      code: 'gu-IN', name: 'Gujarati', nativeName: 'ગુજરાતી', flagEmoji: '🦁'),
+  punjabi(
+      code: 'pa-IN', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ', flagEmoji: '🌾'),
+  english(
+      code: 'en-IN',
+      name: 'Indian English',
+      nativeName: 'English',
+      flagEmoji: '🌐');
 
   final String code;
   final String name;
@@ -30,10 +40,14 @@ enum VernacularLanguage {
 enum VoiceIntentType {
   mealNutrition(label: 'Meal & Nutrition', regionalLabel: 'भोजन व पोषण'),
   waterHydration(label: 'Water Hydration', regionalLabel: 'जलयोजन / पानी'),
-  workoutPhysicalActivity(label: 'Workout & Movement', regionalLabel: 'व्यायाम व सक्रियता'),
-  biometricWeight(label: 'Biometrics & Weight', regionalLabel: 'वजन व शारीरिक माप'),
-  symptomAgni(label: 'Symptom & Agni State', regionalLabel: 'लक्षण व जठराग्नि स्थिति'),
-  generalQuery(label: 'Health Inquiry', regionalLabel: 'सामान्य स्वास्थ्य प्रश्न');
+  workoutPhysicalActivity(
+      label: 'Workout & Movement', regionalLabel: 'व्यायाम व सक्रियता'),
+  biometricWeight(
+      label: 'Biometrics & Weight', regionalLabel: 'वजन व शारीरिक माप'),
+  symptomAgni(
+      label: 'Symptom & Agni State', regionalLabel: 'लक्षण व जठराग्नि स्थिति'),
+  generalQuery(
+      label: 'Health Inquiry', regionalLabel: 'सामान्य स्वास्थ्य प्रश्न');
 
   final String label;
   final String regionalLabel;

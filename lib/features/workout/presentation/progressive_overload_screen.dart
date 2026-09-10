@@ -14,10 +14,12 @@ class ProgressiveOverloadScreen extends ConsumerStatefulWidget {
   const ProgressiveOverloadScreen({super.key});
 
   @override
-  ConsumerState<ProgressiveOverloadScreen> createState() => _ProgressiveOverloadScreenState();
+  ConsumerState<ProgressiveOverloadScreen> createState() =>
+      _ProgressiveOverloadScreenState();
 }
 
-class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadScreen> {
+class _ProgressiveOverloadScreenState
+    extends ConsumerState<ProgressiveOverloadScreen> {
   double _simulatedReadinessScore = 85.0;
 
   @override
@@ -35,7 +37,8 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
       );
     }).toList();
 
-    final primaryPrescription = prescriptions.isNotEmpty ? prescriptions.first : null;
+    final primaryPrescription =
+        prescriptions.isNotEmpty ? prescriptions.first : null;
     final primaryColor = primaryPrescription != null
         ? Color(primaryPrescription.recommendedAction.colorCode)
         : AppColors.karmaGreen;
@@ -67,19 +70,27 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           BilingualLabel(
-                            primaryText: '${primaryPrescription.exercise.name} Overload Status',
-                            regionalText: primaryPrescription.recommendedAction.regionalLabel,
+                            primaryText:
+                                '${primaryPrescription.exercise.name} Overload Status',
+                            regionalText: primaryPrescription
+                                .recommendedAction.regionalLabel,
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
                               color: primaryColor.withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusSm,
-                              border: Border.all(color: primaryColor.withValues(alpha: 0.4)),
+                              border: Border.all(
+                                  color: primaryColor.withValues(alpha: 0.4)),
                             ),
                             child: Text(
-                              primaryPrescription.recommendedAction.label.toUpperCase(),
-                              style: TextStyle(color: primaryColor, fontSize: 10, fontWeight: FontWeight.w800),
+                              primaryPrescription.recommendedAction.label
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w800),
                             ),
                           ),
                         ],
@@ -103,7 +114,8 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                           ),
                           GlowingMetric(
                             label: 'Rep Target',
-                            value: '${primaryPrescription.nextTargetRepsMin}-${primaryPrescription.nextTargetRepsMax}',
+                            value:
+                                '${primaryPrescription.nextTargetRepsMin}-${primaryPrescription.nextTargetRepsMax}',
                             unit: 'reps',
                             accentColor: AppColors.focusBlue,
                           ),
@@ -135,7 +147,10 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                       children: [
                         const Text(
                           'Readiness Score Calibration',
-                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: AppColors.textPrimary),
                         ),
                         Text(
                           '${_simulatedReadinessScore.round()}% (${_simulatedReadinessScore >= 80 ? "Optimal" : (_simulatedReadinessScore >= 60 ? "Moderate" : "Deload Zone")})',
@@ -144,7 +159,9 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                             fontWeight: FontWeight.w800,
                             color: _simulatedReadinessScore >= 80
                                 ? AppColors.karmaGreen
-                                : (_simulatedReadinessScore >= 60 ? AppColors.focusBlue : AppColors.alertRed),
+                                : (_simulatedReadinessScore >= 60
+                                    ? AppColors.focusBlue
+                                    : AppColors.alertRed),
                           ),
                         ),
                       ],
@@ -154,12 +171,16 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                       min: 30.0,
                       max: 100.0,
                       divisions: 14,
-                      activeColor: _simulatedReadinessScore >= 80 ? AppColors.karmaGreen : AppColors.energyOrange,
-                      onChanged: (val) => setState(() => _simulatedReadinessScore = val),
+                      activeColor: _simulatedReadinessScore >= 80
+                          ? AppColors.karmaGreen
+                          : AppColors.energyOrange,
+                      onChanged: (val) =>
+                          setState(() => _simulatedReadinessScore = val),
                     ),
                     const Text(
                       'Low readiness (<50%) automatically triggers nervous system deload prescriptions (-20% load).',
-                      style: TextStyle(fontSize: 11, color: AppColors.textMuted),
+                      style:
+                          TextStyle(fontSize: 11, color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -179,7 +200,8 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
               const SizedBox(height: AppSpacing.sm),
 
               ...prescriptions.map((presc) {
-                final Color actionColor = Color(presc.recommendedAction.colorCode);
+                final Color actionColor =
+                    Color(presc.recommendedAction.colorCode);
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
@@ -197,25 +219,35 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                                 children: [
                                   Text(
                                     presc.exercise.name,
-                                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppColors.textPrimary),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: AppColors.textPrimary),
                                   ),
                                   Text(
                                     presc.exercise.regionalName,
-                                    style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textMuted),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
                                 color: actionColor.withValues(alpha: 0.15),
                                 borderRadius: AppRadii.radiusSm,
-                                border: Border.all(color: actionColor.withValues(alpha: 0.4)),
+                                border: Border.all(
+                                    color: actionColor.withValues(alpha: 0.4)),
                               ),
                               child: Text(
                                 presc.recommendedAction.label,
-                                style: TextStyle(color: actionColor, fontSize: 10, fontWeight: FontWeight.w800),
+                                style: TextStyle(
+                                    color: actionColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                           ],
@@ -224,7 +256,8 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
 
                         // Current vs Next Load Comparison
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
                           decoration: const BoxDecoration(
                             color: AppColors.surface,
                             borderRadius: AppRadii.radiusSm,
@@ -235,21 +268,36 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('CURRENT WORKING SET', style: TextStyle(fontSize: 9, color: AppColors.textMuted, fontWeight: FontWeight.w700)),
+                                  const Text('CURRENT WORKING SET',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          color: AppColors.textMuted,
+                                          fontWeight: FontWeight.w700)),
                                   Text(
                                     '${presc.currentWorkingWeightKg} kg × ${presc.currentReps} reps',
-                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.textPrimary),
                                   ),
                                 ],
                               ),
-                              const Icon(Icons.arrow_forward_rounded, color: AppColors.karmaGreen, size: 18),
+                              const Icon(Icons.arrow_forward_rounded,
+                                  color: AppColors.karmaGreen, size: 18),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  const Text('NEXT OVERLOAD TARGET', style: TextStyle(fontSize: 9, color: AppColors.karmaGreen, fontWeight: FontWeight.w700)),
+                                  const Text('NEXT OVERLOAD TARGET',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          color: AppColors.karmaGreen,
+                                          fontWeight: FontWeight.w700)),
                                   Text(
                                     '${presc.nextTargetWeightKg} kg × ${presc.nextTargetRepsMin}-${presc.nextTargetRepsMax} reps',
-                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.karmaGreen),
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppColors.karmaGreen),
                                   ),
                                 ],
                               ),
@@ -261,18 +309,25 @@ class _ProgressiveOverloadScreenState extends ConsumerState<ProgressiveOverloadS
                         // Technique & Rationale
                         Text(
                           presc.overloadRationale,
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 11,
+                              height: 1.3),
                         ),
                         const SizedBox(height: 4),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.psychology_outlined, color: AppColors.gold, size: 14),
+                            const Icon(Icons.psychology_outlined,
+                                color: AppColors.gold, size: 14),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
                                 'Form Cue: ${presc.techniqueFocusCue}',
-                                style: const TextStyle(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    color: AppColors.gold,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],

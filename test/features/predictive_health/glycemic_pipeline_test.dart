@@ -6,7 +6,9 @@ void main() {
   group('GlycemicPipelineEngine Deterministic Offline Tests', () {
     const engine = GlycemicPipelineEngine();
 
-    test('Processes multi-day optimal glucose dataset with CV < 33% and high TIR', () {
+    test(
+        'Processes multi-day optimal glucose dataset with CV < 33% and high TIR',
+        () {
       final now = DateTime(2026, 9, 9, 12, 0);
       final samples = <HistoricalGlucoseSample>[];
 
@@ -53,14 +55,26 @@ void main() {
       expect(report.glucoseManagementIndicatorGmi, closeTo(5.70, 0.05));
     });
 
-    test('Detects high dysglycemia when large excursions and high CV are present', () {
+    test(
+        'Detects high dysglycemia when large excursions and high CV are present',
+        () {
       final now = DateTime(2026, 9, 9, 12, 0);
       final samples = <HistoricalGlucoseSample>[
-        HistoricalGlucoseSample(timestamp: now.subtract(const Duration(hours: 20)), glucoseValueMgDl: 60.0),
-        HistoricalGlucoseSample(timestamp: now.subtract(const Duration(hours: 18)), glucoseValueMgDl: 210.0),
-        HistoricalGlucoseSample(timestamp: now.subtract(const Duration(hours: 14)), glucoseValueMgDl: 190.0),
-        HistoricalGlucoseSample(timestamp: now.subtract(const Duration(hours: 8)), glucoseValueMgDl: 65.0),
-        HistoricalGlucoseSample(timestamp: now.subtract(const Duration(hours: 2)), glucoseValueMgDl: 185.0),
+        HistoricalGlucoseSample(
+            timestamp: now.subtract(const Duration(hours: 20)),
+            glucoseValueMgDl: 60.0),
+        HistoricalGlucoseSample(
+            timestamp: now.subtract(const Duration(hours: 18)),
+            glucoseValueMgDl: 210.0),
+        HistoricalGlucoseSample(
+            timestamp: now.subtract(const Duration(hours: 14)),
+            glucoseValueMgDl: 190.0),
+        HistoricalGlucoseSample(
+            timestamp: now.subtract(const Duration(hours: 8)),
+            glucoseValueMgDl: 65.0),
+        HistoricalGlucoseSample(
+            timestamp: now.subtract(const Duration(hours: 2)),
+            glucoseValueMgDl: 185.0),
       ];
 
       final report = engine.processRetrospectiveGlucoseTelemetry(
@@ -69,20 +83,33 @@ void main() {
         executionTime: now,
       );
 
-      expect(report.stabilityZone, equals(GlycemicStabilityZone.highDysglycemia));
+      expect(
+          report.stabilityZone, equals(GlycemicStabilityZone.highDysglycemia));
       expect(report.timeAboveRangePercent, greaterThan(0.0));
       expect(report.timeBelowRangePercent, greaterThan(0.0));
       expect(report.coefficientOfVariationPercent, greaterThan(38.0));
     });
 
-    test('Circadian windows segment samples into distinct time buckets correctly', () {
+    test(
+        'Circadian windows segment samples into distinct time buckets correctly',
+        () {
       final baseDate = DateTime(2026, 9, 9);
       final samples = [
-        HistoricalGlucoseSample(timestamp: DateTime(2026, 9, 9, 5, 30), glucoseValueMgDl: 92.0), // dawn
-        HistoricalGlucoseSample(timestamp: DateTime(2026, 9, 9, 9, 15), glucoseValueMgDl: 125.0), // breakfast
-        HistoricalGlucoseSample(timestamp: DateTime(2026, 9, 9, 13, 0), glucoseValueMgDl: 130.0), // lunch
-        HistoricalGlucoseSample(timestamp: DateTime(2026, 9, 9, 20, 30), glucoseValueMgDl: 115.0), // dinner
-        HistoricalGlucoseSample(timestamp: DateTime(2026, 9, 9, 1, 0), glucoseValueMgDl: 85.0), // nocturnal
+        HistoricalGlucoseSample(
+            timestamp: DateTime(2026, 9, 9, 5, 30),
+            glucoseValueMgDl: 92.0), // dawn
+        HistoricalGlucoseSample(
+            timestamp: DateTime(2026, 9, 9, 9, 15),
+            glucoseValueMgDl: 125.0), // breakfast
+        HistoricalGlucoseSample(
+            timestamp: DateTime(2026, 9, 9, 13, 0),
+            glucoseValueMgDl: 130.0), // lunch
+        HistoricalGlucoseSample(
+            timestamp: DateTime(2026, 9, 9, 20, 30),
+            glucoseValueMgDl: 115.0), // dinner
+        HistoricalGlucoseSample(
+            timestamp: DateTime(2026, 9, 9, 1, 0),
+            glucoseValueMgDl: 85.0), // nocturnal
       ];
 
       final report = engine.processRetrospectiveGlucoseTelemetry(
@@ -92,13 +119,16 @@ void main() {
       );
 
       expect(report.circadianWindows.length, equals(5));
-      final dawnWindow = report.circadianWindows.firstWhere((w) => w.window == ChronoGlycemicWindow.dawnFasting);
+      final dawnWindow = report.circadianWindows
+          .firstWhere((w) => w.window == ChronoGlycemicWindow.dawnFasting);
       expect(dawnWindow.meanGlucose, equals(92.0));
 
-      final breakfastWindow = report.circadianWindows.firstWhere((w) => w.window == ChronoGlycemicWindow.postBreakfast);
+      final breakfastWindow = report.circadianWindows
+          .firstWhere((w) => w.window == ChronoGlycemicWindow.postBreakfast);
       expect(breakfastWindow.meanGlucose, equals(125.0));
 
-      final lunchWindow = report.circadianWindows.firstWhere((w) => w.window == ChronoGlycemicWindow.postLunch);
+      final lunchWindow = report.circadianWindows
+          .firstWhere((w) => w.window == ChronoGlycemicWindow.postLunch);
       expect(lunchWindow.meanGlucose, equals(130.0));
     });
 

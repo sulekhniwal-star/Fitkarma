@@ -30,7 +30,8 @@ class GlycemicPipelineScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPipelineMethodologyModal(context),
           ),
         ],
@@ -103,7 +104,8 @@ class GlycemicPipelineScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: zoneColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -224,9 +226,12 @@ class GlycemicPipelineScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildMetricChip('TIR (In Range)', '${report.timeInRangePercent}%', AppColors.karmaGreen),
-              _buildMetricChip('TAR (>140)', '${report.timeAboveRangePercent}%', AppColors.energyOrange),
-              _buildMetricChip('TBR (<70)', '${report.timeBelowRangePercent}%', AppColors.alertRed),
+              _buildMetricChip('TIR (In Range)',
+                  '${report.timeInRangePercent}%', AppColors.karmaGreen),
+              _buildMetricChip('TAR (>140)', '${report.timeAboveRangePercent}%',
+                  AppColors.energyOrange),
+              _buildMetricChip('TBR (<70)', '${report.timeBelowRangePercent}%',
+                  AppColors.alertRed),
             ],
           ),
         ],
@@ -240,18 +245,26 @@ class GlycemicPipelineScreen extends ConsumerWidget {
       children: [
         Row(
           children: [
-            Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+            Container(
+                width: 8,
+                height: 8,
+                decoration:
+                    BoxDecoration(color: color, shape: BoxShape.circle)),
             const SizedBox(width: 4),
             Text(
               label,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary, fontSize: 10),
             ),
           ],
         ),
         const SizedBox(height: 2),
         Text(
           value,
-          style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 13),
+          style: AppTypography.titleSmall.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.bold,
+              fontSize: 13),
         ),
       ],
     );
@@ -302,17 +315,24 @@ class GlycemicPipelineScreen extends ConsumerWidget {
             children: [
               Text(
                 'Mean: ${win.meanGlucose} mg/dL',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.w600, fontSize: 11),
+                style: AppTypography.bodySmall.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11),
               ),
               const SizedBox(width: AppSpacing.md),
               Text(
                 'Peak: ${win.peakGlucose} mg/dL',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.energyOrange, fontWeight: FontWeight.w600, fontSize: 11),
+                style: AppTypography.bodySmall.copyWith(
+                    color: AppColors.energyOrange,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11),
               ),
               const SizedBox(width: AppSpacing.md),
               Text(
                 'SD: ±${win.standardDeviation}',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary, fontSize: 11),
               ),
             ],
           ),
@@ -363,9 +383,13 @@ class GlycemicPipelineScreen extends ConsumerWidget {
                   borderRadius: AppRadii.radiusSm,
                 ),
                 child: Text(
-                  exc.isSpikeExcursion ? 'Spike (+${exc.deltaGlucose.toInt()} mg/dL)' : 'Blunted (+${exc.deltaGlucose.toInt()} mg/dL)',
+                  exc.isSpikeExcursion
+                      ? 'Spike (+${exc.deltaGlucose.toInt()} mg/dL)'
+                      : 'Blunted (+${exc.deltaGlucose.toInt()} mg/dL)',
                   style: TextStyle(
-                    color: exc.isSpikeExcursion ? AppColors.energyOrange : AppColors.karmaGreen,
+                    color: exc.isSpikeExcursion
+                        ? AppColors.energyOrange
+                        : AppColors.karmaGreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
                   ),
@@ -406,7 +430,8 @@ class GlycemicPipelineScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.spa_outlined, color: AppColors.karmaGreen, size: 20),
+              const Icon(Icons.spa_outlined,
+                  color: AppColors.karmaGreen, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Metabolic & Chrono-Nutritional Guidance',
@@ -484,7 +509,8 @@ class GlycemicPipelineScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

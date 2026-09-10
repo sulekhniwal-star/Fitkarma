@@ -14,10 +14,12 @@ class SmartProgrammingScreen extends ConsumerStatefulWidget {
   const SmartProgrammingScreen({super.key});
 
   @override
-  ConsumerState<SmartProgrammingScreen> createState() => _SmartProgrammingScreenState();
+  ConsumerState<SmartProgrammingScreen> createState() =>
+      _SmartProgrammingScreenState();
 }
 
-class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen> {
+class _SmartProgrammingScreenState
+    extends ConsumerState<SmartProgrammingScreen> {
   int _currentWeek = 2;
   double _simulatedRpe = 8.5;
 
@@ -41,7 +43,9 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
     final phase = report.currentPhase;
     final phaseColor = phase == MesocyclePhase.accumulation
         ? AppColors.karmaGreen
-        : (phase == MesocyclePhase.intensification ? AppColors.energyOrange : AppColors.aiPurple);
+        : (phase == MesocyclePhase.intensification
+            ? AppColors.energyOrange
+            : AppColors.aiPurple);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -73,15 +77,20 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                           regionalText: phase.regionalName,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: phaseColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: phaseColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: phaseColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             phase.name.toUpperCase(),
-                            style: TextStyle(color: phaseColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: phaseColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -105,7 +114,8 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                         ),
                         GlowingMetric(
                           label: 'Volume Pacing',
-                          value: '${(phase.volumeModifierPercent * 100).toInt()}%',
+                          value:
+                              '${(phase.volumeModifierPercent * 100).toInt()}%',
                           unit: 'of max',
                           accentColor: AppColors.energyOrange,
                         ),
@@ -136,11 +146,17 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                       children: [
                         const Text(
                           'Simulate Mesocycle Week',
-                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: AppColors.textPrimary),
                         ),
                         Text(
                           'Week $_currentWeek',
-                          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: phaseColor),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 13,
+                              color: phaseColor),
                         ),
                       ],
                     ),
@@ -150,7 +166,8 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                       max: 6.0,
                       divisions: 5,
                       activeColor: phaseColor,
-                      onChanged: (val) => setState(() => _currentWeek = val.round()),
+                      onChanged: (val) =>
+                          setState(() => _currentWeek = val.round()),
                     ),
                     const Divider(color: AppColors.glassBorder, height: 16),
                     Row(
@@ -158,11 +175,17 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                       children: [
                         const Text(
                           'Auto-Regulate RPE on Last Set',
-                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: AppColors.textPrimary),
                         ),
                         Text(
                           'RPE ${_simulatedRpe.toStringAsFixed(1)}',
-                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: AppColors.focusBlue),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 13,
+                              color: AppColors.focusBlue),
                         ),
                       ],
                     ),
@@ -179,11 +202,13 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: AppRadii.radiusSm,
-                        border: Border.all(color: AppColors.focusBlue.withValues(alpha: 0.3)),
+                        border: Border.all(
+                            color: AppColors.focusBlue.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.tune_rounded, color: AppColors.focusBlue, size: 16),
+                          const Icon(Icons.tune_rounded,
+                              color: AppColors.focusBlue, size: 16),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Column(
@@ -191,11 +216,16 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                               children: [
                                 Text(
                                   report.autoRegulation.directiveTitle,
-                                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: AppColors.textPrimary),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                      color: AppColors.textPrimary),
                                 ),
                                 Text(
                                   report.autoRegulation.rationale,
-                                  style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                                  style: const TextStyle(
+                                      fontSize: 10,
+                                      color: AppColors.textSecondary),
                                 ),
                               ],
                             ),
@@ -221,7 +251,8 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
               const SizedBox(height: AppSpacing.sm),
 
               ...report.volumeLandmarks.map((lm) {
-                final double progressFrac = (lm.currentWeeklySets / lm.mrv).clamp(0.0, 1.0);
+                final double progressFrac =
+                    (lm.currentWeeklySets / lm.mrv).clamp(0.0, 1.0);
                 final Color zoneColor = Color(lm.zone.colorCode);
 
                 return Padding(
@@ -236,18 +267,26 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                           children: [
                             Text(
                               lm.muscle.name,
-                              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppColors.textPrimary),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                  color: AppColors.textPrimary),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
                                 color: zoneColor.withValues(alpha: 0.15),
                                 borderRadius: AppRadii.radiusSm,
-                                border: Border.all(color: zoneColor.withValues(alpha: 0.3)),
+                                border: Border.all(
+                                    color: zoneColor.withValues(alpha: 0.3)),
                               ),
                               child: Text(
                                 lm.zone.label.split('(')[0].trim(),
-                                style: TextStyle(color: zoneColor, fontSize: 9, fontWeight: FontWeight.w800),
+                                style: TextStyle(
+                                    color: zoneColor,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                           ],
@@ -256,10 +295,17 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Current: ${lm.currentWeeklySets} sets', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: zoneColor)),
+                            Text('Current: ${lm.currentWeeklySets} sets',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: zoneColor)),
                             Text(
                               'MEV: ${lm.mev} • MAV: ${lm.mav} • MRV: ${lm.mrv} sets',
-                              style: const TextStyle(fontSize: 10, color: AppColors.textMuted, fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                  fontSize: 10,
+                                  color: AppColors.textMuted,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -269,14 +315,18 @@ class _SmartProgrammingScreenState extends ConsumerState<SmartProgrammingScreen>
                           child: LinearProgressIndicator(
                             value: progressFrac,
                             backgroundColor: AppColors.surface,
-                            valueColor: AlwaysStoppedAnimation<Color>(zoneColor),
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(zoneColor),
                             minHeight: 6,
                           ),
                         ),
                         const SizedBox(height: 6),
                         Text(
                           lm.programmingAdvice,
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.2),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 11,
+                              height: 1.2),
                         ),
                       ],
                     ),

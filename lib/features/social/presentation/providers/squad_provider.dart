@@ -92,7 +92,8 @@ class SquadDetailNotifier extends StateNotifier<SquadDetail> {
       id: 'squad_challenge_1m_steps',
       title: 'Weekly 500,000 Step Squad Challenge',
       regionalTitle: 'साप्ताहिक ५ लाख कदम सामूहिक संकल्प',
-      description: 'Collective step milestone for all 5 squad members this week.',
+      description:
+          'Collective step milestone for all 5 squad members this week.',
       targetQuantity: 500000,
       currentQuantity: 342000,
       unit: 'steps',
@@ -104,8 +105,10 @@ class SquadDetailNotifier extends StateNotifier<SquadDetail> {
       squadId: 'squad_vayuprecision',
       squadName: 'Vayu Pacesetters (वायु साधक दल)',
       regionalSquadName: 'वायु साधक दल (५ सदस्य)',
-      manifesto: 'We move daily, practice post-meal Shatpawali, and leave no member behind.',
-      regionalManifesto: 'हम प्रतिदिन गतिशीलता बनाए रखते हैं, शतपावली करते हैं और किसी साथी को पीछे नहीं छोड़ते।',
+      manifesto:
+          'We move daily, practice post-meal Shatpawali, and leave no member behind.',
+      regionalManifesto:
+          'हम प्रतिदिन गतिशीलता बनाए रखते हैं, शतपावली करते हैं और किसी साथी को पीछे नहीं छोड़ते।',
       creatorId: 'user_you',
       tier: SquadTier.vanguard,
       currentStreakDays: 19,

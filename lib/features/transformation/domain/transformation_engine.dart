@@ -17,7 +17,8 @@ class TransformationJourneyEngine {
       final totalRequiredReduction = baseline - target;
       final actualReduction = baseline - current;
       if (totalRequiredReduction <= 0) return 100.0;
-      return ((actualReduction / totalRequiredReduction) * 100.0).clamp(0.0, 100.0);
+      return ((actualReduction / totalRequiredReduction) * 100.0)
+          .clamp(0.0, 100.0);
     } else {
       if (baseline >= target) return 100.0;
       final totalRequiredGain = target - baseline;
@@ -214,9 +215,10 @@ class TransformationJourneyEngine {
   }
 
   /// Computes composite Transformation Score (0.0 to 100.0)
-  static double calculateTransformationScore(List<BiometricPillarDelta> deltas) {
+  static double calculateTransformationScore(
+      List<BiometricPillarDelta> deltas) {
     if (deltas.isEmpty) return 0.0;
-    
+
     // Group progress scores by pillar
     double bodyCompScore = 0.0;
     int bodyCompCount = 0;
@@ -292,8 +294,10 @@ class TransformationJourneyEngine {
         id: 'ms_first_step',
         title: 'The Journey Begins (Sankalpa)',
         regionalTitle: 'साधना संकल्प',
-        description: 'Completed onboarding baseline calibration and initiated daily discipline.',
-        regionalDescription: 'प्रारंभिक स्वास्थ्य मूल्यांकन पूर्ण कर दैनिक साधना का संकल्प लिया।',
+        description:
+            'Completed onboarding baseline calibration and initiated daily discipline.',
+        regionalDescription:
+            'प्रारंभिक स्वास्थ्य मूल्यांकन पूर्ण कर दैनिक साधना का संकल्प लिया।',
         achievedAt: baseline.recordedAt,
         pillar: TransformationPillar.mindsetKarma,
         karmaBonus: 100,
@@ -302,14 +306,17 @@ class TransformationJourneyEngine {
     );
 
     // 2. WHtR Sub-0.50 Milestone
-    if (current.waistToHeightRatio <= 0.50 && baseline.waistToHeightRatio > 0.50) {
+    if (current.waistToHeightRatio <= 0.50 &&
+        baseline.waistToHeightRatio > 0.50) {
       milestones.add(
         TransformationMilestone(
           id: 'ms_whtr_optimal',
           title: 'Visceral Risk Reversal',
           regionalTitle: 'उपापचयी सुरक्षा सीमा पार',
-          description: 'Waist-to-height ratio entered the optimal <0.50 cardiovascular safety zone.',
-          regionalDescription: 'कमर-ऊंचाई अनुपात सुरक्षित सीमा (<०.५०) के भीतर पहुंचा।',
+          description:
+              'Waist-to-height ratio entered the optimal <0.50 cardiovascular safety zone.',
+          regionalDescription:
+              'कमर-ऊंचाई अनुपात सुरक्षित सीमा (<०.५०) के भीतर पहुंचा।',
           achievedAt: current.recordedAt.subtract(const Duration(days: 12)),
           pillar: TransformationPillar.bodyComposition,
           karmaBonus: 250,
@@ -325,8 +332,10 @@ class TransformationJourneyEngine {
           id: 'ms_rhr_athlete',
           title: 'Athletic Vagal Tone',
           regionalTitle: 'मजबूत हृदय स्वास्थ्य (उत्कृष्ट RHR)',
-          description: 'Resting heart rate dropped below 65 BPM demonstrating parasympathetic adaptation.',
-          regionalDescription: 'विश्राम हृदय गति ६५ से कम होकर उत्कृष्ट हृदय सहनशक्ति का प्रमाण बनी।',
+          description:
+              'Resting heart rate dropped below 65 BPM demonstrating parasympathetic adaptation.',
+          regionalDescription:
+              'विश्राम हृदय गति ६५ से कम होकर उत्कृष्ट हृदय सहनशक्ति का प्रमाण बनी।',
           achievedAt: current.recordedAt.subtract(const Duration(days: 5)),
           pillar: TransformationPillar.cardiometabolic,
           karmaBonus: 200,
@@ -342,8 +351,10 @@ class TransformationJourneyEngine {
           id: 'ms_10k_steps',
           title: '10,000 Step Daily Standard',
           regionalTitle: '१०,००० दैनिक कदम मानदंड',
-          description: 'Consistently hitting 10k daily steps with post-meal Shatpawali routines.',
-          regionalDescription: 'शतपावली व दैनिक सक्रियता से १०,००० कदमों का स्तर निरंतर बनाए रखा।',
+          description:
+              'Consistently hitting 10k daily steps with post-meal Shatpawali routines.',
+          regionalDescription:
+              'शतपावली व दैनिक सक्रियता से १०,००० कदमों का स्तर निरंतर बनाए रखा।',
           achievedAt: current.recordedAt.subtract(const Duration(days: 2)),
           pillar: TransformationPillar.workCapacity,
           karmaBonus: 150,
@@ -364,30 +375,38 @@ class TransformationJourneyEngine {
     final weeksPassed = (totalJourneyDays / 7.0).clamp(1.0, 52.0);
 
     // WHtR Projection
-    final whtrTotalDelta = baseline.waistToHeightRatio - current.waistToHeightRatio;
+    final whtrTotalDelta =
+        baseline.waistToHeightRatio - current.waistToHeightRatio;
     final whtrWeeklyVelocity = whtrTotalDelta / weeksPassed;
     final whtrTarget = 0.46;
-    final whtrRemaining = (current.waistToHeightRatio - whtrTarget).clamp(0.0, 1.0);
+    final whtrRemaining =
+        (current.waistToHeightRatio - whtrTarget).clamp(0.0, 1.0);
     final whtrDaysRemaining = whtrWeeklyVelocity > 0.001
         ? ((whtrRemaining / whtrWeeklyVelocity) * 7).round().clamp(7, 180)
         : 45;
 
     // RHR Projection
-    final rhrTotalDelta = baseline.restingHeartRateBpm - current.restingHeartRateBpm;
+    final rhrTotalDelta =
+        baseline.restingHeartRateBpm - current.restingHeartRateBpm;
     final rhrWeeklyVelocity = rhrTotalDelta / weeksPassed;
     final rhrTarget = 56.0;
-    final rhrRemaining = (current.restingHeartRateBpm - rhrTarget).clamp(0.0, 50.0);
+    final rhrRemaining =
+        (current.restingHeartRateBpm - rhrTarget).clamp(0.0, 50.0);
     final rhrDaysRemaining = rhrWeeklyVelocity > 0.1
         ? ((rhrRemaining / rhrWeeklyVelocity) * 7).round().clamp(7, 120)
         : 30;
 
     // Strength Tonnage Projection
-    final strengthTotalGain = current.weeklyStrengthVolumeKg - baseline.weeklyStrengthVolumeKg;
+    final strengthTotalGain =
+        current.weeklyStrengthVolumeKg - baseline.weeklyStrengthVolumeKg;
     final strengthWeeklyVelocity = strengthTotalGain / weeksPassed;
     final strengthTarget = 20000.0;
-    final strengthRemaining = (strengthTarget - current.weeklyStrengthVolumeKg).clamp(0.0, 20000.0);
+    final strengthRemaining =
+        (strengthTarget - current.weeklyStrengthVolumeKg).clamp(0.0, 20000.0);
     final strengthDaysRemaining = strengthWeeklyVelocity > 100
-        ? ((strengthRemaining / strengthWeeklyVelocity) * 7).round().clamp(7, 150)
+        ? ((strengthRemaining / strengthWeeklyVelocity) * 7)
+            .round()
+            .clamp(7, 150)
         : 60;
 
     return [
@@ -429,10 +448,13 @@ class TransformationJourneyEngine {
     required TransformationSnapshot baseline,
     required TransformationSnapshot current,
   }) {
-    final totalDays = current.recordedAt.difference(baseline.recordedAt).inDays.clamp(1, 999);
-    final pillarDeltas = evaluatePillarDeltas(baseline: baseline, current: current);
+    final totalDays =
+        current.recordedAt.difference(baseline.recordedAt).inDays.clamp(1, 999);
+    final pillarDeltas =
+        evaluatePillarDeltas(baseline: baseline, current: current);
     final score = calculateTransformationScore(pillarDeltas);
-    final stage = determineStage(transformationScore: score, totalJourneyDays: totalDays);
+    final stage =
+        determineStage(transformationScore: score, totalJourneyDays: totalDays);
     final milestones = detectUnlockedMilestones(
       baseline: baseline,
       current: current,
@@ -447,15 +469,22 @@ class TransformationJourneyEngine {
     String insight;
     String regionalInsight;
 
-    if (stage == TransformationStage.koushalya || stage == TransformationStage.sthirata) {
-      insight = 'Outstanding athletic evolution! Your cardiometabolic and muscular indices demonstrate deep systemic adaptation.';
-      regionalInsight = 'अद्वितीय शारीरिक पुनर्गठन! आपके बायोमार्कर गहरी आंतरिक शक्ति और उत्कृष्ट स्वास्थ्य दर्शाते हैं।';
+    if (stage == TransformationStage.koushalya ||
+        stage == TransformationStage.sthirata) {
+      insight =
+          'Outstanding athletic evolution! Your cardiometabolic and muscular indices demonstrate deep systemic adaptation.';
+      regionalInsight =
+          'अद्वितीय शारीरिक पुनर्गठन! आपके बायोमार्कर गहरी आंतरिक शक्ति और उत्कृष्ट स्वास्थ्य दर्शाते हैं।';
     } else if (stage == TransformationStage.abhyasa) {
-      insight = 'Metabolic adaptation is accelerating. Consistency in post-meal Shatpawali and progressive volume is yielding tangible biomarker shifts.';
-      regionalInsight = 'उपापचयी अनुकूलन तीव्र गति से हो रहा है। शतपावली और नियमित व्यायाम से बायोमार्कर में सकारात्मक परिवर्तन स्पष्ट हैं।';
+      insight =
+          'Metabolic adaptation is accelerating. Consistency in post-meal Shatpawali and progressive volume is yielding tangible biomarker shifts.';
+      regionalInsight =
+          'उपापचयी अनुकूलन तीव्र गति से हो रहा है। शतपावली और नियमित व्यायाम से बायोमार्कर में सकारात्मक परिवर्तन स्पष्ट हैं।';
     } else {
-      insight = 'Your foundation is being forged. Daily circadian alignment and sleep hygiene are preparing your physiology for deeper adaptation.';
-      regionalInsight = 'आपकी आधारशिला निर्मित हो रही है। दैनिक दिनचर्या और निद्रा अनुशासन से आपका शरीर बड़े परिवर्तनों के लिए तैयार हो रहा है।';
+      insight =
+          'Your foundation is being forged. Daily circadian alignment and sleep hygiene are preparing your physiology for deeper adaptation.';
+      regionalInsight =
+          'आपकी आधारशिला निर्मित हो रही है। दैनिक दिनचर्या और निद्रा अनुशासन से आपका शरीर बड़े परिवर्तनों के लिए तैयार हो रहा है।';
     }
 
     return TransformationJourneyReport(

@@ -2,11 +2,24 @@ import 'package:flutter/foundation.dart';
 
 /// Relationship to primary user
 enum FamilyRelationType {
-  father(label: 'Father (Pitaji)', regionalLabel: 'पिताजी', iconName: 'elderly'),
-  mother(label: 'Mother (Mataji)', regionalLabel: 'माताजी', iconName: 'elderly_woman'),
-  spouse(label: 'Spouse (Jeevansathi)', regionalLabel: 'जीवनसाथी', iconName: 'favorite'),
-  sibling(label: 'Sibling (Bhai/Behen)', regionalLabel: 'भाई / बहन', iconName: 'people'),
-  child(label: 'Child (Beta/Beti)', regionalLabel: 'बेटा / बेटी', iconName: 'child_care');
+  father(
+      label: 'Father (Pitaji)', regionalLabel: 'पिताजी', iconName: 'elderly'),
+  mother(
+      label: 'Mother (Mataji)',
+      regionalLabel: 'माताजी',
+      iconName: 'elderly_woman'),
+  spouse(
+      label: 'Spouse (Jeevansathi)',
+      regionalLabel: 'जीवनसाथी',
+      iconName: 'favorite'),
+  sibling(
+      label: 'Sibling (Bhai/Behen)',
+      regionalLabel: 'भाई / बहन',
+      iconName: 'people'),
+  child(
+      label: 'Child (Beta/Beti)',
+      regionalLabel: 'बेटा / बेटी',
+      iconName: 'child_care');
 
   final String label;
   final String regionalLabel;
@@ -87,7 +100,9 @@ class FamilyMemberProfile {
     required this.regionalCaregiverNote,
   });
 
-  double get stepProgressFraction => (todaySteps / (dailyStepTarget == 0 ? 1 : dailyStepTarget)).clamp(0.0, 1.0);
+  double get stepProgressFraction =>
+      (todaySteps / (dailyStepTarget == 0 ? 1 : dailyStepTarget))
+          .clamp(0.0, 1.0);
   bool get hasBpLogged => latestSystolicBp != null && latestDiastolicBp != null;
 
   FamilyMemberProfile copyWith({
@@ -106,7 +121,8 @@ class FamilyMemberProfile {
       age: age,
       todaySteps: todaySteps ?? this.todaySteps,
       dailyStepTarget: dailyStepTarget,
-      completedShatpawaliToday: completedShatpawaliToday ?? this.completedShatpawaliToday,
+      completedShatpawaliToday:
+          completedShatpawaliToday ?? this.completedShatpawaliToday,
       latestSystolicBp: latestSystolicBp ?? this.latestSystolicBp,
       latestDiastolicBp: latestDiastolicBp ?? this.latestDiastolicBp,
       latestFastingGlucoseMgDl: latestFastingGlucoseMgDl,
@@ -115,7 +131,8 @@ class FamilyMemberProfile {
       lastVitalsLoggedAt: DateTime.now(),
       status: status ?? this.status,
       caregiverNote: caregiverNote ?? this.caregiverNote,
-      regionalCaregiverNote: regionalCaregiverNote ?? this.regionalCaregiverNote,
+      regionalCaregiverNote:
+          regionalCaregiverNote ?? this.regionalCaregiverNote,
     );
   }
 }
@@ -126,7 +143,8 @@ class FamilyCareNudge {
   final String id;
   final String targetMemberId;
   final String targetMemberName;
-  final String nudgeType; // "Shatpawali Prompt", "BP Reminder", "Hydration Nudge"
+  final String
+      nudgeType; // "Shatpawali Prompt", "BP Reminder", "Hydration Nudge"
   final String message;
   final String regionalMessage;
   final DateTime sentAt;
@@ -150,7 +168,8 @@ class SeasonalFamilyAyurvedaTip {
   final String description;
   final String regionalDescription;
   final String keyIngredients;
-  final String benefitCategory; // "Digestion & Gas Relief", "Joint Health", "Immunity"
+  final String
+      benefitCategory; // "Digestion & Gas Relief", "Joint Health", "Immunity"
 
   const SeasonalFamilyAyurvedaTip({
     required this.title,
@@ -187,8 +206,10 @@ class FamilyHealthHubState {
     SeasonalFamilyAyurvedaTip? seasonalTip,
   }) {
     return FamilyHealthHubState(
-      familyHouseholdHealthScore: familyHouseholdHealthScore ?? this.familyHouseholdHealthScore,
-      totalFamilyStepsToday: totalFamilyStepsToday ?? this.totalFamilyStepsToday,
+      familyHouseholdHealthScore:
+          familyHouseholdHealthScore ?? this.familyHouseholdHealthScore,
+      totalFamilyStepsToday:
+          totalFamilyStepsToday ?? this.totalFamilyStepsToday,
       familyMembers: familyMembers ?? this.familyMembers,
       recentNudges: recentNudges ?? this.recentNudges,
       seasonalTip: seasonalTip ?? this.seasonalTip,

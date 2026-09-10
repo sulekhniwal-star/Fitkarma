@@ -6,7 +6,9 @@ void main() {
   group('BodyAnalyticsEngine Deterministic Offline Tests', () {
     const engine = BodyAnalyticsEngine();
 
-    test('Computes lean athletic body composition for optimal male measurements', () {
+    test(
+        'Computes lean athletic body composition for optimal male measurements',
+        () {
       const circumferences = BodyCircumferences(
         neckCm: 39.0,
         chestCm: 104.0,
@@ -35,12 +37,18 @@ void main() {
       expect(report.waistToHeightRatio, lessThan(0.50));
       expect(report.waistToHipRatio, closeTo(0.84, 0.02));
       expect(report.symmetryIndexScore, equals(100.0));
-      expect(report.zone, isIn([BodyCompositionZone.athleticLean, BodyCompositionZone.fitHealthy]));
+      expect(
+          report.zone,
+          isIn([
+            BodyCompositionZone.athleticLean,
+            BodyCompositionZone.fitHealthy
+          ]));
       expect(report.dhatuProfile.mamsaQualityScore, greaterThan(80.0));
       expect(report.dhatuProfile.shukraQualityScore, greaterThan(75.0));
     });
 
-    test('Computes accurate body composition for female anthropometric formula', () {
+    test('Computes accurate body composition for female anthropometric formula',
+        () {
       const circumferences = BodyCircumferences(
         neckCm: 32.0,
         chestCm: 88.0,
@@ -65,7 +73,12 @@ void main() {
       expect(report.weightKg, equals(58.0));
       expect(report.bodyFatPercent, inInclusiveRange(18.0, 26.0));
       expect(report.waistToHeightRatio, lessThan(0.50));
-      expect(report.zone, isIn([BodyCompositionZone.athleticLean, BodyCompositionZone.fitHealthy]));
+      expect(
+          report.zone,
+          isIn([
+            BodyCompositionZone.athleticLean,
+            BodyCompositionZone.fitHealthy
+          ]));
       expect(report.basalMetabolicRateKcal, greaterThan(1200.0));
     });
 
@@ -96,7 +109,9 @@ void main() {
       expect(report.dhatuProfile.majjaQualityScore, equals(65.0));
     });
 
-    test('Classifies elevated adiposity when waist circumference is high relative to height', () {
+    test(
+        'Classifies elevated adiposity when waist circumference is high relative to height',
+        () {
       const elevatedCircumferences = BodyCircumferences(
         neckCm: 37.0,
         chestCm: 106.0,

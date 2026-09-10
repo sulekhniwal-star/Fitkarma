@@ -5,7 +5,8 @@ enum AdherenceTier {
     minScore: 85,
     maxScore: 100,
     colorCode: 0xFF00E676,
-    coachMessage: 'Pristine biological execution. Maximum rate of body recomposition and metabolic vitality.',
+    coachMessage:
+        'Pristine biological execution. Maximum rate of body recomposition and metabolic vitality.',
   ),
   disciplined(
     title: 'Abhyasi Balance (Solid Discipline)',
@@ -13,7 +14,8 @@ enum AdherenceTier {
     minScore: 70,
     maxScore: 84,
     colorCode: 0xFF00B0FF,
-    coachMessage: 'Strong foundational compliance. Progressive overload and cardiovascular adaptations are on track.',
+    coachMessage:
+        'Strong foundational compliance. Progressive overload and cardiovascular adaptations are on track.',
   ),
   warning(
     title: 'Drifting Adherence (Minor Deviations)',
@@ -21,7 +23,8 @@ enum AdherenceTier {
     minScore: 50,
     maxScore: 69,
     colorCode: 0xFFFF9100,
-    coachMessage: 'Nutrition or recovery has drifted over the last 3 days. Focus on sleep and post-meal Shatpawali.',
+    coachMessage:
+        'Nutrition or recovery has drifted over the last 3 days. Focus on sleep and post-meal Shatpawali.',
   ),
   intervention(
     title: 'Critical De-load (Requires Adjustment)',
@@ -29,7 +32,8 @@ enum AdherenceTier {
     minScore: 0,
     maxScore: 49,
     colorCode: 0xFFFF5252,
-    coachMessage: 'Elevated lifestyle friction detected. AI Coach recommends automated de-load and habit simplification.',
+    coachMessage:
+        'Elevated lifestyle friction detected. AI Coach recommends automated de-load and habit simplification.',
   );
 
   final String title;

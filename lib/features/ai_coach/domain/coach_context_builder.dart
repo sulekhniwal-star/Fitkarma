@@ -67,10 +67,12 @@ class CoachUserContext {
       'recoveryAndSleep': {
         'sleepHours': sleepSession?.totalSleepHours ?? 7.5,
         'deepSleepPercent': sleepSession != null
-            ? (sleepSession!.deepSleepMinutes / sleepSession!.actualAsleepMinutes)
+            ? (sleepSession!.deepSleepMinutes /
+                sleepSession!.actualAsleepMinutes)
             : 0.18,
         'remSleepPercent': sleepSession != null
-            ? (sleepSession!.remSleepMinutes / sleepSession!.actualAsleepMinutes)
+            ? (sleepSession!.remSleepMinutes /
+                sleepSession!.actualAsleepMinutes)
             : 0.22,
         'somaticSorenessScore': sorenessMap?.cumulativeScore ?? 20,
       },

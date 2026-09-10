@@ -13,11 +13,13 @@ class FamilyNutritionScreen extends ConsumerStatefulWidget {
   const FamilyNutritionScreen({super.key});
 
   @override
-  ConsumerState<FamilyNutritionScreen> createState() => _FamilyNutritionScreenState();
+  ConsumerState<FamilyNutritionScreen> createState() =>
+      _FamilyNutritionScreenState();
 }
 
 class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
-  final List<FamilyMemberProfile> _members = FamilyNutritionEngine.getDefaultIndianFamily();
+  final List<FamilyMemberProfile> _members =
+      FamilyNutritionEngine.getDefaultIndianFamily();
 
   final List<MasterPotDish> _presetMasterDishes = const [
     MasterPotDish(
@@ -101,15 +103,21 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                       child: ChoiceChip(
                         label: Text(dish.dishName),
                         selected: isSelected,
-                        selectedColor: AppColors.karmaGreen.withValues(alpha: 0.2),
+                        selectedColor:
+                            AppColors.karmaGreen.withValues(alpha: 0.2),
                         backgroundColor: AppColors.surface,
                         labelStyle: TextStyle(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.w700 : FontWeight.w500,
                           fontSize: 12,
                         ),
                         side: BorderSide(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.glassBorder,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.glassBorder,
                         ),
                         onSelected: (val) {
                           if (val) setState(() => _selectedDish = dish);
@@ -136,11 +144,14 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                           regionalText: _selectedDish.regionalName,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.focusBlue.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: AppColors.focusBlue.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color:
+                                    AppColors.focusBlue.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             '${_selectedDish.totalYieldServings} KATORI YIELD',
@@ -231,7 +242,10 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                                 ),
                                 Text(
                                   member.role.defaultGoal,
-                                  style: const TextStyle(fontSize: 10, color: AppColors.focusBlue, fontWeight: FontWeight.w600),
+                                  style: const TextStyle(
+                                      fontSize: 10,
+                                      color: AppColors.focusBlue,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -239,11 +253,15 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                             Row(
                               children: [
                                 IconButton(
-                                  icon: const Icon(Icons.remove_circle_outline_rounded, color: AppColors.textMuted, size: 22),
+                                  icon: const Icon(
+                                      Icons.remove_circle_outline_rounded,
+                                      color: AppColors.textMuted,
+                                      size: 22),
                                   onPressed: servings > 0.5
                                       ? () {
                                           setState(() {
-                                            _servingsMap[member.id] = (servings - 0.5);
+                                            _servingsMap[member.id] =
+                                                (servings - 0.5);
                                           });
                                         }
                                       : null,
@@ -257,10 +275,14 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                                   ),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.add_circle_outline_rounded, color: AppColors.karmaGreen, size: 22),
+                                  icon: const Icon(
+                                      Icons.add_circle_outline_rounded,
+                                      color: AppColors.karmaGreen,
+                                      size: 22),
                                   onPressed: () {
                                     setState(() {
-                                      _servingsMap[member.id] = (servings + 0.5);
+                                      _servingsMap[member.id] =
+                                          (servings + 0.5);
                                     });
                                   },
                                 ),
@@ -270,7 +292,8 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                         ),
                         const SizedBox(height: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
                           decoration: const BoxDecoration(
                             color: AppColors.surface,
                             borderRadius: AppRadii.radiusSm,
@@ -278,13 +301,30 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text('${alloc.allocatedCalories} kcal', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: AppColors.textPrimary)),
-                              const Text('•', style: TextStyle(color: AppColors.textMuted)),
-                              Text('${alloc.allocatedProtein}g Protein', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: AppColors.karmaGreen)),
-                              const Text('•', style: TextStyle(color: AppColors.textMuted)),
-                              Text('${alloc.allocatedCarbs}g Carbs', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                              const Text('•', style: TextStyle(color: AppColors.textMuted)),
-                              Text('${alloc.allocatedFats}g Fats', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                              Text('${alloc.allocatedCalories} kcal',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                      color: AppColors.textPrimary)),
+                              const Text('•',
+                                  style: TextStyle(color: AppColors.textMuted)),
+                              Text('${alloc.allocatedProtein}g Protein',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                      color: AppColors.karmaGreen)),
+                              const Text('•',
+                                  style: TextStyle(color: AppColors.textMuted)),
+                              Text('${alloc.allocatedCarbs}g Carbs',
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textSecondary)),
+                              const Text('•',
+                                  style: TextStyle(color: AppColors.textMuted)),
+                              Text('${alloc.allocatedFats}g Fats',
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textSecondary)),
                             ],
                           ),
                         ),
@@ -292,7 +332,8 @@ class _FamilyNutritionScreenState extends ConsumerState<FamilyNutritionScreen> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.tips_and_updates_outlined, color: AppColors.gold, size: 14),
+                            const Icon(Icons.tips_and_updates_outlined,
+                                color: AppColors.gold, size: 14),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(

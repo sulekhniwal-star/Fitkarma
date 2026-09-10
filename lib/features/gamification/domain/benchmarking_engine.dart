@@ -51,7 +51,8 @@ class BenchmarkingEngine {
     required String contextualInsight,
     required String regionalContextualInsight,
   }) {
-    final z = calculateZScore(userValue, cohortMean, cohortStdDev, lowerIsBetter: lowerIsBetter);
+    final z = calculateZScore(userValue, cohortMean, cohortStdDev,
+        lowerIsBetter: lowerIsBetter);
     final percentile = calculatePercentileFromZ(z);
     final tier = determineTier(percentile);
 
@@ -87,12 +88,16 @@ class BenchmarkingEngine {
       );
     }
 
-    final double avgPercentile = evaluatedMetrics.fold(0.0, (sum, m) => sum + m.percentile) / evaluatedMetrics.length;
-    final double compositePercentile = double.parse(avgPercentile.clamp(1.0, 99.9).toStringAsFixed(1));
+    final double avgPercentile =
+        evaluatedMetrics.fold(0.0, (sum, m) => sum + m.percentile) /
+            evaluatedMetrics.length;
+    final double compositePercentile =
+        double.parse(avgPercentile.clamp(1.0, 99.9).toStringAsFixed(1));
     final overallTier = determineTier(compositePercentile);
 
     // Identify highest and lowest ranking metrics
-    final sorted = List<BenchmarkMetric>.from(evaluatedMetrics)..sort((a, b) => b.percentile.compareTo(a.percentile));
+    final sorted = List<BenchmarkMetric>.from(evaluatedMetrics)
+      ..sort((a, b) => b.percentile.compareTo(a.percentile));
     final strength = sorted.first.name;
     final growth = sorted.last.name;
 

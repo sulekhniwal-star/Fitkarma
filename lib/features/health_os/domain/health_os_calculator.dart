@@ -16,11 +16,15 @@ class HealthOsCalculator {
     double heatIndex = 30.0,
   }) {
     // 1. Readiness Score Calculation (0 - 100)
-    final sleepFactor = ((sleepHours / 8.0).clamp(0.0, 1.0) * 100 * 0.5) + (sleepQuality * 0.5);
+    final sleepFactor =
+        ((sleepHours / 8.0).clamp(0.0, 1.0) * 100 * 0.5) + (sleepQuality * 0.5);
     final recoveryFactor = (100 - sorenessScore).clamp(0, 100);
-    final strainFactor = yesterdaySteps > 15000 ? 70 : (yesterdaySteps > 10000 ? 90 : 80);
+    final strainFactor =
+        yesterdaySteps > 15000 ? 70 : (yesterdaySteps > 10000 ? 90 : 80);
 
-    var readinessScore = ((sleepFactor * 0.40) + (recoveryFactor * 0.35) + (strainFactor * 0.25)).round();
+    var readinessScore =
+        ((sleepFactor * 0.40) + (recoveryFactor * 0.35) + (strainFactor * 0.25))
+            .round();
     if (isIll) readinessScore = readinessScore.clamp(0, 30);
 
     // Readiness Zone
@@ -49,7 +53,8 @@ class HealthOsCalculator {
       targetCalories = (baseCalories * 0.9).round();
       targetSteps = 3000;
       workoutRecommendation = 'Rest & Immune Recovery';
-      safetyAlerts.add('Illness detected: Workout suspended. Prioritize hydration and rest.');
+      safetyAlerts.add(
+          'Illness detected: Workout suspended. Prioritize hydration and rest.');
     } else if (zone == ReadinessZone.optimal) {
       targetCalories = (baseCalories * 1.05).round();
       targetSteps = (baseSteps * 1.1).round();
@@ -58,11 +63,13 @@ class HealthOsCalculator {
       targetCalories = (baseCalories * 0.95).round();
       targetSteps = (baseSteps * 0.7).round().clamp(4000, 15000);
       workoutRecommendation = 'Active Mobility & Zone 2 Walk';
-      safetyAlerts.add('Readiness is reduced. Focus on active recovery and sleep.');
+      safetyAlerts
+          .add('Readiness is reduced. Focus on active recovery and sleep.');
     }
 
     if (heatIndex >= 38.0) {
-      safetyAlerts.add('Extreme heat advisory: Hydrate aggressively and avoid outdoor noon workouts.');
+      safetyAlerts.add(
+          'Extreme heat advisory: Hydrate aggressively and avoid outdoor noon workouts.');
     }
 
     return DailyIntelligencePackage(
@@ -74,7 +81,8 @@ class HealthOsCalculator {
       targetProteinGrams: targetProtein,
       targetSteps: targetSteps,
       workoutRecommendation: workoutRecommendation,
-      aiBriefing: 'Offline intelligence active. Your body readiness is calculated and optimized for today.',
+      aiBriefing:
+          'Offline intelligence active. Your body readiness is calculated and optimized for today.',
       safetyAlerts: safetyAlerts,
       generatedAt: DateTime.now(),
     );

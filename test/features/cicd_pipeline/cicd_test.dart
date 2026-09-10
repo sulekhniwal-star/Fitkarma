@@ -30,21 +30,25 @@ void main() {
         ),
       ];
 
-      final failedReport = engine.generatePipelineReport(customStages: stagesWithFailure);
+      final failedReport =
+          engine.generatePipelineReport(customStages: stagesWithFailure);
       expect(failedReport.overallStatus, equals(PipelineStatus.failed));
       expect(failedReport.isAllGreen, isFalse);
     });
   });
 
   group('Cicd StateNotifier Provider Tests', () {
-    test('StateNotifier triggers automated pipeline run and selects stages', () async {
+    test('StateNotifier triggers automated pipeline run and selects stages',
+        () async {
       final notifier = CicdNotifier();
 
       expect(notifier.state.selectedStage, isNull);
-      expect(notifier.state.report.overallStatus, equals(PipelineStatus.passed));
+      expect(
+          notifier.state.report.overallStatus, equals(PipelineStatus.passed));
 
       notifier.selectStage(PipelineStage.androidAabBuild);
-      expect(notifier.state.selectedStage, equals(PipelineStage.androidAabBuild));
+      expect(
+          notifier.state.selectedStage, equals(PipelineStage.androidAabBuild));
 
       notifier.selectStage(null);
       expect(notifier.state.selectedStage, isNull);

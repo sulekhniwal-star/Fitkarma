@@ -19,7 +19,9 @@ class SecurityEngine {
         pillar: SecurityPillar.appCheckIntegrity,
         title: 'App Check Client Attestation (${provider.name})',
         regionalTitle: 'ऐप चेक व क्लाइंट प्रामाणिकता',
-        status: isAppCheckActive ? SecurityCheckStatus.passed : SecurityCheckStatus.warning,
+        status: isAppCheckActive
+            ? SecurityCheckStatus.passed
+            : SecurityCheckStatus.warning,
         details: isAppCheckActive
             ? 'Firebase App Check actively verifies client device authenticity via ${provider.name}. Scripted / reverse-engineered clients are blocked.'
             : 'App Check token is disabled or operating in unverified sandbox mode.',
@@ -35,7 +37,9 @@ class SecurityEngine {
         pillar: SecurityPillar.zeroClientSecrets,
         title: 'Zero Secrets in Client Binary',
         regionalTitle: 'शून्य क्लाइंट-साइड गुप्त कुंजियाँ',
-        status: areZeroSecretsMaintained ? SecurityCheckStatus.passed : SecurityCheckStatus.critical,
+        status: areZeroSecretsMaintained
+            ? SecurityCheckStatus.passed
+            : SecurityCheckStatus.critical,
         details: areZeroSecretsMaintained
             ? 'Zero plaintext API keys (Groq, RevenueCat Webhook, Twilio) embedded in Flutter APK/IPA. All sensitive API calls routed through Cloud Functions.'
             : 'Hardcoded API secrets detected in client bundle. Risk of credential harvesting.',
@@ -54,7 +58,9 @@ class SecurityEngine {
         pillar: SecurityPillar.biometricHealthVault,
         title: 'Biometric Re-Auth on Sensitive Telemetry',
         regionalTitle: 'बायोमेट्रिक स्वास्थ्य डेटा सुरक्षा',
-        status: isBiometricAdequate ? SecurityCheckStatus.passed : SecurityCheckStatus.warning,
+        status: isBiometricAdequate
+            ? SecurityCheckStatus.passed
+            : SecurityCheckStatus.warning,
         details: isBiometricAdequate
             ? 'Biometric prompt (Fingerprint / Face ID) strictly required before accessing blood lab reports, glucose graphs, and doctor dossiers.'
             : 'Biometric protection partially disabled. Sensitive health telemetry accessible upon device unlock.',
@@ -71,8 +77,10 @@ class SecurityEngine {
         title: 'Firestore UID Isolation & Entitlement Immutability',
         regionalTitle: 'फायरस्टोर डेटा पृथक्करण व सुरक्षा',
         status: SecurityCheckStatus.passed,
-        details: 'Security rules enforce `request.auth.uid == userId` across `/users/{userId}/**` and `/affiliates/{id}`. Client mutation of `subscriptionTier` is strictly blocked.',
-        regionalDetails: 'फायरस्टोर नियमों द्वारा उपयोगकर्ता डेटा पूर्णतः पृथक एवं सुरक्षित है।',
+        details:
+            'Security rules enforce `request.auth.uid == userId` across `/users/{userId}/**` and `/affiliates/{id}`. Client mutation of `subscriptionTier` is strictly blocked.',
+        regionalDetails:
+            'फायरस्टोर नियमों द्वारा उपयोगकर्ता डेटा पूर्णतः पृथक एवं सुरक्षित है।',
       ),
     );
 
@@ -83,8 +91,10 @@ class SecurityEngine {
         title: 'Cloud Storage Path Isolation (/users/{uid}/**)',
         regionalTitle: 'क्लाउड स्टोरेज गोपनीयता',
         status: SecurityCheckStatus.passed,
-        details: 'Progress photos, meal scans, and clinical report uploads are isolated to owner UID paths in Firebase Storage.',
-        regionalDetails: 'प्रगति फ़ोटो व मेडिकल स्कैन केवल अधिकृत उपयोगकर्ता हेतु उपलब्ध हैं।',
+        details:
+            'Progress photos, meal scans, and clinical report uploads are isolated to owner UID paths in Firebase Storage.',
+        regionalDetails:
+            'प्रगति फ़ोटो व मेडिकल स्कैन केवल अधिकृत उपयोगकर्ता हेतु उपलब्ध हैं।',
       ),
     );
 
@@ -95,14 +105,18 @@ class SecurityEngine {
         title: 'India DPDP Act & ABDM Health Consent Safeguards',
         regionalTitle: 'डीपीडीपी व एबीडीएम विधिक सुरक्षा',
         status: SecurityCheckStatus.passed,
-        details: 'Explicit purpose-limited health consent, revocable doctor sharing grants, and local cryptographic hashing for AI caching.',
-        regionalDetails: 'भारतीय डिजिटल व्यक्तिगत डेटा संरक्षण अधिनियम के अनुरूप सहमति प्रबंधन।',
+        details:
+            'Explicit purpose-limited health consent, revocable doctor sharing grants, and local cryptographic hashing for AI caching.',
+        regionalDetails:
+            'भारतीय डिजिटल व्यक्तिगत डेटा संरक्षण अधिनियम के अनुरूप सहमति प्रबंधन।',
       ),
     );
 
     // Compute composite security score (0 to 100)
-    final int passedCount = checks.where((c) => c.status == SecurityCheckStatus.passed).length;
-    final int warningCount = checks.where((c) => c.status == SecurityCheckStatus.warning).length;
+    final int passedCount =
+        checks.where((c) => c.status == SecurityCheckStatus.passed).length;
+    final int warningCount =
+        checks.where((c) => c.status == SecurityCheckStatus.warning).length;
 
     int score = (passedCount * 17) + (warningCount * 8);
     if (score > 100) score = 100;

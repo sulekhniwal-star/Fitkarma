@@ -24,7 +24,8 @@ class MedicationNotifier extends StateNotifier<MedicationScheduleReport> {
         timing: DoseTiming.morningAfterBreakfast,
         isTakenToday: true,
         totalPillsRemaining: 24,
-        clinicalPurpose: 'Blood pressure stabilization and arterial endothelial protection.',
+        clinicalPurpose:
+            'Blood pressure stabilization and arterial endothelial protection.',
         regionalClinicalPurpose: 'रक्तचाप नियंत्रण व धमनी सुरक्षा।',
       ),
       const TrackedMedication(
@@ -37,7 +38,8 @@ class MedicationNotifier extends StateNotifier<MedicationScheduleReport> {
         timing: DoseTiming.nightBeforeBed,
         isTakenToday: false,
         totalPillsRemaining: 45,
-        clinicalPurpose: 'Systemic anti-inflammatory and joint cartilage support.',
+        clinicalPurpose:
+            'Systemic anti-inflammatory and joint cartilage support.',
         regionalClinicalPurpose: 'सूजन-रोधी व जोड़ों की सुरक्षा।',
       ),
       const TrackedMedication(
@@ -50,7 +52,8 @@ class MedicationNotifier extends StateNotifier<MedicationScheduleReport> {
         timing: DoseTiming.nightBeforeBed,
         isTakenToday: false,
         totalPillsRemaining: 60,
-        clinicalPurpose: 'Digestive colon cleansing and gut microbiome modulation.',
+        clinicalPurpose:
+            'Digestive colon cleansing and gut microbiome modulation.',
         regionalClinicalPurpose: 'पाचन तंत्र की शुद्धि व आंत स्वास्थ्य।',
       ),
       const TrackedMedication(
@@ -75,8 +78,11 @@ class MedicationNotifier extends StateNotifier<MedicationScheduleReport> {
     final updatedList = state.activeMedications.map((m) {
       if (m.id == medicationId) {
         final newStatus = !m.isTakenToday;
-        final newPills = newStatus ? (m.totalPillsRemaining - 1).clamp(0, 999) : (m.totalPillsRemaining + 1);
-        return m.copyWith(isTakenToday: newStatus, totalPillsRemaining: newPills);
+        final newPills = newStatus
+            ? (m.totalPillsRemaining - 1).clamp(0, 999)
+            : (m.totalPillsRemaining + 1);
+        return m.copyWith(
+            isTakenToday: newStatus, totalPillsRemaining: newPills);
       }
       return m;
     }).toList();
@@ -90,7 +96,8 @@ class MedicationNotifier extends StateNotifier<MedicationScheduleReport> {
   }
 
   void removeMedication(String medicationId) {
-    final updatedList = state.activeMedications.where((m) => m.id != medicationId).toList();
+    final updatedList =
+        state.activeMedications.where((m) => m.id != medicationId).toList();
     state = _engine.evaluateSchedule(medications: updatedList);
   }
 }

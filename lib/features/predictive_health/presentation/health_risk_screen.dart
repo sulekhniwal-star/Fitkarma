@@ -31,7 +31,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showClinicalMethodologyModal(context),
           ),
         ],
@@ -89,7 +90,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroRiskCard(HealthRiskPreventionReport report, Color tierColor) {
+  Widget _buildHeroRiskCard(
+      HealthRiskPreventionReport report, Color tierColor) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +100,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: tierColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusFull,
@@ -128,7 +131,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: const BoxDecoration(
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusFull,
@@ -153,7 +157,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Composite Clinical Risk Index',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -166,7 +171,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       'Multi-factorial synthesis of WHtR, IDRS diabetes risk, blood pressure, and autonomic recovery.',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -204,7 +210,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.medical_services, color: AppColors.alertRed, size: 24),
+          const Icon(Icons.medical_services,
+              color: AppColors.alertRed, size: 24),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
@@ -220,12 +227,14 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
                 const SizedBox(height: 4),
                 Text(
                   report.consultationReason,
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textPrimary, height: 1.3),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   report.regionalConsultationReason,
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 11),
                 ),
               ],
             ),
@@ -339,11 +348,13 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
                   children: [
                     Text(
                       factor.name,
-                      style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                      style: AppTypography.titleMedium
+                          .copyWith(color: AppColors.textPrimary),
                     ),
                     Text(
                       factor.regionalName,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted, fontSize: 11),
                     ),
                   ],
                 ),
@@ -378,14 +389,16 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
               ),
               Text(
                 'Optimal Target: < ${factor.optimalThreshold} ${factor.unit}',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.karmaGreen),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.karmaGreen),
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             factor.clinicalRationale,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
           ),
         ],
       ),
@@ -402,7 +415,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.health_and_safety, color: AppColors.karmaGreen, size: 18),
+                  const Icon(Icons.health_and_safety,
+                      color: AppColors.karmaGreen, size: 18),
                   const SizedBox(width: 6),
                   Text(
                     protocol.title,
@@ -433,23 +447,27 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
           const SizedBox(height: 2),
           Text(
             protocol.regionalTitle,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textMuted, fontSize: 11),
           ),
           const SizedBox(height: 6),
           Text(
             protocol.protocolDescription,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.3),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, height: 1.3),
           ),
           const SizedBox(height: 6),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm, vertical: 4),
             decoration: const BoxDecoration(
               color: AppColors.surfaceElevated,
               borderRadius: AppRadii.radiusSm,
             ),
             child: Row(
               children: [
-                const Icon(Icons.insights, color: AppColors.focusBlue, size: 14),
+                const Icon(Icons.insights,
+                    color: AppColors.focusBlue, size: 14),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -484,7 +502,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
             children: [
               Text(
                 'South Asian Health Risk Science',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -493,7 +512,8 @@ class HealthRiskPreventionScreen extends ConsumerWidget {
                 '• Indian Diabetes Risk Score (MDRF validated IDRS index).\n'
                 '• Autonomic vagal tone derived from resting heart rate and recovery metrics.\n'
                 '• Non-pharmaceutical lifestyle protocols with proven clinical efficacy.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

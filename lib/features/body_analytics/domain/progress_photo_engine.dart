@@ -33,10 +33,13 @@ class ProgressPhotoEngine {
 
     final firstEntry = sorted.first;
     final lastEntry = sorted.last;
-    final daysTracked = max(1, lastEntry.capturedAt.difference(firstEntry.capturedAt).inDays);
+    final daysTracked =
+        max(1, lastEntry.capturedAt.difference(firstEntry.capturedAt).inDays);
 
-    final totalWeightDelta = lastEntry.weightKgAtCapture - firstEntry.weightKgAtCapture;
-    final totalFatDelta = lastEntry.bodyFatPercentAtCapture - firstEntry.bodyFatPercentAtCapture;
+    final totalWeightDelta =
+        lastEntry.weightKgAtCapture - firstEntry.weightKgAtCapture;
+    final totalFatDelta =
+        lastEntry.bodyFatPercentAtCapture - firstEntry.bodyFatPercentAtCapture;
 
     // Determine comparative pair
     ComparativePhotoPair? comparison;
@@ -52,7 +55,8 @@ class ProgressPhotoEngine {
       totalPhotosCaptured: sorted.length,
       totalDaysTracked: daysTracked,
       totalWeightLossKg: double.parse((-totalWeightDelta).toStringAsFixed(1)),
-      totalBodyFatLossPercent: double.parse((-totalFatDelta).toStringAsFixed(1)),
+      totalBodyFatLossPercent:
+          double.parse((-totalFatDelta).toStringAsFixed(1)),
       isVaultEncrypted: true,
       lastUpdated: now,
     );
@@ -65,8 +69,10 @@ class ProgressPhotoEngine {
   ) {
     final days = after.capturedAt.difference(before.capturedAt).inDays.abs();
     final weightDelta = after.weightKgAtCapture - before.weightKgAtCapture;
-    final fatDelta = after.bodyFatPercentAtCapture - before.bodyFatPercentAtCapture;
-    final waistDelta = (after.waistCmAtCapture ?? 0.0) - (before.waistCmAtCapture ?? 0.0);
+    final fatDelta =
+        after.bodyFatPercentAtCapture - before.bodyFatPercentAtCapture;
+    final waistDelta =
+        (after.waistCmAtCapture ?? 0.0) - (before.waistCmAtCapture ?? 0.0);
 
     String summary;
     String regSummary;

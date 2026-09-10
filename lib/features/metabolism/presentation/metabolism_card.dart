@@ -59,7 +59,8 @@ class MetabolismCard extends StatelessWidget {
                 regionalText: 'अनुकूली चयापचय प्रणाली',
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: stateColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -84,8 +85,11 @@ class MetabolismCard extends StatelessWidget {
                 value: '${profile.dynamicTdee.round()}',
                 unit: 'kcal',
                 accentColor: stateColor,
-                trend: profile.adaptationFactor >= 1.0 ? MetricTrend.up : MetricTrend.down,
-                trendLabel: '${((profile.adaptationFactor - 1.0) * 100).round() >= 0 ? '+' : ''}${((profile.adaptationFactor - 1.0) * 100).round()}%',
+                trend: profile.adaptationFactor >= 1.0
+                    ? MetricTrend.up
+                    : MetricTrend.down,
+                trendLabel:
+                    '${((profile.adaptationFactor - 1.0) * 100).round() >= 0 ? '+' : ''}${((profile.adaptationFactor - 1.0) * 100).round()}%',
               ),
               GlowingMetric(
                 label: 'Daily Target',
@@ -112,9 +116,12 @@ class MetabolismCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildMacroPill('Protein', '${profile.targetProteinGrams}g', AppColors.focusBlue),
-                _buildMacroPill('Carbs', '${profile.targetCarbsGrams}g', AppColors.energyOrange),
-                _buildMacroPill('Fats', '${profile.targetFatsGrams}g', AppColors.aiPurple),
+                _buildMacroPill('Protein', '${profile.targetProteinGrams}g',
+                    AppColors.focusBlue),
+                _buildMacroPill('Carbs', '${profile.targetCarbsGrams}g',
+                    AppColors.energyOrange),
+                _buildMacroPill(
+                    'Fats', '${profile.targetFatsGrams}g', AppColors.aiPurple),
               ],
             ),
           ),

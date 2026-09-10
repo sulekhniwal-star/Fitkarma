@@ -49,15 +49,22 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                       child: ChoiceChip(
                         label: const Text('All Swaps (सभी)'),
                         selected: _selectedCategory == null,
-                        selectedColor: AppColors.karmaGreen.withValues(alpha: 0.2),
+                        selectedColor:
+                            AppColors.karmaGreen.withValues(alpha: 0.2),
                         backgroundColor: AppColors.surface,
                         labelStyle: TextStyle(
-                          color: _selectedCategory == null ? AppColors.karmaGreen : AppColors.textSecondary,
-                          fontWeight: _selectedCategory == null ? FontWeight.w700 : FontWeight.w500,
+                          color: _selectedCategory == null
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
+                          fontWeight: _selectedCategory == null
+                              ? FontWeight.w700
+                              : FontWeight.w500,
                           fontSize: 12,
                         ),
                         side: BorderSide(
-                          color: _selectedCategory == null ? AppColors.karmaGreen : AppColors.glassBorder,
+                          color: _selectedCategory == null
+                              ? AppColors.karmaGreen
+                              : AppColors.glassBorder,
                         ),
                         onSelected: (val) {
                           if (val) setState(() => _selectedCategory = null);
@@ -71,18 +78,25 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                         child: ChoiceChip(
                           label: Text(cat.label),
                           selected: isSelected,
-                          selectedColor: Color(cat.colorCode).withValues(alpha: 0.2),
+                          selectedColor:
+                              Color(cat.colorCode).withValues(alpha: 0.2),
                           backgroundColor: AppColors.surface,
                           labelStyle: TextStyle(
-                            color: isSelected ? Color(cat.colorCode) : AppColors.textSecondary,
-                            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                            color: isSelected
+                                ? Color(cat.colorCode)
+                                : AppColors.textSecondary,
+                            fontWeight:
+                                isSelected ? FontWeight.w700 : FontWeight.w500,
                             fontSize: 12,
                           ),
                           side: BorderSide(
-                            color: isSelected ? Color(cat.colorCode) : AppColors.glassBorder,
+                            color: isSelected
+                                ? Color(cat.colorCode)
+                                : AppColors.glassBorder,
                           ),
                           onSelected: (val) {
-                            setState(() => _selectedCategory = val ? cat : null);
+                            setState(
+                                () => _selectedCategory = val ? cat : null);
                           },
                         ),
                       );
@@ -113,23 +127,34 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
                                 color: categoryColor.withValues(alpha: 0.15),
                                 borderRadius: AppRadii.radiusSm,
-                                border: Border.all(color: categoryColor.withValues(alpha: 0.4)),
+                                border: Border.all(
+                                    color:
+                                        categoryColor.withValues(alpha: 0.4)),
                               ),
                               child: Text(
                                 swap.category.label.toUpperCase(),
-                                style: TextStyle(color: categoryColor, fontSize: 10, fontWeight: FontWeight.w800),
+                                style: TextStyle(
+                                    color: categoryColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                             Row(
                               children: [
-                                const Text('Taste Match: ', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                const Text('Taste Match: ',
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textMuted)),
                                 ...List.generate(5, (starIdx) {
                                   return Icon(
-                                    starIdx < swap.tasteFidelityScore ? Icons.star_rounded : Icons.star_outline_rounded,
+                                    starIdx < swap.tasteFidelityScore
+                                        ? Icons.star_rounded
+                                        : Icons.star_outline_rounded,
                                     color: AppColors.gold,
                                     size: 13,
                                   );
@@ -151,19 +176,35 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                                 decoration: BoxDecoration(
                                   color: AppColors.surface,
                                   borderRadius: AppRadii.radiusSm,
-                                  border: Border.all(color: AppColors.alertRed.withValues(alpha: 0.2)),
+                                  border: Border.all(
+                                      color: AppColors.alertRed
+                                          .withValues(alpha: 0.2)),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('CURRENT (पारंपरिक)', style: TextStyle(color: AppColors.alertRed, fontSize: 9, fontWeight: FontWeight.w800)),
+                                    const Text('CURRENT (पारंपरिक)',
+                                        style: TextStyle(
+                                            color: AppColors.alertRed,
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w800)),
                                     const SizedBox(height: 2),
-                                    Text(swap.originalItem.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.textPrimary)),
-                                    Text(swap.originalItem.servingUnit, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                    Text(swap.originalItem.name,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 12,
+                                            color: AppColors.textPrimary)),
+                                    Text(swap.originalItem.servingUnit,
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.textMuted)),
                                     const SizedBox(height: 4),
                                     Text(
                                       '${swap.originalItem.calories} kcal • ${swap.originalItem.proteinGrams}g P',
-                                      style: const TextStyle(fontSize: 10, color: AppColors.textSecondary, fontWeight: FontWeight.w600),
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          color: AppColors.textSecondary,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ],
                                 ),
@@ -171,7 +212,8 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                             ),
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 6),
-                              child: Icon(Icons.arrow_forward_rounded, color: AppColors.karmaGreen, size: 20),
+                              child: Icon(Icons.arrow_forward_rounded,
+                                  color: AppColors.karmaGreen, size: 20),
                             ),
                             // Suggested Swap Dish
                             Expanded(
@@ -180,19 +222,35 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                                 decoration: BoxDecoration(
                                   color: AppColors.surface,
                                   borderRadius: AppRadii.radiusSm,
-                                  border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.3)),
+                                  border: Border.all(
+                                      color: AppColors.karmaGreen
+                                          .withValues(alpha: 0.3)),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('SMART SWAP (उन्नत विकल्प)', style: TextStyle(color: AppColors.karmaGreen, fontSize: 9, fontWeight: FontWeight.w800)),
+                                    const Text('SMART SWAP (उन्नत विकल्प)',
+                                        style: TextStyle(
+                                            color: AppColors.karmaGreen,
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w800)),
                                     const SizedBox(height: 2),
-                                    Text(swap.suggestedItem.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.textPrimary)),
-                                    Text(swap.suggestedItem.servingUnit, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                    Text(swap.suggestedItem.name,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 12,
+                                            color: AppColors.textPrimary)),
+                                    Text(swap.suggestedItem.servingUnit,
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.textMuted)),
                                     const SizedBox(height: 4),
                                     Text(
                                       '${swap.suggestedItem.calories} kcal • ${swap.suggestedItem.proteinGrams}g P',
-                                      style: const TextStyle(fontSize: 10, color: AppColors.karmaGreen, fontWeight: FontWeight.w700),
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          color: AppColors.karmaGreen,
+                                          fontWeight: FontWeight.w700),
                                     ),
                                   ],
                                 ),
@@ -206,17 +264,23 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                         Row(
                           children: [
                             _buildDeltaPill(
-                              label: swap.deltaCalories <= 0 ? '${swap.deltaCalories} kcal' : '+${swap.deltaCalories} kcal',
+                              label: swap.deltaCalories <= 0
+                                  ? '${swap.deltaCalories} kcal'
+                                  : '+${swap.deltaCalories} kcal',
                               isPositiveAdvantage: swap.deltaCalories <= 0,
                             ),
                             const SizedBox(width: 6),
                             _buildDeltaPill(
-                              label: swap.deltaProtein >= 0 ? '+${swap.deltaProtein}g Protein' : '${swap.deltaProtein}g Protein',
+                              label: swap.deltaProtein >= 0
+                                  ? '+${swap.deltaProtein}g Protein'
+                                  : '${swap.deltaProtein}g Protein',
                               isPositiveAdvantage: swap.deltaProtein >= 0,
                             ),
                             const SizedBox(width: 6),
                             _buildDeltaPill(
-                              label: swap.deltaFiber >= 0 ? '+${swap.deltaFiber}g Fiber' : '${swap.deltaFiber}g Fiber',
+                              label: swap.deltaFiber >= 0
+                                  ? '+${swap.deltaFiber}g Fiber'
+                                  : '${swap.deltaFiber}g Fiber',
                               isPositiveAdvantage: swap.deltaFiber >= 0,
                             ),
                           ],
@@ -226,12 +290,18 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                         // Culinary tip & physiological reason
                         Text(
                           swap.physiologicalAdvantage,
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11, fontWeight: FontWeight.w600),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textPrimary,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(height: 3),
                         Text(
                           '🍳 Chef Tip: ${swap.culinaryPreparationTip}',
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10, height: 1.3),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 10,
+                              height: 1.3),
                         ),
                         const SizedBox(height: 8),
 
@@ -240,14 +310,20 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                           width: double.infinity,
                           child: OutlinedButton.icon(
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: AppColors.karmaGreen),
-                              shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                              side:
+                                  const BorderSide(color: AppColors.karmaGreen),
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: AppRadii.radiusSm),
                               padding: const EdgeInsets.symmetric(vertical: 8),
                             ),
-                            icon: const Icon(Icons.swap_horiz_rounded, color: AppColors.karmaGreen, size: 18),
+                            icon: const Icon(Icons.swap_horiz_rounded,
+                                color: AppColors.karmaGreen, size: 18),
                             label: const Text(
                               'Log This Smart Swap to Daily Diet',
-                              style: TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.w700),
+                              style: TextStyle(
+                                  color: AppColors.karmaGreen,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700),
                             ),
                             onPressed: () {
                               ref.read(nutritionProvider.notifier).addMeal(
@@ -261,12 +337,16 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
                                   backgroundColor: AppColors.surfaceElevated,
                                   content: Row(
                                     children: [
-                                      const Icon(Icons.check_circle_rounded, color: AppColors.karmaGreen, size: 18),
+                                      const Icon(Icons.check_circle_rounded,
+                                          color: AppColors.karmaGreen,
+                                          size: 18),
                                       const SizedBox(width: 8),
                                       Expanded(
                                         child: Text(
                                           'Logged "${swap.suggestedItem.name}" to Lunch!',
-                                          style: const TextStyle(color: AppColors.textPrimary, fontSize: 12),
+                                          style: const TextStyle(
+                                              color: AppColors.textPrimary,
+                                              fontSize: 12),
                                         ),
                                       ),
                                     ],
@@ -293,7 +373,8 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
     required String label,
     required bool isPositiveAdvantage,
   }) {
-    final Color color = isPositiveAdvantage ? AppColors.karmaGreen : AppColors.energyOrange;
+    final Color color =
+        isPositiveAdvantage ? AppColors.karmaGreen : AppColors.energyOrange;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -304,7 +385,8 @@ class _FoodSwapScreenState extends ConsumerState<FoodSwapScreen> {
       ),
       child: Text(
         label,
-        style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
+        style:
+            TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
       ),
     );
   }

@@ -11,7 +11,8 @@ void main() {
       expect(AbhaEngine.isValidAbhaNumber('14882249128734'), isTrue);
       expect(AbhaEngine.isValidAbhaNumber('14-8822-4912-8734'), isTrue);
       expect(AbhaEngine.isValidAbhaNumber('1234'), isFalse);
-      expect(AbhaEngine.formatAbhaNumber('14882249128734'), equals('14-8822-4912-8734'));
+      expect(AbhaEngine.formatAbhaNumber('14882249128734'),
+          equals('14-8822-4912-8734'));
     });
 
     test('Validates ABHA PHR Address handles across valid ABDM domains', () {
@@ -25,7 +26,8 @@ void main() {
       final otp = engine.generateKycOtp('14882249128734');
       expect(otp.length, equals(6));
       expect(engine.verifyKycOtp(enteredOtp: otp, expectedOtp: otp), isTrue);
-      expect(engine.verifyKycOtp(enteredOtp: '000000', expectedOtp: otp), isFalse);
+      expect(
+          engine.verifyKycOtp(enteredOtp: '000000', expectedOtp: otp), isFalse);
     });
 
     test('Synthesizes verified ABHA profile with official QR payload', () {
@@ -37,7 +39,8 @@ void main() {
 
       expect(profile.isLinked, isTrue);
       expect(profile.abhaNumber, equals('14-8822-4912-8734'));
-      expect(profile.verificationStatus, equals(AbhaVerificationStatus.verifiedAadhaar));
+      expect(profile.verificationStatus,
+          equals(AbhaVerificationStatus.verifiedAadhaar));
       expect(profile.qrCodePayload, contains('nha_v'));
     });
 
@@ -72,7 +75,8 @@ void main() {
   });
 
   group('AbhaIntegrationNotifier State Tests', () {
-    test('Handles Aadhaar OTP verification, consent management, and FHIR sync', () {
+    test('Handles Aadhaar OTP verification, consent management, and FHIR sync',
+        () {
       final notifier = AbhaIntegrationNotifier();
       expect(notifier.state.profile.isLinked, isTrue);
       expect(notifier.state.activeConsents.length, equals(2));
@@ -80,7 +84,8 @@ void main() {
       // Initiate KYC
       notifier.initiateAadhaarKyc('14882249128734');
       expect(notifier.state.pendingOtp, isNotNull);
-      expect(notifier.state.profile.verificationStatus, equals(AbhaVerificationStatus.pendingOtp));
+      expect(notifier.state.profile.verificationStatus,
+          equals(AbhaVerificationStatus.pendingOtp));
 
       final otp = notifier.state.pendingOtp!;
       final verified = notifier.verifyOtp(otp);
@@ -89,13 +94,18 @@ void main() {
 
       // Consent Revocation
       notifier.revokeConsent('cr_apollo_001');
-      final apolloConsent = notifier.state.activeConsents.firstWhere((c) => c.consentRequestId == 'cr_apollo_001');
+      final apolloConsent = notifier.state.activeConsents
+          .firstWhere((c) => c.consentRequestId == 'cr_apollo_001');
       expect(apolloConsent.status, equals(AbhaConsentStatus.revoked));
       expect(apolloConsent.isActive, isFalse);
 
       // Re-authorize
       notifier.approveConsent('cr_apollo_001');
-      expect(notifier.state.activeConsents.firstWhere((c) => c.consentRequestId == 'cr_apollo_001').isActive, isTrue);
+      expect(
+          notifier.state.activeConsents
+              .firstWhere((c) => c.consentRequestId == 'cr_apollo_001')
+              .isActive,
+          isTrue);
 
       // FHIR Sync
       notifier.syncFhirRecordsWithAbdm();

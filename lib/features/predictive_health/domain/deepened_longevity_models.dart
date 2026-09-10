@@ -7,43 +7,50 @@ enum HallmarkOfAging {
     name: 'Mitochondrial Bioenergetics & Autophagy',
     regionalName: 'माइटोकॉन्ड्रियल ऊर्जा व ऑटोफैगी',
     weight: 0.18,
-    antiAgingMechanism: 'Promotes cellular mitophagy and ATP synthesis via Zone 2 cardio & polyphenols.',
+    antiAgingMechanism:
+        'Promotes cellular mitophagy and ATP synthesis via Zone 2 cardio & polyphenols.',
   ),
   telomereIntegrity(
     name: 'Telomere Length & Cellular Senescence',
     regionalName: 'टेलोमेयर सुरक्षा व कोशिकीय क्षय निवारण',
     weight: 0.15,
-    antiAgingMechanism: 'Preserves DNA end-caps and halts senescent SASP inflammatory secretions.',
+    antiAgingMechanism:
+        'Preserves DNA end-caps and halts senescent SASP inflammatory secretions.',
   ),
   proteostasisAndAges(
     name: 'Proteostasis & Glycation Protection',
     regionalName: 'प्रोटीन संरचना व ग्लाइकेशन (AGEs) सुरक्षा',
     weight: 0.15,
-    antiAgingMechanism: 'Eliminates misfolded protein aggregates and blunts glucose-induced advanced glycation.',
+    antiAgingMechanism:
+        'Eliminates misfolded protein aggregates and blunts glucose-induced advanced glycation.',
   ),
   epigeneticStability(
     name: 'Epigenetic Methylation Stability',
     regionalName: 'एपिजेनेटिक डीएनए मिथाइलेशन स्थिरता',
     weight: 0.14,
-    antiAgingMechanism: 'Maintains optimal DNA methylation patterns with B12, folate, and low chronic cortisol.',
+    antiAgingMechanism:
+        'Maintains optimal DNA methylation patterns with B12, folate, and low chronic cortisol.',
   ),
   inflammaging(
     name: 'Chronic Low-Grade Inflammaging',
     regionalName: 'दीर्घकालिक सूक्ष्म सूजन (इन्फ्लेमेजिंग)',
     weight: 0.14,
-    antiAgingMechanism: 'Suppresses systemic hs-CRP and TNF-alpha via turmeric, omega-3, and gut microbiome diversity.',
+    antiAgingMechanism:
+        'Suppresses systemic hs-CRP and TNF-alpha via turmeric, omega-3, and gut microbiome diversity.',
   ),
   nutrientSensing(
     name: 'Deregulated Nutrient Sensing & mTOR/AMPK',
     regionalName: 'पोषक तत्व संवेदन व मेटाबॉलिक स्विच',
     weight: 0.12,
-    antiAgingMechanism: 'Balances AMPK activation (fasting/exercise) with controlled mTOR hypertrophy.',
+    antiAgingMechanism:
+        'Balances AMPK activation (fasting/exercise) with controlled mTOR hypertrophy.',
   ),
   stemCellRegeneration(
     name: 'Stem Cell Reserve & Slow-Wave Repair',
     regionalName: 'स्टेम सेल नवीनीकरण व गहरी नींद',
     weight: 0.12,
-    antiAgingMechanism: 'Enhances tissue rejuvenation during deep NREM Stage 3 growth hormone pulses.',
+    antiAgingMechanism:
+        'Enhances tissue rejuvenation during deep NREM Stage 3 growth hormone pulses.',
   );
 
   final String name;
@@ -64,7 +71,8 @@ enum HallmarkOfAging {
 class HallmarkEvaluation {
   final HallmarkOfAging hallmark;
   final double score; // 0 to 100
-  final double biologicalAgeDeltaYears; // e.g. -1.8 years (protective) or +2.2 years (accelerated)
+  final double
+      biologicalAgeDeltaYears; // e.g. -1.8 years (protective) or +2.2 years (accelerated)
   final String primaryBiomarker;
   final String statusSummary;
   final String regionalStatusSummary;

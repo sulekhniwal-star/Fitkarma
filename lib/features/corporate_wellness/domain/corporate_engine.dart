@@ -54,8 +54,10 @@ class CorporateEngine {
     }
 
     // Clamp by insurer max allowable discount
-    final finalDiscountPercent = discountPercentage.clamp(0.0, insurer.maxDiscountPercent);
-    final annualSavings = (baseAnnualPremiumInr * (finalDiscountPercent / 100.0));
+    final finalDiscountPercent =
+        discountPercentage.clamp(0.0, insurer.maxDiscountPercent);
+    final annualSavings =
+        (baseAnnualPremiumInr * (finalDiscountPercent / 100.0));
 
     final InsurerRiskTier riskTier;
     if (finalDiscountPercent >= (insurer.maxDiscountPercent * 0.75)) {
@@ -67,13 +69,15 @@ class CorporateEngine {
     }
 
     // Deterministic certificate ID
-    final certId = 'IRDAI-FK-${policyNumber.replaceAll(RegExp(r'[^A-Z0-9]'), '')}-2026';
+    final certId =
+        'IRDAI-FK-${policyNumber.replaceAll(RegExp(r'[^A-Z0-9]'), '')}-2026';
 
     return InsurerPremiumRebate(
       insurer: insurer,
       policyNumber: policyNumber,
       baseAnnualPremiumInr: baseAnnualPremiumInr,
-      calculatedDiscountPercentage: double.parse(finalDiscountPercent.toStringAsFixed(1)),
+      calculatedDiscountPercentage:
+          double.parse(finalDiscountPercent.toStringAsFixed(1)),
       annualSavingsInr: double.parse(annualSavings.toStringAsFixed(0)),
       riskTier: riskTier,
       requiredMonthlyActiveDays: 20,
@@ -93,7 +97,8 @@ class CorporateEngine {
   }
 
   /// Verifies work email OTP
-  bool verifyWorkEmailOtp({required String enteredOtp, required String expectedOtp}) {
+  bool verifyWorkEmailOtp(
+      {required String enteredOtp, required String expectedOtp}) {
     return enteredOtp.trim() == expectedOtp.trim();
   }
 
@@ -110,8 +115,10 @@ class CorporateEngine {
         const ErgonomicAlert(
           title: '50-Min Desk Sedentary Warning',
           regionalTitle: '५० मिनट निरंतर बैठक चेतावनी',
-          actionPrompt: 'Stand up, perform 10 shoulder rolls, and do 20 seconds of spinal rotation.',
-          regionalActionPrompt: 'उठें, कंधे घुमाएं व २० सेकंड रीढ़ का खिंचाव करें।',
+          actionPrompt:
+              'Stand up, perform 10 shoulder rolls, and do 20 seconds of spinal rotation.',
+          regionalActionPrompt:
+              'उठें, कंधे घुमाएं व २० सेकंड रीढ़ का खिंचाव करें।',
           recommendedBreakSeconds: 120,
         ),
       );
@@ -123,8 +130,10 @@ class CorporateEngine {
         const ErgonomicAlert(
           title: '20-20-20 Eye Rest Protocol',
           regionalTitle: '२०-२०-२० नेत्र विश्राम प्रोटोकॉल',
-          actionPrompt: 'Look at an object 20 feet away for 20 seconds to relax ciliary eye muscles.',
-          regionalActionPrompt: '२० फीट दूर किसी वस्तु पर २० सेकंड दृष्टि केंद्रित करें।',
+          actionPrompt:
+              'Look at an object 20 feet away for 20 seconds to relax ciliary eye muscles.',
+          regionalActionPrompt:
+              '२० फीट दूर किसी वस्तु पर २० सेकंड दृष्टि केंद्रित करें।',
           recommendedBreakSeconds: 20,
         ),
       );
@@ -135,7 +144,8 @@ class CorporateEngine {
       const ErgonomicAlert(
         title: 'Office Corridor Shatapadi Walk',
         regionalTitle: 'कार्यालय शतपावली स्मरण',
-        actionPrompt: 'Take a brisk 5-minute walk around your office floor or campus after your meal.',
+        actionPrompt:
+            'Take a brisk 5-minute walk around your office floor or campus after your meal.',
         regionalActionPrompt: 'भोजनोपरांत ५ मिनट कार्यालय परिसर में टहलें।',
         recommendedBreakSeconds: 300,
       ),

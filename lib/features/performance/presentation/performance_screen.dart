@@ -37,7 +37,8 @@ class PerformanceScreen extends ConsumerWidget {
             onPressed: () => notifier.runBenchmarks(),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -88,12 +89,16 @@ class PerformanceScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.karmaGreen, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -104,7 +109,9 @@ class PerformanceScreen extends ConsumerWidget {
   Widget _buildHeroScoreCard(PerformanceAuditReport report) {
     final gradeColor = report.overallPerformanceScore >= 90
         ? AppColors.karmaGreen
-        : (report.overallPerformanceScore >= 75 ? AppColors.focusBlue : AppColors.energyOrange);
+        : (report.overallPerformanceScore >= 75
+            ? AppColors.focusBlue
+            : AppColors.energyOrange);
 
     return BentoCard(
       child: Column(
@@ -114,7 +121,8 @@ class PerformanceScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: gradeColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -127,7 +135,10 @@ class PerformanceScreen extends ConsumerWidget {
                     const SizedBox(width: 4),
                     Text(
                       report.performanceGrade.name.toUpperCase(),
-                      style: TextStyle(color: gradeColor, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: TextStyle(
+                          color: gradeColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ],
                 ),
@@ -140,7 +151,10 @@ class PerformanceScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   '${report.averageFps.toStringAsFixed(1)} FPS (${report.settings.targetFps}Hz Target)',
-                  style: const TextStyle(color: AppColors.karmaGreen, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.karmaGreen,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -186,7 +200,10 @@ class PerformanceScreen extends ConsumerWidget {
               SizedBox(width: 6),
               Text(
                 'Performance Profiles & Framerate',
-                style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12),
+                style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
               ),
             ],
           ),
@@ -195,13 +212,19 @@ class PerformanceScreen extends ConsumerWidget {
             children: [
               Expanded(
                 child: ChoiceChip(
-                  label: const Center(child: Text('60 FPS (Balanced)', style: TextStyle(fontSize: 11))),
+                  label: const Center(
+                      child: Text('60 FPS (Balanced)',
+                          style: TextStyle(fontSize: 11))),
                   selected: settings.targetFps == 60,
                   selectedColor: AppColors.focusBlue,
                   backgroundColor: AppColors.surfaceElevated,
                   labelStyle: TextStyle(
-                    color: settings.targetFps == 60 ? Colors.white : AppColors.textSecondary,
-                    fontWeight: settings.targetFps == 60 ? FontWeight.bold : FontWeight.normal,
+                    color: settings.targetFps == 60
+                        ? Colors.white
+                        : AppColors.textSecondary,
+                    fontWeight: settings.targetFps == 60
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                   ),
                   onSelected: (_) => notifier.setTargetFps(60),
                 ),
@@ -209,13 +232,19 @@ class PerformanceScreen extends ConsumerWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: ChoiceChip(
-                  label: const Center(child: Text('120 FPS (ProMotion)', style: TextStyle(fontSize: 11))),
+                  label: const Center(
+                      child: Text('120 FPS (ProMotion)',
+                          style: TextStyle(fontSize: 11))),
                   selected: settings.targetFps == 120,
                   selectedColor: AppColors.gold,
                   backgroundColor: AppColors.surfaceElevated,
                   labelStyle: TextStyle(
-                    color: settings.targetFps == 120 ? Colors.black : AppColors.textSecondary,
-                    fontWeight: settings.targetFps == 120 ? FontWeight.bold : FontWeight.normal,
+                    color: settings.targetFps == 120
+                        ? Colors.black
+                        : AppColors.textSecondary,
+                    fontWeight: settings.targetFps == 120
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                   ),
                   onSelected: (_) => notifier.setTargetFps(120),
                 ),
@@ -228,7 +257,8 @@ class PerformanceScreen extends ConsumerWidget {
             children: [
               Text(
                 'Battery Saver Mode (Throttled Background Sync)',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textPrimary, fontSize: 11),
               ),
               Switch(
                 value: settings.batterySaverMode,
@@ -242,7 +272,8 @@ class PerformanceScreen extends ConsumerWidget {
             children: [
               Text(
                 'RepaintBoundary Layer Isolation',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textPrimary, fontSize: 11),
               ),
               Switch(
                 value: settings.enableRepaintBoundaries,
@@ -270,18 +301,25 @@ class PerformanceScreen extends ConsumerWidget {
             children: [
               const Row(
                 children: [
-                  Icon(Icons.timer_outlined, color: AppColors.energyOrange, size: 18),
+                  Icon(Icons.timer_outlined,
+                      color: AppColors.energyOrange, size: 18),
                   SizedBox(width: 6),
                   Text(
                     'Engine Calculation Benchmarks',
-                    style: TextStyle(color: AppColors.energyOrange, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: TextStyle(
+                        color: AppColors.energyOrange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
                   ),
                 ],
               ),
               TextButton.icon(
-                icon: const Icon(Icons.refresh, color: AppColors.focusBlue, size: 14),
-                label: const Text('Re-run', style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
-                onPressed: state.isLoading ? null : () => notifier.runBenchmarks(),
+                icon: const Icon(Icons.refresh,
+                    color: AppColors.focusBlue, size: 14),
+                label: const Text('Re-run',
+                    style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                onPressed:
+                    state.isLoading ? null : () => notifier.runBenchmarks(),
               ),
             ],
           ),
@@ -311,13 +349,15 @@ class PerformanceScreen extends ConsumerWidget {
                             ),
                             Text(
                               b.regionalEngineName,
-                              style: const TextStyle(color: AppColors.textSecondary, fontSize: 9),
+                              style: const TextStyle(
+                                  color: AppColors.textSecondary, fontSize: 9),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.karmaGreen.withValues(alpha: 0.15),
                           borderRadius: AppRadii.radiusSm,
@@ -358,20 +398,25 @@ class PerformanceScreen extends ConsumerWidget {
                   SizedBox(width: 6),
                   Text(
                     'Memory & Offline Cache Purge',
-                    style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: TextStyle(
+                        color: AppColors.gold,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
                   ),
                 ],
               ),
               Text(
                 'Max Budget: ${report.settings.maxCacheSizeMb} MB',
-                style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 10),
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             'Purges cached AI response payloads and resets in-memory sliding telemetry buffers.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
           ),
           const SizedBox(height: AppSpacing.md),
           SizedBox(
@@ -379,13 +424,21 @@ class PerformanceScreen extends ConsumerWidget {
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.surfaceElevatedHigh,
-                shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadii.radiusMd),
                 padding: const EdgeInsets.symmetric(vertical: 10),
               ),
-              icon: const Icon(Icons.cleaning_services_outlined, color: AppColors.focusBlue, size: 16),
+              icon: const Icon(Icons.cleaning_services_outlined,
+                  color: AppColors.focusBlue, size: 16),
               label: isLoading
-                  ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                  : const Text('Purge Offline Cache & Telemetry', style: TextStyle(color: AppColors.focusBlue, fontSize: 12)),
+                  ? const SizedBox(
+                      height: 16,
+                      width: 16,
+                      child: CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2))
+                  : const Text('Purge Offline Cache & Telemetry',
+                      style:
+                          TextStyle(color: AppColors.focusBlue, fontSize: 12)),
               onPressed: () => notifier.clearCache(),
             ),
           ),
@@ -409,12 +462,14 @@ class PerformanceScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.check_circle, color: AppColors.karmaGreen, size: 13),
+                    const Icon(Icons.check_circle,
+                        color: AppColors.karmaGreen, size: 13),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
                         tip,
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11),
+                        style: AppTypography.bodySmall.copyWith(
+                            color: AppColors.textPrimary, fontSize: 11),
                       ),
                     ),
                   ],
@@ -446,7 +501,8 @@ class PerformanceScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma maintains strict sub-16.6ms frame budgets for 60 FPS (and sub-8.3ms for 120 FPS ProMotion) across all health dashboards. Mathematical analysis pipelines are deterministic and execute in sub-10ms, eliminating UI thread jank.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -454,10 +510,12 @@ class PerformanceScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Got it', style: TextStyle(color: Colors.white)),
+                  child: const Text('Got it',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

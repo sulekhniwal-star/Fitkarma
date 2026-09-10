@@ -3,7 +3,8 @@ import '../../domain/deepened_longevity_engine.dart';
 import '../../domain/deepened_longevity_models.dart';
 
 final deepenedLongevityProvider =
-    StateNotifierProvider<DeepenedLongevityNotifier, DeepenedLongevityReport>((ref) {
+    StateNotifierProvider<DeepenedLongevityNotifier, DeepenedLongevityReport>(
+        (ref) {
   return DeepenedLongevityNotifier();
 });
 

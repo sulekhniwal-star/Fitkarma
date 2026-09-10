@@ -50,7 +50,8 @@ class ProteinTimingScreen extends ConsumerWidget {
                           primaryText: 'Muscle Protein Synthesis (MPS)',
                           regionalText: 'दैनिक मांसपेशी संश्लेषण चक्र',
                         ),
-                        Icon(Icons.bolt_rounded, color: AppColors.energyOrange, size: 22),
+                        Icon(Icons.bolt_rounded,
+                            color: AppColors.energyOrange, size: 22),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -75,7 +76,8 @@ class ProteinTimingScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       'Distributing protein into 4 distinct ~30g boluses containing ≥2.5g leucine activates muscle synthesis far more effectively than backloading protein into dinner.',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.35),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, height: 1.35),
                     ),
                   ],
                 ),
@@ -113,12 +115,19 @@ class ProteinTimingScreen extends ConsumerWidget {
                                 Container(
                                   padding: const EdgeInsets.all(6),
                                   decoration: BoxDecoration(
-                                    color: (isDone ? AppColors.karmaGreen : AppColors.surfaceElevated).withValues(alpha: 0.2),
+                                    color: (isDone
+                                            ? AppColors.karmaGreen
+                                            : AppColors.surfaceElevated)
+                                        .withValues(alpha: 0.2),
                                     borderRadius: AppRadii.radiusSm,
                                   ),
                                   child: Icon(
-                                    isDone ? Icons.check_circle_rounded : Icons.schedule_rounded,
-                                    color: isDone ? AppColors.karmaGreen : AppColors.textMuted,
+                                    isDone
+                                        ? Icons.check_circle_rounded
+                                        : Icons.schedule_rounded,
+                                    color: isDone
+                                        ? AppColors.karmaGreen
+                                        : AppColors.textMuted,
                                     size: 18,
                                   ),
                                 ),
@@ -126,22 +135,35 @@ class ProteinTimingScreen extends ConsumerWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(bolus.phase.name, style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700)),
-                                    Text(bolus.timingLabel, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                                    Text(bolus.phase.name,
+                                        style: AppTypography.titleSmall
+                                            .copyWith(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w700)),
+                                    Text(bolus.timingLabel,
+                                        style: const TextStyle(
+                                            fontSize: 11,
+                                            color: AppColors.textMuted)),
                                   ],
                                 ),
                               ],
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
-                                color: (isDone ? AppColors.karmaGreen : AppColors.focusBlue).withValues(alpha: 0.15),
+                                color: (isDone
+                                        ? AppColors.karmaGreen
+                                        : AppColors.focusBlue)
+                                    .withValues(alpha: 0.15),
                                 borderRadius: AppRadii.radiusSm,
                               ),
                               child: Text(
                                 isDone ? 'MPS TRIGGERED' : 'PENDING BOLUS',
                                 style: TextStyle(
-                                  color: isDone ? AppColors.karmaGreen : AppColors.focusBlue,
+                                  color: isDone
+                                      ? AppColors.karmaGreen
+                                      : AppColors.focusBlue,
                                   fontSize: 10,
                                   fontWeight: FontWeight.w800,
                                 ),
@@ -155,13 +177,18 @@ class ProteinTimingScreen extends ConsumerWidget {
                           children: [
                             Text(
                               'Protein: ${bolus.currentProteinGrams}g / ${bolus.targetProteinGrams}g target',
-                              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.textPrimary),
                             ),
                             Text(
                               'Leucine: ~${bolus.estimatedLeucineGrams}g',
                               style: TextStyle(
                                 fontSize: 11,
-                                color: bolus.estimatedLeucineGrams >= 2.2 ? AppColors.karmaGreen : AppColors.textMuted,
+                                color: bolus.estimatedLeucineGrams >= 2.2
+                                    ? AppColors.karmaGreen
+                                    : AppColors.textMuted,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -169,9 +196,13 @@ class ProteinTimingScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 4),
                         LinearProgressIndicator(
-                          value: (bolus.currentProteinGrams / bolus.targetProteinGrams).clamp(0.0, 1.0),
+                          value: (bolus.currentProteinGrams /
+                                  bolus.targetProteinGrams)
+                              .clamp(0.0, 1.0),
                           backgroundColor: AppColors.surfaceElevated,
-                          valueColor: AlwaysStoppedAnimation(isDone ? AppColors.karmaGreen : AppColors.energyOrange),
+                          valueColor: AlwaysStoppedAnimation(isDone
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange),
                           minHeight: 4,
                           borderRadius: AppRadii.radiusSm,
                         ),
@@ -188,15 +219,25 @@ class ProteinTimingScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.grain_rounded, color: AppColors.focusBlue, size: 20),
+                    const Icon(Icons.grain_rounded,
+                        color: AppColors.focusBlue, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Indian Amino Acid Pairing (अमीनो एसिड संतुलन)', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                          const Text(
+                              'Indian Amino Acid Pairing (अमीनो एसिड संतुलन)',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.textPrimary)),
                           const SizedBox(height: 2),
-                          Text(report.aminoAcidPairingNote, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3)),
+                          Text(report.aminoAcidPairingNote,
+                              style: AppTypography.bodySmall.copyWith(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 11,
+                                  height: 1.3)),
                         ],
                       ),
                     ),
@@ -211,15 +252,25 @@ class ProteinTimingScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.fitness_center_rounded, color: AppColors.energyOrange, size: 20),
+                    const Icon(Icons.fitness_center_rounded,
+                        color: AppColors.energyOrange, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Peri-Workout Anabolic Protocol (वर्कआउट पोषण प्रोटोकॉल)', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                          const Text(
+                              'Peri-Workout Anabolic Protocol (वर्कआउट पोषण प्रोटोकॉल)',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.textPrimary)),
                           const SizedBox(height: 2),
-                          Text(report.periWorkoutPrescription, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3)),
+                          Text(report.periWorkoutPrescription,
+                              style: AppTypography.bodySmall.copyWith(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 11,
+                                  height: 1.3)),
                         ],
                       ),
                     ),

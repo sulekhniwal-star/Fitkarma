@@ -24,7 +24,12 @@ void main() {
       expect(report.ensembleBoneMassKg, closeTo(3.45, 0.1));
       expect(report.confidenceScorePercent, greaterThan(80.0));
       expect(report.southAsianSpecificCutoffsApplied, isTrue);
-      expect(report.zone, isIn([BodyCompositionZone.athleticLean, BodyCompositionZone.fitHealthy]));
+      expect(
+          report.zone,
+          isIn([
+            BodyCompositionZone.athleticLean,
+            BodyCompositionZone.fitHealthy
+          ]));
     });
 
     test('Computes ensemble consensus for female inputs', () {
@@ -42,7 +47,12 @@ void main() {
       expect(report.individualEstimates.length, equals(4));
       expect(report.ensembleBodyFatPercent, inInclusiveRange(19.0, 27.0));
       expect(report.ensembleLeanMassKg, greaterThan(40.0));
-      expect(report.zone, isIn([BodyCompositionZone.athleticLean, BodyCompositionZone.fitHealthy]));
+      expect(
+          report.zone,
+          isIn([
+            BodyCompositionZone.athleticLean,
+            BodyCompositionZone.fitHealthy
+          ]));
     });
 
     test('Checks model weights sum to 1.0 in ensemble', () {
@@ -63,7 +73,9 @@ void main() {
       expect(totalWeighting, equals(1.0));
     });
 
-    test('Model concordance interpretation reflects low standard deviation variance', () {
+    test(
+        'Model concordance interpretation reflects low standard deviation variance',
+        () {
       final report = engine.computeWearableFreeComposition(
         weightKg: 74.0,
         heightCm: 178.0,

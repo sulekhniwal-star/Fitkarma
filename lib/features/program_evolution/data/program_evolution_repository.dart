@@ -24,7 +24,8 @@ class ProgramEvolutionRepository {
           .collection('programEvolution')
           .doc('latest');
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data() != null) {
         return ProgramEvolutionResult.fromMap(snapshot.data()!);

@@ -11,9 +11,10 @@ class OnboardingFlowNotifier extends Notifier<OnboardingState> {
 
   void nextStep() {
     final currentIndex = state.currentStep.index;
-    
+
     // Auto-skip Women's Health if male
-    if (state.currentStep == OnboardingFlowStep.doshaQuiz && state.sex == BiologicalSex.male) {
+    if (state.currentStep == OnboardingFlowStep.doshaQuiz &&
+        state.sex == BiologicalSex.male) {
       state = state.copyWith(currentStep: OnboardingFlowStep.aiDietResults);
       return;
     }
@@ -28,9 +29,10 @@ class OnboardingFlowNotifier extends Notifier<OnboardingState> {
 
   void previousStep() {
     final currentIndex = state.currentStep.index;
-    
+
     // Auto-skip Women's Health backwards if male
-    if (state.currentStep == OnboardingFlowStep.aiDietResults && state.sex == BiologicalSex.male) {
+    if (state.currentStep == OnboardingFlowStep.aiDietResults &&
+        state.sex == BiologicalSex.male) {
       state = state.copyWith(currentStep: OnboardingFlowStep.doshaQuiz);
       return;
     }
@@ -80,6 +82,7 @@ class OnboardingFlowNotifier extends Notifier<OnboardingState> {
   }
 }
 
-final onboardingFlowProvider = NotifierProvider<OnboardingFlowNotifier, OnboardingState>(() {
+final onboardingFlowProvider =
+    NotifierProvider<OnboardingFlowNotifier, OnboardingState>(() {
   return OnboardingFlowNotifier();
 });

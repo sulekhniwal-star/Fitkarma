@@ -5,22 +5,26 @@ enum BodyCompositionZone {
   athleticLean(
     name: 'Athletic Lean (Optimal)',
     regionalName: 'सुदृढ़ एवं चुस्त शारीरिक गठन',
-    description: 'High muscle mass, optimal visceral fat, excellent metabolic flexibility.',
+    description:
+        'High muscle mass, optimal visceral fat, excellent metabolic flexibility.',
   ),
   fitHealthy(
     name: 'Fit & Healthy (Balanced)',
     regionalName: 'संतुलित एवं स्वस्थ गठन (समधातु)',
-    description: 'Balanced body fat percentage within ideal cardiometabolic thresholds.',
+    description:
+        'Balanced body fat percentage within ideal cardiometabolic thresholds.',
   ),
   elevatedAdiposity(
     name: 'Elevated Adiposity (Meda Excess)',
     regionalName: 'मेद धातु आधिक्य (अतिरिक्त वसा)',
-    description: 'Higher waist-to-height ratio; benefit from progressive caloric deficit & resistance training.',
+    description:
+        'Higher waist-to-height ratio; benefit from progressive caloric deficit & resistance training.',
   ),
   sarcopenicRisk(
     name: 'Low Muscle Mass (Sarcopenic Tendency)',
     regionalName: 'मांस धातु क्षय (कम मांसपेशी घनत्व)',
-    description: 'Sub-optimal lean mass; prioritizing protein intake and progressive overload.',
+    description:
+        'Sub-optimal lean mass; prioritizing protein intake and progressive overload.',
   );
 
   final String name;

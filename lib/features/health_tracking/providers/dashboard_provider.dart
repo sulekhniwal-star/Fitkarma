@@ -60,15 +60,18 @@ class DashboardSummaryState {
       stepsTarget: stepsTarget ?? this.stepsTarget,
       sleepHours: sleepHours ?? this.sleepHours,
       sleepScore: sleepScore ?? this.sleepScore,
-      hydrationCurrentLiters: hydrationCurrentLiters ?? this.hydrationCurrentLiters,
-      hydrationTargetLiters: hydrationTargetLiters ?? this.hydrationTargetLiters,
+      hydrationCurrentLiters:
+          hydrationCurrentLiters ?? this.hydrationCurrentLiters,
+      hydrationTargetLiters:
+          hydrationTargetLiters ?? this.hydrationTargetLiters,
       currentStrain: currentStrain ?? this.currentStrain,
       targetStrainMax: targetStrainMax ?? this.targetStrainMax,
       caloriesConsumed: caloriesConsumed ?? this.caloriesConsumed,
       caloriesTarget: caloriesTarget ?? this.caloriesTarget,
       proteinConsumedGrams: proteinConsumedGrams ?? this.proteinConsumedGrams,
       proteinTargetGrams: proteinTargetGrams ?? this.proteinTargetGrams,
-      environmentalSnapshot: environmentalSnapshot ?? this.environmentalSnapshot,
+      environmentalSnapshot:
+          environmentalSnapshot ?? this.environmentalSnapshot,
     );
   }
 }
@@ -78,7 +81,8 @@ class DashboardNotifier extends StateNotifier<DashboardSummaryState> {
 
   void addWater(double liters) {
     final updated = state.hydrationCurrentLiters + liters;
-    state = state.copyWith(hydrationCurrentLiters: double.parse(updated.toStringAsFixed(2)));
+    state = state.copyWith(
+        hydrationCurrentLiters: double.parse(updated.toStringAsFixed(2)));
   }
 
   void addSteps(int count) {
@@ -86,6 +90,7 @@ class DashboardNotifier extends StateNotifier<DashboardSummaryState> {
   }
 }
 
-final dashboardProvider = StateNotifierProvider<DashboardNotifier, DashboardSummaryState>((ref) {
+final dashboardProvider =
+    StateNotifierProvider<DashboardNotifier, DashboardSummaryState>((ref) {
   return DashboardNotifier();
 });

@@ -100,7 +100,8 @@ class SquadMemberDetail {
     required this.individualStreakDays,
   });
 
-  double get stepProgressFraction => (todaySteps / dailyStepTarget).clamp(0.0, 1.0);
+  double get stepProgressFraction =>
+      (todaySteps / dailyStepTarget).clamp(0.0, 1.0);
 
   int get completedRingsCount {
     int count = 0;
@@ -137,7 +138,8 @@ class SquadChallengeGoal {
     required this.karmaRewardPool,
   });
 
-  double get progressFraction => (currentQuantity / targetQuantity).clamp(0.0, 1.0);
+  double get progressFraction =>
+      (currentQuantity / targetQuantity).clamp(0.0, 1.0);
   double get progressPercentage => progressFraction * 100.0;
 }
 
@@ -175,9 +177,13 @@ class SquadDetail {
   });
 
   int get totalMembersCount => members.length;
-  int get checkedInMembersCount => members.where((m) => m.hasCheckedInToday).length;
-  double get squadCheckInRate => totalMembersCount > 0 ? (checkedInMembersCount / totalMembersCount) * 100.0 : 0.0;
-  bool get isSquadStreakCompleteToday => checkedInMembersCount == totalMembersCount;
+  int get checkedInMembersCount =>
+      members.where((m) => m.hasCheckedInToday).length;
+  double get squadCheckInRate => totalMembersCount > 0
+      ? (checkedInMembersCount / totalMembersCount) * 100.0
+      : 0.0;
+  bool get isSquadStreakCompleteToday =>
+      checkedInMembersCount == totalMembersCount;
 
   SquadDetail copyWith({
     SquadTier? tier,
@@ -198,7 +204,8 @@ class SquadDetail {
       tier: tier ?? this.tier,
       currentStreakDays: currentStreakDays ?? this.currentStreakDays,
       bestStreakDays: bestStreakDays ?? this.bestStreakDays,
-      availableSanjeevaniShields: availableSanjeevaniShields ?? this.availableSanjeevaniShields,
+      availableSanjeevaniShields:
+          availableSanjeevaniShields ?? this.availableSanjeevaniShields,
       totalCollectiveKarma: totalCollectiveKarma ?? this.totalCollectiveKarma,
       members: members ?? this.members,
       activeChallenge: activeChallenge ?? this.activeChallenge,

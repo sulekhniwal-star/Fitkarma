@@ -10,14 +10,17 @@ void main() {
     test('Free tier allows basic features and blocks pro/elite features', () {
       final freeUser = UserEntitlements.free('user_123');
 
-      final basicAccess = engine.evaluateFeatureAccess(freeUser, EntitlementFeature.aiCoachBasic);
+      final basicAccess = engine.evaluateFeatureAccess(
+          freeUser, EntitlementFeature.aiCoachBasic);
       expect(basicAccess.isGranted, isTrue);
 
-      final proAccess = engine.evaluateFeatureAccess(freeUser, EntitlementFeature.aiRoastMode);
+      final proAccess = engine.evaluateFeatureAccess(
+          freeUser, EntitlementFeature.aiRoastMode);
       expect(proAccess.isGranted, isFalse);
       expect(proAccess.requiredTier, equals(SubscriptionTier.pro));
 
-      final eliteAccess = engine.evaluateFeatureAccess(freeUser, EntitlementFeature.clinicalLabReportParsing);
+      final eliteAccess = engine.evaluateFeatureAccess(
+          freeUser, EntitlementFeature.clinicalLabReportParsing);
       expect(eliteAccess.isGranted, isFalse);
       expect(eliteAccess.requiredTier, equals(SubscriptionTier.elite));
     });
@@ -29,13 +32,16 @@ void main() {
         cycle: BillingCycle.monthly,
       );
 
-      final proAccess = engine.evaluateFeatureAccess(proUser, EntitlementFeature.wearableFreeComposition);
+      final proAccess = engine.evaluateFeatureAccess(
+          proUser, EntitlementFeature.wearableFreeComposition);
       expect(proAccess.isGranted, isTrue);
 
-      final weddingAccess = engine.evaluateFeatureAccess(proUser, EntitlementFeature.weddingTransformation);
+      final weddingAccess = engine.evaluateFeatureAccess(
+          proUser, EntitlementFeature.weddingTransformation);
       expect(weddingAccess.isGranted, isTrue);
 
-      final eliteAccess = engine.evaluateFeatureAccess(proUser, EntitlementFeature.humanCoachConsultations);
+      final eliteAccess = engine.evaluateFeatureAccess(
+          proUser, EntitlementFeature.humanCoachConsultations);
       expect(eliteAccess.isGranted, isFalse);
       expect(eliteAccess.requiredTier, equals(SubscriptionTier.elite));
     });
@@ -49,7 +55,8 @@ void main() {
 
       for (final feature in EntitlementFeature.values) {
         final result = engine.evaluateFeatureAccess(eliteUser, feature);
-        expect(result.isGranted, isTrue, reason: 'Feature ${feature.name} should be unlocked for Elite');
+        expect(result.isGranted, isTrue,
+            reason: 'Feature ${feature.name} should be unlocked for Elite');
       }
     });
 
@@ -119,14 +126,17 @@ void main() {
       // Monthly 499 * 12 = 5988; Annual = 3999; Savings = 1989
       expect(proSavings, equals(1989));
 
-      final eliteSavings = engine.calculateAnnualSavingsInr(SubscriptionTier.elite);
+      final eliteSavings =
+          engine.calculateAnnualSavingsInr(SubscriptionTier.elite);
       // Monthly 1499 * 12 = 17988; Annual = 9999; Savings = 7989
       expect(eliteSavings, equals(7989));
     });
   });
 
   group('Subscription StateNotifier Provider Tests', () {
-    test('StateNotifier updates billing cycle, upgrades tier, and records AI calls', () async {
+    test(
+        'StateNotifier updates billing cycle, upgrades tier, and records AI calls',
+        () async {
       final notifier = SubscriptionNotifier();
 
       expect(notifier.state.entitlements.tier, equals(SubscriptionTier.free));
@@ -141,7 +151,8 @@ void main() {
 
       final initialUsage = notifier.state.entitlements.dailyAiCallsUsed;
       notifier.recordAiCallUsed();
-      expect(notifier.state.entitlements.dailyAiCallsUsed, equals(initialUsage + 1));
+      expect(notifier.state.entitlements.dailyAiCallsUsed,
+          equals(initialUsage + 1));
 
       await notifier.restorePurchases();
       expect(notifier.state.successMessage, contains('synced'));

@@ -22,7 +22,8 @@ class ActivitySharingNotifier extends StateNotifier<ActivitySharingState> {
         regionalMetricLabel: 'निरंतर शतपावली साधना',
         headline: '21-Day Post-Dinner Shatpawali Streak!',
         regionalHeadline: '२१ दिवसीय शतपावली साधना पूर्ण!',
-        detailedSubtitle: '100 steps after every meal • Morning recovery at 92% • Zero postprandial lethargy',
+        detailedSubtitle:
+            '100 steps after every meal • Morning recovery at 92% • Zero postprandial lethargy',
         karmaPointsEarned: 150,
         recordedAt: DateTime.now().subtract(const Duration(minutes: 45)),
         isVerifiedBiometric: true,
@@ -40,7 +41,8 @@ class ActivitySharingNotifier extends StateNotifier<ActivitySharingState> {
         regionalMetricLabel: 'डेडलिफ्ट कीर्तिमान',
         headline: 'Crushed New 140kg Deadlift PR!',
         regionalHeadline: '१४० किग्रा डेडलिफ्ट नया व्यक्तिगत रिकॉर्ड!',
-        detailedSubtitle: 'Flawless hip-hinge mechanics • Form Checked by Vision AI • +75 Karma',
+        detailedSubtitle:
+            'Flawless hip-hinge mechanics • Form Checked by Vision AI • +75 Karma',
         karmaPointsEarned: 75,
         recordedAt: DateTime.now().subtract(const Duration(hours: 4)),
         isVerifiedBiometric: true,
@@ -58,7 +60,8 @@ class ActivitySharingNotifier extends StateNotifier<ActivitySharingState> {
         regionalMetricLabel: 'कमर-ऊंचाई अनुपात (<०.५०)',
         headline: 'Reversed Visceral Fat Risk Zone (<0.50 WHtR)',
         regionalHeadline: 'उपापचयी स्वास्थ्य में स्वर्ण मानक प्राप्त!',
-        detailedSubtitle: 'Waist circumference reduced 6cm • Fasting glucose normalized • +250 Karma',
+        detailedSubtitle:
+            'Waist circumference reduced 6cm • Fasting glucose normalized • +250 Karma',
         karmaPointsEarned: 250,
         recordedAt: DateTime.now().subtract(const Duration(days: 2)),
         isVerifiedBiometric: true,

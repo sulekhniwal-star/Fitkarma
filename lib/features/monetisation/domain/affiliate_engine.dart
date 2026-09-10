@@ -53,12 +53,14 @@ class AffiliateEngine {
       status: PayoutStatus.pending,
     );
 
-    final updatedReferrals = List<AffiliateReferral>.from(currentProfile.recentReferrals)
-      ..insert(0, newReferral);
+    final updatedReferrals =
+        List<AffiliateReferral>.from(currentProfile.recentReferrals)
+          ..insert(0, newReferral);
 
     return currentProfile.copyWith(
       tier: updatedTier,
-      totalClicks: currentProfile.totalClicks + 4, // Average 4 clicks per conversion
+      totalClicks:
+          currentProfile.totalClicks + 4, // Average 4 clicks per conversion
       totalConversions: newConversionCount,
       totalEarningsInr: currentProfile.totalEarningsInr + commission,
       pendingPayoutInr: currentProfile.pendingPayoutInr + commission,
@@ -148,7 +150,8 @@ class AffiliateEngine {
         regionalTitle: 'इंस्टाग्राम स्टोरी बैनर',
         dimension: '1080 x 1920 px',
         recommendedPlatform: 'Instagram & WhatsApp Stories',
-        headline: 'Transform your body with Indian macros & Ayurvedic science. Use code for 20% off!',
+        headline:
+            'Transform your body with Indian macros & Ayurvedic science. Use code for 20% off!',
       ),
       PromoAsset(
         assetId: 'promo_banner_2',
@@ -156,7 +159,8 @@ class AffiliateEngine {
         regionalTitle: 'यूट्यूब कम्युनिटी पोस्ट बैनर',
         dimension: '1200 x 675 px',
         recommendedPlatform: 'YouTube & Telegram Groups',
-        headline: 'Track your HRV, Sleep & Desi Nutrition with FitKarma AI Coach.',
+        headline:
+            'Track your HRV, Sleep & Desi Nutrition with FitKarma AI Coach.',
       ),
       PromoAsset(
         assetId: 'promo_whatsapp_3',

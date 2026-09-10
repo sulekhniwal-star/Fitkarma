@@ -47,9 +47,11 @@ class ProteinTimingEngine {
 
     final List<ProteinBolusTarget> boluses = MealPhase.values.map((phase) {
       final phaseMeals = loggedMeals.where((m) => m.phase == phase).toList();
-      final phaseProtein = phaseMeals.fold<double>(0.0, (sum, m) => sum + m.totalProtein);
+      final phaseProtein =
+          phaseMeals.fold<double>(0.0, (sum, m) => sum + m.totalProtein);
       // Average Leucine is ~8-10% of total complete protein
-      final estimatedLeucine = double.parse((phaseProtein * 0.09).toStringAsFixed(2));
+      final estimatedLeucine =
+          double.parse((phaseProtein * 0.09).toStringAsFixed(2));
       final bool mpsTriggered = phaseProtein >= 25.0 && estimatedLeucine >= 2.2;
 
       final String timeLabel = _getTimeLabel(phase);
@@ -65,15 +67,18 @@ class ProteinTimingEngine {
     }).toList();
 
     final mpsCount = boluses.where((b) => b.isMpsTriggered).length;
-    final totalProt = loggedMeals.fold<double>(0.0, (sum, m) => sum + m.totalProtein);
+    final totalProt =
+        loggedMeals.fold<double>(0.0, (sum, m) => sum + m.totalProtein);
 
     return ProteinTimingReport(
       boluses: boluses,
       totalMpsTriggersAchieved: mpsCount,
       totalMpsTriggersTarget: 4,
       dailyTotalProtein: double.parse(totalProt.toStringAsFixed(1)),
-      aminoAcidPairingNote: 'Traditional Indian combinations (e.g. Daal + Roti, Khichdi, Besan + Paneer) create a complete amino acid profile by pairing methionine-rich cereals with lysine-rich legumes.',
-      periWorkoutPrescription: 'Consume 25g fast-digesting protein (Whey / Sattu) within 45 minutes post-workout with 30-40g complex carbohydrates to maximize glycogen resynthesis and anabolic signaling.',
+      aminoAcidPairingNote:
+          'Traditional Indian combinations (e.g. Daal + Roti, Khichdi, Besan + Paneer) create a complete amino acid profile by pairing methionine-rich cereals with lysine-rich legumes.',
+      periWorkoutPrescription:
+          'Consume 25g fast-digesting protein (Whey / Sattu) within 45 minutes post-workout with 30-40g complex carbohydrates to maximize glycogen resynthesis and anabolic signaling.',
     );
   }
 

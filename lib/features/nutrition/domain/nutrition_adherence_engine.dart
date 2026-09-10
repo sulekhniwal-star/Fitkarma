@@ -16,7 +16,8 @@ class DailyAdherenceSample {
   });
 
   int get calorieVariance => consumedCalories - targetCalories;
-  bool get isWithinCaloricTolerance => (calorieVariance.abs() / targetCalories) <= 0.10;
+  bool get isWithinCaloricTolerance =>
+      (calorieVariance.abs() / targetCalories) <= 0.10;
   bool get isProteinGoalMet => consumedProtein >= (targetProtein * 0.90);
 }
 
@@ -40,14 +41,16 @@ class AdherenceReport {
 
 class NutritionAdherenceEngine {
   /// Pure Dart deterministic calculation of weekly nutrition consistency & streak resilience
-  static AdherenceReport evaluateWeeklyAdherence(List<DailyAdherenceSample> samples) {
+  static AdherenceReport evaluateWeeklyAdherence(
+      List<DailyAdherenceSample> samples) {
     if (samples.isEmpty) {
       return const AdherenceReport(
         weeklyAdherenceScore: 100,
         currentStreakDays: 1,
         availableShieldsCount: 1,
         weekHistory: [],
-        compassionateFeedback: 'Start logging daily meals to activate nutritional adherence tracking.',
+        compassionateFeedback:
+            'Start logging daily meals to activate nutritional adherence tracking.',
         weeklyCaloricDeficitOrSurplus: 0.0,
       );
     }
@@ -68,7 +71,8 @@ class NutritionAdherenceEngine {
       }
 
       // 1. Calorie variance scoring (40% weight)
-      final calVariancePct = (sample.calorieVariance.abs() / sample.targetCalories);
+      final calVariancePct =
+          (sample.calorieVariance.abs() / sample.targetCalories);
       if (calVariancePct <= 0.10) {
         totalCalScore += 100;
       } else if (calVariancePct <= 0.20) {
@@ -96,15 +100,21 @@ class NutritionAdherenceEngine {
     final avgProt = totalProtScore / samples.length;
     const logConsistencyScore = 100.0; // 20% weight
 
-    final compositeScore = ((avgCal * 0.40) + (avgProt * 0.40) + (logConsistencyScore * 0.20)).round().clamp(0, 100);
+    final compositeScore =
+        ((avgCal * 0.40) + (avgProt * 0.40) + (logConsistencyScore * 0.20))
+            .round()
+            .clamp(0, 100);
 
     final String feedback;
     if (compositeScore >= 85) {
-      feedback = 'Outstanding adherence! Your consistent protein delivery and balanced caloric variance keep your metabolism primed for body recomposition.';
+      feedback =
+          'Outstanding adherence! Your consistent protein delivery and balanced caloric variance keep your metabolism primed for body recomposition.';
     } else if (compositeScore >= 70) {
-      feedback = 'Solid consistency across the week. Focus on narrowing evening caloric swings to maximize fat loss.';
+      feedback =
+          'Solid consistency across the week. Focus on narrowing evening caloric swings to maximize fat loss.';
     } else {
-      feedback = 'Compassionate reminder: A single heavy meal or family dinner never derails progress. Your weekly average matters far more than daily perfection.';
+      feedback =
+          'Compassionate reminder: A single heavy meal or family dinner never derails progress. Your weekly average matters far more than daily perfection.';
     }
 
     return AdherenceReport(

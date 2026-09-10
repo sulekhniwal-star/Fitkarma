@@ -34,10 +34,12 @@ class CicdScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.refresh, color: AppColors.textSecondary),
             tooltip: 'Trigger Pipeline Run',
-            onPressed: state.isRunning ? null : () => notifier.triggerPipelineRun(),
+            onPressed:
+                state.isRunning ? null : () => notifier.triggerPipelineRun(),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -77,17 +79,30 @@ class CicdScreen extends ConsumerWidget {
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.focusBlue,
-                  shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: AppRadii.radiusMd),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
                 icon: state.isRunning
-                    ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                    : const Icon(Icons.rocket_launch, color: Colors.white, size: 18),
+                    ? const SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: CircularProgressIndicator(
+                            color: Colors.white, strokeWidth: 2))
+                    : const Icon(Icons.rocket_launch,
+                        color: Colors.white, size: 18),
                 label: Text(
-                  state.isRunning ? 'Executing Automated CI/CD Pipeline...' : 'Trigger Automated CI/CD Build Run',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                  state.isRunning
+                      ? 'Executing Automated CI/CD Pipeline...'
+                      : 'Trigger Automated CI/CD Build Run',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13),
                 ),
-                onPressed: state.isRunning ? null : () => notifier.triggerPipelineRun(),
+                onPressed: state.isRunning
+                    ? null
+                    : () => notifier.triggerPipelineRun(),
               ),
             ),
             const SizedBox(height: AppSpacing.xl),
@@ -109,12 +124,16 @@ class CicdScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.karmaGreen, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -131,7 +150,8 @@ class CicdScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -140,11 +160,15 @@ class CicdScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.check_circle, color: AppColors.karmaGreen, size: 14),
+                    const Icon(Icons.check_circle,
+                        color: AppColors.karmaGreen, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       'PIPELINE ${report.overallStatus.name.toUpperCase()}',
-                      style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.karmaGreen,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ],
                 ),
@@ -157,7 +181,8 @@ class CicdScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   '${report.totalDurationSeconds ~/ 60}m ${report.totalDurationSeconds % 60}s Duration',
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 10),
                 ),
               ),
             ],
@@ -181,12 +206,16 @@ class CicdScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Branch: ${report.branch} @ ${report.commitHash}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue, fontWeight: FontWeight.bold, fontSize: 11),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.focusBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       report.commitMessage,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textPrimary, fontSize: 11),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -211,7 +240,10 @@ class CicdScreen extends ConsumerWidget {
               SizedBox(width: 6),
               Text(
                 'Compiled Release Artifacts',
-                style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 12),
+                style: TextStyle(
+                    color: AppColors.gold,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
               ),
             ],
           ),
@@ -261,8 +293,14 @@ class CicdScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontSize: 11, fontWeight: FontWeight.bold)),
-                Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 9)),
+                Text(title,
+                    style: AppTypography.titleSmall.copyWith(
+                        color: AppColors.textPrimary,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold)),
+                Text(subtitle,
+                    style: const TextStyle(
+                        color: AppColors.textSecondary, fontSize: 9)),
               ],
             ),
           ),
@@ -274,7 +312,8 @@ class CicdScreen extends ConsumerWidget {
             ),
             child: Text(
               'COMPILED',
-              style: TextStyle(color: color, fontSize: 8, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: color, fontSize: 8, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -307,21 +346,26 @@ class CicdScreen extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
                       decoration: const BoxDecoration(
                         color: AppColors.surfaceElevated,
                         borderRadius: AppRadii.radiusSm,
                       ),
                       child: Text(
                         '${stage.durationSeconds}s',
-                        style: const TextStyle(color: AppColors.focusBlue, fontSize: 9, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            color: AppColors.focusBlue,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
                 Text(
                   stage.stage.regionalName,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 10),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -360,7 +404,8 @@ class CicdScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma utilizes automated GitHub Actions workflows for continuous integration (formatting, fatal lint checks, 105+ unit tests with coverage, and zero-secrets scanning) and continuous deployment (release AAB, IPA, and Firebase Cloud Functions deployment).',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -368,10 +413,12 @@ class CicdScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understood', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understood',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

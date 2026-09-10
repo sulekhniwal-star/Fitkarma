@@ -34,7 +34,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSafetyMethodologyModal(context),
           ),
         ],
@@ -83,7 +84,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroSafetyCard(MedicationScheduleReport report, Color safetyColor) {
+  Widget _buildHeroSafetyCard(
+      MedicationScheduleReport report, Color safetyColor) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +94,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: safetyColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -102,7 +105,9 @@ class MedicationSafetyScreen extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      report.hasCriticalContraindication ? Icons.warning_rounded : Icons.shield_outlined,
+                      report.hasCriticalContraindication
+                          ? Icons.warning_rounded
+                          : Icons.shield_outlined,
                       color: safetyColor,
                       size: 14,
                     ),
@@ -110,7 +115,9 @@ class MedicationSafetyScreen extends ConsumerWidget {
                     Text(
                       report.hasCriticalContraindication
                           ? 'Contraindication Alert'
-                          : (report.detectedInteractions.isNotEmpty ? 'Timing Precautions' : 'All Clear • Safe'),
+                          : (report.detectedInteractions.isNotEmpty
+                              ? 'Timing Precautions'
+                              : 'All Clear • Safe'),
                       style: AppTypography.bodySmall.copyWith(
                         color: safetyColor,
                         fontWeight: FontWeight.bold,
@@ -188,7 +195,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Icon(Icons.compare_arrows_rounded, color: alertColor, size: 18),
+                    Icon(Icons.compare_arrows_rounded,
+                        color: alertColor, size: 18),
                     const SizedBox(width: 4),
                     Expanded(
                       child: Text(
@@ -246,7 +254,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.timer_outlined, color: AppColors.focusBlue, size: 14),
+                const Icon(Icons.timer_outlined,
+                    color: AppColors.focusBlue, size: 14),
                 const SizedBox(width: 4),
                 Expanded(
                   child: Text(
@@ -273,7 +282,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.health_and_safety, color: AppColors.focusBlue, size: 18),
+              const Icon(Icons.health_and_safety,
+                  color: AppColors.focusBlue, size: 18),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Clinical Pharmacological Assessment',
@@ -306,7 +316,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildMedicationCard(BuildContext context, WidgetRef ref, TrackedMedication med) {
+  Widget _buildMedicationCard(
+      BuildContext context, WidgetRef ref, TrackedMedication med) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,7 +331,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusSm,
                 ),
-                child: Icon(_getMedicationIcon(med.type), color: AppColors.focusBlue, size: 20),
+                child: Icon(_getMedicationIcon(med.type),
+                    color: AppColors.focusBlue, size: 20),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
@@ -355,16 +367,23 @@ class MedicationSafetyScreen extends ConsumerWidget {
               ),
               IconButton(
                 icon: Icon(
-                  med.isTakenToday ? Icons.check_circle : Icons.radio_button_unchecked,
-                  color: med.isTakenToday ? AppColors.karmaGreen : AppColors.textSecondary,
+                  med.isTakenToday
+                      ? Icons.check_circle
+                      : Icons.radio_button_unchecked,
+                  color: med.isTakenToday
+                      ? AppColors.karmaGreen
+                      : AppColors.textSecondary,
                   size: 28,
                 ),
-                tooltip: med.isTakenToday ? 'Mark as not taken' : 'Mark as taken',
+                tooltip:
+                    med.isTakenToday ? 'Mark as not taken' : 'Mark as taken',
                 onPressed: () {
                   ref.read(medicationProvider.notifier).toggleDoseTaken(med.id);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(med.isTakenToday ? '${med.name} marked as untaken' : '${med.name} dose logged (+10 Karma)!'),
+                      content: Text(med.isTakenToday
+                          ? '${med.name} marked as untaken'
+                          : '${med.name} dose logged (+10 Karma)!'),
                       backgroundColor: AppColors.karmaGreen,
                       duration: const Duration(seconds: 1),
                     ),
@@ -402,7 +421,9 @@ class MedicationSafetyScreen extends ConsumerWidget {
               Text(
                 '${med.totalPillsRemaining} doses remaining',
                 style: AppTypography.bodySmall.copyWith(
-                  color: med.totalPillsRemaining < 7 ? AppColors.energyOrange : AppColors.textSecondary,
+                  color: med.totalPillsRemaining < 7
+                      ? AppColors.energyOrange
+                      : AppColors.textSecondary,
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                 ),
@@ -468,7 +489,8 @@ class MedicationSafetyScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

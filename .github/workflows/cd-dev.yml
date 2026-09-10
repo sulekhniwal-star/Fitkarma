@@ -1,0 +1,73 @@
+name: FitKarma Development CD (Develop Branch)
+
+on:
+  push:
+    branches: [ develop ]
+  workflow_dispatch:
+
+jobs:
+  build-android-dev:
+    name: Build Android Dev APK (Ubuntu)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
+      - name: Build Android Dev APK
+        run: flutter build apk --flavor dev -t lib/main_dev.dart --debug
+
+      - name: Upload Dev APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitkarma-android-dev-apk
+          path: build/app/outputs/flutter-apk/*.apk
+          retention-days: 14
+
+  build-ios-dev:
+    name: Build iOS Dev Simulator App (macOS)
+    runs-on: macos-14
+    timeout-minutes: 35
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build iOS Dev Build (Simulator / No Codesign)
+        run: flutter build ios --flavor dev -t lib/main_dev.dart --no-codesign --simulator
+
+      - name: Upload iOS Dev Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitkarma-ios-dev-app
+          path: build/ios/iphonesimulator/Runner.app
+          retention-days: 14

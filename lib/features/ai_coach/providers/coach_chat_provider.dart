@@ -54,7 +54,8 @@ class CoachChatNotifier extends StateNotifier<AsyncValue<CoachChatState>> {
 
   Future<void> loadConversation() async {
     try {
-      final list = await _chatRepository.getConversationMessages(uid: _uid, dateStr: _date);
+      final list = await _chatRepository.getConversationMessages(
+          uid: _uid, dateStr: _date);
       state = AsyncValue.data(CoachChatState(messages: list));
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -75,7 +76,8 @@ class CoachChatNotifier extends StateNotifier<AsyncValue<CoachChatState>> {
 
     // 1. Optimistic UI insert
     final optimisticList = [...current.messages, userMsg];
-    state = AsyncValue.data(current.copyWith(messages: optimisticList, isThinking: true));
+    state = AsyncValue.data(
+        current.copyWith(messages: optimisticList, isThinking: true));
 
     // 2. Request AI Response via Router with fallback
     String replyText;
@@ -96,15 +98,17 @@ class CoachChatNotifier extends StateNotifier<AsyncValue<CoachChatState>> {
     );
 
     final finalList = [...optimisticList, coachMsg];
-    state = AsyncValue.data(current.copyWith(messages: finalList, isThinking: false));
+    state = AsyncValue.data(
+        current.copyWith(messages: finalList, isThinking: false));
 
     // 3. Persist to Firestore
-    await _chatRepository.saveConversation(uid: _uid, dateStr: _date, messages: finalList);
+    await _chatRepository.saveConversation(
+        uid: _uid, dateStr: _date, messages: finalList);
   }
 }
 
-final coachChatProvider =
-    StateNotifierProvider.autoDispose<CoachChatNotifier, AsyncValue<CoachChatState>>((ref) {
+final coachChatProvider = StateNotifierProvider.autoDispose<CoachChatNotifier,
+    AsyncValue<CoachChatState>>((ref) {
   final chatRepo = ref.watch(coachChatRepositoryProvider);
   final aiRepo = ref.watch(aiRoutingRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);

@@ -35,7 +35,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
             onPressed: () => _showBiometricRecalibrationModal(context, ref),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -83,11 +84,13 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                 regionalText: 'कोशिकीय प्रतिरोध व जैविक दीर्घायु',
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
-                  border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.4)),
+                  border: Border.all(
+                      color: AppColors.karmaGreen.withValues(alpha: 0.4)),
                 ),
                 child: Text(
                   base.tier.label.split('(').first.trim(),
@@ -106,12 +109,15 @@ class DeepenedLongevityScreen extends ConsumerWidget {
               Expanded(
                 flex: 5,
                 child: GlowingMetric(
-                  value: report.compositeCellularResilienceScore.toStringAsFixed(1),
+                  value: report.compositeCellularResilienceScore
+                      .toStringAsFixed(1),
                   unit: '/ 100',
                   label: 'Composite Resilience',
                   accentColor: report.compositeCellularResilienceScore >= 80
                       ? AppColors.karmaGreen
-                      : (report.compositeCellularResilienceScore >= 60 ? AppColors.energyOrange : AppColors.alertRed),
+                      : (report.compositeCellularResilienceScore >= 60
+                          ? AppColors.energyOrange
+                          : AppColors.alertRed),
                 ),
               ),
               Container(width: 1, height: 50, color: AppColors.surfaceElevated),
@@ -124,8 +130,12 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                     Row(
                       children: [
                         Icon(
-                          isBiologicalYounger ? Icons.trending_down : Icons.trending_up,
-                          color: isBiologicalYounger ? AppColors.karmaGreen : AppColors.energyOrange,
+                          isBiologicalYounger
+                              ? Icons.trending_down
+                              : Icons.trending_up,
+                          color: isBiologicalYounger
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange,
                           size: 18,
                         ),
                         const SizedBox(width: 4),
@@ -134,7 +144,9 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                               ? '${ageDelta.toStringAsFixed(1)} Yrs Younger'
                               : '${ageDelta.toStringAsFixed(1)} Yrs Accelerated',
                           style: TextStyle(
-                            color: isBiologicalYounger ? AppColors.karmaGreen : AppColors.energyOrange,
+                            color: isBiologicalYounger
+                                ? AppColors.karmaGreen
+                                : AppColors.energyOrange,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
@@ -144,11 +156,14 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                     const SizedBox(height: 2),
                     Text(
                       'Bio Age: ${base.biologicalAge.toStringAsFixed(1)} | Chrono: ${base.chronologicalAge.toInt()}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     Text(
                       'Healthspan: ${base.tier.projectedHealthspanBonus}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue, fontWeight: FontWeight.w600),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.focusBlue,
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -164,7 +179,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
             ),
             child: Text(
               report.primaryLongevityPillarSummary,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -190,7 +206,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Multi-omic biological aging breakdown mapped to physiological biomarkers and cellular pathways.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           ...hallmarks.map((h) => _buildHallmarkItem(h)),
@@ -256,7 +273,9 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                         ? '${h.biologicalAgeDeltaYears.toStringAsFixed(1)} yrs'
                         : '+${h.biologicalAgeDeltaYears.toStringAsFixed(1)} yrs',
                     style: TextStyle(
-                      color: h.isProtective ? AppColors.karmaGreen : AppColors.energyOrange,
+                      color: h.isProtective
+                          ? AppColors.karmaGreen
+                          : AppColors.energyOrange,
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
@@ -293,7 +312,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                   textAlign: TextAlign.end,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 10),
                 ),
               ),
             ],
@@ -324,9 +344,13 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                   borderRadius: AppRadii.radiusSm,
                 ),
                 child: Text(
-                  risk.visceralAdiposityIndex > 8.0 ? 'Elevated Visceral Risk' : 'Protected Profile',
+                  risk.visceralAdiposityIndex > 8.0
+                      ? 'Elevated Visceral Risk'
+                      : 'Protected Profile',
                   style: TextStyle(
-                    color: risk.visceralAdiposityIndex > 8.0 ? AppColors.energyOrange : AppColors.karmaGreen,
+                    color: risk.visceralAdiposityIndex > 8.0
+                        ? AppColors.energyOrange
+                        : AppColors.karmaGreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 11,
                   ),
@@ -365,7 +389,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
             ),
             child: Text(
               risk.clinicalInterpretation,
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -380,12 +405,15 @@ class DeepenedLongevityScreen extends ConsumerWidget {
   }) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm, horizontal: AppSpacing.xs),
+        padding: const EdgeInsets.symmetric(
+            vertical: AppSpacing.sm, horizontal: AppSpacing.xs),
         decoration: BoxDecoration(
           color: AppColors.surfaceElevated.withValues(alpha: 0.4),
           borderRadius: AppRadii.radiusSm,
           border: Border.all(
-            color: isOptimal ? AppColors.karmaGreen.withValues(alpha: 0.3) : AppColors.energyOrange.withValues(alpha: 0.3),
+            color: isOptimal
+                ? AppColors.karmaGreen.withValues(alpha: 0.3)
+                : AppColors.energyOrange.withValues(alpha: 0.3),
           ),
         ),
         child: Column(
@@ -398,7 +426,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
             Text(
               value,
               style: TextStyle(
-                color: isOptimal ? AppColors.karmaGreen : AppColors.energyOrange,
+                color:
+                    isOptimal ? AppColors.karmaGreen : AppColors.energyOrange,
                 fontWeight: FontWeight.bold,
                 fontSize: 13,
               ),
@@ -427,7 +456,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Structured 3-stage protocol pairing evidence-based molecular triggers with Ayurvedic Rasayana therapies.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           ...roadmap.map((phase) => _buildRoadmapPhaseTile(phase)),
@@ -458,7 +488,10 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                     backgroundColor: AppColors.karmaGreen,
                     child: Text(
                       '${phase.phaseNumber}',
-                      style: const TextStyle(color: AppColors.background, fontSize: 11, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          color: AppColors.background,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -480,7 +513,10 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   phase.timeline,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ],
@@ -492,11 +528,14 @@ class DeepenedLongevityScreen extends ConsumerWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('• ', style: TextStyle(color: AppColors.karmaGreen, fontSize: 12)),
+                  const Text('• ',
+                      style:
+                          TextStyle(color: AppColors.karmaGreen, fontSize: 12)),
                   Expanded(
                     child: Text(
                       action,
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                      style: const TextStyle(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ),
                 ],
@@ -512,7 +551,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.spa_outlined, color: AppColors.karmaGreen, size: 14),
+                const Icon(Icons.spa_outlined,
+                    color: AppColors.karmaGreen, size: 14),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -555,7 +595,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                 left: AppSpacing.md,
                 right: AppSpacing.md,
                 top: AppSpacing.md,
-                bottom: MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
+                bottom:
+                    MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -569,7 +610,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                         regionalText: 'बायोमेट्रिक्स पुनर्मूल्यांकन',
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                        icon: const Icon(Icons.close,
+                            color: AppColors.textSecondary),
                         onPressed: () => Navigator.pop(ctx),
                       ),
                     ],
@@ -583,7 +625,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                     onChanged: (val) => setState(() => rhr = val),
                   ),
                   _buildSlider(
-                    label: 'VO2 Max Estimate: ${vo2Max.toStringAsFixed(1)} ml/kg/min',
+                    label:
+                        'VO2 Max Estimate: ${vo2Max.toStringAsFixed(1)} ml/kg/min',
                     value: vo2Max,
                     min: 25.0,
                     max: 60.0,
@@ -604,7 +647,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                     onChanged: (val) => setState(() => deepSleep = val),
                   ),
                   _buildSlider(
-                    label: 'Skeletal Muscle Mass: ${muscleMass.toStringAsFixed(1)} kg',
+                    label:
+                        'Skeletal Muscle Mass: ${muscleMass.toStringAsFixed(1)} kg',
                     value: muscleMass,
                     min: 20.0,
                     max: 50.0,
@@ -624,10 +668,13 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.karmaGreen,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.md)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadii.md)),
                       ),
                       onPressed: () {
-                        ref.read(deepenedLongevityProvider.notifier).recalculate(
+                        ref
+                            .read(deepenedLongevityProvider.notifier)
+                            .recalculate(
                               chronologicalAge: 32.0,
                               restingHeartRate: rhr,
                               hrvRmssd: 58.0,
@@ -647,7 +694,9 @@ class DeepenedLongevityScreen extends ConsumerWidget {
                       },
                       child: const Text(
                         'Synthesize Cellular Longevity',
-                        style: TextStyle(color: AppColors.background, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: AppColors.background,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -670,7 +719,9 @@ class DeepenedLongevityScreen extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+        Text(label,
+            style:
+                const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
         Slider(
           value: value,
           min: min,
@@ -703,7 +754,8 @@ class DeepenedLongevityScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.md),
             Text(
               'FitKarma\'s Deepened Longevity OS evaluates 7 primary hallmarks of aging across metabolic, cardiovascular, genetic, and sleep vectors. It specifically accounts for the South Asian Thin-Fat phenotype (high visceral adiposity with lower skeletal muscle) and provides a calibrated 90-day cellular rejuvenation roadmap integrating modern geroprotective protocols with classic Ayurvedic Rasayanas.',
-              style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
           ],

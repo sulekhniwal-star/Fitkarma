@@ -88,21 +88,25 @@ enum NetworkInfluenceTier {
     regionalTitle: 'आदत प्रेरक',
     multiplier: 1.15,
     description: 'Your consistency is measurably elevating your peer cohort.',
-    regionalDescription: 'आपकी निरंतरता साथियों को प्रत्यक्ष रूप से प्रेरित कर रही है।',
+    regionalDescription:
+        'आपकी निरंतरता साथियों को प्रत्यक्ष रूप से प्रेरित कर रही है।',
   ),
   vanguard(
     title: 'Pacesetter (Agrani)',
     regionalTitle: 'अग्रणी साधक',
     multiplier: 1.25,
     description: 'Driving top-decile health velocity across your city tier.',
-    regionalDescription: 'अपने शहर वर्ग में शीर्ष गतिशीलता का नेतृत्व कर रहे हैं।',
+    regionalDescription:
+        'अपने शहर वर्ग में शीर्ष गतिशीलता का नेतृत्व कर रहे हैं।',
   ),
   luminary(
     title: 'Sangha Luminary (Margdarshak)',
     regionalTitle: 'संघ मार्गदर्शक',
     multiplier: 1.40,
-    description: 'Radiating profound positive social contagion throughout the community.',
-    regionalDescription: 'समुदाय में सकारात्मक स्वास्थ्य क्रांति का मार्ग प्रशस्त कर रहे हैं।',
+    description:
+        'Radiating profound positive social contagion throughout the community.',
+    regionalDescription:
+        'समुदाय में सकारात्मक स्वास्थ्य क्रांति का मार्ग प्रशस्त कर रहे हैं।',
   );
 
   final String title;
@@ -170,7 +174,8 @@ class CohortPillarMetric {
   });
 
   double get deltaFromCohortMean => userValue - cohortAverage;
-  double get deltaPercentage => cohortAverage > 0 ? (deltaFromCohortMean / cohortAverage) * 100 : 0.0;
+  double get deltaPercentage =>
+      cohortAverage > 0 ? (deltaFromCohortMean / cohortAverage) * 100 : 0.0;
 }
 
 /// Realtime Anonymized Activity Event for Network Contagion Stream
@@ -224,7 +229,8 @@ class SanghaCollectiveGoal {
     required this.participatingAthletes,
   });
 
-  double get progressFraction => (currentQuantity / targetQuantity).clamp(0.0, 1.0);
+  double get progressFraction =>
+      (currentQuantity / targetQuantity).clamp(0.0, 1.0);
   double get progressPercentage => progressFraction * 100;
 }
 

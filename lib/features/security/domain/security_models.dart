@@ -126,11 +126,16 @@ class BiometricLockSettings {
     int? autoLockTimeoutMinutes,
   }) {
     return BiometricLockSettings(
-      isBiometricLockEnabled: isBiometricLockEnabled ?? this.isBiometricLockEnabled,
-      requireOnClinicalReports: requireOnClinicalReports ?? this.requireOnClinicalReports,
-      requireOnDoctorSharing: requireOnDoctorSharing ?? this.requireOnDoctorSharing,
-      requireOnAffiliatePayouts: requireOnAffiliatePayouts ?? this.requireOnAffiliatePayouts,
-      autoLockTimeoutMinutes: autoLockTimeoutMinutes ?? this.autoLockTimeoutMinutes,
+      isBiometricLockEnabled:
+          isBiometricLockEnabled ?? this.isBiometricLockEnabled,
+      requireOnClinicalReports:
+          requireOnClinicalReports ?? this.requireOnClinicalReports,
+      requireOnDoctorSharing:
+          requireOnDoctorSharing ?? this.requireOnDoctorSharing,
+      requireOnAffiliatePayouts:
+          requireOnAffiliatePayouts ?? this.requireOnAffiliatePayouts,
+      autoLockTimeoutMinutes:
+          autoLockTimeoutMinutes ?? this.autoLockTimeoutMinutes,
     );
   }
 }

@@ -20,12 +20,14 @@ class CoachChatRepository {
           .collection('aiConversations')
           .doc(dateStr);
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data()?['messages'] != null) {
         final list = snapshot.data()!['messages'] as List;
         return list
-            .map((item) => CoachMessage.fromMap(Map<String, dynamic>.from(item)))
+            .map(
+                (item) => CoachMessage.fromMap(Map<String, dynamic>.from(item)))
             .toList();
       }
     } catch (_) {
@@ -36,7 +38,8 @@ class CoachChatRepository {
     return [
       CoachMessage(
         id: 'msg_welcome',
-        text: 'Namaste! I am Karma Coach. How can I support your nutrition, recovery, or training today?',
+        text:
+            'Namaste! I am Karma Coach. How can I support your nutrition, recovery, or training today?',
         sender: MessageSender.coach,
         timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
       ),

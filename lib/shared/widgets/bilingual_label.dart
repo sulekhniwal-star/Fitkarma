@@ -3,7 +3,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_typography.dart';
 
 enum BilingualLayout {
-  inline,  // Primary / Regional side by side
+  inline, // Primary / Regional side by side
   stacked, // Primary on top, Regional below
 }
 

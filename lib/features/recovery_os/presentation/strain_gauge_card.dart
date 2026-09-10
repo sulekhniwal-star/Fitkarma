@@ -96,7 +96,8 @@ class StrainGaugeCard extends StatelessWidget {
                   children: [
                     GlowingMetric(
                       label: 'Target Strain Window',
-                      value: '${strain.targetStrainMin.toStringAsFixed(0)} – ${strain.targetStrainMax.toStringAsFixed(0)}',
+                      value:
+                          '${strain.targetStrainMin.toStringAsFixed(0)} – ${strain.targetStrainMax.toStringAsFixed(0)}',
                       unit: '/ 21.0',
                       accentColor: AppColors.karmaGreen,
                     ),
@@ -126,9 +127,18 @@ class StrainGaugeCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildSourceItem('Steps', '${strain.stepsStrainContribution}', Icons.directions_walk_rounded, AppColors.focusBlue),
-                _buildSourceItem('Workout', '${strain.workoutStrainContribution}', Icons.fitness_center_rounded, AppColors.karmaGreen),
-                _buildSourceItem('Heat Cost', '${strain.heatStrainContribution}', Icons.whatshot_rounded, AppColors.energyOrange),
+                _buildSourceItem('Steps', '${strain.stepsStrainContribution}',
+                    Icons.directions_walk_rounded, AppColors.focusBlue),
+                _buildSourceItem(
+                    'Workout',
+                    '${strain.workoutStrainContribution}',
+                    Icons.fitness_center_rounded,
+                    AppColors.karmaGreen),
+                _buildSourceItem(
+                    'Heat Cost',
+                    '${strain.heatStrainContribution}',
+                    Icons.whatshot_rounded,
+                    AppColors.energyOrange),
               ],
             ),
           ),
@@ -138,7 +148,9 @@ class StrainGaugeCard extends StatelessWidget {
           Text(
             strain.statusGuidance,
             style: AppTypography.bodySmall.copyWith(
-              color: strain.isOverreaching ? AppColors.alertRed : AppColors.textSecondary,
+              color: strain.isOverreaching
+                  ? AppColors.alertRed
+                  : AppColors.textSecondary,
               height: 1.3,
             ),
           ),
@@ -147,20 +159,24 @@ class StrainGaugeCard extends StatelessWidget {
     );
   }
 
-  Widget _buildSourceItem(String label, String value, IconData icon, Color color) {
+  Widget _buildSourceItem(
+      String label, String value, IconData icon, Color color) {
     return Column(
       children: [
         Row(
           children: [
             Icon(icon, size: 14, color: color),
             const SizedBox(width: 4),
-            Text(label, style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.textMuted)),
+            Text(label,
+                style: AppTypography.bodySmall
+                    .copyWith(fontSize: 11, color: AppColors.textMuted)),
           ],
         ),
         const SizedBox(height: 2),
         Text(
           value,
-          style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.w700),
+          style: AppTypography.titleSmall.copyWith(
+              color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
       ],
     );

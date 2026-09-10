@@ -18,7 +18,8 @@ class GroceryOptimizationScreen extends StatefulWidget {
   });
 
   @override
-  State<GroceryOptimizationScreen> createState() => _GroceryOptimizationScreenState();
+  State<GroceryOptimizationScreen> createState() =>
+      _GroceryOptimizationScreenState();
 }
 
 class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
@@ -49,13 +50,17 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
     final buffer = StringBuffer();
     buffer.writeln('🛒 FitKarma Weekly Indian Grocery List:');
     for (final item in _plan.items) {
-      buffer.writeln('• ${item.name} (${item.quantity}) — ₹${item.estimatedPriceInr}');
+      buffer.writeln(
+          '• ${item.name} (${item.quantity}) — ₹${item.estimatedPriceInr}');
     }
-    buffer.writeln('\nTotal Estimated: ₹${_plan.totalEstimatedCostInr} | Protein Yield: ${_plan.totalProteinYieldGrams}g');
+    buffer.writeln(
+        '\nTotal Estimated: ₹${_plan.totalEstimatedCostInr} | Protein Yield: ${_plan.totalProteinYieldGrams}g');
 
     Clipboard.setData(ClipboardData(text: buffer.toString()));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Grocery list copied to clipboard for Blinkit / Zepto / Kirana!')),
+      const SnackBar(
+          content: Text(
+              'Grocery list copied to clipboard for Blinkit / Zepto / Kirana!')),
     );
   }
 
@@ -71,12 +76,14 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.karmaGreen),
+            icon: const Icon(Icons.shopping_bag_outlined,
+                color: AppColors.karmaGreen),
             tooltip: 'Quick-Commerce Vendor Checkout',
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const GroceryVendorCheckoutScreen()),
+                MaterialPageRoute(
+                    builder: (_) => const GroceryVendorCheckoutScreen()),
               );
             },
           ),
@@ -97,7 +104,11 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Vegetarian Grocery Only (शाकाहारी)', style: TextStyle(color: AppColors.textPrimary, fontSize: 13, fontWeight: FontWeight.w600)),
+                  const Text('Vegetarian Grocery Only (शाकाहारी)',
+                      style: TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600)),
                   Switch(
                     value: _isVegetarian,
                     activeThumbColor: AppColors.karmaGreen,
@@ -116,12 +127,14 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const GroceryVendorCheckoutScreen()),
+                    MaterialPageRoute(
+                        builder: (_) => const GroceryVendorCheckoutScreen()),
                   );
                 },
                 child: Row(
                   children: [
-                    const Icon(Icons.flash_on_rounded, color: AppColors.karmaGreen, size: 22),
+                    const Icon(Icons.flash_on_rounded,
+                        color: AppColors.karmaGreen, size: 22),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
@@ -129,16 +142,21 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                         children: [
                           const Text(
                             'Compare Blinkit, Zepto, BB & Instamart',
-                            style: TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: AppColors.textPrimary,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '1-Tap cart export, Ayurvedic pantry & live price matrix',
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textSecondary, fontSize: 10),
                           ),
                         ],
                       ),
                     ),
-                    const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.karmaGreen, size: 14),
+                    const Icon(Icons.arrow_forward_ios_rounded,
+                        color: AppColors.karmaGreen, size: 14),
                   ],
                 ),
               ),
@@ -158,7 +176,8 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                           primaryText: '7-Day Nutrition Budget',
                           regionalText: 'साप्ताहिक पोषण व्यय अनुमान',
                         ),
-                        Icon(Icons.savings_rounded, color: AppColors.karmaGreen, size: 20),
+                        Icon(Icons.savings_rounded,
+                            color: AppColors.karmaGreen, size: 20),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -196,12 +215,16 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                 backgroundColor: AppColors.surfaceElevated,
                 child: Row(
                   children: [
-                    const Icon(Icons.flash_on_rounded, color: AppColors.gold, size: 22),
+                    const Icon(Icons.flash_on_rounded,
+                        color: AppColors.gold, size: 22),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Soya Chunks (₹0.21/g P) & Sattu (₹0.48/g P) provide maximum protein density per Rupee.',
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11, height: 1.3),
+                        style: AppTypography.bodySmall.copyWith(
+                            color: AppColors.textPrimary,
+                            fontSize: 11,
+                            height: 1.3),
                       ),
                     ),
                   ],
@@ -231,7 +254,9 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
 
                   return BentoCard(
                     onTap: () => _toggleItem(index),
-                    backgroundColor: item.isChecked ? AppColors.surfaceElevated.withValues(alpha: 0.5) : AppColors.surface,
+                    backgroundColor: item.isChecked
+                        ? AppColors.surfaceElevated.withValues(alpha: 0.5)
+                        : AppColors.surface,
                     child: Row(
                       children: [
                         Checkbox(
@@ -248,13 +273,18 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                                 item.name,
                                 style: AppTypography.titleSmall.copyWith(
                                   fontSize: 13,
-                                  decoration: item.isChecked ? TextDecoration.lineThrough : null,
-                                  color: item.isChecked ? AppColors.textMuted : AppColors.textPrimary,
+                                  decoration: item.isChecked
+                                      ? TextDecoration.lineThrough
+                                      : null,
+                                  color: item.isChecked
+                                      ? AppColors.textMuted
+                                      : AppColors.textPrimary,
                                 ),
                               ),
                               Text(
                                 '${item.regionalName} • ${item.quantity}',
-                                style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                                style: const TextStyle(
+                                    fontSize: 11, color: AppColors.textMuted),
                               ),
                             ],
                           ),
@@ -264,11 +294,15 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                           children: [
                             Text(
                               '₹${item.estimatedPriceInr}',
-                              style: const TextStyle(fontWeight: FontWeight.w800, color: AppColors.karmaGreen, fontSize: 13),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.karmaGreen,
+                                  fontSize: 13),
                             ),
                             Text(
                               '+${item.totalProteinGrams.round()}g P',
-                              style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                              style: const TextStyle(
+                                  fontSize: 10, color: AppColors.textSecondary),
                             ),
                           ],
                         ),

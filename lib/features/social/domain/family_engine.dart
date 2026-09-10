@@ -35,7 +35,8 @@ class FamilyHealthEngine {
   }
 
   /// Calculates Household Family Health Score (0.0 to 100.0)
-  static double calculateHouseholdHealthScore(List<FamilyMemberProfile> members) {
+  static double calculateHouseholdHealthScore(
+      List<FamilyMemberProfile> members) {
     if (members.isEmpty) return 100.0;
 
     double stepSum = 0.0;
@@ -44,7 +45,10 @@ class FamilyHealthEngine {
 
     for (final m in members) {
       // Step fraction (max 100)
-      final stepFrac = (m.todaySteps / (m.dailyStepTarget == 0 ? 1 : m.dailyStepTarget)).clamp(0.0, 1.0) * 100.0;
+      final stepFrac =
+          (m.todaySteps / (m.dailyStepTarget == 0 ? 1 : m.dailyStepTarget))
+                  .clamp(0.0, 1.0) *
+              100.0;
       stepSum += stepFrac;
 
       // Shatpawali completion
@@ -64,7 +68,8 @@ class FamilyHealthEngine {
     final avgShatpawali = shatpawaliSum / members.length;
     final avgVitals = vitalsSum / members.length;
 
-    final composite = (avgSteps * 0.35) + (avgShatpawali * 0.30) + (avgVitals * 0.35);
+    final composite =
+        (avgSteps * 0.35) + (avgShatpawali * 0.30) + (avgVitals * 0.35);
     return composite.clamp(10.0, 100.0);
   }
 

@@ -14,11 +14,14 @@ class BiomechanicsTrajectoryScreen extends ConsumerStatefulWidget {
   const BiomechanicsTrajectoryScreen({super.key});
 
   @override
-  ConsumerState<BiomechanicsTrajectoryScreen> createState() => _BiomechanicsTrajectoryScreenState();
+  ConsumerState<BiomechanicsTrajectoryScreen> createState() =>
+      _BiomechanicsTrajectoryScreenState();
 }
 
-class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTrajectoryScreen> {
-  AnthropometricLimbProfile _selectedProfile = AnthropometricLimbProfile.longFemurs;
+class _BiomechanicsTrajectoryScreenState
+    extends ConsumerState<BiomechanicsTrajectoryScreen> {
+  AnthropometricLimbProfile _selectedProfile =
+      AnthropometricLimbProfile.longFemurs;
   int _simulatedAdherence = 90;
 
   @override
@@ -74,15 +77,21 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                           regionalText: '६-माह शक्ति एवं मांसपेशी अनुमान',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.karmaGreen.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: AppColors.karmaGreen
+                                    .withValues(alpha: 0.4)),
                           ),
                           child: const Text(
                             'CONFIDENCE 94%',
-                            style: TextStyle(color: AppColors.karmaGreen, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: AppColors.karmaGreen,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -137,18 +146,28 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                       children: [
                         const Text(
                           'Anthropometric Lever Profile',
-                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: AppColors.textPrimary),
                         ),
                         DropdownButton<AnthropometricLimbProfile>(
                           value: _selectedProfile,
                           dropdownColor: AppColors.surfaceElevated,
                           underline: const SizedBox(),
-                          style: const TextStyle(fontSize: 12, color: AppColors.focusBlue, fontWeight: FontWeight.w700),
+                          style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.focusBlue,
+                              fontWeight: FontWeight.w700),
                           items: AnthropometricLimbProfile.values.map((p) {
-                            return DropdownMenuItem(value: p, child: Text(p.title.split('/')[0].trim()));
+                            return DropdownMenuItem(
+                                value: p,
+                                child: Text(p.title.split('/')[0].trim()));
                           }).toList(),
                           onChanged: (val) {
-                            if (val != null) setState(() => _selectedProfile = val);
+                            if (val != null) {
+                              setState(() => _selectedProfile = val);
+                            }
                           },
                         ),
                       ],
@@ -159,22 +178,30 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: AppRadii.radiusSm,
-                        border: Border.all(color: AppColors.focusBlue.withValues(alpha: 0.3)),
+                        border: Border.all(
+                            color: AppColors.focusBlue.withValues(alpha: 0.3)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.accessibility_new_rounded, color: AppColors.focusBlue, size: 16),
+                              const Icon(Icons.accessibility_new_rounded,
+                                  color: AppColors.focusBlue, size: 16),
                               const SizedBox(width: 6),
-                              Text('Squat Stance Cue: ${_selectedProfile.title}', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: AppColors.textPrimary)),
+                              Text(
+                                  'Squat Stance Cue: ${_selectedProfile.title}',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                      color: AppColors.textPrimary)),
                             ],
                           ),
                           const SizedBox(height: 3),
                           Text(
                             _selectedProfile.squatSetupRecommendation,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textSecondary, fontSize: 11),
                           ),
                         ],
                       ),
@@ -183,8 +210,16 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Simulate 30-Day Adherence', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.textPrimary)),
-                        Text('$_simulatedAdherence%', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.karmaGreen)),
+                        const Text('Simulate 30-Day Adherence',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                                color: AppColors.textPrimary)),
+                        Text('$_simulatedAdherence%',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 12,
+                                color: AppColors.karmaGreen)),
                       ],
                     ),
                     Slider(
@@ -193,7 +228,8 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                       max: 100.0,
                       divisions: 10,
                       activeColor: AppColors.karmaGreen,
-                      onChanged: (val) => setState(() => _simulatedAdherence = val.round()),
+                      onChanged: (val) =>
+                          setState(() => _simulatedAdherence = val.round()),
                     ),
                   ],
                 ),
@@ -225,11 +261,17 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                           children: [
                             Text(
                               proj.exercise.name,
-                              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13,
+                                  color: AppColors.textPrimary),
                             ),
                             Text(
                               '+${proj.projectedVolumeTonnageGainPercent}% Gain',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.karmaGreen),
+                              style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.karmaGreen),
                             ),
                           ],
                         ),
@@ -239,10 +281,22 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildMilestonePill(label: 'Current 1RM', value: '${proj.current1RmKg} kg', color: AppColors.textPrimary),
-                            _buildMilestonePill(label: '3 Months', value: '${proj.projected1Rm3MonthsKg} kg', color: AppColors.focusBlue),
-                            _buildMilestonePill(label: '6 Months', value: '${proj.projected1Rm6MonthsKg} kg', color: AppColors.energyOrange),
-                            _buildMilestonePill(label: '12 Months', value: '${proj.projected1Rm12MonthsKg} kg', color: AppColors.karmaGreen),
+                            _buildMilestonePill(
+                                label: 'Current 1RM',
+                                value: '${proj.current1RmKg} kg',
+                                color: AppColors.textPrimary),
+                            _buildMilestonePill(
+                                label: '3 Months',
+                                value: '${proj.projected1Rm3MonthsKg} kg',
+                                color: AppColors.focusBlue),
+                            _buildMilestonePill(
+                                label: '6 Months',
+                                value: '${proj.projected1Rm6MonthsKg} kg',
+                                color: AppColors.energyOrange),
+                            _buildMilestonePill(
+                                label: '12 Months',
+                                value: '${proj.projected1Rm12MonthsKg} kg',
+                                color: AppColors.karmaGreen),
                           ],
                         ),
                       ],
@@ -271,9 +325,15 @@ class _BiomechanicsTrajectoryScreenState extends ConsumerState<BiomechanicsTraje
       ),
       child: Column(
         children: [
-          Text(label, style: const TextStyle(fontSize: 9, color: AppColors.textMuted, fontWeight: FontWeight.w600)),
+          Text(label,
+              style: const TextStyle(
+                  fontSize: 9,
+                  color: AppColors.textMuted,
+                  fontWeight: FontWeight.w600)),
           const SizedBox(height: 2),
-          Text(value, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: color)),
+          Text(value,
+              style: TextStyle(
+                  fontSize: 12, fontWeight: FontWeight.w800, color: color)),
         ],
       ),
     );

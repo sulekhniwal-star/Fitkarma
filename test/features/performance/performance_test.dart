@@ -7,7 +7,9 @@ void main() {
   group('PerformanceEngine Deterministic Tests', () {
     const engine = PerformanceEngine();
 
-    test('Micro-benchmarks execute in sub-15ms across all core health algorithms', () {
+    test(
+        'Micro-benchmarks execute in sub-15ms across all core health algorithms',
+        () {
       final benchmarks = engine.runEngineBenchmarks(iterations: 50);
 
       expect(benchmarks.length, equals(4));
@@ -17,7 +19,9 @@ void main() {
       }
     });
 
-    test('Performance audit evaluation generates Grade A on standard 120 FPS settings', () {
+    test(
+        'Performance audit evaluation generates Grade A on standard 120 FPS settings',
+        () {
       const settings = PerformanceSettings(targetFps: 120);
       final report = engine.evaluatePerformanceAudit(settings);
 
@@ -28,8 +32,10 @@ void main() {
       expect(report.optimizationTips.isNotEmpty, isTrue);
     });
 
-    test('Battery saver mode adapts framerate and reduces memory footprint', () {
-      const saverSettings = PerformanceSettings(batterySaverMode: true, targetFps: 60);
+    test('Battery saver mode adapts framerate and reduces memory footprint',
+        () {
+      const saverSettings =
+          PerformanceSettings(batterySaverMode: true, targetFps: 60);
       final report = engine.evaluatePerformanceAudit(saverSettings);
 
       expect(report.averageFps, lessThan(65.0));
@@ -38,7 +44,8 @@ void main() {
   });
 
   group('Performance StateNotifier Provider Tests', () {
-    test('StateNotifier adjusts FPS, toggles battery saver, and purges cache', () async {
+    test('StateNotifier adjusts FPS, toggles battery saver, and purges cache',
+        () async {
       final notifier = PerformanceNotifier();
 
       expect(notifier.state.report.settings.targetFps, equals(120));

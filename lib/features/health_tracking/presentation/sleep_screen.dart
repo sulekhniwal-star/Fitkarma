@@ -61,13 +61,33 @@ class SleepScreen extends ConsumerWidget {
                       regionalText: 'नींद के विभिन्न चरण',
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    _buildStageTile('Deep Sleep (गहरी नींद)', '${session.deepSleepMinutes} min', '${(analysis.deepSleepPercent * 100).round()}%', AppColors.focusBlue, 'Physical repair & growth hormone release'),
+                    _buildStageTile(
+                        'Deep Sleep (गहरी नींद)',
+                        '${session.deepSleepMinutes} min',
+                        '${(analysis.deepSleepPercent * 100).round()}%',
+                        AppColors.focusBlue,
+                        'Physical repair & growth hormone release'),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildStageTile('REM Sleep (सपनों की नींद)', '${session.remSleepMinutes} min', '${(analysis.remSleepPercent * 100).round()}%', AppColors.aiPurple, 'Neuroplasticity & cognitive restoration'),
+                    _buildStageTile(
+                        'REM Sleep (सपनों की नींद)',
+                        '${session.remSleepMinutes} min',
+                        '${(analysis.remSleepPercent * 100).round()}%',
+                        AppColors.aiPurple,
+                        'Neuroplasticity & cognitive restoration'),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildStageTile('Light Sleep (हल्की नींद)', '${session.lightSleepMinutes} min', '${((session.lightSleepMinutes / session.actualAsleepMinutes) * 100).round()}%', AppColors.energyOrange, 'Base rest and muscle recovery'),
+                    _buildStageTile(
+                        'Light Sleep (हल्की नींद)',
+                        '${session.lightSleepMinutes} min',
+                        '${((session.lightSleepMinutes / session.actualAsleepMinutes) * 100).round()}%',
+                        AppColors.energyOrange,
+                        'Base rest and muscle recovery'),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildStageTile('Awake / Latency (जागने का समय)', '${session.awakeMinutes} min', '${session.latencyMinutes}m latency', AppColors.alertRed, 'Micro-awakenings and sleep onset latency'),
+                    _buildStageTile(
+                        'Awake / Latency (जागने का समय)',
+                        '${session.awakeMinutes} min',
+                        '${session.latencyMinutes}m latency',
+                        AppColors.alertRed,
+                        'Micro-awakenings and sleep onset latency'),
                   ],
                 ),
               ),
@@ -90,9 +110,12 @@ class SleepScreen extends ConsumerWidget {
                       children: [
                         GlowingMetric(
                           label: '7-Day Sleep Debt',
-                          value: '${analysis.sleepDebtHours.toStringAsFixed(1)}h',
+                          value:
+                              '${analysis.sleepDebtHours.toStringAsFixed(1)}h',
                           unit: 'accumulated',
-                          accentColor: analysis.sleepDebtHours > 1.0 ? AppColors.energyOrange : AppColors.karmaGreen,
+                          accentColor: analysis.sleepDebtHours > 1.0
+                              ? AppColors.energyOrange
+                              : AppColors.karmaGreen,
                         ),
                         GlowingMetric(
                           label: 'Optimal Bedtime',
@@ -112,7 +135,8 @@ class SleepScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.nightlight_round, color: AppColors.aiPurple, size: 20),
+                    const Icon(Icons.nightlight_round,
+                        color: AppColors.aiPurple, size: 20),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(
@@ -129,7 +153,10 @@ class SleepScreen extends ConsumerWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('• ', style: TextStyle(color: AppColors.aiPurple, fontWeight: FontWeight.bold)),
+                                  const Text('• ',
+                                      style: TextStyle(
+                                          color: AppColors.aiPurple,
+                                          fontWeight: FontWeight.bold)),
                                   Expanded(
                                     child: Text(
                                       p,
@@ -157,7 +184,8 @@ class SleepScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStageTile(String title, String duration, String percentage, Color color, String purpose) {
+  Widget _buildStageTile(String title, String duration, String percentage,
+      Color color, String purpose) {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
@@ -175,23 +203,31 @@ class SleepScreen extends ConsumerWidget {
                   Container(
                     width: 8,
                     height: 8,
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+                    decoration:
+                        BoxDecoration(shape: BoxShape.circle, color: color),
                   ),
                   const SizedBox(width: 8),
-                  Text(title, style: AppTypography.titleSmall.copyWith(fontSize: 13)),
+                  Text(title,
+                      style: AppTypography.titleSmall.copyWith(fontSize: 13)),
                 ],
               ),
               Row(
                 children: [
-                  Text(duration, style: AppTypography.titleSmall.copyWith(color: color, fontSize: 13)),
+                  Text(duration,
+                      style: AppTypography.titleSmall
+                          .copyWith(color: color, fontSize: 13)),
                   const SizedBox(width: 6),
-                  Text('($percentage)', style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                  Text('($percentage)',
+                      style: const TextStyle(
+                          fontSize: 11, color: AppColors.textMuted)),
                 ],
               ),
             ],
           ),
           const SizedBox(height: 3),
-          Text(purpose, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+          Text(purpose,
+              style: const TextStyle(
+                  fontSize: 11, color: AppColors.textSecondary)),
         ],
       ),
     );

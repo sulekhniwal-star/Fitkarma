@@ -13,7 +13,8 @@ class HabitIdentityEngine {
     required double adherenceScore,
   }) {
     // 1. Logarithmic vote saturation component (max 40 pts)
-    final voteComponent = (math.log(1.0 + totalVotesCast) * 8.5).clamp(0.0, 40.0);
+    final voteComponent =
+        (math.log(1.0 + totalVotesCast) * 8.5).clamp(0.0, 40.0);
 
     // 2. Streak continuity component (max 35 pts)
     final streakComponent = ((activeStreakDays / 30.0).clamp(0.0, 1.0)) * 35.0;
@@ -21,7 +22,8 @@ class HabitIdentityEngine {
     // 3. Adherence reliability component (max 25 pts)
     final adherenceComponent = (adherenceScore * 0.25).clamp(0.0, 25.0);
 
-    return (voteComponent + streakComponent + adherenceComponent).clamp(0.0, 100.0);
+    return (voteComponent + streakComponent + adherenceComponent)
+        .clamp(0.0, 100.0);
   }
 
   /// Calculates Asymptotic Habit Automaticity Index based on Lally et al. (2010)
@@ -30,7 +32,8 @@ class HabitIdentityEngine {
     required int consecutiveRepetitionDays,
   }) {
     const k = 0.038; // standard habit formation decay constant
-    final rawAutomaticity = 100.0 * (1.0 - math.exp(-k * consecutiveRepetitionDays));
+    final rawAutomaticity =
+        100.0 * (1.0 - math.exp(-k * consecutiveRepetitionDays));
     return rawAutomaticity.clamp(5.0, 99.0);
   }
 
@@ -76,15 +79,19 @@ class HabitIdentityEngine {
     };
 
     for (final v in recentVotes) {
-      tallyMap[v.archetypeReinforced] = (tallyMap[v.archetypeReinforced] ?? 0) + v.votesCount;
+      tallyMap[v.archetypeReinforced] =
+          (tallyMap[v.archetypeReinforced] ?? 0) + v.votesCount;
     }
 
     // Add baseline proportional weight for primary archetype
-    tallyMap[primaryArchetype] = (tallyMap[primaryArchetype] ?? 0) + (totalVotesCast ~/ 2);
+    tallyMap[primaryArchetype] =
+        (tallyMap[primaryArchetype] ?? 0) + (totalVotesCast ~/ 2);
 
-    final totalTallyCount = tallyMap.values.fold<int>(0, (sum, val) => sum + val);
+    final totalTallyCount =
+        tallyMap.values.fold<int>(0, (sum, val) => sum + val);
     final voteTallies = tallyMap.entries.map((entry) {
-      final share = totalTallyCount > 0 ? (entry.value / totalTallyCount) * 100.0 : 25.0;
+      final share =
+          totalTallyCount > 0 ? (entry.value / totalTallyCount) * 100.0 : 25.0;
       return ArchetypeVoteTally(
         archetype: entry.key,
         totalVotes: entry.value,
@@ -98,20 +105,28 @@ class HabitIdentityEngine {
 
     switch (stage) {
       case IdentityFusionStage.sahaja:
-        affirmation = 'Your habits are no longer tasks to complete; they are the natural expression of who you are.';
-        regionalAffirmation = 'आपकी आदतें अब कोई कार्य नहीं, अपितु आपके स्वाभाविक अस्तित्व की सहज अभिव्यक्ति हैं।';
+        affirmation =
+            'Your habits are no longer tasks to complete; they are the natural expression of who you are.';
+        regionalAffirmation =
+            'आपकी आदतें अब कोई कार्य नहीं, अपितु आपके स्वाभाविक अस्तित्व की सहज अभिव्यक्ति हैं।';
         break;
       case IdentityFusionStage.nishtha:
-        affirmation = 'You have cast $totalVotesCast votes for your ${primaryArchetype.title}. Discipline is turning into devotion.';
-        regionalAffirmation = 'आपने अपने स्वरूप के पक्ष में $totalVotesCast संकल्प मत डाले हैं। अनुशासन अब निष्ठा में बदल चुका है।';
+        affirmation =
+            'You have cast $totalVotesCast votes for your ${primaryArchetype.title}. Discipline is turning into devotion.';
+        regionalAffirmation =
+            'आपने अपने स्वरूप के पक्ष में $totalVotesCast संकल्प मत डाले हैं। अनुशासन अब निष्ठा में बदल चुका है।';
         break;
       case IdentityFusionStage.abhyasi:
-        affirmation = 'Every completed ritual lowers mental resistance. You are actively stepping into your athlete identity.';
-        regionalAffirmation = 'प्रत्येक पूर्ण अनुष्ठान मानसिक आलस्य को घटाता है। आप अपनी नई पहचान में प्रवेश कर रहे हैं।';
+        affirmation =
+            'Every completed ritual lowers mental resistance. You are actively stepping into your athlete identity.';
+        regionalAffirmation =
+            'प्रत्येक पूर्ण अनुष्ठान मानसिक आलस्य को घटाता है। आप अपनी नई पहचान में प्रवेश कर रहे हैं।';
         break;
       case IdentityFusionStage.jigyasu:
-        affirmation = 'Every small action is a powerful vote for the person you are becoming today.';
-        regionalAffirmation = 'प्रत्येक छोटा सकारात्मक कदम आपके भावी स्वरूप के निर्माण का सशक्त प्रमाण है।';
+        affirmation =
+            'Every small action is a powerful vote for the person you are becoming today.';
+        regionalAffirmation =
+            'प्रत्येक छोटा सकारात्मक कदम आपके भावी स्वरूप के निर्माण का सशक्त प्रमाण है।';
         break;
     }
 

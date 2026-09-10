@@ -32,12 +32,14 @@ class TestingScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.play_circle_outline, color: AppColors.karmaGreen),
+            icon: const Icon(Icons.play_circle_outline,
+                color: AppColors.karmaGreen),
             tooltip: 'Run All Tests',
             onPressed: state.isRunningAll ? null : () => notifier.runAllTests(),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showTestingPhilosophyModal(context),
           ),
         ],
@@ -68,12 +70,15 @@ class TestingScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BilingualLabel(
-                  primaryText: 'Feature Test Suites (${state.filteredSuites.length})',
+                  primaryText:
+                      'Feature Test Suites (${state.filteredSuites.length})',
                   regionalText: 'मॉड्यूल-वार परीक्षण सूची',
                 ),
                 TextButton(
                   onPressed: () => notifier.selectLayer(null),
-                  child: const Text('Show All Layers', style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                  child: const Text('Show All Layers',
+                      style:
+                          TextStyle(color: AppColors.focusBlue, fontSize: 11)),
                 ),
               ],
             ),
@@ -92,17 +97,28 @@ class TestingScreen extends ConsumerWidget {
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.focusBlue,
-                  shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: AppRadii.radiusMd),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
                 icon: state.isRunningAll
-                    ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                    ? const SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: CircularProgressIndicator(
+                            color: Colors.white, strokeWidth: 2))
                     : const Icon(Icons.verified, color: Colors.white, size: 18),
                 label: Text(
-                  state.isRunningAll ? 'Executing 105 Tests...' : 'Execute Full Project Test Suite',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                  state.isRunningAll
+                      ? 'Executing 105 Tests...'
+                      : 'Execute Full Project Test Suite',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13),
                 ),
-                onPressed: state.isRunningAll ? null : () => notifier.runAllTests(),
+                onPressed:
+                    state.isRunningAll ? null : () => notifier.runAllTests(),
               ),
             ),
             const SizedBox(height: AppSpacing.xl),
@@ -124,12 +140,16 @@ class TestingScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.karmaGreen, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -146,7 +166,8 @@ class TestingScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -155,11 +176,15 @@ class TestingScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.verified_outlined, color: AppColors.karmaGreen, size: 14),
+                    Icon(Icons.verified_outlined,
+                        color: AppColors.karmaGreen, size: 14),
                     SizedBox(width: 4),
                     Text(
                       '100% SUITES PASSING',
-                      style: TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: TextStyle(
+                          color: AppColors.karmaGreen,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ],
                 ),
@@ -172,7 +197,8 @@ class TestingScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   'Runtime: ${report.totalExecutionTimeMs} ms',
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 10),
                 ),
               ),
             ],
@@ -216,8 +242,12 @@ class TestingScreen extends ConsumerWidget {
             selectedColor: AppColors.focusBlue,
             backgroundColor: AppColors.surfaceElevated,
             labelStyle: TextStyle(
-              color: state.selectedLayer == null ? Colors.white : AppColors.textSecondary,
-              fontWeight: state.selectedLayer == null ? FontWeight.bold : FontWeight.normal,
+              color: state.selectedLayer == null
+                  ? Colors.white
+                  : AppColors.textSecondary,
+              fontWeight: state.selectedLayer == null
+                  ? FontWeight.bold
+                  : FontWeight.normal,
             ),
             onSelected: (_) => notifier.selectLayer(null),
           ),
@@ -227,7 +257,8 @@ class TestingScreen extends ConsumerWidget {
             return Padding(
               padding: const EdgeInsets.only(right: 6),
               child: ChoiceChip(
-                label: Text(layer.name.split(' ').first, style: const TextStyle(fontSize: 11)),
+                label: Text(layer.name.split(' ').first,
+                    style: const TextStyle(fontSize: 11)),
                 selected: isSelected,
                 selectedColor: AppColors.focusBlue,
                 backgroundColor: AppColors.surfaceElevated,
@@ -235,7 +266,8 @@ class TestingScreen extends ConsumerWidget {
                   color: isSelected ? Colors.white : AppColors.textSecondary,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
-                onSelected: (_) => notifier.selectLayer(isSelected ? null : layer),
+                onSelected: (_) =>
+                    notifier.selectLayer(isSelected ? null : layer),
               ),
             );
           }),
@@ -255,15 +287,22 @@ class TestingScreen extends ConsumerWidget {
               SizedBox(width: 6),
               Text(
                 'Testing Pyramid Architecture & Target Thresholds',
-                style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 12),
+                style: TextStyle(
+                    color: AppColors.gold,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
-          _buildPyramidTier('Security Rules & Storage', '100% Target', AppColors.alertRed),
-          _buildPyramidTier('Integration & E2E Flows', '80% Target', AppColors.energyOrange),
-          _buildPyramidTier('Widget & Bento Component Tests', '85% Target', AppColors.focusBlue),
-          _buildPyramidTier('Pure Dart Deterministic Algorithms', '95%+ Target', AppColors.karmaGreen),
+          _buildPyramidTier(
+              'Security Rules & Storage', '100% Target', AppColors.alertRed),
+          _buildPyramidTier(
+              'Integration & E2E Flows', '80% Target', AppColors.energyOrange),
+          _buildPyramidTier('Widget & Bento Component Tests', '85% Target',
+              AppColors.focusBlue),
+          _buildPyramidTier('Pure Dart Deterministic Algorithms', '95%+ Target',
+              AppColors.karmaGreen),
         ],
       ),
     );
@@ -273,7 +312,8 @@ class TestingScreen extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.12),
           borderRadius: AppRadii.radiusSm,
@@ -282,8 +322,14 @@ class TestingScreen extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w500)),
-            Text(target, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold)),
+            Text(title,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500)),
+            Text(target,
+                style: TextStyle(
+                    color: color, fontSize: 10, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -315,33 +361,42 @@ class TestingScreen extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
                       decoration: const BoxDecoration(
                         color: AppColors.surfaceElevated,
                         borderRadius: AppRadii.radiusSm,
                       ),
                       child: Text(
                         '${suite.passedCount}/${suite.testCount} PASSED',
-                        style: const TextStyle(color: AppColors.karmaGreen, fontSize: 8, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            color: AppColors.karmaGreen,
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
                 Text(
                   suite.regionalFeatureName,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 10),
                 ),
                 const SizedBox(height: 4),
                 Row(
                   children: [
                     Text(
                       '${suite.coveragePercent}% Coverage',
-                      style: const TextStyle(color: AppColors.focusBlue, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.focusBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       '• ${suite.executionTimeMs} ms • ${suite.layer.name}',
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.textSecondary, fontSize: 10),
                     ),
                   ],
                 ),
@@ -374,7 +429,8 @@ class TestingScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma follows a deterministic testing pyramid: pure Dart algorithms require 95%+ coverage with zero network/cloud dependencies. Widget tests verify responsive Bento layouts, and integration tests validate offline-first synchronization.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -382,10 +438,12 @@ class TestingScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understood', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understood',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

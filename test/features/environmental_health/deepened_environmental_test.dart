@@ -8,7 +8,9 @@ void main() {
   group('DeepenedEnvironmentalEngine Tests', () {
     const engine = DeepenedEnvironmentalEngine();
 
-    test('Synthesizes pristine report for optimal mountain/coastal atmospheric conditions', () {
+    test(
+        'Synthesizes pristine report for optimal mountain/coastal atmospheric conditions',
+        () {
       final report = engine.synthesizeReport(
         aqi: 35,
         uvIndex: 4.0,
@@ -25,7 +27,8 @@ void main() {
 
       expect(report.environmentalSafetyIndex, greaterThanOrEqualTo(85.0));
       expect(report.baseSnapshot.aqiCategory, equals(AqiCategory.good));
-      expect(report.pulmonaryStress.recommendedMode, equals(TrainingEnvironmentMode.outdoorUnrestricted));
+      expect(report.pulmonaryStress.recommendedMode,
+          equals(TrainingEnvironmentMode.outdoorUnrestricted));
       expect(report.pulmonaryStress.maskTier, equals(ProtectiveMaskTier.none));
       expect(report.pulmonaryStress.hasThermalInversionWarning, isFalse);
       expect(report.rituCharya.season, equals(RituSeason.vasanta));
@@ -33,7 +36,9 @@ void main() {
       expect(report.thermalStrain.wbgtCelsius, lessThan(24.0));
     });
 
-    test('Identifies winter morning thermal smog inversion and halts outdoor cardio', () {
+    test(
+        'Identifies winter morning thermal smog inversion and halts outdoor cardio',
+        () {
       final report = engine.synthesizeReport(
         aqi: 340,
         uvIndex: 2.0,
@@ -46,14 +51,20 @@ void main() {
       expect(report.environmentalSafetyIndex, lessThan(40.0));
       expect(report.baseSnapshot.aqiCategory, equals(AqiCategory.veryPoor));
       expect(report.pulmonaryStress.hasThermalInversionWarning, isTrue);
-      expect(report.pulmonaryStress.recommendedMode, equals(TrainingEnvironmentMode.hazardousHalt));
-      expect(report.pulmonaryStress.maskTier, equals(ProtectiveMaskTier.n99Mandatory));
-      expect(report.pulmonaryStress.inhaledPm25MicrogramsPerHour, greaterThan(400.0));
+      expect(report.pulmonaryStress.recommendedMode,
+          equals(TrainingEnvironmentMode.hazardousHalt));
+      expect(report.pulmonaryStress.maskTier,
+          equals(ProtectiveMaskTier.n99Mandatory));
+      expect(report.pulmonaryStress.inhaledPm25MicrogramsPerHour,
+          greaterThan(400.0));
       expect(report.rituCharya.season, equals(RituSeason.hemanta));
-      expect(report.rituCharya.herbalRespiratoryShield, contains('Chyawanprash'));
+      expect(
+          report.rituCharya.herbalRespiratoryShield, contains('Chyawanprash'));
     });
 
-    test('Computes extreme thermal strain and high sweat/sodium loss during summer heatwave', () {
+    test(
+        'Computes extreme thermal strain and high sweat/sodium loss during summer heatwave',
+        () {
       final report = engine.synthesizeReport(
         aqi: 95,
         uvIndex: 11.5,
@@ -64,42 +75,96 @@ void main() {
 
       expect(report.baseSnapshot.uvCategory, equals(UvCategory.extreme));
       expect(report.thermalStrain.wbgtCelsius, greaterThan(32.0));
-      expect(report.thermalStrain.estimatedSweatLossPerHourMl, greaterThan(1100.0));
+      expect(report.thermalStrain.estimatedSweatLossPerHourMl,
+          greaterThan(1100.0));
       expect(report.thermalStrain.sodiumLossMg, greaterThan(900));
       expect(report.rituCharya.season, equals(RituSeason.grishma));
-      expect(report.rituCharya.hydrationElectrolyteFormula, contains('Tender Coconut'));
+      expect(report.rituCharya.hydrationElectrolyteFormula,
+          contains('Tender Coconut'));
     });
 
-    test('Accurately maps all 6 Ayurvedic Indian seasons across calendar months', () {
+    test(
+        'Accurately maps all 6 Ayurvedic Indian seasons across calendar months',
+        () {
       expect(
-        engine.synthesizeReport(aqi: 50, uvIndex: 5, temperatureC: 25, humidityPercent: 50, timestamp: DateTime(2026, 1, 15)).rituCharya.season,
+        engine
+            .synthesizeReport(
+                aqi: 50,
+                uvIndex: 5,
+                temperatureC: 25,
+                humidityPercent: 50,
+                timestamp: DateTime(2026, 1, 15))
+            .rituCharya
+            .season,
         equals(RituSeason.shishira),
       );
       expect(
-        engine.synthesizeReport(aqi: 50, uvIndex: 5, temperatureC: 25, humidityPercent: 50, timestamp: DateTime(2026, 3, 15)).rituCharya.season,
+        engine
+            .synthesizeReport(
+                aqi: 50,
+                uvIndex: 5,
+                temperatureC: 25,
+                humidityPercent: 50,
+                timestamp: DateTime(2026, 3, 15))
+            .rituCharya
+            .season,
         equals(RituSeason.vasanta),
       );
       expect(
-        engine.synthesizeReport(aqi: 50, uvIndex: 5, temperatureC: 25, humidityPercent: 50, timestamp: DateTime(2026, 5, 15)).rituCharya.season,
+        engine
+            .synthesizeReport(
+                aqi: 50,
+                uvIndex: 5,
+                temperatureC: 25,
+                humidityPercent: 50,
+                timestamp: DateTime(2026, 5, 15))
+            .rituCharya
+            .season,
         equals(RituSeason.grishma),
       );
       expect(
-        engine.synthesizeReport(aqi: 50, uvIndex: 5, temperatureC: 25, humidityPercent: 50, timestamp: DateTime(2026, 7, 15)).rituCharya.season,
+        engine
+            .synthesizeReport(
+                aqi: 50,
+                uvIndex: 5,
+                temperatureC: 25,
+                humidityPercent: 50,
+                timestamp: DateTime(2026, 7, 15))
+            .rituCharya
+            .season,
         equals(RituSeason.varsha),
       );
       expect(
-        engine.synthesizeReport(aqi: 50, uvIndex: 5, temperatureC: 25, humidityPercent: 50, timestamp: DateTime(2026, 9, 15)).rituCharya.season,
+        engine
+            .synthesizeReport(
+                aqi: 50,
+                uvIndex: 5,
+                temperatureC: 25,
+                humidityPercent: 50,
+                timestamp: DateTime(2026, 9, 15))
+            .rituCharya
+            .season,
         equals(RituSeason.sharad),
       );
       expect(
-        engine.synthesizeReport(aqi: 50, uvIndex: 5, temperatureC: 25, humidityPercent: 50, timestamp: DateTime(2026, 11, 15)).rituCharya.season,
+        engine
+            .synthesizeReport(
+                aqi: 50,
+                uvIndex: 5,
+                temperatureC: 25,
+                humidityPercent: 50,
+                timestamp: DateTime(2026, 11, 15))
+            .rituCharya
+            .season,
         equals(RituSeason.hemanta),
       );
     });
   });
 
   group('DeepenedEnvironmentalNotifier Tests', () {
-    test('Initializes with baseline report and updates on atmospheric telemetry change', () {
+    test(
+        'Initializes with baseline report and updates on atmospheric telemetry change',
+        () {
       final notifier = DeepenedEnvironmentalNotifier();
       expect(notifier.state.pollutants.pm25, equals(52.0));
       expect(notifier.state.environmentalSafetyIndex, greaterThan(50.0));

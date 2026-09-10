@@ -30,7 +30,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showStagePhilosophyModal(context),
           ),
         ],
@@ -101,7 +102,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: stageColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusFull,
@@ -133,7 +135,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: const BoxDecoration(
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusFull,
@@ -158,7 +161,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Composite Transformation Index',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -171,7 +175,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       stage.focusArea,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -187,7 +192,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
           ClipRRect(
             borderRadius: AppRadii.radiusFull,
             child: LinearProgressIndicator(
-              value: (report.overallTransformationScore / 100.0).clamp(0.0, 1.0),
+              value:
+                  (report.overallTransformationScore / 100.0).clamp(0.0, 1.0),
               backgroundColor: AppColors.surfaceElevated,
               valueColor: AlwaysStoppedAnimation<Color>(stageColor),
               minHeight: 8,
@@ -248,7 +254,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
 
   Widget _buildBiometricDeltaCard(BiometricPillarDelta delta) {
     final isPositive = delta.isPositiveProgress;
-    final progressColor = isPositive ? AppColors.karmaGreen : AppColors.energyOrange;
+    final progressColor =
+        isPositive ? AppColors.karmaGreen : AppColors.energyOrange;
 
     return BentoCard(
       child: Column(
@@ -263,17 +270,20 @@ class TransformationTimelineScreen extends ConsumerWidget {
                   children: [
                     Text(
                       delta.metricName,
-                      style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                      style: AppTypography.titleMedium
+                          .copyWith(color: AppColors.textPrimary),
                     ),
                     Text(
                       delta.regionalMetricName,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 12),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted, fontSize: 12),
                     ),
                   ],
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: progressColor.withValues(alpha: 0.12),
                   borderRadius: AppRadii.radiusFull,
@@ -295,18 +305,24 @@ class TransformationTimelineScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Baseline (Day 1)', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Baseline (Day 1)',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     '${delta.baselineValue % 1 != 0 ? delta.baselineValue.toStringAsFixed(2) : delta.baselineValue.toInt()} ${delta.unit}',
-                    style: AppTypography.titleMedium.copyWith(color: AppColors.textSecondary),
+                    style: AppTypography.titleMedium
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                 ],
               ),
-              const Icon(Icons.arrow_forward, color: AppColors.textMuted, size: 18),
+              const Icon(Icons.arrow_forward,
+                  color: AppColors.textMuted, size: 18),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Current Value', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Current Value',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     '${delta.currentValue % 1 != 0 ? delta.currentValue.toStringAsFixed(2) : delta.currentValue.toInt()} ${delta.unit}',
                     style: AppTypography.titleMedium.copyWith(
@@ -352,7 +368,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Biometric Trajectory Forecaster',
-                style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
             ],
           ),
@@ -380,7 +397,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
                             color: AppColors.focusBlue.withValues(alpha: 0.12),
                             borderRadius: AppRadii.radiusFull,
@@ -398,7 +416,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       'Current: ${p.currentValue % 1 != 0 ? p.currentValue.toStringAsFixed(2) : p.currentValue.toInt()} ${p.unit} | Target: ${p.targetValue % 1 != 0 ? p.targetValue.toStringAsFixed(2) : p.targetValue.toInt()} ${p.unit}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted),
                     ),
                     const SizedBox(height: 6),
                     ClipRRect(
@@ -406,7 +425,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                       child: LinearProgressIndicator(
                         value: p.progressFraction,
                         backgroundColor: AppColors.surfaceElevated,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.focusBlue),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            AppColors.focusBlue),
                         minHeight: 6,
                       ),
                     ),
@@ -429,7 +449,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Unlocked Milestones & Siddhis',
-                style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
             ],
           ),
@@ -442,7 +463,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                     CircleAvatar(
                       radius: 16,
                       backgroundColor: AppColors.gold.withValues(alpha: 0.15),
-                      child: const Icon(Icons.check, color: AppColors.gold, size: 16),
+                      child: const Icon(Icons.check,
+                          color: AppColors.gold, size: 16),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
@@ -460,7 +482,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
                                   color: AppColors.gold.withValues(alpha: 0.12),
                                   borderRadius: AppRadii.radiusFull,
@@ -478,12 +501,14 @@ class TransformationTimelineScreen extends ConsumerWidget {
                           const SizedBox(height: 2),
                           Text(
                             m.description,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                            style: AppTypography.bodySmall
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             m.regionalDescription,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textMuted, fontSize: 11),
                           ),
                         ],
                       ),
@@ -512,7 +537,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
             children: [
               Text(
                 'Transformation Stages (Yatra Charan)',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -520,7 +546,8 @@ class TransformationTimelineScreen extends ConsumerWidget {
                 '2. Abhyasa (W5-12): Metabolic adaptation & progressive overload.\n'
                 '3. Koushalya (W13-24): Lean muscle hypertrophy & VO2 Max elevation.\n'
                 '4. Sthirata (W25+): Autonomous lifestyle mastery & lifelong resilience.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.5),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.5),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

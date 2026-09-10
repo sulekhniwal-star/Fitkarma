@@ -31,7 +31,9 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
       } else {
         // Compute final score
         _calculatedResult = DoshaScoringEngine.calculateScore(_answers);
-        ref.read(onboardingFlowProvider.notifier).updateDosha(_calculatedResult!.primaryDosha.name);
+        ref
+            .read(onboardingFlowProvider.notifier)
+            .updateDosha(_calculatedResult!.primaryDosha.name);
       }
     });
   }
@@ -109,7 +111,8 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: question.options.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(height: AppSpacing.sm),
                   itemBuilder: (context, index) {
                     final option = question.options[index];
                     final isSelected = selectedDosha == option.dosha;
@@ -138,7 +141,8 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
                       child: Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
                               color: doshaColor.withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusSm,
@@ -160,8 +164,12 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
                                 Text(
                                   option.text,
                                   style: AppTypography.bodyMedium.copyWith(
-                                    color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
-                                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                                    color: isSelected
+                                        ? AppColors.textPrimary
+                                        : AppColors.textSecondary,
+                                    fontWeight: isSelected
+                                        ? FontWeight.w600
+                                        : FontWeight.w400,
                                   ),
                                 ),
                                 const SizedBox(height: 2),
@@ -192,7 +200,8 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
             },
             child: Text(
               'Previous Question',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ),
         const SizedBox(height: AppSpacing.sm),
@@ -305,15 +314,24 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: _buildDoshaBar('Vata (वात)', '${(result.vataPercent * 100).round()}%', AppColors.focusBlue),
+                      child: _buildDoshaBar(
+                          'Vata (वात)',
+                          '${(result.vataPercent * 100).round()}%',
+                          AppColors.focusBlue),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
-                      child: _buildDoshaBar('Pitta (पित्त)', '${(result.pittaPercent * 100).round()}%', AppColors.energyOrange),
+                      child: _buildDoshaBar(
+                          'Pitta (पित्त)',
+                          '${(result.pittaPercent * 100).round()}%',
+                          AppColors.energyOrange),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
-                      child: _buildDoshaBar('Kapha (कफ)', '${(result.kaphaPercent * 100).round()}%', AppColors.karmaGreen),
+                      child: _buildDoshaBar(
+                          'Kapha (कफ)',
+                          '${(result.kaphaPercent * 100).round()}%',
+                          AppColors.karmaGreen),
                     ),
                   ],
                 ),
@@ -435,12 +453,14 @@ class _DoshaQuizScreenState extends ConsumerState<DoshaQuizScreen> {
         children: [
           Text(
             title,
-            style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(fontSize: 11, color: AppColors.textSecondary),
           ),
           const SizedBox(height: 2),
           Text(
             percent,
-            style: AppTypography.titleSmall.copyWith(color: color, fontWeight: FontWeight.w800),
+            style: AppTypography.titleSmall
+                .copyWith(color: color, fontWeight: FontWeight.w800),
           ),
         ],
       ),

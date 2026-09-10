@@ -23,7 +23,8 @@ class ComplianceNotifier extends StateNotifier<ComplianceFrameworkReport> {
   }
 
   void revokeConsent(String consentId) {
-    final updatedConsents = state.activeConsents.where((c) => c.consentId != consentId).toList();
+    final updatedConsents =
+        state.activeConsents.where((c) => c.consentId != consentId).toList();
     state = _engine.evaluateCompliance(
       userConsents: updatedConsents,
       encryptionAtRestVerified: state.encryptionAtRestVerified,

@@ -19,6 +19,6 @@ class AppSpacing {
     horizontal: md,
     vertical: sm,
   );
-  
+
   static const EdgeInsets cardPadding = EdgeInsets.all(md);
 }

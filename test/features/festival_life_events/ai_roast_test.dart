@@ -6,7 +6,8 @@ void main() {
   group('AiRoastEngine Deterministic Tests', () {
     const engine = AiRoastEngine();
 
-    test('Generates Desi Gym Bro roast with pushup challenge on missed workout', () {
+    test('Generates Desi Gym Bro roast with pushup challenge on missed workout',
+        () {
       final roast = engine.generateRoast(
         persona: RoastPersona.desiGymBro,
         intensity: RoastIntensity.desiToughLove,
@@ -56,7 +57,9 @@ void main() {
       expect(prompt, contains('Bhai form dekh'));
     });
 
-    test('All persona and trigger combinations produce non-empty valid artifacts', () {
+    test(
+        'All persona and trigger combinations produce non-empty valid artifacts',
+        () {
       for (final persona in RoastPersona.values) {
         for (final trigger in RoastTriggerEvent.values) {
           final roast = engine.generateRoast(

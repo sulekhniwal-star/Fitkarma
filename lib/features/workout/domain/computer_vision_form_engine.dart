@@ -3,9 +3,11 @@ import 'workout_models.dart';
 
 enum RepPhase {
   setup(label: 'Setup & Ready', regionalLabel: 'तैयारी'),
-  eccentric(label: 'Eccentric (Descent)', regionalLabel: 'नीचे जाना (नियंत्रित)'),
+  eccentric(
+      label: 'Eccentric (Descent)', regionalLabel: 'नीचे जाना (नियंत्रित)'),
   peakContraction(label: 'Peak Depth / Stretch', regionalLabel: 'अधिकतम गहराई'),
-  concentric(label: 'Concentric (Ascent)', regionalLabel: 'ऊपर उठना (विस्फोटक)'),
+  concentric(
+      label: 'Concentric (Ascent)', regionalLabel: 'ऊपर उठना (विस्फोटक)'),
   lockout(label: 'Lockout & Rep Complete', regionalLabel: 'पूर्ण रेप संपन्न');
 
   final String label;
@@ -18,9 +20,18 @@ enum RepPhase {
 }
 
 enum FormFeedbackTier {
-  optimal(label: 'Optimal Technique', regionalLabel: 'उत्कृष्ट मुद्रा', colorCode: 0xff22C55E),
-  warning(label: 'Form Alert / Minor Deviation', regionalLabel: 'चेतावनी / मामूली विचलन', colorCode: 0xffFF9100),
-  fault(label: 'Form Fault / Safety Risk', regionalLabel: 'त्रुटि / सुरक्षा जोखिम', colorCode: 0xffEF4444);
+  optimal(
+      label: 'Optimal Technique',
+      regionalLabel: 'उत्कृष्ट मुद्रा',
+      colorCode: 0xff22C55E),
+  warning(
+      label: 'Form Alert / Minor Deviation',
+      regionalLabel: 'चेतावनी / मामूली विचलन',
+      colorCode: 0xffFF9100),
+  fault(
+      label: 'Form Fault / Safety Risk',
+      regionalLabel: 'त्रुटि / सुरक्षा जोखिम',
+      colorCode: 0xffEF4444);
 
   final String label;
   final String regionalLabel;
@@ -91,8 +102,10 @@ class VisionFormAnalysisFrame {
 
 class ComputerVisionFormEngine {
   /// Pure Dart deterministic joint angle calculation from 3 2D keypoints (A-B-C with B as vertex)
-  static double calculateJointAngle(PoseKeypoint a, PoseKeypoint b, PoseKeypoint c) {
-    final double radians = atan2(c.y - b.y, c.x - b.x) - atan2(a.y - b.y, a.x - b.x);
+  static double calculateJointAngle(
+      PoseKeypoint a, PoseKeypoint b, PoseKeypoint c) {
+    final double radians =
+        atan2(c.y - b.y, c.x - b.x) - atan2(a.y - b.y, a.x - b.x);
     double angle = (radians * 180.0 / pi).abs();
     if (angle > 180.0) {
       angle = 360.0 - angle;
@@ -112,16 +125,21 @@ class ComputerVisionFormEngine {
 
     // 1. Squats / Desi Baithak Evaluation
     if (name.contains('squat') || name.contains('baithak')) {
-      return _evaluateSquatFrame(exercise, kneeAngle, hipAngle, completedRepsCount, history);
+      return _evaluateSquatFrame(
+          exercise, kneeAngle, hipAngle, completedRepsCount, history);
     }
 
     // 2. Bench Press / Desi Dand / Pushups Evaluation
-    if (name.contains('bench') || name.contains('dand') || name.contains('pushup')) {
-      return _evaluatePushFrame(exercise, kneeAngle, hipAngle, completedRepsCount, history);
+    if (name.contains('bench') ||
+        name.contains('dand') ||
+        name.contains('pushup')) {
+      return _evaluatePushFrame(
+          exercise, kneeAngle, hipAngle, completedRepsCount, history);
     }
 
     // Default Fallback Evaluation (RDL / Hinge)
-    return _evaluateHingeFrame(exercise, kneeAngle, hipAngle, completedRepsCount, history);
+    return _evaluateHingeFrame(
+        exercise, kneeAngle, hipAngle, completedRepsCount, history);
   }
 
   static VisionFormAnalysisFrame _evaluateSquatFrame(
@@ -234,8 +252,10 @@ class ComputerVisionFormEngine {
   ) {
     final RepPhase phase;
     const tier = FormFeedbackTier.optimal;
-    const cue = 'Hips hinged backward with soft knees. Feel deep hamstring stretch.';
-    const regCue = 'कूल्हों को पीछे धकेलें, हैमस्ट्रिंग्स में खिंचाव महसूस करें।';
+    const cue =
+        'Hips hinged backward with soft knees. Feel deep hamstring stretch.';
+    const regCue =
+        'कूल्हों को पीछे धकेलें, हैमस्ट्रिंग्स में खिंचाव महसूस करें।';
 
     if (hipHingeAngle > 150) {
       phase = RepPhase.lockout;

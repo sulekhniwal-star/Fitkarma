@@ -39,11 +39,13 @@ class DeepenedMetabolismState {
 }
 
 final deepenedMetabolismProvider =
-    StateNotifierProvider<DeepenedMetabolismNotifier, DeepenedMetabolismState>((ref) {
+    StateNotifierProvider<DeepenedMetabolismNotifier, DeepenedMetabolismState>(
+        (ref) {
   return DeepenedMetabolismNotifier();
 });
 
-class DeepenedMetabolismNotifier extends StateNotifier<DeepenedMetabolismState> {
+class DeepenedMetabolismNotifier
+    extends StateNotifier<DeepenedMetabolismState> {
   DeepenedMetabolismNotifier() : super(_buildInitialState());
 
   static const DeepenedMetabolismEngine _engine = DeepenedMetabolismEngine();

@@ -55,15 +55,20 @@ class AthleticProfilingScreen extends ConsumerWidget {
                           regionalText: persona.regionalTitle,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: personaColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: personaColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: personaColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             persona.title.split('/')[0].trim().toUpperCase(),
-                            style: TextStyle(color: personaColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: personaColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -87,7 +92,8 @@ class AthleticProfilingScreen extends ConsumerWidget {
                         ),
                         GlowingMetric(
                           label: 'Sessions',
-                          value: '${report.completedWorkouts30Days}/${report.scheduledWorkouts30Days}',
+                          value:
+                              '${report.completedWorkouts30Days}/${report.scheduledWorkouts30Days}',
                           unit: 'done',
                           accentColor: AppColors.focusBlue,
                         ),
@@ -135,7 +141,9 @@ class AthleticProfilingScreen extends ConsumerWidget {
                     final double frac = (vector.score / 100.0).clamp(0.0, 1.0);
                     final Color vectorColor = vector.score >= 85
                         ? AppColors.karmaGreen
-                        : (vector.score >= 70 ? AppColors.focusBlue : AppColors.energyOrange);
+                        : (vector.score >= 70
+                            ? AppColors.focusBlue
+                            : AppColors.energyOrange);
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -148,23 +156,39 @@ class AthleticProfilingScreen extends ConsumerWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(vector.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.textPrimary)),
-                                  Text(vector.regionalName, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                  Text(vector.name,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 12,
+                                          color: AppColors.textPrimary)),
+                                  Text(vector.regionalName,
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          color: AppColors.textMuted)),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('${vector.score}%', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: vectorColor)),
+                                  Text('${vector.score}%',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 13,
+                                          color: vectorColor)),
                                   const SizedBox(width: 6),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 1),
                                     decoration: BoxDecoration(
-                                      color: vectorColor.withValues(alpha: 0.12),
+                                      color:
+                                          vectorColor.withValues(alpha: 0.12),
                                       borderRadius: AppRadii.radiusSm,
                                     ),
                                     child: Text(
                                       vector.status,
-                                      style: TextStyle(fontSize: 9, color: vectorColor, fontWeight: FontWeight.w700),
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          color: vectorColor,
+                                          fontWeight: FontWeight.w700),
                                     ),
                                   ),
                                 ],
@@ -177,7 +201,8 @@ class AthleticProfilingScreen extends ConsumerWidget {
                             child: LinearProgressIndicator(
                               value: frac,
                               backgroundColor: AppColors.surface,
-                              valueColor: AlwaysStoppedAnimation<Color>(vectorColor),
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(vectorColor),
                               minHeight: 6,
                             ),
                           ),
@@ -195,7 +220,8 @@ class AthleticProfilingScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.flash_on_rounded, color: AppColors.gold, size: 22),
+                    const Icon(Icons.flash_on_rounded,
+                        color: AppColors.gold, size: 22),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
@@ -203,7 +229,10 @@ class AthleticProfilingScreen extends ConsumerWidget {
                         children: [
                           const Text(
                             'Time-Crunched Anti-Quit Protocol',
-                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13,
+                                color: AppColors.textPrimary),
                           ),
                           const SizedBox(height: 3),
                           Text(

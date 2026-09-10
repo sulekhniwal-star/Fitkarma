@@ -96,7 +96,8 @@ class WearableComparisonScreen extends StatelessWidget {
                   children: [
                     const Row(
                       children: [
-                        Icon(Icons.hub_rounded, color: AppColors.focusBlue, size: 20),
+                        Icon(Icons.hub_rounded,
+                            color: AppColors.focusBlue, size: 20),
                         SizedBox(width: 8),
                         BilingualLabel(
                           primaryText: 'Device Confidence Matrix',
@@ -107,7 +108,8 @@ class WearableComparisonScreen extends StatelessWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'FitKarma automatically resolves multi-device conflicts. Higher tier sensors (optical photoplethysmography & chest straps) supersede consumer pedometers and late syncs without duplicate counting.',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.35),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, height: 1.35),
                     ),
                   ],
                 ),
@@ -163,13 +165,17 @@ class WearableComparisonScreen extends StatelessWidget {
               BentoCard(
                 child: Column(
                   children: [
-                    _buildDeviceRow('WHOOP 4.0', 'Primary HRV & Recovery', 0.95, AppColors.karmaGreen),
+                    _buildDeviceRow('WHOOP 4.0', 'Primary HRV & Recovery', 0.95,
+                        AppColors.karmaGreen),
                     const Divider(color: AppColors.glassBorder, height: 16),
-                    _buildDeviceRow('Oura Ring Gen 3', 'Primary Sleep Architecture', 0.98, AppColors.aiPurple),
+                    _buildDeviceRow('Oura Ring Gen 3',
+                        'Primary Sleep Architecture', 0.98, AppColors.aiPurple),
                     const Divider(color: AppColors.glassBorder, height: 16),
-                    _buildDeviceRow('Apple Watch Ultra', 'Primary Steps & Workouts', 0.95, AppColors.focusBlue),
+                    _buildDeviceRow('Apple Watch Ultra',
+                        'Primary Steps & Workouts', 0.95, AppColors.focusBlue),
                     const Divider(color: AppColors.glassBorder, height: 16),
-                    _buildDeviceRow('Health Connect / Phone', 'Backup Pedometer', 0.85, AppColors.textMuted),
+                    _buildDeviceRow('Health Connect / Phone',
+                        'Backup Pedometer', 0.85, AppColors.textMuted),
                   ],
                 ),
               ),
@@ -197,7 +203,9 @@ class WearableComparisonScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: AppTypography.titleSmall.copyWith(fontWeight: FontWeight.w700)),
+              Text(title,
+                  style: AppTypography.titleSmall
+                      .copyWith(fontWeight: FontWeight.w700)),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -207,7 +215,10 @@ class WearableComparisonScreen extends StatelessWidget {
                 ),
                 child: Text(
                   '${(confidence * 100).round()}% CONFIDENCE',
-                  style: TextStyle(color: accentColor, fontSize: 10, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      color: accentColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800),
                 ),
               ),
             ],
@@ -215,15 +226,23 @@ class WearableComparisonScreen extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           Row(
             children: [
-              GlowingMetric(label: 'Selected Value', value: value, accentColor: accentColor),
+              GlowingMetric(
+                  label: 'Selected Value',
+                  value: value,
+                  accentColor: accentColor),
               const SizedBox(width: AppSpacing.lg),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Active Source: $sourceName', style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
+                    Text('Active Source: $sourceName',
+                        style: AppTypography.bodySmall.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w700)),
                     const SizedBox(height: 2),
-                    Text(reason, style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11)),
+                    Text(reason,
+                        style: AppTypography.bodySmall.copyWith(
+                            color: AppColors.textMuted, fontSize: 11)),
                   ],
                 ),
               ),
@@ -239,8 +258,14 @@ class WearableComparisonScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('${candidates.length} sources evaluated', style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
-                const Text('Conflict Resolved', style: TextStyle(fontSize: 11, color: AppColors.karmaGreen, fontWeight: FontWeight.w700)),
+                Text('${candidates.length} sources evaluated',
+                    style: const TextStyle(
+                        fontSize: 11, color: AppColors.textMuted)),
+                const Text('Conflict Resolved',
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: AppColors.karmaGreen,
+                        fontWeight: FontWeight.w700)),
               ],
             ),
           ),
@@ -249,24 +274,36 @@ class WearableComparisonScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDeviceRow(String name, String role, double confidence, Color dotColor) {
+  Widget _buildDeviceRow(
+      String name, String role, double confidence, Color dotColor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            Container(width: 8, height: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: dotColor)),
+            Container(
+                width: 8,
+                height: 8,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: dotColor)),
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: AppTypography.titleSmall.copyWith(fontSize: 13)),
-                Text(role, style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11)),
+                Text(name,
+                    style: AppTypography.titleSmall.copyWith(fontSize: 13)),
+                Text(role,
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textMuted, fontSize: 11)),
               ],
             ),
           ],
         ),
-        Text('${(confidence * 100).round()}% Tier', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.w600)),
+        Text('${(confidence * 100).round()}% Tier',
+            style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 12,
+                fontWeight: FontWeight.w600)),
       ],
     );
   }

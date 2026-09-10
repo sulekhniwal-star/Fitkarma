@@ -32,10 +32,12 @@ class SmartCalendarScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.refresh, color: AppColors.textSecondary),
             tooltip: 'Reset Sample Day',
-            onPressed: () => ref.read(smartCalendarProvider.notifier).resetToSampleDay(),
+            onPressed: () =>
+                ref.read(smartCalendarProvider.notifier).resetToSampleDay(),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -43,7 +45,8 @@ class SmartCalendarScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.focusBlue,
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Add Event Block', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        label: const Text('Add Event Block',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         onPressed: () => _showAddEventBottomSheet(context, ref),
       ),
       body: SingleChildScrollView(
@@ -84,8 +87,12 @@ class SmartCalendarScreen extends ConsumerWidget {
                 ),
                 if (report.scheduledEvents.isNotEmpty)
                   TextButton(
-                    onPressed: () => ref.read(smartCalendarProvider.notifier).clearAllEvents(),
-                    child: const Text('Clear All', style: TextStyle(color: AppColors.alertRed, fontSize: 12)),
+                    onPressed: () => ref
+                        .read(smartCalendarProvider.notifier)
+                        .clearAllEvents(),
+                    child: const Text('Clear All',
+                        style:
+                            TextStyle(color: AppColors.alertRed, fontSize: 12)),
                   ),
               ],
             ),
@@ -108,7 +115,9 @@ class SmartCalendarScreen extends ConsumerWidget {
     final isBurnout = report.isHighCognitiveBurnoutDay;
     final loadColor = isBurnout
         ? AppColors.alertRed
-        : (report.totalCognitiveLoadScore > 35 ? AppColors.energyOrange : AppColors.karmaGreen);
+        : (report.totalCognitiveLoadScore > 35
+            ? AppColors.energyOrange
+            : AppColors.karmaGreen);
 
     return BentoCard(
       child: Column(
@@ -118,7 +127,8 @@ class SmartCalendarScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: loadColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -128,7 +138,9 @@ class SmartCalendarScreen extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      isBurnout ? Icons.warning_amber_rounded : Icons.check_circle_outline,
+                      isBurnout
+                          ? Icons.warning_amber_rounded
+                          : Icons.check_circle_outline,
                       color: loadColor,
                       size: 14,
                     ),
@@ -251,8 +263,10 @@ class SmartCalendarScreen extends ConsumerWidget {
   }
 
   Widget _buildWellnessSlotCard(SuggestedWellnessSlot slot) {
-    final startStr = '${slot.startTime.hour}:${slot.startTime.minute.toString().padLeft(2, '0')}';
-    final endStr = '${slot.endTime.hour}:${slot.endTime.minute.toString().padLeft(2, '0')}';
+    final startStr =
+        '${slot.startTime.hour}:${slot.startTime.minute.toString().padLeft(2, '0')}';
+    final endStr =
+        '${slot.endTime.hour}:${slot.endTime.minute.toString().padLeft(2, '0')}';
 
     return BentoCard(
       child: Column(
@@ -264,7 +278,8 @@ class SmartCalendarScreen extends ConsumerWidget {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: AppColors.karmaGreen.withValues(alpha: 0.15),
                       borderRadius: AppRadii.radiusSm,
@@ -282,14 +297,18 @@ class SmartCalendarScreen extends ConsumerWidget {
               ),
               if (slot.isOptimalTime)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.focusBlue.withValues(alpha: 0.15),
                     borderRadius: AppRadii.radiusSm,
                   ),
                   child: const Text(
                     'Optimal Window',
-                    style: TextStyle(color: AppColors.focusBlue, fontSize: 9, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: AppColors.focusBlue,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
             ],
@@ -332,8 +351,10 @@ class SmartCalendarScreen extends ConsumerWidget {
   }
 
   Widget _buildEventBlockCard(WidgetRef ref, CalendarEventBlock evt) {
-    final startStr = '${evt.startTime.hour}:${evt.startTime.minute.toString().padLeft(2, '0')}';
-    final endStr = '${evt.endTime.hour}:${evt.endTime.minute.toString().padLeft(2, '0')}';
+    final startStr =
+        '${evt.startTime.hour}:${evt.startTime.minute.toString().padLeft(2, '0')}';
+    final endStr =
+        '${evt.endTime.hour}:${evt.endTime.minute.toString().padLeft(2, '0')}';
 
     return BentoCard(
       child: Row(
@@ -345,7 +366,8 @@ class SmartCalendarScreen extends ConsumerWidget {
               color: AppColors.surfaceElevated,
               borderRadius: AppRadii.radiusSm,
             ),
-            child: const Icon(Icons.event_note, color: AppColors.focusBlue, size: 20),
+            child: const Icon(Icons.event_note,
+                color: AppColors.focusBlue, size: 20),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
@@ -372,8 +394,11 @@ class SmartCalendarScreen extends ConsumerWidget {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.close, color: AppColors.textSecondary, size: 16),
-            onPressed: () => ref.read(smartCalendarProvider.notifier).removeEvent(evt.eventId),
+            icon: const Icon(Icons.close,
+                color: AppColors.textSecondary, size: 16),
+            onPressed: () => ref
+                .read(smartCalendarProvider.notifier)
+                .removeEvent(evt.eventId),
           ),
         ],
       ),
@@ -387,7 +412,8 @@ class SmartCalendarScreen extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
           child: Text(
             'No free micro-windows identified in the current schedule.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
         ),
       ),
@@ -401,7 +427,8 @@ class SmartCalendarScreen extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
           child: Text(
             'No events scheduled. Tap "+ Add Event Block" below to parse schedule.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
         ),
       ),
@@ -426,7 +453,8 @@ class SmartCalendarScreen extends ConsumerWidget {
           builder: (context, setModalState) {
             return Padding(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom + AppSpacing.lg,
+                bottom:
+                    MediaQuery.of(context).viewInsets.bottom + AppSpacing.lg,
                 left: AppSpacing.lg,
                 right: AppSpacing.lg,
                 top: AppSpacing.lg,
@@ -455,7 +483,9 @@ class SmartCalendarScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  Text('Event Category / Stress Type:', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary)),
+                  Text('Event Category / Stress Type:',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary)),
                   const SizedBox(height: AppSpacing.xs),
                   DropdownButton<CalendarEventType>(
                     value: selectedType,
@@ -466,7 +496,8 @@ class SmartCalendarScreen extends ConsumerWidget {
                         value: type,
                         child: Text(
                           type.name,
-                          style: const TextStyle(color: AppColors.textPrimary, fontSize: 12),
+                          style: const TextStyle(
+                              color: AppColors.textPrimary, fontSize: 12),
                         ),
                       );
                     }).toList(),
@@ -483,18 +514,27 @@ class SmartCalendarScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Start Hour (24h)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                            Text('Start Hour (24h)',
+                                style: AppTypography.bodySmall.copyWith(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 11)),
                             DropdownButton<int>(
                               value: startHour,
                               dropdownColor: AppColors.surfaceElevated,
                               items: List.generate(24, (i) => i).map((h) {
-                                return DropdownMenuItem(value: h, child: Text('$h:00', style: const TextStyle(color: AppColors.textPrimary)));
+                                return DropdownMenuItem(
+                                    value: h,
+                                    child: Text('$h:00',
+                                        style: const TextStyle(
+                                            color: AppColors.textPrimary)));
                               }).toList(),
                               onChanged: (val) {
                                 if (val != null) {
                                   setModalState(() {
                                     startHour = val;
-                                    if (endHour <= startHour) endHour = startHour + 1;
+                                    if (endHour <= startHour) {
+                                      endHour = startHour + 1;
+                                    }
                                   });
                                 }
                               },
@@ -507,15 +547,26 @@ class SmartCalendarScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('End Hour (24h)', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11)),
+                            Text('End Hour (24h)',
+                                style: AppTypography.bodySmall.copyWith(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 11)),
                             DropdownButton<int>(
                               value: endHour,
                               dropdownColor: AppColors.surfaceElevated,
-                              items: List.generate(24, (i) => i).where((h) => h > startHour).map((h) {
-                                return DropdownMenuItem(value: h, child: Text('$h:00', style: const TextStyle(color: AppColors.textPrimary)));
+                              items: List.generate(24, (i) => i)
+                                  .where((h) => h > startHour)
+                                  .map((h) {
+                                return DropdownMenuItem(
+                                    value: h,
+                                    child: Text('$h:00',
+                                        style: const TextStyle(
+                                            color: AppColors.textPrimary)));
                               }).toList(),
                               onChanged: (val) {
-                                if (val != null) setModalState(() => endHour = val);
+                                if (val != null) {
+                                  setModalState(() => endHour = val);
+                                }
                               },
                             ),
                           ],
@@ -534,19 +585,29 @@ class SmartCalendarScreen extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        final title = titleController.text.trim().isEmpty ? 'Meeting Block' : titleController.text.trim();
+                        final title = titleController.text.trim().isEmpty
+                            ? 'Meeting Block'
+                            : titleController.text.trim();
                         final now = DateTime.now();
                         final newEvent = CalendarEventBlock(
-                          eventId: 'evt_${DateTime.now().millisecondsSinceEpoch}',
+                          eventId:
+                              'evt_${DateTime.now().millisecondsSinceEpoch}',
                           title: title,
-                          startTime: DateTime(now.year, now.month, now.day, startHour, 0),
-                          endTime: DateTime(now.year, now.month, now.day, endHour, 0),
+                          startTime: DateTime(
+                              now.year, now.month, now.day, startHour, 0),
+                          endTime: DateTime(
+                              now.year, now.month, now.day, endHour, 0),
                           type: selectedType,
                         );
-                        ref.read(smartCalendarProvider.notifier).addEvent(newEvent);
+                        ref
+                            .read(smartCalendarProvider.notifier)
+                            .addEvent(newEvent);
                         Navigator.pop(ctx);
                       },
-                      child: const Text('Add to Schedule', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: const Text('Add to Schedule',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],
@@ -579,7 +640,8 @@ class SmartCalendarScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma parses your busy schedule to find micro-movement windows (5 to 30 mins) such as post-lunch Shatapadi digestive strolls, pre-meeting vagus nerve box breathing buffers, and adapts workout pacing from high-intensity hypertrophy to restorative yoga when cognitive fatigue is elevated.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -592,7 +654,8 @@ class SmartCalendarScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Got it', style: TextStyle(color: Colors.white)),
+                  child: const Text('Got it',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

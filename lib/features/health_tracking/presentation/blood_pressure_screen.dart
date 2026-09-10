@@ -9,7 +9,8 @@ import '../../../shared/widgets/bilingual_label.dart';
 import '../../../shared/widgets/glowing_metric.dart';
 import '../domain/blood_pressure_engine.dart';
 
-final bloodPressureListProvider = StateProvider<List<BloodPressureReading>>((ref) {
+final bloodPressureListProvider =
+    StateProvider<List<BloodPressureReading>>((ref) {
   return [
     BloodPressureReading(
       id: 'bp_1',
@@ -60,7 +61,8 @@ class BloodPressureScreen extends ConsumerWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.surfaceElevated,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (ctx) {
         return Padding(
           padding: EdgeInsets.only(
@@ -119,7 +121,8 @@ class BloodPressureScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.karmaGreen,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusSm),
                   ),
                   onPressed: () {
                     final sys = int.tryParse(systolicController.text) ?? 120;
@@ -135,10 +138,16 @@ class BloodPressureScreen extends ConsumerWidget {
                     );
 
                     final current = ref.read(bloodPressureListProvider);
-                    ref.read(bloodPressureListProvider.notifier).state = [newReading, ...current];
+                    ref.read(bloodPressureListProvider.notifier).state = [
+                      newReading,
+                      ...current
+                    ];
                     Navigator.of(ctx).pop();
                   },
-                  child: const Text('Save Reading', style: TextStyle(color: AppColors.textInverse, fontWeight: FontWeight.w800)),
+                  child: const Text('Save Reading',
+                      style: TextStyle(
+                          color: AppColors.textInverse,
+                          fontWeight: FontWeight.w800)),
                 ),
               ),
             ],
@@ -177,7 +186,10 @@ class BloodPressureScreen extends ConsumerWidget {
           ? FloatingActionButton.extended(
               backgroundColor: AppColors.karmaGreen,
               icon: const Icon(Icons.add_rounded, color: AppColors.textInverse),
-              label: const Text('Log BP', style: TextStyle(color: AppColors.textInverse, fontWeight: FontWeight.w700)),
+              label: const Text('Log BP',
+                  style: TextStyle(
+                      color: AppColors.textInverse,
+                      fontWeight: FontWeight.w700)),
               onPressed: () => _showAddReadingDialog(context, ref),
             )
           : null,
@@ -202,7 +214,8 @@ class BloodPressureScreen extends ConsumerWidget {
                 shape: BoxShape.circle,
                 color: AppColors.focusBlue.withValues(alpha: 0.15),
               ),
-              child: const Icon(Icons.fingerprint_rounded, size: 72, color: AppColors.focusBlue),
+              child: const Icon(Icons.fingerprint_rounded,
+                  size: 72, color: AppColors.focusBlue),
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
@@ -225,13 +238,17 @@ class BloodPressureScreen extends ConsumerWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.focusBlue,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadii.radiusSm),
               ),
-              icon: const Icon(Icons.lock_open_rounded, color: AppColors.textInverse),
+              icon: const Icon(Icons.lock_open_rounded,
+                  color: AppColors.textInverse),
               label: const Text(
                 'Unlock with Biometrics / PIN',
-                style: TextStyle(color: AppColors.textInverse, fontWeight: FontWeight.w800),
+                style: TextStyle(
+                    color: AppColors.textInverse, fontWeight: FontWeight.w800),
               ),
               onPressed: () {
                 ref.read(biometricUnlockedProvider.notifier).state = true;
@@ -243,13 +260,16 @@ class BloodPressureScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildUnlockedContent(BuildContext context, List<BloodPressureReading> readings) {
+  Widget _buildUnlockedContent(
+      BuildContext context, List<BloodPressureReading> readings) {
     final latest = readings.isNotEmpty ? readings.first : null;
     final eval = latest != null
-        ? BloodPressureEngine.evaluate(systolic: latest.systolic, diastolic: latest.diastolic)
+        ? BloodPressureEngine.evaluate(
+            systolic: latest.systolic, diastolic: latest.diastolic)
         : null;
 
-    final categoryColor = eval != null ? _getCategoryColor(eval.category) : AppColors.karmaGreen;
+    final categoryColor =
+        eval != null ? _getCategoryColor(eval.category) : AppColors.karmaGreen;
 
     return SingleChildScrollView(
       padding: AppSpacing.screenPadding,
@@ -272,15 +292,20 @@ class BloodPressureScreen extends ConsumerWidget {
                         regionalText: 'नवीनतम रक्तचाप माप',
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
                           color: categoryColor.withValues(alpha: 0.15),
                           borderRadius: AppRadii.radiusSm,
-                          border: Border.all(color: categoryColor.withValues(alpha: 0.4)),
+                          border: Border.all(
+                              color: categoryColor.withValues(alpha: 0.4)),
                         ),
                         child: Text(
                           eval.category.name,
-                          style: TextStyle(color: categoryColor, fontSize: 10, fontWeight: FontWeight.w800),
+                          style: TextStyle(
+                              color: categoryColor,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800),
                         ),
                       ),
                     ],
@@ -335,7 +360,8 @@ class BloodPressureScreen extends ConsumerWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.health_and_safety_rounded, color: categoryColor, size: 20),
+                  Icon(Icons.health_and_safety_rounded,
+                      color: categoryColor, size: 20),
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: Column(
@@ -381,7 +407,8 @@ class BloodPressureScreen extends ConsumerWidget {
             separatorBuilder: (_, __) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
               final item = readings[index];
-              final itemEval = BloodPressureEngine.evaluate(systolic: item.systolic, diastolic: item.diastolic);
+              final itemEval = BloodPressureEngine.evaluate(
+                  systolic: item.systolic, diastolic: item.diastolic);
               final col = _getCategoryColor(itemEval.category);
 
               return BentoCard(
@@ -400,13 +427,15 @@ class BloodPressureScreen extends ConsumerWidget {
                         ),
                         Text(
                           'Pulse: ${item.pulseBpm} bpm • ${item.arm} Arm',
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textMuted, fontSize: 11),
                         ),
                       ],
                     ),
                     Text(
                       '${item.recordedAt.hour}:${item.recordedAt.minute.toString().padLeft(2, '0')}',
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                      style: const TextStyle(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
                 ),

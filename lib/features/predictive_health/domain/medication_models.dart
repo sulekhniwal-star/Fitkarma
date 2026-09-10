@@ -2,9 +2,18 @@ import 'package:flutter/foundation.dart';
 
 /// Medication category
 enum MedicationType {
-  allopathicPrescription(name: 'Allopathic Prescription', regionalName: 'एलोपैथिक प्रिस्क्रिप्शन', iconName: 'medication'),
-  ayurvedicHerb(name: 'Ayurvedic Rasayana / Herb', regionalName: 'आयुर्वेदिक जड़ी-बूटी / रसायन', iconName: 'eco'),
-  supplementVitamin(name: 'Nutritional Supplement', regionalName: 'विटामिन व पोषक सप्लीमेंट', iconName: 'vaccines');
+  allopathicPrescription(
+      name: 'Allopathic Prescription',
+      regionalName: 'एलोपैथिक प्रिस्क्रिप्शन',
+      iconName: 'medication'),
+  ayurvedicHerb(
+      name: 'Ayurvedic Rasayana / Herb',
+      regionalName: 'आयुर्वेदिक जड़ी-बूटी / रसायन',
+      iconName: 'eco'),
+  supplementVitamin(
+      name: 'Nutritional Supplement',
+      regionalName: 'विटामिन व पोषक सप्लीमेंट',
+      iconName: 'vaccines');
 
   final String name;
   final String regionalName;
@@ -19,11 +28,23 @@ enum MedicationType {
 
 /// Timing of medication dose
 enum DoseTiming {
-  morningEmptyStomach(label: 'Morning (Empty Stomach)', regionalLabel: 'सुबह (खाली पेट)', timeOfDay: '07:00 AM'),
-  morningAfterBreakfast(label: 'Morning (After Breakfast)', regionalLabel: 'सुबह (नाश्ते के बाद)', timeOfDay: '08:30 AM'),
-  afternoonPostLunch(label: 'Afternoon (Post Lunch)', regionalLabel: 'दोपहर (भोजनोपरांत)', timeOfDay: '01:30 PM'),
+  morningEmptyStomach(
+      label: 'Morning (Empty Stomach)',
+      regionalLabel: 'सुबह (खाली पेट)',
+      timeOfDay: '07:00 AM'),
+  morningAfterBreakfast(
+      label: 'Morning (After Breakfast)',
+      regionalLabel: 'सुबह (नाश्ते के बाद)',
+      timeOfDay: '08:30 AM'),
+  afternoonPostLunch(
+      label: 'Afternoon (Post Lunch)',
+      regionalLabel: 'दोपहर (भोजनोपरांत)',
+      timeOfDay: '01:30 PM'),
   evening(label: 'Evening', regionalLabel: 'शाम', timeOfDay: '06:00 PM'),
-  nightBeforeBed(label: 'Night (Before Bed)', regionalLabel: 'रात (सोने से पूर्व)', timeOfDay: '10:00 PM');
+  nightBeforeBed(
+      label: 'Night (Before Bed)',
+      regionalLabel: 'रात (सोने से पूर्व)',
+      timeOfDay: '10:00 PM');
 
   final String label;
   final String regionalLabel;
@@ -125,7 +146,8 @@ class MedicationInteractionAlert {
   final String regionalInteractionMechanism;
   final String clinicalAction;
   final String regionalClinicalAction;
-  final String safeSpacingGuideline; // e.g. "Separate intake by at least 3 hours"
+  final String
+      safeSpacingGuideline; // e.g. "Separate intake by at least 3 hours"
 
   const MedicationInteractionAlert({
     required this.id,

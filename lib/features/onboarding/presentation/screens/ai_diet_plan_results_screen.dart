@@ -30,9 +30,13 @@ class AiDietPlanResultsScreen extends ConsumerWidget {
     final totalMacrosCalories = (profile.targetProteinGrams * 4) +
         (profile.targetCarbsGrams * 4) +
         (profile.targetFatsGrams * 9);
-    final proteinPercent = ((profile.targetProteinGrams * 4) / totalMacrosCalories).clamp(0.0, 1.0);
-    final carbsPercent = ((profile.targetCarbsGrams * 4) / totalMacrosCalories).clamp(0.0, 1.0);
-    final fatsPercent = ((profile.targetFatsGrams * 9) / totalMacrosCalories).clamp(0.0, 1.0);
+    final proteinPercent =
+        ((profile.targetProteinGrams * 4) / totalMacrosCalories)
+            .clamp(0.0, 1.0);
+    final carbsPercent =
+        ((profile.targetCarbsGrams * 4) / totalMacrosCalories).clamp(0.0, 1.0);
+    final fatsPercent =
+        ((profile.targetFatsGrams * 9) / totalMacrosCalories).clamp(0.0, 1.0);
 
     return Column(
       children: [
@@ -221,7 +225,8 @@ class AiDietPlanResultsScreen extends ConsumerWidget {
                   time: '1:00 PM',
                   mealName: 'Lunch / दोपहर का भोजन',
                   calories: '${(profile.targetCalories * 0.35).round()} kcal',
-                  suggestion: 'Thick Daal, Paneer/Chicken, 2 Rotis, Fresh Salad',
+                  suggestion:
+                      'Thick Daal, Paneer/Chicken, 2 Rotis, Fresh Salad',
                   icon: Icons.wb_sunny_rounded,
                   color: AppColors.energyOrange,
                 ),
@@ -239,7 +244,8 @@ class AiDietPlanResultsScreen extends ConsumerWidget {
                   time: '8:30 PM',
                   mealName: 'Dinner / रात्रि भोजन',
                   calories: '${(profile.targetCalories * 0.25).round()} kcal',
-                  suggestion: 'Light vegetable soup with Soya chunks/Fish & sauteed greens',
+                  suggestion:
+                      'Light vegetable soup with Soya chunks/Fish & sauteed greens',
                   icon: Icons.nightlight_round,
                   color: AppColors.aiPurple,
                 ),

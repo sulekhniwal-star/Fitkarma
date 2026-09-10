@@ -3,7 +3,8 @@ import '../../domain/wedding_mode_engine.dart';
 import '../../domain/wedding_mode_models.dart';
 
 final weddingModeProvider =
-    StateNotifierProvider<WeddingModeNotifier, WeddingTransformationReport>((ref) {
+    StateNotifierProvider<WeddingModeNotifier, WeddingTransformationReport>(
+        (ref) {
   return WeddingModeNotifier();
 });
 
@@ -16,7 +17,8 @@ class WeddingModeNotifier extends StateNotifier<WeddingTransformationReport> {
     final now = DateTime.now();
     return _engine.generateWeddingPlan(
       role: WeddingRole.bride,
-      weddingDate: now.add(const Duration(days: 45)), // 6.5 weeks away (Definition phase)
+      weddingDate: now
+          .add(const Duration(days: 45)), // 6.5 weeks away (Definition phase)
       currentWeightKg: 62.0,
       targetWeightKg: 57.5,
       targetBodyFatPercent: 19.5,

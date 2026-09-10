@@ -29,7 +29,8 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final template = FixMyMealTemplates.preconfiguredTemplates[_selectedTemplateIndex];
+    final template =
+        FixMyMealTemplates.preconfiguredTemplates[_selectedTemplateIndex];
 
     // Compute adjusted macros if suggestions applied
     int adjustedCalories = template.totalCalories;
@@ -64,19 +65,26 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                   itemCount: FixMyMealTemplates.preconfiguredTemplates.length,
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
                   itemBuilder: (context, index) {
-                    final item = FixMyMealTemplates.preconfiguredTemplates[index];
+                    final item =
+                        FixMyMealTemplates.preconfiguredTemplates[index];
                     final isSelected = _selectedTemplateIndex == index;
 
                     return ChoiceChip(
                       selected: isSelected,
                       selectedColor: AppColors.focusBlue.withValues(alpha: 0.2),
                       backgroundColor: AppColors.surfaceElevated,
-                      side: BorderSide(color: isSelected ? AppColors.focusBlue : AppColors.glassBorder),
+                      side: BorderSide(
+                          color: isSelected
+                              ? AppColors.focusBlue
+                              : AppColors.glassBorder),
                       label: Text(
                         item.mealName.split(' ')[0],
                         style: TextStyle(
-                          color: isSelected ? AppColors.focusBlue : AppColors.textPrimary,
-                          fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
+                          color: isSelected
+                              ? AppColors.focusBlue
+                              : AppColors.textPrimary,
+                          fontWeight:
+                              isSelected ? FontWeight.w800 : FontWeight.w500,
                           fontSize: 12,
                         ),
                       ),
@@ -105,15 +113,21 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                           regionalText: 'स्वचालित एआई पहचान',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.aiPurple.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: AppColors.aiPurple.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color:
+                                    AppColors.aiPurple.withValues(alpha: 0.4)),
                           ),
                           child: const Text(
                             'AI VISION PARSED',
-                            style: TextStyle(color: AppColors.aiPurple, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: AppColors.aiPurple,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -174,13 +188,22 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(f.name, style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700)),
-                              Text('${f.regionalName} • ${f.estimatedPortion}', style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                              Text(f.name,
+                                  style: AppTypography.titleSmall.copyWith(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700)),
+                              Text('${f.regionalName} • ${f.estimatedPortion}',
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textMuted)),
                             ],
                           ),
                           Text(
                             '${f.calories} kcal • ${f.proteinGrams}g P',
-                            style: const TextStyle(fontSize: 11, color: AppColors.textSecondary, fontWeight: FontWeight.w600),
+                            style: const TextStyle(
+                                fontSize: 11,
+                                color: AppColors.textSecondary,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -211,9 +234,13 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                   child: BentoCard(
                     hasGlow: isApplied,
                     glowColor: AppColors.karmaGreen,
-                    backgroundColor: isApplied ? AppColors.surfaceElevated : AppColors.surface,
+                    backgroundColor: isApplied
+                        ? AppColors.surfaceElevated
+                        : AppColors.surface,
                     border: Border.all(
-                      color: isApplied ? AppColors.karmaGreen : AppColors.glassBorder,
+                      color: isApplied
+                          ? AppColors.karmaGreen
+                          : AppColors.glassBorder,
                     ),
                     onTap: () {
                       setState(() {
@@ -230,12 +257,19 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: (isApplied ? AppColors.karmaGreen : AppColors.gold).withValues(alpha: 0.15),
+                            color: (isApplied
+                                    ? AppColors.karmaGreen
+                                    : AppColors.gold)
+                                .withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Icon(
-                            isApplied ? Icons.check_circle_rounded : Icons.tune_rounded,
-                            color: isApplied ? AppColors.karmaGreen : AppColors.gold,
+                            isApplied
+                                ? Icons.check_circle_rounded
+                                : Icons.tune_rounded,
+                            color: isApplied
+                                ? AppColors.karmaGreen
+                                : AppColors.gold,
                             size: 18,
                           ),
                         ),
@@ -245,7 +279,8 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
@@ -253,25 +288,36 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                                       style: AppTypography.titleSmall.copyWith(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700,
-                                        color: isApplied ? AppColors.karmaGreen : AppColors.textPrimary,
+                                        color: isApplied
+                                            ? AppColors.karmaGreen
+                                            : AppColors.textPrimary,
                                       ),
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
-                                      color: AppColors.focusBlue.withValues(alpha: 0.15),
+                                      color: AppColors.focusBlue
+                                          .withValues(alpha: 0.15),
                                       borderRadius: AppRadii.radiusSm,
                                     ),
                                     child: Text(
                                       sug.macroImpact,
-                                      style: const TextStyle(color: AppColors.focusBlue, fontSize: 10, fontWeight: FontWeight.w700),
+                                      style: const TextStyle(
+                                          color: AppColors.focusBlue,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w700),
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 3),
-                              Text(sug.description, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.25)),
+                              Text(sug.description,
+                                  style: AppTypography.bodySmall.copyWith(
+                                      color: AppColors.textSecondary,
+                                      fontSize: 11,
+                                      height: 1.25)),
                             ],
                           ),
                         ),
@@ -294,12 +340,15 @@ class _FixMyMealScreenState extends ConsumerState<FixMyMealScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () {
                     // Log all detected items to the daily plan
                     for (final item in template.detectedFoods) {
-                      ref.read(nutritionProvider.notifier).addMeal(item.toFoodItem(), widget.phase, 1.0);
+                      ref
+                          .read(nutritionProvider.notifier)
+                          .addMeal(item.toFoodItem(), widget.phase, 1.0);
                     }
                     Navigator.of(context).pop();
                   },

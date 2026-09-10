@@ -26,7 +26,8 @@ class MetabolismRepository {
           .collection('metabolism')
           .doc('current');
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data() != null) {
         return AdaptiveMetabolismProfile.fromMap(snapshot.data()!);

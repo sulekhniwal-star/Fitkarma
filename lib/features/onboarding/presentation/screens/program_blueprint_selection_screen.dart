@@ -18,17 +18,21 @@ class ProgramBlueprintSelectionScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ProgramBlueprintSelectionScreen> createState() => _ProgramBlueprintSelectionScreenState();
+  ConsumerState<ProgramBlueprintSelectionScreen> createState() =>
+      _ProgramBlueprintSelectionScreenState();
 }
 
-class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBlueprintSelectionScreen> {
+class _ProgramBlueprintSelectionScreenState
+    extends ConsumerState<ProgramBlueprintSelectionScreen> {
   late String _selectedBlueprintId;
 
   @override
   void initState() {
     super.initState();
     final onboardingState = ref.read(onboardingFlowProvider);
-    final userGoal = onboardingState.selectedGoals.isNotEmpty ? onboardingState.selectedGoals.first : 'fat_loss';
+    final userGoal = onboardingState.selectedGoals.isNotEmpty
+        ? onboardingState.selectedGoals.first
+        : 'fat_loss';
 
     // Auto-match recommendation based on primary goal
     final recommended = WorkoutBlueprint.catalog.firstWhere(
@@ -47,7 +51,9 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
   @override
   Widget build(BuildContext context) {
     final onboardingState = ref.watch(onboardingFlowProvider);
-    final userPrimaryGoal = onboardingState.selectedGoals.isNotEmpty ? onboardingState.selectedGoals.first : 'fat_loss';
+    final userPrimaryGoal = onboardingState.selectedGoals.isNotEmpty
+        ? onboardingState.selectedGoals.first
+        : 'fat_loss';
 
     return Column(
       children: [
@@ -81,11 +87,13 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: WorkoutBlueprint.catalog.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(height: AppSpacing.md),
                   itemBuilder: (context, index) {
                     final blueprint = WorkoutBlueprint.catalog[index];
                     final isSelected = _selectedBlueprintId == blueprint.id;
-                    final isRecommended = blueprint.targetGoal == userPrimaryGoal;
+                    final isRecommended =
+                        blueprint.targetGoal == userPrimaryGoal;
 
                     final Color accentColor;
                     switch (blueprint.location) {
@@ -103,7 +111,9 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
                     return BentoCard(
                       hasGlow: isSelected,
                       glowColor: accentColor,
-                      backgroundColor: isSelected ? AppColors.surfaceElevated : AppColors.surface,
+                      backgroundColor: isSelected
+                          ? AppColors.surfaceElevated
+                          : AppColors.surface,
                       border: Border.all(
                         color: isSelected ? accentColor : AppColors.glassBorder,
                         width: isSelected ? 1.5 : 1.0,
@@ -122,15 +132,20 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
                                   children: [
                                     if (isRecommended) ...[
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 3),
                                         decoration: BoxDecoration(
-                                          color: AppColors.karmaGreen.withValues(alpha: 0.20),
+                                          color: AppColors.karmaGreen
+                                              .withValues(alpha: 0.20),
                                           borderRadius: AppRadii.radiusSm,
-                                          border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.4)),
+                                          border: Border.all(
+                                              color: AppColors.karmaGreen
+                                                  .withValues(alpha: 0.4)),
                                         ),
                                         child: Text(
                                           'RECOMMENDED FOR YOU',
-                                          style: AppTypography.bodySmall.copyWith(
+                                          style:
+                                              AppTypography.bodySmall.copyWith(
                                             color: AppColors.karmaGreen,
                                             fontSize: 10,
                                             fontWeight: FontWeight.w800,
@@ -142,9 +157,14 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
                                     BilingualLabel(
                                       primaryText: blueprint.title,
                                       regionalText: blueprint.regionalTitle,
-                                      primaryStyle: AppTypography.titleMedium.copyWith(
-                                        color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
-                                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
+                                      primaryStyle:
+                                          AppTypography.titleMedium.copyWith(
+                                        color: isSelected
+                                            ? AppColors.textPrimary
+                                            : AppColors.textSecondary,
+                                        fontWeight: isSelected
+                                            ? FontWeight.w700
+                                            : FontWeight.w600,
                                       ),
                                     ),
                                   ],
@@ -156,9 +176,13 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
                                 height: 22,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: isSelected ? accentColor : Colors.transparent,
+                                  color: isSelected
+                                      ? accentColor
+                                      : Colors.transparent,
                                   border: Border.all(
-                                    color: isSelected ? accentColor : AppColors.glassBorder,
+                                    color: isSelected
+                                        ? accentColor
+                                        : AppColors.glassBorder,
                                     width: 1.5,
                                   ),
                                 ),
@@ -187,15 +211,21 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
                             spacing: 6,
                             runSpacing: 4,
                             children: [
-                              _buildTagChip('${blueprint.daysPerWeek} Days/Wk', Icons.calendar_today_rounded, accentColor),
-                              _buildTagChip('${blueprint.durationWeeks} Weeks', Icons.timelapse_rounded, AppColors.textSecondary),
-                              _buildTagChip(blueprint.level.name.toUpperCase(), Icons.speed_rounded, AppColors.textMuted),
+                              _buildTagChip('${blueprint.daysPerWeek} Days/Wk',
+                                  Icons.calendar_today_rounded, accentColor),
+                              _buildTagChip(
+                                  '${blueprint.durationWeeks} Weeks',
+                                  Icons.timelapse_rounded,
+                                  AppColors.textSecondary),
+                              _buildTagChip(blueprint.level.name.toUpperCase(),
+                                  Icons.speed_rounded, AppColors.textMuted),
                             ],
                           ),
                           const SizedBox(height: 6),
                           Row(
                             children: [
-                              const Icon(Icons.handyman_outlined, color: AppColors.textMuted, size: 14),
+                              const Icon(Icons.handyman_outlined,
+                                  color: AppColors.textMuted, size: 14),
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
@@ -243,7 +273,9 @@ class _ProgramBlueprintSelectionScreenState extends ConsumerState<ProgramBluepri
               ),
             ),
             onPressed: () {
-              ref.read(onboardingFlowProvider.notifier).selectBlueprint(_selectedBlueprintId);
+              ref
+                  .read(onboardingFlowProvider.notifier)
+                  .selectBlueprint(_selectedBlueprintId);
               ref.read(onboardingFlowProvider.notifier).nextStep();
               widget.onComplete?.call();
             },

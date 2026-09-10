@@ -56,15 +56,20 @@ class MealAnalysisScreen extends ConsumerWidget {
                           regionalText: 'भोजन गुणवत्ता समग्र स्कोर',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: gradeColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: gradeColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: gradeColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             'GRADE ${analysis.grade.grade}',
-                            style: TextStyle(color: gradeColor, fontSize: 12, fontWeight: FontWeight.w900),
+                            style: TextStyle(
+                                color: gradeColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w900),
                           ),
                         ),
                       ],
@@ -116,11 +121,18 @@ class MealAnalysisScreen extends ConsumerWidget {
                       regionalText: 'पोषण आयाम विश्लेषण',
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    _buildDimensionProgress('Protein Density (प्रोटीन घनत्व)', analysis.proteinDensityScore, AppColors.energyOrange),
+                    _buildDimensionProgress('Protein Density (प्रोटीन घनत्व)',
+                        analysis.proteinDensityScore, AppColors.energyOrange),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildDimensionProgress('Fiber & Glycemic Balance (फाइबर संतुलन)', analysis.glycemicFiberScore, AppColors.karmaGreen),
+                    _buildDimensionProgress(
+                        'Fiber & Glycemic Balance (फाइबर संतुलन)',
+                        analysis.glycemicFiberScore,
+                        AppColors.karmaGreen),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildDimensionProgress('Satiety & Fullness Index (तृप्ति सूचकांक)', analysis.satietyScore, AppColors.focusBlue),
+                    _buildDimensionProgress(
+                        'Satiety & Fullness Index (तृप्ति सूचकांक)',
+                        analysis.satietyScore,
+                        AppColors.focusBlue),
                   ],
                 ),
               ),
@@ -132,10 +144,14 @@ class MealAnalysisScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildMacroPill('Protein', '${analysis.totalProteinGrams}g', AppColors.energyOrange),
-                    _buildMacroPill('Carbs', '${analysis.totalCarbsGrams}g', AppColors.focusBlue),
-                    _buildMacroPill('Fats', '${analysis.totalFatsGrams}g', AppColors.aiPurple),
-                    _buildMacroPill('Fiber', '${analysis.totalFiberGrams}g', AppColors.karmaGreen),
+                    _buildMacroPill('Protein', '${analysis.totalProteinGrams}g',
+                        AppColors.energyOrange),
+                    _buildMacroPill('Carbs', '${analysis.totalCarbsGrams}g',
+                        AppColors.focusBlue),
+                    _buildMacroPill('Fats', '${analysis.totalFatsGrams}g',
+                        AppColors.aiPurple),
+                    _buildMacroPill('Fiber', '${analysis.totalFiberGrams}g',
+                        AppColors.karmaGreen),
                   ],
                 ),
               ),
@@ -161,7 +177,8 @@ class MealAnalysisScreen extends ConsumerWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.auto_awesome_rounded, color: AppColors.gold, size: 18),
+                        const Icon(Icons.auto_awesome_rounded,
+                            color: AppColors.gold, size: 18),
                         const SizedBox(width: AppSpacing.md),
                         Expanded(
                           child: Text(
@@ -192,8 +209,12 @@ class MealAnalysisScreen extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary)),
-            Text('$score / 100', style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w700)),
+            Text(label,
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary)),
+            Text('$score / 100',
+                style: TextStyle(
+                    color: color, fontSize: 11, fontWeight: FontWeight.w700)),
           ],
         ),
         const SizedBox(height: 4),
@@ -211,9 +232,12 @@ class MealAnalysisScreen extends ConsumerWidget {
   Widget _buildMacroPill(String label, String value, Color color) {
     return Column(
       children: [
-        Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+        Text(label,
+            style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
         const SizedBox(height: 2),
-        Text(value, style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13)),
+        Text(value,
+            style: TextStyle(
+                color: color, fontWeight: FontWeight.w800, fontSize: 13)),
       ],
     );
   }

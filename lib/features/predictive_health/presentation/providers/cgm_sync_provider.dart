@@ -3,14 +3,17 @@ import '../../domain/cgm_sync_engine.dart';
 import '../../domain/cgm_sync_models.dart';
 
 final continuousBiomarkerProvider =
-    StateNotifierProvider<ContinuousBiomarkerNotifier, ContinuousGlucoseReport>((ref) {
+    StateNotifierProvider<ContinuousBiomarkerNotifier, ContinuousGlucoseReport>(
+        (ref) {
   return ContinuousBiomarkerNotifier();
 });
 
-class ContinuousBiomarkerNotifier extends StateNotifier<ContinuousGlucoseReport> {
+class ContinuousBiomarkerNotifier
+    extends StateNotifier<ContinuousGlucoseReport> {
   ContinuousBiomarkerNotifier() : super(_buildInitialReport());
 
-  static final ContinuousBiomarkerEngine _engine = const ContinuousBiomarkerEngine();
+  static final ContinuousBiomarkerEngine _engine =
+      const ContinuousBiomarkerEngine();
 
   static ContinuousGlucoseReport _buildInitialReport() {
     return _engine.processCgmTelemetry(
@@ -35,7 +38,9 @@ class ContinuousBiomarkerNotifier extends StateNotifier<ContinuousGlucoseReport>
           ? GlucoseRangeTier.hypo
           : (newGlucoseValue <= 140.0
               ? GlucoseRangeTier.inRange
-              : (newGlucoseValue <= 180.0 ? GlucoseRangeTier.elevated : GlucoseRangeTier.spikeHigh)),
+              : (newGlucoseValue <= 180.0
+                  ? GlucoseRangeTier.elevated
+                  : GlucoseRangeTier.spikeHigh)),
       eventTag: eventTag,
     );
 

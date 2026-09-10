@@ -71,7 +71,8 @@ class EnvironmentalHealthCard extends StatelessWidget {
                 regionalText: 'पर्यावरणीय स्वास्थ्य सूचकांक',
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: aqiColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -101,7 +102,9 @@ class EnvironmentalHealthCard extends StatelessWidget {
               GlowingMetric(
                 label: 'Heat Index',
                 value: '${snapshot.heatIndexC.round()}°C',
-                accentColor: snapshot.heatRisk == HeatRiskLevel.low ? AppColors.focusBlue : AppColors.energyOrange,
+                accentColor: snapshot.heatRisk == HeatRiskLevel.low
+                    ? AppColors.focusBlue
+                    : AppColors.energyOrange,
               ),
               GlowingMetric(
                 label: 'UV Index',
@@ -119,15 +122,21 @@ class EnvironmentalHealthCard extends StatelessWidget {
                   : AppColors.alertRed.withValues(alpha: 0.12),
               borderRadius: AppRadii.radiusMd,
               border: Border.all(
-                color: snapshot.outdoorWorkoutAllowed ? AppColors.glassBorder : AppColors.alertRed.withValues(alpha: 0.3),
+                color: snapshot.outdoorWorkoutAllowed
+                    ? AppColors.glassBorder
+                    : AppColors.alertRed.withValues(alpha: 0.3),
               ),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
-                  snapshot.outdoorWorkoutAllowed ? Icons.wb_sunny_outlined : Icons.warning_amber_rounded,
-                  color: snapshot.outdoorWorkoutAllowed ? AppColors.focusBlue : AppColors.alertRed,
+                  snapshot.outdoorWorkoutAllowed
+                      ? Icons.wb_sunny_outlined
+                      : Icons.warning_amber_rounded,
+                  color: snapshot.outdoorWorkoutAllowed
+                      ? AppColors.focusBlue
+                      : AppColors.alertRed,
                   size: 18,
                 ),
                 const SizedBox(width: 8),
@@ -147,7 +156,8 @@ class EnvironmentalHealthCard extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                const Icon(Icons.water_drop_outlined, color: AppColors.focusBlue, size: 16),
+                const Icon(Icons.water_drop_outlined,
+                    color: AppColors.focusBlue, size: 16),
                 const SizedBox(width: 6),
                 Text(
                   'Heat Advisory: +${snapshot.extraHydrationMl} ml extra hydration recommended.',

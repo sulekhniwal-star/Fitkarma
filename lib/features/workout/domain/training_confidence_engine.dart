@@ -111,49 +111,60 @@ class TrainingConfidenceEngine {
     // Pillar 1: Form & Mechanical Integrity Index (30% weight)
     // -------------------------------------------------------------
     double formScore = 85.0;
-    final highRpeSets = completedSets.where((s) => (s.rpe ?? 8.0) >= 9.5).length;
+    final highRpeSets =
+        completedSets.where((s) => (s.rpe ?? 8.0) >= 9.5).length;
     final totalSets = completedSets.length;
 
     if (highRpeSets == 0) {
       formScore = 95.0;
     } else if (highRpeSets <= 2) {
       formScore = 80.0;
-      calibrations.add('Minor mechanical strain detected at RPE 9.5+. Scapular and core bracing held intact.');
+      calibrations.add(
+          'Minor mechanical strain detected at RPE 9.5+. Scapular and core bracing held intact.');
     } else {
       formScore = 60.0;
-      calibrations.add('Excessive near-failure sets ($highRpeSets sets at RPE 9.5+). Form breakdown probability elevated by 40%.');
+      calibrations.add(
+          'Excessive near-failure sets ($highRpeSets sets at RPE 9.5+). Form breakdown probability elevated by 40%.');
     }
 
     // -------------------------------------------------------------
     // Pillar 2: Progression Confidence Index (30% weight)
     // -------------------------------------------------------------
     double progressionScore = 88.0;
-    final completedPlanned = session.plannedExercises.where((p) => p.isFullyCompleted).length;
+    final completedPlanned =
+        session.plannedExercises.where((p) => p.isFullyCompleted).length;
     final plannedTotal = session.plannedExercises.length;
-    final double completionRatio = plannedTotal > 0 ? (completedPlanned / plannedTotal) : 1.0;
+    final double completionRatio =
+        plannedTotal > 0 ? (completedPlanned / plannedTotal) : 1.0;
 
     if (completionRatio >= 0.8) {
       progressionScore = 94.0;
-      calibrations.add('High progression statistical confidence (94%). Verified target rep completion across all primary lifts.');
+      calibrations.add(
+          'High progression statistical confidence (94%). Verified target rep completion across all primary lifts.');
     } else if (completionRatio >= 0.5) {
       progressionScore = 75.0;
-      calibrations.add('Moderate progression confidence. Partial set target fulfillment.');
+      calibrations.add(
+          'Moderate progression confidence. Partial set target fulfillment.');
     } else {
       progressionScore = 50.0;
-      calibrations.add('Sub-target rep completion. Recommend weight hold next session to stabilize motor pattern.');
+      calibrations.add(
+          'Sub-target rep completion. Recommend weight hold next session to stabilize motor pattern.');
     }
 
     // -------------------------------------------------------------
     // Pillar 3: CNS & Recovery Alignment Index (25% weight)
     // -------------------------------------------------------------
     double cnsScore = 85.0;
-    final double avgSessionRpe = completedSets.map((s) => s.rpe ?? 8.0).reduce((a, b) => a + b) / totalSets;
+    final double avgSessionRpe =
+        completedSets.map((s) => s.rpe ?? 8.0).reduce((a, b) => a + b) /
+            totalSets;
 
     if (readinessScore >= 75.0 && avgSessionRpe <= 9.0) {
       cnsScore = 98.0;
     } else if (readinessScore < 55.0 && avgSessionRpe > 8.5) {
       cnsScore = 48.0;
-      calibrations.add('CNS Recovery Discrepancy: High training strain (RPE ${avgSessionRpe.toStringAsFixed(1)}) on low readiness day (${readinessScore.round()}%). Risk of delayed neuromuscular fatigue.');
+      calibrations.add(
+          'CNS Recovery Discrepancy: High training strain (RPE ${avgSessionRpe.toStringAsFixed(1)}) on low readiness day (${readinessScore.round()}%). Risk of delayed neuromuscular fatigue.');
     } else if (readinessScore >= 55.0) {
       cnsScore = 82.0;
     } else {
@@ -165,7 +176,8 @@ class TrainingConfidenceEngine {
     // -------------------------------------------------------------
     final double loggingScore = isRealTimeLogged ? 98.0 : 65.0;
     if (!isRealTimeLogged) {
-      calibrations.add('Batch retroactive logging detected. Real-time in-gym set logging ensures precise RPE calibration.');
+      calibrations.add(
+          'Batch retroactive logging detected. Real-time in-gym set logging ensures precise RPE calibration.');
     }
 
     // -------------------------------------------------------------
@@ -178,9 +190,14 @@ class TrainingConfidenceEngine {
         regionalName: 'व्यायाम मुद्रा एवं यांत्रिक शुद्धता',
         score: double.parse(formScore.toStringAsFixed(1)),
         weight: 0.30,
-        status: formScore >= 80 ? 'Optimal' : (formScore >= 60 ? 'Acceptable' : 'Strained'),
-        diagnosticDetail: highRpeSets == 0 ? 'Strict motor pattern maintained across all sets.' : '$highRpeSets sets reached near-failure threshold.',
-        optimizationGuidance: 'Keep eccentric lowering controlled (2s tempo) on final repetitions.',
+        status: formScore >= 80
+            ? 'Optimal'
+            : (formScore >= 60 ? 'Acceptable' : 'Strained'),
+        diagnosticDetail: highRpeSets == 0
+            ? 'Strict motor pattern maintained across all sets.'
+            : '$highRpeSets sets reached near-failure threshold.',
+        optimizationGuidance:
+            'Keep eccentric lowering controlled (2s tempo) on final repetitions.',
       ),
       TrainingIndexPillar(
         id: 'progression_confidence',
@@ -188,9 +205,13 @@ class TrainingConfidenceEngine {
         regionalName: 'प्रगतिशीलता सांख्यिकीय विश्वास',
         score: double.parse(progressionScore.toStringAsFixed(1)),
         weight: 0.30,
-        status: progressionScore >= 80 ? 'High' : (progressionScore >= 60 ? 'Moderate' : 'Low'),
-        diagnosticDetail: '${(completionRatio * 100).round()}% of planned target sets completed.',
-        optimizationGuidance: 'Primed for systematic +2.5kg load increase on primary compound lifts.',
+        status: progressionScore >= 80
+            ? 'High'
+            : (progressionScore >= 60 ? 'Moderate' : 'Low'),
+        diagnosticDetail:
+            '${(completionRatio * 100).round()}% of planned target sets completed.',
+        optimizationGuidance:
+            'Primed for systematic +2.5kg load increase on primary compound lifts.',
       ),
       TrainingIndexPillar(
         id: 'cns_alignment',
@@ -198,9 +219,14 @@ class TrainingConfidenceEngine {
         regionalName: 'तंत्रिका तंत्र एवं पुनर्प्राप्ति तालमेल',
         score: double.parse(cnsScore.toStringAsFixed(1)),
         weight: 0.25,
-        status: cnsScore >= 80 ? 'Harmonious' : (cnsScore >= 60 ? 'Moderate' : 'Mismatched'),
-        diagnosticDetail: 'Session strain matched against daily readiness score (${readinessScore.round()}%).',
-        optimizationGuidance: cnsScore < 70 ? 'Extend rest intervals to 120s and hydrate with electrolyte water.' : 'Ideal training stimulus for current autonomic recovery state.',
+        status: cnsScore >= 80
+            ? 'Harmonious'
+            : (cnsScore >= 60 ? 'Moderate' : 'Mismatched'),
+        diagnosticDetail:
+            'Session strain matched against daily readiness score (${readinessScore.round()}%).',
+        optimizationGuidance: cnsScore < 70
+            ? 'Extend rest intervals to 120s and hydrate with electrolyte water.'
+            : 'Ideal training stimulus for current autonomic recovery state.',
       ),
       TrainingIndexPillar(
         id: 'logging_precision',
@@ -209,12 +235,16 @@ class TrainingConfidenceEngine {
         score: double.parse(loggingScore.toStringAsFixed(1)),
         weight: 0.15,
         status: isRealTimeLogged ? 'Live Verified' : 'Estimated',
-        diagnosticDetail: isRealTimeLogged ? 'Tracked live with automated rest stopwatch.' : 'Logged retroactively after session.',
-        optimizationGuidance: 'Log sets immediately upon completion for peak biofeedback precision.',
+        diagnosticDetail: isRealTimeLogged
+            ? 'Tracked live with automated rest stopwatch.'
+            : 'Logged retroactively after session.',
+        optimizationGuidance:
+            'Log sets immediately upon completion for peak biofeedback precision.',
       ),
     ];
 
-    final double compositeRaw = pillars.fold<double>(0.0, (sum, p) => sum + p.weightedContribution);
+    final double compositeRaw =
+        pillars.fold<double>(0.0, (sum, p) => sum + p.weightedContribution);
     final int composite = compositeRaw.round().clamp(0, 100);
 
     final tier = _getTier(composite);
@@ -224,9 +254,12 @@ class TrainingConfidenceEngine {
       tier: tier,
       pillars: pillars,
       activeShieldCalibrations: calibrations.isEmpty
-          ? ['All training data parameters verified with optimal biomechanical precision.']
+          ? [
+              'All training data parameters verified with optimal biomechanical precision.'
+            ]
           : calibrations,
-      executiveSummary: 'Training OS Confidence Score is $composite% (${tier.label}). '
+      executiveSummary:
+          'Training OS Confidence Score is $composite% (${tier.label}). '
           'Your progressive overload trajectory is structurally protected by the Training Confidence Shield.',
     );
   }
@@ -259,8 +292,11 @@ class TrainingConfidenceEngine {
           optimizationGuidance: 'Start live workout tracking.',
         ),
       ],
-      activeShieldCalibrations: ['Start workout session to activate the Training OS Confidence Shield.'],
-      executiveSummary: 'No completed sets recorded in current workout session yet.',
+      activeShieldCalibrations: [
+        'Start workout session to activate the Training OS Confidence Shield.'
+      ],
+      executiveSummary:
+          'No completed sets recorded in current workout session yet.',
     );
   }
 }

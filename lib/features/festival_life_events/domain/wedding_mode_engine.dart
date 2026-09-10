@@ -59,7 +59,8 @@ class WeddingModeEngine {
     );
   }
 
-  List<WeddingPillarItem> _buildPillarActions(WeddingRole role, WeddingTimelinePhase phase) {
+  List<WeddingPillarItem> _buildPillarActions(
+      WeddingRole role, WeddingTimelinePhase phase) {
     final actions = <WeddingPillarItem>[];
 
     // 1. Posture & Garment Drape
@@ -153,7 +154,8 @@ class WeddingModeEngine {
     );
   }
 
-  String _getSangeetStaminaGuidance(WeddingRole role, WeddingTimelinePhase phase) {
+  String _getSangeetStaminaGuidance(
+      WeddingRole role, WeddingTimelinePhase phase) {
     return 'Integrate 3 sets of 45-second high-knees and rotational core pivots 3x weekly to build effortless stamina for 2-hour Sangeet dance performances.';
   }
 }

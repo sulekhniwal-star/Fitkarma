@@ -24,7 +24,8 @@ class SubscriptionEngine {
         );
       }
 
-      if (entitlements.expiresAt != null && now.isAfter(entitlements.expiresAt!)) {
+      if (entitlements.expiresAt != null &&
+          now.isAfter(entitlements.expiresAt!)) {
         if (entitlements.status != SubscriptionStatus.gracePeriod) {
           return EntitlementAccessResult.denied(
             feature,
@@ -86,10 +87,12 @@ class SubscriptionEngine {
       status: SubscriptionStatus.sandboxTest,
       expiresAt: tier.isPaid ? now.add(Duration(days: durationDays)) : null,
       willRenew: tier.isPaid,
-      originalPurchaseTransactionId: tier.isPaid ? 'rc_sb_${now.millisecondsSinceEpoch}' : null,
+      originalPurchaseTransactionId:
+          tier.isPaid ? 'rc_sb_${now.millisecondsSinceEpoch}' : null,
       dailyAiCallsUsed: 0,
       lastQuotaResetDate: now,
-      serverVerificationHash: 'mock_sha256_${tier.id}_${now.millisecondsSinceEpoch}',
+      serverVerificationHash:
+          'mock_sha256_${tier.id}_${now.millisecondsSinceEpoch}',
       updatedAt: now,
     );
   }

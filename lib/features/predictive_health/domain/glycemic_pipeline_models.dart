@@ -5,17 +5,20 @@ enum GlycemicStabilityZone {
   optimalStable(
     name: 'Optimal Homeostasis',
     regionalName: 'उत्कृष्ट शर्करा संतुलन (साम्य अवस्था)',
-    description: 'Low glycemic variability (CV < 33%) with smooth circadian excursions.',
+    description:
+        'Low glycemic variability (CV < 33%) with smooth circadian excursions.',
   ),
   moderateVolatility(
     name: 'Moderate Volatility',
     regionalName: 'मध्यम शर्करा उतार-चढ़ाव',
-    description: 'Postprandial spikes or minor nocturnal dips; responsive to meal timing.',
+    description:
+        'Postprandial spikes or minor nocturnal dips; responsive to meal timing.',
   ),
   highDysglycemia(
     name: 'High Glycemic Volatility',
     regionalName: 'अत्यधिक शर्करा अस्थिरता (विषम अवस्था)',
-    description: 'Frequent excursions > 140 mg/dL or nocturnal hypoglycemia risk.',
+    description:
+        'Frequent excursions > 140 mg/dL or nocturnal hypoglycemia risk.',
   );
 
   final String name;
@@ -31,11 +34,17 @@ enum GlycemicStabilityZone {
 
 /// Chrono-glycemic time window
 enum ChronoGlycemicWindow {
-  dawnFasting(name: 'Dawn & Fasting (04:00 - 08:00)', regionalName: 'उषाकाल व प्रभात शर्करा'),
-  postBreakfast(name: 'Post-Breakfast (08:00 - 12:00)', regionalName: 'प्रातराश उपरांत'),
-  postLunch(name: 'Post-Lunch (12:00 - 16:00)', regionalName: 'मध्याह्न भोजन उपरांत'),
-  postDinner(name: 'Post-Dinner (19:00 - 23:00)', regionalName: 'रात्रि भोजन उपरांत'),
-  nocturnal(name: 'Nocturnal Basal (23:00 - 04:00)', regionalName: 'निशि काल शर्करा');
+  dawnFasting(
+      name: 'Dawn & Fasting (04:00 - 08:00)',
+      regionalName: 'उषाकाल व प्रभात शर्करा'),
+  postBreakfast(
+      name: 'Post-Breakfast (08:00 - 12:00)', regionalName: 'प्रातराश उपरांत'),
+  postLunch(
+      name: 'Post-Lunch (12:00 - 16:00)', regionalName: 'मध्याह्न भोजन उपरांत'),
+  postDinner(
+      name: 'Post-Dinner (19:00 - 23:00)', regionalName: 'रात्रि भोजन उपरांत'),
+  nocturnal(
+      name: 'Nocturnal Basal (23:00 - 04:00)', regionalName: 'निशि काल शर्करा');
 
   final String name;
   final String regionalName;

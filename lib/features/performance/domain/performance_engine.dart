@@ -20,7 +20,8 @@ class PerformanceEngine {
         engineName: 'Glycemic Variance & Excursion Pipeline',
         regionalEngineName: 'ग्लाइसेमिक विचरण एवं विश्लेषण पाइपलाइन',
         executionMicroseconds: glycemicUs,
-        executionMilliseconds: double.parse((glycemicUs / 1000.0).toStringAsFixed(2)),
+        executionMilliseconds:
+            double.parse((glycemicUs / 1000.0).toStringAsFixed(2)),
         iterationsRun: iterations,
         isWithinBudget: (glycemicUs / 1000.0) < 15.0,
       ),
@@ -38,7 +39,8 @@ class PerformanceEngine {
         engineName: 'ACWR Injury Risk & Training Deload Engine',
         regionalEngineName: 'चोट जोखिम व भार अनुपात एल्गोरिदम',
         executionMicroseconds: acwrUs,
-        executionMilliseconds: double.parse((acwrUs / 1000.0).toStringAsFixed(2)),
+        executionMilliseconds:
+            double.parse((acwrUs / 1000.0).toStringAsFixed(2)),
         iterationsRun: iterations,
         isWithinBudget: (acwrUs / 1000.0) < 10.0,
       ),
@@ -56,7 +58,8 @@ class PerformanceEngine {
         engineName: 'Bio-Age Multi-Vector Synthesis Engine',
         regionalEngineName: 'जैविक आयु बहु-घटक विश्लेषण इंजन',
         executionMicroseconds: bioAgeUs,
-        executionMilliseconds: double.parse((bioAgeUs / 1000.0).toStringAsFixed(2)),
+        executionMilliseconds:
+            double.parse((bioAgeUs / 1000.0).toStringAsFixed(2)),
         iterationsRun: iterations,
         isWithinBudget: (bioAgeUs / 1000.0) < 12.0,
       ),
@@ -74,7 +77,8 @@ class PerformanceEngine {
         engineName: 'Smart Calendar Cognitive Load & Gap Finder',
         regionalEngineName: 'कैलेंडर मानसिक भार व सूक्ष्म अंतराल खोजक',
         executionMicroseconds: calUs,
-        executionMilliseconds: double.parse((calUs / 1000.0).toStringAsFixed(2)),
+        executionMilliseconds:
+            double.parse((calUs / 1000.0).toStringAsFixed(2)),
         iterationsRun: iterations,
         isWithinBudget: (calUs / 1000.0) < 10.0,
       ),
@@ -84,7 +88,8 @@ class PerformanceEngine {
   }
 
   /// Synthesizes complete performance report
-  PerformanceAuditReport evaluatePerformanceAudit(PerformanceSettings settings) {
+  PerformanceAuditReport evaluatePerformanceAudit(
+      PerformanceSettings settings) {
     final benchmarks = runEngineBenchmarks();
     final allWithinBudget = benchmarks.every((b) => b.isWithinBudget);
 

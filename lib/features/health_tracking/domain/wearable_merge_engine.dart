@@ -1,11 +1,39 @@
 enum WearableBrand {
-  whoop(name: 'WHOOP 4.0', hrvConfidence: 0.95, sleepConfidence: 0.95, stepConfidence: 0.80),
-  oura(name: 'Oura Ring Gen 3', hrvConfidence: 0.95, sleepConfidence: 0.98, stepConfidence: 0.75),
-  appleWatch(name: 'Apple Watch Ultra / Series', hrvConfidence: 0.90, sleepConfidence: 0.90, stepConfidence: 0.95),
-  garmin(name: 'Garmin Forerunner / Fenix', hrvConfidence: 0.85, sleepConfidence: 0.85, stepConfidence: 0.95),
-  polarChestStrap(name: 'Polar H10 Chest Strap', hrvConfidence: 0.99, sleepConfidence: 0.0, stepConfidence: 0.0),
-  noiseBoat(name: 'Noise / boAt Smartwatch', hrvConfidence: 0.55, sleepConfidence: 0.60, stepConfidence: 0.75),
-  phonePedometer(name: 'Phone Sensor (Health Connect)', hrvConfidence: 0.0, sleepConfidence: 0.50, stepConfidence: 0.85);
+  whoop(
+      name: 'WHOOP 4.0',
+      hrvConfidence: 0.95,
+      sleepConfidence: 0.95,
+      stepConfidence: 0.80),
+  oura(
+      name: 'Oura Ring Gen 3',
+      hrvConfidence: 0.95,
+      sleepConfidence: 0.98,
+      stepConfidence: 0.75),
+  appleWatch(
+      name: 'Apple Watch Ultra / Series',
+      hrvConfidence: 0.90,
+      sleepConfidence: 0.90,
+      stepConfidence: 0.95),
+  garmin(
+      name: 'Garmin Forerunner / Fenix',
+      hrvConfidence: 0.85,
+      sleepConfidence: 0.85,
+      stepConfidence: 0.95),
+  polarChestStrap(
+      name: 'Polar H10 Chest Strap',
+      hrvConfidence: 0.99,
+      sleepConfidence: 0.0,
+      stepConfidence: 0.0),
+  noiseBoat(
+      name: 'Noise / boAt Smartwatch',
+      hrvConfidence: 0.55,
+      sleepConfidence: 0.60,
+      stepConfidence: 0.75),
+  phonePedometer(
+      name: 'Phone Sensor (Health Connect)',
+      hrvConfidence: 0.0,
+      sleepConfidence: 0.50,
+      stepConfidence: 0.85);
 
   final String name;
   final double hrvConfidence;
@@ -108,7 +136,8 @@ class WearableMergeEngine {
       authoritativeValue: winner.value,
       selectedSource: winner.source,
       confidenceScore: winnerConf,
-      resolutionReason: 'Selected ${winner.source.name} (Tier Confidence: ${(winnerConf * 100).round()}%) over ${sorted.length - 1} conflicting late-sync sources.',
+      resolutionReason:
+          'Selected ${winner.source.name} (Tier Confidence: ${(winnerConf * 100).round()}%) over ${sorted.length - 1} conflicting late-sync sources.',
       candidateSamples: sorted,
     );
   }
@@ -122,7 +151,9 @@ class WearableMergeEngine {
       case MetricType.steps:
         return brand.stepConfidence;
       case MetricType.workoutHeartRate:
-        return brand == WearableBrand.polarChestStrap ? 0.99 : brand.hrvConfidence;
+        return brand == WearableBrand.polarChestStrap
+            ? 0.99
+            : brand.hrvConfidence;
     }
   }
 }

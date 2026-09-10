@@ -32,9 +32,13 @@ class WorkoutState {
       todaysSession: todaysSession ?? this.todaysSession,
       weeklySchedule: weeklySchedule ?? this.weeklySchedule,
       isSessionActive: isSessionActive ?? this.isSessionActive,
-      completedWorkoutsThisWeek: completedWorkoutsThisWeek ?? this.completedWorkoutsThisWeek,
-      totalVolumeTonnageThisWeek: totalVolumeTonnageThisWeek ?? this.totalVolumeTonnageThisWeek,
-      activeRestTimerSeconds: clearRestTimer ? null : (activeRestTimerSeconds ?? this.activeRestTimerSeconds),
+      completedWorkoutsThisWeek:
+          completedWorkoutsThisWeek ?? this.completedWorkoutsThisWeek,
+      totalVolumeTonnageThisWeek:
+          totalVolumeTonnageThisWeek ?? this.totalVolumeTonnageThisWeek,
+      activeRestTimerSeconds: clearRestTimer
+          ? null
+          : (activeRestTimerSeconds ?? this.activeRestTimerSeconds),
     );
   }
 }
@@ -58,10 +62,30 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
           targetRepsMax: 10,
           suggestedWeightKg: 72.5,
           completedSets: [
-            const WorkoutSet(setNumber: 1, weightKg: 72.5, reps: 10, rpe: 8.0, isCompleted: true),
-            const WorkoutSet(setNumber: 2, weightKg: 72.5, reps: 9, rpe: 8.5, isCompleted: true),
-            const WorkoutSet(setNumber: 3, weightKg: 72.5, reps: 8, rpe: 9.0, isCompleted: false),
-            const WorkoutSet(setNumber: 4, weightKg: 72.5, reps: 8, rpe: 9.5, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 1,
+                weightKg: 72.5,
+                reps: 10,
+                rpe: 8.0,
+                isCompleted: true),
+            const WorkoutSet(
+                setNumber: 2,
+                weightKg: 72.5,
+                reps: 9,
+                rpe: 8.5,
+                isCompleted: true),
+            const WorkoutSet(
+                setNumber: 3,
+                weightKg: 72.5,
+                reps: 8,
+                rpe: 9.0,
+                isCompleted: false),
+            const WorkoutSet(
+                setNumber: 4,
+                weightKg: 72.5,
+                reps: 8,
+                rpe: 9.5,
+                isCompleted: false),
           ],
         ),
         PlannedExercise(
@@ -71,9 +95,24 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
           targetRepsMax: 12,
           suggestedWeightKg: 24.0,
           completedSets: [
-            const WorkoutSet(setNumber: 1, weightKg: 24.0, reps: 12, rpe: 8.0, isCompleted: false),
-            const WorkoutSet(setNumber: 2, weightKg: 24.0, reps: 11, rpe: 8.5, isCompleted: false),
-            const WorkoutSet(setNumber: 3, weightKg: 24.0, reps: 10, rpe: 9.0, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 1,
+                weightKg: 24.0,
+                reps: 12,
+                rpe: 8.0,
+                isCompleted: false),
+            const WorkoutSet(
+                setNumber: 2,
+                weightKg: 24.0,
+                reps: 11,
+                rpe: 8.5,
+                isCompleted: false),
+            const WorkoutSet(
+                setNumber: 3,
+                weightKg: 24.0,
+                reps: 10,
+                rpe: 9.0,
+                isCompleted: false),
           ],
         ),
         PlannedExercise(
@@ -83,10 +122,14 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
           targetRepsMax: 15,
           suggestedWeightKg: 7.5,
           completedSets: [
-            const WorkoutSet(setNumber: 1, weightKg: 7.5, reps: 15, isCompleted: false),
-            const WorkoutSet(setNumber: 2, weightKg: 7.5, reps: 14, isCompleted: false),
-            const WorkoutSet(setNumber: 3, weightKg: 7.5, reps: 12, isCompleted: false),
-            const WorkoutSet(setNumber: 4, weightKg: 7.5, reps: 12, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 1, weightKg: 7.5, reps: 15, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 2, weightKg: 7.5, reps: 14, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 3, weightKg: 7.5, reps: 12, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 4, weightKg: 7.5, reps: 12, isCompleted: false),
           ],
         ),
         PlannedExercise(
@@ -96,9 +139,12 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
           targetRepsMax: 20,
           suggestedWeightKg: 0.0,
           completedSets: [
-            const WorkoutSet(setNumber: 1, weightKg: 0.0, reps: 20, isCompleted: false),
-            const WorkoutSet(setNumber: 2, weightKg: 0.0, reps: 18, isCompleted: false),
-            const WorkoutSet(setNumber: 3, weightKg: 0.0, reps: 15, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 1, weightKg: 0.0, reps: 20, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 2, weightKg: 0.0, reps: 18, isCompleted: false),
+            const WorkoutSet(
+                setNumber: 3, weightKg: 0.0, reps: 15, isCompleted: false),
           ],
         ),
       ],
@@ -144,7 +190,8 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
     state = state.copyWith(
       isSessionActive: false,
       completedWorkoutsThisWeek: state.completedWorkoutsThisWeek + 1,
-      totalVolumeTonnageThisWeek: state.totalVolumeTonnageThisWeek + sessionVolume,
+      totalVolumeTonnageThisWeek:
+          state.totalVolumeTonnageThisWeek + sessionVolume,
       clearRestTimer: true,
     );
   }
@@ -296,6 +343,7 @@ class WorkoutNotifier extends StateNotifier<WorkoutState> {
   }
 }
 
-final workoutProvider = StateNotifierProvider<WorkoutNotifier, WorkoutState>((ref) {
+final workoutProvider =
+    StateNotifierProvider<WorkoutNotifier, WorkoutState>((ref) {
   return WorkoutNotifier();
 });

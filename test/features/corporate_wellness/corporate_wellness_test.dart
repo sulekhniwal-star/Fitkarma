@@ -7,7 +7,8 @@ void main() {
   group('CorporateEngine Deterministic Tests', () {
     const engine = CorporateEngine();
 
-    test('Computes optimal IRDAI dynamic premium discount & maximum savings', () {
+    test('Computes optimal IRDAI dynamic premium discount & maximum savings',
+        () {
       final rebate = engine.calculateInsurerRebate(
         insurer: InsurerPartner.hdfcErgo,
         policyNumber: 'HE-FIT-884920',
@@ -42,8 +43,10 @@ void main() {
     test('Generates deterministic corporate work email OTP and verifies', () {
       final otp = engine.generateWorkEmailOtp('rahul.s@tcs.com');
       expect(otp.length, equals(6));
-      expect(engine.verifyWorkEmailOtp(enteredOtp: otp, expectedOtp: otp), isTrue);
-      expect(engine.verifyWorkEmailOtp(enteredOtp: '000000', expectedOtp: otp), isFalse);
+      expect(
+          engine.verifyWorkEmailOtp(enteredOtp: otp, expectedOtp: otp), isTrue);
+      expect(engine.verifyWorkEmailOtp(enteredOtp: '000000', expectedOtp: otp),
+          isFalse);
     });
 
     test('Evaluates workplace desk strain and triggers ergonomic alerts', () {
@@ -66,15 +69,18 @@ void main() {
       expect(notifier.state.teamChallenges.length, equals(2));
 
       // Initiate work email verification
-      notifier.initiateWorkEmailVerification('priya@infosys.com', 'Infosys Ltd', 'Product');
-      expect(notifier.state.employeeProfile.verificationStatus, equals(CorporateVerificationStatus.pendingWorkEmailOtp));
+      notifier.initiateWorkEmailVerification(
+          'priya@infosys.com', 'Infosys Ltd', 'Product');
+      expect(notifier.state.employeeProfile.verificationStatus,
+          equals(CorporateVerificationStatus.pendingWorkEmailOtp));
       expect(notifier.state.pendingOtp, isNotNull);
 
       final otp = notifier.state.pendingOtp!;
       final verified = notifier.verifyOtp(otp);
       expect(verified, isTrue);
       expect(notifier.state.employeeProfile.isVerified, isTrue);
-      expect(notifier.state.employeeProfile.workEmail, equals('priya@infosys.com'));
+      expect(notifier.state.employeeProfile.workEmail,
+          equals('priya@infosys.com'));
 
       // Link Insurer Policy
       notifier.linkInsurerPolicy(
@@ -82,13 +88,17 @@ void main() {
         policyNumber: 'STAR-FIT-990011',
         baseAnnualPremium: 28000.0,
       );
-      expect(notifier.state.insurerRebate.insurer, equals(InsurerPartner.starHealth));
-      expect(notifier.state.insurerRebate.policyNumber, equals('STAR-FIT-990011'));
-      expect(notifier.state.insurerRebate.annualSavingsInr, greaterThan(6000.0));
+      expect(notifier.state.insurerRebate.insurer,
+          equals(InsurerPartner.starHealth));
+      expect(
+          notifier.state.insurerRebate.policyNumber, equals('STAR-FIT-990011'));
+      expect(
+          notifier.state.insurerRebate.annualSavingsInr, greaterThan(6000.0));
 
       // Unlink
       notifier.unlinkCorporate();
-      expect(notifier.state.employeeProfile.verificationStatus, equals(CorporateVerificationStatus.unlinked));
+      expect(notifier.state.employeeProfile.verificationStatus,
+          equals(CorporateVerificationStatus.unlinked));
     });
   });
 }

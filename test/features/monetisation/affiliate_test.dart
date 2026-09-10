@@ -8,10 +8,22 @@ void main() {
     const engine = AffiliateEngine();
 
     test('Calculates tier-based commissions accurately in INR', () {
-      expect(engine.calculateCommission(tier: AffiliateTier.bronze, orderAmountInr: 3999), equals(600)); // 15%
-      expect(engine.calculateCommission(tier: AffiliateTier.silver, orderAmountInr: 3999), equals(800)); // 20%
-      expect(engine.calculateCommission(tier: AffiliateTier.gold, orderAmountInr: 3999), equals(1000)); // 25%
-      expect(engine.calculateCommission(tier: AffiliateTier.platinum, orderAmountInr: 3999), equals(1200)); // 30%
+      expect(
+          engine.calculateCommission(
+              tier: AffiliateTier.bronze, orderAmountInr: 3999),
+          equals(600)); // 15%
+      expect(
+          engine.calculateCommission(
+              tier: AffiliateTier.silver, orderAmountInr: 3999),
+          equals(800)); // 20%
+      expect(
+          engine.calculateCommission(
+              tier: AffiliateTier.gold, orderAmountInr: 3999),
+          equals(1000)); // 25%
+      expect(
+          engine.calculateCommission(
+              tier: AffiliateTier.platinum, orderAmountInr: 3999),
+          equals(1200)); // 30%
     });
 
     test('Resolves tier promotions accurately based on conversion counts', () {
@@ -25,7 +37,8 @@ void main() {
       expect(engine.resolveTier(500), equals(AffiliateTier.platinum));
     });
 
-    test('Recording referral conversion promotes tier and accumulates earnings', () {
+    test('Recording referral conversion promotes tier and accumulates earnings',
+        () {
       const initialProfile = AffiliateProfile(
         affiliateId: 'test_creator',
         creatorName: 'Aman',
@@ -49,7 +62,8 @@ void main() {
 
       expect(updated.totalConversions, equals(11));
       expect(updated.tier, equals(AffiliateTier.silver)); // Promoted to Silver!
-      expect(updated.totalEarningsInr, equals(5600)); // 5000 + (15% of 4000 = 600)
+      expect(
+          updated.totalEarningsInr, equals(5600)); // 5000 + (15% of 4000 = 600)
       expect(updated.pendingPayoutInr, equals(1600));
       expect(updated.recentReferrals.length, equals(1));
     });
@@ -65,12 +79,17 @@ void main() {
 
       expect(clearedProfile.pendingPayoutInr, equals(0));
       expect(clearedProfile.paidOutInr, equals(initialPaidOut + pendingAmount));
-      expect(clearedProfile.recentReferrals.every((r) => r.status == PayoutStatus.paidOut), isTrue);
+      expect(
+          clearedProfile.recentReferrals
+              .every((r) => r.status == PayoutStatus.paidOut),
+          isTrue);
     });
   });
 
   group('Affiliate StateNotifier Provider Tests', () {
-    test('StateNotifier updates UPI ID, referral code, and simulates referral attribution', () async {
+    test(
+        'StateNotifier updates UPI ID, referral code, and simulates referral attribution',
+        () async {
       final notifier = AffiliateNotifier();
 
       expect(notifier.state.profile.referralCode, equals('VIKRAM20'));
@@ -88,12 +107,15 @@ void main() {
         amount: 2499,
       );
 
-      expect(notifier.state.profile.totalConversions, equals(initialConversions + 1));
-      expect(notifier.state.successMessage, contains('New referral attributed'));
+      expect(notifier.state.profile.totalConversions,
+          equals(initialConversions + 1));
+      expect(
+          notifier.state.successMessage, contains('New referral attributed'));
 
       await notifier.requestPayout();
       expect(notifier.state.profile.pendingPayoutInr, equals(0));
-      expect(notifier.state.successMessage, contains('transferred successfully'));
+      expect(
+          notifier.state.successMessage, contains('transferred successfully'));
     });
   });
 }

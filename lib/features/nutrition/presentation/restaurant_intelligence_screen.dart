@@ -14,15 +14,18 @@ class RestaurantIntelligenceScreen extends ConsumerStatefulWidget {
   const RestaurantIntelligenceScreen({super.key});
 
   @override
-  ConsumerState<RestaurantIntelligenceScreen> createState() => _RestaurantIntelligenceScreenState();
+  ConsumerState<RestaurantIntelligenceScreen> createState() =>
+      _RestaurantIntelligenceScreenState();
 }
 
-class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelligenceScreen> {
+class _RestaurantIntelligenceScreenState
+    extends ConsumerState<RestaurantIntelligenceScreen> {
   int _selectedChainIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    final chain = RestaurantIntelligenceEngine.chainPresets[_selectedChainIndex];
+    final chain =
+        RestaurantIntelligenceEngine.chainPresets[_selectedChainIndex];
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -54,16 +57,23 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                       selected: isSelected,
                       selectedColor: AppColors.focusBlue.withValues(alpha: 0.2),
                       backgroundColor: AppColors.surfaceElevated,
-                      side: BorderSide(color: isSelected ? AppColors.focusBlue : AppColors.glassBorder),
+                      side: BorderSide(
+                          color: isSelected
+                              ? AppColors.focusBlue
+                              : AppColors.glassBorder),
                       label: Text(
                         p.chainName.split('&')[0].trim(),
                         style: TextStyle(
-                          color: isSelected ? AppColors.focusBlue : AppColors.textPrimary,
+                          color: isSelected
+                              ? AppColors.focusBlue
+                              : AppColors.textPrimary,
                           fontSize: 12,
-                          fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
+                          fontWeight:
+                              isSelected ? FontWeight.w800 : FontWeight.w500,
                         ),
                       ),
-                      onSelected: (_) => setState(() => _selectedChainIndex = index),
+                      onSelected: (_) =>
+                          setState(() => _selectedChainIndex = index),
                     );
                   },
                 ),
@@ -82,19 +92,27 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                         color: AppColors.focusBlue.withValues(alpha: 0.15),
                         borderRadius: AppRadii.radiusSm,
                       ),
-                      child: const Icon(Icons.restaurant_menu_rounded, color: AppColors.focusBlue, size: 24),
+                      child: const Icon(Icons.restaurant_menu_rounded,
+                          color: AppColors.focusBlue, size: 24),
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(chain.chainName, style: AppTypography.titleSmall.copyWith(fontWeight: FontWeight.w700)),
-                          Text(chain.regionalName, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                          Text(chain.chainName,
+                              style: AppTypography.titleSmall
+                                  .copyWith(fontWeight: FontWeight.w700)),
+                          Text(chain.regionalName,
+                              style: const TextStyle(
+                                  fontSize: 11, color: AppColors.textMuted)),
                           const SizedBox(height: 2),
                           Text(
                             'Cuisine: ${chain.cuisineType}',
-                            style: const TextStyle(fontSize: 11, color: AppColors.focusBlue, fontWeight: FontWeight.w600),
+                            style: const TextStyle(
+                                fontSize: 11,
+                                color: AppColors.focusBlue,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -130,7 +148,8 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                             Expanded(
                               child: Row(
                                 children: [
-                                  const Icon(Icons.cancel_outlined, color: AppColors.alertRed, size: 16),
+                                  const Icon(Icons.cancel_outlined,
+                                      color: AppColors.alertRed, size: 16),
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
@@ -144,12 +163,14 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                                 ],
                               ),
                             ),
-                            const Icon(Icons.arrow_forward_rounded, color: AppColors.karmaGreen, size: 16),
+                            const Icon(Icons.arrow_forward_rounded,
+                                color: AppColors.karmaGreen, size: 16),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Row(
                                 children: [
-                                  const Icon(Icons.check_circle_rounded, color: AppColors.karmaGreen, size: 16),
+                                  const Icon(Icons.check_circle_rounded,
+                                      color: AppColors.karmaGreen, size: 16),
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
@@ -170,32 +191,44 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                         Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
-                                color: AppColors.karmaGreen.withValues(alpha: 0.15),
+                                color: AppColors.karmaGreen
+                                    .withValues(alpha: 0.15),
                                 borderRadius: AppRadii.radiusSm,
                               ),
                               child: Text(
                                 swap.caloriesSaved,
-                                style: const TextStyle(color: AppColors.karmaGreen, fontSize: 10, fontWeight: FontWeight.w800),
+                                style: const TextStyle(
+                                    color: AppColors.karmaGreen,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                             const SizedBox(width: 6),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
-                                color: AppColors.focusBlue.withValues(alpha: 0.15),
+                                color:
+                                    AppColors.focusBlue.withValues(alpha: 0.15),
                                 borderRadius: AppRadii.radiusSm,
                               ),
                               child: Text(
                                 swap.proteinGain,
-                                style: const TextStyle(color: AppColors.focusBlue, fontSize: 10, fontWeight: FontWeight.w800),
+                                style: const TextStyle(
+                                    color: AppColors.focusBlue,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 4),
-                        Text(swap.rationale, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                        Text(swap.rationale,
+                            style: const TextStyle(
+                                fontSize: 11, color: AppColors.textSecondary)),
                       ],
                     ),
                   ),
@@ -226,12 +259,21 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(item.name, style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700)),
-                              Text(item.regionalName, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                              Text(item.name,
+                                  style: AppTypography.titleSmall.copyWith(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700)),
+                              Text(item.regionalName,
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textMuted)),
                               const SizedBox(height: 2),
                               Text(
                                 '${item.calories} kcal • ${item.proteinGrams}g Protein • ${item.servingUnit}',
-                                style: const TextStyle(fontSize: 11, color: AppColors.karmaGreen, fontWeight: FontWeight.w600),
+                                style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppColors.karmaGreen,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -239,16 +281,26 @@ class _RestaurantIntelligenceScreenState extends ConsumerState<RestaurantIntelli
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.karmaGreen,
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                            shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 6),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: AppRadii.radiusSm),
                           ),
                           onPressed: () {
-                            ref.read(nutritionProvider.notifier).addMeal(item, MealPhase.dinner, 1.0);
+                            ref
+                                .read(nutritionProvider.notifier)
+                                .addMeal(item, MealPhase.dinner, 1.0);
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Logged ${item.name} to Dinner!')),
+                              SnackBar(
+                                  content:
+                                      Text('Logged ${item.name} to Dinner!')),
                             );
                           },
-                          child: const Text('Log Dish', style: TextStyle(color: AppColors.textInverse, fontSize: 11, fontWeight: FontWeight.w800)),
+                          child: const Text('Log Dish',
+                              style: TextStyle(
+                                  color: AppColors.textInverse,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800)),
                         ),
                       ],
                     ),

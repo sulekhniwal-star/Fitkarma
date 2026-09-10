@@ -14,10 +14,12 @@ class SmartMealIntelligenceScreen extends StatefulWidget {
   const SmartMealIntelligenceScreen({super.key});
 
   @override
-  State<SmartMealIntelligenceScreen> createState() => _SmartMealIntelligenceScreenState();
+  State<SmartMealIntelligenceScreen> createState() =>
+      _SmartMealIntelligenceScreenState();
 }
 
-class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScreen> {
+class _SmartMealIntelligenceScreenState
+    extends State<SmartMealIntelligenceScreen> {
   String _searchQuery = '';
   String _selectedCategory = 'All';
 
@@ -42,11 +44,13 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.surfaceElevated,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (ctx) {
         return StatefulBuilder(
           builder: (context, setModalState) {
-            final comparison = MealIntelligenceEngine.compareFoods(itemA, itemB);
+            final comparison =
+                MealIntelligenceEngine.compareFoods(itemA, itemB);
 
             return SizedBox(
               height: MediaQuery.of(ctx).size.height * 0.70,
@@ -70,18 +74,30 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('CURRENT (वर्तमान)', style: TextStyle(color: AppColors.textMuted, fontSize: 10, fontWeight: FontWeight.bold)),
+                                const Text('CURRENT (वर्तमान)',
+                                    style: TextStyle(
+                                        color: AppColors.textMuted,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 2),
-                                Text(itemA.name, style: AppTypography.titleSmall.copyWith(fontSize: 12, fontWeight: FontWeight.w700)),
+                                Text(itemA.name,
+                                    style: AppTypography.titleSmall.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700)),
                                 const SizedBox(height: 2),
-                                Text('${itemA.calories} kcal • ${itemA.proteinGrams}g P', style: const TextStyle(fontSize: 11, color: AppColors.karmaGreen)),
+                                Text(
+                                    '${itemA.calories} kcal • ${itemA.proteinGrams}g P',
+                                    style: const TextStyle(
+                                        fontSize: 11,
+                                        color: AppColors.karmaGreen)),
                               ],
                             ),
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 6),
-                          child: Icon(Icons.compare_arrows_rounded, color: AppColors.focusBlue, size: 22),
+                          child: Icon(Icons.compare_arrows_rounded,
+                              color: AppColors.focusBlue, size: 22),
                         ),
                         Expanded(
                           child: BentoCard(
@@ -89,21 +105,31 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('COMPARE WITH (तुलना)', style: TextStyle(color: AppColors.textMuted, fontSize: 10, fontWeight: FontWeight.bold)),
+                                const Text('COMPARE WITH (तुलना)',
+                                    style: TextStyle(
+                                        color: AppColors.textMuted,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 2),
                                 DropdownButton<FoodItem>(
                                   value: itemB,
                                   isExpanded: true,
                                   underline: const SizedBox(),
                                   dropdownColor: AppColors.surfaceElevated,
-                                  items: IndianFoodDatabase.stapleIndianFoods.map((f) {
+                                  items: IndianFoodDatabase.stapleIndianFoods
+                                      .map((f) {
                                     return DropdownMenuItem(
                                       value: f,
-                                      child: Text(f.name, style: const TextStyle(fontSize: 11, color: AppColors.textPrimary)),
+                                      child: Text(f.name,
+                                          style: const TextStyle(
+                                              fontSize: 11,
+                                              color: AppColors.textPrimary)),
                                     );
                                   }).toList(),
                                   onChanged: (val) {
-                                    if (val != null) setModalState(() => itemB = val);
+                                    if (val != null) {
+                                      setModalState(() => itemB = val);
+                                    }
                                   },
                                 ),
                               ],
@@ -120,19 +146,28 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                       children: [
                         GlowingMetric(
                           label: 'Calorie Diff',
-                          value: '${comparison.calorieDelta > 0 ? "+${comparison.calorieDelta}" : comparison.calorieDelta}',
+                          value:
+                              '${comparison.calorieDelta > 0 ? "+${comparison.calorieDelta}" : comparison.calorieDelta}',
                           unit: 'kcal',
-                          accentColor: comparison.calorieDelta <= 0 ? AppColors.karmaGreen : AppColors.energyOrange,
+                          accentColor: comparison.calorieDelta <= 0
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange,
                         ),
                         GlowingMetric(
                           label: 'Protein Diff',
-                          value: '${comparison.proteinDelta > 0 ? "+${comparison.proteinDelta}" : comparison.proteinDelta}g',
-                          accentColor: comparison.proteinDelta >= 0 ? AppColors.karmaGreen : AppColors.alertRed,
+                          value:
+                              '${comparison.proteinDelta > 0 ? "+${comparison.proteinDelta}" : comparison.proteinDelta}g',
+                          accentColor: comparison.proteinDelta >= 0
+                              ? AppColors.karmaGreen
+                              : AppColors.alertRed,
                         ),
                         GlowingMetric(
                           label: 'Fiber Diff',
-                          value: '${comparison.fiberDelta > 0 ? "+${comparison.fiberDelta}" : comparison.fiberDelta}g',
-                          accentColor: comparison.fiberDelta >= 0 ? AppColors.focusBlue : AppColors.textMuted,
+                          value:
+                              '${comparison.fiberDelta > 0 ? "+${comparison.fiberDelta}" : comparison.fiberDelta}g',
+                          accentColor: comparison.fiberDelta >= 0
+                              ? AppColors.focusBlue
+                              : AppColors.textMuted,
                         ),
                       ],
                     ),
@@ -144,12 +179,14 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.auto_awesome_rounded, color: AppColors.gold, size: 18),
+                          const Icon(Icons.auto_awesome_rounded,
+                              color: AppColors.gold, size: 18),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               comparison.recommendation,
-                              style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                              style: AppTypography.bodySmall.copyWith(
+                                  color: AppColors.textPrimary, height: 1.3),
                             ),
                           ),
                         ],
@@ -192,8 +229,10 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
               child: TextField(
                 onChanged: (val) => setState(() => _searchQuery = val),
                 decoration: const InputDecoration(
-                  hintText: 'Search 100+ Indian dishes, rotis, daals, snacks...',
-                  prefixIcon: Icon(Icons.search_rounded, color: AppColors.textMuted),
+                  hintText:
+                      'Search 100+ Indian dishes, rotis, daals, snacks...',
+                  prefixIcon:
+                      Icon(Icons.search_rounded, color: AppColors.textMuted),
                   filled: true,
                   fillColor: AppColors.surfaceElevated,
                   border: OutlineInputBorder(
@@ -219,13 +258,19 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                     selected: isSelected,
                     selectedColor: AppColors.focusBlue.withValues(alpha: 0.2),
                     backgroundColor: AppColors.surfaceElevated,
-                    side: BorderSide(color: isSelected ? AppColors.focusBlue : AppColors.glassBorder),
+                    side: BorderSide(
+                        color: isSelected
+                            ? AppColors.focusBlue
+                            : AppColors.glassBorder),
                     label: Text(
                       cat,
                       style: TextStyle(
-                        color: isSelected ? AppColors.focusBlue : AppColors.textSecondary,
+                        color: isSelected
+                            ? AppColors.focusBlue
+                            : AppColors.textSecondary,
                         fontSize: 11,
-                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                        fontWeight:
+                            isSelected ? FontWeight.w700 : FontWeight.w500,
                       ),
                     ),
                     onSelected: (_) => setState(() => _selectedCategory = cat),
@@ -244,7 +289,8 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                 separatorBuilder: (_, __) => const SizedBox(height: 8),
                 itemBuilder: (context, index) {
                   final item = items[index];
-                  final qualityScore = MealIntelligenceEngine.calculateLocalMealScore(item);
+                  final qualityScore =
+                      MealIntelligenceEngine.calculateLocalMealScore(item);
                   final Color scoreColor = qualityScore >= 80
                       ? AppColors.karmaGreen
                       : qualityScore >= 60
@@ -261,34 +307,47 @@ class _SmartMealIntelligenceScreenState extends State<SmartMealIntelligenceScree
                             children: [
                               Row(
                                 children: [
-                                  Text(item.name, style: AppTypography.titleSmall.copyWith(fontSize: 14)),
+                                  Text(item.name,
+                                      style: AppTypography.titleSmall
+                                          .copyWith(fontSize: 14)),
                                   const SizedBox(width: 6),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
                                       color: scoreColor.withValues(alpha: 0.15),
                                       borderRadius: AppRadii.radiusSm,
                                     ),
                                     child: Text(
                                       'Score $qualityScore',
-                                      style: TextStyle(color: scoreColor, fontSize: 10, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          color: scoreColor,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                   ),
                                 ],
                               ),
-                              Text(item.regionalName, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                              Text(item.regionalName,
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textMuted)),
                               const SizedBox(height: 3),
                               Text(
                                 '${item.calories} kcal • ${item.proteinGrams}g Protein • ${item.carbsGrams}g Carbs • ${item.fatsGrams}g Fat',
-                                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppColors.textSecondary),
                               ),
                             ],
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.compare_arrows_rounded, color: AppColors.focusBlue, size: 20),
+                          icon: const Icon(Icons.compare_arrows_rounded,
+                              color: AppColors.focusBlue, size: 20),
                           tooltip: 'Compare Food',
-                          onPressed: () => _showFoodComparisonModal(context, item),
+                          onPressed: () =>
+                              _showFoodComparisonModal(context, item),
                         ),
                       ],
                     ),

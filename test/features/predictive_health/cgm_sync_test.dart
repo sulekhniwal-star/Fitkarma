@@ -30,7 +30,8 @@ void main() {
           timestamp: DateTime.now().subtract(Duration(minutes: index * 30)),
           glucoseValue: val,
           trend: GlucoseTrendDirection.rapidlyRising,
-          rangeTier: val > 140 ? GlucoseRangeTier.spikeHigh : GlucoseRangeTier.hypo,
+          rangeTier:
+              val > 140 ? GlucoseRangeTier.spikeHigh : GlucoseRangeTier.hypo,
         );
       });
 

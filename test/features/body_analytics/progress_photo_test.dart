@@ -49,18 +49,24 @@ void main() {
 
       expect(report.totalPhotosCaptured, equals(3));
       expect(report.totalDaysTracked, equals(60));
-      expect(report.totalWeightLossKg, equals(7.0)); // 82.0 - 75.0 = 7.0 kg loss
-      expect(report.totalBodyFatLossPercent, equals(6.0)); // 22.0 - 16.0 = 6.0% BF drop
+      expect(
+          report.totalWeightLossKg, equals(7.0)); // 82.0 - 75.0 = 7.0 kg loss
+      expect(report.totalBodyFatLossPercent,
+          equals(6.0)); // 22.0 - 16.0 = 6.0% BF drop
       expect(report.isVaultEncrypted, isTrue);
       expect(report.activeComparison, isNotNull);
       expect(report.activeComparison!.weightDeltaKg, equals(-7.0));
       expect(report.activeComparison!.bodyFatDeltaPercent, equals(-6.0));
       expect(report.activeComparison!.waistDeltaCm, equals(-8.0));
-      expect(report.activeComparison!.transformationSummary, contains('7.0 kg reduction'));
-      expect(report.activeComparison!.regionalTransformationSummary, contains('किग्रा भार'));
+      expect(report.activeComparison!.transformationSummary,
+          contains('7.0 kg reduction'));
+      expect(report.activeComparison!.regionalTransformationSummary,
+          contains('किग्रा भार'));
     });
 
-    test('Creates accurate comparative photo pair between two specific milestones', () {
+    test(
+        'Creates accurate comparative photo pair between two specific milestones',
+        () {
       final now = DateTime(2026, 9, 9);
       final before = ProgressPhotoEntry(
         photoId: 'b1',

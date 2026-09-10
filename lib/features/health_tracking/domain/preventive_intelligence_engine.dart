@@ -95,7 +95,8 @@ class PreventiveIntelligenceEngine {
       sleepPts = 8;
     }
 
-    final totalRiskScore = (bpPts + glucosePts + bmiPts + sleepPts).clamp(0, 100);
+    final totalRiskScore =
+        (bpPts + glucosePts + bmiPts + sleepPts).clamp(0, 100);
 
     // Determine Risk Tier
     final RiskTier tier;
@@ -124,26 +125,38 @@ class PreventiveIntelligenceEngine {
     // Generate Preventive Action Protocols
     final List<String> protocols = [];
     if (tier == RiskTier.high || tier == RiskTier.elevated) {
-      protocols.add('Zone 2 Cardio: 35 minutes of steady walking/cycling 4x/week to enhance capillary density.');
-      protocols.add('Sodium Management: Keep sodium under 2,000mg and emphasize high-potassium greens.');
-      protocols.add('Post-Meal Walking (शतपावली): 10-15 minutes after lunch and dinner for GLUT-4 activation.');
-      protocols.add('Sleep Extension: Add 45 minutes to your sleep opportunity to clear autonomic strain.');
+      protocols.add(
+          'Zone 2 Cardio: 35 minutes of steady walking/cycling 4x/week to enhance capillary density.');
+      protocols.add(
+          'Sodium Management: Keep sodium under 2,000mg and emphasize high-potassium greens.');
+      protocols.add(
+          'Post-Meal Walking (शतपावली): 10-15 minutes after lunch and dinner for GLUT-4 activation.');
+      protocols.add(
+          'Sleep Extension: Add 45 minutes to your sleep opportunity to clear autonomic strain.');
     } else if (tier == RiskTier.moderate) {
-      protocols.add('Maintain consistent meal timing with fiber-rich Indian legumes (daal, chana).');
-      protocols.add('Engage in 10 minutes of evening Pranayama (Anulom Vilom) to reduce cortisol.');
-      protocols.add('Hit 8,000 to 10,000 daily steps to preserve insulin sensitivity.');
+      protocols.add(
+          'Maintain consistent meal timing with fiber-rich Indian legumes (daal, chana).');
+      protocols.add(
+          'Engage in 10 minutes of evening Pranayama (Anulom Vilom) to reduce cortisol.');
+      protocols.add(
+          'Hit 8,000 to 10,000 daily steps to preserve insulin sensitivity.');
     } else {
-      protocols.add('Maintain your balanced resistance and cardiovascular training split.');
-      protocols.add('Continue whole-food Mediterranean-Indian dietary staples.');
+      protocols.add(
+          'Maintain your balanced resistance and cardiovascular training split.');
+      protocols
+          .add('Continue whole-food Mediterranean-Indian dietary staples.');
     }
 
     final String summary;
     if (tier == RiskTier.optimal) {
-      summary = 'All preventive cardiometabolic biomarkers are within optimal functional ranges.';
+      summary =
+          'All preventive cardiometabolic biomarkers are within optimal functional ranges.';
     } else if (tier == RiskTier.moderate) {
-      summary = 'Minor metabolic or lifestyle drift detected. Early lifestyle tuning will reverse early risk markers.';
+      summary =
+          'Minor metabolic or lifestyle drift detected. Early lifestyle tuning will reverse early risk markers.';
     } else {
-      summary = 'Elevated cardiometabolic indicators. Proactive lifestyle modifications are strongly recommended.';
+      summary =
+          'Elevated cardiometabolic indicators. Proactive lifestyle modifications are strongly recommended.';
     }
 
     return PreventiveHealthReport(

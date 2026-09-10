@@ -16,7 +16,8 @@ class KarmaBadgeDatabase {
       id: 'badge_shatpawali_master',
       name: 'Shatpawali Acharya',
       regionalName: 'शतपावली आचार्य',
-      description: 'Complete 30 post-meal Shatpawali walks to regulate postprandial glucose.',
+      description:
+          'Complete 30 post-meal Shatpawali walks to regulate postprandial glucose.',
       regionalDescription: 'ब्लड शुगर संतुलन हेतु ३० शतपावली सत्र संपन्न करें।',
       category: KarmaBadgeCategory.metabolicMastery,
       requirementLabel: '30 Shatpawali Walks',
@@ -25,7 +26,8 @@ class KarmaBadgeDatabase {
       id: 'badge_sattvic_nutrition',
       name: 'Sattvic Discipline',
       regionalName: 'सात्विक पोषण सिद्धि',
-      description: 'Log 20 high-quality Indian meals with Meal Quality Score > 85.',
+      description:
+          'Log 20 high-quality Indian meals with Meal Quality Score > 85.',
       regionalDescription: '८५+ गुणवत्ता स्कोर वाले २० भोजन दर्ज करें।',
       category: KarmaBadgeCategory.metabolicMastery,
       requirementLabel: '20 High MQS Meals',
@@ -57,7 +59,8 @@ class KarmaBadgeDatabase {
       name: 'Nidra Sadhak',
       regionalName: 'निद्रा साधक (गहरी नींद)',
       description: 'Achieve 14 nights with > 85% sleep recovery efficiency.',
-      regionalDescription: '१४ रातों तक ८५%+ निद्रा रिकवरी दक्षता प्राप्त करें।',
+      regionalDescription:
+          '१४ रातों तक ८५%+ निद्रा रिकवरी दक्षता प्राप्त करें।',
       category: KarmaBadgeCategory.recoveryCircadian,
       requirementLabel: '14 Optimal Sleep Nights',
     ),
@@ -68,7 +71,8 @@ class KarmaBadgeDatabase {
       name: 'Saptah Samarpit',
       regionalName: 'सप्ताह समर्पित (७ दिन स्ट्रीक)',
       description: 'Maintain an unbroken 7-day health logging streak.',
-      regionalDescription: 'लगातार ७ दिनों तक स्वास्थ्य व पोषण लॉगिंग बनाए रखें।',
+      regionalDescription:
+          'लगातार ७ दिनों तक स्वास्थ्य व पोषण लॉगिंग बनाए रखें।',
       category: KarmaBadgeCategory.consistencyGrit,
       requirementLabel: '7-Day Streak',
     ),
@@ -106,7 +110,8 @@ class KarmaBadgeDatabase {
       name: 'Abhyasi Ascendant',
       regionalName: 'अभ्यासी पद (५,००० कर्म)',
       description: 'Accumulate 5,000 Lifetime Karma Points.',
-      regionalDescription: '५००० कर्म अंक अर्जित कर अभ्यासी श्रेणी में प्रवेश करें।',
+      regionalDescription:
+          '५००० कर्म अंक अर्जित कर अभ्यासी श्रेणी में प्रवेश करें।',
       category: KarmaBadgeCategory.culturalAyurvedic,
       requirementLabel: '5,000 Lifetime KP',
     ),
@@ -114,8 +119,10 @@ class KarmaBadgeDatabase {
       id: 'badge_yogi_mastery',
       name: 'Param Yogi',
       regionalName: 'परम योगी (३५,००० कर्म)',
-      description: 'Reach the pinnacle of health operating mastery with 35,000+ KP.',
-      regionalDescription: '३५०००+ कर्म अंक अर्जित कर सर्वोच्च स्वास्थ्य पद प्राप्त करें।',
+      description:
+          'Reach the pinnacle of health operating mastery with 35,000+ KP.',
+      regionalDescription:
+          '३५०००+ कर्म अंक अर्जित कर सर्वोच्च स्वास्थ्य पद प्राप्त करें।',
       category: KarmaBadgeCategory.culturalAyurvedic,
       requirementLabel: '35,000 Lifetime KP',
     ),

@@ -31,7 +31,8 @@ class StressDetectionScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showAutonomicMethodologyModal(context),
           ),
         ],
@@ -217,7 +218,9 @@ class StressDetectionScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isAcute ? 'Sympathetic Overload Detected' : 'Elevated Stress Detected',
+                  isAcute
+                      ? 'Sympathetic Overload Detected'
+                      : 'Elevated Stress Detected',
                   style: AppTypography.titleSmall.copyWith(
                     color: color,
                     fontWeight: FontWeight.bold,
@@ -308,7 +311,8 @@ class StressDetectionScreen extends ConsumerWidget {
 
                 return Container(
                   width: 62,
-                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
                   decoration: BoxDecoration(
                     color: AppColors.surfaceElevated,
                     borderRadius: AppRadii.radiusSm,
@@ -358,7 +362,11 @@ class StressDetectionScreen extends ConsumerWidget {
 
   Widget _buildSignalCard(InferredStressSignal sig) {
     final isHigh = sig.stressPointsContribution >= 15;
-    final sigColor = isHigh ? AppColors.alertRed : (sig.stressPointsContribution >= 8 ? AppColors.energyOrange : AppColors.karmaGreen);
+    final sigColor = isHigh
+        ? AppColors.alertRed
+        : (sig.stressPointsContribution >= 8
+            ? AppColors.energyOrange
+            : AppColors.karmaGreen);
 
     return BentoCard(
       child: Column(
@@ -581,7 +589,8 @@ class StressDetectionScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

@@ -27,7 +27,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
         elevation: 0,
         title: BilingualLabel(
           primaryText: 'Monthly Health Report • ${report.monthTitle}',
-          regionalText: 'मासिक स्वास्थ्य रिपोर्ट • ${report.regionalMonthTitle}',
+          regionalText:
+              'मासिक स्वास्थ्य रिपोर्ट • ${report.regionalMonthTitle}',
         ),
         actions: [
           IconButton(
@@ -320,7 +321,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Icon(_getPillarIconData(pillar.iconName), color: AppColors.focusBlue, size: 18),
+                  Icon(_getPillarIconData(pillar.iconName),
+                      color: AppColors.focusBlue, size: 18),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     pillar.title,
@@ -376,7 +378,9 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
                 child: Text(
                   pillar.monthDelta,
                   style: AppTypography.bodySmall.copyWith(
-                    color: pillar.isPositiveDelta ? AppColors.karmaGreen : AppColors.energyOrange,
+                    color: pillar.isPositiveDelta
+                        ? AppColors.karmaGreen
+                        : AppColors.energyOrange,
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                   ),
@@ -405,7 +409,10 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('• ', style: TextStyle(color: AppColors.focusBlue, fontWeight: FontWeight.bold)),
+                    const Text('• ',
+                        style: TextStyle(
+                            color: AppColors.focusBlue,
+                            fontWeight: FontWeight.bold)),
                     Expanded(
                       child: Text(
                         insight,
@@ -482,7 +489,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.flag_outlined, color: AppColors.energyOrange, size: 16),
+                const Icon(Icons.flag_outlined,
+                    color: AppColors.energyOrange, size: 16),
                 const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
@@ -502,7 +510,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildDoctorShareBanner(BuildContext context, MonthlyHealthReport report) {
+  Widget _buildDoctorShareBanner(
+      BuildContext context, MonthlyHealthReport report) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -515,7 +524,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.local_hospital_outlined, color: AppColors.focusBlue, size: 22),
+              const Icon(Icons.local_hospital_outlined,
+                  color: AppColors.focusBlue, size: 22),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Doctor-Ready Clinical Summary',
@@ -544,7 +554,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
                 ),
               ),
               icon: const Icon(Icons.copy_all, color: Colors.white, size: 16),
-              label: const Text('View & Copy Clinical Summary', style: TextStyle(color: Colors.white)),
+              label: const Text('View & Copy Clinical Summary',
+                  style: TextStyle(color: Colors.white)),
               onPressed: () => _showDoctorSummaryModal(context, report),
             ),
           ),
@@ -583,7 +594,8 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
     }
   }
 
-  void _showDoctorSummaryModal(BuildContext context, MonthlyHealthReport report) {
+  void _showDoctorSummaryModal(
+      BuildContext context, MonthlyHealthReport report) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
@@ -635,14 +647,18 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
                               borderRadius: AppRadii.radiusMd,
                             ),
                           ),
-                          icon: const Icon(Icons.copy, size: 16, color: AppColors.focusBlue),
-                          label: const Text('Copy to Clipboard', style: TextStyle(color: AppColors.focusBlue)),
+                          icon: const Icon(Icons.copy,
+                              size: 16, color: AppColors.focusBlue),
+                          label: const Text('Copy to Clipboard',
+                              style: TextStyle(color: AppColors.focusBlue)),
                           onPressed: () {
-                            Clipboard.setData(ClipboardData(text: report.doctorSummaryParagraph));
+                            Clipboard.setData(ClipboardData(
+                                text: report.doctorSummaryParagraph));
                             Navigator.pop(context);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Clinical summary copied to clipboard!'),
+                                content: Text(
+                                    'Clinical summary copied to clipboard!'),
                                 backgroundColor: AppColors.karmaGreen,
                               ),
                             );
@@ -658,8 +674,10 @@ class MonthlyHealthReportScreen extends ConsumerWidget {
                               borderRadius: AppRadii.radiusMd,
                             ),
                           ),
-                          icon: const Icon(Icons.done, size: 16, color: Colors.white),
-                          label: const Text('Close', style: TextStyle(color: Colors.white)),
+                          icon: const Icon(Icons.done,
+                              size: 16, color: Colors.white),
+                          label: const Text('Close',
+                              style: TextStyle(color: Colors.white)),
                           onPressed: () => Navigator.pop(context),
                         ),
                       ),

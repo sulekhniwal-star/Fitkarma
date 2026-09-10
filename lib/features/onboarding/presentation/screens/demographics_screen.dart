@@ -180,7 +180,8 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                           activeTrackColor: AppColors.karmaGreen,
                           inactiveTrackColor: AppColors.surfaceElevated,
                           thumbColor: AppColors.karmaGreen,
-                          overlayColor: AppColors.karmaGreen.withValues(alpha: 0.2),
+                          overlayColor:
+                              AppColors.karmaGreen.withValues(alpha: 0.2),
                         ),
                         child: Slider(
                           value: _weightKg,
@@ -221,7 +222,8 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                           activeTrackColor: AppColors.focusBlue,
                           inactiveTrackColor: AppColors.surfaceElevated,
                           thumbColor: AppColors.focusBlue,
-                          overlayColor: AppColors.focusBlue.withValues(alpha: 0.2),
+                          overlayColor:
+                              AppColors.focusBlue.withValues(alpha: 0.2),
                         ),
                         child: Slider(
                           value: _heightCm,
@@ -245,7 +247,9 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('AGE (उम्र)', style: TextStyle(fontSize: 12, color: AppColors.textMuted)),
+                            const Text('AGE (उम्र)',
+                                style: TextStyle(
+                                    fontSize: 12, color: AppColors.textMuted)),
                             const SizedBox(height: 6),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -253,19 +257,22 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                                 IconButton(
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(),
-                                  icon: const Icon(Icons.remove_circle_outline, color: AppColors.textSecondary),
+                                  icon: const Icon(Icons.remove_circle_outline,
+                                      color: AppColors.textSecondary),
                                   onPressed: () {
                                     if (_age > 16) setState(() => _age--);
                                   },
                                 ),
                                 Text(
                                   '$_age yrs',
-                                  style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w800),
+                                  style: AppTypography.titleMedium
+                                      .copyWith(fontWeight: FontWeight.w800),
                                 ),
                                 IconButton(
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(),
-                                  icon: const Icon(Icons.add_circle_outline, color: AppColors.karmaGreen),
+                                  icon: const Icon(Icons.add_circle_outline,
+                                      color: AppColors.karmaGreen),
                                   onPressed: () {
                                     if (_age < 85) setState(() => _age++);
                                   },
@@ -283,26 +290,38 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('GOAL (लक्ष्य)', style: TextStyle(fontSize: 12, color: AppColors.textMuted)),
+                            const Text('GOAL (लक्ष्य)',
+                                style: TextStyle(
+                                    fontSize: 12, color: AppColors.textMuted)),
                             const SizedBox(height: 6),
                             DropdownButtonHideUnderline(
                               child: DropdownButton<NutritionGoal>(
                                 value: _goal,
                                 isDense: true,
                                 dropdownColor: AppColors.surfaceElevated,
-                                icon: const Icon(Icons.arrow_drop_down, color: AppColors.karmaGreen),
+                                icon: const Icon(Icons.arrow_drop_down,
+                                    color: AppColors.karmaGreen),
                                 items: const [
                                   DropdownMenuItem(
                                     value: NutritionGoal.fatLoss,
-                                    child: Text('Fat Loss', style: TextStyle(fontSize: 14, color: AppColors.textPrimary)),
+                                    child: Text('Fat Loss',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColors.textPrimary)),
                                   ),
                                   DropdownMenuItem(
                                     value: NutritionGoal.maintenance,
-                                    child: Text('Maintain', style: TextStyle(fontSize: 14, color: AppColors.textPrimary)),
+                                    child: Text('Maintain',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColors.textPrimary)),
                                   ),
                                   DropdownMenuItem(
                                     value: NutritionGoal.muscleGain,
-                                    child: Text('Build Muscle', style: TextStyle(fontSize: 14, color: AppColors.textPrimary)),
+                                    child: Text('Build Muscle',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColors.textPrimary)),
                                   ),
                                 ],
                                 onChanged: (val) {
@@ -431,7 +450,8 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
     return BentoCard(
       hasGlow: isSelected,
       glowColor: AppColors.focusBlue,
-      backgroundColor: isSelected ? AppColors.surfaceElevated : AppColors.surface,
+      backgroundColor:
+          isSelected ? AppColors.surfaceElevated : AppColors.surface,
       border: Border.all(
         color: isSelected ? AppColors.focusBlue : AppColors.glassBorder,
         width: isSelected ? 1.5 : 1.0,
@@ -440,13 +460,16 @@ class _DemographicsScreenState extends ConsumerState<DemographicsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: isSelected ? AppColors.focusBlue : AppColors.textSecondary, size: 24),
+          Icon(icon,
+              color: isSelected ? AppColors.focusBlue : AppColors.textSecondary,
+              size: 24),
           const SizedBox(width: 8),
           BilingualLabel(
             primaryText: label,
             regionalText: regionalLabel,
             primaryStyle: AppTypography.titleMedium.copyWith(
-              color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
+              color:
+                  isSelected ? AppColors.textPrimary : AppColors.textSecondary,
               fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
             ),
           ),

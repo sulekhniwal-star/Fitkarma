@@ -22,7 +22,10 @@ class LocalClubEngine {
     final lat2Rad = _degreesToRadians(lat2);
 
     final a = math.sin(dLat / 2) * math.sin(dLat / 2) +
-        math.sin(dLon / 2) * math.sin(dLon / 2) * math.cos(lat1Rad) * math.cos(lat2Rad);
+        math.sin(dLon / 2) *
+            math.sin(dLon / 2) *
+            math.cos(lat1Rad) *
+            math.cos(lat2Rad);
     final c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
 
     return earthRadiusKm * c;
@@ -37,8 +40,10 @@ class LocalClubEngine {
     required List<LocalGeoClub> clubs,
     required double maxRadiusKm,
   }) {
-    final filtered = clubs.where((c) => c.distanceFromUserKm <= maxRadiusKm).toList();
-    filtered.sort((a, b) => a.distanceFromUserKm.compareTo(b.distanceFromUserKm));
+    final filtered =
+        clubs.where((c) => c.distanceFromUserKm <= maxRadiusKm).toList();
+    filtered
+        .sort((a, b) => a.distanceFromUserKm.compareTo(b.distanceFromUserKm));
     return filtered;
   }
 }

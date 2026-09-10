@@ -8,7 +8,8 @@ class ComplianceEngine {
   ClinicalDisclaimer getStandardClinicalDisclaimer() {
     return const ClinicalDisclaimer(
       title: 'SaMD & Clinical Decision Support Notice',
-      regionalTitle: 'सॉफ्टवेयर-एज-ए-मेडिकल-डिवाइस (SaMD) एवं स्वास्थ्य परामर्श सूचना',
+      regionalTitle:
+          'सॉफ्टवेयर-एज-ए-मेडिकल-डिवाइस (SaMD) एवं स्वास्थ्य परामर्श सूचना',
       legalText:
           'FitKarma provides AI-driven lifestyle recommendations, Ayurvedic dosha harmony insights, '
           'and preventive biomarker risk stratification. It is NOT a substitute for professional '
@@ -18,7 +19,8 @@ class ComplianceEngine {
           'फिटकर्मा एआई-आधारित जीवनशैली मार्गदर्शन, आयुर्वेदिक त्रिदोष संतुलन एवं निवारक बायोमार्कर '
           'जोखिम विश्लेषण प्रदान करता है। यह किसी पंजीकृत चिकित्सक के चिकित्सकीय निदान या उपचार का विकल्प '
           'नहीं है। किसी भी चिकित्सीय परिवर्तन से पूर्व अपने चिकित्सक से परामर्श अवश्य करें।',
-      emergencyHelpline: 'National Medical Emergency: 112 / 108 (India) | 911 (US)',
+      emergencyHelpline:
+          'National Medical Emergency: 112 / 108 (India) | 911 (US)',
     );
   }
 
@@ -71,7 +73,8 @@ class ComplianceEngine {
   }
 
   /// Generates baseline statutory consents conforming to DPDP 2023 & ABDM M3
-  List<ClinicalConsentArtifact> generateDefaultStatutoryConsents({DateTime? grantedTime}) {
+  List<ClinicalConsentArtifact> generateDefaultStatutoryConsents(
+      {DateTime? grantedTime}) {
     final start = grantedTime ?? DateTime.now();
     final oneYearExpiry = start.add(const Duration(days: 365));
 
@@ -108,7 +111,8 @@ class ComplianceEngine {
       ClinicalConsentArtifact(
         consentId: 'CONSENT-AYUSH-LIFESTYLE-03',
         purpose: 'Ayurvedic Dinacharya & Seasonal Ritucharya Personalization',
-        regionalPurpose: 'दिनचर्या एवं ऋतुचर्या अनुसार व्यक्तिगत जीवनशैली परामर्श',
+        regionalPurpose:
+            'दिनचर्या एवं ऋतुचर्या अनुसार व्यक्तिगत जीवनशैली परामर्श',
         dataCategories: const [
           'Dietary Intake',
           'Agni & Digestion Logs',

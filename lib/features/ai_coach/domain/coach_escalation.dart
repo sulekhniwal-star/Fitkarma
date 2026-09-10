@@ -1,7 +1,12 @@
 enum EscalationReason {
-  medicalBoundary(name: 'Medical / Injury Precaution', regionalName: 'चिकित्सीय सावधानी'),
-  advancedContestPrep(name: 'Elite Periodization / Contest Prep', regionalName: 'उन्नत प्रतियोगिता तैयारी'),
-  userRequested(name: 'Direct Human Consultation', regionalName: 'प्रमाणित कोच से सीधा परामर्श');
+  medicalBoundary(
+      name: 'Medical / Injury Precaution', regionalName: 'चिकित्सीय सावधानी'),
+  advancedContestPrep(
+      name: 'Elite Periodization / Contest Prep',
+      regionalName: 'उन्नत प्रतियोगिता तैयारी'),
+  userRequested(
+      name: 'Direct Human Consultation',
+      regionalName: 'प्रमाणित कोच से सीधा परामर्श');
 
   final String name;
   final String regionalName;
@@ -120,7 +125,8 @@ class CoachEscalationTicket {
       userId: map['userId'] as String? ?? '',
       reason: reason,
       status: status,
-      dossier: CoachHandoverDossier.fromMap(Map<String, dynamic>.from(map['dossier'] ?? {})),
+      dossier: CoachHandoverDossier.fromMap(
+          Map<String, dynamic>.from(map['dossier'] ?? {})),
       assignedCoachName: map['assignedCoachName'] as String?,
       coachResponseNotes: map['coachResponseNotes'] as String?,
       createdAt: map['createdAt'] != null

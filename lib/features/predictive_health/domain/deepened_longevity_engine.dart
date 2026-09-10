@@ -26,10 +26,13 @@ class DeepenedLongevityEngine {
     double? visceralFatIndex,
   }) {
     // 1. Calculate Base Longevity Report
-    final double computedBioAge = chronologicalAge - (vo2MaxEstimate >= 42.0 ? 2.8 : -1.5);
-    final double computedHbA1c = double.parse(((fastingGlucose + 46.7) / 28.7).toStringAsFixed(1));
+    final double computedBioAge =
+        chronologicalAge - (vo2MaxEstimate >= 42.0 ? 2.8 : -1.5);
+    final double computedHbA1c =
+        double.parse(((fastingGlucose + 46.7) / 28.7).toStringAsFixed(1));
     final double deepSleepPercent = (deepSleepMinutes / 480.0) * 100.0;
-    final double computedWaistRatio = visceralFatIndex != null ? (0.40 + (visceralFatIndex * 0.008)) : 0.46;
+    final double computedWaistRatio =
+        visceralFatIndex != null ? (0.40 + (visceralFatIndex * 0.008)) : 0.46;
 
     final baseReport = _baseEngine.calculateLongevityScore(
       chronologicalAge: chronologicalAge,
@@ -78,7 +81,8 @@ class DeepenedLongevityEngine {
       weightedHallmarkSum += (h.score * h.hallmark.weight);
     }
 
-    double cellularScore = (baseReport.compositeScore * 0.4) + (weightedHallmarkSum * 0.6);
+    double cellularScore =
+        (baseReport.compositeScore * 0.4) + (weightedHallmarkSum * 0.6);
     if (southAsianRisk.hasElevatedLpA) cellularScore -= 4.0;
     if (southAsianRisk.atherogenicIndexRatio > 3.5) cellularScore -= 5.0;
     cellularScore = cellularScore.clamp(0.0, 100.0);
@@ -88,12 +92,15 @@ class DeepenedLongevityEngine {
 
     return DeepenedLongevityReport(
       baseReport: baseReport,
-      compositeCellularResilienceScore: double.parse(cellularScore.toStringAsFixed(1)),
+      compositeCellularResilienceScore:
+          double.parse(cellularScore.toStringAsFixed(1)),
       hallmarkEvaluations: hallmarkEvaluations,
       southAsianRisk: southAsianRisk,
       cellularRoadmap: roadmap,
-      primaryLongevityPillarSummary: 'Mitochondrial efficiency and glycemic stability are primary drivers of your ${baseReport.tier.projectedHealthspanBonus} projected healthspan trajectory.',
-      regionalPrimaryLongevityPillarSummary: 'माइटोकॉन्ड्रिया कार्यक्षमता व शर्करा संतुलन आपकी दीर्घायु संभावना को ${baseReport.tier.regionalProjectedHealthspanBonus} तक बढ़ाते हैं।',
+      primaryLongevityPillarSummary:
+          'Mitochondrial efficiency and glycemic stability are primary drivers of your ${baseReport.tier.projectedHealthspanBonus} projected healthspan trajectory.',
+      regionalPrimaryLongevityPillarSummary:
+          'माइटोकॉन्ड्रिया कार्यक्षमता व शर्करा संतुलन आपकी दीर्घायु संभावना को ${baseReport.tier.regionalProjectedHealthspanBonus} तक बढ़ाते हैं।',
       synthesizedAt: DateTime.now(),
     );
   }
@@ -111,7 +118,8 @@ class DeepenedLongevityEngine {
 
     // 1. Mitochondrial Health (VO2 Max & Aerobic Capacity)
     final double mitoScore = ((vo2Max / 48.0) * 100).clamp(30.0, 100.0);
-    final double mitoDelta = mitoScore >= 80 ? -1.8 : (mitoScore >= 60 ? -0.5 : 1.5);
+    final double mitoDelta =
+        mitoScore >= 80 ? -1.8 : (mitoScore >= 60 ? -0.5 : 1.5);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.mitochondrialHealth,
@@ -128,8 +136,10 @@ class DeepenedLongevityEngine {
     );
 
     // 2. Telomere Integrity (Vascular & Cardiorespiratory Reserve)
-    final double teloScore = (100.0 - (restingHr - 50) * 1.5).clamp(40.0, 100.0);
-    final double teloDelta = teloScore >= 80 ? -1.5 : (teloScore >= 60 ? 0.0 : 1.8);
+    final double teloScore =
+        (100.0 - (restingHr - 50) * 1.5).clamp(40.0, 100.0);
+    final double teloDelta =
+        teloScore >= 80 ? -1.5 : (teloScore >= 60 ? 0.0 : 1.8);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.telomereIntegrity,
@@ -146,8 +156,10 @@ class DeepenedLongevityEngine {
     );
 
     // 3. Proteostasis & AGEs (Glycemic Stability)
-    final double protoScore = (100.0 - (fastingGlucose - 80) * 1.8).clamp(30.0, 100.0);
-    final double protoDelta = protoScore >= 80 ? -2.0 : (protoScore >= 60 ? -0.4 : 2.2);
+    final double protoScore =
+        (100.0 - (fastingGlucose - 80) * 1.8).clamp(30.0, 100.0);
+    final double protoDelta =
+        protoScore >= 80 ? -2.0 : (protoScore >= 60 ? -0.4 : 2.2);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.proteostasisAndAges,
@@ -165,7 +177,8 @@ class DeepenedLongevityEngine {
 
     // 4. Epigenetic Stability (HRV & Parasympathetic Regulation)
     final double epiScore = ((hrv / 65.0) * 100).clamp(30.0, 100.0);
-    final double epiDelta = epiScore >= 80 ? -1.4 : (epiScore >= 60 ? -0.2 : 1.6);
+    final double epiDelta =
+        epiScore >= 80 ? -1.4 : (epiScore >= 60 ? -0.2 : 1.6);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.epigeneticStability,
@@ -184,7 +197,8 @@ class DeepenedLongevityEngine {
     // 5. Inflammaging (Systemic Low-Grade Inflammation)
     final double effectiveCrp = hsCrp ?? 1.2;
     final double inflScore = (100.0 - (effectiveCrp * 25.0)).clamp(30.0, 100.0);
-    final double inflDelta = inflScore >= 80 ? -1.6 : (inflScore >= 60 ? 0.0 : 2.0);
+    final double inflDelta =
+        inflScore >= 80 ? -1.6 : (inflScore >= 60 ? 0.0 : 2.0);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.inflammaging,
@@ -202,7 +216,8 @@ class DeepenedLongevityEngine {
 
     // 6. Nutrient Sensing & mTOR/AMPK (Skeletal Muscle & Strength)
     final double nutrientScore = ((muscleMass / 32.0) * 100).clamp(40.0, 100.0);
-    final double nutrientDelta = nutrientScore >= 80 ? -1.2 : (nutrientScore >= 60 ? 0.0 : 1.4);
+    final double nutrientDelta =
+        nutrientScore >= 80 ? -1.2 : (nutrientScore >= 60 ? 0.0 : 1.4);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.nutrientSensing,
@@ -220,7 +235,8 @@ class DeepenedLongevityEngine {
 
     // 7. Stem Cell Regeneration (Deep NREM Stage 3 Sleep)
     final double stemScore = ((deepSleep / 80.0) * 100).clamp(30.0, 100.0);
-    final double stemDelta = stemScore >= 80 ? -1.5 : (stemScore >= 60 ? -0.2 : 1.7);
+    final double stemDelta =
+        stemScore >= 80 ? -1.5 : (stemScore >= 60 ? -0.2 : 1.7);
     list.add(
       HallmarkEvaluation(
         hallmark: HallmarkOfAging.stemCellRegeneration,
@@ -279,8 +295,10 @@ class DeepenedLongevityEngine {
           'सप्ताह में ३ दिन ३५-मिनट ज़ोन २ कार्डियो व्यायाम',
           'अनार व ग्रीन टी पॉलीफेनोल्स द्वारा कोशिकीय ऊर्जा वृद्धि',
         ],
-        ayurvedicRasayana: 'Shilajit (Fulvic Acid Mineral Complex) & Triphala Churna',
-        regionalAyurvedicRasayana: 'शुद्ध शिलाजीत व त्रिफला चूर्ण (पाचन व आंत सुरक्षा)',
+        ayurvedicRasayana:
+            'Shilajit (Fulvic Acid Mineral Complex) & Triphala Churna',
+        regionalAyurvedicRasayana:
+            'शुद्ध शिलाजीत व त्रिफला चूर्ण (पाचन व आंत सुरक्षा)',
       ),
       LongevityRoadmapPhase(
         phaseNumber: 2,
@@ -297,8 +315,10 @@ class DeepenedLongevityEngine {
           'रक्त संचार व धमनी संकुचन सुधार हेतु शीतल स्नान',
           'चुकंदर व पालक द्वारा नाइट्रिक ऑक्साइड उत्पादन वृद्धि',
         ],
-        ayurvedicRasayana: 'Ashwagandha KSM-66 (Withaferin-A) & Arjuna Bark Kwath',
-        regionalAyurvedicRasayana: 'अश्वगंधा (केएसएम-६६) व अर्जुन छाल काढ़ा (हृदय सुरक्षा)',
+        ayurvedicRasayana:
+            'Ashwagandha KSM-66 (Withaferin-A) & Arjuna Bark Kwath',
+        regionalAyurvedicRasayana:
+            'अश्वगंधा (केएसएम-६६) व अर्जुन छाल काढ़ा (हृदय सुरक्षा)',
       ),
       LongevityRoadmapPhase(
         phaseNumber: 3,
@@ -315,8 +335,10 @@ class DeepenedLongevityEngine {
           'हीट शॉक प्रोटीन वृद्धि हेतु गर्म स्नान व स्टीम थेरेपी',
           'अंकुरित दालों व विटामिन बी द्वारा डीएनए मिथाइलेशन सुदृढ़ीकरण',
         ],
-        ayurvedicRasayana: 'Amalaki Rasayana (Chyawanprash) & Brahmi Medhya Rasayana',
-        regionalAyurvedicRasayana: 'आमलकी रसायन (च्यवनप्राश) व ब्राह्मी (मस्तिष्क सुरक्षा)',
+        ayurvedicRasayana:
+            'Amalaki Rasayana (Chyawanprash) & Brahmi Medhya Rasayana',
+        regionalAyurvedicRasayana:
+            'आमलकी रसायन (च्यवनप्राश) व ब्राह्मी (मस्तिष्क सुरक्षा)',
       ),
     ];
   }

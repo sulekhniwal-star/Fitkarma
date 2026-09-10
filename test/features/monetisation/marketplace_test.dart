@@ -15,11 +15,14 @@ void main() {
     });
 
     test('Filters listings by coach specialty accurately', () {
-      const filter = MarketplaceFilter(specialty: CoachSpecialty.ayurvedicVaidya);
+      const filter =
+          MarketplaceFilter(specialty: CoachSpecialty.ayurvedicVaidya);
       final filtered = engine.filterListings(listings: catalog, filter: filter);
 
       expect(filtered.isNotEmpty, isTrue);
-      expect(filtered.every((l) => l.specialty == CoachSpecialty.ayurvedicVaidya), isTrue);
+      expect(
+          filtered.every((l) => l.specialty == CoachSpecialty.ayurvedicVaidya),
+          isTrue);
     });
 
     test('Filters listings by listing type accurately', () {
@@ -27,7 +30,8 @@ void main() {
       final filtered = engine.filterListings(listings: catalog, filter: filter);
 
       expect(filtered.isNotEmpty, isTrue);
-      expect(filtered.every((l) => l.type == ListingType.oneOnOneConsultation), isTrue);
+      expect(filtered.every((l) => l.type == ListingType.oneOnOneConsultation),
+          isTrue);
     });
 
     test('Filters listings by case-insensitive search query', () {
@@ -72,8 +76,12 @@ void main() {
       expect(notifier.state.userOrders.isEmpty, isTrue);
 
       notifier.setSpecialty(CoachSpecialty.hypertrophyStrength);
-      expect(notifier.state.filter.specialty, equals(CoachSpecialty.hypertrophyStrength));
-      expect(notifier.state.filteredListings.every((l) => l.specialty == CoachSpecialty.hypertrophyStrength), isTrue);
+      expect(notifier.state.filter.specialty,
+          equals(CoachSpecialty.hypertrophyStrength));
+      expect(
+          notifier.state.filteredListings
+              .every((l) => l.specialty == CoachSpecialty.hypertrophyStrength),
+          isTrue);
 
       notifier.setSearchQuery('Vikram');
       expect(notifier.state.filteredListings.length, equals(1));
@@ -82,12 +90,14 @@ void main() {
       await notifier.purchaseListing(listing);
 
       expect(notifier.state.userOrders.length, equals(1));
-      expect(notifier.state.userOrders.first.listingId, equals(listing.listingId));
+      expect(
+          notifier.state.userOrders.first.listingId, equals(listing.listingId));
       expect(notifier.state.successMessage, contains('Successfully enrolled'));
 
       notifier.resetFilters();
       expect(notifier.state.filter.specialty, isNull);
-      expect(notifier.state.filteredListings.length, equals(notifier.state.catalog.length));
+      expect(notifier.state.filteredListings.length,
+          equals(notifier.state.catalog.length));
     });
   });
 }

@@ -45,10 +45,14 @@ enum HabitTimeSlot {
 
 enum HabitTriggerSource {
   manual(label: 'Manual Check', regionalLabel: 'मैनुअल चेक'),
-  stepSensor(label: 'Auto: Step Counter / Wearable', regionalLabel: 'ऑटो: कदम ट्रैकर'),
-  workoutLogger(label: 'Auto: Workout Tracker', regionalLabel: 'ऑटो: व्यायाम ट्रैकर'),
-  mealLogger(label: 'Auto: Nutrition Scanner', regionalLabel: 'ऑटो: भोजन ट्रैकर'),
-  sleepTracker(label: 'Auto: Sleep Monitor', regionalLabel: 'ऑटो: निद्रा ट्रैकर');
+  stepSensor(
+      label: 'Auto: Step Counter / Wearable', regionalLabel: 'ऑटो: कदम ट्रैकर'),
+  workoutLogger(
+      label: 'Auto: Workout Tracker', regionalLabel: 'ऑटो: व्यायाम ट्रैकर'),
+  mealLogger(
+      label: 'Auto: Nutrition Scanner', regionalLabel: 'ऑटो: भोजन ट्रैकर'),
+  sleepTracker(
+      label: 'Auto: Sleep Monitor', regionalLabel: 'ऑटो: निद्रा ट्रैकर');
 
   final String label;
   final String regionalLabel;

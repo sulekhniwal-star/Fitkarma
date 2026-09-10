@@ -5,12 +5,14 @@ enum TravelContext {
   flightTransit(
     name: 'Long Flight & Airport Transit',
     regionalName: 'हवाई यात्रा एवं पारगमन',
-    description: 'Pressurized dry cabin air, prolonged sitting, circadian shifting.',
+    description:
+        'Pressurized dry cabin air, prolonged sitting, circadian shifting.',
   ),
   trainRoadTrip(
     name: 'Train / Highway Road Trip',
     regionalName: 'रेल व सड़क यात्रा',
-    description: 'Irregular meal stops, restricted legroom, station snack temptations.',
+    description:
+        'Irregular meal stops, restricted legroom, station snack temptations.',
   ),
   hotelNoGym(
     name: 'Hotel Stay (No Gym / Minimal Space)',
@@ -25,7 +27,8 @@ enum TravelContext {
   internationalJetLag(
     name: 'Cross-Timezone Long Haul (>4h Shift)',
     regionalName: 'अंतरराष्ट्रीय समय क्षेत्र परिवर्तन (जेट लैग)',
-    description: 'Circadian misalignment, delayed sleep onset, altered digestion.',
+    description:
+        'Circadian misalignment, delayed sleep onset, altered digestion.',
   );
 
   final String name;

@@ -33,7 +33,8 @@ class KarmaEngine {
   /// Maps lifetime points to KarmaTier
   static KarmaTier determineTier(int lifetimePoints) {
     for (final tier in KarmaTier.values) {
-      if (lifetimePoints >= tier.minPoints && lifetimePoints <= tier.maxPoints) {
+      if (lifetimePoints >= tier.minPoints &&
+          lifetimePoints <= tier.maxPoints) {
         return tier;
       }
     }
@@ -54,12 +55,14 @@ class KarmaEngine {
   static KarmaTransaction generateKarmaReward({
     required KarmaActionType action,
     required int streakDays,
-    double formQualityScore = 1.0, // 0.8 to 1.25 multiplier based on Computer Vision HUD
+    double formQualityScore =
+        1.0, // 0.8 to 1.25 multiplier based on Computer Vision HUD
     bool isReadinessAligned = true, // Bonus if training matches readiness zone
   }) {
     final streakMult = calculateStreakMultiplier(streakDays);
     final readinessBonus = isReadinessAligned ? 1.15 : 1.0;
-    final effectiveMultiplier = double.parse((streakMult * formQualityScore * readinessBonus).toStringAsFixed(2));
+    final effectiveMultiplier = double.parse(
+        (streakMult * formQualityScore * readinessBonus).toStringAsFixed(2));
 
     final totalPoints = (action.basePoints * effectiveMultiplier).round();
 
@@ -70,8 +73,10 @@ class KarmaEngine {
       basePoints: action.basePoints,
       multiplier: effectiveMultiplier,
       totalPointsAwarded: totalPoints,
-      description: '${action.label} (x${effectiveMultiplier.toStringAsFixed(2)} multiplier)',
-      regionalDescription: '${action.regionalLabel} (x${effectiveMultiplier.toStringAsFixed(2)} गुणक)',
+      description:
+          '${action.label} (x${effectiveMultiplier.toStringAsFixed(2)} multiplier)',
+      regionalDescription:
+          '${action.regionalLabel} (x${effectiveMultiplier.toStringAsFixed(2)} गुणक)',
     );
   }
 

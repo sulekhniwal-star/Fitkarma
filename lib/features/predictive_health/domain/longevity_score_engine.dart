@@ -39,10 +39,14 @@ class LongevityScoreEngine {
     final cardioPillar = LongevityPillarScore(
       pillar: LongevityPillarType.cardiovascular,
       score: cardioScore,
-      primaryStrength: 'Normotensive arterial compliance (${systolicBloodPressure.toInt()}/${diastolicBloodPressure.toInt()} mmHg) & high HRV (${rmssdHeartRateVariability.toInt()} ms).',
-      regionalPrimaryStrength: 'धमनियों में उत्तम लचीलापन (${systolicBloodPressure.toInt()}/${diastolicBloodPressure.toInt()} BP) व मजबूत वेगल टोन (${rmssdHeartRateVariability.toInt()} ms)।',
-      optimizationOpportunity: 'Target resting heart rate below 56 bpm with progressive aerobic sessions.',
-      regionalOptimizationOpportunity: 'नियमित एरोबिक अभ्यास से विश्राम हृदय गति को ५६ से नीचे लाएं।',
+      primaryStrength:
+          'Normotensive arterial compliance (${systolicBloodPressure.toInt()}/${diastolicBloodPressure.toInt()} mmHg) & high HRV (${rmssdHeartRateVariability.toInt()} ms).',
+      regionalPrimaryStrength:
+          'धमनियों में उत्तम लचीलापन (${systolicBloodPressure.toInt()}/${diastolicBloodPressure.toInt()} BP) व मजबूत वेगल टोन (${rmssdHeartRateVariability.toInt()} ms)।',
+      optimizationOpportunity:
+          'Target resting heart rate below 56 bpm with progressive aerobic sessions.',
+      regionalOptimizationOpportunity:
+          'नियमित एरोबिक अभ्यास से विश्राम हृदय गति को ५६ से नीचे लाएं।',
     );
 
     // Pillar B: Metabolic & Glycemic Reserve (20%)
@@ -54,10 +58,14 @@ class LongevityScoreEngine {
     final metabolicPillar = LongevityPillarScore(
       pillar: LongevityPillarType.metabolic,
       score: metabolicScore,
-      primaryStrength: 'Optimal waist-to-height ratio (${waistToHeightRatio.toStringAsFixed(2)}) minimizing visceral adipose inflammation.',
-      regionalPrimaryStrength: 'कमर-ऊंचाई अनुपात (${waistToHeightRatio.toStringAsFixed(2)}) आदर्श स्तर पर है जिससे आंतरिक चर्बी का जोखिम न्यूनतम है।',
-      optimizationOpportunity: 'Maintain 35g+ daily dietary fiber to preserve superior insulin sensitivity.',
-      regionalOptimizationOpportunity: 'इंसुलिन संवेदनशीलता बनाए रखने के लिए ३५ ग्राम फाइबर प्रतिदिन लें।',
+      primaryStrength:
+          'Optimal waist-to-height ratio (${waistToHeightRatio.toStringAsFixed(2)}) minimizing visceral adipose inflammation.',
+      regionalPrimaryStrength:
+          'कमर-ऊंचाई अनुपात (${waistToHeightRatio.toStringAsFixed(2)}) आदर्श स्तर पर है जिससे आंतरिक चर्बी का जोखिम न्यूनतम है।',
+      optimizationOpportunity:
+          'Maintain 35g+ daily dietary fiber to preserve superior insulin sensitivity.',
+      regionalOptimizationOpportunity:
+          'इंसुलिन संवेदनशीलता बनाए रखने के लिए ३५ ग्राम फाइबर प्रतिदिन लें।',
     );
 
     // Pillar C: Cardiorespiratory & Musculoskeletal Reserve (20%)
@@ -70,10 +78,14 @@ class LongevityScoreEngine {
     final fitnessPillar = LongevityPillarScore(
       pillar: LongevityPillarType.cardiorespiratory,
       score: fitnessScore,
-      primaryStrength: 'High aerobic reserve (VO2 Max ${estimatedVo2Max.toStringAsFixed(1)}) and sarcopenic lean mass preservation.',
-      regionalPrimaryStrength: 'उत्कृष्ट एरोबिक क्षमता (VO2 Max ${estimatedVo2Max.toStringAsFixed(1)}) व मजबूत मांसपेशी भंडार।',
-      optimizationOpportunity: 'Progressive overload on compound multi-joint resistance lifts.',
-      regionalOptimizationOpportunity: 'शक्ति प्रशिक्षण में भार की क्रमिक वृद्धि जारी रखें।',
+      primaryStrength:
+          'High aerobic reserve (VO2 Max ${estimatedVo2Max.toStringAsFixed(1)}) and sarcopenic lean mass preservation.',
+      regionalPrimaryStrength:
+          'उत्कृष्ट एरोबिक क्षमता (VO2 Max ${estimatedVo2Max.toStringAsFixed(1)}) व मजबूत मांसपेशी भंडार।',
+      optimizationOpportunity:
+          'Progressive overload on compound multi-joint resistance lifts.',
+      regionalOptimizationOpportunity:
+          'शक्ति प्रशिक्षण में भार की क्रमिक वृद्धि जारी रखें।',
     );
 
     // Pillar D: Cellular Recovery & Circadian Architecture (15%)
@@ -84,10 +96,14 @@ class LongevityScoreEngine {
     final sleepPillar = LongevityPillarScore(
       pillar: LongevityPillarType.cellularRecovery,
       score: sleepScore,
-      primaryStrength: 'Restorative slow-wave deep sleep (${deepSleepPercentage.toStringAsFixed(1)}%) supporting glymphatic neuro-repair.',
-      regionalPrimaryStrength: 'गहरी नींद (${deepSleepPercentage.toStringAsFixed(1)}%) से मस्तिष्क व कोशिकाओं की प्राकृतिक मरम्मत।',
-      optimizationOpportunity: 'Lock in a 10:30 PM bedtime to harmonize nocturnal melatonin release.',
-      regionalOptimizationOpportunity: 'मेलाटोनिन संतुलन हेतु १०:३० बजे सोने का नियम बनाएं।',
+      primaryStrength:
+          'Restorative slow-wave deep sleep (${deepSleepPercentage.toStringAsFixed(1)}%) supporting glymphatic neuro-repair.',
+      regionalPrimaryStrength:
+          'गहरी नींद (${deepSleepPercentage.toStringAsFixed(1)}%) से मस्तिष्क व कोशिकाओं की प्राकृतिक मरम्मत।',
+      optimizationOpportunity:
+          'Lock in a 10:30 PM bedtime to harmonize nocturnal melatonin release.',
+      regionalOptimizationOpportunity:
+          'मेलाटोनिन संतुलन हेतु १०:३० बजे सोने का नियम बनाएं।',
     );
 
     // Pillar E: Nutritional Anti-Inflammatory Index (15%)
@@ -98,10 +114,14 @@ class LongevityScoreEngine {
     final nutritionPillar = LongevityPillarScore(
       pillar: LongevityPillarType.antiInflammatory,
       score: nutritionScore,
-      primaryStrength: 'High polyphenol antioxidant density and adequate protein intake (${dailyProteinGramsPerKg.toStringAsFixed(2)} g/kg).',
-      regionalPrimaryStrength: 'एंटीऑक्सीडेंट्स से भरपूर आहार व पर्याप्त प्रोटीन (${dailyProteinGramsPerKg.toStringAsFixed(2)} g/kg)।',
-      optimizationOpportunity: 'Incorporate rich sources of Omega-3s (flaxseeds, walnuts) daily.',
-      regionalOptimizationOpportunity: 'दैनिक आहार में ओमेगा-३ (अलसी, अखरोट) को प्राथमिकता दें।',
+      primaryStrength:
+          'High polyphenol antioxidant density and adequate protein intake (${dailyProteinGramsPerKg.toStringAsFixed(2)} g/kg).',
+      regionalPrimaryStrength:
+          'एंटीऑक्सीडेंट्स से भरपूर आहार व पर्याप्त प्रोटीन (${dailyProteinGramsPerKg.toStringAsFixed(2)} g/kg)।',
+      optimizationOpportunity:
+          'Incorporate rich sources of Omega-3s (flaxseeds, walnuts) daily.',
+      regionalOptimizationOpportunity:
+          'दैनिक आहार में ओमेगा-३ (अलसी, अखरोट) को प्राथमिकता दें।',
     );
 
     // Pillar F: Ayurvedic & Mind-Body Homeostasis (10%)
@@ -112,10 +132,14 @@ class LongevityScoreEngine {
     final ayurvedicPillar = LongevityPillarScore(
       pillar: LongevityPillarType.ayurvedicVagal,
       score: ayurvedicScore,
-      primaryStrength: 'Strong Shatpawali post-meal habit (${shatpawaliAdherencePercent.toInt()}%) and balanced autonomic tone.',
-      regionalPrimaryStrength: 'भोजनोपरांत शतपावली (${shatpawaliAdherencePercent.toInt()}%) व शांत मनोदशा का संतुलन।',
-      optimizationOpportunity: 'Add 10 minutes of morning Anulom-Vilom pranayama.',
-      regionalOptimizationOpportunity: 'प्रातःकाल १० मिनट अनुलोम-विलोम प्राणायाम जोड़ें।',
+      primaryStrength:
+          'Strong Shatpawali post-meal habit (${shatpawaliAdherencePercent.toInt()}%) and balanced autonomic tone.',
+      regionalPrimaryStrength:
+          'भोजनोपरांत शतपावली (${shatpawaliAdherencePercent.toInt()}%) व शांत मनोदशा का संतुलन।',
+      optimizationOpportunity:
+          'Add 10 minutes of morning Anulom-Vilom pranayama.',
+      regionalOptimizationOpportunity:
+          'प्रातःकाल १० मिनट अनुलोम-विलोम प्राणायाम जोड़ें।',
     );
 
     final allPillars = [
@@ -145,7 +169,8 @@ class LongevityScoreEngine {
     final ageRejuvenationBonus = (chronologicalAge - biologicalAge) * 0.75;
     final scoreBonus = ((compositeScore - 50.0) / 50.0) * 8.5;
     final healthspanBonusYears = _round(ageRejuvenationBonus + scoreBonus);
-    final projectedHealthspanAge = _round(baselineLifeExpectancy + healthspanBonusYears);
+    final projectedHealthspanAge =
+        _round(baselineLifeExpectancy + healthspanBonusYears);
 
     // 4. Actionable Longevity Accelerators
     final accelerators = _generateAccelerators(
@@ -163,11 +188,15 @@ class LongevityScoreEngine {
     final bestPillar = sortedPillars.first;
     final weakestPillar = sortedPillars.last;
 
-    final primaryAsset = '${bestPillar.pillar.name} (${bestPillar.score.toInt()}/100)';
-    final regionalPrimaryAsset = '${bestPillar.pillar.regionalName} (${bestPillar.score.toInt()}/100)';
+    final primaryAsset =
+        '${bestPillar.pillar.name} (${bestPillar.score.toInt()}/100)';
+    final regionalPrimaryAsset =
+        '${bestPillar.pillar.regionalName} (${bestPillar.score.toInt()}/100)';
 
-    final primaryVulnerability = '${weakestPillar.pillar.name} (${weakestPillar.score.toInt()}/100)';
-    final regionalPrimaryVulnerability = '${weakestPillar.pillar.regionalName} (${weakestPillar.score.toInt()}/100)';
+    final primaryVulnerability =
+        '${weakestPillar.pillar.name} (${weakestPillar.score.toInt()}/100)';
+    final regionalPrimaryVulnerability =
+        '${weakestPillar.pillar.regionalName} (${weakestPillar.score.toInt()}/100)';
 
     return LongevityReport(
       compositeScore: compositeScore,
@@ -238,7 +267,8 @@ class LongevityScoreEngine {
     return score.clamp(30.0, 99.0);
   }
 
-  double _evaluateFitnessScore(double vo2, double steps, int lifts, double chronoAge) {
+  double _evaluateFitnessScore(
+      double vo2, double steps, int lifts, double chronoAge) {
     double score = 100.0;
     final targetVo2 = 45.0 - (chronoAge - 20) * 0.3;
     final vo2Diff = vo2 - targetVo2;
@@ -345,8 +375,10 @@ class LongevityScoreEngine {
         pillar: LongevityPillarType.cardiorespiratory,
         title: 'Zone 2 Mitochondrial Biogenesis Progression',
         regionalTitle: 'ज़ोन २ माइटोकॉन्ड्रियल एरोबिक विस्तार',
-        scientificRationale: 'Expanding VO2 Max top decile reserve correlates with a 5x reduction in all-cause mortality risk.',
-        regionalScientificRationale: 'VO2 Max बढ़ाने से समग्र जीवन प्रत्याशा में ५ गुना सुधार देखा गया है।',
+        scientificRationale:
+            'Expanding VO2 Max top decile reserve correlates with a 5x reduction in all-cause mortality risk.',
+        regionalScientificRationale:
+            'VO2 Max बढ़ाने से समग्र जीवन प्रत्याशा में ५ गुना सुधार देखा गया है।',
         projectedHealthspanYearsGained: 3.2,
         implementationEase: 'Moderate',
         karmaReward: 100,
@@ -360,8 +392,10 @@ class LongevityScoreEngine {
           pillar: LongevityPillarType.metabolic,
           title: 'Waist-to-Height Optimization (< 0.46)',
           regionalTitle: 'कमर-ऊंचाई अनुपात सुधार (< ०.४६)',
-          scientificRationale: 'Eliminating subclinical visceral adiposity halts chronic low-grade cytokine inflammation.',
-          regionalScientificRationale: 'विसरल फैट कम करने से शरीर में आंतरिक सूजन का अंत होता है।',
+          scientificRationale:
+              'Eliminating subclinical visceral adiposity halts chronic low-grade cytokine inflammation.',
+          regionalScientificRationale:
+              'विसरल फैट कम करने से शरीर में आंतरिक सूजन का अंत होता है।',
           projectedHealthspanYearsGained: 2.6,
           implementationEase: 'High Focus',
           karmaReward: 90,
@@ -375,8 +409,10 @@ class LongevityScoreEngine {
         pillar: LongevityPillarType.cardiorespiratory,
         title: 'Compound Progressive Hypertrophy Lifts',
         regionalTitle: 'मांसपेशी मजबूती व शक्ति प्रशिक्षण',
-        scientificRationale: 'Preserving lean muscle mass and bone mineral density shields against frailty past age 65.',
-        regionalScientificRationale: 'मजबूत मांसपेशियां ६५ वर्ष की आयु के बाद भी शरीर को सक्रिय रखती हैं।',
+        scientificRationale:
+            'Preserving lean muscle mass and bone mineral density shields against frailty past age 65.',
+        regionalScientificRationale:
+            'मजबूत मांसपेशियां ६५ वर्ष की आयु के बाद भी शरीर को सक्रिय रखती हैं।',
         projectedHealthspanYearsGained: 2.1,
         implementationEase: 'Moderate',
         karmaReward: 80,
@@ -390,8 +426,10 @@ class LongevityScoreEngine {
           pillar: LongevityPillarType.cellularRecovery,
           title: 'Glymphatic Slow-Wave Delta Optimization',
           regionalTitle: 'गहरी नींद व न्यूरो-कोशिकीय सफाई',
-          scientificRationale: 'Deep delta sleep facilitates clearance of amyloid-beta peptides from the cerebral cortex.',
-          regionalScientificRationale: 'गहरी नींद मस्तिष्क से विषाक्त पदार्थों की सफाई करती है।',
+          scientificRationale:
+              'Deep delta sleep facilitates clearance of amyloid-beta peptides from the cerebral cortex.',
+          regionalScientificRationale:
+              'गहरी नींद मस्तिष्क से विषाक्त पदार्थों की सफाई करती है।',
           projectedHealthspanYearsGained: 1.8,
           implementationEase: 'Effortless',
           karmaReward: 60,

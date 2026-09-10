@@ -1,9 +1,15 @@
 import '../../../core/models/daily_intelligence_package.dart';
 
 enum ReadinessConfidenceTier {
-  tier1Wearable(name: 'Tier 1 (HRV & Sleep Stages)', regionalName: 'स्मार्ट वॉच बायोमेट्रिक्स'),
-  tier2Basic(name: 'Tier 2 (Sleep & Step Strain)', regionalName: 'बुनियादी स्लीप एवं स्टेप्स'),
-  tier3Subjective(name: 'Tier 3 (Subjective Check-in)', regionalName: 'सुबह का स्व-मूल्यांकन');
+  tier1Wearable(
+      name: 'Tier 1 (HRV & Sleep Stages)',
+      regionalName: 'स्मार्ट वॉच बायोमेट्रिक्स'),
+  tier2Basic(
+      name: 'Tier 2 (Sleep & Step Strain)',
+      regionalName: 'बुनियादी स्लीप एवं स्टेप्स'),
+  tier3Subjective(
+      name: 'Tier 3 (Subjective Check-in)',
+      regionalName: 'सुबह का स्व-मूल्यांकन');
 
   final String name;
   final String regionalName;
@@ -57,11 +63,16 @@ class ReadinessEvaluationResult {
       score: score,
       zone: zone,
       tier: tier,
-      hrvScoreContribution: (map['hrvScoreContribution'] as num?)?.toDouble() ?? 0.0,
-      sleepScoreContribution: (map['sleepScoreContribution'] as num?)?.toDouble() ?? 0.0,
-      recoveryContribution: (map['recoveryContribution'] as num?)?.toDouble() ?? 0.0,
-      strainContribution: (map['strainContribution'] as num?)?.toDouble() ?? 0.0,
-      recommendation: map['recommendation'] as String? ?? 'Moderate intensity training recommended.',
+      hrvScoreContribution:
+          (map['hrvScoreContribution'] as num?)?.toDouble() ?? 0.0,
+      sleepScoreContribution:
+          (map['sleepScoreContribution'] as num?)?.toDouble() ?? 0.0,
+      recoveryContribution:
+          (map['recoveryContribution'] as num?)?.toDouble() ?? 0.0,
+      strainContribution:
+          (map['strainContribution'] as num?)?.toDouble() ?? 0.0,
+      recommendation: map['recommendation'] as String? ??
+          'Moderate intensity training recommended.',
       safetyAlerts: List<String>.from(map['safetyAlerts'] ?? []),
       evaluatedAt: map['evaluatedAt'] != null
           ? DateTime.tryParse(map['evaluatedAt']) ?? DateTime.now()
@@ -101,7 +112,7 @@ class ReadinessEngine {
     int? yesterdayWorkoutLoadScore, // 0 - 100
     // Subjective Check-in Inputs (Tier 3)
     int? subjectiveSleepRating, // 1 to 5
-    int? somaticSorenessScore,  // 0 to 100 (higher = more sore)
+    int? somaticSorenessScore, // 0 to 100 (higher = more sore)
     int? subjectiveEnergyRating, // 1 to 5
     bool isIll = false,
   }) {
@@ -118,7 +129,9 @@ class ReadinessEngine {
     }
 
     // --- TIER 1: Wearable Biometrics (Highest Confidence) ---
-    if (currentHrvRmssd != null && baselineHrv14Day != null && baselineHrv14Day > 0) {
+    if (currentHrvRmssd != null &&
+        baselineHrv14Day != null &&
+        baselineHrv14Day > 0) {
       tier = ReadinessConfidenceTier.tier1Wearable;
 
       // 1. HRV Deviation Score (0 - 100)
@@ -136,8 +149,10 @@ class ReadinessEngine {
       hrvContribution = hrvPoints * 0.35;
 
       // 2. Sleep Architecture Score (0 - 100)
-      final restorativeSleep = (deepSleepMinutes ?? 60.0) + (remSleepMinutes ?? 90.0);
-      final sleepArchPoints = ((restorativeSleep / 150.0).clamp(0.0, 1.2) * 85.0).clamp(0.0, 100.0);
+      final restorativeSleep =
+          (deepSleepMinutes ?? 60.0) + (remSleepMinutes ?? 90.0);
+      final sleepArchPoints =
+          ((restorativeSleep / 150.0).clamp(0.0, 1.2) * 85.0).clamp(0.0, 100.0);
       sleepContribution = sleepArchPoints * 0.25;
 
       // 3. Resting HR Deviation Score (0 - 100)
@@ -152,7 +167,8 @@ class ReadinessEngine {
           rhrPoints = 60.0;
         } else {
           rhrPoints = 35.0;
-          alerts.add('Resting heart rate is elevated (+${rhrDelta.round()} bpm above baseline).');
+          alerts.add(
+              'Resting heart rate is elevated (+${rhrDelta.round()} bpm above baseline).');
         }
       }
       final rhrContribution = rhrPoints * 0.20;
@@ -162,7 +178,11 @@ class ReadinessEngine {
       final recPoints = (100.0 - soreness).clamp(0.0, 100.0);
       recoveryContribution = recPoints * 0.20;
 
-      finalScore = (hrvContribution + sleepContribution + rhrContribution + recoveryContribution).round();
+      finalScore = (hrvContribution +
+              sleepContribution +
+              rhrContribution +
+              recoveryContribution)
+          .round();
     }
     // --- TIER 2: Basic Tracking (Medium Confidence) ---
     else if (totalSleepHours != null || yesterdaySteps != null) {
@@ -190,7 +210,9 @@ class ReadinessEngine {
       }
       strainContribution = strainPoints * 0.25;
 
-      finalScore = (sleepContribution + recoveryContribution + strainContribution).round();
+      finalScore =
+          (sleepContribution + recoveryContribution + strainContribution)
+              .round();
     }
     // --- TIER 3: Subjective Check-in (Fallback Baseline) ---
     else {
@@ -204,7 +226,9 @@ class ReadinessEngine {
       recoveryContribution = ((100.0 - soreness).clamp(0.0, 100.0)) * 0.35;
       strainContribution = (energyRating / 5.0 * 100.0) * 0.25;
 
-      finalScore = (sleepContribution + recoveryContribution + strainContribution).round();
+      finalScore =
+          (sleepContribution + recoveryContribution + strainContribution)
+              .round();
     }
 
     if (isIll) finalScore = finalScore.clamp(0, 30);
@@ -216,16 +240,20 @@ class ReadinessEngine {
 
     if (finalScore >= 80) {
       zone = ReadinessZone.optimal;
-      recommendation = 'Autonomic nervous system is primed. Excellent day for heavy compound lifts or high-intensity intervals.';
+      recommendation =
+          'Autonomic nervous system is primed. Excellent day for heavy compound lifts or high-intensity intervals.';
     } else if (finalScore >= 60) {
       zone = ReadinessZone.moderate;
-      recommendation = 'Capacity is stable. Follow scheduled progressive overload training with standard rest periods.';
+      recommendation =
+          'Capacity is stable. Follow scheduled progressive overload training with standard rest periods.';
     } else if (finalScore >= 40) {
       zone = ReadinessZone.recovery;
-      recommendation = 'Elevated systemic fatigue detected. Shift to active recovery, mobility, or light Zone 2 cardio.';
+      recommendation =
+          'Elevated systemic fatigue detected. Shift to active recovery, mobility, or light Zone 2 cardio.';
     } else {
       zone = ReadinessZone.rest;
-      recommendation = 'High strain or recovery deficit. Rest, hydration, and restorative sleep are your top priorities today.';
+      recommendation =
+          'High strain or recovery deficit. Rest, hydration, and restorative sleep are your top priorities today.';
     }
 
     return ReadinessEvaluationResult(

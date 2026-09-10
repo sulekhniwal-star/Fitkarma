@@ -43,7 +43,9 @@ void main() {
       expect(report.detectedInteractions.isEmpty, isTrue);
     });
 
-    test('Screens and flags synergistic Herb-Drug interaction between Curcumin and Aspirin', () {
+    test(
+        'Screens and flags synergistic Herb-Drug interaction between Curcumin and Aspirin',
+        () {
       final meds = [
         const TrackedMedication(
           id: 'med_aspirin',
@@ -76,8 +78,10 @@ void main() {
       final report = engine.evaluateSchedule(medications: meds);
 
       expect(report.detectedInteractions.isNotEmpty, isTrue);
-      expect(report.detectedInteractions.first.id, equals('inter_curcumin_aspirin'));
-      expect(report.detectedInteractions.first.severity, equals(InteractionSeverity.moderate));
+      expect(report.detectedInteractions.first.id,
+          equals('inter_curcumin_aspirin'));
+      expect(report.detectedInteractions.first.severity,
+          equals(InteractionSeverity.moderate));
       expect(report.adherenceScorePercent, equals(50.0));
     });
   });

@@ -15,14 +15,16 @@ import '../providers/nutrition_provider.dart';
 class FoodScreenHome extends ConsumerWidget {
   const FoodScreenHome({super.key});
 
-  void _showAddFoodBottomSheet(BuildContext context, WidgetRef ref, MealPhase phase) {
+  void _showAddFoodBottomSheet(
+      BuildContext context, WidgetRef ref, MealPhase phase) {
     String query = '';
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.surfaceElevated,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (ctx) {
         return StatefulBuilder(
           builder: (context, setModalState) {
@@ -43,8 +45,10 @@ class FoodScreenHome extends ConsumerWidget {
                     TextField(
                       onChanged: (val) => setModalState(() => query = val),
                       decoration: const InputDecoration(
-                        hintText: 'Search Indian foods (e.g. Paneer, Daal, Idli, Poha)...',
-                        prefixIcon: Icon(Icons.search_rounded, color: AppColors.textMuted),
+                        hintText:
+                            'Search Indian foods (e.g. Paneer, Daal, Idli, Poha)...',
+                        prefixIcon: Icon(Icons.search_rounded,
+                            color: AppColors.textMuted),
                         filled: true,
                         fillColor: AppColors.surface,
                         border: OutlineInputBorder(
@@ -63,7 +67,9 @@ class FoodScreenHome extends ConsumerWidget {
                           return BentoCard(
                             backgroundColor: AppColors.surface,
                             onTap: () {
-                              ref.read(nutritionProvider.notifier).addMeal(item, phase, 1.0);
+                              ref
+                                  .read(nutritionProvider.notifier)
+                                  .addMeal(item, phase, 1.0);
                               Navigator.of(ctx).pop();
                             },
                             child: Row(
@@ -71,19 +77,29 @@ class FoodScreenHome extends ConsumerWidget {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(item.name, style: AppTypography.titleSmall.copyWith(fontSize: 14)),
-                                      Text(item.regionalName, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                                      Text(item.name,
+                                          style: AppTypography.titleSmall
+                                              .copyWith(fontSize: 14)),
+                                      Text(item.regionalName,
+                                          style: const TextStyle(
+                                              fontSize: 11,
+                                              color: AppColors.textMuted)),
                                       const SizedBox(height: 2),
                                       Text(
                                         '${item.calories} kcal • ${item.proteinGrams}g Protein • ${item.servingUnit}',
-                                        style: const TextStyle(fontSize: 11, color: AppColors.karmaGreen, fontWeight: FontWeight.w600),
+                                        style: const TextStyle(
+                                            fontSize: 11,
+                                            color: AppColors.karmaGreen,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ],
                                   ),
                                 ),
-                                const Icon(Icons.add_circle_rounded, color: AppColors.karmaGreen, size: 24),
+                                const Icon(Icons.add_circle_rounded,
+                                    color: AppColors.karmaGreen, size: 24),
                               ],
                             ),
                           );
@@ -104,9 +120,12 @@ class FoodScreenHome extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final nutrition = ref.watch(nutritionProvider);
 
-    final calProgress = (nutrition.consumedCalories / nutrition.targetCalories).clamp(0.0, 1.0);
-    final proteinProgress = (nutrition.consumedProtein / nutrition.targetProtein).clamp(0.0, 1.0);
-    final carbsProgress = (nutrition.consumedCarbs / nutrition.targetCarbs).clamp(0.0, 1.0);
+    final calProgress =
+        (nutrition.consumedCalories / nutrition.targetCalories).clamp(0.0, 1.0);
+    final proteinProgress =
+        (nutrition.consumedProtein / nutrition.targetProtein).clamp(0.0, 1.0);
+    final carbsProgress =
+        (nutrition.consumedCarbs / nutrition.targetCarbs).clamp(0.0, 1.0);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -160,11 +179,21 @@ class FoodScreenHome extends ConsumerWidget {
                     ActivityRings(
                       size: 110,
                       rings: [
-                        RingData(progress: calProgress, color: AppColors.karmaGreen, strokeWidth: 8),
-                        RingData(progress: proteinProgress, color: AppColors.energyOrange, strokeWidth: 8),
-                        RingData(progress: carbsProgress, color: AppColors.focusBlue, strokeWidth: 8),
+                        RingData(
+                            progress: calProgress,
+                            color: AppColors.karmaGreen,
+                            strokeWidth: 8),
+                        RingData(
+                            progress: proteinProgress,
+                            color: AppColors.energyOrange,
+                            strokeWidth: 8),
+                        RingData(
+                            progress: carbsProgress,
+                            color: AppColors.focusBlue,
+                            strokeWidth: 8),
                       ],
-                      centerWidget: const Icon(Icons.restaurant_rounded, color: AppColors.karmaGreen, size: 22),
+                      centerWidget: const Icon(Icons.restaurant_rounded,
+                          color: AppColors.karmaGreen, size: 22),
                     ),
                   ],
                 ),
@@ -213,7 +242,8 @@ class FoodScreenHome extends ConsumerWidget {
 
               ...MealPhase.values.map((phase) {
                 final meals = nutrition.getMealsForPhase(phase);
-                final phaseCalories = meals.fold<int>(0, (sum, m) => sum + m.totalCalories);
+                final phaseCalories =
+                    meals.fold<int>(0, (sum, m) => sum + m.totalCalories);
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
@@ -229,17 +259,26 @@ class FoodScreenHome extends ConsumerWidget {
                                 Container(
                                   padding: const EdgeInsets.all(6),
                                   decoration: BoxDecoration(
-                                    color: AppColors.focusBlue.withValues(alpha: 0.15),
+                                    color: AppColors.focusBlue
+                                        .withValues(alpha: 0.15),
                                     borderRadius: AppRadii.radiusSm,
                                   ),
-                                  child: Icon(_getPhaseIcon(phase), color: AppColors.focusBlue, size: 16),
+                                  child: Icon(_getPhaseIcon(phase),
+                                      color: AppColors.focusBlue, size: 16),
                                 ),
                                 const SizedBox(width: 8),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(phase.name, style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700)),
-                                    Text(phase.regionalName, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                    Text(phase.name,
+                                        style: AppTypography.titleSmall
+                                            .copyWith(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w700)),
+                                    Text(phase.regionalName,
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.textMuted)),
                                   ],
                                 ),
                               ],
@@ -249,11 +288,18 @@ class FoodScreenHome extends ConsumerWidget {
                                 if (phaseCalories > 0)
                                   Text(
                                     '$phaseCalories kcal',
-                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.karmaGreen),
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.karmaGreen),
                                   ),
                                 IconButton(
-                                  icon: const Icon(Icons.add_circle_outline_rounded, color: AppColors.focusBlue, size: 20),
-                                  onPressed: () => _showAddFoodBottomSheet(context, ref, phase),
+                                  icon: const Icon(
+                                      Icons.add_circle_outline_rounded,
+                                      color: AppColors.focusBlue,
+                                      size: 20),
+                                  onPressed: () => _showAddFoodBottomSheet(
+                                      context, ref, phase),
                                 ),
                               ],
                             ),
@@ -261,20 +307,27 @@ class FoodScreenHome extends ConsumerWidget {
                         ),
                         if (meals.isNotEmpty) ...[
                           const SizedBox(height: 6),
-                          const Divider(color: AppColors.glassBorder, height: 1),
+                          const Divider(
+                              color: AppColors.glassBorder, height: 1),
                           const SizedBox(height: 6),
                           ...meals.map((m) => Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 3),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 3),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       '${m.food.name} (${m.food.servingUnit})',
-                                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                                      style: AppTypography.bodySmall.copyWith(
+                                          color: AppColors.textSecondary,
+                                          fontSize: 12),
                                     ),
                                     Text(
                                       '${m.totalCalories} kcal • ${m.totalProtein}g P',
-                                      style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                                      style: const TextStyle(
+                                          color: AppColors.textMuted,
+                                          fontSize: 11),
                                     ),
                                   ],
                                 ),

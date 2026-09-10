@@ -68,21 +68,26 @@ class PerformanceNotifier extends StateNotifier<PerformanceState> {
     final report = _engine.evaluatePerformanceAudit(updatedSettings);
     state = state.copyWith(
       report: report,
-      successMessage: isSaver ? 'Battery Saver activated (60 FPS).' : 'High Performance Mode enabled (120 FPS).',
+      successMessage: isSaver
+          ? 'Battery Saver activated (60 FPS).'
+          : 'High Performance Mode enabled (120 FPS).',
     );
   }
 
   void toggleRepaintBoundaries(bool enabled) {
-    final updatedSettings = state.report.settings.copyWith(enableRepaintBoundaries: enabled);
+    final updatedSettings =
+        state.report.settings.copyWith(enableRepaintBoundaries: enabled);
     final report = _engine.evaluatePerformanceAudit(updatedSettings);
     state = state.copyWith(
       report: report,
-      successMessage: 'Repaint boundary isolation ${enabled ? "enabled" : "disabled"}.',
+      successMessage:
+          'Repaint boundary isolation ${enabled ? "enabled" : "disabled"}.',
     );
   }
 
   Future<void> runBenchmarks() async {
-    state = state.copyWith(isLoading: true, errorMessage: null, successMessage: null);
+    state = state.copyWith(
+        isLoading: true, errorMessage: null, successMessage: null);
 
     await Future.delayed(const Duration(milliseconds: 250));
 
@@ -101,14 +106,16 @@ class PerformanceNotifier extends StateNotifier<PerformanceState> {
     await Future.delayed(const Duration(milliseconds: 200));
 
     final updatedReport = _engine.evaluatePerformanceAudit(
-      state.report.settings.copyWith(batterySaverMode: state.report.settings.batterySaverMode),
+      state.report.settings
+          .copyWith(batterySaverMode: state.report.settings.batterySaverMode),
     );
 
     state = state.copyWith(
       report: updatedReport,
       isLoading: false,
       cacheCleared: true,
-      successMessage: 'In-memory telemetry and offline cache purged successfully.',
+      successMessage:
+          'In-memory telemetry and offline cache purged successfully.',
     );
   }
 }

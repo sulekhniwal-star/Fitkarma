@@ -6,22 +6,26 @@ enum JatharagniState {
   samagni(
     name: 'Samagni (Optimal Balanced Metabolism)',
     regionalName: 'समाग्नि (संतुलित व आदर्श चयापचय)',
-    description: 'Effortless digestion, regular hunger, stable blood sugar, and zero bloating.',
+    description:
+        'Effortless digestion, regular hunger, stable blood sugar, and zero bloating.',
   ),
   mandagni(
     name: 'Mandagni (Sluggish / Suppressed Metabolism)',
     regionalName: 'मंदाग्नि (धीमा चयापचय व कफ दोष)',
-    description: 'Sluggish digestion, slow gastric emptying, fatigue after meals, and easy weight gain.',
+    description:
+        'Sluggish digestion, slow gastric emptying, fatigue after meals, and easy weight gain.',
   ),
   tikshnagni(
     name: 'Tikshnagni (Hyperactive / Acidic Metabolism)',
     regionalName: 'तीक्ष्णाग्नि (अति-सक्रिय चयापचय व पित्त दोष)',
-    description: 'Excessive heat, rapid hunger, acid reflux, and high metabolic turnover.',
+    description:
+        'Excessive heat, rapid hunger, acid reflux, and high metabolic turnover.',
   ),
   vishmagni(
     name: 'Vishamagni (Irregular / Volatile Metabolism)',
     regionalName: 'विषमाग्नि (अनियमित चयापचय व वात दोष)',
-    description: 'Fluctuating hunger, erratic digestion, post-meal gas, and bloating.',
+    description:
+        'Fluctuating hunger, erratic digestion, post-meal gas, and bloating.',
   );
 
   final String name;
@@ -49,14 +53,16 @@ enum RefeedProtocol {
     regionalName: '४८-घंटे लेप्टिन व ग्लाइकोजन रीफीड',
     extraCalories: 350,
     carbBoostGrams: 75,
-    rationale: 'Temporarily raises leptin, restores muscle glycogen, and blunts thyroid suppression.',
+    rationale:
+        'Temporarily raises leptin, restores muscle glycogen, and blunts thyroid suppression.',
   ),
   fullDietBreak(
     name: '7-Day Maintenance Diet Break',
     regionalName: '७-दिवसीय आहार विराम (मेंटेनेंस ब्रेक)',
     extraCalories: 450,
     carbBoostGrams: 100,
-    rationale: 'Full reset of basal metabolic rate after 6+ weeks of sustained caloric restriction.',
+    rationale:
+        'Full reset of basal metabolic rate after 6+ weeks of sustained caloric restriction.',
   );
 
   final String name;
@@ -122,7 +128,8 @@ class MacroCyclingPlan {
 class DeepenedMetabolismReport {
   final AdaptiveMetabolismProfile baseProfile;
   final EnergyExpenditureDecomposition decomposition;
-  final double adaptiveThermogenesisDeltaKcal; // Difference between expected and true expenditure
+  final double
+      adaptiveThermogenesisDeltaKcal; // Difference between expected and true expenditure
   final double metabolicResistanceScore; // 0 to 100
   final bool isMetabolicAdaptationSevere;
   final JatharagniState jatharagniState;

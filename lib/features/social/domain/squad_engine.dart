@@ -23,7 +23,8 @@ class SquadEngine {
 
     if (allCheckedIn) {
       final newStreak = squad.currentStreakDays + 1;
-      final newBest = newStreak > squad.bestStreakDays ? newStreak : squad.bestStreakDays;
+      final newBest =
+          newStreak > squad.bestStreakDays ? newStreak : squad.bestStreakDays;
       final newTier = evaluateSquadTier(newStreak);
       final bonusKarma = (100 * newTier.multiplier).round();
 

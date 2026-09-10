@@ -5,26 +5,33 @@ enum AnthropometricLimbProfile {
   longFemurs(
     title: 'Long Femurs / Short Torso',
     regionalTitle: 'लंबी जांघें / छोटा धड़',
-    squatSetupRecommendation: 'Wider stance (1.2x shoulder width) or 0.5-inch heel elevation (akhara wood block) to reduce forward lumbar lean.',
-    deadliftSetupRecommendation: 'Semi-Sumo or Trap Bar deadlift to optimize hip torque.',
+    squatSetupRecommendation:
+        'Wider stance (1.2x shoulder width) or 0.5-inch heel elevation (akhara wood block) to reduce forward lumbar lean.',
+    deadliftSetupRecommendation:
+        'Semi-Sumo or Trap Bar deadlift to optimize hip torque.',
   ),
   longTorso(
     title: 'Long Torso / Short Femurs',
     regionalTitle: 'लंबा धड़ / छोटी जांघें',
-    squatSetupRecommendation: 'Narrow to moderate stance high-bar squats; naturally upright spine with high quad recruitment.',
+    squatSetupRecommendation:
+        'Narrow to moderate stance high-bar squats; naturally upright spine with high quad recruitment.',
     deadliftSetupRecommendation: 'Conventional deadlift with narrow hip hinge.',
   ),
   longWingspan(
     title: 'Long Wingspan / Long Arms',
     regionalTitle: 'लंबी भुजाएँ (विस्तृत फैलाव)',
-    squatSetupRecommendation: 'Standard bar placement with active lat pull-down engagement.',
-    deadliftSetupRecommendation: 'Exceptional deadlift leverages; lock out close to body with high glute drive.',
+    squatSetupRecommendation:
+        'Standard bar placement with active lat pull-down engagement.',
+    deadliftSetupRecommendation:
+        'Exceptional deadlift leverages; lock out close to body with high glute drive.',
   ),
   balancedProportions(
     title: 'Balanced / Standard Proportions',
     regionalTitle: 'संतुलित शारीरिक अनुपात',
-    squatSetupRecommendation: 'Standard shoulder-width stance with natural 30-degree foot flare.',
-    deadliftSetupRecommendation: 'Conventional or Romanian deadlifts with standard biomechanical leverage.',
+    squatSetupRecommendation:
+        'Standard shoulder-width stance with natural 30-degree foot flare.',
+    deadliftSetupRecommendation:
+        'Conventional or Romanian deadlifts with standard biomechanical leverage.',
   );
 
   final String title;
@@ -82,7 +89,8 @@ class BiomechanicsTrajectoryEngine {
     required int adherencePercentage, // e.g. 90%
     AnthropometricLimbProfile profile = AnthropometricLimbProfile.longFemurs,
   }) {
-    final double adherenceModifier = (adherencePercentage.clamp(50, 100) / 100.0);
+    final double adherenceModifier =
+        (adherencePercentage.clamp(50, 100) / 100.0);
     final List<StrengthMilestoneProjection> projections = [];
 
     for (final ex in primaryExercises) {
@@ -96,11 +104,15 @@ class BiomechanicsTrajectoryEngine {
       final double gain6M = current1Rm * 0.22 * adherenceModifier;
       final double gain12M = current1Rm * 0.36 * adherenceModifier;
 
-      final double proj3M = double.parse((current1Rm + gain3M).toStringAsFixed(1));
-      final double proj6M = double.parse((current1Rm + gain6M).toStringAsFixed(1));
-      final double proj12M = double.parse((current1Rm + gain12M).toStringAsFixed(1));
+      final double proj3M =
+          double.parse((current1Rm + gain3M).toStringAsFixed(1));
+      final double proj6M =
+          double.parse((current1Rm + gain6M).toStringAsFixed(1));
+      final double proj12M =
+          double.parse((current1Rm + gain12M).toStringAsFixed(1));
 
-      final double volumeGain = double.parse(((gain6M / max(1.0, current1Rm)) * 100.0).toStringAsFixed(1));
+      final double volumeGain = double.parse(
+          ((gain6M / max(1.0, current1Rm)) * 100.0).toStringAsFixed(1));
 
       projections.add(StrengthMilestoneProjection(
         exercise: ex,
@@ -114,15 +126,18 @@ class BiomechanicsTrajectoryEngine {
 
     // Alan Aragon & Casey Butt Lean Tissue Accrual Model
     // Average intermediate natural athlete can gain ~0.5 - 0.9kg lean tissue per month
-    final double leanMass6M = double.parse((4.2 * adherenceModifier).toStringAsFixed(1));
+    final double leanMass6M =
+        double.parse((4.2 * adherenceModifier).toStringAsFixed(1));
 
     return BiomechanicsTrajectoryReport(
       anthropometricProfile: profile,
       strengthProjections: projections,
       projectedLeanMassGainKg6Months: leanMass6M,
-      trajectoryConfidenceSummary: 'At $adherencePercentage% training adherence, your 6-month projected compound strength '
+      trajectoryConfidenceSummary:
+          'At $adherencePercentage% training adherence, your 6-month projected compound strength '
           'will expand by +22.4% alongside ~$leanMass6M kg of net contractile muscle tissue.',
-      leverOptimizationGuidance: 'Limb Ratio Calibration (${profile.title}): ${profile.squatSetupRecommendation}',
+      leverOptimizationGuidance:
+          'Limb Ratio Calibration (${profile.title}): ${profile.squatSetupRecommendation}',
     );
   }
 }

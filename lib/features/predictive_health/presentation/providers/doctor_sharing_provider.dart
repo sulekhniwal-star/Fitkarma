@@ -3,7 +3,8 @@ import '../../domain/doctor_sharing_engine.dart';
 import '../../domain/doctor_sharing_models.dart';
 
 final doctorSharingProvider =
-    StateNotifierProvider<DoctorSharingNotifier, DoctorSharingPortalReport>((ref) {
+    StateNotifierProvider<DoctorSharingNotifier, DoctorSharingPortalReport>(
+        (ref) {
   return DoctorSharingNotifier();
 });
 
@@ -91,7 +92,8 @@ class DoctorSharingNotifier extends StateNotifier<DoctorSharingPortalReport> {
     );
 
     final updatedGrants = [...state.activeGrants, newGrant];
-    final activeCount = updatedGrants.where((g) => g.isActive && !g.isExpired).length;
+    final activeCount =
+        updatedGrants.where((g) => g.isActive && !g.isExpired).length;
 
     state = DoctorSharingPortalReport(
       activeGrants: updatedGrants,
@@ -111,7 +113,8 @@ class DoctorSharingNotifier extends StateNotifier<DoctorSharingPortalReport> {
       return g;
     }).toList();
 
-    final activeCount = updatedGrants.where((g) => g.isActive && !g.isExpired).length;
+    final activeCount =
+        updatedGrants.where((g) => g.isActive && !g.isExpired).length;
 
     state = DoctorSharingPortalReport(
       activeGrants: updatedGrants,
@@ -124,7 +127,8 @@ class DoctorSharingNotifier extends StateNotifier<DoctorSharingPortalReport> {
   }
 
   void revokeAllGrants() {
-    final updatedGrants = state.activeGrants.map((g) => _engine.revokeGrant(g)).toList();
+    final updatedGrants =
+        state.activeGrants.map((g) => _engine.revokeGrant(g)).toList();
 
     state = DoctorSharingPortalReport(
       activeGrants: updatedGrants,

@@ -32,7 +32,8 @@ class AdherenceScreen extends ConsumerWidget {
             ),
             Text(
               'Multi-Pillar Biological Compliance Fidelity',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
+              style:
+                  AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
             ),
           ],
         ),
@@ -89,7 +90,8 @@ class AdherenceScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: tierColor.withAlpha(40),
                   borderRadius: BorderRadius.circular(AppRadii.full),
@@ -284,7 +286,8 @@ class AdherenceScreen extends ConsumerWidget {
                     children: [
                       Text(
                         pillar.keyMetricLabel,
-                        style: AppTypography.bodySmall.copyWith(fontSize: 10, color: AppColors.textSecondary),
+                        style: AppTypography.bodySmall.copyWith(
+                            fontSize: 10, color: AppColors.textSecondary),
                       ),
                       Text(
                         pillar.statusSummary,
@@ -329,7 +332,8 @@ class AdherenceScreen extends ConsumerWidget {
                     value: report.consistencyStabilityIndex / 100.0,
                     minHeight: 10,
                     backgroundColor: AppColors.surfaceElevated,
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.karmaGreen),
                   ),
                 ),
               ),
@@ -365,7 +369,8 @@ class AdherenceScreen extends ConsumerWidget {
             children: List.generate(report.weeklyHistory.length, (index) {
               final snapshot = report.weeklyHistory[index];
               final scoreColor = Color(snapshot.tier.colorCode);
-              final dayLabel = index < days.length ? days[index] : 'D${index + 1}';
+              final dayLabel =
+                  index < days.length ? days[index] : 'D${index + 1}';
 
               return Expanded(
                 child: Container(
@@ -434,12 +439,14 @@ class AdherenceScreen extends ConsumerWidget {
                 const SizedBox(height: 4),
                 Text(
                   report.primaryRecommendation,
-                  style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.textPrimary),
+                  style: AppTypography.bodySmall
+                      .copyWith(fontSize: 11, color: AppColors.textPrimary),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   report.regionalRecommendation,
-                  style: AppTypography.bodySmall.copyWith(fontSize: 10, color: AppColors.focusBlue),
+                  style: AppTypography.bodySmall
+                      .copyWith(fontSize: 10, color: AppColors.focusBlue),
                 ),
               ],
             ),

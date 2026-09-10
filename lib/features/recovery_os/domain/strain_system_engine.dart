@@ -62,8 +62,11 @@ class StrainSystemEngine {
 
     // 2. Workout Strain Contribution (Duration * RPE intensity factor)
     final hrIntensityFactor = ((averageWorkoutHr - 60) / 120.0).clamp(0.2, 1.2);
-    final workoutLoad = (workoutDurationMinutes / 60.0) * (workoutRpe / 10.0) * hrIntensityFactor;
-    final double workoutStrain = min(12.0, 9.5 * (log(workoutLoad + 1) / log(2)));
+    final workoutLoad = (workoutDurationMinutes / 60.0) *
+        (workoutRpe / 10.0) *
+        hrIntensityFactor;
+    final double workoutStrain =
+        min(12.0, 9.5 * (log(workoutLoad + 1) / log(2)));
 
     // 3. Environmental Heat Strain (Thermal cardiac cost)
     final double heatStrain;
@@ -77,7 +80,8 @@ class StrainSystemEngine {
 
     // Combined logarithmic strain synthesis capped at 21.0
     final rawCombined = stepStrain + workoutStrain + heatStrain;
-    final double currentStrain = (21.0 * (1.0 - exp(-rawCombined / 10.0))).clamp(0.0, 21.0);
+    final double currentStrain =
+        (21.0 * (1.0 - exp(-rawCombined / 10.0))).clamp(0.0, 21.0);
 
     // Target Strain Range based on Body Readiness Score
     final double targetMin;
@@ -114,11 +118,14 @@ class StrainSystemEngine {
     // Guidance
     final String guidance;
     if (isOverreaching) {
-      guidance = 'Exertion exceeds optimal recovery capacity. Prioritize hydration, sodium, and early sleep.';
+      guidance =
+          'Exertion exceeds optimal recovery capacity. Prioritize hydration, sodium, and early sleep.';
     } else if (currentStrain >= targetMin && currentStrain <= targetMax) {
-      guidance = 'Optimal strain achieved for today’s readiness. Excellent progressive stimulus.';
+      guidance =
+          'Optimal strain achieved for today’s readiness. Excellent progressive stimulus.';
     } else if (currentStrain < targetMin) {
-      guidance = 'Low strain accumulated. Capacity remains for scheduled resistance training or brisk walking.';
+      guidance =
+          'Low strain accumulated. Capacity remains for scheduled resistance training or brisk walking.';
     } else {
       guidance = 'Solid daily output within safe physiological parameters.';
     }

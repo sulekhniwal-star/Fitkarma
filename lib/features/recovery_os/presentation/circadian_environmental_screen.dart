@@ -56,7 +56,8 @@ class CircadianEnvironmentalScreen extends StatelessWidget {
                   children: [
                     const Row(
                       children: [
-                        Icon(Icons.schedule_rounded, color: AppColors.focusBlue, size: 20),
+                        Icon(Icons.schedule_rounded,
+                            color: AppColors.focusBlue, size: 20),
                         SizedBox(width: 8),
                         BilingualLabel(
                           primaryText: 'Current Circadian State',
@@ -81,7 +82,8 @@ class CircadianEnvironmentalScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.fitness_center_rounded, color: AppColors.karmaGreen, size: 18),
+                          const Icon(Icons.fitness_center_rounded,
+                              color: AppColors.karmaGreen, size: 18),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
@@ -116,12 +118,16 @@ class CircadianEnvironmentalScreen extends StatelessWidget {
                         GlowingMetric(
                           label: 'AQI Level',
                           value: '${report.environmentalSnapshot.aqi}',
-                          unit: report.environmentalSnapshot.aqiCategory.name.toUpperCase(),
-                          accentColor: report.environmentalSnapshot.aqi > 200 ? AppColors.alertRed : AppColors.karmaGreen,
+                          unit: report.environmentalSnapshot.aqiCategory.name
+                              .toUpperCase(),
+                          accentColor: report.environmentalSnapshot.aqi > 200
+                              ? AppColors.alertRed
+                              : AppColors.karmaGreen,
                         ),
                         GlowingMetric(
                           label: 'Heat Index',
-                          value: '${report.environmentalSnapshot.heatIndexC.round()}°C',
+                          value:
+                              '${report.environmentalSnapshot.heatIndexC.round()}°C',
                           unit: 'Feels like',
                           accentColor: AppColors.energyOrange,
                         ),
@@ -154,16 +160,21 @@ class CircadianEnvironmentalScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: report.milestones.length,
-                separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+                separatorBuilder: (_, __) =>
+                    const SizedBox(height: AppSpacing.sm),
                 itemBuilder: (context, index) {
                   final milestone = report.milestones[index];
 
                   return BentoCard(
                     hasGlow: milestone.isCurrent,
                     glowColor: AppColors.focusBlue,
-                    backgroundColor: milestone.isCurrent ? AppColors.surfaceElevated : AppColors.surface,
+                    backgroundColor: milestone.isCurrent
+                        ? AppColors.surfaceElevated
+                        : AppColors.surface,
                     border: Border.all(
-                      color: milestone.isCurrent ? AppColors.focusBlue : AppColors.glassBorder,
+                      color: milestone.isCurrent
+                          ? AppColors.focusBlue
+                          : AppColors.glassBorder,
                       width: milestone.isCurrent ? 1.5 : 1.0,
                     ),
                     child: Row(
@@ -172,12 +183,17 @@ class CircadianEnvironmentalScreen extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: (milestone.isCurrent ? AppColors.focusBlue : AppColors.textSecondary).withValues(alpha: 0.15),
+                            color: (milestone.isCurrent
+                                    ? AppColors.focusBlue
+                                    : AppColors.textSecondary)
+                                .withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Icon(
                             _getMilestoneIcon(milestone.iconCode),
-                            color: milestone.isCurrent ? AppColors.focusBlue : AppColors.textSecondary,
+                            color: milestone.isCurrent
+                                ? AppColors.focusBlue
+                                : AppColors.textSecondary,
                             size: 20,
                           ),
                         ),
@@ -187,19 +203,24 @@ class CircadianEnvironmentalScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     milestone.title,
                                     style: AppTypography.titleSmall.copyWith(
-                                      color: milestone.isCurrent ? AppColors.textPrimary : AppColors.textSecondary,
+                                      color: milestone.isCurrent
+                                          ? AppColors.textPrimary
+                                          : AppColors.textSecondary,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                   Text(
                                     milestone.timeWindow,
                                     style: AppTypography.bodySmall.copyWith(
-                                      color: milestone.isCurrent ? AppColors.focusBlue : AppColors.textMuted,
+                                      color: milestone.isCurrent
+                                          ? AppColors.focusBlue
+                                          : AppColors.textMuted,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 11,
                                     ),

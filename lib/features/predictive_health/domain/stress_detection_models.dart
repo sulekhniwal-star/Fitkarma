@@ -7,32 +7,40 @@ enum StressLevelTier {
     regionalLabel: 'शांत व तनावमुक्त (प्रसन्न मन)',
     scoreRange: '0 - 25',
     colorCode: 0xFF00E676,
-    description: 'Robust parasympathetic vagal tone; physiological recovery is high.',
-    regionalDescription: 'वेगल नर्व सक्रिय है; शरीर व मस्तिष्क पूर्णतः तनावमुक्त हैं।',
+    description:
+        'Robust parasympathetic vagal tone; physiological recovery is high.',
+    regionalDescription:
+        'वेगल नर्व सक्रिय है; शरीर व मस्तिष्क पूर्णतः तनावमुक्त हैं।',
   ),
   eustress(
     label: 'Engaged / Focused Eustress (Sachet)',
     regionalLabel: 'सचेत व एकाग्र (सकारात्मक ऊर्जा)',
     scoreRange: '26 - 50',
     colorCode: 0xFF448AFF,
-    description: 'Optimal productive arousal with controlled autonomic reactivity.',
-    regionalDescription: 'उत्पादक व सकारात्मक ऊर्जा; मानसिक एकाग्रता उच्च स्तर पर है।',
+    description:
+        'Optimal productive arousal with controlled autonomic reactivity.',
+    regionalDescription:
+        'उत्पादक व सकारात्मक ऊर्जा; मानसिक एकाग्रता उच्च स्तर पर है।',
   ),
   elevated(
     label: 'Elevated Distress (Tanaav)',
     regionalLabel: 'तनावग्रस्त (मानसिक व शारीरिक दबाव)',
     scoreRange: '51 - 75',
     colorCode: 0xFFFFB300,
-    description: 'Sympathetic tone dominance and suppressed heart rate variability.',
-    regionalDescription: 'सहानुभूति तंत्रिका सक्रिय; हृदय परिवर्तनशीलता में कमी दर्ज।',
+    description:
+        'Sympathetic tone dominance and suppressed heart rate variability.',
+    regionalDescription:
+        'सहानुभूति तंत्रिका सक्रिय; हृदय परिवर्तनशीलता में कमी दर्ज।',
   ),
   acuteOverload(
     label: 'Sympathetic Overload (Ati-Tanaav)',
     regionalLabel: 'अत्यधिक तनाव (तुरंत शांति आवश्यक)',
     scoreRange: '76 - 100',
     colorCode: 0xFFFF5252,
-    description: 'Severe autonomic strain; immediate vagal down-regulation recommended.',
-    regionalDescription: 'तीव्र न्यूरोलॉजिकल दबाव; प्राणायाम व विश्राम अत्यंत आवश्यक।',
+    description:
+        'Severe autonomic strain; immediate vagal down-regulation recommended.',
+    regionalDescription:
+        'तीव्र न्यूरोलॉजिकल दबाव; प्राणायाम व विश्राम अत्यंत आवश्यक।',
   );
 
   final String label;
@@ -54,11 +62,20 @@ enum StressLevelTier {
 
 /// Stress biomarker signal contributor
 enum StressSignalType {
-  hrvSuppression(name: 'HRV Vagal Suppression', regionalName: 'हृदय गति परिवर्तनशीलता में कमी'),
-  sedentaryPulseSpike(name: 'Sedentary Heart Rate Spikes', regionalName: 'अक्रिय अवस्था में हृदय गति वृद्धि'),
-  respirationRate(name: 'Elevated Respiration Rate', regionalName: 'तीव्र श्वसन गति'),
-  sleepFragmentation(name: 'Nocturnal Restlessness', regionalName: 'रात में नींद में व्यवधान व बेचैनी'),
-  screenBehaviorTension(name: 'Digital Device Tension', regionalName: 'स्क्रीन पर तीव्र प्रतिक्रिया व तनाव');
+  hrvSuppression(
+      name: 'HRV Vagal Suppression',
+      regionalName: 'हृदय गति परिवर्तनशीलता में कमी'),
+  sedentaryPulseSpike(
+      name: 'Sedentary Heart Rate Spikes',
+      regionalName: 'अक्रिय अवस्था में हृदय गति वृद्धि'),
+  respirationRate(
+      name: 'Elevated Respiration Rate', regionalName: 'तीव्र श्वसन गति'),
+  sleepFragmentation(
+      name: 'Nocturnal Restlessness',
+      regionalName: 'रात में नींद में व्यवधान व बेचैनी'),
+  screenBehaviorTension(
+      name: 'Digital Device Tension',
+      regionalName: 'स्क्रीन पर तीव्र प्रतिक्रिया व तनाव');
 
   final String name;
   final String regionalName;

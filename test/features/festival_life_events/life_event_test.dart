@@ -6,7 +6,9 @@ void main() {
   group('LifeEventEngine Deterministic Tests', () {
     const engine = LifeEventEngine();
 
-    test('Generates acute disruption plan with Grace Streak Freeze and 5,000 steps for Day 3', () {
+    test(
+        'Generates acute disruption plan with Grace Streak Freeze and 5,000 steps for Day 3',
+        () {
       final report = engine.generateAdaptivePlan(
         event: LifeEventCategory.examCrunch,
         daysElapsed: 3,
@@ -23,7 +25,9 @@ void main() {
       expect(report.supportiveCoachMessage, contains('Grace Streak Freeze'));
     });
 
-    test('Transitions to stabilization phase for Day 14 with increased movement targets', () {
+    test(
+        'Transitions to stabilization phase for Day 14 with increased movement targets',
+        () {
       final report = engine.generateAdaptivePlan(
         event: LifeEventCategory.newParenthood,
         daysElapsed: 14,
@@ -33,7 +37,8 @@ void main() {
       expect(report.stepGoalAdjustment, equals(7000));
       expect(report.workoutDurationMinutes, equals(25));
       expect(report.ayurvedicNervineTonic, contains('Shatavari'));
-      expect(report.supportiveCoachMessage, contains('navigating this transition'));
+      expect(report.supportiveCoachMessage,
+          contains('navigating this transition'));
     });
 
     test('Transitions to progressive re-entry phase for Day 25', () {
@@ -48,9 +53,12 @@ void main() {
       expect(report.ayurvedicNervineTonic, contains('Ashwagandha'));
     });
 
-    test('All life event categories generate valid adaptations without missing fields', () {
+    test(
+        'All life event categories generate valid adaptations without missing fields',
+        () {
       for (final event in LifeEventCategory.values) {
-        final report = engine.generateAdaptivePlan(event: event, daysElapsed: 5);
+        final report =
+            engine.generateAdaptivePlan(event: event, daysElapsed: 5);
         expect(report.activeEvent, equals(event));
         expect(report.pillarAdjustments, isNotEmpty);
         expect(report.ayurvedicNervineTonic, isNotEmpty);

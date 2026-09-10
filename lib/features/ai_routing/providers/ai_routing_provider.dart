@@ -6,7 +6,8 @@ final aiRoutingRepositoryProvider = Provider<AiRoutingRepository>((ref) {
 });
 
 // Family provider to send AI coaching queries with optimistic / async handling
-final askCoachProvider = FutureProvider.family<String, String>((ref, prompt) async {
+final askCoachProvider =
+    FutureProvider.family<String, String>((ref, prompt) async {
   final repo = ref.watch(aiRoutingRepositoryProvider);
   return await repo.askCoach(prompt: prompt);
 });

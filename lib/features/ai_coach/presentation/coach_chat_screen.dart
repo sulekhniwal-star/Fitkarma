@@ -63,7 +63,8 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
             CircleAvatar(
               radius: 16,
               backgroundColor: AppColors.surfaceElevated,
-              child: Icon(Icons.auto_awesome_rounded, color: AppColors.aiPurple, size: 18),
+              child: Icon(Icons.auto_awesome_rounded,
+                  color: AppColors.aiPurple, size: 18),
             ),
             SizedBox(width: 10),
             BilingualLabel(
@@ -89,7 +90,8 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
                   return ActionChip(
                     backgroundColor: AppColors.surfaceElevated,
                     side: const BorderSide(color: AppColors.glassBorder),
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusSm),
                     label: Text(
                       prompt,
                       style: AppTypography.bodySmall.copyWith(
@@ -111,7 +113,8 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
                   return ListView.builder(
                     controller: _scrollController,
                     padding: const EdgeInsets.all(16),
-                    itemCount: state.messages.length + (state.isThinking ? 1 : 0),
+                    itemCount:
+                        state.messages.length + (state.isThinking ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index == state.messages.length && state.isThinking) {
                         return _buildThinkingBubble();
@@ -138,11 +141,16 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
                   Expanded(
                     child: TextField(
                       controller: _textController,
-                      style: const TextStyle(color: AppColors.textPrimary, fontSize: 14),
+                      style: const TextStyle(
+                          color: AppColors.textPrimary, fontSize: 14),
                       decoration: InputDecoration(
-                        hintText: 'Ask Karma Coach about nutrition, workouts...',
-                        hintStyle: TextStyle(color: AppColors.textMuted.withValues(alpha: 0.8), fontSize: 13),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        hintText:
+                            'Ask Karma Coach about nutrition, workouts...',
+                        hintStyle: TextStyle(
+                            color: AppColors.textMuted.withValues(alpha: 0.8),
+                            fontSize: 13),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 10),
                         filled: true,
                         fillColor: AppColors.surfaceElevated,
                         border: OutlineInputBorder(
@@ -160,7 +168,8 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
                       gradient: AppColors.primaryGradient,
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_upward_rounded, color: AppColors.textInverse, size: 20),
+                      icon: const Icon(Icons.arrow_upward_rounded,
+                          color: AppColors.textInverse, size: 20),
                       onPressed: () => _sendMessage(),
                     ),
                   ),
@@ -180,10 +189,13 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.82),
+        constraints:
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.82),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: isUser ? AppColors.karmaGreen.withValues(alpha: 0.20) : AppColors.surfaceElevated,
+          color: isUser
+              ? AppColors.karmaGreen.withValues(alpha: 0.20)
+              : AppColors.surfaceElevated,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(14),
             topRight: const Radius.circular(14),
@@ -191,7 +203,9 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
             bottomRight: Radius.circular(isUser ? 2 : 14),
           ),
           border: Border.all(
-            color: isUser ? AppColors.karmaGreen.withValues(alpha: 0.4) : AppColors.glassBorder,
+            color: isUser
+                ? AppColors.karmaGreen.withValues(alpha: 0.4)
+                : AppColors.glassBorder,
           ),
         ),
         child: Column(
@@ -235,12 +249,14 @@ class _CoachChatScreenState extends ConsumerState<CoachChatScreen> {
             const SizedBox(
               width: 14,
               height: 14,
-              child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.aiPurple),
+              child: CircularProgressIndicator(
+                  strokeWidth: 2, color: AppColors.aiPurple),
             ),
             const SizedBox(width: 8),
             Text(
               'Karma Coach is thinking...',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.aiPurple),
+              style:
+                  AppTypography.bodySmall.copyWith(color: AppColors.aiPurple),
             ),
           ],
         ),

@@ -19,7 +19,9 @@ class CommunitiesState {
     List<AccountabilityCommunity>? allCommunities,
   }) {
     return CommunitiesState(
-      selectedCategory: clearCategory == true ? null : selectedCategory ?? this.selectedCategory,
+      selectedCategory: clearCategory == true
+          ? null
+          : selectedCategory ?? this.selectedCategory,
       showJoinedOnly: showJoinedOnly ?? this.showJoinedOnly,
       allCommunities: allCommunities ?? this.allCommunities,
     );
@@ -61,8 +63,10 @@ class CommunitiesNotifier extends StateNotifier<CommunitiesState> {
         name: '100-Step Shatpawali Sadhana Circle',
         regionalName: 'शतपावली साधना मंडल (१०,०००+ साधक)',
         category: CommunityCategory.dailyMovement,
-        manifesto: 'We honor post-meal digestion through conscious, mindful Shatpawali strolls.',
-        regionalManifesto: 'हम भोजनोपरांत शतपावली द्वारा पाचन अग्नि व स्वास्थ्य की रक्षा करते हैं।',
+        manifesto:
+            'We honor post-meal digestion through conscious, mindful Shatpawali strolls.',
+        regionalManifesto:
+            'हम भोजनोपरांत शतपावली द्वारा पाचन अग्नि व स्वास्थ्य की रक्षा करते हैं।',
         activeMembersCount: 4250,
         communityPulseScore: 94.2,
         totalCollectiveKarma: 84500,
@@ -76,12 +80,14 @@ class CommunitiesNotifier extends StateNotifier<CommunitiesState> {
             authorKarmaTier: 'Vanguard',
             title: 'Is 100 steps sufficient after a heavy Dal-Bhat dinner?',
             regionalTitle: 'क्या भारी भोजन के बाद १०० कदम पर्याप्त हैं?',
-            body: 'I usually do 500-1000 gentle steps. Should pace be slow or moderate?',
+            body:
+                'I usually do 500-1000 gentle steps. Should pace be slow or moderate?',
             createdAt: DateTime.now().subtract(const Duration(hours: 3)),
             repliesCount: 14,
             upvotesCount: 42,
             hasVerifiedMentorReply: true,
-            topAnswerSnippet: 'Dr. Sharma: 100 gentle steps (Shatpawali) is the minimum Vedic baseline. 10-15 mins of slow unhurried strolling enhances gastric emptying by 28%.',
+            topAnswerSnippet:
+                'Dr. Sharma: 100 gentle steps (Shatpawali) is the minimum Vedic baseline. 10-15 mins of slow unhurried strolling enhances gastric emptying by 28%.',
           ),
         ],
         knowledgeVault: const [
@@ -101,8 +107,10 @@ class CommunitiesNotifier extends StateNotifier<CommunitiesState> {
         name: 'Insulin Sensitivity & Pre-Diabetes Reversal',
         regionalName: 'मधुमेह मुक्ति व इंसुलिन संवेदनशीलता मंडल',
         category: CommunityCategory.cardiometabolic,
-        manifesto: 'Reversing cardiometabolic risk and flattening postprandial glucose spikes naturally.',
-        regionalManifesto: 'आहार, शतपावली व शक्ति संवर्धन से ग्लूकोज स्तर को संतुलित करना।',
+        manifesto:
+            'Reversing cardiometabolic risk and flattening postprandial glucose spikes naturally.',
+        regionalManifesto:
+            'आहार, शतपावली व शक्ति संवर्धन से ग्लूकोज स्तर को संतुलित करना।',
         activeMembersCount: 2890,
         communityPulseScore: 89.5,
         totalCollectiveKarma: 62000,
@@ -116,12 +124,14 @@ class CommunitiesNotifier extends StateNotifier<CommunitiesState> {
             authorKarmaTier: 'Pacesetter',
             title: 'My estimated HbA1c dropped from 5.9 to 5.4 in 8 weeks!',
             regionalTitle: 'मेरा HbA1c स्तर ५.९ से ५.४ पर आया!',
-            body: 'Combining Sattu/Paneer protein breakfast with post-dinner walking did wonders.',
+            body:
+                'Combining Sattu/Paneer protein breakfast with post-dinner walking did wonders.',
             createdAt: DateTime.now().subtract(const Duration(hours: 5)),
             repliesCount: 28,
             upvotesCount: 88,
             hasVerifiedMentorReply: true,
-            topAnswerSnippet: 'Coach Vikram: Consistent muscle contraction acts as an insulin-independent glucose sink. Outstanding work!',
+            topAnswerSnippet:
+                'Coach Vikram: Consistent muscle contraction acts as an insulin-independent glucose sink. Outstanding work!',
           ),
         ],
         knowledgeVault: const [
@@ -141,8 +151,10 @@ class CommunitiesNotifier extends StateNotifier<CommunitiesState> {
         name: 'Desi Strength & Calisthenics Guild',
         regionalName: 'देसी शक्ति व व्यायाम मंडल',
         category: CommunityCategory.desiStrength,
-        manifesto: 'Forging explosive relative strength with Baithak, Dands, and Barbell fundamentals.',
-        regionalManifesto: 'देसी दंड, बैठक व बारबेल व्यायाम द्वारा अभेद्य शक्ति का निर्माण।',
+        manifesto:
+            'Forging explosive relative strength with Baithak, Dands, and Barbell fundamentals.',
+        regionalManifesto:
+            'देसी दंड, बैठक व बारबेल व्यायाम द्वारा अभेद्य शक्ति का निर्माण।',
         activeMembersCount: 3410,
         communityPulseScore: 91.8,
         totalCollectiveKarma: 78000,
@@ -187,7 +199,9 @@ class CommunitiesNotifier extends StateNotifier<CommunitiesState> {
         final currentlyJoined = c.isUserJoined;
         return c.copyWith(
           isUserJoined: !currentlyJoined,
-          activeMembersCount: currentlyJoined ? c.activeMembersCount - 1 : c.activeMembersCount + 1,
+          activeMembersCount: currentlyJoined
+              ? c.activeMembersCount - 1
+              : c.activeMembersCount + 1,
         );
       }
       return c;

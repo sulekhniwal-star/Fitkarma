@@ -3,11 +3,13 @@ import '../../domain/transformation_engine.dart';
 import '../../domain/transformation_models.dart';
 
 final transformationProvider =
-    StateNotifierProvider<TransformationNotifier, TransformationJourneyReport>((ref) {
+    StateNotifierProvider<TransformationNotifier, TransformationJourneyReport>(
+        (ref) {
   return TransformationNotifier();
 });
 
-class TransformationNotifier extends StateNotifier<TransformationJourneyReport> {
+class TransformationNotifier
+    extends StateNotifier<TransformationJourneyReport> {
   TransformationNotifier() : super(_buildInitialReport());
 
   static TransformationJourneyReport _buildInitialReport() {

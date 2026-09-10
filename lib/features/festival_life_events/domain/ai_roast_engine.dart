@@ -13,7 +13,8 @@ class AiRoastEngine {
   }) {
     final now = executionTime ?? DateTime.now();
 
-    final (headline, en, hi, challenge, regChallenge) = _selectRoastContent(persona, intensity, trigger);
+    final (headline, en, hi, challenge, regChallenge) =
+        _selectRoastContent(persona, intensity, trigger);
 
     return RoastMessageArtifact(
       id: 'roast_${now.millisecondsSinceEpoch}',
@@ -30,7 +31,8 @@ class AiRoastEngine {
   }
 
   /// System instruction builder for Groq LLM real-time streaming roast generation
-  String buildSystemInstruction(RoastPersona persona, RoastIntensity intensity) {
+  String buildSystemInstruction(
+      RoastPersona persona, RoastIntensity intensity) {
     return '''
 You are the "${persona.name}" AI coach on FitKarma. Your job is to deliver witty, culturally authentic Indian tough-love roasts to keep the user accountable.
 Intensity Level: ${intensity.name}.

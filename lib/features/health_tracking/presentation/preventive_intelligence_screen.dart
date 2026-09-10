@@ -91,15 +91,20 @@ class PreventiveIntelligenceScreen extends StatelessWidget {
                           regionalText: 'हृदय-मेटाबॉलिक समग्र स्कोर',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: tierColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: tierColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: tierColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             report.cardiometabolicTier.name.toUpperCase(),
-                            style: TextStyle(color: tierColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: tierColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -123,7 +128,10 @@ class PreventiveIntelligenceScreen extends StatelessWidget {
                         ),
                         GlowingMetric(
                           label: 'Autonomic Balance',
-                          value: report.autonomicState == AutonomicState.balanced ? 'Optimal' : 'Active',
+                          value:
+                              report.autonomicState == AutonomicState.balanced
+                                  ? 'Optimal'
+                                  : 'Active',
                           accentColor: AppColors.aiPurple,
                         ),
                       ],
@@ -151,13 +159,17 @@ class PreventiveIntelligenceScreen extends StatelessWidget {
                       regionalText: 'बायोमार्कर योगदान कारक',
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    _buildContributionRow('Blood Pressure Load', report.bpContribution, 30, AppColors.energyOrange),
+                    _buildContributionRow('Blood Pressure Load',
+                        report.bpContribution, 30, AppColors.energyOrange),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildContributionRow('Fasting Glycemic Index', report.glucoseContribution, 30, AppColors.focusBlue),
+                    _buildContributionRow('Fasting Glycemic Index',
+                        report.glucoseContribution, 30, AppColors.focusBlue),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildContributionRow('Asian-Indian Adiposity (BMI)', report.bmiContribution, 25, AppColors.aiPurple),
+                    _buildContributionRow('Asian-Indian Adiposity (BMI)',
+                        report.bmiContribution, 25, AppColors.aiPurple),
                     const SizedBox(height: AppSpacing.sm),
-                    _buildContributionRow('7-Day Sleep Deficit', report.sleepDebtContribution, 15, AppColors.karmaGreen),
+                    _buildContributionRow('7-Day Sleep Deficit',
+                        report.sleepDebtContribution, 15, AppColors.karmaGreen),
                   ],
                 ),
               ),
@@ -183,7 +195,8 @@ class PreventiveIntelligenceScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.check_circle_outline_rounded, color: AppColors.karmaGreen, size: 20),
+                        const Icon(Icons.check_circle_outline_rounded,
+                            color: AppColors.karmaGreen, size: 20),
                         const SizedBox(width: AppSpacing.md),
                         Expanded(
                           child: Text(
@@ -207,7 +220,8 @@ class PreventiveIntelligenceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContributionRow(String label, int points, int maxPoints, Color color) {
+  Widget _buildContributionRow(
+      String label, int points, int maxPoints, Color color) {
     final fraction = (points / maxPoints).clamp(0.0, 1.0);
 
     return Column(
@@ -216,8 +230,12 @@ class PreventiveIntelligenceScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary)),
-            Text('$points / $maxPoints pts', style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w700)),
+            Text(label,
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary)),
+            Text('$points / $maxPoints pts',
+                style: TextStyle(
+                    color: color, fontSize: 11, fontWeight: FontWeight.w700)),
           ],
         ),
         const SizedBox(height: 4),

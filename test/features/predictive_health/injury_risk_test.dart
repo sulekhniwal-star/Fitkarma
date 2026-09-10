@@ -36,7 +36,9 @@ void main() {
       expect(report.activeProtocols.isNotEmpty, isTrue);
     });
 
-    test('Triggers high-risk tier and deload recommendation on severe training spike', () {
+    test(
+        'Triggers high-risk tier and deload recommendation on severe training spike',
+        () {
       final report = engine.evaluateInjuryRisk(
         acuteLoad7Days: 5800.0,
         chronicLoad28Days: 3200.0,
@@ -62,7 +64,8 @@ void main() {
       expect(report.acuteChronicWorkloadRatio, greaterThan(1.50));
       expect(report.overallRiskTier, equals(InjuryRiskTier.high));
       expect(report.shouldDeload, isTrue);
-      expect(report.activeProtocols.any((p) => p.id.contains('deload')), isTrue);
+      expect(
+          report.activeProtocols.any((p) => p.id.contains('deload')), isTrue);
     });
   });
 }

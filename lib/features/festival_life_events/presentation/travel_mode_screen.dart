@@ -30,7 +30,8 @@ class TravelModeScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -54,15 +55,19 @@ class TravelModeScreen extends ConsumerWidget {
                     label: Text(
                       ctx.name.split('(').first.trim(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.white : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                         fontSize: 12,
                       ),
                     ),
                     selected: isSelected,
                     selectedColor: AppColors.focusBlue,
                     backgroundColor: AppColors.surfaceElevated,
-                    onSelected: (_) => ref.read(travelModeProvider.notifier).updateContext(ctx),
+                    onSelected: (_) => ref
+                        .read(travelModeProvider.notifier)
+                        .updateContext(ctx),
                   );
                 },
               ),
@@ -115,7 +120,8 @@ class TravelModeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.focusBlue.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -124,7 +130,8 @@ class TravelModeScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.flight_takeoff, color: AppColors.focusBlue, size: 14),
+                    const Icon(Icons.flight_takeoff,
+                        color: AppColors.focusBlue, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       '${report.destinationCityOrTimezone} (${report.timezoneShiftHours > 0 ? "+${report.timezoneShiftHours}" : "${report.timezoneShiftHours}"}h Shift)',
@@ -151,7 +158,9 @@ class TravelModeScreen extends ConsumerWidget {
                     value: report.isTravelModeActive,
                     activeThumbColor: AppColors.focusBlue,
                     onChanged: (val) {
-                      ref.read(travelModeProvider.notifier).toggleTravelMode(val);
+                      ref
+                          .read(travelModeProvider.notifier)
+                          .toggleTravelMode(val);
                     },
                   ),
                 ],
@@ -230,7 +239,8 @@ class TravelModeScreen extends ConsumerWidget {
         children: [
           const Row(
             children: [
-              Icon(Icons.wb_sunny_outlined, color: AppColors.energyOrange, size: 18),
+              Icon(Icons.wb_sunny_outlined,
+                  color: AppColors.energyOrange, size: 18),
               SizedBox(width: 6),
               Text(
                 'Circadian Jet Lag & Sunlight Timing',
@@ -428,7 +438,8 @@ class TravelModeScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'Travel Mode transforms hotel rooms into functional movement spaces, balances aggravated Vata dosha through warm foot massage (Pada Abhyanga), resets circadian rhythms with sunlight timing, and guides healthy airport/dhaba dining.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -441,7 +452,8 @@ class TravelModeScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

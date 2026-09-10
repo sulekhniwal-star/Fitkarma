@@ -28,8 +28,10 @@ class OnboardingContainerScreen extends ConsumerWidget {
         elevation: 0,
         leading: currentStep != OnboardingFlowStep.welcome
             ? IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.textPrimary, size: 20),
-                onPressed: () => ref.read(onboardingFlowProvider.notifier).previousStep(),
+                icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                    color: AppColors.textPrimary, size: 20),
+                onPressed: () =>
+                    ref.read(onboardingFlowProvider.notifier).previousStep(),
               )
             : null,
         title: Text(
@@ -40,7 +42,8 @@ class OnboardingContainerScreen extends ConsumerWidget {
         actions: [
           if (currentStep.canSkip)
             TextButton(
-              onPressed: () => ref.read(onboardingFlowProvider.notifier).skipStep(),
+              onPressed: () =>
+                  ref.read(onboardingFlowProvider.notifier).skipStep(),
               child: Text(
                 'Skip',
                 style: AppTypography.bodyMedium.copyWith(
@@ -59,7 +62,8 @@ class OnboardingContainerScreen extends ConsumerWidget {
               child: LinearProgressIndicator(
                 value: progress,
                 backgroundColor: AppColors.surfaceElevated,
-                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
                 minHeight: 4,
               ),
             ),

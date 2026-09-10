@@ -1,7 +1,12 @@
 enum MenstrualPhase {
-  menstrual(name: 'Menstrual', regionalName: 'माहवारी चरण', dayRange: 'Days 1–5'),
-  follicular(name: 'Follicular', regionalName: 'फॉलिक्युलर चरण', dayRange: 'Days 6–13'),
-  ovulatory(name: 'Ovulatory', regionalName: 'ओव्यूलेशन चरण', dayRange: 'Days 14–16'),
+  menstrual(
+      name: 'Menstrual', regionalName: 'माहवारी चरण', dayRange: 'Days 1–5'),
+  follicular(
+      name: 'Follicular',
+      regionalName: 'फॉलिक्युलर चरण',
+      dayRange: 'Days 6–13'),
+  ovulatory(
+      name: 'Ovulatory', regionalName: 'ओव्यूलेशन चरण', dayRange: 'Days 14–16'),
   luteal(name: 'Luteal', regionalName: 'ल्यूटियल चरण', dayRange: 'Days 17–28');
 
   final String name;
@@ -16,10 +21,10 @@ enum MenstrualPhase {
 }
 
 enum LifeStageMode {
-  regularCycle,    // Standard cycle tracking
-  pcosCalibrator,  // PCOS / PCOD insulin-resistance mode
+  regularCycle, // Standard cycle tracking
+  pcosCalibrator, // PCOS / PCOD insulin-resistance mode
   fertilityWindow, // Fertility & conception planning
-  menopauseCare,   // Peri-menopause & bone-density tracking
+  menopauseCare, // Peri-menopause & bone-density tracking
 }
 
 class WomensHealthProfile {
@@ -30,7 +35,8 @@ class WomensHealthProfile {
   final LifeStageMode lifeStageMode;
   final bool isPcosDiagnosed;
   final int calorieOffset; // e.g. +150 kcal during luteal
-  final double trainingLoadMultiplier; // e.g. 1.10 during follicular, 0.80 in menstrual
+  final double
+      trainingLoadMultiplier; // e.g. 1.10 during follicular, 0.80 in menstrual
   final String trainingRecommendation;
   final String nutritionRecommendation;
   final List<String> wellnessTips;
@@ -70,9 +76,12 @@ class WomensHealthProfile {
       lifeStageMode: mode,
       isPcosDiagnosed: map['isPcosDiagnosed'] as bool? ?? false,
       calorieOffset: (map['calorieOffset'] as num?)?.toInt() ?? 0,
-      trainingLoadMultiplier: (map['trainingLoadMultiplier'] as num?)?.toDouble() ?? 1.0,
-      trainingRecommendation: map['trainingRecommendation'] as String? ?? 'Progressive strength training focus.',
-      nutritionRecommendation: map['nutritionRecommendation'] as String? ?? 'Balanced high-protein meals with complex carbs.',
+      trainingLoadMultiplier:
+          (map['trainingLoadMultiplier'] as num?)?.toDouble() ?? 1.0,
+      trainingRecommendation: map['trainingRecommendation'] as String? ??
+          'Progressive strength training focus.',
+      nutritionRecommendation: map['nutritionRecommendation'] as String? ??
+          'Balanced high-protein meals with complex carbs.',
       wellnessTips: List<String>.from(map['wellnessTips'] ?? []),
     );
   }
@@ -115,44 +124,58 @@ class WomensHealthEngine {
       phase = MenstrualPhase.menstrual;
       calorieOffset = 0;
       trainingMultiplier = 0.75;
-      trainingAdvice = 'Low-intensity mobility, restorative yoga, and gentle walks. Listen to your body and avoid heavy spinal loading.';
-      nutritionAdvice = 'Focus on iron-rich Indian foods (spinach, beetroot, jaggery, lentils), warm soups, and herbal teas (ginger/ajwain).';
+      trainingAdvice =
+          'Low-intensity mobility, restorative yoga, and gentle walks. Listen to your body and avoid heavy spinal loading.';
+      nutritionAdvice =
+          'Focus on iron-rich Indian foods (spinach, beetroot, jaggery, lentils), warm soups, and herbal teas (ginger/ajwain).';
       tips.add('Prioritize sleep and magnesium-rich hydration.');
     } else if (currentCycleDay <= 13) {
       phase = MenstrualPhase.follicular;
       calorieOffset = 0;
       trainingMultiplier = 1.10;
-      trainingAdvice = 'Estrogen is rising — peak strength & progressive overload capacity. Best window for PR attempts and intense lifting.';
-      nutritionAdvice = 'High insulin sensitivity — lean protein, complex grains (millets, oats), and cruciferous vegetables for estrogen clearance.';
+      trainingAdvice =
+          'Estrogen is rising — peak strength & progressive overload capacity. Best window for PR attempts and intense lifting.';
+      nutritionAdvice =
+          'High insulin sensitivity — lean protein, complex grains (millets, oats), and cruciferous vegetables for estrogen clearance.';
       tips.add('Great time to increase training volume.');
     } else if (currentCycleDay <= 16) {
       phase = MenstrualPhase.ovulatory;
       calorieOffset = 50;
       trainingMultiplier = 1.15;
-      trainingAdvice = 'Peak power output and athletic performance. Maintain knee and joint stability (estrogen-induced ligament laxity awareness).';
-      nutritionAdvice = 'Hydrate with electrolytes, include anti-inflammatory berries, citrus fruits, and zinc-rich seeds (pumpkin/sunflower).';
+      trainingAdvice =
+          'Peak power output and athletic performance. Maintain knee and joint stability (estrogen-induced ligament laxity awareness).';
+      nutritionAdvice =
+          'Hydrate with electrolytes, include anti-inflammatory berries, citrus fruits, and zinc-rich seeds (pumpkin/sunflower).';
       tips.add('Optimal window for high-intensity intervals (HIIT).');
     } else {
       phase = MenstrualPhase.luteal;
       calorieOffset = 150; // Basal metabolic rate increases by ~100-200 kcal
       trainingMultiplier = 0.90;
-      trainingAdvice = 'Progesterone dominates — focus on moderate steady-state cardio, strength maintenance, and higher recovery intervals.';
-      nutritionAdvice = 'Slightly higher caloric need (+150 kcal). Focus on healthy fats (ghee, nuts), dark chocolate, and avoid excess salt to prevent bloating.';
+      trainingAdvice =
+          'Progesterone dominates — focus on moderate steady-state cardio, strength maintenance, and higher recovery intervals.';
+      nutritionAdvice =
+          'Slightly higher caloric need (+150 kcal). Focus on healthy fats (ghee, nuts), dark chocolate, and avoid excess salt to prevent bloating.';
       tips.add('Support serotonin with complex carbs and restful evenings.');
     }
 
     // 2. PCOS / PCOD Adjustments
     if (isPcos || mode == LifeStageMode.pcosCalibrator) {
-      nutritionAdvice = 'PCOS Protocol: Low-glycemic Indian meals, cinnamon & fenugreek (methi) water, spearmint tea for androgen balance, and high-fiber lentils.';
-      trainingAdvice = 'Resistance strength training prioritized over excessive cardio to maximize insulin sensitivity without elevating cortisol.';
-      tips.add('Pair all carbs with healthy fats and protein to prevent insulin spikes.');
+      nutritionAdvice =
+          'PCOS Protocol: Low-glycemic Indian meals, cinnamon & fenugreek (methi) water, spearmint tea for androgen balance, and high-fiber lentils.';
+      trainingAdvice =
+          'Resistance strength training prioritized over excessive cardio to maximize insulin sensitivity without elevating cortisol.';
+      tips.add(
+          'Pair all carbs with healthy fats and protein to prevent insulin spikes.');
     }
 
     // 3. Menopause Care Adjustments
     if (mode == LifeStageMode.menopauseCare) {
-      nutritionAdvice = 'Menopause Protocol: Phytoestrogen-rich foods (tofu, flaxseeds), calcium + D3 rich meals, and cooling herbs to manage temperature fluctuations.';
-      trainingAdvice = 'Weight-bearing resistance training is paramount to stimulate bone mineral density and protect muscle mass.';
-      tips.add('Incorporate balance, core stability, and joint mobility drills.');
+      nutritionAdvice =
+          'Menopause Protocol: Phytoestrogen-rich foods (tofu, flaxseeds), calcium + D3 rich meals, and cooling herbs to manage temperature fluctuations.';
+      trainingAdvice =
+          'Weight-bearing resistance training is paramount to stimulate bone mineral density and protect muscle mass.';
+      tips.add(
+          'Incorporate balance, core stability, and joint mobility drills.');
     }
 
     return WomensHealthProfile(

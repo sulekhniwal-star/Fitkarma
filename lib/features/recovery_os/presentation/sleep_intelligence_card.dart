@@ -106,9 +106,15 @@ class SleepIntelligenceCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Row(
                       children: [
-                        _buildStagePill('Deep', '${(analysis.deepSleepPercent * 100).round()}%', AppColors.focusBlue),
+                        _buildStagePill(
+                            'Deep',
+                            '${(analysis.deepSleepPercent * 100).round()}%',
+                            AppColors.focusBlue),
                         const SizedBox(width: 6),
-                        _buildStagePill('REM', '${(analysis.remSleepPercent * 100).round()}%', AppColors.aiPurple),
+                        _buildStagePill(
+                            'REM',
+                            '${(analysis.remSleepPercent * 100).round()}%',
+                            AppColors.aiPurple),
                       ],
                     ),
                   ],
@@ -125,12 +131,16 @@ class SleepIntelligenceCard extends StatelessWidget {
               GlowingMetric(
                 label: '7-Day Sleep Debt',
                 value: '${analysis.sleepDebtHours.toStringAsFixed(1)}h',
-                accentColor: analysis.sleepDebtHours > 2.5 ? AppColors.alertRed : AppColors.karmaGreen,
+                accentColor: analysis.sleepDebtHours > 2.5
+                    ? AppColors.alertRed
+                    : AppColors.karmaGreen,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text('Optimal Bedtime Window', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                  const Text('Optimal Bedtime Window',
+                      style:
+                          TextStyle(fontSize: 11, color: AppColors.textMuted)),
                   const SizedBox(height: 2),
                   Text(
                     analysis.optimalBedtimeWindow,
@@ -157,7 +167,8 @@ class SleepIntelligenceCard extends StatelessWidget {
       ),
       child: Text(
         '$label: $percent',
-        style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w700),
+        style:
+            TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w700),
       ),
     );
   }

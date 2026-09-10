@@ -30,7 +30,8 @@ class WeddingModeScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showMethodologyModal(context),
           ),
         ],
@@ -54,15 +55,18 @@ class WeddingModeScreen extends ConsumerWidget {
                     label: Text(
                       r.name.split('(').first.trim(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.white : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                         fontSize: 12,
                       ),
                     ),
                     selected: isSelected,
                     selectedColor: AppColors.gold,
                     backgroundColor: AppColors.surfaceElevated,
-                    onSelected: (_) => ref.read(weddingModeProvider.notifier).updateRole(r),
+                    onSelected: (_) =>
+                        ref.read(weddingModeProvider.notifier).updateRole(r),
                   );
                 },
               ),
@@ -111,7 +115,8 @@ class WeddingModeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.gold.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -317,7 +322,8 @@ class WeddingModeScreen extends ConsumerWidget {
         children: [
           const Row(
             children: [
-              Icon(Icons.water_drop_outlined, color: AppColors.focusBlue, size: 18),
+              Icon(Icons.water_drop_outlined,
+                  color: AppColors.focusBlue, size: 18),
               SizedBox(width: 6),
               Text(
                 'De-Bloat & Anti-Puffiness Protocol',
@@ -403,7 +409,8 @@ class WeddingModeScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'Wedding Transformation Mode orchestrates countdown periodization (Foundation -> Sculpting -> Skin Radiance -> Peak Week). It emphasizes garment posture (Lehenga drape / Sherwani V-taper), Ojas skin nourishment, and safe anti-bloat strategies.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -416,7 +423,8 @@ class WeddingModeScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

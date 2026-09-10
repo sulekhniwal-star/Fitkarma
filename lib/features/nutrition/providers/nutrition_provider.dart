@@ -17,13 +17,20 @@ class DailyNutritionState {
     this.loggedMeals = const [],
   });
 
-  int get consumedCalories => loggedMeals.fold(0, (sum, m) => sum + m.totalCalories);
-  double get consumedProtein => double.parse(loggedMeals.fold(0.0, (sum, m) => sum + m.totalProtein).toStringAsFixed(1));
-  double get consumedCarbs => double.parse(loggedMeals.fold(0.0, (sum, m) => sum + m.totalCarbs).toStringAsFixed(1));
-  double get consumedFats => double.parse(loggedMeals.fold(0.0, (sum, m) => sum + m.totalFats).toStringAsFixed(1));
+  int get consumedCalories =>
+      loggedMeals.fold(0, (sum, m) => sum + m.totalCalories);
+  double get consumedProtein => double.parse(loggedMeals
+      .fold(0.0, (sum, m) => sum + m.totalProtein)
+      .toStringAsFixed(1));
+  double get consumedCarbs => double.parse(
+      loggedMeals.fold(0.0, (sum, m) => sum + m.totalCarbs).toStringAsFixed(1));
+  double get consumedFats => double.parse(
+      loggedMeals.fold(0.0, (sum, m) => sum + m.totalFats).toStringAsFixed(1));
 
-  int get remainingCalories => (targetCalories - consumedCalories).clamp(0, 10000);
-  int get remainingProtein => (targetProtein - consumedProtein.round()).clamp(0, 1000);
+  int get remainingCalories =>
+      (targetCalories - consumedCalories).clamp(0, 10000);
+  int get remainingProtein =>
+      (targetProtein - consumedProtein.round()).clamp(0, 1000);
 
   List<LoggedMealEntry> getMealsForPhase(MealPhase phase) =>
       loggedMeals.where((m) => m.phase == phase).toList();
@@ -94,6 +101,7 @@ class NutritionNotifier extends StateNotifier<DailyNutritionState> {
   }
 }
 
-final nutritionProvider = StateNotifierProvider<NutritionNotifier, DailyNutritionState>((ref) {
+final nutritionProvider =
+    StateNotifierProvider<NutritionNotifier, DailyNutritionState>((ref) {
   return NutritionNotifier();
 });

@@ -6,27 +6,32 @@ enum CompositionEstimationModel {
   ensembleConsensus(
     name: 'Multi-Method Ensemble Consensus',
     regionalName: 'बहु-पद्धति समन्वित अनुमान',
-    description: 'Weighted synthesis of anthropometric, biometric, and regression equations.',
+    description:
+        'Weighted synthesis of anthropometric, biometric, and regression equations.',
   ),
   usNavyCircumference(
     name: 'US Navy Anthropometric Model',
     regionalName: 'अमेरिकी नौसेना माप पद्धति',
-    description: 'Logarithmic circumference formula based on waist, neck, and hip ratios.',
+    description:
+        'Logarithmic circumference formula based on waist, neck, and hip ratios.',
   ),
   ymcaBodyFatModel(
     name: 'YMCA Anthropometric Model',
     regionalName: 'YMCA कमर-भार सूत्र',
-    description: 'Clinical linear model utilizing waist circumference and body weight.',
+    description:
+        'Clinical linear model utilizing waist circumference and body weight.',
   ),
   deurenbergRegression(
     name: 'Deurenberg Clinical Equation',
     regionalName: 'ड्यूरेनबर्ग क्लिनिकल समीकरण',
-    description: 'Age- and sex-adjusted BMI non-linear body fat regression model.',
+    description:
+        'Age- and sex-adjusted BMI non-linear body fat regression model.',
   ),
   gallagherClinical(
     name: 'Gallagher Dual-Energy Surrogate',
     regionalName: 'गैलाघर बायोमार्कर सूत्र',
-    description: 'Cardiometabolic calibrated body fat index adjusted for ethnicity.',
+    description:
+        'Cardiometabolic calibrated body fat index adjusted for ethnicity.',
   );
 
   final String name;
@@ -66,11 +71,13 @@ class WearableFreeCompositionReport {
   final double ensembleFatMassKg;
   final double ensembleBoneMassKg;
   final double ensembleTotalBodyWaterPercent;
-  final double confidenceScorePercent; // e.g. 92% based on model agreement / low variance
+  final double
+      confidenceScorePercent; // e.g. 92% based on model agreement / low variance
   final double modelVarianceStdDev; // Standard deviation between the 4 models
   final List<SingleModelEstimate> individualEstimates;
   final BodyCompositionZone zone;
-  final bool southAsianSpecificCutoffsApplied; // ICMR / WHO Asian BMI/Adiposity guidelines
+  final bool
+      southAsianSpecificCutoffsApplied; // ICMR / WHO Asian BMI/Adiposity guidelines
   final String clinicalInterpretation;
   final String regionalInterpretation;
   final DateTime estimatedAt;

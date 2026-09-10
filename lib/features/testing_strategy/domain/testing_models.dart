@@ -6,31 +6,36 @@ enum TestLayer {
     name: 'Pure Dart Unit Tests',
     regionalName: 'यूनिट परीक्षण (गणितीय एल्गोरिदम)',
     targetCoverage: 95,
-    description: 'Deterministic pure Dart domain engines with zero external dependencies.',
+    description:
+        'Deterministic pure Dart domain engines with zero external dependencies.',
   ),
   widget(
     name: 'Widget & UI Component Tests',
     regionalName: 'विजेट व यूआई घटक परीक्षण',
     targetCoverage: 85,
-    description: 'Bento cards, BilingualLabel rendering, GlowingMetric states, and themes.',
+    description:
+        'Bento cards, BilingualLabel rendering, GlowingMetric states, and themes.',
   ),
   integration(
     name: 'End-to-End Integration Flows',
     regionalName: 'एकीकृत उपयोगकर्ता प्रवाह परीक्षण',
     targetCoverage: 80,
-    description: 'Onboarding to workout completion and offline recovery pipelines.',
+    description:
+        'Onboarding to workout completion and offline recovery pipelines.',
   ),
   securityRules(
     name: 'Firestore & Storage Security Tests',
     regionalName: 'सुरक्षा नियम व प्रमाणीकरण परीक्षण',
     targetCoverage: 100,
-    description: 'Strict UID owner isolation and client immutability validations.',
+    description:
+        'Strict UID owner isolation and client immutability validations.',
   ),
   golden(
     name: 'Golden Snapshot Visual Tests',
     regionalName: 'गोल्डन विजुअल स्नैपशॉट परीक्षण',
     targetCoverage: 75,
-    description: 'Pixel-perfect glassmorphic dark-mode regression verification.',
+    description:
+        'Pixel-perfect glassmorphic dark-mode regression verification.',
   );
 
   final String name;
@@ -84,7 +89,8 @@ class FeatureTestSuite {
     required this.status,
   });
 
-  bool get isAllPassed => passedCount == testCount && status == TestExecutionStatus.passed;
+  bool get isAllPassed =>
+      passedCount == testCount && status == TestExecutionStatus.passed;
 }
 
 /// Overall Testing Pyramid Report across FitKarma

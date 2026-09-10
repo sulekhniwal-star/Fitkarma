@@ -25,27 +25,31 @@ class BodySorenessNotifier extends StateNotifier<AsyncValue<BodySorenessMap>> {
 
   Future<void> loadMap() async {
     try {
-      final map = await _repository.getDailySorenessMap(uid: _uid, dateStr: _date);
+      final map =
+          await _repository.getDailySorenessMap(uid: _uid, dateStr: _date);
       state = AsyncValue.data(map);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
 
-  Future<void> updateMuscleSoreness(MuscleGroup muscle, SorenessLevel level) async {
+  Future<void> updateMuscleSoreness(
+      MuscleGroup muscle, SorenessLevel level) async {
     final current = state.value ?? BodySorenessMap.initial();
-    final updatedStates = Map<MuscleGroup, SorenessLevel>.from(current.muscleStates);
+    final updatedStates =
+        Map<MuscleGroup, SorenessLevel>.from(current.muscleStates);
     updatedStates[muscle] = level;
 
-    final newMap = BodySorenessMap(muscleStates: updatedStates, loggedAt: DateTime.now());
+    final newMap =
+        BodySorenessMap(muscleStates: updatedStates, loggedAt: DateTime.now());
     state = AsyncValue.data(newMap);
 
     await _repository.saveSorenessMap(uid: _uid, dateStr: _date, map: newMap);
   }
 }
 
-final bodySorenessProvider =
-    StateNotifierProvider.autoDispose<BodySorenessNotifier, AsyncValue<BodySorenessMap>>((ref) {
+final bodySorenessProvider = StateNotifierProvider.autoDispose<
+    BodySorenessNotifier, AsyncValue<BodySorenessMap>>((ref) {
   final repo = ref.watch(recoveryRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);
   final date = ref.watch(selectedDateProvider);

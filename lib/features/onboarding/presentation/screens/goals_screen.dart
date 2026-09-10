@@ -34,7 +34,8 @@ class GoalsScreen extends ConsumerStatefulWidget {
       id: 'fat_loss',
       title: 'Lose Fat & Tone Up',
       regionalTitle: 'चर्बी घटाएं एवं फिट रहें',
-      description: 'Burn fat sustainably while retaining lean muscle with smart Indian meal swaps.',
+      description:
+          'Burn fat sustainably while retaining lean muscle with smart Indian meal swaps.',
       icon: Icons.local_fire_department_rounded,
       accentColor: AppColors.energyOrange,
     ),
@@ -42,7 +43,8 @@ class GoalsScreen extends ConsumerStatefulWidget {
       id: 'build_muscle',
       title: 'Build Muscle & Strength',
       regionalTitle: 'मांसपेशियां एवं ताकत बढ़ाएं',
-      description: 'Progressive overload training paired with high-protein vegetarian/non-veg plans.',
+      description:
+          'Progressive overload training paired with high-protein vegetarian/non-veg plans.',
       icon: Icons.fitness_center_rounded,
       accentColor: AppColors.karmaGreen,
     ),
@@ -50,7 +52,8 @@ class GoalsScreen extends ConsumerStatefulWidget {
       id: 'boost_energy',
       title: 'Boost Energy & Stamina',
       regionalTitle: 'ऊर्जा एवं सहनशक्ति में सुधार',
-      description: 'Optimize circadian rhythm, daily steps, and metabolic energy balance.',
+      description:
+          'Optimize circadian rhythm, daily steps, and metabolic energy balance.',
       icon: Icons.bolt_rounded,
       accentColor: AppColors.focusBlue,
     ),
@@ -58,7 +61,8 @@ class GoalsScreen extends ConsumerStatefulWidget {
       id: 'stress_recovery',
       title: 'Stress & Sleep Recovery',
       regionalTitle: 'तनाव प्रबंधन एवं गहरी नींद',
-      description: 'Guided breathwork, sleep stage optimization, and somatic recovery tracking.',
+      description:
+          'Guided breathwork, sleep stage optimization, and somatic recovery tracking.',
       icon: Icons.nightlight_round,
       accentColor: AppColors.aiPurple,
     ),
@@ -66,7 +70,8 @@ class GoalsScreen extends ConsumerStatefulWidget {
       id: 'metabolic_health',
       title: 'Metabolic & Heart Health',
       regionalTitle: 'मधुमेह एवं हृदय स्वास्थ्य',
-      description: 'Manage glucose spikes, lipid profiles, and maintain healthy blood pressure.',
+      description:
+          'Manage glucose spikes, lipid profiles, and maintain healthy blood pressure.',
       icon: Icons.favorite_rounded,
       accentColor: AppColors.alertRed,
     ),
@@ -74,7 +79,8 @@ class GoalsScreen extends ConsumerStatefulWidget {
       id: 'longevity',
       title: 'Longevity & Vitality',
       regionalTitle: 'दीर्घायु एवं सक्रिय जीवनशैली',
-      description: 'Long-term biological age reduction and functional mobility preservation.',
+      description:
+          'Long-term biological age reduction and functional mobility preservation.',
       icon: Icons.eco_rounded,
       accentColor: AppColors.gold,
     ),
@@ -146,7 +152,8 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: GoalsScreen.availableGoals.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(height: AppSpacing.md),
                   itemBuilder: (context, index) {
                     final goal = GoalsScreen.availableGoals[index];
                     final isSelected = _selectedGoalIds.contains(goal.id);
@@ -182,7 +189,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                             ),
                             child: Icon(
                               goal.icon,
-                              color: isSelected ? goal.accentColor : AppColors.textSecondary,
+                              color: isSelected
+                                  ? goal.accentColor
+                                  : AppColors.textSecondary,
                               size: 22,
                             ),
                           ),
@@ -192,27 +201,38 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: BilingualLabel(
                                         primaryText: goal.title,
                                         regionalText: goal.regionalTitle,
-                                        primaryStyle: AppTypography.titleMedium.copyWith(
-                                          color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
-                                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
+                                        primaryStyle:
+                                            AppTypography.titleMedium.copyWith(
+                                          color: isSelected
+                                              ? AppColors.textPrimary
+                                              : AppColors.textSecondary,
+                                          fontWeight: isSelected
+                                              ? FontWeight.w700
+                                              : FontWeight.w600,
                                         ),
                                       ),
                                     ),
                                     AnimatedContainer(
-                                      duration: const Duration(milliseconds: 200),
+                                      duration:
+                                          const Duration(milliseconds: 200),
                                       width: 22,
                                       height: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: isSelected ? goal.accentColor : Colors.transparent,
+                                        color: isSelected
+                                            ? goal.accentColor
+                                            : Colors.transparent,
                                         border: Border.all(
-                                          color: isSelected ? goal.accentColor : AppColors.glassBorder,
+                                          color: isSelected
+                                              ? goal.accentColor
+                                              : AppColors.glassBorder,
                                           width: 1.5,
                                         ),
                                       ),
@@ -254,7 +274,8 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
           height: 56,
           decoration: BoxDecoration(
             borderRadius: AppRadii.radiusMd,
-            gradient: _selectedGoalIds.isNotEmpty ? AppColors.primaryGradient : null,
+            gradient:
+                _selectedGoalIds.isNotEmpty ? AppColors.primaryGradient : null,
             color: _selectedGoalIds.isEmpty ? AppColors.surfaceElevated : null,
             boxShadow: _selectedGoalIds.isNotEmpty
                 ? [
@@ -276,7 +297,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
             ),
             onPressed: _selectedGoalIds.isNotEmpty
                 ? () {
-                    ref.read(onboardingFlowProvider.notifier).updateGoals(_selectedGoalIds.toList());
+                    ref
+                        .read(onboardingFlowProvider.notifier)
+                        .updateGoals(_selectedGoalIds.toList());
                     ref.read(onboardingFlowProvider.notifier).nextStep();
                   }
                 : null,
@@ -286,7 +309,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                 Text(
                   'Continue',
                   style: AppTypography.titleMedium.copyWith(
-                    color: _selectedGoalIds.isNotEmpty ? AppColors.textInverse : AppColors.textMuted,
+                    color: _selectedGoalIds.isNotEmpty
+                        ? AppColors.textInverse
+                        : AppColors.textMuted,
                     fontWeight: FontWeight.w800,
                     fontSize: 18,
                   ),
@@ -294,7 +319,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                 const SizedBox(width: 8),
                 Icon(
                   Icons.arrow_forward_rounded,
-                  color: _selectedGoalIds.isNotEmpty ? AppColors.textInverse : AppColors.textMuted,
+                  color: _selectedGoalIds.isNotEmpty
+                      ? AppColors.textInverse
+                      : AppColors.textMuted,
                   size: 20,
                 ),
               ],

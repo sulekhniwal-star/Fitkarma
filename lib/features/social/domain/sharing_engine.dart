@@ -15,7 +15,8 @@ class ActivitySharingEngine {
     buffer.writeln('🔥 *${payload.headline}*');
     buffer.writeln('✨ ${payload.regionalHeadline}');
     buffer.writeln('');
-    buffer.writeln('📊 *Achievement:* ${payload.primaryMetricValue} (${payload.primaryMetricLabel})');
+    buffer.writeln(
+        '📊 *Achievement:* ${payload.primaryMetricValue} (${payload.primaryMetricLabel})');
     buffer.writeln('⚡ *Details:* ${payload.detailedSubtitle}');
     buffer.writeln('🛡️ *Status:* Verified via ${payload.verificationSource}');
     buffer.writeln('');

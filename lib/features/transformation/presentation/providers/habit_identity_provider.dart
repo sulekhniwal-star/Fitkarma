@@ -20,7 +20,8 @@ class HabitIdentityNotifier extends StateNotifier<HabitIdentityReport> {
         votesCount: 1,
         timestamp: DateTime.now().subtract(const Duration(hours: 2)),
         reinforcementMessage: '+1 Vote cast for Mindful Metabolic Vitality',
-        regionalReinforcementMessage: 'मेटाबॉलिक सजगता के पक्ष में +१ संकल्प मत',
+        regionalReinforcementMessage:
+            'मेटाबॉलिक सजगता के पक्ष में +१ संकल्प मत',
       ),
       IdentityVoteRecord(
         id: 'vote_2',
@@ -30,7 +31,8 @@ class HabitIdentityNotifier extends StateNotifier<HabitIdentityReport> {
         votesCount: 2,
         timestamp: DateTime.now().subtract(const Duration(hours: 8)),
         reinforcementMessage: '+2 Votes cast for Kshatriya Strength Identity',
-        regionalReinforcementMessage: 'शारीरिक सामर्थ्य व शक्ति स्वरूप के पक्ष में +२ मत',
+        regionalReinforcementMessage:
+            'शारीरिक सामर्थ्य व शक्ति स्वरूप के पक्ष में +२ मत',
       ),
       IdentityVoteRecord(
         id: 'vote_3',
@@ -40,7 +42,8 @@ class HabitIdentityNotifier extends StateNotifier<HabitIdentityReport> {
         votesCount: 1,
         timestamp: DateTime.now().subtract(const Duration(hours: 14)),
         reinforcementMessage: '+1 Vote cast for Cellular Muscle Recovery',
-        regionalReinforcementMessage: 'मांसपेशी पोषण व रिकवरी के पक्ष में +१ मत',
+        regionalReinforcementMessage:
+            'मांसपेशी पोषण व रिकवरी के पक्ष में +१ मत',
       ),
       IdentityVoteRecord(
         id: 'vote_4',
@@ -50,7 +53,8 @@ class HabitIdentityNotifier extends StateNotifier<HabitIdentityReport> {
         votesCount: 1,
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
         reinforcementMessage: '+1 Vote cast for Parasympathetic Vagal Tone',
-        regionalReinforcementMessage: 'मानसिक शांति व स्वायत्त तंत्रिका संतुलन के पक्ष में +१ मत',
+        regionalReinforcementMessage:
+            'मानसिक शांति व स्वायत्त तंत्रिका संतुलन के पक्ष में +१ मत',
       ),
     ];
 

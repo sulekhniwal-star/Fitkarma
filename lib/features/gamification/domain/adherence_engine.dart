@@ -36,7 +36,9 @@ class AdherenceEngine {
     if (scores.length == 1) return 100.0;
 
     final double mean = scores.reduce((a, b) => a + b) / scores.length;
-    final double variance = scores.map((s) => pow(s - mean, 2)).reduce((a, b) => a + b) / scores.length;
+    final double variance =
+        scores.map((s) => pow(s - mean, 2)).reduce((a, b) => a + b) /
+            scores.length;
     final double stdDev = sqrt(variance);
 
     final double stability = 100.0 - (stdDev * 2.5);
@@ -63,7 +65,8 @@ class AdherenceEngine {
     final allScores = weeklySnapshots.map((s) => s.compositeScore).toList();
     final double weeklyAvg = allScores.isEmpty
         ? currentComposite
-        : double.parse((allScores.reduce((a, b) => a + b) / allScores.length).toStringAsFixed(1));
+        : double.parse((allScores.reduce((a, b) => a + b) / allScores.length)
+            .toStringAsFixed(1));
 
     final double stabilityIndex = calculateStabilityIndex(allScores);
 
@@ -73,7 +76,9 @@ class AdherenceEngine {
       score: nutritionScore,
       weight: 0.30,
       keyMetricLabel: 'Protein & Macro Targets Hit',
-      statusSummary: nutritionScore >= 80 ? 'Optimal Macro Balance' : 'Slight Protein Shortfall',
+      statusSummary: nutritionScore >= 80
+          ? 'Optimal Macro Balance'
+          : 'Slight Protein Shortfall',
     );
 
     final trainingPillar = PillarAdherenceScore(
@@ -82,7 +87,9 @@ class AdherenceEngine {
       score: trainingScore,
       weight: 0.30,
       keyMetricLabel: 'Volume & Form Quality Fulfilled',
-      statusSummary: trainingScore >= 80 ? 'Progressive Overload Active' : 'Rest Day Scheduled',
+      statusSummary: trainingScore >= 80
+          ? 'Progressive Overload Active'
+          : 'Rest Day Scheduled',
     );
 
     final recoveryPillar = PillarAdherenceScore(
@@ -91,7 +98,9 @@ class AdherenceEngine {
       score: recoveryScore,
       weight: 0.25,
       keyMetricLabel: 'Sleep Debt & Strain Alignment',
-      statusSummary: recoveryScore >= 80 ? 'Restorative Sleep >85%' : 'Moderate Sleep Debt (45m)',
+      statusSummary: recoveryScore >= 80
+          ? 'Restorative Sleep >85%'
+          : 'Moderate Sleep Debt (45m)',
     );
 
     final circadianPillar = PillarAdherenceScore(
@@ -100,15 +109,21 @@ class AdherenceEngine {
       score: circadianScore,
       weight: 0.15,
       keyMetricLabel: 'Post-Meal Steps & Curfew Met',
-      statusSummary: circadianScore >= 80 ? 'All 3 Shatpawali Walks Logged' : '1 Shatpawali Missed',
+      statusSummary: circadianScore >= 80
+          ? 'All 3 Shatpawali Walks Logged'
+          : '1 Shatpawali Missed',
     );
 
-    String rec = 'Continue current protocol. Maintain protein pacing across 4 meals.';
-    String regRec = 'वर्तमान दिनचर्या जारी रखें। ४ भोजन में प्रोटीन का समान वितरण बनाए रखें।';
+    String rec =
+        'Continue current protocol. Maintain protein pacing across 4 meals.';
+    String regRec =
+        'वर्तमान दिनचर्या जारी रखें। ४ भोजन में प्रोटीन का समान वितरण बनाए रखें।';
 
     if (currentComposite < 70) {
-      rec = 'Focus on post-dinner Shatpawali and enforcing a 45m pre-sleep digital curfew to restore autonomic balance.';
-      regRec = 'स्वायत्त संतुलन बहाल करने हेतु रात्रि भोजनोपरांत शतपावली और स्क्रीन बंद करने पर ध्यान दें।';
+      rec =
+          'Focus on post-dinner Shatpawali and enforcing a 45m pre-sleep digital curfew to restore autonomic balance.';
+      regRec =
+          'स्वायत्त संतुलन बहाल करने हेतु रात्रि भोजनोपरांत शतपावली और स्क्रीन बंद करने पर ध्यान दें।';
     }
 
     return AdherenceReport(

@@ -32,7 +32,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhenoAgeMethodologyModal(context),
           ),
         ],
@@ -103,8 +104,10 @@ class BiologicalAgeScreen extends ConsumerWidget {
     bool isYounger,
   ) {
     final deltaSign = report.ageDelta > 0 ? '+' : '';
-    final deltaText = '${report.ageDelta.abs().toStringAsFixed(1)} Yrs ${isYounger ? 'Younger' : 'Older'}';
-    final deltaRegionalText = '${report.ageDelta.abs().toStringAsFixed(1)} वर्ष ${isYounger ? 'युवा' : 'अधिक'}';
+    final deltaText =
+        '${report.ageDelta.abs().toStringAsFixed(1)} Yrs ${isYounger ? 'Younger' : 'Older'}';
+    final deltaRegionalText =
+        '${report.ageDelta.abs().toStringAsFixed(1)} वर्ष ${isYounger ? 'युवा' : 'अधिक'}';
 
     return BentoCard(
       child: Column(
@@ -124,7 +127,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
                       : AppColors.alertRed.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
                   border: Border.all(
-                    color: isYounger ? AppColors.karmaGreen : AppColors.alertRed,
+                    color:
+                        isYounger ? AppColors.karmaGreen : AppColors.alertRed,
                     width: 1,
                   ),
                 ),
@@ -133,14 +137,17 @@ class BiologicalAgeScreen extends ConsumerWidget {
                   children: [
                     Icon(
                       isYounger ? Icons.auto_awesome : Icons.trending_up,
-                      color: isYounger ? AppColors.karmaGreen : AppColors.alertRed,
+                      color:
+                          isYounger ? AppColors.karmaGreen : AppColors.alertRed,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       '$deltaSign${report.ageDelta.toStringAsFixed(1)} Yrs ($deltaText)',
                       style: AppTypography.bodySmall.copyWith(
-                        color: isYounger ? AppColors.karmaGreen : AppColors.alertRed,
+                        color: isYounger
+                            ? AppColors.karmaGreen
+                            : AppColors.alertRed,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -165,7 +172,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
                 label: 'Biological Age',
                 value: report.biologicalAge.toStringAsFixed(1),
                 unit: 'years',
-                accentColor: isYounger ? AppColors.karmaGreen : AppColors.energyOrange,
+                accentColor:
+                    isYounger ? AppColors.karmaGreen : AppColors.energyOrange,
                 isHero: true,
               ),
               const SizedBox(width: AppSpacing.lg),
@@ -197,10 +205,12 @@ class BiologicalAgeScreen extends ConsumerWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const Divider(height: AppSpacing.lg, color: AppColors.surfaceElevated),
+          const Divider(
+              height: AppSpacing.lg, color: AppColors.surfaceElevated),
           Row(
             children: [
-              const Icon(Icons.thumb_up_alt_outlined, color: AppColors.karmaGreen, size: 16),
+              const Icon(Icons.thumb_up_alt_outlined,
+                  color: AppColors.karmaGreen, size: 16),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -311,7 +321,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
     return Column(
       children: report.systemAges.map((sys) {
         final isSubYounger = sys.ageDelta <= 0;
-        final sysColor = isSubYounger ? AppColors.karmaGreen : AppColors.energyOrange;
+        final sysColor =
+            isSubYounger ? AppColors.karmaGreen : AppColors.energyOrange;
         final sign = sys.ageDelta > 0 ? '+' : '';
 
         return Padding(
@@ -341,7 +352,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
                         color: sysColor.withValues(alpha: 0.15),
                         borderRadius: AppRadii.radiusSm,
@@ -402,7 +414,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
                   color: AppColors.textPrimary,
                 ),
               ),
-              const Icon(Icons.show_chart, color: AppColors.karmaGreen, size: 18),
+              const Icon(Icons.show_chart,
+                  color: AppColors.karmaGreen, size: 18),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -446,7 +459,9 @@ class BiologicalAgeScreen extends ConsumerWidget {
                       Text(
                         '${snap.biologicalAge.toStringAsFixed(1)}y',
                         style: AppTypography.titleSmall.copyWith(
-                          color: isSnapYounger ? AppColors.karmaGreen : AppColors.energyOrange,
+                          color: isSnapYounger
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange,
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                         ),
@@ -455,7 +470,9 @@ class BiologicalAgeScreen extends ConsumerWidget {
                       Text(
                         '${delta > 0 ? "+" : ""}${delta.toStringAsFixed(1)}y',
                         style: AppTypography.bodySmall.copyWith(
-                          color: isSnapYounger ? AppColors.karmaGreen : AppColors.energyOrange,
+                          color: isSnapYounger
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange,
                           fontSize: 10,
                         ),
                       ),
@@ -643,9 +660,11 @@ class BiologicalAgeScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Row(
             children: [
-              _buildLeverBadge(Icons.timer, lever.timeframe, AppColors.focusBlue),
+              _buildLeverBadge(
+                  Icons.timer, lever.timeframe, AppColors.focusBlue),
               const SizedBox(width: AppSpacing.xs),
-              _buildLeverBadge(Icons.fitness_center, lever.difficulty, AppColors.energyOrange),
+              _buildLeverBadge(Icons.fitness_center, lever.difficulty,
+                  AppColors.energyOrange),
               const Spacer(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -756,7 +775,8 @@ class BiologicalAgeScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

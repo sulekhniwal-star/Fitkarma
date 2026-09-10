@@ -14,10 +14,12 @@ class NutritionReliabilityScreen extends ConsumerStatefulWidget {
   const NutritionReliabilityScreen({super.key});
 
   @override
-  ConsumerState<NutritionReliabilityScreen> createState() => _NutritionReliabilityScreenState();
+  ConsumerState<NutritionReliabilityScreen> createState() =>
+      _NutritionReliabilityScreenState();
 }
 
-class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilityScreen> {
+class _NutritionReliabilityScreenState
+    extends ConsumerState<NutritionReliabilityScreen> {
   bool _isOilExplicitlyTracked = false;
 
   @override
@@ -63,22 +65,28 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                           regionalText: 'डेटा सटीकता एवं सुरक्षा स्थिति',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: levelColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: levelColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: levelColor.withValues(alpha: 0.4)),
                           ),
                           child: Row(
                             children: [
                               Icon(
-                                report.isShieldActive ? Icons.shield_rounded : Icons.shield_outlined,
+                                report.isShieldActive
+                                    ? Icons.shield_rounded
+                                    : Icons.shield_outlined,
                                 color: levelColor,
                                 size: 14,
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                report.isShieldActive ? 'SHIELD ACTIVE' : 'UNSHIELDED',
+                                report.isShieldActive
+                                    ? 'SHIELD ACTIVE'
+                                    : 'UNSHIELDED',
                                 style: TextStyle(
                                   color: levelColor,
                                   fontSize: 10,
@@ -149,7 +157,8 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                   ),
                   value: _isOilExplicitlyTracked,
                   activeThumbColor: AppColors.karmaGreen,
-                  onChanged: (val) => setState(() => _isOilExplicitlyTracked = val),
+                  onChanged: (val) =>
+                      setState(() => _isOilExplicitlyTracked = val),
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
@@ -170,7 +179,11 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                 final double scoreFrac = (factor.score / 100.0).clamp(0.0, 1.0);
                 final Color factorColor = factor.score >= 80
                     ? AppColors.karmaGreen
-                    : (factor.score >= 60 ? AppColors.focusBlue : (factor.score >= 40 ? AppColors.gold : AppColors.alertRed));
+                    : (factor.score >= 60
+                        ? AppColors.focusBlue
+                        : (factor.score >= 40
+                            ? AppColors.gold
+                            : AppColors.alertRed));
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
@@ -198,7 +211,8 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                                       ),
                                       const SizedBox(width: 6),
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 1),
                                         decoration: const BoxDecoration(
                                           color: AppColors.surface,
                                           borderRadius: AppRadii.radiusSm,
@@ -216,7 +230,9 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                                   ),
                                   Text(
                                     factor.regionalName,
-                                    style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textMuted),
                                   ),
                                 ],
                               ),
@@ -250,7 +266,8 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                           child: LinearProgressIndicator(
                             value: scoreFrac,
                             backgroundColor: AppColors.surface,
-                            valueColor: AlwaysStoppedAnimation<Color>(factorColor),
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(factorColor),
                             minHeight: 6,
                           ),
                         ),
@@ -267,7 +284,8 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.lightbulb_outline_rounded, color: AppColors.gold, size: 14),
+                            const Icon(Icons.lightbulb_outline_rounded,
+                                color: AppColors.gold, size: 14),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
@@ -308,7 +326,8 @@ class _NutritionReliabilityScreenState extends ConsumerState<NutritionReliabilit
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.verified_user_rounded, color: AppColors.focusBlue, size: 16),
+                        const Icon(Icons.verified_user_rounded,
+                            color: AppColors.focusBlue, size: 16),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(

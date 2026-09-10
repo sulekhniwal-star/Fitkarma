@@ -26,7 +26,8 @@ class GroceryVendorEngine {
         totalProteinGrams: 250.0,
         category: 'Protein Staples',
         isAyurvedicEssential: true,
-        ayurvedicBenefit: 'शीतल (Pitta pacifying) natural high-fiber cooling protein',
+        ayurvedicBenefit:
+            'शीतल (Pitta pacifying) natural high-fiber cooling protein',
       ),
       const VendorCartItem(
         id: 'moong_sprouts',
@@ -37,7 +38,8 @@ class GroceryVendorEngine {
         totalProteinGrams: 240.0,
         category: 'Protein Staples',
         isAyurvedicEssential: true,
-        ayurvedicBenefit: 'लघु (Light to digest), Tridosha balancing clean protein',
+        ayurvedicBenefit:
+            'लघु (Light to digest), Tridosha balancing clean protein',
       ),
       const VendorCartItem(
         id: 'paneer_curd',
@@ -109,7 +111,8 @@ class GroceryVendorEngine {
         totalProteinGrams: 110.0,
         category: 'Grains & Carbs',
         isAyurvedicEssential: true,
-        ayurvedicBenefit: 'मधुर-कषाय (Low Glycemic), Rich in Magnesium and micronutrients',
+        ayurvedicBenefit:
+            'मधुर-कषाय (Low Glycemic), Rich in Magnesium and micronutrients',
       ),
 
       // 4. Ayurvedic Seasonal & Healing Pantry (Optional toggled)
@@ -123,7 +126,8 @@ class GroceryVendorEngine {
           totalProteinGrams: 0.0,
           category: 'Ayurvedic Superfoods',
           isAyurvedicEssential: true,
-          ayurvedicBenefit: 'ओजस वर्धक (Strengthens Ojas & Fat-soluble Vitamin transport)',
+          ayurvedicBenefit:
+              'ओजस वर्धक (Strengthens Ojas & Fat-soluble Vitamin transport)',
         ),
         const VendorCartItem(
           id: 'sendha_namak',
@@ -134,7 +138,8 @@ class GroceryVendorEngine {
           totalProteinGrams: 0.0,
           category: 'Ayurvedic Superfoods',
           isAyurvedicEssential: true,
-          ayurvedicBenefit: 'दीपन-पाचन (Enhances digestive fire, non-bloating sodium)',
+          ayurvedicBenefit:
+              'दीपन-पाचन (Enhances digestive fire, non-bloating sodium)',
         ),
         const VendorCartItem(
           id: 'lakadong_turmeric',
@@ -145,7 +150,8 @@ class GroceryVendorEngine {
           totalProteinGrams: 16.0,
           category: 'Ayurvedic Superfoods',
           isAyurvedicEssential: true,
-          ayurvedicBenefit: 'शोथहर (Potent Anti-inflammatory & Recovery Accelerator)',
+          ayurvedicBenefit:
+              'शोथहर (Potent Anti-inflammatory & Recovery Accelerator)',
         ),
       ],
     ];
@@ -161,12 +167,16 @@ class GroceryVendorEngine {
   }) {
     final activeItems = items.where((i) => i.isChecked).toList();
 
-    final int baseSubtotal = activeItems.fold<int>(0, (sum, i) => sum + i.basePriceInr);
-    final double totalProtein = activeItems.fold<double>(0.0, (sum, i) => sum + i.totalProteinGrams);
+    final int baseSubtotal =
+        activeItems.fold<int>(0, (sum, i) => sum + i.basePriceInr);
+    final double totalProtein =
+        activeItems.fold<double>(0.0, (sum, i) => sum + i.totalProteinGrams);
 
     // Build unified search query string
-    final itemQueryTokens = activeItems.map((e) => e.name.split(' ').first).take(6).join(', ');
-    final encodedQuery = Uri.encodeComponent(itemQueryTokens.isNotEmpty ? itemQueryTokens : 'groceries');
+    final itemQueryTokens =
+        activeItems.map((e) => e.name.split(' ').first).take(6).join(', ');
+    final encodedQuery = Uri.encodeComponent(
+        itemQueryTokens.isNotEmpty ? itemQueryTokens : 'groceries');
 
     final quotes = <VendorPriceQuote>[];
 
@@ -185,7 +195,8 @@ class GroceryVendorEngine {
           break;
 
         case GroceryVendorType.zepto:
-          itemSubtotal = (baseSubtotal * 0.98).round(); // 2% quick-commerce promo
+          itemSubtotal =
+              (baseSubtotal * 0.98).round(); // 2% quick-commerce promo
           handlingFee = 5;
           deliveryFee = itemSubtotal > 499 ? 0 : 15;
           discount = itemSubtotal >= 750 ? 25 : 0;
@@ -199,14 +210,16 @@ class GroceryVendorEngine {
           break;
 
         case GroceryVendorType.bigBasket:
-          itemSubtotal = (baseSubtotal * 0.91).round(); // ~9% bulk staple savings
+          itemSubtotal =
+              (baseSubtotal * 0.91).round(); // ~9% bulk staple savings
           handlingFee = 0;
           deliveryFee = itemSubtotal > 999 ? 0 : 30;
           discount = itemSubtotal >= 1200 ? 50 : 0;
           break;
 
         case GroceryVendorType.amazonFresh:
-          itemSubtotal = (baseSubtotal * 0.93).round(); // ~7% competitive savings
+          itemSubtotal =
+              (baseSubtotal * 0.93).round(); // ~7% competitive savings
           handlingFee = 0;
           deliveryFee = itemSubtotal > 799 ? 0 : 40;
           discount = itemSubtotal >= 1500 ? 60 : 0;
@@ -220,7 +233,8 @@ class GroceryVendorEngine {
           break;
       }
 
-      final totalPayable = (itemSubtotal + deliveryFee + handlingFee - discount).clamp(0, 999999);
+      final totalPayable = (itemSubtotal + deliveryFee + handlingFee - discount)
+          .clamp(0, 999999);
 
       final deepLink = '${vendor.appDeepLinkPrefix}$encodedQuery';
       final fallbackUrl = '${vendor.fallbackWebUrlPrefix}$encodedQuery';
@@ -233,7 +247,8 @@ class GroceryVendorEngine {
         discountInr: discount,
         totalPayableInr: totalPayable,
         eta: vendor.deliveryEta,
-        isFastest: vendor == GroceryVendorType.blinkit || vendor == GroceryVendorType.zepto,
+        isFastest: vendor == GroceryVendorType.blinkit ||
+            vendor == GroceryVendorType.zepto,
         isCheapest: false, // Calculated after finding min
         searchCartQuery: itemQueryTokens,
         deepLinkUrl: deepLink,
@@ -243,7 +258,8 @@ class GroceryVendorEngine {
 
     // Determine cheapest vendor
     if (quotes.isNotEmpty) {
-      final minPayable = quotes.map((q) => q.totalPayableInr).reduce((a, b) => a < b ? a : b);
+      final minPayable =
+          quotes.map((q) => q.totalPayableInr).reduce((a, b) => a < b ? a : b);
       for (int i = 0; i < quotes.length; i++) {
         if (quotes[i].totalPayableInr == minPayable) {
           quotes[i] = VendorPriceQuote(
@@ -267,20 +283,25 @@ class GroceryVendorEngine {
     // Build WhatsApp Kirana Shopping List
     final whatsappBuffer = StringBuffer();
     whatsappBuffer.writeln('🛒 *FitKarma Smart Grocery List (किराना पर्ची)*');
-    whatsappBuffer.writeln('📍 *Pincode:* $pincode | *Items:* ${activeItems.length}');
+    whatsappBuffer
+        .writeln('📍 *Pincode:* $pincode | *Items:* ${activeItems.length}');
     whatsappBuffer.writeln('--------------------------------');
     for (final item in activeItems) {
       final ayurvedicTag = item.isAyurvedicEssential ? ' 🌿 (आयुर्वेदिक)' : '';
       whatsappBuffer.writeln('▫️ *${item.name}* (${item.regionalName})');
-      whatsappBuffer.writeln('   👉 मात्रा: ${item.quantity} | ₹${item.basePriceInr}$ayurvedicTag');
+      whatsappBuffer.writeln(
+          '   👉 मात्रा: ${item.quantity} | ₹${item.basePriceInr}$ayurvedicTag');
     }
     whatsappBuffer.writeln('--------------------------------');
     whatsappBuffer.writeln('💰 *अनुमानित कुल योग:* ₹$baseSubtotal');
     whatsappBuffer.writeln('💪 *कुल प्रोटीन:* ${totalProtein.round()}g');
-    whatsappBuffer.writeln('\n_Generated via FitKarma Nutrition Optimizer_ 🇮🇳');
+    whatsappBuffer
+        .writeln('\n_Generated via FitKarma Nutrition Optimizer_ 🇮🇳');
 
     // Default recommended vendor: Zepto or BigBasket based on cart size
-    final recommended = activeItems.length > 7 ? GroceryVendorType.bigBasket : GroceryVendorType.blinkit;
+    final recommended = activeItems.length > 7
+        ? GroceryVendorType.bigBasket
+        : GroceryVendorType.blinkit;
 
     return GroceryVendorCheckoutPayload(
       planId: planId ?? 'gvp_${DateTime.now().millisecondsSinceEpoch}',

@@ -6,7 +6,9 @@ void main() {
   group('ClinicalLabEngine Tests', () {
     const engine = ClinicalLabEngine();
 
-    test('Parses and analyzes optimal laboratory panel without physician escalation', () {
+    test(
+        'Parses and analyzes optimal laboratory panel without physician escalation',
+        () {
       final report = engine.parseAndAnalyzeReport(
         reportId: 'lab_test_01',
         labProviderName: 'Dr. Lal PathLabs',
@@ -35,7 +37,9 @@ void main() {
       expect(report.optimizationProtocols.isNotEmpty, isTrue);
     });
 
-    test('Triggers critical physician escalation when severe biomarkers are parsed', () {
+    test(
+        'Triggers critical physician escalation when severe biomarkers are parsed',
+        () {
       final report = engine.parseAndAnalyzeReport(
         reportId: 'lab_test_critical',
         labProviderName: 'Thyrocare',
@@ -58,8 +62,12 @@ void main() {
       );
 
       expect(report.requiresPhysicianConsult, isTrue);
-      expect(report.physicianEscalationRationale, contains('Critical threshold'));
-      expect(report.parsedBiomarkers.any((b) => b.status == LabBiomarkerStatus.critical), isTrue);
+      expect(
+          report.physicianEscalationRationale, contains('Critical threshold'));
+      expect(
+          report.parsedBiomarkers
+              .any((b) => b.status == LabBiomarkerStatus.critical),
+          isTrue);
     });
   });
 }

@@ -137,14 +137,18 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
                               color: phaseColor.withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusSm,
                             ),
                             child: Text(
                               profile.currentPhase.dayRange,
-                              style: TextStyle(color: phaseColor, fontSize: 10, fontWeight: FontWeight.w700),
+                              style: TextStyle(
+                                  color: phaseColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -157,7 +161,8 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
                           ),
                           Text(
                             profile.currentPhase.regionalName,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                            style: AppTypography.bodySmall
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                           const SizedBox(height: 6),
                           Text(
@@ -223,7 +228,8 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
                           min: 1.0,
                           max: _cycleLengthDays.toDouble(),
                           divisions: _cycleLengthDays - 1,
-                          onChanged: (val) => setState(() => _currentCycleDay = val.round()),
+                          onChanged: (val) =>
+                              setState(() => _currentCycleDay = val.round()),
                         ),
                       ),
                     ],
@@ -275,7 +281,8 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
                       if (profile.calorieOffset != 0) ...[
                         const SizedBox(height: 6),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.aiPurple.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
@@ -324,7 +331,8 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
             ),
             onPressed: () {
               ref.read(onboardingFlowProvider.notifier).updateWomensHealth(
-                    isPcosAware: _isPcos || _selectedMode == LifeStageMode.pcosCalibrator,
+                    isPcosAware: _isPcos ||
+                        _selectedMode == LifeStageMode.pcosCalibrator,
                   );
               ref.read(onboardingFlowProvider.notifier).nextStep();
             },
@@ -363,7 +371,8 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
 
     return BentoCard(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-      backgroundColor: isSelected ? AppColors.surfaceElevated : AppColors.surface,
+      backgroundColor:
+          isSelected ? AppColors.surfaceElevated : AppColors.surface,
       border: Border.all(
         color: isSelected ? AppColors.aiPurple : AppColors.glassBorder,
         width: isSelected ? 1.5 : 1.0,
@@ -377,14 +386,17 @@ class _WomensHealthScreenState extends ConsumerState<WomensHealthScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 16, color: isSelected ? AppColors.aiPurple : AppColors.textSecondary),
+          Icon(icon,
+              size: 16,
+              color: isSelected ? AppColors.aiPurple : AppColors.textSecondary),
           const SizedBox(width: 6),
           Text(
             label,
             style: TextStyle(
               fontSize: 13,
               fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-              color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
+              color:
+                  isSelected ? AppColors.textPrimary : AppColors.textSecondary,
             ),
           ),
         ],

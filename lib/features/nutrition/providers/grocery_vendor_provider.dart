@@ -37,7 +37,8 @@ class GroceryVendorState {
       payload: payload ?? this.payload,
       selectedVendor: selectedVendor ?? this.selectedVendor,
       isVegetarian: isVegetarian ?? this.isVegetarian,
-      includeAyurvedicPantry: includeAyurvedicPantry ?? this.includeAyurvedicPantry,
+      includeAyurvedicPantry:
+          includeAyurvedicPantry ?? this.includeAyurvedicPantry,
       pincode: pincode ?? this.pincode,
       statusMessage: statusMessage,
     );
@@ -111,7 +112,9 @@ class GroceryVendorNotifier extends StateNotifier<GroceryVendorState> {
       isVegetarian: isVegetarian,
       items: items,
       payload: payload,
-      statusMessage: isVegetarian ? 'Switched to 100% शाकाहारी (Veg) items' : 'Non-veg protein staples added',
+      statusMessage: isVegetarian
+          ? 'Switched to 100% शाकाहारी (Veg) items'
+          : 'Non-veg protein staples added',
     );
   }
 
@@ -130,7 +133,9 @@ class GroceryVendorNotifier extends StateNotifier<GroceryVendorState> {
       includeAyurvedicPantry: include,
       items: items,
       payload: payload,
-      statusMessage: include ? 'Ayurvedic superfoods added to pantry list' : 'Removed Ayurvedic pantry items',
+      statusMessage: include
+          ? 'Ayurvedic superfoods added to pantry list'
+          : 'Removed Ayurvedic pantry items',
     );
   }
 
@@ -153,7 +158,9 @@ class GroceryVendorNotifier extends StateNotifier<GroceryVendorState> {
         (quote) => quote.vendor == state.selectedVendor,
       );
     } catch (_) {
-      return state.payload.vendorQuotes.isNotEmpty ? state.payload.vendorQuotes.first : null;
+      return state.payload.vendorQuotes.isNotEmpty
+          ? state.payload.vendorQuotes.first
+          : null;
     }
   }
 }

@@ -117,5 +117,6 @@ class CicdPipelineReport {
     required this.startedAt,
   });
 
-  bool get isAllGreen => overallStatus == PipelineStatus.passed && stages.every((s) => s.isPassed);
+  bool get isAllGreen =>
+      overallStatus == PipelineStatus.passed && stages.every((s) => s.isPassed);
 }

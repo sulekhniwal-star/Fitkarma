@@ -59,10 +59,15 @@ class IndianFoodSwap {
   });
 
   int get deltaCalories => suggestedItem.calories - originalItem.calories;
-  double get deltaProtein => double.parse((suggestedItem.proteinGrams - originalItem.proteinGrams).toStringAsFixed(1));
-  double get deltaCarbs => double.parse((suggestedItem.carbsGrams - originalItem.carbsGrams).toStringAsFixed(1));
-  double get deltaFats => double.parse((suggestedItem.fatsGrams - originalItem.fatsGrams).toStringAsFixed(1));
-  double get deltaFiber => double.parse((suggestedItem.fiberGrams - originalItem.fiberGrams).toStringAsFixed(1));
+  double get deltaProtein =>
+      double.parse((suggestedItem.proteinGrams - originalItem.proteinGrams)
+          .toStringAsFixed(1));
+  double get deltaCarbs => double.parse(
+      (suggestedItem.carbsGrams - originalItem.carbsGrams).toStringAsFixed(1));
+  double get deltaFats => double.parse(
+      (suggestedItem.fatsGrams - originalItem.fatsGrams).toStringAsFixed(1));
+  double get deltaFiber => double.parse(
+      (suggestedItem.fiberGrams - originalItem.fiberGrams).toStringAsFixed(1));
 }
 
 class FoodSwapEngine {
@@ -96,8 +101,10 @@ class FoodSwapEngine {
         category: 'Roti/Bread',
       ),
       tasteFidelityScore: 5,
-      culinaryPreparationTip: 'Knead with ajwain, roasted jeera, and fresh green chillies for authentic Bihari flavor.',
-      physiologicalAdvantage: '+9.5g high-DIAAS roasted chickpea protein with 2.5x dietary fiber.',
+      culinaryPreparationTip:
+          'Knead with ajwain, roasted jeera, and fresh green chillies for authentic Bihari flavor.',
+      physiologicalAdvantage:
+          '+9.5g high-DIAAS roasted chickpea protein with 2.5x dietary fiber.',
     ),
     IndianFoodSwap(
       id: 'swap_white_rice_to_soya_pulao',
@@ -127,8 +134,10 @@ class FoodSwapEngine {
         category: 'Roti/Bread',
       ),
       tasteFidelityScore: 5,
-      culinaryPreparationTip: 'Boil soya chunks in mild salted turmeric water, squeeze thoroughly, and saute with whole garam masala.',
-      physiologicalAdvantage: '+13.7g protein per bowl; turns high-glycemic starch into an anabolic complete meal.',
+      culinaryPreparationTip:
+          'Boil soya chunks in mild salted turmeric water, squeeze thoroughly, and saute with whole garam masala.',
+      physiologicalAdvantage:
+          '+13.7g protein per bowl; turns high-glycemic starch into an anabolic complete meal.',
     ),
 
     // 2. Glycemic & Fiber Swaps
@@ -160,8 +169,10 @@ class FoodSwapEngine {
         category: 'Roti/Bread',
       ),
       tasteFidelityScore: 4,
-      culinaryPreparationTip: 'Mix 50% Ragi and 50% Besan with kasuri methi and warm water for soft texture.',
-      physiologicalAdvantage: 'Reduces Glycemic Load by 60%; rich in bioavailable Calcium and slow-digesting polyphenols.',
+      culinaryPreparationTip:
+          'Mix 50% Ragi and 50% Besan with kasuri methi and warm water for soft texture.',
+      physiologicalAdvantage:
+          'Reduces Glycemic Load by 60%; rich in bioavailable Calcium and slow-digesting polyphenols.',
     ),
     IndianFoodSwap(
       id: 'swap_white_poha_to_sprouted_moong_poha',
@@ -191,8 +202,10 @@ class FoodSwapEngine {
         category: 'Snack',
       ),
       tasteFidelityScore: 5,
-      culinaryPreparationTip: 'Add 50% sprouted moong + 50% red rice poha with mustard seeds, curry leaves, and lemon juice.',
-      physiologicalAdvantage: 'Prevents 10:30 AM mid-morning energy crashes by flattening the insulin spike.',
+      culinaryPreparationTip:
+          'Add 50% sprouted moong + 50% red rice poha with mustard seeds, curry leaves, and lemon juice.',
+      physiologicalAdvantage:
+          'Prevents 10:30 AM mid-morning energy crashes by flattening the insulin spike.',
     ),
 
     // 3. Caloric Deficit & Fat Cut Swaps
@@ -224,8 +237,10 @@ class FoodSwapEngine {
         category: 'Snack',
       ),
       tasteFidelityScore: 4,
-      culinaryPreparationTip: 'Roast with 1/2 tsp pure A2 desi ghee, rock salt (sendha namak), chaat masala, and black pepper.',
-      physiologicalAdvantage: 'Saves 355 kcal and eliminates oxidized trans-fats; rich in anti-aging flavonoids.',
+      culinaryPreparationTip:
+          'Roast with 1/2 tsp pure A2 desi ghee, rock salt (sendha namak), chaat masala, and black pepper.',
+      physiologicalAdvantage:
+          'Saves 355 kcal and eliminates oxidized trans-fats; rich in anti-aging flavonoids.',
     ),
     IndianFoodSwap(
       id: 'swap_malai_paneer_to_lowfat_paneer',
@@ -255,8 +270,10 @@ class FoodSwapEngine {
         category: 'Dairy',
       ),
       tasteFidelityScore: 5,
-      culinaryPreparationTip: 'Soak diced low-fat paneer in warm salted water for 5 minutes before cooking for ultra-soft texture.',
-      physiologicalAdvantage: 'Saves 195 kcal while increasing bioavailable casein protein by +9.0g.',
+      culinaryPreparationTip:
+          'Soak diced low-fat paneer in warm salted water for 5 minutes before cooking for ultra-soft texture.',
+      physiologicalAdvantage:
+          'Saves 195 kcal while increasing bioavailable casein protein by +9.0g.',
     ),
 
     // 4. Ayurvedic & Gut Health Swaps
@@ -288,8 +305,10 @@ class FoodSwapEngine {
         category: 'Dairy',
       ),
       tasteFidelityScore: 5,
-      culinaryPreparationTip: 'Whisk dahi with cold water, roasted jeera, fresh mint, black salt, and a pinch of hing.',
-      physiologicalAdvantage: 'Pitta-pacifying probiotic culture that accelerates gastric digestion without blood sugar spikes.',
+      culinaryPreparationTip:
+          'Whisk dahi with cold water, roasted jeera, fresh mint, black salt, and a pinch of hing.',
+      physiologicalAdvantage:
+          'Pitta-pacifying probiotic culture that accelerates gastric digestion without blood sugar spikes.',
     ),
   ];
 
@@ -302,7 +321,9 @@ class FoodSwapEngine {
   static IndianFoodSwap? findSwapForFoodName(String foodName) {
     final lower = foodName.toLowerCase();
     return stapleSwaps.firstWhere(
-      (s) => s.originalItem.name.toLowerCase().contains(lower) || s.suggestedItem.name.toLowerCase().contains(lower),
+      (s) =>
+          s.originalItem.name.toLowerCase().contains(lower) ||
+          s.suggestedItem.name.toLowerCase().contains(lower),
       orElse: () => stapleSwaps.first,
     );
   }

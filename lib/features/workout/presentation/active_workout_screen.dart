@@ -15,12 +15,14 @@ class ActiveWorkoutScreen extends ConsumerStatefulWidget {
   const ActiveWorkoutScreen({super.key});
 
   @override
-  ConsumerState<ActiveWorkoutScreen> createState() => _ActiveWorkoutScreenState();
+  ConsumerState<ActiveWorkoutScreen> createState() =>
+      _ActiveWorkoutScreenState();
 }
 
 class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
   late Timer _sessionStopwatchTimer;
-  int _elapsedSeconds = 28 * 60 + 14; // Default starting simulated time: 28m 14s
+  int _elapsedSeconds =
+      28 * 60 + 14; // Default starting simulated time: 28m 14s
 
   Timer? _restCountdownTimer;
   int _restSecondsRemaining = 0;
@@ -85,7 +87,8 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                   color: AppColors.karmaGlow,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.emoji_events_rounded, color: AppColors.karmaGreen, size: 24),
+                child: const Icon(Icons.emoji_events_rounded,
+                    color: AppColors.karmaGreen, size: 24),
               ),
               const SizedBox(width: 10),
               const Expanded(
@@ -100,7 +103,8 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(session.title, style: AppTypography.titleSmall.copyWith(fontSize: 14)),
+              Text(session.title,
+                  style: AppTypography.titleSmall.copyWith(fontSize: 14)),
               const SizedBox(height: AppSpacing.md),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -132,16 +136,19 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: AppRadii.radiusSm,
-                  border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.3)),
+                  border: Border.all(
+                      color: AppColors.karmaGreen.withValues(alpha: 0.3)),
                 ),
                 child: const Row(
                   children: [
-                    Icon(Icons.bolt_rounded, color: AppColors.karmaGreen, size: 18),
+                    Icon(Icons.bolt_rounded,
+                        color: AppColors.karmaGreen, size: 18),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Day Strain: 14.8 / 21.0 (Optimal Overload Zone). Muscle protein synthesis primed for the next 36 hours.',
-                        style: TextStyle(fontSize: 11, color: AppColors.textPrimary),
+                        style: TextStyle(
+                            fontSize: 11, color: AppColors.textPrimary),
                       ),
                     ),
                   ],
@@ -154,15 +161,18 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.karmaGreen,
                 foregroundColor: AppColors.textInverse,
-                shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadii.radiusSm),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               onPressed: () {
                 ref.read(workoutProvider.notifier).completeWorkout();
                 Navigator.of(ctx).pop();
                 Navigator.of(context).pop();
               },
-              child: const Text('Save & Finish / सहेजें', style: TextStyle(fontWeight: FontWeight.w800)),
+              child: const Text('Save & Finish / सहेजें',
+                  style: TextStyle(fontWeight: FontWeight.w800)),
             ),
           ],
         );
@@ -177,7 +187,8 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
     final totalTonnage = session.totalVolumeTonnage;
 
     // Trigger rest timer if provider requested it
-    if (workoutState.activeRestTimerSeconds != null && _restSecondsRemaining == 0) {
+    if (workoutState.activeRestTimerSeconds != null &&
+        _restSecondsRemaining == 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _startRestTimer(workoutState.activeRestTimerSeconds!);
       });
@@ -193,8 +204,11 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
         ),
         actions: [
           TextButton.icon(
-            icon: const Icon(Icons.check_circle_rounded, color: AppColors.karmaGreen, size: 18),
-            label: const Text('Finish', style: TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.w800)),
+            icon: const Icon(Icons.check_circle_rounded,
+                color: AppColors.karmaGreen, size: 18),
+            label: const Text('Finish',
+                style: TextStyle(
+                    color: AppColors.karmaGreen, fontWeight: FontWeight.w800)),
             onPressed: () => _showFinishWorkoutSummary(context, session),
           ),
         ],
@@ -242,7 +256,8 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                   ...List.generate(session.plannedExercises.length, (exIdx) {
                     final planned = session.plannedExercises[exIdx];
                     final ex = planned.exercise;
-                    final isDesi = ex.equipment == EquipmentType.traditionalIndian;
+                    final isDesi =
+                        ex.equipment == EquipmentType.traditionalIndian;
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 14),
@@ -257,23 +272,33 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         ex.name,
-                                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: AppColors.textPrimary),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 14,
+                                            color: AppColors.textPrimary),
                                       ),
                                       Text(
                                         ex.regionalName,
-                                        style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.textMuted),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
-                                    color: (isDesi ? AppColors.energyOrange : AppColors.focusBlue).withValues(alpha: 0.15),
+                                    color: (isDesi
+                                            ? AppColors.energyOrange
+                                            : AppColors.focusBlue)
+                                        .withValues(alpha: 0.15),
                                     borderRadius: AppRadii.radiusSm,
                                   ),
                                   child: Text(
@@ -281,7 +306,9 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                                     style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.w700,
-                                      color: isDesi ? AppColors.energyOrange : AppColors.focusBlue,
+                                      color: isDesi
+                                          ? AppColors.energyOrange
+                                          : AppColors.focusBlue,
                                     ),
                                   ),
                                 ),
@@ -291,32 +318,81 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
 
                             // Set Logging Table Header
                             const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4, vertical: 2),
                               child: Row(
                                 children: [
-                                  SizedBox(width: 32, child: Text('SET', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted))),
-                                  Expanded(flex: 3, child: Center(child: Text('PREVIOUS', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)))),
-                                  Expanded(flex: 3, child: Center(child: Text('KG', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)))),
-                                  Expanded(flex: 3, child: Center(child: Text('REPS', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)))),
-                                  SizedBox(width: 40, child: Center(child: Text('DONE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)))),
+                                  SizedBox(
+                                      width: 32,
+                                      child: Text('SET',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.textMuted))),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Center(
+                                          child: Text('PREVIOUS',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w700,
+                                                  color:
+                                                      AppColors.textMuted)))),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Center(
+                                          child: Text('KG',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w700,
+                                                  color:
+                                                      AppColors.textMuted)))),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Center(
+                                          child: Text('REPS',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w700,
+                                                  color:
+                                                      AppColors.textMuted)))),
+                                  SizedBox(
+                                      width: 40,
+                                      child: Center(
+                                          child: Text('DONE',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w700,
+                                                  color:
+                                                      AppColors.textMuted)))),
                                 ],
                               ),
                             ),
-                            const Divider(color: AppColors.glassBorder, height: 8),
+                            const Divider(
+                                color: AppColors.glassBorder, height: 8),
 
                             // Set Rows
-                            ...List.generate(planned.completedSets.length, (setIdx) {
+                            ...List.generate(planned.completedSets.length,
+                                (setIdx) {
                               final currentSet = planned.completedSets[setIdx];
 
                               return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 4),
                                   decoration: BoxDecoration(
-                                    color: currentSet.isCompleted ? AppColors.karmaGreen.withValues(alpha: 0.08) : AppColors.surface,
+                                    color: currentSet.isCompleted
+                                        ? AppColors.karmaGreen
+                                            .withValues(alpha: 0.08)
+                                        : AppColors.surface,
                                     borderRadius: AppRadii.radiusSm,
                                     border: Border.all(
-                                      color: currentSet.isCompleted ? AppColors.karmaGreen.withValues(alpha: 0.4) : AppColors.glassBorder,
+                                      color: currentSet.isCompleted
+                                          ? AppColors.karmaGreen
+                                              .withValues(alpha: 0.4)
+                                          : AppColors.glassBorder,
                                     ),
                                   ),
                                   child: Row(
@@ -326,7 +402,10 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                                         width: 28,
                                         child: Text(
                                           '${currentSet.setNumber}',
-                                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.textPrimary),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 12,
+                                              color: AppColors.textPrimary),
                                         ),
                                       ),
                                       // Previous Ghost Target
@@ -335,7 +414,9 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                                         child: Center(
                                           child: Text(
                                             '${(planned.suggestedWeightKg > 0 ? '${planned.suggestedWeightKg}kg' : 'BW')} × ${planned.targetRepsMin}',
-                                            style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                                            style: const TextStyle(
+                                                fontSize: 11,
+                                                color: AppColors.textMuted),
                                           ),
                                         ),
                                       ),
@@ -344,11 +425,19 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                                         flex: 3,
                                         child: Center(
                                           child: Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                            decoration: const BoxDecoration(color: AppColors.surfaceElevated, borderRadius: AppRadii.radiusSm),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 2),
+                                            decoration: const BoxDecoration(
+                                                color:
+                                                    AppColors.surfaceElevated,
+                                                borderRadius:
+                                                    AppRadii.radiusSm),
                                             child: Text(
                                               '${currentSet.weightKg} kg',
-                                              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: AppColors.textPrimary),
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 11,
+                                                  color: AppColors.textPrimary),
                                             ),
                                           ),
                                         ),
@@ -358,11 +447,19 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                                         flex: 3,
                                         child: Center(
                                           child: Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                            decoration: const BoxDecoration(color: AppColors.surfaceElevated, borderRadius: AppRadii.radiusSm),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 2),
+                                            decoration: const BoxDecoration(
+                                                color:
+                                                    AppColors.surfaceElevated,
+                                                borderRadius:
+                                                    AppRadii.radiusSm),
                                             child: Text(
                                               '${currentSet.reps} reps',
-                                              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: AppColors.textPrimary),
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 11,
+                                                  color: AppColors.textPrimary),
                                             ),
                                           ),
                                         ),
@@ -374,12 +471,20 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
                                           icon: Icon(
-                                            currentSet.isCompleted ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
-                                            color: currentSet.isCompleted ? AppColors.karmaGreen : AppColors.textMuted,
+                                            currentSet.isCompleted
+                                                ? Icons.check_circle_rounded
+                                                : Icons
+                                                    .radio_button_unchecked_rounded,
+                                            color: currentSet.isCompleted
+                                                ? AppColors.karmaGreen
+                                                : AppColors.textMuted,
                                             size: 24,
                                           ),
                                           onPressed: () {
-                                            ref.read(workoutProvider.notifier).toggleSetCompletion(exIdx, setIdx);
+                                            ref
+                                                .read(workoutProvider.notifier)
+                                                .toggleSetCompletion(
+                                                    exIdx, setIdx);
                                           },
                                         ),
                                       ),
@@ -395,14 +500,23 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                               alignment: Alignment.centerLeft,
                               child: TextButton.icon(
                                 style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
                                   minimumSize: Size.zero,
-                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
                                 ),
-                                icon: const Icon(Icons.add_rounded, color: AppColors.focusBlue, size: 16),
-                                label: const Text('+ Add Set', style: TextStyle(color: AppColors.focusBlue, fontSize: 11, fontWeight: FontWeight.w700)),
+                                icon: const Icon(Icons.add_rounded,
+                                    color: AppColors.focusBlue, size: 16),
+                                label: const Text('+ Add Set',
+                                    style: TextStyle(
+                                        color: AppColors.focusBlue,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700)),
                                 onPressed: () {
-                                  ref.read(workoutProvider.notifier).addSet(exIdx);
+                                  ref
+                                      .read(workoutProvider.notifier)
+                                      .addSet(exIdx);
                                 },
                               ),
                             ),
@@ -430,15 +544,23 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.timer_rounded, color: AppColors.focusBlue, size: 22),
+                          const Icon(Icons.timer_rounded,
+                              color: AppColors.focusBlue, size: 22),
                           const SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('REST TIMER (विश्राम समय)', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
+                              const Text('REST TIMER (विश्राम समय)',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.textMuted)),
                               Text(
                                 _formatDuration(_restSecondsRemaining),
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.focusBlue),
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.focusBlue),
                               ),
                             ],
                           ),
@@ -448,29 +570,39 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                         children: [
                           OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: AppColors.glassBorder),
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              side: const BorderSide(
+                                  color: AppColors.glassBorder),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
                               minimumSize: Size.zero,
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
-                            onPressed: () => setState(() => _restSecondsRemaining += 30),
-                            child: const Text('+30s', style: TextStyle(color: AppColors.textPrimary, fontSize: 11)),
+                            onPressed: () =>
+                                setState(() => _restSecondsRemaining += 30),
+                            child: const Text('+30s',
+                                style: TextStyle(
+                                    color: AppColors.textPrimary,
+                                    fontSize: 11)),
                           ),
                           const SizedBox(width: 8),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.surface,
                               foregroundColor: AppColors.textMuted,
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
                               minimumSize: Size.zero,
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {
                               _restCountdownTimer?.cancel();
                               setState(() => _restSecondsRemaining = 0);
-                              ref.read(workoutProvider.notifier).clearRestTimer();
+                              ref
+                                  .read(workoutProvider.notifier)
+                                  .clearRestTimer();
                             },
-                            child: const Text('Skip', style: TextStyle(fontSize: 11)),
+                            child: const Text('Skip',
+                                style: TextStyle(fontSize: 11)),
                           ),
                         ],
                       ),

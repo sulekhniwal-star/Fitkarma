@@ -18,7 +18,8 @@ class DoctorSharingEngine {
     final now = grantTime ?? DateTime.now();
     final expiresAt = now.add(durationWindow.duration);
     final token = _generateSecureAccessPin();
-    final grantId = 'grant_${now.millisecondsSinceEpoch}_${math.Random().nextInt(9000) + 1000}';
+    final grantId =
+        'grant_${now.millisecondsSinceEpoch}_${math.Random().nextInt(9000) + 1000}';
 
     return DoctorAccessGrant(
       grantId: grantId,
@@ -55,7 +56,8 @@ class DoctorSharingEngine {
     final now = compileTime ?? DateTime.now();
     final dateString = '${now.day}/${now.month}/${now.year}';
 
-    final demographics = 'Age: $patientAge | Sex: $patientSex | Assessment Date: $dateString | ABHA/ID: $patientId';
+    final demographics =
+        'Age: $patientAge | Sex: $patientSex | Assessment Date: $dateString | ABHA/ID: $patientId';
 
     final cardioSection =
         '• Resting Hemodynamics: Mean RHR ${restingHeartRate.toInt()} bpm | Arterial BP ${systolicBp.toInt()}/${diastolicBp.toInt()} mmHg (Normotensive) | Autonomic rMSSD ${rmssdHeartRateVariability.toInt()} ms.\n'
@@ -69,16 +71,13 @@ class DoctorSharingEngine {
         ? '• No active prescription medications logged.'
         : '• Active Regimens: ${activeMedicationNames.join(" | ")}.\n• Adherence Rate: 94% on-time compliance.';
 
-    final subjectiveObjective =
-        '30-DAY COMPREHENSIVE CLINICAL HEALTH DOSSIER\n'
+    final subjectiveObjective = '30-DAY COMPREHENSIVE CLINICAL HEALTH DOSSIER\n'
         'Patient reports steady functional energy with optimal sleep quality (7.5h avg). Normotensive arterial hemodynamics and superior glycemic control demonstrated across continuous wearable and diagnostic streams.';
 
-    final regionalSubjectiveObjective =
-        '३०-दिवसीय व्यापक स्वास्थ्य रिपोर्ट\n'
+    final regionalSubjectiveObjective = '३०-दिवसीय व्यापक स्वास्थ्य रिपोर्ट\n'
         'मरीज में निरंतर ऊर्जा व उत्कृष्ट स्वास्थ्य स्थिरता दर्ज की गई है। रक्तचाप (${systolicBp.toInt()}/${diastolicBp.toInt()} mmHg) व शर्करा स्तर (${estimatedHbA1c.toStringAsFixed(2)}% HbA1c) पूर्णतः सामान्य सीमा में हैं।';
 
-    final fullText =
-        '=======================================================\n'
+    final fullText = '=======================================================\n'
         'FITKARMA CLINICAL HEALTH & TELEMETRY DOSSIER\n'
         'Confidential Medical Information • ABDM Interoperable\n'
         '=======================================================\n\n'

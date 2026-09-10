@@ -30,7 +30,8 @@ class SquadDetailScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSquadPhilosophyModal(context),
           ),
         ],
@@ -58,7 +59,8 @@ class SquadDetailScreen extends ConsumerWidget {
 
             // 5. Daily Squad Standup Matrix
             BilingualLabel(
-              primaryText: 'Daily Standup (${squad.checkedInMembersCount}/${squad.totalMembersCount} Checked In)',
+              primaryText:
+                  'Daily Standup (${squad.checkedInMembersCount}/${squad.totalMembersCount} Checked In)',
               regionalText: 'दैनिक सह-साधना अवलोकन',
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -82,7 +84,8 @@ class SquadDetailScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: tierColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusFull,
@@ -104,7 +107,8 @@ class SquadDetailScreen extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: const BoxDecoration(
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusFull,
@@ -137,12 +141,14 @@ class SquadDetailScreen extends ConsumerWidget {
                     const SizedBox(height: 2),
                     Text(
                       '${squad.currentStreakDays} Days Streak • Best: ${squad.bestStreakDays} Days',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.karmaGreen),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.karmaGreen),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '${squad.squadCheckInRate.toStringAsFixed(0)}% check-in rate today across ${squad.totalMembersCount} athletes.',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -217,14 +223,16 @@ class SquadDetailScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildSanjeevaniCard(BuildContext context, WidgetRef ref, SquadDetail squad) {
+  Widget _buildSanjeevaniCard(
+      BuildContext context, WidgetRef ref, SquadDetail squad) {
     return BentoCard(
       child: Row(
         children: [
           CircleAvatar(
             radius: 20,
             backgroundColor: AppColors.karmaGreen.withValues(alpha: 0.15),
-            child: const Icon(Icons.healing, color: AppColors.karmaGreen, size: 22),
+            child: const Icon(Icons.healing,
+                color: AppColors.karmaGreen, size: 22),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -233,11 +241,13 @@ class SquadDetailScreen extends ConsumerWidget {
               children: [
                 Text(
                   'Sanjeevani Streak Shield (${squad.availableSanjeevaniShields} Available)',
-                  style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                  style: AppTypography.titleMedium
+                      .copyWith(color: AppColors.textPrimary),
                 ),
                 Text(
                   'Protects squad streak from resetting if a member is traveling or resting.',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textMuted, fontSize: 11),
                 ),
               ],
             ),
@@ -247,9 +257,11 @@ class SquadDetailScreen extends ConsumerWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.surfaceElevated,
                 foregroundColor: AppColors.karmaGreen,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               ),
-              onPressed: () => ref.read(squadDetailProvider.notifier).useSanjeevaniShield(),
+              onPressed: () =>
+                  ref.read(squadDetailProvider.notifier).useSanjeevaniShield(),
               child: const Text('Deploy Shield'),
             ),
         ],
@@ -267,11 +279,13 @@ class SquadDetailScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.flag, color: AppColors.energyOrange, size: 20),
+                  const Icon(Icons.flag,
+                      color: AppColors.energyOrange, size: 20),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     'Active Squad Sanghathon',
-                    style: AppTypography.titleMedium.copyWith(color: AppColors.energyOrange),
+                    style: AppTypography.titleMedium
+                        .copyWith(color: AppColors.energyOrange),
                   ),
                 ],
               ),
@@ -294,7 +308,8 @@ class SquadDetailScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             challenge.title,
-            style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+            style: AppTypography.titleMedium
+                .copyWith(color: AppColors.textPrimary),
           ),
           const SizedBox(height: 2),
           Text(
@@ -327,7 +342,8 @@ class SquadDetailScreen extends ConsumerWidget {
             child: LinearProgressIndicator(
               value: challenge.progressFraction,
               backgroundColor: AppColors.surfaceElevated,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.energyOrange),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(AppColors.energyOrange),
               minHeight: 6,
             ),
           ),
@@ -336,7 +352,8 @@ class SquadDetailScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildMemberStandupCard(BuildContext context, WidgetRef ref, SquadMemberDetail member) {
+  Widget _buildMemberStandupCard(
+      BuildContext context, WidgetRef ref, SquadMemberDetail member) {
     final isSelf = member.memberId == 'user_you';
 
     return BentoCard(
@@ -345,7 +362,8 @@ class SquadDetailScreen extends ConsumerWidget {
         children: [
           CircleAvatar(
             radius: 20,
-            backgroundColor: isSelf ? AppColors.karmaGreen : AppColors.surfaceElevated,
+            backgroundColor:
+                isSelf ? AppColors.karmaGreen : AppColors.surfaceElevated,
             child: Text(
               member.avatarInitials,
               style: AppTypography.titleSmall.copyWith(
@@ -371,7 +389,8 @@ class SquadDetailScreen extends ConsumerWidget {
                     if (member.role == SquadMemberRole.captain)
                       Container(
                         margin: const EdgeInsets.only(left: 6),
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: AppColors.gold.withValues(alpha: 0.15),
                           borderRadius: AppRadii.radiusFull,
@@ -389,19 +408,23 @@ class SquadDetailScreen extends ConsumerWidget {
                 ),
                 Text(
                   '${member.todaySteps} steps • ${member.completedRingsCount}/4 Rings Complete',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textMuted, fontSize: 11),
                 ),
                 const SizedBox(height: 4),
                 // Tiny completed rings indicators
                 Row(
                   children: [
-                    _buildRingStatusIcon('Steps', member.todaySteps >= member.dailyStepTarget),
+                    _buildRingStatusIcon(
+                        'Steps', member.todaySteps >= member.dailyStepTarget),
                     const SizedBox(width: 4),
-                    _buildRingStatusIcon('Shatpawali', member.hasCompletedShatpawali),
+                    _buildRingStatusIcon(
+                        'Shatpawali', member.hasCompletedShatpawali),
                     const SizedBox(width: 4),
                     _buildRingStatusIcon('Workout', member.hasCompletedWorkout),
                     const SizedBox(width: 4),
-                    _buildRingStatusIcon('Nutrition', member.hasLoggedNutrition),
+                    _buildRingStatusIcon(
+                        'Nutrition', member.hasLoggedNutrition),
                   ],
                 ),
               ],
@@ -409,13 +432,18 @@ class SquadDetailScreen extends ConsumerWidget {
           ),
           if (isSelf)
             IconButton(
-              icon: const Icon(Icons.check_circle, color: AppColors.karmaGreen, size: 28),
-              onPressed: () => ref.read(squadDetailProvider.notifier).checkInSelf(),
+              icon: const Icon(Icons.check_circle,
+                  color: AppColors.karmaGreen, size: 28),
+              onPressed: () =>
+                  ref.read(squadDetailProvider.notifier).checkInSelf(),
             )
           else
             IconButton(
-              icon: const Icon(Icons.favorite_border, color: AppColors.energyOrange, size: 24),
-              onPressed: () => ref.read(squadDetailProvider.notifier).cheerMember(member.memberId),
+              icon: const Icon(Icons.favorite_border,
+                  color: AppColors.energyOrange, size: 24),
+              onPressed: () => ref
+                  .read(squadDetailProvider.notifier)
+                  .cheerMember(member.memberId),
             ),
         ],
       ),
@@ -426,7 +454,9 @@ class SquadDetailScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
       decoration: BoxDecoration(
-        color: isDone ? AppColors.karmaGreen.withValues(alpha: 0.15) : AppColors.surfaceElevated,
+        color: isDone
+            ? AppColors.karmaGreen.withValues(alpha: 0.15)
+            : AppColors.surfaceElevated,
         borderRadius: AppRadii.radiusFull,
       ),
       child: Text(
@@ -456,7 +486,8 @@ class SquadDetailScreen extends ConsumerWidget {
             children: [
               Text(
                 'FitKarma Squad (Dal) Architecture',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -464,7 +495,8 @@ class SquadDetailScreen extends ConsumerWidget {
                 '• All-for-One Streak: When all members check in, your squad tier and multiplier elevate.\n'
                 '• Sanjeevani Shield: Emergency protections safeguard your collective streak.\n'
                 '• Sanghathon Challenges: Complete collective distance and nutrition goals to earn community Karma pools.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

@@ -40,7 +40,9 @@ class MarketplaceState {
       filteredListings: filteredListings ?? this.filteredListings,
       filter: filter ?? this.filter,
       userOrders: userOrders ?? this.userOrders,
-      selectedListing: clearSelectedListing ? null : (selectedListing ?? this.selectedListing),
+      selectedListing: clearSelectedListing
+          ? null
+          : (selectedListing ?? this.selectedListing),
       isLoading: isLoading ?? this.isLoading,
       successMessage: successMessage,
       errorMessage: errorMessage,
@@ -61,7 +63,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
   static MarketplaceState _buildInitialState() {
     final catalog = MarketplaceEngine.sampleCatalog();
     const initialFilter = MarketplaceFilter();
-    final filtered = _engine.filterListings(listings: catalog, filter: initialFilter);
+    final filtered =
+        _engine.filterListings(listings: catalog, filter: initialFilter);
 
     return MarketplaceState(
       catalog: catalog,
@@ -72,7 +75,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
   }
 
   void _applyFilters(MarketplaceFilter filter) {
-    final filtered = _engine.filterListings(listings: state.catalog, filter: filter);
+    final filtered =
+        _engine.filterListings(listings: state.catalog, filter: filter);
     state = state.copyWith(filter: filter, filteredListings: filtered);
   }
 
@@ -105,12 +109,14 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
   }
 
   void selectListing(MarketplaceListing? listing) {
-    state = state.copyWith(selectedListing: listing, clearSelectedListing: listing == null);
+    state = state.copyWith(
+        selectedListing: listing, clearSelectedListing: listing == null);
   }
 
   /// Completes purchase & creates order
   Future<void> purchaseListing(MarketplaceListing listing) async {
-    state = state.copyWith(isLoading: true, errorMessage: null, successMessage: null);
+    state = state.copyWith(
+        isLoading: true, errorMessage: null, successMessage: null);
 
     // Simulate verified checkout
     await Future.delayed(const Duration(milliseconds: 300));
@@ -120,7 +126,8 @@ class MarketplaceNotifier extends StateNotifier<MarketplaceState> {
       listing: listing,
     );
 
-    final updatedOrders = List<MarketplaceOrder>.from(state.userOrders)..insert(0, order);
+    final updatedOrders = List<MarketplaceOrder>.from(state.userOrders)
+      ..insert(0, order);
 
     state = state.copyWith(
       userOrders: updatedOrders,

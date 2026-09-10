@@ -99,17 +99,23 @@ class SatietyPredictionEngine {
       return _buildEmptySatietyReport(now);
     }
 
-    final totalCalories = entries.fold<int>(0, (sum, e) => sum + e.totalCalories);
-    final totalProtein = entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
-    final totalCarbs = entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
-    final totalFiber = entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
+    final totalCalories =
+        entries.fold<int>(0, (sum, e) => sum + e.totalCalories);
+    final totalProtein =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
+    final totalCarbs =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
+    final totalFiber =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
 
-    final categories = entries.map((e) => e.food.category.toLowerCase()).toSet();
+    final categories =
+        entries.map((e) => e.food.category.toLowerCase()).toSet();
     final names = entries.map((e) => e.food.name.toLowerCase()).toList();
 
     // 1. Protein Satiety Vector (35% weight)
     // Protein stimulates CCK & PYY release in the duodenum
-    final double proteinVector = (totalProtein / 30.0 * 100.0).clamp(10.0, 100.0);
+    final double proteinVector =
+        (totalProtein / 30.0 * 100.0).clamp(10.0, 100.0);
 
     // 2. Dietary Fiber & Viscosity Vector (30% weight)
     // Soluble fiber creates viscous gel in stomach, delaying gastric emptying
@@ -118,10 +124,18 @@ class SatietyPredictionEngine {
     // 3. Food Volume & Water Matrix (20% weight)
     // Whole vegetables / salads / broths vs calorie-dense fats
     double volumeVector = 50.0;
-    if (categories.contains('sabzi') || names.any((n) => n.contains('salad') || n.contains('cucumber') || n.contains('kheera') || n.contains('soup') || n.contains('chaas'))) {
+    if (categories.contains('sabzi') ||
+        names.any((n) =>
+            n.contains('salad') ||
+            n.contains('cucumber') ||
+            n.contains('kheera') ||
+            n.contains('soup') ||
+            n.contains('chaas'))) {
       volumeVector += 40.0;
     }
-    if (categories.contains('daal') || names.any((n) => n.contains('dal') || n.contains('rajma') || n.contains('chole'))) {
+    if (categories.contains('daal') ||
+        names.any((n) =>
+            n.contains('dal') || n.contains('rajma') || n.contains('chole'))) {
       volumeVector += 15.0;
     }
     volumeVector = volumeVector.clamp(20.0, 100.0);
@@ -129,7 +143,8 @@ class SatietyPredictionEngine {
     // 4. Glycemic Crash Risk Penalty (15% weight)
     // Refined sugar/flour with low protein/fiber causes reactive hypoglycemia
     double glycemicStabilityVector = 85.0;
-    final isHighRefinedCarb = (totalCarbs > 50 && totalFiber < 3.0 && totalProtein < 10.0);
+    final isHighRefinedCarb =
+        (totalCarbs > 50 && totalFiber < 3.0 && totalProtein < 10.0);
     if (isHighRefinedCarb) {
       glycemicStabilityVector = 30.0;
     } else if (totalFiber >= 5.0 || totalProtein >= 20.0) {
@@ -148,13 +163,15 @@ class SatietyPredictionEngine {
     // Fullness Duration Calculation:
     // Base: 1.5 hours + (satietyScore / 100 * 3.5 hours)
     // Ranges from ~1.8 hours (poor meal) to 5.0 hours (optimal high protein/fiber meal)
-    final double fullnessHours = double.parse((1.5 + (satietyScore / 100.0 * 3.5)).toStringAsFixed(1));
+    final double fullnessHours =
+        double.parse((1.5 + (satietyScore / 100.0 * 3.5)).toStringAsFixed(1));
     final int fullnessMinutes = (fullnessHours * 60).round();
     final nextHunger = now.add(Duration(minutes: fullnessMinutes));
 
     // Efficiency per 100 kcal
     final double efficiency = totalCalories > 0
-        ? double.parse(((satietyScore / totalCalories) * 100.0).toStringAsFixed(1))
+        ? double.parse(
+            ((satietyScore / totalCalories) * 100.0).toStringAsFixed(1))
         : 15.0;
 
     // Personalized Boosters based on deficits
@@ -165,7 +182,8 @@ class SatietyPredictionEngine {
         regionalTitle: '१५० ग्राम पनीर या २ उबले अंडे जोड़ें',
         addedCalories: 140,
         addedSatietyMinutes: 60,
-        physiologicalMechanism: 'Elevates leucine above 2.5g, triggering continuous PYY satiety hormone release.',
+        physiologicalMechanism:
+            'Elevates leucine above 2.5g, triggering continuous PYY satiety hormone release.',
       ));
     }
     if (totalFiber < 5.0) {
@@ -174,16 +192,19 @@ class SatietyPredictionEngine {
         regionalTitle: '१ कटोरी खीरा-ककड़ी सलाद जोड़ें',
         addedCalories: 25,
         addedSatietyMinutes: 45,
-        physiologicalMechanism: 'High water volume and raw insoluble cellulose stimulate gastric vagal stretch receptors.',
+        physiologicalMechanism:
+            'High water volume and raw insoluble cellulose stimulate gastric vagal stretch receptors.',
       ));
     }
-    if (!names.any((n) => n.contains('chaas') || n.contains('curd') || n.contains('dahi'))) {
+    if (!names.any((n) =>
+        n.contains('chaas') || n.contains('curd') || n.contains('dahi'))) {
       boosters.add(const SatietyBooster(
         title: '1 Glass Roasted Cumin Chaas (Buttermilk)',
         regionalTitle: '१ गिलास भुना जीरा छाछ',
         addedCalories: 35,
         addedSatietyMinutes: 40,
-        physiologicalMechanism: 'Increases intragastric volume and delivers bioavailable whey proteins without heavy fat.',
+        physiologicalMechanism:
+            'Increases intragastric volume and delivers bioavailable whey proteins without heavy fat.',
       ));
     }
 
@@ -203,11 +224,13 @@ class SatietyPredictionEngine {
                 regionalTitle: 'उत्कृष्ट तृप्ति संतुलन',
                 addedCalories: 0,
                 addedSatietyMinutes: 0,
-                physiologicalMechanism: 'Your meal delivers optimal protein, dietary fiber, and volume synergy.',
+                physiologicalMechanism:
+                    'Your meal delivers optimal protein, dietary fiber, and volume synergy.',
               )
             ]
           : boosters,
-      biologicalMechanismSummary: 'This meal provides approximately $fullnessHours hours of stable metabolic satiety. '
+      biologicalMechanismSummary:
+          'This meal provides approximately $fullnessHours hours of stable metabolic satiety. '
           'Satiety is sustained by ${totalProtein.toStringAsFixed(1)}g protein and ${totalFiber.toStringAsFixed(1)}g fiber.',
     );
   }
@@ -240,10 +263,12 @@ class SatietyPredictionEngine {
           regionalTitle: 'तृप्ति अवधि जानने के लिए भोजन दर्ज करें',
           addedCalories: 0,
           addedSatietyMinutes: 0,
-          physiologicalMechanism: 'Add your dishes to simulate gastric emptying and peptide hormone kinetics.',
+          physiologicalMechanism:
+              'Add your dishes to simulate gastric emptying and peptide hormone kinetics.',
         ),
       ],
-      biologicalMechanismSummary: 'No meal logged yet. Log dishes to compute postprandial satiety curve.',
+      biologicalMechanismSummary:
+          'No meal logged yet. Log dishes to compute postprandial satiety curve.',
     );
   }
 }

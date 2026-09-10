@@ -104,13 +104,18 @@ class MultiDimensionalQualityEngine {
       return _buildEmptyMealReport();
     }
 
-    final totalCalories = entries.fold<int>(0, (sum, e) => sum + e.totalCalories);
-    final totalProtein = entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
-    final totalCarbs = entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
+    final totalCalories =
+        entries.fold<int>(0, (sum, e) => sum + e.totalCalories);
+    final totalProtein =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalProtein);
+    final totalCarbs =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalCarbs);
     final totalFats = entries.fold<double>(0.0, (sum, e) => sum + e.totalFats);
-    final totalFiber = entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
+    final totalFiber =
+        entries.fold<double>(0.0, (sum, e) => sum + e.totalFiber);
 
-    final categories = entries.map((e) => e.food.category.toLowerCase()).toSet();
+    final categories =
+        entries.map((e) => e.food.category.toLowerCase()).toSet();
     final names = entries.map((e) => e.food.name.toLowerCase()).toList();
 
     // -------------------------------------------------------------
@@ -122,10 +127,30 @@ class MultiDimensionalQualityEngine {
 
     final hasCompleteProtein = categories.contains('dairy') ||
         categories.contains('non-veg') ||
-        names.any((n) => n.contains('paneer') || n.contains('egg') || n.contains('chicken') || n.contains('soya') || n.contains('tofu') || n.contains('whey') || n.contains('fish') || n.contains('curd') || n.contains('dahi'));
+        names.any((n) =>
+            n.contains('paneer') ||
+            n.contains('egg') ||
+            n.contains('chicken') ||
+            n.contains('soya') ||
+            n.contains('tofu') ||
+            n.contains('whey') ||
+            n.contains('fish') ||
+            n.contains('curd') ||
+            n.contains('dahi'));
 
-    final hasComplementaryPair = (categories.contains('daal') || names.any((n) => n.contains('daal') || n.contains('dal') || n.contains('rajma') || n.contains('chole') || n.contains('chana'))) &&
-        (categories.contains('roti/bread') || names.any((n) => n.contains('roti') || n.contains('rice') || n.contains('chawal') || n.contains('chapati')));
+    final hasComplementaryPair = (categories.contains('daal') ||
+            names.any((n) =>
+                n.contains('daal') ||
+                n.contains('dal') ||
+                n.contains('rajma') ||
+                n.contains('chole') ||
+                n.contains('chana'))) &&
+        (categories.contains('roti/bread') ||
+            names.any((n) =>
+                n.contains('roti') ||
+                n.contains('rice') ||
+                n.contains('chawal') ||
+                n.contains('chapati')));
 
     if (totalProtein >= 30.0) {
       proteinScore = 95.0;
@@ -139,16 +164,21 @@ class MultiDimensionalQualityEngine {
 
     if (hasCompleteProtein) {
       proteinScore = (proteinScore + 10.0).clamp(0.0, 100.0);
-      proteinInsight = 'Complete amino acid profile detected with high DIAAS bioavailability (${totalProtein.toStringAsFixed(1)}g protein).';
+      proteinInsight =
+          'Complete amino acid profile detected with high DIAAS bioavailability (${totalProtein.toStringAsFixed(1)}g protein).';
       proteinOpt = 'Maintain current quality source (dairy/eggs/meat/soya).';
     } else if (hasComplementaryPair) {
       proteinScore = (proteinScore + 5.0).clamp(0.0, 100.0);
-      proteinInsight = 'Complementary plant amino acids paired (Methionine in grain + Lysine in pulses).';
-      proteinOpt = 'Add 1 katori curd (dahi) or 1 scoop sattu/whey to elevate leucine threshold.';
+      proteinInsight =
+          'Complementary plant amino acids paired (Methionine in grain + Lysine in pulses).';
+      proteinOpt =
+          'Add 1 katori curd (dahi) or 1 scoop sattu/whey to elevate leucine threshold.';
     } else {
       proteinScore = (proteinScore - 10.0).clamp(10.0, 100.0);
-      proteinInsight = 'Incomplete amino acid spectrum; missing complementary grain-pulse pairing or high DIAAS protein.';
-      proteinOpt = 'Pair Dal with Roti/Rice or add Paneer/Eggs to complete the limiting amino acid pool.';
+      proteinInsight =
+          'Incomplete amino acid spectrum; missing complementary grain-pulse pairing or high DIAAS protein.';
+      proteinOpt =
+          'Pair Dal with Roti/Rice or add Paneer/Eggs to complete the limiting amino acid pool.';
     }
 
     // -------------------------------------------------------------
@@ -163,16 +193,21 @@ class MultiDimensionalQualityEngine {
 
     if (fiberRatio >= 0.20 && totalProtein >= 15.0) {
       glycemicScore = 92.0;
-      glycemicInsight = 'Optimal glycemic buffering: Fiber-to-carb ratio (${(fiberRatio * 100).toStringAsFixed(0)}%) and co-ingested protein prevent postprandial glucose surges.';
+      glycemicInsight =
+          'Optimal glycemic buffering: Fiber-to-carb ratio (${(fiberRatio * 100).toStringAsFixed(0)}%) and co-ingested protein prevent postprandial glucose surges.';
       glycemicOpt = 'Keep eating salad/fiber first before starch.';
     } else if (fiberRatio >= 0.12) {
       glycemicScore = 75.0;
-      glycemicInsight = 'Moderate glycemic load ($rawGl). Sufficient dietary fiber prevents steep glycemic peaks.';
-      glycemicOpt = 'Add raw salad (kakdi/kheera/tomatoes) or take a 10-min Shatpawali walk.';
+      glycemicInsight =
+          'Moderate glycemic load ($rawGl). Sufficient dietary fiber prevents steep glycemic peaks.';
+      glycemicOpt =
+          'Add raw salad (kakdi/kheera/tomatoes) or take a 10-min Shatpawali walk.';
     } else {
       glycemicScore = (40.0 - (rawGl * 0.4)).clamp(15.0, 55.0);
-      glycemicInsight = 'High glycemic vulnerability: Low fiber-to-carb ratio (${(fiberRatio * 100).toStringAsFixed(0)}%) with rapid starch conversion.';
-      glycemicOpt = 'Replace refined grains with multi-millet rotis or add 1 katori green salad first.';
+      glycemicInsight =
+          'High glycemic vulnerability: Low fiber-to-carb ratio (${(fiberRatio * 100).toStringAsFixed(0)}%) with rapid starch conversion.';
+      glycemicOpt =
+          'Replace refined grains with multi-millet rotis or add 1 katori green salad first.';
     }
 
     // -------------------------------------------------------------
@@ -183,31 +218,50 @@ class MultiDimensionalQualityEngine {
     String microOpt = '';
 
     int nutrientRichFoods = 0;
-    if (categories.contains('sabzi') || names.any((n) => n.contains('palak') || n.contains('bhindi') || n.contains('gobhi') || n.contains('methi') || n.contains('salad'))) {
+    if (categories.contains('sabzi') ||
+        names.any((n) =>
+            n.contains('palak') ||
+            n.contains('bhindi') ||
+            n.contains('gobhi') ||
+            n.contains('methi') ||
+            n.contains('salad'))) {
       nutrientRichFoods += 2;
     }
-    if (categories.contains('daal') || names.any((n) => n.contains('dal') || n.contains('sprouts') || n.contains('chana'))) {
+    if (categories.contains('daal') ||
+        names.any((n) =>
+            n.contains('dal') ||
+            n.contains('sprouts') ||
+            n.contains('chana'))) {
       nutrientRichFoods += 1;
     }
-    if (categories.contains('dairy') || names.any((n) => n.contains('curd') || n.contains('dahi') || n.contains('paneer'))) {
+    if (categories.contains('dairy') ||
+        names.any((n) =>
+            n.contains('curd') || n.contains('dahi') || n.contains('paneer'))) {
       nutrientRichFoods += 1;
     }
-    if (names.any((n) => n.contains('egg') || n.contains('chicken') || n.contains('fish'))) {
+    if (names.any((n) =>
+        n.contains('egg') || n.contains('chicken') || n.contains('fish'))) {
       nutrientRichFoods += 1;
     }
 
     if (nutrientRichFoods >= 4) {
       micronutrientScore = 95.0;
-      microInsight = 'High micronutrient density with diverse bioavailable Iron, B12, Calcium, and Folate.';
-      microOpt = 'Excellent micronutrient coverage; maintain colorful food variety.';
+      microInsight =
+          'High micronutrient density with diverse bioavailable Iron, B12, Calcium, and Folate.';
+      microOpt =
+          'Excellent micronutrient coverage; maintain colorful food variety.';
     } else if (nutrientRichFoods >= 2) {
       micronutrientScore = 75.0;
-      microInsight = 'Moderate micronutrient yield. Provides baseline minerals with room for antioxidant enhancement.';
-      microOpt = 'Squeeze fresh lemon (Vitamin C) over dal to boost non-heme Iron absorption by 300%.';
+      microInsight =
+          'Moderate micronutrient yield. Provides baseline minerals with room for antioxidant enhancement.';
+      microOpt =
+          'Squeeze fresh lemon (Vitamin C) over dal to boost non-heme Iron absorption by 300%.';
     } else {
       micronutrientScore = 40.0;
-      microInsight = 'Low micronutrient density: Calorie-dense but mineral-sparse profile.';
-      microOpt = 'Include dark leafy greens (Palak/Methi/Sarson) or sprouted moong.';
+      microInsight =
+          'Low micronutrient density: Calorie-dense but mineral-sparse profile.';
+      microOpt =
+          'Include dark leafy greens (Palak/Methi/Sarson) or sprouted moong.';
     }
 
     // -------------------------------------------------------------
@@ -217,20 +271,28 @@ class MultiDimensionalQualityEngine {
     String satietyInsight = '';
     String satietyOpt = '';
 
-    final double caloricDensityIndex = totalCalories > 0 ? (totalProtein * 2.0 + totalFiber * 3.0) / (totalCalories / 100.0) : 10.0;
+    final double caloricDensityIndex = totalCalories > 0
+        ? (totalProtein * 2.0 + totalFiber * 3.0) / (totalCalories / 100.0)
+        : 10.0;
 
     if (caloricDensityIndex >= 14.0) {
       satietyScore = 95.0;
-      satietyInsight = 'High satiety volume: Protein-fiber mechanical stretch triggers sustained PYY and GLP-1 fullness hormones.';
-      satietyOpt = 'Promotes 4-5 hours of sustained mental clarity without hunger crashes.';
+      satietyInsight =
+          'High satiety volume: Protein-fiber mechanical stretch triggers sustained PYY and GLP-1 fullness hormones.';
+      satietyOpt =
+          'Promotes 4-5 hours of sustained mental clarity without hunger crashes.';
     } else if (caloricDensityIndex >= 8.0) {
       satietyScore = 74.0;
-      satietyInsight = 'Balanced satiety index. Provides steady fullness for 3-4 hours.';
-      satietyOpt = 'Add 1 glass warm spiced chaas (buttermilk) to increase gastric volume without excess calories.';
+      satietyInsight =
+          'Balanced satiety index. Provides steady fullness for 3-4 hours.';
+      satietyOpt =
+          'Add 1 glass warm spiced chaas (buttermilk) to increase gastric volume without excess calories.';
     } else {
       satietyScore = 45.0;
-      satietyInsight = 'Low satiety index: Rapid gastric emptying expected within 90 minutes due to low protein-fiber matrix.';
-      satietyOpt = 'Add fiber-rich vegetable salads or roasted chana to prolong gastric clearance.';
+      satietyInsight =
+          'Low satiety index: Rapid gastric emptying expected within 90 minutes due to low protein-fiber matrix.';
+      satietyOpt =
+          'Add fiber-rich vegetable salads or roasted chana to prolong gastric clearance.';
     }
 
     // -------------------------------------------------------------
@@ -240,8 +302,18 @@ class MultiDimensionalQualityEngine {
     String inflInsight = '';
     String inflOpt = '';
 
-    final isDeepFried = names.any((n) => n.contains('puri') || n.contains('bhature') || n.contains('pakora') || n.contains('samosa') || n.contains('fried'));
-    final hasHighSugar = names.any((n) => n.contains('sweet') || n.contains('halwa') || n.contains('gulab') || n.contains('sugar') || n.contains('jalebi'));
+    final isDeepFried = names.any((n) =>
+        n.contains('puri') ||
+        n.contains('bhature') ||
+        n.contains('pakora') ||
+        n.contains('samosa') ||
+        n.contains('fried'));
+    final hasHighSugar = names.any((n) =>
+        n.contains('sweet') ||
+        n.contains('halwa') ||
+        n.contains('gulab') ||
+        n.contains('sugar') ||
+        n.contains('jalebi'));
 
     if (isDeepFried) {
       inflammatoryScore -= 35.0;
@@ -256,14 +328,20 @@ class MultiDimensionalQualityEngine {
     inflammatoryScore = inflammatoryScore.clamp(20.0, 100.0);
 
     if (inflammatoryScore >= 80.0) {
-      inflInsight = 'Whole-food anti-inflammatory profile with minimal thermal oxidation or saturated lipid degradation.';
-      inflOpt = 'Garnish with pinch of haldi (turmeric) and black pepper for curcuminoid bioavailability.';
+      inflInsight =
+          'Whole-food anti-inflammatory profile with minimal thermal oxidation or saturated lipid degradation.';
+      inflOpt =
+          'Garnish with pinch of haldi (turmeric) and black pepper for curcuminoid bioavailability.';
     } else if (inflammatoryScore >= 50.0) {
-      inflInsight = 'Mild inflammatory load detected from cooking fats or moderate refined sugars.';
-      inflOpt = 'Cook with cold-pressed mustard/groundnut oil or pure A2 desi ghee instead of refined vegetable oils.';
+      inflInsight =
+          'Mild inflammatory load detected from cooking fats or moderate refined sugars.';
+      inflOpt =
+          'Cook with cold-pressed mustard/groundnut oil or pure A2 desi ghee instead of refined vegetable oils.';
     } else {
-      inflInsight = 'Elevated inflammatory index: High thermal lipid oxidation / fried matrix triggers transient endothelial stiffness.';
-      inflOpt = 'Limit deep-fried items; balance with ginger-turmeric tea and green sabzi.';
+      inflInsight =
+          'Elevated inflammatory index: High thermal lipid oxidation / fried matrix triggers transient endothelial stiffness.';
+      inflOpt =
+          'Limit deep-fried items; balance with ginger-turmeric tea and green sabzi.';
     }
 
     // -------------------------------------------------------------
@@ -322,23 +400,36 @@ class MultiDimensionalQualityEngine {
       ),
     ];
 
-    final double compositeRaw = dimensions.fold<double>(0.0, (sum, d) => sum + d.weightedContribution);
+    final double compositeRaw =
+        dimensions.fold<double>(0.0, (sum, d) => sum + d.weightedContribution);
     final int composite = compositeRaw.round().clamp(0, 100);
 
     final tier = _getTier(composite);
 
-    final strengths = dimensions.where((d) => d.score >= 75.0).map((d) => '${d.name}: ${d.insight}').toList();
-    final improvements = dimensions.where((d) => d.score < 75.0).map((d) => '${d.name}: ${d.actionableOptimization}').toList();
+    final strengths = dimensions
+        .where((d) => d.score >= 75.0)
+        .map((d) => '${d.name}: ${d.insight}')
+        .toList();
+    final improvements = dimensions
+        .where((d) => d.score < 75.0)
+        .map((d) => '${d.name}: ${d.actionableOptimization}')
+        .toList();
 
     return MealQualityReport(
       compositeScore: composite,
       tier: tier,
       dimensions: dimensions,
-      topStrengths: strengths.isEmpty ? ['Baseline calories provided for energy requirements.'] : strengths,
-      improvementPriorities: improvements.isEmpty ? ['Meal is optimally balanced across all 5 dimensions.'] : improvements,
-      executiveSummary: 'This meal scored $composite/100 (${tier.grade}) on the Multi-Dimensional Indian Quality Index. '
+      topStrengths: strengths.isEmpty
+          ? ['Baseline calories provided for energy requirements.']
+          : strengths,
+      improvementPriorities: improvements.isEmpty
+          ? ['Meal is optimally balanced across all 5 dimensions.']
+          : improvements,
+      executiveSummary:
+          'This meal scored $composite/100 (${tier.grade}) on the Multi-Dimensional Indian Quality Index. '
           'Weighted heavily on protein DIAAS completeness (30%) and glycemic buffering (25%).',
-      ayurvedicSynergyNote: 'Ayurvedic Shad-Rasa Balance: Combine with digestive cumin/ginger water (Deepana) to optimize nutrient assimilation.',
+      ayurvedicSynergyNote:
+          'Ayurvedic Shad-Rasa Balance: Combine with digestive cumin/ginger water (Deepana) to optimize nutrient assimilation.',
     );
   }
 
@@ -374,7 +465,8 @@ class MultiDimensionalQualityEngine {
           weight: 0.30,
           status: 'No Data',
           insight: 'Log meal items to calculate amino acid completeness.',
-          actionableOptimization: 'Add protein rich Indian foods (Paneer, Dal, Eggs).',
+          actionableOptimization:
+              'Add protein rich Indian foods (Paneer, Dal, Eggs).',
         ),
         QualityDimension(
           id: 'glycemic',
@@ -383,8 +475,10 @@ class MultiDimensionalQualityEngine {
           score: 0.0,
           weight: 0.25,
           status: 'No Data',
-          insight: 'Fiber-to-carb buffering will be evaluated once food is logged.',
-          actionableOptimization: 'Ensure adequate fiber and protein co-ingestion.',
+          insight:
+              'Fiber-to-carb buffering will be evaluated once food is logged.',
+          actionableOptimization:
+              'Ensure adequate fiber and protein co-ingestion.',
         ),
         QualityDimension(
           id: 'micronutrients',
@@ -393,7 +487,8 @@ class MultiDimensionalQualityEngine {
           score: 0.0,
           weight: 0.20,
           status: 'No Data',
-          insight: 'Micronutrient abundance is calculated per 100 kcal of logged meal.',
+          insight:
+              'Micronutrient abundance is calculated per 100 kcal of logged meal.',
           actionableOptimization: 'Include colorful sabzi and green salads.',
         ),
         QualityDimension(
@@ -403,8 +498,10 @@ class MultiDimensionalQualityEngine {
           score: 0.0,
           weight: 0.15,
           status: 'No Data',
-          insight: 'Satiety hormone stimulation index based on protein-fiber volume.',
-          actionableOptimization: 'Target high-volume, low caloric-density whole foods.',
+          insight:
+              'Satiety hormone stimulation index based on protein-fiber volume.',
+          actionableOptimization:
+              'Target high-volume, low caloric-density whole foods.',
         ),
         QualityDimension(
           id: 'anti_inflammatory',
@@ -413,14 +510,19 @@ class MultiDimensionalQualityEngine {
           score: 0.0,
           weight: 0.10,
           status: 'No Data',
-          insight: 'Evaluates whole food processing vs deep fried palm oil cooking.',
-          actionableOptimization: 'Favor traditional Indian unrefined oils & digestive spices.',
+          insight:
+              'Evaluates whole food processing vs deep fried palm oil cooking.',
+          actionableOptimization:
+              'Favor traditional Indian unrefined oils & digestive spices.',
         ),
       ],
       topStrengths: ['No meal logged yet.'],
-      improvementPriorities: ['Log your meal to view your 5-dimensional Indian quality score.'],
+      improvementPriorities: [
+        'Log your meal to view your 5-dimensional Indian quality score.'
+      ],
       executiveSummary: 'No food items logged for this meal phase yet.',
-      ayurvedicSynergyNote: 'Eat in a calm state with awareness (Sattvic mindset).',
+      ayurvedicSynergyNote:
+          'Eat in a calm state with awareness (Sattvic mindset).',
     );
   }
 }

@@ -13,7 +13,8 @@ class LocalStorageService {
   }
 
   static Box get draftsBox => Hive.box(AppConstants.hiveDraftBox);
-  static Box get activeWorkoutBox => Hive.box(AppConstants.hiveActiveWorkoutBox);
+  static Box get activeWorkoutBox =>
+      Hive.box(AppConstants.hiveActiveWorkoutBox);
 
   // Draft operations
   static Future<void> saveDraft(String key, dynamic value) async {

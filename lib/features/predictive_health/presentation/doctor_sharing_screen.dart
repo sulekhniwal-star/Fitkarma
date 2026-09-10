@@ -31,7 +31,8 @@ class DoctorSharingScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSharingMethodologyModal(context),
           ),
         ],
@@ -59,7 +60,10 @@ class DoctorSharingScreen extends ConsumerWidget {
                 icon: const Icon(Icons.add_link, color: Colors.white),
                 label: const Text(
                   'Grant New Doctor Access Link',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
                 ),
                 onPressed: () => _showCreateGrantModal(context, ref),
               ),
@@ -122,7 +126,8 @@ class DoctorSharingScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -131,7 +136,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.verified_user_outlined, color: AppColors.karmaGreen, size: 14),
+                    Icon(Icons.verified_user_outlined,
+                        color: AppColors.karmaGreen, size: 14),
                     SizedBox(width: 4),
                     Text(
                       'ABDM & EMR Compliant',
@@ -155,7 +161,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                     ref.read(doctorSharingProvider.notifier).revokeAllGrants();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('All active doctor sharing grants revoked immediately.'),
+                        content: Text(
+                            'All active doctor sharing grants revoked immediately.'),
                         backgroundColor: AppColors.alertRed,
                       ),
                     );
@@ -193,7 +200,9 @@ class DoctorSharingScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    report.hasActiveSharingLinks ? 'Time-Bound Read-Only Access' : 'Encrypted & Isolated',
+                    report.hasActiveSharingLinks
+                        ? 'Time-Bound Read-Only Access'
+                        : 'Encrypted & Isolated',
                     style: AppTypography.titleSmall.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.bold,
@@ -222,7 +231,8 @@ class DoctorSharingScreen extends ConsumerWidget {
     DoctorAccessGrant grant,
   ) {
     final isGrantActive = grant.isActive && !grant.isExpired;
-    final statusColor = isGrantActive ? AppColors.karmaGreen : AppColors.textSecondary;
+    final statusColor =
+        isGrantActive ? AppColors.karmaGreen : AppColors.textSecondary;
 
     return BentoCard(
       child: Column(
@@ -237,7 +247,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusSm,
                 ),
-                child: const Icon(Icons.local_hospital, color: AppColors.focusBlue, size: 20),
+                child: const Icon(Icons.local_hospital,
+                    color: AppColors.focusBlue, size: 20),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
@@ -311,7 +322,9 @@ class DoctorSharingScreen extends ConsumerWidget {
                   ],
                 ),
                 Text(
-                  isGrantActive ? 'Expires: ${grant.expiresAt.day}/${grant.expiresAt.month} ${grant.expiresAt.hour}:${grant.expiresAt.minute}' : 'Revoked',
+                  isGrantActive
+                      ? 'Expires: ${grant.expiresAt.day}/${grant.expiresAt.month} ${grant.expiresAt.hour}:${grant.expiresAt.minute}'
+                      : 'Revoked',
                   style: AppTypography.bodySmall.copyWith(
                     color: AppColors.textSecondary,
                     fontSize: 10,
@@ -354,15 +367,20 @@ class DoctorSharingScreen extends ConsumerWidget {
                         borderRadius: AppRadii.radiusSm,
                       ),
                     ),
-                    icon: const Icon(Icons.share, size: 14, color: AppColors.focusBlue),
-                    label: const Text('Share Access Link', style: TextStyle(color: AppColors.focusBlue, fontSize: 12)),
+                    icon: const Icon(Icons.share,
+                        size: 14, color: AppColors.focusBlue),
+                    label: const Text('Share Access Link',
+                        style: TextStyle(
+                            color: AppColors.focusBlue, fontSize: 12)),
                     onPressed: () {
                       Clipboard.setData(ClipboardData(
-                        text: 'FitKarma Doctor Access: https://fitkarma.app/telemetry?token=${grant.secureAccessToken}&id=${grant.grantId}',
+                        text:
+                            'FitKarma Doctor Access: https://fitkarma.app/telemetry?token=${grant.secureAccessToken}&id=${grant.grantId}',
                       ));
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Doctor sharing link copied to clipboard!'),
+                          content:
+                              Text('Doctor sharing link copied to clipboard!'),
                           backgroundColor: AppColors.karmaGreen,
                         ),
                       );
@@ -373,13 +391,18 @@ class DoctorSharingScreen extends ConsumerWidget {
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: AppColors.alertRed),
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
                     shape: const RoundedRectangleBorder(
                       borderRadius: AppRadii.radiusSm,
                     ),
                   ),
-                  onPressed: () => ref.read(doctorSharingProvider.notifier).revokeGrant(grant.grantId),
-                  child: const Text('Revoke', style: TextStyle(color: AppColors.alertRed, fontSize: 12)),
+                  onPressed: () => ref
+                      .read(doctorSharingProvider.notifier)
+                      .revokeGrant(grant.grantId),
+                  child: const Text('Revoke',
+                      style:
+                          TextStyle(color: AppColors.alertRed, fontSize: 12)),
                 ),
               ],
             ),
@@ -389,14 +412,16 @@ class DoctorSharingScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildDossierExportCard(BuildContext context, FormattedDoctorDossier dossier) {
+  Widget _buildDossierExportCard(
+      BuildContext context, FormattedDoctorDossier dossier) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.description_outlined, color: AppColors.focusBlue, size: 20),
+              const Icon(Icons.description_outlined,
+                  color: AppColors.focusBlue, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Clinical Health Dossier (EMR Ready)',
@@ -425,8 +450,10 @@ class DoctorSharingScreen extends ConsumerWidget {
                       borderRadius: AppRadii.radiusMd,
                     ),
                   ),
-                  icon: const Icon(Icons.visibility, color: Colors.white, size: 16),
-                  label: const Text('Preview Full Dossier', style: TextStyle(color: Colors.white)),
+                  icon: const Icon(Icons.visibility,
+                      color: Colors.white, size: 16),
+                  label: const Text('Preview Full Dossier',
+                      style: TextStyle(color: Colors.white)),
                   onPressed: () => _showDossierModal(context, dossier),
                 ),
               ),
@@ -435,7 +462,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                 icon: const Icon(Icons.copy, color: AppColors.karmaGreen),
                 tooltip: 'Copy text dossier',
                 onPressed: () {
-                  Clipboard.setData(ClipboardData(text: dossier.fullFormattedTextForPdf));
+                  Clipboard.setData(
+                      ClipboardData(text: dossier.fullFormattedTextForPdf));
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Clinical dossier copied to clipboard!'),
@@ -537,7 +565,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                   onPressed: () {
                     ref.read(doctorSharingProvider.notifier).createNewGrant(
                           doctorName: 'Dr. Anita Desai, MD (Endocrinology)',
-                          specialization: 'Endocrinologist & Diabetes Specialist',
+                          specialization:
+                              'Endocrinologist & Diabetes Specialist',
                           clinicOrHospital: 'Apollo Hospitals',
                           medicalRegistrationNumber: 'MCI-84920',
                           permittedScopes: [
@@ -550,12 +579,14 @@ class DoctorSharingScreen extends ConsumerWidget {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Doctor access grant generated successfully!'),
+                        content:
+                            Text('Doctor access grant generated successfully!'),
                         backgroundColor: AppColors.karmaGreen,
                       ),
                     );
                   },
-                  child: const Text('Confirm & Generate 7-Day Access PIN', style: TextStyle(color: Colors.white)),
+                  child: const Text('Confirm & Generate 7-Day Access PIN',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],
@@ -615,7 +646,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                       ),
                     ),
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Close Preview', style: TextStyle(color: Colors.white)),
+                    child: const Text('Close Preview',
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
@@ -669,7 +701,8 @@ class DoctorSharingScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

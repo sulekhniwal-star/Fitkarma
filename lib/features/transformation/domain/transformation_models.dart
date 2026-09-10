@@ -7,8 +7,10 @@ enum TransformationStage {
     title: 'Foundation & Reset (Arambha)',
     regionalTitle: 'आरंभ: आधारशिला एवं संतुलन',
     weekRange: 'Weeks 1–4',
-    focusArea: 'Circadian alignment, Shatpawali habit formation & baseline recovery',
-    regionalFocusArea: 'दिनचर्या संतुलन, शतपावली आदत व प्राथमिक स्वास्थ्य सुधार',
+    focusArea:
+        'Circadian alignment, Shatpawali habit formation & baseline recovery',
+    regionalFocusArea:
+        'दिनचर्या संतुलन, शतपावली आदत व प्राथमिक स्वास्थ्य सुधार',
     minTransformationScore: 0.0,
   ),
   abhyasa(
@@ -16,8 +18,10 @@ enum TransformationStage {
     title: 'Metabolic Adaptation & Overload (Abhyasa)',
     regionalTitle: 'अभ्यास: उपापचयी अनुकूलन व शक्ति',
     weekRange: 'Weeks 5–12',
-    focusArea: 'Insulin sensitivity, visceral fat reduction & progressive overload',
-    regionalFocusArea: 'इंसुलिन संवेदनशीलता, चर्बी निवारण व निरंतर शक्ति संवर्धन',
+    focusArea:
+        'Insulin sensitivity, visceral fat reduction & progressive overload',
+    regionalFocusArea:
+        'इंसुलिन संवेदनशीलता, चर्बी निवारण व निरंतर शक्ति संवर्धन',
     minTransformationScore: 35.0,
   ),
   koushalya(
@@ -34,8 +38,10 @@ enum TransformationStage {
     title: 'Autonomous Mastery (Sthirata)',
     regionalTitle: 'स्थिरता: सहज जीवनशैली व आत्म-नियंत्रण',
     weekRange: 'Weeks 25+',
-    focusArea: 'Habit automaticity, biomarker stabilization & community mentorship',
-    regionalFocusArea: 'स्थायी आदतें, दीर्घकालिक बायोमार्कर स्थिरता व मार्गदर्शक भूमिका',
+    focusArea:
+        'Habit automaticity, biomarker stabilization & community mentorship',
+    regionalFocusArea:
+        'स्थायी आदतें, दीर्घकालिक बायोमार्कर स्थिरता व मार्गदर्शक भूमिका',
     minTransformationScore: 85.0,
   );
 
@@ -103,26 +109,26 @@ class TransformationSnapshot {
   final String id;
   final DateTime recordedAt;
   final int journeyDayNumber;
-  
+
   // Anthropometrics
   final double bodyweightKg;
   final double waistCircumferenceCm;
   final double heightCm;
-  
+
   // Cardiometabolic
   final double restingHeartRateBpm;
   final int systolicBp;
   final int diastolicBp;
   final double estimatedHbA1c;
   final double vo2MaxEstimate;
-  
+
   // Lifestyle & Athletic
   final int averageDailySteps;
   final double weeklyStrengthVolumeKg;
   final double proteinGramsPerKg;
   final double doshaEquilibriumScore; // 0.0 to 100.0
   final int cumulativeKarmaPoints;
-  
+
   // Optional Photo URL (stored securely in Firebase Storage)
   final String? frontPhotoUrl;
   final String? sidePhotoUrl;
@@ -149,10 +155,13 @@ class TransformationSnapshot {
   });
 
   /// Waist-to-Height Ratio (South Asian visceral adiposity index)
-  double get waistToHeightRatio => heightCm > 0 ? waistCircumferenceCm / heightCm : 0.50;
-  
+  double get waistToHeightRatio =>
+      heightCm > 0 ? waistCircumferenceCm / heightCm : 0.50;
+
   /// Body Mass Index
-  double get bmi => heightCm > 0 ? bodyweightKg / ((heightCm / 100) * (heightCm / 100)) : 22.0;
+  double get bmi => heightCm > 0
+      ? bodyweightKg / ((heightCm / 100) * (heightCm / 100))
+      : 22.0;
 }
 
 /// Comparison delta across two snapshots
@@ -179,8 +188,11 @@ class BiometricPillarDelta {
   });
 
   double get absoluteDelta => currentValue - baselineValue;
-  double get percentageDelta => baselineValue != 0 ? (absoluteDelta / baselineValue) * 100 : 0.0;
-  bool get isPositiveProgress => lowerIsBetter ? currentValue < baselineValue : currentValue > baselineValue;
+  double get percentageDelta =>
+      baselineValue != 0 ? (absoluteDelta / baselineValue) * 100 : 0.0;
+  bool get isPositiveProgress => lowerIsBetter
+      ? currentValue < baselineValue
+      : currentValue > baselineValue;
 }
 
 /// Milestone achieved along the transformation continuum
@@ -232,14 +244,16 @@ class TransformationProjection {
     required this.confidenceRating,
   });
 
-  double get progressFraction => ((currentValue) / (targetValue == 0 ? 1 : targetValue)).clamp(0.0, 1.0);
+  double get progressFraction =>
+      ((currentValue) / (targetValue == 0 ? 1 : targetValue)).clamp(0.0, 1.0);
 }
 
 /// Comprehensive Transformation Journey Summary Report
 @immutable
 class TransformationJourneyReport {
   final TransformationStage currentStage;
-  final double overallTransformationScore; // 0.0 to 100.0 (composite transformation index)
+  final double
+      overallTransformationScore; // 0.0 to 100.0 (composite transformation index)
   final int totalJourneyDays;
   final TransformationSnapshot baselineSnapshot;
   final TransformationSnapshot currentSnapshot;

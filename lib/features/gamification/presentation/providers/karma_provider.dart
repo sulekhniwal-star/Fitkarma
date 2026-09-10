@@ -94,23 +94,32 @@ class KarmaNotifier extends StateNotifier<KarmaProfile> {
       isReadinessAligned: isReadinessAligned,
     );
 
-    final newLifetimeKP = state.lifetimeKarmaPoints + transaction.totalPointsAwarded;
-    final newCurrentKP = state.currentKarmaPoints + transaction.totalPointsAwarded;
+    final newLifetimeKP =
+        state.lifetimeKarmaPoints + transaction.totalPointsAwarded;
+    final newCurrentKP =
+        state.currentKarmaPoints + transaction.totalPointsAwarded;
     final newLevel = KarmaEngine.calculateLevel(newLifetimeKP);
     final newTier = KarmaEngine.determineTier(newLifetimeKP);
-    final newProgress = KarmaEngine.calculateLevelProgressPercent(newLifetimeKP);
-    final newPointsToNext = KarmaEngine.calculatePointsToNextLevel(newLifetimeKP);
+    final newProgress =
+        KarmaEngine.calculateLevelProgressPercent(newLifetimeKP);
+    final newPointsToNext =
+        KarmaEngine.calculatePointsToNextLevel(newLifetimeKP);
 
-    final updatedTransactions = [transaction, ...state.recentTransactions.take(19)];
+    final updatedTransactions = [
+      transaction,
+      ...state.recentTransactions.take(19)
+    ];
 
     final updatedBadges = KarmaEngine.evaluateBadgeProgression(
       currentBadges: state.allBadges,
       lifetimePoints: newLifetimeKP,
       streakDays: state.currentStreakDays,
       completedWorkouts: action == KarmaActionType.workoutCompletion ? 13 : 12,
-      loggedShatpawaliCount: action == KarmaActionType.shatpawaliSteps ? 16 : 15,
+      loggedShatpawaliCount:
+          action == KarmaActionType.shatpawaliSteps ? 16 : 15,
       highQualityMealsCount: action == KarmaActionType.mealQualityLog ? 19 : 18,
-      optimalSleepNightsCount: action == KarmaActionType.sleepGoalAchieved ? 11 : 10,
+      optimalSleepNightsCount:
+          action == KarmaActionType.sleepGoalAchieved ? 11 : 10,
     );
 
     final unlockedCount = updatedBadges.where((b) => b.isUnlocked).length;

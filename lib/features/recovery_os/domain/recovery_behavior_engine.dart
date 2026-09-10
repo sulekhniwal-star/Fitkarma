@@ -121,34 +121,45 @@ class RecoveryBehaviorEngine {
       prescriptions.add(
         RecoveryPrescriptionItem(
           behavior: RecoveryBehaviorType.haldiAshwagandha,
-          priorityReason: 'High muscular strain requires anti-inflammatory support.',
-          instruction: 'Drink warm turmeric milk with black pepper and ashwagandha 45m before bed.',
-          isCompleted: completedBehaviorIds.contains(RecoveryBehaviorType.haldiAshwagandha.id),
+          priorityReason:
+              'High muscular strain requires anti-inflammatory support.',
+          instruction:
+              'Drink warm turmeric milk with black pepper and ashwagandha 45m before bed.',
+          isCompleted: completedBehaviorIds
+              .contains(RecoveryBehaviorType.haldiAshwagandha.id),
         ),
       );
       prescriptions.add(
         RecoveryPrescriptionItem(
           behavior: RecoveryBehaviorType.pranayama,
           priorityReason: 'Autonomic nervous system recovery boost needed.',
-          instruction: 'Perform 8 minutes of Anulom Vilom (alternate nostril) or 4-7-8 breathing.',
-          isCompleted: completedBehaviorIds.contains(RecoveryBehaviorType.pranayama.id),
+          instruction:
+              'Perform 8 minutes of Anulom Vilom (alternate nostril) or 4-7-8 breathing.',
+          isCompleted:
+              completedBehaviorIds.contains(RecoveryBehaviorType.pranayama.id),
         ),
       );
     } else {
       prescriptions.add(
         RecoveryPrescriptionItem(
           behavior: RecoveryBehaviorType.postMealWalk,
-          priorityReason: 'Maintains healthy glucose disposal without adding fatigue.',
-          instruction: '10-minute relaxed post-dinner stroll (शतपावली) before bedtime.',
-          isCompleted: completedBehaviorIds.contains(RecoveryBehaviorType.postMealWalk.id),
+          priorityReason:
+              'Maintains healthy glucose disposal without adding fatigue.',
+          instruction:
+              '10-minute relaxed post-dinner stroll (शतपावली) before bedtime.',
+          isCompleted: completedBehaviorIds
+              .contains(RecoveryBehaviorType.postMealWalk.id),
         ),
       );
       prescriptions.add(
         RecoveryPrescriptionItem(
           behavior: RecoveryBehaviorType.pranayama,
-          priorityReason: 'Optimal vagal nerve stimulation for overnight recovery.',
-          instruction: '5 minutes of evening resonance breathing (5.5s in, 5.5s out).',
-          isCompleted: completedBehaviorIds.contains(RecoveryBehaviorType.pranayama.id),
+          priorityReason:
+              'Optimal vagal nerve stimulation for overnight recovery.',
+          instruction:
+              '5 minutes of evening resonance breathing (5.5s in, 5.5s out).',
+          isCompleted:
+              completedBehaviorIds.contains(RecoveryBehaviorType.pranayama.id),
         ),
       );
     }
@@ -158,9 +169,12 @@ class RecoveryBehaviorEngine {
       prescriptions.add(
         RecoveryPrescriptionItem(
           behavior: RecoveryBehaviorType.screenFreeBuffer,
-          priorityReason: 'Cumulative sleep debt detected (+${sleepDebtHours.toStringAsFixed(1)}h).',
-          instruction: 'Dim all screens 60m before bed to trigger natural melatonin release.',
-          isCompleted: completedBehaviorIds.contains(RecoveryBehaviorType.screenFreeBuffer.id),
+          priorityReason:
+              'Cumulative sleep debt detected (+${sleepDebtHours.toStringAsFixed(1)}h).',
+          instruction:
+              'Dim all screens 60m before bed to trigger natural melatonin release.',
+          isCompleted: completedBehaviorIds
+              .contains(RecoveryBehaviorType.screenFreeBuffer.id),
         ),
       );
     } else {
@@ -168,8 +182,10 @@ class RecoveryBehaviorEngine {
         RecoveryPrescriptionItem(
           behavior: RecoveryBehaviorType.lateCaffeineCutoff,
           priorityReason: 'Protects deep sleep architecture & REM duration.',
-          instruction: 'Avoid chai/coffee after 4:00 PM to clear adenosine receptor blockage.',
-          isCompleted: completedBehaviorIds.contains(RecoveryBehaviorType.lateCaffeineCutoff.id),
+          instruction:
+              'Avoid chai/coffee after 4:00 PM to clear adenosine receptor blockage.',
+          isCompleted: completedBehaviorIds
+              .contains(RecoveryBehaviorType.lateCaffeineCutoff.id),
         ),
       );
     }

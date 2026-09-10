@@ -26,14 +26,14 @@ class CicdState {
     return CicdState(
       report: report ?? this.report,
       isRunning: isRunning ?? this.isRunning,
-      selectedStage: clearSelectedStage ? null : (selectedStage ?? this.selectedStage),
+      selectedStage:
+          clearSelectedStage ? null : (selectedStage ?? this.selectedStage),
       successMessage: successMessage,
     );
   }
 }
 
-final cicdProvider =
-    StateNotifierProvider<CicdNotifier, CicdState>((ref) {
+final cicdProvider = StateNotifierProvider<CicdNotifier, CicdState>((ref) {
   return CicdNotifier();
 });
 
@@ -48,7 +48,8 @@ class CicdNotifier extends StateNotifier<CicdState> {
   }
 
   void selectStage(PipelineStage? stage) {
-    state = state.copyWith(selectedStage: stage, clearSelectedStage: stage == null);
+    state =
+        state.copyWith(selectedStage: stage, clearSelectedStage: stage == null);
   }
 
   Future<void> triggerPipelineRun() async {
@@ -65,7 +66,8 @@ class CicdNotifier extends StateNotifier<CicdState> {
     state = state.copyWith(
       report: updatedReport,
       isRunning: false,
-      successMessage: 'CI/CD Pipeline Run #${updatedReport.pipelineRunId.split('_').last} completed successfully (All Green)!',
+      successMessage:
+          'CI/CD Pipeline Run #${updatedReport.pipelineRunId.split('_').last} completed successfully (All Green)!',
     );
   }
 }

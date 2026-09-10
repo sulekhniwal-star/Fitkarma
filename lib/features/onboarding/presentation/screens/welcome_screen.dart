@@ -22,7 +22,8 @@ class WelcomeScreen extends ConsumerStatefulWidget {
   ConsumerState<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with SingleTickerProviderStateMixin {
+class _WelcomeScreenState extends ConsumerState<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
 
@@ -125,7 +126,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with SingleTicker
               iconColor: AppColors.focusBlue,
               title: 'Health OS Brain',
               regionalTitle: 'दैनिक स्वास्थ्य मस्तिष्क',
-              description: 'A single orchestrated daily intelligence cycle that adapts your readiness, calories, and training.',
+              description:
+                  'A single orchestrated daily intelligence cycle that adapts your readiness, calories, and training.',
             ),
             const SizedBox(height: AppSpacing.md),
             _buildPillarCard(
@@ -133,7 +135,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with SingleTicker
               iconColor: AppColors.energyOrange,
               title: 'Indian Nutrition Intelligence',
               regionalTitle: 'भारतीय पोषण विश्लेषण',
-              description: 'Macro tracking precision for daal, rotis, regional thalis, and festive fasting modes.',
+              description:
+                  'Macro tracking precision for daal, rotis, regional thalis, and festive fasting modes.',
             ),
             const SizedBox(height: AppSpacing.md),
             _buildPillarCard(
@@ -141,7 +144,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with SingleTicker
               iconColor: AppColors.aiPurple,
               title: 'Adaptive AI Coaching',
               regionalTitle: 'अनुकूली एआई कोच',
-              description: 'Multi-tiered Groq AI models providing real-time form, workout, and recovery guidance.',
+              description:
+                  'Multi-tiered Groq AI models providing real-time form, workout, and recovery guidance.',
             ),
             const SizedBox(height: AppSpacing.xl),
 

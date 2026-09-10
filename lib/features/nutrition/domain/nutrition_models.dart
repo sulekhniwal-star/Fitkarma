@@ -1,8 +1,20 @@
 enum MealPhase {
-  breakfast(name: 'Breakfast / Nashta', regionalName: 'नाश्ता', recommendedCaloriesPercent: 0.25),
-  lunch(name: 'Lunch / Dopahar Ka Khana', regionalName: 'दोपहर का भोजन', recommendedCaloriesPercent: 0.35),
-  eveningSnack(name: 'Evening Snack / Chai Nashta', regionalName: 'शाम का नाश्ता', recommendedCaloriesPercent: 0.15),
-  dinner(name: 'Dinner / Raat Ka Khana', regionalName: 'रात का भोजन', recommendedCaloriesPercent: 0.25);
+  breakfast(
+      name: 'Breakfast / Nashta',
+      regionalName: 'नाश्ता',
+      recommendedCaloriesPercent: 0.25),
+  lunch(
+      name: 'Lunch / Dopahar Ka Khana',
+      regionalName: 'दोपहर का भोजन',
+      recommendedCaloriesPercent: 0.35),
+  eveningSnack(
+      name: 'Evening Snack / Chai Nashta',
+      regionalName: 'शाम का नाश्ता',
+      recommendedCaloriesPercent: 0.15),
+  dinner(
+      name: 'Dinner / Raat Ka Khana',
+      regionalName: 'रात का भोजन',
+      recommendedCaloriesPercent: 0.25);
 
   final String name;
   final String regionalName;
@@ -27,7 +39,8 @@ class FoodItem {
   final double fiberGrams;
   final bool isVegetarian;
   final bool isVegan;
-  final String category; // 'Daal', 'Roti/Bread', 'Sabzi', 'Dairy', 'Snack', 'Non-Veg'
+  final String
+      category; // 'Daal', 'Roti/Bread', 'Sabzi', 'Dairy', 'Snack', 'Non-Veg'
 
   const FoodItem({
     required this.id,
@@ -94,8 +107,12 @@ class LoggedMealEntry {
   });
 
   int get totalCalories => (food.calories * servings).round();
-  double get totalProtein => double.parse((food.proteinGrams * servings).toStringAsFixed(1));
-  double get totalCarbs => double.parse((food.carbsGrams * servings).toStringAsFixed(1));
-  double get totalFats => double.parse((food.fatsGrams * servings).toStringAsFixed(1));
-  double get totalFiber => double.parse((food.fiberGrams * servings).toStringAsFixed(1));
+  double get totalProtein =>
+      double.parse((food.proteinGrams * servings).toStringAsFixed(1));
+  double get totalCarbs =>
+      double.parse((food.carbsGrams * servings).toStringAsFixed(1));
+  double get totalFats =>
+      double.parse((food.fatsGrams * servings).toStringAsFixed(1));
+  double get totalFiber =>
+      double.parse((food.fiberGrams * servings).toStringAsFixed(1));
 }

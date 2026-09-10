@@ -62,7 +62,8 @@ class GlucoseScreen extends ConsumerWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.surfaceElevated,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (ctx) {
         return StatefulBuilder(
           builder: (context, setModalState) {
@@ -94,11 +95,14 @@ class GlucoseScreen extends ConsumerWidget {
                   DropdownButtonFormField<GlucoseContextType>(
                     initialValue: selectedType,
                     dropdownColor: AppColors.surfaceElevated,
-                    decoration: const InputDecoration(labelText: 'Context / Timing'),
+                    decoration:
+                        const InputDecoration(labelText: 'Context / Timing'),
                     items: GlucoseContextType.values.map((type) {
                       return DropdownMenuItem(
                         value: type,
-                        child: Text(type.name, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
+                        child: Text(type.name,
+                            style: const TextStyle(
+                                fontSize: 13, color: AppColors.textPrimary)),
                       );
                     }).toList(),
                     onChanged: (val) {
@@ -131,12 +135,15 @@ class GlucoseScreen extends ConsumerWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.karmaGreen,
-                        shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: AppRadii.radiusSm),
                       ),
                       onPressed: () {
                         final val = int.tryParse(glucoseController.text) ?? 110;
                         final preMeal = int.tryParse(preMealController.text);
-                        final meal = mealController.text.trim().isNotEmpty ? mealController.text.trim() : null;
+                        final meal = mealController.text.trim().isNotEmpty
+                            ? mealController.text.trim()
+                            : null;
 
                         final newReading = GlucoseReading(
                           id: 'gl_${DateTime.now().millisecondsSinceEpoch}',
@@ -148,10 +155,16 @@ class GlucoseScreen extends ConsumerWidget {
                         );
 
                         final current = ref.read(glucoseListProvider);
-                        ref.read(glucoseListProvider.notifier).state = [newReading, ...current];
+                        ref.read(glucoseListProvider.notifier).state = [
+                          newReading,
+                          ...current
+                        ];
                         Navigator.of(ctx).pop();
                       },
-                      child: const Text('Save Glucose Reading', style: TextStyle(color: AppColors.textInverse, fontWeight: FontWeight.w800)),
+                      child: const Text('Save Glucose Reading',
+                          style: TextStyle(
+                              color: AppColors.textInverse,
+                              fontWeight: FontWeight.w800)),
                     ),
                   ),
                 ],
@@ -181,7 +194,9 @@ class GlucoseScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.karmaGreen,
         icon: const Icon(Icons.add_rounded, color: AppColors.textInverse),
-        label: const Text('Log Glucose', style: TextStyle(color: AppColors.textInverse, fontWeight: FontWeight.w700)),
+        label: const Text('Log Glucose',
+            style: TextStyle(
+                color: AppColors.textInverse, fontWeight: FontWeight.w700)),
         onPressed: () => _showAddGlucoseDialog(context, ref),
       ),
       body: SafeArea(
@@ -205,15 +220,20 @@ class GlucoseScreen extends ConsumerWidget {
                           regionalText: 'अनुमानित HbA1c एवं ग्लूकोज स्तर',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: statusColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: statusColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: statusColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             '${summary.timeInRangePercent.round()}% IN RANGE',
-                            style: TextStyle(color: statusColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: statusColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -225,9 +245,13 @@ class GlucoseScreen extends ConsumerWidget {
                         GlowingMetric(
                           label: 'Estimated HbA1c',
                           value: '${summary.estimatedHbA1c}%',
-                          unit: summary.estimatedHbA1c < 5.7 ? 'Optimal' : 'Elevated',
+                          unit: summary.estimatedHbA1c < 5.7
+                              ? 'Optimal'
+                              : 'Elevated',
                           isHero: true,
-                          accentColor: summary.estimatedHbA1c < 5.7 ? AppColors.karmaGreen : AppColors.energyOrange,
+                          accentColor: summary.estimatedHbA1c < 5.7
+                              ? AppColors.karmaGreen
+                              : AppColors.energyOrange,
                         ),
                         GlowingMetric(
                           label: 'Avg Glucose',
@@ -254,7 +278,8 @@ class GlucoseScreen extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.monitor_heart_rounded, color: statusColor, size: 20),
+                    Icon(Icons.monitor_heart_rounded,
+                        color: statusColor, size: 20),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
                       child: Column(
@@ -299,7 +324,8 @@ class GlucoseScreen extends ConsumerWidget {
                 separatorBuilder: (_, __) => const SizedBox(height: 8),
                 itemBuilder: (context, index) {
                   final reading = readings[index];
-                  final isSpike = reading.mealExcursion != null && reading.mealExcursion! > 30;
+                  final isSpike = reading.mealExcursion != null &&
+                      reading.mealExcursion! > 30;
 
                   return BentoCard(
                     child: Row(
@@ -313,20 +339,26 @@ class GlucoseScreen extends ConsumerWidget {
                                 Text(
                                   '${reading.glucoseMgDl} mg/dL',
                                   style: AppTypography.titleSmall.copyWith(
-                                    color: reading.glucoseMgDl <= reading.contextType.normalMax ? AppColors.karmaGreen : AppColors.energyOrange,
+                                    color: reading.glucoseMgDl <=
+                                            reading.contextType.normalMax
+                                        ? AppColors.karmaGreen
+                                        : AppColors.energyOrange,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
                                 const SizedBox(width: 8),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 2),
                                   decoration: const BoxDecoration(
                                     color: AppColors.surfaceElevated,
                                     borderRadius: AppRadii.radiusSm,
                                   ),
                                   child: Text(
                                     reading.contextType.name.split(' ')[0],
-                                    style: const TextStyle(color: AppColors.textMuted, fontSize: 10),
+                                    style: const TextStyle(
+                                        color: AppColors.textMuted,
+                                        fontSize: 10),
                                   ),
                                 ),
                               ],
@@ -335,22 +367,30 @@ class GlucoseScreen extends ConsumerWidget {
                               const SizedBox(height: 2),
                               Text(
                                 '🍽️ ${reading.correlatedMealName}',
-                                style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                                style: AppTypography.bodySmall.copyWith(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 11),
                               ),
                             ],
                           ],
                         ),
                         if (reading.mealExcursion != null)
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: (isSpike ? AppColors.alertRed : AppColors.karmaGreen).withValues(alpha: 0.15),
+                              color: (isSpike
+                                      ? AppColors.alertRed
+                                      : AppColors.karmaGreen)
+                                  .withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusSm,
                             ),
                             child: Text(
                               '+${reading.mealExcursion} mg/dL',
                               style: TextStyle(
-                                color: isSpike ? AppColors.alertRed : AppColors.karmaGreen,
+                                color: isSpike
+                                    ? AppColors.alertRed
+                                    : AppColors.karmaGreen,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 11,
                               ),

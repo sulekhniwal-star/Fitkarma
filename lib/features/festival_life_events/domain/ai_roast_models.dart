@@ -65,11 +65,21 @@ enum RoastPersona {
 
 /// Scenario trigger for roast generation
 enum RoastTriggerEvent {
-  missedWorkout(name: 'Missed Workout / Snoozed Alarm', regionalName: 'व्यायाम छोड़ना व अलार्म स्नूज़'),
-  lateNightJunkOrder(name: 'Late Night Swiggy/Zomato Binge', regionalName: 'देर रात जंक फूड डिलीवरी'),
-  sedentarySlump(name: '3+ Hours Sedentary Screen Slump', regionalName: 'बिना हिले लगातार स्क्रीन देखना'),
-  skippedWaterHydration(name: 'Zero Water Intake (<1L)', regionalName: 'पानी न पीना व निर्जलीकरण'),
-  smashingGoals(name: 'Goal Smashed (Rare Praise)', regionalName: 'लक्ष्य प्राप्ति (सच्ची तारीफ)');
+  missedWorkout(
+      name: 'Missed Workout / Snoozed Alarm',
+      regionalName: 'व्यायाम छोड़ना व अलार्म स्नूज़'),
+  lateNightJunkOrder(
+      name: 'Late Night Swiggy/Zomato Binge',
+      regionalName: 'देर रात जंक फूड डिलीवरी'),
+  sedentarySlump(
+      name: '3+ Hours Sedentary Screen Slump',
+      regionalName: 'बिना हिले लगातार स्क्रीन देखना'),
+  skippedWaterHydration(
+      name: 'Zero Water Intake (<1L)',
+      regionalName: 'पानी न पीना व निर्जलीकरण'),
+  smashingGoals(
+      name: 'Goal Smashed (Rare Praise)',
+      regionalName: 'लक्ष्य प्राप्ति (सच्ची तारीफ)');
 
   final String name;
   final String regionalName;

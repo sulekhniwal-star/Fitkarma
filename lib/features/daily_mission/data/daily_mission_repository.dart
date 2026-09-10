@@ -24,12 +24,14 @@ class DailyMissionRepository {
           .collection('dailyMissions')
           .doc(dateStr);
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data()?['missions'] != null) {
         final list = snapshot.data()!['missions'] as List;
         return list
-            .map((item) => DailyMissionItem.fromMap(Map<String, dynamic>.from(item)))
+            .map((item) =>
+                DailyMissionItem.fromMap(Map<String, dynamic>.from(item)))
             .toList();
       }
     } catch (_) {

@@ -2,11 +2,26 @@ import 'package:flutter/foundation.dart';
 
 /// Event type / intensity category in user's calendar
 enum CalendarEventType {
-  highStressMeeting(name: 'Executive / Client Meeting', regionalName: 'उच्च तनाव बैठक', cognitiveLoad: 8),
-  routineWorkBlock(name: 'Desk Work & Coding', regionalName: 'नियमित कार्य ब्लॉक', cognitiveLoad: 4),
-  commuteTravel(name: 'Transit / Commute', regionalName: 'पारगमन व आवागमन', cognitiveLoad: 3),
-  socialFamilyEvent(name: 'Family Gathering / Dinner', regionalName: 'पारिवारिक व सामाजिक कार्यक्रम', cognitiveLoad: 5),
-  freeWindow(name: 'Open Schedule Gap', regionalName: 'उपलब्ध समय अंतराल', cognitiveLoad: 0);
+  highStressMeeting(
+      name: 'Executive / Client Meeting',
+      regionalName: 'उच्च तनाव बैठक',
+      cognitiveLoad: 8),
+  routineWorkBlock(
+      name: 'Desk Work & Coding',
+      regionalName: 'नियमित कार्य ब्लॉक',
+      cognitiveLoad: 4),
+  commuteTravel(
+      name: 'Transit / Commute',
+      regionalName: 'पारगमन व आवागमन',
+      cognitiveLoad: 3),
+  socialFamilyEvent(
+      name: 'Family Gathering / Dinner',
+      regionalName: 'पारिवारिक व सामाजिक कार्यक्रम',
+      cognitiveLoad: 5),
+  freeWindow(
+      name: 'Open Schedule Gap',
+      regionalName: 'उपलब्ध समय अंतराल',
+      cognitiveLoad: 0);
 
   final String name;
   final String regionalName;
@@ -72,7 +87,8 @@ class SmartCalendarPlanReport {
   final double totalMeetingHours;
   final double totalCognitiveLoadScore; // 0 to 100
   final bool isHighCognitiveBurnoutDay;
-  final String recommendedWorkoutPacing; // e.g. "Restorative Yoga & Mobility" vs "High-Intensity Strength"
+  final String
+      recommendedWorkoutPacing; // e.g. "Restorative Yoga & Mobility" vs "High-Intensity Strength"
   final String preMeetingMealTimingTip;
   final String regionalPreMeetingMealTimingTip;
   final DateTime generatedAt;

@@ -87,7 +87,8 @@ class FestivalAdaptationEngine {
           'Dry Fruit / Kaju Katli (55 kcal/pc) instead of Jalebi / Imarti (220 kcal/pc) — lower glycemic spike.',
           'Roasted Makhana / Salted Almonds instead of Fried Namkeen / Mathri.',
         ]);
-        note = 'Enjoy your festival guilt-free! Traditional celebrations are meant to be cherished. Savor your favorites mindfully without stress.';
+        note =
+            'Enjoy your festival guilt-free! Traditional celebrations are meant to be cherished. Savor your favorites mindfully without stress.';
         break;
 
       case FestivalType.navratri:
@@ -100,7 +101,8 @@ class FestivalAdaptationEngine {
           'Kuttu / Singhara Chilla instead of Deep-Fried Kuttu Puri.',
           'Roasted Makhana Chaat instead of Fried Sabudana Vada.',
         ]);
-        note = 'Navratri fasting cleanses metabolic pathways when balanced with nutrient-dense Sattvic foods rather than deep-fried snacks.';
+        note =
+            'Navratri fasting cleanses metabolic pathways when balanced with nutrient-dense Sattvic foods rather than deep-fried snacks.';
         break;
 
       case FestivalType.ramadan:
@@ -113,7 +115,8 @@ class FestivalAdaptationEngine {
           'Grilled Tandoori Kebabs instead of Deep-Fried Pakoras.',
           'Fruit Chaat with Mint instead of Sugar-Loaded Rooh Afza / Sherbet.',
         ]);
-        note = 'Ramadan fasting is a powerful form of intermittent fasting that enhances autophagy and insulin sensitivity when paired with clean Iftar choices.';
+        note =
+            'Ramadan fasting is a powerful form of intermittent fasting that enhances autophagy and insulin sensitivity when paired with clean Iftar choices.';
         break;
 
       case FestivalType.eidPuja:
@@ -126,7 +129,8 @@ class FestivalAdaptationEngine {
           'Sheer Khurma with Stevia / Sugar-Lite instead of Double-Sugar Sewaiyan.',
           'Tandoori Roti instead of Fried Bhature / Sheermal.',
         ]);
-        note = 'Celebrate with family and community! A single joyous feast has zero negative impact on your long-term body composition.';
+        note =
+            'Celebrate with family and community! A single joyous feast has zero negative impact on your long-term body composition.';
         break;
     }
 

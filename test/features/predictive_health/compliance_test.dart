@@ -6,30 +6,40 @@ void main() {
   group('ComplianceEngine Deterministic Evaluation Tests', () {
     const engine = ComplianceEngine();
 
-    test('Clinical Disclaimer contains both English and Hindi text with emergency helpline', () {
+    test(
+        'Clinical Disclaimer contains both English and Hindi text with emergency helpline',
+        () {
       final disclaimer = engine.getStandardClinicalDisclaimer();
       expect(disclaimer.title, contains('SaMD'));
       expect(disclaimer.regionalTitle, isNotEmpty);
-      expect(disclaimer.legalText, contains('FitKarma provides AI-driven lifestyle'));
+      expect(disclaimer.legalText,
+          contains('FitKarma provides AI-driven lifestyle'));
       expect(disclaimer.regionalLegalText, contains('फिटकर्मा'));
       expect(disclaimer.emergencyHelpline, contains('112'));
     });
 
-    test('Statutory consent generation contains 3 default frameworks (DPDP, ABDM, AYUSH)', () {
+    test(
+        'Statutory consent generation contains 3 default frameworks (DPDP, ABDM, AYUSH)',
+        () {
       final now = DateTime(2026, 9, 9, 10, 0);
-      final consents = engine.generateDefaultStatutoryConsents(grantedTime: now);
+      final consents =
+          engine.generateDefaultStatutoryConsents(grantedTime: now);
 
       expect(consents.length, equals(3));
       expect(consents[0].consentId, equals('CONSENT-DPDP-HEALTH-TELEMETRY-01'));
       expect(consents[1].consentId, equals('CONSENT-ABDM-FHIR-SHARE-02'));
       expect(consents[2].consentId, equals('CONSENT-AYUSH-LIFESTYLE-03'));
-      expect(consents.every((c) => c.isExplicitlyGranted && c.isRevocable), isTrue);
+      expect(consents.every((c) => c.isExplicitlyGranted && c.isRevocable),
+          isTrue);
       expect(consents[0].expiresAt, equals(now.add(const Duration(days: 365))));
     });
 
-    test('Full compliance evaluation yields 100% score when all safeguards & consents are valid', () {
+    test(
+        'Full compliance evaluation yields 100% score when all safeguards & consents are valid',
+        () {
       final now = DateTime(2026, 9, 9, 10, 0);
-      final consents = engine.generateDefaultStatutoryConsents(grantedTime: now);
+      final consents =
+          engine.generateDefaultStatutoryConsents(grantedTime: now);
 
       final report = engine.evaluateCompliance(
         userConsents: consents,
@@ -48,7 +58,9 @@ void main() {
       expect(report.dataErasureSupported, isTrue);
     });
 
-    test('Partial compliance evaluation when encryption or consents are missing', () {
+    test(
+        'Partial compliance evaluation when encryption or consents are missing',
+        () {
       final now = DateTime(2026, 9, 9, 10, 0);
 
       final report = engine.evaluateCompliance(
@@ -65,7 +77,8 @@ void main() {
       expect(report.activeConsents, isEmpty);
     });
 
-    test('Expired consents are excluded from active list during evaluation', () {
+    test('Expired consents are excluded from active list during evaluation',
+        () {
       final now = DateTime(2026, 9, 9, 10, 0);
       final expiredConsent = ClinicalConsentArtifact(
         consentId: 'EXPIRED-01',
@@ -87,7 +100,8 @@ void main() {
       );
 
       expect(report.activeConsents, isEmpty);
-      expect(report.complianceAuditScore, equals(75.0)); // Missing active consent
+      expect(
+          report.complianceAuditScore, equals(75.0)); // Missing active consent
       expect(report.isFullyCompliant, isFalse);
     });
   });

@@ -18,7 +18,8 @@ final currentUserIdProvider = StateProvider<String>((ref) {
 });
 
 // Daily Intelligence Package Provider
-final dailyIntelligenceProvider = FutureProvider.autoDispose<DailyIntelligencePackage>((ref) async {
+final dailyIntelligenceProvider =
+    FutureProvider.autoDispose<DailyIntelligencePackage>((ref) async {
   final repository = ref.watch(healthOsRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);
   final date = ref.watch(selectedDateProvider);

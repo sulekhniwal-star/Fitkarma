@@ -30,7 +30,8 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showMethodologyModal(context),
           ),
         ],
@@ -54,15 +55,19 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
                     label: Text(
                       f.name.split('(').first.trim(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.white : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                         fontSize: 12,
                       ),
                     ),
                     selected: isSelected,
                     selectedColor: AppColors.energyOrange,
                     backgroundColor: AppColors.surfaceElevated,
-                    onSelected: (_) => ref.read(festivalIntelligenceProvider.notifier).selectFestival(f),
+                    onSelected: (_) => ref
+                        .read(festivalIntelligenceProvider.notifier)
+                        .selectFestival(f),
                   );
                 },
               ),
@@ -116,7 +121,8 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.energyOrange.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -125,7 +131,8 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.celebration, color: AppColors.energyOrange, size: 14),
+                    const Icon(Icons.celebration,
+                        color: AppColors.energyOrange, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       plan.activeFestival.season,
@@ -152,7 +159,9 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
                     value: plan.isFestivalModeActive,
                     activeThumbColor: AppColors.energyOrange,
                     onChanged: (val) {
-                      ref.read(festivalIntelligenceProvider.notifier).toggleFestivalMode(val);
+                      ref
+                          .read(festivalIntelligenceProvider.notifier)
+                          .toggleFestivalMode(val);
                     },
                   ),
                 ],
@@ -181,9 +190,13 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
             children: [
               GlowingMetric(
                 label: 'Calorie Target',
-                value: plan.calorieDeltaTarget > 0 ? '+${plan.calorieDeltaTarget}' : '${plan.calorieDeltaTarget}',
+                value: plan.calorieDeltaTarget > 0
+                    ? '+${plan.calorieDeltaTarget}'
+                    : '${plan.calorieDeltaTarget}',
                 unit: 'kcal',
-                accentColor: plan.calorieDeltaTarget >= 0 ? AppColors.karmaGreen : AppColors.focusBlue,
+                accentColor: plan.calorieDeltaTarget >= 0
+                    ? AppColors.karmaGreen
+                    : AppColors.focusBlue,
                 isHero: true,
               ),
               const SizedBox(width: AppSpacing.lg),
@@ -361,7 +374,10 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
                   child: Center(
                     child: Text(
                       '${day.dayNumber}',
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13),
                     ),
                   ),
                 ),
@@ -432,7 +448,8 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma honors the rich cultural heritage of Indian festivals with an intelligent, multi-pillar adaptation framework. Rather than forcing rigid restrictions, it dynamically recalibrates calorie buffers, micro-workouts, digestive Agni protection, and 3-day post-festival resets.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -445,7 +462,8 @@ class FestivalIntelligenceScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

@@ -84,7 +84,8 @@ class VernacularVoiceNotifier extends StateNotifier<VoiceState> {
     if (spokenTranscript.trim().isEmpty) {
       state = state.copyWith(
         recordingState: VoiceRecordingState.idle,
-        errorMessage: 'No speech detected. Please speak clearly into the microphone.',
+        errorMessage:
+            'No speech detected. Please speak clearly into the microphone.',
       );
       return;
     }

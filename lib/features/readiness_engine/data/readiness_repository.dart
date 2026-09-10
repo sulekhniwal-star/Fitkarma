@@ -30,7 +30,8 @@ class ReadinessRepository {
           .collection(AppConstants.dailyLogsSubcollection)
           .doc(dateStr);
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data()?['readiness'] != null) {
         return ReadinessEvaluationResult.fromMap(

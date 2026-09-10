@@ -27,7 +27,8 @@ class DemographicCohortState {
 }
 
 final demographicCohortProvider =
-    StateNotifierProvider<DemographicCohortNotifier, DemographicCohortState>((ref) {
+    StateNotifierProvider<DemographicCohortNotifier, DemographicCohortState>(
+        (ref) {
   return DemographicCohortNotifier();
 });
 

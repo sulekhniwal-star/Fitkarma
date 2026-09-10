@@ -32,7 +32,8 @@ class SecurityScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSecurityArchitectureModal(context),
           ),
         ],
@@ -94,12 +95,14 @@ class SecurityScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          Icon(isError ? Icons.error_outline : Icons.check_circle_outline, color: color, size: 16),
+          Icon(isError ? Icons.error_outline : Icons.check_circle_outline,
+              color: color, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: color, fontSize: 12, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -107,9 +110,11 @@ class SecurityScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroScoreCard(SecurityAuditReport report, SecurityNotifier notifier) {
+  Widget _buildHeroScoreCard(
+      SecurityAuditReport report, SecurityNotifier notifier) {
     final isHardened = report.isEnterpriseHardened;
-    final scoreColor = isHardened ? AppColors.karmaGreen : AppColors.energyOrange;
+    final scoreColor =
+        isHardened ? AppColors.karmaGreen : AppColors.energyOrange;
 
     return BentoCard(
       child: Column(
@@ -119,7 +124,8 @@ class SecurityScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: scoreColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -136,7 +142,10 @@ class SecurityScreen extends ConsumerWidget {
                     const SizedBox(width: 4),
                     Text(
                       isHardened ? 'ENTERPRISE HARDENED' : 'AUDIT WARNING',
-                      style: TextStyle(color: scoreColor, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: TextStyle(
+                          color: scoreColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ],
                 ),
@@ -145,7 +154,8 @@ class SecurityScreen extends ConsumerWidget {
                 children: [
                   Text(
                     'App Check',
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textSecondary, fontSize: 11),
                   ),
                   const SizedBox(width: 4),
                   Switch(
@@ -176,16 +186,22 @@ class SecurityScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Client Attestation:',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                     Text(
-                      report.isAppCheckActive ? report.activeProvider.name.split('(').first.trim() : 'Disabled (Sandbox)',
-                      style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+                      report.isAppCheckActive
+                          ? report.activeProvider.name.split('(').first.trim()
+                          : 'Disabled (Sandbox)',
+                      style: AppTypography.titleSmall.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       'Zero secrets in client APK/IPA',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.karmaGreen, fontSize: 10),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.karmaGreen, fontSize: 10),
                     ),
                   ],
                 ),
@@ -218,20 +234,28 @@ class SecurityScreen extends ConsumerWidget {
                   SizedBox(width: 6),
                   Text(
                     'Biometric Health Vault (local_auth)',
-                    style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
                   ),
                 ],
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: (isUnlocked ? AppColors.karmaGreen : AppColors.energyOrange).withValues(alpha: 0.15),
+                  color: (isUnlocked
+                          ? AppColors.karmaGreen
+                          : AppColors.energyOrange)
+                      .withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
                 ),
                 child: Text(
                   isUnlocked ? 'VAULT UNLOCKED' : 'LOCKED',
                   style: TextStyle(
-                    color: isUnlocked ? AppColors.karmaGreen : AppColors.energyOrange,
+                    color: isUnlocked
+                        ? AppColors.karmaGreen
+                        : AppColors.energyOrange,
                     fontSize: 9,
                     fontWeight: FontWeight.bold,
                   ),
@@ -242,7 +266,8 @@ class SecurityScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Requires biometric re-authentication (Fingerprint / Face ID / PIN) before decrypting sensitive clinical lab reports and doctor dossiers.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
           ),
           const SizedBox(height: AppSpacing.md),
 
@@ -250,17 +275,20 @@ class SecurityScreen extends ConsumerWidget {
           _buildVaultToggle(
             title: 'Protect Clinical Lab Reports',
             value: settings.requireOnClinicalReports,
-            onChanged: (val) => notifier.updateBiometricSettings(settings.copyWith(requireOnClinicalReports: val)),
+            onChanged: (val) => notifier.updateBiometricSettings(
+                settings.copyWith(requireOnClinicalReports: val)),
           ),
           _buildVaultToggle(
             title: 'Protect Doctor Dossier Sharing',
             value: settings.requireOnDoctorSharing,
-            onChanged: (val) => notifier.updateBiometricSettings(settings.copyWith(requireOnDoctorSharing: val)),
+            onChanged: (val) => notifier.updateBiometricSettings(
+                settings.copyWith(requireOnDoctorSharing: val)),
           ),
           _buildVaultToggle(
             title: 'Protect Affiliate Payout Requests',
             value: settings.requireOnAffiliatePayouts,
-            onChanged: (val) => notifier.updateBiometricSettings(settings.copyWith(requireOnAffiliatePayouts: val)),
+            onChanged: (val) => notifier.updateBiometricSettings(
+                settings.copyWith(requireOnAffiliatePayouts: val)),
           ),
           const SizedBox(height: AppSpacing.sm),
 
@@ -269,16 +297,29 @@ class SecurityScreen extends ConsumerWidget {
             width: double.infinity,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: isUnlocked ? AppColors.surfaceElevated : AppColors.focusBlue,
-                shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                backgroundColor: isUnlocked
+                    ? AppColors.surfaceElevated
+                    : AppColors.focusBlue,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadii.radiusMd),
                 padding: const EdgeInsets.symmetric(vertical: 10),
               ),
-              icon: Icon(isUnlocked ? Icons.lock : Icons.fingerprint, color: Colors.white, size: 16),
+              icon: Icon(isUnlocked ? Icons.lock : Icons.fingerprint,
+                  color: Colors.white, size: 16),
               label: state.isLoading
-                  ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                  ? const SizedBox(
+                      height: 16,
+                      width: 16,
+                      child: CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2))
                   : Text(
-                      isUnlocked ? 'Lock Health Vault' : 'Test Biometric Re-Auth',
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                      isUnlocked
+                          ? 'Lock Health Vault'
+                          : 'Test Biometric Re-Auth',
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12),
                     ),
               onPressed: () {
                 if (isUnlocked) {
@@ -304,7 +345,9 @@ class SecurityScreen extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontSize: 11)),
+          Text(title,
+              style: AppTypography.bodySmall
+                  .copyWith(color: AppColors.textPrimary, fontSize: 11)),
           Switch(
             value: value,
             activeThumbColor: AppColors.karmaGreen,
@@ -315,7 +358,8 @@ class SecurityScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildAppCheckProviderCard(SecurityAuditReport report, SecurityNotifier notifier) {
+  Widget _buildAppCheckProviderCard(
+      SecurityAuditReport report, SecurityNotifier notifier) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,7 +370,10 @@ class SecurityScreen extends ConsumerWidget {
               SizedBox(width: 6),
               Text(
                 'Firebase App Check Provider Mode',
-                style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 12),
+                style: TextStyle(
+                    color: AppColors.gold,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
               ),
             ],
           ),
@@ -337,7 +384,8 @@ class SecurityScreen extends ConsumerWidget {
             children: AppCheckProviderType.values.map((p) {
               final isSelected = report.activeProvider == p;
               return ChoiceChip(
-                label: Text(p.name.split('(').first.trim(), style: const TextStyle(fontSize: 10)),
+                label: Text(p.name.split('(').first.trim(),
+                    style: const TextStyle(fontSize: 10)),
                 selected: isSelected,
                 selectedColor: AppColors.gold.withValues(alpha: 0.25),
                 backgroundColor: AppColors.surfaceElevated,
@@ -356,7 +404,8 @@ class SecurityScreen extends ConsumerWidget {
 
   Widget _buildCheckItemCard(SecurityCheckItem item) {
     final isPassed = item.isPassed;
-    final statusColor = isPassed ? AppColors.karmaGreen : AppColors.energyOrange;
+    final statusColor =
+        isPassed ? AppColors.karmaGreen : AppColors.energyOrange;
 
     return BentoCard(
       child: Row(
@@ -386,21 +435,26 @@ class SecurityScreen extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: statusColor.withValues(alpha: 0.12),
                         borderRadius: AppRadii.radiusSm,
                       ),
                       child: Text(
                         item.status.name.toUpperCase(),
-                        style: TextStyle(color: statusColor, fontSize: 8, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: statusColor,
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
                 Text(
                   item.regionalTitle,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 10),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -455,8 +509,14 @@ class SecurityScreen extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          Text(title, style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 10)),
-          Text(subtitle, style: const TextStyle(color: AppColors.textSecondary, fontSize: 8)),
+          Text(title,
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 10)),
+          Text(subtitle,
+              style:
+                  const TextStyle(color: AppColors.textSecondary, fontSize: 8)),
         ],
       ),
     );
@@ -483,7 +543,8 @@ class SecurityScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma is built with zero client-side secrets. All LLM calls (Groq) and payment webhooks (RevenueCat) are mediated by Google Cloud Functions. Firebase App Check actively verifies device authenticity, and sensitive health telemetry is guarded with on-device biometrics.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -491,10 +552,12 @@ class SecurityScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understood', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understood',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

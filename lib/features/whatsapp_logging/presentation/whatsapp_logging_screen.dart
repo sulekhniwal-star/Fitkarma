@@ -15,7 +15,8 @@ class WhatsAppLoggingScreen extends ConsumerStatefulWidget {
   const WhatsAppLoggingScreen({super.key});
 
   @override
-  ConsumerState<WhatsAppLoggingScreen> createState() => _WhatsAppLoggingScreenState();
+  ConsumerState<WhatsAppLoggingScreen> createState() =>
+      _WhatsAppLoggingScreenState();
 }
 
 class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
@@ -47,7 +48,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -58,7 +60,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Status feedback banner
-            if (state.statusMessage != null) _buildStatusBanner(state.statusMessage!),
+            if (state.statusMessage != null)
+              _buildStatusBanner(state.statusMessage!),
 
             // 1. WhatsApp Connection & Status Card
             _buildConnectionCard(state.profile, notifier),
@@ -93,12 +96,16 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.karmaGreen, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -106,7 +113,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
     );
   }
 
-  Widget _buildConnectionCard(WhatsAppUserProfile profile, WhatsAppLoggingNotifier notifier) {
+  Widget _buildConnectionCard(
+      WhatsAppUserProfile profile, WhatsAppLoggingNotifier notifier) {
     final bool isLinked = profile.linkStatus == WhatsAppLinkStatus.activeLinked;
 
     return BentoCard(
@@ -138,14 +146,18 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                   children: [
                     Icon(
                       isLinked ? Icons.verified : Icons.hourglass_top,
-                      color: isLinked ? AppColors.karmaGreen : AppColors.energyOrange,
+                      color: isLinked
+                          ? AppColors.karmaGreen
+                          : AppColors.energyOrange,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       profile.linkStatus.label,
                       style: TextStyle(
-                        color: isLinked ? AppColors.karmaGreen : AppColors.energyOrange,
+                        color: isLinked
+                            ? AppColors.karmaGreen
+                            : AppColors.energyOrange,
                         fontWeight: FontWeight.bold,
                         fontSize: 11,
                       ),
@@ -166,7 +178,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                   shape: BoxShape.circle,
                   border: Border.all(color: const Color(0xFF25D366)),
                 ),
-                child: const Icon(Icons.chat, color: Color(0xFF25D366), size: 22),
+                child:
+                    const Icon(Icons.chat, color: Color(0xFF25D366), size: 22),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -174,7 +187,9 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      profile.phoneNumber.isNotEmpty ? profile.phoneNumber : 'No phone linked',
+                      profile.phoneNumber.isNotEmpty
+                          ? profile.phoneNumber
+                          : 'No phone linked',
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 15,
@@ -185,22 +200,29 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                       isLinked
                           ? 'Send text or food photos to +91 80 4748 8800'
                           : 'Link your phone number to enable frictionless chat logging',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
                 ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isLinked ? AppColors.surfaceElevated : AppColors.karmaGreen,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                  backgroundColor: isLinked
+                      ? AppColors.surfaceElevated
+                      : AppColors.karmaGreen,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadii.sm)),
                 ),
-                onPressed: () => _showPhoneLinkModal(context, profile, notifier),
+                onPressed: () =>
+                    _showPhoneLinkModal(context, profile, notifier),
                 child: Text(
                   isLinked ? 'Manage' : 'Link Phone',
                   style: TextStyle(
-                    color: isLinked ? AppColors.textPrimary : AppColors.background,
+                    color:
+                        isLinked ? AppColors.textPrimary : AppColors.background,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -213,7 +235,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
     );
   }
 
-  Widget _buildPreferencesCard(WhatsAppUserProfile profile, WhatsAppLoggingNotifier notifier) {
+  Widget _buildPreferencesCard(
+      WhatsAppUserProfile profile, WhatsAppLoggingNotifier notifier) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,30 +254,35 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Configure daily contextual WhatsApp alerts synchronized with circadian and meal windows.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildSwitchRow(
             title: 'Morning Readiness & Agni Briefing',
-            subtitle: 'Daily 07:00 AM readiness score & training window recommendations',
+            subtitle:
+                'Daily 07:00 AM readiness score & training window recommendations',
             value: profile.enableMorningBriefing,
             onChanged: (val) => notifier.togglePreference(morningBriefing: val),
           ),
           _buildSwitchRow(
             title: 'Meal & Nutrition NLP Logging',
-            subtitle: 'Instantly calculate calories and macros from text/photo food logs',
+            subtitle:
+                'Instantly calculate calories and macros from text/photo food logs',
             value: profile.enableMealLogging,
             onChanged: (val) => notifier.togglePreference(mealLogging: val),
           ),
           _buildSwitchRow(
             title: 'Hydration & Nimbu-Pani Nudges',
-            subtitle: 'Smart midday water reminders based on heat index and sweat rate',
+            subtitle:
+                'Smart midday water reminders based on heat index and sweat rate',
             value: profile.enableWaterNudges,
             onChanged: (val) => notifier.togglePreference(waterNudges: val),
           ),
           _buildSwitchRow(
             title: 'Post-Dinner Shatapadi Walk Alert',
-            subtitle: '100-step post-meal walk reminder 15 minutes after logged dinner',
+            subtitle:
+                '100-step post-meal walk reminder 15 minutes after logged dinner',
             value: profile.enablePostDinnerWalkAlert,
             onChanged: (val) => notifier.togglePreference(postDinnerWalk: val),
           ),
@@ -280,11 +308,15 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 13, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600),
                 ),
                 Text(
                   subtitle,
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textMuted, fontSize: 11),
                 ),
               ],
             ),
@@ -302,7 +334,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
     );
   }
 
-  Widget _buildInteractiveSimulatorCard(WhatsAppState state, WhatsAppLoggingNotifier notifier) {
+  Widget _buildInteractiveSimulatorCard(
+      WhatsAppState state, WhatsAppLoggingNotifier notifier) {
     final quickChips = [
       '2 roti, dal tadka, salad',
       '500ml water',
@@ -331,7 +364,10 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                 ),
                 child: const Text(
                   'Meta Graph API Sandbox',
-                  style: TextStyle(color: Color(0xFF25D366), fontSize: 10, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Color(0xFF25D366),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -339,7 +375,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Test real-time Natural Language Processing (NLP) of Indian meals, hydration, and workouts.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.sm),
           Wrap(
@@ -348,7 +385,9 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
             children: quickChips.map((chip) {
               return ActionChip(
                 backgroundColor: AppColors.surfaceElevated,
-                label: Text(chip, style: const TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                label: Text(chip,
+                    style: const TextStyle(
+                        color: AppColors.focusBlue, fontSize: 11)),
                 onPressed: () {
                   _messageController.text = chip;
                 },
@@ -361,13 +400,16 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
               Expanded(
                 child: TextField(
                   controller: _messageController,
-                  style: const TextStyle(color: AppColors.textPrimary, fontSize: 13),
+                  style: const TextStyle(
+                      color: AppColors.textPrimary, fontSize: 13),
                   decoration: InputDecoration(
                     hintText: 'Type WhatsApp message (e.g. 2 roti dal curd)...',
-                    hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+                    hintStyle: const TextStyle(
+                        color: AppColors.textMuted, fontSize: 12),
                     filled: true,
                     fillColor: AppColors.surfaceElevated,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppRadii.sm),
                       borderSide: BorderSide.none,
@@ -385,8 +427,10 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF25D366),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadii.sm)),
                 ),
                 onPressed: () {
                   if (_messageController.text.trim().isNotEmpty) {
@@ -394,17 +438,23 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                     _messageController.clear();
                   }
                 },
-                child: const Icon(Icons.send, color: AppColors.background, size: 18),
+                child: const Icon(Icons.send,
+                    color: AppColors.background, size: 18),
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
           const Text(
             'Message Stream (Recent Inbound & Responses):',
-            style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: AppColors.textMuted,
+                fontSize: 11,
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: AppSpacing.sm),
-          ...state.messageHistory.take(4).map((msg) => _buildMessageBubble(msg)),
+          ...state.messageHistory
+              .take(4)
+              .map((msg) => _buildMessageBubble(msg)),
         ],
       ),
     );
@@ -427,17 +477,22 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.person_pin, color: AppColors.focusBlue, size: 14),
+                  const Icon(Icons.person_pin,
+                      color: AppColors.focusBlue, size: 14),
                   const SizedBox(width: 4),
                   Text(
                     'User Inbound: "${record.rawMessage}"',
-                    style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
               Text(
                 '${record.timestamp.hour.toString().padLeft(2, '0')}:${record.timestamp.minute.toString().padLeft(2, '0')}',
-                style: const TextStyle(color: AppColors.textMuted, fontSize: 10),
+                style:
+                    const TextStyle(color: AppColors.textMuted, fontSize: 10),
               ),
             ],
           ),
@@ -448,11 +503,13 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
             decoration: BoxDecoration(
               color: const Color(0xFF075E54).withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xFF25D366).withValues(alpha: 0.3)),
+              border: Border.all(
+                  color: const Color(0xFF25D366).withValues(alpha: 0.3)),
             ),
             child: Text(
               record.botReplyText,
-              style: const TextStyle(color: AppColors.textPrimary, fontSize: 11, height: 1.3),
+              style: const TextStyle(
+                  color: AppColors.textPrimary, fontSize: 11, height: 1.3),
             ),
           ),
         ],
@@ -472,26 +529,31 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                 primaryText: 'Interactive WhatsApp Templates',
                 regionalText: 'इंटरैक्टिव व्हाट्सएप टेम्प्लेट्स',
               ),
-              Icon(Icons.dashboard_customize, color: AppColors.karmaGreen, size: 20),
+              Icon(Icons.dashboard_customize,
+                  color: AppColors.karmaGreen, size: 20),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Pre-approved Meta Business interactive templates with quick action buttons.',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           _buildTemplateItem(
             type: WhatsAppTemplateType.morningReadiness,
-            description: 'Contains morning readiness gauge, Agni state, and action buttons [🍳 Log Breakfast, 🏋️ View Workout].',
+            description:
+                'Contains morning readiness gauge, Agni state, and action buttons [🍳 Log Breakfast, 🏋️ View Workout].',
           ),
           _buildTemplateItem(
             type: WhatsAppTemplateType.postMealShatapadi,
-            description: 'Triggered 15 mins post-dinner with 1-tap walk initiation [✅ Walking Now, 💧 Log Water].',
+            description:
+                'Triggered 15 mins post-dinner with 1-tap walk initiation [✅ Walking Now, 💧 Log Water].',
           ),
           _buildTemplateItem(
             type: WhatsAppTemplateType.waterHydrationNudge,
-            description: 'Dynamic midday hydration prompt with quick add buttons [+250 mL, +500 mL].',
+            description:
+                'Dynamic midday hydration prompt with quick add buttons [+250 mL, +500 mL].',
           ),
         ],
       ),
@@ -514,12 +576,16 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
         children: [
           Text(
             type.title,
-            style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 12,
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 2),
           Text(
             description,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
           ),
         ],
       ),
@@ -548,7 +614,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                 left: AppSpacing.md,
                 right: AppSpacing.md,
                 top: AppSpacing.md,
-                bottom: MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
+                bottom:
+                    MediaQuery.of(context).viewInsets.bottom + AppSpacing.xl,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -562,7 +629,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                         regionalText: 'व्हाट्सएप मोबाइल नंबर जोड़ें',
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                        icon: const Icon(Icons.close,
+                            color: AppColors.textSecondary),
                         onPressed: () => Navigator.pop(ctx),
                       ),
                     ],
@@ -574,7 +642,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                     style: const TextStyle(color: AppColors.textPrimary),
                     decoration: InputDecoration(
                       labelText: '10-Digit Mobile Number (+91)',
-                      labelStyle: const TextStyle(color: AppColors.textSecondary),
+                      labelStyle:
+                          const TextStyle(color: AppColors.textSecondary),
                       filled: true,
                       fillColor: AppColors.surfaceElevated,
                       border: OutlineInputBorder(
@@ -583,14 +652,16 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  if (profile.linkStatus == WhatsAppLinkStatus.pendingVerification) ...[
+                  if (profile.linkStatus ==
+                      WhatsAppLinkStatus.pendingVerification) ...[
                     TextField(
                       controller: _otpController,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(color: AppColors.textPrimary),
                       decoration: InputDecoration(
                         labelText: 'Enter 6-Digit OTP',
-                        labelStyle: const TextStyle(color: AppColors.textSecondary),
+                        labelStyle:
+                            const TextStyle(color: AppColors.textSecondary),
                         filled: true,
                         fillColor: AppColors.surfaceElevated,
                         border: OutlineInputBorder(
@@ -606,11 +677,14 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF25D366),
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.md)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadii.md)),
                       ),
                       onPressed: () {
-                        if (profile.linkStatus == WhatsAppLinkStatus.pendingVerification) {
-                          final success = notifier.confirmOtp(_otpController.text);
+                        if (profile.linkStatus ==
+                            WhatsAppLinkStatus.pendingVerification) {
+                          final success =
+                              notifier.confirmOtp(_otpController.text);
                           if (success) Navigator.pop(ctx);
                         } else {
                           notifier.initiatePhoneLinking(_phoneController.text);
@@ -618,8 +692,13 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
                         }
                       },
                       child: Text(
-                        profile.linkStatus == WhatsAppLinkStatus.pendingVerification ? 'Verify OTP' : 'Send OTP',
-                        style: const TextStyle(color: AppColors.background, fontWeight: FontWeight.bold),
+                        profile.linkStatus ==
+                                WhatsAppLinkStatus.pendingVerification
+                            ? 'Verify OTP'
+                            : 'Send OTP',
+                        style: const TextStyle(
+                            color: AppColors.background,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -652,7 +731,8 @@ class _WhatsAppLoggingScreenState extends ConsumerState<WhatsAppLoggingScreen> {
             const SizedBox(height: AppSpacing.md),
             Text(
               'FitKarma\'s WhatsApp Business integration enables friction-free health logging for Indian users. Send natural language text or food photos directly via WhatsApp to automatically record meals, water, and physical activity. Inbound messages are processed via pure-Dart deterministic NLP and synced securely to your user-scoped Firestore profile with end-to-end data ownership.',
-              style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTypography.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
           ],

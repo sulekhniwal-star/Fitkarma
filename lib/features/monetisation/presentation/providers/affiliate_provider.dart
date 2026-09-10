@@ -74,11 +74,13 @@ class AffiliateNotifier extends StateNotifier<AffiliateState> {
 
   Future<void> requestPayout() async {
     if (state.profile.pendingPayoutInr <= 0) {
-      state = state.copyWith(errorMessage: 'No pending balance available for payout.');
+      state = state.copyWith(
+          errorMessage: 'No pending balance available for payout.');
       return;
     }
 
-    state = state.copyWith(isLoading: true, errorMessage: null, successMessage: null);
+    state = state.copyWith(
+        isLoading: true, errorMessage: null, successMessage: null);
 
     // Simulate instant UPI payout transfer
     await Future.delayed(const Duration(milliseconds: 350));
@@ -88,7 +90,8 @@ class AffiliateNotifier extends StateNotifier<AffiliateState> {
     state = state.copyWith(
       profile: updatedProfile,
       isLoading: false,
-      successMessage: '₹${state.profile.pendingPayoutInr} transferred successfully to ${state.profile.upiId}!',
+      successMessage:
+          '₹${state.profile.pendingPayoutInr} transferred successfully to ${state.profile.upiId}!',
     );
   }
 
@@ -102,7 +105,8 @@ class AffiliateNotifier extends StateNotifier<AffiliateState> {
 
     state = state.copyWith(
       profile: updatedProfile,
-      successMessage: 'New referral attributed! Earned +₹${_engine.calculateCommission(tier: state.profile.tier, orderAmountInr: amount)}.',
+      successMessage:
+          'New referral attributed! Earned +₹${_engine.calculateCommission(tier: state.profile.tier, orderAmountInr: amount)}.',
     );
   }
 }

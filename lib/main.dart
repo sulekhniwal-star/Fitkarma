@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/config/app_environment.dart';
 import 'core/bootstrap/app_bootstrap.dart';
 import 'core/constants/app_constants.dart';
 import 'features/health_os/providers/health_os_provider.dart';
@@ -7,6 +8,11 @@ import 'features/health_os/presentation/health_os_briefing_card.dart';
 import 'shared/theme/app_theme.dart';
 
 void main() async {
+  try {
+    AppConfig.current;
+  } catch (_) {
+    AppConfig.initialize(AppConfig.prod);
+  }
   await AppBootstrap.initialize();
   runApp(
     const ProviderScope(
@@ -20,9 +26,25 @@ class FitKarmaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final title = () {
+      try {
+        return AppConfig.current.appName;
+      } catch (_) {
+        return AppConstants.appName;
+      }
+    }();
+
+    final showDebugBanner = () {
+      try {
+        return AppConfig.current.isDebugBannerVisible;
+      } catch (_) {
+        return false;
+      }
+    }();
+
     return MaterialApp(
-      title: AppConstants.appName,
-      debugShowCheckedModeBanner: false,
+      title: title,
+      debugShowCheckedModeBanner: showDebugBanner,
       theme: AppTheme.darkTheme,
       home: const HomeScreen(),
     );

@@ -6,7 +6,8 @@ void main() {
   group('BiologicalAgeEngine Tests', () {
     const engine = BiologicalAgeEngine();
 
-    test('Computes rejuvenating biological age for optimal biometric inputs', () {
+    test('Computes rejuvenating biological age for optimal biometric inputs',
+        () {
       final report = engine.estimateBiologicalAge(
         chronologicalAge: 32.0,
         restingHeartRate: 52.0,
@@ -33,7 +34,9 @@ void main() {
       expect(report.trajectory12Months.length, equals(12));
     });
 
-    test('Computes accelerated biological age for compromised metabolic markers', () {
+    test(
+        'Computes accelerated biological age for compromised metabolic markers',
+        () {
       final report = engine.estimateBiologicalAge(
         chronologicalAge: 40.0,
         restingHeartRate: 84.0,

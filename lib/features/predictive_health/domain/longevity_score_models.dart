@@ -54,12 +54,36 @@ enum LongevityTier {
 
 /// Core Longevity Pillar Subsystem
 enum LongevityPillarType {
-  cardiovascular(name: 'Cardiovascular Elasticity', regionalName: 'हृदय व धमनी लचीलापन', iconName: 'favorite', weight: 0.20),
-  metabolic(name: 'Metabolic & Glycemic Reserve', regionalName: 'उपापचयी व शर्करा संतुलन', iconName: 'bolt', weight: 0.20),
-  cardiorespiratory(name: 'VO2 Max & Muscle Mass', regionalName: 'VO2 Max व मांसपेशी भंडार', iconName: 'fitness_center', weight: 0.20),
-  cellularRecovery(name: 'Circadian & Sleep Architecture', regionalName: 'गहरी नींद व कोशिकीय मरम्मत', iconName: 'nights_stay', weight: 0.15),
-  antiInflammatory(name: 'Nutritional Anti-Inflammatory', regionalName: 'सूजन-रोधी पोषण व आंत स्वास्थ्य', iconName: 'restaurant', weight: 0.15),
-  ayurvedicVagal(name: 'Dinacharya & Autonomic Harmony', regionalName: 'दिनचर्या व स्वायत्त संतुलन', iconName: 'spa', weight: 0.10);
+  cardiovascular(
+      name: 'Cardiovascular Elasticity',
+      regionalName: 'हृदय व धमनी लचीलापन',
+      iconName: 'favorite',
+      weight: 0.20),
+  metabolic(
+      name: 'Metabolic & Glycemic Reserve',
+      regionalName: 'उपापचयी व शर्करा संतुलन',
+      iconName: 'bolt',
+      weight: 0.20),
+  cardiorespiratory(
+      name: 'VO2 Max & Muscle Mass',
+      regionalName: 'VO2 Max व मांसपेशी भंडार',
+      iconName: 'fitness_center',
+      weight: 0.20),
+  cellularRecovery(
+      name: 'Circadian & Sleep Architecture',
+      regionalName: 'गहरी नींद व कोशिकीय मरम्मत',
+      iconName: 'nights_stay',
+      weight: 0.15),
+  antiInflammatory(
+      name: 'Nutritional Anti-Inflammatory',
+      regionalName: 'सूजन-रोधी पोषण व आंत स्वास्थ्य',
+      iconName: 'restaurant',
+      weight: 0.15),
+  ayurvedicVagal(
+      name: 'Dinacharya & Autonomic Harmony',
+      regionalName: 'दिनचर्या व स्वायत्त संतुलन',
+      iconName: 'spa',
+      weight: 0.10);
 
   final String name;
   final String regionalName;
@@ -128,7 +152,8 @@ class LongevityReport {
   final double chronologicalAge;
   final double biologicalAge;
   final double projectedHealthspanAge; // e.g. 84.5 years
-  final double healthspanBonusYears; // projectedHealthspanAge - baseline (e.g. +7.5 years)
+  final double
+      healthspanBonusYears; // projectedHealthspanAge - baseline (e.g. +7.5 years)
   final List<LongevityPillarScore> pillarScores;
   final List<LongevityAccelerator> topAccelerators;
   final String primaryLongevityAsset;

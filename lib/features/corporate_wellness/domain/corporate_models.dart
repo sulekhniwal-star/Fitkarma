@@ -25,8 +25,11 @@ class CorporateOrganization {
 /// Employee Corporate Membership & Verification Status
 enum CorporateVerificationStatus {
   unlinked(label: 'Unlinked', regionalLabel: 'कॉर्पोरेट लिंक नहीं है'),
-  pendingWorkEmailOtp(label: 'Work Email OTP Pending', regionalLabel: 'कार्य ईमेल ओटीपी लंबित'),
-  verifiedEmployee(label: 'Verified Corporate Member', regionalLabel: 'सत्यापित कॉर्पोरेट सदस्य');
+  pendingWorkEmailOtp(
+      label: 'Work Email OTP Pending', regionalLabel: 'कार्य ईमेल ओटीपी लंबित'),
+  verifiedEmployee(
+      label: 'Verified Corporate Member',
+      regionalLabel: 'सत्यापित कॉर्पोरेट सदस्य');
 
   final String label;
   final String regionalLabel;
@@ -60,7 +63,8 @@ class CorporateEmployeeProfile {
     this.joinedAt,
   });
 
-  bool get isVerified => verificationStatus == CorporateVerificationStatus.verifiedEmployee;
+  bool get isVerified =>
+      verificationStatus == CorporateVerificationStatus.verifiedEmployee;
 
   CorporateEmployeeProfile copyWith({
     String? employeeId,

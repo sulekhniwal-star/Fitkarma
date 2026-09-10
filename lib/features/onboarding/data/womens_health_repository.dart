@@ -24,7 +24,8 @@ class WomensHealthRepository {
           .collection('womensHealth')
           .doc('profile');
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data() != null) {
         return WomensHealthProfile.fromMap(snapshot.data()!);

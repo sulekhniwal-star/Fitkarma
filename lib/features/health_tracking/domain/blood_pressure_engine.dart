@@ -1,9 +1,13 @@
 enum BloodPressureCategory {
   normal(name: 'Normal (सामान्य)', isAlert: false),
-  elevated(name: 'Elevated / Pre-hypertensive (हल्का बढ़ा हुआ)', isAlert: false),
-  stage1Hypertension(name: 'Stage 1 Hypertension (उच्च रक्तचाप स्टेज 1)', isAlert: true),
-  stage2Hypertension(name: 'Stage 2 Hypertension (उच्च रक्तचाप स्टेज 2)', isAlert: true),
-  hypertensiveCrisis(name: 'Hypertensive Crisis (आपातकालीन उच्च रक्तचाप)', isAlert: true);
+  elevated(
+      name: 'Elevated / Pre-hypertensive (हल्का बढ़ा हुआ)', isAlert: false),
+  stage1Hypertension(
+      name: 'Stage 1 Hypertension (उच्च रक्तचाप स्टेज 1)', isAlert: true),
+  stage2Hypertension(
+      name: 'Stage 2 Hypertension (उच्च रक्तचाप स्टेज 2)', isAlert: true),
+  hypertensiveCrisis(
+      name: 'Hypertensive Crisis (आपातकालीन उच्च रक्तचाप)', isAlert: true);
 
   final String name;
   final bool isAlert;
@@ -87,19 +91,25 @@ class BloodPressureEngine {
 
     if (systolic > 180 || diastolic > 120) {
       category = BloodPressureCategory.hypertensiveCrisis;
-      recommendation = 'CRITICAL: Immediate medical attention required. Rest quietly and contact emergency healthcare.';
+      recommendation =
+          'CRITICAL: Immediate medical attention required. Rest quietly and contact emergency healthcare.';
     } else if (systolic >= 140 || diastolic >= 90) {
       category = BloodPressureCategory.stage2Hypertension;
-      recommendation = 'Stage 2 Hypertension detected. Consult physician, reduce sodium (<2,000mg/day), and incorporate daily Zone 2 brisk walking.';
-    } else if ((systolic >= 130 && systolic <= 139) || (diastolic >= 80 && diastolic <= 89)) {
+      recommendation =
+          'Stage 2 Hypertension detected. Consult physician, reduce sodium (<2,000mg/day), and incorporate daily Zone 2 brisk walking.';
+    } else if ((systolic >= 130 && systolic <= 139) ||
+        (diastolic >= 80 && diastolic <= 89)) {
       category = BloodPressureCategory.stage1Hypertension;
-      recommendation = 'Stage 1 Hypertension. Focus on potassium-rich foods (coconut water, bananas, spinach), daily Pranayama, and weight management.';
+      recommendation =
+          'Stage 1 Hypertension. Focus on potassium-rich foods (coconut water, bananas, spinach), daily Pranayama, and weight management.';
     } else if (systolic >= 120 && systolic <= 129 && diastolic < 80) {
       category = BloodPressureCategory.elevated;
-      recommendation = 'Elevated blood pressure. Maintain adequate hydration, limit caffeine after 2 PM, and engage in regular cardiovascular exercise.';
+      recommendation =
+          'Elevated blood pressure. Maintain adequate hydration, limit caffeine after 2 PM, and engage in regular cardiovascular exercise.';
     } else {
       category = BloodPressureCategory.normal;
-      recommendation = 'Optimal blood pressure. Cardiovascular arterial elasticity and autonomic tone are balanced.';
+      recommendation =
+          'Optimal blood pressure. Cardiovascular arterial elasticity and autonomic tone are balanced.';
     }
 
     return BloodPressureEvaluation(

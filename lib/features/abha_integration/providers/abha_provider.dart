@@ -104,7 +104,9 @@ class AbhaIntegrationNotifier extends StateNotifier<AbhaState> {
 
   void initiateAadhaarKyc(String aadhaarOrMobile) {
     if (aadhaarOrMobile.trim().isEmpty) {
-      state = state.copyWith(statusMessage: 'Please enter valid 12-digit Aadhaar or 10-digit mobile number.');
+      state = state.copyWith(
+          statusMessage:
+              'Please enter valid 12-digit Aadhaar or 10-digit mobile number.');
       return;
     }
 
@@ -112,7 +114,8 @@ class AbhaIntegrationNotifier extends StateNotifier<AbhaState> {
     state = state.copyWith(
       pendingOtp: otp,
       statusMessage: 'ABDM Aadhaar OTP sent: $otp (Demo Simulation)',
-      profile: state.profile.copyWith(verificationStatus: AbhaVerificationStatus.pendingOtp),
+      profile: state.profile
+          .copyWith(verificationStatus: AbhaVerificationStatus.pendingOtp),
     );
   }
 
@@ -135,11 +138,13 @@ class AbhaIntegrationNotifier extends StateNotifier<AbhaState> {
       state = state.copyWith(
         profile: verified,
         pendingOtp: null,
-        statusMessage: 'ABHA Health ID verified successfully via ABDM Gateway! 🇮🇳',
+        statusMessage:
+            'ABHA Health ID verified successfully via ABDM Gateway! 🇮🇳',
       );
       return true;
     } else {
-      state = state.copyWith(statusMessage: 'Incorrect OTP. Please check and try again.');
+      state = state.copyWith(
+          statusMessage: 'Incorrect OTP. Please check and try again.');
       return false;
     }
   }
@@ -190,13 +195,15 @@ class AbhaIntegrationNotifier extends StateNotifier<AbhaState> {
     state = state.copyWith(
       latestFhirBundle: bundle,
       isSyncingWithGateway: false,
-      statusMessage: 'FitKarma health records synced with ABDM PHR Gateway (FHIR R4).',
+      statusMessage:
+          'FitKarma health records synced with ABDM PHR Gateway (FHIR R4).',
     );
   }
 
   void unlinkAbha() {
     state = state.copyWith(
-      profile: state.profile.copyWith(verificationStatus: AbhaVerificationStatus.unlinked),
+      profile: state.profile
+          .copyWith(verificationStatus: AbhaVerificationStatus.unlinked),
       statusMessage: 'ABHA account unlinked from FitKarma.',
     );
   }

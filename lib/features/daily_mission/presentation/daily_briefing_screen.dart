@@ -17,7 +17,8 @@ class DailyBriefingScreen extends ConsumerStatefulWidget {
   const DailyBriefingScreen({super.key});
 
   @override
-  ConsumerState<DailyBriefingScreen> createState() => _DailyBriefingScreenState();
+  ConsumerState<DailyBriefingScreen> createState() =>
+      _DailyBriefingScreenState();
 }
 
 class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
@@ -79,9 +80,11 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
                   ),
                   missionsAsync.when(
                     data: (missions) {
-                      final completedCount = missions.where((m) => m.isCompleted).length;
+                      final completedCount =
+                          missions.where((m) => m.isCompleted).length;
                       return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
                           color: AppColors.karmaGreen.withValues(alpha: 0.15),
                           borderRadius: AppRadii.radiusSm,
@@ -108,7 +111,8 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: missions.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(height: AppSpacing.sm),
                   itemBuilder: (context, index) {
                     final mission = missions[index];
                     return _buildMissionCard(mission);
@@ -135,7 +139,8 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
         children: [
           const Row(
             children: [
-              Icon(Icons.wb_sunny_rounded, color: AppColors.focusBlue, size: 20),
+              Icon(Icons.wb_sunny_rounded,
+                  color: AppColors.focusBlue, size: 20),
               SizedBox(width: 8),
               BilingualLabel(
                 primaryText: 'Morning Check-In Ritual',
@@ -154,9 +159,12 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
                 children: List.generate(5, (index) {
                   return IconButton(
                     padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                    constraints:
+                        const BoxConstraints(minWidth: 32, minHeight: 32),
                     icon: Icon(
-                      index < _sleepStars ? Icons.star_rounded : Icons.star_border_rounded,
+                      index < _sleepStars
+                          ? Icons.star_rounded
+                          : Icons.star_border_rounded,
                       color: AppColors.gold,
                       size: 24,
                     ),
@@ -176,9 +184,12 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
                 children: List.generate(5, (index) {
                   return IconButton(
                     padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                    constraints:
+                        const BoxConstraints(minWidth: 32, minHeight: 32),
                     icon: Icon(
-                      index < _energyStars ? Icons.bolt_rounded : Icons.flash_off_rounded,
+                      index < _energyStars
+                          ? Icons.bolt_rounded
+                          : Icons.flash_off_rounded,
                       color: AppColors.energyOrange,
                       size: 24,
                     ),
@@ -193,11 +204,14 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Muscle Soreness (दर्द/जकड़न)', style: AppTypography.bodySmall),
+              Text('Muscle Soreness (दर्द/जकड़न)',
+                  style: AppTypography.bodySmall),
               Text(
                 '$_sorenessLevel%',
                 style: AppTypography.bodySmall.copyWith(
-                  color: _sorenessLevel > 50 ? AppColors.alertRed : AppColors.karmaGreen,
+                  color: _sorenessLevel > 50
+                      ? AppColors.alertRed
+                      : AppColors.karmaGreen,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -226,7 +240,8 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.focusBlue,
-                shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadii.radiusSm),
               ),
               onPressed: () {
                 setState(() => _checkInSubmitted = true);
@@ -239,7 +254,8 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
               },
               child: const Text(
                 'Calculate Readiness (तैयारी जांचें)',
-                style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
+                style:
+                    TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
               ),
             ),
           ),
@@ -279,7 +295,9 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
       hasGlow: mission.isCompleted,
       glowColor: AppColors.karmaGreen,
       border: Border.all(
-        color: mission.isCompleted ? AppColors.karmaGreen.withValues(alpha: 0.5) : AppColors.glassBorder,
+        color: mission.isCompleted
+            ? AppColors.karmaGreen.withValues(alpha: 0.5)
+            : AppColors.glassBorder,
       ),
       onTap: () {
         ref.read(dailyMissionsProvider.notifier).toggleMission(mission.id);
@@ -305,8 +323,12 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
                     Text(
                       mission.title,
                       style: AppTypography.titleSmall.copyWith(
-                        color: mission.isCompleted ? AppColors.textMuted : AppColors.textPrimary,
-                        decoration: mission.isCompleted ? TextDecoration.lineThrough : null,
+                        color: mission.isCompleted
+                            ? AppColors.textMuted
+                            : AppColors.textPrimary,
+                        decoration: mission.isCompleted
+                            ? TextDecoration.lineThrough
+                            : null,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -336,14 +358,19 @@ class _DailyBriefingScreenState extends ConsumerState<DailyBriefingScreen> {
             height: 24,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: mission.isCompleted ? AppColors.karmaGreen : Colors.transparent,
+              color: mission.isCompleted
+                  ? AppColors.karmaGreen
+                  : Colors.transparent,
               border: Border.all(
-                color: mission.isCompleted ? AppColors.karmaGreen : AppColors.glassBorder,
+                color: mission.isCompleted
+                    ? AppColors.karmaGreen
+                    : AppColors.glassBorder,
                 width: 1.5,
               ),
             ),
             child: mission.isCompleted
-                ? const Icon(Icons.check_rounded, size: 16, color: AppColors.textInverse)
+                ? const Icon(Icons.check_rounded,
+                    size: 16, color: AppColors.textInverse)
                 : null,
           ),
         ],

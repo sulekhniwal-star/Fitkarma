@@ -31,7 +31,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showCgmMethodologyModal(context),
           ),
         ],
@@ -87,7 +88,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroGlucoseCard(ContinuousGlucoseReport report, Color trendColor) {
+  Widget _buildHeroGlucoseCard(
+      ContinuousGlucoseReport report, Color trendColor) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +98,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -105,7 +108,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.sensors, color: AppColors.karmaGreen, size: 14),
+                    const Icon(Icons.sensors,
+                        color: AppColors.karmaGreen, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       'Live • ${report.sensorModel}',
@@ -233,10 +237,22 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildTirLegend('Low (<70)', '${report.timeBelowRangePercent.toInt()}%', AppColors.aiPurple),
-              _buildTirLegend('In-Range (70-140)', '${report.timeInRangePercent.toInt()}%', AppColors.karmaGreen),
-              _buildTirLegend('High (>140)', '${report.timeAboveRangePercent.toInt()}%', AppColors.energyOrange),
-              _buildTirLegend('CV (Variance)', '${report.glycemicVariabilityCvPercent.toStringAsFixed(1)}%', AppColors.focusBlue),
+              _buildTirLegend(
+                  'Low (<70)',
+                  '${report.timeBelowRangePercent.toInt()}%',
+                  AppColors.aiPurple),
+              _buildTirLegend(
+                  'In-Range (70-140)',
+                  '${report.timeInRangePercent.toInt()}%',
+                  AppColors.karmaGreen),
+              _buildTirLegend(
+                  'High (>140)',
+                  '${report.timeAboveRangePercent.toInt()}%',
+                  AppColors.energyOrange),
+              _buildTirLegend(
+                  'CV (Variance)',
+                  '${report.glycemicVariabilityCvPercent.toStringAsFixed(1)}%',
+                  AppColors.focusBlue),
             ],
           ),
         ],
@@ -250,12 +266,20 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
       children: [
         Row(
           children: [
-            Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+            Container(
+                width: 8,
+                height: 8,
+                decoration:
+                    BoxDecoration(color: color, shape: BoxShape.circle)),
             const SizedBox(width: 4),
-            Text(label, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
+            Text(label,
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary, fontSize: 10)),
           ],
         ),
-        Text(value, style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold)),
+        Text(value,
+            style: AppTypography.bodySmall.copyWith(
+                color: AppColors.textPrimary, fontWeight: FontWeight.bold)),
       ],
     );
   }
@@ -274,7 +298,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
                   color: AppColors.textPrimary,
                 ),
               ),
-              const Icon(Icons.show_chart, color: AppColors.karmaGreen, size: 16),
+              const Icon(Icons.show_chart,
+                  color: AppColors.karmaGreen, size: 16),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -287,16 +312,21 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final point = report.telemetryStream24h[index];
                 final tierColor = Color(point.rangeTier.colorCode);
-                final timeLabel = '${point.timestamp.hour.toString().padLeft(2, '0')}:${point.timestamp.minute.toString().padLeft(2, '0')}';
+                final timeLabel =
+                    '${point.timestamp.hour.toString().padLeft(2, '0')}:${point.timestamp.minute.toString().padLeft(2, '0')}';
 
                 return Container(
                   width: 68,
                   padding: const EdgeInsets.all(AppSpacing.xs),
                   decoration: BoxDecoration(
-                    color: point.eventTag != null ? AppColors.surfaceElevated : AppColors.background,
+                    color: point.eventTag != null
+                        ? AppColors.surfaceElevated
+                        : AppColors.background,
                     borderRadius: AppRadii.radiusSm,
                     border: Border.all(
-                      color: point.eventTag != null ? AppColors.focusBlue.withValues(alpha: 0.6) : AppColors.surfaceElevated,
+                      color: point.eventTag != null
+                          ? AppColors.focusBlue.withValues(alpha: 0.6)
+                          : AppColors.surfaceElevated,
                     ),
                   ),
                   child: Column(
@@ -320,7 +350,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
                       ),
                       if (point.eventTag != null) ...[
                         const SizedBox(height: 2),
-                        const Icon(Icons.restaurant_menu, color: AppColors.focusBlue, size: 10),
+                        const Icon(Icons.restaurant_menu,
+                            color: AppColors.focusBlue, size: 10),
                       ],
                     ],
                   ),
@@ -388,14 +419,16 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
               const Spacer(),
               if (spike.shatpawaliCompleted)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: const BoxDecoration(
                     color: AppColors.surfaceElevated,
                     borderRadius: AppRadii.radiusSm,
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.directions_walk, color: AppColors.karmaGreen, size: 12),
+                      const Icon(Icons.directions_walk,
+                          color: AppColors.karmaGreen, size: 12),
                       const SizedBox(width: 2),
                       Text(
                         'Shatpawali Done',
@@ -537,7 +570,8 @@ class ContinuousBiomarkerScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

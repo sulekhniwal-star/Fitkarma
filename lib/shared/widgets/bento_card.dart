@@ -34,7 +34,8 @@ class BentoCard extends StatefulWidget {
   State<BentoCard> createState() => _BentoCardState();
 }
 
-class _BentoCardState extends State<BentoCard> with SingleTickerProviderStateMixin {
+class _BentoCardState extends State<BentoCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _scaleController;
   late Animation<double> _scaleAnimation;
 

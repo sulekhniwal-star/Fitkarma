@@ -309,9 +309,9 @@
     },
     {
       "name": "flutter_riverpod",
-      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_riverpod-2.6.1",
+      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_riverpod-3.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.12"
     },
     {
       "name": "flutter_shaders",
@@ -464,6 +464,12 @@
       "languageVersion": "3.8"
     },
     {
+      "name": "listen",
+      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/listen-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
+    },
+    {
       "name": "local_auth",
       "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth-3.0.2",
       "packageUri": "lib/",
@@ -579,9 +585,9 @@
     },
     {
       "name": "platform",
-      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.6",
+      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.2.0",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.10"
     },
     {
       "name": "plugin_platform_interface",
@@ -621,9 +627,9 @@
     },
     {
       "name": "riverpod",
-      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/riverpod-2.6.1",
+      "rootUri": "file:///C:/Users/JSK/AppData/Local/Pub/Cache/hosted/pub.dev/riverpod-3.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.12"
     },
     {
       "name": "shelf",

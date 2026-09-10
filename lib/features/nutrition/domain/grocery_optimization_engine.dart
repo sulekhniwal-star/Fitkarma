@@ -5,7 +5,8 @@ class GroceryItem {
   final String quantity; // e.g. '1 kg', '2 dozen', '500g'
   final int estimatedPriceInr;
   final double totalProteinGrams;
-  final String category; // 'Protein Staples', 'Produce & Greens', 'Grains', 'Pantry'
+  final String
+      category; // 'Protein Staples', 'Produce & Greens', 'Grains', 'Pantry'
   final bool isChecked;
 
   const GroceryItem({
@@ -159,14 +160,16 @@ class GroceryOptimizationEngine {
     ];
 
     final totalCost = items.fold<int>(0, (sum, i) => sum + i.estimatedPriceInr);
-    final totalProtein = items.fold<double>(0.0, (sum, i) => sum + i.totalProteinGrams);
+    final totalProtein =
+        items.fold<double>(0.0, (sum, i) => sum + i.totalProteinGrams);
     final avgCostPerGram = totalProtein > 0 ? (totalCost / totalProtein) : 0.0;
 
     return WeeklyGroceryPlan(
       items: items,
       totalEstimatedCostInr: totalCost,
       totalProteinYieldGrams: double.parse(totalProtein.toStringAsFixed(1)),
-      averageCostPerGramProtein: double.parse(avgCostPerGram.toStringAsFixed(2)),
+      averageCostPerGramProtein:
+          double.parse(avgCostPerGram.toStringAsFixed(2)),
     );
   }
 }

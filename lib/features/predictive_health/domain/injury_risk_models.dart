@@ -6,22 +6,27 @@ enum InjuryRiskTier {
     label: 'Optimal / Sweet Spot (Surakshit)',
     regionalLabel: 'सुरक्षित (अनुकूल कार्यभार)',
     colorCode: 0xFF00E676,
-    description: 'Workload progression is well-matched to muscular and connective tissue adaptation.',
-    regionalDescription: 'कार्यभार मांसपेशियों व जोड़ों की सहनक्षमता के अनुकूल है।',
+    description:
+        'Workload progression is well-matched to muscular and connective tissue adaptation.',
+    regionalDescription:
+        'कार्यभार मांसपेशियों व जोड़ों की सहनक्षमता के अनुकूल है।',
   ),
   moderate(
     label: 'Moderate / Caution (Satark)',
     regionalLabel: 'सतर्क (मध्यम जोखिम)',
     colorCode: 0xFFFFB300,
-    description: 'Workload approaching upper thresholds or minor recovery deficits detected.',
+    description:
+        'Workload approaching upper thresholds or minor recovery deficits detected.',
     regionalDescription: 'कार्यभार या थकान का स्तर बढ़ रहा है, सावधानी आवश्यक।',
   ),
   high(
     label: 'High Risk / Danger Zone (Chintajanak)',
     regionalLabel: 'चिंताजनक (उच्च चोट जोखिम)',
     colorCode: 0xFFFF5252,
-    description: 'Acute workload spike or compounded fatigue significantly elevates injury vulnerability.',
-    regionalDescription: 'तीव्र भार वृद्धि अथवा गंभीर थकान के कारण चोट की संभावना अत्यधिक है।',
+    description:
+        'Acute workload spike or compounded fatigue significantly elevates injury vulnerability.',
+    regionalDescription:
+        'तीव्र भार वृद्धि अथवा गंभीर थकान के कारण चोट की संभावना अत्यधिक है।',
   );
 
   final String label;
@@ -133,10 +138,12 @@ class InjuryPreventionProtocol {
 class InjuryRiskReport {
   final double compositeRiskScore; // 0 to 100 (lower is safer)
   final InjuryRiskTier overallRiskTier;
-  final double acuteChronicWorkloadRatio; // e.g. 1.15 (0.80 - 1.30 is sweet spot)
+  final double
+      acuteChronicWorkloadRatio; // e.g. 1.15 (0.80 - 1.30 is sweet spot)
   final double acuteLoad7Days; // AU (Arbitrary Units / Strain-tonnage)
   final double chronicLoad28Days; // AU (4-week rolling avg)
-  final double recoveryDeficitMultiplier; // e.g. 1.20x from sleep/HRV suppression
+  final double
+      recoveryDeficitMultiplier; // e.g. 1.20x from sleep/HRV suppression
   final List<JointRiskAssessment> jointAssessments;
   final List<InjuryPreventionProtocol> activeProtocols;
   final bool shouldDeload;

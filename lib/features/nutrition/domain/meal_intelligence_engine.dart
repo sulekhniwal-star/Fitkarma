@@ -57,11 +57,14 @@ class MealIntelligenceEngine {
 
     final String rec;
     if (proteinDelta > 5.0 && calDelta <= 50) {
-      rec = 'Swapping to ${itemB.name} adds +${proteinDelta.toStringAsFixed(1)}g Protein with negligible calorie surplus.';
+      rec =
+          'Swapping to ${itemB.name} adds +${proteinDelta.toStringAsFixed(1)}g Protein with negligible calorie surplus.';
     } else if (calDelta < -75) {
-      rec = 'Swapping to ${itemB.name} saves ${calDelta.abs()} calories, ideal for caloric deficit phases.';
+      rec =
+          'Swapping to ${itemB.name} saves ${calDelta.abs()} calories, ideal for caloric deficit phases.';
     } else {
-      rec = '${itemB.name} provides ${proteinDelta >= 0 ? "+${proteinDelta.toStringAsFixed(1)}g Protein" : "${proteinDelta.toStringAsFixed(1)}g Protein"} and ${fiberDelta >= 0 ? "+${fiberDelta.toStringAsFixed(1)}g Fiber" : "${fiberDelta.toStringAsFixed(1)}g Fiber"}.';
+      rec =
+          '${itemB.name} provides ${proteinDelta >= 0 ? "+${proteinDelta.toStringAsFixed(1)}g Protein" : "${proteinDelta.toStringAsFixed(1)}g Protein"} and ${fiberDelta >= 0 ? "+${fiberDelta.toStringAsFixed(1)}g Fiber" : "${fiberDelta.toStringAsFixed(1)}g Fiber"}.';
     }
 
     return FoodComparisonResult(

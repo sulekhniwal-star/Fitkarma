@@ -23,7 +23,8 @@ class EnvironmentalHealthRepository {
           .collection('environmentalHealth')
           .doc('today');
 
-      final snapshot = await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final snapshot =
+          await docRef.get(const GetOptions(source: Source.serverAndCache));
 
       if (snapshot.exists && snapshot.data() != null) {
         return EnvironmentalHealthSnapshot.fromMap(snapshot.data()!);

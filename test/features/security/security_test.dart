@@ -7,7 +7,8 @@ void main() {
   group('SecurityEngine Deterministic Tests', () {
     const engine = SecurityEngine();
 
-    test('Full enterprise security posture evaluation yields 100/100 score', () {
+    test('Full enterprise security posture evaluation yields 100/100 score',
+        () {
       final report = engine.evaluateSecurityPosture(
         isAppCheckActive: true,
         provider: AppCheckProviderType.playIntegrity,
@@ -42,11 +43,18 @@ void main() {
     });
 
     test('Secrets scanner flags dangerous API key prefixes in source code', () {
-      expect(engine.verifyZeroSecrets('const apiKey = "gsk_live_secret_123";'), isFalse);
-      expect(engine.verifyZeroSecrets('const openAiKey = "sk-proj-999";'), isFalse);
-      expect(engine.verifyZeroSecrets('const rcKey = "rc_secret_token";'), isFalse);
-      expect(engine.verifyZeroSecrets('const googleKey = "AIzaSyXYZ";'), isFalse);
-      expect(engine.verifyZeroSecrets('const safeClientCode = "callCloudFunction(\'askAiCoach\')";'), isTrue);
+      expect(engine.verifyZeroSecrets('const apiKey = "gsk_live_secret_123";'),
+          isFalse);
+      expect(engine.verifyZeroSecrets('const openAiKey = "sk-proj-999";'),
+          isFalse);
+      expect(engine.verifyZeroSecrets('const rcKey = "rc_secret_token";'),
+          isFalse);
+      expect(
+          engine.verifyZeroSecrets('const googleKey = "AIzaSyXYZ";'), isFalse);
+      expect(
+          engine.verifyZeroSecrets(
+              'const safeClientCode = "callCloudFunction(\'askAiCoach\')";'),
+          isTrue);
     });
 
     test('Biometric setting copyWith mutates fields correctly', () {
@@ -59,7 +67,9 @@ void main() {
   });
 
   group('Security StateNotifier Provider Tests', () {
-    test('StateNotifier toggles App Check, switches provider, and handles biometrics', () async {
+    test(
+        'StateNotifier toggles App Check, switches provider, and handles biometrics',
+        () async {
       final notifier = SecurityNotifier();
 
       expect(notifier.state.report.isAppCheckActive, isTrue);
@@ -69,7 +79,8 @@ void main() {
       expect(notifier.state.report.isAppCheckActive, isFalse);
 
       notifier.setProvider(AppCheckProviderType.appAttest);
-      expect(notifier.state.report.activeProvider, equals(AppCheckProviderType.appAttest));
+      expect(notifier.state.report.activeProvider,
+          equals(AppCheckProviderType.appAttest));
 
       await notifier.authenticateBiometrics();
       expect(notifier.state.isBiometricUnlocked, isTrue);

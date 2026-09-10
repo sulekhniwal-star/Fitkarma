@@ -20,10 +20,12 @@ class GlycemicResponseScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<GlycemicResponseScreen> createState() => _GlycemicResponseScreenState();
+  ConsumerState<GlycemicResponseScreen> createState() =>
+      _GlycemicResponseScreenState();
 }
 
-class _GlycemicResponseScreenState extends ConsumerState<GlycemicResponseScreen> {
+class _GlycemicResponseScreenState
+    extends ConsumerState<GlycemicResponseScreen> {
   bool _isSaladFirst = false;
   bool _isWalkPlanned = true;
 
@@ -70,15 +72,23 @@ class _GlycemicResponseScreenState extends ConsumerState<GlycemicResponseScreen>
                           regionalText: 'व्यक्तिगत भोजन ग्लाइसेमिक स्कोर',
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: tierColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: tierColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: tierColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
-                            report.riskTier.label.split('/')[0].trim().toUpperCase(),
-                            style: TextStyle(color: tierColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            report.riskTier.label
+                                .split('/')[0]
+                                .trim()
+                                .toUpperCase(),
+                            style: TextStyle(
+                                color: tierColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -120,8 +130,15 @@ class _GlycemicResponseScreenState extends ConsumerState<GlycemicResponseScreen>
                   children: [
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Eat Salad / Fiber First', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
-                      subtitle: const Text('Raw fiber coat reduces carb absorption rate by 30%', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                      title: const Text('Eat Salad / Fiber First',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: AppColors.textPrimary)),
+                      subtitle: const Text(
+                          'Raw fiber coat reduces carb absorption rate by 30%',
+                          style: TextStyle(
+                              fontSize: 11, color: AppColors.textMuted)),
                       value: _isSaladFirst,
                       activeThumbColor: AppColors.karmaGreen,
                       onChanged: (val) => setState(() => _isSaladFirst = val),
@@ -129,8 +146,15 @@ class _GlycemicResponseScreenState extends ConsumerState<GlycemicResponseScreen>
                     const Divider(color: AppColors.glassBorder, height: 1),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Plan Shatpawali Walk (+1,000 steps)', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
-                      subtitle: const Text('Direct muscle glucose uptake via GLUT4 (-25% spike)', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                      title: const Text('Plan Shatpawali Walk (+1,000 steps)',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: AppColors.textPrimary)),
+                      subtitle: const Text(
+                          'Direct muscle glucose uptake via GLUT4 (-25% spike)',
+                          style: TextStyle(
+                              fontSize: 11, color: AppColors.textMuted)),
                       value: _isWalkPlanned,
                       activeThumbColor: AppColors.focusBlue,
                       onChanged: (val) => setState(() => _isWalkPlanned = val),
@@ -146,15 +170,24 @@ class _GlycemicResponseScreenState extends ConsumerState<GlycemicResponseScreen>
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.format_list_numbered_rounded, color: AppColors.gold, size: 22),
+                    const Icon(Icons.format_list_numbered_rounded,
+                        color: AppColors.gold, size: 22),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('The Anti-Spike Sequencing Rule', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
+                          const Text('The Anti-Spike Sequencing Rule',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13,
+                                  color: AppColors.textPrimary)),
                           const SizedBox(height: 3),
-                          Text(report.sequencingPrescription, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3)),
+                          Text(report.sequencingPrescription,
+                              style: AppTypography.bodySmall.copyWith(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 11,
+                                  height: 1.3)),
                         ],
                       ),
                     ),
@@ -183,12 +216,14 @@ class _GlycemicResponseScreenState extends ConsumerState<GlycemicResponseScreen>
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.check_circle_rounded, color: AppColors.karmaGreen, size: 16),
+                        const Icon(Icons.check_circle_rounded,
+                            color: AppColors.karmaGreen, size: 16),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             buff,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary, height: 1.3),
                           ),
                         ),
                       ],

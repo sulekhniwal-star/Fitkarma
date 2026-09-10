@@ -7,7 +7,8 @@ final dailyMissionRepositoryProvider = Provider<DailyMissionRepository>((ref) {
   return DailyMissionRepository();
 });
 
-class DailyMissionNotifier extends StateNotifier<AsyncValue<List<DailyMissionItem>>> {
+class DailyMissionNotifier
+    extends StateNotifier<AsyncValue<List<DailyMissionItem>>> {
   final DailyMissionRepository _repository;
   final String _uid;
   final String _date;
@@ -25,7 +26,8 @@ class DailyMissionNotifier extends StateNotifier<AsyncValue<List<DailyMissionIte
 
   Future<void> loadMissions() async {
     try {
-      final list = await _repository.getDailyMissions(uid: _uid, dateStr: _date);
+      final list =
+          await _repository.getDailyMissions(uid: _uid, dateStr: _date);
       state = AsyncValue.data(list);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -44,12 +46,13 @@ class DailyMissionNotifier extends StateNotifier<AsyncValue<List<DailyMissionIte
     }).toList();
 
     state = AsyncValue.data(updated);
-    await _repository.saveMissions(uid: _uid, dateStr: _date, missions: updated);
+    await _repository.saveMissions(
+        uid: _uid, dateStr: _date, missions: updated);
   }
 }
 
-final dailyMissionsProvider =
-    StateNotifierProvider.autoDispose<DailyMissionNotifier, AsyncValue<List<DailyMissionItem>>>((ref) {
+final dailyMissionsProvider = StateNotifierProvider.autoDispose<
+    DailyMissionNotifier, AsyncValue<List<DailyMissionItem>>>((ref) {
   final repo = ref.watch(dailyMissionRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);
   final date = ref.watch(selectedDateProvider);

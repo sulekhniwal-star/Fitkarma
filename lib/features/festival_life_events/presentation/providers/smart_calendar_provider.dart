@@ -3,7 +3,8 @@ import '../../domain/smart_calendar_engine.dart';
 import '../../domain/smart_calendar_models.dart';
 
 final smartCalendarProvider =
-    StateNotifierProvider<SmartCalendarNotifier, SmartCalendarPlanReport>((ref) {
+    StateNotifierProvider<SmartCalendarNotifier, SmartCalendarPlanReport>(
+        (ref) {
   return SmartCalendarNotifier();
 });
 
@@ -19,7 +20,8 @@ class SmartCalendarNotifier extends StateNotifier<SmartCalendarPlanReport> {
   }
 
   void addEvent(CalendarEventBlock event) {
-    final updatedEvents = List<CalendarEventBlock>.from(state.scheduledEvents)..add(event);
+    final updatedEvents = List<CalendarEventBlock>.from(state.scheduledEvents)
+      ..add(event);
     state = _engine.generateSchedulePlan(
       targetDate: state.scheduledDate,
       events: updatedEvents,
@@ -27,7 +29,8 @@ class SmartCalendarNotifier extends StateNotifier<SmartCalendarPlanReport> {
   }
 
   void removeEvent(String eventId) {
-    final updatedEvents = state.scheduledEvents.where((e) => e.eventId != eventId).toList();
+    final updatedEvents =
+        state.scheduledEvents.where((e) => e.eventId != eventId).toList();
     state = _engine.generateSchedulePlan(
       targetDate: state.scheduledDate,
       events: updatedEvents,
@@ -41,6 +44,7 @@ class SmartCalendarNotifier extends StateNotifier<SmartCalendarPlanReport> {
   }
 
   void clearAllEvents() {
-    state = _engine.generateSchedulePlan(targetDate: state.scheduledDate, events: const []);
+    state = _engine.generateSchedulePlan(
+        targetDate: state.scheduledDate, events: const []);
   }
 }

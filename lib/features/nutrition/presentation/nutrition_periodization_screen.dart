@@ -19,10 +19,12 @@ class NutritionPeriodizationScreen extends StatefulWidget {
   });
 
   @override
-  State<NutritionPeriodizationScreen> createState() => _NutritionPeriodizationScreenState();
+  State<NutritionPeriodizationScreen> createState() =>
+      _NutritionPeriodizationScreenState();
 }
 
-class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScreen> {
+class _NutritionPeriodizationScreenState
+    extends State<NutritionPeriodizationScreen> {
   bool _isRefeedEnabled = false;
   bool _isVratModeActive = false;
   late NutritionPeriodizationPlan _plan;
@@ -105,7 +107,8 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       _plan.strategicRationale,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.35),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, height: 1.35),
                     ),
                   ],
                 ),
@@ -123,8 +126,14 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Saturday High-Carb Refeed Day', style: TextStyle(color: AppColors.textPrimary, fontSize: 13, fontWeight: FontWeight.w700)),
-                            Text('Breaks metabolic plateaus & restores leptin', style: TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                            Text('Saturday High-Carb Refeed Day',
+                                style: TextStyle(
+                                    color: AppColors.textPrimary,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700)),
+                            Text('Breaks metabolic plateaus & restores leptin',
+                                style: TextStyle(
+                                    color: AppColors.textMuted, fontSize: 11)),
                           ],
                         ),
                         Switch(
@@ -146,8 +155,14 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Indian Vrat / Fasting Calibrator', style: TextStyle(color: AppColors.textPrimary, fontSize: 13, fontWeight: FontWeight.w700)),
-                            Text('Sabudana/Kuttu macro adjustments', style: TextStyle(color: AppColors.textMuted, fontSize: 11)),
+                            Text('Indian Vrat / Fasting Calibrator',
+                                style: TextStyle(
+                                    color: AppColors.textPrimary,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700)),
+                            Text('Sabudana/Kuttu macro adjustments',
+                                style: TextStyle(
+                                    color: AppColors.textMuted, fontSize: 11)),
                           ],
                         ),
                         Switch(
@@ -193,17 +208,24 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                           children: [
                             Row(
                               children: [
-                                Text(day.dayName, style: AppTypography.titleSmall.copyWith(fontWeight: FontWeight.w800, fontSize: 14)),
+                                Text(day.dayName,
+                                    style: AppTypography.titleSmall.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 14)),
                                 const SizedBox(width: 8),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
                                     color: col.withValues(alpha: 0.15),
                                     borderRadius: AppRadii.radiusSm,
                                   ),
                                   child: Text(
                                     day.intensity.name.split('/')[0].trim(),
-                                    style: TextStyle(color: col, fontSize: 10, fontWeight: FontWeight.w800),
+                                    style: TextStyle(
+                                        color: col,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w800),
                                   ),
                                 ),
                               ],
@@ -211,13 +233,15 @@ class _NutritionPeriodizationScreenState extends State<NutritionPeriodizationScr
                             const SizedBox(height: 2),
                             Text(
                               '${day.targetProteinGrams}g Protein • ${day.targetCarbsGrams}g Carbs • ${day.targetFatsGrams}g Fats',
-                              style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                              style: const TextStyle(
+                                  fontSize: 11, color: AppColors.textMuted),
                             ),
                           ],
                         ),
                         Text(
                           '${day.targetCalories} kcal',
-                          style: AppTypography.titleSmall.copyWith(color: col, fontWeight: FontWeight.w800),
+                          style: AppTypography.titleSmall.copyWith(
+                              color: col, fontWeight: FontWeight.w800),
                         ),
                       ],
                     ),

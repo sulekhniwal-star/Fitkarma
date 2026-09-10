@@ -7,7 +7,8 @@ final womensHealthRepositoryProvider = Provider<WomensHealthRepository>((ref) {
   return WomensHealthRepository();
 });
 
-final womensHealthProfileProvider = FutureProvider.autoDispose<WomensHealthProfile>((ref) async {
+final womensHealthProfileProvider =
+    FutureProvider.autoDispose<WomensHealthProfile>((ref) async {
   final repo = ref.watch(womensHealthRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);
 

@@ -33,7 +33,8 @@ class ActivityRings extends StatefulWidget {
   State<ActivityRings> createState() => _ActivityRingsState();
 }
 
-class _ActivityRingsState extends State<ActivityRings> with SingleTickerProviderStateMixin {
+class _ActivityRingsState extends State<ActivityRings>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 

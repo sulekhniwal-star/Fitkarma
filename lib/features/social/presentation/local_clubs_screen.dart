@@ -34,7 +34,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showClubPhilosophyModal(context),
           ),
         ],
@@ -50,7 +51,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
 
             // 2. Section Header
             BilingualLabel(
-              primaryText: 'Clubs within ${state.selectedRadiusKm.toInt()} km (${displayedClubs.length} active)',
+              primaryText:
+                  'Clubs within ${state.selectedRadiusKm.toInt()} km (${displayedClubs.length} active)',
               regionalText: 'निकटवर्ती सक्रिय साधना क्लब',
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -89,7 +91,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.my_location, color: AppColors.karmaGreen, size: 20),
+              const Icon(Icons.my_location,
+                  color: AppColors.karmaGreen, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 state.userCurrentLocationLabel,
@@ -103,7 +106,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Filter by Walking & Commuting Radius:',
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: 6),
           Row(
@@ -116,8 +120,10 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                   label: Text(
                     '${radius.toInt()} km',
                     style: AppTypography.metricLabel.copyWith(
-                      color: isSelected ? Colors.black : AppColors.textSecondary,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      color:
+                          isSelected ? Colors.black : AppColors.textSecondary,
+                      fontWeight:
+                          isSelected ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
                   selected: isSelected,
@@ -125,7 +131,9 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                   backgroundColor: AppColors.surfaceElevated,
                   onSelected: (selected) {
                     if (selected) {
-                      ref.read(localClubsProvider.notifier).updateRadius(radius);
+                      ref
+                          .read(localClubsProvider.notifier)
+                          .updateRadius(radius);
                     }
                   },
                 ),
@@ -137,7 +145,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildClubBentoCard(BuildContext context, WidgetRef ref, LocalGeoClub club) {
+  Widget _buildClubBentoCard(
+      BuildContext context, WidgetRef ref, LocalGeoClub club) {
     final actColor = Color(club.primaryActivity.colorCode);
 
     return BentoCard(
@@ -151,7 +160,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
                       color: actColor.withValues(alpha: 0.15),
                       borderRadius: AppRadii.radiusFull,
@@ -167,7 +177,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                   ),
                   const SizedBox(width: 6),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: const BoxDecoration(
                       color: AppColors.surfaceElevated,
                       borderRadius: AppRadii.radiusFull,
@@ -188,17 +199,24 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                   backgroundColor: club.isUserJoined
                       ? AppColors.surfaceElevated
                       : AppColors.karmaGreen,
-                  foregroundColor: club.isUserJoined ? AppColors.textSecondary : Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  foregroundColor: club.isUserJoined
+                      ? AppColors.textSecondary
+                      : Colors.black,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                onPressed: () => ref.read(localClubsProvider.notifier).toggleJoinClub(club.id),
+                onPressed: () => ref
+                    .read(localClubsProvider.notifier)
+                    .toggleJoinClub(club.id),
                 child: Text(
                   club.isUserJoined ? 'Joined' : 'Join Club',
                   style: AppTypography.metricLabel.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: club.isUserJoined ? AppColors.textSecondary : Colors.black,
+                    color: club.isUserJoined
+                        ? AppColors.textSecondary
+                        : Colors.black,
                   ),
                 ),
               ),
@@ -216,23 +234,27 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                   children: [
                     Text(
                       club.name,
-                      style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                      style: AppTypography.titleLarge
+                          .copyWith(color: AppColors.textPrimary),
                     ),
                     Text(
                       '${club.landmarkArea}, ${club.city}',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 12),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted, fontSize: 12),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '${club.activeMembersCount} neighbors practicing together weekly.',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ],
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
               GlowingMetric(
-                value: '${(club.weeklyCollectiveSteps / 1000000).toStringAsFixed(1)}M',
+                value:
+                    '${(club.weeklyCollectiveSteps / 1000000).toStringAsFixed(1)}M',
                 label: 'Weekly Steps',
                 accentColor: actColor,
               ),
@@ -257,7 +279,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.event, color: AppColors.gold, size: 16),
+                          const Icon(Icons.event,
+                              color: AppColors.gold, size: 16),
                           const SizedBox(width: 4),
                           Text(
                             'Next Physical Meetup',
@@ -287,7 +310,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                   ),
                   Text(
                     '📍 ${club.nextMeetup!.venueName}',
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textSecondary, fontSize: 11),
                   ),
                   const SizedBox(height: 6),
                   Row(
@@ -295,7 +319,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                     children: [
                       Text(
                         'Led by ${club.nextMeetup!.organizerName}',
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 10),
+                        style: AppTypography.bodySmall
+                            .copyWith(color: AppColors.textMuted, fontSize: 10),
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -305,16 +330,21 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                           foregroundColor: club.nextMeetup!.isUserRsvpd
                               ? AppColors.karmaGreen
                               : AppColors.textPrimary,
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        onPressed: () => ref.read(localClubsProvider.notifier).toggleMeetupRsvp(
+                        onPressed: () => ref
+                            .read(localClubsProvider.notifier)
+                            .toggleMeetupRsvp(
                               club.id,
                               club.nextMeetup!.id,
                             ),
                         child: Text(
-                          club.nextMeetup!.isUserRsvpd ? 'RSVP Confirmed ✓' : 'RSVP for Meetup',
+                          club.nextMeetup!.isUserRsvpd
+                              ? 'RSVP Confirmed ✓'
+                              : 'RSVP for Meetup',
                           style: AppTypography.metricLabel.copyWith(
                             color: club.nextMeetup!.isUserRsvpd
                                 ? AppColors.karmaGreen
@@ -349,7 +379,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: AppColors.aiPurple.withValues(alpha: 0.2),
-            child: const Icon(Icons.add_location_alt, color: AppColors.aiPurple, size: 22),
+            child: const Icon(Icons.add_location_alt,
+                color: AppColors.aiPurple, size: 22),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -365,7 +396,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                 ),
                 Text(
                   'Organize a weekend morning Shatpawali or calisthenics circle at your local park. Earn +100 Organizer Karma.',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary, fontSize: 11),
                 ),
               ],
             ),
@@ -391,7 +423,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
             children: [
               Text(
                 'Local Geolocation Clubs (Kshetra)',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -399,7 +432,8 @@ class LocalGeolocationClubsScreen extends ConsumerWidget {
                 '• Real-world morning meetups for Shatpawali, Calisthenics, and Running.\n'
                 '• Geofenced check-in bonuses (+25 Karma) for attending park sadhanas.\n'
                 '• Safe, community-moderated spaces to meet fellow practitioners.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

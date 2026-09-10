@@ -36,7 +36,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showCommunityPhilosophyModal(context),
           ),
         ],
@@ -62,14 +63,20 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                   label: Text(
                     'Joined Only',
                     style: AppTypography.metricLabel.copyWith(
-                      color: state.showJoinedOnly ? Colors.black : AppColors.textSecondary,
-                      fontWeight: state.showJoinedOnly ? FontWeight.bold : FontWeight.normal,
+                      color: state.showJoinedOnly
+                          ? Colors.black
+                          : AppColors.textSecondary,
+                      fontWeight: state.showJoinedOnly
+                          ? FontWeight.bold
+                          : FontWeight.normal,
                     ),
                   ),
                   selected: state.showJoinedOnly,
                   selectedColor: AppColors.karmaGreen,
                   backgroundColor: AppColors.surfaceElevated,
-                  onSelected: (val) => ref.read(communitiesProvider.notifier).toggleJoinedOnly(val),
+                  onSelected: (val) => ref
+                      .read(communitiesProvider.notifier)
+                      .toggleJoinedOnly(val),
                 ),
               ],
             ),
@@ -98,8 +105,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategoryFilterRow(
-      BuildContext context, WidgetRef ref, CommunityCategory? selectedCategory) {
+  Widget _buildCategoryFilterRow(BuildContext context, WidgetRef ref,
+      CommunityCategory? selectedCategory) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -120,7 +127,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
               selected: isSelected,
               selectedColor: color,
               backgroundColor: AppColors.surfaceElevated,
-              onSelected: (_) => ref.read(communitiesProvider.notifier).selectCategory(cat),
+              onSelected: (_) =>
+                  ref.read(communitiesProvider.notifier).selectCategory(cat),
             ),
           );
         }).toList(),
@@ -141,7 +149,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: catColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusFull,
@@ -163,16 +172,21 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                   foregroundColor: community.isUserJoined
                       ? AppColors.textSecondary
                       : Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                onPressed: () => ref.read(communitiesProvider.notifier).toggleJoinCommunity(community.id),
+                onPressed: () => ref
+                    .read(communitiesProvider.notifier)
+                    .toggleJoinCommunity(community.id),
                 child: Text(
                   community.isUserJoined ? 'Joined' : 'Join Mandala',
                   style: AppTypography.metricLabel.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: community.isUserJoined ? AppColors.textSecondary : Colors.black,
+                    color: community.isUserJoined
+                        ? AppColors.textSecondary
+                        : Colors.black,
                   ),
                 ),
               ),
@@ -190,11 +204,13 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                   children: [
                     Text(
                       community.name,
-                      style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                      style: AppTypography.titleLarge
+                          .copyWith(color: AppColors.textPrimary),
                     ),
                     Text(
                       community.regionalName,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 12),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted, fontSize: 12),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -229,7 +245,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                 CircleAvatar(
                   radius: 18,
                   backgroundColor: AppColors.focusBlue.withValues(alpha: 0.15),
-                  child: const Icon(Icons.verified, color: AppColors.focusBlue, size: 18),
+                  child: const Icon(Icons.verified,
+                      color: AppColors.focusBlue, size: 18),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
@@ -245,7 +262,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                       ),
                       Text(
                         community.leadMentor.title,
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        style: AppTypography.bodySmall
+                            .copyWith(color: AppColors.textMuted, fontSize: 11),
                       ),
                     ],
                   ),
@@ -266,7 +284,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
           if (community.activeThreads.isNotEmpty) ...[
             Text(
               'Featured Community Discussion',
-              style: AppTypography.metricLabel.copyWith(color: AppColors.focusBlue, fontWeight: FontWeight.bold),
+              style: AppTypography.metricLabel.copyWith(
+                  color: AppColors.focusBlue, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             ...community.activeThreads.map((t) => Container(
@@ -294,7 +313,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                           ),
                           Text(
                             '${t.upvotesCount} Upvotes',
-                            style: AppTypography.metricLabel.copyWith(color: AppColors.karmaGreen, fontSize: 10),
+                            style: AppTypography.metricLabel.copyWith(
+                                color: AppColors.karmaGreen, fontSize: 10),
                           ),
                         ],
                       ),
@@ -302,7 +322,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                         const SizedBox(height: 4),
                         Text(
                           t.topAnswerSnippet!,
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary, fontSize: 11),
                         ),
                       ],
                     ],
@@ -319,7 +340,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                 const SizedBox(width: 6),
                 Text(
                   'Knowledge Vault: ${community.knowledgeVault.first.title} (${community.knowledgeVault.first.durationOrPages})',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.gold, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.gold, fontSize: 11),
                 ),
               ],
             ),
@@ -345,7 +367,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
             children: [
               Text(
                 'Accountability Communities (Mandalas)',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -353,7 +376,8 @@ class AccountabilityCommunitiesScreen extends ConsumerWidget {
                 '• Guided by verified Ayurvedic Doctors & CSCS Coaches.\n'
                 '• Free of misinformation and aggressive marketing.\n'
                 '• Community Pulse Index aggregates member adherence to prove real-world outcomes.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

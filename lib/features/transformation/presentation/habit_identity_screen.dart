@@ -30,7 +30,8 @@ class HabitIdentityScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showBehaviorScienceModal(context),
           ),
         ],
@@ -97,7 +98,8 @@ class HabitIdentityScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusFull,
@@ -119,7 +121,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: const BoxDecoration(
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusFull,
@@ -144,7 +147,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Identity Fusion Index',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -157,7 +161,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       stage.description,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -192,11 +197,13 @@ class HabitIdentityScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.psychology, color: AppColors.focusBlue, size: 20),
+              const Icon(Icons.psychology,
+                  color: AppColors.focusBlue, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Chosen Swadharma Archetype',
-                style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
             ],
           ),
@@ -212,8 +219,10 @@ class HabitIdentityScreen extends ConsumerWidget {
                     label: Text(
                       archetype.title.split('(')[0].trim(),
                       style: AppTypography.metricLabel.copyWith(
-                        color: isSelected ? Colors.black : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.black : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
                     selected: isSelected,
@@ -221,7 +230,9 @@ class HabitIdentityScreen extends ConsumerWidget {
                     backgroundColor: AppColors.surfaceElevated,
                     onSelected: (selected) {
                       if (selected) {
-                        ref.read(habitIdentityProvider.notifier).switchArchetype(archetype);
+                        ref
+                            .read(habitIdentityProvider.notifier)
+                            .switchArchetype(archetype);
                       }
                     },
                   ),
@@ -241,7 +252,8 @@ class HabitIdentityScreen extends ConsumerWidget {
               children: [
                 Text(
                   'Core Mantra:',
-                  style: AppTypography.metricLabel.copyWith(color: AppColors.karmaGreen),
+                  style: AppTypography.metricLabel
+                      .copyWith(color: AppColors.karmaGreen),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -326,7 +338,8 @@ class HabitIdentityScreen extends ConsumerWidget {
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Habit Automaticity & Cognitive Friction',
-                style: AppTypography.titleMedium.copyWith(color: AppColors.energyOrange),
+                style: AppTypography.titleMedium
+                    .copyWith(color: AppColors.energyOrange),
               ),
             ],
           ),
@@ -342,7 +355,9 @@ class HabitIdentityScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Automaticity Index', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Automaticity Index',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     '${report.habitAutomaticityIndex.toStringAsFixed(1)}%',
                     style: AppTypography.displayMedium.copyWith(
@@ -355,7 +370,9 @@ class HabitIdentityScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Mental Friction Reduction', style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted)),
+                  Text('Mental Friction Reduction',
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textMuted)),
                   Text(
                     '-${report.cognitiveFrictionReductionPercent.toStringAsFixed(0)}% effort',
                     style: AppTypography.displayMedium.copyWith(
@@ -373,7 +390,8 @@ class HabitIdentityScreen extends ConsumerWidget {
             child: LinearProgressIndicator(
               value: (report.habitAutomaticityIndex / 100.0).clamp(0.0, 1.0),
               backgroundColor: AppColors.surfaceElevated,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.energyOrange),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(AppColors.energyOrange),
               minHeight: 6,
             ),
           ),
@@ -417,7 +435,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                   child: LinearProgressIndicator(
                     value: (tally.percentageShare / 100.0).clamp(0.0, 1.0),
                     backgroundColor: AppColors.surfaceElevated,
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.karmaGreen),
                     minHeight: 5,
                   ),
                 ),
@@ -442,7 +461,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                 const CircleAvatar(
                   radius: 14,
                   backgroundColor: AppColors.surfaceElevated,
-                  child: Icon(Icons.how_to_vote, color: AppColors.focusBlue, size: 14),
+                  child: Icon(Icons.how_to_vote,
+                      color: AppColors.focusBlue, size: 14),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
@@ -467,7 +487,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.focusBlue.withValues(alpha: 0.12),
                     borderRadius: AppRadii.radiusFull,
@@ -504,7 +525,8 @@ class HabitIdentityScreen extends ConsumerWidget {
             children: [
               Text(
                 'Identity-Based Habit Science',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -512,7 +534,8 @@ class HabitIdentityScreen extends ConsumerWidget {
                 '• Outcome habits say: "I want to finish 10k steps."\n'
                 '• Identity habits say: "I am an active practitioner who moves every day."\n\n'
                 'Every time you complete Shatpawali or a workout, you cast an undeniable vote for your chosen athlete identity, permanently lowering mental resistance.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

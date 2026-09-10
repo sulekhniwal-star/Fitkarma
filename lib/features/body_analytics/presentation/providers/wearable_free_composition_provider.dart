@@ -3,15 +3,17 @@ import '../../domain/body_analytics_models.dart';
 import '../../domain/wearable_free_composition_engine.dart';
 import '../../domain/wearable_free_composition_models.dart';
 
-final wearableFreeCompositionProvider =
-    StateNotifierProvider<WearableFreeCompositionNotifier, WearableFreeCompositionReport>((ref) {
+final wearableFreeCompositionProvider = StateNotifierProvider<
+    WearableFreeCompositionNotifier, WearableFreeCompositionReport>((ref) {
   return WearableFreeCompositionNotifier();
 });
 
-class WearableFreeCompositionNotifier extends StateNotifier<WearableFreeCompositionReport> {
+class WearableFreeCompositionNotifier
+    extends StateNotifier<WearableFreeCompositionReport> {
   WearableFreeCompositionNotifier() : super(_buildInitialReport());
 
-  static final WearableFreeCompositionEngine _engine = const WearableFreeCompositionEngine();
+  static final WearableFreeCompositionEngine _engine =
+      const WearableFreeCompositionEngine();
 
   static WearableFreeCompositionReport _buildInitialReport() {
     return _engine.computeWearableFreeComposition(

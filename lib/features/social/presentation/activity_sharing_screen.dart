@@ -40,7 +40,8 @@ class ActivitySharingScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSharingPhilosophyModal(context),
           ),
         ],
@@ -108,7 +109,9 @@ class ActivitySharingScreen extends ConsumerWidget {
               backgroundColor: AppColors.surfaceElevated,
               onSelected: (selected) {
                 if (selected) {
-                  ref.read(activitySharingProvider.notifier).selectPayload(item);
+                  ref
+                      .read(activitySharingProvider.notifier)
+                      .selectPayload(item);
                 }
               },
             ),
@@ -118,8 +121,8 @@ class ActivitySharingScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStoryCardCanvas(
-      ShareableActivityPayload payload, Color primaryColor, Color secondaryColor) {
+  Widget _buildStoryCardCanvas(ShareableActivityPayload payload,
+      Color primaryColor, Color secondaryColor) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -134,7 +137,8 @@ class ActivitySharingScreen extends ConsumerWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: AppRadii.radiusXl,
-        border: Border.all(color: primaryColor.withValues(alpha: 0.5), width: 1.5),
+        border:
+            Border.all(color: primaryColor.withValues(alpha: 0.5), width: 1.5),
         boxShadow: [
           BoxShadow(
             color: primaryColor.withValues(alpha: 0.15),
@@ -155,7 +159,8 @@ class ActivitySharingScreen extends ConsumerWidget {
                   CircleAvatar(
                     radius: 12,
                     backgroundColor: primaryColor,
-                    child: const Icon(Icons.bolt, color: Colors.black, size: 14),
+                    child:
+                        const Icon(Icons.bolt, color: Colors.black, size: 14),
                   ),
                   const SizedBox(width: 6),
                   Text(
@@ -207,11 +212,13 @@ class ActivitySharingScreen extends ConsumerWidget {
           // Headline & Regional Headline
           Text(
             payload.headline,
-            style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+            style:
+                AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
           ),
           Text(
             payload.regionalHeadline,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 12),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 12),
           ),
           const SizedBox(height: AppSpacing.sm),
 
@@ -224,7 +231,8 @@ class ActivitySharingScreen extends ConsumerWidget {
 
           // Verified Biometric Footer Pill
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm, vertical: 4),
             decoration: BoxDecoration(
               color: AppColors.surface.withValues(alpha: 0.6),
               borderRadius: AppRadii.radiusFull,
@@ -232,7 +240,8 @@ class ActivitySharingScreen extends ConsumerWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.verified, color: AppColors.karmaGreen, size: 14),
+                const Icon(Icons.verified,
+                    color: AppColors.karmaGreen, size: 14),
                 const SizedBox(width: 4),
                 Text(
                   'Verified via ${payload.verificationSource}',
@@ -256,7 +265,8 @@ class ActivitySharingScreen extends ConsumerWidget {
         children: [
           Text(
             'Story Card Theme Palette',
-            style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+            style: AppTypography.titleMedium
+                .copyWith(color: AppColors.textPrimary),
           ),
           const SizedBox(height: AppSpacing.sm),
           SingleChildScrollView(
@@ -273,8 +283,10 @@ class ActivitySharingScreen extends ConsumerWidget {
                     label: Text(
                       t.name.split('(')[0].trim(),
                       style: AppTypography.metricLabel.copyWith(
-                        color: isSelected ? Colors.black : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.black : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
                     selected: isSelected,
@@ -282,7 +294,9 @@ class ActivitySharingScreen extends ConsumerWidget {
                     backgroundColor: AppColors.surfaceElevated,
                     onSelected: (selected) {
                       if (selected) {
-                        ref.read(activitySharingProvider.notifier).switchCardTheme(t);
+                        ref
+                            .read(activitySharingProvider.notifier)
+                            .switchCardTheme(t);
                       }
                     },
                   ),
@@ -382,13 +396,18 @@ class ActivitySharingScreen extends ConsumerWidget {
         ),
       ),
       onPressed: () {
-        ref.read(activitySharingProvider.notifier).recordShareBroadcast(channel);
-        final formattedText = ActivitySharingEngine.generateShareableTextPayload(payload: payload);
+        ref
+            .read(activitySharingProvider.notifier)
+            .recordShareBroadcast(channel);
+        final formattedText =
+            ActivitySharingEngine.generateShareableTextPayload(
+                payload: payload);
         Clipboard.setData(ClipboardData(text: formattedText));
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${channel.label.split('(')[0].trim()} Payload copied (+15 Karma awarded)!'),
+            content: Text(
+                '${channel.label.split('(')[0].trim()} Payload copied (+15 Karma awarded)!'),
             backgroundColor: AppColors.karmaGreen,
           ),
         );
@@ -396,7 +415,8 @@ class ActivitySharingScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildViralContagionBento(ActivitySharingState state, double viralScore) {
+  Widget _buildViralContagionBento(
+      ActivitySharingState state, double viralScore) {
     return BentoCard(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -406,12 +426,14 @@ class ActivitySharingScreen extends ConsumerWidget {
             children: [
               Text(
                 'Positive Social Contagion',
-                style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: 2),
               Text(
                 '${state.totalSharesCount} Milestone Broadcasts • +${state.totalShareBonusKarmaEarned} Bonus Karma',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textMuted, fontSize: 11),
               ),
             ],
           ),
@@ -441,7 +463,8 @@ class ActivitySharingScreen extends ConsumerWidget {
             children: [
               Text(
                 'FitKarma Social Sharing Philosophy',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -449,7 +472,8 @@ class ActivitySharingScreen extends ConsumerWidget {
                 '• Verified Biometric Badges: Only authentic Apple Health or Computer Vision PRs can be broadcast.\n'
                 '• Multi-Channel Export: Beautiful WhatsApp Status & Instagram Story canvas exports.\n'
                 '• Earn Karma Bonuses: Radiating positive health habits to friends and family rewards you with community Karma.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

@@ -75,12 +75,14 @@ class FestivalIntelligenceEngine {
       postFestivalResetProtocol: resetProtocol,
       mindfulFeastingTip: tip,
       regionalMindfulFeastingTip: regTip,
-      aiCoachToneOverride: 'Festive Harmony, Cultural Celebration & Non-Guilt Mindset',
+      aiCoachToneOverride:
+          'Festive Harmony, Cultural Celebration & Non-Guilt Mindset',
       generatedAt: now,
     );
   }
 
-  List<PillarAdaptationStrategy> _buildPillarStrategies(IndianFestival festival, int calorieDelta) {
+  List<PillarAdaptationStrategy> _buildPillarStrategies(
+      IndianFestival festival, int calorieDelta) {
     if (festival.isFastingCentric) {
       return [
         const PillarAdaptationStrategy(
@@ -91,7 +93,8 @@ class FestivalIntelligenceEngine {
               'Shift high-load resistance training to post-prandial evening hours. Prioritize restorative pranayama and Garba/Dandiya step counting during Navratri.',
           regionalDetailedProtocol:
               'भारी व्यायाम के स्थान पर शाम को फलाहार उपरांत योग करें। गरबा/डांडिया के माध्यम से सक्रिय रहें।',
-          keyMetricAdjustment: 'Daily Step Goal: 10,000+ via festive dance / evening walk',
+          keyMetricAdjustment:
+              'Daily Step Goal: 10,000+ via festive dance / evening walk',
         ),
         PillarAdaptationStrategy(
           pillarName: 'Satvik Vrat Nutrition',
@@ -101,7 +104,8 @@ class FestivalIntelligenceEngine {
               'Incorporate Kuttu (Buckwheat), Samak rice, Makhana, roasted peanuts, and curd. Avoid excessive deep-fried potato chips; maintain optimal protein density.',
           regionalDetailedProtocol:
               'कुट्टू, समा के चावल, मखाना, मूंगफली व दही का सेवन करें। तले हुए चिप्स से बचें व प्रोटीन संतुलित रखें।',
-          keyMetricAdjustment: 'Calorie Target: ${calorieDelta > 0 ? "+$calorieDelta" : calorieDelta} kcal',
+          keyMetricAdjustment:
+              'Calorie Target: ${calorieDelta > 0 ? "+$calorieDelta" : calorieDelta} kcal',
         ),
         const PillarAdaptationStrategy(
           pillarName: 'Electrolyte & Hydration',
@@ -121,7 +125,8 @@ class FestivalIntelligenceEngine {
               'Compensate for late-night Aarti or Suhoor/Taraweeh with a disciplined 20-minute afternoon Yoga Nidra session to sustain cellular repair.',
           regionalDetailedProtocol:
               'देर रात की प्रार्थना के प्रभाव को संतुलित करने हेतु दोपहर में २० मिनट योग निद्रा करें।',
-          keyMetricAdjustment: 'Sleep Target: 7.5h split (Night + Afternoon Rest)',
+          keyMetricAdjustment:
+              'Sleep Target: 7.5h split (Night + Afternoon Rest)',
         ),
       ];
     } else {
@@ -134,7 +139,8 @@ class FestivalIntelligenceEngine {
               'Execute concise 15-20 minute morning metabolic bodyweight/dumbbell supersets before guest arrivals to prime insulin sensitivity for the day.',
           regionalDetailedProtocol:
               'त्योहार की व्यस्तता से पूर्व सुबह १५-२० मिनट का संक्षिप्त व प्रभावी व्यायाम करें ताकि चयापचय सक्रिय रहे।',
-          keyMetricAdjustment: 'Workout Duration: 20 min high-efficiency circuit',
+          keyMetricAdjustment:
+              'Workout Duration: 20 min high-efficiency circuit',
         ),
         PillarAdaptationStrategy(
           pillarName: 'Festive Feasting Strategy',
@@ -144,7 +150,8 @@ class FestivalIntelligenceEngine {
               'Consume a bowl of raw salad or soaked methi water 15 minutes before festive meals. Always complete a 100-step Shatapadi walk after heavy dining.',
           regionalDetailedProtocol:
               'मिठाई व मुख्य भोजन से पूर्व सलाद या मेथी पानी लें। भोजन पश्चात १०० कदम शतपदी भ्रमण अवश्य करें।',
-          keyMetricAdjustment: 'Calorie Target: +$calorieDelta kcal festive buffer',
+          keyMetricAdjustment:
+              'Calorie Target: +$calorieDelta kcal festive buffer',
         ),
         const PillarAdaptationStrategy(
           pillarName: 'Ayurvedic Agni Protection',
@@ -154,7 +161,8 @@ class FestivalIntelligenceEngine {
               'Sip warm water infused with ginger, cumin (Jeera), and carom seeds (Ajwain) to sustain digestive fire and prevent Ama (metabolic endotoxins).',
           regionalDetailedProtocol:
               'अदरक, जीरा व अजवाइन युक्त गुनगुना पानी पिएं जिससे जठराग्नि प्रदीप्त रहे और भारी भोजन आसानी से पचे।',
-          keyMetricAdjustment: 'Digestive Tea: 2x daily after main festive meals',
+          keyMetricAdjustment:
+              'Digestive Tea: 2x daily after main festive meals',
         ),
         const PillarAdaptationStrategy(
           pillarName: 'Psychological Well-Being',
@@ -175,22 +183,28 @@ class FestivalIntelligenceEngine {
       const ResetProtocolDay(
         dayNumber: 1,
         focusTheme: 'Digestive Agni Reignition & Hydration',
-        dietaryProtocol: 'Light Moong Dal Soup, Lauki juice, warm water hydration, and zero refined sugar.',
+        dietaryProtocol:
+            'Light Moong Dal Soup, Lauki juice, warm water hydration, and zero refined sugar.',
         workoutProtocol: 'Restorative Hatha Yoga & 30-minute brisk walk.',
-        ayurvedicDigestiveRemedy: 'Triphala Churna (1 tsp) with warm water before bedtime.',
+        ayurvedicDigestiveRemedy:
+            'Triphala Churna (1 tsp) with warm water before bedtime.',
       ),
       const ResetProtocolDay(
         dayNumber: 2,
         focusTheme: 'Cellular Autophagy & Glycemic Normalization',
-        dietaryProtocol: 'Ayurvedic Green Moong & Rice Khichdi with a dash of A2 Cow Ghee and turmeric.',
+        dietaryProtocol:
+            'Ayurvedic Green Moong & Rice Khichdi with a dash of A2 Cow Ghee and turmeric.',
         workoutProtocol: 'Full-body moderate resistance training (45 minutes).',
-        ayurvedicDigestiveRemedy: 'Ginger-Coriander-Cumin (CCF) tea post-lunch.',
+        ayurvedicDigestiveRemedy:
+            'Ginger-Coriander-Cumin (CCF) tea post-lunch.',
       ),
       const ResetProtocolDay(
         dayNumber: 3,
         focusTheme: 'Peak Training Re-entry & Baseline Homeostasis',
-        dietaryProtocol: 'Return to standardized personalized macro target with 1.6g/kg protein distribution.',
-        workoutProtocol: 'Standard primary progressive overload training split.',
+        dietaryProtocol:
+            'Return to standardized personalized macro target with 1.6g/kg protein distribution.',
+        workoutProtocol:
+            'Standard primary progressive overload training split.',
         ayurvedicDigestiveRemedy: 'Amla juice with warm water in the morning.',
       ),
     ];

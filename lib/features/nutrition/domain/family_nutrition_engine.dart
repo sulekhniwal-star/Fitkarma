@@ -1,8 +1,20 @@
 enum FamilyMemberRole {
-  self(name: 'Self (Primary User)', regionalName: 'स्वयं', defaultGoal: 'Fat Loss & Muscle Retention'),
-  spouse(name: 'Spouse / Partner', regionalName: 'जीवनसाथी', defaultGoal: 'Lean Muscle & Energy'),
-  parent(name: 'Parent / Senior (Diabetic/BP Care)', regionalName: 'माता-पिता (मधुमेह / बीपी नियंत्रण)', defaultGoal: 'Low Glycemic & Low Sodium'),
-  child(name: 'Child / Teen (Growth & Sports)', regionalName: 'बच्चे / किशोर (विकास एवं ऊर्जा)', defaultGoal: 'High Protein & Micronutrients');
+  self(
+      name: 'Self (Primary User)',
+      regionalName: 'स्वयं',
+      defaultGoal: 'Fat Loss & Muscle Retention'),
+  spouse(
+      name: 'Spouse / Partner',
+      regionalName: 'जीवनसाथी',
+      defaultGoal: 'Lean Muscle & Energy'),
+  parent(
+      name: 'Parent / Senior (Diabetic/BP Care)',
+      regionalName: 'माता-पिता (मधुमेह / बीपी नियंत्रण)',
+      defaultGoal: 'Low Glycemic & Low Sodium'),
+  child(
+      name: 'Child / Teen (Growth & Sports)',
+      regionalName: 'बच्चे / किशोर (विकास एवं ऊर्जा)',
+      defaultGoal: 'High Protein & Micronutrients');
 
   final String name;
   final String regionalName;
@@ -107,13 +119,18 @@ class FamilyNutritionEngine {
       final servings = servingsPerMember[member.id] ?? 1.0;
       totalAllocated += servings;
 
-      final ratio = dish.totalYieldServings > 0 ? (servings / dish.totalYieldServings) : 0.25;
+      final ratio = dish.totalYieldServings > 0
+          ? (servings / dish.totalYieldServings)
+          : 0.25;
 
       final cal = (dish.totalPotCalories * ratio).round();
-      final prot = double.parse((dish.totalPotProtein * ratio).toStringAsFixed(1));
-      final carbs = double.parse((dish.totalPotCarbs * ratio).toStringAsFixed(1));
+      final prot =
+          double.parse((dish.totalPotProtein * ratio).toStringAsFixed(1));
+      final carbs =
+          double.parse((dish.totalPotCarbs * ratio).toStringAsFixed(1));
       final fats = double.parse((dish.totalPotFats * ratio).toStringAsFixed(1));
-      final fiber = double.parse((dish.totalPotFiber * ratio).toStringAsFixed(1));
+      final fiber =
+          double.parse((dish.totalPotFiber * ratio).toStringAsFixed(1));
 
       final tip = _generatePersonalizedTip(member.role, dish.dishName);
 
@@ -129,19 +146,22 @@ class FamilyNutritionEngine {
       ));
     }
 
-    final remaining = (dish.totalYieldServings - totalAllocated).round().clamp(0, 100);
+    final remaining =
+        (dish.totalYieldServings - totalAllocated).round().clamp(0, 100);
 
     return FamilyMealDecompositionReport(
       masterDish: dish,
       memberAllocations: allocations,
       totalServingsAllocated: totalAllocated.round(),
       remainingServingsInPot: remaining,
-      batchSynergySummary: 'Single pot of "${dish.dishName}" divided across ${familyMembers.length} family members. '
+      batchSynergySummary:
+          'Single pot of "${dish.dishName}" divided across ${familyMembers.length} family members. '
           'Saved ~45 minutes cooking time while maintaining individual goal compliance.',
     );
   }
 
-  static String _generatePersonalizedTip(FamilyMemberRole role, String dishName) {
+  static String _generatePersonalizedTip(
+      FamilyMemberRole role, String dishName) {
     switch (role) {
       case FamilyMemberRole.self:
         return 'Fat Loss Strategy: Eat salad first, take 1.5x portion of daal/sabzi, and limit to 1-2 rotis.';

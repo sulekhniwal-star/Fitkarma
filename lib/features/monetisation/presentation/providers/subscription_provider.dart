@@ -73,7 +73,8 @@ class SubscriptionNotifier extends StateNotifier<SubscriptionState> {
   Future<void> upgradeTier(SubscriptionTier targetTier) async {
     if (targetTier == state.entitlements.tier) return;
 
-    state = state.copyWith(isLoading: true, errorMessage: null, successMessage: null);
+    state = state.copyWith(
+        isLoading: true, errorMessage: null, successMessage: null);
 
     // Simulate verified server handshake
     await Future.delayed(const Duration(milliseconds: 300));
@@ -96,7 +97,8 @@ class SubscriptionNotifier extends StateNotifier<SubscriptionState> {
 
   /// Restores server-verified active subscription
   Future<void> restorePurchases() async {
-    state = state.copyWith(isLoading: true, errorMessage: null, successMessage: null);
+    state = state.copyWith(
+        isLoading: true, errorMessage: null, successMessage: null);
 
     await Future.delayed(const Duration(milliseconds: 250));
 
@@ -116,7 +118,8 @@ class SubscriptionNotifier extends StateNotifier<SubscriptionState> {
       status: state.entitlements.status,
       expiresAt: state.entitlements.expiresAt,
       willRenew: state.entitlements.willRenew,
-      originalPurchaseTransactionId: state.entitlements.originalPurchaseTransactionId,
+      originalPurchaseTransactionId:
+          state.entitlements.originalPurchaseTransactionId,
       dailyAiCallsUsed: state.entitlements.dailyAiCallsUsed + 1,
       lastQuotaResetDate: state.entitlements.lastQuotaResetDate,
       serverVerificationHash: state.entitlements.serverVerificationHash,

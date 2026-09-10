@@ -35,10 +35,12 @@ void main() {
       expect(report.pillarSummaries.length, equals(5));
       expect(report.topWins.isNotEmpty, isTrue);
       expect(report.nextMonthPriorities.isNotEmpty, isTrue);
-      expect(report.doctorSummaryParagraph, contains('PATIENT 30-DAY BIOMETRIC SUMMARY'));
+      expect(report.doctorSummaryParagraph,
+          contains('PATIENT 30-DAY BIOMETRIC SUMMARY'));
     });
 
-    test('Correctly identifies areas needing focus for compromised telemetry', () {
+    test('Correctly identifies areas needing focus for compromised telemetry',
+        () {
       final report = engine.generateMonthlyReport(
         monthTitle: 'July 2026',
         regionalMonthTitle: 'जुलाई २०२६',

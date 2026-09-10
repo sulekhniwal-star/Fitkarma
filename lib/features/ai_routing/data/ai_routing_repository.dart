@@ -22,7 +22,8 @@ class AiRoutingRepository {
         'messages': [
           {
             'role': 'system',
-            'content': 'You are FitKarma AI Health Coach. Provide actionable, concise advice for Indian fitness enthusiasts.',
+            'content':
+                'You are FitKarma AI Health Coach. Provide actionable, concise advice for Indian fitness enthusiasts.',
           },
           {
             'role': 'user',
@@ -32,7 +33,8 @@ class AiRoutingRepository {
       });
 
       final result = response.data;
-      if (result['response'] != null && (result['response'] as String).isNotEmpty) {
+      if (result['response'] != null &&
+          (result['response'] as String).isNotEmpty) {
         return result['response'] as String;
       }
     } catch (_) {

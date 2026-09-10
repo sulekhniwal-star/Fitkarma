@@ -6,7 +6,9 @@ void main() {
   group('TravelModeEngine Deterministic Tests', () {
     const engine = TravelModeEngine();
 
-    test('Generates flight transit plan with anti-edema and hydration protocols', () {
+    test(
+        'Generates flight transit plan with anti-edema and hydration protocols',
+        () {
       final report = engine.generateTravelPlan(
         context: TravelContext.flightTransit,
         destinationCityOrTimezone: 'Dubai / London',
@@ -19,13 +21,18 @@ void main() {
       expect(report.adaptedStepGoal, equals(6000));
       expect(report.hotelWorkoutDurationMinutes, equals(15));
       expect(report.activeTravelActions.length, equals(3));
-      expect(report.activeTravelActions.any((a) => a.title.contains('Viparita Karani')), isTrue);
+      expect(
+          report.activeTravelActions
+              .any((a) => a.title.contains('Viparita Karani')),
+          isTrue);
       expect(report.vataBalancingRitual, contains('Pada Abhyanga'));
       expect(report.regionalVataBalancingRitual, contains('पाद अभ्यंग'));
       expect(report.airportDhabaDiningTip, contains('Idli-Sambar'));
     });
 
-    test('Generates circadian sunlight timing for international long-haul jet lag', () {
+    test(
+        'Generates circadian sunlight timing for international long-haul jet lag',
+        () {
       final report = engine.generateTravelPlan(
         context: TravelContext.internationalJetLag,
         destinationCityOrTimezone: 'New York (EST)',
@@ -38,7 +45,8 @@ void main() {
       expect(report.adaptedStepGoal, equals(7000));
     });
 
-    test('Generates higher step and workout target for hotel with equipped gym', () {
+    test('Generates higher step and workout target for hotel with equipped gym',
+        () {
       final report = engine.generateTravelPlan(
         context: TravelContext.hotelWithGym,
         destinationCityOrTimezone: 'Bengaluru (IST)',

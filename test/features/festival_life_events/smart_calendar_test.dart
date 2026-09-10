@@ -8,9 +8,11 @@ void main() {
     const engine = SmartCalendarEngine();
     final testDate = DateTime(2026, 9, 9);
 
-    test('Corporate day schedule calculates meeting hours and cognitive load', () {
+    test('Corporate day schedule calculates meeting hours and cognitive load',
+        () {
       final sampleEvents = SmartCalendarEngine.sampleCorporateDay(testDate);
-      final report = engine.generateSchedulePlan(targetDate: testDate, events: sampleEvents);
+      final report = engine.generateSchedulePlan(
+          targetDate: testDate, events: sampleEvents);
 
       expect(report.scheduledEvents.length, equals(4));
       expect(report.totalMeetingHours, greaterThan(4.0));
@@ -25,21 +27,24 @@ void main() {
         CalendarEventBlock(
           eventId: 'evt_morning',
           title: 'Morning Sync',
-          startTime: DateTime(testDate.year, testDate.month, testDate.day, 10, 0),
+          startTime:
+              DateTime(testDate.year, testDate.month, testDate.day, 10, 0),
           endTime: DateTime(testDate.year, testDate.month, testDate.day, 12, 0),
           type: CalendarEventType.routineWorkBlock,
         ),
         CalendarEventBlock(
           eventId: 'evt_afternoon',
           title: 'Afternoon Client Pitch',
-          startTime: DateTime(testDate.year, testDate.month, testDate.day, 14, 30),
+          startTime:
+              DateTime(testDate.year, testDate.month, testDate.day, 14, 30),
           endTime: DateTime(testDate.year, testDate.month, testDate.day, 16, 0),
           type: CalendarEventType.highStressMeeting,
         ),
       ];
 
-      final report = engine.generateSchedulePlan(targetDate: testDate, events: events);
-      
+      final report =
+          engine.generateSchedulePlan(targetDate: testDate, events: events);
+
       // Should find a lunchtime gap with Shatapadi
       final shatapadiSlot = report.suggestedSlots.firstWhere(
         (s) => s.activityName.contains('Shatapadi'),
@@ -50,45 +55,55 @@ void main() {
       expect(shatapadiSlot.regionalActivityName, contains('शतपावली'));
     });
 
-    test('High cognitive stress day switches recommended workout to restorative pacing', () {
+    test(
+        'High cognitive stress day switches recommended workout to restorative pacing',
+        () {
       final highStressEvents = [
         CalendarEventBlock(
           eventId: 'evt_1',
           title: 'Board Meeting',
-          startTime: DateTime(testDate.year, testDate.month, testDate.day, 9, 0),
+          startTime:
+              DateTime(testDate.year, testDate.month, testDate.day, 9, 0),
           endTime: DateTime(testDate.year, testDate.month, testDate.day, 12, 0),
           type: CalendarEventType.highStressMeeting,
         ),
         CalendarEventBlock(
           eventId: 'evt_2',
           title: 'Client Negotiation',
-          startTime: DateTime(testDate.year, testDate.month, testDate.day, 13, 0),
+          startTime:
+              DateTime(testDate.year, testDate.month, testDate.day, 13, 0),
           endTime: DateTime(testDate.year, testDate.month, testDate.day, 16, 0),
           type: CalendarEventType.highStressMeeting,
         ),
         CalendarEventBlock(
           eventId: 'evt_3',
           title: 'Crisis Management',
-          startTime: DateTime(testDate.year, testDate.month, testDate.day, 16, 30),
+          startTime:
+              DateTime(testDate.year, testDate.month, testDate.day, 16, 30),
           endTime: DateTime(testDate.year, testDate.month, testDate.day, 19, 0),
           type: CalendarEventType.highStressMeeting,
         ),
       ];
 
-      final report = engine.generateSchedulePlan(targetDate: testDate, events: highStressEvents);
+      final report = engine.generateSchedulePlan(
+          targetDate: testDate, events: highStressEvents);
 
       expect(report.isHighCognitiveBurnoutDay, isTrue);
       expect(report.recommendedWorkoutPacing, contains('Restorative Yoga'));
     });
 
-    test('Empty day schedule returns zero meetings and active hypertrophy pacing', () {
-      final report = engine.generateSchedulePlan(targetDate: testDate, events: const []);
+    test(
+        'Empty day schedule returns zero meetings and active hypertrophy pacing',
+        () {
+      final report =
+          engine.generateSchedulePlan(targetDate: testDate, events: const []);
 
       expect(report.scheduledEvents.isEmpty, isTrue);
       expect(report.totalMeetingHours, equals(0.0));
       expect(report.totalCognitiveLoadScore, equals(0.0));
       expect(report.isHighCognitiveBurnoutDay, isFalse);
-      expect(report.recommendedWorkoutPacing, contains('High Intensity Strength'));
+      expect(
+          report.recommendedWorkoutPacing, contains('High Intensity Strength'));
     });
   });
 

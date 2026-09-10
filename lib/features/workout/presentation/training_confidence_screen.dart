@@ -14,10 +14,12 @@ class TrainingConfidenceScreen extends ConsumerStatefulWidget {
   const TrainingConfidenceScreen({super.key});
 
   @override
-  ConsumerState<TrainingConfidenceScreen> createState() => _TrainingConfidenceScreenState();
+  ConsumerState<TrainingConfidenceScreen> createState() =>
+      _TrainingConfidenceScreenState();
 }
 
-class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScreen> {
+class _TrainingConfidenceScreenState
+    extends ConsumerState<TrainingConfidenceScreen> {
   bool _isLiveLogged = true;
   final double _readinessScore = 87.0;
 
@@ -64,24 +66,33 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                           regionalText: report.tier.regionalLabel,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: tierColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: tierColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: tierColor.withValues(alpha: 0.4)),
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.shield_rounded, color: tierColor, size: 14),
+                              Icon(Icons.shield_rounded,
+                                  color: tierColor, size: 14),
                               const SizedBox(width: 4),
                               Text(
                                 report.tier.grade,
-                                style: TextStyle(color: tierColor, fontSize: 13, fontWeight: FontWeight.w900),
+                                style: TextStyle(
+                                    color: tierColor,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w900),
                               ),
                               const SizedBox(width: 4),
                               Text(
                                 '• ${report.tier.label.split('/')[0].trim().toUpperCase()}',
-                                style: TextStyle(color: tierColor, fontSize: 9, fontWeight: FontWeight.w800),
+                                style: TextStyle(
+                                    color: tierColor,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ],
                           ),
@@ -134,7 +145,10 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                   contentPadding: EdgeInsets.zero,
                   title: const Text(
                     'Real-Time In-Gym Stopwatch Logging',
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: AppColors.textPrimary),
                   ),
                   subtitle: const Text(
                     'Live set completion tracking prevents post-workout RPE memory decay (-35% uncertainty)',
@@ -163,7 +177,11 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                 final double scoreFrac = (pillar.score / 100.0).clamp(0.0, 1.0);
                 final Color pillarColor = pillar.score >= 80
                     ? AppColors.karmaGreen
-                    : (pillar.score >= 60 ? AppColors.focusBlue : (pillar.score >= 40 ? AppColors.gold : AppColors.alertRed));
+                    : (pillar.score >= 60
+                        ? AppColors.focusBlue
+                        : (pillar.score >= 40
+                            ? AppColors.gold
+                            : AppColors.alertRed));
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
@@ -183,25 +201,34 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                                     children: [
                                       Text(
                                         pillar.name,
-                                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 13,
+                                            color: AppColors.textPrimary),
                                       ),
                                       const SizedBox(width: 6),
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 1),
                                         decoration: const BoxDecoration(
                                           color: AppColors.surface,
                                           borderRadius: AppRadii.radiusSm,
                                         ),
                                         child: Text(
                                           '${(pillar.weight * 100).toInt()}% wt',
-                                          style: const TextStyle(fontSize: 9, color: AppColors.textMuted, fontWeight: FontWeight.w600),
+                                          style: const TextStyle(
+                                              fontSize: 9,
+                                              color: AppColors.textMuted,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Text(
                                     pillar.regionalName,
-                                    style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textMuted),
                                   ),
                                 ],
                               ),
@@ -211,11 +238,17 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                               children: [
                                 Text(
                                   '${pillar.score.round()}%',
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: pillarColor),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w800,
+                                      color: pillarColor),
                                 ),
                                 Text(
                                   pillar.status,
-                                  style: TextStyle(fontSize: 10, color: pillarColor, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: pillarColor,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -227,25 +260,33 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                           child: LinearProgressIndicator(
                             value: scoreFrac,
                             backgroundColor: AppColors.surface,
-                            valueColor: AlwaysStoppedAnimation<Color>(pillarColor),
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(pillarColor),
                             minHeight: 6,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           pillar.diagnosticDetail,
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 11,
+                              height: 1.3),
                         ),
                         const SizedBox(height: 4),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.bolt_rounded, color: AppColors.gold, size: 14),
+                            const Icon(Icons.bolt_rounded,
+                                color: AppColors.gold, size: 14),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
                                 pillar.optimizationGuidance,
-                                style: const TextStyle(color: AppColors.gold, fontSize: 11, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    color: AppColors.gold,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],
@@ -277,12 +318,14 @@ class _TrainingConfidenceScreenState extends ConsumerState<TrainingConfidenceScr
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.verified_user_rounded, color: AppColors.focusBlue, size: 16),
+                        const Icon(Icons.verified_user_rounded,
+                            color: AppColors.focusBlue, size: 16),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             calib,
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.3),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary, height: 1.3),
                           ),
                         ),
                       ],

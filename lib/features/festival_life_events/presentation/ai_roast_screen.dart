@@ -30,7 +30,8 @@ class AiRoastScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSafetyGuidelinesModal(context),
           ),
         ],
@@ -54,15 +55,18 @@ class AiRoastScreen extends ConsumerWidget {
                     label: Text(
                       p.name.split('(').first.trim(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color:
+                            isSelected ? Colors.white : AppColors.textSecondary,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                         fontSize: 12,
                       ),
                     ),
                     selected: isSelected,
                     selectedColor: AppColors.alertRed,
                     backgroundColor: AppColors.surfaceElevated,
-                    onSelected: (_) => ref.read(aiRoastProvider.notifier).updatePersona(p),
+                    onSelected: (_) =>
+                        ref.read(aiRoastProvider.notifier).updatePersona(p),
                   );
                 },
               ),
@@ -115,7 +119,8 @@ class AiRoastScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.alertRed.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -124,7 +129,8 @@ class AiRoastScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.local_fire_department, color: AppColors.alertRed, size: 14),
+                    const Icon(Icons.local_fire_department,
+                        color: AppColors.alertRed, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       report.activeIntensity.name.split('(').first.trim(),
@@ -181,7 +187,8 @@ class AiRoastScreen extends ConsumerWidget {
             decoration: BoxDecoration(
               color: AppColors.alertRed.withValues(alpha: 0.08),
               borderRadius: AppRadii.radiusSm,
-              border: Border.all(color: AppColors.alertRed.withValues(alpha: 0.25)),
+              border:
+                  Border.all(color: AppColors.alertRed.withValues(alpha: 0.25)),
             ),
             child: Text(
               roast.fullRoastEnglish,
@@ -208,7 +215,8 @@ class AiRoastScreen extends ConsumerWidget {
             decoration: BoxDecoration(
               color: AppColors.karmaGreen.withValues(alpha: 0.1),
               borderRadius: AppRadii.radiusSm,
-              border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.4)),
+              border: Border.all(
+                  color: AppColors.karmaGreen.withValues(alpha: 0.4)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,10 +273,14 @@ class AiRoastScreen extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 3),
             child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 0),
+              contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm, vertical: 0),
               dense: true,
-              tileColor: isCurrent ? AppColors.alertRed.withValues(alpha: 0.1) : AppColors.surfaceElevated,
-              shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+              tileColor: isCurrent
+                  ? AppColors.alertRed.withValues(alpha: 0.1)
+                  : AppColors.surfaceElevated,
+              shape:
+                  const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
               leading: Icon(
                 _getTriggerIcon(trigger),
                 color: isCurrent ? AppColors.alertRed : AppColors.focusBlue,
@@ -277,14 +289,19 @@ class AiRoastScreen extends ConsumerWidget {
               title: Text(
                 trigger.name,
                 style: AppTypography.bodySmall.copyWith(
-                  color: isCurrent ? AppColors.textPrimary : AppColors.textSecondary,
+                  color: isCurrent
+                      ? AppColors.textPrimary
+                      : AppColors.textSecondary,
                   fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
                   fontSize: 11,
                 ),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.textSecondary),
+              trailing: const Icon(Icons.arrow_forward_ios,
+                  size: 12, color: AppColors.textSecondary),
               onTap: () {
-                ref.read(aiRoastProvider.notifier).triggerScenarioRoast(trigger);
+                ref
+                    .read(aiRoastProvider.notifier)
+                    .triggerScenarioRoast(trigger);
               },
             ),
           );
@@ -321,11 +338,15 @@ class AiRoastScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 3),
             child: InkWell(
               borderRadius: AppRadii.radiusSm,
-              onTap: () => ref.read(aiRoastProvider.notifier).updateIntensity(intensity),
+              onTap: () =>
+                  ref.read(aiRoastProvider.notifier).updateIntensity(intensity),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.alertRed.withValues(alpha: 0.1) : AppColors.surfaceElevated,
+                  color: isSelected
+                      ? AppColors.alertRed.withValues(alpha: 0.1)
+                      : AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusSm,
                   border: Border.all(
                     color: isSelected ? AppColors.alertRed : Colors.transparent,
@@ -335,8 +356,12 @@ class AiRoastScreen extends ConsumerWidget {
                 child: Row(
                   children: [
                     Icon(
-                      isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-                      color: isSelected ? AppColors.alertRed : AppColors.textSecondary,
+                      isSelected
+                          ? Icons.radio_button_checked
+                          : Icons.radio_button_off,
+                      color: isSelected
+                          ? AppColors.alertRed
+                          : AppColors.textSecondary,
                       size: 18,
                     ),
                     const SizedBox(width: 8),
@@ -347,8 +372,12 @@ class AiRoastScreen extends ConsumerWidget {
                           Text(
                             intensity.name,
                             style: AppTypography.bodySmall.copyWith(
-                              color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                              color: isSelected
+                                  ? AppColors.textPrimary
+                                  : AppColors.textSecondary,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                               fontSize: 12,
                             ),
                           ),
@@ -418,12 +447,14 @@ class AiRoastScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma AI Roast Mode is engineered for entertaining, culturally authentic tough love and accountability. It strictly follows guardrails:',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 '• Zero hate speech, body shaming, or derogatory slurs.\n• Strictly behavioral: targets habits, procrastination, and excuses.\n• Always pairs roasts with positive physical redemption challenges.\n• Can be toggled off at any moment.',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -436,7 +467,8 @@ class AiRoastScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

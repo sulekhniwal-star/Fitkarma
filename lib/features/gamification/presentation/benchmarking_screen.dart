@@ -27,7 +27,9 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
 
     final filteredMetrics = _selectedCategory == null
         ? report.allMetrics
-        : report.allMetrics.where((m) => m.category == _selectedCategory).toList();
+        : report.allMetrics
+            .where((m) => m.category == _selectedCategory)
+            .toList();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -43,7 +45,8 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
             ),
             Text(
               'South Asian Demographic Cohort Calibration',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
+              style:
+                  AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
             ),
           ],
         ),
@@ -69,8 +72,10 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
     );
   }
 
-  Widget _buildHeroPercentileCard(FitnessBenchmarkReport report, Color tierColor) {
-    final topPercent = (100.0 - report.compositeFitnessPercentile).toStringAsFixed(1);
+  Widget _buildHeroPercentileCard(
+      FitnessBenchmarkReport report, Color tierColor) {
+    final topPercent =
+        (100.0 - report.compositeFitnessPercentile).toStringAsFixed(1);
 
     return Container(
       width: double.infinity,
@@ -100,7 +105,8 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: tierColor.withAlpha(40),
                   borderRadius: BorderRadius.circular(AppRadii.full),
@@ -152,7 +158,8 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
             ),
             child: Text(
               report.cohortProfile.cohortName,
-              style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.textSecondary),
+              style: AppTypography.bodySmall
+                  .copyWith(fontSize: 11, color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -198,7 +205,8 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.trending_up, color: AppColors.focusBlue, size: 16),
+                    const Icon(Icons.trending_up,
+                        color: AppColors.focusBlue, size: 16),
                     const SizedBox(width: 4),
                     Text('Growth Area', style: AppTypography.metricLabel),
                   ],
@@ -248,7 +256,8 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
             return Padding(
               padding: const EdgeInsets.only(right: 6.0),
               child: FilterChip(
-                label: Text(cat.label.split('(').first.trim(), style: const TextStyle(fontSize: 11)),
+                label: Text(cat.label.split('(').first.trim(),
+                    style: const TextStyle(fontSize: 11)),
                 selected: isSelected,
                 selectedColor: AppColors.focusBlue,
                 backgroundColor: AppColors.surfaceElevated,
@@ -360,12 +369,14 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
           const SizedBox(height: 8),
           Text(
             metric.contextualInsight,
-            style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.textSecondary),
+            style: AppTypography.bodySmall
+                .copyWith(fontSize: 11, color: AppColors.textSecondary),
           ),
           const SizedBox(height: 2),
           Text(
             metric.regionalContextualInsight,
-            style: AppTypography.bodySmall.copyWith(fontSize: 10, color: AppColors.focusBlue),
+            style: AppTypography.bodySmall
+                .copyWith(fontSize: 10, color: AppColors.focusBlue),
           ),
         ],
       ),
@@ -396,7 +407,8 @@ class _BenchmarkingScreenState extends ConsumerState<BenchmarkingScreen> {
               border: Border.all(color: AppColors.glassBorder),
             ),
             child: CustomPaint(
-              painter: _BellCurvePainter(percentile: report.compositeFitnessPercentile),
+              painter: _BellCurvePainter(
+                  percentile: report.compositeFitnessPercentile),
             ),
           ),
         ],
@@ -451,7 +463,8 @@ class _BellCurvePainter extends CustomPainter {
 
     // Draw user position marker
     final userX = (percentile / 100.0) * size.width;
-    canvas.drawLine(Offset(userX, 10), Offset(userX, size.height - 10), markerPaint);
+    canvas.drawLine(
+        Offset(userX, 10), Offset(userX, size.height - 10), markerPaint);
 
     final dotPaint = Paint()
       ..color = AppColors.gold

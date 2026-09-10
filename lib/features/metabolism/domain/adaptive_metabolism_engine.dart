@@ -1,12 +1,15 @@
 enum BiologicalSex { male, female }
+
 enum NutritionGoal { fatLoss, maintenance, muscleGain }
+
 enum MetabolicState { suppressed, normal, elevated }
 
 class AdaptiveMetabolismProfile {
   final double bmr; // Basal Metabolic Rate (kcal)
   final double staticTdee; // Standard formula TDEE (kcal)
   final double dynamicTdee; // True expenditure from energy balance (kcal)
-  final double adaptationFactor; // dynamicTdee / staticTdee (e.g. 0.95 = -5% metabolic rate)
+  final double
+      adaptationFactor; // dynamicTdee / staticTdee (e.g. 0.95 = -5% metabolic rate)
   final MetabolicState metabolicState;
   final int targetCalories;
   final int targetProteinGrams;
@@ -92,7 +95,8 @@ class AdaptiveMetabolismEngine {
     double? avgDailyIntake14Days,
     double? weightDelta14DaysKg, // positive = gained weight, negative = lost
   }) {
-    final bmr = calculateBmr(weightKg: weightKg, heightCm: heightCm, age: age, sex: sex);
+    final bmr = calculateBmr(
+        weightKg: weightKg, heightCm: heightCm, age: age, sex: sex);
     final staticTdee = bmr * activityMultiplier;
 
     double dynamicTdee = staticTdee;
@@ -101,13 +105,15 @@ class AdaptiveMetabolismEngine {
       final dailyEnergyImbalance = (weightDelta14DaysKg * 7700.0) / 14.0;
       final calculatedExpenditure = avgDailyIntake14Days - dailyEnergyImbalance;
       // Clamp within physiological bounds (0.7 to 1.4 of static TDEE)
-      dynamicTdee = calculatedExpenditure.clamp(staticTdee * 0.70, staticTdee * 1.40);
+      dynamicTdee =
+          calculatedExpenditure.clamp(staticTdee * 0.70, staticTdee * 1.40);
     }
 
     final adaptationFactor = dynamicTdee / staticTdee;
     final MetabolicState metabolicState;
     if (adaptationFactor < 0.92) {
-      metabolicState = MetabolicState.suppressed; // Metabolic adaptation to restriction
+      metabolicState =
+          MetabolicState.suppressed; // Metabolic adaptation to restriction
     } else if (adaptationFactor > 1.08) {
       metabolicState = MetabolicState.elevated; // High NEAT / thermic effect
     } else {

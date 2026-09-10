@@ -60,7 +60,8 @@ class TravelModeEngine {
     );
   }
 
-  List<TravelActionItem> _buildTravelActionItems(TravelContext context, int workoutMins) {
+  List<TravelActionItem> _buildTravelActionItems(
+      TravelContext context, int workoutMins) {
     return [
       TravelActionItem(
         category: 'Hotel Room Movement',

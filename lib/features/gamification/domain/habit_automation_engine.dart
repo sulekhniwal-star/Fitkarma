@@ -90,8 +90,10 @@ class HabitAutomationEngine {
     final int completedCount = habits.where((h) => h.isCompletedToday).length;
     final double adherence = (completedCount / habits.length) * 100.0;
 
-    final double totalHsi = habits.fold(0.0, (sum, h) => sum + h.habitStrengthIndex);
-    final double avgHsi = double.parse((totalHsi / habits.length).toStringAsFixed(1));
+    final double totalHsi =
+        habits.fold(0.0, (sum, h) => sum + h.habitStrengthIndex);
+    final double avgHsi =
+        double.parse((totalHsi / habits.length).toStringAsFixed(1));
 
     final int earnedKarma = habits
         .where((h) => h.isCompletedToday)

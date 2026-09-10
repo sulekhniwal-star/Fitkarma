@@ -123,7 +123,10 @@ enum EntitlementFeature {
 /// Subscription billing period
 enum BillingCycle {
   monthly(name: 'Monthly', regionalName: 'मासिक', discountPercent: 0),
-  annual(name: 'Annual (Save 33%)', regionalName: 'वार्षिक (३३% छूट)', discountPercent: 33);
+  annual(
+      name: 'Annual (Save 33%)',
+      regionalName: 'वार्षिक (३३% छूट)',
+      discountPercent: 33);
 
   final String name;
   final String regionalName;
@@ -157,7 +160,8 @@ class UserEntitlements {
   final String? originalPurchaseTransactionId;
   final int dailyAiCallsUsed;
   final DateTime lastQuotaResetDate;
-  final String serverVerificationHash; // Cryptographic hash from Cloud Functions
+  final String
+      serverVerificationHash; // Cryptographic hash from Cloud Functions
   final DateTime updatedAt;
 
   const UserEntitlements({
@@ -175,7 +179,8 @@ class UserEntitlements {
 
   bool get isActive {
     if (tier == SubscriptionTier.free) return true;
-    if (status == SubscriptionStatus.expired || status == SubscriptionStatus.pastDue) {
+    if (status == SubscriptionStatus.expired ||
+        status == SubscriptionStatus.pastDue) {
       return false;
     }
     if (expiresAt != null && DateTime.now().isAfter(expiresAt!)) {
@@ -224,7 +229,8 @@ class EntitlementAccessResult {
     required this.regionalDenialReason,
   });
 
-  factory EntitlementAccessResult.granted(EntitlementFeature feature, SubscriptionTier userTier) {
+  factory EntitlementAccessResult.granted(
+      EntitlementFeature feature, SubscriptionTier userTier) {
     return EntitlementAccessResult(
       isGranted: true,
       feature: feature,

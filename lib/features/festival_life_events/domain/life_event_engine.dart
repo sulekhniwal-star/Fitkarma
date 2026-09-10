@@ -32,7 +32,8 @@ class LifeEventEngine {
     }
 
     // 2. Pillar Adjustments
-    final pillarAdjustments = _buildPillarAdjustments(event, phase, stepGoal, workoutMins);
+    final pillarAdjustments =
+        _buildPillarAdjustments(event, phase, stepGoal, workoutMins);
 
     // 3. Ayurvedic Nervine / Medhya Rasayana Tonic
     final (tonic, regTonic) = _getAyurvedicTonic(event);
@@ -70,22 +71,28 @@ class LifeEventEngine {
             pillarTitle: 'Physical Activity',
             originalTarget: '60 min heavy lifting / 10,000 steps',
             adaptedTarget: '$workoutMins min desk mobility + $stepGoal steps',
-            rationale: 'Prevent physical exhaustion so maximum glucose & oxygen reach cerebral cortex.',
-            regionalRationale: 'मानसिक एकाग्रता बढ़ाने हेतु भारी व्यायाम के स्थान पर हल्का संचलन करें।',
+            rationale:
+                'Prevent physical exhaustion so maximum glucose & oxygen reach cerebral cortex.',
+            regionalRationale:
+                'मानसिक एकाग्रता बढ़ाने हेतु भारी व्यायाम के स्थान पर हल्का संचलन करें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Cognitive Nutrition',
             originalTarget: 'Strict caloric deficit',
             adaptedTarget: 'Iso-caloric maintenance + Omega-3s & walnuts',
-            rationale: 'Avoid brain fog; supply continuous steady glucose for hippocampal memory retention.',
-            regionalRationale: 'स्मृति व एकाग्रता बनाए रखने हेतु अखरोट व संतुलित पोषण लें।',
+            rationale:
+                'Avoid brain fog; supply continuous steady glucose for hippocampal memory retention.',
+            regionalRationale:
+                'स्मृति व एकाग्रता बनाए रखने हेतु अखरोट व संतुलित पोषण लें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Circadian Sleep Buffer',
             originalTarget: 'Fixed 06:00 wake time',
             adaptedTarget: '7.5h anchor with 20-min pre-exam Yoga Nidra',
-            rationale: 'Deep sleep is mandatory for memory consolidation and neural synaptic clearing.',
-            regionalRationale: 'याददाश्त सुदृढ़ करने के लिए गहरी नींद व योग निद्रा अत्यंत आवश्यक है।',
+            rationale:
+                'Deep sleep is mandatory for memory consolidation and neural synaptic clearing.',
+            regionalRationale:
+                'याददाश्त सुदृढ़ करने के लिए गहरी नींद व योग निद्रा अत्यंत आवश्यक है।',
           ),
         ];
 
@@ -94,23 +101,30 @@ class LifeEventEngine {
           LifeEventPillarAdjustment(
             pillarTitle: 'Movement & Posture',
             originalTarget: 'Gym progressive overload',
-            adaptedTarget: '$workoutMins min stroller walk + core & thoracic spine opening',
-            rationale: 'Relieve posture strain from baby carrying while keeping cardiovascular tone active.',
-            regionalRationale: 'शिशु को गोद लेने से उत्पन्न पीठ के खिंचाव को दूर करने हेतु वक्ष-खिंचाव व्यायाम करें।',
+            adaptedTarget:
+                '$workoutMins min stroller walk + core & thoracic spine opening',
+            rationale:
+                'Relieve posture strain from baby carrying while keeping cardiovascular tone active.',
+            regionalRationale:
+                'शिशु को गोद लेने से उत्पन्न पीठ के खिंचाव को दूर करने हेतु वक्ष-खिंचाव व्यायाम करें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Fractional Sleep Preservation',
             originalTarget: '8h uninterrupted sleep',
             adaptedTarget: 'Polyphasic nap stacking + Brahmari pranayama',
-            rationale: 'Embrace micro-sleep windows and calm maternal/paternal autonomic anxiety.',
-            regionalRationale: 'छोटे-छोटे विश्राम सत्रों (नैप्स) एवं भ्रामरी प्राणायाम से ऊर्जा संचित करें।',
+            rationale:
+                'Embrace micro-sleep windows and calm maternal/paternal autonomic anxiety.',
+            regionalRationale:
+                'छोटे-छोटे विश्राम सत्रों (नैप्स) एवं भ्रामरी प्राणायाम से ऊर्जा संचित करें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Convenience Nutrition',
             originalTarget: 'Complex meal prep',
             adaptedTarget: 'One-pot nutrient-dense stews & soaked nuts',
-            rationale: 'Minimize cooking stress while ensuring high micronutrient and lactation support.',
-            regionalRationale: 'सरल व पौष्टिक एक-बर्तन भोजन (खिचड़ी/दलिया) अपनाएं।',
+            rationale:
+                'Minimize cooking stress while ensuring high micronutrient and lactation support.',
+            regionalRationale:
+                'सरल व पौष्टिक एक-बर्तन भोजन (खिचड़ी/दलिया) अपनाएं।',
           ),
         ];
 
@@ -119,16 +133,21 @@ class LifeEventEngine {
           LifeEventPillarAdjustment(
             pillarTitle: 'Metabolic Workouts',
             originalTarget: '5 days/week gym split',
-            adaptedTarget: '$workoutMins min morning HIIT / dumbbell circuit ($stepGoal steps)',
-            rationale: 'Maintain insulin sensitivity during high-stress workplace onboarding.',
-            regionalRationale: 'कार्यस्थल के तनाव को नियंत्रित करने हेतु सुबह १५-२० मिनट का संक्षिप्त व्यायाम करें।',
+            adaptedTarget:
+                '$workoutMins min morning HIIT / dumbbell circuit ($stepGoal steps)',
+            rationale:
+                'Maintain insulin sensitivity during high-stress workplace onboarding.',
+            regionalRationale:
+                'कार्यस्थल के तनाव को नियंत्रित करने हेतु सुबह १५-२० मिनट का संक्षिप्त व्यायाम करें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Stress Shielding',
             originalTarget: 'Standard tracking',
             adaptedTarget: 'Ashwagandha cortisol blunting + Box breathing',
-            rationale: 'Blunt sympathetic cortisol spikes before critical business presentations.',
-            regionalRationale: 'अश्वगंधा व प्राणायाम द्वारा कार्य संबंधी मानसिक तनाव को शांत रखें।',
+            rationale:
+                'Blunt sympathetic cortisol spikes before critical business presentations.',
+            regionalRationale:
+                'अश्वगंधा व प्राणायाम द्वारा कार्य संबंधी मानसिक तनाव को शांत रखें।',
           ),
         ];
 
@@ -137,16 +156,21 @@ class LifeEventEngine {
           LifeEventPillarAdjustment(
             pillarTitle: 'Equipment-Free Movement',
             originalTarget: 'Barbell & machine regimen',
-            adaptedTarget: '$workoutMins min bodyweight calisthenics + $stepGoal box-carrying steps',
-            rationale: 'Leverage functional relocation movement without losing neuromuscular connection.',
-            regionalRationale: 'बिना जिम उपकरणों के शारीरिक भार आधारित व्यायाम से सक्रिय रहें।',
+            adaptedTarget:
+                '$workoutMins min bodyweight calisthenics + $stepGoal box-carrying steps',
+            rationale:
+                'Leverage functional relocation movement without losing neuromuscular connection.',
+            regionalRationale:
+                'बिना जिम उपकरणों के शारीरिक भार आधारित व्यायाम से सक्रिय रहें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Local Sourcing Mode',
             originalTarget: 'Specific brand grocery tracking',
             adaptedTarget: 'Fresh local sabzi mandi whole foods',
-            rationale: 'Adapt flexibly to new neighborhood markets without diet tracking friction.',
-            regionalRationale: 'स्थानीय ताजी सब्जियों व फलों से संतुलित पोषण प्राप्त करें।',
+            rationale:
+                'Adapt flexibly to new neighborhood markets without diet tracking friction.',
+            regionalRationale:
+                'स्थानीय ताजी सब्जियों व फलों से संतुलित पोषण प्राप्त करें।',
           ),
         ];
 
@@ -155,16 +179,21 @@ class LifeEventEngine {
           LifeEventPillarAdjustment(
             pillarTitle: 'Restorative Movement',
             originalTarget: 'High-intensity interval training',
-            adaptedTarget: '$workoutMins min gentle joint rotations (Sukshma Vyayama) + $stepGoal steps',
-            rationale: 'Protect heart rate variability and avoid post-viral chronic fatigue flare-ups.',
-            regionalRationale: 'हल्के सूक्ष्म व्यायाम करें ताकि हृदय गति व ऊर्जा पर अतिरिक्त भार न पड़े।',
+            adaptedTarget:
+                '$workoutMins min gentle joint rotations (Sukshma Vyayama) + $stepGoal steps',
+            rationale:
+                'Protect heart rate variability and avoid post-viral chronic fatigue flare-ups.',
+            regionalRationale:
+                'हल्के सूक्ष्म व्यायाम करें ताकि हृदय गति व ऊर्जा पर अतिरिक्त भार न पड़े।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Agni Rebuilding Diet',
             originalTarget: 'High-fiber raw salads',
             adaptedTarget: 'Warm Moong broth & spiced herbal teas',
-            rationale: 'Kindle compromised digestive Agni and eliminate residual Ama endotoxins.',
-            regionalRationale: 'पाचन अग्नि को सुदृढ़ करने हेतु सुपाच्य मूंग दाल सूप व काढ़ा लें।',
+            rationale:
+                'Kindle compromised digestive Agni and eliminate residual Ama endotoxins.',
+            regionalRationale:
+                'पाचन अग्नि को सुदृढ़ करने हेतु सुपाच्य मूंग दाल सूप व काढ़ा लें।',
           ),
         ];
 
@@ -173,16 +202,21 @@ class LifeEventEngine {
           LifeEventPillarAdjustment(
             pillarTitle: 'Grounding & Nature',
             originalTarget: 'Rigid fitness metrics',
-            adaptedTarget: '$stepGoal gentle outdoor walking in green space + silence',
-            rationale: 'Harness somatic grounding and gentle sunlight to regulate emotional state.',
-            regionalRationale: 'प्राकृतिक वातावरण में शांतिपूर्वक टहलें और स्वयं को विश्राम दें।',
+            adaptedTarget:
+                '$stepGoal gentle outdoor walking in green space + silence',
+            rationale:
+                'Harness somatic grounding and gentle sunlight to regulate emotional state.',
+            regionalRationale:
+                'प्राकृतिक वातावरण में शांतिपूर्वक टहलें और स्वयं को विश्राम दें।',
           ),
           const LifeEventPillarAdjustment(
             pillarTitle: 'Nourishment Grace',
             originalTarget: 'Strict macronutrient goals',
             adaptedTarget: 'Warm comfort foods & hydration reminders',
-            rationale: 'Provide compassionate nutritional sustenance without guilt or tracking pressure.',
-            regionalRationale: 'बिना किसी दबाव के गर्म व सात्विक भोजन से शरीर को पोषण दें।',
+            rationale:
+                'Provide compassionate nutritional sustenance without guilt or tracking pressure.',
+            regionalRationale:
+                'बिना किसी दबाव के गर्म व सात्विक भोजन से शरीर को पोषण दें।',
           ),
         ];
     }
@@ -223,7 +257,8 @@ class LifeEventEngine {
     }
   }
 
-  (String, String) _getSupportiveMessage(LifeEventCategory event, TransitionPhase phase) {
+  (String, String) _getSupportiveMessage(
+      LifeEventCategory event, TransitionPhase phase) {
     switch (phase) {
       case TransitionPhase.acuteDisruption:
         return (

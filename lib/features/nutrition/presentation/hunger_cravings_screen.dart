@@ -96,8 +96,13 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                     const SizedBox(height: AppSpacing.sm),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Did the craving hit suddenly?', style: TextStyle(fontSize: 13, color: AppColors.textPrimary)),
-                      subtitle: const Text('Sudden onset signals dopamine craving', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                      title: const Text('Did the craving hit suddenly?',
+                          style: TextStyle(
+                              fontSize: 13, color: AppColors.textPrimary)),
+                      subtitle: const Text(
+                          'Sudden onset signals dopamine craving',
+                          style: TextStyle(
+                              fontSize: 11, color: AppColors.textMuted)),
                       value: _isSudden,
                       activeThumbColor: AppColors.energyOrange,
                       onChanged: (val) => setState(() => _isSudden = val),
@@ -105,20 +110,34 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                     const Divider(color: AppColors.glassBorder, height: 1),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Are you craving a hyper-specific food?', style: TextStyle(fontSize: 13, color: AppColors.textPrimary)),
-                      subtitle: const Text('e.g. Samosa, Gulab Jamun, Chocolate', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                      title: const Text(
+                          'Are you craving a hyper-specific food?',
+                          style: TextStyle(
+                              fontSize: 13, color: AppColors.textPrimary)),
+                      subtitle: const Text(
+                          'e.g. Samosa, Gulab Jamun, Chocolate',
+                          style: TextStyle(
+                              fontSize: 11, color: AppColors.textMuted)),
                       value: _isSpecificCraving,
                       activeThumbColor: AppColors.energyOrange,
-                      onChanged: (val) => setState(() => _isSpecificCraving = val),
+                      onChanged: (val) =>
+                          setState(() => _isSpecificCraving = val),
                     ),
                     const Divider(color: AppColors.glassBorder, height: 1),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Would you eat plain boiled eggs or dalia?', style: TextStyle(fontSize: 13, color: AppColors.textPrimary)),
-                      subtitle: const Text('True hunger accepts simple whole foods', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                      title: const Text(
+                          'Would you eat plain boiled eggs or dalia?',
+                          style: TextStyle(
+                              fontSize: 13, color: AppColors.textPrimary)),
+                      subtitle: const Text(
+                          'True hunger accepts simple whole foods',
+                          style: TextStyle(
+                              fontSize: 11, color: AppColors.textMuted)),
                       value: _willingToEatKhichdi,
                       activeThumbColor: AppColors.karmaGreen,
-                      onChanged: (val) => setState(() => _willingToEatKhichdi = val),
+                      onChanged: (val) =>
+                          setState(() => _willingToEatKhichdi = val),
                     ),
                   ],
                 ),
@@ -140,14 +159,20 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                           regionalText: report.detectedType.regionalName,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: statusColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Text(
-                            report.detectedType.isTrueHunger ? 'TRUE HUNGER' : 'FALSE CRAVING',
-                            style: TextStyle(color: statusColor, fontSize: 10, fontWeight: FontWeight.w800),
+                            report.detectedType.isTrueHunger
+                                ? 'TRUE HUNGER'
+                                : 'FALSE CRAVING',
+                            style: TextStyle(
+                                color: statusColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -155,7 +180,8 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       report.rootCauseAnalysis,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, height: 1.35),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textPrimary, height: 1.35),
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Container(
@@ -166,7 +192,10 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                       ),
                       child: Text(
                         'Action: ${report.instantActionStep}',
-                        style: TextStyle(color: statusColor, fontSize: 11, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: statusColor,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                   ],
@@ -183,8 +212,13 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('15-Minute Dopamine Reset Timer', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
-                          Icon(Icons.timer_outlined, color: AppColors.focusBlue, size: 20),
+                          Text('15-Minute Dopamine Reset Timer',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13,
+                                  color: AppColors.textPrimary)),
+                          Icon(Icons.timer_outlined,
+                              color: AppColors.focusBlue, size: 20),
                         ],
                       ),
                       const SizedBox(height: AppSpacing.sm),
@@ -198,16 +232,24 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                       Text(
                         'Drink 400ml water. Over 85% of hedonic cravings vanish after 15 minutes of behavioral delay.',
                         textAlign: TextAlign.center,
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        style: AppTypography.bodySmall
+                            .copyWith(color: AppColors.textMuted, fontSize: 11),
                       ),
                       const SizedBox(height: AppSpacing.sm),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.focusBlue,
-                          shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: AppRadii.radiusSm),
                         ),
                         onPressed: _isTimerActive ? null : _startTimer,
-                        child: Text(_isTimerActive ? 'Timer Running...' : 'Start 15-Min Delay', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+                        child: Text(
+                            _isTimerActive
+                                ? 'Timer Running...'
+                                : 'Start 15-Min Delay',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800)),
                       ),
                     ],
                   ),
@@ -238,22 +280,35 @@ class _HungerCravingsScreenState extends State<HungerCravingsScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(hack.title, style: AppTypography.titleSmall.copyWith(fontSize: 13, fontWeight: FontWeight.w700)),
-                              Text('${hack.regionalTitle} • ${hack.portion}', style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                              Text(hack.title,
+                                  style: AppTypography.titleSmall.copyWith(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700)),
+                              Text('${hack.regionalTitle} • ${hack.portion}',
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textMuted)),
                               const SizedBox(height: 2),
-                              Text(hack.satietyMechanism, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                              Text(hack.satietyMechanism,
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.textSecondary)),
                             ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.karmaGreen.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Text(
                             '${hack.calories} kcal',
-                            style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.w800, fontSize: 11),
+                            style: const TextStyle(
+                                color: AppColors.karmaGreen,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 11),
                           ),
                         ),
                       ],

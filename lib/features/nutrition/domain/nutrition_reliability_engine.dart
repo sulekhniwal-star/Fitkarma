@@ -106,10 +106,14 @@ class NutritionReliabilityEngine {
       return _buildEmptyReliabilityReport();
     }
 
-    final totalCalories = allDayMeals.fold<int>(0, (sum, m) => sum + m.totalCalories);
-    final totalProtein = allDayMeals.fold<double>(0.0, (sum, m) => sum + m.totalProtein);
-    final totalCarbs = allDayMeals.fold<double>(0.0, (sum, m) => sum + m.totalCarbs);
-    final totalFats = allDayMeals.fold<double>(0.0, (sum, m) => sum + m.totalFats);
+    final totalCalories =
+        allDayMeals.fold<int>(0, (sum, m) => sum + m.totalCalories);
+    final totalProtein =
+        allDayMeals.fold<double>(0.0, (sum, m) => sum + m.totalProtein);
+    final totalCarbs =
+        allDayMeals.fold<double>(0.0, (sum, m) => sum + m.totalCarbs);
+    final totalFats =
+        allDayMeals.fold<double>(0.0, (sum, m) => sum + m.totalFats);
 
     final loggedPhases = allDayMeals.map((m) => m.phase).toSet();
     final List<String> gaps = [];
@@ -125,34 +129,45 @@ class NutritionReliabilityEngine {
       phaseScore = 100.0;
     } else if (phaseCount == 3) {
       phaseScore = 80.0;
-      final missing = MealPhase.values.where((p) => !loggedPhases.contains(p)).map((p) => p.name.split('/')[0].trim()).join(', ');
-      gaps.add('Missing $missing log. Unrecorded snacks often add 150-300 untracked calories.');
+      final missing = MealPhase.values
+          .where((p) => !loggedPhases.contains(p))
+          .map((p) => p.name.split('/')[0].trim())
+          .join(', ');
+      gaps.add(
+          'Missing $missing log. Unrecorded snacks often add 150-300 untracked calories.');
     } else if (phaseCount == 2) {
       phaseScore = 55.0;
-      gaps.add('Only 2 meal phases recorded. High likelihood of unaccounted beverages/snacks.');
+      gaps.add(
+          'Only 2 meal phases recorded. High likelihood of unaccounted beverages/snacks.');
     } else {
       phaseScore = 25.0;
       gaps.add('Only 1 meal phase recorded. Incomplete daily picture.');
     }
 
     // Calorie plausibility adjustment
-    final calRatio = totalCalories / (targetCalories > 0 ? targetCalories : 2000);
+    final calRatio =
+        totalCalories / (targetCalories > 0 ? targetCalories : 2000);
     if (calRatio < 0.45 && phaseCount < 3) {
       phaseScore = (phaseScore * 0.7).clamp(10.0, 100.0);
-      gaps.add('Very low recorded intake ($totalCalories kcal) suggests under-logging.');
+      gaps.add(
+          'Very low recorded intake ($totalCalories kcal) suggests under-logging.');
     }
 
     // -------------------------------------------------------------
     // Factor 2: Portion Measurement Precision (25% weight)
     // -------------------------------------------------------------
     double portionScore = 80.0;
-    final hasAmbiguousPortions = allDayMeals.any((m) => m.food.servingUnit.toLowerCase().contains('serving') && !m.food.servingUnit.toLowerCase().contains('g') && !m.food.servingUnit.toLowerCase().contains('katori'));
+    final hasAmbiguousPortions = allDayMeals.any((m) =>
+        m.food.servingUnit.toLowerCase().contains('serving') &&
+        !m.food.servingUnit.toLowerCase().contains('g') &&
+        !m.food.servingUnit.toLowerCase().contains('katori'));
 
     if (!hasAmbiguousPortions) {
       portionScore = 95.0;
     } else {
       portionScore = 65.0;
-      calibrations.add('Standardized Indian Katori / Gram estimation applied for ambiguous portion sizes.');
+      calibrations.add(
+          'Standardized Indian Katori / Gram estimation applied for ambiguous portion sizes.');
     }
 
     // -------------------------------------------------------------
@@ -161,15 +176,21 @@ class NutritionReliabilityEngine {
     double oilScore = 60.0;
     double hiddenOilKcal = 0.0;
 
-    final hasSabziOrCurry = allDayMeals.any((m) => m.food.category.toLowerCase().contains('sabzi') || m.food.category.toLowerCase().contains('daal') || m.food.name.toLowerCase().contains('paneer') || m.food.name.toLowerCase().contains('chicken'));
+    final hasSabziOrCurry = allDayMeals.any((m) =>
+        m.food.category.toLowerCase().contains('sabzi') ||
+        m.food.category.toLowerCase().contains('daal') ||
+        m.food.name.toLowerCase().contains('paneer') ||
+        m.food.name.toLowerCase().contains('chicken'));
 
     if (isOilExplicitlyTracked) {
       oilScore = 100.0;
-      calibrations.add('Cooking oil/ghee tracked explicitly (Zero hidden tadka discrepancy).');
+      calibrations.add(
+          'Cooking oil/ghee tracked explicitly (Zero hidden tadka discrepancy).');
     } else if (hasSabziOrCurry) {
       oilScore = 65.0;
       hiddenOilKcal = 180.0;
-      calibrations.add('Indian Tadka/Chhonk Shield (+180 kcal buffer) auto-applied for untracked cooking ghee/mustard oil.');
+      calibrations.add(
+          'Indian Tadka/Chhonk Shield (+180 kcal buffer) auto-applied for untracked cooking ghee/mustard oil.');
     } else {
       oilScore = 90.0;
     }
@@ -180,8 +201,12 @@ class NutritionReliabilityEngine {
     double temporalScore = 85.0;
     // Check if timestamps are spaced out by at least 60 mins vs batch logged at once
     if (allDayMeals.length > 2) {
-      final firstLog = allDayMeals.map((m) => m.loggedAt).reduce((a, b) => a.isBefore(b) ? a : b);
-      final lastLog = allDayMeals.map((m) => m.loggedAt).reduce((a, b) => a.isAfter(b) ? a : b);
+      final firstLog = allDayMeals
+          .map((m) => m.loggedAt)
+          .reduce((a, b) => a.isBefore(b) ? a : b);
+      final lastLog = allDayMeals
+          .map((m) => m.loggedAt)
+          .reduce((a, b) => a.isAfter(b) ? a : b);
       final spanHours = lastLog.difference(firstLog).inHours;
 
       if (spanHours >= 4) {
@@ -190,7 +215,8 @@ class NutritionReliabilityEngine {
         temporalScore = 80.0;
       } else {
         temporalScore = 55.0;
-        calibrations.add('Batch retro-logging detected. Real-time logging reduces recall bias by ~35%.');
+        calibrations.add(
+            'Batch retro-logging detected. Real-time logging reduces recall bias by ~35%.');
       }
     }
 
@@ -198,8 +224,11 @@ class NutritionReliabilityEngine {
     // Factor 5: Macronutrient Mathematical Consistency (10% weight)
     // -------------------------------------------------------------
     double macroScore = 85.0;
-    final calculatedKcal = (totalProtein * 4.0) + (totalCarbs * 4.0) + (totalFats * 9.0);
-    final macroDiscrepancy = totalCalories > 0 ? (calculatedKcal - totalCalories).abs() / totalCalories : 0.0;
+    final calculatedKcal =
+        (totalProtein * 4.0) + (totalCarbs * 4.0) + (totalFats * 9.0);
+    final macroDiscrepancy = totalCalories > 0
+        ? (calculatedKcal - totalCalories).abs() / totalCalories
+        : 0.0;
 
     if (macroDiscrepancy <= 0.08) {
       macroScore = 98.0;
@@ -207,7 +236,8 @@ class NutritionReliabilityEngine {
       macroScore = 80.0;
     } else {
       macroScore = 50.0;
-      calibrations.add('Macro-energy variance (${(macroDiscrepancy * 100).toStringAsFixed(0)}%) reconciled via standard Atwater factors.');
+      calibrations.add(
+          'Macro-energy variance (${(macroDiscrepancy * 100).toStringAsFixed(0)}%) reconciled via standard Atwater factors.');
     }
 
     // -------------------------------------------------------------
@@ -220,9 +250,13 @@ class NutritionReliabilityEngine {
         regionalName: 'भोजन चरणों की पूर्णता',
         score: double.parse(phaseScore.toStringAsFixed(1)),
         weight: 0.35,
-        status: phaseScore >= 80 ? 'Complete' : (phaseScore >= 50 ? 'Partial' : 'Gaps Present'),
+        status: phaseScore >= 80
+            ? 'Complete'
+            : (phaseScore >= 50 ? 'Partial' : 'Gaps Present'),
         detail: '$phaseCount of 4 core phases recorded.',
-        recommendation: phaseCount < 4 ? 'Log remaining meal phases for 100% daily coverage.' : 'All primary meals recorded on schedule.',
+        recommendation: phaseCount < 4
+            ? 'Log remaining meal phases for 100% daily coverage.'
+            : 'All primary meals recorded on schedule.',
       ),
       ReliabilityFactor(
         id: 'portion_precision',
@@ -231,8 +265,11 @@ class NutritionReliabilityEngine {
         score: double.parse(portionScore.toStringAsFixed(1)),
         weight: 0.25,
         status: portionScore >= 85 ? 'Precise' : 'Estimated',
-        detail: hasAmbiguousPortions ? 'Using standardized Indian katori sizes.' : 'Explicit units (grams/pieces/katori) verified.',
-        recommendation: 'Use kitchen scale or standard 150ml katori for curries & daal.',
+        detail: hasAmbiguousPortions
+            ? 'Using standardized Indian katori sizes.'
+            : 'Explicit units (grams/pieces/katori) verified.',
+        recommendation:
+            'Use kitchen scale or standard 150ml katori for curries & daal.',
       ),
       ReliabilityFactor(
         id: 'cooking_oil_shield',
@@ -241,8 +278,12 @@ class NutritionReliabilityEngine {
         score: double.parse(oilScore.toStringAsFixed(1)),
         weight: 0.20,
         status: isOilExplicitlyTracked ? 'Explicit' : 'Shield Buffer Active',
-        detail: isOilExplicitlyTracked ? 'No cooking oil discrepancies.' : '+180 kcal buffer added for Indian home tadka.',
-        recommendation: isOilExplicitlyTracked ? 'Great job logging preparation medium.' : 'Log 1-2 tsp cooking oil or ghee per dish for laser accuracy.',
+        detail: isOilExplicitlyTracked
+            ? 'No cooking oil discrepancies.'
+            : '+180 kcal buffer added for Indian home tadka.',
+        recommendation: isOilExplicitlyTracked
+            ? 'Great job logging preparation medium.'
+            : 'Log 1-2 tsp cooking oil or ghee per dish for laser accuracy.',
       ),
       ReliabilityFactor(
         id: 'temporal_consistency',
@@ -251,7 +292,9 @@ class NutritionReliabilityEngine {
         score: double.parse(temporalScore.toStringAsFixed(1)),
         weight: 0.10,
         status: temporalScore >= 80 ? 'Real-Time' : 'Batch Recall',
-        detail: temporalScore >= 80 ? 'Meals logged promptly after eating.' : 'Logged retroactively in a single batch.',
+        detail: temporalScore >= 80
+            ? 'Meals logged promptly after eating.'
+            : 'Logged retroactively in a single batch.',
         recommendation: 'Log meals within 30 mins to eliminate memory decay.',
       ),
       ReliabilityFactor(
@@ -266,12 +309,16 @@ class NutritionReliabilityEngine {
       ),
     ];
 
-    final double compositeRaw = factors.fold<double>(0.0, (sum, f) => sum + f.weightedContribution);
+    final double compositeRaw =
+        factors.fold<double>(0.0, (sum, f) => sum + f.weightedContribution);
     final int composite = compositeRaw.round().clamp(0, 100);
 
     final level = _getReliabilityLevel(composite);
-    final int calMargin = (totalCalories * level.uncertaintyPct).round().clamp(60, 550);
-    final double protMargin = double.parse((totalProtein * level.uncertaintyPct).toStringAsFixed(1)).clamp(2.0, 25.0);
+    final int calMargin =
+        (totalCalories * level.uncertaintyPct).round().clamp(60, 550);
+    final double protMargin =
+        double.parse((totalProtein * level.uncertaintyPct).toStringAsFixed(1))
+            .clamp(2.0, 25.0);
 
     return NutritionReliabilityReport(
       overallReliabilityScore: composite,
@@ -281,9 +328,13 @@ class NutritionReliabilityEngine {
       isShieldActive: level.shieldActive,
       hiddenOilBufferKcal: hiddenOilKcal,
       factors: factors,
-      detectedGaps: gaps.isEmpty ? ['No major nutritional data gaps detected.'] : gaps,
-      shieldCalibrations: calibrations.isEmpty ? ['Standard calibration profile active.'] : calibrations,
-      confidenceSummary: 'Today\'s nutrition logs have an estimated confidence score of $composite% '
+      detectedGaps:
+          gaps.isEmpty ? ['No major nutritional data gaps detected.'] : gaps,
+      shieldCalibrations: calibrations.isEmpty
+          ? ['Standard calibration profile active.']
+          : calibrations,
+      confidenceSummary:
+          'Today\'s nutrition logs have an estimated confidence score of $composite% '
           '(${level.label}). Your effective intake is $totalCalories ± $calMargin kcal.',
     );
   }

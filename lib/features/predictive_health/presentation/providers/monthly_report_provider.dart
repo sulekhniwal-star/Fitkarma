@@ -10,7 +10,8 @@ final monthlyReportProvider =
 class MonthlyReportNotifier extends StateNotifier<MonthlyHealthReport> {
   MonthlyReportNotifier() : super(_buildInitialReport());
 
-  static final MonthlyHealthReportEngine _engine = const MonthlyHealthReportEngine();
+  static final MonthlyHealthReportEngine _engine =
+      const MonthlyHealthReportEngine();
 
   static MonthlyHealthReport _buildInitialReport() {
     return _engine.generateMonthlyReport(

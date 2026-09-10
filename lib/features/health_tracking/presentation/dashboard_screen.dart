@@ -48,9 +48,11 @@ class DashboardScreen extends ConsumerWidget {
                   ),
                   Row(
                     children: [
-                      _buildHeaderBadge('🔥 ${dashboard.streakDays}d', AppColors.energyOrange),
+                      _buildHeaderBadge('🔥 ${dashboard.streakDays}d',
+                          AppColors.energyOrange),
                       const SizedBox(width: 8),
-                      _buildHeaderBadge('✨ ${dashboard.karmaPoints}', AppColors.gold),
+                      _buildHeaderBadge(
+                          '✨ ${dashboard.karmaPoints}', AppColors.gold),
                     ],
                   ),
                 ],
@@ -77,7 +79,8 @@ class DashboardScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Icon(Icons.directions_walk_rounded, color: AppColors.focusBlue, size: 20),
+                              const Icon(Icons.directions_walk_rounded,
+                                  color: AppColors.focusBlue, size: 20),
                               Text(
                                 '${((dashboard.stepsCurrent / dashboard.stepsTarget) * 100).round()}%',
                                 style: AppTypography.bodySmall.copyWith(
@@ -96,7 +99,8 @@ class DashboardScreen extends ConsumerWidget {
                           const SizedBox(height: 2),
                           Text(
                             'Goal: ${dashboard.stepsTarget}',
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textMuted, fontSize: 11),
                           ),
                         ],
                       ),
@@ -113,7 +117,8 @@ class DashboardScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Icon(Icons.bedtime_rounded, color: AppColors.aiPurple, size: 20),
+                              const Icon(Icons.bedtime_rounded,
+                                  color: AppColors.aiPurple, size: 20),
                               Text(
                                 '${dashboard.sleepHours}h',
                                 style: AppTypography.bodySmall.copyWith(
@@ -133,7 +138,8 @@ class DashboardScreen extends ConsumerWidget {
                           const SizedBox(height: 2),
                           Text(
                             'Optimal architecture',
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textMuted, fontSize: 11),
                           ),
                         ],
                       ),
@@ -154,18 +160,26 @@ class DashboardScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Icon(Icons.water_drop_rounded, color: AppColors.focusBlue, size: 20),
+                              const Icon(Icons.water_drop_rounded,
+                                  color: AppColors.focusBlue, size: 20),
                               GestureDetector(
-                                onTap: () => ref.read(dashboardProvider.notifier).addWater(0.25),
+                                onTap: () => ref
+                                    .read(dashboardProvider.notifier)
+                                    .addWater(0.25),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
-                                    color: AppColors.focusBlue.withValues(alpha: 0.2),
+                                    color: AppColors.focusBlue
+                                        .withValues(alpha: 0.2),
                                     borderRadius: AppRadii.radiusSm,
                                   ),
                                   child: const Text(
                                     '+250ml',
-                                    style: TextStyle(color: AppColors.focusBlue, fontSize: 10, fontWeight: FontWeight.w800),
+                                    style: TextStyle(
+                                        color: AppColors.focusBlue,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w800),
                                   ),
                                 ),
                               ),
@@ -180,7 +194,8 @@ class DashboardScreen extends ConsumerWidget {
                           const SizedBox(height: 2),
                           Text(
                             'Target: ${dashboard.hydrationTargetLiters}L',
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textMuted, fontSize: 11),
                           ),
                         ],
                       ),
@@ -197,7 +212,8 @@ class DashboardScreen extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Icon(Icons.whatshot_rounded, color: AppColors.energyOrange, size: 20),
+                              const Icon(Icons.whatshot_rounded,
+                                  color: AppColors.energyOrange, size: 20),
                               Text(
                                 'Target: ${dashboard.targetStrainMax.round()}',
                                 style: AppTypography.bodySmall.copyWith(
@@ -217,7 +233,8 @@ class DashboardScreen extends ConsumerWidget {
                           const SizedBox(height: 2),
                           Text(
                             'Balanced exertion',
-                            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                            style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textMuted, fontSize: 11),
                           ),
                         ],
                       ),
@@ -250,9 +267,12 @@ class DashboardScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     LinearProgressIndicator(
-                      value: (dashboard.caloriesConsumed / dashboard.caloriesTarget).clamp(0.0, 1.0),
+                      value: (dashboard.caloriesConsumed /
+                              dashboard.caloriesTarget)
+                          .clamp(0.0, 1.0),
                       backgroundColor: AppColors.surfaceElevated,
-                      valueColor: const AlwaysStoppedAnimation(AppColors.karmaGreen),
+                      valueColor:
+                          const AlwaysStoppedAnimation(AppColors.karmaGreen),
                       minHeight: 6,
                       borderRadius: AppRadii.radiusSm,
                     ),
@@ -262,11 +282,13 @@ class DashboardScreen extends ConsumerWidget {
                       children: [
                         Text(
                           'Protein: ${dashboard.proteinConsumedGrams}g / ${dashboard.proteinTargetGrams}g',
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                          style: AppTypography.bodySmall
+                              .copyWith(color: AppColors.textSecondary),
                         ),
                         Text(
                           '${dashboard.caloriesTarget - dashboard.caloriesConsumed} kcal remaining',
-                          style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                          style: AppTypography.bodySmall.copyWith(
+                              color: AppColors.textMuted, fontSize: 11),
                         ),
                       ],
                     ),
@@ -281,15 +303,19 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHealthOsHeroCard(DailyIntelligencePackage dip, DashboardSummaryState dashboard) {
+  Widget _buildHealthOsHeroCard(
+      DailyIntelligencePackage dip, DashboardSummaryState dashboard) {
     final Color zoneColor = dip.readinessScore >= 80
         ? AppColors.karmaGreen
         : dip.readinessScore >= 60
             ? AppColors.focusBlue
             : AppColors.energyOrange;
 
-    final stepsProgress = (dashboard.stepsCurrent / dashboard.stepsTarget).clamp(0.0, 1.0);
-    final nutritionProgress = (dashboard.proteinConsumedGrams / dashboard.proteinTargetGrams).clamp(0.0, 1.0);
+    final stepsProgress =
+        (dashboard.stepsCurrent / dashboard.stepsTarget).clamp(0.0, 1.0);
+    final nutritionProgress =
+        (dashboard.proteinConsumedGrams / dashboard.proteinTargetGrams)
+            .clamp(0.0, 1.0);
     final readinessProgress = (dip.readinessScore / 100.0).clamp(0.0, 1.0);
 
     return BentoCard(
@@ -303,7 +329,8 @@ class DashboardScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: zoneColor.withValues(alpha: 0.15),
                     borderRadius: AppRadii.radiusSm,
@@ -311,7 +338,10 @@ class DashboardScreen extends ConsumerWidget {
                   ),
                   child: Text(
                     'ZONE: ${dip.readinessZone.name.toUpperCase()}',
-                    style: TextStyle(color: zoneColor, fontSize: 10, fontWeight: FontWeight.w800),
+                    style: TextStyle(
+                        color: zoneColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800),
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -336,11 +366,21 @@ class DashboardScreen extends ConsumerWidget {
           ActivityRings(
             size: 105,
             rings: [
-              RingData(progress: readinessProgress, color: zoneColor, strokeWidth: 8),
-              RingData(progress: stepsProgress, color: AppColors.focusBlue, strokeWidth: 8),
-              RingData(progress: nutritionProgress, color: AppColors.energyOrange, strokeWidth: 8),
+              RingData(
+                  progress: readinessProgress,
+                  color: zoneColor,
+                  strokeWidth: 8),
+              RingData(
+                  progress: stepsProgress,
+                  color: AppColors.focusBlue,
+                  strokeWidth: 8),
+              RingData(
+                  progress: nutritionProgress,
+                  color: AppColors.energyOrange,
+                  strokeWidth: 8),
             ],
-            centerWidget: Icon(Icons.favorite_rounded, color: zoneColor, size: 22),
+            centerWidget:
+                Icon(Icons.favorite_rounded, color: zoneColor, size: 22),
           ),
         ],
       ),
@@ -357,7 +397,8 @@ class DashboardScreen extends ConsumerWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 12),
+        style:
+            TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 12),
       ),
     );
   }

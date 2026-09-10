@@ -29,7 +29,8 @@ class ClinicalLabEngine {
 
     // --- 1. Lipid & Glycemic Panel ---
     // HbA1c
-    final hba1cStatus = _evaluateStatus(hba1cPercent, 4.0, 5.6, 4.5, 5.3, highIsBad: true, criticalHigh: 8.0);
+    final hba1cStatus = _evaluateStatus(hba1cPercent, 4.0, 5.6, 4.5, 5.3,
+        highIsBad: true, criticalHigh: 8.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'HBA1C',
@@ -46,16 +47,21 @@ class ClinicalLabEngine {
         clinicalInterpretation: hba1cStatus == LabBiomarkerStatus.optimal
             ? 'Optimal 90-day glycemic stability with minimal cellular glycation.'
             : 'Pre-diabetic glycemic range; insulin resistance intervention indicated.',
-        regionalClinicalInterpretation: hba1cStatus == LabBiomarkerStatus.optimal
+        regionalClinicalInterpretation: hba1cStatus ==
+                LabBiomarkerStatus.optimal
             ? 'पिछले ९० दिनों का शर्करा स्तर उत्तम व सुरक्षित सीमा में है।'
             : 'शर्करा स्तर में वृद्धि; इंसुलिन संवेदनशीलता बढ़ाने की आवश्यकता।',
-        lifestylePrescription: 'Maintain Shatpawali post-meal walks and 35g+ daily dietary fiber.',
-        regionalLifestylePrescription: 'भोजनोपरांत शतपावली (१०० कदम) व उच्च फाइबर आहार जारी रखें।',
+        lifestylePrescription:
+            'Maintain Shatpawali post-meal walks and 35g+ daily dietary fiber.',
+        regionalLifestylePrescription:
+            'भोजनोपरांत शतपावली (१०० कदम) व उच्च फाइबर आहार जारी रखें।',
       ),
     );
 
     // Fasting Blood Glucose
-    final fbgStatus = _evaluateStatus(fastingGlucoseMgDl, 70.0, 99.0, 75.0, 90.0, highIsBad: true, criticalHigh: 140.0);
+    final fbgStatus = _evaluateStatus(
+        fastingGlucoseMgDl, 70.0, 99.0, 75.0, 90.0,
+        highIsBad: true, criticalHigh: 140.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'FBG',
@@ -75,13 +81,17 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: fbgStatus == LabBiomarkerStatus.optimal
             ? 'यकृत व इंसुलिन संवेदनशीलता पूर्णतः सामान्य है।'
             : 'प्रातःकाल यकृत द्वारा शर्करा स्राव में हल्की वृद्धि।',
-        lifestylePrescription: '12-hour overnight digestive rest window (Dinner by 8:00 PM).',
-        regionalLifestylePrescription: 'रात्रि भोजन ८ बजे तक पूर्ण कर १२ घंटे का उपवास रखें।',
+        lifestylePrescription:
+            '12-hour overnight digestive rest window (Dinner by 8:00 PM).',
+        regionalLifestylePrescription:
+            'रात्रि भोजन ८ बजे तक पूर्ण कर १२ घंटे का उपवास रखें।',
       ),
     );
 
     // Triglycerides
-    final tgStatus = _evaluateStatus(triglyceridesMgDl, 50.0, 150.0, 60.0, 110.0, highIsBad: true, criticalHigh: 300.0);
+    final tgStatus = _evaluateStatus(
+        triglyceridesMgDl, 50.0, 150.0, 60.0, 110.0,
+        highIsBad: true, criticalHigh: 300.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'LIPID_TG',
@@ -101,13 +111,17 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: tgStatus == LabBiomarkerStatus.optimal
             ? 'रक्त में वसा की मात्रा सुरक्षित व संतुलित है।'
             : 'रिफाइंड कार्बोहाइड्रेट के कारण रक्त वसा में वृद्धि।',
-        lifestylePrescription: 'Incorporate 1 tbsp flaxseeds / chia seeds and eliminate refined seed oils.',
-        regionalLifestylePrescription: 'अलसी/चिया बीज का सेवन करें और रिफाइंड तेल से बचें।',
+        lifestylePrescription:
+            'Incorporate 1 tbsp flaxseeds / chia seeds and eliminate refined seed oils.',
+        regionalLifestylePrescription:
+            'अलसी/चिया बीज का सेवन करें और रिफाइंड तेल से बचें।',
       ),
     );
 
     // HDL Cholesterol
-    final hdlStatus = _evaluateStatus(hdlCholesterolMgDl, 40.0, 80.0, 50.0, 75.0, highIsBad: false);
+    final hdlStatus = _evaluateStatus(
+        hdlCholesterolMgDl, 40.0, 80.0, 50.0, 75.0,
+        highIsBad: false);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'LIPID_HDL',
@@ -127,13 +141,17 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: hdlStatus == LabBiomarkerStatus.optimal
             ? 'धमनियों की सुरक्षात्मक प्रणाली उत्कृष्ट अवस्था में है।'
             : 'HDL स्तर कम है; नियमित एरोबिक कार्डियो से इसे बढ़ाएं।',
-        lifestylePrescription: '3x weekly Zone 2 aerobic cardio and healthy dietary monounsaturated fats.',
-        regionalLifestylePrescription: 'सप्ताह में ३ बार ज़ोन २ कार्डियो व स्वस्थ वसा (घी, अखरोट) लें।',
+        lifestylePrescription:
+            '3x weekly Zone 2 aerobic cardio and healthy dietary monounsaturated fats.',
+        regionalLifestylePrescription:
+            'सप्ताह में ३ बार ज़ोन २ कार्डियो व स्वस्थ वसा (घी, अखरोट) लें।',
       ),
     );
 
     // LDL Cholesterol
-    final ldlStatus = _evaluateStatus(ldlCholesterolMgDl, 50.0, 129.0, 60.0, 99.0, highIsBad: true, criticalHigh: 190.0);
+    final ldlStatus = _evaluateStatus(
+        ldlCholesterolMgDl, 50.0, 129.0, 60.0, 99.0,
+        highIsBad: true, criticalHigh: 190.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'LIPID_LDL',
@@ -153,13 +171,16 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: ldlStatus == LabBiomarkerStatus.optimal
             ? 'हृदय धमनियों के लिए सुरक्षित सीमा में है।'
             : 'घुलनशील फाइबर (ओट्स, ईसबगोल) का सेवन बढ़ाएं।',
-        lifestylePrescription: 'Add 5g psyllium husk (Isabgol) daily to promote bile acid excretion.',
-        regionalLifestylePrescription: 'प्रतिदिन ५ ग्राम ईसबगोल लें जो कोलेस्ट्रॉल घटाने में सहायक है।',
+        lifestylePrescription:
+            'Add 5g psyllium husk (Isabgol) daily to promote bile acid excretion.',
+        regionalLifestylePrescription:
+            'प्रतिदिन ५ ग्राम ईसबगोल लें जो कोलेस्ट्रॉल घटाने में सहायक है।',
       ),
     );
 
     // --- 2. Hepatic (Liver LFT) Panel ---
-    final altStatus = _evaluateStatus(altSgptUnitsL, 10.0, 45.0, 12.0, 28.0, highIsBad: true, criticalHigh: 80.0);
+    final altStatus = _evaluateStatus(altSgptUnitsL, 10.0, 45.0, 12.0, 28.0,
+        highIsBad: true, criticalHigh: 80.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'LFT_ALT',
@@ -179,13 +200,17 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: altStatus == LabBiomarkerStatus.optimal
             ? 'यकृत में कोई सूजन या फैटी लिवर का संकेत नहीं है।'
             : 'यकृत पर प्रारंभिक सूजन अथवा विसरल चर्बी का संकेत।',
-        lifestylePrescription: 'Cruciferous vegetables (Broccoli/Cauliflower) and reduce late-night snacking.',
-        regionalLifestylePrescription: 'पत्तागोभी/ब्रोकोली का सेवन करें और देर रात खाने से बचें।',
+        lifestylePrescription:
+            'Cruciferous vegetables (Broccoli/Cauliflower) and reduce late-night snacking.',
+        regionalLifestylePrescription:
+            'पत्तागोभी/ब्रोकोली का सेवन करें और देर रात खाने से बचें।',
       ),
     );
 
     // --- 3. Renal & Electrolytes (KFT) Panel ---
-    final creatStatus = _evaluateStatus(serumCreatinineMgDl, 0.6, 1.2, 0.7, 1.05, highIsBad: true, criticalHigh: 1.6);
+    final creatStatus = _evaluateStatus(
+        serumCreatinineMgDl, 0.6, 1.2, 0.7, 1.05,
+        highIsBad: true, criticalHigh: 1.6);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'KFT_CREAT',
@@ -202,16 +227,20 @@ class ClinicalLabEngine {
         clinicalInterpretation: creatStatus == LabBiomarkerStatus.optimal
             ? 'Optimal glomerular filtration reserve and renal clearance.'
             : 'Creatinine elevation; ensure adequate hydration and repeat test.',
-        regionalClinicalInterpretation: creatStatus == LabBiomarkerStatus.optimal
-            ? 'गुर्दों की रक्त शोधन क्षमता पूर्णतः सामान्य है।'
-            : 'पर्याप्त मात्रा में पानी पिएं और पुनः जांच कराएं।',
-        lifestylePrescription: 'Maintain 3.0L daily hydration with electrolyte balance.',
-        regionalLifestylePrescription: 'प्रतिदिन ३ लीटर जल व इलेक्ट्रोलाइट्स का सेवन बनाए रखें।',
+        regionalClinicalInterpretation:
+            creatStatus == LabBiomarkerStatus.optimal
+                ? 'गुर्दों की रक्त शोधन क्षमता पूर्णतः सामान्य है।'
+                : 'पर्याप्त मात्रा में पानी पिएं और पुनः जांच कराएं।',
+        lifestylePrescription:
+            'Maintain 3.0L daily hydration with electrolyte balance.',
+        regionalLifestylePrescription:
+            'प्रतिदिन ३ लीटर जल व इलेक्ट्रोलाइट्स का सेवन बनाए रखें।',
       ),
     );
 
     // Serum Uric Acid
-    final uricStatus = _evaluateStatus(serumUricAcidMgDl, 3.5, 7.2, 4.0, 6.0, highIsBad: true, criticalHigh: 9.0);
+    final uricStatus = _evaluateStatus(serumUricAcidMgDl, 3.5, 7.2, 4.0, 6.0,
+        highIsBad: true, criticalHigh: 9.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'KFT_URIC',
@@ -231,13 +260,15 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: uricStatus == LabBiomarkerStatus.optimal
             ? 'प्यूरीन उपापचय सामान्य है व यूरिक एसिड का स्तर संतुलित है।'
             : 'मीठे पेय पदार्थों से बचें और जल सेवन बढ़ाएं।',
-        lifestylePrescription: 'Tart cherry extract or lemon water in the morning.',
+        lifestylePrescription:
+            'Tart cherry extract or lemon water in the morning.',
         regionalLifestylePrescription: 'सुबह गुनगुने पानी में नींबू का रस लें।',
       ),
     );
 
     // --- 4. Micronutrients & Endocrine Panel ---
-    final vitDStatus = _evaluateStatus(vitaminD3NgMl, 30.0, 100.0, 40.0, 70.0, highIsBad: false);
+    final vitDStatus = _evaluateStatus(vitaminD3NgMl, 30.0, 100.0, 40.0, 70.0,
+        highIsBad: false);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'VIT_D3',
@@ -257,12 +288,16 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: vitDStatus == LabBiomarkerStatus.optimal
             ? 'प्रतिरक्षा प्रणाली व हड्डियों की मजबूती के लिए आदर्श स्तर।'
             : 'विटामिन D3 की कमी; धूप व अनुपूरक की आवश्यकता।',
-        lifestylePrescription: '20 minutes morning sun exposure & Vitamin D3 + K2 protocol.',
-        regionalLifestylePrescription: 'प्रातःकाल २० मिनट धूप लें व विटामिन D3+K2 का सेवन करें।',
+        lifestylePrescription:
+            '20 minutes morning sun exposure & Vitamin D3 + K2 protocol.',
+        regionalLifestylePrescription:
+            'प्रातःकाल २० मिनट धूप लें व विटामिन D3+K2 का सेवन करें।',
       ),
     );
 
-    final vitB12Status = _evaluateStatus(vitaminB12PgMl, 211.0, 911.0, 400.0, 800.0, highIsBad: false);
+    final vitB12Status = _evaluateStatus(
+        vitaminB12PgMl, 211.0, 911.0, 400.0, 800.0,
+        highIsBad: false);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'VIT_B12',
@@ -279,15 +314,19 @@ class ClinicalLabEngine {
         clinicalInterpretation: vitB12Status == LabBiomarkerStatus.optimal
             ? 'Optimal myelin sheath protection and methylation reserve.'
             : 'Borderline low B12 frequently observed in vegetarian diets.',
-        regionalClinicalInterpretation: vitB12Status == LabBiomarkerStatus.optimal
-            ? 'तंत्रिका तंत्र व लाल रक्त कोशिकाओं के लिए उत्तम स्तर।'
-            : 'शाकाहारी आहार में B12 की कमी आम है; अनुपूरक लें।',
-        lifestylePrescription: 'Methylcobalamin supplement or fortified nutritional yeast.',
-        regionalLifestylePrescription: 'मेथिलकोबालामिन अथवा बी१२ फोर्टिफाइड खाद्य पदार्थों का सेवन करें।',
+        regionalClinicalInterpretation:
+            vitB12Status == LabBiomarkerStatus.optimal
+                ? 'तंत्रिका तंत्र व लाल रक्त कोशिकाओं के लिए उत्तम स्तर।'
+                : 'शाकाहारी आहार में B12 की कमी आम है; अनुपूरक लें।',
+        lifestylePrescription:
+            'Methylcobalamin supplement or fortified nutritional yeast.',
+        regionalLifestylePrescription:
+            'मेथिलकोबालामिन अथवा बी१२ फोर्टिफाइड खाद्य पदार्थों का सेवन करें।',
       ),
     );
 
-    final tshStatus = _evaluateStatus(tshUiuMl, 0.4, 4.5, 1.0, 2.5, highIsBad: true, criticalHigh: 8.0);
+    final tshStatus = _evaluateStatus(tshUiuMl, 0.4, 4.5, 1.0, 2.5,
+        highIsBad: true, criticalHigh: 8.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'ENDO_TSH',
@@ -307,13 +346,16 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: tshStatus == LabBiomarkerStatus.optimal
             ? 'थायरॉयड व उपापचय दर पूर्णतः संतुलित है।'
             : 'थायरॉयड कार्यप्रणाली में हल्का उतार-चढ़ाव।',
-        lifestylePrescription: 'Adequate selenium (2 Brazil nuts/day) and iodized salt.',
-        regionalLifestylePrescription: 'सेलेनियम (ब्राजील नट्स) व आयोडीन युक्त आहार लें।',
+        lifestylePrescription:
+            'Adequate selenium (2 Brazil nuts/day) and iodized salt.',
+        regionalLifestylePrescription:
+            'सेलेनियम (ब्राजील नट्स) व आयोडीन युक्त आहार लें।',
       ),
     );
 
     // --- 5. Hematology & Inflammation Panel ---
-    final hscrpStatus = _evaluateStatus(hsCrpMgL, 0.0, 3.0, 0.1, 1.0, highIsBad: true, criticalHigh: 6.0);
+    final hscrpStatus = _evaluateStatus(hsCrpMgL, 0.0, 3.0, 0.1, 1.0,
+        highIsBad: true, criticalHigh: 6.0);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'CARDIO_HSCRP',
@@ -330,15 +372,19 @@ class ClinicalLabEngine {
         clinicalInterpretation: hscrpStatus == LabBiomarkerStatus.optimal
             ? 'Minimal systemic vascular inflammation and low cardiovascular plaque risk.'
             : 'Elevated systemic micro-inflammation.',
-        regionalClinicalInterpretation: hscrpStatus == LabBiomarkerStatus.optimal
-            ? 'धमनियों में सूक्ष्म सूजन का स्तर अत्यंत कम व सुरक्षित है।'
-            : 'शरीर में सूजन का संकेत; सूजन-रोधी आहार लें।',
-        lifestylePrescription: 'Curcumin with black pepper (Haldi doodh) & cold-pressed virgin oils.',
-        regionalLifestylePrescription: 'हल्दी वाला दूध (काली मिर्च युक्त) व एंटीऑक्सीडेंट्स लें।',
+        regionalClinicalInterpretation:
+            hscrpStatus == LabBiomarkerStatus.optimal
+                ? 'धमनियों में सूक्ष्म सूजन का स्तर अत्यंत कम व सुरक्षित है।'
+                : 'शरीर में सूजन का संकेत; सूजन-रोधी आहार लें।',
+        lifestylePrescription:
+            'Curcumin with black pepper (Haldi doodh) & cold-pressed virgin oils.',
+        regionalLifestylePrescription:
+            'हल्दी वाला दूध (काली मिर्च युक्त) व एंटीऑक्सीडेंट्स लें।',
       ),
     );
 
-    final hbStatus = _evaluateStatus(hemoglobinGDl, 12.0, 17.0, 13.5, 16.5, highIsBad: false);
+    final hbStatus = _evaluateStatus(hemoglobinGDl, 12.0, 17.0, 13.5, 16.5,
+        highIsBad: false);
     biomarkers.add(
       ParsedLabBiomarker(
         code: 'CBC_HB',
@@ -358,8 +404,10 @@ class ClinicalLabEngine {
         regionalClinicalInterpretation: hbStatus == LabBiomarkerStatus.optimal
             ? 'रक्त में ऑक्सीजन वहन क्षमता उत्कृष्ट है।'
             : 'आयरन व विटामिन सी युक्त आहार (आंवला, पालक) बढ़ाएं।',
-        lifestylePrescription: 'Amla juice and green leafy vegetables cooked in iron cookware.',
-        regionalLifestylePrescription: 'आंवला रस व लोहे के बर्तन में पकी हरी पत्तेदार सब्जियां खाएं।',
+        lifestylePrescription:
+            'Amla juice and green leafy vegetables cooked in iron cookware.',
+        regionalLifestylePrescription:
+            'आंवला रस व लोहे के बर्तन में पकी हरी पत्तेदार सब्जियां खाएं।',
       ),
     );
 
@@ -368,8 +416,14 @@ class ClinicalLabEngine {
     for (final cat in LabBiomarkerCategory.values) {
       final catBiomarkers = biomarkers.where((b) => b.category == cat).toList();
       if (catBiomarkers.isNotEmpty) {
-        final optimalCount = catBiomarkers.where((b) => b.status == LabBiomarkerStatus.optimal).length;
-        final abnormalCount = catBiomarkers.where((b) => b.status == LabBiomarkerStatus.abnormal || b.status == LabBiomarkerStatus.critical).length;
+        final optimalCount = catBiomarkers
+            .where((b) => b.status == LabBiomarkerStatus.optimal)
+            .length;
+        final abnormalCount = catBiomarkers
+            .where((b) =>
+                b.status == LabBiomarkerStatus.abnormal ||
+                b.status == LabBiomarkerStatus.critical)
+            .length;
         final score = (optimalCount / catBiomarkers.length) * 100.0;
 
         panelSummaries.add(
@@ -391,12 +445,19 @@ class ClinicalLabEngine {
     }
 
     // Overall Score
-    final totalOptimal = biomarkers.where((b) => b.status == LabBiomarkerStatus.optimal).length;
-    final totalBorderline = biomarkers.where((b) => b.status == LabBiomarkerStatus.borderline).length;
-    final overallScore = _round(((totalOptimal * 1.0 + totalBorderline * 0.5) / biomarkers.length) * 100.0);
+    final totalOptimal =
+        biomarkers.where((b) => b.status == LabBiomarkerStatus.optimal).length;
+    final totalBorderline = biomarkers
+        .where((b) => b.status == LabBiomarkerStatus.borderline)
+        .length;
+    final overallScore = _round(
+        ((totalOptimal * 1.0 + totalBorderline * 0.5) / biomarkers.length) *
+            100.0);
 
     // Check for Critical Physician Escalations
-    final criticalBiomarkers = biomarkers.where((b) => b.status == LabBiomarkerStatus.critical).toList();
+    final criticalBiomarkers = biomarkers
+        .where((b) => b.status == LabBiomarkerStatus.critical)
+        .toList();
     final requiresConsult = criticalBiomarkers.isNotEmpty;
     final escalationReason = requiresConsult
         ? 'Critical threshold breached in: ${criticalBiomarkers.map((b) => "${b.name} (${b.measuredValue} ${b.unit})").join(", ")}'
@@ -456,10 +517,13 @@ class ClinicalLabEngine {
     return LabBiomarkerStatus.abnormal;
   }
 
-  List<LabOptimizationProtocol> _generateOptimizationProtocols(List<ParsedLabBiomarker> biomarkers) {
+  List<LabOptimizationProtocol> _generateOptimizationProtocols(
+      List<ParsedLabBiomarker> biomarkers) {
     final protocols = <LabOptimizationProtocol>[];
 
-    final nonOptimal = biomarkers.where((b) => b.status != LabBiomarkerStatus.optimal).toList();
+    final nonOptimal = biomarkers
+        .where((b) => b.status != LabBiomarkerStatus.optimal)
+        .toList();
     for (final b in nonOptimal.take(3)) {
       protocols.add(
         LabOptimizationProtocol(
@@ -482,8 +546,10 @@ class ClinicalLabEngine {
           title: 'Longevity Biomarker Maintenance',
           regionalTitle: 'दीर्घायु बायोमार्कर संतुलन संरक्षण',
           targetBiomarker: 'All Biomarkers Optimal',
-          actionPlan: 'Continue current anti-inflammatory nutrition and daily Zone 2 exercise routine.',
-          regionalActionPlan: 'वर्तमान स्वस्थ खान-पान व दैनिक व्यायाम की दिनचर्या जारी रखें।',
+          actionPlan:
+              'Continue current anti-inflammatory nutrition and daily Zone 2 exercise routine.',
+          regionalActionPlan:
+              'वर्तमान स्वस्थ खान-पान व दैनिक व्यायाम की दिनचर्या जारी रखें।',
           expectedChange: 'Sustained optimal longevity status',
           karmaReward: 50,
         ),

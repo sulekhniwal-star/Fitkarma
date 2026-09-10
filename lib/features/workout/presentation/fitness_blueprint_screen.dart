@@ -13,12 +13,15 @@ class FitnessBlueprintScreen extends ConsumerStatefulWidget {
   const FitnessBlueprintScreen({super.key});
 
   @override
-  ConsumerState<FitnessBlueprintScreen> createState() => _FitnessBlueprintScreenState();
+  ConsumerState<FitnessBlueprintScreen> createState() =>
+      _FitnessBlueprintScreenState();
 }
 
-class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen> {
+class _FitnessBlueprintScreenState
+    extends ConsumerState<FitnessBlueprintScreen> {
   FitnessGoal _selectedGoal = FitnessGoal.hypertrophy;
-  final TrainingExperience _selectedExperience = TrainingExperience.intermediate;
+  final TrainingExperience _selectedExperience =
+      TrainingExperience.intermediate;
   EquipmentEnvironment _selectedEquipment = EquipmentEnvironment.commercialGym;
   int _selectedDaysPerWeek = 4;
 
@@ -49,7 +52,11 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
               // 1. Goal Selector Chips
               const Text(
                 'PRIMARY TRAINING GOAL (मुख्य प्रशिक्षण लक्ष्य)',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textMuted, letterSpacing: 0.5),
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textMuted,
+                    letterSpacing: 0.5),
               ),
               const SizedBox(height: AppSpacing.sm),
               SingleChildScrollView(
@@ -62,15 +69,21 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                       child: ChoiceChip(
                         label: Text(g.label),
                         selected: isSelected,
-                        selectedColor: AppColors.karmaGreen.withValues(alpha: 0.2),
+                        selectedColor:
+                            AppColors.karmaGreen.withValues(alpha: 0.2),
                         backgroundColor: AppColors.surface,
                         labelStyle: TextStyle(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.w700 : FontWeight.w500,
                           fontSize: 12,
                         ),
                         side: BorderSide(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.glassBorder,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.glassBorder,
                         ),
                         onSelected: (val) {
                           if (val) setState(() => _selectedGoal = g);
@@ -91,10 +104,17 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Weekly Frequency', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
+                        const Text('Weekly Frequency',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13,
+                                color: AppColors.textPrimary)),
                         Text(
                           '$_selectedDaysPerWeek Days / Week',
-                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: AppColors.focusBlue),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 13,
+                              color: AppColors.focusBlue),
                         ),
                       ],
                     ),
@@ -104,24 +124,35 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                       max: 6.0,
                       divisions: 3,
                       activeColor: AppColors.focusBlue,
-                      onChanged: (val) => setState(() => _selectedDaysPerWeek = val.round()),
+                      onChanged: (val) =>
+                          setState(() => _selectedDaysPerWeek = val.round()),
                     ),
                     const Divider(color: AppColors.glassBorder, height: 16),
                     Row(
                       children: [
                         const Expanded(
-                          child: Text('Equipment:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                          child: Text('Equipment:',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.textSecondary)),
                         ),
                         DropdownButton<EquipmentEnvironment>(
                           value: _selectedEquipment,
                           dropdownColor: AppColors.surfaceElevated,
                           underline: const SizedBox(),
-                          style: const TextStyle(fontSize: 12, color: AppColors.karmaGreen, fontWeight: FontWeight.w700),
+                          style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.karmaGreen,
+                              fontWeight: FontWeight.w700),
                           items: EquipmentEnvironment.values.map((e) {
-                            return DropdownMenuItem(value: e, child: Text(e.label));
+                            return DropdownMenuItem(
+                                value: e, child: Text(e.label));
                           }).toList(),
                           onChanged: (val) {
-                            if (val != null) setState(() => _selectedEquipment = val);
+                            if (val != null) {
+                              setState(() => _selectedEquipment = val);
+                            }
                           },
                         ),
                       ],
@@ -148,15 +179,21 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: AppColors.karmaGreen.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: AppColors.karmaGreen.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: AppColors.karmaGreen
+                                    .withValues(alpha: 0.4)),
                           ),
                           child: const Text(
                             '4-WEEK MESOCYCLE',
-                            style: TextStyle(color: AppColors.karmaGreen, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: AppColors.karmaGreen,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -180,7 +217,8 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                         ),
                         GlowingMetric(
                           label: 'Rep Target',
-                          value: '${blueprint.goal.repsMin}-${blueprint.goal.repsMax}',
+                          value:
+                              '${blueprint.goal.repsMin}-${blueprint.goal.repsMax}',
                           unit: 'reps',
                           accentColor: AppColors.focusBlue,
                         ),
@@ -189,12 +227,18 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                     const SizedBox(height: AppSpacing.md),
                     Text(
                       blueprint.periodizationFramework,
-                      style: const TextStyle(fontSize: 11, color: AppColors.focusBlue, fontWeight: FontWeight.w700),
+                      style: const TextStyle(
+                          fontSize: 11,
+                          color: AppColors.focusBlue,
+                          fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 3),
                     Text(
                       blueprint.biomechanicalRationale,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11, height: 1.3),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 11,
+                          height: 1.3),
                     ),
                   ],
                 ),
@@ -216,7 +260,8 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
               BentoCard(
                 backgroundColor: AppColors.surfaceElevated,
                 child: Column(
-                  children: blueprint.weeklyVolumeDistribution.entries.map((entry) {
+                  children:
+                      blueprint.weeklyVolumeDistribution.entries.map((entry) {
                     final double frac = (entry.value / 20.0).clamp(0.0, 1.0);
 
                     return Padding(
@@ -227,8 +272,16 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(entry.key.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: AppColors.textPrimary)),
-                              Text('${entry.value} sets', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.karmaGreen)),
+                              Text(entry.key.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      color: AppColors.textPrimary)),
+                              Text('${entry.value} sets',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 12,
+                                      color: AppColors.karmaGreen)),
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -237,7 +290,8 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                             child: LinearProgressIndicator(
                               value: frac,
                               backgroundColor: AppColors.surface,
-                              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.karmaGreen),
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                  AppColors.karmaGreen),
                               minHeight: 5,
                             ),
                           ),
@@ -275,19 +329,30 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(sess.title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.textPrimary)),
-                                Text(sess.regionalTitle, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                                Text(sess.title,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 13,
+                                        color: AppColors.textPrimary)),
+                                Text(sess.regionalTitle,
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textMuted)),
                               ],
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 2),
                               decoration: const BoxDecoration(
                                 color: AppColors.surface,
                                 borderRadius: AppRadii.radiusSm,
                               ),
                               child: Text(
                                 '${sess.estimatedDurationMinutes}m • ${sess.plannedExercises.length} moves',
-                                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.focusBlue),
+                                style: const TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.focusBlue),
                               ),
                             ),
                           ],
@@ -301,11 +366,16 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                               children: [
                                 Text(
                                   '• ${planned.exercise.name}',
-                                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                                  style: AppTypography.bodySmall.copyWith(
+                                      color: AppColors.textSecondary,
+                                      fontSize: 11),
                                 ),
                                 Text(
                                   '${planned.targetSets} sets × ${planned.targetRepsMin}-${planned.targetRepsMax}',
-                                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.karmaGreen),
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.karmaGreen),
                                 ),
                               ],
                             ),
@@ -326,7 +396,8 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                     backgroundColor: AppColors.karmaGreen,
                     foregroundColor: AppColors.textInverse,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusSm),
                   ),
                   icon: const Icon(Icons.rocket_launch_rounded, size: 20),
                   label: const Text(
@@ -339,12 +410,14 @@ class _FitnessBlueprintScreenState extends ConsumerState<FitnessBlueprintScreen>
                         backgroundColor: AppColors.surfaceElevated,
                         content: Row(
                           children: [
-                            const Icon(Icons.check_circle_rounded, color: AppColors.karmaGreen, size: 18),
+                            const Icon(Icons.check_circle_rounded,
+                                color: AppColors.karmaGreen, size: 18),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 'Blueprint "${blueprint.title}" activated for the next 4-week cycle!',
-                                style: const TextStyle(color: AppColors.textPrimary, fontSize: 12),
+                                style: const TextStyle(
+                                    color: AppColors.textPrimary, fontSize: 12),
                               ),
                             ),
                           ],

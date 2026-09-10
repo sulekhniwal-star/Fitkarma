@@ -3,7 +3,8 @@ import '../../domain/progress_photo_engine.dart';
 import '../../domain/progress_photo_models.dart';
 
 final progressPhotoProvider =
-    StateNotifierProvider<ProgressPhotoNotifier, ProgressPhotoTimelineReport>((ref) {
+    StateNotifierProvider<ProgressPhotoNotifier, ProgressPhotoTimelineReport>(
+        (ref) {
   return ProgressPhotoNotifier();
 });
 
@@ -92,7 +93,8 @@ class ProgressPhotoNotifier extends StateNotifier<ProgressPhotoTimelineReport> {
       photoId: 'photo_${DateTime.now().millisecondsSinceEpoch}',
       capturedAt: DateTime.now(),
       poseAngle: poseAngle,
-      localFilePath: 'vault://photos/new_${DateTime.now().millisecondsSinceEpoch}.enc',
+      localFilePath:
+          'vault://photos/new_${DateTime.now().millisecondsSinceEpoch}.enc',
       weightKgAtCapture: weightKg,
       bodyFatPercentAtCapture: bodyFatPercent,
       waistCmAtCapture: waistCm,
@@ -103,7 +105,8 @@ class ProgressPhotoNotifier extends StateNotifier<ProgressPhotoTimelineReport> {
     final updatedEntries = [...state.entries, newEntry];
     state = _engine.generateTimelineReport(
       entries: updatedEntries,
-      selectedBefore: state.activeComparison?.beforePhoto ?? updatedEntries.first,
+      selectedBefore:
+          state.activeComparison?.beforePhoto ?? updatedEntries.first,
       selectedAfter: newEntry,
       executionTime: DateTime.now(),
     );

@@ -1,7 +1,16 @@
 enum DoshaType {
-  vata(name: 'Vata', regionalName: 'वात', element: 'Air & Ether (वायु एवं आकाश)'),
-  pitta(name: 'Pitta', regionalName: 'पित्त', element: 'Fire & Water (अग्नि एवं जल)'),
-  kapha(name: 'Kapha', regionalName: 'कफ', element: 'Earth & Water (पृथ्वी एवं जल)');
+  vata(
+      name: 'Vata',
+      regionalName: 'वात',
+      element: 'Air & Ether (वायु एवं आकाश)'),
+  pitta(
+      name: 'Pitta',
+      regionalName: 'पित्त',
+      element: 'Fire & Water (अग्नि एवं जल)'),
+  kapha(
+      name: 'Kapha',
+      regionalName: 'कफ',
+      element: 'Earth & Water (पृथ्वी एवं जल)');
 
   final String name;
   final String regionalName;
@@ -101,7 +110,8 @@ class DoshaScoringEngine {
         ),
         DoshaQuizOption(
           text: 'Slow, steady appetite, can skip meals easily',
-          regionalText: 'धीमी एवं स्थिर पाचन क्रिया, आसानी से भोजन छोड़ सकते हैं',
+          regionalText:
+              'धीमी एवं स्थिर पाचन क्रिया, आसानी से भोजन छोड़ सकते हैं',
           dosha: DoshaType.kapha,
         ),
       ],
@@ -153,7 +163,8 @@ class DoshaScoringEngine {
     DoshaQuizQuestion(
       id: 'stress_response',
       question: 'How do you instinctively react under high stress?',
-      regionalQuestion: 'अत्यधिक तनाव की स्थिति में आपकी क्या प्रतिक्रिया होती है?',
+      regionalQuestion:
+          'अत्यधिक तनाव की स्थिति में आपकी क्या प्रतिक्रिया होती है?',
       options: [
         DoshaQuizOption(
           text: 'Anxious, overwhelmed, overthinking and restless',
@@ -236,16 +247,22 @@ class DoshaScoringEngine {
 
     switch (primary) {
       case DoshaType.vata:
-        nutritionGuidance = 'Focus on warm, grounding, nourishing Indian meals (ghee, daal, cooked root vegetables). Avoid cold dry salads and raw fasting.';
-        trainingGuidance = 'Prioritize consistent resistance training with moderate weights and grounding yoga/mobility. Avoid over-exhausting cardio.';
+        nutritionGuidance =
+            'Focus on warm, grounding, nourishing Indian meals (ghee, daal, cooked root vegetables). Avoid cold dry salads and raw fasting.';
+        trainingGuidance =
+            'Prioritize consistent resistance training with moderate weights and grounding yoga/mobility. Avoid over-exhausting cardio.';
         break;
       case DoshaType.pitta:
-        nutritionGuidance = 'Incorporate cooling foods (coconut water, coriander, sweet fruits, curd/buttermilk). Limit excessive chilies, garlic, and deep-fried items.';
-        trainingGuidance = 'Channel intense drive into progressive compound lifts and early morning outdoor running before peak heat.';
+        nutritionGuidance =
+            'Incorporate cooling foods (coconut water, coriander, sweet fruits, curd/buttermilk). Limit excessive chilies, garlic, and deep-fried items.';
+        trainingGuidance =
+            'Channel intense drive into progressive compound lifts and early morning outdoor running before peak heat.';
         break;
       case DoshaType.kapha:
-        nutritionGuidance = 'Focus on light, warm, spiced foods with ginger, black pepper, and turmeric. Keep carbohydrates moderate and prioritize lean protein.';
-        trainingGuidance = 'Thrives on high-intensity interval training (HIIT), circuit workouts, and fast-paced cardio to stimulate metabolism.';
+        nutritionGuidance =
+            'Focus on light, warm, spiced foods with ginger, black pepper, and turmeric. Keep carbohydrates moderate and prioritize lean protein.';
+        trainingGuidance =
+            'Thrives on high-intensity interval training (HIIT), circuit workouts, and fast-paced cardio to stimulate metabolism.';
         break;
     }
 

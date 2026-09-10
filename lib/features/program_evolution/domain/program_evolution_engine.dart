@@ -1,8 +1,8 @@
 enum EvolutionAction {
-  progress,     // Increase volume / intensity / weights
-  maintain,     // Keep current program parameters
-  deload,       // Trigger 1-week active recovery / lower volume
-  recalibrate,  // Adjust calorie/macro targets due to plateau
+  progress, // Increase volume / intensity / weights
+  maintain, // Keep current program parameters
+  deload, // Trigger 1-week active recovery / lower volume
+  recalibrate, // Adjust calorie/macro targets due to plateau
 }
 
 class ProgramEvolutionResult {
@@ -34,10 +34,12 @@ class ProgramEvolutionResult {
     return ProgramEvolutionResult(
       action: action,
       volumeMultiplier: (map['volumeMultiplier'] as num?)?.toDouble() ?? 1.0,
-      recommendedCalorieDelta: (map['recommendedCalorieDelta'] as num?)?.toInt() ?? 0,
+      recommendedCalorieDelta:
+          (map['recommendedCalorieDelta'] as num?)?.toInt() ?? 0,
       adherenceRate: (map['adherenceRate'] as num?)?.toDouble() ?? 0.8,
       averageReadiness: (map['averageReadiness'] as num?)?.toDouble() ?? 75.0,
-      reasoning: map['reasoning'] as String? ?? 'Maintaining current program progression.',
+      reasoning: map['reasoning'] as String? ??
+          'Maintaining current program progression.',
       evaluatedAt: map['evaluatedAt'] != null
           ? DateTime.tryParse(map['evaluatedAt']) ?? DateTime.now()
           : DateTime.now(),
@@ -78,7 +80,8 @@ class ProgramEvolutionEngine {
         recommendedCalorieDelta: 0,
         adherenceRate: adherence,
         averageReadiness: averageReadiness,
-        reasoning: 'Systemic fatigue detected across consecutive sessions. Triggering a 1-week active deload cycle to restore recovery capacity.',
+        reasoning:
+            'Systemic fatigue detected across consecutive sessions. Triggering a 1-week active deload cycle to restore recovery capacity.',
         evaluatedAt: DateTime.now(),
       );
     }
@@ -91,7 +94,8 @@ class ProgramEvolutionEngine {
         recommendedCalorieDelta: -150,
         adherenceRate: adherence,
         averageReadiness: averageReadiness,
-        reasoning: 'Metabolic adaptation detected after 14-day plateau with strong consistency. Adjusting daily intake by -150 kcal to resume progression.',
+        reasoning:
+            'Metabolic adaptation detected after 14-day plateau with strong consistency. Adjusting daily intake by -150 kcal to resume progression.',
         evaluatedAt: DateTime.now(),
       );
     }
@@ -104,7 +108,8 @@ class ProgramEvolutionEngine {
         recommendedCalorieDelta: 0,
         adherenceRate: adherence,
         averageReadiness: averageReadiness,
-        reasoning: 'Exceptional adherence (${(adherence * 100).round()}%) and readiness (${averageReadiness.round()}). Advancing training volume by +5%.',
+        reasoning:
+            'Exceptional adherence (${(adherence * 100).round()}%) and readiness (${averageReadiness.round()}). Advancing training volume by +5%.',
         evaluatedAt: DateTime.now(),
       );
     }
@@ -116,7 +121,8 @@ class ProgramEvolutionEngine {
       recommendedCalorieDelta: 0,
       adherenceRate: adherence,
       averageReadiness: averageReadiness,
-      reasoning: 'Consistency is stabilizing. Maintaining current program blueprint without adjustment.',
+      reasoning:
+          'Consistency is stabilizing. Maintaining current program blueprint without adjustment.',
       evaluatedAt: DateTime.now(),
     );
   }

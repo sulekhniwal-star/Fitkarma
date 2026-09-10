@@ -35,7 +35,8 @@ class LeaderboardScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showLeaderboardPhilosophyModal(context),
           ),
         ],
@@ -63,7 +64,8 @@ class LeaderboardScreen extends ConsumerWidget {
 
             // 5. Section Header
             BilingualLabel(
-              primaryText: 'National Rankings (${state.totalAthletesInPool} Athletes)',
+              primaryText:
+                  'National Rankings (${state.totalAthletesInPool} Athletes)',
               regionalText: 'राष्ट्रीय श्रेष्ठता क्रम',
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -157,7 +159,8 @@ class LeaderboardScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.workspace_premium, color: AppColors.gold, size: 20),
+              const Icon(Icons.workspace_premium,
+                  color: AppColors.gold, size: 20),
               const SizedBox(width: 6),
               Text(
                 'Weekly Sadhana Podium',
@@ -188,13 +191,17 @@ class LeaderboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPodiumColumn(
-      LeaderboardEntry entry, int rank, Color medalColor, double pedestalHeight) {
+  Widget _buildPodiumColumn(LeaderboardEntry entry, int rank, Color medalColor,
+      double pedestalHeight) {
     return Column(
       children: [
         // Crown / Rank Icon
         Text(
-          rank == 1 ? '👑' : rank == 2 ? '🥈' : '🥉',
+          rank == 1
+              ? '👑'
+              : rank == 2
+                  ? '🥈'
+                  : '🥉',
           style: const TextStyle(fontSize: 20),
         ),
         const SizedBox(height: 4),
@@ -219,7 +226,8 @@ class LeaderboardScreen extends ConsumerWidget {
         ),
         Text(
           '${entry.scoreValue.toInt()} ${entry.scoreUnit}',
-          style: AppTypography.metricLabel.copyWith(color: medalColor, fontSize: 10),
+          style: AppTypography.metricLabel
+              .copyWith(color: medalColor, fontSize: 10),
         ),
         const SizedBox(height: 6),
 
@@ -259,7 +267,8 @@ class LeaderboardScreen extends ConsumerWidget {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.karmaGreen.withValues(alpha: 0.2),
                         borderRadius: AppRadii.radiusFull,
@@ -285,20 +294,23 @@ class LeaderboardScreen extends ConsumerWidget {
                 const SizedBox(height: 4),
                 Text(
                   '${user.scoreValue.toInt()} ${user.scoreUnit} • ${user.activeStreakDays}d streak',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textSecondary),
                 ),
                 if (pointsToNext > 0) ...[
                   const SizedBox(height: 2),
                   Text(
                     '+${pointsToNext.toInt()} ${user.scoreUnit} to reach #${user.rank - 1}',
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.gold, fontSize: 11),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.gold, fontSize: 11),
                   ),
                 ],
               ],
             ),
           ),
           GlowingMetric(
-            value: 'Top ${(100 - percentile).clamp(0.1, 99.0).toStringAsFixed(1)}%',
+            value:
+                'Top ${(100 - percentile).clamp(0.1, 99.0).toStringAsFixed(1)}%',
             label: 'National Decile',
             accentColor: AppColors.karmaGreen,
           ),
@@ -307,7 +319,8 @@ class LeaderboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildRankRowCard(BuildContext context, WidgetRef ref, LeaderboardEntry entry) {
+  Widget _buildRankRowCard(
+      BuildContext context, WidgetRef ref, LeaderboardEntry entry) {
     final isSelf = entry.isCurrentUser;
     final isTop3 = entry.rank <= 3;
     final rankColor = entry.rank == 1
@@ -319,12 +332,17 @@ class LeaderboardScreen extends ConsumerWidget {
                 : AppColors.textSecondary;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
-        color: isSelf ? AppColors.karmaGreen.withValues(alpha: 0.10) : AppColors.surfaceElevated,
+        color: isSelf
+            ? AppColors.karmaGreen.withValues(alpha: 0.10)
+            : AppColors.surfaceElevated,
         borderRadius: AppRadii.radiusMd,
         border: Border.all(
-          color: isSelf ? AppColors.karmaGreen.withValues(alpha: 0.4) : Colors.transparent,
+          color: isSelf
+              ? AppColors.karmaGreen.withValues(alpha: 0.4)
+              : Colors.transparent,
         ),
       ),
       child: Row(
@@ -374,7 +392,8 @@ class LeaderboardScreen extends ConsumerWidget {
                     if (isSelf)
                       Container(
                         margin: const EdgeInsets.only(left: 6),
-                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 1),
                         decoration: const BoxDecoration(
                           color: AppColors.karmaGreen,
                           borderRadius: AppRadii.radiusFull,
@@ -392,7 +411,8 @@ class LeaderboardScreen extends ConsumerWidget {
                 ),
                 Text(
                   '${entry.karmaTierTitle} • ${entry.cityLocation}',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textMuted, fontSize: 11),
                 ),
               ],
             ),
@@ -410,14 +430,18 @@ class LeaderboardScreen extends ConsumerWidget {
                 ),
               ),
               InkWell(
-                onTap: () => ref.read(leaderboardProvider.notifier).giveKudos(entry.athleteId),
+                onTap: () => ref
+                    .read(leaderboardProvider.notifier)
+                    .giveKudos(entry.athleteId),
                 child: Row(
                   children: [
-                    const Icon(Icons.favorite, color: AppColors.karmaGreen, size: 12),
+                    const Icon(Icons.favorite,
+                        color: AppColors.karmaGreen, size: 12),
                     const SizedBox(width: 2),
                     Text(
                       '${entry.kudosReceived}',
-                      style: AppTypography.metricLabel.copyWith(color: AppColors.karmaGreen, fontSize: 10),
+                      style: AppTypography.metricLabel
+                          .copyWith(color: AppColors.karmaGreen, fontSize: 10),
                     ),
                   ],
                 ),
@@ -445,7 +469,8 @@ class LeaderboardScreen extends ConsumerWidget {
             children: [
               Text(
                 'Shreshthata Leaderboard Philosophy',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -453,7 +478,8 @@ class LeaderboardScreen extends ConsumerWidget {
                 '• Karma Velocity rewards sleep, recovery, steps, and mindful nutrition equally.\n'
                 '• Shatpawali consistency honors natural digestive fire (*Jatharagni*).\n'
                 '• Unbroken habit streaks celebrate lifelong discipline (*Sthirata*).',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

@@ -2,10 +2,30 @@ import 'package:flutter/foundation.dart';
 
 /// Performance grading tier for monthly health synthesis
 enum MonthlyHealthGrade {
-  aPlus(grade: 'A+', label: 'Exceptional (Utkrisht)', regionalLabel: 'उत्कृष्ट स्वास्थ्य सुधार', minScore: 90, colorCode: 0xFF00E676),
-  a(grade: 'A', label: 'Optimal (Uttam)', regionalLabel: 'उत्तम स्वास्थ्य स्तर', minScore: 80, colorCode: 0xFF448AFF),
-  b(grade: 'B', label: 'Moderate (Madhyam)', regionalLabel: 'मध्यम प्रगति (सुधार संभव)', minScore: 70, colorCode: 0xFFFFB300),
-  c(grade: 'C', label: 'Needs Focus (Dhyan Aavashyak)', regionalLabel: 'ध्यान आवश्यक (सक्रियता बढ़ाएं)', minScore: 0, colorCode: 0xFFFF5252);
+  aPlus(
+      grade: 'A+',
+      label: 'Exceptional (Utkrisht)',
+      regionalLabel: 'उत्कृष्ट स्वास्थ्य सुधार',
+      minScore: 90,
+      colorCode: 0xFF00E676),
+  a(
+      grade: 'A',
+      label: 'Optimal (Uttam)',
+      regionalLabel: 'उत्तम स्वास्थ्य स्तर',
+      minScore: 80,
+      colorCode: 0xFF448AFF),
+  b(
+      grade: 'B',
+      label: 'Moderate (Madhyam)',
+      regionalLabel: 'मध्यम प्रगति (सुधार संभव)',
+      minScore: 70,
+      colorCode: 0xFFFFB300),
+  c(
+      grade: 'C',
+      label: 'Needs Focus (Dhyan Aavashyak)',
+      regionalLabel: 'ध्यान आवश्यक (सक्रियता बढ़ाएं)',
+      minScore: 0,
+      colorCode: 0xFFFF5252);
 
   final String grade;
   final String label;

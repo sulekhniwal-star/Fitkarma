@@ -21,10 +21,12 @@ class SatietyPredictionScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<SatietyPredictionScreen> createState() => _SatietyPredictionScreenState();
+  ConsumerState<SatietyPredictionScreen> createState() =>
+      _SatietyPredictionScreenState();
 }
 
-class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScreen> {
+class _SatietyPredictionScreenState
+    extends ConsumerState<SatietyPredictionScreen> {
   late MealPhase _selectedPhase;
 
   @override
@@ -68,15 +70,21 @@ class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScree
                       child: ChoiceChip(
                         label: Text(phase.name.split('/')[0].trim()),
                         selected: isSelected,
-                        selectedColor: AppColors.karmaGreen.withValues(alpha: 0.2),
+                        selectedColor:
+                            AppColors.karmaGreen.withValues(alpha: 0.2),
                         backgroundColor: AppColors.surface,
                         labelStyle: TextStyle(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.w700 : FontWeight.w500,
                           fontSize: 12,
                         ),
                         side: BorderSide(
-                          color: isSelected ? AppColors.karmaGreen : AppColors.glassBorder,
+                          color: isSelected
+                              ? AppColors.karmaGreen
+                              : AppColors.glassBorder,
                         ),
                         onSelected: (val) {
                           if (val) setState(() => _selectedPhase = phase);
@@ -103,11 +111,13 @@ class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScree
                           regionalText: report.grade.regionalLabel,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: gradeColor.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
-                            border: Border.all(color: gradeColor.withValues(alpha: 0.4)),
+                            border: Border.all(
+                                color: gradeColor.withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             report.grade.grade,
@@ -220,14 +230,16 @@ class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScree
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.timer_outlined, color: AppColors.gold, size: 20),
+                        const Icon(Icons.timer_outlined,
+                            color: AppColors.gold, size: 20),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
@@ -241,7 +253,8 @@ class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScree
                                   ),
                                   if (booster.addedSatietyMinutes > 0)
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 6, vertical: 2),
                                       decoration: const BoxDecoration(
                                         color: AppColors.surface,
                                         borderRadius: AppRadii.radiusSm,
@@ -259,7 +272,8 @@ class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScree
                               ),
                               Text(
                                 booster.regionalTitle,
-                                style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                style: const TextStyle(
+                                    fontSize: 10, color: AppColors.textMuted),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -303,11 +317,21 @@ class _SatietyPredictionScreenState extends ConsumerState<SatietyPredictionScree
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.textPrimary)),
-                Text(regionalTitle, style: const TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                Text(title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                        color: AppColors.textPrimary)),
+                Text(regionalTitle,
+                    style: const TextStyle(
+                        fontSize: 10, color: AppColors.textMuted)),
               ],
             ),
-            Text('${score.round()}%', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: accentColor)),
+            Text('${score.round()}%',
+                style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                    color: accentColor)),
           ],
         ),
         const SizedBox(height: 6),

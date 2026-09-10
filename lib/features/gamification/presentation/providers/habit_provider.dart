@@ -4,7 +4,8 @@ import '../../domain/habit_models.dart';
 import '../../domain/karma_models.dart';
 import 'karma_provider.dart';
 
-final habitProvider = StateNotifierProvider<HabitNotifier, HabitDailySummary>((ref) {
+final habitProvider =
+    StateNotifierProvider<HabitNotifier, HabitDailySummary>((ref) {
   return HabitNotifier(ref);
 });
 
@@ -20,7 +21,8 @@ class HabitNotifier extends StateNotifier<HabitDailySummary> {
         title: 'Ushapan (Warm Water + Jeera/Methi)',
         regionalTitle: 'उषापान (गुनगुना जल + जीरा/मेथी)',
         cueDescription: 'Immediately upon waking up before brushing',
-        routineDescription: 'Drink 500ml warm water with soaked methi/jeera seeds',
+        routineDescription:
+            'Drink 500ml warm water with soaked methi/jeera seeds',
         rewardKarmaPoints: 30,
         timeSlot: HabitTimeSlot.morning,
         triggerSource: HabitTriggerSource.manual,
@@ -36,7 +38,8 @@ class HabitNotifier extends StateNotifier<HabitDailySummary> {
         title: 'Morning Sunlight & Anulom Vilom (10m)',
         regionalTitle: 'प्रातः सूर्य प्रकाश व प्राणायाम (१० मिनट)',
         cueDescription: 'Step outside within 30 mins of waking',
-        routineDescription: '10 mins sunlight exposure + 5 mins Anulom Vilom breathing',
+        routineDescription:
+            '10 mins sunlight exposure + 5 mins Anulom Vilom breathing',
         rewardKarmaPoints: 40,
         timeSlot: HabitTimeSlot.morning,
         triggerSource: HabitTriggerSource.manual,
@@ -116,7 +119,8 @@ class HabitNotifier extends StateNotifier<HabitDailySummary> {
         title: 'Digital Curfew 45m Before Sleep',
         regionalTitle: 'सोने से ४५ मिनट पूर्व स्क्रीन बंद (डिजिटल कर्फ्यू)',
         cueDescription: 'At 10:15 PM alarm trigger',
-        routineDescription: 'Phone kept in other room, read book or dim lighting',
+        routineDescription:
+            'Phone kept in other room, read book or dim lighting',
         rewardKarmaPoints: 40,
         timeSlot: HabitTimeSlot.night,
         triggerSource: HabitTriggerSource.manual,
@@ -141,9 +145,9 @@ class HabitNotifier extends StateNotifier<HabitDailySummary> {
         // Award Karma if habit was newly checked as complete
         if (toggled.isCompletedToday && !h.isCompletedToday) {
           _ref.read(karmaProvider.notifier).recordKarmaAction(
-            action: KarmaActionType.mindfulnessPranayama,
-            isReadinessAligned: true,
-          );
+                action: KarmaActionType.mindfulnessPranayama,
+                isReadinessAligned: true,
+              );
         }
 
         return toggled;

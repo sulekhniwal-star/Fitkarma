@@ -7,7 +7,8 @@ enum MuscleGroup {
   arms(name: 'Arms (Biceps/Triceps)', regionalName: 'बांहें'),
   coreAbs(name: 'Core & Abdominals', regionalName: 'पेट एवं कोर'),
   quadriceps(name: 'Quadriceps', regionalName: 'जांघें (आगे)'),
-  hamstringsGlutes(name: 'Hamstrings & Glutes', regionalName: 'हैमस्ट्रिंग एवं नितंब'),
+  hamstringsGlutes(
+      name: 'Hamstrings & Glutes', regionalName: 'हैमस्ट्रिंग एवं नितंब'),
   calves(name: 'Calves & Shins', regionalName: 'पिंडलियां');
 
   final String name;
@@ -61,41 +62,52 @@ class BodySorenessMap {
       if (level.value >= 2) {
         switch (muscle) {
           case MuscleGroup.neckTraps:
-            protocols.add('Neck & Traps: 5 min chin tucks, upper trap stretch, warm compress.');
+            protocols.add(
+                'Neck & Traps: 5 min chin tucks, upper trap stretch, warm compress.');
             break;
           case MuscleGroup.shoulders:
-            protocols.add('Shoulders: Light band dislocates, doorway pec stretch, avoid overhead pressing.');
+            protocols.add(
+                'Shoulders: Light band dislocates, doorway pec stretch, avoid overhead pressing.');
             break;
           case MuscleGroup.chest:
-            protocols.add('Chest: Foam roll thoracic spine, open-book mobility drills.');
+            protocols.add(
+                'Chest: Foam roll thoracic spine, open-book mobility drills.');
             break;
           case MuscleGroup.upperBack:
-            protocols.add('Upper Back: Lat foam rolling, thread-the-needle spinal rotations.');
+            protocols.add(
+                'Upper Back: Lat foam rolling, thread-the-needle spinal rotations.');
             break;
           case MuscleGroup.lowerBack:
-            protocols.add('Lower Back: Cat-Cow stretch, Bird-Dog holds, pelvic tilts, avoid spinal compression.');
+            protocols.add(
+                'Lower Back: Cat-Cow stretch, Bird-Dog holds, pelvic tilts, avoid spinal compression.');
             break;
           case MuscleGroup.arms:
-            protocols.add('Arms: Forearm extensor massage, light biceps stretching, magnesium hydration.');
+            protocols.add(
+                'Arms: Forearm extensor massage, light biceps stretching, magnesium hydration.');
             break;
           case MuscleGroup.coreAbs:
-            protocols.add('Core: Cobra stretch, gentle diaphragmatic breathing exercises.');
+            protocols.add(
+                'Core: Cobra stretch, gentle diaphragmatic breathing exercises.');
             break;
           case MuscleGroup.quadriceps:
-            protocols.add('Quads: Foam rolling anterior thigh, standing quad stretch, post-workout walk.');
+            protocols.add(
+                'Quads: Foam rolling anterior thigh, standing quad stretch, post-workout walk.');
             break;
           case MuscleGroup.hamstringsGlutes:
-            protocols.add('Hamstrings/Glutes: Pigeon pose, figure-4 glute stretch, lacrosse ball release.');
+            protocols.add(
+                'Hamstrings/Glutes: Pigeon pose, figure-4 glute stretch, lacrosse ball release.');
             break;
           case MuscleGroup.calves:
-            protocols.add('Calves: Wall calf stretch, ankle dorsiflexion mobility, electrolyte replenishment.');
+            protocols.add(
+                'Calves: Wall calf stretch, ankle dorsiflexion mobility, electrolyte replenishment.');
             break;
         }
       }
     });
 
     if (protocols.isEmpty) {
-      protocols.add('Muscles are fresh and well-recovered. Ready for standard training loads.');
+      protocols.add(
+          'Muscles are fresh and well-recovered. Ready for standard training loads.');
     }
 
     return protocols;

@@ -34,13 +34,15 @@ class MarketplaceScreen extends ConsumerWidget {
             icon: Badge(
               isLabelVisible: state.userOrders.isNotEmpty,
               label: Text('${state.userOrders.length}'),
-              child: const Icon(Icons.shopping_bag_outlined, color: AppColors.textSecondary),
+              child: const Icon(Icons.shopping_bag_outlined,
+                  color: AppColors.textSecondary),
             ),
             tooltip: 'My Enrollments',
             onPressed: () => _showMyOrdersBottomSheet(context, state),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showPhilosophyModal(context),
           ),
         ],
@@ -75,7 +77,8 @@ class MarketplaceScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BilingualLabel(
-                  primaryText: 'Available Programs & Consultations (${state.filteredListings.length})',
+                  primaryText:
+                      'Available Programs & Consultations (${state.filteredListings.length})',
                   regionalText: 'उपलब्ध कोर्स एवं परामर्श सत्र',
                 ),
                 if (state.filter.specialty != null ||
@@ -84,7 +87,9 @@ class MarketplaceScreen extends ConsumerWidget {
                     state.filter.onlyVerified)
                   TextButton(
                     onPressed: () => notifier.resetFilters(),
-                    child: const Text('Reset Filters', style: TextStyle(color: AppColors.focusBlue, fontSize: 11)),
+                    child: const Text('Reset Filters',
+                        style: TextStyle(
+                            color: AppColors.focusBlue, fontSize: 11)),
                   ),
               ],
             ),
@@ -119,12 +124,16 @@ class MarketplaceScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+          const Icon(Icons.check_circle_outline,
+              color: AppColors.karmaGreen, size: 16),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(color: AppColors.karmaGreen, fontSize: 12, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: AppColors.karmaGreen,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -138,10 +147,12 @@ class MarketplaceScreen extends ConsumerWidget {
       decoration: const InputDecoration(
         hintText: 'Search coach, strength, PCOS, Ayurveda, yoga...',
         hintStyle: TextStyle(color: AppColors.textSecondary, fontSize: 12),
-        prefixIcon: Icon(Icons.search, color: AppColors.textSecondary, size: 18),
+        prefixIcon:
+            Icon(Icons.search, color: AppColors.textSecondary, size: 18),
         filled: true,
         fillColor: AppColors.surfaceElevated,
-        contentPadding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+        contentPadding: EdgeInsets.symmetric(
+            horizontal: AppSpacing.md, vertical: AppSpacing.sm),
         border: OutlineInputBorder(
           borderRadius: AppRadii.radiusMd,
           borderSide: BorderSide.none,
@@ -151,20 +162,26 @@ class MarketplaceScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildSpecialtyFilters(MarketplaceState state, MarketplaceNotifier notifier) {
+  Widget _buildSpecialtyFilters(
+      MarketplaceState state, MarketplaceNotifier notifier) {
     return SizedBox(
       height: 38,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
           ChoiceChip(
-            label: const Text('All Specialties', style: TextStyle(fontSize: 11)),
+            label:
+                const Text('All Specialties', style: TextStyle(fontSize: 11)),
             selected: state.filter.specialty == null,
             selectedColor: AppColors.focusBlue,
             backgroundColor: AppColors.surfaceElevated,
             labelStyle: TextStyle(
-              color: state.filter.specialty == null ? Colors.white : AppColors.textSecondary,
-              fontWeight: state.filter.specialty == null ? FontWeight.bold : FontWeight.normal,
+              color: state.filter.specialty == null
+                  ? Colors.white
+                  : AppColors.textSecondary,
+              fontWeight: state.filter.specialty == null
+                  ? FontWeight.bold
+                  : FontWeight.normal,
             ),
             onSelected: (_) => notifier.setSpecialty(null),
           ),
@@ -174,7 +191,8 @@ class MarketplaceScreen extends ConsumerWidget {
             return Padding(
               padding: const EdgeInsets.only(right: 6),
               child: ChoiceChip(
-                label: Text(spec.name.split('&').first.trim(), style: const TextStyle(fontSize: 11)),
+                label: Text(spec.name.split('&').first.trim(),
+                    style: const TextStyle(fontSize: 11)),
                 selected: isSelected,
                 selectedColor: AppColors.focusBlue,
                 backgroundColor: AppColors.surfaceElevated,
@@ -182,7 +200,8 @@ class MarketplaceScreen extends ConsumerWidget {
                   color: isSelected ? Colors.white : AppColors.textSecondary,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
-                onSelected: (_) => notifier.setSpecialty(isSelected ? null : spec),
+                onSelected: (_) =>
+                    notifier.setSpecialty(isSelected ? null : spec),
               ),
             );
           }),
@@ -191,7 +210,8 @@ class MarketplaceScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildTypeFilterRow(MarketplaceState state, MarketplaceNotifier notifier) {
+  Widget _buildTypeFilterRow(
+      MarketplaceState state, MarketplaceNotifier notifier) {
     return Row(
       children: [
         Expanded(
@@ -208,17 +228,23 @@ class MarketplaceScreen extends ConsumerWidget {
                       label: Text(
                         type == ListingType.structuredProgram
                             ? 'Programs'
-                            : (type == ListingType.oneOnOneConsultation ? '1-on-1 Calls' : 'Diet Plans'),
+                            : (type == ListingType.oneOnOneConsultation
+                                ? '1-on-1 Calls'
+                                : 'Diet Plans'),
                         style: const TextStyle(fontSize: 10),
                       ),
                       selected: isSelected,
-                      selectedColor: AppColors.karmaGreen.withValues(alpha: 0.25),
+                      selectedColor:
+                          AppColors.karmaGreen.withValues(alpha: 0.25),
                       checkmarkColor: AppColors.karmaGreen,
                       backgroundColor: AppColors.surfaceElevated,
                       labelStyle: TextStyle(
-                        color: isSelected ? AppColors.karmaGreen : AppColors.textSecondary,
+                        color: isSelected
+                            ? AppColors.karmaGreen
+                            : AppColors.textSecondary,
                       ),
-                      onSelected: (_) => notifier.setListingType(isSelected ? null : type),
+                      onSelected: (_) =>
+                          notifier.setListingType(isSelected ? null : type),
                     ),
                   );
                 }),
@@ -231,7 +257,9 @@ class MarketplaceScreen extends ConsumerWidget {
           children: [
             const Icon(Icons.verified, color: AppColors.focusBlue, size: 14),
             const SizedBox(width: 4),
-            Text('Verified', style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
+            Text('Verified',
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary, fontSize: 10)),
             Switch(
               value: state.filter.onlyVerified,
               activeThumbColor: AppColors.focusBlue,
@@ -252,7 +280,8 @@ class MarketplaceScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.gold.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -261,18 +290,25 @@ class MarketplaceScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.workspace_premium, color: AppColors.gold, size: 14),
+                    Icon(Icons.workspace_premium,
+                        color: AppColors.gold, size: 14),
                     SizedBox(width: 4),
                     Text(
                       'VERIFIED COACH NETWORK',
-                      style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold, fontSize: 10),
+                      style: TextStyle(
+                          color: AppColors.gold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10),
                     ),
                   ],
                 ),
               ),
               Text(
                 '80% Direct Creator Payout',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.karmaGreen, fontSize: 10, fontWeight: FontWeight.bold),
+                style: AppTypography.bodySmall.copyWith(
+                    color: AppColors.karmaGreen,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -325,7 +361,10 @@ class MarketplaceScreen extends ConsumerWidget {
                     backgroundColor: AppColors.surfaceElevated,
                     child: Text(
                       listing.coachName.characters.first,
-                      style: const TextStyle(color: AppColors.focusBlue, fontSize: 11, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          color: AppColors.focusBlue,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -339,7 +378,8 @@ class MarketplaceScreen extends ConsumerWidget {
                   ),
                   if (listing.isCoachVerified) ...[
                     const SizedBox(width: 4),
-                    const Icon(Icons.verified, color: AppColors.focusBlue, size: 13),
+                    const Icon(Icons.verified,
+                        color: AppColors.focusBlue, size: 13),
                   ],
                 ],
               ),
@@ -351,7 +391,10 @@ class MarketplaceScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   listing.specialty.name.split('&').first.trim(),
-                  style: const TextStyle(color: AppColors.energyOrange, fontSize: 9, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: AppColors.energyOrange,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -392,7 +435,8 @@ class MarketplaceScreen extends ConsumerWidget {
                 padding: const EdgeInsets.only(bottom: 2),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle, color: AppColors.karmaGreen, size: 12),
+                    const Icon(Icons.check_circle,
+                        color: AppColors.karmaGreen, size: 12),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
@@ -436,14 +480,18 @@ class MarketplaceScreen extends ConsumerWidget {
                       if (discount > 0) ...[
                         const SizedBox(width: 4),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4, vertical: 1),
                           decoration: BoxDecoration(
                             color: AppColors.alertRed.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
                           child: Text(
                             '$discount% OFF',
-                            style: const TextStyle(color: AppColors.alertRed, fontSize: 8, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                color: AppColors.alertRed,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -455,7 +503,8 @@ class MarketplaceScreen extends ConsumerWidget {
                       const SizedBox(width: 2),
                       Text(
                         '${listing.rating} (${listing.enrolledCount} enrolled)',
-                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 9),
+                        style: const TextStyle(
+                            color: AppColors.textSecondary, fontSize: 9),
                       ),
                     ],
                   ),
@@ -467,12 +516,19 @@ class MarketplaceScreen extends ConsumerWidget {
                   shape: const RoundedRectangleBorder(
                     borderRadius: AppRadii.radiusMd,
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md, vertical: 8),
                 ),
-                onPressed: () => _showCheckoutBottomSheet(context, notifier, listing),
+                onPressed: () =>
+                    _showCheckoutBottomSheet(context, notifier, listing),
                 child: Text(
-                  listing.type == ListingType.oneOnOneConsultation ? 'Book Slot' : 'Enroll Now',
-                  style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                  listing.type == ListingType.oneOnOneConsultation
+                      ? 'Book Slot'
+                      : 'Enroll Now',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -489,17 +545,21 @@ class MarketplaceScreen extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
           child: Column(
             children: [
-              const Icon(Icons.search_off, color: AppColors.textSecondary, size: 32),
+              const Icon(Icons.search_off,
+                  color: AppColors.textSecondary, size: 32),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 'No listings found matching your search and filters.',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary),
               ),
               const SizedBox(height: AppSpacing.sm),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: AppColors.focusBlue),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.focusBlue),
                 onPressed: () => notifier.resetFilters(),
-                child: const Text('Clear Filters', style: TextStyle(color: Colors.white, fontSize: 11)),
+                child: const Text('Clear Filters',
+                    style: TextStyle(color: Colors.white, fontSize: 11)),
               ),
             ],
           ),
@@ -533,10 +593,13 @@ class MarketplaceScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 listing.title,
-                style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+                style: AppTypography.titleMedium.copyWith(
+                    color: AppColors.textPrimary, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 2),
-              Text('Instructor: ${listing.coachName}', style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+              Text('Instructor: ${listing.coachName}',
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 11)),
               const SizedBox(height: AppSpacing.md),
               Container(
                 padding: const EdgeInsets.all(AppSpacing.sm),
@@ -549,24 +612,40 @@ class MarketplaceScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Program Price:', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
-                        Text('₹${listing.priceInr}', style: const TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold)),
+                        const Text('Program Price:',
+                            style: TextStyle(
+                                color: AppColors.textSecondary, fontSize: 11)),
+                        Text('₹${listing.priceInr}',
+                            style: const TextStyle(
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.bold)),
                       ],
                     ),
                     const SizedBox(height: 4),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Platform Guarantee & Protection:', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
-                        Text('Included (Free)', style: TextStyle(color: AppColors.karmaGreen, fontSize: 11)),
+                        Text('Platform Guarantee & Protection:',
+                            style: TextStyle(
+                                color: AppColors.textSecondary, fontSize: 11)),
+                        Text('Included (Free)',
+                            style: TextStyle(
+                                color: AppColors.karmaGreen, fontSize: 11)),
                       ],
                     ),
                     const Divider(color: AppColors.glassBorder, height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total Payable:', style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold)),
-                        Text('₹${listing.priceInr}', style: const TextStyle(color: AppColors.karmaGreen, fontWeight: FontWeight.bold, fontSize: 14)),
+                        const Text('Total Payable:',
+                            style: TextStyle(
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.bold)),
+                        Text('₹${listing.priceInr}',
+                            style: const TextStyle(
+                                color: AppColors.karmaGreen,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14)),
                       ],
                     ),
                   ],
@@ -589,7 +668,8 @@ class MarketplaceScreen extends ConsumerWidget {
                   },
                   child: Text(
                     'Pay ₹${listing.priceInr} & Start Transformation',
-                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -625,7 +705,8 @@ class MarketplaceScreen extends ConsumerWidget {
                   child: Center(
                     child: Text(
                       'No active enrollments yet. Explore the marketplace to enroll!',
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                      style: AppTypography.bodySmall
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                   ),
                 )
@@ -647,22 +728,31 @@ class MarketplaceScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 order.listingTitle,
-                                style: AppTypography.bodySmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+                                style: AppTypography.bodySmall.copyWith(
+                                    color: AppColors.textPrimary,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Order #${order.orderId.substring(order.orderId.length - 6)} • ₹${order.amountPaidInr}',
-                                style: const TextStyle(color: AppColors.textSecondary, fontSize: 10),
+                                style: const TextStyle(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 10),
                               ),
                             ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: AppColors.karmaGreen.withValues(alpha: 0.15),
                             borderRadius: AppRadii.radiusSm,
                           ),
-                          child: const Text('ACTIVE', style: TextStyle(color: AppColors.karmaGreen, fontSize: 9, fontWeight: FontWeight.bold)),
+                          child: const Text('ACTIVE',
+                              style: TextStyle(
+                                  color: AppColors.karmaGreen,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -674,10 +764,12 @@ class MarketplaceScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.focusBlue,
-                    shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadii.radiusMd),
                   ),
                   onPressed: () => Navigator.pop(ctx),
-                  child: const Text('Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],
@@ -708,7 +800,8 @@ class MarketplaceScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma empowers certified fitness coaches, clinical nutritionists, and Ayurvedic Vaidyas with an 80/20 revenue share. All instructors undergo rigorous credential screening ensuring safe, evidence-based health guidance.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -721,7 +814,8 @@ class MarketplaceScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understood', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understood',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

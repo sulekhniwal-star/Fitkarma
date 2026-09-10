@@ -19,10 +19,12 @@ class RecoveryPrescriptionsScreen extends StatefulWidget {
   });
 
   @override
-  State<RecoveryPrescriptionsScreen> createState() => _RecoveryPrescriptionsScreenState();
+  State<RecoveryPrescriptionsScreen> createState() =>
+      _RecoveryPrescriptionsScreenState();
 }
 
-class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScreen> {
+class _RecoveryPrescriptionsScreenState
+    extends State<RecoveryPrescriptionsScreen> {
   final Set<String> _completedIds = {};
 
   void _toggleBehavior(String id) {
@@ -68,7 +70,8 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                   children: [
                     const Row(
                       children: [
-                        Icon(Icons.auto_awesome_rounded, color: AppColors.aiPurple, size: 20),
+                        Icon(Icons.auto_awesome_rounded,
+                            color: AppColors.aiPurple, size: 20),
                         SizedBox(width: 8),
                         BilingualLabel(
                           primaryText: "Today's Recovery Prescriptions",
@@ -84,7 +87,9 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                         child: BentoCard(
                           backgroundColor: AppColors.surfaceElevated,
                           border: Border.all(
-                            color: isDone ? AppColors.karmaGreen : AppColors.glassBorder,
+                            color: isDone
+                                ? AppColors.karmaGreen
+                                : AppColors.glassBorder,
                           ),
                           onTap: () => _toggleBehavior(item.behavior.id),
                           child: Row(
@@ -92,7 +97,9 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                             children: [
                               Icon(
                                 item.behavior.icon,
-                                color: isDone ? AppColors.karmaGreen : AppColors.focusBlue,
+                                color: isDone
+                                    ? AppColors.karmaGreen
+                                    : AppColors.focusBlue,
                                 size: 22,
                               ),
                               const SizedBox(width: AppSpacing.md),
@@ -101,19 +108,26 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           item.behavior.name,
-                                          style: AppTypography.titleSmall.copyWith(
-                                            color: isDone ? AppColors.textMuted : AppColors.textPrimary,
-                                            decoration: isDone ? TextDecoration.lineThrough : null,
+                                          style:
+                                              AppTypography.titleSmall.copyWith(
+                                            color: isDone
+                                                ? AppColors.textMuted
+                                                : AppColors.textPrimary,
+                                            decoration: isDone
+                                                ? TextDecoration.lineThrough
+                                                : null,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
                                         Text(
                                           '+${item.behavior.estimatedHrvImpactMs.toStringAsFixed(1)}ms HRV',
-                                          style: AppTypography.bodySmall.copyWith(
+                                          style:
+                                              AppTypography.bodySmall.copyWith(
                                             color: AppColors.karmaGreen,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 11,
@@ -147,14 +161,19 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                                 height: 22,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: isDone ? AppColors.karmaGreen : Colors.transparent,
+                                  color: isDone
+                                      ? AppColors.karmaGreen
+                                      : Colors.transparent,
                                   border: Border.all(
-                                    color: isDone ? AppColors.karmaGreen : AppColors.glassBorder,
+                                    color: isDone
+                                        ? AppColors.karmaGreen
+                                        : AppColors.glassBorder,
                                     width: 1.5,
                                   ),
                                 ),
                                 child: isDone
-                                    ? const Icon(Icons.check_rounded, size: 14, color: AppColors.textInverse)
+                                    ? const Icon(Icons.check_rounded,
+                                        size: 14, color: AppColors.textInverse)
                                     : null,
                               ),
                             ],
@@ -183,13 +202,15 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: RecoveryBehaviorType.values.length,
-                separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.xs),
+                separatorBuilder: (_, __) =>
+                    const SizedBox(height: AppSpacing.xs),
                 itemBuilder: (context, index) {
                   final behavior = RecoveryBehaviorType.values[index];
                   final isLogged = _completedIds.contains(behavior.id);
 
                   return BentoCard(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 10),
                     onTap: () => _toggleBehavior(behavior.id),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,7 +219,9 @@ class _RecoveryPrescriptionsScreenState extends State<RecoveryPrescriptionsScree
                           children: [
                             Icon(
                               behavior.icon,
-                              color: isLogged ? AppColors.karmaGreen : AppColors.textSecondary,
+                              color: isLogged
+                                  ? AppColors.karmaGreen
+                                  : AppColors.textSecondary,
                               size: 20,
                             ),
                             const SizedBox(width: 12),

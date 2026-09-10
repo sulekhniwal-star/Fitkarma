@@ -163,8 +163,10 @@ class HealthRiskEngine {
         clinicalRiskThreshold: 0.50,
         riskScore: finalCmrScore,
         tier: whtr >= 0.50 ? ClinicalRiskTier.moderate : ClinicalRiskTier.low,
-        clinicalRationale: 'South Asian cardiometabolic consensus designates WHtR >= 0.50 as the critical threshold for visceral adiposity.',
-        regionalClinicalRationale: 'भारतीय स्वास्थ्य मानकों के अनुसार ०.५० से अधिक WHtR आंतरिक चर्बी के जोखिम को दर्शाता है।',
+        clinicalRationale:
+            'South Asian cardiometabolic consensus designates WHtR >= 0.50 as the critical threshold for visceral adiposity.',
+        regionalClinicalRationale:
+            'भारतीय स्वास्थ्य मानकों के अनुसार ०.५० से अधिक WHtR आंतरिक चर्बी के जोखिम को दर्शाता है।',
       ),
       ClinicalRiskFactor(
         id: 'factor_idrs',
@@ -181,8 +183,10 @@ class HealthRiskEngine {
             : idrsScore >= 30.0
                 ? ClinicalRiskTier.moderate
                 : ClinicalRiskTier.low,
-        clinicalRationale: 'MDRF validated scoring combining age, abdominal girth, family history, and physical movement.',
-        regionalClinicalRationale: 'आयु, कमर घेरा और पारिवारिक इतिहास पर आधारित प्रमाणीकृत मधुमेह जोखिम स्कोर।',
+        clinicalRationale:
+            'MDRF validated scoring combining age, abdominal girth, family history, and physical movement.',
+        regionalClinicalRationale:
+            'आयु, कमर घेरा और पारिवारिक इतिहास पर आधारित प्रमाणीकृत मधुमेह जोखिम स्कोर।',
       ),
       ClinicalRiskFactor(
         id: 'factor_rhr',
@@ -194,9 +198,13 @@ class HealthRiskEngine {
         optimalThreshold: 60.0,
         clinicalRiskThreshold: 78.0,
         riskScore: autonomicScore,
-        tier: restingHeartRateBpm >= 78.0 ? ClinicalRiskTier.moderate : ClinicalRiskTier.low,
-        clinicalRationale: 'Lower RHR reflects strong parasympathetic vagal tone and optimal cardiovascular recovery.',
-        regionalClinicalRationale: 'कम विश्राम हृदय गति सुदृढ़ हृदय स्वास्थ्य और स्वायत्त तंत्रिका संतुलन का प्रतीक है।',
+        tier: restingHeartRateBpm >= 78.0
+            ? ClinicalRiskTier.moderate
+            : ClinicalRiskTier.low,
+        clinicalRationale:
+            'Lower RHR reflects strong parasympathetic vagal tone and optimal cardiovascular recovery.',
+        regionalClinicalRationale:
+            'कम विश्राम हृदय गति सुदृढ़ हृदय स्वास्थ्य और स्वायत्त तंत्रिका संतुलन का प्रतीक है।',
       ),
       ClinicalRiskFactor(
         id: 'factor_sarcopenia',
@@ -208,9 +216,13 @@ class HealthRiskEngine {
         optimalThreshold: 1.40,
         clinicalRiskThreshold: 1.00,
         riskScore: sarcopeniaScore,
-        tier: relativeStrengthXBW < 1.00 ? ClinicalRiskTier.moderate : ClinicalRiskTier.low,
-        clinicalRationale: 'Preserving lean skeletal muscle protects against glucose intolerance and metabolic deceleration.',
-        regionalClinicalRationale: 'मांसपेशी शक्ति का संरक्षण इंसुलिन संवेदनशीलता और मेटाबॉलिज्म की रक्षा करता है।',
+        tier: relativeStrengthXBW < 1.00
+            ? ClinicalRiskTier.moderate
+            : ClinicalRiskTier.low,
+        clinicalRationale:
+            'Preserving lean skeletal muscle protects against glucose intolerance and metabolic deceleration.',
+        regionalClinicalRationale:
+            'मांसपेशी शक्ति का संरक्षण इंसुलिन संवेदनशीलता और मेटाबॉलिज्म की रक्षा करता है।',
       ),
     ];
 
@@ -221,8 +233,10 @@ class HealthRiskEngine {
         targetedDomain: RiskDomainType.circadianDigestive,
         title: 'Post-Meal 100-Step Shatpawali Stroll',
         regionalTitle: 'भोजनोपरांत १०० कदम शतपावली अनुष्ठान',
-        protocolDescription: 'Perform a slow 10-15 minute walk immediately after dinner. Blunts postprandial glucose excursion and aids Jatharagni.',
-        regionalProtocolDescription: 'रात्रि भोजनोपरांत १०-१५ मिनट की धीमी चहलकदमी। ग्लूकोज वृद्धि को रोकती है व पाचन को सुगम बनाती है।',
+        protocolDescription:
+            'Perform a slow 10-15 minute walk immediately after dinner. Blunts postprandial glucose excursion and aids Jatharagni.',
+        regionalProtocolDescription:
+            'रात्रि भोजनोपरांत १०-१५ मिनट की धीमी चहलकदमी। ग्लूकोज वृद्धि को रोकती है व पाचन को सुगम बनाती है।',
         frequency: 'Twice daily after lunch & dinner',
         expectedBiometricImpact: 'Reduces postprandial glucose spike by 24-28%',
         karmaReward: 25,
@@ -232,10 +246,13 @@ class HealthRiskEngine {
         targetedDomain: RiskDomainType.sarcopenicStrength,
         title: 'Progressive Resistance Overload (Baithak / Barbell)',
         regionalTitle: 'देसी बैठक व शक्ति संवर्धन अभ्यास',
-        protocolDescription: 'Engage major muscle groups with bodyweight squats, Baithak, and progressive resistance 3 times per week.',
-        regionalProtocolDescription: 'सप्ताह में ३ दिन देसी बैठक व शक्ति व्यायाम। मांसपेशियों को ग्लूकोज अवशोषण हेतु सक्रिय करता है।',
+        protocolDescription:
+            'Engage major muscle groups with bodyweight squats, Baithak, and progressive resistance 3 times per week.',
+        regionalProtocolDescription:
+            'सप्ताह में ३ दिन देसी बैठक व शक्ति व्यायाम। मांसपेशियों को ग्लूकोज अवशोषण हेतु सक्रिय करता है।',
         frequency: '3x weekly (Mon / Wed / Fri)',
-        expectedBiometricImpact: 'Elevates insulin-independent glucose clearance',
+        expectedBiometricImpact:
+            'Elevates insulin-independent glucose clearance',
         karmaReward: 40,
       ),
       const PreventiveProtocol(
@@ -243,8 +260,10 @@ class HealthRiskEngine {
         targetedDomain: RiskDomainType.autonomicVagal,
         title: 'Evening Nadi Shodhana & 4-7-8 Breathing',
         regionalTitle: 'संध्याकालीन नाड़ी शोधन प्राणायाम',
-        protocolDescription: '10 minutes of slow alternate nostril breathing before sleep. Stimulates the vagus nerve and reduces nocturnal cortisol.',
-        regionalProtocolDescription: 'सोने से पूर्व १० मिनट नाड़ी शोधन प्राणायाम। स्वायत्त तंत्रिका तंत्र को शांत कर कोर्टिसोल घटाता है।',
+        protocolDescription:
+            '10 minutes of slow alternate nostril breathing before sleep. Stimulates the vagus nerve and reduces nocturnal cortisol.',
+        regionalProtocolDescription:
+            'सोने से पूर्व १० मिनट नाड़ी शोधन प्राणायाम। स्वायत्त तंत्रिका तंत्र को शांत कर कोर्टिसोल घटाता है।',
         frequency: 'Daily before bed',
         expectedBiometricImpact: 'Lowers resting heart rate by 4-6 BPM',
         karmaReward: 20,
@@ -258,12 +277,16 @@ class HealthRiskEngine {
 
     if (systolicBp >= 140 || diastolicBp >= 90) {
       needsDoctor = true;
-      consultReason = 'Blood pressure reading ($systolicBp/$diastolicBp mmHg) is in the Stage 2 Hypertension range. Please schedule an in-person clinical checkup.';
-      regionalConsultReason = 'रक्तचाप ($systolicBp/$diastolicBp mmHg) उच्च सीमा में है। कृपया चिकित्सक से परामर्श लें।';
+      consultReason =
+          'Blood pressure reading ($systolicBp/$diastolicBp mmHg) is in the Stage 2 Hypertension range. Please schedule an in-person clinical checkup.';
+      regionalConsultReason =
+          'रक्तचाप ($systolicBp/$diastolicBp mmHg) उच्च सीमा में है। कृपया चिकित्सक से परामर्श लें।';
     } else if (estimatedFastingGlucoseMgDl >= 126.0) {
       needsDoctor = true;
-      consultReason = 'Fasting glucose reading (${estimatedFastingGlucoseMgDl.toInt()} mg/dL) exceeds clinical fasting targets. Diagnostic lab verification is recommended.';
-      regionalConsultReason = 'फास्टिंग ग्लूकोज स्तर अधिक है। प्रयोगशाला परीक्षण व डॉक्टर परामर्श आवश्यक है।';
+      consultReason =
+          'Fasting glucose reading (${estimatedFastingGlucoseMgDl.toInt()} mg/dL) exceeds clinical fasting targets. Diagnostic lab verification is recommended.';
+      regionalConsultReason =
+          'फास्टिंग ग्लूकोज स्तर अधिक है। प्रयोगशाला परीक्षण व डॉक्टर परामर्श आवश्यक है।';
     }
 
     return HealthRiskPreventionReport(

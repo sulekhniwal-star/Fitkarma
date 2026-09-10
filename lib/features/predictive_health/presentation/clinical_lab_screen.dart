@@ -20,7 +20,9 @@ class ClinicalReportScreen extends ConsumerWidget {
     final report = ref.watch(clinicalLabProvider);
     final scoreColor = report.overallMetabolicGradeScore >= 80
         ? AppColors.karmaGreen
-        : (report.overallMetabolicGradeScore >= 60 ? AppColors.energyOrange : AppColors.alertRed);
+        : (report.overallMetabolicGradeScore >= 60
+            ? AppColors.energyOrange
+            : AppColors.alertRed);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -33,7 +35,8 @@ class ClinicalReportScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showLabMethodologyModal(context),
           ),
         ],
@@ -98,7 +101,8 @@ class ClinicalReportScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroLabCard(ClinicalReportIntelligence report, Color scoreColor) {
+  Widget _buildHeroLabCard(
+      ClinicalReportIntelligence report, Color scoreColor) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +111,8 @@ class ClinicalReportScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.focusBlue.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -116,7 +121,8 @@ class ClinicalReportScreen extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.biotech, color: AppColors.focusBlue, size: 14),
+                    const Icon(Icons.biotech,
+                        color: AppColors.focusBlue, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       report.labProviderName,
@@ -194,7 +200,8 @@ class ClinicalReportScreen extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.local_hospital_rounded, color: AppColors.alertRed, size: 24),
+          const Icon(Icons.local_hospital_rounded,
+              color: AppColors.alertRed, size: 24),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Column(
@@ -273,7 +280,9 @@ class ClinicalReportScreen extends ConsumerWidget {
   Widget _buildPanelCard(LabPanelSummary panel) {
     final panelColor = panel.healthScore >= 80
         ? AppColors.karmaGreen
-        : (panel.healthScore >= 60 ? AppColors.energyOrange : AppColors.alertRed);
+        : (panel.healthScore >= 60
+            ? AppColors.energyOrange
+            : AppColors.alertRed);
 
     return BentoCard(
       child: Column(
@@ -284,7 +293,8 @@ class ClinicalReportScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Icon(_getCategoryIcon(panel.category.iconName), color: AppColors.focusBlue, size: 18),
+                  Icon(_getCategoryIcon(panel.category.iconName),
+                      color: AppColors.focusBlue, size: 18),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     panel.category.name,
@@ -576,7 +586,8 @@ class ClinicalReportScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

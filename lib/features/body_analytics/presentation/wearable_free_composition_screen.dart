@@ -31,7 +31,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showMethodologyModal(context),
           ),
         ],
@@ -93,7 +94,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.focusBlue.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -102,7 +104,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.hub_outlined, color: AppColors.focusBlue, size: 14),
+                    Icon(Icons.hub_outlined,
+                        color: AppColors.focusBlue, size: 14),
                     SizedBox(width: 4),
                     Text(
                       '4-Model Ensemble Consensus',
@@ -117,7 +120,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
               ),
               if (report.southAsianSpecificCutoffsApplied)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.karmaGreen.withValues(alpha: 0.12),
                     borderRadius: AppRadii.radiusSm,
@@ -179,7 +183,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCompartmentDistributionCard(WearableFreeCompositionReport report) {
+  Widget _buildCompartmentDistributionCard(
+      WearableFreeCompositionReport report) {
     return BentoCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,10 +223,16 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildMassChip('Lean Mass', '${report.ensembleLeanMassKg} kg', AppColors.focusBlue),
-              _buildMassChip('Fat Mass', '${report.ensembleFatMassKg} kg', AppColors.energyOrange),
-              _buildMassChip('Bone Mass', '${report.ensembleBoneMassKg} kg', AppColors.karmaGreen),
-              _buildMassChip('Hydration', '${report.ensembleTotalBodyWaterPercent}%', AppColors.focusBlue),
+              _buildMassChip('Lean Mass', '${report.ensembleLeanMassKg} kg',
+                  AppColors.focusBlue),
+              _buildMassChip('Fat Mass', '${report.ensembleFatMassKg} kg',
+                  AppColors.energyOrange),
+              _buildMassChip('Bone Mass', '${report.ensembleBoneMassKg} kg',
+                  AppColors.karmaGreen),
+              _buildMassChip(
+                  'Hydration',
+                  '${report.ensembleTotalBodyWaterPercent}%',
+                  AppColors.focusBlue),
             ],
           ),
         ],
@@ -235,13 +246,23 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
       children: [
         Row(
           children: [
-            Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+            Container(
+                width: 8,
+                height: 8,
+                decoration:
+                    BoxDecoration(color: color, shape: BoxShape.circle)),
             const SizedBox(width: 4),
-            Text(label, style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10)),
+            Text(label,
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary, fontSize: 10)),
           ],
         ),
         const SizedBox(height: 2),
-        Text(value, style: AppTypography.titleSmall.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 12)),
+        Text(value,
+            style: AppTypography.titleSmall.copyWith(
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.bold,
+                fontSize: 12)),
       ],
     );
   }
@@ -337,7 +358,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.analytics_outlined, color: AppColors.karmaGreen, size: 20),
+              const Icon(Icons.analytics_outlined,
+                  color: AppColors.karmaGreen, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Ensemble Concordance & Interpretation',
@@ -392,12 +414,14 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               Text(
                 'FitKarma eliminates dependency on expensive smart scales or bioelectrical impedance (BIA) hardware by combining 4 clinically validated equations (US Navy, YMCA, Deurenberg, Gallagher) into a weighted consensus model.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 'Adjusted with ICMR South Asian metabolic calibrations to account for visceral adiposity and lean mass density without requiring cloud computation.',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textSecondary),
               ),
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
@@ -410,7 +434,8 @@ class WearableFreeCompositionScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Understand & Close', style: TextStyle(color: Colors.white)),
+                  child: const Text('Understand & Close',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

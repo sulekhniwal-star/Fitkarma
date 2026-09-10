@@ -92,7 +92,8 @@ class SocialFeedItem {
   final SocialEventType eventType;
   final String eventHeadline;
   final String regionalEventHeadline;
-  final String detailMetrics; // e.g. "12,400 steps • 100% Shatpawali • +45 Karma"
+  final String
+      detailMetrics; // e.g. "12,400 steps • 100% Shatpawali • +45 Karma"
   final DateTime timestamp;
   final int kudosCount;
   final bool hasUserLiked;
@@ -187,7 +188,8 @@ class FamilyMemberSummary {
     this.alertRequired = false,
   });
 
-  double get stepProgressFraction => (todaySteps / dailyStepTarget).clamp(0.0, 1.0);
+  double get stepProgressFraction =>
+      (todaySteps / dailyStepTarget).clamp(0.0, 1.0);
 }
 
 /// Local neighborhood fitness circle spotlight

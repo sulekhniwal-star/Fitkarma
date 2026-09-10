@@ -13,10 +13,12 @@ void main() {
       );
 
       expect(result.detectedLanguage, equals(VernacularLanguage.hinglish));
-      expect(result.parsedEntity.intentType, equals(VoiceIntentType.mealNutrition));
+      expect(result.parsedEntity.intentType,
+          equals(VoiceIntentType.mealNutrition));
       expect(result.parsedEntity.calories, greaterThan(300.0));
       expect(result.parsedEntity.proteinGrams, greaterThan(10.0));
-      expect(result.parsedEntity.detectedFoodItems.length, greaterThanOrEqualTo(2));
+      expect(result.parsedEntity.detectedFoodItems.length,
+          greaterThanOrEqualTo(2));
       expect(result.confidenceScore, greaterThan(0.85));
     });
 
@@ -26,7 +28,8 @@ void main() {
       );
 
       expect(result.detectedLanguage, equals(VernacularLanguage.marathi));
-      expect(result.parsedEntity.intentType, equals(VoiceIntentType.mealNutrition));
+      expect(result.parsedEntity.intentType,
+          equals(VoiceIntentType.mealNutrition));
       expect(result.parsedEntity.calories, greaterThan(200.0));
     });
 
@@ -35,7 +38,8 @@ void main() {
         transcript: 'இரண்டு இட்லி சாம்பார்',
       );
       expect(resTamil.detectedLanguage, equals(VernacularLanguage.tamil));
-      expect(resTamil.parsedEntity.intentType, equals(VoiceIntentType.mealNutrition));
+      expect(resTamil.parsedEntity.intentType,
+          equals(VoiceIntentType.mealNutrition));
       expect(resTamil.parsedEntity.carbsGrams, greaterThan(20.0));
 
       final resTelugu = engine.processVoiceTranscript(
@@ -46,12 +50,16 @@ void main() {
     });
 
     test('Parses hydration and water voice transcripts', () {
-      final res1 = engine.processVoiceTranscript(transcript: '500ml water please');
-      expect(res1.parsedEntity.intentType, equals(VoiceIntentType.waterHydration));
+      final res1 =
+          engine.processVoiceTranscript(transcript: '500ml water please');
+      expect(
+          res1.parsedEntity.intentType, equals(VoiceIntentType.waterHydration));
       expect(res1.parsedEntity.waterMl, equals(500));
 
-      final res2 = engine.processVoiceTranscript(transcript: '1 glass coconut water');
-      expect(res2.parsedEntity.intentType, equals(VoiceIntentType.waterHydration));
+      final res2 =
+          engine.processVoiceTranscript(transcript: '1 glass coconut water');
+      expect(
+          res2.parsedEntity.intentType, equals(VoiceIntentType.waterHydration));
       expect(res2.parsedEntity.waterMl, equals(300));
     });
 
@@ -60,7 +68,8 @@ void main() {
         transcript: 'Subah 45 minute walk kiya aur 5500 steps hue',
       );
 
-      expect(res.parsedEntity.intentType, equals(VoiceIntentType.workoutPhysicalActivity));
+      expect(res.parsedEntity.intentType,
+          equals(VoiceIntentType.workoutPhysicalActivity));
       expect(res.parsedEntity.workoutDurationMinutes, equals(45));
       expect(res.parsedEntity.stepsCount, equals(5500));
       expect(res.parsedEntity.calories, greaterThan(200.0));
@@ -79,19 +88,26 @@ void main() {
   });
 
   group('VernacularVoiceNotifier State Tests', () {
-    test('Handles language switching, recording lifecycle, and session processing', () {
+    test(
+        'Handles language switching, recording lifecycle, and session processing',
+        () {
       final notifier = VernacularVoiceNotifier();
-      expect(notifier.state.selectedLanguage, equals(VernacularLanguage.hinglish));
+      expect(
+          notifier.state.selectedLanguage, equals(VernacularLanguage.hinglish));
 
       notifier.selectLanguage(VernacularLanguage.marathi);
-      expect(notifier.state.selectedLanguage, equals(VernacularLanguage.marathi));
+      expect(
+          notifier.state.selectedLanguage, equals(VernacularLanguage.marathi));
 
       notifier.startListening();
-      expect(notifier.state.recordingState, equals(VoiceRecordingState.listening));
+      expect(
+          notifier.state.recordingState, equals(VoiceRecordingState.listening));
 
       notifier.processVoiceInput('1 plate biryani aur 1 glass chaas');
-      expect(notifier.state.recordingState, equals(VoiceRecordingState.success));
-      expect(notifier.state.currentTranscript?.parsedEntity.calories, greaterThan(400.0));
+      expect(
+          notifier.state.recordingState, equals(VoiceRecordingState.success));
+      expect(notifier.state.currentTranscript?.parsedEntity.calories,
+          greaterThan(400.0));
       expect(notifier.state.voiceHistory.isNotEmpty, isTrue);
 
       notifier.resetSession();

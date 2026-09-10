@@ -110,10 +110,12 @@ class RecoveryLogScreen extends ConsumerWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: MuscleGroup.values.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.xs),
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(height: AppSpacing.xs),
                     itemBuilder: (context, index) {
                       final muscle = MuscleGroup.values[index];
-                      final currentLevel = sorenessMap.muscleStates[muscle] ?? SorenessLevel.none;
+                      final currentLevel = sorenessMap.muscleStates[muscle] ??
+                          SorenessLevel.none;
 
                       return _buildMuscleRow(
                         context: context,
@@ -133,7 +135,8 @@ class RecoveryLogScreen extends ConsumerWidget {
                       children: [
                         const Row(
                           children: [
-                            Icon(Icons.healing_rounded, color: AppColors.focusBlue, size: 20),
+                            Icon(Icons.healing_rounded,
+                                color: AppColors.focusBlue, size: 20),
                             SizedBox(width: 8),
                             BilingualLabel(
                               primaryText: 'Targeted Relief Protocols',
@@ -148,7 +151,8 @@ class RecoveryLogScreen extends ConsumerWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(Icons.check_circle_outline, color: AppColors.karmaGreen, size: 16),
+                                const Icon(Icons.check_circle_outline,
+                                    color: AppColors.karmaGreen, size: 16),
                                 const SizedBox(width: 6),
                                 Expanded(
                                   child: Text(
@@ -217,11 +221,14 @@ class RecoveryLogScreen extends ConsumerWidget {
 
               return GestureDetector(
                 onTap: () {
-                  ref.read(bodySorenessProvider.notifier).updateMuscleSoreness(muscle, level);
+                  ref
+                      .read(bodySorenessProvider.notifier)
+                      .updateMuscleSoreness(muscle, level);
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 6),
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: isSelected ? levelColor : AppColors.surfaceElevated,
                     borderRadius: AppRadii.radiusSm,
@@ -234,7 +241,8 @@ class RecoveryLogScreen extends ConsumerWidget {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w800,
-                      color: isSelected ? Colors.white : AppColors.textSecondary,
+                      color:
+                          isSelected ? Colors.white : AppColors.textSecondary,
                     ),
                   ),
                 ),

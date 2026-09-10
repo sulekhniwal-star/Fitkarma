@@ -13,10 +13,12 @@ class AppColors {
   static const Color glassBorderHighlight = Color(0x4DFFFFFF); // 30% white
 
   // Brand Accents
-  static const Color karmaGreen = Color(0xFF00E676); // Primary Brand & Optimal State
+  static const Color karmaGreen =
+      Color(0xFF00E676); // Primary Brand & Optimal State
   static const Color focusBlue = Color(0xFF00B0FF); // Secondary Brand & Focus
   static const Color energyOrange = Color(0xFFFF9100); // Activity & High Energy
-  static const Color alertRed = Color(0xFFFF5252); // Safety alerts & critical states
+  static const Color alertRed =
+      Color(0xFFFF5252); // Safety alerts & critical states
   static const Color aiPurple = Color(0xFF7C4DFF); // Groq / AI Coach features
   static const Color gold = Color(0xFFFFD700); // Karma achievements & streaks
 

@@ -60,14 +60,19 @@ class WhatsAppLoggingNotifier extends StateNotifier<WhatsAppState> {
         direction: WhatsAppMessageDirection.inboundUser,
         parsedEntity: const ParsedWhatsAppEntity(
           logType: WhatsAppLogType.meal,
-          parsedSummary: '2 Roti(s), 1 Bowl Dal Tadka, 1 Bowl Fresh Green Salad',
+          parsedSummary:
+              '2 Roti(s), 1 Bowl Dal Tadka, 1 Bowl Fresh Green Salad',
           regionalParsedSummary: '२ रोटी, दाल तड़का, ककड़ी सलाद',
           calories: 350.0,
           proteinGrams: 14.0,
           carbsGrams: 56.0,
           fatGrams: 7.5,
           fiberGrams: 11.0,
-          identifiedItems: ['2 Roti(s)', '1 Bowl Dal Tadka', '1 Bowl Fresh Green Salad'],
+          identifiedItems: [
+            '2 Roti(s)',
+            '1 Bowl Dal Tadka',
+            '1 Bowl Fresh Green Salad'
+          ],
         ),
         botReplyText: '''*✅ FitKarma Logged! 🥗*
 ━━━━━━━━━━━━━━━━━
@@ -105,7 +110,9 @@ class WhatsAppLoggingNotifier extends StateNotifier<WhatsAppState> {
   void initiatePhoneLinking(String rawPhone) {
     final normalized = WhatsAppEngine.normalizeIndianPhoneNumber(rawPhone);
     if (normalized == null) {
-      state = state.copyWith(statusMessage: 'Invalid phone number. Must be valid 10-digit Indian mobile.');
+      state = state.copyWith(
+          statusMessage:
+              'Invalid phone number. Must be valid 10-digit Indian mobile.');
       return;
     }
 
@@ -118,7 +125,8 @@ class WhatsAppLoggingNotifier extends StateNotifier<WhatsAppState> {
 
     state = state.copyWith(
       profile: updatedProfile,
-      statusMessage: 'Verification OTP sent to $normalized: $otp (Demo Simulated)',
+      statusMessage:
+          'Verification OTP sent to $normalized: $otp (Demo Simulated)',
     );
   }
 
@@ -142,7 +150,8 @@ class WhatsAppLoggingNotifier extends StateNotifier<WhatsAppState> {
       );
       return true;
     } else {
-      state = state.copyWith(statusMessage: 'Incorrect OTP. Please check and try again.');
+      state = state.copyWith(
+          statusMessage: 'Incorrect OTP. Please check and try again.');
       return false;
     }
   }
@@ -154,10 +163,12 @@ class WhatsAppLoggingNotifier extends StateNotifier<WhatsAppState> {
     bool? postDinnerWalk,
   }) {
     final updatedProfile = state.profile.copyWith(
-      enableMorningBriefing: morningBriefing ?? state.profile.enableMorningBriefing,
+      enableMorningBriefing:
+          morningBriefing ?? state.profile.enableMorningBriefing,
       enableMealLogging: mealLogging ?? state.profile.enableMealLogging,
       enableWaterNudges: waterNudges ?? state.profile.enableWaterNudges,
-      enablePostDinnerWalkAlert: postDinnerWalk ?? state.profile.enablePostDinnerWalkAlert,
+      enablePostDinnerWalkAlert:
+          postDinnerWalk ?? state.profile.enablePostDinnerWalkAlert,
     );
     state = state.copyWith(
       profile: updatedProfile,
@@ -176,7 +187,8 @@ class WhatsAppLoggingNotifier extends StateNotifier<WhatsAppState> {
     if (messageText.trim().isEmpty) return;
 
     final parsed = _engine.parseInboundMessage(messageText);
-    final reply = _engine.formatBotReply(parsed, language: state.profile.preferredLanguage);
+    final reply = _engine.formatBotReply(parsed,
+        language: state.profile.preferredLanguage);
 
     final newRecord = WhatsAppMessageRecord(
       id: 'msg_${DateTime.now().millisecondsSinceEpoch}',

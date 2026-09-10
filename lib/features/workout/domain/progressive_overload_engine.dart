@@ -72,7 +72,8 @@ class ProgressiveOverloadEngine {
     final double epley = weightKg * (1.0 + (reps / 30.0));
 
     // Brzycki Formula: 1RM = Weight * (36 / (37 - Reps)) (valid for reps <= 12)
-    final double brzycki = reps < 36 ? weightKg * (36.0 / (37.0 - reps)) : epley;
+    final double brzycki =
+        reps < 36 ? weightKg * (36.0 / (37.0 - reps)) : epley;
 
     final double composite = (epley + brzycki) / 2.0;
     return double.parse(composite.toStringAsFixed(1));
@@ -86,7 +87,8 @@ class ProgressiveOverloadEngine {
     required int targetRepsMax,
     required double readinessScore, // 0 to 100
   }) {
-    final completedSets = recentCompletedSets.where((s) => s.isCompleted && !s.isWarmup).toList();
+    final completedSets =
+        recentCompletedSets.where((s) => s.isCompleted && !s.isWarmup).toList();
 
     if (completedSets.isEmpty) {
       return ExerciseOverloadPrescription(
@@ -98,21 +100,29 @@ class ProgressiveOverloadEngine {
         nextTargetWeightKg: 0.0,
         nextTargetRepsMin: targetRepsMin,
         nextTargetRepsMax: targetRepsMax,
-        overloadRationale: 'Start with baseline suggested load and focus on controlled 2-second eccentric tempo.',
+        overloadRationale:
+            'Start with baseline suggested load and focus on controlled 2-second eccentric tempo.',
         techniqueFocusCue: exercise.instructions,
       );
     }
 
-    final double topWeight = completedSets.map((s) => s.weightKg).reduce((a, b) => a > b ? a : b);
-    final int minRepsAchieved = completedSets.map((s) => s.reps).reduce((a, b) => a < b ? a : b);
-    final int maxRepsAchieved = completedSets.map((s) => s.reps).reduce((a, b) => a > b ? a : b);
-    final double avgRpe = completedSets.map((s) => s.rpe ?? 8.0).reduce((a, b) => a + b) / completedSets.length;
+    final double topWeight =
+        completedSets.map((s) => s.weightKg).reduce((a, b) => a > b ? a : b);
+    final int minRepsAchieved =
+        completedSets.map((s) => s.reps).reduce((a, b) => a < b ? a : b);
+    final int maxRepsAchieved =
+        completedSets.map((s) => s.reps).reduce((a, b) => a > b ? a : b);
+    final double avgRpe =
+        completedSets.map((s) => s.rpe ?? 8.0).reduce((a, b) => a + b) /
+            completedSets.length;
 
-    final double estimated1Rm = calculateEstimated1Rm(weightKg: topWeight, reps: maxRepsAchieved);
+    final double estimated1Rm =
+        calculateEstimated1Rm(weightKg: topWeight, reps: maxRepsAchieved);
 
     // Deload Check: High systemic fatigue or readiness < 50%
     if (readinessScore < 50.0) {
-      final double deloadWeight = double.parse((topWeight * 0.80).toStringAsFixed(1));
+      final double deloadWeight =
+          double.parse((topWeight * 0.80).toStringAsFixed(1));
       return ExerciseOverloadPrescription(
         exercise: exercise,
         currentWorkingWeightKg: topWeight,
@@ -122,9 +132,11 @@ class ProgressiveOverloadEngine {
         nextTargetWeightKg: deloadWeight,
         nextTargetRepsMin: targetRepsMin,
         nextTargetRepsMax: targetRepsMax,
-        overloadRationale: 'Readiness (${readinessScore.round()}%) indicates systemic or neural fatigue. '
+        overloadRationale:
+            'Readiness (${readinessScore.round()}%) indicates systemic or neural fatigue. '
             'Deload intensity by 20% to allow connective tissue remodeling.',
-        techniqueFocusCue: 'Focus on explosive concentric velocity and joint mobility.',
+        techniqueFocusCue:
+            'Focus on explosive concentric velocity and joint mobility.',
       );
     }
 
@@ -146,7 +158,8 @@ class ProgressiveOverloadEngine {
         nextTargetWeightKg: nextWeight,
         nextTargetRepsMin: targetRepsMin,
         nextTargetRepsMax: targetRepsMax,
-        overloadRationale: 'Double Progression Target Achieved ($minRepsAchieved reps in all sets). '
+        overloadRationale:
+            'Double Progression Target Achieved ($minRepsAchieved reps in all sets). '
             'Increase working load by +$loadIncrement kg next session.',
         techniqueFocusCue: 'Maintain strict scapular brace under new load.',
       );
@@ -161,9 +174,11 @@ class ProgressiveOverloadEngine {
         nextTargetWeightKg: topWeight,
         nextTargetRepsMin: targetRepsMin,
         nextTargetRepsMax: targetRepsMax,
-        overloadRationale: 'Solid performance ($minRepsAchieved reps at $topWeight kg). '
+        overloadRationale:
+            'Solid performance ($minRepsAchieved reps at $topWeight kg). '
             'Keep weight fixed and aim for +1 rep on earlier sets next workout.',
-        techniqueFocusCue: 'Control the eccentric descent to maximize mechanical tension.',
+        techniqueFocusCue:
+            'Control the eccentric descent to maximize mechanical tension.',
       );
     } else {
       // Struggling to hit minimum reps
@@ -176,9 +191,11 @@ class ProgressiveOverloadEngine {
         nextTargetWeightKg: topWeight,
         nextTargetRepsMin: targetRepsMin,
         nextTargetRepsMax: targetRepsMax,
-        overloadRationale: 'Current load is challenging ($minRepsAchieved reps vs $targetRepsMin target). '
+        overloadRationale:
+            'Current load is challenging ($minRepsAchieved reps vs $targetRepsMin target). '
             'Consolidate form, optimize rest intervals, and maintain load.',
-        techniqueFocusCue: 'Ensure complete 90-120s rest periods between heavy sets.',
+        techniqueFocusCue:
+            'Ensure complete 90-120s rest periods between heavy sets.',
       );
     }
   }
@@ -195,7 +212,9 @@ class ProgressiveOverloadEngine {
       case MuscleGroup.arms:
       case MuscleGroup.core:
       case MuscleGroup.fullBody:
-        return exercise.equipment == EquipmentType.traditionalIndian ? 0.0 : 1.25;
+        return exercise.equipment == EquipmentType.traditionalIndian
+            ? 0.0
+            : 1.25;
     }
   }
 }

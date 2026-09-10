@@ -124,11 +124,13 @@ class CorporateWellnessNotifier extends StateNotifier<CorporateState> {
     );
   }
 
-  void initiateWorkEmailVerification(String workEmail, String orgName, String dept) {
+  void initiateWorkEmailVerification(
+      String workEmail, String orgName, String dept) {
     final otp = _engine.generateWorkEmailOtp(workEmail);
     state = state.copyWith(
       pendingOtp: otp,
-      statusMessage: 'Verification OTP sent to $workEmail: $otp (Demo Simulation)',
+      statusMessage:
+          'Verification OTP sent to $workEmail: $otp (Demo Simulation)',
       employeeProfile: state.employeeProfile.copyWith(
         workEmail: workEmail,
         organizationName: orgName,
@@ -157,7 +159,8 @@ class CorporateWellnessNotifier extends StateNotifier<CorporateState> {
       );
       return true;
     } else {
-      state = state.copyWith(statusMessage: 'Incorrect OTP. Please check your work email.');
+      state = state.copyWith(
+          statusMessage: 'Incorrect OTP. Please check your work email.');
       return false;
     }
   }
@@ -179,7 +182,8 @@ class CorporateWellnessNotifier extends StateNotifier<CorporateState> {
 
     state = state.copyWith(
       insurerRebate: updatedRebate,
-      statusMessage: '${insurer.name} policy linked! Dynamic rebate applied. 🛡️',
+      statusMessage:
+          '${insurer.name} policy linked! Dynamic rebate applied. 🛡️',
     );
   }
 

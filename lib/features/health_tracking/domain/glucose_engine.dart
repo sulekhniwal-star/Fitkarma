@@ -30,7 +30,8 @@ class GlucoseReading {
     required this.recordedAt,
   });
 
-  int? get mealExcursion => (preMealGlucose != null) ? (glucoseMgDl - preMealGlucose!) : null;
+  int? get mealExcursion =>
+      (preMealGlucose != null) ? (glucoseMgDl - preMealGlucose!) : null;
 
   factory GlucoseReading.fromMap(Map<String, dynamic> map, String id) {
     final typeName = map['contextType'] as String? ?? 'fasting';
@@ -95,16 +96,20 @@ class GlucoseEngine {
         averageGlucoseMgDl: 105.0,
         timeInRangePercent: 95.0,
         currentStatus: GlucoseStatus.normal,
-        glycemicInsight: 'No glucose readings logged yet. Baseline glycemic metrics active.',
+        glycemicInsight:
+            'No glucose readings logged yet. Baseline glycemic metrics active.',
       );
     }
 
-    final totalGlucose = readings.fold<int>(0, (sum, item) => sum + item.glucoseMgDl);
+    final totalGlucose =
+        readings.fold<int>(0, (sum, item) => sum + item.glucoseMgDl);
     final avg = totalGlucose / readings.length;
     final eA1c = calculateEstimatedHbA1c(avg);
 
     // Time In Range (TIR: 70 to 140 mg/dL)
-    final inRangeCount = readings.where((r) => r.glucoseMgDl >= 70 && r.glucoseMgDl <= 140).length;
+    final inRangeCount = readings
+        .where((r) => r.glucoseMgDl >= 70 && r.glucoseMgDl <= 140)
+        .length;
     final tir = (inRangeCount / readings.length) * 100.0;
 
     final latest = readings.first;
@@ -121,11 +126,14 @@ class GlucoseEngine {
 
     final String insight;
     if (status == GlucoseStatus.high) {
-      insight = 'Elevated postprandial glucose detected. Take a 15-minute brisk walk (शतपावली) to stimulate GLUT-4 muscle glucose uptake without insulin demand.';
+      insight =
+          'Elevated postprandial glucose detected. Take a 15-minute brisk walk (शतपावली) to stimulate GLUT-4 muscle glucose uptake without insulin demand.';
     } else if (tir >= 85.0) {
-      insight = 'Outstanding Glycemic Stability! Your Time-In-Range (${tir.round()}%) reflects excellent insulin sensitivity and balanced meal composition.';
+      insight =
+          'Outstanding Glycemic Stability! Your Time-In-Range (${tir.round()}%) reflects excellent insulin sensitivity and balanced meal composition.';
     } else {
-      insight = 'Moderate glycemic variability. Consider pairing complex carbohydrates (millets/brown rice) with fiber and protein (daal/paneer).';
+      insight =
+          'Moderate glycemic variability. Consider pairing complex carbohydrates (millets/brown rice) with fiber and protein (daal/paneer).';
     }
 
     return GlucoseSummaryResult(

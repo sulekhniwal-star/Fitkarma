@@ -10,17 +10,20 @@ enum ClinicalDataScope {
   glycemicCgm(
     name: 'Glycemic & CGM Interstitial Feeds',
     regionalName: 'शर्करा व CGM निरंतर आंकड़े',
-    description: 'Time in Range (TIR), mean glucose, postprandial spike amplitude',
+    description:
+        'Time in Range (TIR), mean glucose, postprandial spike amplitude',
   ),
   labBiomarkers(
     name: 'Diagnostic Laboratory Panels',
     regionalName: 'प्रयोगशाला रक्त परीक्षण रिपोर्ट',
-    description: 'Lipid profile, HbA1c, LFT enzymes, KFT renal markers, Vitamins',
+    description:
+        'Lipid profile, HbA1c, LFT enzymes, KFT renal markers, Vitamins',
   ),
   medicationRegimens(
     name: 'Medication Regimen & Adherence',
     regionalName: 'दवाओं की सूची व सेवन अनुपालन',
-    description: 'Active allopathic prescriptions, Ayurvedic rasayanas, and compliance rate',
+    description:
+        'Active allopathic prescriptions, Ayurvedic rasayanas, and compliance rate',
   ),
   sleepRecovery(
     name: 'Sleep Architecture & Recovery',
@@ -41,10 +44,22 @@ enum ClinicalDataScope {
 
 /// Access duration validity
 enum SharingDurationWindow {
-  hours24(label: '24 Hours (Immediate Consult)', regionalLabel: '२४ घंटे (तात्कालिक परामर्श)', duration: Duration(hours: 24)),
-  days7(label: '7 Days (Post-Consult Follow-up)', regionalLabel: '७ दिन (परामर्श पश्चात समीक्षा)', duration: Duration(days: 7)),
-  days30(label: '30 Days (Chronic Care Management)', regionalLabel: '३० दिन (दीर्घकालिक देखभाल)', duration: Duration(days: 30)),
-  days90(label: '90 Days (Quarterly Specialist Review)', regionalLabel: '९० दिन (त्रैमासिक विशेषज्ञ समीक्षा)', duration: Duration(days: 90));
+  hours24(
+      label: '24 Hours (Immediate Consult)',
+      regionalLabel: '२४ घंटे (तात्कालिक परामर्श)',
+      duration: Duration(hours: 24)),
+  days7(
+      label: '7 Days (Post-Consult Follow-up)',
+      regionalLabel: '७ दिन (परामर्श पश्चात समीक्षा)',
+      duration: Duration(days: 7)),
+  days30(
+      label: '30 Days (Chronic Care Management)',
+      regionalLabel: '३० दिन (दीर्घकालिक देखभाल)',
+      duration: Duration(days: 30)),
+  days90(
+      label: '90 Days (Quarterly Specialist Review)',
+      regionalLabel: '९० दिन (त्रैमासिक विशेषज्ञ समीक्षा)',
+      duration: Duration(days: 90));
 
   final String label;
   final String regionalLabel;
@@ -62,7 +77,8 @@ enum SharingDurationWindow {
 class DoctorAccessGrant {
   final String grantId;
   final String doctorName;
-  final String specialization; // e.g. "Cardiologist", "Endocrinologist", "Ayurvedic Physician"
+  final String
+      specialization; // e.g. "Cardiologist", "Endocrinologist", "Ayurvedic Physician"
   final String clinicOrHospital;
   final String medicalRegistrationNumber; // e.g. "MCI-48291"
   final DateTime grantedAt;

@@ -11,7 +11,8 @@ import '../../health_os/providers/health_os_provider.dart';
 import '../data/coach_escalation_repository.dart';
 import '../domain/coach_escalation.dart';
 
-final coachEscalationRepositoryProvider = Provider<CoachEscalationRepository>((ref) {
+final coachEscalationRepositoryProvider =
+    Provider<CoachEscalationRepository>((ref) {
   return CoachEscalationRepository();
 });
 
@@ -19,7 +20,8 @@ class CoachEscalationScreen extends ConsumerStatefulWidget {
   const CoachEscalationScreen({super.key});
 
   @override
-  ConsumerState<CoachEscalationScreen> createState() => _CoachEscalationScreenState();
+  ConsumerState<CoachEscalationScreen> createState() =>
+      _CoachEscalationScreenState();
 }
 
 class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
@@ -109,7 +111,8 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
                   color: AppColors.gold.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
                 ),
-                child: const Icon(Icons.workspace_premium_rounded, color: AppColors.gold, size: 24),
+                child: const Icon(Icons.workspace_premium_rounded,
+                    color: AppColors.gold, size: 24),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -159,7 +162,8 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
             child: BentoCard(
               hasGlow: isSelected,
               glowColor: AppColors.focusBlue,
-              backgroundColor: isSelected ? AppColors.surfaceElevated : AppColors.surface,
+              backgroundColor:
+                  isSelected ? AppColors.surfaceElevated : AppColors.surface,
               border: Border.all(
                 color: isSelected ? AppColors.focusBlue : AppColors.glassBorder,
               ),
@@ -173,18 +177,23 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
                       Text(
                         reason.name,
                         style: AppTypography.titleSmall.copyWith(
-                          color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          color: isSelected
+                              ? AppColors.textPrimary
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.w700 : FontWeight.w500,
                         ),
                       ),
                       Text(
                         reason.regionalName,
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        style: AppTypography.bodySmall
+                            .copyWith(color: AppColors.textMuted, fontSize: 11),
                       ),
                     ],
                   ),
                   if (isSelected)
-                    const Icon(Icons.check_circle_rounded, color: AppColors.focusBlue, size: 20),
+                    const Icon(Icons.check_circle_rounded,
+                        color: AppColors.focusBlue, size: 20),
                 ],
               ),
             ),
@@ -199,7 +208,8 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.description_rounded, color: AppColors.karmaGreen, size: 18),
+                  Icon(Icons.description_rounded,
+                      color: AppColors.karmaGreen, size: 18),
                   SizedBox(width: 8),
                   BilingualLabel(
                     primaryText: 'Auto-Compiled Health Dossier',
@@ -216,9 +226,18 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  GlowingMetric(label: '14-Day HRV', value: '58.2ms', accentColor: AppColors.focusBlue),
-                  GlowingMetric(label: 'Avg Sleep', value: '7.4h', accentColor: AppColors.aiPurple),
-                  GlowingMetric(label: 'Readiness', value: '78%', accentColor: AppColors.karmaGreen),
+                  GlowingMetric(
+                      label: '14-Day HRV',
+                      value: '58.2ms',
+                      accentColor: AppColors.focusBlue),
+                  GlowingMetric(
+                      label: 'Avg Sleep',
+                      value: '7.4h',
+                      accentColor: AppColors.aiPurple),
+                  GlowingMetric(
+                      label: 'Readiness',
+                      value: '78%',
+                      accentColor: AppColors.karmaGreen),
                 ],
               ),
             ],
@@ -232,8 +251,11 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
           maxLines: 3,
           style: const TextStyle(color: AppColors.textPrimary, fontSize: 14),
           decoration: InputDecoration(
-            hintText: 'Describe your specific question or injury/periodization goal for the human coach...',
-            hintStyle: TextStyle(color: AppColors.textMuted.withValues(alpha: 0.8), fontSize: 13),
+            hintText:
+                'Describe your specific question or injury/periodization goal for the human coach...',
+            hintStyle: TextStyle(
+                color: AppColors.textMuted.withValues(alpha: 0.8),
+                fontSize: 13),
             filled: true,
             fillColor: AppColors.surfaceElevated,
             border: const OutlineInputBorder(
@@ -256,7 +278,8 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
-              shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
+              shape:
+                  const RoundedRectangleBorder(borderRadius: AppRadii.radiusMd),
             ),
             onPressed: _submitTicket,
             child: Text(
@@ -285,7 +308,8 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
               shape: BoxShape.circle,
               color: AppColors.karmaGreen.withValues(alpha: 0.15),
             ),
-            child: const Icon(Icons.check_circle_outline_rounded, color: AppColors.karmaGreen, size: 64),
+            child: const Icon(Icons.check_circle_outline_rounded,
+                color: AppColors.karmaGreen, size: 64),
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(
@@ -308,10 +332,12 @@ class _CoachEscalationScreenState extends ConsumerState<CoachEscalationScreen> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.surfaceElevated,
-              shape: const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
+              shape:
+                  const RoundedRectangleBorder(borderRadius: AppRadii.radiusSm),
             ),
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Return to Coach Chat', style: TextStyle(color: AppColors.textPrimary)),
+            child: const Text('Return to Coach Chat',
+                style: TextStyle(color: AppColors.textPrimary)),
           ),
         ],
       ),

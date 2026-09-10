@@ -1,8 +1,28 @@
 enum DayTrainingIntensity {
-  heavyCompound(name: 'Heavy Compound / Leg Day', regionalName: 'भारी कसरत (लेग डे)', calorieOffset: 250, carbFactor: 4.0, fatFactor: 0.65),
-  moderateUpper(name: 'Moderate Upper Body / Hypertrophy', regionalName: 'मध्यम अपर बॉडी', calorieOffset: 0, carbFactor: 3.2, fatFactor: 0.8),
-  lightConditioning(name: 'Light Zone 2 / Active Recovery', regionalName: 'हल्का कार्डियो / रिकवरी', calorieOffset: -150, carbFactor: 2.4, fatFactor: 0.9),
-  fullRest(name: 'Full Rest Day', regionalName: 'पूर्ण विश्राम दिवस', calorieOffset: -250, carbFactor: 1.8, fatFactor: 1.05);
+  heavyCompound(
+      name: 'Heavy Compound / Leg Day',
+      regionalName: 'भारी कसरत (लेग डे)',
+      calorieOffset: 250,
+      carbFactor: 4.0,
+      fatFactor: 0.65),
+  moderateUpper(
+      name: 'Moderate Upper Body / Hypertrophy',
+      regionalName: 'मध्यम अपर बॉडी',
+      calorieOffset: 0,
+      carbFactor: 3.2,
+      fatFactor: 0.8),
+  lightConditioning(
+      name: 'Light Zone 2 / Active Recovery',
+      regionalName: 'हल्का कार्डियो / रिकवरी',
+      calorieOffset: -150,
+      carbFactor: 2.4,
+      fatFactor: 0.9),
+  fullRest(
+      name: 'Full Rest Day',
+      regionalName: 'पूर्ण विश्राम दिवस',
+      calorieOffset: -250,
+      carbFactor: 1.8,
+      fatFactor: 1.05);
 
   final String name;
   final String regionalName;
@@ -65,13 +85,27 @@ class NutritionPeriodizationEngine {
     final baseProtein = (weightKg * proteinPerKg).round();
 
     final List<PeriodizedDayTarget> schedule = [
-      _calculateDay('Monday', DayTrainingIntensity.heavyCompound, baseMaintenanceCalories, baseProtein, weightKg),
-      _calculateDay('Tuesday', DayTrainingIntensity.moderateUpper, baseMaintenanceCalories, baseProtein, weightKg),
-      _calculateDay('Wednesday', DayTrainingIntensity.lightConditioning, baseMaintenanceCalories, baseProtein, weightKg),
-      _calculateDay('Thursday', DayTrainingIntensity.heavyCompound, baseMaintenanceCalories, baseProtein, weightKg),
-      _calculateDay('Friday', DayTrainingIntensity.moderateUpper, baseMaintenanceCalories, baseProtein, weightKg),
-      _calculateDay('Saturday', isRefeedEnabled ? DayTrainingIntensity.heavyCompound : DayTrainingIntensity.lightConditioning, baseMaintenanceCalories, baseProtein, weightKg, isRefeed: isRefeedEnabled),
-      _calculateDay('Sunday', DayTrainingIntensity.fullRest, baseMaintenanceCalories, baseProtein, weightKg),
+      _calculateDay('Monday', DayTrainingIntensity.heavyCompound,
+          baseMaintenanceCalories, baseProtein, weightKg),
+      _calculateDay('Tuesday', DayTrainingIntensity.moderateUpper,
+          baseMaintenanceCalories, baseProtein, weightKg),
+      _calculateDay('Wednesday', DayTrainingIntensity.lightConditioning,
+          baseMaintenanceCalories, baseProtein, weightKg),
+      _calculateDay('Thursday', DayTrainingIntensity.heavyCompound,
+          baseMaintenanceCalories, baseProtein, weightKg),
+      _calculateDay('Friday', DayTrainingIntensity.moderateUpper,
+          baseMaintenanceCalories, baseProtein, weightKg),
+      _calculateDay(
+          'Saturday',
+          isRefeedEnabled
+              ? DayTrainingIntensity.heavyCompound
+              : DayTrainingIntensity.lightConditioning,
+          baseMaintenanceCalories,
+          baseProtein,
+          weightKg,
+          isRefeed: isRefeedEnabled),
+      _calculateDay('Sunday', DayTrainingIntensity.fullRest,
+          baseMaintenanceCalories, baseProtein, weightKg),
     ];
 
     final totalCals = schedule.fold<int>(0, (sum, d) => sum + d.targetCalories);
@@ -81,7 +115,8 @@ class NutritionPeriodizationEngine {
       weeklySchedule: schedule,
       averageWeeklyCalories: avgCals,
       weeklyProteinAverage: baseProtein.toDouble(),
-      strategicRationale: 'Synchronizes high carbohydrate availability with heavy compound leg and push days for glycogen replenishment, while dropping carbs and calories on rest days to maintain peak insulin sensitivity.',
+      strategicRationale:
+          'Synchronizes high carbohydrate availability with heavy compound leg and push days for glycogen replenishment, while dropping carbs and calories on rest days to maintain peak insulin sensitivity.',
     );
   }
 
@@ -93,8 +128,10 @@ class NutritionPeriodizationEngine {
     double weightKg, {
     bool isRefeed = false,
   }) {
-    final int dayCals = baseMaintenance + intensity.calorieOffset + (isRefeed ? 200 : 0);
-    final int dayCarbs = ((weightKg * intensity.carbFactor) + (isRefeed ? 50 : 0)).round();
+    final int dayCals =
+        baseMaintenance + intensity.calorieOffset + (isRefeed ? 200 : 0);
+    final int dayCarbs =
+        ((weightKg * intensity.carbFactor) + (isRefeed ? 50 : 0)).round();
     final int dayFats = (weightKg * intensity.fatFactor).round();
 
     return PeriodizedDayTarget(

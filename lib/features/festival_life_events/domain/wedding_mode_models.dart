@@ -2,10 +2,22 @@ import 'package:flutter/foundation.dart';
 
 /// Wedding role archetype
 enum WeddingRole {
-  bride(name: 'Bride (वधू)', regionalName: 'वधू (दुल्हन)', focus: 'Bridal Posture, Skin Glow & Waist Taper'),
-  groom(name: 'Groom (वर)', regionalName: 'वर (दूल्हा)', focus: 'Sherwani V-Taper, Posture & Shoulder Width'),
-  closeFamily(name: 'Close Family / Parents', regionalName: 'परिवार के मुख्य सदस्य', focus: 'All-Day Stamina, Mobility & Joint Health'),
-  bridalParty(name: 'Bridesmaid / Groomsman', regionalName: 'सहेली / बाराती मित्र', focus: 'Sangeet Choreography Stamina & Lean Tone');
+  bride(
+      name: 'Bride (वधू)',
+      regionalName: 'वधू (दुल्हन)',
+      focus: 'Bridal Posture, Skin Glow & Waist Taper'),
+  groom(
+      name: 'Groom (वर)',
+      regionalName: 'वर (दूल्हा)',
+      focus: 'Sherwani V-Taper, Posture & Shoulder Width'),
+  closeFamily(
+      name: 'Close Family / Parents',
+      regionalName: 'परिवार के मुख्य सदस्य',
+      focus: 'All-Day Stamina, Mobility & Joint Health'),
+  bridalParty(
+      name: 'Bridesmaid / Groomsman',
+      regionalName: 'सहेली / बाराती मित्र',
+      focus: 'Sangeet Choreography Stamina & Lean Tone');
 
   final String name;
   final String regionalName;
@@ -20,10 +32,18 @@ enum WeddingRole {
 
 /// Countdown timeline phase
 enum WeddingTimelinePhase {
-  foundation(name: 'Foundation & Recomposition (Weeks 12–8)', regionalName: 'प्रारंभिक शारीरिक पुनर्गठन चरण'),
-  definition(name: 'Sculpting & Definition (Weeks 7–4)', regionalName: 'कसावट व मांसपेशी परिष्कार चरण'),
-  refinement(name: 'Skin Glow & Posture Refinement (Weeks 3–2)', regionalName: 'त्वचा कांति व मुद्रा सुधार चरण'),
-  peakWeek(name: 'Peak Week & Anti-Bloat Protocol (Final 7 Days)', regionalName: 'अंतिम ७ दिवसीय पीक वीक प्रोटोकॉल');
+  foundation(
+      name: 'Foundation & Recomposition (Weeks 12–8)',
+      regionalName: 'प्रारंभिक शारीरिक पुनर्गठन चरण'),
+  definition(
+      name: 'Sculpting & Definition (Weeks 7–4)',
+      regionalName: 'कसावट व मांसपेशी परिष्कार चरण'),
+  refinement(
+      name: 'Skin Glow & Posture Refinement (Weeks 3–2)',
+      regionalName: 'त्वचा कांति व मुद्रा सुधार चरण'),
+  peakWeek(
+      name: 'Peak Week & Anti-Bloat Protocol (Final 7 Days)',
+      regionalName: 'अंतिम ७ दिवसीय पीक वीक प्रोटोकॉल');
 
   final String name;
   final String regionalName;

@@ -17,7 +17,8 @@ class KarmaHubScreen extends ConsumerStatefulWidget {
   ConsumerState<KarmaHubScreen> createState() => _KarmaHubScreenState();
 }
 
-class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTickerProviderStateMixin {
+class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen>
+    with SingleTickerProviderStateMixin {
   KarmaBadgeCategory? _selectedCategory;
   late AnimationController _glowController;
 
@@ -54,7 +55,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
             ),
             Text(
               'Deterministic Health Currency • Gamification OS',
-              style: AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
+              style:
+                  AppTypography.bodySmall.copyWith(color: AppColors.focusBlue),
             ),
           ],
         ),
@@ -140,7 +142,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: tierColor.withAlpha(40),
                       borderRadius: BorderRadius.circular(AppRadii.full),
@@ -159,7 +162,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                   const SizedBox(height: 4),
                   Text(
                     profile.tier.regionalTitle,
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                 ],
               ),
@@ -204,7 +208,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                 children: [
                   Text(
                     'Level ${profile.currentLevel} Progress',
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                   Text(
                     '${(profile.levelProgressPercent * 100).toInt()}% • ${profile.pointsToNextLevel} KP to L${profile.currentLevel + 1}',
@@ -261,7 +266,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
           child: BentoCard(
             child: GlowingMetric(
               label: 'Badges Unlocked',
-              value: '${profile.unlockedBadgesCount}/${profile.totalBadgesCount}',
+              value:
+                  '${profile.unlockedBadgesCount}/${profile.totalBadgesCount}',
               accentColor: AppColors.karmaGreen,
             ),
           ),
@@ -335,9 +341,9 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
       side: BorderSide(color: color.withAlpha(90)),
       onPressed: () {
         ref.read(karmaProvider.notifier).recordKarmaAction(
-          action: action,
-          isReadinessAligned: true,
-        );
+              action: action,
+              isReadinessAligned: true,
+            );
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -350,7 +356,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                 const SizedBox(width: 8),
                 Text(
                   'Karma Awarded: ${action.label}!',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -363,7 +370,9 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
   Widget _buildBadgeShowcaseSection(KarmaProfile profile) {
     final filteredBadges = _selectedCategory == null
         ? profile.allBadges
-        : profile.allBadges.where((b) => b.category == _selectedCategory).toList();
+        : profile.allBadges
+            .where((b) => b.category == _selectedCategory)
+            .toList();
 
     return BentoCard(
       child: Column(
@@ -394,7 +403,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                 Padding(
                   padding: const EdgeInsets.only(right: 6.0),
                   child: FilterChip(
-                    label: const Text('All Pillars', style: TextStyle(fontSize: 11)),
+                    label: const Text('All Pillars',
+                        style: TextStyle(fontSize: 11)),
                     selected: _selectedCategory == null,
                     selectedColor: AppColors.karmaGreen,
                     backgroundColor: AppColors.surfaceElevated,
@@ -412,7 +422,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                   return Padding(
                     padding: const EdgeInsets.only(right: 6.0),
                     child: FilterChip(
-                      label: Text(cat.label, style: const TextStyle(fontSize: 11)),
+                      label:
+                          Text(cat.label, style: const TextStyle(fontSize: 11)),
                       selected: isSelected,
                       selectedColor: AppColors.karmaGreen,
                       backgroundColor: AppColors.surfaceElevated,
@@ -454,7 +465,9 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
         color: AppColors.surfaceElevated,
         borderRadius: BorderRadius.circular(AppRadii.md),
         border: Border.all(
-          color: isUnlocked ? AppColors.gold.withAlpha(120) : AppColors.glassBorder,
+          color: isUnlocked
+              ? AppColors.gold.withAlpha(120)
+              : AppColors.glassBorder,
           width: isUnlocked ? 1.5 : 1.0,
         ),
       ),
@@ -463,7 +476,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: isUnlocked ? AppColors.gold.withAlpha(40) : AppColors.surface,
+            backgroundColor:
+                isUnlocked ? AppColors.gold.withAlpha(40) : AppColors.surface,
             child: Icon(
               isUnlocked ? Icons.workspace_premium : Icons.lock_outline,
               color: badgeColor,
@@ -481,13 +495,16 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                     Text(
                       badge.name,
                       style: AppTypography.titleSmall.copyWith(
-                        color: isUnlocked ? AppColors.textPrimary : AppColors.textSecondary,
+                        color: isUnlocked
+                            ? AppColors.textPrimary
+                            : AppColors.textSecondary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     if (isUnlocked)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: AppColors.gold.withAlpha(30),
                           borderRadius: BorderRadius.circular(4),
@@ -507,7 +524,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                 Text(
                   badge.regionalName,
                   style: AppTypography.bodySmall.copyWith(
-                    color: isUnlocked ? AppColors.focusBlue : AppColors.textMuted,
+                    color:
+                        isUnlocked ? AppColors.focusBlue : AppColors.textMuted,
                     fontSize: 11,
                   ),
                 ),
@@ -526,7 +544,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                     children: [
                       Text(
                         'Requirement: ${badge.requirementLabel}',
-                        style: AppTypography.bodySmall.copyWith(fontSize: 10, color: AppColors.textMuted),
+                        style: AppTypography.bodySmall
+                            .copyWith(fontSize: 10, color: AppColors.textMuted),
                       ),
                       Text(
                         '${(badge.progress * 100).toInt()}%',
@@ -545,7 +564,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                       value: badge.progress,
                       minHeight: 4,
                       backgroundColor: AppColors.surface,
-                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.focusBlue),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          AppColors.focusBlue),
                     ),
                   ),
                 ],
@@ -581,7 +601,8 @@ class _KarmaHubScreenState extends ConsumerState<KarmaHubScreen> with SingleTick
                   CircleAvatar(
                     radius: 14,
                     backgroundColor: AppColors.karmaGreen.withAlpha(35),
-                    child: const Icon(Icons.add, color: AppColors.karmaGreen, size: 14),
+                    child: const Icon(Icons.add,
+                        color: AppColors.karmaGreen, size: 14),
                   ),
                   const SizedBox(width: 10),
                   Expanded(

@@ -35,7 +35,9 @@ class DeepenedMetabolismEngine {
 
     // 2. Compute Accurate BMR (Katch-McArdle if lean mass available, else Mifflin-St Jeor)
     final double bmr;
-    if (bodyFatPercentage != null && bodyFatPercentage > 5 && bodyFatPercentage < 60) {
+    if (bodyFatPercentage != null &&
+        bodyFatPercentage > 5 &&
+        bodyFatPercentage < 60) {
       final leanMassKg = weightKg * (1 - (bodyFatPercentage / 100.0));
       bmr = 370 + (21.6 * leanMassKg);
     } else {
@@ -75,7 +77,8 @@ class DeepenedMetabolismEngine {
       jatharagni = JatharagniState.mandagni;
     } else if (baseProfile.adaptationFactor > 1.10) {
       jatharagni = JatharagniState.tikshnagni;
-    } else if (baseProfile.adaptationFactor >= 0.92 && baseProfile.adaptationFactor <= 1.06) {
+    } else if (baseProfile.adaptationFactor >= 0.92 &&
+        baseProfile.adaptationFactor <= 1.06) {
       jatharagni = JatharagniState.samagni;
     } else {
       jatharagni = JatharagniState.vishmagni;
@@ -96,12 +99,16 @@ class DeepenedMetabolismEngine {
     final trainingCalories = targetCal + 150;
     final trainingProtein = baseProfile.targetProteinGrams;
     final trainingCarbs = baseProfile.targetCarbsGrams + 35;
-    final trainingFats = ((trainingCalories - (trainingProtein * 4) - (trainingCarbs * 4)) / 9).round();
+    final trainingFats =
+        ((trainingCalories - (trainingProtein * 4) - (trainingCarbs * 4)) / 9)
+            .round();
 
     final restCalories = targetCal - 150;
     final restProtein = baseProfile.targetProteinGrams;
     final restCarbs = (baseProfile.targetCarbsGrams - 35).clamp(40, 500);
-    final restFats = ((restCalories - (restProtein * 4) - (restCarbs * 4)) / 9).round().clamp(30, 150);
+    final restFats = ((restCalories - (restProtein * 4) - (restCarbs * 4)) / 9)
+        .round()
+        .clamp(30, 150);
 
     final macroCycling = MacroCyclingPlan(
       trainingDayCalories: trainingCalories,
@@ -120,8 +127,10 @@ class DeepenedMetabolismEngine {
     return DeepenedMetabolismReport(
       baseProfile: baseProfile,
       decomposition: decomposition,
-      adaptiveThermogenesisDeltaKcal: double.parse(atDeltaKcal.toStringAsFixed(1)),
-      metabolicResistanceScore: double.parse(resistanceScore.toStringAsFixed(1)),
+      adaptiveThermogenesisDeltaKcal:
+          double.parse(atDeltaKcal.toStringAsFixed(1)),
+      metabolicResistanceScore:
+          double.parse(resistanceScore.toStringAsFixed(1)),
       isMetabolicAdaptationSevere: isSevereAdaptation,
       jatharagniState: jatharagni,
       recommendedRefeed: refeed,
@@ -136,23 +145,31 @@ class DeepenedMetabolismEngine {
     switch (state) {
       case JatharagniState.samagni:
         return const _AgniTip(
-          english: 'Digestive fire is perfectly balanced. Consume 45% of daily calories between 12:00 - 14:00 (Solar Peak) and keep dinner light before 20:00.',
-          hindi: 'जठराग्नि संतुलित है। मध्याह्न १२ से २ बजे के बीच ४५% मुख्य आहार लें तथा रात्रि भोजन हल्का रखें।',
+          english:
+              'Digestive fire is perfectly balanced. Consume 45% of daily calories between 12:00 - 14:00 (Solar Peak) and keep dinner light before 20:00.',
+          hindi:
+              'जठराग्नि संतुलित है। मध्याह्न १२ से २ बजे के बीच ४५% मुख्य आहार लें तथा रात्रि भोजन हल्का रखें।',
         );
       case JatharagniState.mandagni:
         return const _AgniTip(
-          english: 'Metabolic adaptation has suppressed digestive rate. Sip warm ginger water 20 min before meals and incorporate 1000-pace post-meal Shatapadi.',
-          hindi: 'मंदाग्नि सक्रिय है। भोजन से २० मिनट पूर्व अदरक जल पिएं तथा भोजनोपरांत १००० कदम शतपावली अवश्य करें।',
+          english:
+              'Metabolic adaptation has suppressed digestive rate. Sip warm ginger water 20 min before meals and incorporate 1000-pace post-meal Shatapadi.',
+          hindi:
+              'मंदाग्नि सक्रिय है। भोजन से २० मिनट पूर्व अदरक जल पिएं तथा भोजनोपरांत १००० कदम शतपावली अवश्य करें।',
         );
       case JatharagniState.tikshnagni:
         return const _AgniTip(
-          english: 'Elevated Pitta metabolic heat. Prioritize cooling grains (barley, soaked chia) and avoid excessive chilies or fried spices.',
-          hindi: 'तीक्ष्णाग्नि व पित्त अधिक है। जौ, चिया व शीतल आहार को प्राथमिकता दें तथा अधिक मिर्च-मसाले से बचें।',
+          english:
+              'Elevated Pitta metabolic heat. Prioritize cooling grains (barley, soaked chia) and avoid excessive chilies or fried spices.',
+          hindi:
+              'तीक्ष्णाग्नि व पित्त अधिक है। जौ, चिया व शीतल आहार को प्राथमिकता दें तथा अधिक मिर्च-मसाले से बचें।',
         );
       case JatharagniState.vishmagni:
         return const _AgniTip(
-          english: 'Vata erratic digestion. Maintain fixed meal timings every 4 hours, consume warm cooked stews, and avoid dry raw salads.',
-          hindi: 'विषमाग्नि व वात दोष है। प्रत्येक ४ घंटे पर नियमित समय पर गर्म व ताजा भोजन लें, कच्चे सलाद से बचें।',
+          english:
+              'Vata erratic digestion. Maintain fixed meal timings every 4 hours, consume warm cooked stews, and avoid dry raw salads.',
+          hindi:
+              'विषमाग्नि व वात दोष है। प्रत्येक ४ घंटे पर नियमित समय पर गर्म व ताजा भोजन लें, कच्चे सलाद से बचें।',
         );
     }
   }

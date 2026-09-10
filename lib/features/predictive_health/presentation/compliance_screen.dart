@@ -31,7 +31,8 @@ class ComplianceScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shield_outlined, color: AppColors.textSecondary),
+            icon: const Icon(Icons.shield_outlined,
+                color: AppColors.textSecondary),
             onPressed: () => _showAuditDetailsModal(context, report),
           ),
         ],
@@ -77,10 +78,13 @@ class ComplianceScreen extends ConsumerWidget {
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                     onPressed: () {
-                      ref.read(complianceProvider.notifier).restoreBaselineConsents();
+                      ref
+                          .read(complianceProvider.notifier)
+                          .restoreBaselineConsents();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Baseline statutory consents restored.'),
+                          content:
+                              Text('Baseline statutory consents restored.'),
                           backgroundColor: AppColors.karmaGreen,
                         ),
                       );
@@ -129,7 +133,8 @@ class ComplianceScreen extends ConsumerWidget {
     WidgetRef ref,
     ComplianceFrameworkReport report,
   ) {
-    final statusColor = report.isFullyCompliant ? AppColors.karmaGreen : AppColors.energyOrange;
+    final statusColor =
+        report.isFullyCompliant ? AppColors.karmaGreen : AppColors.energyOrange;
 
     return BentoCard(
       child: Column(
@@ -139,7 +144,8 @@ class ComplianceScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.15),
                   borderRadius: AppRadii.radiusSm,
@@ -149,13 +155,17 @@ class ComplianceScreen extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      report.isFullyCompliant ? Icons.verified : Icons.warning_amber_rounded,
+                      report.isFullyCompliant
+                          ? Icons.verified
+                          : Icons.warning_amber_rounded,
                       color: statusColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      report.isFullyCompliant ? '100% Fully Compliant' : 'Partial Compliance',
+                      report.isFullyCompliant
+                          ? '100% Fully Compliant'
+                          : 'Partial Compliance',
                       style: TextStyle(
                         color: statusColor,
                         fontWeight: FontWeight.bold,
@@ -228,7 +238,8 @@ class ComplianceScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.medical_information_outlined, color: AppColors.energyOrange, size: 20),
+              const Icon(Icons.medical_information_outlined,
+                  color: AppColors.energyOrange, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Expanded(
                 child: Text(
@@ -255,7 +266,8 @@ class ComplianceScreen extends ConsumerWidget {
             decoration: BoxDecoration(
               color: AppColors.energyOrange.withValues(alpha: 0.08),
               borderRadius: AppRadii.radiusSm,
-              border: Border.all(color: AppColors.energyOrange.withValues(alpha: 0.3)),
+              border: Border.all(
+                  color: AppColors.energyOrange.withValues(alpha: 0.3)),
             ),
             child: Text(
               disclaimer.legalText,
@@ -277,14 +289,16 @@ class ComplianceScreen extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.alertRed.withValues(alpha: 0.1),
               borderRadius: AppRadii.radiusSm,
             ),
             child: Row(
               children: [
-                const Icon(Icons.phone_in_talk, color: AppColors.alertRed, size: 14),
+                const Icon(Icons.phone_in_talk,
+                    color: AppColors.alertRed, size: 14),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -318,7 +332,8 @@ class ComplianceScreen extends ConsumerWidget {
                   color: AppColors.surfaceElevated,
                   borderRadius: AppRadii.radiusSm,
                 ),
-                child: const Icon(Icons.policy_outlined, color: AppColors.focusBlue, size: 18),
+                child: const Icon(Icons.policy_outlined,
+                    color: AppColors.focusBlue, size: 18),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
@@ -413,7 +428,9 @@ class ComplianceScreen extends ConsumerWidget {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    ref.read(complianceProvider.notifier).revokeConsent(consent.consentId);
+                    ref
+                        .read(complianceProvider.notifier)
+                        .revokeConsent(consent.consentId);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Consent ${consent.consentId} revoked.'),
@@ -473,7 +490,8 @@ class ComplianceScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.lock_outline, color: AppColors.karmaGreen, size: 20),
+              const Icon(Icons.lock_outline,
+                  color: AppColors.karmaGreen, size: 20),
               const SizedBox(width: AppSpacing.xs),
               Text(
                 'Data Protection & Cryptographic Safeguards',
@@ -485,9 +503,12 @@ class ComplianceScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
-          _buildCheckRow('Encryption At Rest (AES-256-GCM)', report.encryptionAtRestVerified),
-          _buildCheckRow('Strict Audit Logging of Data Access', report.auditLoggingActive),
-          _buildCheckRow('User Right to Data Erasure (DPDP S.12)', report.dataErasureSupported),
+          _buildCheckRow('Encryption At Rest (AES-256-GCM)',
+              report.encryptionAtRestVerified),
+          _buildCheckRow(
+              'Strict Audit Logging of Data Access', report.auditLoggingActive),
+          _buildCheckRow('User Right to Data Erasure (DPDP S.12)',
+              report.dataErasureSupported),
           _buildCheckRow('Zero Third-Party Ad Trackers / SDKs', true),
         ],
       ),
@@ -519,7 +540,8 @@ class ComplianceScreen extends ConsumerWidget {
     );
   }
 
-  void _showAuditDetailsModal(BuildContext context, ComplianceFrameworkReport report) {
+  void _showAuditDetailsModal(
+      BuildContext context, ComplianceFrameworkReport report) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
@@ -562,7 +584,8 @@ class ComplianceScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Dismiss', style: TextStyle(color: Colors.white)),
+                  child: const Text('Dismiss',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

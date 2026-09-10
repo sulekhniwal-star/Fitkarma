@@ -6,7 +6,8 @@ void main() {
   group('DoctorSharingEngine Tests', () {
     const engine = DoctorSharingEngine();
 
-    test('Creates secure time-bound doctor access grant and compiles dossier', () {
+    test('Creates secure time-bound doctor access grant and compiles dossier',
+        () {
       final grant = engine.createAccessGrant(
         doctorName: 'Dr. Vikram Sethi',
         specialization: 'Cardiologist',
@@ -41,8 +42,10 @@ void main() {
 
       expect(dossier.patientDemographics, contains('PAT_84920'));
       expect(dossier.cardiometabolicSection, contains('WHtR 0.45'));
-      expect(dossier.glycemicSection, contains('Time-In-Range (70-140 mg/dL): 98%'));
-      expect(dossier.fullFormattedTextForPdf, contains('FITKARMA CLINICAL HEALTH'));
+      expect(dossier.glycemicSection,
+          contains('Time-In-Range (70-140 mg/dL): 98%'));
+      expect(dossier.fullFormattedTextForPdf,
+          contains('FITKARMA CLINICAL HEALTH'));
     });
 
     test('Instantly revokes active grant', () {

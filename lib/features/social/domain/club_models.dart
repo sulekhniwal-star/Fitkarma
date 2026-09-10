@@ -159,7 +159,8 @@ class LocalClubsState {
   }) {
     return LocalClubsState(
       selectedRadiusKm: selectedRadiusKm ?? this.selectedRadiusKm,
-      userCurrentLocationLabel: userCurrentLocationLabel ?? this.userCurrentLocationLabel,
+      userCurrentLocationLabel:
+          userCurrentLocationLabel ?? this.userCurrentLocationLabel,
       allClubs: allClubs ?? this.allClubs,
     );
   }

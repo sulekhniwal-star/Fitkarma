@@ -7,7 +7,8 @@ final readinessRepositoryProvider = Provider<ReadinessRepository>((ref) {
   return ReadinessRepository();
 });
 
-final dailyReadinessProvider = FutureProvider.autoDispose<ReadinessEvaluationResult>((ref) async {
+final dailyReadinessProvider =
+    FutureProvider.autoDispose<ReadinessEvaluationResult>((ref) async {
   final repo = ref.watch(readinessRepositoryProvider);
   final uid = ref.watch(currentUserIdProvider);
   final date = ref.watch(selectedDateProvider);

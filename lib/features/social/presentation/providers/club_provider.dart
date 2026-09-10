@@ -119,7 +119,9 @@ class LocalClubsNotifier extends StateNotifier<LocalClubsState> {
         final currentlyJoined = c.isUserJoined;
         return c.copyWith(
           isUserJoined: !currentlyJoined,
-          activeMembersCount: currentlyJoined ? c.activeMembersCount - 1 : c.activeMembersCount + 1,
+          activeMembersCount: currentlyJoined
+              ? c.activeMembersCount - 1
+              : c.activeMembersCount + 1,
         );
       }
       return c;
@@ -130,7 +132,9 @@ class LocalClubsNotifier extends StateNotifier<LocalClubsState> {
 
   void toggleMeetupRsvp(String clubId, String meetupId) {
     final updated = state.allClubs.map((c) {
-      if (c.id == clubId && c.nextMeetup != null && c.nextMeetup!.id == meetupId) {
+      if (c.id == clubId &&
+          c.nextMeetup != null &&
+          c.nextMeetup!.id == meetupId) {
         final meetup = c.nextMeetup!;
         final currentRsvp = meetup.isUserRsvpd;
         final updatedMeetup = meetup.copyWith(

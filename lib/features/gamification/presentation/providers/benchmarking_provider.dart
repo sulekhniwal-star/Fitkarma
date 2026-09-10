@@ -2,7 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/benchmarking_engine.dart';
 import '../../domain/benchmarking_models.dart';
 
-final benchmarkingProvider = StateNotifierProvider<BenchmarkingNotifier, FitnessBenchmarkReport>((ref) {
+final benchmarkingProvider =
+    StateNotifierProvider<BenchmarkingNotifier, FitnessBenchmarkReport>((ref) {
   return BenchmarkingNotifier();
 });
 
@@ -29,7 +30,8 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         unit: 'kg (1.53x BW)',
         cohortMean: 75.0,
         cohortStdDev: 18.0,
-        contextualInsight: 'Top 8% strength relative to South Asian demographic cohort.',
+        contextualInsight:
+            'Top 8% strength relative to South Asian demographic cohort.',
         regionalContextualInsight: 'समान आयु वर्ग में शीर्ष ८% शक्ति क्षमता।',
       ),
       BenchmarkingEngine.evaluateMetric(
@@ -41,7 +43,8 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         unit: 'kg (1.18x BW)',
         cohortMean: 62.0,
         cohortStdDev: 14.0,
-        contextualInsight: 'Superior pectoral power output; safe rotator cuff mechanics.',
+        contextualInsight:
+            'Superior pectoral power output; safe rotator cuff mechanics.',
         regionalContextualInsight: 'उत्कृष्ट चेस्ट शक्ति और सुरक्षित तकनीक।',
       ),
       BenchmarkingEngine.evaluateMetric(
@@ -53,7 +56,8 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         unit: 'kg (1.87x BW)',
         cohortMean: 95.0,
         cohortStdDev: 22.0,
-        contextualInsight: 'Elite posterior chain force development; low lumbar shear risk.',
+        contextualInsight:
+            'Elite posterior chain force development; low lumbar shear risk.',
         regionalContextualInsight: 'शीर्ष श्रेणी की रीढ़ व हैमस्ट्रिंग शक्ति।',
       ),
       BenchmarkingEngine.evaluateMetric(
@@ -65,8 +69,10 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         unit: 'ml/kg/min',
         cohortMean: 38.5,
         cohortStdDev: 5.2,
-        contextualInsight: 'Cardiorespiratory fitness exceeds 89% of urban Indian peers.',
-        regionalContextualInsight: 'हृदय व फेफड़ों की कार्यक्षमता ८९% साथियों से बेहतर।',
+        contextualInsight:
+            'Cardiorespiratory fitness exceeds 89% of urban Indian peers.',
+        regionalContextualInsight:
+            'हृदय व फेफड़ों की कार्यक्षमता ८९% साथियों से बेहतर।',
       ),
       BenchmarkingEngine.evaluateMetric(
         id: 'bench_rhr',
@@ -78,7 +84,8 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         cohortMean: 72.0,
         cohortStdDev: 8.5,
         lowerIsBetter: true,
-        contextualInsight: 'Strong vagal tone and high parasympathetic autonomic recovery.',
+        contextualInsight:
+            'Strong vagal tone and high parasympathetic autonomic recovery.',
         regionalContextualInsight: 'मजबूत हृदय स्वास्थ्य और त्वरित रिकवरी दर।',
       ),
       BenchmarkingEngine.evaluateMetric(
@@ -91,8 +98,10 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         cohortMean: 0.52,
         cohortStdDev: 0.045,
         lowerIsBetter: true,
-        contextualInsight: 'Optimal cardiometabolic protection against visceral adiposity.',
-        regionalContextualInsight: 'पेट की आंतरिक चर्बी से पूर्ण मेटाबॉलिक सुरक्षा।',
+        contextualInsight:
+            'Optimal cardiometabolic protection against visceral adiposity.',
+        regionalContextualInsight:
+            'पेट की आंतरिक चर्बी से पूर्ण मेटाबॉलिक सुरक्षा।',
       ),
       BenchmarkingEngine.evaluateMetric(
         id: 'bench_steps',
@@ -103,8 +112,10 @@ class BenchmarkingNotifier extends StateNotifier<FitnessBenchmarkReport> {
         unit: 'Steps/Day',
         cohortMean: 6800.0,
         cohortStdDev: 2400.0,
-        contextualInsight: 'High non-exercise physical activity (NEAT) and insulin sensitivity.',
-        regionalContextualInsight: 'उत्कृष्ट दैनिक सक्रियता और इंसुलिन संवेदनशीलता।',
+        contextualInsight:
+            'High non-exercise physical activity (NEAT) and insulin sensitivity.',
+        regionalContextualInsight:
+            'उत्कृष्ट दैनिक सक्रियता और इंसुलिन संवेदनशीलता।',
       ),
     ];
 

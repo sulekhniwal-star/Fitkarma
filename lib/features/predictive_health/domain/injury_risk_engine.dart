@@ -9,7 +9,8 @@ class InjuryRiskEngine {
     required double acuteLoad7Days, // e.g. 3850.0 AU
     required double chronicLoad28Days, // e.g. 3400.0 AU
     required double sleepDebtHours, // e.g. 1.2 hrs
-    required double hrvSuppressionPercent, // e.g. 6.0% (positive means suppressed)
+    required double
+        hrvSuppressionPercent, // e.g. 6.0% (positive means suppressed)
     required double formBreakdownRatePercent, // e.g. 8.0%
     required Map<AnatomicalJointArea, int> jointSorenessScores, // 0 to 10
     required Map<AnatomicalJointArea, double> jointLoadTonnages, // kg in 7 days
@@ -89,8 +90,10 @@ class InjuryRiskEngine {
           tier: tier,
           cumulativeLoadTonnage: tonnage,
           sorenessLevel: soreness,
-          primaryRiskFactor: _getPrimaryRiskFactor(area, soreness, tonnage, acwr),
-          regionalPrimaryRiskFactor: _getRegionalPrimaryRiskFactor(area, soreness, tonnage, acwr),
+          primaryRiskFactor:
+              _getPrimaryRiskFactor(area, soreness, tonnage, acwr),
+          regionalPrimaryRiskFactor:
+              _getRegionalPrimaryRiskFactor(area, soreness, tonnage, acwr),
           recommendedPrehab: prehab.$1,
           regionalRecommendedPrehab: prehab.$2,
         ),
@@ -99,7 +102,8 @@ class InjuryRiskEngine {
 
     // 5. Composite Injury Risk Score
     final compositeRiskScore = _round(
-      ((baseAcwrScore * safeRecoveryMultiplier * 0.65) + (maxJointRisk * 0.35)).clamp(5.0, 99.0),
+      ((baseAcwrScore * safeRecoveryMultiplier * 0.65) + (maxJointRisk * 0.35))
+          .clamp(5.0, 99.0),
     );
 
     final overallTier = _tierForScore(compositeRiskScore);
@@ -118,7 +122,8 @@ class InjuryRiskEngine {
       compositeScore: compositeRiskScore,
       tier: overallTier,
       shouldDeload: shouldDeload,
-      maxJoint: jointAssessments.reduce((a, b) => a.riskScore > b.riskScore ? a : b),
+      maxJoint:
+          jointAssessments.reduce((a, b) => a.riskScore > b.riskScore ? a : b),
     );
 
     final regionalSummary = _generateRegionalSummary(
@@ -126,7 +131,8 @@ class InjuryRiskEngine {
       compositeScore: compositeRiskScore,
       tier: overallTier,
       shouldDeload: shouldDeload,
-      maxJoint: jointAssessments.reduce((a, b) => a.riskScore > b.riskScore ? a : b),
+      maxJoint:
+          jointAssessments.reduce((a, b) => a.riskScore > b.riskScore ? a : b),
     );
 
     return InjuryRiskReport(
@@ -173,7 +179,9 @@ class InjuryRiskEngine {
       acwrMod = 1.25;
     }
 
-    final rawScore = (sorenessPts + tonnagePts + 10.0) * acwrMod * (recoveryMultiplier * 0.85);
+    final rawScore = (sorenessPts + tonnagePts + 10.0) *
+        acwrMod *
+        (recoveryMultiplier * 0.85);
     return _round(rawScore.clamp(5.0, 99.0));
   }
 
@@ -267,8 +275,10 @@ class InjuryRiskEngine {
           targetArea: AnatomicalJointArea.lumbarSpine,
           title: 'Strategic 30% Workload Volume Deload',
           regionalTitle: 'रणनीतिक ३०% कार्यभार कटौती (डीलोड)',
-          prescription: 'Cap heavy compound lifts at 65% 1RM and eliminate forced failure sets for 5-7 days.',
-          regionalPrescription: 'अगले ५-७ दिनों के लिए वजन ६५% पर सीमित रखें व पूर्ण थकान से बचें।',
+          prescription:
+              'Cap heavy compound lifts at 65% 1RM and eliminate forced failure sets for 5-7 days.',
+          regionalPrescription:
+              'अगले ५-७ दिनों के लिए वजन ६५% पर सीमित रखें व पूर्ण थकान से बचें।',
           targetSetsReps: '2 sets @ RPE 6-7',
           karmaReward: 75,
         ),

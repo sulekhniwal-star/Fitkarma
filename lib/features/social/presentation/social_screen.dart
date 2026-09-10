@@ -34,7 +34,8 @@ class SocialScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.textSecondary),
+            icon:
+                const Icon(Icons.info_outline, color: AppColors.textSecondary),
             onPressed: () => _showSocialPhilosophyModal(context),
           ),
         ],
@@ -101,16 +102,19 @@ class SocialScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.groups, color: AppColors.karmaGreen, size: 20),
+                  const Icon(Icons.groups,
+                      color: AppColors.karmaGreen, size: 20),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     'Active Accountability Squad',
-                    style: AppTypography.titleMedium.copyWith(color: AppColors.karmaGreen),
+                    style: AppTypography.titleMedium
+                        .copyWith(color: AppColors.karmaGreen),
                   ),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.karmaGreen.withValues(alpha: 0.12),
                   borderRadius: AppRadii.radiusFull,
@@ -128,7 +132,8 @@ class SocialScreen extends ConsumerWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             squad.squadName,
-            style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+            style: AppTypography.titleMedium
+                .copyWith(color: AppColors.textPrimary),
           ),
           const SizedBox(height: AppSpacing.md),
           Row(
@@ -139,7 +144,8 @@ class SocialScreen extends ConsumerWidget {
                 children: [
                   Text(
                     '${squad.memberCount} Athletes in Sync',
-                    style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTypography.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                   const SizedBox(height: 6),
                   Row(
@@ -148,11 +154,15 @@ class SocialScreen extends ConsumerWidget {
                         padding: const EdgeInsets.only(right: 6),
                         child: CircleAvatar(
                           radius: 14,
-                          backgroundColor: initials == 'You' ? AppColors.karmaGreen : AppColors.surfaceElevated,
+                          backgroundColor: initials == 'You'
+                              ? AppColors.karmaGreen
+                              : AppColors.surfaceElevated,
                           child: Text(
                             initials,
                             style: AppTypography.metricLabel.copyWith(
-                              color: initials == 'You' ? Colors.black : AppColors.textPrimary,
+                              color: initials == 'You'
+                                  ? Colors.black
+                                  : AppColors.textPrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 10,
                             ),
@@ -185,17 +195,20 @@ class SocialScreen extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.family_restroom, color: AppColors.focusBlue, size: 20),
+                  const Icon(Icons.family_restroom,
+                      color: AppColors.focusBlue, size: 20),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     'Family Health Circle (Parivar)',
-                    style: AppTypography.titleMedium.copyWith(color: AppColors.focusBlue),
+                    style: AppTypography.titleMedium
+                        .copyWith(color: AppColors.focusBlue),
                   ),
                 ],
               ),
               Text(
                 '${family.length} Connected',
-                style: AppTypography.metricLabel.copyWith(color: AppColors.textMuted),
+                style: AppTypography.metricLabel
+                    .copyWith(color: AppColors.textMuted),
               ),
             ],
           ),
@@ -224,15 +237,18 @@ class SocialScreen extends ConsumerWidget {
                         ),
                         if (member.alertRequired)
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.energyOrange.withValues(alpha: 0.15),
+                              color: AppColors.energyOrange
+                                  .withValues(alpha: 0.15),
                               borderRadius: AppRadii.radiusFull,
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.priority_high, color: AppColors.energyOrange, size: 12),
+                                const Icon(Icons.priority_high,
+                                    color: AppColors.energyOrange, size: 12),
                                 Text(
                                   'Prompt Walk',
                                   style: AppTypography.metricLabel.copyWith(
@@ -246,14 +262,16 @@ class SocialScreen extends ConsumerWidget {
                         else
                           Text(
                             '${member.todaySteps} / ${member.dailyStepTarget} steps',
-                            style: AppTypography.metricLabel.copyWith(color: AppColors.karmaGreen),
+                            style: AppTypography.metricLabel
+                                .copyWith(color: AppColors.karmaGreen),
                           ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Text(
                       member.healthStatus,
-                      style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                      style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary, fontSize: 11),
                     ),
                     const SizedBox(height: 4),
                     ClipRRect(
@@ -262,7 +280,9 @@ class SocialScreen extends ConsumerWidget {
                         value: member.stepProgressFraction,
                         backgroundColor: AppColors.surface,
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          member.alertRequired ? AppColors.energyOrange : AppColors.focusBlue,
+                          member.alertRequired
+                              ? AppColors.energyOrange
+                              : AppColors.focusBlue,
                         ),
                         minHeight: 4,
                       ),
@@ -285,7 +305,8 @@ class SocialScreen extends ConsumerWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: AppColors.aiPurple.withValues(alpha: 0.15),
-            child: const Icon(Icons.location_on, color: AppColors.aiPurple, size: 22),
+            child: const Icon(Icons.location_on,
+                color: AppColors.aiPurple, size: 22),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -301,7 +322,8 @@ class SocialScreen extends ConsumerWidget {
                 ),
                 Text(
                   '${club.cityArea} • ${club.activeMembersCount} active practitioners',
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTypography.bodySmall
+                      .copyWith(color: AppColors.textMuted, fontSize: 11),
                 ),
               ],
             ),
@@ -344,7 +366,8 @@ class SocialScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildFeedItemCard(BuildContext context, WidgetRef ref, SocialFeedItem item) {
+  Widget _buildFeedItemCard(
+      BuildContext context, WidgetRef ref, SocialFeedItem item) {
     final eventColor = Color(item.eventType.badgeColorCode);
 
     return BentoCard(
@@ -381,7 +404,8 @@ class SocialScreen extends ConsumerWidget {
                       ),
                       Text(
                         '${item.authorKarmaBadge} • ${item.authorLocation}',
-                        style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        style: AppTypography.bodySmall
+                            .copyWith(color: AppColors.textMuted, fontSize: 11),
                       ),
                     ],
                   ),
@@ -409,24 +433,28 @@ class SocialScreen extends ConsumerWidget {
           // Event Headline
           Text(
             item.eventHeadline,
-            style: AppTypography.titleMedium.copyWith(color: AppColors.textPrimary),
+            style: AppTypography.titleMedium
+                .copyWith(color: AppColors.textPrimary),
           ),
           Text(
             item.regionalEventHeadline,
-            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 12),
+            style: AppTypography.bodySmall
+                .copyWith(color: AppColors.textSecondary, fontSize: 12),
           ),
           const SizedBox(height: AppSpacing.sm),
 
           // Detail Metrics Pill
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm, vertical: 6),
             decoration: const BoxDecoration(
               color: AppColors.surfaceElevated,
               borderRadius: AppRadii.radiusSm,
             ),
             child: Row(
               children: [
-                const Icon(Icons.insights, color: AppColors.karmaGreen, size: 14),
+                const Icon(Icons.insights,
+                    color: AppColors.karmaGreen, size: 14),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -448,34 +476,45 @@ class SocialScreen extends ConsumerWidget {
             children: [
               Text(
                 '${DateTime.now().difference(item.timestamp).inMinutes}m ago',
-                style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                style: AppTypography.bodySmall
+                    .copyWith(color: AppColors.textMuted, fontSize: 11),
               ),
               InkWell(
                 borderRadius: AppRadii.radiusFull,
-                onTap: () => ref.read(socialProvider.notifier).toggleKudos(item.id),
+                onTap: () =>
+                    ref.read(socialProvider.notifier).toggleKudos(item.id),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     color: item.hasUserLiked
                         ? AppColors.karmaGreen.withValues(alpha: 0.2)
                         : AppColors.surfaceElevated,
                     borderRadius: AppRadii.radiusFull,
                     border: Border.all(
-                      color: item.hasUserLiked ? AppColors.karmaGreen : Colors.transparent,
+                      color: item.hasUserLiked
+                          ? AppColors.karmaGreen
+                          : Colors.transparent,
                     ),
                   ),
                   child: Row(
                     children: [
                       Icon(
-                        item.hasUserLiked ? Icons.favorite : Icons.favorite_border,
-                        color: item.hasUserLiked ? AppColors.karmaGreen : AppColors.textSecondary,
+                        item.hasUserLiked
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: item.hasUserLiked
+                            ? AppColors.karmaGreen
+                            : AppColors.textSecondary,
                         size: 16,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         '${item.kudosCount} Kudos',
                         style: AppTypography.metricLabel.copyWith(
-                          color: item.hasUserLiked ? AppColors.karmaGreen : AppColors.textSecondary,
+                          color: item.hasUserLiked
+                              ? AppColors.karmaGreen
+                              : AppColors.textSecondary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -506,7 +545,8 @@ class SocialScreen extends ConsumerWidget {
             children: [
               Text(
                 'FitKarma Sangha Philosophy',
-                style: AppTypography.titleLarge.copyWith(color: AppColors.textPrimary),
+                style: AppTypography.titleLarge
+                    .copyWith(color: AppColors.textPrimary),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -514,7 +554,8 @@ class SocialScreen extends ConsumerWidget {
                 '• Micro-Squads multiply collective Karma.\n'
                 '• Family Circles provide peace of mind for elders.\n'
                 '• Giving Kudos sends positive Karma energy to your fellow practitioners.',
-                style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+                style: AppTypography.bodyMedium
+                    .copyWith(color: AppColors.textSecondary, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

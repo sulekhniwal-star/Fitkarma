@@ -27,7 +27,8 @@ class GlycemicPipelineEngine {
         stabilityZone: GlycemicStabilityZone.moderateVolatility,
         circadianWindows: const [],
         recentExcursions: const [],
-        actionableMetabolicRecommendation: 'Insufficient glucose telemetry logged.',
+        actionableMetabolicRecommendation:
+            'Insufficient glucose telemetry logged.',
         regionalMetabolicRecommendation: 'पर्याप्त शर्करा डेटा उपलब्ध नहीं है।',
         generatedAt: now,
       );
@@ -35,7 +36,8 @@ class GlycemicPipelineEngine {
 
     // 1. Core Statistical Aggregates
     final totalSamples = samples.length;
-    final sumGlucose = samples.fold<double>(0.0, (acc, s) => acc + s.glucoseValueMgDl);
+    final sumGlucose =
+        samples.fold<double>(0.0, (acc, s) => acc + s.glucoseValueMgDl);
     final meanGlucose = sumGlucose / totalSamples;
 
     // Standard Deviation
@@ -52,9 +54,13 @@ class GlycemicPipelineEngine {
     final gmi = 3.31 + (0.02392 * meanGlucose);
 
     // Time in Range (70-140 mg/dL for non-diabetic/optimal longevity, or 70-180 standard)
-    final inRangeCount = samples.where((s) => s.glucoseValueMgDl >= 70.0 && s.glucoseValueMgDl <= 140.0).length;
-    final aboveRangeCount = samples.where((s) => s.glucoseValueMgDl > 140.0).length;
-    final belowRangeCount = samples.where((s) => s.glucoseValueMgDl < 70.0).length;
+    final inRangeCount = samples
+        .where((s) => s.glucoseValueMgDl >= 70.0 && s.glucoseValueMgDl <= 140.0)
+        .length;
+    final aboveRangeCount =
+        samples.where((s) => s.glucoseValueMgDl > 140.0).length;
+    final belowRangeCount =
+        samples.where((s) => s.glucoseValueMgDl < 70.0).length;
 
     final tirPercent = (inRangeCount / totalSamples) * 100.0;
     final tarPercent = (aboveRangeCount / totalSamples) * 100.0;
@@ -80,7 +86,8 @@ class GlycemicPipelineEngine {
     }
 
     // 4. Chrono-Nutritional Recommendations
-    final (rec, regRec) = _generateMetabolicGuidance(zone, circadianWindows, mealExcursions);
+    final (rec, regRec) =
+        _generateMetabolicGuidance(zone, circadianWindows, mealExcursions);
 
     return RetrospectiveGlycemicReport(
       totalDaysAnalyzed: daysAnalyzed,
@@ -101,7 +108,8 @@ class GlycemicPipelineEngine {
     );
   }
 
-  List<WindowGlycemicSummary> _segmentCircadianWindows(List<HistoricalGlucoseSample> samples) {
+  List<WindowGlycemicSummary> _segmentCircadianWindows(
+      List<HistoricalGlucoseSample> samples) {
     final Map<ChronoGlycemicWindow, List<HistoricalGlucoseSample>> buckets = {
       ChronoGlycemicWindow.dawnFasting: [],
       ChronoGlycemicWindow.postBreakfast: [],
@@ -141,7 +149,8 @@ class GlycemicPipelineEngine {
         );
       }
 
-      final sum = bucketSamples.fold<double>(0.0, (acc, s) => acc + s.glucoseValueMgDl);
+      final sum =
+          bucketSamples.fold<double>(0.0, (acc, s) => acc + s.glucoseValueMgDl);
       final mean = sum / bucketSamples.length;
       final peak = bucketSamples.map((s) => s.glucoseValueMgDl).reduce(max);
 
@@ -150,7 +159,10 @@ class GlycemicPipelineEngine {
         (acc, s) => acc + pow(s.glucoseValueMgDl - mean, 2),
       );
       final sd = sqrt(sumSqDiff / bucketSamples.length);
-      final inRange = bucketSamples.where((s) => s.glucoseValueMgDl >= 70.0 && s.glucoseValueMgDl <= 140.0).length;
+      final inRange = bucketSamples
+          .where(
+              (s) => s.glucoseValueMgDl >= 70.0 && s.glucoseValueMgDl <= 140.0)
+          .length;
       final tir = (inRange / bucketSamples.length) * 100.0;
 
       String obs;
@@ -159,8 +171,10 @@ class GlycemicPipelineEngine {
       switch (window) {
         case ChronoGlycemicWindow.dawnFasting:
           if (mean > 100.0) {
-            obs = 'Mild Dawn Phenomenon detected. Hepatic gluconeogenesis active.';
-            regObs = 'प्रभात शर्करा में हल्की वृद्धि देखी गई (यकृत ग्लूकोज स्राव)।';
+            obs =
+                'Mild Dawn Phenomenon detected. Hepatic gluconeogenesis active.';
+            regObs =
+                'प्रभात शर्करा में हल्की वृद्धि देखी गई (यकृत ग्लूकोज स्राव)।';
           } else {
             obs = 'Optimal fasting glucose stability.';
             regObs = 'उत्कृष्ट उपवास शर्करा संतुलन।';
@@ -168,8 +182,10 @@ class GlycemicPipelineEngine {
           break;
         case ChronoGlycemicWindow.postBreakfast:
           if (peak > 135.0) {
-            obs = 'High breakfast glycemic excursion. Consider pairing carbohydrates with protein/fiber.';
-            regObs = 'नाश्ते के बाद शर्करा में वृद्धि। प्रोटीन व फाइबर की मात्रा बढ़ाएं।';
+            obs =
+                'High breakfast glycemic excursion. Consider pairing carbohydrates with protein/fiber.';
+            regObs =
+                'नाश्ते के बाद शर्करा में वृद्धि। प्रोटीन व फाइबर की मात्रा बढ़ाएं।';
           } else {
             obs = 'Smooth morning postprandial curve.';
             regObs = 'प्रातराश पश्चात सुचारू शर्करा वक्र।';
@@ -177,8 +193,10 @@ class GlycemicPipelineEngine {
           break;
         case ChronoGlycemicWindow.postLunch:
           if (peak > 140.0) {
-            obs = 'Post-lunch spike. Incorporate a 10-minute post-meal walk (Shatapadi).';
-            regObs = 'दोपहर भोजन बाद उछाल। भोजनोपरांत १० मिनट शतपदी भ्रमण करें।';
+            obs =
+                'Post-lunch spike. Incorporate a 10-minute post-meal walk (Shatapadi).';
+            regObs =
+                'दोपहर भोजन बाद उछाल। भोजनोपरांत १० मिनट शतपदी भ्रमण करें।';
           } else {
             obs = 'Balanced post-lunch insulin sensitivity.';
             regObs = 'मध्याह्न भोजन उपरांत संतुलित इंसुलिन संवेदनशीलता।';
@@ -186,8 +204,10 @@ class GlycemicPipelineEngine {
           break;
         case ChronoGlycemicWindow.postDinner:
           if (mean > 120.0) {
-            obs = 'Delayed nocturnal clearance. Shift dinner 90 minutes before sleep.';
-            regObs = 'रात्रि शर्करा का धीमा निकास। सोने से ९० मिनट पूर्व हल्का भोजन करें।';
+            obs =
+                'Delayed nocturnal clearance. Shift dinner 90 minutes before sleep.';
+            regObs =
+                'रात्रि शर्करा का धीमा निकास। सोने से ९० मिनट पूर्व हल्का भोजन करें।';
           } else {
             obs = 'Efficient evening glycemic clearance.';
             regObs = 'सायंकालीन शर्करा का प्रभावी निष्कासन।';
@@ -195,8 +215,10 @@ class GlycemicPipelineEngine {
           break;
         case ChronoGlycemicWindow.nocturnal:
           if (bucketSamples.any((s) => s.glucoseValueMgDl < 70.0)) {
-            obs = 'Sub-70 nocturnal dipping. Ensure complex carbs or healthy fats in dinner.';
-            regObs = 'रात्रि के समय निम्न शर्करा स्तर। रात के भोजन में स्वस्थ वसा सम्मिलित करें।';
+            obs =
+                'Sub-70 nocturnal dipping. Ensure complex carbs or healthy fats in dinner.';
+            regObs =
+                'रात्रि के समय निम्न शर्करा स्तर। रात के भोजन में स्वस्थ वसा सम्मिलित करें।';
           } else {
             obs = 'Restful nocturnal metabolic baseline.';
             regObs = 'विश्रामदायी रात्रि चयापचय अवस्था।';

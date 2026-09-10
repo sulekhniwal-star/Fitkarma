@@ -11,7 +11,8 @@ class SocialEngine {
     required double squadAdherenceScore,
   }) {
     final streakFactor = (activeStreakDays / 30.0).clamp(0.0, 1.0) * 0.20;
-    final adherenceFactor = (squadAdherenceScore / 100.0).clamp(0.0, 1.0) * 0.15;
+    final adherenceFactor =
+        (squadAdherenceScore / 100.0).clamp(0.0, 1.0) * 0.15;
     return (1.0 + streakFactor + adherenceFactor).clamp(1.0, 1.35);
   }
 
@@ -24,18 +25,24 @@ class SocialEngine {
       case SocialFeedFilter.all:
         return allItems;
       case SocialFeedFilter.squad:
-        return allItems.where((i) =>
-            i.eventType == SocialEventType.workoutCompleted ||
-            i.eventType == SocialEventType.shatpawaliStreak ||
-            i.eventType == SocialEventType.milestoneUnlocked).toList();
+        return allItems
+            .where((i) =>
+                i.eventType == SocialEventType.workoutCompleted ||
+                i.eventType == SocialEventType.shatpawaliStreak ||
+                i.eventType == SocialEventType.milestoneUnlocked)
+            .toList();
       case SocialFeedFilter.family:
-        return allItems.where((i) =>
-            i.eventType == SocialEventType.familyCheckIn ||
-            i.eventType == SocialEventType.shatpawaliStreak).toList();
+        return allItems
+            .where((i) =>
+                i.eventType == SocialEventType.familyCheckIn ||
+                i.eventType == SocialEventType.shatpawaliStreak)
+            .toList();
       case SocialFeedFilter.localClubs:
-        return allItems.where((i) =>
-            i.eventType == SocialEventType.workoutCompleted ||
-            i.eventType == SocialEventType.karmaTierPromotion).toList();
+        return allItems
+            .where((i) =>
+                i.eventType == SocialEventType.workoutCompleted ||
+                i.eventType == SocialEventType.karmaTierPromotion)
+            .toList();
     }
   }
 
