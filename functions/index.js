@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const { generateDailyIntelligencePackage } = require('./healthOS');
 const { routeAiRequest } = require('./aiRouter');
-const { handleRevenueCatEvent } = require('./webhooks');
+const { handleRevenueCatEvent, verifyWhatsAppWebhook, handleWhatsAppWebhookEvent } = require('./webhooks');
 const { deleteUserData } = require('./compliance/deleteUserData');
 
 // Callable: Generate or retrieve DIP
@@ -46,5 +46,26 @@ exports.revenueCatWebhook = onRequest(async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// Webhook HTTPS endpoint: Meta WhatsApp Business Cloud API
+exports.whatsappWebhook = onRequest(async (req, res) => {
+  if (req.method === 'GET') {
+    const verification = verifyWhatsAppWebhook(req.query);
+    if (verification.status === 200) {
+      res.status(200).send(verification.challenge);
+    } else {
+      res.status(verification.status).send(verification.error);
+    }
+  } else if (req.method === 'POST') {
+    try {
+      const result = await handleWhatsAppWebhookEvent(req.body, admin.firestore());
+      res.status(result.status || 200).json(result);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  } else {
+    res.status(405).send('Method Not Allowed');
   }
 });
