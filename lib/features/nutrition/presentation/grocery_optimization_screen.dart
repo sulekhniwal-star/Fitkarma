@@ -6,6 +6,7 @@ import '../../../shared/theme/app_typography.dart';
 import '../../../shared/widgets/bento_card.dart';
 import '../../../shared/widgets/bilingual_label.dart';
 import '../../../shared/widgets/glowing_metric.dart';
+import 'grocery_vendor_checkout_screen.dart';
 import '../domain/grocery_optimization_engine.dart';
 
 class GroceryOptimizationScreen extends StatefulWidget {
@@ -70,6 +71,16 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
         ),
         actions: [
           IconButton(
+            icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.karmaGreen),
+            tooltip: 'Quick-Commerce Vendor Checkout',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const GroceryVendorCheckoutScreen()),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.copy_rounded, color: AppColors.focusBlue),
             tooltip: 'Copy List',
             onPressed: _copyToClipboard,
@@ -98,6 +109,38 @@ class _GroceryOptimizationScreenState extends State<GroceryOptimizationScreen> {
                     },
                   ),
                 ],
+              ),
+              // Quick-Commerce 1-Tap Checkout Link Banner
+              BentoCard(
+                backgroundColor: AppColors.surfaceElevated,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const GroceryVendorCheckoutScreen()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    const Icon(Icons.flash_on_rounded, color: AppColors.karmaGreen, size: 22),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Compare Blinkit, Zepto, BB & Instamart',
+                            style: TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '1-Tap cart export, Ayurvedic pantry & live price matrix',
+                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.karmaGreen, size: 14),
+                  ],
+                ),
               ),
               const SizedBox(height: AppSpacing.sm),
 
