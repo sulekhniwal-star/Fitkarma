@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '../config/app_environment.dart';
 import '../services/local_storage_service.dart';
 
@@ -45,14 +46,20 @@ class AppBootstrap {
           'Notice: Supabase initialization deferred or running in offline mode: $e');
     }
 
-    // 4. Global Error Handling
+    // 4. Global Error Handling & Sentry Monitoring
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
       debugPrint('Flutter Error: ${details.exceptionAsString()}');
+      try {
+        Sentry.captureException(details.exception, stackTrace: details.stack);
+      } catch (_) {}
     };
 
     PlatformDispatcher.instance.onError = (error, stack) {
       debugPrint('Uncaught Platform Error: $error\n$stack');
+      try {
+        Sentry.captureException(error, stackTrace: stack);
+      } catch (_) {}
       return true;
     };
   }
