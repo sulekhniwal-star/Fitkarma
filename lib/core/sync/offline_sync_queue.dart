@@ -118,22 +118,19 @@ class OfflineSyncQueueState {
 }
 
 class OfflineSyncQueueNotifier extends StateNotifier<OfflineSyncQueueState> {
-  final LocalStorageService _storage;
   final SupabaseClient? _supabase;
   static const String _storageKey = 'offline_pending_mutations_v1';
 
   OfflineSyncQueueNotifier({
-    LocalStorageService? storage,
     SupabaseClient? supabase,
-  })  : _storage = storage ?? LocalStorageService(),
-        _supabase = supabase,
+  })  : _supabase = supabase,
         super(const OfflineSyncQueueState()) {
     _loadQueueFromStorage();
   }
 
   void _loadQueueFromStorage() {
     try {
-      final raw = _storage.getString(_storageKey);
+      final raw = LocalStorageService.getString(_storageKey);
       if (raw != null && raw.isNotEmpty) {
         final list = (jsonDecode(raw) as List)
             .map((item) =>
@@ -149,7 +146,7 @@ class OfflineSyncQueueNotifier extends StateNotifier<OfflineSyncQueueState> {
   Future<void> _persistQueue() async {
     try {
       final raw = jsonEncode(state.queue.map((m) => m.toMap()).toList());
-      await _storage.setString(_storageKey, raw);
+      await LocalStorageService.setString(_storageKey, raw);
     } catch (e) {
       debugPrint('Error persisting sync queue: $e');
     }

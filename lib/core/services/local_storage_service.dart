@@ -42,7 +42,25 @@ class LocalStorageService {
     return null;
   }
 
-  static Future<void> clearActiveWorkoutState() async {
-    await activeWorkoutBox.delete('current_session');
+  // Key-Value String operations (Offline sync queues, cached payloads)
+  static Future<void> setString(String key, String value) async {
+    await draftsBox.put(key, value);
   }
+
+  static String? getString(String key) {
+    final value = draftsBox.get(key);
+    return value is String ? value : null;
+  }
+
+  static Future<void> deleteString(String key) async {
+    await draftsBox.delete(key);
+  }
+
+  // Instance methods for dependency injection
+  Future<void> setStringInstance(String key, String value) => setString(key, value);
+  String? getStringInstance(String key) => getString(key);
+  Future<void> deleteStringInstance(String key) => deleteString(key);
+
+  String? get(String key) => getString(key);
+  Future<void> set(String key, String value) => setString(key, value);
 }
