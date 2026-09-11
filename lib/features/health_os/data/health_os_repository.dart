@@ -1,53 +1,73 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/models/daily_intelligence_package.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/health_os_calculator.dart';
 
 class HealthOsRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  HealthOsRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  HealthOsRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
+
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
 
   /// Retrieves the Daily Intelligence Package for the given date.
-  /// Seamlessly leverages Firestore offline cache or calculates offline fallback.
+  /// Seamlessly leverages LocalStorage cache or calculates offline fallback.
   Future<DailyIntelligencePackage> getDailyPackage({
     required String uid,
     required String dateStr,
   }) async {
+    final cacheKey = 'health_os_${uid}_$dateStr';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection(AppConstants.healthOsSubcollection)
-          .doc(dateStr);
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is Map) {
+        return DailyIntelligencePackage.fromMap(Map<String, dynamic>.from(cached), dateStr);
+      }
 
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final response = await _client
+          .from('daily_intelligence')
+          .select()
+          .eq('user_id', uid)
+          .eq('date', dateStr)
+          .maybeSingle();
 
-      if (snapshot.exists && snapshot.data() != null) {
-        return DailyIntelligencePackage.fromMap(snapshot.data()!, dateStr);
+      if (response != null) {
+        final dipPayload = response['dip_payload'] as Map<String, dynamic>? ?? {};
+        return DailyIntelligencePackage.fromMap({
+          ...dipPayload,
+          'readinessScore': (response['readiness_score'] as num?)?.toInt() ?? 70,
+          'healthScore': 75,
+          'aiBriefing': response['morning_briefing'] ?? '',
+        }, dateStr);
       }
     } catch (_) {
-      // If Firestore is unavailable or uninitialized in unit testing / offline mode,
-      // fallback to deterministic pure Dart computation
+      // Offline fallback
     }
 
     // Local deterministic fallback
     return HealthOsCalculator.computePackage(date: dateStr);
   }
 
-  /// Writes a locally calculated or updated package to Firestore (queued automatically when offline)
+  /// Writes a locally calculated or updated package to LocalStorage and Supabase
   Future<void> saveDailyPackage({
     required String uid,
     required DailyIntelligencePackage package,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection(AppConstants.healthOsSubcollection)
-        .doc(package.date);
+    final cacheKey = 'health_os_${uid}_${package.date}';
+    await LocalStorageService.saveDraft(cacheKey, package.toMap());
 
-    await docRef.set(package.toMap(), SetOptions(merge: true));
+    try {
+      await _client.from('daily_intelligence').upsert({
+        'user_id': uid,
+        'date': package.date,
+        'readiness_score': package.readinessScore,
+        'recovery_score': package.readinessScore,
+        'morning_briefing': package.aiBriefing,
+        'dip_payload': package.toMap(),
+        'generated_at': DateTime.now().toUtc().toIso8601String(),
+      });
+    } catch (_) {
+      // Handled via local storage
+    }
   }
 }

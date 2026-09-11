@@ -1,12 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/daily_mission.dart';
 
 class DailyMissionRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  DailyMissionRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  DailyMissionRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
+
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
 
   /// Fetches the user's daily missions for the specified date
   Future<List<DailyMissionItem>> getDailyMissions({
@@ -17,22 +19,30 @@ class DailyMissionRepository {
     int targetProtein = 130,
     String workoutName = 'Upper Body Strength',
   }) async {
+    final cacheKey = 'missions_${uid}_$dateStr';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection('dailyMissions')
-          .doc(dateStr);
-
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
-
-      if (snapshot.exists && snapshot.data()?['missions'] != null) {
-        final list = snapshot.data()!['missions'] as List;
-        return list
-            .map((item) =>
-                DailyMissionItem.fromMap(Map<String, dynamic>.from(item)))
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is List) {
+        return cached
+            .map((item) => DailyMissionItem.fromMap(Map<String, dynamic>.from(item)))
             .toList();
+      }
+
+      final response = await _client
+          .from('daily_intelligence')
+          .select('dip_payload')
+          .eq('user_id', uid)
+          .eq('date', dateStr)
+          .maybeSingle();
+
+      if (response != null && response['dip_payload'] != null) {
+        final payload = response['dip_payload'] as Map<String, dynamic>;
+        if (payload['missions'] != null && payload['missions'] is List) {
+          final list = payload['missions'] as List;
+          return list
+              .map((item) => DailyMissionItem.fromMap(Map<String, dynamic>.from(item)))
+              .toList();
+        }
       }
     } catch (_) {
       // Offline fallback
@@ -83,21 +93,27 @@ class DailyMissionRepository {
     ];
   }
 
-  /// Toggles mission completion status in Firestore
+  /// Toggles mission completion status in LocalStorage & Supabase
   Future<void> saveMissions({
     required String uid,
     required String dateStr,
     required List<DailyMissionItem> missions,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection('dailyMissions')
-        .doc(dateStr);
+    final cacheKey = 'missions_${uid}_$dateStr';
+    final rawList = missions.map((m) => m.toMap()).toList();
+    await LocalStorageService.saveDraft(cacheKey, rawList);
 
-    await docRef.set({
-      'missions': missions.map((m) => m.toMap()).toList(),
-      'updatedAt': FieldValue.serverTimestamp(),
-    }, SetOptions(merge: true));
+    try {
+      await _client.from('daily_intelligence').upsert({
+        'user_id': uid,
+        'date': dateStr,
+        'dip_payload': {
+          'missions': rawList,
+          'updated_at': DateTime.now().toUtc().toIso8601String(),
+        },
+      });
+    } catch (_) {
+      // Handled via local storage
+    }
   }
 }

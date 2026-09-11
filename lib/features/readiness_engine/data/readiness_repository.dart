@@ -1,14 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/readiness_engine.dart';
 
 class ReadinessRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  ReadinessRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  ReadinessRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
 
-  /// Fetches daily readiness evaluation from Firestore cache or computes locally
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
+
+  /// Fetches daily readiness evaluation from LocalStorage cache or computes locally
   Future<ReadinessEvaluationResult> getDailyReadiness({
     required String uid,
     required String dateStr,
@@ -23,20 +25,29 @@ class ReadinessRepository {
     int? somaticSorenessScore = 20,
     bool isIll = false,
   }) async {
+    final cacheKey = 'readiness_${uid}_$dateStr';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection(AppConstants.dailyLogsSubcollection)
-          .doc(dateStr);
-
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
-
-      if (snapshot.exists && snapshot.data()?['readiness'] != null) {
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is Map) {
         return ReadinessEvaluationResult.fromMap(
-          Map<String, dynamic>.from(snapshot.data()!['readiness']),
+          Map<String, dynamic>.from(cached),
         );
+      }
+
+      final response = await _client
+          .from('daily_intelligence')
+          .select()
+          .eq('user_id', uid)
+          .eq('date', dateStr)
+          .maybeSingle();
+
+      if (response != null && response['dip_payload'] != null) {
+        final payload = response['dip_payload'] as Map<String, dynamic>;
+        if (payload['readiness'] != null) {
+          return ReadinessEvaluationResult.fromMap(
+            Map<String, dynamic>.from(payload['readiness']),
+          );
+        }
       }
     } catch (_) {
       // Offline fallback
@@ -57,21 +68,27 @@ class ReadinessRepository {
     );
   }
 
-  /// Persists readiness score to Firestore
+  /// Persists readiness score to LocalStorage and Supabase
   Future<void> saveReadinessResult({
     required String uid,
     required String dateStr,
     required ReadinessEvaluationResult result,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection(AppConstants.dailyLogsSubcollection)
-        .doc(dateStr);
+    final cacheKey = 'readiness_${uid}_$dateStr';
+    await LocalStorageService.saveDraft(cacheKey, result.toMap());
 
-    await docRef.set({
-      'readiness': result.toMap(),
-      'lastUpdatedAt': FieldValue.serverTimestamp(),
-    }, SetOptions(merge: true));
+    try {
+      await _client.from('daily_intelligence').upsert({
+        'user_id': uid,
+        'date': dateStr,
+        'readiness_score': result.score,
+        'dip_payload': {
+          'readiness': result.toMap(),
+          'updated_at': DateTime.now().toUtc().toIso8601String(),
+        },
+      });
+    } catch (_) {
+      // Handled via local storage
+    }
   }
 }

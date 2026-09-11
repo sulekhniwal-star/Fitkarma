@@ -1,14 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/program_evolution_engine.dart';
 
 class ProgramEvolutionRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  ProgramEvolutionRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  ProgramEvolutionRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
 
-  /// Fetches the latest evolution check from Firestore (offline-cached) or evaluates locally
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
+
+  /// Fetches the latest evolution check from LocalStorage or evaluates locally
   Future<ProgramEvolutionResult> getLatestEvolution({
     required String uid,
     int completedWorkouts = 12,
@@ -17,18 +19,27 @@ class ProgramEvolutionRepository {
     int consecutiveLowReadinessDays = 0,
     bool weightPlateau14Days = false,
   }) async {
+    final cacheKey = 'prog_evol_$uid';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection('programEvolution')
-          .doc('latest');
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is Map) {
+        return ProgramEvolutionResult.fromMap(Map<String, dynamic>.from(cached));
+      }
 
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final response = await _client
+          .from('daily_intelligence')
+          .select('dip_payload')
+          .eq('user_id', uid)
+          .order('date', ascending: false)
+          .limit(1)
+          .maybeSingle();
 
-      if (snapshot.exists && snapshot.data() != null) {
-        return ProgramEvolutionResult.fromMap(snapshot.data()!);
+      if (response != null && response['dip_payload'] != null) {
+        final payload = response['dip_payload'] as Map<String, dynamic>;
+        if (payload['program_evolution'] != null) {
+          return ProgramEvolutionResult.fromMap(
+              Map<String, dynamic>.from(payload['program_evolution']));
+        }
       }
     } catch (_) {
       // Offline fallback
@@ -46,17 +57,25 @@ class ProgramEvolutionRepository {
     return result;
   }
 
-  /// Persists evolution status to Firestore (queued offline automatically)
+  /// Persists evolution status to LocalStorage and Supabase
   Future<void> saveEvolutionResult({
     required String uid,
     required ProgramEvolutionResult result,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection('programEvolution')
-        .doc('latest');
+    final cacheKey = 'prog_evol_$uid';
+    await LocalStorageService.saveDraft(cacheKey, result.toMap());
 
-    await docRef.set(result.toMap(), SetOptions(merge: true));
+    try {
+      await _client.from('daily_intelligence').upsert({
+        'user_id': uid,
+        'date': DateTime.now().toUtc().toIso8601String().split('T')[0],
+        'dip_payload': {
+          'program_evolution': result.toMap(),
+          'updated_at': DateTime.now().toUtc().toIso8601String(),
+        },
+      });
+    } catch (_) {
+      // Handled via local storage
+    }
   }
 }

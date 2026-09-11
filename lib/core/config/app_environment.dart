@@ -8,6 +8,8 @@ class AppConfig {
   final Environment environment;
   final String appName;
   final String apiBaseUrl;
+  final String supabaseUrl;
+  final String supabaseAnonKey;
   final bool enableVerboseLogging;
   final bool isDebugBannerVisible;
 
@@ -15,6 +17,8 @@ class AppConfig {
     required this.environment,
     required this.appName,
     required this.apiBaseUrl,
+    required this.supabaseUrl,
+    required this.supabaseAnonKey,
     this.enableVerboseLogging = false,
     this.isDebugBannerVisible = false,
   });
@@ -35,6 +39,14 @@ class AppConfig {
     environment: Environment.dev,
     appName: 'FitKarma Dev',
     apiBaseUrl: 'https://staging-api.fitkarma.in',
+    supabaseUrl: String.fromEnvironment(
+      'SUPABASE_URL',
+      defaultValue: 'https://abnepbjdslbozmmhjaxq.supabase.co',
+    ),
+    supabaseAnonKey: String.fromEnvironment(
+      'SUPABASE_ANON_KEY',
+      defaultValue: '',
+    ),
     enableVerboseLogging: true,
     isDebugBannerVisible: true,
   );
@@ -44,6 +56,14 @@ class AppConfig {
     environment: Environment.prod,
     appName: 'FitKarma',
     apiBaseUrl: 'https://api.fitkarma.in',
+    supabaseUrl: String.fromEnvironment(
+      'SUPABASE_URL',
+      defaultValue: 'https://abnepbjdslbozmmhjaxq.supabase.co',
+    ),
+    supabaseAnonKey: String.fromEnvironment(
+      'SUPABASE_ANON_KEY',
+      defaultValue: '',
+    ),
     enableVerboseLogging: false,
     isDebugBannerVisible: false,
   );

@@ -35,7 +35,13 @@ jobs:
         run: flutter test
 
       - name: Build Android Dev APK
-        run: flutter build apk --flavor dev -t lib/main_dev.dart --debug
+        env:
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        run: |
+          flutter build apk --flavor dev -t lib/main_dev.dart --debug \
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+            --dart-define=SUPABASE_URL="$SUPABASE_URL"
 
       - name: Upload Dev APK Artifact
         uses: actions/upload-artifact@v4
@@ -63,7 +69,13 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS Dev Build (Simulator / No Codesign)
-        run: flutter build ios --flavor dev -t lib/main_dev.dart --no-codesign --simulator
+        env:
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        run: |
+          flutter build ios --flavor dev -t lib/main_dev.dart --no-codesign --simulator \
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+            --dart-define=SUPABASE_URL="$SUPABASE_URL"
 
       - name: Upload iOS Dev Artifact
         uses: actions/upload-artifact@v4

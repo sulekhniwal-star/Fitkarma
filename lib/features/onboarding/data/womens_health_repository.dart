@@ -1,12 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/womens_health_engine.dart';
 
 class WomensHealthRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  WomensHealthRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  WomensHealthRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
+
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
 
   /// Fetches women's health profile with offline caching and pure Dart fallback
   Future<WomensHealthProfile> getProfile({
@@ -17,18 +19,23 @@ class WomensHealthRepository {
     LifeStageMode mode = LifeStageMode.regularCycle,
     bool isPcos = false,
   }) async {
+    final cacheKey = 'womens_health_$uid';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection('womensHealth')
-          .doc('profile');
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is Map) {
+        return WomensHealthProfile.fromMap(Map<String, dynamic>.from(cached));
+      }
 
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final response = await _client
+          .from('cycle_tracking')
+          .select()
+          .eq('user_id', uid)
+          .order('period_start_date', ascending: false)
+          .limit(1)
+          .maybeSingle();
 
-      if (snapshot.exists && snapshot.data() != null) {
-        return WomensHealthProfile.fromMap(snapshot.data()!);
+      if (response != null) {
+        return WomensHealthProfile.fromMap(response);
       }
     } catch (_) {
       // Offline fallback
@@ -43,17 +50,25 @@ class WomensHealthRepository {
     );
   }
 
-  /// Persists women's health profile to Firestore
+  /// Persists women's health profile to Supabase and LocalStorage
   Future<void> saveProfile({
     required String uid,
     required WomensHealthProfile profile,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection('womensHealth')
-        .doc('profile');
+    final cacheKey = 'womens_health_$uid';
+    await LocalStorageService.saveDraft(cacheKey, profile.toMap());
 
-    await docRef.set(profile.toMap(), SetOptions(merge: true));
+    try {
+      await _client.from('cycle_tracking').upsert({
+        'user_id': uid,
+        'phase': profile.currentPhase.name,
+        'cycle_length_days': profile.cycleLengthDays,
+        'period_start_date': DateTime.now().toUtc().toIso8601String().split('T')[0],
+        'pcos_flag': profile.isPcosDiagnosed,
+        'logged_at': DateTime.now().toUtc().toIso8601String(),
+      });
+    } catch (_) {
+      // Handled via local storage
+    }
   }
 }

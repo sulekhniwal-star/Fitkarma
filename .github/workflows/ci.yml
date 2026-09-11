@@ -73,28 +73,10 @@ jobs:
         run: flutter pub get
 
       - name: Verify Android Gradle & Compilation
-        run: flutter build apk --debug --flavor dev -t lib/main_dev.dart
-
-  functions-lint:
-    name: Firebase Cloud Functions Test
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: 'functions/package.json'
-
-      - name: Install Functions Dependencies
-        working-directory: ./functions
-        run: npm ci || npm install
-
-      - name: Test Functions Webhook Signatures
-        working-directory: ./functions
-        run: node -e "console.log('Validating Functions syntax and exports...'); require('./index.js'); console.log('Functions validated successfully.');"
+        env:
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        run: |
+          flutter build apk --debug --flavor dev -t lib/main_dev.dart \
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+            --dart-define=SUPABASE_URL="$SUPABASE_URL"

@@ -1,12 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/environmental_health_engine.dart';
 
 class EnvironmentalHealthRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  EnvironmentalHealthRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  EnvironmentalHealthRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
+
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
 
   /// Fetches the latest environmental snapshot with offline caching
   Future<EnvironmentalHealthSnapshot> getEnvironmentalSnapshot({
@@ -16,18 +18,23 @@ class EnvironmentalHealthRepository {
     double temperatureC = 33.0,
     double humidityPercent = 60.0,
   }) async {
+    final cacheKey = 'env_$uid';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection('environmentalHealth')
-          .doc('today');
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is Map) {
+        return EnvironmentalHealthSnapshot.fromMap(Map<String, dynamic>.from(cached));
+      }
 
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final response = await _client
+          .from('environmental_telemetry')
+          .select()
+          .eq('user_id', uid)
+          .order('timestamp', ascending: false)
+          .limit(1)
+          .maybeSingle();
 
-      if (snapshot.exists && snapshot.data() != null) {
-        return EnvironmentalHealthSnapshot.fromMap(snapshot.data()!);
+      if (response != null) {
+        return EnvironmentalHealthSnapshot.fromMap(response);
       }
     } catch (_) {
       // Offline fallback
@@ -42,17 +49,25 @@ class EnvironmentalHealthRepository {
     );
   }
 
-  /// Persists environmental health data to Firestore
+  /// Persists environmental health data to Supabase & LocalStorage
   Future<void> saveEnvironmentalSnapshot({
     required String uid,
     required EnvironmentalHealthSnapshot snapshot,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection('environmentalHealth')
-        .doc('today');
+    final cacheKey = 'env_$uid';
+    await LocalStorageService.saveDraft(cacheKey, snapshot.toMap());
 
-    await docRef.set(snapshot.toMap(), SetOptions(merge: true));
+    try {
+      await _client.from('environmental_telemetry').insert({
+        'user_id': uid,
+        'aqi': snapshot.aqi,
+        'uv_index': snapshot.uvIndex,
+        'wet_bulb_temp_c': snapshot.heatIndexC,
+        'outdoor_recommendation': snapshot.recommendation,
+        'timestamp': DateTime.now().toUtc().toIso8601String(),
+      });
+    } catch (_) {
+      // Handled via local draft
+    }
   }
 }

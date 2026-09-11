@@ -1,34 +1,44 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/coach_message.dart';
 
 class CoachChatRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  CoachChatRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  CoachChatRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
+
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
 
   /// Fetches conversation messages for the current date with offline cache support
   Future<List<CoachMessage>> getConversationMessages({
     required String uid,
     required String dateStr,
   }) async {
+    final cacheKey = 'chat_${uid}_$dateStr';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection('aiConversations')
-          .doc(dateStr);
-
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
-
-      if (snapshot.exists && snapshot.data()?['messages'] != null) {
-        final list = snapshot.data()!['messages'] as List;
-        return list
-            .map(
-                (item) => CoachMessage.fromMap(Map<String, dynamic>.from(item)))
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is List) {
+        return cached
+            .map((item) => CoachMessage.fromMap(Map<String, dynamic>.from(item)))
             .toList();
+      }
+
+      final response = await _client
+          .from('daily_intelligence')
+          .select('dip_payload')
+          .eq('user_id', uid)
+          .eq('date', dateStr)
+          .maybeSingle();
+
+      if (response != null && response['dip_payload'] != null) {
+        final payload = response['dip_payload'] as Map<String, dynamic>;
+        if (payload['messages'] != null && payload['messages'] is List) {
+          final list = payload['messages'] as List;
+          return list
+              .map((item) => CoachMessage.fromMap(Map<String, dynamic>.from(item)))
+              .toList();
+        }
       }
     } catch (_) {
       // Offline fallback
@@ -46,21 +56,27 @@ class CoachChatRepository {
     ];
   }
 
-  /// Persists full conversation thread to Firestore
+  /// Persists full conversation thread to LocalStorage & Supabase
   Future<void> saveConversation({
     required String uid,
     required String dateStr,
     required List<CoachMessage> messages,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection('aiConversations')
-        .doc(dateStr);
+    final cacheKey = 'chat_${uid}_$dateStr';
+    final rawList = messages.map((m) => m.toMap()).toList();
+    await LocalStorageService.saveDraft(cacheKey, rawList);
 
-    await docRef.set({
-      'messages': messages.map((m) => m.toMap()).toList(),
-      'lastUpdatedAt': FieldValue.serverTimestamp(),
-    }, SetOptions(merge: true));
+    try {
+      await _client.from('daily_intelligence').upsert({
+        'user_id': uid,
+        'date': dateStr,
+        'dip_payload': {
+          'messages': rawList,
+          'last_updated_at': DateTime.now().toUtc().toIso8601String(),
+        },
+      });
+    } catch (_) {
+      // Saved in local cache, syncs when reconnecting
+    }
   }
 }

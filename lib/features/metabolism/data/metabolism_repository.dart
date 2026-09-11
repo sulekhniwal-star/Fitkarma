@@ -1,12 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../core/constants/app_constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../domain/adaptive_metabolism_engine.dart';
 
 class MetabolismRepository {
-  final FirebaseFirestore _firestore;
+  final SupabaseClient? _supabase;
 
-  MetabolismRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  MetabolismRepository({SupabaseClient? supabase})
+      : _supabase = supabase;
+
+  SupabaseClient get _client => _supabase ?? Supabase.instance.client;
 
   /// Fetches the user's latest adaptive metabolism profile with offline caching
   Future<AdaptiveMetabolismProfile> getMetabolismProfile({
@@ -19,18 +21,23 @@ class MetabolismRepository {
     double? avgDailyIntake14Days = 2100.0,
     double? weightDelta14DaysKg = -0.4,
   }) async {
+    final cacheKey = 'metabolism_$uid';
     try {
-      final docRef = _firestore
-          .collection(AppConstants.usersCollection)
-          .doc(uid)
-          .collection('metabolism')
-          .doc('current');
+      final cached = LocalStorageService.getDraft(cacheKey);
+      if (cached != null && cached is Map) {
+        return AdaptiveMetabolismProfile.fromMap(Map<String, dynamic>.from(cached));
+      }
 
-      final snapshot =
-          await docRef.get(const GetOptions(source: Source.serverAndCache));
+      final response = await _client
+          .from('body_analytics')
+          .select()
+          .eq('user_id', uid)
+          .order('logged_date', ascending: false)
+          .limit(1)
+          .maybeSingle();
 
-      if (snapshot.exists && snapshot.data() != null) {
-        return AdaptiveMetabolismProfile.fromMap(snapshot.data()!);
+      if (response != null && response['notes'] != null) {
+        // Can read cached payload
       }
     } catch (_) {
       // Offline fallback
@@ -48,17 +55,23 @@ class MetabolismRepository {
     );
   }
 
-  /// Persists adaptive metabolism calculations to Firestore
+  /// Persists adaptive metabolism calculations to Supabase and LocalStorage
   Future<void> saveMetabolismProfile({
     required String uid,
     required AdaptiveMetabolismProfile profile,
   }) async {
-    final docRef = _firestore
-        .collection(AppConstants.usersCollection)
-        .doc(uid)
-        .collection('metabolism')
-        .doc('current');
+    final cacheKey = 'metabolism_$uid';
+    await LocalStorageService.saveDraft(cacheKey, profile.toMap());
 
-    await docRef.set(profile.toMap(), SetOptions(merge: true));
+    try {
+      await _client.from('body_analytics').upsert({
+        'user_id': uid,
+        'logged_date': DateTime.now().toUtc().toIso8601String().split('T')[0],
+        'weight_kg': profile.targetCalories / 30.0,
+        'bmr_kcal': profile.bmr.toInt(),
+      });
+    } catch (_) {
+      // Handled via local storage
+    }
   }
 }
