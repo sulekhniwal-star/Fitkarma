@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/nutrition/domain/models/nutrition_models.dart"
+  ]
+}

@@ -168,6 +168,61 @@ class LocalCgmTelemetry extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 13. Local Recipes Table (Seeded Indian Foods)
+class LocalRecipes extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get nameHindi => text()();
+  TextColumn get region => text()();
+  TextColumn get dietaryType => text()();
+  RealColumn get caloriesKcal => real()();
+  RealColumn get proteinGrams => real()();
+  RealColumn get carbsGrams => real()();
+  RealColumn get fatGrams => real()();
+  RealColumn get fiberGrams => real()();
+  RealColumn get glycemicIndex => real()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 14. Local Meals Table (Logged User Meals)
+class LocalMeals extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get name => text()();
+  TextColumn get mealType => text()();
+  RealColumn get caloriesKcal => real()();
+  RealColumn get proteinGrams => real()();
+  RealColumn get carbsGrams => real()();
+  RealColumn get fatGrams => real()();
+  RealColumn get fiberGrams => real()();
+  IntColumn get mealQualityScore => integer()();
+  RealColumn get visionConfidence => real().withDefault(const Constant(1.0))();
+  TextColumn get photoUrl => text().nullable()();
+  DateTimeColumn get loggedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 15. Local Grocery Items Table
+class LocalGroceryItems extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get name => text()();
+  TextColumn get nameHindi => text()();
+  TextColumn get category => text()();
+  RealColumn get quantity => real()();
+  TextColumn get unit => text()();
+  RealColumn get estimatedCostInr => real()();
+  BoolColumn get isPurchased => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -181,6 +236,9 @@ class LocalCgmTelemetry extends Table {
   LocalWearableSamples,
   LocalBiomarkers,
   LocalCgmTelemetry,
+  LocalRecipes,
+  LocalMeals,
+  LocalGroceryItems,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

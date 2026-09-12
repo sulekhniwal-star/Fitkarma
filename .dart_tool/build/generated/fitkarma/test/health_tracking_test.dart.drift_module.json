@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/native.dart",
+    "package:flutter_test/flutter_test.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/health_tracking/data/health_tracking_repository.dart",
+    "package:fitkarma/features/health_tracking/domain/models/health_models.dart",
+    "package:fitkarma/features/health_tracking/domain/services/preventive_intelligence_engine.dart",
+    "package:fitkarma/features/health_tracking/domain/services/wearable_comparison_engine.dart"
+  ]
+}
