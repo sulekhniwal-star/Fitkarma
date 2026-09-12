@@ -315,6 +315,94 @@ class LocalBodyTransformationLogs extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 22. Local Squads Table
+class LocalSquads extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get bio => text()();
+  TextColumn get bannerUrl => text().nullable()();
+  IntColumn get streakDays => integer().withDefault(const Constant(0))();
+  IntColumn get totalKarma => integer().withDefault(const Constant(0))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 23. Local Squad Members Table
+class LocalSquadMembers extends Table {
+  TextColumn get id => text()();
+  TextColumn get squadId => text()();
+  TextColumn get userId => text()();
+  TextColumn get displayName => text()();
+  TextColumn get avatarUrl => text().nullable()();
+  TextColumn get role => text()();
+  BoolColumn get todayLogged => boolean().withDefault(const Constant(false))();
+  IntColumn get todayKarma => integer().withDefault(const Constant(0))();
+  TextColumn get todayCommitment => text().nullable()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 24. Local Community Posts Table
+class LocalCommunityPosts extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get authorName => text()();
+  TextColumn get authorAvatar => text().nullable()();
+  TextColumn get activityType => text()();
+  TextColumn get title => text()();
+  TextColumn get description => text().nullable()();
+  TextColumn get mediaUrl => text().nullable()();
+  IntColumn get karmaEarned => integer().withDefault(const Constant(0))();
+  IntColumn get likesCount => integer().withDefault(const Constant(0))();
+  IntColumn get cheersCount => integer().withDefault(const Constant(0))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 25. Local Family Members Table
+class LocalFamilyMembers extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get relativeUserId => text()();
+  TextColumn get relativeName => text()();
+  TextColumn get relation => text()();
+  IntColumn get age => integer()();
+  RealColumn get latestSystolicBp => real().nullable()();
+  RealColumn get latestDiastolicBp => real().nullable()();
+  RealColumn get latestFastingGlucoseMgDl => real().nullable()();
+  IntColumn get todaySteps => integer().nullable()();
+  TextColumn get alertLevel => text()();
+  TextColumn get alertMessage => text().nullable()();
+  TextColumn get alertMessageHindi => text().nullable()();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 26. Local Clubs Table
+class LocalClubs extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get city => text()();
+  TextColumn get locality => text()();
+  TextColumn get clubType => text()();
+  IntColumn get memberCount => integer().withDefault(const Constant(1))();
+  TextColumn get bannerUrl => text().nullable()();
+  TextColumn get nextMeetup => text()();
+  TextColumn get nextMeetupHindi => text()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -337,6 +425,11 @@ class LocalBodyTransformationLogs extends Table {
   LocalHabitStreaks,
   LocalTransformationMilestones,
   LocalBodyTransformationLogs,
+  LocalSquads,
+  LocalSquadMembers,
+  LocalCommunityPosts,
+  LocalFamilyMembers,
+  LocalClubs,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

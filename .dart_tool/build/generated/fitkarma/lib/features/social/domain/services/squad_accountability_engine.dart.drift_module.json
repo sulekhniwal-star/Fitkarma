@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/social/domain/models/social_models.dart"
+  ]
+}

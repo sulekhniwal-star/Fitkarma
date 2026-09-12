@@ -8899,6 +8899,2765 @@ class LocalBodyTransformationLogsCompanion
   }
 }
 
+class $LocalSquadsTable extends LocalSquads
+    with TableInfo<$LocalSquadsTable, LocalSquad> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalSquadsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _bioMeta = const VerificationMeta('bio');
+  @override
+  late final GeneratedColumn<String> bio = GeneratedColumn<String>(
+      'bio', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _bannerUrlMeta =
+      const VerificationMeta('bannerUrl');
+  @override
+  late final GeneratedColumn<String> bannerUrl = GeneratedColumn<String>(
+      'banner_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _streakDaysMeta =
+      const VerificationMeta('streakDays');
+  @override
+  late final GeneratedColumn<int> streakDays = GeneratedColumn<int>(
+      'streak_days', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _totalKarmaMeta =
+      const VerificationMeta('totalKarma');
+  @override
+  late final GeneratedColumn<int> totalKarma = GeneratedColumn<int>(
+      'total_karma', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, name, bio, bannerUrl, streakDays, totalKarma, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_squads';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalSquad> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('bio')) {
+      context.handle(
+          _bioMeta, bio.isAcceptableOrUnknown(data['bio']!, _bioMeta));
+    } else if (isInserting) {
+      context.missing(_bioMeta);
+    }
+    if (data.containsKey('banner_url')) {
+      context.handle(_bannerUrlMeta,
+          bannerUrl.isAcceptableOrUnknown(data['banner_url']!, _bannerUrlMeta));
+    }
+    if (data.containsKey('streak_days')) {
+      context.handle(
+          _streakDaysMeta,
+          streakDays.isAcceptableOrUnknown(
+              data['streak_days']!, _streakDaysMeta));
+    }
+    if (data.containsKey('total_karma')) {
+      context.handle(
+          _totalKarmaMeta,
+          totalKarma.isAcceptableOrUnknown(
+              data['total_karma']!, _totalKarmaMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalSquad map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalSquad(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      bio: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}bio'])!,
+      bannerUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}banner_url']),
+      streakDays: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}streak_days'])!,
+      totalKarma: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}total_karma'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalSquadsTable createAlias(String alias) {
+    return $LocalSquadsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalSquad extends DataClass implements Insertable<LocalSquad> {
+  final String id;
+  final String name;
+  final String bio;
+  final String? bannerUrl;
+  final int streakDays;
+  final int totalKarma;
+  final DateTime createdAt;
+  const LocalSquad(
+      {required this.id,
+      required this.name,
+      required this.bio,
+      this.bannerUrl,
+      required this.streakDays,
+      required this.totalKarma,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    map['bio'] = Variable<String>(bio);
+    if (!nullToAbsent || bannerUrl != null) {
+      map['banner_url'] = Variable<String>(bannerUrl);
+    }
+    map['streak_days'] = Variable<int>(streakDays);
+    map['total_karma'] = Variable<int>(totalKarma);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalSquadsCompanion toCompanion(bool nullToAbsent) {
+    return LocalSquadsCompanion(
+      id: Value(id),
+      name: Value(name),
+      bio: Value(bio),
+      bannerUrl: bannerUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(bannerUrl),
+      streakDays: Value(streakDays),
+      totalKarma: Value(totalKarma),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalSquad.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalSquad(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      bio: serializer.fromJson<String>(json['bio']),
+      bannerUrl: serializer.fromJson<String?>(json['bannerUrl']),
+      streakDays: serializer.fromJson<int>(json['streakDays']),
+      totalKarma: serializer.fromJson<int>(json['totalKarma']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+      'bio': serializer.toJson<String>(bio),
+      'bannerUrl': serializer.toJson<String?>(bannerUrl),
+      'streakDays': serializer.toJson<int>(streakDays),
+      'totalKarma': serializer.toJson<int>(totalKarma),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalSquad copyWith(
+          {String? id,
+          String? name,
+          String? bio,
+          Value<String?> bannerUrl = const Value.absent(),
+          int? streakDays,
+          int? totalKarma,
+          DateTime? createdAt}) =>
+      LocalSquad(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        bio: bio ?? this.bio,
+        bannerUrl: bannerUrl.present ? bannerUrl.value : this.bannerUrl,
+        streakDays: streakDays ?? this.streakDays,
+        totalKarma: totalKarma ?? this.totalKarma,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalSquad copyWithCompanion(LocalSquadsCompanion data) {
+    return LocalSquad(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      bio: data.bio.present ? data.bio.value : this.bio,
+      bannerUrl: data.bannerUrl.present ? data.bannerUrl.value : this.bannerUrl,
+      streakDays:
+          data.streakDays.present ? data.streakDays.value : this.streakDays,
+      totalKarma:
+          data.totalKarma.present ? data.totalKarma.value : this.totalKarma,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalSquad(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('bio: $bio, ')
+          ..write('bannerUrl: $bannerUrl, ')
+          ..write('streakDays: $streakDays, ')
+          ..write('totalKarma: $totalKarma, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, name, bio, bannerUrl, streakDays, totalKarma, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalSquad &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.bio == this.bio &&
+          other.bannerUrl == this.bannerUrl &&
+          other.streakDays == this.streakDays &&
+          other.totalKarma == this.totalKarma &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalSquadsCompanion extends UpdateCompanion<LocalSquad> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<String> bio;
+  final Value<String?> bannerUrl;
+  final Value<int> streakDays;
+  final Value<int> totalKarma;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalSquadsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.bio = const Value.absent(),
+    this.bannerUrl = const Value.absent(),
+    this.streakDays = const Value.absent(),
+    this.totalKarma = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalSquadsCompanion.insert({
+    required String id,
+    required String name,
+    required String bio,
+    this.bannerUrl = const Value.absent(),
+    this.streakDays = const Value.absent(),
+    this.totalKarma = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name),
+        bio = Value(bio);
+  static Insertable<LocalSquad> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<String>? bio,
+    Expression<String>? bannerUrl,
+    Expression<int>? streakDays,
+    Expression<int>? totalKarma,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (bio != null) 'bio': bio,
+      if (bannerUrl != null) 'banner_url': bannerUrl,
+      if (streakDays != null) 'streak_days': streakDays,
+      if (totalKarma != null) 'total_karma': totalKarma,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalSquadsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? name,
+      Value<String>? bio,
+      Value<String?>? bannerUrl,
+      Value<int>? streakDays,
+      Value<int>? totalKarma,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalSquadsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      bio: bio ?? this.bio,
+      bannerUrl: bannerUrl ?? this.bannerUrl,
+      streakDays: streakDays ?? this.streakDays,
+      totalKarma: totalKarma ?? this.totalKarma,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (bio.present) {
+      map['bio'] = Variable<String>(bio.value);
+    }
+    if (bannerUrl.present) {
+      map['banner_url'] = Variable<String>(bannerUrl.value);
+    }
+    if (streakDays.present) {
+      map['streak_days'] = Variable<int>(streakDays.value);
+    }
+    if (totalKarma.present) {
+      map['total_karma'] = Variable<int>(totalKarma.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalSquadsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('bio: $bio, ')
+          ..write('bannerUrl: $bannerUrl, ')
+          ..write('streakDays: $streakDays, ')
+          ..write('totalKarma: $totalKarma, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalSquadMembersTable extends LocalSquadMembers
+    with TableInfo<$LocalSquadMembersTable, LocalSquadMember> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalSquadMembersTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _squadIdMeta =
+      const VerificationMeta('squadId');
+  @override
+  late final GeneratedColumn<String> squadId = GeneratedColumn<String>(
+      'squad_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _displayNameMeta =
+      const VerificationMeta('displayName');
+  @override
+  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
+      'display_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _avatarUrlMeta =
+      const VerificationMeta('avatarUrl');
+  @override
+  late final GeneratedColumn<String> avatarUrl = GeneratedColumn<String>(
+      'avatar_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _roleMeta = const VerificationMeta('role');
+  @override
+  late final GeneratedColumn<String> role = GeneratedColumn<String>(
+      'role', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _todayLoggedMeta =
+      const VerificationMeta('todayLogged');
+  @override
+  late final GeneratedColumn<bool> todayLogged = GeneratedColumn<bool>(
+      'today_logged', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("today_logged" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _todayKarmaMeta =
+      const VerificationMeta('todayKarma');
+  @override
+  late final GeneratedColumn<int> todayKarma = GeneratedColumn<int>(
+      'today_karma', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _todayCommitmentMeta =
+      const VerificationMeta('todayCommitment');
+  @override
+  late final GeneratedColumn<String> todayCommitment = GeneratedColumn<String>(
+      'today_commitment', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        squadId,
+        userId,
+        displayName,
+        avatarUrl,
+        role,
+        todayLogged,
+        todayKarma,
+        todayCommitment,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_squad_members';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalSquadMember> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('squad_id')) {
+      context.handle(_squadIdMeta,
+          squadId.isAcceptableOrUnknown(data['squad_id']!, _squadIdMeta));
+    } else if (isInserting) {
+      context.missing(_squadIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('display_name')) {
+      context.handle(
+          _displayNameMeta,
+          displayName.isAcceptableOrUnknown(
+              data['display_name']!, _displayNameMeta));
+    } else if (isInserting) {
+      context.missing(_displayNameMeta);
+    }
+    if (data.containsKey('avatar_url')) {
+      context.handle(_avatarUrlMeta,
+          avatarUrl.isAcceptableOrUnknown(data['avatar_url']!, _avatarUrlMeta));
+    }
+    if (data.containsKey('role')) {
+      context.handle(
+          _roleMeta, role.isAcceptableOrUnknown(data['role']!, _roleMeta));
+    } else if (isInserting) {
+      context.missing(_roleMeta);
+    }
+    if (data.containsKey('today_logged')) {
+      context.handle(
+          _todayLoggedMeta,
+          todayLogged.isAcceptableOrUnknown(
+              data['today_logged']!, _todayLoggedMeta));
+    }
+    if (data.containsKey('today_karma')) {
+      context.handle(
+          _todayKarmaMeta,
+          todayKarma.isAcceptableOrUnknown(
+              data['today_karma']!, _todayKarmaMeta));
+    }
+    if (data.containsKey('today_commitment')) {
+      context.handle(
+          _todayCommitmentMeta,
+          todayCommitment.isAcceptableOrUnknown(
+              data['today_commitment']!, _todayCommitmentMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalSquadMember map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalSquadMember(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      squadId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}squad_id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      displayName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}display_name'])!,
+      avatarUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}avatar_url']),
+      role: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}role'])!,
+      todayLogged: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}today_logged'])!,
+      todayKarma: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}today_karma'])!,
+      todayCommitment: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}today_commitment']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalSquadMembersTable createAlias(String alias) {
+    return $LocalSquadMembersTable(attachedDatabase, alias);
+  }
+}
+
+class LocalSquadMember extends DataClass
+    implements Insertable<LocalSquadMember> {
+  final String id;
+  final String squadId;
+  final String userId;
+  final String displayName;
+  final String? avatarUrl;
+  final String role;
+  final bool todayLogged;
+  final int todayKarma;
+  final String? todayCommitment;
+  final DateTime createdAt;
+  const LocalSquadMember(
+      {required this.id,
+      required this.squadId,
+      required this.userId,
+      required this.displayName,
+      this.avatarUrl,
+      required this.role,
+      required this.todayLogged,
+      required this.todayKarma,
+      this.todayCommitment,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['squad_id'] = Variable<String>(squadId);
+    map['user_id'] = Variable<String>(userId);
+    map['display_name'] = Variable<String>(displayName);
+    if (!nullToAbsent || avatarUrl != null) {
+      map['avatar_url'] = Variable<String>(avatarUrl);
+    }
+    map['role'] = Variable<String>(role);
+    map['today_logged'] = Variable<bool>(todayLogged);
+    map['today_karma'] = Variable<int>(todayKarma);
+    if (!nullToAbsent || todayCommitment != null) {
+      map['today_commitment'] = Variable<String>(todayCommitment);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalSquadMembersCompanion toCompanion(bool nullToAbsent) {
+    return LocalSquadMembersCompanion(
+      id: Value(id),
+      squadId: Value(squadId),
+      userId: Value(userId),
+      displayName: Value(displayName),
+      avatarUrl: avatarUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(avatarUrl),
+      role: Value(role),
+      todayLogged: Value(todayLogged),
+      todayKarma: Value(todayKarma),
+      todayCommitment: todayCommitment == null && nullToAbsent
+          ? const Value.absent()
+          : Value(todayCommitment),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalSquadMember.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalSquadMember(
+      id: serializer.fromJson<String>(json['id']),
+      squadId: serializer.fromJson<String>(json['squadId']),
+      userId: serializer.fromJson<String>(json['userId']),
+      displayName: serializer.fromJson<String>(json['displayName']),
+      avatarUrl: serializer.fromJson<String?>(json['avatarUrl']),
+      role: serializer.fromJson<String>(json['role']),
+      todayLogged: serializer.fromJson<bool>(json['todayLogged']),
+      todayKarma: serializer.fromJson<int>(json['todayKarma']),
+      todayCommitment: serializer.fromJson<String?>(json['todayCommitment']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'squadId': serializer.toJson<String>(squadId),
+      'userId': serializer.toJson<String>(userId),
+      'displayName': serializer.toJson<String>(displayName),
+      'avatarUrl': serializer.toJson<String?>(avatarUrl),
+      'role': serializer.toJson<String>(role),
+      'todayLogged': serializer.toJson<bool>(todayLogged),
+      'todayKarma': serializer.toJson<int>(todayKarma),
+      'todayCommitment': serializer.toJson<String?>(todayCommitment),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalSquadMember copyWith(
+          {String? id,
+          String? squadId,
+          String? userId,
+          String? displayName,
+          Value<String?> avatarUrl = const Value.absent(),
+          String? role,
+          bool? todayLogged,
+          int? todayKarma,
+          Value<String?> todayCommitment = const Value.absent(),
+          DateTime? createdAt}) =>
+      LocalSquadMember(
+        id: id ?? this.id,
+        squadId: squadId ?? this.squadId,
+        userId: userId ?? this.userId,
+        displayName: displayName ?? this.displayName,
+        avatarUrl: avatarUrl.present ? avatarUrl.value : this.avatarUrl,
+        role: role ?? this.role,
+        todayLogged: todayLogged ?? this.todayLogged,
+        todayKarma: todayKarma ?? this.todayKarma,
+        todayCommitment: todayCommitment.present
+            ? todayCommitment.value
+            : this.todayCommitment,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalSquadMember copyWithCompanion(LocalSquadMembersCompanion data) {
+    return LocalSquadMember(
+      id: data.id.present ? data.id.value : this.id,
+      squadId: data.squadId.present ? data.squadId.value : this.squadId,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      displayName:
+          data.displayName.present ? data.displayName.value : this.displayName,
+      avatarUrl: data.avatarUrl.present ? data.avatarUrl.value : this.avatarUrl,
+      role: data.role.present ? data.role.value : this.role,
+      todayLogged:
+          data.todayLogged.present ? data.todayLogged.value : this.todayLogged,
+      todayKarma:
+          data.todayKarma.present ? data.todayKarma.value : this.todayKarma,
+      todayCommitment: data.todayCommitment.present
+          ? data.todayCommitment.value
+          : this.todayCommitment,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalSquadMember(')
+          ..write('id: $id, ')
+          ..write('squadId: $squadId, ')
+          ..write('userId: $userId, ')
+          ..write('displayName: $displayName, ')
+          ..write('avatarUrl: $avatarUrl, ')
+          ..write('role: $role, ')
+          ..write('todayLogged: $todayLogged, ')
+          ..write('todayKarma: $todayKarma, ')
+          ..write('todayCommitment: $todayCommitment, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, squadId, userId, displayName, avatarUrl,
+      role, todayLogged, todayKarma, todayCommitment, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalSquadMember &&
+          other.id == this.id &&
+          other.squadId == this.squadId &&
+          other.userId == this.userId &&
+          other.displayName == this.displayName &&
+          other.avatarUrl == this.avatarUrl &&
+          other.role == this.role &&
+          other.todayLogged == this.todayLogged &&
+          other.todayKarma == this.todayKarma &&
+          other.todayCommitment == this.todayCommitment &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalSquadMembersCompanion extends UpdateCompanion<LocalSquadMember> {
+  final Value<String> id;
+  final Value<String> squadId;
+  final Value<String> userId;
+  final Value<String> displayName;
+  final Value<String?> avatarUrl;
+  final Value<String> role;
+  final Value<bool> todayLogged;
+  final Value<int> todayKarma;
+  final Value<String?> todayCommitment;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalSquadMembersCompanion({
+    this.id = const Value.absent(),
+    this.squadId = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.displayName = const Value.absent(),
+    this.avatarUrl = const Value.absent(),
+    this.role = const Value.absent(),
+    this.todayLogged = const Value.absent(),
+    this.todayKarma = const Value.absent(),
+    this.todayCommitment = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalSquadMembersCompanion.insert({
+    required String id,
+    required String squadId,
+    required String userId,
+    required String displayName,
+    this.avatarUrl = const Value.absent(),
+    required String role,
+    this.todayLogged = const Value.absent(),
+    this.todayKarma = const Value.absent(),
+    this.todayCommitment = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        squadId = Value(squadId),
+        userId = Value(userId),
+        displayName = Value(displayName),
+        role = Value(role);
+  static Insertable<LocalSquadMember> custom({
+    Expression<String>? id,
+    Expression<String>? squadId,
+    Expression<String>? userId,
+    Expression<String>? displayName,
+    Expression<String>? avatarUrl,
+    Expression<String>? role,
+    Expression<bool>? todayLogged,
+    Expression<int>? todayKarma,
+    Expression<String>? todayCommitment,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (squadId != null) 'squad_id': squadId,
+      if (userId != null) 'user_id': userId,
+      if (displayName != null) 'display_name': displayName,
+      if (avatarUrl != null) 'avatar_url': avatarUrl,
+      if (role != null) 'role': role,
+      if (todayLogged != null) 'today_logged': todayLogged,
+      if (todayKarma != null) 'today_karma': todayKarma,
+      if (todayCommitment != null) 'today_commitment': todayCommitment,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalSquadMembersCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? squadId,
+      Value<String>? userId,
+      Value<String>? displayName,
+      Value<String?>? avatarUrl,
+      Value<String>? role,
+      Value<bool>? todayLogged,
+      Value<int>? todayKarma,
+      Value<String?>? todayCommitment,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalSquadMembersCompanion(
+      id: id ?? this.id,
+      squadId: squadId ?? this.squadId,
+      userId: userId ?? this.userId,
+      displayName: displayName ?? this.displayName,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      role: role ?? this.role,
+      todayLogged: todayLogged ?? this.todayLogged,
+      todayKarma: todayKarma ?? this.todayKarma,
+      todayCommitment: todayCommitment ?? this.todayCommitment,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (squadId.present) {
+      map['squad_id'] = Variable<String>(squadId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (displayName.present) {
+      map['display_name'] = Variable<String>(displayName.value);
+    }
+    if (avatarUrl.present) {
+      map['avatar_url'] = Variable<String>(avatarUrl.value);
+    }
+    if (role.present) {
+      map['role'] = Variable<String>(role.value);
+    }
+    if (todayLogged.present) {
+      map['today_logged'] = Variable<bool>(todayLogged.value);
+    }
+    if (todayKarma.present) {
+      map['today_karma'] = Variable<int>(todayKarma.value);
+    }
+    if (todayCommitment.present) {
+      map['today_commitment'] = Variable<String>(todayCommitment.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalSquadMembersCompanion(')
+          ..write('id: $id, ')
+          ..write('squadId: $squadId, ')
+          ..write('userId: $userId, ')
+          ..write('displayName: $displayName, ')
+          ..write('avatarUrl: $avatarUrl, ')
+          ..write('role: $role, ')
+          ..write('todayLogged: $todayLogged, ')
+          ..write('todayKarma: $todayKarma, ')
+          ..write('todayCommitment: $todayCommitment, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCommunityPostsTable extends LocalCommunityPosts
+    with TableInfo<$LocalCommunityPostsTable, LocalCommunityPost> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCommunityPostsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _authorNameMeta =
+      const VerificationMeta('authorName');
+  @override
+  late final GeneratedColumn<String> authorName = GeneratedColumn<String>(
+      'author_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _authorAvatarMeta =
+      const VerificationMeta('authorAvatar');
+  @override
+  late final GeneratedColumn<String> authorAvatar = GeneratedColumn<String>(
+      'author_avatar', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _activityTypeMeta =
+      const VerificationMeta('activityType');
+  @override
+  late final GeneratedColumn<String> activityType = GeneratedColumn<String>(
+      'activity_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _mediaUrlMeta =
+      const VerificationMeta('mediaUrl');
+  @override
+  late final GeneratedColumn<String> mediaUrl = GeneratedColumn<String>(
+      'media_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _karmaEarnedMeta =
+      const VerificationMeta('karmaEarned');
+  @override
+  late final GeneratedColumn<int> karmaEarned = GeneratedColumn<int>(
+      'karma_earned', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _likesCountMeta =
+      const VerificationMeta('likesCount');
+  @override
+  late final GeneratedColumn<int> likesCount = GeneratedColumn<int>(
+      'likes_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _cheersCountMeta =
+      const VerificationMeta('cheersCount');
+  @override
+  late final GeneratedColumn<int> cheersCount = GeneratedColumn<int>(
+      'cheers_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        authorName,
+        authorAvatar,
+        activityType,
+        title,
+        description,
+        mediaUrl,
+        karmaEarned,
+        likesCount,
+        cheersCount,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_community_posts';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalCommunityPost> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('author_name')) {
+      context.handle(
+          _authorNameMeta,
+          authorName.isAcceptableOrUnknown(
+              data['author_name']!, _authorNameMeta));
+    } else if (isInserting) {
+      context.missing(_authorNameMeta);
+    }
+    if (data.containsKey('author_avatar')) {
+      context.handle(
+          _authorAvatarMeta,
+          authorAvatar.isAcceptableOrUnknown(
+              data['author_avatar']!, _authorAvatarMeta));
+    }
+    if (data.containsKey('activity_type')) {
+      context.handle(
+          _activityTypeMeta,
+          activityType.isAcceptableOrUnknown(
+              data['activity_type']!, _activityTypeMeta));
+    } else if (isInserting) {
+      context.missing(_activityTypeMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    }
+    if (data.containsKey('media_url')) {
+      context.handle(_mediaUrlMeta,
+          mediaUrl.isAcceptableOrUnknown(data['media_url']!, _mediaUrlMeta));
+    }
+    if (data.containsKey('karma_earned')) {
+      context.handle(
+          _karmaEarnedMeta,
+          karmaEarned.isAcceptableOrUnknown(
+              data['karma_earned']!, _karmaEarnedMeta));
+    }
+    if (data.containsKey('likes_count')) {
+      context.handle(
+          _likesCountMeta,
+          likesCount.isAcceptableOrUnknown(
+              data['likes_count']!, _likesCountMeta));
+    }
+    if (data.containsKey('cheers_count')) {
+      context.handle(
+          _cheersCountMeta,
+          cheersCount.isAcceptableOrUnknown(
+              data['cheers_count']!, _cheersCountMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCommunityPost map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCommunityPost(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      authorName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}author_name'])!,
+      authorAvatar: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}author_avatar']),
+      activityType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}activity_type'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description']),
+      mediaUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}media_url']),
+      karmaEarned: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}karma_earned'])!,
+      likesCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}likes_count'])!,
+      cheersCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}cheers_count'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalCommunityPostsTable createAlias(String alias) {
+    return $LocalCommunityPostsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCommunityPost extends DataClass
+    implements Insertable<LocalCommunityPost> {
+  final String id;
+  final String userId;
+  final String authorName;
+  final String? authorAvatar;
+  final String activityType;
+  final String title;
+  final String? description;
+  final String? mediaUrl;
+  final int karmaEarned;
+  final int likesCount;
+  final int cheersCount;
+  final DateTime createdAt;
+  const LocalCommunityPost(
+      {required this.id,
+      required this.userId,
+      required this.authorName,
+      this.authorAvatar,
+      required this.activityType,
+      required this.title,
+      this.description,
+      this.mediaUrl,
+      required this.karmaEarned,
+      required this.likesCount,
+      required this.cheersCount,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['author_name'] = Variable<String>(authorName);
+    if (!nullToAbsent || authorAvatar != null) {
+      map['author_avatar'] = Variable<String>(authorAvatar);
+    }
+    map['activity_type'] = Variable<String>(activityType);
+    map['title'] = Variable<String>(title);
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
+    }
+    if (!nullToAbsent || mediaUrl != null) {
+      map['media_url'] = Variable<String>(mediaUrl);
+    }
+    map['karma_earned'] = Variable<int>(karmaEarned);
+    map['likes_count'] = Variable<int>(likesCount);
+    map['cheers_count'] = Variable<int>(cheersCount);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalCommunityPostsCompanion toCompanion(bool nullToAbsent) {
+    return LocalCommunityPostsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      authorName: Value(authorName),
+      authorAvatar: authorAvatar == null && nullToAbsent
+          ? const Value.absent()
+          : Value(authorAvatar),
+      activityType: Value(activityType),
+      title: Value(title),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
+      mediaUrl: mediaUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mediaUrl),
+      karmaEarned: Value(karmaEarned),
+      likesCount: Value(likesCount),
+      cheersCount: Value(cheersCount),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalCommunityPost.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCommunityPost(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      authorName: serializer.fromJson<String>(json['authorName']),
+      authorAvatar: serializer.fromJson<String?>(json['authorAvatar']),
+      activityType: serializer.fromJson<String>(json['activityType']),
+      title: serializer.fromJson<String>(json['title']),
+      description: serializer.fromJson<String?>(json['description']),
+      mediaUrl: serializer.fromJson<String?>(json['mediaUrl']),
+      karmaEarned: serializer.fromJson<int>(json['karmaEarned']),
+      likesCount: serializer.fromJson<int>(json['likesCount']),
+      cheersCount: serializer.fromJson<int>(json['cheersCount']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'authorName': serializer.toJson<String>(authorName),
+      'authorAvatar': serializer.toJson<String?>(authorAvatar),
+      'activityType': serializer.toJson<String>(activityType),
+      'title': serializer.toJson<String>(title),
+      'description': serializer.toJson<String?>(description),
+      'mediaUrl': serializer.toJson<String?>(mediaUrl),
+      'karmaEarned': serializer.toJson<int>(karmaEarned),
+      'likesCount': serializer.toJson<int>(likesCount),
+      'cheersCount': serializer.toJson<int>(cheersCount),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalCommunityPost copyWith(
+          {String? id,
+          String? userId,
+          String? authorName,
+          Value<String?> authorAvatar = const Value.absent(),
+          String? activityType,
+          String? title,
+          Value<String?> description = const Value.absent(),
+          Value<String?> mediaUrl = const Value.absent(),
+          int? karmaEarned,
+          int? likesCount,
+          int? cheersCount,
+          DateTime? createdAt}) =>
+      LocalCommunityPost(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        authorName: authorName ?? this.authorName,
+        authorAvatar:
+            authorAvatar.present ? authorAvatar.value : this.authorAvatar,
+        activityType: activityType ?? this.activityType,
+        title: title ?? this.title,
+        description: description.present ? description.value : this.description,
+        mediaUrl: mediaUrl.present ? mediaUrl.value : this.mediaUrl,
+        karmaEarned: karmaEarned ?? this.karmaEarned,
+        likesCount: likesCount ?? this.likesCount,
+        cheersCount: cheersCount ?? this.cheersCount,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalCommunityPost copyWithCompanion(LocalCommunityPostsCompanion data) {
+    return LocalCommunityPost(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      authorName:
+          data.authorName.present ? data.authorName.value : this.authorName,
+      authorAvatar: data.authorAvatar.present
+          ? data.authorAvatar.value
+          : this.authorAvatar,
+      activityType: data.activityType.present
+          ? data.activityType.value
+          : this.activityType,
+      title: data.title.present ? data.title.value : this.title,
+      description:
+          data.description.present ? data.description.value : this.description,
+      mediaUrl: data.mediaUrl.present ? data.mediaUrl.value : this.mediaUrl,
+      karmaEarned:
+          data.karmaEarned.present ? data.karmaEarned.value : this.karmaEarned,
+      likesCount:
+          data.likesCount.present ? data.likesCount.value : this.likesCount,
+      cheersCount:
+          data.cheersCount.present ? data.cheersCount.value : this.cheersCount,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCommunityPost(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('authorName: $authorName, ')
+          ..write('authorAvatar: $authorAvatar, ')
+          ..write('activityType: $activityType, ')
+          ..write('title: $title, ')
+          ..write('description: $description, ')
+          ..write('mediaUrl: $mediaUrl, ')
+          ..write('karmaEarned: $karmaEarned, ')
+          ..write('likesCount: $likesCount, ')
+          ..write('cheersCount: $cheersCount, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      userId,
+      authorName,
+      authorAvatar,
+      activityType,
+      title,
+      description,
+      mediaUrl,
+      karmaEarned,
+      likesCount,
+      cheersCount,
+      createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCommunityPost &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.authorName == this.authorName &&
+          other.authorAvatar == this.authorAvatar &&
+          other.activityType == this.activityType &&
+          other.title == this.title &&
+          other.description == this.description &&
+          other.mediaUrl == this.mediaUrl &&
+          other.karmaEarned == this.karmaEarned &&
+          other.likesCount == this.likesCount &&
+          other.cheersCount == this.cheersCount &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalCommunityPostsCompanion extends UpdateCompanion<LocalCommunityPost> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> authorName;
+  final Value<String?> authorAvatar;
+  final Value<String> activityType;
+  final Value<String> title;
+  final Value<String?> description;
+  final Value<String?> mediaUrl;
+  final Value<int> karmaEarned;
+  final Value<int> likesCount;
+  final Value<int> cheersCount;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalCommunityPostsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.authorName = const Value.absent(),
+    this.authorAvatar = const Value.absent(),
+    this.activityType = const Value.absent(),
+    this.title = const Value.absent(),
+    this.description = const Value.absent(),
+    this.mediaUrl = const Value.absent(),
+    this.karmaEarned = const Value.absent(),
+    this.likesCount = const Value.absent(),
+    this.cheersCount = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCommunityPostsCompanion.insert({
+    required String id,
+    required String userId,
+    required String authorName,
+    this.authorAvatar = const Value.absent(),
+    required String activityType,
+    required String title,
+    this.description = const Value.absent(),
+    this.mediaUrl = const Value.absent(),
+    this.karmaEarned = const Value.absent(),
+    this.likesCount = const Value.absent(),
+    this.cheersCount = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        authorName = Value(authorName),
+        activityType = Value(activityType),
+        title = Value(title);
+  static Insertable<LocalCommunityPost> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? authorName,
+    Expression<String>? authorAvatar,
+    Expression<String>? activityType,
+    Expression<String>? title,
+    Expression<String>? description,
+    Expression<String>? mediaUrl,
+    Expression<int>? karmaEarned,
+    Expression<int>? likesCount,
+    Expression<int>? cheersCount,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (authorName != null) 'author_name': authorName,
+      if (authorAvatar != null) 'author_avatar': authorAvatar,
+      if (activityType != null) 'activity_type': activityType,
+      if (title != null) 'title': title,
+      if (description != null) 'description': description,
+      if (mediaUrl != null) 'media_url': mediaUrl,
+      if (karmaEarned != null) 'karma_earned': karmaEarned,
+      if (likesCount != null) 'likes_count': likesCount,
+      if (cheersCount != null) 'cheers_count': cheersCount,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCommunityPostsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? authorName,
+      Value<String?>? authorAvatar,
+      Value<String>? activityType,
+      Value<String>? title,
+      Value<String?>? description,
+      Value<String?>? mediaUrl,
+      Value<int>? karmaEarned,
+      Value<int>? likesCount,
+      Value<int>? cheersCount,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalCommunityPostsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      authorName: authorName ?? this.authorName,
+      authorAvatar: authorAvatar ?? this.authorAvatar,
+      activityType: activityType ?? this.activityType,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      mediaUrl: mediaUrl ?? this.mediaUrl,
+      karmaEarned: karmaEarned ?? this.karmaEarned,
+      likesCount: likesCount ?? this.likesCount,
+      cheersCount: cheersCount ?? this.cheersCount,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (authorName.present) {
+      map['author_name'] = Variable<String>(authorName.value);
+    }
+    if (authorAvatar.present) {
+      map['author_avatar'] = Variable<String>(authorAvatar.value);
+    }
+    if (activityType.present) {
+      map['activity_type'] = Variable<String>(activityType.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
+    if (mediaUrl.present) {
+      map['media_url'] = Variable<String>(mediaUrl.value);
+    }
+    if (karmaEarned.present) {
+      map['karma_earned'] = Variable<int>(karmaEarned.value);
+    }
+    if (likesCount.present) {
+      map['likes_count'] = Variable<int>(likesCount.value);
+    }
+    if (cheersCount.present) {
+      map['cheers_count'] = Variable<int>(cheersCount.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCommunityPostsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('authorName: $authorName, ')
+          ..write('authorAvatar: $authorAvatar, ')
+          ..write('activityType: $activityType, ')
+          ..write('title: $title, ')
+          ..write('description: $description, ')
+          ..write('mediaUrl: $mediaUrl, ')
+          ..write('karmaEarned: $karmaEarned, ')
+          ..write('likesCount: $likesCount, ')
+          ..write('cheersCount: $cheersCount, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalFamilyMembersTable extends LocalFamilyMembers
+    with TableInfo<$LocalFamilyMembersTable, LocalFamilyMember> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalFamilyMembersTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _relativeUserIdMeta =
+      const VerificationMeta('relativeUserId');
+  @override
+  late final GeneratedColumn<String> relativeUserId = GeneratedColumn<String>(
+      'relative_user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _relativeNameMeta =
+      const VerificationMeta('relativeName');
+  @override
+  late final GeneratedColumn<String> relativeName = GeneratedColumn<String>(
+      'relative_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _relationMeta =
+      const VerificationMeta('relation');
+  @override
+  late final GeneratedColumn<String> relation = GeneratedColumn<String>(
+      'relation', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _ageMeta = const VerificationMeta('age');
+  @override
+  late final GeneratedColumn<int> age = GeneratedColumn<int>(
+      'age', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _latestSystolicBpMeta =
+      const VerificationMeta('latestSystolicBp');
+  @override
+  late final GeneratedColumn<double> latestSystolicBp = GeneratedColumn<double>(
+      'latest_systolic_bp', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _latestDiastolicBpMeta =
+      const VerificationMeta('latestDiastolicBp');
+  @override
+  late final GeneratedColumn<double> latestDiastolicBp =
+      GeneratedColumn<double>('latest_diastolic_bp', aliasedName, true,
+          type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _latestFastingGlucoseMgDlMeta =
+      const VerificationMeta('latestFastingGlucoseMgDl');
+  @override
+  late final GeneratedColumn<double> latestFastingGlucoseMgDl =
+      GeneratedColumn<double>('latest_fasting_glucose_mg_dl', aliasedName, true,
+          type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _todayStepsMeta =
+      const VerificationMeta('todaySteps');
+  @override
+  late final GeneratedColumn<int> todaySteps = GeneratedColumn<int>(
+      'today_steps', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _alertLevelMeta =
+      const VerificationMeta('alertLevel');
+  @override
+  late final GeneratedColumn<String> alertLevel = GeneratedColumn<String>(
+      'alert_level', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _alertMessageMeta =
+      const VerificationMeta('alertMessage');
+  @override
+  late final GeneratedColumn<String> alertMessage = GeneratedColumn<String>(
+      'alert_message', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _alertMessageHindiMeta =
+      const VerificationMeta('alertMessageHindi');
+  @override
+  late final GeneratedColumn<String> alertMessageHindi =
+      GeneratedColumn<String>('alert_message_hindi', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        relativeUserId,
+        relativeName,
+        relation,
+        age,
+        latestSystolicBp,
+        latestDiastolicBp,
+        latestFastingGlucoseMgDl,
+        todaySteps,
+        alertLevel,
+        alertMessage,
+        alertMessageHindi,
+        updatedAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_family_members';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalFamilyMember> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('relative_user_id')) {
+      context.handle(
+          _relativeUserIdMeta,
+          relativeUserId.isAcceptableOrUnknown(
+              data['relative_user_id']!, _relativeUserIdMeta));
+    } else if (isInserting) {
+      context.missing(_relativeUserIdMeta);
+    }
+    if (data.containsKey('relative_name')) {
+      context.handle(
+          _relativeNameMeta,
+          relativeName.isAcceptableOrUnknown(
+              data['relative_name']!, _relativeNameMeta));
+    } else if (isInserting) {
+      context.missing(_relativeNameMeta);
+    }
+    if (data.containsKey('relation')) {
+      context.handle(_relationMeta,
+          relation.isAcceptableOrUnknown(data['relation']!, _relationMeta));
+    } else if (isInserting) {
+      context.missing(_relationMeta);
+    }
+    if (data.containsKey('age')) {
+      context.handle(
+          _ageMeta, age.isAcceptableOrUnknown(data['age']!, _ageMeta));
+    } else if (isInserting) {
+      context.missing(_ageMeta);
+    }
+    if (data.containsKey('latest_systolic_bp')) {
+      context.handle(
+          _latestSystolicBpMeta,
+          latestSystolicBp.isAcceptableOrUnknown(
+              data['latest_systolic_bp']!, _latestSystolicBpMeta));
+    }
+    if (data.containsKey('latest_diastolic_bp')) {
+      context.handle(
+          _latestDiastolicBpMeta,
+          latestDiastolicBp.isAcceptableOrUnknown(
+              data['latest_diastolic_bp']!, _latestDiastolicBpMeta));
+    }
+    if (data.containsKey('latest_fasting_glucose_mg_dl')) {
+      context.handle(
+          _latestFastingGlucoseMgDlMeta,
+          latestFastingGlucoseMgDl.isAcceptableOrUnknown(
+              data['latest_fasting_glucose_mg_dl']!,
+              _latestFastingGlucoseMgDlMeta));
+    }
+    if (data.containsKey('today_steps')) {
+      context.handle(
+          _todayStepsMeta,
+          todaySteps.isAcceptableOrUnknown(
+              data['today_steps']!, _todayStepsMeta));
+    }
+    if (data.containsKey('alert_level')) {
+      context.handle(
+          _alertLevelMeta,
+          alertLevel.isAcceptableOrUnknown(
+              data['alert_level']!, _alertLevelMeta));
+    } else if (isInserting) {
+      context.missing(_alertLevelMeta);
+    }
+    if (data.containsKey('alert_message')) {
+      context.handle(
+          _alertMessageMeta,
+          alertMessage.isAcceptableOrUnknown(
+              data['alert_message']!, _alertMessageMeta));
+    }
+    if (data.containsKey('alert_message_hindi')) {
+      context.handle(
+          _alertMessageHindiMeta,
+          alertMessageHindi.isAcceptableOrUnknown(
+              data['alert_message_hindi']!, _alertMessageHindiMeta));
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalFamilyMember map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalFamilyMember(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      relativeUserId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}relative_user_id'])!,
+      relativeName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}relative_name'])!,
+      relation: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}relation'])!,
+      age: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}age'])!,
+      latestSystolicBp: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}latest_systolic_bp']),
+      latestDiastolicBp: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}latest_diastolic_bp']),
+      latestFastingGlucoseMgDl: attachedDatabase.typeMapping.read(
+          DriftSqlType.double,
+          data['${effectivePrefix}latest_fasting_glucose_mg_dl']),
+      todaySteps: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}today_steps']),
+      alertLevel: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}alert_level'])!,
+      alertMessage: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}alert_message']),
+      alertMessageHindi: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}alert_message_hindi']),
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $LocalFamilyMembersTable createAlias(String alias) {
+    return $LocalFamilyMembersTable(attachedDatabase, alias);
+  }
+}
+
+class LocalFamilyMember extends DataClass
+    implements Insertable<LocalFamilyMember> {
+  final String id;
+  final String userId;
+  final String relativeUserId;
+  final String relativeName;
+  final String relation;
+  final int age;
+  final double? latestSystolicBp;
+  final double? latestDiastolicBp;
+  final double? latestFastingGlucoseMgDl;
+  final int? todaySteps;
+  final String alertLevel;
+  final String? alertMessage;
+  final String? alertMessageHindi;
+  final DateTime updatedAt;
+  const LocalFamilyMember(
+      {required this.id,
+      required this.userId,
+      required this.relativeUserId,
+      required this.relativeName,
+      required this.relation,
+      required this.age,
+      this.latestSystolicBp,
+      this.latestDiastolicBp,
+      this.latestFastingGlucoseMgDl,
+      this.todaySteps,
+      required this.alertLevel,
+      this.alertMessage,
+      this.alertMessageHindi,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['relative_user_id'] = Variable<String>(relativeUserId);
+    map['relative_name'] = Variable<String>(relativeName);
+    map['relation'] = Variable<String>(relation);
+    map['age'] = Variable<int>(age);
+    if (!nullToAbsent || latestSystolicBp != null) {
+      map['latest_systolic_bp'] = Variable<double>(latestSystolicBp);
+    }
+    if (!nullToAbsent || latestDiastolicBp != null) {
+      map['latest_diastolic_bp'] = Variable<double>(latestDiastolicBp);
+    }
+    if (!nullToAbsent || latestFastingGlucoseMgDl != null) {
+      map['latest_fasting_glucose_mg_dl'] =
+          Variable<double>(latestFastingGlucoseMgDl);
+    }
+    if (!nullToAbsent || todaySteps != null) {
+      map['today_steps'] = Variable<int>(todaySteps);
+    }
+    map['alert_level'] = Variable<String>(alertLevel);
+    if (!nullToAbsent || alertMessage != null) {
+      map['alert_message'] = Variable<String>(alertMessage);
+    }
+    if (!nullToAbsent || alertMessageHindi != null) {
+      map['alert_message_hindi'] = Variable<String>(alertMessageHindi);
+    }
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  LocalFamilyMembersCompanion toCompanion(bool nullToAbsent) {
+    return LocalFamilyMembersCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      relativeUserId: Value(relativeUserId),
+      relativeName: Value(relativeName),
+      relation: Value(relation),
+      age: Value(age),
+      latestSystolicBp: latestSystolicBp == null && nullToAbsent
+          ? const Value.absent()
+          : Value(latestSystolicBp),
+      latestDiastolicBp: latestDiastolicBp == null && nullToAbsent
+          ? const Value.absent()
+          : Value(latestDiastolicBp),
+      latestFastingGlucoseMgDl: latestFastingGlucoseMgDl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(latestFastingGlucoseMgDl),
+      todaySteps: todaySteps == null && nullToAbsent
+          ? const Value.absent()
+          : Value(todaySteps),
+      alertLevel: Value(alertLevel),
+      alertMessage: alertMessage == null && nullToAbsent
+          ? const Value.absent()
+          : Value(alertMessage),
+      alertMessageHindi: alertMessageHindi == null && nullToAbsent
+          ? const Value.absent()
+          : Value(alertMessageHindi),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory LocalFamilyMember.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalFamilyMember(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      relativeUserId: serializer.fromJson<String>(json['relativeUserId']),
+      relativeName: serializer.fromJson<String>(json['relativeName']),
+      relation: serializer.fromJson<String>(json['relation']),
+      age: serializer.fromJson<int>(json['age']),
+      latestSystolicBp: serializer.fromJson<double?>(json['latestSystolicBp']),
+      latestDiastolicBp:
+          serializer.fromJson<double?>(json['latestDiastolicBp']),
+      latestFastingGlucoseMgDl:
+          serializer.fromJson<double?>(json['latestFastingGlucoseMgDl']),
+      todaySteps: serializer.fromJson<int?>(json['todaySteps']),
+      alertLevel: serializer.fromJson<String>(json['alertLevel']),
+      alertMessage: serializer.fromJson<String?>(json['alertMessage']),
+      alertMessageHindi:
+          serializer.fromJson<String?>(json['alertMessageHindi']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'relativeUserId': serializer.toJson<String>(relativeUserId),
+      'relativeName': serializer.toJson<String>(relativeName),
+      'relation': serializer.toJson<String>(relation),
+      'age': serializer.toJson<int>(age),
+      'latestSystolicBp': serializer.toJson<double?>(latestSystolicBp),
+      'latestDiastolicBp': serializer.toJson<double?>(latestDiastolicBp),
+      'latestFastingGlucoseMgDl':
+          serializer.toJson<double?>(latestFastingGlucoseMgDl),
+      'todaySteps': serializer.toJson<int?>(todaySteps),
+      'alertLevel': serializer.toJson<String>(alertLevel),
+      'alertMessage': serializer.toJson<String?>(alertMessage),
+      'alertMessageHindi': serializer.toJson<String?>(alertMessageHindi),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  LocalFamilyMember copyWith(
+          {String? id,
+          String? userId,
+          String? relativeUserId,
+          String? relativeName,
+          String? relation,
+          int? age,
+          Value<double?> latestSystolicBp = const Value.absent(),
+          Value<double?> latestDiastolicBp = const Value.absent(),
+          Value<double?> latestFastingGlucoseMgDl = const Value.absent(),
+          Value<int?> todaySteps = const Value.absent(),
+          String? alertLevel,
+          Value<String?> alertMessage = const Value.absent(),
+          Value<String?> alertMessageHindi = const Value.absent(),
+          DateTime? updatedAt}) =>
+      LocalFamilyMember(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        relativeUserId: relativeUserId ?? this.relativeUserId,
+        relativeName: relativeName ?? this.relativeName,
+        relation: relation ?? this.relation,
+        age: age ?? this.age,
+        latestSystolicBp: latestSystolicBp.present
+            ? latestSystolicBp.value
+            : this.latestSystolicBp,
+        latestDiastolicBp: latestDiastolicBp.present
+            ? latestDiastolicBp.value
+            : this.latestDiastolicBp,
+        latestFastingGlucoseMgDl: latestFastingGlucoseMgDl.present
+            ? latestFastingGlucoseMgDl.value
+            : this.latestFastingGlucoseMgDl,
+        todaySteps: todaySteps.present ? todaySteps.value : this.todaySteps,
+        alertLevel: alertLevel ?? this.alertLevel,
+        alertMessage:
+            alertMessage.present ? alertMessage.value : this.alertMessage,
+        alertMessageHindi: alertMessageHindi.present
+            ? alertMessageHindi.value
+            : this.alertMessageHindi,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  LocalFamilyMember copyWithCompanion(LocalFamilyMembersCompanion data) {
+    return LocalFamilyMember(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      relativeUserId: data.relativeUserId.present
+          ? data.relativeUserId.value
+          : this.relativeUserId,
+      relativeName: data.relativeName.present
+          ? data.relativeName.value
+          : this.relativeName,
+      relation: data.relation.present ? data.relation.value : this.relation,
+      age: data.age.present ? data.age.value : this.age,
+      latestSystolicBp: data.latestSystolicBp.present
+          ? data.latestSystolicBp.value
+          : this.latestSystolicBp,
+      latestDiastolicBp: data.latestDiastolicBp.present
+          ? data.latestDiastolicBp.value
+          : this.latestDiastolicBp,
+      latestFastingGlucoseMgDl: data.latestFastingGlucoseMgDl.present
+          ? data.latestFastingGlucoseMgDl.value
+          : this.latestFastingGlucoseMgDl,
+      todaySteps:
+          data.todaySteps.present ? data.todaySteps.value : this.todaySteps,
+      alertLevel:
+          data.alertLevel.present ? data.alertLevel.value : this.alertLevel,
+      alertMessage: data.alertMessage.present
+          ? data.alertMessage.value
+          : this.alertMessage,
+      alertMessageHindi: data.alertMessageHindi.present
+          ? data.alertMessageHindi.value
+          : this.alertMessageHindi,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalFamilyMember(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('relativeUserId: $relativeUserId, ')
+          ..write('relativeName: $relativeName, ')
+          ..write('relation: $relation, ')
+          ..write('age: $age, ')
+          ..write('latestSystolicBp: $latestSystolicBp, ')
+          ..write('latestDiastolicBp: $latestDiastolicBp, ')
+          ..write('latestFastingGlucoseMgDl: $latestFastingGlucoseMgDl, ')
+          ..write('todaySteps: $todaySteps, ')
+          ..write('alertLevel: $alertLevel, ')
+          ..write('alertMessage: $alertMessage, ')
+          ..write('alertMessageHindi: $alertMessageHindi, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      userId,
+      relativeUserId,
+      relativeName,
+      relation,
+      age,
+      latestSystolicBp,
+      latestDiastolicBp,
+      latestFastingGlucoseMgDl,
+      todaySteps,
+      alertLevel,
+      alertMessage,
+      alertMessageHindi,
+      updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalFamilyMember &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.relativeUserId == this.relativeUserId &&
+          other.relativeName == this.relativeName &&
+          other.relation == this.relation &&
+          other.age == this.age &&
+          other.latestSystolicBp == this.latestSystolicBp &&
+          other.latestDiastolicBp == this.latestDiastolicBp &&
+          other.latestFastingGlucoseMgDl == this.latestFastingGlucoseMgDl &&
+          other.todaySteps == this.todaySteps &&
+          other.alertLevel == this.alertLevel &&
+          other.alertMessage == this.alertMessage &&
+          other.alertMessageHindi == this.alertMessageHindi &&
+          other.updatedAt == this.updatedAt);
+}
+
+class LocalFamilyMembersCompanion extends UpdateCompanion<LocalFamilyMember> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> relativeUserId;
+  final Value<String> relativeName;
+  final Value<String> relation;
+  final Value<int> age;
+  final Value<double?> latestSystolicBp;
+  final Value<double?> latestDiastolicBp;
+  final Value<double?> latestFastingGlucoseMgDl;
+  final Value<int?> todaySteps;
+  final Value<String> alertLevel;
+  final Value<String?> alertMessage;
+  final Value<String?> alertMessageHindi;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const LocalFamilyMembersCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.relativeUserId = const Value.absent(),
+    this.relativeName = const Value.absent(),
+    this.relation = const Value.absent(),
+    this.age = const Value.absent(),
+    this.latestSystolicBp = const Value.absent(),
+    this.latestDiastolicBp = const Value.absent(),
+    this.latestFastingGlucoseMgDl = const Value.absent(),
+    this.todaySteps = const Value.absent(),
+    this.alertLevel = const Value.absent(),
+    this.alertMessage = const Value.absent(),
+    this.alertMessageHindi = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalFamilyMembersCompanion.insert({
+    required String id,
+    required String userId,
+    required String relativeUserId,
+    required String relativeName,
+    required String relation,
+    required int age,
+    this.latestSystolicBp = const Value.absent(),
+    this.latestDiastolicBp = const Value.absent(),
+    this.latestFastingGlucoseMgDl = const Value.absent(),
+    this.todaySteps = const Value.absent(),
+    required String alertLevel,
+    this.alertMessage = const Value.absent(),
+    this.alertMessageHindi = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        relativeUserId = Value(relativeUserId),
+        relativeName = Value(relativeName),
+        relation = Value(relation),
+        age = Value(age),
+        alertLevel = Value(alertLevel);
+  static Insertable<LocalFamilyMember> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? relativeUserId,
+    Expression<String>? relativeName,
+    Expression<String>? relation,
+    Expression<int>? age,
+    Expression<double>? latestSystolicBp,
+    Expression<double>? latestDiastolicBp,
+    Expression<double>? latestFastingGlucoseMgDl,
+    Expression<int>? todaySteps,
+    Expression<String>? alertLevel,
+    Expression<String>? alertMessage,
+    Expression<String>? alertMessageHindi,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (relativeUserId != null) 'relative_user_id': relativeUserId,
+      if (relativeName != null) 'relative_name': relativeName,
+      if (relation != null) 'relation': relation,
+      if (age != null) 'age': age,
+      if (latestSystolicBp != null) 'latest_systolic_bp': latestSystolicBp,
+      if (latestDiastolicBp != null) 'latest_diastolic_bp': latestDiastolicBp,
+      if (latestFastingGlucoseMgDl != null)
+        'latest_fasting_glucose_mg_dl': latestFastingGlucoseMgDl,
+      if (todaySteps != null) 'today_steps': todaySteps,
+      if (alertLevel != null) 'alert_level': alertLevel,
+      if (alertMessage != null) 'alert_message': alertMessage,
+      if (alertMessageHindi != null) 'alert_message_hindi': alertMessageHindi,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalFamilyMembersCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? relativeUserId,
+      Value<String>? relativeName,
+      Value<String>? relation,
+      Value<int>? age,
+      Value<double?>? latestSystolicBp,
+      Value<double?>? latestDiastolicBp,
+      Value<double?>? latestFastingGlucoseMgDl,
+      Value<int?>? todaySteps,
+      Value<String>? alertLevel,
+      Value<String?>? alertMessage,
+      Value<String?>? alertMessageHindi,
+      Value<DateTime>? updatedAt,
+      Value<int>? rowid}) {
+    return LocalFamilyMembersCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      relativeUserId: relativeUserId ?? this.relativeUserId,
+      relativeName: relativeName ?? this.relativeName,
+      relation: relation ?? this.relation,
+      age: age ?? this.age,
+      latestSystolicBp: latestSystolicBp ?? this.latestSystolicBp,
+      latestDiastolicBp: latestDiastolicBp ?? this.latestDiastolicBp,
+      latestFastingGlucoseMgDl:
+          latestFastingGlucoseMgDl ?? this.latestFastingGlucoseMgDl,
+      todaySteps: todaySteps ?? this.todaySteps,
+      alertLevel: alertLevel ?? this.alertLevel,
+      alertMessage: alertMessage ?? this.alertMessage,
+      alertMessageHindi: alertMessageHindi ?? this.alertMessageHindi,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (relativeUserId.present) {
+      map['relative_user_id'] = Variable<String>(relativeUserId.value);
+    }
+    if (relativeName.present) {
+      map['relative_name'] = Variable<String>(relativeName.value);
+    }
+    if (relation.present) {
+      map['relation'] = Variable<String>(relation.value);
+    }
+    if (age.present) {
+      map['age'] = Variable<int>(age.value);
+    }
+    if (latestSystolicBp.present) {
+      map['latest_systolic_bp'] = Variable<double>(latestSystolicBp.value);
+    }
+    if (latestDiastolicBp.present) {
+      map['latest_diastolic_bp'] = Variable<double>(latestDiastolicBp.value);
+    }
+    if (latestFastingGlucoseMgDl.present) {
+      map['latest_fasting_glucose_mg_dl'] =
+          Variable<double>(latestFastingGlucoseMgDl.value);
+    }
+    if (todaySteps.present) {
+      map['today_steps'] = Variable<int>(todaySteps.value);
+    }
+    if (alertLevel.present) {
+      map['alert_level'] = Variable<String>(alertLevel.value);
+    }
+    if (alertMessage.present) {
+      map['alert_message'] = Variable<String>(alertMessage.value);
+    }
+    if (alertMessageHindi.present) {
+      map['alert_message_hindi'] = Variable<String>(alertMessageHindi.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalFamilyMembersCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('relativeUserId: $relativeUserId, ')
+          ..write('relativeName: $relativeName, ')
+          ..write('relation: $relation, ')
+          ..write('age: $age, ')
+          ..write('latestSystolicBp: $latestSystolicBp, ')
+          ..write('latestDiastolicBp: $latestDiastolicBp, ')
+          ..write('latestFastingGlucoseMgDl: $latestFastingGlucoseMgDl, ')
+          ..write('todaySteps: $todaySteps, ')
+          ..write('alertLevel: $alertLevel, ')
+          ..write('alertMessage: $alertMessage, ')
+          ..write('alertMessageHindi: $alertMessageHindi, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalClubsTable extends LocalClubs
+    with TableInfo<$LocalClubsTable, LocalClub> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalClubsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _cityMeta = const VerificationMeta('city');
+  @override
+  late final GeneratedColumn<String> city = GeneratedColumn<String>(
+      'city', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _localityMeta =
+      const VerificationMeta('locality');
+  @override
+  late final GeneratedColumn<String> locality = GeneratedColumn<String>(
+      'locality', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _clubTypeMeta =
+      const VerificationMeta('clubType');
+  @override
+  late final GeneratedColumn<String> clubType = GeneratedColumn<String>(
+      'club_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _memberCountMeta =
+      const VerificationMeta('memberCount');
+  @override
+  late final GeneratedColumn<int> memberCount = GeneratedColumn<int>(
+      'member_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(1));
+  static const VerificationMeta _bannerUrlMeta =
+      const VerificationMeta('bannerUrl');
+  @override
+  late final GeneratedColumn<String> bannerUrl = GeneratedColumn<String>(
+      'banner_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _nextMeetupMeta =
+      const VerificationMeta('nextMeetup');
+  @override
+  late final GeneratedColumn<String> nextMeetup = GeneratedColumn<String>(
+      'next_meetup', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nextMeetupHindiMeta =
+      const VerificationMeta('nextMeetupHindi');
+  @override
+  late final GeneratedColumn<String> nextMeetupHindi = GeneratedColumn<String>(
+      'next_meetup_hindi', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        name,
+        city,
+        locality,
+        clubType,
+        memberCount,
+        bannerUrl,
+        nextMeetup,
+        nextMeetupHindi,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_clubs';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalClub> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('city')) {
+      context.handle(
+          _cityMeta, city.isAcceptableOrUnknown(data['city']!, _cityMeta));
+    } else if (isInserting) {
+      context.missing(_cityMeta);
+    }
+    if (data.containsKey('locality')) {
+      context.handle(_localityMeta,
+          locality.isAcceptableOrUnknown(data['locality']!, _localityMeta));
+    } else if (isInserting) {
+      context.missing(_localityMeta);
+    }
+    if (data.containsKey('club_type')) {
+      context.handle(_clubTypeMeta,
+          clubType.isAcceptableOrUnknown(data['club_type']!, _clubTypeMeta));
+    } else if (isInserting) {
+      context.missing(_clubTypeMeta);
+    }
+    if (data.containsKey('member_count')) {
+      context.handle(
+          _memberCountMeta,
+          memberCount.isAcceptableOrUnknown(
+              data['member_count']!, _memberCountMeta));
+    }
+    if (data.containsKey('banner_url')) {
+      context.handle(_bannerUrlMeta,
+          bannerUrl.isAcceptableOrUnknown(data['banner_url']!, _bannerUrlMeta));
+    }
+    if (data.containsKey('next_meetup')) {
+      context.handle(
+          _nextMeetupMeta,
+          nextMeetup.isAcceptableOrUnknown(
+              data['next_meetup']!, _nextMeetupMeta));
+    } else if (isInserting) {
+      context.missing(_nextMeetupMeta);
+    }
+    if (data.containsKey('next_meetup_hindi')) {
+      context.handle(
+          _nextMeetupHindiMeta,
+          nextMeetupHindi.isAcceptableOrUnknown(
+              data['next_meetup_hindi']!, _nextMeetupHindiMeta));
+    } else if (isInserting) {
+      context.missing(_nextMeetupHindiMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalClub map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalClub(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      city: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}city'])!,
+      locality: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}locality'])!,
+      clubType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}club_type'])!,
+      memberCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}member_count'])!,
+      bannerUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}banner_url']),
+      nextMeetup: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}next_meetup'])!,
+      nextMeetupHindi: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}next_meetup_hindi'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalClubsTable createAlias(String alias) {
+    return $LocalClubsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalClub extends DataClass implements Insertable<LocalClub> {
+  final String id;
+  final String name;
+  final String city;
+  final String locality;
+  final String clubType;
+  final int memberCount;
+  final String? bannerUrl;
+  final String nextMeetup;
+  final String nextMeetupHindi;
+  final DateTime createdAt;
+  const LocalClub(
+      {required this.id,
+      required this.name,
+      required this.city,
+      required this.locality,
+      required this.clubType,
+      required this.memberCount,
+      this.bannerUrl,
+      required this.nextMeetup,
+      required this.nextMeetupHindi,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    map['city'] = Variable<String>(city);
+    map['locality'] = Variable<String>(locality);
+    map['club_type'] = Variable<String>(clubType);
+    map['member_count'] = Variable<int>(memberCount);
+    if (!nullToAbsent || bannerUrl != null) {
+      map['banner_url'] = Variable<String>(bannerUrl);
+    }
+    map['next_meetup'] = Variable<String>(nextMeetup);
+    map['next_meetup_hindi'] = Variable<String>(nextMeetupHindi);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalClubsCompanion toCompanion(bool nullToAbsent) {
+    return LocalClubsCompanion(
+      id: Value(id),
+      name: Value(name),
+      city: Value(city),
+      locality: Value(locality),
+      clubType: Value(clubType),
+      memberCount: Value(memberCount),
+      bannerUrl: bannerUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(bannerUrl),
+      nextMeetup: Value(nextMeetup),
+      nextMeetupHindi: Value(nextMeetupHindi),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalClub.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalClub(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      city: serializer.fromJson<String>(json['city']),
+      locality: serializer.fromJson<String>(json['locality']),
+      clubType: serializer.fromJson<String>(json['clubType']),
+      memberCount: serializer.fromJson<int>(json['memberCount']),
+      bannerUrl: serializer.fromJson<String?>(json['bannerUrl']),
+      nextMeetup: serializer.fromJson<String>(json['nextMeetup']),
+      nextMeetupHindi: serializer.fromJson<String>(json['nextMeetupHindi']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+      'city': serializer.toJson<String>(city),
+      'locality': serializer.toJson<String>(locality),
+      'clubType': serializer.toJson<String>(clubType),
+      'memberCount': serializer.toJson<int>(memberCount),
+      'bannerUrl': serializer.toJson<String?>(bannerUrl),
+      'nextMeetup': serializer.toJson<String>(nextMeetup),
+      'nextMeetupHindi': serializer.toJson<String>(nextMeetupHindi),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalClub copyWith(
+          {String? id,
+          String? name,
+          String? city,
+          String? locality,
+          String? clubType,
+          int? memberCount,
+          Value<String?> bannerUrl = const Value.absent(),
+          String? nextMeetup,
+          String? nextMeetupHindi,
+          DateTime? createdAt}) =>
+      LocalClub(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        city: city ?? this.city,
+        locality: locality ?? this.locality,
+        clubType: clubType ?? this.clubType,
+        memberCount: memberCount ?? this.memberCount,
+        bannerUrl: bannerUrl.present ? bannerUrl.value : this.bannerUrl,
+        nextMeetup: nextMeetup ?? this.nextMeetup,
+        nextMeetupHindi: nextMeetupHindi ?? this.nextMeetupHindi,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalClub copyWithCompanion(LocalClubsCompanion data) {
+    return LocalClub(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      city: data.city.present ? data.city.value : this.city,
+      locality: data.locality.present ? data.locality.value : this.locality,
+      clubType: data.clubType.present ? data.clubType.value : this.clubType,
+      memberCount:
+          data.memberCount.present ? data.memberCount.value : this.memberCount,
+      bannerUrl: data.bannerUrl.present ? data.bannerUrl.value : this.bannerUrl,
+      nextMeetup:
+          data.nextMeetup.present ? data.nextMeetup.value : this.nextMeetup,
+      nextMeetupHindi: data.nextMeetupHindi.present
+          ? data.nextMeetupHindi.value
+          : this.nextMeetupHindi,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalClub(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('city: $city, ')
+          ..write('locality: $locality, ')
+          ..write('clubType: $clubType, ')
+          ..write('memberCount: $memberCount, ')
+          ..write('bannerUrl: $bannerUrl, ')
+          ..write('nextMeetup: $nextMeetup, ')
+          ..write('nextMeetupHindi: $nextMeetupHindi, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, city, locality, clubType,
+      memberCount, bannerUrl, nextMeetup, nextMeetupHindi, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalClub &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.city == this.city &&
+          other.locality == this.locality &&
+          other.clubType == this.clubType &&
+          other.memberCount == this.memberCount &&
+          other.bannerUrl == this.bannerUrl &&
+          other.nextMeetup == this.nextMeetup &&
+          other.nextMeetupHindi == this.nextMeetupHindi &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalClubsCompanion extends UpdateCompanion<LocalClub> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<String> city;
+  final Value<String> locality;
+  final Value<String> clubType;
+  final Value<int> memberCount;
+  final Value<String?> bannerUrl;
+  final Value<String> nextMeetup;
+  final Value<String> nextMeetupHindi;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalClubsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.city = const Value.absent(),
+    this.locality = const Value.absent(),
+    this.clubType = const Value.absent(),
+    this.memberCount = const Value.absent(),
+    this.bannerUrl = const Value.absent(),
+    this.nextMeetup = const Value.absent(),
+    this.nextMeetupHindi = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalClubsCompanion.insert({
+    required String id,
+    required String name,
+    required String city,
+    required String locality,
+    required String clubType,
+    this.memberCount = const Value.absent(),
+    this.bannerUrl = const Value.absent(),
+    required String nextMeetup,
+    required String nextMeetupHindi,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name),
+        city = Value(city),
+        locality = Value(locality),
+        clubType = Value(clubType),
+        nextMeetup = Value(nextMeetup),
+        nextMeetupHindi = Value(nextMeetupHindi);
+  static Insertable<LocalClub> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<String>? city,
+    Expression<String>? locality,
+    Expression<String>? clubType,
+    Expression<int>? memberCount,
+    Expression<String>? bannerUrl,
+    Expression<String>? nextMeetup,
+    Expression<String>? nextMeetupHindi,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (city != null) 'city': city,
+      if (locality != null) 'locality': locality,
+      if (clubType != null) 'club_type': clubType,
+      if (memberCount != null) 'member_count': memberCount,
+      if (bannerUrl != null) 'banner_url': bannerUrl,
+      if (nextMeetup != null) 'next_meetup': nextMeetup,
+      if (nextMeetupHindi != null) 'next_meetup_hindi': nextMeetupHindi,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalClubsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? name,
+      Value<String>? city,
+      Value<String>? locality,
+      Value<String>? clubType,
+      Value<int>? memberCount,
+      Value<String?>? bannerUrl,
+      Value<String>? nextMeetup,
+      Value<String>? nextMeetupHindi,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalClubsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      city: city ?? this.city,
+      locality: locality ?? this.locality,
+      clubType: clubType ?? this.clubType,
+      memberCount: memberCount ?? this.memberCount,
+      bannerUrl: bannerUrl ?? this.bannerUrl,
+      nextMeetup: nextMeetup ?? this.nextMeetup,
+      nextMeetupHindi: nextMeetupHindi ?? this.nextMeetupHindi,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (city.present) {
+      map['city'] = Variable<String>(city.value);
+    }
+    if (locality.present) {
+      map['locality'] = Variable<String>(locality.value);
+    }
+    if (clubType.present) {
+      map['club_type'] = Variable<String>(clubType.value);
+    }
+    if (memberCount.present) {
+      map['member_count'] = Variable<int>(memberCount.value);
+    }
+    if (bannerUrl.present) {
+      map['banner_url'] = Variable<String>(bannerUrl.value);
+    }
+    if (nextMeetup.present) {
+      map['next_meetup'] = Variable<String>(nextMeetup.value);
+    }
+    if (nextMeetupHindi.present) {
+      map['next_meetup_hindi'] = Variable<String>(nextMeetupHindi.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalClubsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('city: $city, ')
+          ..write('locality: $locality, ')
+          ..write('clubType: $clubType, ')
+          ..write('memberCount: $memberCount, ')
+          ..write('bannerUrl: $bannerUrl, ')
+          ..write('nextMeetup: $nextMeetup, ')
+          ..write('nextMeetupHindi: $nextMeetupHindi, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -8940,6 +11699,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalTransformationMilestonesTable(this);
   late final $LocalBodyTransformationLogsTable localBodyTransformationLogs =
       $LocalBodyTransformationLogsTable(this);
+  late final $LocalSquadsTable localSquads = $LocalSquadsTable(this);
+  late final $LocalSquadMembersTable localSquadMembers =
+      $LocalSquadMembersTable(this);
+  late final $LocalCommunityPostsTable localCommunityPosts =
+      $LocalCommunityPostsTable(this);
+  late final $LocalFamilyMembersTable localFamilyMembers =
+      $LocalFamilyMembersTable(this);
+  late final $LocalClubsTable localClubs = $LocalClubsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -8965,7 +11732,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localKarmaPoints,
         localHabitStreaks,
         localTransformationMilestones,
-        localBodyTransformationLogs
+        localBodyTransformationLogs,
+        localSquads,
+        localSquadMembers,
+        localCommunityPosts,
+        localFamilyMembers,
+        localClubs
       ];
 }
 
@@ -13636,6 +16408,1327 @@ typedef $$LocalBodyTransformationLogsTableProcessedTableManager
         ),
         LocalBodyTransformationLog,
         PrefetchHooks Function()>;
+typedef $$LocalSquadsTableCreateCompanionBuilder = LocalSquadsCompanion
+    Function({
+  required String id,
+  required String name,
+  required String bio,
+  Value<String?> bannerUrl,
+  Value<int> streakDays,
+  Value<int> totalKarma,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalSquadsTableUpdateCompanionBuilder = LocalSquadsCompanion
+    Function({
+  Value<String> id,
+  Value<String> name,
+  Value<String> bio,
+  Value<String?> bannerUrl,
+  Value<int> streakDays,
+  Value<int> totalKarma,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalSquadsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalSquadsTable> {
+  $$LocalSquadsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get bio => $composableBuilder(
+      column: $table.bio, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get bannerUrl => $composableBuilder(
+      column: $table.bannerUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get streakDays => $composableBuilder(
+      column: $table.streakDays, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get totalKarma => $composableBuilder(
+      column: $table.totalKarma, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalSquadsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalSquadsTable> {
+  $$LocalSquadsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get bio => $composableBuilder(
+      column: $table.bio, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get bannerUrl => $composableBuilder(
+      column: $table.bannerUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get streakDays => $composableBuilder(
+      column: $table.streakDays, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get totalKarma => $composableBuilder(
+      column: $table.totalKarma, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalSquadsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalSquadsTable> {
+  $$LocalSquadsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get bio =>
+      $composableBuilder(column: $table.bio, builder: (column) => column);
+
+  GeneratedColumn<String> get bannerUrl =>
+      $composableBuilder(column: $table.bannerUrl, builder: (column) => column);
+
+  GeneratedColumn<int> get streakDays => $composableBuilder(
+      column: $table.streakDays, builder: (column) => column);
+
+  GeneratedColumn<int> get totalKarma => $composableBuilder(
+      column: $table.totalKarma, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalSquadsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalSquadsTable,
+    LocalSquad,
+    $$LocalSquadsTableFilterComposer,
+    $$LocalSquadsTableOrderingComposer,
+    $$LocalSquadsTableAnnotationComposer,
+    $$LocalSquadsTableCreateCompanionBuilder,
+    $$LocalSquadsTableUpdateCompanionBuilder,
+    (LocalSquad, BaseReferences<_$AppDatabase, $LocalSquadsTable, LocalSquad>),
+    LocalSquad,
+    PrefetchHooks Function()> {
+  $$LocalSquadsTableTableManager(_$AppDatabase db, $LocalSquadsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalSquadsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalSquadsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalSquadsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> bio = const Value.absent(),
+            Value<String?> bannerUrl = const Value.absent(),
+            Value<int> streakDays = const Value.absent(),
+            Value<int> totalKarma = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalSquadsCompanion(
+            id: id,
+            name: name,
+            bio: bio,
+            bannerUrl: bannerUrl,
+            streakDays: streakDays,
+            totalKarma: totalKarma,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String name,
+            required String bio,
+            Value<String?> bannerUrl = const Value.absent(),
+            Value<int> streakDays = const Value.absent(),
+            Value<int> totalKarma = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalSquadsCompanion.insert(
+            id: id,
+            name: name,
+            bio: bio,
+            bannerUrl: bannerUrl,
+            streakDays: streakDays,
+            totalKarma: totalKarma,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalSquadsTable, LocalSquad>(table),
+                    BaseReferences<_$AppDatabase, $LocalSquadsTable,
+                        LocalSquad>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalSquadsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalSquadsTable,
+    LocalSquad,
+    $$LocalSquadsTableFilterComposer,
+    $$LocalSquadsTableOrderingComposer,
+    $$LocalSquadsTableAnnotationComposer,
+    $$LocalSquadsTableCreateCompanionBuilder,
+    $$LocalSquadsTableUpdateCompanionBuilder,
+    (LocalSquad, BaseReferences<_$AppDatabase, $LocalSquadsTable, LocalSquad>),
+    LocalSquad,
+    PrefetchHooks Function()>;
+typedef $$LocalSquadMembersTableCreateCompanionBuilder
+    = LocalSquadMembersCompanion Function({
+  required String id,
+  required String squadId,
+  required String userId,
+  required String displayName,
+  Value<String?> avatarUrl,
+  required String role,
+  Value<bool> todayLogged,
+  Value<int> todayKarma,
+  Value<String?> todayCommitment,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalSquadMembersTableUpdateCompanionBuilder
+    = LocalSquadMembersCompanion Function({
+  Value<String> id,
+  Value<String> squadId,
+  Value<String> userId,
+  Value<String> displayName,
+  Value<String?> avatarUrl,
+  Value<String> role,
+  Value<bool> todayLogged,
+  Value<int> todayKarma,
+  Value<String?> todayCommitment,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalSquadMembersTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalSquadMembersTable> {
+  $$LocalSquadMembersTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get squadId => $composableBuilder(
+      column: $table.squadId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get displayName => $composableBuilder(
+      column: $table.displayName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get avatarUrl => $composableBuilder(
+      column: $table.avatarUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get role => $composableBuilder(
+      column: $table.role, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get todayLogged => $composableBuilder(
+      column: $table.todayLogged, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get todayKarma => $composableBuilder(
+      column: $table.todayKarma, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get todayCommitment => $composableBuilder(
+      column: $table.todayCommitment,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalSquadMembersTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalSquadMembersTable> {
+  $$LocalSquadMembersTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get squadId => $composableBuilder(
+      column: $table.squadId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get displayName => $composableBuilder(
+      column: $table.displayName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get avatarUrl => $composableBuilder(
+      column: $table.avatarUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get role => $composableBuilder(
+      column: $table.role, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get todayLogged => $composableBuilder(
+      column: $table.todayLogged, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get todayKarma => $composableBuilder(
+      column: $table.todayKarma, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get todayCommitment => $composableBuilder(
+      column: $table.todayCommitment,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalSquadMembersTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalSquadMembersTable> {
+  $$LocalSquadMembersTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get squadId =>
+      $composableBuilder(column: $table.squadId, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get displayName => $composableBuilder(
+      column: $table.displayName, builder: (column) => column);
+
+  GeneratedColumn<String> get avatarUrl =>
+      $composableBuilder(column: $table.avatarUrl, builder: (column) => column);
+
+  GeneratedColumn<String> get role =>
+      $composableBuilder(column: $table.role, builder: (column) => column);
+
+  GeneratedColumn<bool> get todayLogged => $composableBuilder(
+      column: $table.todayLogged, builder: (column) => column);
+
+  GeneratedColumn<int> get todayKarma => $composableBuilder(
+      column: $table.todayKarma, builder: (column) => column);
+
+  GeneratedColumn<String> get todayCommitment => $composableBuilder(
+      column: $table.todayCommitment, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalSquadMembersTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalSquadMembersTable,
+    LocalSquadMember,
+    $$LocalSquadMembersTableFilterComposer,
+    $$LocalSquadMembersTableOrderingComposer,
+    $$LocalSquadMembersTableAnnotationComposer,
+    $$LocalSquadMembersTableCreateCompanionBuilder,
+    $$LocalSquadMembersTableUpdateCompanionBuilder,
+    (
+      LocalSquadMember,
+      BaseReferences<_$AppDatabase, $LocalSquadMembersTable, LocalSquadMember>
+    ),
+    LocalSquadMember,
+    PrefetchHooks Function()> {
+  $$LocalSquadMembersTableTableManager(
+      _$AppDatabase db, $LocalSquadMembersTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalSquadMembersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalSquadMembersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalSquadMembersTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> squadId = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> displayName = const Value.absent(),
+            Value<String?> avatarUrl = const Value.absent(),
+            Value<String> role = const Value.absent(),
+            Value<bool> todayLogged = const Value.absent(),
+            Value<int> todayKarma = const Value.absent(),
+            Value<String?> todayCommitment = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalSquadMembersCompanion(
+            id: id,
+            squadId: squadId,
+            userId: userId,
+            displayName: displayName,
+            avatarUrl: avatarUrl,
+            role: role,
+            todayLogged: todayLogged,
+            todayKarma: todayKarma,
+            todayCommitment: todayCommitment,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String squadId,
+            required String userId,
+            required String displayName,
+            Value<String?> avatarUrl = const Value.absent(),
+            required String role,
+            Value<bool> todayLogged = const Value.absent(),
+            Value<int> todayKarma = const Value.absent(),
+            Value<String?> todayCommitment = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalSquadMembersCompanion.insert(
+            id: id,
+            squadId: squadId,
+            userId: userId,
+            displayName: displayName,
+            avatarUrl: avatarUrl,
+            role: role,
+            todayLogged: todayLogged,
+            todayKarma: todayKarma,
+            todayCommitment: todayCommitment,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalSquadMembersTable, LocalSquadMember>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalSquadMembersTable,
+                        LocalSquadMember>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalSquadMembersTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalSquadMembersTable,
+    LocalSquadMember,
+    $$LocalSquadMembersTableFilterComposer,
+    $$LocalSquadMembersTableOrderingComposer,
+    $$LocalSquadMembersTableAnnotationComposer,
+    $$LocalSquadMembersTableCreateCompanionBuilder,
+    $$LocalSquadMembersTableUpdateCompanionBuilder,
+    (
+      LocalSquadMember,
+      BaseReferences<_$AppDatabase, $LocalSquadMembersTable, LocalSquadMember>
+    ),
+    LocalSquadMember,
+    PrefetchHooks Function()>;
+typedef $$LocalCommunityPostsTableCreateCompanionBuilder
+    = LocalCommunityPostsCompanion Function({
+  required String id,
+  required String userId,
+  required String authorName,
+  Value<String?> authorAvatar,
+  required String activityType,
+  required String title,
+  Value<String?> description,
+  Value<String?> mediaUrl,
+  Value<int> karmaEarned,
+  Value<int> likesCount,
+  Value<int> cheersCount,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalCommunityPostsTableUpdateCompanionBuilder
+    = LocalCommunityPostsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> authorName,
+  Value<String?> authorAvatar,
+  Value<String> activityType,
+  Value<String> title,
+  Value<String?> description,
+  Value<String?> mediaUrl,
+  Value<int> karmaEarned,
+  Value<int> likesCount,
+  Value<int> cheersCount,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalCommunityPostsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCommunityPostsTable> {
+  $$LocalCommunityPostsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get authorName => $composableBuilder(
+      column: $table.authorName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get authorAvatar => $composableBuilder(
+      column: $table.authorAvatar, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get activityType => $composableBuilder(
+      column: $table.activityType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get mediaUrl => $composableBuilder(
+      column: $table.mediaUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get karmaEarned => $composableBuilder(
+      column: $table.karmaEarned, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get likesCount => $composableBuilder(
+      column: $table.likesCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get cheersCount => $composableBuilder(
+      column: $table.cheersCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCommunityPostsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCommunityPostsTable> {
+  $$LocalCommunityPostsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get authorName => $composableBuilder(
+      column: $table.authorName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get authorAvatar => $composableBuilder(
+      column: $table.authorAvatar,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get activityType => $composableBuilder(
+      column: $table.activityType,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get mediaUrl => $composableBuilder(
+      column: $table.mediaUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get karmaEarned => $composableBuilder(
+      column: $table.karmaEarned, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get likesCount => $composableBuilder(
+      column: $table.likesCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get cheersCount => $composableBuilder(
+      column: $table.cheersCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCommunityPostsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCommunityPostsTable> {
+  $$LocalCommunityPostsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get authorName => $composableBuilder(
+      column: $table.authorName, builder: (column) => column);
+
+  GeneratedColumn<String> get authorAvatar => $composableBuilder(
+      column: $table.authorAvatar, builder: (column) => column);
+
+  GeneratedColumn<String> get activityType => $composableBuilder(
+      column: $table.activityType, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+
+  GeneratedColumn<String> get mediaUrl =>
+      $composableBuilder(column: $table.mediaUrl, builder: (column) => column);
+
+  GeneratedColumn<int> get karmaEarned => $composableBuilder(
+      column: $table.karmaEarned, builder: (column) => column);
+
+  GeneratedColumn<int> get likesCount => $composableBuilder(
+      column: $table.likesCount, builder: (column) => column);
+
+  GeneratedColumn<int> get cheersCount => $composableBuilder(
+      column: $table.cheersCount, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalCommunityPostsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCommunityPostsTable,
+    LocalCommunityPost,
+    $$LocalCommunityPostsTableFilterComposer,
+    $$LocalCommunityPostsTableOrderingComposer,
+    $$LocalCommunityPostsTableAnnotationComposer,
+    $$LocalCommunityPostsTableCreateCompanionBuilder,
+    $$LocalCommunityPostsTableUpdateCompanionBuilder,
+    (
+      LocalCommunityPost,
+      BaseReferences<_$AppDatabase, $LocalCommunityPostsTable,
+          LocalCommunityPost>
+    ),
+    LocalCommunityPost,
+    PrefetchHooks Function()> {
+  $$LocalCommunityPostsTableTableManager(
+      _$AppDatabase db, $LocalCommunityPostsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCommunityPostsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCommunityPostsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCommunityPostsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> authorName = const Value.absent(),
+            Value<String?> authorAvatar = const Value.absent(),
+            Value<String> activityType = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String?> mediaUrl = const Value.absent(),
+            Value<int> karmaEarned = const Value.absent(),
+            Value<int> likesCount = const Value.absent(),
+            Value<int> cheersCount = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCommunityPostsCompanion(
+            id: id,
+            userId: userId,
+            authorName: authorName,
+            authorAvatar: authorAvatar,
+            activityType: activityType,
+            title: title,
+            description: description,
+            mediaUrl: mediaUrl,
+            karmaEarned: karmaEarned,
+            likesCount: likesCount,
+            cheersCount: cheersCount,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String authorName,
+            Value<String?> authorAvatar = const Value.absent(),
+            required String activityType,
+            required String title,
+            Value<String?> description = const Value.absent(),
+            Value<String?> mediaUrl = const Value.absent(),
+            Value<int> karmaEarned = const Value.absent(),
+            Value<int> likesCount = const Value.absent(),
+            Value<int> cheersCount = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCommunityPostsCompanion.insert(
+            id: id,
+            userId: userId,
+            authorName: authorName,
+            authorAvatar: authorAvatar,
+            activityType: activityType,
+            title: title,
+            description: description,
+            mediaUrl: mediaUrl,
+            karmaEarned: karmaEarned,
+            likesCount: likesCount,
+            cheersCount: cheersCount,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCommunityPostsTable, LocalCommunityPost>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCommunityPostsTable,
+                        LocalCommunityPost>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCommunityPostsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCommunityPostsTable,
+    LocalCommunityPost,
+    $$LocalCommunityPostsTableFilterComposer,
+    $$LocalCommunityPostsTableOrderingComposer,
+    $$LocalCommunityPostsTableAnnotationComposer,
+    $$LocalCommunityPostsTableCreateCompanionBuilder,
+    $$LocalCommunityPostsTableUpdateCompanionBuilder,
+    (
+      LocalCommunityPost,
+      BaseReferences<_$AppDatabase, $LocalCommunityPostsTable,
+          LocalCommunityPost>
+    ),
+    LocalCommunityPost,
+    PrefetchHooks Function()>;
+typedef $$LocalFamilyMembersTableCreateCompanionBuilder
+    = LocalFamilyMembersCompanion Function({
+  required String id,
+  required String userId,
+  required String relativeUserId,
+  required String relativeName,
+  required String relation,
+  required int age,
+  Value<double?> latestSystolicBp,
+  Value<double?> latestDiastolicBp,
+  Value<double?> latestFastingGlucoseMgDl,
+  Value<int?> todaySteps,
+  required String alertLevel,
+  Value<String?> alertMessage,
+  Value<String?> alertMessageHindi,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+typedef $$LocalFamilyMembersTableUpdateCompanionBuilder
+    = LocalFamilyMembersCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> relativeUserId,
+  Value<String> relativeName,
+  Value<String> relation,
+  Value<int> age,
+  Value<double?> latestSystolicBp,
+  Value<double?> latestDiastolicBp,
+  Value<double?> latestFastingGlucoseMgDl,
+  Value<int?> todaySteps,
+  Value<String> alertLevel,
+  Value<String?> alertMessage,
+  Value<String?> alertMessageHindi,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+
+class $$LocalFamilyMembersTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalFamilyMembersTable> {
+  $$LocalFamilyMembersTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get relativeUserId => $composableBuilder(
+      column: $table.relativeUserId,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get relativeName => $composableBuilder(
+      column: $table.relativeName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get relation => $composableBuilder(
+      column: $table.relation, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get age => $composableBuilder(
+      column: $table.age, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get latestSystolicBp => $composableBuilder(
+      column: $table.latestSystolicBp,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get latestDiastolicBp => $composableBuilder(
+      column: $table.latestDiastolicBp,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get latestFastingGlucoseMgDl => $composableBuilder(
+      column: $table.latestFastingGlucoseMgDl,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get todaySteps => $composableBuilder(
+      column: $table.todaySteps, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get alertLevel => $composableBuilder(
+      column: $table.alertLevel, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get alertMessage => $composableBuilder(
+      column: $table.alertMessage, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get alertMessageHindi => $composableBuilder(
+      column: $table.alertMessageHindi,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalFamilyMembersTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalFamilyMembersTable> {
+  $$LocalFamilyMembersTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get relativeUserId => $composableBuilder(
+      column: $table.relativeUserId,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get relativeName => $composableBuilder(
+      column: $table.relativeName,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get relation => $composableBuilder(
+      column: $table.relation, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get age => $composableBuilder(
+      column: $table.age, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get latestSystolicBp => $composableBuilder(
+      column: $table.latestSystolicBp,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get latestDiastolicBp => $composableBuilder(
+      column: $table.latestDiastolicBp,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get latestFastingGlucoseMgDl => $composableBuilder(
+      column: $table.latestFastingGlucoseMgDl,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get todaySteps => $composableBuilder(
+      column: $table.todaySteps, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get alertLevel => $composableBuilder(
+      column: $table.alertLevel, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get alertMessage => $composableBuilder(
+      column: $table.alertMessage,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get alertMessageHindi => $composableBuilder(
+      column: $table.alertMessageHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalFamilyMembersTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalFamilyMembersTable> {
+  $$LocalFamilyMembersTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get relativeUserId => $composableBuilder(
+      column: $table.relativeUserId, builder: (column) => column);
+
+  GeneratedColumn<String> get relativeName => $composableBuilder(
+      column: $table.relativeName, builder: (column) => column);
+
+  GeneratedColumn<String> get relation =>
+      $composableBuilder(column: $table.relation, builder: (column) => column);
+
+  GeneratedColumn<int> get age =>
+      $composableBuilder(column: $table.age, builder: (column) => column);
+
+  GeneratedColumn<double> get latestSystolicBp => $composableBuilder(
+      column: $table.latestSystolicBp, builder: (column) => column);
+
+  GeneratedColumn<double> get latestDiastolicBp => $composableBuilder(
+      column: $table.latestDiastolicBp, builder: (column) => column);
+
+  GeneratedColumn<double> get latestFastingGlucoseMgDl => $composableBuilder(
+      column: $table.latestFastingGlucoseMgDl, builder: (column) => column);
+
+  GeneratedColumn<int> get todaySteps => $composableBuilder(
+      column: $table.todaySteps, builder: (column) => column);
+
+  GeneratedColumn<String> get alertLevel => $composableBuilder(
+      column: $table.alertLevel, builder: (column) => column);
+
+  GeneratedColumn<String> get alertMessage => $composableBuilder(
+      column: $table.alertMessage, builder: (column) => column);
+
+  GeneratedColumn<String> get alertMessageHindi => $composableBuilder(
+      column: $table.alertMessageHindi, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$LocalFamilyMembersTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalFamilyMembersTable,
+    LocalFamilyMember,
+    $$LocalFamilyMembersTableFilterComposer,
+    $$LocalFamilyMembersTableOrderingComposer,
+    $$LocalFamilyMembersTableAnnotationComposer,
+    $$LocalFamilyMembersTableCreateCompanionBuilder,
+    $$LocalFamilyMembersTableUpdateCompanionBuilder,
+    (
+      LocalFamilyMember,
+      BaseReferences<_$AppDatabase, $LocalFamilyMembersTable, LocalFamilyMember>
+    ),
+    LocalFamilyMember,
+    PrefetchHooks Function()> {
+  $$LocalFamilyMembersTableTableManager(
+      _$AppDatabase db, $LocalFamilyMembersTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalFamilyMembersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalFamilyMembersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalFamilyMembersTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> relativeUserId = const Value.absent(),
+            Value<String> relativeName = const Value.absent(),
+            Value<String> relation = const Value.absent(),
+            Value<int> age = const Value.absent(),
+            Value<double?> latestSystolicBp = const Value.absent(),
+            Value<double?> latestDiastolicBp = const Value.absent(),
+            Value<double?> latestFastingGlucoseMgDl = const Value.absent(),
+            Value<int?> todaySteps = const Value.absent(),
+            Value<String> alertLevel = const Value.absent(),
+            Value<String?> alertMessage = const Value.absent(),
+            Value<String?> alertMessageHindi = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalFamilyMembersCompanion(
+            id: id,
+            userId: userId,
+            relativeUserId: relativeUserId,
+            relativeName: relativeName,
+            relation: relation,
+            age: age,
+            latestSystolicBp: latestSystolicBp,
+            latestDiastolicBp: latestDiastolicBp,
+            latestFastingGlucoseMgDl: latestFastingGlucoseMgDl,
+            todaySteps: todaySteps,
+            alertLevel: alertLevel,
+            alertMessage: alertMessage,
+            alertMessageHindi: alertMessageHindi,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String relativeUserId,
+            required String relativeName,
+            required String relation,
+            required int age,
+            Value<double?> latestSystolicBp = const Value.absent(),
+            Value<double?> latestDiastolicBp = const Value.absent(),
+            Value<double?> latestFastingGlucoseMgDl = const Value.absent(),
+            Value<int?> todaySteps = const Value.absent(),
+            required String alertLevel,
+            Value<String?> alertMessage = const Value.absent(),
+            Value<String?> alertMessageHindi = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalFamilyMembersCompanion.insert(
+            id: id,
+            userId: userId,
+            relativeUserId: relativeUserId,
+            relativeName: relativeName,
+            relation: relation,
+            age: age,
+            latestSystolicBp: latestSystolicBp,
+            latestDiastolicBp: latestDiastolicBp,
+            latestFastingGlucoseMgDl: latestFastingGlucoseMgDl,
+            todaySteps: todaySteps,
+            alertLevel: alertLevel,
+            alertMessage: alertMessage,
+            alertMessageHindi: alertMessageHindi,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalFamilyMembersTable, LocalFamilyMember>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalFamilyMembersTable,
+                        LocalFamilyMember>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalFamilyMembersTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalFamilyMembersTable,
+    LocalFamilyMember,
+    $$LocalFamilyMembersTableFilterComposer,
+    $$LocalFamilyMembersTableOrderingComposer,
+    $$LocalFamilyMembersTableAnnotationComposer,
+    $$LocalFamilyMembersTableCreateCompanionBuilder,
+    $$LocalFamilyMembersTableUpdateCompanionBuilder,
+    (
+      LocalFamilyMember,
+      BaseReferences<_$AppDatabase, $LocalFamilyMembersTable, LocalFamilyMember>
+    ),
+    LocalFamilyMember,
+    PrefetchHooks Function()>;
+typedef $$LocalClubsTableCreateCompanionBuilder = LocalClubsCompanion Function({
+  required String id,
+  required String name,
+  required String city,
+  required String locality,
+  required String clubType,
+  Value<int> memberCount,
+  Value<String?> bannerUrl,
+  required String nextMeetup,
+  required String nextMeetupHindi,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalClubsTableUpdateCompanionBuilder = LocalClubsCompanion Function({
+  Value<String> id,
+  Value<String> name,
+  Value<String> city,
+  Value<String> locality,
+  Value<String> clubType,
+  Value<int> memberCount,
+  Value<String?> bannerUrl,
+  Value<String> nextMeetup,
+  Value<String> nextMeetupHindi,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalClubsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalClubsTable> {
+  $$LocalClubsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get city => $composableBuilder(
+      column: $table.city, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get locality => $composableBuilder(
+      column: $table.locality, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get clubType => $composableBuilder(
+      column: $table.clubType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get memberCount => $composableBuilder(
+      column: $table.memberCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get bannerUrl => $composableBuilder(
+      column: $table.bannerUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get nextMeetup => $composableBuilder(
+      column: $table.nextMeetup, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get nextMeetupHindi => $composableBuilder(
+      column: $table.nextMeetupHindi,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalClubsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalClubsTable> {
+  $$LocalClubsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get city => $composableBuilder(
+      column: $table.city, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get locality => $composableBuilder(
+      column: $table.locality, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get clubType => $composableBuilder(
+      column: $table.clubType, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get memberCount => $composableBuilder(
+      column: $table.memberCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get bannerUrl => $composableBuilder(
+      column: $table.bannerUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get nextMeetup => $composableBuilder(
+      column: $table.nextMeetup, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get nextMeetupHindi => $composableBuilder(
+      column: $table.nextMeetupHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalClubsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalClubsTable> {
+  $$LocalClubsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get city =>
+      $composableBuilder(column: $table.city, builder: (column) => column);
+
+  GeneratedColumn<String> get locality =>
+      $composableBuilder(column: $table.locality, builder: (column) => column);
+
+  GeneratedColumn<String> get clubType =>
+      $composableBuilder(column: $table.clubType, builder: (column) => column);
+
+  GeneratedColumn<int> get memberCount => $composableBuilder(
+      column: $table.memberCount, builder: (column) => column);
+
+  GeneratedColumn<String> get bannerUrl =>
+      $composableBuilder(column: $table.bannerUrl, builder: (column) => column);
+
+  GeneratedColumn<String> get nextMeetup => $composableBuilder(
+      column: $table.nextMeetup, builder: (column) => column);
+
+  GeneratedColumn<String> get nextMeetupHindi => $composableBuilder(
+      column: $table.nextMeetupHindi, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalClubsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalClubsTable,
+    LocalClub,
+    $$LocalClubsTableFilterComposer,
+    $$LocalClubsTableOrderingComposer,
+    $$LocalClubsTableAnnotationComposer,
+    $$LocalClubsTableCreateCompanionBuilder,
+    $$LocalClubsTableUpdateCompanionBuilder,
+    (LocalClub, BaseReferences<_$AppDatabase, $LocalClubsTable, LocalClub>),
+    LocalClub,
+    PrefetchHooks Function()> {
+  $$LocalClubsTableTableManager(_$AppDatabase db, $LocalClubsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalClubsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalClubsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalClubsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> city = const Value.absent(),
+            Value<String> locality = const Value.absent(),
+            Value<String> clubType = const Value.absent(),
+            Value<int> memberCount = const Value.absent(),
+            Value<String?> bannerUrl = const Value.absent(),
+            Value<String> nextMeetup = const Value.absent(),
+            Value<String> nextMeetupHindi = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalClubsCompanion(
+            id: id,
+            name: name,
+            city: city,
+            locality: locality,
+            clubType: clubType,
+            memberCount: memberCount,
+            bannerUrl: bannerUrl,
+            nextMeetup: nextMeetup,
+            nextMeetupHindi: nextMeetupHindi,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String name,
+            required String city,
+            required String locality,
+            required String clubType,
+            Value<int> memberCount = const Value.absent(),
+            Value<String?> bannerUrl = const Value.absent(),
+            required String nextMeetup,
+            required String nextMeetupHindi,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalClubsCompanion.insert(
+            id: id,
+            name: name,
+            city: city,
+            locality: locality,
+            clubType: clubType,
+            memberCount: memberCount,
+            bannerUrl: bannerUrl,
+            nextMeetup: nextMeetup,
+            nextMeetupHindi: nextMeetupHindi,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalClubsTable, LocalClub>(table),
+                    BaseReferences<_$AppDatabase, $LocalClubsTable, LocalClub>(
+                        db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalClubsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalClubsTable,
+    LocalClub,
+    $$LocalClubsTableFilterComposer,
+    $$LocalClubsTableOrderingComposer,
+    $$LocalClubsTableAnnotationComposer,
+    $$LocalClubsTableCreateCompanionBuilder,
+    $$LocalClubsTableUpdateCompanionBuilder,
+    (LocalClub, BaseReferences<_$AppDatabase, $LocalClubsTable, LocalClub>),
+    LocalClub,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -13686,4 +17779,14 @@ class $AppDatabaseManager {
       get localBodyTransformationLogs =>
           $$LocalBodyTransformationLogsTableTableManager(
               _db, _db.localBodyTransformationLogs);
+  $$LocalSquadsTableTableManager get localSquads =>
+      $$LocalSquadsTableTableManager(_db, _db.localSquads);
+  $$LocalSquadMembersTableTableManager get localSquadMembers =>
+      $$LocalSquadMembersTableTableManager(_db, _db.localSquadMembers);
+  $$LocalCommunityPostsTableTableManager get localCommunityPosts =>
+      $$LocalCommunityPostsTableTableManager(_db, _db.localCommunityPosts);
+  $$LocalFamilyMembersTableTableManager get localFamilyMembers =>
+      $$LocalFamilyMembersTableTableManager(_db, _db.localFamilyMembers);
+  $$LocalClubsTableTableManager get localClubs =>
+      $$LocalClubsTableTableManager(_db, _db.localClubs);
 }
