@@ -434,21 +434,21 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 8 — Transformation Journey
 
-- [ ] **Transformation Journey Engine**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Transformation Timeline Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Habit Identity Layer (behavior science)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Transformation Journey Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Transformation Timeline Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Habit Identity Layer (behavior science)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 9 — Social
 

@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/drift.dart",
+    "package:uuid/uuid.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/gamification/domain/models/gamification_models.dart",
+    "package:fitkarma/features/gamification/domain/services/adherence_engine.dart",
+    "package:fitkarma/features/gamification/domain/services/cohort_benchmarking_engine.dart",
+    "package:fitkarma/features/gamification/domain/services/karma_engine.dart"
+  ]
+}

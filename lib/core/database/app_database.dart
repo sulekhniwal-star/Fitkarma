@@ -283,6 +283,38 @@ class LocalHabitStreaks extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 20. Local Transformation Milestones Table
+class LocalTransformationMilestones extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get type => text()();
+  TextColumn get title => text()();
+  TextColumn get titleHindi => text()();
+  TextColumn get description => text()();
+  DateTimeColumn get achievedAt => dateTime()();
+  TextColumn get photoUrl => text().nullable()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 21. Local Body Transformation Logs Table
+class LocalBodyTransformationLogs extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  RealColumn get weightKg => real()();
+  RealColumn get waistCm => real()();
+  RealColumn get hipCm => real()();
+  RealColumn get bodyFatPct => real()();
+  TextColumn get photoUrl => text().nullable()();
+  DateTimeColumn get loggedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -303,6 +335,8 @@ class LocalHabitStreaks extends Table {
   LocalWorkoutSets,
   LocalKarmaPoints,
   LocalHabitStreaks,
+  LocalTransformationMilestones,
+  LocalBodyTransformationLogs,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

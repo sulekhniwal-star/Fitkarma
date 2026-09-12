@@ -7944,6 +7944,961 @@ class LocalHabitStreaksCompanion extends UpdateCompanion<LocalHabitStreak> {
   }
 }
 
+class $LocalTransformationMilestonesTable extends LocalTransformationMilestones
+    with
+        TableInfo<$LocalTransformationMilestonesTable,
+            LocalTransformationMilestone> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalTransformationMilestonesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+      'type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleHindiMeta =
+      const VerificationMeta('titleHindi');
+  @override
+  late final GeneratedColumn<String> titleHindi = GeneratedColumn<String>(
+      'title_hindi', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _achievedAtMeta =
+      const VerificationMeta('achievedAt');
+  @override
+  late final GeneratedColumn<DateTime> achievedAt = GeneratedColumn<DateTime>(
+      'achieved_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _photoUrlMeta =
+      const VerificationMeta('photoUrl');
+  @override
+  late final GeneratedColumn<String> photoUrl = GeneratedColumn<String>(
+      'photo_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        type,
+        title,
+        titleHindi,
+        description,
+        achievedAt,
+        photoUrl,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_transformation_milestones';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalTransformationMilestone> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('title_hindi')) {
+      context.handle(
+          _titleHindiMeta,
+          titleHindi.isAcceptableOrUnknown(
+              data['title_hindi']!, _titleHindiMeta));
+    } else if (isInserting) {
+      context.missing(_titleHindiMeta);
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    } else if (isInserting) {
+      context.missing(_descriptionMeta);
+    }
+    if (data.containsKey('achieved_at')) {
+      context.handle(
+          _achievedAtMeta,
+          achievedAt.isAcceptableOrUnknown(
+              data['achieved_at']!, _achievedAtMeta));
+    } else if (isInserting) {
+      context.missing(_achievedAtMeta);
+    }
+    if (data.containsKey('photo_url')) {
+      context.handle(_photoUrlMeta,
+          photoUrl.isAcceptableOrUnknown(data['photo_url']!, _photoUrlMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalTransformationMilestone map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalTransformationMilestone(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      type: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      titleHindi: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title_hindi'])!,
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description'])!,
+      achievedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}achieved_at'])!,
+      photoUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}photo_url']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalTransformationMilestonesTable createAlias(String alias) {
+    return $LocalTransformationMilestonesTable(attachedDatabase, alias);
+  }
+}
+
+class LocalTransformationMilestone extends DataClass
+    implements Insertable<LocalTransformationMilestone> {
+  final String id;
+  final String userId;
+  final String type;
+  final String title;
+  final String titleHindi;
+  final String description;
+  final DateTime achievedAt;
+  final String? photoUrl;
+  final DateTime createdAt;
+  const LocalTransformationMilestone(
+      {required this.id,
+      required this.userId,
+      required this.type,
+      required this.title,
+      required this.titleHindi,
+      required this.description,
+      required this.achievedAt,
+      this.photoUrl,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['type'] = Variable<String>(type);
+    map['title'] = Variable<String>(title);
+    map['title_hindi'] = Variable<String>(titleHindi);
+    map['description'] = Variable<String>(description);
+    map['achieved_at'] = Variable<DateTime>(achievedAt);
+    if (!nullToAbsent || photoUrl != null) {
+      map['photo_url'] = Variable<String>(photoUrl);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalTransformationMilestonesCompanion toCompanion(bool nullToAbsent) {
+    return LocalTransformationMilestonesCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      type: Value(type),
+      title: Value(title),
+      titleHindi: Value(titleHindi),
+      description: Value(description),
+      achievedAt: Value(achievedAt),
+      photoUrl: photoUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(photoUrl),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalTransformationMilestone.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalTransformationMilestone(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      type: serializer.fromJson<String>(json['type']),
+      title: serializer.fromJson<String>(json['title']),
+      titleHindi: serializer.fromJson<String>(json['titleHindi']),
+      description: serializer.fromJson<String>(json['description']),
+      achievedAt: serializer.fromJson<DateTime>(json['achievedAt']),
+      photoUrl: serializer.fromJson<String?>(json['photoUrl']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'type': serializer.toJson<String>(type),
+      'title': serializer.toJson<String>(title),
+      'titleHindi': serializer.toJson<String>(titleHindi),
+      'description': serializer.toJson<String>(description),
+      'achievedAt': serializer.toJson<DateTime>(achievedAt),
+      'photoUrl': serializer.toJson<String?>(photoUrl),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalTransformationMilestone copyWith(
+          {String? id,
+          String? userId,
+          String? type,
+          String? title,
+          String? titleHindi,
+          String? description,
+          DateTime? achievedAt,
+          Value<String?> photoUrl = const Value.absent(),
+          DateTime? createdAt}) =>
+      LocalTransformationMilestone(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        type: type ?? this.type,
+        title: title ?? this.title,
+        titleHindi: titleHindi ?? this.titleHindi,
+        description: description ?? this.description,
+        achievedAt: achievedAt ?? this.achievedAt,
+        photoUrl: photoUrl.present ? photoUrl.value : this.photoUrl,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalTransformationMilestone copyWithCompanion(
+      LocalTransformationMilestonesCompanion data) {
+    return LocalTransformationMilestone(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      type: data.type.present ? data.type.value : this.type,
+      title: data.title.present ? data.title.value : this.title,
+      titleHindi:
+          data.titleHindi.present ? data.titleHindi.value : this.titleHindi,
+      description:
+          data.description.present ? data.description.value : this.description,
+      achievedAt:
+          data.achievedAt.present ? data.achievedAt.value : this.achievedAt,
+      photoUrl: data.photoUrl.present ? data.photoUrl.value : this.photoUrl,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalTransformationMilestone(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('type: $type, ')
+          ..write('title: $title, ')
+          ..write('titleHindi: $titleHindi, ')
+          ..write('description: $description, ')
+          ..write('achievedAt: $achievedAt, ')
+          ..write('photoUrl: $photoUrl, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, type, title, titleHindi,
+      description, achievedAt, photoUrl, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalTransformationMilestone &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.type == this.type &&
+          other.title == this.title &&
+          other.titleHindi == this.titleHindi &&
+          other.description == this.description &&
+          other.achievedAt == this.achievedAt &&
+          other.photoUrl == this.photoUrl &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalTransformationMilestonesCompanion
+    extends UpdateCompanion<LocalTransformationMilestone> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> type;
+  final Value<String> title;
+  final Value<String> titleHindi;
+  final Value<String> description;
+  final Value<DateTime> achievedAt;
+  final Value<String?> photoUrl;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalTransformationMilestonesCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.type = const Value.absent(),
+    this.title = const Value.absent(),
+    this.titleHindi = const Value.absent(),
+    this.description = const Value.absent(),
+    this.achievedAt = const Value.absent(),
+    this.photoUrl = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalTransformationMilestonesCompanion.insert({
+    required String id,
+    required String userId,
+    required String type,
+    required String title,
+    required String titleHindi,
+    required String description,
+    required DateTime achievedAt,
+    this.photoUrl = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        type = Value(type),
+        title = Value(title),
+        titleHindi = Value(titleHindi),
+        description = Value(description),
+        achievedAt = Value(achievedAt);
+  static Insertable<LocalTransformationMilestone> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? type,
+    Expression<String>? title,
+    Expression<String>? titleHindi,
+    Expression<String>? description,
+    Expression<DateTime>? achievedAt,
+    Expression<String>? photoUrl,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (type != null) 'type': type,
+      if (title != null) 'title': title,
+      if (titleHindi != null) 'title_hindi': titleHindi,
+      if (description != null) 'description': description,
+      if (achievedAt != null) 'achieved_at': achievedAt,
+      if (photoUrl != null) 'photo_url': photoUrl,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalTransformationMilestonesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? type,
+      Value<String>? title,
+      Value<String>? titleHindi,
+      Value<String>? description,
+      Value<DateTime>? achievedAt,
+      Value<String?>? photoUrl,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalTransformationMilestonesCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      type: type ?? this.type,
+      title: title ?? this.title,
+      titleHindi: titleHindi ?? this.titleHindi,
+      description: description ?? this.description,
+      achievedAt: achievedAt ?? this.achievedAt,
+      photoUrl: photoUrl ?? this.photoUrl,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (titleHindi.present) {
+      map['title_hindi'] = Variable<String>(titleHindi.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
+    if (achievedAt.present) {
+      map['achieved_at'] = Variable<DateTime>(achievedAt.value);
+    }
+    if (photoUrl.present) {
+      map['photo_url'] = Variable<String>(photoUrl.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalTransformationMilestonesCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('type: $type, ')
+          ..write('title: $title, ')
+          ..write('titleHindi: $titleHindi, ')
+          ..write('description: $description, ')
+          ..write('achievedAt: $achievedAt, ')
+          ..write('photoUrl: $photoUrl, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalBodyTransformationLogsTable extends LocalBodyTransformationLogs
+    with
+        TableInfo<$LocalBodyTransformationLogsTable,
+            LocalBodyTransformationLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalBodyTransformationLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _weightKgMeta =
+      const VerificationMeta('weightKg');
+  @override
+  late final GeneratedColumn<double> weightKg = GeneratedColumn<double>(
+      'weight_kg', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _waistCmMeta =
+      const VerificationMeta('waistCm');
+  @override
+  late final GeneratedColumn<double> waistCm = GeneratedColumn<double>(
+      'waist_cm', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _hipCmMeta = const VerificationMeta('hipCm');
+  @override
+  late final GeneratedColumn<double> hipCm = GeneratedColumn<double>(
+      'hip_cm', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _bodyFatPctMeta =
+      const VerificationMeta('bodyFatPct');
+  @override
+  late final GeneratedColumn<double> bodyFatPct = GeneratedColumn<double>(
+      'body_fat_pct', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _photoUrlMeta =
+      const VerificationMeta('photoUrl');
+  @override
+  late final GeneratedColumn<String> photoUrl = GeneratedColumn<String>(
+      'photo_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _loggedAtMeta =
+      const VerificationMeta('loggedAt');
+  @override
+  late final GeneratedColumn<DateTime> loggedAt = GeneratedColumn<DateTime>(
+      'logged_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        weightKg,
+        waistCm,
+        hipCm,
+        bodyFatPct,
+        photoUrl,
+        loggedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_body_transformation_logs';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalBodyTransformationLog> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('weight_kg')) {
+      context.handle(_weightKgMeta,
+          weightKg.isAcceptableOrUnknown(data['weight_kg']!, _weightKgMeta));
+    } else if (isInserting) {
+      context.missing(_weightKgMeta);
+    }
+    if (data.containsKey('waist_cm')) {
+      context.handle(_waistCmMeta,
+          waistCm.isAcceptableOrUnknown(data['waist_cm']!, _waistCmMeta));
+    } else if (isInserting) {
+      context.missing(_waistCmMeta);
+    }
+    if (data.containsKey('hip_cm')) {
+      context.handle(
+          _hipCmMeta, hipCm.isAcceptableOrUnknown(data['hip_cm']!, _hipCmMeta));
+    } else if (isInserting) {
+      context.missing(_hipCmMeta);
+    }
+    if (data.containsKey('body_fat_pct')) {
+      context.handle(
+          _bodyFatPctMeta,
+          bodyFatPct.isAcceptableOrUnknown(
+              data['body_fat_pct']!, _bodyFatPctMeta));
+    } else if (isInserting) {
+      context.missing(_bodyFatPctMeta);
+    }
+    if (data.containsKey('photo_url')) {
+      context.handle(_photoUrlMeta,
+          photoUrl.isAcceptableOrUnknown(data['photo_url']!, _photoUrlMeta));
+    }
+    if (data.containsKey('logged_at')) {
+      context.handle(_loggedAtMeta,
+          loggedAt.isAcceptableOrUnknown(data['logged_at']!, _loggedAtMeta));
+    } else if (isInserting) {
+      context.missing(_loggedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalBodyTransformationLog map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalBodyTransformationLog(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      weightKg: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}weight_kg'])!,
+      waistCm: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}waist_cm'])!,
+      hipCm: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}hip_cm'])!,
+      bodyFatPct: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}body_fat_pct'])!,
+      photoUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}photo_url']),
+      loggedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}logged_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalBodyTransformationLogsTable createAlias(String alias) {
+    return $LocalBodyTransformationLogsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalBodyTransformationLog extends DataClass
+    implements Insertable<LocalBodyTransformationLog> {
+  final String id;
+  final String userId;
+  final double weightKg;
+  final double waistCm;
+  final double hipCm;
+  final double bodyFatPct;
+  final String? photoUrl;
+  final DateTime loggedAt;
+  final DateTime createdAt;
+  const LocalBodyTransformationLog(
+      {required this.id,
+      required this.userId,
+      required this.weightKg,
+      required this.waistCm,
+      required this.hipCm,
+      required this.bodyFatPct,
+      this.photoUrl,
+      required this.loggedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['weight_kg'] = Variable<double>(weightKg);
+    map['waist_cm'] = Variable<double>(waistCm);
+    map['hip_cm'] = Variable<double>(hipCm);
+    map['body_fat_pct'] = Variable<double>(bodyFatPct);
+    if (!nullToAbsent || photoUrl != null) {
+      map['photo_url'] = Variable<String>(photoUrl);
+    }
+    map['logged_at'] = Variable<DateTime>(loggedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalBodyTransformationLogsCompanion toCompanion(bool nullToAbsent) {
+    return LocalBodyTransformationLogsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      weightKg: Value(weightKg),
+      waistCm: Value(waistCm),
+      hipCm: Value(hipCm),
+      bodyFatPct: Value(bodyFatPct),
+      photoUrl: photoUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(photoUrl),
+      loggedAt: Value(loggedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalBodyTransformationLog.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalBodyTransformationLog(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      weightKg: serializer.fromJson<double>(json['weightKg']),
+      waistCm: serializer.fromJson<double>(json['waistCm']),
+      hipCm: serializer.fromJson<double>(json['hipCm']),
+      bodyFatPct: serializer.fromJson<double>(json['bodyFatPct']),
+      photoUrl: serializer.fromJson<String?>(json['photoUrl']),
+      loggedAt: serializer.fromJson<DateTime>(json['loggedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'weightKg': serializer.toJson<double>(weightKg),
+      'waistCm': serializer.toJson<double>(waistCm),
+      'hipCm': serializer.toJson<double>(hipCm),
+      'bodyFatPct': serializer.toJson<double>(bodyFatPct),
+      'photoUrl': serializer.toJson<String?>(photoUrl),
+      'loggedAt': serializer.toJson<DateTime>(loggedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalBodyTransformationLog copyWith(
+          {String? id,
+          String? userId,
+          double? weightKg,
+          double? waistCm,
+          double? hipCm,
+          double? bodyFatPct,
+          Value<String?> photoUrl = const Value.absent(),
+          DateTime? loggedAt,
+          DateTime? createdAt}) =>
+      LocalBodyTransformationLog(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        weightKg: weightKg ?? this.weightKg,
+        waistCm: waistCm ?? this.waistCm,
+        hipCm: hipCm ?? this.hipCm,
+        bodyFatPct: bodyFatPct ?? this.bodyFatPct,
+        photoUrl: photoUrl.present ? photoUrl.value : this.photoUrl,
+        loggedAt: loggedAt ?? this.loggedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalBodyTransformationLog copyWithCompanion(
+      LocalBodyTransformationLogsCompanion data) {
+    return LocalBodyTransformationLog(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      weightKg: data.weightKg.present ? data.weightKg.value : this.weightKg,
+      waistCm: data.waistCm.present ? data.waistCm.value : this.waistCm,
+      hipCm: data.hipCm.present ? data.hipCm.value : this.hipCm,
+      bodyFatPct:
+          data.bodyFatPct.present ? data.bodyFatPct.value : this.bodyFatPct,
+      photoUrl: data.photoUrl.present ? data.photoUrl.value : this.photoUrl,
+      loggedAt: data.loggedAt.present ? data.loggedAt.value : this.loggedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBodyTransformationLog(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('weightKg: $weightKg, ')
+          ..write('waistCm: $waistCm, ')
+          ..write('hipCm: $hipCm, ')
+          ..write('bodyFatPct: $bodyFatPct, ')
+          ..write('photoUrl: $photoUrl, ')
+          ..write('loggedAt: $loggedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, weightKg, waistCm, hipCm,
+      bodyFatPct, photoUrl, loggedAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalBodyTransformationLog &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.weightKg == this.weightKg &&
+          other.waistCm == this.waistCm &&
+          other.hipCm == this.hipCm &&
+          other.bodyFatPct == this.bodyFatPct &&
+          other.photoUrl == this.photoUrl &&
+          other.loggedAt == this.loggedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalBodyTransformationLogsCompanion
+    extends UpdateCompanion<LocalBodyTransformationLog> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<double> weightKg;
+  final Value<double> waistCm;
+  final Value<double> hipCm;
+  final Value<double> bodyFatPct;
+  final Value<String?> photoUrl;
+  final Value<DateTime> loggedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalBodyTransformationLogsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.weightKg = const Value.absent(),
+    this.waistCm = const Value.absent(),
+    this.hipCm = const Value.absent(),
+    this.bodyFatPct = const Value.absent(),
+    this.photoUrl = const Value.absent(),
+    this.loggedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalBodyTransformationLogsCompanion.insert({
+    required String id,
+    required String userId,
+    required double weightKg,
+    required double waistCm,
+    required double hipCm,
+    required double bodyFatPct,
+    this.photoUrl = const Value.absent(),
+    required DateTime loggedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        weightKg = Value(weightKg),
+        waistCm = Value(waistCm),
+        hipCm = Value(hipCm),
+        bodyFatPct = Value(bodyFatPct),
+        loggedAt = Value(loggedAt);
+  static Insertable<LocalBodyTransformationLog> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<double>? weightKg,
+    Expression<double>? waistCm,
+    Expression<double>? hipCm,
+    Expression<double>? bodyFatPct,
+    Expression<String>? photoUrl,
+    Expression<DateTime>? loggedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (weightKg != null) 'weight_kg': weightKg,
+      if (waistCm != null) 'waist_cm': waistCm,
+      if (hipCm != null) 'hip_cm': hipCm,
+      if (bodyFatPct != null) 'body_fat_pct': bodyFatPct,
+      if (photoUrl != null) 'photo_url': photoUrl,
+      if (loggedAt != null) 'logged_at': loggedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalBodyTransformationLogsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<double>? weightKg,
+      Value<double>? waistCm,
+      Value<double>? hipCm,
+      Value<double>? bodyFatPct,
+      Value<String?>? photoUrl,
+      Value<DateTime>? loggedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalBodyTransformationLogsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      weightKg: weightKg ?? this.weightKg,
+      waistCm: waistCm ?? this.waistCm,
+      hipCm: hipCm ?? this.hipCm,
+      bodyFatPct: bodyFatPct ?? this.bodyFatPct,
+      photoUrl: photoUrl ?? this.photoUrl,
+      loggedAt: loggedAt ?? this.loggedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (weightKg.present) {
+      map['weight_kg'] = Variable<double>(weightKg.value);
+    }
+    if (waistCm.present) {
+      map['waist_cm'] = Variable<double>(waistCm.value);
+    }
+    if (hipCm.present) {
+      map['hip_cm'] = Variable<double>(hipCm.value);
+    }
+    if (bodyFatPct.present) {
+      map['body_fat_pct'] = Variable<double>(bodyFatPct.value);
+    }
+    if (photoUrl.present) {
+      map['photo_url'] = Variable<String>(photoUrl.value);
+    }
+    if (loggedAt.present) {
+      map['logged_at'] = Variable<DateTime>(loggedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBodyTransformationLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('weightKg: $weightKg, ')
+          ..write('waistCm: $waistCm, ')
+          ..write('hipCm: $hipCm, ')
+          ..write('bodyFatPct: $bodyFatPct, ')
+          ..write('photoUrl: $photoUrl, ')
+          ..write('loggedAt: $loggedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -7981,6 +8936,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalKarmaPointsTable(this);
   late final $LocalHabitStreaksTable localHabitStreaks =
       $LocalHabitStreaksTable(this);
+  late final $LocalTransformationMilestonesTable localTransformationMilestones =
+      $LocalTransformationMilestonesTable(this);
+  late final $LocalBodyTransformationLogsTable localBodyTransformationLogs =
+      $LocalBodyTransformationLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -8004,7 +8963,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localWorkoutSessions,
         localWorkoutSets,
         localKarmaPoints,
-        localHabitStreaks
+        localHabitStreaks,
+        localTransformationMilestones,
+        localBodyTransformationLogs
       ];
 }
 
@@ -12181,6 +13142,500 @@ typedef $$LocalHabitStreaksTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalHabitStreak,
     PrefetchHooks Function()>;
+typedef $$LocalTransformationMilestonesTableCreateCompanionBuilder
+    = LocalTransformationMilestonesCompanion Function({
+  required String id,
+  required String userId,
+  required String type,
+  required String title,
+  required String titleHindi,
+  required String description,
+  required DateTime achievedAt,
+  Value<String?> photoUrl,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalTransformationMilestonesTableUpdateCompanionBuilder
+    = LocalTransformationMilestonesCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> type,
+  Value<String> title,
+  Value<String> titleHindi,
+  Value<String> description,
+  Value<DateTime> achievedAt,
+  Value<String?> photoUrl,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalTransformationMilestonesTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalTransformationMilestonesTable> {
+  $$LocalTransformationMilestonesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get titleHindi => $composableBuilder(
+      column: $table.titleHindi, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get achievedAt => $composableBuilder(
+      column: $table.achievedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get photoUrl => $composableBuilder(
+      column: $table.photoUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalTransformationMilestonesTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalTransformationMilestonesTable> {
+  $$LocalTransformationMilestonesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get titleHindi => $composableBuilder(
+      column: $table.titleHindi, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get achievedAt => $composableBuilder(
+      column: $table.achievedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get photoUrl => $composableBuilder(
+      column: $table.photoUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalTransformationMilestonesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalTransformationMilestonesTable> {
+  $$LocalTransformationMilestonesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get titleHindi => $composableBuilder(
+      column: $table.titleHindi, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get achievedAt => $composableBuilder(
+      column: $table.achievedAt, builder: (column) => column);
+
+  GeneratedColumn<String> get photoUrl =>
+      $composableBuilder(column: $table.photoUrl, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalTransformationMilestonesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalTransformationMilestonesTable,
+    LocalTransformationMilestone,
+    $$LocalTransformationMilestonesTableFilterComposer,
+    $$LocalTransformationMilestonesTableOrderingComposer,
+    $$LocalTransformationMilestonesTableAnnotationComposer,
+    $$LocalTransformationMilestonesTableCreateCompanionBuilder,
+    $$LocalTransformationMilestonesTableUpdateCompanionBuilder,
+    (
+      LocalTransformationMilestone,
+      BaseReferences<_$AppDatabase, $LocalTransformationMilestonesTable,
+          LocalTransformationMilestone>
+    ),
+    LocalTransformationMilestone,
+    PrefetchHooks Function()> {
+  $$LocalTransformationMilestonesTableTableManager(
+      _$AppDatabase db, $LocalTransformationMilestonesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalTransformationMilestonesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalTransformationMilestonesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalTransformationMilestonesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> type = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> titleHindi = const Value.absent(),
+            Value<String> description = const Value.absent(),
+            Value<DateTime> achievedAt = const Value.absent(),
+            Value<String?> photoUrl = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalTransformationMilestonesCompanion(
+            id: id,
+            userId: userId,
+            type: type,
+            title: title,
+            titleHindi: titleHindi,
+            description: description,
+            achievedAt: achievedAt,
+            photoUrl: photoUrl,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String type,
+            required String title,
+            required String titleHindi,
+            required String description,
+            required DateTime achievedAt,
+            Value<String?> photoUrl = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalTransformationMilestonesCompanion.insert(
+            id: id,
+            userId: userId,
+            type: type,
+            title: title,
+            titleHindi: titleHindi,
+            description: description,
+            achievedAt: achievedAt,
+            photoUrl: photoUrl,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalTransformationMilestonesTable,
+                        LocalTransformationMilestone>(table),
+                    BaseReferences<
+                        _$AppDatabase,
+                        $LocalTransformationMilestonesTable,
+                        LocalTransformationMilestone>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalTransformationMilestonesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalTransformationMilestonesTable,
+        LocalTransformationMilestone,
+        $$LocalTransformationMilestonesTableFilterComposer,
+        $$LocalTransformationMilestonesTableOrderingComposer,
+        $$LocalTransformationMilestonesTableAnnotationComposer,
+        $$LocalTransformationMilestonesTableCreateCompanionBuilder,
+        $$LocalTransformationMilestonesTableUpdateCompanionBuilder,
+        (
+          LocalTransformationMilestone,
+          BaseReferences<_$AppDatabase, $LocalTransformationMilestonesTable,
+              LocalTransformationMilestone>
+        ),
+        LocalTransformationMilestone,
+        PrefetchHooks Function()>;
+typedef $$LocalBodyTransformationLogsTableCreateCompanionBuilder
+    = LocalBodyTransformationLogsCompanion Function({
+  required String id,
+  required String userId,
+  required double weightKg,
+  required double waistCm,
+  required double hipCm,
+  required double bodyFatPct,
+  Value<String?> photoUrl,
+  required DateTime loggedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalBodyTransformationLogsTableUpdateCompanionBuilder
+    = LocalBodyTransformationLogsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<double> weightKg,
+  Value<double> waistCm,
+  Value<double> hipCm,
+  Value<double> bodyFatPct,
+  Value<String?> photoUrl,
+  Value<DateTime> loggedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalBodyTransformationLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalBodyTransformationLogsTable> {
+  $$LocalBodyTransformationLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get weightKg => $composableBuilder(
+      column: $table.weightKg, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get waistCm => $composableBuilder(
+      column: $table.waistCm, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get hipCm => $composableBuilder(
+      column: $table.hipCm, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get bodyFatPct => $composableBuilder(
+      column: $table.bodyFatPct, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get photoUrl => $composableBuilder(
+      column: $table.photoUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get loggedAt => $composableBuilder(
+      column: $table.loggedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalBodyTransformationLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalBodyTransformationLogsTable> {
+  $$LocalBodyTransformationLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get weightKg => $composableBuilder(
+      column: $table.weightKg, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get waistCm => $composableBuilder(
+      column: $table.waistCm, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get hipCm => $composableBuilder(
+      column: $table.hipCm, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get bodyFatPct => $composableBuilder(
+      column: $table.bodyFatPct, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get photoUrl => $composableBuilder(
+      column: $table.photoUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get loggedAt => $composableBuilder(
+      column: $table.loggedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalBodyTransformationLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalBodyTransformationLogsTable> {
+  $$LocalBodyTransformationLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<double> get weightKg =>
+      $composableBuilder(column: $table.weightKg, builder: (column) => column);
+
+  GeneratedColumn<double> get waistCm =>
+      $composableBuilder(column: $table.waistCm, builder: (column) => column);
+
+  GeneratedColumn<double> get hipCm =>
+      $composableBuilder(column: $table.hipCm, builder: (column) => column);
+
+  GeneratedColumn<double> get bodyFatPct => $composableBuilder(
+      column: $table.bodyFatPct, builder: (column) => column);
+
+  GeneratedColumn<String> get photoUrl =>
+      $composableBuilder(column: $table.photoUrl, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get loggedAt =>
+      $composableBuilder(column: $table.loggedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalBodyTransformationLogsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalBodyTransformationLogsTable,
+    LocalBodyTransformationLog,
+    $$LocalBodyTransformationLogsTableFilterComposer,
+    $$LocalBodyTransformationLogsTableOrderingComposer,
+    $$LocalBodyTransformationLogsTableAnnotationComposer,
+    $$LocalBodyTransformationLogsTableCreateCompanionBuilder,
+    $$LocalBodyTransformationLogsTableUpdateCompanionBuilder,
+    (
+      LocalBodyTransformationLog,
+      BaseReferences<_$AppDatabase, $LocalBodyTransformationLogsTable,
+          LocalBodyTransformationLog>
+    ),
+    LocalBodyTransformationLog,
+    PrefetchHooks Function()> {
+  $$LocalBodyTransformationLogsTableTableManager(
+      _$AppDatabase db, $LocalBodyTransformationLogsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalBodyTransformationLogsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalBodyTransformationLogsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalBodyTransformationLogsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<double> weightKg = const Value.absent(),
+            Value<double> waistCm = const Value.absent(),
+            Value<double> hipCm = const Value.absent(),
+            Value<double> bodyFatPct = const Value.absent(),
+            Value<String?> photoUrl = const Value.absent(),
+            Value<DateTime> loggedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBodyTransformationLogsCompanion(
+            id: id,
+            userId: userId,
+            weightKg: weightKg,
+            waistCm: waistCm,
+            hipCm: hipCm,
+            bodyFatPct: bodyFatPct,
+            photoUrl: photoUrl,
+            loggedAt: loggedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required double weightKg,
+            required double waistCm,
+            required double hipCm,
+            required double bodyFatPct,
+            Value<String?> photoUrl = const Value.absent(),
+            required DateTime loggedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBodyTransformationLogsCompanion.insert(
+            id: id,
+            userId: userId,
+            weightKg: weightKg,
+            waistCm: waistCm,
+            hipCm: hipCm,
+            bodyFatPct: bodyFatPct,
+            photoUrl: photoUrl,
+            loggedAt: loggedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalBodyTransformationLogsTable,
+                        LocalBodyTransformationLog>(table),
+                    BaseReferences<
+                        _$AppDatabase,
+                        $LocalBodyTransformationLogsTable,
+                        LocalBodyTransformationLog>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalBodyTransformationLogsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalBodyTransformationLogsTable,
+        LocalBodyTransformationLog,
+        $$LocalBodyTransformationLogsTableFilterComposer,
+        $$LocalBodyTransformationLogsTableOrderingComposer,
+        $$LocalBodyTransformationLogsTableAnnotationComposer,
+        $$LocalBodyTransformationLogsTableCreateCompanionBuilder,
+        $$LocalBodyTransformationLogsTableUpdateCompanionBuilder,
+        (
+          LocalBodyTransformationLog,
+          BaseReferences<_$AppDatabase, $LocalBodyTransformationLogsTable,
+              LocalBodyTransformationLog>
+        ),
+        LocalBodyTransformationLog,
+        PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -12223,4 +13678,12 @@ class $AppDatabaseManager {
       $$LocalKarmaPointsTableTableManager(_db, _db.localKarmaPoints);
   $$LocalHabitStreaksTableTableManager get localHabitStreaks =>
       $$LocalHabitStreaksTableTableManager(_db, _db.localHabitStreaks);
+  $$LocalTransformationMilestonesTableTableManager
+      get localTransformationMilestones =>
+          $$LocalTransformationMilestonesTableTableManager(
+              _db, _db.localTransformationMilestones);
+  $$LocalBodyTransformationLogsTableTableManager
+      get localBodyTransformationLogs =>
+          $$LocalBodyTransformationLogsTableTableManager(
+              _db, _db.localBodyTransformationLogs);
 }

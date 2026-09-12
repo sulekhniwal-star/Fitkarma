@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/transformation/domain/models/transformation_models.dart"
+  ]
+}
