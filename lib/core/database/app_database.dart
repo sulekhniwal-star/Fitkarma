@@ -122,6 +122,52 @@ class LocalCoachMessages extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 10. Local Wearable Samples Table
+class LocalWearableSamples extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get source => text()();
+  TextColumn get metric => text()();
+  RealColumn get value => real()();
+  TextColumn get unit => text()();
+  DateTimeColumn get timestamp => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 11. Local Biomarkers Table
+class LocalBiomarkers extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get source => text()();
+  TextColumn get type => text()();
+  RealColumn get primaryValue => real()();
+  RealColumn get secondaryValue => real().nullable()();
+  TextColumn get unit => text()();
+  TextColumn get note => text().nullable()();
+  DateTimeColumn get measuredAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 12. Local CGM Telemetry Table
+class LocalCgmTelemetry extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  RealColumn get glucoseMgDl => real()();
+  TextColumn get trendArrow => text()();
+  TextColumn get associatedMealId => text().nullable()();
+  DateTimeColumn get recordedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -132,6 +178,9 @@ class LocalCoachMessages extends Table {
   LocalSorenessLogs,
   LocalCoachSessions,
   LocalCoachMessages,
+  LocalWearableSamples,
+  LocalBiomarkers,
+  LocalCgmTelemetry,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

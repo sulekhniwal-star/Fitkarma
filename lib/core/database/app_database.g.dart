@@ -3140,6 +3140,1343 @@ class LocalCoachMessagesCompanion extends UpdateCompanion<LocalCoachMessage> {
   }
 }
 
+class $LocalWearableSamplesTable extends LocalWearableSamples
+    with TableInfo<$LocalWearableSamplesTable, LocalWearableSample> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalWearableSamplesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  @override
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+      'source', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _metricMeta = const VerificationMeta('metric');
+  @override
+  late final GeneratedColumn<String> metric = GeneratedColumn<String>(
+      'metric', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _valueMeta = const VerificationMeta('value');
+  @override
+  late final GeneratedColumn<double> value = GeneratedColumn<double>(
+      'value', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _unitMeta = const VerificationMeta('unit');
+  @override
+  late final GeneratedColumn<String> unit = GeneratedColumn<String>(
+      'unit', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
+  @override
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
+      'timestamp', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, source, metric, value, unit, timestamp, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_wearable_samples';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalWearableSample> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('source')) {
+      context.handle(_sourceMeta,
+          source.isAcceptableOrUnknown(data['source']!, _sourceMeta));
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
+    }
+    if (data.containsKey('metric')) {
+      context.handle(_metricMeta,
+          metric.isAcceptableOrUnknown(data['metric']!, _metricMeta));
+    } else if (isInserting) {
+      context.missing(_metricMeta);
+    }
+    if (data.containsKey('value')) {
+      context.handle(
+          _valueMeta, value.isAcceptableOrUnknown(data['value']!, _valueMeta));
+    } else if (isInserting) {
+      context.missing(_valueMeta);
+    }
+    if (data.containsKey('unit')) {
+      context.handle(
+          _unitMeta, unit.isAcceptableOrUnknown(data['unit']!, _unitMeta));
+    } else if (isInserting) {
+      context.missing(_unitMeta);
+    }
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    } else if (isInserting) {
+      context.missing(_timestampMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalWearableSample map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalWearableSample(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      source: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source'])!,
+      metric: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}metric'])!,
+      value: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}value'])!,
+      unit: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}unit'])!,
+      timestamp: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalWearableSamplesTable createAlias(String alias) {
+    return $LocalWearableSamplesTable(attachedDatabase, alias);
+  }
+}
+
+class LocalWearableSample extends DataClass
+    implements Insertable<LocalWearableSample> {
+  final String id;
+  final String userId;
+  final String source;
+  final String metric;
+  final double value;
+  final String unit;
+  final DateTime timestamp;
+  final DateTime createdAt;
+  const LocalWearableSample(
+      {required this.id,
+      required this.userId,
+      required this.source,
+      required this.metric,
+      required this.value,
+      required this.unit,
+      required this.timestamp,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['source'] = Variable<String>(source);
+    map['metric'] = Variable<String>(metric);
+    map['value'] = Variable<double>(value);
+    map['unit'] = Variable<String>(unit);
+    map['timestamp'] = Variable<DateTime>(timestamp);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalWearableSamplesCompanion toCompanion(bool nullToAbsent) {
+    return LocalWearableSamplesCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      source: Value(source),
+      metric: Value(metric),
+      value: Value(value),
+      unit: Value(unit),
+      timestamp: Value(timestamp),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalWearableSample.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalWearableSample(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      source: serializer.fromJson<String>(json['source']),
+      metric: serializer.fromJson<String>(json['metric']),
+      value: serializer.fromJson<double>(json['value']),
+      unit: serializer.fromJson<String>(json['unit']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'source': serializer.toJson<String>(source),
+      'metric': serializer.toJson<String>(metric),
+      'value': serializer.toJson<double>(value),
+      'unit': serializer.toJson<String>(unit),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalWearableSample copyWith(
+          {String? id,
+          String? userId,
+          String? source,
+          String? metric,
+          double? value,
+          String? unit,
+          DateTime? timestamp,
+          DateTime? createdAt}) =>
+      LocalWearableSample(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        source: source ?? this.source,
+        metric: metric ?? this.metric,
+        value: value ?? this.value,
+        unit: unit ?? this.unit,
+        timestamp: timestamp ?? this.timestamp,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalWearableSample copyWithCompanion(LocalWearableSamplesCompanion data) {
+    return LocalWearableSample(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      source: data.source.present ? data.source.value : this.source,
+      metric: data.metric.present ? data.metric.value : this.metric,
+      value: data.value.present ? data.value.value : this.value,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalWearableSample(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('source: $source, ')
+          ..write('metric: $metric, ')
+          ..write('value: $value, ')
+          ..write('unit: $unit, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, source, metric, value, unit, timestamp, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalWearableSample &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.source == this.source &&
+          other.metric == this.metric &&
+          other.value == this.value &&
+          other.unit == this.unit &&
+          other.timestamp == this.timestamp &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalWearableSamplesCompanion
+    extends UpdateCompanion<LocalWearableSample> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> source;
+  final Value<String> metric;
+  final Value<double> value;
+  final Value<String> unit;
+  final Value<DateTime> timestamp;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalWearableSamplesCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.source = const Value.absent(),
+    this.metric = const Value.absent(),
+    this.value = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.timestamp = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalWearableSamplesCompanion.insert({
+    required String id,
+    required String userId,
+    required String source,
+    required String metric,
+    required double value,
+    required String unit,
+    required DateTime timestamp,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        source = Value(source),
+        metric = Value(metric),
+        value = Value(value),
+        unit = Value(unit),
+        timestamp = Value(timestamp);
+  static Insertable<LocalWearableSample> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? source,
+    Expression<String>? metric,
+    Expression<double>? value,
+    Expression<String>? unit,
+    Expression<DateTime>? timestamp,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (source != null) 'source': source,
+      if (metric != null) 'metric': metric,
+      if (value != null) 'value': value,
+      if (unit != null) 'unit': unit,
+      if (timestamp != null) 'timestamp': timestamp,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalWearableSamplesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? source,
+      Value<String>? metric,
+      Value<double>? value,
+      Value<String>? unit,
+      Value<DateTime>? timestamp,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalWearableSamplesCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      source: source ?? this.source,
+      metric: metric ?? this.metric,
+      value: value ?? this.value,
+      unit: unit ?? this.unit,
+      timestamp: timestamp ?? this.timestamp,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
+    if (metric.present) {
+      map['metric'] = Variable<String>(metric.value);
+    }
+    if (value.present) {
+      map['value'] = Variable<double>(value.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(unit.value);
+    }
+    if (timestamp.present) {
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalWearableSamplesCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('source: $source, ')
+          ..write('metric: $metric, ')
+          ..write('value: $value, ')
+          ..write('unit: $unit, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalBiomarkersTable extends LocalBiomarkers
+    with TableInfo<$LocalBiomarkersTable, LocalBiomarker> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalBiomarkersTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  @override
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+      'source', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+      'type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _primaryValueMeta =
+      const VerificationMeta('primaryValue');
+  @override
+  late final GeneratedColumn<double> primaryValue = GeneratedColumn<double>(
+      'primary_value', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _secondaryValueMeta =
+      const VerificationMeta('secondaryValue');
+  @override
+  late final GeneratedColumn<double> secondaryValue = GeneratedColumn<double>(
+      'secondary_value', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _unitMeta = const VerificationMeta('unit');
+  @override
+  late final GeneratedColumn<String> unit = GeneratedColumn<String>(
+      'unit', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+      'note', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _measuredAtMeta =
+      const VerificationMeta('measuredAt');
+  @override
+  late final GeneratedColumn<DateTime> measuredAt = GeneratedColumn<DateTime>(
+      'measured_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        source,
+        type,
+        primaryValue,
+        secondaryValue,
+        unit,
+        note,
+        measuredAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_biomarkers';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalBiomarker> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('source')) {
+      context.handle(_sourceMeta,
+          source.isAcceptableOrUnknown(data['source']!, _sourceMeta));
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('primary_value')) {
+      context.handle(
+          _primaryValueMeta,
+          primaryValue.isAcceptableOrUnknown(
+              data['primary_value']!, _primaryValueMeta));
+    } else if (isInserting) {
+      context.missing(_primaryValueMeta);
+    }
+    if (data.containsKey('secondary_value')) {
+      context.handle(
+          _secondaryValueMeta,
+          secondaryValue.isAcceptableOrUnknown(
+              data['secondary_value']!, _secondaryValueMeta));
+    }
+    if (data.containsKey('unit')) {
+      context.handle(
+          _unitMeta, unit.isAcceptableOrUnknown(data['unit']!, _unitMeta));
+    } else if (isInserting) {
+      context.missing(_unitMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+          _noteMeta, note.isAcceptableOrUnknown(data['note']!, _noteMeta));
+    }
+    if (data.containsKey('measured_at')) {
+      context.handle(
+          _measuredAtMeta,
+          measuredAt.isAcceptableOrUnknown(
+              data['measured_at']!, _measuredAtMeta));
+    } else if (isInserting) {
+      context.missing(_measuredAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalBiomarker map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalBiomarker(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      source: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source'])!,
+      type: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
+      primaryValue: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}primary_value'])!,
+      secondaryValue: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}secondary_value']),
+      unit: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}unit'])!,
+      note: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}note']),
+      measuredAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}measured_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalBiomarkersTable createAlias(String alias) {
+    return $LocalBiomarkersTable(attachedDatabase, alias);
+  }
+}
+
+class LocalBiomarker extends DataClass implements Insertable<LocalBiomarker> {
+  final String id;
+  final String userId;
+  final String source;
+  final String type;
+  final double primaryValue;
+  final double? secondaryValue;
+  final String unit;
+  final String? note;
+  final DateTime measuredAt;
+  final DateTime createdAt;
+  const LocalBiomarker(
+      {required this.id,
+      required this.userId,
+      required this.source,
+      required this.type,
+      required this.primaryValue,
+      this.secondaryValue,
+      required this.unit,
+      this.note,
+      required this.measuredAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['source'] = Variable<String>(source);
+    map['type'] = Variable<String>(type);
+    map['primary_value'] = Variable<double>(primaryValue);
+    if (!nullToAbsent || secondaryValue != null) {
+      map['secondary_value'] = Variable<double>(secondaryValue);
+    }
+    map['unit'] = Variable<String>(unit);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    map['measured_at'] = Variable<DateTime>(measuredAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalBiomarkersCompanion toCompanion(bool nullToAbsent) {
+    return LocalBiomarkersCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      source: Value(source),
+      type: Value(type),
+      primaryValue: Value(primaryValue),
+      secondaryValue: secondaryValue == null && nullToAbsent
+          ? const Value.absent()
+          : Value(secondaryValue),
+      unit: Value(unit),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      measuredAt: Value(measuredAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalBiomarker.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalBiomarker(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      source: serializer.fromJson<String>(json['source']),
+      type: serializer.fromJson<String>(json['type']),
+      primaryValue: serializer.fromJson<double>(json['primaryValue']),
+      secondaryValue: serializer.fromJson<double?>(json['secondaryValue']),
+      unit: serializer.fromJson<String>(json['unit']),
+      note: serializer.fromJson<String?>(json['note']),
+      measuredAt: serializer.fromJson<DateTime>(json['measuredAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'source': serializer.toJson<String>(source),
+      'type': serializer.toJson<String>(type),
+      'primaryValue': serializer.toJson<double>(primaryValue),
+      'secondaryValue': serializer.toJson<double?>(secondaryValue),
+      'unit': serializer.toJson<String>(unit),
+      'note': serializer.toJson<String?>(note),
+      'measuredAt': serializer.toJson<DateTime>(measuredAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalBiomarker copyWith(
+          {String? id,
+          String? userId,
+          String? source,
+          String? type,
+          double? primaryValue,
+          Value<double?> secondaryValue = const Value.absent(),
+          String? unit,
+          Value<String?> note = const Value.absent(),
+          DateTime? measuredAt,
+          DateTime? createdAt}) =>
+      LocalBiomarker(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        source: source ?? this.source,
+        type: type ?? this.type,
+        primaryValue: primaryValue ?? this.primaryValue,
+        secondaryValue:
+            secondaryValue.present ? secondaryValue.value : this.secondaryValue,
+        unit: unit ?? this.unit,
+        note: note.present ? note.value : this.note,
+        measuredAt: measuredAt ?? this.measuredAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalBiomarker copyWithCompanion(LocalBiomarkersCompanion data) {
+    return LocalBiomarker(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      source: data.source.present ? data.source.value : this.source,
+      type: data.type.present ? data.type.value : this.type,
+      primaryValue: data.primaryValue.present
+          ? data.primaryValue.value
+          : this.primaryValue,
+      secondaryValue: data.secondaryValue.present
+          ? data.secondaryValue.value
+          : this.secondaryValue,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      note: data.note.present ? data.note.value : this.note,
+      measuredAt:
+          data.measuredAt.present ? data.measuredAt.value : this.measuredAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBiomarker(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('source: $source, ')
+          ..write('type: $type, ')
+          ..write('primaryValue: $primaryValue, ')
+          ..write('secondaryValue: $secondaryValue, ')
+          ..write('unit: $unit, ')
+          ..write('note: $note, ')
+          ..write('measuredAt: $measuredAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, source, type, primaryValue,
+      secondaryValue, unit, note, measuredAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalBiomarker &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.source == this.source &&
+          other.type == this.type &&
+          other.primaryValue == this.primaryValue &&
+          other.secondaryValue == this.secondaryValue &&
+          other.unit == this.unit &&
+          other.note == this.note &&
+          other.measuredAt == this.measuredAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalBiomarkersCompanion extends UpdateCompanion<LocalBiomarker> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> source;
+  final Value<String> type;
+  final Value<double> primaryValue;
+  final Value<double?> secondaryValue;
+  final Value<String> unit;
+  final Value<String?> note;
+  final Value<DateTime> measuredAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalBiomarkersCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.source = const Value.absent(),
+    this.type = const Value.absent(),
+    this.primaryValue = const Value.absent(),
+    this.secondaryValue = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.note = const Value.absent(),
+    this.measuredAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalBiomarkersCompanion.insert({
+    required String id,
+    required String userId,
+    required String source,
+    required String type,
+    required double primaryValue,
+    this.secondaryValue = const Value.absent(),
+    required String unit,
+    this.note = const Value.absent(),
+    required DateTime measuredAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        source = Value(source),
+        type = Value(type),
+        primaryValue = Value(primaryValue),
+        unit = Value(unit),
+        measuredAt = Value(measuredAt);
+  static Insertable<LocalBiomarker> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? source,
+    Expression<String>? type,
+    Expression<double>? primaryValue,
+    Expression<double>? secondaryValue,
+    Expression<String>? unit,
+    Expression<String>? note,
+    Expression<DateTime>? measuredAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (source != null) 'source': source,
+      if (type != null) 'type': type,
+      if (primaryValue != null) 'primary_value': primaryValue,
+      if (secondaryValue != null) 'secondary_value': secondaryValue,
+      if (unit != null) 'unit': unit,
+      if (note != null) 'note': note,
+      if (measuredAt != null) 'measured_at': measuredAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalBiomarkersCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? source,
+      Value<String>? type,
+      Value<double>? primaryValue,
+      Value<double?>? secondaryValue,
+      Value<String>? unit,
+      Value<String?>? note,
+      Value<DateTime>? measuredAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalBiomarkersCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      source: source ?? this.source,
+      type: type ?? this.type,
+      primaryValue: primaryValue ?? this.primaryValue,
+      secondaryValue: secondaryValue ?? this.secondaryValue,
+      unit: unit ?? this.unit,
+      note: note ?? this.note,
+      measuredAt: measuredAt ?? this.measuredAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (primaryValue.present) {
+      map['primary_value'] = Variable<double>(primaryValue.value);
+    }
+    if (secondaryValue.present) {
+      map['secondary_value'] = Variable<double>(secondaryValue.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(unit.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (measuredAt.present) {
+      map['measured_at'] = Variable<DateTime>(measuredAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBiomarkersCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('source: $source, ')
+          ..write('type: $type, ')
+          ..write('primaryValue: $primaryValue, ')
+          ..write('secondaryValue: $secondaryValue, ')
+          ..write('unit: $unit, ')
+          ..write('note: $note, ')
+          ..write('measuredAt: $measuredAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCgmTelemetryTable extends LocalCgmTelemetry
+    with TableInfo<$LocalCgmTelemetryTable, LocalCgmTelemetryData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCgmTelemetryTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _glucoseMgDlMeta =
+      const VerificationMeta('glucoseMgDl');
+  @override
+  late final GeneratedColumn<double> glucoseMgDl = GeneratedColumn<double>(
+      'glucose_mg_dl', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _trendArrowMeta =
+      const VerificationMeta('trendArrow');
+  @override
+  late final GeneratedColumn<String> trendArrow = GeneratedColumn<String>(
+      'trend_arrow', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _associatedMealIdMeta =
+      const VerificationMeta('associatedMealId');
+  @override
+  late final GeneratedColumn<String> associatedMealId = GeneratedColumn<String>(
+      'associated_meal_id', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _recordedAtMeta =
+      const VerificationMeta('recordedAt');
+  @override
+  late final GeneratedColumn<DateTime> recordedAt = GeneratedColumn<DateTime>(
+      'recorded_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        glucoseMgDl,
+        trendArrow,
+        associatedMealId,
+        recordedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_cgm_telemetry';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalCgmTelemetryData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('glucose_mg_dl')) {
+      context.handle(
+          _glucoseMgDlMeta,
+          glucoseMgDl.isAcceptableOrUnknown(
+              data['glucose_mg_dl']!, _glucoseMgDlMeta));
+    } else if (isInserting) {
+      context.missing(_glucoseMgDlMeta);
+    }
+    if (data.containsKey('trend_arrow')) {
+      context.handle(
+          _trendArrowMeta,
+          trendArrow.isAcceptableOrUnknown(
+              data['trend_arrow']!, _trendArrowMeta));
+    } else if (isInserting) {
+      context.missing(_trendArrowMeta);
+    }
+    if (data.containsKey('associated_meal_id')) {
+      context.handle(
+          _associatedMealIdMeta,
+          associatedMealId.isAcceptableOrUnknown(
+              data['associated_meal_id']!, _associatedMealIdMeta));
+    }
+    if (data.containsKey('recorded_at')) {
+      context.handle(
+          _recordedAtMeta,
+          recordedAt.isAcceptableOrUnknown(
+              data['recorded_at']!, _recordedAtMeta));
+    } else if (isInserting) {
+      context.missing(_recordedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCgmTelemetryData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCgmTelemetryData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      glucoseMgDl: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}glucose_mg_dl'])!,
+      trendArrow: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}trend_arrow'])!,
+      associatedMealId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}associated_meal_id']),
+      recordedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}recorded_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalCgmTelemetryTable createAlias(String alias) {
+    return $LocalCgmTelemetryTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCgmTelemetryData extends DataClass
+    implements Insertable<LocalCgmTelemetryData> {
+  final String id;
+  final String userId;
+  final double glucoseMgDl;
+  final String trendArrow;
+  final String? associatedMealId;
+  final DateTime recordedAt;
+  final DateTime createdAt;
+  const LocalCgmTelemetryData(
+      {required this.id,
+      required this.userId,
+      required this.glucoseMgDl,
+      required this.trendArrow,
+      this.associatedMealId,
+      required this.recordedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['glucose_mg_dl'] = Variable<double>(glucoseMgDl);
+    map['trend_arrow'] = Variable<String>(trendArrow);
+    if (!nullToAbsent || associatedMealId != null) {
+      map['associated_meal_id'] = Variable<String>(associatedMealId);
+    }
+    map['recorded_at'] = Variable<DateTime>(recordedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalCgmTelemetryCompanion toCompanion(bool nullToAbsent) {
+    return LocalCgmTelemetryCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      glucoseMgDl: Value(glucoseMgDl),
+      trendArrow: Value(trendArrow),
+      associatedMealId: associatedMealId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(associatedMealId),
+      recordedAt: Value(recordedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalCgmTelemetryData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCgmTelemetryData(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      glucoseMgDl: serializer.fromJson<double>(json['glucoseMgDl']),
+      trendArrow: serializer.fromJson<String>(json['trendArrow']),
+      associatedMealId: serializer.fromJson<String?>(json['associatedMealId']),
+      recordedAt: serializer.fromJson<DateTime>(json['recordedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'glucoseMgDl': serializer.toJson<double>(glucoseMgDl),
+      'trendArrow': serializer.toJson<String>(trendArrow),
+      'associatedMealId': serializer.toJson<String?>(associatedMealId),
+      'recordedAt': serializer.toJson<DateTime>(recordedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalCgmTelemetryData copyWith(
+          {String? id,
+          String? userId,
+          double? glucoseMgDl,
+          String? trendArrow,
+          Value<String?> associatedMealId = const Value.absent(),
+          DateTime? recordedAt,
+          DateTime? createdAt}) =>
+      LocalCgmTelemetryData(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        glucoseMgDl: glucoseMgDl ?? this.glucoseMgDl,
+        trendArrow: trendArrow ?? this.trendArrow,
+        associatedMealId: associatedMealId.present
+            ? associatedMealId.value
+            : this.associatedMealId,
+        recordedAt: recordedAt ?? this.recordedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalCgmTelemetryData copyWithCompanion(LocalCgmTelemetryCompanion data) {
+    return LocalCgmTelemetryData(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      glucoseMgDl:
+          data.glucoseMgDl.present ? data.glucoseMgDl.value : this.glucoseMgDl,
+      trendArrow:
+          data.trendArrow.present ? data.trendArrow.value : this.trendArrow,
+      associatedMealId: data.associatedMealId.present
+          ? data.associatedMealId.value
+          : this.associatedMealId,
+      recordedAt:
+          data.recordedAt.present ? data.recordedAt.value : this.recordedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCgmTelemetryData(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('glucoseMgDl: $glucoseMgDl, ')
+          ..write('trendArrow: $trendArrow, ')
+          ..write('associatedMealId: $associatedMealId, ')
+          ..write('recordedAt: $recordedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, glucoseMgDl, trendArrow,
+      associatedMealId, recordedAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCgmTelemetryData &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.glucoseMgDl == this.glucoseMgDl &&
+          other.trendArrow == this.trendArrow &&
+          other.associatedMealId == this.associatedMealId &&
+          other.recordedAt == this.recordedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalCgmTelemetryCompanion
+    extends UpdateCompanion<LocalCgmTelemetryData> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<double> glucoseMgDl;
+  final Value<String> trendArrow;
+  final Value<String?> associatedMealId;
+  final Value<DateTime> recordedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalCgmTelemetryCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.glucoseMgDl = const Value.absent(),
+    this.trendArrow = const Value.absent(),
+    this.associatedMealId = const Value.absent(),
+    this.recordedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCgmTelemetryCompanion.insert({
+    required String id,
+    required String userId,
+    required double glucoseMgDl,
+    required String trendArrow,
+    this.associatedMealId = const Value.absent(),
+    required DateTime recordedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        glucoseMgDl = Value(glucoseMgDl),
+        trendArrow = Value(trendArrow),
+        recordedAt = Value(recordedAt);
+  static Insertable<LocalCgmTelemetryData> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<double>? glucoseMgDl,
+    Expression<String>? trendArrow,
+    Expression<String>? associatedMealId,
+    Expression<DateTime>? recordedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (glucoseMgDl != null) 'glucose_mg_dl': glucoseMgDl,
+      if (trendArrow != null) 'trend_arrow': trendArrow,
+      if (associatedMealId != null) 'associated_meal_id': associatedMealId,
+      if (recordedAt != null) 'recorded_at': recordedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCgmTelemetryCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<double>? glucoseMgDl,
+      Value<String>? trendArrow,
+      Value<String?>? associatedMealId,
+      Value<DateTime>? recordedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalCgmTelemetryCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      glucoseMgDl: glucoseMgDl ?? this.glucoseMgDl,
+      trendArrow: trendArrow ?? this.trendArrow,
+      associatedMealId: associatedMealId ?? this.associatedMealId,
+      recordedAt: recordedAt ?? this.recordedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (glucoseMgDl.present) {
+      map['glucose_mg_dl'] = Variable<double>(glucoseMgDl.value);
+    }
+    if (trendArrow.present) {
+      map['trend_arrow'] = Variable<String>(trendArrow.value);
+    }
+    if (associatedMealId.present) {
+      map['associated_meal_id'] = Variable<String>(associatedMealId.value);
+    }
+    if (recordedAt.present) {
+      map['recorded_at'] = Variable<DateTime>(recordedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCgmTelemetryCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('glucoseMgDl: $glucoseMgDl, ')
+          ..write('trendArrow: $trendArrow, ')
+          ..write('associatedMealId: $associatedMealId, ')
+          ..write('recordedAt: $recordedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3159,6 +4496,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalCoachSessionsTable(this);
   late final $LocalCoachMessagesTable localCoachMessages =
       $LocalCoachMessagesTable(this);
+  late final $LocalWearableSamplesTable localWearableSamples =
+      $LocalWearableSamplesTable(this);
+  late final $LocalBiomarkersTable localBiomarkers =
+      $LocalBiomarkersTable(this);
+  late final $LocalCgmTelemetryTable localCgmTelemetry =
+      $LocalCgmTelemetryTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3172,7 +4515,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localCycleTracking,
         localSorenessLogs,
         localCoachSessions,
-        localCoachMessages
+        localCoachMessages,
+        localWearableSamples,
+        localBiomarkers,
+        localCgmTelemetry
       ];
 }
 
@@ -4921,6 +6267,705 @@ typedef $$LocalCoachMessagesTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalCoachMessage,
     PrefetchHooks Function()>;
+typedef $$LocalWearableSamplesTableCreateCompanionBuilder
+    = LocalWearableSamplesCompanion Function({
+  required String id,
+  required String userId,
+  required String source,
+  required String metric,
+  required double value,
+  required String unit,
+  required DateTime timestamp,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalWearableSamplesTableUpdateCompanionBuilder
+    = LocalWearableSamplesCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> source,
+  Value<String> metric,
+  Value<double> value,
+  Value<String> unit,
+  Value<DateTime> timestamp,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalWearableSamplesTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalWearableSamplesTable> {
+  $$LocalWearableSamplesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get source => $composableBuilder(
+      column: $table.source, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get metric => $composableBuilder(
+      column: $table.metric, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get value => $composableBuilder(
+      column: $table.value, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get unit => $composableBuilder(
+      column: $table.unit, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
+      column: $table.timestamp, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalWearableSamplesTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalWearableSamplesTable> {
+  $$LocalWearableSamplesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get source => $composableBuilder(
+      column: $table.source, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get metric => $composableBuilder(
+      column: $table.metric, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get value => $composableBuilder(
+      column: $table.value, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get unit => $composableBuilder(
+      column: $table.unit, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
+      column: $table.timestamp, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalWearableSamplesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalWearableSamplesTable> {
+  $$LocalWearableSamplesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
+
+  GeneratedColumn<String> get metric =>
+      $composableBuilder(column: $table.metric, builder: (column) => column);
+
+  GeneratedColumn<double> get value =>
+      $composableBuilder(column: $table.value, builder: (column) => column);
+
+  GeneratedColumn<String> get unit =>
+      $composableBuilder(column: $table.unit, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get timestamp =>
+      $composableBuilder(column: $table.timestamp, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalWearableSamplesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalWearableSamplesTable,
+    LocalWearableSample,
+    $$LocalWearableSamplesTableFilterComposer,
+    $$LocalWearableSamplesTableOrderingComposer,
+    $$LocalWearableSamplesTableAnnotationComposer,
+    $$LocalWearableSamplesTableCreateCompanionBuilder,
+    $$LocalWearableSamplesTableUpdateCompanionBuilder,
+    (
+      LocalWearableSample,
+      BaseReferences<_$AppDatabase, $LocalWearableSamplesTable,
+          LocalWearableSample>
+    ),
+    LocalWearableSample,
+    PrefetchHooks Function()> {
+  $$LocalWearableSamplesTableTableManager(
+      _$AppDatabase db, $LocalWearableSamplesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalWearableSamplesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalWearableSamplesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalWearableSamplesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> source = const Value.absent(),
+            Value<String> metric = const Value.absent(),
+            Value<double> value = const Value.absent(),
+            Value<String> unit = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalWearableSamplesCompanion(
+            id: id,
+            userId: userId,
+            source: source,
+            metric: metric,
+            value: value,
+            unit: unit,
+            timestamp: timestamp,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String source,
+            required String metric,
+            required double value,
+            required String unit,
+            required DateTime timestamp,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalWearableSamplesCompanion.insert(
+            id: id,
+            userId: userId,
+            source: source,
+            metric: metric,
+            value: value,
+            unit: unit,
+            timestamp: timestamp,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalWearableSamplesTable,
+                        LocalWearableSample>(table),
+                    BaseReferences<_$AppDatabase, $LocalWearableSamplesTable,
+                        LocalWearableSample>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalWearableSamplesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalWearableSamplesTable,
+        LocalWearableSample,
+        $$LocalWearableSamplesTableFilterComposer,
+        $$LocalWearableSamplesTableOrderingComposer,
+        $$LocalWearableSamplesTableAnnotationComposer,
+        $$LocalWearableSamplesTableCreateCompanionBuilder,
+        $$LocalWearableSamplesTableUpdateCompanionBuilder,
+        (
+          LocalWearableSample,
+          BaseReferences<_$AppDatabase, $LocalWearableSamplesTable,
+              LocalWearableSample>
+        ),
+        LocalWearableSample,
+        PrefetchHooks Function()>;
+typedef $$LocalBiomarkersTableCreateCompanionBuilder = LocalBiomarkersCompanion
+    Function({
+  required String id,
+  required String userId,
+  required String source,
+  required String type,
+  required double primaryValue,
+  Value<double?> secondaryValue,
+  required String unit,
+  Value<String?> note,
+  required DateTime measuredAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalBiomarkersTableUpdateCompanionBuilder = LocalBiomarkersCompanion
+    Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> source,
+  Value<String> type,
+  Value<double> primaryValue,
+  Value<double?> secondaryValue,
+  Value<String> unit,
+  Value<String?> note,
+  Value<DateTime> measuredAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalBiomarkersTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalBiomarkersTable> {
+  $$LocalBiomarkersTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get source => $composableBuilder(
+      column: $table.source, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get primaryValue => $composableBuilder(
+      column: $table.primaryValue, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get secondaryValue => $composableBuilder(
+      column: $table.secondaryValue,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get unit => $composableBuilder(
+      column: $table.unit, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get note => $composableBuilder(
+      column: $table.note, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get measuredAt => $composableBuilder(
+      column: $table.measuredAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalBiomarkersTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalBiomarkersTable> {
+  $$LocalBiomarkersTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get source => $composableBuilder(
+      column: $table.source, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get primaryValue => $composableBuilder(
+      column: $table.primaryValue,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get secondaryValue => $composableBuilder(
+      column: $table.secondaryValue,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get unit => $composableBuilder(
+      column: $table.unit, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get note => $composableBuilder(
+      column: $table.note, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get measuredAt => $composableBuilder(
+      column: $table.measuredAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalBiomarkersTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalBiomarkersTable> {
+  $$LocalBiomarkersTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<double> get primaryValue => $composableBuilder(
+      column: $table.primaryValue, builder: (column) => column);
+
+  GeneratedColumn<double> get secondaryValue => $composableBuilder(
+      column: $table.secondaryValue, builder: (column) => column);
+
+  GeneratedColumn<String> get unit =>
+      $composableBuilder(column: $table.unit, builder: (column) => column);
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get measuredAt => $composableBuilder(
+      column: $table.measuredAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalBiomarkersTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalBiomarkersTable,
+    LocalBiomarker,
+    $$LocalBiomarkersTableFilterComposer,
+    $$LocalBiomarkersTableOrderingComposer,
+    $$LocalBiomarkersTableAnnotationComposer,
+    $$LocalBiomarkersTableCreateCompanionBuilder,
+    $$LocalBiomarkersTableUpdateCompanionBuilder,
+    (
+      LocalBiomarker,
+      BaseReferences<_$AppDatabase, $LocalBiomarkersTable, LocalBiomarker>
+    ),
+    LocalBiomarker,
+    PrefetchHooks Function()> {
+  $$LocalBiomarkersTableTableManager(
+      _$AppDatabase db, $LocalBiomarkersTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalBiomarkersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalBiomarkersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalBiomarkersTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> source = const Value.absent(),
+            Value<String> type = const Value.absent(),
+            Value<double> primaryValue = const Value.absent(),
+            Value<double?> secondaryValue = const Value.absent(),
+            Value<String> unit = const Value.absent(),
+            Value<String?> note = const Value.absent(),
+            Value<DateTime> measuredAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBiomarkersCompanion(
+            id: id,
+            userId: userId,
+            source: source,
+            type: type,
+            primaryValue: primaryValue,
+            secondaryValue: secondaryValue,
+            unit: unit,
+            note: note,
+            measuredAt: measuredAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String source,
+            required String type,
+            required double primaryValue,
+            Value<double?> secondaryValue = const Value.absent(),
+            required String unit,
+            Value<String?> note = const Value.absent(),
+            required DateTime measuredAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBiomarkersCompanion.insert(
+            id: id,
+            userId: userId,
+            source: source,
+            type: type,
+            primaryValue: primaryValue,
+            secondaryValue: secondaryValue,
+            unit: unit,
+            note: note,
+            measuredAt: measuredAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalBiomarkersTable, LocalBiomarker>(table),
+                    BaseReferences<_$AppDatabase, $LocalBiomarkersTable,
+                        LocalBiomarker>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalBiomarkersTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalBiomarkersTable,
+    LocalBiomarker,
+    $$LocalBiomarkersTableFilterComposer,
+    $$LocalBiomarkersTableOrderingComposer,
+    $$LocalBiomarkersTableAnnotationComposer,
+    $$LocalBiomarkersTableCreateCompanionBuilder,
+    $$LocalBiomarkersTableUpdateCompanionBuilder,
+    (
+      LocalBiomarker,
+      BaseReferences<_$AppDatabase, $LocalBiomarkersTable, LocalBiomarker>
+    ),
+    LocalBiomarker,
+    PrefetchHooks Function()>;
+typedef $$LocalCgmTelemetryTableCreateCompanionBuilder
+    = LocalCgmTelemetryCompanion Function({
+  required String id,
+  required String userId,
+  required double glucoseMgDl,
+  required String trendArrow,
+  Value<String?> associatedMealId,
+  required DateTime recordedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalCgmTelemetryTableUpdateCompanionBuilder
+    = LocalCgmTelemetryCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<double> glucoseMgDl,
+  Value<String> trendArrow,
+  Value<String?> associatedMealId,
+  Value<DateTime> recordedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalCgmTelemetryTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCgmTelemetryTable> {
+  $$LocalCgmTelemetryTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get glucoseMgDl => $composableBuilder(
+      column: $table.glucoseMgDl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get trendArrow => $composableBuilder(
+      column: $table.trendArrow, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get associatedMealId => $composableBuilder(
+      column: $table.associatedMealId,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get recordedAt => $composableBuilder(
+      column: $table.recordedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCgmTelemetryTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCgmTelemetryTable> {
+  $$LocalCgmTelemetryTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get glucoseMgDl => $composableBuilder(
+      column: $table.glucoseMgDl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get trendArrow => $composableBuilder(
+      column: $table.trendArrow, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get associatedMealId => $composableBuilder(
+      column: $table.associatedMealId,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get recordedAt => $composableBuilder(
+      column: $table.recordedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCgmTelemetryTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCgmTelemetryTable> {
+  $$LocalCgmTelemetryTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<double> get glucoseMgDl => $composableBuilder(
+      column: $table.glucoseMgDl, builder: (column) => column);
+
+  GeneratedColumn<String> get trendArrow => $composableBuilder(
+      column: $table.trendArrow, builder: (column) => column);
+
+  GeneratedColumn<String> get associatedMealId => $composableBuilder(
+      column: $table.associatedMealId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get recordedAt => $composableBuilder(
+      column: $table.recordedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalCgmTelemetryTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCgmTelemetryTable,
+    LocalCgmTelemetryData,
+    $$LocalCgmTelemetryTableFilterComposer,
+    $$LocalCgmTelemetryTableOrderingComposer,
+    $$LocalCgmTelemetryTableAnnotationComposer,
+    $$LocalCgmTelemetryTableCreateCompanionBuilder,
+    $$LocalCgmTelemetryTableUpdateCompanionBuilder,
+    (
+      LocalCgmTelemetryData,
+      BaseReferences<_$AppDatabase, $LocalCgmTelemetryTable,
+          LocalCgmTelemetryData>
+    ),
+    LocalCgmTelemetryData,
+    PrefetchHooks Function()> {
+  $$LocalCgmTelemetryTableTableManager(
+      _$AppDatabase db, $LocalCgmTelemetryTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCgmTelemetryTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCgmTelemetryTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCgmTelemetryTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<double> glucoseMgDl = const Value.absent(),
+            Value<String> trendArrow = const Value.absent(),
+            Value<String?> associatedMealId = const Value.absent(),
+            Value<DateTime> recordedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCgmTelemetryCompanion(
+            id: id,
+            userId: userId,
+            glucoseMgDl: glucoseMgDl,
+            trendArrow: trendArrow,
+            associatedMealId: associatedMealId,
+            recordedAt: recordedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required double glucoseMgDl,
+            required String trendArrow,
+            Value<String?> associatedMealId = const Value.absent(),
+            required DateTime recordedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCgmTelemetryCompanion.insert(
+            id: id,
+            userId: userId,
+            glucoseMgDl: glucoseMgDl,
+            trendArrow: trendArrow,
+            associatedMealId: associatedMealId,
+            recordedAt: recordedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCgmTelemetryTable, LocalCgmTelemetryData>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCgmTelemetryTable,
+                        LocalCgmTelemetryData>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCgmTelemetryTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCgmTelemetryTable,
+    LocalCgmTelemetryData,
+    $$LocalCgmTelemetryTableFilterComposer,
+    $$LocalCgmTelemetryTableOrderingComposer,
+    $$LocalCgmTelemetryTableAnnotationComposer,
+    $$LocalCgmTelemetryTableCreateCompanionBuilder,
+    $$LocalCgmTelemetryTableUpdateCompanionBuilder,
+    (
+      LocalCgmTelemetryData,
+      BaseReferences<_$AppDatabase, $LocalCgmTelemetryTable,
+          LocalCgmTelemetryData>
+    ),
+    LocalCgmTelemetryData,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4943,4 +6988,10 @@ class $AppDatabaseManager {
       $$LocalCoachSessionsTableTableManager(_db, _db.localCoachSessions);
   $$LocalCoachMessagesTableTableManager get localCoachMessages =>
       $$LocalCoachMessagesTableTableManager(_db, _db.localCoachMessages);
+  $$LocalWearableSamplesTableTableManager get localWearableSamples =>
+      $$LocalWearableSamplesTableTableManager(_db, _db.localWearableSamples);
+  $$LocalBiomarkersTableTableManager get localBiomarkers =>
+      $$LocalBiomarkersTableTableManager(_db, _db.localBiomarkers);
+  $$LocalCgmTelemetryTableTableManager get localCgmTelemetry =>
+      $$LocalCgmTelemetryTableTableManager(_db, _db.localCgmTelemetry);
 }

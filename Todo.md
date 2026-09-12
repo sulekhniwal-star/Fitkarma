@@ -217,41 +217,41 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 4 — Health Tracking
 
-- [ ] **Dashboard Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Steps Screen (auto-detection & sync)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Sleep Screen (stage metrics, debt modeling)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Blood Pressure Screen (biometric-gated access)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Glucose Screen (meal correlation, HbA1c estimation)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Preventive Intelligence Engine (deterministic)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Dashboard Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Steps Screen (auto-detection & sync)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Sleep Screen (stage metrics, debt modeling)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Blood Pressure Screen (biometric-gated access)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Glucose Screen (meal correlation, HbA1c estimation)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Preventive Intelligence Engine (deterministic)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 5 — Smart Indian Nutrition
 

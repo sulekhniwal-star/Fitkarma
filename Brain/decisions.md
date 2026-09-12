@@ -11,11 +11,11 @@ Each entry: context → decision → consequences. Add new entries at the top. D
 
 ---
 
-## ADR-002: Offline-first sync approach — pending decision
-**Context**: Firestore's automatic offline cache has no Supabase equivalent (see `architechture.md` §4).
+## ADR-002: Offline-first sync approach — Hand-rolled Drift Outbox + Append-Only Telemetry
+**Context**: Firestore's automatic offline cache has no direct Supabase equivalent (see `architechture.md` §4).
 **Options considered**: (a) hand-rolled Drift outbox + sync worker, (b) PowerSync, (c) ElectricSQL.
-**Decision**: **not yet finalized.** Default assumption in the docs is (a), since Drift/SQLCipher is already in the stack, but this should be confirmed before Phase 4 work resumes — the wearable late-sync conflict logic depends on which path is chosen.
-**Consequences**: TBD — update this entry once decided, don't leave two conflicting "decisions" in the docs.
+**Decision**: **Option (a) Hand-rolled Drift outbox (`pending_mutations`) with `OutboxSyncWorker`.** For high-frequency telemetry tables (`wearable_samples`, `cgm_telemetry`), an append-only unique constraint `(user_id, source, metric, timestamp)` is enforced, completely avoiding update conflicts on late sync. For mutable profile/setting rows, `updated_at`-based last-write-wins is applied.
+**Consequences**: zero external SDK vendor dependency; utilizes existing SQLCipher-encrypted Drift database already in the stack; predictable local writes with automatic background flush on reconnect.
 
 ---
 

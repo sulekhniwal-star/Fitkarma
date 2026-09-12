@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/native.dart",
+    "package:flutter_test/flutter_test.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/coach/data/coach_repository.dart",
+    "package:fitkarma/features/coach/data/coach_service.dart",
+    "package:fitkarma/features/coach/domain/models/coach_message.dart",
+    "package:fitkarma/features/coach/domain/services/coach_context_builder.dart",
+    "package:fitkarma/features/coach/domain/services/proactive_insights_engine.dart",
+    "package:fitkarma/features/onboarding/domain/models/onboarding_state.dart"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/main.dart",
+    "package:fitkarma/features/coach/data/coach_repository.dart",
+    "package:fitkarma/features/coach/data/coach_service.dart",
+    "package:fitkarma/features/coach/domain/models/coach_message.dart",
+    "package:fitkarma/features/coach/domain/services/proactive_insights_engine.dart"
+  ]
+}

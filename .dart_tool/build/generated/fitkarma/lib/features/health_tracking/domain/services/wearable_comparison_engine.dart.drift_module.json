@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/health_tracking/domain/models/health_models.dart"
+  ]
+}
