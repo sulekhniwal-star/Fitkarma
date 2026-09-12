@@ -1,0 +1,27 @@
+name: Supabase RLS Policy Tests
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/migrations/**'
+      - 'supabase/tests/**'
+
+jobs:
+  test_rls:
+    name: Run pgTAP Database RLS Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Start Local Supabase Stack
+        run: supabase start
+
+      - name: Run pgTAP Tests
+        run: supabase test db
