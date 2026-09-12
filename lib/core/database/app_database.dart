@@ -58,11 +58,40 @@ class LocalDipCache extends Table {
   Set<Column> get primaryKey => {userId, date};
 }
 
+// 5. Local Dosha Scores Table
+class LocalDoshaScores extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  IntColumn get vataScore => integer()();
+  IntColumn get pittaScore => integer()();
+  IntColumn get kaphaScore => integer()();
+  TextColumn get dominantDosha => text()();
+  DateTimeColumn get assessedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 6. Local Women's Health & Cycle Tracking Table
+class LocalCycleTracking extends Table {
+  TextColumn get userId => text()();
+  IntColumn get cycleLengthDays => integer()();
+  IntColumn get currentCycleDay => integer()();
+  TextColumn get currentPhase => text()();
+  BoolColumn get hasPcos => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {userId};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
   LocalReadinessScores,
   LocalDipCache,
+  LocalDoshaScores,
+  LocalCycleTracking,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

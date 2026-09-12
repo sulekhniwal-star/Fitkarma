@@ -1406,6 +1406,777 @@ class LocalDipCacheCompanion extends UpdateCompanion<LocalDipCacheData> {
   }
 }
 
+class $LocalDoshaScoresTable extends LocalDoshaScores
+    with TableInfo<$LocalDoshaScoresTable, LocalDoshaScore> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalDoshaScoresTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _vataScoreMeta =
+      const VerificationMeta('vataScore');
+  @override
+  late final GeneratedColumn<int> vataScore = GeneratedColumn<int>(
+      'vata_score', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _pittaScoreMeta =
+      const VerificationMeta('pittaScore');
+  @override
+  late final GeneratedColumn<int> pittaScore = GeneratedColumn<int>(
+      'pitta_score', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _kaphaScoreMeta =
+      const VerificationMeta('kaphaScore');
+  @override
+  late final GeneratedColumn<int> kaphaScore = GeneratedColumn<int>(
+      'kapha_score', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _dominantDoshaMeta =
+      const VerificationMeta('dominantDosha');
+  @override
+  late final GeneratedColumn<String> dominantDosha = GeneratedColumn<String>(
+      'dominant_dosha', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _assessedAtMeta =
+      const VerificationMeta('assessedAt');
+  @override
+  late final GeneratedColumn<DateTime> assessedAt = GeneratedColumn<DateTime>(
+      'assessed_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        vataScore,
+        pittaScore,
+        kaphaScore,
+        dominantDosha,
+        assessedAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_dosha_scores';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalDoshaScore> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('vata_score')) {
+      context.handle(_vataScoreMeta,
+          vataScore.isAcceptableOrUnknown(data['vata_score']!, _vataScoreMeta));
+    } else if (isInserting) {
+      context.missing(_vataScoreMeta);
+    }
+    if (data.containsKey('pitta_score')) {
+      context.handle(
+          _pittaScoreMeta,
+          pittaScore.isAcceptableOrUnknown(
+              data['pitta_score']!, _pittaScoreMeta));
+    } else if (isInserting) {
+      context.missing(_pittaScoreMeta);
+    }
+    if (data.containsKey('kapha_score')) {
+      context.handle(
+          _kaphaScoreMeta,
+          kaphaScore.isAcceptableOrUnknown(
+              data['kapha_score']!, _kaphaScoreMeta));
+    } else if (isInserting) {
+      context.missing(_kaphaScoreMeta);
+    }
+    if (data.containsKey('dominant_dosha')) {
+      context.handle(
+          _dominantDoshaMeta,
+          dominantDosha.isAcceptableOrUnknown(
+              data['dominant_dosha']!, _dominantDoshaMeta));
+    } else if (isInserting) {
+      context.missing(_dominantDoshaMeta);
+    }
+    if (data.containsKey('assessed_at')) {
+      context.handle(
+          _assessedAtMeta,
+          assessedAt.isAcceptableOrUnknown(
+              data['assessed_at']!, _assessedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalDoshaScore map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalDoshaScore(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      vataScore: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}vata_score'])!,
+      pittaScore: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}pitta_score'])!,
+      kaphaScore: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}kapha_score'])!,
+      dominantDosha: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}dominant_dosha'])!,
+      assessedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}assessed_at'])!,
+    );
+  }
+
+  @override
+  $LocalDoshaScoresTable createAlias(String alias) {
+    return $LocalDoshaScoresTable(attachedDatabase, alias);
+  }
+}
+
+class LocalDoshaScore extends DataClass implements Insertable<LocalDoshaScore> {
+  final String id;
+  final String userId;
+  final int vataScore;
+  final int pittaScore;
+  final int kaphaScore;
+  final String dominantDosha;
+  final DateTime assessedAt;
+  const LocalDoshaScore(
+      {required this.id,
+      required this.userId,
+      required this.vataScore,
+      required this.pittaScore,
+      required this.kaphaScore,
+      required this.dominantDosha,
+      required this.assessedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['vata_score'] = Variable<int>(vataScore);
+    map['pitta_score'] = Variable<int>(pittaScore);
+    map['kapha_score'] = Variable<int>(kaphaScore);
+    map['dominant_dosha'] = Variable<String>(dominantDosha);
+    map['assessed_at'] = Variable<DateTime>(assessedAt);
+    return map;
+  }
+
+  LocalDoshaScoresCompanion toCompanion(bool nullToAbsent) {
+    return LocalDoshaScoresCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      vataScore: Value(vataScore),
+      pittaScore: Value(pittaScore),
+      kaphaScore: Value(kaphaScore),
+      dominantDosha: Value(dominantDosha),
+      assessedAt: Value(assessedAt),
+    );
+  }
+
+  factory LocalDoshaScore.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalDoshaScore(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      vataScore: serializer.fromJson<int>(json['vataScore']),
+      pittaScore: serializer.fromJson<int>(json['pittaScore']),
+      kaphaScore: serializer.fromJson<int>(json['kaphaScore']),
+      dominantDosha: serializer.fromJson<String>(json['dominantDosha']),
+      assessedAt: serializer.fromJson<DateTime>(json['assessedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'vataScore': serializer.toJson<int>(vataScore),
+      'pittaScore': serializer.toJson<int>(pittaScore),
+      'kaphaScore': serializer.toJson<int>(kaphaScore),
+      'dominantDosha': serializer.toJson<String>(dominantDosha),
+      'assessedAt': serializer.toJson<DateTime>(assessedAt),
+    };
+  }
+
+  LocalDoshaScore copyWith(
+          {String? id,
+          String? userId,
+          int? vataScore,
+          int? pittaScore,
+          int? kaphaScore,
+          String? dominantDosha,
+          DateTime? assessedAt}) =>
+      LocalDoshaScore(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        vataScore: vataScore ?? this.vataScore,
+        pittaScore: pittaScore ?? this.pittaScore,
+        kaphaScore: kaphaScore ?? this.kaphaScore,
+        dominantDosha: dominantDosha ?? this.dominantDosha,
+        assessedAt: assessedAt ?? this.assessedAt,
+      );
+  LocalDoshaScore copyWithCompanion(LocalDoshaScoresCompanion data) {
+    return LocalDoshaScore(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      vataScore: data.vataScore.present ? data.vataScore.value : this.vataScore,
+      pittaScore:
+          data.pittaScore.present ? data.pittaScore.value : this.pittaScore,
+      kaphaScore:
+          data.kaphaScore.present ? data.kaphaScore.value : this.kaphaScore,
+      dominantDosha: data.dominantDosha.present
+          ? data.dominantDosha.value
+          : this.dominantDosha,
+      assessedAt:
+          data.assessedAt.present ? data.assessedAt.value : this.assessedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalDoshaScore(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('vataScore: $vataScore, ')
+          ..write('pittaScore: $pittaScore, ')
+          ..write('kaphaScore: $kaphaScore, ')
+          ..write('dominantDosha: $dominantDosha, ')
+          ..write('assessedAt: $assessedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, vataScore, pittaScore, kaphaScore, dominantDosha, assessedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalDoshaScore &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.vataScore == this.vataScore &&
+          other.pittaScore == this.pittaScore &&
+          other.kaphaScore == this.kaphaScore &&
+          other.dominantDosha == this.dominantDosha &&
+          other.assessedAt == this.assessedAt);
+}
+
+class LocalDoshaScoresCompanion extends UpdateCompanion<LocalDoshaScore> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<int> vataScore;
+  final Value<int> pittaScore;
+  final Value<int> kaphaScore;
+  final Value<String> dominantDosha;
+  final Value<DateTime> assessedAt;
+  final Value<int> rowid;
+  const LocalDoshaScoresCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.vataScore = const Value.absent(),
+    this.pittaScore = const Value.absent(),
+    this.kaphaScore = const Value.absent(),
+    this.dominantDosha = const Value.absent(),
+    this.assessedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalDoshaScoresCompanion.insert({
+    required String id,
+    required String userId,
+    required int vataScore,
+    required int pittaScore,
+    required int kaphaScore,
+    required String dominantDosha,
+    this.assessedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        vataScore = Value(vataScore),
+        pittaScore = Value(pittaScore),
+        kaphaScore = Value(kaphaScore),
+        dominantDosha = Value(dominantDosha);
+  static Insertable<LocalDoshaScore> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<int>? vataScore,
+    Expression<int>? pittaScore,
+    Expression<int>? kaphaScore,
+    Expression<String>? dominantDosha,
+    Expression<DateTime>? assessedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (vataScore != null) 'vata_score': vataScore,
+      if (pittaScore != null) 'pitta_score': pittaScore,
+      if (kaphaScore != null) 'kapha_score': kaphaScore,
+      if (dominantDosha != null) 'dominant_dosha': dominantDosha,
+      if (assessedAt != null) 'assessed_at': assessedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalDoshaScoresCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<int>? vataScore,
+      Value<int>? pittaScore,
+      Value<int>? kaphaScore,
+      Value<String>? dominantDosha,
+      Value<DateTime>? assessedAt,
+      Value<int>? rowid}) {
+    return LocalDoshaScoresCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      vataScore: vataScore ?? this.vataScore,
+      pittaScore: pittaScore ?? this.pittaScore,
+      kaphaScore: kaphaScore ?? this.kaphaScore,
+      dominantDosha: dominantDosha ?? this.dominantDosha,
+      assessedAt: assessedAt ?? this.assessedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (vataScore.present) {
+      map['vata_score'] = Variable<int>(vataScore.value);
+    }
+    if (pittaScore.present) {
+      map['pitta_score'] = Variable<int>(pittaScore.value);
+    }
+    if (kaphaScore.present) {
+      map['kapha_score'] = Variable<int>(kaphaScore.value);
+    }
+    if (dominantDosha.present) {
+      map['dominant_dosha'] = Variable<String>(dominantDosha.value);
+    }
+    if (assessedAt.present) {
+      map['assessed_at'] = Variable<DateTime>(assessedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalDoshaScoresCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('vataScore: $vataScore, ')
+          ..write('pittaScore: $pittaScore, ')
+          ..write('kaphaScore: $kaphaScore, ')
+          ..write('dominantDosha: $dominantDosha, ')
+          ..write('assessedAt: $assessedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCycleTrackingTable extends LocalCycleTracking
+    with TableInfo<$LocalCycleTrackingTable, LocalCycleTrackingData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCycleTrackingTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _cycleLengthDaysMeta =
+      const VerificationMeta('cycleLengthDays');
+  @override
+  late final GeneratedColumn<int> cycleLengthDays = GeneratedColumn<int>(
+      'cycle_length_days', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _currentCycleDayMeta =
+      const VerificationMeta('currentCycleDay');
+  @override
+  late final GeneratedColumn<int> currentCycleDay = GeneratedColumn<int>(
+      'current_cycle_day', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _currentPhaseMeta =
+      const VerificationMeta('currentPhase');
+  @override
+  late final GeneratedColumn<String> currentPhase = GeneratedColumn<String>(
+      'current_phase', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _hasPcosMeta =
+      const VerificationMeta('hasPcos');
+  @override
+  late final GeneratedColumn<bool> hasPcos = GeneratedColumn<bool>(
+      'has_pcos', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("has_pcos" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        userId,
+        cycleLengthDays,
+        currentCycleDay,
+        currentPhase,
+        hasPcos,
+        updatedAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_cycle_tracking';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalCycleTrackingData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('cycle_length_days')) {
+      context.handle(
+          _cycleLengthDaysMeta,
+          cycleLengthDays.isAcceptableOrUnknown(
+              data['cycle_length_days']!, _cycleLengthDaysMeta));
+    } else if (isInserting) {
+      context.missing(_cycleLengthDaysMeta);
+    }
+    if (data.containsKey('current_cycle_day')) {
+      context.handle(
+          _currentCycleDayMeta,
+          currentCycleDay.isAcceptableOrUnknown(
+              data['current_cycle_day']!, _currentCycleDayMeta));
+    } else if (isInserting) {
+      context.missing(_currentCycleDayMeta);
+    }
+    if (data.containsKey('current_phase')) {
+      context.handle(
+          _currentPhaseMeta,
+          currentPhase.isAcceptableOrUnknown(
+              data['current_phase']!, _currentPhaseMeta));
+    } else if (isInserting) {
+      context.missing(_currentPhaseMeta);
+    }
+    if (data.containsKey('has_pcos')) {
+      context.handle(_hasPcosMeta,
+          hasPcos.isAcceptableOrUnknown(data['has_pcos']!, _hasPcosMeta));
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {userId};
+  @override
+  LocalCycleTrackingData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCycleTrackingData(
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      cycleLengthDays: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}cycle_length_days'])!,
+      currentCycleDay: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}current_cycle_day'])!,
+      currentPhase: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}current_phase'])!,
+      hasPcos: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}has_pcos'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $LocalCycleTrackingTable createAlias(String alias) {
+    return $LocalCycleTrackingTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCycleTrackingData extends DataClass
+    implements Insertable<LocalCycleTrackingData> {
+  final String userId;
+  final int cycleLengthDays;
+  final int currentCycleDay;
+  final String currentPhase;
+  final bool hasPcos;
+  final DateTime updatedAt;
+  const LocalCycleTrackingData(
+      {required this.userId,
+      required this.cycleLengthDays,
+      required this.currentCycleDay,
+      required this.currentPhase,
+      required this.hasPcos,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['user_id'] = Variable<String>(userId);
+    map['cycle_length_days'] = Variable<int>(cycleLengthDays);
+    map['current_cycle_day'] = Variable<int>(currentCycleDay);
+    map['current_phase'] = Variable<String>(currentPhase);
+    map['has_pcos'] = Variable<bool>(hasPcos);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  LocalCycleTrackingCompanion toCompanion(bool nullToAbsent) {
+    return LocalCycleTrackingCompanion(
+      userId: Value(userId),
+      cycleLengthDays: Value(cycleLengthDays),
+      currentCycleDay: Value(currentCycleDay),
+      currentPhase: Value(currentPhase),
+      hasPcos: Value(hasPcos),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory LocalCycleTrackingData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCycleTrackingData(
+      userId: serializer.fromJson<String>(json['userId']),
+      cycleLengthDays: serializer.fromJson<int>(json['cycleLengthDays']),
+      currentCycleDay: serializer.fromJson<int>(json['currentCycleDay']),
+      currentPhase: serializer.fromJson<String>(json['currentPhase']),
+      hasPcos: serializer.fromJson<bool>(json['hasPcos']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'userId': serializer.toJson<String>(userId),
+      'cycleLengthDays': serializer.toJson<int>(cycleLengthDays),
+      'currentCycleDay': serializer.toJson<int>(currentCycleDay),
+      'currentPhase': serializer.toJson<String>(currentPhase),
+      'hasPcos': serializer.toJson<bool>(hasPcos),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  LocalCycleTrackingData copyWith(
+          {String? userId,
+          int? cycleLengthDays,
+          int? currentCycleDay,
+          String? currentPhase,
+          bool? hasPcos,
+          DateTime? updatedAt}) =>
+      LocalCycleTrackingData(
+        userId: userId ?? this.userId,
+        cycleLengthDays: cycleLengthDays ?? this.cycleLengthDays,
+        currentCycleDay: currentCycleDay ?? this.currentCycleDay,
+        currentPhase: currentPhase ?? this.currentPhase,
+        hasPcos: hasPcos ?? this.hasPcos,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  LocalCycleTrackingData copyWithCompanion(LocalCycleTrackingCompanion data) {
+    return LocalCycleTrackingData(
+      userId: data.userId.present ? data.userId.value : this.userId,
+      cycleLengthDays: data.cycleLengthDays.present
+          ? data.cycleLengthDays.value
+          : this.cycleLengthDays,
+      currentCycleDay: data.currentCycleDay.present
+          ? data.currentCycleDay.value
+          : this.currentCycleDay,
+      currentPhase: data.currentPhase.present
+          ? data.currentPhase.value
+          : this.currentPhase,
+      hasPcos: data.hasPcos.present ? data.hasPcos.value : this.hasPcos,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCycleTrackingData(')
+          ..write('userId: $userId, ')
+          ..write('cycleLengthDays: $cycleLengthDays, ')
+          ..write('currentCycleDay: $currentCycleDay, ')
+          ..write('currentPhase: $currentPhase, ')
+          ..write('hasPcos: $hasPcos, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(userId, cycleLengthDays, currentCycleDay,
+      currentPhase, hasPcos, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCycleTrackingData &&
+          other.userId == this.userId &&
+          other.cycleLengthDays == this.cycleLengthDays &&
+          other.currentCycleDay == this.currentCycleDay &&
+          other.currentPhase == this.currentPhase &&
+          other.hasPcos == this.hasPcos &&
+          other.updatedAt == this.updatedAt);
+}
+
+class LocalCycleTrackingCompanion
+    extends UpdateCompanion<LocalCycleTrackingData> {
+  final Value<String> userId;
+  final Value<int> cycleLengthDays;
+  final Value<int> currentCycleDay;
+  final Value<String> currentPhase;
+  final Value<bool> hasPcos;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const LocalCycleTrackingCompanion({
+    this.userId = const Value.absent(),
+    this.cycleLengthDays = const Value.absent(),
+    this.currentCycleDay = const Value.absent(),
+    this.currentPhase = const Value.absent(),
+    this.hasPcos = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCycleTrackingCompanion.insert({
+    required String userId,
+    required int cycleLengthDays,
+    required int currentCycleDay,
+    required String currentPhase,
+    this.hasPcos = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : userId = Value(userId),
+        cycleLengthDays = Value(cycleLengthDays),
+        currentCycleDay = Value(currentCycleDay),
+        currentPhase = Value(currentPhase);
+  static Insertable<LocalCycleTrackingData> custom({
+    Expression<String>? userId,
+    Expression<int>? cycleLengthDays,
+    Expression<int>? currentCycleDay,
+    Expression<String>? currentPhase,
+    Expression<bool>? hasPcos,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (userId != null) 'user_id': userId,
+      if (cycleLengthDays != null) 'cycle_length_days': cycleLengthDays,
+      if (currentCycleDay != null) 'current_cycle_day': currentCycleDay,
+      if (currentPhase != null) 'current_phase': currentPhase,
+      if (hasPcos != null) 'has_pcos': hasPcos,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCycleTrackingCompanion copyWith(
+      {Value<String>? userId,
+      Value<int>? cycleLengthDays,
+      Value<int>? currentCycleDay,
+      Value<String>? currentPhase,
+      Value<bool>? hasPcos,
+      Value<DateTime>? updatedAt,
+      Value<int>? rowid}) {
+    return LocalCycleTrackingCompanion(
+      userId: userId ?? this.userId,
+      cycleLengthDays: cycleLengthDays ?? this.cycleLengthDays,
+      currentCycleDay: currentCycleDay ?? this.currentCycleDay,
+      currentPhase: currentPhase ?? this.currentPhase,
+      hasPcos: hasPcos ?? this.hasPcos,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (cycleLengthDays.present) {
+      map['cycle_length_days'] = Variable<int>(cycleLengthDays.value);
+    }
+    if (currentCycleDay.present) {
+      map['current_cycle_day'] = Variable<int>(currentCycleDay.value);
+    }
+    if (currentPhase.present) {
+      map['current_phase'] = Variable<String>(currentPhase.value);
+    }
+    if (hasPcos.present) {
+      map['has_pcos'] = Variable<bool>(hasPcos.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCycleTrackingCompanion(')
+          ..write('userId: $userId, ')
+          ..write('cycleLengthDays: $cycleLengthDays, ')
+          ..write('currentCycleDay: $currentCycleDay, ')
+          ..write('currentPhase: $currentPhase, ')
+          ..write('hasPcos: $hasPcos, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1415,12 +2186,22 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $LocalReadinessScoresTable localReadinessScores =
       $LocalReadinessScoresTable(this);
   late final $LocalDipCacheTable localDipCache = $LocalDipCacheTable(this);
+  late final $LocalDoshaScoresTable localDoshaScores =
+      $LocalDoshaScoresTable(this);
+  late final $LocalCycleTrackingTable localCycleTracking =
+      $LocalCycleTrackingTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [pendingMutations, localProfiles, localReadinessScores, localDipCache];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        pendingMutations,
+        localProfiles,
+        localReadinessScores,
+        localDipCache,
+        localDoshaScores,
+        localCycleTracking
+      ];
 }
 
 typedef $$PendingMutationsTableCreateCompanionBuilder
@@ -2202,6 +2983,417 @@ typedef $$LocalDipCacheTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalDipCacheData,
     PrefetchHooks Function()>;
+typedef $$LocalDoshaScoresTableCreateCompanionBuilder
+    = LocalDoshaScoresCompanion Function({
+  required String id,
+  required String userId,
+  required int vataScore,
+  required int pittaScore,
+  required int kaphaScore,
+  required String dominantDosha,
+  Value<DateTime> assessedAt,
+  Value<int> rowid,
+});
+typedef $$LocalDoshaScoresTableUpdateCompanionBuilder
+    = LocalDoshaScoresCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<int> vataScore,
+  Value<int> pittaScore,
+  Value<int> kaphaScore,
+  Value<String> dominantDosha,
+  Value<DateTime> assessedAt,
+  Value<int> rowid,
+});
+
+class $$LocalDoshaScoresTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalDoshaScoresTable> {
+  $$LocalDoshaScoresTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get vataScore => $composableBuilder(
+      column: $table.vataScore, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get pittaScore => $composableBuilder(
+      column: $table.pittaScore, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get kaphaScore => $composableBuilder(
+      column: $table.kaphaScore, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get dominantDosha => $composableBuilder(
+      column: $table.dominantDosha, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get assessedAt => $composableBuilder(
+      column: $table.assessedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalDoshaScoresTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalDoshaScoresTable> {
+  $$LocalDoshaScoresTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get vataScore => $composableBuilder(
+      column: $table.vataScore, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get pittaScore => $composableBuilder(
+      column: $table.pittaScore, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get kaphaScore => $composableBuilder(
+      column: $table.kaphaScore, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get dominantDosha => $composableBuilder(
+      column: $table.dominantDosha,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get assessedAt => $composableBuilder(
+      column: $table.assessedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalDoshaScoresTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalDoshaScoresTable> {
+  $$LocalDoshaScoresTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<int> get vataScore =>
+      $composableBuilder(column: $table.vataScore, builder: (column) => column);
+
+  GeneratedColumn<int> get pittaScore => $composableBuilder(
+      column: $table.pittaScore, builder: (column) => column);
+
+  GeneratedColumn<int> get kaphaScore => $composableBuilder(
+      column: $table.kaphaScore, builder: (column) => column);
+
+  GeneratedColumn<String> get dominantDosha => $composableBuilder(
+      column: $table.dominantDosha, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get assessedAt => $composableBuilder(
+      column: $table.assessedAt, builder: (column) => column);
+}
+
+class $$LocalDoshaScoresTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalDoshaScoresTable,
+    LocalDoshaScore,
+    $$LocalDoshaScoresTableFilterComposer,
+    $$LocalDoshaScoresTableOrderingComposer,
+    $$LocalDoshaScoresTableAnnotationComposer,
+    $$LocalDoshaScoresTableCreateCompanionBuilder,
+    $$LocalDoshaScoresTableUpdateCompanionBuilder,
+    (
+      LocalDoshaScore,
+      BaseReferences<_$AppDatabase, $LocalDoshaScoresTable, LocalDoshaScore>
+    ),
+    LocalDoshaScore,
+    PrefetchHooks Function()> {
+  $$LocalDoshaScoresTableTableManager(
+      _$AppDatabase db, $LocalDoshaScoresTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalDoshaScoresTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalDoshaScoresTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalDoshaScoresTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<int> vataScore = const Value.absent(),
+            Value<int> pittaScore = const Value.absent(),
+            Value<int> kaphaScore = const Value.absent(),
+            Value<String> dominantDosha = const Value.absent(),
+            Value<DateTime> assessedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalDoshaScoresCompanion(
+            id: id,
+            userId: userId,
+            vataScore: vataScore,
+            pittaScore: pittaScore,
+            kaphaScore: kaphaScore,
+            dominantDosha: dominantDosha,
+            assessedAt: assessedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required int vataScore,
+            required int pittaScore,
+            required int kaphaScore,
+            required String dominantDosha,
+            Value<DateTime> assessedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalDoshaScoresCompanion.insert(
+            id: id,
+            userId: userId,
+            vataScore: vataScore,
+            pittaScore: pittaScore,
+            kaphaScore: kaphaScore,
+            dominantDosha: dominantDosha,
+            assessedAt: assessedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalDoshaScoresTable, LocalDoshaScore>(table),
+                    BaseReferences<_$AppDatabase, $LocalDoshaScoresTable,
+                        LocalDoshaScore>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalDoshaScoresTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalDoshaScoresTable,
+    LocalDoshaScore,
+    $$LocalDoshaScoresTableFilterComposer,
+    $$LocalDoshaScoresTableOrderingComposer,
+    $$LocalDoshaScoresTableAnnotationComposer,
+    $$LocalDoshaScoresTableCreateCompanionBuilder,
+    $$LocalDoshaScoresTableUpdateCompanionBuilder,
+    (
+      LocalDoshaScore,
+      BaseReferences<_$AppDatabase, $LocalDoshaScoresTable, LocalDoshaScore>
+    ),
+    LocalDoshaScore,
+    PrefetchHooks Function()>;
+typedef $$LocalCycleTrackingTableCreateCompanionBuilder
+    = LocalCycleTrackingCompanion Function({
+  required String userId,
+  required int cycleLengthDays,
+  required int currentCycleDay,
+  required String currentPhase,
+  Value<bool> hasPcos,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+typedef $$LocalCycleTrackingTableUpdateCompanionBuilder
+    = LocalCycleTrackingCompanion Function({
+  Value<String> userId,
+  Value<int> cycleLengthDays,
+  Value<int> currentCycleDay,
+  Value<String> currentPhase,
+  Value<bool> hasPcos,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+
+class $$LocalCycleTrackingTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCycleTrackingTable> {
+  $$LocalCycleTrackingTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get cycleLengthDays => $composableBuilder(
+      column: $table.cycleLengthDays,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get currentCycleDay => $composableBuilder(
+      column: $table.currentCycleDay,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get currentPhase => $composableBuilder(
+      column: $table.currentPhase, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get hasPcos => $composableBuilder(
+      column: $table.hasPcos, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCycleTrackingTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCycleTrackingTable> {
+  $$LocalCycleTrackingTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get cycleLengthDays => $composableBuilder(
+      column: $table.cycleLengthDays,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get currentCycleDay => $composableBuilder(
+      column: $table.currentCycleDay,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentPhase => $composableBuilder(
+      column: $table.currentPhase,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get hasPcos => $composableBuilder(
+      column: $table.hasPcos, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCycleTrackingTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCycleTrackingTable> {
+  $$LocalCycleTrackingTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<int> get cycleLengthDays => $composableBuilder(
+      column: $table.cycleLengthDays, builder: (column) => column);
+
+  GeneratedColumn<int> get currentCycleDay => $composableBuilder(
+      column: $table.currentCycleDay, builder: (column) => column);
+
+  GeneratedColumn<String> get currentPhase => $composableBuilder(
+      column: $table.currentPhase, builder: (column) => column);
+
+  GeneratedColumn<bool> get hasPcos =>
+      $composableBuilder(column: $table.hasPcos, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$LocalCycleTrackingTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCycleTrackingTable,
+    LocalCycleTrackingData,
+    $$LocalCycleTrackingTableFilterComposer,
+    $$LocalCycleTrackingTableOrderingComposer,
+    $$LocalCycleTrackingTableAnnotationComposer,
+    $$LocalCycleTrackingTableCreateCompanionBuilder,
+    $$LocalCycleTrackingTableUpdateCompanionBuilder,
+    (
+      LocalCycleTrackingData,
+      BaseReferences<_$AppDatabase, $LocalCycleTrackingTable,
+          LocalCycleTrackingData>
+    ),
+    LocalCycleTrackingData,
+    PrefetchHooks Function()> {
+  $$LocalCycleTrackingTableTableManager(
+      _$AppDatabase db, $LocalCycleTrackingTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCycleTrackingTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCycleTrackingTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCycleTrackingTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> userId = const Value.absent(),
+            Value<int> cycleLengthDays = const Value.absent(),
+            Value<int> currentCycleDay = const Value.absent(),
+            Value<String> currentPhase = const Value.absent(),
+            Value<bool> hasPcos = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCycleTrackingCompanion(
+            userId: userId,
+            cycleLengthDays: cycleLengthDays,
+            currentCycleDay: currentCycleDay,
+            currentPhase: currentPhase,
+            hasPcos: hasPcos,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String userId,
+            required int cycleLengthDays,
+            required int currentCycleDay,
+            required String currentPhase,
+            Value<bool> hasPcos = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCycleTrackingCompanion.insert(
+            userId: userId,
+            cycleLengthDays: cycleLengthDays,
+            currentCycleDay: currentCycleDay,
+            currentPhase: currentPhase,
+            hasPcos: hasPcos,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCycleTrackingTable,
+                        LocalCycleTrackingData>(table),
+                    BaseReferences<_$AppDatabase, $LocalCycleTrackingTable,
+                        LocalCycleTrackingData>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCycleTrackingTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCycleTrackingTable,
+    LocalCycleTrackingData,
+    $$LocalCycleTrackingTableFilterComposer,
+    $$LocalCycleTrackingTableOrderingComposer,
+    $$LocalCycleTrackingTableAnnotationComposer,
+    $$LocalCycleTrackingTableCreateCompanionBuilder,
+    $$LocalCycleTrackingTableUpdateCompanionBuilder,
+    (
+      LocalCycleTrackingData,
+      BaseReferences<_$AppDatabase, $LocalCycleTrackingTable,
+          LocalCycleTrackingData>
+    ),
+    LocalCycleTrackingData,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2214,4 +3406,8 @@ class $AppDatabaseManager {
       $$LocalReadinessScoresTableTableManager(_db, _db.localReadinessScores);
   $$LocalDipCacheTableTableManager get localDipCache =>
       $$LocalDipCacheTableTableManager(_db, _db.localDipCache);
+  $$LocalDoshaScoresTableTableManager get localDoshaScores =>
+      $$LocalDoshaScoresTableTableManager(_db, _db.localDoshaScores);
+  $$LocalCycleTrackingTableTableManager get localCycleTracking =>
+      $$LocalCycleTrackingTableTableManager(_db, _db.localCycleTracking);
 }

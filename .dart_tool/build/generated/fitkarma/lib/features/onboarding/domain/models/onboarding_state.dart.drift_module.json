@@ -1,0 +1,8 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/onboarding/metabolism/services/metabolism_engine.dart",
+    "package:fitkarma/features/onboarding/domain/services/dosha_scoring_engine.dart",
+    "package:fitkarma/features/onboarding/domain/services/womens_health_engine.dart"
+  ]
+}

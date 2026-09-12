@@ -24,7 +24,7 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 6. Check this box off
 
 - [x] **Phase 0 — Foundation** (Health OS Brain, AI routing layer → Groq via Edge Functions)
-- [ ] **Phase 1 — Onboarding** (profiles, dosha_scores, cycle_tracking tables)
+- [x] **Phase 1 — Onboarding** (profiles, dosha_scores, cycle_tracking tables)
 - [ ] **Phase 2 — Daily Mission + Readiness** (readiness_scores, dip_cache)
 - [ ] **Phase 3 — AI Adaptive Coach** (coach_sessions/coach_messages, Cloud Function coach endpoint → `coach-message` Edge Function)
 - [ ] **Phase 4 — Health Tracking** (wearable_samples/biomarkers/cgm_telemetry — **blocked on the offline-sync decision in `decisions.md` ADR-002** before porting late-sync conflict resolution)
@@ -103,46 +103,46 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 1 — Onboarding
 
-- [ ] **Onboarding Flow Order**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Welcome Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Goals Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Demographics Screen (live BMI + adaptive targets)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **AI Diet Plan Results Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Dosha Quiz (scoring engine)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Program Blueprint Selection Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Women's Advanced Health Layer (cycle-aware training/nutrition, fertility planning, menopause tracking, PCOS calibrator)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Onboarding Flow Order**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Welcome Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Goals Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Demographics Screen (live BMI + adaptive targets)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Diet Plan Results Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Dosha Quiz (scoring engine)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Program Blueprint Selection Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Women's Advanced Health Layer (cycle-aware training/nutrition, fertility planning, menopause tracking, PCOS calibrator)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 2 — Daily Mission + Readiness
 
