@@ -6,7 +6,6 @@
     "package:fitkarma/core/database/app_database.dart",
     "package:fitkarma/core/sync/outbox_sync_worker.dart",
     "package:fitkarma/features/workout/domain/models/workout_models.dart",
-    "package:fitkarma/features/workout/domain/services/exercise_database.dart",
     "package:fitkarma/features/workout/domain/services/movement_intelligence_engine.dart",
     "package:fitkarma/features/workout/domain/services/progressive_overload_engine.dart"
   ]

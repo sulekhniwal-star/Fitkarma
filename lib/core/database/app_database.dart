@@ -255,6 +255,34 @@ class LocalWorkoutSets extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 18. Local Karma Points Ledger Table
+class LocalKarmaPoints extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  IntColumn get points => integer()();
+  TextColumn get actionType => text()();
+  TextColumn get description => text()();
+  DateTimeColumn get earnedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 19. Local Habit Streaks Table
+class LocalHabitStreaks extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get habitType => text()();
+  IntColumn get currentStreak => integer()();
+  IntColumn get longestStreak => integer()();
+  DateTimeColumn get lastActiveDate => dateTime()();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -273,6 +301,8 @@ class LocalWorkoutSets extends Table {
   LocalGroceryItems,
   LocalWorkoutSessions,
   LocalWorkoutSets,
+  LocalKarmaPoints,
+  LocalHabitStreaks,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

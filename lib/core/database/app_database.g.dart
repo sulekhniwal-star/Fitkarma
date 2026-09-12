@@ -7159,6 +7159,795 @@ class LocalWorkoutSetsCompanion extends UpdateCompanion<LocalWorkoutSet> {
   }
 }
 
+class $LocalKarmaPointsTable extends LocalKarmaPoints
+    with TableInfo<$LocalKarmaPointsTable, LocalKarmaPoint> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalKarmaPointsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _pointsMeta = const VerificationMeta('points');
+  @override
+  late final GeneratedColumn<int> points = GeneratedColumn<int>(
+      'points', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _actionTypeMeta =
+      const VerificationMeta('actionType');
+  @override
+  late final GeneratedColumn<String> actionType = GeneratedColumn<String>(
+      'action_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _earnedAtMeta =
+      const VerificationMeta('earnedAt');
+  @override
+  late final GeneratedColumn<DateTime> earnedAt = GeneratedColumn<DateTime>(
+      'earned_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, points, actionType, description, earnedAt, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_karma_points';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalKarmaPoint> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('points')) {
+      context.handle(_pointsMeta,
+          points.isAcceptableOrUnknown(data['points']!, _pointsMeta));
+    } else if (isInserting) {
+      context.missing(_pointsMeta);
+    }
+    if (data.containsKey('action_type')) {
+      context.handle(
+          _actionTypeMeta,
+          actionType.isAcceptableOrUnknown(
+              data['action_type']!, _actionTypeMeta));
+    } else if (isInserting) {
+      context.missing(_actionTypeMeta);
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    } else if (isInserting) {
+      context.missing(_descriptionMeta);
+    }
+    if (data.containsKey('earned_at')) {
+      context.handle(_earnedAtMeta,
+          earnedAt.isAcceptableOrUnknown(data['earned_at']!, _earnedAtMeta));
+    } else if (isInserting) {
+      context.missing(_earnedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalKarmaPoint map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalKarmaPoint(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      points: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}points'])!,
+      actionType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}action_type'])!,
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description'])!,
+      earnedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}earned_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalKarmaPointsTable createAlias(String alias) {
+    return $LocalKarmaPointsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalKarmaPoint extends DataClass implements Insertable<LocalKarmaPoint> {
+  final String id;
+  final String userId;
+  final int points;
+  final String actionType;
+  final String description;
+  final DateTime earnedAt;
+  final DateTime createdAt;
+  const LocalKarmaPoint(
+      {required this.id,
+      required this.userId,
+      required this.points,
+      required this.actionType,
+      required this.description,
+      required this.earnedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['points'] = Variable<int>(points);
+    map['action_type'] = Variable<String>(actionType);
+    map['description'] = Variable<String>(description);
+    map['earned_at'] = Variable<DateTime>(earnedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalKarmaPointsCompanion toCompanion(bool nullToAbsent) {
+    return LocalKarmaPointsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      points: Value(points),
+      actionType: Value(actionType),
+      description: Value(description),
+      earnedAt: Value(earnedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalKarmaPoint.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalKarmaPoint(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      points: serializer.fromJson<int>(json['points']),
+      actionType: serializer.fromJson<String>(json['actionType']),
+      description: serializer.fromJson<String>(json['description']),
+      earnedAt: serializer.fromJson<DateTime>(json['earnedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'points': serializer.toJson<int>(points),
+      'actionType': serializer.toJson<String>(actionType),
+      'description': serializer.toJson<String>(description),
+      'earnedAt': serializer.toJson<DateTime>(earnedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalKarmaPoint copyWith(
+          {String? id,
+          String? userId,
+          int? points,
+          String? actionType,
+          String? description,
+          DateTime? earnedAt,
+          DateTime? createdAt}) =>
+      LocalKarmaPoint(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        points: points ?? this.points,
+        actionType: actionType ?? this.actionType,
+        description: description ?? this.description,
+        earnedAt: earnedAt ?? this.earnedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalKarmaPoint copyWithCompanion(LocalKarmaPointsCompanion data) {
+    return LocalKarmaPoint(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      points: data.points.present ? data.points.value : this.points,
+      actionType:
+          data.actionType.present ? data.actionType.value : this.actionType,
+      description:
+          data.description.present ? data.description.value : this.description,
+      earnedAt: data.earnedAt.present ? data.earnedAt.value : this.earnedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalKarmaPoint(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('points: $points, ')
+          ..write('actionType: $actionType, ')
+          ..write('description: $description, ')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, points, actionType, description, earnedAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalKarmaPoint &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.points == this.points &&
+          other.actionType == this.actionType &&
+          other.description == this.description &&
+          other.earnedAt == this.earnedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalKarmaPointsCompanion extends UpdateCompanion<LocalKarmaPoint> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<int> points;
+  final Value<String> actionType;
+  final Value<String> description;
+  final Value<DateTime> earnedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalKarmaPointsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.points = const Value.absent(),
+    this.actionType = const Value.absent(),
+    this.description = const Value.absent(),
+    this.earnedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalKarmaPointsCompanion.insert({
+    required String id,
+    required String userId,
+    required int points,
+    required String actionType,
+    required String description,
+    required DateTime earnedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        points = Value(points),
+        actionType = Value(actionType),
+        description = Value(description),
+        earnedAt = Value(earnedAt);
+  static Insertable<LocalKarmaPoint> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<int>? points,
+    Expression<String>? actionType,
+    Expression<String>? description,
+    Expression<DateTime>? earnedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (points != null) 'points': points,
+      if (actionType != null) 'action_type': actionType,
+      if (description != null) 'description': description,
+      if (earnedAt != null) 'earned_at': earnedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalKarmaPointsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<int>? points,
+      Value<String>? actionType,
+      Value<String>? description,
+      Value<DateTime>? earnedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalKarmaPointsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      points: points ?? this.points,
+      actionType: actionType ?? this.actionType,
+      description: description ?? this.description,
+      earnedAt: earnedAt ?? this.earnedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (points.present) {
+      map['points'] = Variable<int>(points.value);
+    }
+    if (actionType.present) {
+      map['action_type'] = Variable<String>(actionType.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
+    if (earnedAt.present) {
+      map['earned_at'] = Variable<DateTime>(earnedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalKarmaPointsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('points: $points, ')
+          ..write('actionType: $actionType, ')
+          ..write('description: $description, ')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalHabitStreaksTable extends LocalHabitStreaks
+    with TableInfo<$LocalHabitStreaksTable, LocalHabitStreak> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalHabitStreaksTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _habitTypeMeta =
+      const VerificationMeta('habitType');
+  @override
+  late final GeneratedColumn<String> habitType = GeneratedColumn<String>(
+      'habit_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _currentStreakMeta =
+      const VerificationMeta('currentStreak');
+  @override
+  late final GeneratedColumn<int> currentStreak = GeneratedColumn<int>(
+      'current_streak', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _longestStreakMeta =
+      const VerificationMeta('longestStreak');
+  @override
+  late final GeneratedColumn<int> longestStreak = GeneratedColumn<int>(
+      'longest_streak', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _lastActiveDateMeta =
+      const VerificationMeta('lastActiveDate');
+  @override
+  late final GeneratedColumn<DateTime> lastActiveDate =
+      GeneratedColumn<DateTime>('last_active_date', aliasedName, false,
+          type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        habitType,
+        currentStreak,
+        longestStreak,
+        lastActiveDate,
+        updatedAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_habit_streaks';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalHabitStreak> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('habit_type')) {
+      context.handle(_habitTypeMeta,
+          habitType.isAcceptableOrUnknown(data['habit_type']!, _habitTypeMeta));
+    } else if (isInserting) {
+      context.missing(_habitTypeMeta);
+    }
+    if (data.containsKey('current_streak')) {
+      context.handle(
+          _currentStreakMeta,
+          currentStreak.isAcceptableOrUnknown(
+              data['current_streak']!, _currentStreakMeta));
+    } else if (isInserting) {
+      context.missing(_currentStreakMeta);
+    }
+    if (data.containsKey('longest_streak')) {
+      context.handle(
+          _longestStreakMeta,
+          longestStreak.isAcceptableOrUnknown(
+              data['longest_streak']!, _longestStreakMeta));
+    } else if (isInserting) {
+      context.missing(_longestStreakMeta);
+    }
+    if (data.containsKey('last_active_date')) {
+      context.handle(
+          _lastActiveDateMeta,
+          lastActiveDate.isAcceptableOrUnknown(
+              data['last_active_date']!, _lastActiveDateMeta));
+    } else if (isInserting) {
+      context.missing(_lastActiveDateMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalHabitStreak map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalHabitStreak(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      habitType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}habit_type'])!,
+      currentStreak: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}current_streak'])!,
+      longestStreak: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}longest_streak'])!,
+      lastActiveDate: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}last_active_date'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $LocalHabitStreaksTable createAlias(String alias) {
+    return $LocalHabitStreaksTable(attachedDatabase, alias);
+  }
+}
+
+class LocalHabitStreak extends DataClass
+    implements Insertable<LocalHabitStreak> {
+  final String id;
+  final String userId;
+  final String habitType;
+  final int currentStreak;
+  final int longestStreak;
+  final DateTime lastActiveDate;
+  final DateTime updatedAt;
+  const LocalHabitStreak(
+      {required this.id,
+      required this.userId,
+      required this.habitType,
+      required this.currentStreak,
+      required this.longestStreak,
+      required this.lastActiveDate,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['habit_type'] = Variable<String>(habitType);
+    map['current_streak'] = Variable<int>(currentStreak);
+    map['longest_streak'] = Variable<int>(longestStreak);
+    map['last_active_date'] = Variable<DateTime>(lastActiveDate);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  LocalHabitStreaksCompanion toCompanion(bool nullToAbsent) {
+    return LocalHabitStreaksCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      habitType: Value(habitType),
+      currentStreak: Value(currentStreak),
+      longestStreak: Value(longestStreak),
+      lastActiveDate: Value(lastActiveDate),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory LocalHabitStreak.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalHabitStreak(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      habitType: serializer.fromJson<String>(json['habitType']),
+      currentStreak: serializer.fromJson<int>(json['currentStreak']),
+      longestStreak: serializer.fromJson<int>(json['longestStreak']),
+      lastActiveDate: serializer.fromJson<DateTime>(json['lastActiveDate']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'habitType': serializer.toJson<String>(habitType),
+      'currentStreak': serializer.toJson<int>(currentStreak),
+      'longestStreak': serializer.toJson<int>(longestStreak),
+      'lastActiveDate': serializer.toJson<DateTime>(lastActiveDate),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  LocalHabitStreak copyWith(
+          {String? id,
+          String? userId,
+          String? habitType,
+          int? currentStreak,
+          int? longestStreak,
+          DateTime? lastActiveDate,
+          DateTime? updatedAt}) =>
+      LocalHabitStreak(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        habitType: habitType ?? this.habitType,
+        currentStreak: currentStreak ?? this.currentStreak,
+        longestStreak: longestStreak ?? this.longestStreak,
+        lastActiveDate: lastActiveDate ?? this.lastActiveDate,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  LocalHabitStreak copyWithCompanion(LocalHabitStreaksCompanion data) {
+    return LocalHabitStreak(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      habitType: data.habitType.present ? data.habitType.value : this.habitType,
+      currentStreak: data.currentStreak.present
+          ? data.currentStreak.value
+          : this.currentStreak,
+      longestStreak: data.longestStreak.present
+          ? data.longestStreak.value
+          : this.longestStreak,
+      lastActiveDate: data.lastActiveDate.present
+          ? data.lastActiveDate.value
+          : this.lastActiveDate,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalHabitStreak(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('habitType: $habitType, ')
+          ..write('currentStreak: $currentStreak, ')
+          ..write('longestStreak: $longestStreak, ')
+          ..write('lastActiveDate: $lastActiveDate, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, habitType, currentStreak,
+      longestStreak, lastActiveDate, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalHabitStreak &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.habitType == this.habitType &&
+          other.currentStreak == this.currentStreak &&
+          other.longestStreak == this.longestStreak &&
+          other.lastActiveDate == this.lastActiveDate &&
+          other.updatedAt == this.updatedAt);
+}
+
+class LocalHabitStreaksCompanion extends UpdateCompanion<LocalHabitStreak> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> habitType;
+  final Value<int> currentStreak;
+  final Value<int> longestStreak;
+  final Value<DateTime> lastActiveDate;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const LocalHabitStreaksCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.habitType = const Value.absent(),
+    this.currentStreak = const Value.absent(),
+    this.longestStreak = const Value.absent(),
+    this.lastActiveDate = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalHabitStreaksCompanion.insert({
+    required String id,
+    required String userId,
+    required String habitType,
+    required int currentStreak,
+    required int longestStreak,
+    required DateTime lastActiveDate,
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        habitType = Value(habitType),
+        currentStreak = Value(currentStreak),
+        longestStreak = Value(longestStreak),
+        lastActiveDate = Value(lastActiveDate);
+  static Insertable<LocalHabitStreak> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? habitType,
+    Expression<int>? currentStreak,
+    Expression<int>? longestStreak,
+    Expression<DateTime>? lastActiveDate,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (habitType != null) 'habit_type': habitType,
+      if (currentStreak != null) 'current_streak': currentStreak,
+      if (longestStreak != null) 'longest_streak': longestStreak,
+      if (lastActiveDate != null) 'last_active_date': lastActiveDate,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalHabitStreaksCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? habitType,
+      Value<int>? currentStreak,
+      Value<int>? longestStreak,
+      Value<DateTime>? lastActiveDate,
+      Value<DateTime>? updatedAt,
+      Value<int>? rowid}) {
+    return LocalHabitStreaksCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      habitType: habitType ?? this.habitType,
+      currentStreak: currentStreak ?? this.currentStreak,
+      longestStreak: longestStreak ?? this.longestStreak,
+      lastActiveDate: lastActiveDate ?? this.lastActiveDate,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (habitType.present) {
+      map['habit_type'] = Variable<String>(habitType.value);
+    }
+    if (currentStreak.present) {
+      map['current_streak'] = Variable<int>(currentStreak.value);
+    }
+    if (longestStreak.present) {
+      map['longest_streak'] = Variable<int>(longestStreak.value);
+    }
+    if (lastActiveDate.present) {
+      map['last_active_date'] = Variable<DateTime>(lastActiveDate.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalHabitStreaksCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('habitType: $habitType, ')
+          ..write('currentStreak: $currentStreak, ')
+          ..write('longestStreak: $longestStreak, ')
+          ..write('lastActiveDate: $lastActiveDate, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -7192,6 +7981,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalWorkoutSessionsTable(this);
   late final $LocalWorkoutSetsTable localWorkoutSets =
       $LocalWorkoutSetsTable(this);
+  late final $LocalKarmaPointsTable localKarmaPoints =
+      $LocalKarmaPointsTable(this);
+  late final $LocalHabitStreaksTable localHabitStreaks =
+      $LocalHabitStreaksTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -7213,7 +8006,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localMeals,
         localGroceryItems,
         localWorkoutSessions,
-        localWorkoutSets
+        localWorkoutSets,
+        localKarmaPoints,
+        localHabitStreaks
       ];
 }
 
@@ -10968,6 +11763,428 @@ typedef $$LocalWorkoutSetsTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalWorkoutSet,
     PrefetchHooks Function()>;
+typedef $$LocalKarmaPointsTableCreateCompanionBuilder
+    = LocalKarmaPointsCompanion Function({
+  required String id,
+  required String userId,
+  required int points,
+  required String actionType,
+  required String description,
+  required DateTime earnedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalKarmaPointsTableUpdateCompanionBuilder
+    = LocalKarmaPointsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<int> points,
+  Value<String> actionType,
+  Value<String> description,
+  Value<DateTime> earnedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalKarmaPointsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalKarmaPointsTable> {
+  $$LocalKarmaPointsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get points => $composableBuilder(
+      column: $table.points, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get actionType => $composableBuilder(
+      column: $table.actionType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get earnedAt => $composableBuilder(
+      column: $table.earnedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalKarmaPointsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalKarmaPointsTable> {
+  $$LocalKarmaPointsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get points => $composableBuilder(
+      column: $table.points, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get actionType => $composableBuilder(
+      column: $table.actionType, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get earnedAt => $composableBuilder(
+      column: $table.earnedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalKarmaPointsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalKarmaPointsTable> {
+  $$LocalKarmaPointsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<int> get points =>
+      $composableBuilder(column: $table.points, builder: (column) => column);
+
+  GeneratedColumn<String> get actionType => $composableBuilder(
+      column: $table.actionType, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get earnedAt =>
+      $composableBuilder(column: $table.earnedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalKarmaPointsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalKarmaPointsTable,
+    LocalKarmaPoint,
+    $$LocalKarmaPointsTableFilterComposer,
+    $$LocalKarmaPointsTableOrderingComposer,
+    $$LocalKarmaPointsTableAnnotationComposer,
+    $$LocalKarmaPointsTableCreateCompanionBuilder,
+    $$LocalKarmaPointsTableUpdateCompanionBuilder,
+    (
+      LocalKarmaPoint,
+      BaseReferences<_$AppDatabase, $LocalKarmaPointsTable, LocalKarmaPoint>
+    ),
+    LocalKarmaPoint,
+    PrefetchHooks Function()> {
+  $$LocalKarmaPointsTableTableManager(
+      _$AppDatabase db, $LocalKarmaPointsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalKarmaPointsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalKarmaPointsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalKarmaPointsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<int> points = const Value.absent(),
+            Value<String> actionType = const Value.absent(),
+            Value<String> description = const Value.absent(),
+            Value<DateTime> earnedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalKarmaPointsCompanion(
+            id: id,
+            userId: userId,
+            points: points,
+            actionType: actionType,
+            description: description,
+            earnedAt: earnedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required int points,
+            required String actionType,
+            required String description,
+            required DateTime earnedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalKarmaPointsCompanion.insert(
+            id: id,
+            userId: userId,
+            points: points,
+            actionType: actionType,
+            description: description,
+            earnedAt: earnedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalKarmaPointsTable, LocalKarmaPoint>(table),
+                    BaseReferences<_$AppDatabase, $LocalKarmaPointsTable,
+                        LocalKarmaPoint>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalKarmaPointsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalKarmaPointsTable,
+    LocalKarmaPoint,
+    $$LocalKarmaPointsTableFilterComposer,
+    $$LocalKarmaPointsTableOrderingComposer,
+    $$LocalKarmaPointsTableAnnotationComposer,
+    $$LocalKarmaPointsTableCreateCompanionBuilder,
+    $$LocalKarmaPointsTableUpdateCompanionBuilder,
+    (
+      LocalKarmaPoint,
+      BaseReferences<_$AppDatabase, $LocalKarmaPointsTable, LocalKarmaPoint>
+    ),
+    LocalKarmaPoint,
+    PrefetchHooks Function()>;
+typedef $$LocalHabitStreaksTableCreateCompanionBuilder
+    = LocalHabitStreaksCompanion Function({
+  required String id,
+  required String userId,
+  required String habitType,
+  required int currentStreak,
+  required int longestStreak,
+  required DateTime lastActiveDate,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+typedef $$LocalHabitStreaksTableUpdateCompanionBuilder
+    = LocalHabitStreaksCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> habitType,
+  Value<int> currentStreak,
+  Value<int> longestStreak,
+  Value<DateTime> lastActiveDate,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+
+class $$LocalHabitStreaksTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalHabitStreaksTable> {
+  $$LocalHabitStreaksTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get habitType => $composableBuilder(
+      column: $table.habitType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get currentStreak => $composableBuilder(
+      column: $table.currentStreak, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get longestStreak => $composableBuilder(
+      column: $table.longestStreak, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get lastActiveDate => $composableBuilder(
+      column: $table.lastActiveDate,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalHabitStreaksTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalHabitStreaksTable> {
+  $$LocalHabitStreaksTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get habitType => $composableBuilder(
+      column: $table.habitType, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get currentStreak => $composableBuilder(
+      column: $table.currentStreak,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get longestStreak => $composableBuilder(
+      column: $table.longestStreak,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get lastActiveDate => $composableBuilder(
+      column: $table.lastActiveDate,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalHabitStreaksTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalHabitStreaksTable> {
+  $$LocalHabitStreaksTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get habitType =>
+      $composableBuilder(column: $table.habitType, builder: (column) => column);
+
+  GeneratedColumn<int> get currentStreak => $composableBuilder(
+      column: $table.currentStreak, builder: (column) => column);
+
+  GeneratedColumn<int> get longestStreak => $composableBuilder(
+      column: $table.longestStreak, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastActiveDate => $composableBuilder(
+      column: $table.lastActiveDate, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$LocalHabitStreaksTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalHabitStreaksTable,
+    LocalHabitStreak,
+    $$LocalHabitStreaksTableFilterComposer,
+    $$LocalHabitStreaksTableOrderingComposer,
+    $$LocalHabitStreaksTableAnnotationComposer,
+    $$LocalHabitStreaksTableCreateCompanionBuilder,
+    $$LocalHabitStreaksTableUpdateCompanionBuilder,
+    (
+      LocalHabitStreak,
+      BaseReferences<_$AppDatabase, $LocalHabitStreaksTable, LocalHabitStreak>
+    ),
+    LocalHabitStreak,
+    PrefetchHooks Function()> {
+  $$LocalHabitStreaksTableTableManager(
+      _$AppDatabase db, $LocalHabitStreaksTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalHabitStreaksTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalHabitStreaksTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalHabitStreaksTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> habitType = const Value.absent(),
+            Value<int> currentStreak = const Value.absent(),
+            Value<int> longestStreak = const Value.absent(),
+            Value<DateTime> lastActiveDate = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalHabitStreaksCompanion(
+            id: id,
+            userId: userId,
+            habitType: habitType,
+            currentStreak: currentStreak,
+            longestStreak: longestStreak,
+            lastActiveDate: lastActiveDate,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String habitType,
+            required int currentStreak,
+            required int longestStreak,
+            required DateTime lastActiveDate,
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalHabitStreaksCompanion.insert(
+            id: id,
+            userId: userId,
+            habitType: habitType,
+            currentStreak: currentStreak,
+            longestStreak: longestStreak,
+            lastActiveDate: lastActiveDate,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalHabitStreaksTable, LocalHabitStreak>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalHabitStreaksTable,
+                        LocalHabitStreak>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalHabitStreaksTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalHabitStreaksTable,
+    LocalHabitStreak,
+    $$LocalHabitStreaksTableFilterComposer,
+    $$LocalHabitStreaksTableOrderingComposer,
+    $$LocalHabitStreaksTableAnnotationComposer,
+    $$LocalHabitStreaksTableCreateCompanionBuilder,
+    $$LocalHabitStreaksTableUpdateCompanionBuilder,
+    (
+      LocalHabitStreak,
+      BaseReferences<_$AppDatabase, $LocalHabitStreaksTable, LocalHabitStreak>
+    ),
+    LocalHabitStreak,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -11006,4 +12223,8 @@ class $AppDatabaseManager {
       $$LocalWorkoutSessionsTableTableManager(_db, _db.localWorkoutSessions);
   $$LocalWorkoutSetsTableTableManager get localWorkoutSets =>
       $$LocalWorkoutSetsTableTableManager(_db, _db.localWorkoutSets);
+  $$LocalKarmaPointsTableTableManager get localKarmaPoints =>
+      $$LocalKarmaPointsTableTableManager(_db, _db.localKarmaPoints);
+  $$LocalHabitStreaksTableTableManager get localHabitStreaks =>
+      $$LocalHabitStreaksTableTableManager(_db, _db.localHabitStreaks);
 }

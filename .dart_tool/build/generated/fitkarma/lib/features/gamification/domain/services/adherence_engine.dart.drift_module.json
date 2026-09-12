@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/gamification/domain/models/gamification_models.dart"
+  ]
+}
