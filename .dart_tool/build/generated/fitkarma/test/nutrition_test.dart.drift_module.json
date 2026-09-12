@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/native.dart",
+    "package:flutter_test/flutter_test.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/nutrition/data/nutrition_repository.dart",
+    "package:fitkarma/features/nutrition/domain/models/nutrition_models.dart",
+    "package:fitkarma/features/nutrition/domain/services/festival_nutrition_engine.dart",
+    "package:fitkarma/features/nutrition/domain/services/indian_food_swap_engine.dart",
+    "package:fitkarma/features/nutrition/domain/services/indian_nutrition_engine.dart",
+    "package:fitkarma/features/nutrition/domain/services/meal_quality_engine.dart"
+  ]
+}

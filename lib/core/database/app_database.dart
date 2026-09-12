@@ -223,6 +223,38 @@ class LocalGroceryItems extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 16. Local Workout Sessions Table
+class LocalWorkoutSessions extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get name => text()();
+  IntColumn get durationSeconds => integer()();
+  RealColumn get totalVolumeKg => real()();
+  RealColumn get avgRpe => real()();
+  DateTimeColumn get startedAt => dateTime()();
+  DateTimeColumn get completedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 17. Local Workout Sets Table
+class LocalWorkoutSets extends Table {
+  TextColumn get id => text()();
+  TextColumn get sessionId => text()();
+  TextColumn get exerciseId => text()();
+  IntColumn get setNumber => integer()();
+  RealColumn get weightKg => real()();
+  IntColumn get reps => integer()();
+  IntColumn get rpe => integer()();
+  BoolColumn get isCompleted => boolean().withDefault(const Constant(true))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -239,6 +271,8 @@ class LocalGroceryItems extends Table {
   LocalRecipes,
   LocalMeals,
   LocalGroceryItems,
+  LocalWorkoutSessions,
+  LocalWorkoutSets,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

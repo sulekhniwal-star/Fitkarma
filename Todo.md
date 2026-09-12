@@ -348,56 +348,56 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 6 — Workout System
 
-- [ ] **Workout Screen Home**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Active Workout Screen**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Progressive Overload Engine (deterministic)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Dynamic Fitness Blueprint Generator**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Training Operating System — Movement Intelligence Platform**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Training Operating System — Confidence Indices**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Training Operating System — Smart Programming & Overload Logic**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Training Operating System — Adherence & Athletic Profiling**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Training Operating System — Biomechanics & Trajectory Projections**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Adaptive Computer Vision Loop (pose estimation form-checking)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Workout Screen Home**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Active Workout Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Progressive Overload Engine (deterministic)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Dynamic Fitness Blueprint Generator**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Movement Intelligence Platform**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Confidence Indices**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Smart Programming & Overload Logic**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Adherence & Athletic Profiling**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Biomechanics & Trajectory Projections**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Adaptive Computer Vision Loop (pose estimation form-checking)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 7 — Gamification
 

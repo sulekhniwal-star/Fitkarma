@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/features/nutrition/domain/models/nutrition_models.dart",
+    "package:fitkarma/features/nutrition/domain/services/indian_nutrition_engine.dart",
+    "package:fitkarma/features/nutrition/domain/services/meal_quality_engine.dart"
+  ]
+}

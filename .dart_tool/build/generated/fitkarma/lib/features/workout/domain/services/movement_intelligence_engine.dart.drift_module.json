@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/workout/domain/models/workout_models.dart"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/drift.dart",
+    "package:uuid/uuid.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/nutrition/domain/models/nutrition_models.dart",
+    "package:fitkarma/features/nutrition/domain/services/indian_food_swap_engine.dart",
+    "package:fitkarma/features/nutrition/domain/services/indian_nutrition_engine.dart",
+    "package:fitkarma/features/nutrition/domain/services/meal_quality_engine.dart"
+  ]
+}
