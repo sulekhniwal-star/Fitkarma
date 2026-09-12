@@ -26,7 +26,7 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 - [x] **Phase 0 — Foundation** (Health OS Brain, AI routing layer → Groq via Edge Functions)
 - [x] **Phase 1 — Onboarding** (profiles, dosha_scores, cycle_tracking tables)
 - [x] **Phase 2 — Daily Mission + Readiness** (readiness_scores, dip_cache)
-- [ ] **Phase 3 — AI Adaptive Coach** (coach_sessions/coach_messages, Cloud Function coach endpoint → `coach-message` Edge Function)
+- [x] **Phase 3 — AI Adaptive Coach** (coach_sessions/coach_messages, Cloud Function coach endpoint → `coach-message` Edge Function)
 - [ ] **Phase 4 — Health Tracking** (wearable_samples/biomarkers/cgm_telemetry — **blocked on the offline-sync decision in `decisions.md` ADR-002** before porting late-sync conflict resolution)
 - [ ] **Phase 5 — Smart Indian Nutrition** (recipes with pgvector, meals, grocery_price_matrix)
 - [ ] **Phase 6 — Workout System** (workout_sessions/workout_sets, MediaPipe landmark storage)
@@ -189,31 +189,31 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 3 — AI Adaptive Coach
 
-- [ ] **AI Coach Philosophy & Context Builder**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **AI Coach Screen (local chat cache, optimistic UI)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Cloud Function coach endpoint**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Proactive event-driven insights**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Health Coach Escalation Layer (elite tier — human coach handoff)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **AI Coach Philosophy & Context Builder**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Coach Screen (local chat cache, optimistic UI)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Cloud Function coach endpoint**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Proactive event-driven insights**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Health Coach Escalation Layer (elite tier — human coach handoff)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 4 — Health Tracking
 

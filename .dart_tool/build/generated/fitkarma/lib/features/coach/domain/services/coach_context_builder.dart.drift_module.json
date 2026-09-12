@@ -1,0 +1,9 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/core/database/app_database.dart",
+    "package:fitkarma/features/coach/metabolism/services/metabolism_engine.dart",
+    "package:fitkarma/features/coach/onboarding/domain/models/onboarding_state.dart",
+    "package:fitkarma/features/coach/readiness_engine/domain/models/readiness_result.dart"
+  ]
+}

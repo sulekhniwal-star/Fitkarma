@@ -97,6 +97,31 @@ class LocalSorenessLogs extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 8. Local Coach Sessions Table
+class LocalCoachSessions extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get title => text().withDefault(const Constant('Daily Coaching Session'))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 9. Local Coach Messages Table
+class LocalCoachMessages extends Table {
+  TextColumn get id => text()();
+  TextColumn get sessionId => text()();
+  TextColumn get sender => text()(); // 'user', 'coach', 'system'
+  TextColumn get content => text()();
+  TextColumn get modelUsed => text().nullable()();
+  DateTimeColumn get timestamp => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -105,6 +130,8 @@ class LocalSorenessLogs extends Table {
   LocalDoshaScores,
   LocalCycleTracking,
   LocalSorenessLogs,
+  LocalCoachSessions,
+  LocalCoachMessages,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

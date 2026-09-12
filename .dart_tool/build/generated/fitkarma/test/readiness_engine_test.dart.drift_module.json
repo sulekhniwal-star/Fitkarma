@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/native.dart",
+    "package:flutter_test/flutter_test.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/readiness_engine/data/readiness_repository.dart",
+    "package:fitkarma/features/readiness_engine/domain/models/readiness_input.dart",
+    "package:fitkarma/features/readiness_engine/domain/models/readiness_result.dart",
+    "package:fitkarma/features/readiness_engine/domain/services/readiness_calculation_engine.dart",
+    "package:fitkarma/features/readiness_engine/domain/services/sleep_intelligence_engine.dart",
+    "package:fitkarma/features/readiness_engine/domain/services/recovery_os_engine.dart"
+  ]
+}

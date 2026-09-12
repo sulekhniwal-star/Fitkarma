@@ -1,0 +1,7 @@
+{
+  "elements": {},
+  "imports": [
+    "package:supabase_flutter/supabase_flutter.dart",
+    "package:fitkarma/features/coach/domain/models/coach_message.dart"
+  ]
+}

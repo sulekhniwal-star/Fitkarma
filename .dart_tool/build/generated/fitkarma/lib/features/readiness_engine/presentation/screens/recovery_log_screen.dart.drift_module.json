@@ -1,0 +1,17 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/main.dart",
+    "package:fitkarma/features/readiness_engine/data/readiness_repository.dart",
+    "package:fitkarma/features/readiness_engine/domain/models/readiness_input.dart",
+    "package:fitkarma/features/readiness_engine/domain/models/readiness_result.dart",
+    "package:fitkarma/features/readiness_engine/domain/services/readiness_calculation_engine.dart",
+    "package:fitkarma/features/readiness_engine/presentation/widgets/body_soreness_map.dart"
+  ]
+}

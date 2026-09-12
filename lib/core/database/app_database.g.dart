@@ -2488,6 +2488,658 @@ class LocalSorenessLogsCompanion extends UpdateCompanion<LocalSorenessLog> {
   }
 }
 
+class $LocalCoachSessionsTable extends LocalCoachSessions
+    with TableInfo<$LocalCoachSessionsTable, LocalCoachSession> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCoachSessionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('Daily Coaching Session'));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, title, createdAt, updatedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_coach_sessions';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalCoachSession> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCoachSession map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCoachSession(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $LocalCoachSessionsTable createAlias(String alias) {
+    return $LocalCoachSessionsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCoachSession extends DataClass
+    implements Insertable<LocalCoachSession> {
+  final String id;
+  final String userId;
+  final String title;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  const LocalCoachSession(
+      {required this.id,
+      required this.userId,
+      required this.title,
+      required this.createdAt,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['title'] = Variable<String>(title);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  LocalCoachSessionsCompanion toCompanion(bool nullToAbsent) {
+    return LocalCoachSessionsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      title: Value(title),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory LocalCoachSession.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCoachSession(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      title: serializer.fromJson<String>(json['title']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'title': serializer.toJson<String>(title),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  LocalCoachSession copyWith(
+          {String? id,
+          String? userId,
+          String? title,
+          DateTime? createdAt,
+          DateTime? updatedAt}) =>
+      LocalCoachSession(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        title: title ?? this.title,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  LocalCoachSession copyWithCompanion(LocalCoachSessionsCompanion data) {
+    return LocalCoachSession(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      title: data.title.present ? data.title.value : this.title,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachSession(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('title: $title, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, title, createdAt, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCoachSession &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.title == this.title &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class LocalCoachSessionsCompanion extends UpdateCompanion<LocalCoachSession> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> title;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const LocalCoachSessionsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.title = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCoachSessionsCompanion.insert({
+    required String id,
+    required String userId,
+    this.title = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId);
+  static Insertable<LocalCoachSession> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? title,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (title != null) 'title': title,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCoachSessionsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? title,
+      Value<DateTime>? createdAt,
+      Value<DateTime>? updatedAt,
+      Value<int>? rowid}) {
+    return LocalCoachSessionsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      title: title ?? this.title,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachSessionsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('title: $title, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCoachMessagesTable extends LocalCoachMessages
+    with TableInfo<$LocalCoachMessagesTable, LocalCoachMessage> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCoachMessagesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sessionIdMeta =
+      const VerificationMeta('sessionId');
+  @override
+  late final GeneratedColumn<String> sessionId = GeneratedColumn<String>(
+      'session_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _senderMeta = const VerificationMeta('sender');
+  @override
+  late final GeneratedColumn<String> sender = GeneratedColumn<String>(
+      'sender', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _contentMeta =
+      const VerificationMeta('content');
+  @override
+  late final GeneratedColumn<String> content = GeneratedColumn<String>(
+      'content', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _modelUsedMeta =
+      const VerificationMeta('modelUsed');
+  @override
+  late final GeneratedColumn<String> modelUsed = GeneratedColumn<String>(
+      'model_used', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
+  @override
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
+      'timestamp', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, sessionId, sender, content, modelUsed, timestamp];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_coach_messages';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalCoachMessage> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('session_id')) {
+      context.handle(_sessionIdMeta,
+          sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta));
+    } else if (isInserting) {
+      context.missing(_sessionIdMeta);
+    }
+    if (data.containsKey('sender')) {
+      context.handle(_senderMeta,
+          sender.isAcceptableOrUnknown(data['sender']!, _senderMeta));
+    } else if (isInserting) {
+      context.missing(_senderMeta);
+    }
+    if (data.containsKey('content')) {
+      context.handle(_contentMeta,
+          content.isAcceptableOrUnknown(data['content']!, _contentMeta));
+    } else if (isInserting) {
+      context.missing(_contentMeta);
+    }
+    if (data.containsKey('model_used')) {
+      context.handle(_modelUsedMeta,
+          modelUsed.isAcceptableOrUnknown(data['model_used']!, _modelUsedMeta));
+    }
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCoachMessage map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCoachMessage(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      sessionId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}session_id'])!,
+      sender: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}sender'])!,
+      content: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
+      modelUsed: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}model_used']),
+      timestamp: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
+    );
+  }
+
+  @override
+  $LocalCoachMessagesTable createAlias(String alias) {
+    return $LocalCoachMessagesTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCoachMessage extends DataClass
+    implements Insertable<LocalCoachMessage> {
+  final String id;
+  final String sessionId;
+  final String sender;
+  final String content;
+  final String? modelUsed;
+  final DateTime timestamp;
+  const LocalCoachMessage(
+      {required this.id,
+      required this.sessionId,
+      required this.sender,
+      required this.content,
+      this.modelUsed,
+      required this.timestamp});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['session_id'] = Variable<String>(sessionId);
+    map['sender'] = Variable<String>(sender);
+    map['content'] = Variable<String>(content);
+    if (!nullToAbsent || modelUsed != null) {
+      map['model_used'] = Variable<String>(modelUsed);
+    }
+    map['timestamp'] = Variable<DateTime>(timestamp);
+    return map;
+  }
+
+  LocalCoachMessagesCompanion toCompanion(bool nullToAbsent) {
+    return LocalCoachMessagesCompanion(
+      id: Value(id),
+      sessionId: Value(sessionId),
+      sender: Value(sender),
+      content: Value(content),
+      modelUsed: modelUsed == null && nullToAbsent
+          ? const Value.absent()
+          : Value(modelUsed),
+      timestamp: Value(timestamp),
+    );
+  }
+
+  factory LocalCoachMessage.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCoachMessage(
+      id: serializer.fromJson<String>(json['id']),
+      sessionId: serializer.fromJson<String>(json['sessionId']),
+      sender: serializer.fromJson<String>(json['sender']),
+      content: serializer.fromJson<String>(json['content']),
+      modelUsed: serializer.fromJson<String?>(json['modelUsed']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'sessionId': serializer.toJson<String>(sessionId),
+      'sender': serializer.toJson<String>(sender),
+      'content': serializer.toJson<String>(content),
+      'modelUsed': serializer.toJson<String?>(modelUsed),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
+    };
+  }
+
+  LocalCoachMessage copyWith(
+          {String? id,
+          String? sessionId,
+          String? sender,
+          String? content,
+          Value<String?> modelUsed = const Value.absent(),
+          DateTime? timestamp}) =>
+      LocalCoachMessage(
+        id: id ?? this.id,
+        sessionId: sessionId ?? this.sessionId,
+        sender: sender ?? this.sender,
+        content: content ?? this.content,
+        modelUsed: modelUsed.present ? modelUsed.value : this.modelUsed,
+        timestamp: timestamp ?? this.timestamp,
+      );
+  LocalCoachMessage copyWithCompanion(LocalCoachMessagesCompanion data) {
+    return LocalCoachMessage(
+      id: data.id.present ? data.id.value : this.id,
+      sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
+      sender: data.sender.present ? data.sender.value : this.sender,
+      content: data.content.present ? data.content.value : this.content,
+      modelUsed: data.modelUsed.present ? data.modelUsed.value : this.modelUsed,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachMessage(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('sender: $sender, ')
+          ..write('content: $content, ')
+          ..write('modelUsed: $modelUsed, ')
+          ..write('timestamp: $timestamp')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, sessionId, sender, content, modelUsed, timestamp);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCoachMessage &&
+          other.id == this.id &&
+          other.sessionId == this.sessionId &&
+          other.sender == this.sender &&
+          other.content == this.content &&
+          other.modelUsed == this.modelUsed &&
+          other.timestamp == this.timestamp);
+}
+
+class LocalCoachMessagesCompanion extends UpdateCompanion<LocalCoachMessage> {
+  final Value<String> id;
+  final Value<String> sessionId;
+  final Value<String> sender;
+  final Value<String> content;
+  final Value<String?> modelUsed;
+  final Value<DateTime> timestamp;
+  final Value<int> rowid;
+  const LocalCoachMessagesCompanion({
+    this.id = const Value.absent(),
+    this.sessionId = const Value.absent(),
+    this.sender = const Value.absent(),
+    this.content = const Value.absent(),
+    this.modelUsed = const Value.absent(),
+    this.timestamp = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCoachMessagesCompanion.insert({
+    required String id,
+    required String sessionId,
+    required String sender,
+    required String content,
+    this.modelUsed = const Value.absent(),
+    this.timestamp = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        sessionId = Value(sessionId),
+        sender = Value(sender),
+        content = Value(content);
+  static Insertable<LocalCoachMessage> custom({
+    Expression<String>? id,
+    Expression<String>? sessionId,
+    Expression<String>? sender,
+    Expression<String>? content,
+    Expression<String>? modelUsed,
+    Expression<DateTime>? timestamp,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (sessionId != null) 'session_id': sessionId,
+      if (sender != null) 'sender': sender,
+      if (content != null) 'content': content,
+      if (modelUsed != null) 'model_used': modelUsed,
+      if (timestamp != null) 'timestamp': timestamp,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCoachMessagesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? sessionId,
+      Value<String>? sender,
+      Value<String>? content,
+      Value<String?>? modelUsed,
+      Value<DateTime>? timestamp,
+      Value<int>? rowid}) {
+    return LocalCoachMessagesCompanion(
+      id: id ?? this.id,
+      sessionId: sessionId ?? this.sessionId,
+      sender: sender ?? this.sender,
+      content: content ?? this.content,
+      modelUsed: modelUsed ?? this.modelUsed,
+      timestamp: timestamp ?? this.timestamp,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (sessionId.present) {
+      map['session_id'] = Variable<String>(sessionId.value);
+    }
+    if (sender.present) {
+      map['sender'] = Variable<String>(sender.value);
+    }
+    if (content.present) {
+      map['content'] = Variable<String>(content.value);
+    }
+    if (modelUsed.present) {
+      map['model_used'] = Variable<String>(modelUsed.value);
+    }
+    if (timestamp.present) {
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachMessagesCompanion(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('sender: $sender, ')
+          ..write('content: $content, ')
+          ..write('modelUsed: $modelUsed, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2503,6 +3155,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalCycleTrackingTable(this);
   late final $LocalSorenessLogsTable localSorenessLogs =
       $LocalSorenessLogsTable(this);
+  late final $LocalCoachSessionsTable localCoachSessions =
+      $LocalCoachSessionsTable(this);
+  late final $LocalCoachMessagesTable localCoachMessages =
+      $LocalCoachMessagesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2514,7 +3170,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localDipCache,
         localDoshaScores,
         localCycleTracking,
-        localSorenessLogs
+        localSorenessLogs,
+        localCoachSessions,
+        localCoachMessages
       ];
 }
 
@@ -3888,6 +4546,381 @@ typedef $$LocalSorenessLogsTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalSorenessLog,
     PrefetchHooks Function()>;
+typedef $$LocalCoachSessionsTableCreateCompanionBuilder
+    = LocalCoachSessionsCompanion Function({
+  required String id,
+  required String userId,
+  Value<String> title,
+  Value<DateTime> createdAt,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+typedef $$LocalCoachSessionsTableUpdateCompanionBuilder
+    = LocalCoachSessionsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> title,
+  Value<DateTime> createdAt,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+
+class $$LocalCoachSessionsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCoachSessionsTable> {
+  $$LocalCoachSessionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCoachSessionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCoachSessionsTable> {
+  $$LocalCoachSessionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCoachSessionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCoachSessionsTable> {
+  $$LocalCoachSessionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$LocalCoachSessionsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCoachSessionsTable,
+    LocalCoachSession,
+    $$LocalCoachSessionsTableFilterComposer,
+    $$LocalCoachSessionsTableOrderingComposer,
+    $$LocalCoachSessionsTableAnnotationComposer,
+    $$LocalCoachSessionsTableCreateCompanionBuilder,
+    $$LocalCoachSessionsTableUpdateCompanionBuilder,
+    (
+      LocalCoachSession,
+      BaseReferences<_$AppDatabase, $LocalCoachSessionsTable, LocalCoachSession>
+    ),
+    LocalCoachSession,
+    PrefetchHooks Function()> {
+  $$LocalCoachSessionsTableTableManager(
+      _$AppDatabase db, $LocalCoachSessionsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCoachSessionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCoachSessionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCoachSessionsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachSessionsCompanion(
+            id: id,
+            userId: userId,
+            title: title,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            Value<String> title = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachSessionsCompanion.insert(
+            id: id,
+            userId: userId,
+            title: title,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCoachSessionsTable, LocalCoachSession>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCoachSessionsTable,
+                        LocalCoachSession>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCoachSessionsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCoachSessionsTable,
+    LocalCoachSession,
+    $$LocalCoachSessionsTableFilterComposer,
+    $$LocalCoachSessionsTableOrderingComposer,
+    $$LocalCoachSessionsTableAnnotationComposer,
+    $$LocalCoachSessionsTableCreateCompanionBuilder,
+    $$LocalCoachSessionsTableUpdateCompanionBuilder,
+    (
+      LocalCoachSession,
+      BaseReferences<_$AppDatabase, $LocalCoachSessionsTable, LocalCoachSession>
+    ),
+    LocalCoachSession,
+    PrefetchHooks Function()>;
+typedef $$LocalCoachMessagesTableCreateCompanionBuilder
+    = LocalCoachMessagesCompanion Function({
+  required String id,
+  required String sessionId,
+  required String sender,
+  required String content,
+  Value<String?> modelUsed,
+  Value<DateTime> timestamp,
+  Value<int> rowid,
+});
+typedef $$LocalCoachMessagesTableUpdateCompanionBuilder
+    = LocalCoachMessagesCompanion Function({
+  Value<String> id,
+  Value<String> sessionId,
+  Value<String> sender,
+  Value<String> content,
+  Value<String?> modelUsed,
+  Value<DateTime> timestamp,
+  Value<int> rowid,
+});
+
+class $$LocalCoachMessagesTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCoachMessagesTable> {
+  $$LocalCoachMessagesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get sessionId => $composableBuilder(
+      column: $table.sessionId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get sender => $composableBuilder(
+      column: $table.sender, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get content => $composableBuilder(
+      column: $table.content, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get modelUsed => $composableBuilder(
+      column: $table.modelUsed, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
+      column: $table.timestamp, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCoachMessagesTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCoachMessagesTable> {
+  $$LocalCoachMessagesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get sessionId => $composableBuilder(
+      column: $table.sessionId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get sender => $composableBuilder(
+      column: $table.sender, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get content => $composableBuilder(
+      column: $table.content, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get modelUsed => $composableBuilder(
+      column: $table.modelUsed, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
+      column: $table.timestamp, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCoachMessagesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCoachMessagesTable> {
+  $$LocalCoachMessagesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get sessionId =>
+      $composableBuilder(column: $table.sessionId, builder: (column) => column);
+
+  GeneratedColumn<String> get sender =>
+      $composableBuilder(column: $table.sender, builder: (column) => column);
+
+  GeneratedColumn<String> get content =>
+      $composableBuilder(column: $table.content, builder: (column) => column);
+
+  GeneratedColumn<String> get modelUsed =>
+      $composableBuilder(column: $table.modelUsed, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get timestamp =>
+      $composableBuilder(column: $table.timestamp, builder: (column) => column);
+}
+
+class $$LocalCoachMessagesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCoachMessagesTable,
+    LocalCoachMessage,
+    $$LocalCoachMessagesTableFilterComposer,
+    $$LocalCoachMessagesTableOrderingComposer,
+    $$LocalCoachMessagesTableAnnotationComposer,
+    $$LocalCoachMessagesTableCreateCompanionBuilder,
+    $$LocalCoachMessagesTableUpdateCompanionBuilder,
+    (
+      LocalCoachMessage,
+      BaseReferences<_$AppDatabase, $LocalCoachMessagesTable, LocalCoachMessage>
+    ),
+    LocalCoachMessage,
+    PrefetchHooks Function()> {
+  $$LocalCoachMessagesTableTableManager(
+      _$AppDatabase db, $LocalCoachMessagesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCoachMessagesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCoachMessagesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCoachMessagesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> sessionId = const Value.absent(),
+            Value<String> sender = const Value.absent(),
+            Value<String> content = const Value.absent(),
+            Value<String?> modelUsed = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachMessagesCompanion(
+            id: id,
+            sessionId: sessionId,
+            sender: sender,
+            content: content,
+            modelUsed: modelUsed,
+            timestamp: timestamp,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String sessionId,
+            required String sender,
+            required String content,
+            Value<String?> modelUsed = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachMessagesCompanion.insert(
+            id: id,
+            sessionId: sessionId,
+            sender: sender,
+            content: content,
+            modelUsed: modelUsed,
+            timestamp: timestamp,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCoachMessagesTable, LocalCoachMessage>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCoachMessagesTable,
+                        LocalCoachMessage>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCoachMessagesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCoachMessagesTable,
+    LocalCoachMessage,
+    $$LocalCoachMessagesTableFilterComposer,
+    $$LocalCoachMessagesTableOrderingComposer,
+    $$LocalCoachMessagesTableAnnotationComposer,
+    $$LocalCoachMessagesTableCreateCompanionBuilder,
+    $$LocalCoachMessagesTableUpdateCompanionBuilder,
+    (
+      LocalCoachMessage,
+      BaseReferences<_$AppDatabase, $LocalCoachMessagesTable, LocalCoachMessage>
+    ),
+    LocalCoachMessage,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3906,4 +4939,8 @@ class $AppDatabaseManager {
       $$LocalCycleTrackingTableTableManager(_db, _db.localCycleTracking);
   $$LocalSorenessLogsTableTableManager get localSorenessLogs =>
       $$LocalSorenessLogsTableTableManager(_db, _db.localSorenessLogs);
+  $$LocalCoachSessionsTableTableManager get localCoachSessions =>
+      $$LocalCoachSessionsTableTableManager(_db, _db.localCoachSessions);
+  $$LocalCoachMessagesTableTableManager get localCoachMessages =>
+      $$LocalCoachMessagesTableTableManager(_db, _db.localCoachMessages);
 }
