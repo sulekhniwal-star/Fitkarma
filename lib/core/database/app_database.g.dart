@@ -11662,6 +11662,1973 @@ class LocalClubsCompanion extends UpdateCompanion<LocalClub> {
   }
 }
 
+class $LocalBiologicalAgeRecordsTable extends LocalBiologicalAgeRecords
+    with TableInfo<$LocalBiologicalAgeRecordsTable, LocalBiologicalAgeRecord> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalBiologicalAgeRecordsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _chronologicalAgeMeta =
+      const VerificationMeta('chronologicalAge');
+  @override
+  late final GeneratedColumn<int> chronologicalAge = GeneratedColumn<int>(
+      'chronological_age', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _biologicalAgeMeta =
+      const VerificationMeta('biologicalAge');
+  @override
+  late final GeneratedColumn<double> biologicalAge = GeneratedColumn<double>(
+      'biological_age', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _ageDeltaMeta =
+      const VerificationMeta('ageDelta');
+  @override
+  late final GeneratedColumn<double> ageDelta = GeneratedColumn<double>(
+      'age_delta', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _topActionMeta =
+      const VerificationMeta('topAction');
+  @override
+  late final GeneratedColumn<String> topAction = GeneratedColumn<String>(
+      'top_action', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _topActionHindiMeta =
+      const VerificationMeta('topActionHindi');
+  @override
+  late final GeneratedColumn<String> topActionHindi = GeneratedColumn<String>(
+      'top_action_hindi', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _calculatedAtMeta =
+      const VerificationMeta('calculatedAt');
+  @override
+  late final GeneratedColumn<DateTime> calculatedAt = GeneratedColumn<DateTime>(
+      'calculated_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        chronologicalAge,
+        biologicalAge,
+        ageDelta,
+        topAction,
+        topActionHindi,
+        calculatedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_biological_age_records';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalBiologicalAgeRecord> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('chronological_age')) {
+      context.handle(
+          _chronologicalAgeMeta,
+          chronologicalAge.isAcceptableOrUnknown(
+              data['chronological_age']!, _chronologicalAgeMeta));
+    } else if (isInserting) {
+      context.missing(_chronologicalAgeMeta);
+    }
+    if (data.containsKey('biological_age')) {
+      context.handle(
+          _biologicalAgeMeta,
+          biologicalAge.isAcceptableOrUnknown(
+              data['biological_age']!, _biologicalAgeMeta));
+    } else if (isInserting) {
+      context.missing(_biologicalAgeMeta);
+    }
+    if (data.containsKey('age_delta')) {
+      context.handle(_ageDeltaMeta,
+          ageDelta.isAcceptableOrUnknown(data['age_delta']!, _ageDeltaMeta));
+    } else if (isInserting) {
+      context.missing(_ageDeltaMeta);
+    }
+    if (data.containsKey('top_action')) {
+      context.handle(_topActionMeta,
+          topAction.isAcceptableOrUnknown(data['top_action']!, _topActionMeta));
+    } else if (isInserting) {
+      context.missing(_topActionMeta);
+    }
+    if (data.containsKey('top_action_hindi')) {
+      context.handle(
+          _topActionHindiMeta,
+          topActionHindi.isAcceptableOrUnknown(
+              data['top_action_hindi']!, _topActionHindiMeta));
+    } else if (isInserting) {
+      context.missing(_topActionHindiMeta);
+    }
+    if (data.containsKey('calculated_at')) {
+      context.handle(
+          _calculatedAtMeta,
+          calculatedAt.isAcceptableOrUnknown(
+              data['calculated_at']!, _calculatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_calculatedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalBiologicalAgeRecord map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalBiologicalAgeRecord(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      chronologicalAge: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}chronological_age'])!,
+      biologicalAge: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}biological_age'])!,
+      ageDelta: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}age_delta'])!,
+      topAction: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}top_action'])!,
+      topActionHindi: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}top_action_hindi'])!,
+      calculatedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}calculated_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalBiologicalAgeRecordsTable createAlias(String alias) {
+    return $LocalBiologicalAgeRecordsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalBiologicalAgeRecord extends DataClass
+    implements Insertable<LocalBiologicalAgeRecord> {
+  final String id;
+  final String userId;
+  final int chronologicalAge;
+  final double biologicalAge;
+  final double ageDelta;
+  final String topAction;
+  final String topActionHindi;
+  final DateTime calculatedAt;
+  final DateTime createdAt;
+  const LocalBiologicalAgeRecord(
+      {required this.id,
+      required this.userId,
+      required this.chronologicalAge,
+      required this.biologicalAge,
+      required this.ageDelta,
+      required this.topAction,
+      required this.topActionHindi,
+      required this.calculatedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['chronological_age'] = Variable<int>(chronologicalAge);
+    map['biological_age'] = Variable<double>(biologicalAge);
+    map['age_delta'] = Variable<double>(ageDelta);
+    map['top_action'] = Variable<String>(topAction);
+    map['top_action_hindi'] = Variable<String>(topActionHindi);
+    map['calculated_at'] = Variable<DateTime>(calculatedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalBiologicalAgeRecordsCompanion toCompanion(bool nullToAbsent) {
+    return LocalBiologicalAgeRecordsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      chronologicalAge: Value(chronologicalAge),
+      biologicalAge: Value(biologicalAge),
+      ageDelta: Value(ageDelta),
+      topAction: Value(topAction),
+      topActionHindi: Value(topActionHindi),
+      calculatedAt: Value(calculatedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalBiologicalAgeRecord.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalBiologicalAgeRecord(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      chronologicalAge: serializer.fromJson<int>(json['chronologicalAge']),
+      biologicalAge: serializer.fromJson<double>(json['biologicalAge']),
+      ageDelta: serializer.fromJson<double>(json['ageDelta']),
+      topAction: serializer.fromJson<String>(json['topAction']),
+      topActionHindi: serializer.fromJson<String>(json['topActionHindi']),
+      calculatedAt: serializer.fromJson<DateTime>(json['calculatedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'chronologicalAge': serializer.toJson<int>(chronologicalAge),
+      'biologicalAge': serializer.toJson<double>(biologicalAge),
+      'ageDelta': serializer.toJson<double>(ageDelta),
+      'topAction': serializer.toJson<String>(topAction),
+      'topActionHindi': serializer.toJson<String>(topActionHindi),
+      'calculatedAt': serializer.toJson<DateTime>(calculatedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalBiologicalAgeRecord copyWith(
+          {String? id,
+          String? userId,
+          int? chronologicalAge,
+          double? biologicalAge,
+          double? ageDelta,
+          String? topAction,
+          String? topActionHindi,
+          DateTime? calculatedAt,
+          DateTime? createdAt}) =>
+      LocalBiologicalAgeRecord(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        chronologicalAge: chronologicalAge ?? this.chronologicalAge,
+        biologicalAge: biologicalAge ?? this.biologicalAge,
+        ageDelta: ageDelta ?? this.ageDelta,
+        topAction: topAction ?? this.topAction,
+        topActionHindi: topActionHindi ?? this.topActionHindi,
+        calculatedAt: calculatedAt ?? this.calculatedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalBiologicalAgeRecord copyWithCompanion(
+      LocalBiologicalAgeRecordsCompanion data) {
+    return LocalBiologicalAgeRecord(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      chronologicalAge: data.chronologicalAge.present
+          ? data.chronologicalAge.value
+          : this.chronologicalAge,
+      biologicalAge: data.biologicalAge.present
+          ? data.biologicalAge.value
+          : this.biologicalAge,
+      ageDelta: data.ageDelta.present ? data.ageDelta.value : this.ageDelta,
+      topAction: data.topAction.present ? data.topAction.value : this.topAction,
+      topActionHindi: data.topActionHindi.present
+          ? data.topActionHindi.value
+          : this.topActionHindi,
+      calculatedAt: data.calculatedAt.present
+          ? data.calculatedAt.value
+          : this.calculatedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBiologicalAgeRecord(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('chronologicalAge: $chronologicalAge, ')
+          ..write('biologicalAge: $biologicalAge, ')
+          ..write('ageDelta: $ageDelta, ')
+          ..write('topAction: $topAction, ')
+          ..write('topActionHindi: $topActionHindi, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, chronologicalAge, biologicalAge,
+      ageDelta, topAction, topActionHindi, calculatedAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalBiologicalAgeRecord &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.chronologicalAge == this.chronologicalAge &&
+          other.biologicalAge == this.biologicalAge &&
+          other.ageDelta == this.ageDelta &&
+          other.topAction == this.topAction &&
+          other.topActionHindi == this.topActionHindi &&
+          other.calculatedAt == this.calculatedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalBiologicalAgeRecordsCompanion
+    extends UpdateCompanion<LocalBiologicalAgeRecord> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<int> chronologicalAge;
+  final Value<double> biologicalAge;
+  final Value<double> ageDelta;
+  final Value<String> topAction;
+  final Value<String> topActionHindi;
+  final Value<DateTime> calculatedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalBiologicalAgeRecordsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.chronologicalAge = const Value.absent(),
+    this.biologicalAge = const Value.absent(),
+    this.ageDelta = const Value.absent(),
+    this.topAction = const Value.absent(),
+    this.topActionHindi = const Value.absent(),
+    this.calculatedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalBiologicalAgeRecordsCompanion.insert({
+    required String id,
+    required String userId,
+    required int chronologicalAge,
+    required double biologicalAge,
+    required double ageDelta,
+    required String topAction,
+    required String topActionHindi,
+    required DateTime calculatedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        chronologicalAge = Value(chronologicalAge),
+        biologicalAge = Value(biologicalAge),
+        ageDelta = Value(ageDelta),
+        topAction = Value(topAction),
+        topActionHindi = Value(topActionHindi),
+        calculatedAt = Value(calculatedAt);
+  static Insertable<LocalBiologicalAgeRecord> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<int>? chronologicalAge,
+    Expression<double>? biologicalAge,
+    Expression<double>? ageDelta,
+    Expression<String>? topAction,
+    Expression<String>? topActionHindi,
+    Expression<DateTime>? calculatedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (chronologicalAge != null) 'chronological_age': chronologicalAge,
+      if (biologicalAge != null) 'biological_age': biologicalAge,
+      if (ageDelta != null) 'age_delta': ageDelta,
+      if (topAction != null) 'top_action': topAction,
+      if (topActionHindi != null) 'top_action_hindi': topActionHindi,
+      if (calculatedAt != null) 'calculated_at': calculatedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalBiologicalAgeRecordsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<int>? chronologicalAge,
+      Value<double>? biologicalAge,
+      Value<double>? ageDelta,
+      Value<String>? topAction,
+      Value<String>? topActionHindi,
+      Value<DateTime>? calculatedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalBiologicalAgeRecordsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      chronologicalAge: chronologicalAge ?? this.chronologicalAge,
+      biologicalAge: biologicalAge ?? this.biologicalAge,
+      ageDelta: ageDelta ?? this.ageDelta,
+      topAction: topAction ?? this.topAction,
+      topActionHindi: topActionHindi ?? this.topActionHindi,
+      calculatedAt: calculatedAt ?? this.calculatedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (chronologicalAge.present) {
+      map['chronological_age'] = Variable<int>(chronologicalAge.value);
+    }
+    if (biologicalAge.present) {
+      map['biological_age'] = Variable<double>(biologicalAge.value);
+    }
+    if (ageDelta.present) {
+      map['age_delta'] = Variable<double>(ageDelta.value);
+    }
+    if (topAction.present) {
+      map['top_action'] = Variable<String>(topAction.value);
+    }
+    if (topActionHindi.present) {
+      map['top_action_hindi'] = Variable<String>(topActionHindi.value);
+    }
+    if (calculatedAt.present) {
+      map['calculated_at'] = Variable<DateTime>(calculatedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBiologicalAgeRecordsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('chronologicalAge: $chronologicalAge, ')
+          ..write('biologicalAge: $biologicalAge, ')
+          ..write('ageDelta: $ageDelta, ')
+          ..write('topAction: $topAction, ')
+          ..write('topActionHindi: $topActionHindi, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalClinicalLabReportsTable extends LocalClinicalLabReports
+    with TableInfo<$LocalClinicalLabReportsTable, LocalClinicalLabReport> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalClinicalLabReportsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _labNameMeta =
+      const VerificationMeta('labName');
+  @override
+  late final GeneratedColumn<String> labName = GeneratedColumn<String>(
+      'lab_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _testDateMeta =
+      const VerificationMeta('testDate');
+  @override
+  late final GeneratedColumn<DateTime> testDate = GeneratedColumn<DateTime>(
+      'test_date', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _resultsJsonMeta =
+      const VerificationMeta('resultsJson');
+  @override
+  late final GeneratedColumn<String> resultsJson = GeneratedColumn<String>(
+      'results_json', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _executiveSummaryMeta =
+      const VerificationMeta('executiveSummary');
+  @override
+  late final GeneratedColumn<String> executiveSummary = GeneratedColumn<String>(
+      'executive_summary', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _executiveSummaryHindiMeta =
+      const VerificationMeta('executiveSummaryHindi');
+  @override
+  late final GeneratedColumn<String> executiveSummaryHindi =
+      GeneratedColumn<String>('executive_summary_hindi', aliasedName, false,
+          type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _uploadedAtMeta =
+      const VerificationMeta('uploadedAt');
+  @override
+  late final GeneratedColumn<DateTime> uploadedAt = GeneratedColumn<DateTime>(
+      'uploaded_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        labName,
+        testDate,
+        resultsJson,
+        executiveSummary,
+        executiveSummaryHindi,
+        uploadedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_clinical_lab_reports';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalClinicalLabReport> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('lab_name')) {
+      context.handle(_labNameMeta,
+          labName.isAcceptableOrUnknown(data['lab_name']!, _labNameMeta));
+    } else if (isInserting) {
+      context.missing(_labNameMeta);
+    }
+    if (data.containsKey('test_date')) {
+      context.handle(_testDateMeta,
+          testDate.isAcceptableOrUnknown(data['test_date']!, _testDateMeta));
+    } else if (isInserting) {
+      context.missing(_testDateMeta);
+    }
+    if (data.containsKey('results_json')) {
+      context.handle(
+          _resultsJsonMeta,
+          resultsJson.isAcceptableOrUnknown(
+              data['results_json']!, _resultsJsonMeta));
+    } else if (isInserting) {
+      context.missing(_resultsJsonMeta);
+    }
+    if (data.containsKey('executive_summary')) {
+      context.handle(
+          _executiveSummaryMeta,
+          executiveSummary.isAcceptableOrUnknown(
+              data['executive_summary']!, _executiveSummaryMeta));
+    } else if (isInserting) {
+      context.missing(_executiveSummaryMeta);
+    }
+    if (data.containsKey('executive_summary_hindi')) {
+      context.handle(
+          _executiveSummaryHindiMeta,
+          executiveSummaryHindi.isAcceptableOrUnknown(
+              data['executive_summary_hindi']!, _executiveSummaryHindiMeta));
+    } else if (isInserting) {
+      context.missing(_executiveSummaryHindiMeta);
+    }
+    if (data.containsKey('uploaded_at')) {
+      context.handle(
+          _uploadedAtMeta,
+          uploadedAt.isAcceptableOrUnknown(
+              data['uploaded_at']!, _uploadedAtMeta));
+    } else if (isInserting) {
+      context.missing(_uploadedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalClinicalLabReport map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalClinicalLabReport(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      labName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}lab_name'])!,
+      testDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}test_date'])!,
+      resultsJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}results_json'])!,
+      executiveSummary: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}executive_summary'])!,
+      executiveSummaryHindi: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}executive_summary_hindi'])!,
+      uploadedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}uploaded_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalClinicalLabReportsTable createAlias(String alias) {
+    return $LocalClinicalLabReportsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalClinicalLabReport extends DataClass
+    implements Insertable<LocalClinicalLabReport> {
+  final String id;
+  final String userId;
+  final String labName;
+  final DateTime testDate;
+  final String resultsJson;
+  final String executiveSummary;
+  final String executiveSummaryHindi;
+  final DateTime uploadedAt;
+  final DateTime createdAt;
+  const LocalClinicalLabReport(
+      {required this.id,
+      required this.userId,
+      required this.labName,
+      required this.testDate,
+      required this.resultsJson,
+      required this.executiveSummary,
+      required this.executiveSummaryHindi,
+      required this.uploadedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['lab_name'] = Variable<String>(labName);
+    map['test_date'] = Variable<DateTime>(testDate);
+    map['results_json'] = Variable<String>(resultsJson);
+    map['executive_summary'] = Variable<String>(executiveSummary);
+    map['executive_summary_hindi'] = Variable<String>(executiveSummaryHindi);
+    map['uploaded_at'] = Variable<DateTime>(uploadedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalClinicalLabReportsCompanion toCompanion(bool nullToAbsent) {
+    return LocalClinicalLabReportsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      labName: Value(labName),
+      testDate: Value(testDate),
+      resultsJson: Value(resultsJson),
+      executiveSummary: Value(executiveSummary),
+      executiveSummaryHindi: Value(executiveSummaryHindi),
+      uploadedAt: Value(uploadedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalClinicalLabReport.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalClinicalLabReport(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      labName: serializer.fromJson<String>(json['labName']),
+      testDate: serializer.fromJson<DateTime>(json['testDate']),
+      resultsJson: serializer.fromJson<String>(json['resultsJson']),
+      executiveSummary: serializer.fromJson<String>(json['executiveSummary']),
+      executiveSummaryHindi:
+          serializer.fromJson<String>(json['executiveSummaryHindi']),
+      uploadedAt: serializer.fromJson<DateTime>(json['uploadedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'labName': serializer.toJson<String>(labName),
+      'testDate': serializer.toJson<DateTime>(testDate),
+      'resultsJson': serializer.toJson<String>(resultsJson),
+      'executiveSummary': serializer.toJson<String>(executiveSummary),
+      'executiveSummaryHindi': serializer.toJson<String>(executiveSummaryHindi),
+      'uploadedAt': serializer.toJson<DateTime>(uploadedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalClinicalLabReport copyWith(
+          {String? id,
+          String? userId,
+          String? labName,
+          DateTime? testDate,
+          String? resultsJson,
+          String? executiveSummary,
+          String? executiveSummaryHindi,
+          DateTime? uploadedAt,
+          DateTime? createdAt}) =>
+      LocalClinicalLabReport(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        labName: labName ?? this.labName,
+        testDate: testDate ?? this.testDate,
+        resultsJson: resultsJson ?? this.resultsJson,
+        executiveSummary: executiveSummary ?? this.executiveSummary,
+        executiveSummaryHindi:
+            executiveSummaryHindi ?? this.executiveSummaryHindi,
+        uploadedAt: uploadedAt ?? this.uploadedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalClinicalLabReport copyWithCompanion(
+      LocalClinicalLabReportsCompanion data) {
+    return LocalClinicalLabReport(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      labName: data.labName.present ? data.labName.value : this.labName,
+      testDate: data.testDate.present ? data.testDate.value : this.testDate,
+      resultsJson:
+          data.resultsJson.present ? data.resultsJson.value : this.resultsJson,
+      executiveSummary: data.executiveSummary.present
+          ? data.executiveSummary.value
+          : this.executiveSummary,
+      executiveSummaryHindi: data.executiveSummaryHindi.present
+          ? data.executiveSummaryHindi.value
+          : this.executiveSummaryHindi,
+      uploadedAt:
+          data.uploadedAt.present ? data.uploadedAt.value : this.uploadedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalClinicalLabReport(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('labName: $labName, ')
+          ..write('testDate: $testDate, ')
+          ..write('resultsJson: $resultsJson, ')
+          ..write('executiveSummary: $executiveSummary, ')
+          ..write('executiveSummaryHindi: $executiveSummaryHindi, ')
+          ..write('uploadedAt: $uploadedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, labName, testDate, resultsJson,
+      executiveSummary, executiveSummaryHindi, uploadedAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalClinicalLabReport &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.labName == this.labName &&
+          other.testDate == this.testDate &&
+          other.resultsJson == this.resultsJson &&
+          other.executiveSummary == this.executiveSummary &&
+          other.executiveSummaryHindi == this.executiveSummaryHindi &&
+          other.uploadedAt == this.uploadedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalClinicalLabReportsCompanion
+    extends UpdateCompanion<LocalClinicalLabReport> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> labName;
+  final Value<DateTime> testDate;
+  final Value<String> resultsJson;
+  final Value<String> executiveSummary;
+  final Value<String> executiveSummaryHindi;
+  final Value<DateTime> uploadedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalClinicalLabReportsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.labName = const Value.absent(),
+    this.testDate = const Value.absent(),
+    this.resultsJson = const Value.absent(),
+    this.executiveSummary = const Value.absent(),
+    this.executiveSummaryHindi = const Value.absent(),
+    this.uploadedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalClinicalLabReportsCompanion.insert({
+    required String id,
+    required String userId,
+    required String labName,
+    required DateTime testDate,
+    required String resultsJson,
+    required String executiveSummary,
+    required String executiveSummaryHindi,
+    required DateTime uploadedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        labName = Value(labName),
+        testDate = Value(testDate),
+        resultsJson = Value(resultsJson),
+        executiveSummary = Value(executiveSummary),
+        executiveSummaryHindi = Value(executiveSummaryHindi),
+        uploadedAt = Value(uploadedAt);
+  static Insertable<LocalClinicalLabReport> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? labName,
+    Expression<DateTime>? testDate,
+    Expression<String>? resultsJson,
+    Expression<String>? executiveSummary,
+    Expression<String>? executiveSummaryHindi,
+    Expression<DateTime>? uploadedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (labName != null) 'lab_name': labName,
+      if (testDate != null) 'test_date': testDate,
+      if (resultsJson != null) 'results_json': resultsJson,
+      if (executiveSummary != null) 'executive_summary': executiveSummary,
+      if (executiveSummaryHindi != null)
+        'executive_summary_hindi': executiveSummaryHindi,
+      if (uploadedAt != null) 'uploaded_at': uploadedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalClinicalLabReportsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? labName,
+      Value<DateTime>? testDate,
+      Value<String>? resultsJson,
+      Value<String>? executiveSummary,
+      Value<String>? executiveSummaryHindi,
+      Value<DateTime>? uploadedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalClinicalLabReportsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      labName: labName ?? this.labName,
+      testDate: testDate ?? this.testDate,
+      resultsJson: resultsJson ?? this.resultsJson,
+      executiveSummary: executiveSummary ?? this.executiveSummary,
+      executiveSummaryHindi:
+          executiveSummaryHindi ?? this.executiveSummaryHindi,
+      uploadedAt: uploadedAt ?? this.uploadedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (labName.present) {
+      map['lab_name'] = Variable<String>(labName.value);
+    }
+    if (testDate.present) {
+      map['test_date'] = Variable<DateTime>(testDate.value);
+    }
+    if (resultsJson.present) {
+      map['results_json'] = Variable<String>(resultsJson.value);
+    }
+    if (executiveSummary.present) {
+      map['executive_summary'] = Variable<String>(executiveSummary.value);
+    }
+    if (executiveSummaryHindi.present) {
+      map['executive_summary_hindi'] =
+          Variable<String>(executiveSummaryHindi.value);
+    }
+    if (uploadedAt.present) {
+      map['uploaded_at'] = Variable<DateTime>(uploadedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalClinicalLabReportsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('labName: $labName, ')
+          ..write('testDate: $testDate, ')
+          ..write('resultsJson: $resultsJson, ')
+          ..write('executiveSummary: $executiveSummary, ')
+          ..write('executiveSummaryHindi: $executiveSummaryHindi, ')
+          ..write('uploadedAt: $uploadedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalMedicationsTable extends LocalMedications
+    with TableInfo<$LocalMedicationsTable, LocalMedication> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalMedicationsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _medicationNameMeta =
+      const VerificationMeta('medicationName');
+  @override
+  late final GeneratedColumn<String> medicationName = GeneratedColumn<String>(
+      'medication_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dosageMeta = const VerificationMeta('dosage');
+  @override
+  late final GeneratedColumn<String> dosage = GeneratedColumn<String>(
+      'dosage', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _frequencyMeta =
+      const VerificationMeta('frequency');
+  @override
+  late final GeneratedColumn<String> frequency = GeneratedColumn<String>(
+      'frequency', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _timingCategoryMeta =
+      const VerificationMeta('timingCategory');
+  @override
+  late final GeneratedColumn<String> timingCategory = GeneratedColumn<String>(
+      'timing_category', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _foodInteractionWarningMeta =
+      const VerificationMeta('foodInteractionWarning');
+  @override
+  late final GeneratedColumn<String> foodInteractionWarning =
+      GeneratedColumn<String>('food_interaction_warning', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _foodInteractionWarningHindiMeta =
+      const VerificationMeta('foodInteractionWarningHindi');
+  @override
+  late final GeneratedColumn<String> foodInteractionWarningHindi =
+      GeneratedColumn<String>(
+          'food_interaction_warning_hindi', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _isTakenTodayMeta =
+      const VerificationMeta('isTakenToday');
+  @override
+  late final GeneratedColumn<bool> isTakenToday = GeneratedColumn<bool>(
+      'is_taken_today', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_taken_today" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        medicationName,
+        dosage,
+        frequency,
+        timingCategory,
+        foodInteractionWarning,
+        foodInteractionWarningHindi,
+        isTakenToday,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_medications';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalMedication> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('medication_name')) {
+      context.handle(
+          _medicationNameMeta,
+          medicationName.isAcceptableOrUnknown(
+              data['medication_name']!, _medicationNameMeta));
+    } else if (isInserting) {
+      context.missing(_medicationNameMeta);
+    }
+    if (data.containsKey('dosage')) {
+      context.handle(_dosageMeta,
+          dosage.isAcceptableOrUnknown(data['dosage']!, _dosageMeta));
+    } else if (isInserting) {
+      context.missing(_dosageMeta);
+    }
+    if (data.containsKey('frequency')) {
+      context.handle(_frequencyMeta,
+          frequency.isAcceptableOrUnknown(data['frequency']!, _frequencyMeta));
+    } else if (isInserting) {
+      context.missing(_frequencyMeta);
+    }
+    if (data.containsKey('timing_category')) {
+      context.handle(
+          _timingCategoryMeta,
+          timingCategory.isAcceptableOrUnknown(
+              data['timing_category']!, _timingCategoryMeta));
+    } else if (isInserting) {
+      context.missing(_timingCategoryMeta);
+    }
+    if (data.containsKey('food_interaction_warning')) {
+      context.handle(
+          _foodInteractionWarningMeta,
+          foodInteractionWarning.isAcceptableOrUnknown(
+              data['food_interaction_warning']!, _foodInteractionWarningMeta));
+    }
+    if (data.containsKey('food_interaction_warning_hindi')) {
+      context.handle(
+          _foodInteractionWarningHindiMeta,
+          foodInteractionWarningHindi.isAcceptableOrUnknown(
+              data['food_interaction_warning_hindi']!,
+              _foodInteractionWarningHindiMeta));
+    }
+    if (data.containsKey('is_taken_today')) {
+      context.handle(
+          _isTakenTodayMeta,
+          isTakenToday.isAcceptableOrUnknown(
+              data['is_taken_today']!, _isTakenTodayMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalMedication map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalMedication(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      medicationName: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}medication_name'])!,
+      dosage: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}dosage'])!,
+      frequency: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}frequency'])!,
+      timingCategory: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}timing_category'])!,
+      foodInteractionWarning: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}food_interaction_warning']),
+      foodInteractionWarningHindi: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}food_interaction_warning_hindi']),
+      isTakenToday: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_taken_today'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalMedicationsTable createAlias(String alias) {
+    return $LocalMedicationsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalMedication extends DataClass implements Insertable<LocalMedication> {
+  final String id;
+  final String userId;
+  final String medicationName;
+  final String dosage;
+  final String frequency;
+  final String timingCategory;
+  final String? foodInteractionWarning;
+  final String? foodInteractionWarningHindi;
+  final bool isTakenToday;
+  final DateTime createdAt;
+  const LocalMedication(
+      {required this.id,
+      required this.userId,
+      required this.medicationName,
+      required this.dosage,
+      required this.frequency,
+      required this.timingCategory,
+      this.foodInteractionWarning,
+      this.foodInteractionWarningHindi,
+      required this.isTakenToday,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['medication_name'] = Variable<String>(medicationName);
+    map['dosage'] = Variable<String>(dosage);
+    map['frequency'] = Variable<String>(frequency);
+    map['timing_category'] = Variable<String>(timingCategory);
+    if (!nullToAbsent || foodInteractionWarning != null) {
+      map['food_interaction_warning'] =
+          Variable<String>(foodInteractionWarning);
+    }
+    if (!nullToAbsent || foodInteractionWarningHindi != null) {
+      map['food_interaction_warning_hindi'] =
+          Variable<String>(foodInteractionWarningHindi);
+    }
+    map['is_taken_today'] = Variable<bool>(isTakenToday);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalMedicationsCompanion toCompanion(bool nullToAbsent) {
+    return LocalMedicationsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      medicationName: Value(medicationName),
+      dosage: Value(dosage),
+      frequency: Value(frequency),
+      timingCategory: Value(timingCategory),
+      foodInteractionWarning: foodInteractionWarning == null && nullToAbsent
+          ? const Value.absent()
+          : Value(foodInteractionWarning),
+      foodInteractionWarningHindi:
+          foodInteractionWarningHindi == null && nullToAbsent
+              ? const Value.absent()
+              : Value(foodInteractionWarningHindi),
+      isTakenToday: Value(isTakenToday),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalMedication.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalMedication(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      medicationName: serializer.fromJson<String>(json['medicationName']),
+      dosage: serializer.fromJson<String>(json['dosage']),
+      frequency: serializer.fromJson<String>(json['frequency']),
+      timingCategory: serializer.fromJson<String>(json['timingCategory']),
+      foodInteractionWarning:
+          serializer.fromJson<String?>(json['foodInteractionWarning']),
+      foodInteractionWarningHindi:
+          serializer.fromJson<String?>(json['foodInteractionWarningHindi']),
+      isTakenToday: serializer.fromJson<bool>(json['isTakenToday']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'medicationName': serializer.toJson<String>(medicationName),
+      'dosage': serializer.toJson<String>(dosage),
+      'frequency': serializer.toJson<String>(frequency),
+      'timingCategory': serializer.toJson<String>(timingCategory),
+      'foodInteractionWarning':
+          serializer.toJson<String?>(foodInteractionWarning),
+      'foodInteractionWarningHindi':
+          serializer.toJson<String?>(foodInteractionWarningHindi),
+      'isTakenToday': serializer.toJson<bool>(isTakenToday),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalMedication copyWith(
+          {String? id,
+          String? userId,
+          String? medicationName,
+          String? dosage,
+          String? frequency,
+          String? timingCategory,
+          Value<String?> foodInteractionWarning = const Value.absent(),
+          Value<String?> foodInteractionWarningHindi = const Value.absent(),
+          bool? isTakenToday,
+          DateTime? createdAt}) =>
+      LocalMedication(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        medicationName: medicationName ?? this.medicationName,
+        dosage: dosage ?? this.dosage,
+        frequency: frequency ?? this.frequency,
+        timingCategory: timingCategory ?? this.timingCategory,
+        foodInteractionWarning: foodInteractionWarning.present
+            ? foodInteractionWarning.value
+            : this.foodInteractionWarning,
+        foodInteractionWarningHindi: foodInteractionWarningHindi.present
+            ? foodInteractionWarningHindi.value
+            : this.foodInteractionWarningHindi,
+        isTakenToday: isTakenToday ?? this.isTakenToday,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalMedication copyWithCompanion(LocalMedicationsCompanion data) {
+    return LocalMedication(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      medicationName: data.medicationName.present
+          ? data.medicationName.value
+          : this.medicationName,
+      dosage: data.dosage.present ? data.dosage.value : this.dosage,
+      frequency: data.frequency.present ? data.frequency.value : this.frequency,
+      timingCategory: data.timingCategory.present
+          ? data.timingCategory.value
+          : this.timingCategory,
+      foodInteractionWarning: data.foodInteractionWarning.present
+          ? data.foodInteractionWarning.value
+          : this.foodInteractionWarning,
+      foodInteractionWarningHindi: data.foodInteractionWarningHindi.present
+          ? data.foodInteractionWarningHindi.value
+          : this.foodInteractionWarningHindi,
+      isTakenToday: data.isTakenToday.present
+          ? data.isTakenToday.value
+          : this.isTakenToday,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalMedication(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('medicationName: $medicationName, ')
+          ..write('dosage: $dosage, ')
+          ..write('frequency: $frequency, ')
+          ..write('timingCategory: $timingCategory, ')
+          ..write('foodInteractionWarning: $foodInteractionWarning, ')
+          ..write('foodInteractionWarningHindi: $foodInteractionWarningHindi, ')
+          ..write('isTakenToday: $isTakenToday, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      userId,
+      medicationName,
+      dosage,
+      frequency,
+      timingCategory,
+      foodInteractionWarning,
+      foodInteractionWarningHindi,
+      isTakenToday,
+      createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalMedication &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.medicationName == this.medicationName &&
+          other.dosage == this.dosage &&
+          other.frequency == this.frequency &&
+          other.timingCategory == this.timingCategory &&
+          other.foodInteractionWarning == this.foodInteractionWarning &&
+          other.foodInteractionWarningHindi ==
+              this.foodInteractionWarningHindi &&
+          other.isTakenToday == this.isTakenToday &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalMedicationsCompanion extends UpdateCompanion<LocalMedication> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> medicationName;
+  final Value<String> dosage;
+  final Value<String> frequency;
+  final Value<String> timingCategory;
+  final Value<String?> foodInteractionWarning;
+  final Value<String?> foodInteractionWarningHindi;
+  final Value<bool> isTakenToday;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalMedicationsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.medicationName = const Value.absent(),
+    this.dosage = const Value.absent(),
+    this.frequency = const Value.absent(),
+    this.timingCategory = const Value.absent(),
+    this.foodInteractionWarning = const Value.absent(),
+    this.foodInteractionWarningHindi = const Value.absent(),
+    this.isTakenToday = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalMedicationsCompanion.insert({
+    required String id,
+    required String userId,
+    required String medicationName,
+    required String dosage,
+    required String frequency,
+    required String timingCategory,
+    this.foodInteractionWarning = const Value.absent(),
+    this.foodInteractionWarningHindi = const Value.absent(),
+    this.isTakenToday = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        medicationName = Value(medicationName),
+        dosage = Value(dosage),
+        frequency = Value(frequency),
+        timingCategory = Value(timingCategory);
+  static Insertable<LocalMedication> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? medicationName,
+    Expression<String>? dosage,
+    Expression<String>? frequency,
+    Expression<String>? timingCategory,
+    Expression<String>? foodInteractionWarning,
+    Expression<String>? foodInteractionWarningHindi,
+    Expression<bool>? isTakenToday,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (medicationName != null) 'medication_name': medicationName,
+      if (dosage != null) 'dosage': dosage,
+      if (frequency != null) 'frequency': frequency,
+      if (timingCategory != null) 'timing_category': timingCategory,
+      if (foodInteractionWarning != null)
+        'food_interaction_warning': foodInteractionWarning,
+      if (foodInteractionWarningHindi != null)
+        'food_interaction_warning_hindi': foodInteractionWarningHindi,
+      if (isTakenToday != null) 'is_taken_today': isTakenToday,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalMedicationsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? medicationName,
+      Value<String>? dosage,
+      Value<String>? frequency,
+      Value<String>? timingCategory,
+      Value<String?>? foodInteractionWarning,
+      Value<String?>? foodInteractionWarningHindi,
+      Value<bool>? isTakenToday,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalMedicationsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      medicationName: medicationName ?? this.medicationName,
+      dosage: dosage ?? this.dosage,
+      frequency: frequency ?? this.frequency,
+      timingCategory: timingCategory ?? this.timingCategory,
+      foodInteractionWarning:
+          foodInteractionWarning ?? this.foodInteractionWarning,
+      foodInteractionWarningHindi:
+          foodInteractionWarningHindi ?? this.foodInteractionWarningHindi,
+      isTakenToday: isTakenToday ?? this.isTakenToday,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (medicationName.present) {
+      map['medication_name'] = Variable<String>(medicationName.value);
+    }
+    if (dosage.present) {
+      map['dosage'] = Variable<String>(dosage.value);
+    }
+    if (frequency.present) {
+      map['frequency'] = Variable<String>(frequency.value);
+    }
+    if (timingCategory.present) {
+      map['timing_category'] = Variable<String>(timingCategory.value);
+    }
+    if (foodInteractionWarning.present) {
+      map['food_interaction_warning'] =
+          Variable<String>(foodInteractionWarning.value);
+    }
+    if (foodInteractionWarningHindi.present) {
+      map['food_interaction_warning_hindi'] =
+          Variable<String>(foodInteractionWarningHindi.value);
+    }
+    if (isTakenToday.present) {
+      map['is_taken_today'] = Variable<bool>(isTakenToday.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalMedicationsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('medicationName: $medicationName, ')
+          ..write('dosage: $dosage, ')
+          ..write('frequency: $frequency, ')
+          ..write('timingCategory: $timingCategory, ')
+          ..write('foodInteractionWarning: $foodInteractionWarning, ')
+          ..write('foodInteractionWarningHindi: $foodInteractionWarningHindi, ')
+          ..write('isTakenToday: $isTakenToday, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalDoctorGrantsTable extends LocalDoctorGrants
+    with TableInfo<$LocalDoctorGrantsTable, LocalDoctorGrant> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalDoctorGrantsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _doctorNameMeta =
+      const VerificationMeta('doctorName');
+  @override
+  late final GeneratedColumn<String> doctorName = GeneratedColumn<String>(
+      'doctor_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _clinicHospitalMeta =
+      const VerificationMeta('clinicHospital');
+  @override
+  late final GeneratedColumn<String> clinicHospital = GeneratedColumn<String>(
+      'clinic_hospital', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _accessPinMeta =
+      const VerificationMeta('accessPin');
+  @override
+  late final GeneratedColumn<String> accessPin = GeneratedColumn<String>(
+      'access_pin', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _expiresAtMeta =
+      const VerificationMeta('expiresAt');
+  @override
+  late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
+      'expires_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _isActiveMeta =
+      const VerificationMeta('isActive');
+  @override
+  late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
+      'is_active', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_active" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        doctorName,
+        clinicHospital,
+        accessPin,
+        expiresAt,
+        isActive,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_doctor_grants';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalDoctorGrant> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('doctor_name')) {
+      context.handle(
+          _doctorNameMeta,
+          doctorName.isAcceptableOrUnknown(
+              data['doctor_name']!, _doctorNameMeta));
+    } else if (isInserting) {
+      context.missing(_doctorNameMeta);
+    }
+    if (data.containsKey('clinic_hospital')) {
+      context.handle(
+          _clinicHospitalMeta,
+          clinicHospital.isAcceptableOrUnknown(
+              data['clinic_hospital']!, _clinicHospitalMeta));
+    } else if (isInserting) {
+      context.missing(_clinicHospitalMeta);
+    }
+    if (data.containsKey('access_pin')) {
+      context.handle(_accessPinMeta,
+          accessPin.isAcceptableOrUnknown(data['access_pin']!, _accessPinMeta));
+    } else if (isInserting) {
+      context.missing(_accessPinMeta);
+    }
+    if (data.containsKey('expires_at')) {
+      context.handle(_expiresAtMeta,
+          expiresAt.isAcceptableOrUnknown(data['expires_at']!, _expiresAtMeta));
+    } else if (isInserting) {
+      context.missing(_expiresAtMeta);
+    }
+    if (data.containsKey('is_active')) {
+      context.handle(_isActiveMeta,
+          isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalDoctorGrant map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalDoctorGrant(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      doctorName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}doctor_name'])!,
+      clinicHospital: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}clinic_hospital'])!,
+      accessPin: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}access_pin'])!,
+      expiresAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}expires_at'])!,
+      isActive: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_active'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalDoctorGrantsTable createAlias(String alias) {
+    return $LocalDoctorGrantsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalDoctorGrant extends DataClass
+    implements Insertable<LocalDoctorGrant> {
+  final String id;
+  final String userId;
+  final String doctorName;
+  final String clinicHospital;
+  final String accessPin;
+  final DateTime expiresAt;
+  final bool isActive;
+  final DateTime createdAt;
+  const LocalDoctorGrant(
+      {required this.id,
+      required this.userId,
+      required this.doctorName,
+      required this.clinicHospital,
+      required this.accessPin,
+      required this.expiresAt,
+      required this.isActive,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['doctor_name'] = Variable<String>(doctorName);
+    map['clinic_hospital'] = Variable<String>(clinicHospital);
+    map['access_pin'] = Variable<String>(accessPin);
+    map['expires_at'] = Variable<DateTime>(expiresAt);
+    map['is_active'] = Variable<bool>(isActive);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalDoctorGrantsCompanion toCompanion(bool nullToAbsent) {
+    return LocalDoctorGrantsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      doctorName: Value(doctorName),
+      clinicHospital: Value(clinicHospital),
+      accessPin: Value(accessPin),
+      expiresAt: Value(expiresAt),
+      isActive: Value(isActive),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalDoctorGrant.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalDoctorGrant(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      doctorName: serializer.fromJson<String>(json['doctorName']),
+      clinicHospital: serializer.fromJson<String>(json['clinicHospital']),
+      accessPin: serializer.fromJson<String>(json['accessPin']),
+      expiresAt: serializer.fromJson<DateTime>(json['expiresAt']),
+      isActive: serializer.fromJson<bool>(json['isActive']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'doctorName': serializer.toJson<String>(doctorName),
+      'clinicHospital': serializer.toJson<String>(clinicHospital),
+      'accessPin': serializer.toJson<String>(accessPin),
+      'expiresAt': serializer.toJson<DateTime>(expiresAt),
+      'isActive': serializer.toJson<bool>(isActive),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalDoctorGrant copyWith(
+          {String? id,
+          String? userId,
+          String? doctorName,
+          String? clinicHospital,
+          String? accessPin,
+          DateTime? expiresAt,
+          bool? isActive,
+          DateTime? createdAt}) =>
+      LocalDoctorGrant(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        doctorName: doctorName ?? this.doctorName,
+        clinicHospital: clinicHospital ?? this.clinicHospital,
+        accessPin: accessPin ?? this.accessPin,
+        expiresAt: expiresAt ?? this.expiresAt,
+        isActive: isActive ?? this.isActive,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalDoctorGrant copyWithCompanion(LocalDoctorGrantsCompanion data) {
+    return LocalDoctorGrant(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      doctorName:
+          data.doctorName.present ? data.doctorName.value : this.doctorName,
+      clinicHospital: data.clinicHospital.present
+          ? data.clinicHospital.value
+          : this.clinicHospital,
+      accessPin: data.accessPin.present ? data.accessPin.value : this.accessPin,
+      expiresAt: data.expiresAt.present ? data.expiresAt.value : this.expiresAt,
+      isActive: data.isActive.present ? data.isActive.value : this.isActive,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalDoctorGrant(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('doctorName: $doctorName, ')
+          ..write('clinicHospital: $clinicHospital, ')
+          ..write('accessPin: $accessPin, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('isActive: $isActive, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, doctorName, clinicHospital,
+      accessPin, expiresAt, isActive, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalDoctorGrant &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.doctorName == this.doctorName &&
+          other.clinicHospital == this.clinicHospital &&
+          other.accessPin == this.accessPin &&
+          other.expiresAt == this.expiresAt &&
+          other.isActive == this.isActive &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalDoctorGrantsCompanion extends UpdateCompanion<LocalDoctorGrant> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> doctorName;
+  final Value<String> clinicHospital;
+  final Value<String> accessPin;
+  final Value<DateTime> expiresAt;
+  final Value<bool> isActive;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalDoctorGrantsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.doctorName = const Value.absent(),
+    this.clinicHospital = const Value.absent(),
+    this.accessPin = const Value.absent(),
+    this.expiresAt = const Value.absent(),
+    this.isActive = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalDoctorGrantsCompanion.insert({
+    required String id,
+    required String userId,
+    required String doctorName,
+    required String clinicHospital,
+    required String accessPin,
+    required DateTime expiresAt,
+    this.isActive = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        doctorName = Value(doctorName),
+        clinicHospital = Value(clinicHospital),
+        accessPin = Value(accessPin),
+        expiresAt = Value(expiresAt);
+  static Insertable<LocalDoctorGrant> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? doctorName,
+    Expression<String>? clinicHospital,
+    Expression<String>? accessPin,
+    Expression<DateTime>? expiresAt,
+    Expression<bool>? isActive,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (doctorName != null) 'doctor_name': doctorName,
+      if (clinicHospital != null) 'clinic_hospital': clinicHospital,
+      if (accessPin != null) 'access_pin': accessPin,
+      if (expiresAt != null) 'expires_at': expiresAt,
+      if (isActive != null) 'is_active': isActive,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalDoctorGrantsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? doctorName,
+      Value<String>? clinicHospital,
+      Value<String>? accessPin,
+      Value<DateTime>? expiresAt,
+      Value<bool>? isActive,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalDoctorGrantsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      doctorName: doctorName ?? this.doctorName,
+      clinicHospital: clinicHospital ?? this.clinicHospital,
+      accessPin: accessPin ?? this.accessPin,
+      expiresAt: expiresAt ?? this.expiresAt,
+      isActive: isActive ?? this.isActive,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (doctorName.present) {
+      map['doctor_name'] = Variable<String>(doctorName.value);
+    }
+    if (clinicHospital.present) {
+      map['clinic_hospital'] = Variable<String>(clinicHospital.value);
+    }
+    if (accessPin.present) {
+      map['access_pin'] = Variable<String>(accessPin.value);
+    }
+    if (expiresAt.present) {
+      map['expires_at'] = Variable<DateTime>(expiresAt.value);
+    }
+    if (isActive.present) {
+      map['is_active'] = Variable<bool>(isActive.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalDoctorGrantsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('doctorName: $doctorName, ')
+          ..write('clinicHospital: $clinicHospital, ')
+          ..write('accessPin: $accessPin, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('isActive: $isActive, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -11711,6 +13678,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $LocalFamilyMembersTable localFamilyMembers =
       $LocalFamilyMembersTable(this);
   late final $LocalClubsTable localClubs = $LocalClubsTable(this);
+  late final $LocalBiologicalAgeRecordsTable localBiologicalAgeRecords =
+      $LocalBiologicalAgeRecordsTable(this);
+  late final $LocalClinicalLabReportsTable localClinicalLabReports =
+      $LocalClinicalLabReportsTable(this);
+  late final $LocalMedicationsTable localMedications =
+      $LocalMedicationsTable(this);
+  late final $LocalDoctorGrantsTable localDoctorGrants =
+      $LocalDoctorGrantsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -11741,7 +13716,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localSquadMembers,
         localCommunityPosts,
         localFamilyMembers,
-        localClubs
+        localClubs,
+        localBiologicalAgeRecords,
+        localClinicalLabReports,
+        localMedications,
+        localDoctorGrants
       ];
 }
 
@@ -17733,6 +19712,997 @@ typedef $$LocalClubsTableProcessedTableManager = ProcessedTableManager<
     (LocalClub, BaseReferences<_$AppDatabase, $LocalClubsTable, LocalClub>),
     LocalClub,
     PrefetchHooks Function()>;
+typedef $$LocalBiologicalAgeRecordsTableCreateCompanionBuilder
+    = LocalBiologicalAgeRecordsCompanion Function({
+  required String id,
+  required String userId,
+  required int chronologicalAge,
+  required double biologicalAge,
+  required double ageDelta,
+  required String topAction,
+  required String topActionHindi,
+  required DateTime calculatedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalBiologicalAgeRecordsTableUpdateCompanionBuilder
+    = LocalBiologicalAgeRecordsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<int> chronologicalAge,
+  Value<double> biologicalAge,
+  Value<double> ageDelta,
+  Value<String> topAction,
+  Value<String> topActionHindi,
+  Value<DateTime> calculatedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalBiologicalAgeRecordsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalBiologicalAgeRecordsTable> {
+  $$LocalBiologicalAgeRecordsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get chronologicalAge => $composableBuilder(
+      column: $table.chronologicalAge,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get biologicalAge => $composableBuilder(
+      column: $table.biologicalAge, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get ageDelta => $composableBuilder(
+      column: $table.ageDelta, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get topAction => $composableBuilder(
+      column: $table.topAction, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get topActionHindi => $composableBuilder(
+      column: $table.topActionHindi,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalBiologicalAgeRecordsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalBiologicalAgeRecordsTable> {
+  $$LocalBiologicalAgeRecordsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get chronologicalAge => $composableBuilder(
+      column: $table.chronologicalAge,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get biologicalAge => $composableBuilder(
+      column: $table.biologicalAge,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get ageDelta => $composableBuilder(
+      column: $table.ageDelta, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get topAction => $composableBuilder(
+      column: $table.topAction, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get topActionHindi => $composableBuilder(
+      column: $table.topActionHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalBiologicalAgeRecordsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalBiologicalAgeRecordsTable> {
+  $$LocalBiologicalAgeRecordsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<int> get chronologicalAge => $composableBuilder(
+      column: $table.chronologicalAge, builder: (column) => column);
+
+  GeneratedColumn<double> get biologicalAge => $composableBuilder(
+      column: $table.biologicalAge, builder: (column) => column);
+
+  GeneratedColumn<double> get ageDelta =>
+      $composableBuilder(column: $table.ageDelta, builder: (column) => column);
+
+  GeneratedColumn<String> get topAction =>
+      $composableBuilder(column: $table.topAction, builder: (column) => column);
+
+  GeneratedColumn<String> get topActionHindi => $composableBuilder(
+      column: $table.topActionHindi, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalBiologicalAgeRecordsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalBiologicalAgeRecordsTable,
+    LocalBiologicalAgeRecord,
+    $$LocalBiologicalAgeRecordsTableFilterComposer,
+    $$LocalBiologicalAgeRecordsTableOrderingComposer,
+    $$LocalBiologicalAgeRecordsTableAnnotationComposer,
+    $$LocalBiologicalAgeRecordsTableCreateCompanionBuilder,
+    $$LocalBiologicalAgeRecordsTableUpdateCompanionBuilder,
+    (
+      LocalBiologicalAgeRecord,
+      BaseReferences<_$AppDatabase, $LocalBiologicalAgeRecordsTable,
+          LocalBiologicalAgeRecord>
+    ),
+    LocalBiologicalAgeRecord,
+    PrefetchHooks Function()> {
+  $$LocalBiologicalAgeRecordsTableTableManager(
+      _$AppDatabase db, $LocalBiologicalAgeRecordsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalBiologicalAgeRecordsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalBiologicalAgeRecordsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalBiologicalAgeRecordsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<int> chronologicalAge = const Value.absent(),
+            Value<double> biologicalAge = const Value.absent(),
+            Value<double> ageDelta = const Value.absent(),
+            Value<String> topAction = const Value.absent(),
+            Value<String> topActionHindi = const Value.absent(),
+            Value<DateTime> calculatedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBiologicalAgeRecordsCompanion(
+            id: id,
+            userId: userId,
+            chronologicalAge: chronologicalAge,
+            biologicalAge: biologicalAge,
+            ageDelta: ageDelta,
+            topAction: topAction,
+            topActionHindi: topActionHindi,
+            calculatedAt: calculatedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required int chronologicalAge,
+            required double biologicalAge,
+            required double ageDelta,
+            required String topAction,
+            required String topActionHindi,
+            required DateTime calculatedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBiologicalAgeRecordsCompanion.insert(
+            id: id,
+            userId: userId,
+            chronologicalAge: chronologicalAge,
+            biologicalAge: biologicalAge,
+            ageDelta: ageDelta,
+            topAction: topAction,
+            topActionHindi: topActionHindi,
+            calculatedAt: calculatedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalBiologicalAgeRecordsTable,
+                        LocalBiologicalAgeRecord>(table),
+                    BaseReferences<
+                        _$AppDatabase,
+                        $LocalBiologicalAgeRecordsTable,
+                        LocalBiologicalAgeRecord>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalBiologicalAgeRecordsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalBiologicalAgeRecordsTable,
+        LocalBiologicalAgeRecord,
+        $$LocalBiologicalAgeRecordsTableFilterComposer,
+        $$LocalBiologicalAgeRecordsTableOrderingComposer,
+        $$LocalBiologicalAgeRecordsTableAnnotationComposer,
+        $$LocalBiologicalAgeRecordsTableCreateCompanionBuilder,
+        $$LocalBiologicalAgeRecordsTableUpdateCompanionBuilder,
+        (
+          LocalBiologicalAgeRecord,
+          BaseReferences<_$AppDatabase, $LocalBiologicalAgeRecordsTable,
+              LocalBiologicalAgeRecord>
+        ),
+        LocalBiologicalAgeRecord,
+        PrefetchHooks Function()>;
+typedef $$LocalClinicalLabReportsTableCreateCompanionBuilder
+    = LocalClinicalLabReportsCompanion Function({
+  required String id,
+  required String userId,
+  required String labName,
+  required DateTime testDate,
+  required String resultsJson,
+  required String executiveSummary,
+  required String executiveSummaryHindi,
+  required DateTime uploadedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalClinicalLabReportsTableUpdateCompanionBuilder
+    = LocalClinicalLabReportsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> labName,
+  Value<DateTime> testDate,
+  Value<String> resultsJson,
+  Value<String> executiveSummary,
+  Value<String> executiveSummaryHindi,
+  Value<DateTime> uploadedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalClinicalLabReportsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalClinicalLabReportsTable> {
+  $$LocalClinicalLabReportsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get labName => $composableBuilder(
+      column: $table.labName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get testDate => $composableBuilder(
+      column: $table.testDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get resultsJson => $composableBuilder(
+      column: $table.resultsJson, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get executiveSummary => $composableBuilder(
+      column: $table.executiveSummary,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get executiveSummaryHindi => $composableBuilder(
+      column: $table.executiveSummaryHindi,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get uploadedAt => $composableBuilder(
+      column: $table.uploadedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalClinicalLabReportsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalClinicalLabReportsTable> {
+  $$LocalClinicalLabReportsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get labName => $composableBuilder(
+      column: $table.labName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get testDate => $composableBuilder(
+      column: $table.testDate, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get resultsJson => $composableBuilder(
+      column: $table.resultsJson, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get executiveSummary => $composableBuilder(
+      column: $table.executiveSummary,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get executiveSummaryHindi => $composableBuilder(
+      column: $table.executiveSummaryHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get uploadedAt => $composableBuilder(
+      column: $table.uploadedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalClinicalLabReportsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalClinicalLabReportsTable> {
+  $$LocalClinicalLabReportsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get labName =>
+      $composableBuilder(column: $table.labName, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get testDate =>
+      $composableBuilder(column: $table.testDate, builder: (column) => column);
+
+  GeneratedColumn<String> get resultsJson => $composableBuilder(
+      column: $table.resultsJson, builder: (column) => column);
+
+  GeneratedColumn<String> get executiveSummary => $composableBuilder(
+      column: $table.executiveSummary, builder: (column) => column);
+
+  GeneratedColumn<String> get executiveSummaryHindi => $composableBuilder(
+      column: $table.executiveSummaryHindi, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get uploadedAt => $composableBuilder(
+      column: $table.uploadedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalClinicalLabReportsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalClinicalLabReportsTable,
+    LocalClinicalLabReport,
+    $$LocalClinicalLabReportsTableFilterComposer,
+    $$LocalClinicalLabReportsTableOrderingComposer,
+    $$LocalClinicalLabReportsTableAnnotationComposer,
+    $$LocalClinicalLabReportsTableCreateCompanionBuilder,
+    $$LocalClinicalLabReportsTableUpdateCompanionBuilder,
+    (
+      LocalClinicalLabReport,
+      BaseReferences<_$AppDatabase, $LocalClinicalLabReportsTable,
+          LocalClinicalLabReport>
+    ),
+    LocalClinicalLabReport,
+    PrefetchHooks Function()> {
+  $$LocalClinicalLabReportsTableTableManager(
+      _$AppDatabase db, $LocalClinicalLabReportsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalClinicalLabReportsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalClinicalLabReportsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalClinicalLabReportsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> labName = const Value.absent(),
+            Value<DateTime> testDate = const Value.absent(),
+            Value<String> resultsJson = const Value.absent(),
+            Value<String> executiveSummary = const Value.absent(),
+            Value<String> executiveSummaryHindi = const Value.absent(),
+            Value<DateTime> uploadedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalClinicalLabReportsCompanion(
+            id: id,
+            userId: userId,
+            labName: labName,
+            testDate: testDate,
+            resultsJson: resultsJson,
+            executiveSummary: executiveSummary,
+            executiveSummaryHindi: executiveSummaryHindi,
+            uploadedAt: uploadedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String labName,
+            required DateTime testDate,
+            required String resultsJson,
+            required String executiveSummary,
+            required String executiveSummaryHindi,
+            required DateTime uploadedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalClinicalLabReportsCompanion.insert(
+            id: id,
+            userId: userId,
+            labName: labName,
+            testDate: testDate,
+            resultsJson: resultsJson,
+            executiveSummary: executiveSummary,
+            executiveSummaryHindi: executiveSummaryHindi,
+            uploadedAt: uploadedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalClinicalLabReportsTable,
+                        LocalClinicalLabReport>(table),
+                    BaseReferences<_$AppDatabase, $LocalClinicalLabReportsTable,
+                        LocalClinicalLabReport>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalClinicalLabReportsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalClinicalLabReportsTable,
+        LocalClinicalLabReport,
+        $$LocalClinicalLabReportsTableFilterComposer,
+        $$LocalClinicalLabReportsTableOrderingComposer,
+        $$LocalClinicalLabReportsTableAnnotationComposer,
+        $$LocalClinicalLabReportsTableCreateCompanionBuilder,
+        $$LocalClinicalLabReportsTableUpdateCompanionBuilder,
+        (
+          LocalClinicalLabReport,
+          BaseReferences<_$AppDatabase, $LocalClinicalLabReportsTable,
+              LocalClinicalLabReport>
+        ),
+        LocalClinicalLabReport,
+        PrefetchHooks Function()>;
+typedef $$LocalMedicationsTableCreateCompanionBuilder
+    = LocalMedicationsCompanion Function({
+  required String id,
+  required String userId,
+  required String medicationName,
+  required String dosage,
+  required String frequency,
+  required String timingCategory,
+  Value<String?> foodInteractionWarning,
+  Value<String?> foodInteractionWarningHindi,
+  Value<bool> isTakenToday,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalMedicationsTableUpdateCompanionBuilder
+    = LocalMedicationsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> medicationName,
+  Value<String> dosage,
+  Value<String> frequency,
+  Value<String> timingCategory,
+  Value<String?> foodInteractionWarning,
+  Value<String?> foodInteractionWarningHindi,
+  Value<bool> isTakenToday,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalMedicationsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalMedicationsTable> {
+  $$LocalMedicationsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get medicationName => $composableBuilder(
+      column: $table.medicationName,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get dosage => $composableBuilder(
+      column: $table.dosage, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get frequency => $composableBuilder(
+      column: $table.frequency, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get timingCategory => $composableBuilder(
+      column: $table.timingCategory,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get foodInteractionWarning => $composableBuilder(
+      column: $table.foodInteractionWarning,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get foodInteractionWarningHindi => $composableBuilder(
+      column: $table.foodInteractionWarningHindi,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isTakenToday => $composableBuilder(
+      column: $table.isTakenToday, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalMedicationsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalMedicationsTable> {
+  $$LocalMedicationsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get medicationName => $composableBuilder(
+      column: $table.medicationName,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get dosage => $composableBuilder(
+      column: $table.dosage, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get frequency => $composableBuilder(
+      column: $table.frequency, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get timingCategory => $composableBuilder(
+      column: $table.timingCategory,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get foodInteractionWarning => $composableBuilder(
+      column: $table.foodInteractionWarning,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get foodInteractionWarningHindi => $composableBuilder(
+      column: $table.foodInteractionWarningHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isTakenToday => $composableBuilder(
+      column: $table.isTakenToday,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalMedicationsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalMedicationsTable> {
+  $$LocalMedicationsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get medicationName => $composableBuilder(
+      column: $table.medicationName, builder: (column) => column);
+
+  GeneratedColumn<String> get dosage =>
+      $composableBuilder(column: $table.dosage, builder: (column) => column);
+
+  GeneratedColumn<String> get frequency =>
+      $composableBuilder(column: $table.frequency, builder: (column) => column);
+
+  GeneratedColumn<String> get timingCategory => $composableBuilder(
+      column: $table.timingCategory, builder: (column) => column);
+
+  GeneratedColumn<String> get foodInteractionWarning => $composableBuilder(
+      column: $table.foodInteractionWarning, builder: (column) => column);
+
+  GeneratedColumn<String> get foodInteractionWarningHindi => $composableBuilder(
+      column: $table.foodInteractionWarningHindi, builder: (column) => column);
+
+  GeneratedColumn<bool> get isTakenToday => $composableBuilder(
+      column: $table.isTakenToday, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalMedicationsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalMedicationsTable,
+    LocalMedication,
+    $$LocalMedicationsTableFilterComposer,
+    $$LocalMedicationsTableOrderingComposer,
+    $$LocalMedicationsTableAnnotationComposer,
+    $$LocalMedicationsTableCreateCompanionBuilder,
+    $$LocalMedicationsTableUpdateCompanionBuilder,
+    (
+      LocalMedication,
+      BaseReferences<_$AppDatabase, $LocalMedicationsTable, LocalMedication>
+    ),
+    LocalMedication,
+    PrefetchHooks Function()> {
+  $$LocalMedicationsTableTableManager(
+      _$AppDatabase db, $LocalMedicationsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalMedicationsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalMedicationsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalMedicationsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> medicationName = const Value.absent(),
+            Value<String> dosage = const Value.absent(),
+            Value<String> frequency = const Value.absent(),
+            Value<String> timingCategory = const Value.absent(),
+            Value<String?> foodInteractionWarning = const Value.absent(),
+            Value<String?> foodInteractionWarningHindi = const Value.absent(),
+            Value<bool> isTakenToday = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalMedicationsCompanion(
+            id: id,
+            userId: userId,
+            medicationName: medicationName,
+            dosage: dosage,
+            frequency: frequency,
+            timingCategory: timingCategory,
+            foodInteractionWarning: foodInteractionWarning,
+            foodInteractionWarningHindi: foodInteractionWarningHindi,
+            isTakenToday: isTakenToday,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String medicationName,
+            required String dosage,
+            required String frequency,
+            required String timingCategory,
+            Value<String?> foodInteractionWarning = const Value.absent(),
+            Value<String?> foodInteractionWarningHindi = const Value.absent(),
+            Value<bool> isTakenToday = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalMedicationsCompanion.insert(
+            id: id,
+            userId: userId,
+            medicationName: medicationName,
+            dosage: dosage,
+            frequency: frequency,
+            timingCategory: timingCategory,
+            foodInteractionWarning: foodInteractionWarning,
+            foodInteractionWarningHindi: foodInteractionWarningHindi,
+            isTakenToday: isTakenToday,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalMedicationsTable, LocalMedication>(table),
+                    BaseReferences<_$AppDatabase, $LocalMedicationsTable,
+                        LocalMedication>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalMedicationsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalMedicationsTable,
+    LocalMedication,
+    $$LocalMedicationsTableFilterComposer,
+    $$LocalMedicationsTableOrderingComposer,
+    $$LocalMedicationsTableAnnotationComposer,
+    $$LocalMedicationsTableCreateCompanionBuilder,
+    $$LocalMedicationsTableUpdateCompanionBuilder,
+    (
+      LocalMedication,
+      BaseReferences<_$AppDatabase, $LocalMedicationsTable, LocalMedication>
+    ),
+    LocalMedication,
+    PrefetchHooks Function()>;
+typedef $$LocalDoctorGrantsTableCreateCompanionBuilder
+    = LocalDoctorGrantsCompanion Function({
+  required String id,
+  required String userId,
+  required String doctorName,
+  required String clinicHospital,
+  required String accessPin,
+  required DateTime expiresAt,
+  Value<bool> isActive,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalDoctorGrantsTableUpdateCompanionBuilder
+    = LocalDoctorGrantsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> doctorName,
+  Value<String> clinicHospital,
+  Value<String> accessPin,
+  Value<DateTime> expiresAt,
+  Value<bool> isActive,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalDoctorGrantsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalDoctorGrantsTable> {
+  $$LocalDoctorGrantsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get doctorName => $composableBuilder(
+      column: $table.doctorName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get clinicHospital => $composableBuilder(
+      column: $table.clinicHospital,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get accessPin => $composableBuilder(
+      column: $table.accessPin, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+      column: $table.expiresAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isActive => $composableBuilder(
+      column: $table.isActive, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalDoctorGrantsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalDoctorGrantsTable> {
+  $$LocalDoctorGrantsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get doctorName => $composableBuilder(
+      column: $table.doctorName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get clinicHospital => $composableBuilder(
+      column: $table.clinicHospital,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get accessPin => $composableBuilder(
+      column: $table.accessPin, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+      column: $table.expiresAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isActive => $composableBuilder(
+      column: $table.isActive, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalDoctorGrantsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalDoctorGrantsTable> {
+  $$LocalDoctorGrantsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get doctorName => $composableBuilder(
+      column: $table.doctorName, builder: (column) => column);
+
+  GeneratedColumn<String> get clinicHospital => $composableBuilder(
+      column: $table.clinicHospital, builder: (column) => column);
+
+  GeneratedColumn<String> get accessPin =>
+      $composableBuilder(column: $table.accessPin, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiresAt =>
+      $composableBuilder(column: $table.expiresAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get isActive =>
+      $composableBuilder(column: $table.isActive, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalDoctorGrantsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalDoctorGrantsTable,
+    LocalDoctorGrant,
+    $$LocalDoctorGrantsTableFilterComposer,
+    $$LocalDoctorGrantsTableOrderingComposer,
+    $$LocalDoctorGrantsTableAnnotationComposer,
+    $$LocalDoctorGrantsTableCreateCompanionBuilder,
+    $$LocalDoctorGrantsTableUpdateCompanionBuilder,
+    (
+      LocalDoctorGrant,
+      BaseReferences<_$AppDatabase, $LocalDoctorGrantsTable, LocalDoctorGrant>
+    ),
+    LocalDoctorGrant,
+    PrefetchHooks Function()> {
+  $$LocalDoctorGrantsTableTableManager(
+      _$AppDatabase db, $LocalDoctorGrantsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalDoctorGrantsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalDoctorGrantsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalDoctorGrantsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> doctorName = const Value.absent(),
+            Value<String> clinicHospital = const Value.absent(),
+            Value<String> accessPin = const Value.absent(),
+            Value<DateTime> expiresAt = const Value.absent(),
+            Value<bool> isActive = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalDoctorGrantsCompanion(
+            id: id,
+            userId: userId,
+            doctorName: doctorName,
+            clinicHospital: clinicHospital,
+            accessPin: accessPin,
+            expiresAt: expiresAt,
+            isActive: isActive,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String doctorName,
+            required String clinicHospital,
+            required String accessPin,
+            required DateTime expiresAt,
+            Value<bool> isActive = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalDoctorGrantsCompanion.insert(
+            id: id,
+            userId: userId,
+            doctorName: doctorName,
+            clinicHospital: clinicHospital,
+            accessPin: accessPin,
+            expiresAt: expiresAt,
+            isActive: isActive,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalDoctorGrantsTable, LocalDoctorGrant>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalDoctorGrantsTable,
+                        LocalDoctorGrant>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalDoctorGrantsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalDoctorGrantsTable,
+    LocalDoctorGrant,
+    $$LocalDoctorGrantsTableFilterComposer,
+    $$LocalDoctorGrantsTableOrderingComposer,
+    $$LocalDoctorGrantsTableAnnotationComposer,
+    $$LocalDoctorGrantsTableCreateCompanionBuilder,
+    $$LocalDoctorGrantsTableUpdateCompanionBuilder,
+    (
+      LocalDoctorGrant,
+      BaseReferences<_$AppDatabase, $LocalDoctorGrantsTable, LocalDoctorGrant>
+    ),
+    LocalDoctorGrant,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -17793,4 +20763,14 @@ class $AppDatabaseManager {
       $$LocalFamilyMembersTableTableManager(_db, _db.localFamilyMembers);
   $$LocalClubsTableTableManager get localClubs =>
       $$LocalClubsTableTableManager(_db, _db.localClubs);
+  $$LocalBiologicalAgeRecordsTableTableManager get localBiologicalAgeRecords =>
+      $$LocalBiologicalAgeRecordsTableTableManager(
+          _db, _db.localBiologicalAgeRecords);
+  $$LocalClinicalLabReportsTableTableManager get localClinicalLabReports =>
+      $$LocalClinicalLabReportsTableTableManager(
+          _db, _db.localClinicalLabReports);
+  $$LocalMedicationsTableTableManager get localMedications =>
+      $$LocalMedicationsTableTableManager(_db, _db.localMedications);
+  $$LocalDoctorGrantsTableTableManager get localDoctorGrants =>
+      $$LocalDoctorGrantsTableTableManager(_db, _db.localDoctorGrants);
 }

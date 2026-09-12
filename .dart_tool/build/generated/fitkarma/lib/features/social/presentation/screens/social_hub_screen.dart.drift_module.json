@@ -1,0 +1,16 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:flutter_animate/flutter_animate.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/features/social/data/social_repository.dart",
+    "package:fitkarma/features/social/domain/models/social_models.dart",
+    "package:fitkarma/features/social/presentation/screens/squad_detail_screen.dart",
+    "package:fitkarma/features/social/presentation/screens/family_health_hub_screen.dart"
+  ]
+}

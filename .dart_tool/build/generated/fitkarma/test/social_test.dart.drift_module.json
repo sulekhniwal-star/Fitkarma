@@ -1,0 +1,14 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter_test/flutter_test.dart",
+    "package:drift/native.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/social/domain/models/social_models.dart",
+    "package:fitkarma/features/social/domain/services/squad_accountability_engine.dart",
+    "package:fitkarma/features/social/domain/services/family_health_monitoring_engine.dart",
+    "package:fitkarma/features/social/domain/services/leaderboard_ranking_engine.dart",
+    "package:fitkarma/features/social/data/social_repository.dart"
+  ]
+}

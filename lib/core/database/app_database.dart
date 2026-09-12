@@ -403,6 +403,70 @@ class LocalClubs extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 27. Local Biological Age Records Table
+class LocalBiologicalAgeRecords extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  IntColumn get chronologicalAge => integer()();
+  RealColumn get biologicalAge => real()();
+  RealColumn get ageDelta => real()();
+  TextColumn get topAction => text()();
+  TextColumn get topActionHindi => text()();
+  DateTimeColumn get calculatedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 28. Local Clinical Lab Reports Table
+class LocalClinicalLabReports extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get labName => text()();
+  DateTimeColumn get testDate => dateTime()();
+  TextColumn get resultsJson => text()();
+  TextColumn get executiveSummary => text()();
+  TextColumn get executiveSummaryHindi => text()();
+  DateTimeColumn get uploadedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 29. Local Medications Table
+class LocalMedications extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get medicationName => text()();
+  TextColumn get dosage => text()();
+  TextColumn get frequency => text()();
+  TextColumn get timingCategory => text()();
+  TextColumn get foodInteractionWarning => text().nullable()();
+  TextColumn get foodInteractionWarningHindi => text().nullable()();
+  BoolColumn get isTakenToday => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 30. Local Doctor Access Grants Table
+class LocalDoctorGrants extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get doctorName => text()();
+  TextColumn get clinicHospital => text()();
+  TextColumn get accessPin => text()();
+  DateTimeColumn get expiresAt => dateTime()();
+  BoolColumn get isActive => boolean().withDefault(const Constant(true))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -430,6 +494,10 @@ class LocalClubs extends Table {
   LocalCommunityPosts,
   LocalFamilyMembers,
   LocalClubs,
+  LocalBiologicalAgeRecords,
+  LocalClinicalLabReports,
+  LocalMedications,
+  LocalDoctorGrants,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
