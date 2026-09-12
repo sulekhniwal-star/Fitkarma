@@ -1,0 +1,10 @@
+{
+  "elements": {},
+  "imports": [
+    "package:intl/intl.dart",
+    "package:fitkarma/features/environmental/services/environmental_health_engine.dart",
+    "package:fitkarma/features/metabolism/services/metabolism_engine.dart",
+    "package:fitkarma/features/health_os/domain/models/dip_package.dart",
+    "package:fitkarma/features/health_os/services/ai_routing_service.dart"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "elements": {},
+  "imports": [
+    "package:supabase_flutter/supabase_flutter.dart",
+    "package:fitkarma/features/health_os/domain/models/dip_package.dart"
+  ]
+}

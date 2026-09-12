@@ -1,0 +1,2213 @@
+// ignore_for_file: type=lint
+class $PendingMutationsTable extends PendingMutations
+    with TableInfo<$PendingMutationsTable, PendingMutation> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PendingMutationsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _targetTableMeta =
+      const VerificationMeta('targetTable');
+  @override
+  late final GeneratedColumn<String> targetTable = GeneratedColumn<String>(
+      'target_table', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _actionMeta = const VerificationMeta('action');
+  @override
+  late final GeneratedColumn<String> action = GeneratedColumn<String>(
+      'action', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _payloadMeta =
+      const VerificationMeta('payload');
+  @override
+  late final GeneratedColumn<String> payload = GeneratedColumn<String>(
+      'payload', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  static const VerificationMeta _retryCountMeta =
+      const VerificationMeta('retryCount');
+  @override
+  late final GeneratedColumn<int> retryCount = GeneratedColumn<int>(
+      'retry_count', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _lastErrorMeta =
+      const VerificationMeta('lastError');
+  @override
+  late final GeneratedColumn<String> lastError = GeneratedColumn<String>(
+      'last_error', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, targetTable, action, payload, createdAt, retryCount, lastError];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'pending_mutations';
+  @override
+  VerificationContext validateIntegrity(Insertable<PendingMutation> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('target_table')) {
+      context.handle(
+          _targetTableMeta,
+          targetTable.isAcceptableOrUnknown(
+              data['target_table']!, _targetTableMeta));
+    } else if (isInserting) {
+      context.missing(_targetTableMeta);
+    }
+    if (data.containsKey('action')) {
+      context.handle(_actionMeta,
+          action.isAcceptableOrUnknown(data['action']!, _actionMeta));
+    } else if (isInserting) {
+      context.missing(_actionMeta);
+    }
+    if (data.containsKey('payload')) {
+      context.handle(_payloadMeta,
+          payload.isAcceptableOrUnknown(data['payload']!, _payloadMeta));
+    } else if (isInserting) {
+      context.missing(_payloadMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    if (data.containsKey('retry_count')) {
+      context.handle(
+          _retryCountMeta,
+          retryCount.isAcceptableOrUnknown(
+              data['retry_count']!, _retryCountMeta));
+    }
+    if (data.containsKey('last_error')) {
+      context.handle(_lastErrorMeta,
+          lastError.isAcceptableOrUnknown(data['last_error']!, _lastErrorMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PendingMutation map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PendingMutation(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      targetTable: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}target_table'])!,
+      action: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}action'])!,
+      payload: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}payload'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      retryCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}retry_count'])!,
+      lastError: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}last_error']),
+    );
+  }
+
+  @override
+  $PendingMutationsTable createAlias(String alias) {
+    return $PendingMutationsTable(attachedDatabase, alias);
+  }
+}
+
+class PendingMutation extends DataClass implements Insertable<PendingMutation> {
+  final String id;
+  final String targetTable;
+  final String action;
+  final String payload;
+  final DateTime createdAt;
+  final int retryCount;
+  final String? lastError;
+  const PendingMutation(
+      {required this.id,
+      required this.targetTable,
+      required this.action,
+      required this.payload,
+      required this.createdAt,
+      required this.retryCount,
+      this.lastError});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['target_table'] = Variable<String>(targetTable);
+    map['action'] = Variable<String>(action);
+    map['payload'] = Variable<String>(payload);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['retry_count'] = Variable<int>(retryCount);
+    if (!nullToAbsent || lastError != null) {
+      map['last_error'] = Variable<String>(lastError);
+    }
+    return map;
+  }
+
+  PendingMutationsCompanion toCompanion(bool nullToAbsent) {
+    return PendingMutationsCompanion(
+      id: Value(id),
+      targetTable: Value(targetTable),
+      action: Value(action),
+      payload: Value(payload),
+      createdAt: Value(createdAt),
+      retryCount: Value(retryCount),
+      lastError: lastError == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastError),
+    );
+  }
+
+  factory PendingMutation.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PendingMutation(
+      id: serializer.fromJson<String>(json['id']),
+      targetTable: serializer.fromJson<String>(json['targetTable']),
+      action: serializer.fromJson<String>(json['action']),
+      payload: serializer.fromJson<String>(json['payload']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      retryCount: serializer.fromJson<int>(json['retryCount']),
+      lastError: serializer.fromJson<String?>(json['lastError']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'targetTable': serializer.toJson<String>(targetTable),
+      'action': serializer.toJson<String>(action),
+      'payload': serializer.toJson<String>(payload),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'retryCount': serializer.toJson<int>(retryCount),
+      'lastError': serializer.toJson<String?>(lastError),
+    };
+  }
+
+  PendingMutation copyWith(
+          {String? id,
+          String? targetTable,
+          String? action,
+          String? payload,
+          DateTime? createdAt,
+          int? retryCount,
+          Value<String?> lastError = const Value.absent()}) =>
+      PendingMutation(
+        id: id ?? this.id,
+        targetTable: targetTable ?? this.targetTable,
+        action: action ?? this.action,
+        payload: payload ?? this.payload,
+        createdAt: createdAt ?? this.createdAt,
+        retryCount: retryCount ?? this.retryCount,
+        lastError: lastError.present ? lastError.value : this.lastError,
+      );
+  PendingMutation copyWithCompanion(PendingMutationsCompanion data) {
+    return PendingMutation(
+      id: data.id.present ? data.id.value : this.id,
+      targetTable:
+          data.targetTable.present ? data.targetTable.value : this.targetTable,
+      action: data.action.present ? data.action.value : this.action,
+      payload: data.payload.present ? data.payload.value : this.payload,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      retryCount:
+          data.retryCount.present ? data.retryCount.value : this.retryCount,
+      lastError: data.lastError.present ? data.lastError.value : this.lastError,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PendingMutation(')
+          ..write('id: $id, ')
+          ..write('targetTable: $targetTable, ')
+          ..write('action: $action, ')
+          ..write('payload: $payload, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('retryCount: $retryCount, ')
+          ..write('lastError: $lastError')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, targetTable, action, payload, createdAt, retryCount, lastError);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PendingMutation &&
+          other.id == this.id &&
+          other.targetTable == this.targetTable &&
+          other.action == this.action &&
+          other.payload == this.payload &&
+          other.createdAt == this.createdAt &&
+          other.retryCount == this.retryCount &&
+          other.lastError == this.lastError);
+}
+
+class PendingMutationsCompanion extends UpdateCompanion<PendingMutation> {
+  final Value<String> id;
+  final Value<String> targetTable;
+  final Value<String> action;
+  final Value<String> payload;
+  final Value<DateTime> createdAt;
+  final Value<int> retryCount;
+  final Value<String?> lastError;
+  final Value<int> rowid;
+  const PendingMutationsCompanion({
+    this.id = const Value.absent(),
+    this.targetTable = const Value.absent(),
+    this.action = const Value.absent(),
+    this.payload = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.retryCount = const Value.absent(),
+    this.lastError = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PendingMutationsCompanion.insert({
+    required String id,
+    required String targetTable,
+    required String action,
+    required String payload,
+    this.createdAt = const Value.absent(),
+    this.retryCount = const Value.absent(),
+    this.lastError = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        targetTable = Value(targetTable),
+        action = Value(action),
+        payload = Value(payload);
+  static Insertable<PendingMutation> custom({
+    Expression<String>? id,
+    Expression<String>? targetTable,
+    Expression<String>? action,
+    Expression<String>? payload,
+    Expression<DateTime>? createdAt,
+    Expression<int>? retryCount,
+    Expression<String>? lastError,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (targetTable != null) 'target_table': targetTable,
+      if (action != null) 'action': action,
+      if (payload != null) 'payload': payload,
+      if (createdAt != null) 'created_at': createdAt,
+      if (retryCount != null) 'retry_count': retryCount,
+      if (lastError != null) 'last_error': lastError,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PendingMutationsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? targetTable,
+      Value<String>? action,
+      Value<String>? payload,
+      Value<DateTime>? createdAt,
+      Value<int>? retryCount,
+      Value<String?>? lastError,
+      Value<int>? rowid}) {
+    return PendingMutationsCompanion(
+      id: id ?? this.id,
+      targetTable: targetTable ?? this.targetTable,
+      action: action ?? this.action,
+      payload: payload ?? this.payload,
+      createdAt: createdAt ?? this.createdAt,
+      retryCount: retryCount ?? this.retryCount,
+      lastError: lastError ?? this.lastError,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (targetTable.present) {
+      map['target_table'] = Variable<String>(targetTable.value);
+    }
+    if (action.present) {
+      map['action'] = Variable<String>(action.value);
+    }
+    if (payload.present) {
+      map['payload'] = Variable<String>(payload.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (retryCount.present) {
+      map['retry_count'] = Variable<int>(retryCount.value);
+    }
+    if (lastError.present) {
+      map['last_error'] = Variable<String>(lastError.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PendingMutationsCompanion(')
+          ..write('id: $id, ')
+          ..write('targetTable: $targetTable, ')
+          ..write('action: $action, ')
+          ..write('payload: $payload, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('retryCount: $retryCount, ')
+          ..write('lastError: $lastError, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalProfilesTable extends LocalProfiles
+    with TableInfo<$LocalProfilesTable, LocalProfile> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalProfilesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _ageMeta = const VerificationMeta('age');
+  @override
+  late final GeneratedColumn<int> age = GeneratedColumn<int>(
+      'age', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _genderMeta = const VerificationMeta('gender');
+  @override
+  late final GeneratedColumn<String> gender = GeneratedColumn<String>(
+      'gender', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _heightCmMeta =
+      const VerificationMeta('heightCm');
+  @override
+  late final GeneratedColumn<double> heightCm = GeneratedColumn<double>(
+      'height_cm', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _weightKgMeta =
+      const VerificationMeta('weightKg');
+  @override
+  late final GeneratedColumn<double> weightKg = GeneratedColumn<double>(
+      'weight_kg', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _primaryGoalMeta =
+      const VerificationMeta('primaryGoal');
+  @override
+  late final GeneratedColumn<String> primaryGoal = GeneratedColumn<String>(
+      'primary_goal', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [userId, name, age, gender, heightCm, weightKg, primaryGoal, updatedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_profiles';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalProfile> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    }
+    if (data.containsKey('age')) {
+      context.handle(
+          _ageMeta, age.isAcceptableOrUnknown(data['age']!, _ageMeta));
+    }
+    if (data.containsKey('gender')) {
+      context.handle(_genderMeta,
+          gender.isAcceptableOrUnknown(data['gender']!, _genderMeta));
+    }
+    if (data.containsKey('height_cm')) {
+      context.handle(_heightCmMeta,
+          heightCm.isAcceptableOrUnknown(data['height_cm']!, _heightCmMeta));
+    }
+    if (data.containsKey('weight_kg')) {
+      context.handle(_weightKgMeta,
+          weightKg.isAcceptableOrUnknown(data['weight_kg']!, _weightKgMeta));
+    }
+    if (data.containsKey('primary_goal')) {
+      context.handle(
+          _primaryGoalMeta,
+          primaryGoal.isAcceptableOrUnknown(
+              data['primary_goal']!, _primaryGoalMeta));
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {userId};
+  @override
+  LocalProfile map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalProfile(
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name']),
+      age: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}age']),
+      gender: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}gender']),
+      heightCm: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}height_cm']),
+      weightKg: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}weight_kg']),
+      primaryGoal: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}primary_goal']),
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $LocalProfilesTable createAlias(String alias) {
+    return $LocalProfilesTable(attachedDatabase, alias);
+  }
+}
+
+class LocalProfile extends DataClass implements Insertable<LocalProfile> {
+  final String userId;
+  final String? name;
+  final int? age;
+  final String? gender;
+  final double? heightCm;
+  final double? weightKg;
+  final String? primaryGoal;
+  final DateTime updatedAt;
+  const LocalProfile(
+      {required this.userId,
+      this.name,
+      this.age,
+      this.gender,
+      this.heightCm,
+      this.weightKg,
+      this.primaryGoal,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['user_id'] = Variable<String>(userId);
+    if (!nullToAbsent || name != null) {
+      map['name'] = Variable<String>(name);
+    }
+    if (!nullToAbsent || age != null) {
+      map['age'] = Variable<int>(age);
+    }
+    if (!nullToAbsent || gender != null) {
+      map['gender'] = Variable<String>(gender);
+    }
+    if (!nullToAbsent || heightCm != null) {
+      map['height_cm'] = Variable<double>(heightCm);
+    }
+    if (!nullToAbsent || weightKg != null) {
+      map['weight_kg'] = Variable<double>(weightKg);
+    }
+    if (!nullToAbsent || primaryGoal != null) {
+      map['primary_goal'] = Variable<String>(primaryGoal);
+    }
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  LocalProfilesCompanion toCompanion(bool nullToAbsent) {
+    return LocalProfilesCompanion(
+      userId: Value(userId),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      age: age == null && nullToAbsent ? const Value.absent() : Value(age),
+      gender:
+          gender == null && nullToAbsent ? const Value.absent() : Value(gender),
+      heightCm: heightCm == null && nullToAbsent
+          ? const Value.absent()
+          : Value(heightCm),
+      weightKg: weightKg == null && nullToAbsent
+          ? const Value.absent()
+          : Value(weightKg),
+      primaryGoal: primaryGoal == null && nullToAbsent
+          ? const Value.absent()
+          : Value(primaryGoal),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory LocalProfile.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalProfile(
+      userId: serializer.fromJson<String>(json['userId']),
+      name: serializer.fromJson<String?>(json['name']),
+      age: serializer.fromJson<int?>(json['age']),
+      gender: serializer.fromJson<String?>(json['gender']),
+      heightCm: serializer.fromJson<double?>(json['heightCm']),
+      weightKg: serializer.fromJson<double?>(json['weightKg']),
+      primaryGoal: serializer.fromJson<String?>(json['primaryGoal']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'userId': serializer.toJson<String>(userId),
+      'name': serializer.toJson<String?>(name),
+      'age': serializer.toJson<int?>(age),
+      'gender': serializer.toJson<String?>(gender),
+      'heightCm': serializer.toJson<double?>(heightCm),
+      'weightKg': serializer.toJson<double?>(weightKg),
+      'primaryGoal': serializer.toJson<String?>(primaryGoal),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  LocalProfile copyWith(
+          {String? userId,
+          Value<String?> name = const Value.absent(),
+          Value<int?> age = const Value.absent(),
+          Value<String?> gender = const Value.absent(),
+          Value<double?> heightCm = const Value.absent(),
+          Value<double?> weightKg = const Value.absent(),
+          Value<String?> primaryGoal = const Value.absent(),
+          DateTime? updatedAt}) =>
+      LocalProfile(
+        userId: userId ?? this.userId,
+        name: name.present ? name.value : this.name,
+        age: age.present ? age.value : this.age,
+        gender: gender.present ? gender.value : this.gender,
+        heightCm: heightCm.present ? heightCm.value : this.heightCm,
+        weightKg: weightKg.present ? weightKg.value : this.weightKg,
+        primaryGoal: primaryGoal.present ? primaryGoal.value : this.primaryGoal,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  LocalProfile copyWithCompanion(LocalProfilesCompanion data) {
+    return LocalProfile(
+      userId: data.userId.present ? data.userId.value : this.userId,
+      name: data.name.present ? data.name.value : this.name,
+      age: data.age.present ? data.age.value : this.age,
+      gender: data.gender.present ? data.gender.value : this.gender,
+      heightCm: data.heightCm.present ? data.heightCm.value : this.heightCm,
+      weightKg: data.weightKg.present ? data.weightKg.value : this.weightKg,
+      primaryGoal:
+          data.primaryGoal.present ? data.primaryGoal.value : this.primaryGoal,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalProfile(')
+          ..write('userId: $userId, ')
+          ..write('name: $name, ')
+          ..write('age: $age, ')
+          ..write('gender: $gender, ')
+          ..write('heightCm: $heightCm, ')
+          ..write('weightKg: $weightKg, ')
+          ..write('primaryGoal: $primaryGoal, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      userId, name, age, gender, heightCm, weightKg, primaryGoal, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalProfile &&
+          other.userId == this.userId &&
+          other.name == this.name &&
+          other.age == this.age &&
+          other.gender == this.gender &&
+          other.heightCm == this.heightCm &&
+          other.weightKg == this.weightKg &&
+          other.primaryGoal == this.primaryGoal &&
+          other.updatedAt == this.updatedAt);
+}
+
+class LocalProfilesCompanion extends UpdateCompanion<LocalProfile> {
+  final Value<String> userId;
+  final Value<String?> name;
+  final Value<int?> age;
+  final Value<String?> gender;
+  final Value<double?> heightCm;
+  final Value<double?> weightKg;
+  final Value<String?> primaryGoal;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const LocalProfilesCompanion({
+    this.userId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.age = const Value.absent(),
+    this.gender = const Value.absent(),
+    this.heightCm = const Value.absent(),
+    this.weightKg = const Value.absent(),
+    this.primaryGoal = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalProfilesCompanion.insert({
+    required String userId,
+    this.name = const Value.absent(),
+    this.age = const Value.absent(),
+    this.gender = const Value.absent(),
+    this.heightCm = const Value.absent(),
+    this.weightKg = const Value.absent(),
+    this.primaryGoal = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : userId = Value(userId);
+  static Insertable<LocalProfile> custom({
+    Expression<String>? userId,
+    Expression<String>? name,
+    Expression<int>? age,
+    Expression<String>? gender,
+    Expression<double>? heightCm,
+    Expression<double>? weightKg,
+    Expression<String>? primaryGoal,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (userId != null) 'user_id': userId,
+      if (name != null) 'name': name,
+      if (age != null) 'age': age,
+      if (gender != null) 'gender': gender,
+      if (heightCm != null) 'height_cm': heightCm,
+      if (weightKg != null) 'weight_kg': weightKg,
+      if (primaryGoal != null) 'primary_goal': primaryGoal,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalProfilesCompanion copyWith(
+      {Value<String>? userId,
+      Value<String?>? name,
+      Value<int?>? age,
+      Value<String?>? gender,
+      Value<double?>? heightCm,
+      Value<double?>? weightKg,
+      Value<String?>? primaryGoal,
+      Value<DateTime>? updatedAt,
+      Value<int>? rowid}) {
+    return LocalProfilesCompanion(
+      userId: userId ?? this.userId,
+      name: name ?? this.name,
+      age: age ?? this.age,
+      gender: gender ?? this.gender,
+      heightCm: heightCm ?? this.heightCm,
+      weightKg: weightKg ?? this.weightKg,
+      primaryGoal: primaryGoal ?? this.primaryGoal,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (age.present) {
+      map['age'] = Variable<int>(age.value);
+    }
+    if (gender.present) {
+      map['gender'] = Variable<String>(gender.value);
+    }
+    if (heightCm.present) {
+      map['height_cm'] = Variable<double>(heightCm.value);
+    }
+    if (weightKg.present) {
+      map['weight_kg'] = Variable<double>(weightKg.value);
+    }
+    if (primaryGoal.present) {
+      map['primary_goal'] = Variable<String>(primaryGoal.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalProfilesCompanion(')
+          ..write('userId: $userId, ')
+          ..write('name: $name, ')
+          ..write('age: $age, ')
+          ..write('gender: $gender, ')
+          ..write('heightCm: $heightCm, ')
+          ..write('weightKg: $weightKg, ')
+          ..write('primaryGoal: $primaryGoal, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalReadinessScoresTable extends LocalReadinessScores
+    with TableInfo<$LocalReadinessScoresTable, LocalReadinessScore> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalReadinessScoresTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _scoreMeta = const VerificationMeta('score');
+  @override
+  late final GeneratedColumn<int> score = GeneratedColumn<int>(
+      'score', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _confidenceTierMeta =
+      const VerificationMeta('confidenceTier');
+  @override
+  late final GeneratedColumn<String> confidenceTier = GeneratedColumn<String>(
+      'confidence_tier', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _calculatedAtMeta =
+      const VerificationMeta('calculatedAt');
+  @override
+  late final GeneratedColumn<DateTime> calculatedAt = GeneratedColumn<DateTime>(
+      'calculated_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, score, confidenceTier, calculatedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_readiness_scores';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalReadinessScore> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('score')) {
+      context.handle(
+          _scoreMeta, score.isAcceptableOrUnknown(data['score']!, _scoreMeta));
+    } else if (isInserting) {
+      context.missing(_scoreMeta);
+    }
+    if (data.containsKey('confidence_tier')) {
+      context.handle(
+          _confidenceTierMeta,
+          confidenceTier.isAcceptableOrUnknown(
+              data['confidence_tier']!, _confidenceTierMeta));
+    } else if (isInserting) {
+      context.missing(_confidenceTierMeta);
+    }
+    if (data.containsKey('calculated_at')) {
+      context.handle(
+          _calculatedAtMeta,
+          calculatedAt.isAcceptableOrUnknown(
+              data['calculated_at']!, _calculatedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalReadinessScore map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalReadinessScore(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      score: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}score'])!,
+      confidenceTier: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}confidence_tier'])!,
+      calculatedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}calculated_at'])!,
+    );
+  }
+
+  @override
+  $LocalReadinessScoresTable createAlias(String alias) {
+    return $LocalReadinessScoresTable(attachedDatabase, alias);
+  }
+}
+
+class LocalReadinessScore extends DataClass
+    implements Insertable<LocalReadinessScore> {
+  final String id;
+  final String userId;
+  final int score;
+  final String confidenceTier;
+  final DateTime calculatedAt;
+  const LocalReadinessScore(
+      {required this.id,
+      required this.userId,
+      required this.score,
+      required this.confidenceTier,
+      required this.calculatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['score'] = Variable<int>(score);
+    map['confidence_tier'] = Variable<String>(confidenceTier);
+    map['calculated_at'] = Variable<DateTime>(calculatedAt);
+    return map;
+  }
+
+  LocalReadinessScoresCompanion toCompanion(bool nullToAbsent) {
+    return LocalReadinessScoresCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      score: Value(score),
+      confidenceTier: Value(confidenceTier),
+      calculatedAt: Value(calculatedAt),
+    );
+  }
+
+  factory LocalReadinessScore.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalReadinessScore(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      score: serializer.fromJson<int>(json['score']),
+      confidenceTier: serializer.fromJson<String>(json['confidenceTier']),
+      calculatedAt: serializer.fromJson<DateTime>(json['calculatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'score': serializer.toJson<int>(score),
+      'confidenceTier': serializer.toJson<String>(confidenceTier),
+      'calculatedAt': serializer.toJson<DateTime>(calculatedAt),
+    };
+  }
+
+  LocalReadinessScore copyWith(
+          {String? id,
+          String? userId,
+          int? score,
+          String? confidenceTier,
+          DateTime? calculatedAt}) =>
+      LocalReadinessScore(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        score: score ?? this.score,
+        confidenceTier: confidenceTier ?? this.confidenceTier,
+        calculatedAt: calculatedAt ?? this.calculatedAt,
+      );
+  LocalReadinessScore copyWithCompanion(LocalReadinessScoresCompanion data) {
+    return LocalReadinessScore(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      score: data.score.present ? data.score.value : this.score,
+      confidenceTier: data.confidenceTier.present
+          ? data.confidenceTier.value
+          : this.confidenceTier,
+      calculatedAt: data.calculatedAt.present
+          ? data.calculatedAt.value
+          : this.calculatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalReadinessScore(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('score: $score, ')
+          ..write('confidenceTier: $confidenceTier, ')
+          ..write('calculatedAt: $calculatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, userId, score, confidenceTier, calculatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalReadinessScore &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.score == this.score &&
+          other.confidenceTier == this.confidenceTier &&
+          other.calculatedAt == this.calculatedAt);
+}
+
+class LocalReadinessScoresCompanion
+    extends UpdateCompanion<LocalReadinessScore> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<int> score;
+  final Value<String> confidenceTier;
+  final Value<DateTime> calculatedAt;
+  final Value<int> rowid;
+  const LocalReadinessScoresCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.score = const Value.absent(),
+    this.confidenceTier = const Value.absent(),
+    this.calculatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalReadinessScoresCompanion.insert({
+    required String id,
+    required String userId,
+    required int score,
+    required String confidenceTier,
+    this.calculatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        score = Value(score),
+        confidenceTier = Value(confidenceTier);
+  static Insertable<LocalReadinessScore> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<int>? score,
+    Expression<String>? confidenceTier,
+    Expression<DateTime>? calculatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (score != null) 'score': score,
+      if (confidenceTier != null) 'confidence_tier': confidenceTier,
+      if (calculatedAt != null) 'calculated_at': calculatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalReadinessScoresCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<int>? score,
+      Value<String>? confidenceTier,
+      Value<DateTime>? calculatedAt,
+      Value<int>? rowid}) {
+    return LocalReadinessScoresCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      score: score ?? this.score,
+      confidenceTier: confidenceTier ?? this.confidenceTier,
+      calculatedAt: calculatedAt ?? this.calculatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (score.present) {
+      map['score'] = Variable<int>(score.value);
+    }
+    if (confidenceTier.present) {
+      map['confidence_tier'] = Variable<String>(confidenceTier.value);
+    }
+    if (calculatedAt.present) {
+      map['calculated_at'] = Variable<DateTime>(calculatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalReadinessScoresCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('score: $score, ')
+          ..write('confidenceTier: $confidenceTier, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalDipCacheTable extends LocalDipCache
+    with TableInfo<$LocalDipCacheTable, LocalDipCacheData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalDipCacheTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+      'date', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _payloadJsonMeta =
+      const VerificationMeta('payloadJson');
+  @override
+  late final GeneratedColumn<String> payloadJson = GeneratedColumn<String>(
+      'payload_json', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _expiresAtMeta =
+      const VerificationMeta('expiresAt');
+  @override
+  late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
+      'expires_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [userId, date, payloadJson, expiresAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_dip_cache';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalDipCacheData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('payload_json')) {
+      context.handle(
+          _payloadJsonMeta,
+          payloadJson.isAcceptableOrUnknown(
+              data['payload_json']!, _payloadJsonMeta));
+    } else if (isInserting) {
+      context.missing(_payloadJsonMeta);
+    }
+    if (data.containsKey('expires_at')) {
+      context.handle(_expiresAtMeta,
+          expiresAt.isAcceptableOrUnknown(data['expires_at']!, _expiresAtMeta));
+    } else if (isInserting) {
+      context.missing(_expiresAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {userId, date};
+  @override
+  LocalDipCacheData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalDipCacheData(
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      date: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}date'])!,
+      payloadJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}payload_json'])!,
+      expiresAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}expires_at'])!,
+    );
+  }
+
+  @override
+  $LocalDipCacheTable createAlias(String alias) {
+    return $LocalDipCacheTable(attachedDatabase, alias);
+  }
+}
+
+class LocalDipCacheData extends DataClass
+    implements Insertable<LocalDipCacheData> {
+  final String userId;
+  final String date;
+  final String payloadJson;
+  final DateTime expiresAt;
+  const LocalDipCacheData(
+      {required this.userId,
+      required this.date,
+      required this.payloadJson,
+      required this.expiresAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['user_id'] = Variable<String>(userId);
+    map['date'] = Variable<String>(date);
+    map['payload_json'] = Variable<String>(payloadJson);
+    map['expires_at'] = Variable<DateTime>(expiresAt);
+    return map;
+  }
+
+  LocalDipCacheCompanion toCompanion(bool nullToAbsent) {
+    return LocalDipCacheCompanion(
+      userId: Value(userId),
+      date: Value(date),
+      payloadJson: Value(payloadJson),
+      expiresAt: Value(expiresAt),
+    );
+  }
+
+  factory LocalDipCacheData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalDipCacheData(
+      userId: serializer.fromJson<String>(json['userId']),
+      date: serializer.fromJson<String>(json['date']),
+      payloadJson: serializer.fromJson<String>(json['payloadJson']),
+      expiresAt: serializer.fromJson<DateTime>(json['expiresAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'userId': serializer.toJson<String>(userId),
+      'date': serializer.toJson<String>(date),
+      'payloadJson': serializer.toJson<String>(payloadJson),
+      'expiresAt': serializer.toJson<DateTime>(expiresAt),
+    };
+  }
+
+  LocalDipCacheData copyWith(
+          {String? userId,
+          String? date,
+          String? payloadJson,
+          DateTime? expiresAt}) =>
+      LocalDipCacheData(
+        userId: userId ?? this.userId,
+        date: date ?? this.date,
+        payloadJson: payloadJson ?? this.payloadJson,
+        expiresAt: expiresAt ?? this.expiresAt,
+      );
+  LocalDipCacheData copyWithCompanion(LocalDipCacheCompanion data) {
+    return LocalDipCacheData(
+      userId: data.userId.present ? data.userId.value : this.userId,
+      date: data.date.present ? data.date.value : this.date,
+      payloadJson:
+          data.payloadJson.present ? data.payloadJson.value : this.payloadJson,
+      expiresAt: data.expiresAt.present ? data.expiresAt.value : this.expiresAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalDipCacheData(')
+          ..write('userId: $userId, ')
+          ..write('date: $date, ')
+          ..write('payloadJson: $payloadJson, ')
+          ..write('expiresAt: $expiresAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(userId, date, payloadJson, expiresAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalDipCacheData &&
+          other.userId == this.userId &&
+          other.date == this.date &&
+          other.payloadJson == this.payloadJson &&
+          other.expiresAt == this.expiresAt);
+}
+
+class LocalDipCacheCompanion extends UpdateCompanion<LocalDipCacheData> {
+  final Value<String> userId;
+  final Value<String> date;
+  final Value<String> payloadJson;
+  final Value<DateTime> expiresAt;
+  final Value<int> rowid;
+  const LocalDipCacheCompanion({
+    this.userId = const Value.absent(),
+    this.date = const Value.absent(),
+    this.payloadJson = const Value.absent(),
+    this.expiresAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalDipCacheCompanion.insert({
+    required String userId,
+    required String date,
+    required String payloadJson,
+    required DateTime expiresAt,
+    this.rowid = const Value.absent(),
+  })  : userId = Value(userId),
+        date = Value(date),
+        payloadJson = Value(payloadJson),
+        expiresAt = Value(expiresAt);
+  static Insertable<LocalDipCacheData> custom({
+    Expression<String>? userId,
+    Expression<String>? date,
+    Expression<String>? payloadJson,
+    Expression<DateTime>? expiresAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (userId != null) 'user_id': userId,
+      if (date != null) 'date': date,
+      if (payloadJson != null) 'payload_json': payloadJson,
+      if (expiresAt != null) 'expires_at': expiresAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalDipCacheCompanion copyWith(
+      {Value<String>? userId,
+      Value<String>? date,
+      Value<String>? payloadJson,
+      Value<DateTime>? expiresAt,
+      Value<int>? rowid}) {
+    return LocalDipCacheCompanion(
+      userId: userId ?? this.userId,
+      date: date ?? this.date,
+      payloadJson: payloadJson ?? this.payloadJson,
+      expiresAt: expiresAt ?? this.expiresAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (payloadJson.present) {
+      map['payload_json'] = Variable<String>(payloadJson.value);
+    }
+    if (expiresAt.present) {
+      map['expires_at'] = Variable<DateTime>(expiresAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalDipCacheCompanion(')
+          ..write('userId: $userId, ')
+          ..write('date: $date, ')
+          ..write('payloadJson: $payloadJson, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+abstract class _$AppDatabase extends GeneratedDatabase {
+  _$AppDatabase(QueryExecutor e) : super(e);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $PendingMutationsTable pendingMutations =
+      $PendingMutationsTable(this);
+  late final $LocalProfilesTable localProfiles = $LocalProfilesTable(this);
+  late final $LocalReadinessScoresTable localReadinessScores =
+      $LocalReadinessScoresTable(this);
+  late final $LocalDipCacheTable localDipCache = $LocalDipCacheTable(this);
+  @override
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  @override
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [pendingMutations, localProfiles, localReadinessScores, localDipCache];
+}
+
+typedef $$PendingMutationsTableCreateCompanionBuilder
+    = PendingMutationsCompanion Function({
+  required String id,
+  required String targetTable,
+  required String action,
+  required String payload,
+  Value<DateTime> createdAt,
+  Value<int> retryCount,
+  Value<String?> lastError,
+  Value<int> rowid,
+});
+typedef $$PendingMutationsTableUpdateCompanionBuilder
+    = PendingMutationsCompanion Function({
+  Value<String> id,
+  Value<String> targetTable,
+  Value<String> action,
+  Value<String> payload,
+  Value<DateTime> createdAt,
+  Value<int> retryCount,
+  Value<String?> lastError,
+  Value<int> rowid,
+});
+
+class $$PendingMutationsTableFilterComposer
+    extends Composer<_$AppDatabase, $PendingMutationsTable> {
+  $$PendingMutationsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get targetTable => $composableBuilder(
+      column: $table.targetTable, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get action => $composableBuilder(
+      column: $table.action, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get payload => $composableBuilder(
+      column: $table.payload, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get retryCount => $composableBuilder(
+      column: $table.retryCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get lastError => $composableBuilder(
+      column: $table.lastError, builder: (column) => ColumnFilters(column));
+}
+
+class $$PendingMutationsTableOrderingComposer
+    extends Composer<_$AppDatabase, $PendingMutationsTable> {
+  $$PendingMutationsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get targetTable => $composableBuilder(
+      column: $table.targetTable, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get action => $composableBuilder(
+      column: $table.action, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get payload => $composableBuilder(
+      column: $table.payload, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get retryCount => $composableBuilder(
+      column: $table.retryCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get lastError => $composableBuilder(
+      column: $table.lastError, builder: (column) => ColumnOrderings(column));
+}
+
+class $$PendingMutationsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PendingMutationsTable> {
+  $$PendingMutationsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get targetTable => $composableBuilder(
+      column: $table.targetTable, builder: (column) => column);
+
+  GeneratedColumn<String> get action =>
+      $composableBuilder(column: $table.action, builder: (column) => column);
+
+  GeneratedColumn<String> get payload =>
+      $composableBuilder(column: $table.payload, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<int> get retryCount => $composableBuilder(
+      column: $table.retryCount, builder: (column) => column);
+
+  GeneratedColumn<String> get lastError =>
+      $composableBuilder(column: $table.lastError, builder: (column) => column);
+}
+
+class $$PendingMutationsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PendingMutationsTable,
+    PendingMutation,
+    $$PendingMutationsTableFilterComposer,
+    $$PendingMutationsTableOrderingComposer,
+    $$PendingMutationsTableAnnotationComposer,
+    $$PendingMutationsTableCreateCompanionBuilder,
+    $$PendingMutationsTableUpdateCompanionBuilder,
+    (
+      PendingMutation,
+      BaseReferences<_$AppDatabase, $PendingMutationsTable, PendingMutation>
+    ),
+    PendingMutation,
+    PrefetchHooks Function()> {
+  $$PendingMutationsTableTableManager(
+      _$AppDatabase db, $PendingMutationsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PendingMutationsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PendingMutationsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PendingMutationsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> targetTable = const Value.absent(),
+            Value<String> action = const Value.absent(),
+            Value<String> payload = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> retryCount = const Value.absent(),
+            Value<String?> lastError = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PendingMutationsCompanion(
+            id: id,
+            targetTable: targetTable,
+            action: action,
+            payload: payload,
+            createdAt: createdAt,
+            retryCount: retryCount,
+            lastError: lastError,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String targetTable,
+            required String action,
+            required String payload,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> retryCount = const Value.absent(),
+            Value<String?> lastError = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PendingMutationsCompanion.insert(
+            id: id,
+            targetTable: targetTable,
+            action: action,
+            payload: payload,
+            createdAt: createdAt,
+            retryCount: retryCount,
+            lastError: lastError,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$PendingMutationsTable, PendingMutation>(table),
+                    BaseReferences<_$AppDatabase, $PendingMutationsTable,
+                        PendingMutation>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$PendingMutationsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $PendingMutationsTable,
+    PendingMutation,
+    $$PendingMutationsTableFilterComposer,
+    $$PendingMutationsTableOrderingComposer,
+    $$PendingMutationsTableAnnotationComposer,
+    $$PendingMutationsTableCreateCompanionBuilder,
+    $$PendingMutationsTableUpdateCompanionBuilder,
+    (
+      PendingMutation,
+      BaseReferences<_$AppDatabase, $PendingMutationsTable, PendingMutation>
+    ),
+    PendingMutation,
+    PrefetchHooks Function()>;
+typedef $$LocalProfilesTableCreateCompanionBuilder = LocalProfilesCompanion
+    Function({
+  required String userId,
+  Value<String?> name,
+  Value<int?> age,
+  Value<String?> gender,
+  Value<double?> heightCm,
+  Value<double?> weightKg,
+  Value<String?> primaryGoal,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+typedef $$LocalProfilesTableUpdateCompanionBuilder = LocalProfilesCompanion
+    Function({
+  Value<String> userId,
+  Value<String?> name,
+  Value<int?> age,
+  Value<String?> gender,
+  Value<double?> heightCm,
+  Value<double?> weightKg,
+  Value<String?> primaryGoal,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+
+class $$LocalProfilesTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalProfilesTable> {
+  $$LocalProfilesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get age => $composableBuilder(
+      column: $table.age, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get gender => $composableBuilder(
+      column: $table.gender, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get heightCm => $composableBuilder(
+      column: $table.heightCm, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get weightKg => $composableBuilder(
+      column: $table.weightKg, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get primaryGoal => $composableBuilder(
+      column: $table.primaryGoal, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalProfilesTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalProfilesTable> {
+  $$LocalProfilesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get age => $composableBuilder(
+      column: $table.age, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get gender => $composableBuilder(
+      column: $table.gender, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get heightCm => $composableBuilder(
+      column: $table.heightCm, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get weightKg => $composableBuilder(
+      column: $table.weightKg, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get primaryGoal => $composableBuilder(
+      column: $table.primaryGoal, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalProfilesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalProfilesTable> {
+  $$LocalProfilesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<int> get age =>
+      $composableBuilder(column: $table.age, builder: (column) => column);
+
+  GeneratedColumn<String> get gender =>
+      $composableBuilder(column: $table.gender, builder: (column) => column);
+
+  GeneratedColumn<double> get heightCm =>
+      $composableBuilder(column: $table.heightCm, builder: (column) => column);
+
+  GeneratedColumn<double> get weightKg =>
+      $composableBuilder(column: $table.weightKg, builder: (column) => column);
+
+  GeneratedColumn<String> get primaryGoal => $composableBuilder(
+      column: $table.primaryGoal, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$LocalProfilesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalProfilesTable,
+    LocalProfile,
+    $$LocalProfilesTableFilterComposer,
+    $$LocalProfilesTableOrderingComposer,
+    $$LocalProfilesTableAnnotationComposer,
+    $$LocalProfilesTableCreateCompanionBuilder,
+    $$LocalProfilesTableUpdateCompanionBuilder,
+    (
+      LocalProfile,
+      BaseReferences<_$AppDatabase, $LocalProfilesTable, LocalProfile>
+    ),
+    LocalProfile,
+    PrefetchHooks Function()> {
+  $$LocalProfilesTableTableManager(_$AppDatabase db, $LocalProfilesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalProfilesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalProfilesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalProfilesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> userId = const Value.absent(),
+            Value<String?> name = const Value.absent(),
+            Value<int?> age = const Value.absent(),
+            Value<String?> gender = const Value.absent(),
+            Value<double?> heightCm = const Value.absent(),
+            Value<double?> weightKg = const Value.absent(),
+            Value<String?> primaryGoal = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalProfilesCompanion(
+            userId: userId,
+            name: name,
+            age: age,
+            gender: gender,
+            heightCm: heightCm,
+            weightKg: weightKg,
+            primaryGoal: primaryGoal,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String userId,
+            Value<String?> name = const Value.absent(),
+            Value<int?> age = const Value.absent(),
+            Value<String?> gender = const Value.absent(),
+            Value<double?> heightCm = const Value.absent(),
+            Value<double?> weightKg = const Value.absent(),
+            Value<String?> primaryGoal = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalProfilesCompanion.insert(
+            userId: userId,
+            name: name,
+            age: age,
+            gender: gender,
+            heightCm: heightCm,
+            weightKg: weightKg,
+            primaryGoal: primaryGoal,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalProfilesTable, LocalProfile>(table),
+                    BaseReferences<_$AppDatabase, $LocalProfilesTable,
+                        LocalProfile>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalProfilesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalProfilesTable,
+    LocalProfile,
+    $$LocalProfilesTableFilterComposer,
+    $$LocalProfilesTableOrderingComposer,
+    $$LocalProfilesTableAnnotationComposer,
+    $$LocalProfilesTableCreateCompanionBuilder,
+    $$LocalProfilesTableUpdateCompanionBuilder,
+    (
+      LocalProfile,
+      BaseReferences<_$AppDatabase, $LocalProfilesTable, LocalProfile>
+    ),
+    LocalProfile,
+    PrefetchHooks Function()>;
+typedef $$LocalReadinessScoresTableCreateCompanionBuilder
+    = LocalReadinessScoresCompanion Function({
+  required String id,
+  required String userId,
+  required int score,
+  required String confidenceTier,
+  Value<DateTime> calculatedAt,
+  Value<int> rowid,
+});
+typedef $$LocalReadinessScoresTableUpdateCompanionBuilder
+    = LocalReadinessScoresCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<int> score,
+  Value<String> confidenceTier,
+  Value<DateTime> calculatedAt,
+  Value<int> rowid,
+});
+
+class $$LocalReadinessScoresTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalReadinessScoresTable> {
+  $$LocalReadinessScoresTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get score => $composableBuilder(
+      column: $table.score, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get confidenceTier => $composableBuilder(
+      column: $table.confidenceTier,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalReadinessScoresTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalReadinessScoresTable> {
+  $$LocalReadinessScoresTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get score => $composableBuilder(
+      column: $table.score, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get confidenceTier => $composableBuilder(
+      column: $table.confidenceTier,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalReadinessScoresTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalReadinessScoresTable> {
+  $$LocalReadinessScoresTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<int> get score =>
+      $composableBuilder(column: $table.score, builder: (column) => column);
+
+  GeneratedColumn<String> get confidenceTier => $composableBuilder(
+      column: $table.confidenceTier, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => column);
+}
+
+class $$LocalReadinessScoresTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalReadinessScoresTable,
+    LocalReadinessScore,
+    $$LocalReadinessScoresTableFilterComposer,
+    $$LocalReadinessScoresTableOrderingComposer,
+    $$LocalReadinessScoresTableAnnotationComposer,
+    $$LocalReadinessScoresTableCreateCompanionBuilder,
+    $$LocalReadinessScoresTableUpdateCompanionBuilder,
+    (
+      LocalReadinessScore,
+      BaseReferences<_$AppDatabase, $LocalReadinessScoresTable,
+          LocalReadinessScore>
+    ),
+    LocalReadinessScore,
+    PrefetchHooks Function()> {
+  $$LocalReadinessScoresTableTableManager(
+      _$AppDatabase db, $LocalReadinessScoresTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalReadinessScoresTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalReadinessScoresTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalReadinessScoresTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<int> score = const Value.absent(),
+            Value<String> confidenceTier = const Value.absent(),
+            Value<DateTime> calculatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalReadinessScoresCompanion(
+            id: id,
+            userId: userId,
+            score: score,
+            confidenceTier: confidenceTier,
+            calculatedAt: calculatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required int score,
+            required String confidenceTier,
+            Value<DateTime> calculatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalReadinessScoresCompanion.insert(
+            id: id,
+            userId: userId,
+            score: score,
+            confidenceTier: confidenceTier,
+            calculatedAt: calculatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalReadinessScoresTable,
+                        LocalReadinessScore>(table),
+                    BaseReferences<_$AppDatabase, $LocalReadinessScoresTable,
+                        LocalReadinessScore>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalReadinessScoresTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalReadinessScoresTable,
+        LocalReadinessScore,
+        $$LocalReadinessScoresTableFilterComposer,
+        $$LocalReadinessScoresTableOrderingComposer,
+        $$LocalReadinessScoresTableAnnotationComposer,
+        $$LocalReadinessScoresTableCreateCompanionBuilder,
+        $$LocalReadinessScoresTableUpdateCompanionBuilder,
+        (
+          LocalReadinessScore,
+          BaseReferences<_$AppDatabase, $LocalReadinessScoresTable,
+              LocalReadinessScore>
+        ),
+        LocalReadinessScore,
+        PrefetchHooks Function()>;
+typedef $$LocalDipCacheTableCreateCompanionBuilder = LocalDipCacheCompanion
+    Function({
+  required String userId,
+  required String date,
+  required String payloadJson,
+  required DateTime expiresAt,
+  Value<int> rowid,
+});
+typedef $$LocalDipCacheTableUpdateCompanionBuilder = LocalDipCacheCompanion
+    Function({
+  Value<String> userId,
+  Value<String> date,
+  Value<String> payloadJson,
+  Value<DateTime> expiresAt,
+  Value<int> rowid,
+});
+
+class $$LocalDipCacheTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalDipCacheTable> {
+  $$LocalDipCacheTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get payloadJson => $composableBuilder(
+      column: $table.payloadJson, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+      column: $table.expiresAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalDipCacheTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalDipCacheTable> {
+  $$LocalDipCacheTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get payloadJson => $composableBuilder(
+      column: $table.payloadJson, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+      column: $table.expiresAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalDipCacheTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalDipCacheTable> {
+  $$LocalDipCacheTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get payloadJson => $composableBuilder(
+      column: $table.payloadJson, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiresAt =>
+      $composableBuilder(column: $table.expiresAt, builder: (column) => column);
+}
+
+class $$LocalDipCacheTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalDipCacheTable,
+    LocalDipCacheData,
+    $$LocalDipCacheTableFilterComposer,
+    $$LocalDipCacheTableOrderingComposer,
+    $$LocalDipCacheTableAnnotationComposer,
+    $$LocalDipCacheTableCreateCompanionBuilder,
+    $$LocalDipCacheTableUpdateCompanionBuilder,
+    (
+      LocalDipCacheData,
+      BaseReferences<_$AppDatabase, $LocalDipCacheTable, LocalDipCacheData>
+    ),
+    LocalDipCacheData,
+    PrefetchHooks Function()> {
+  $$LocalDipCacheTableTableManager(_$AppDatabase db, $LocalDipCacheTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalDipCacheTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalDipCacheTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalDipCacheTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> userId = const Value.absent(),
+            Value<String> date = const Value.absent(),
+            Value<String> payloadJson = const Value.absent(),
+            Value<DateTime> expiresAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalDipCacheCompanion(
+            userId: userId,
+            date: date,
+            payloadJson: payloadJson,
+            expiresAt: expiresAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String userId,
+            required String date,
+            required String payloadJson,
+            required DateTime expiresAt,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalDipCacheCompanion.insert(
+            userId: userId,
+            date: date,
+            payloadJson: payloadJson,
+            expiresAt: expiresAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalDipCacheTable, LocalDipCacheData>(table),
+                    BaseReferences<_$AppDatabase, $LocalDipCacheTable,
+                        LocalDipCacheData>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalDipCacheTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalDipCacheTable,
+    LocalDipCacheData,
+    $$LocalDipCacheTableFilterComposer,
+    $$LocalDipCacheTableOrderingComposer,
+    $$LocalDipCacheTableAnnotationComposer,
+    $$LocalDipCacheTableCreateCompanionBuilder,
+    $$LocalDipCacheTableUpdateCompanionBuilder,
+    (
+      LocalDipCacheData,
+      BaseReferences<_$AppDatabase, $LocalDipCacheTable, LocalDipCacheData>
+    ),
+    LocalDipCacheData,
+    PrefetchHooks Function()>;
+
+class $AppDatabaseManager {
+  final _$AppDatabase _db;
+  $AppDatabaseManager(this._db);
+  $$PendingMutationsTableTableManager get pendingMutations =>
+      $$PendingMutationsTableTableManager(_db, _db.pendingMutations);
+  $$LocalProfilesTableTableManager get localProfiles =>
+      $$LocalProfilesTableTableManager(_db, _db.localProfiles);
+  $$LocalReadinessScoresTableTableManager get localReadinessScores =>
+      $$LocalReadinessScoresTableTableManager(_db, _db.localReadinessScores);
+  $$LocalDipCacheTableTableManager get localDipCache =>
+      $$LocalDipCacheTableTableManager(_db, _db.localDipCache);
+}

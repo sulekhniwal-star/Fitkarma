@@ -1,0 +1,20 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_theme.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/activity_rings.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/core/widgets/glowing_metric.dart",
+    "package:fitkarma/features/environmental/services/environmental_health_engine.dart",
+    "package:fitkarma/features/health_os/services/ai_routing_service.dart",
+    "package:fitkarma/features/health_os/services/health_os_brain.dart",
+    "package:fitkarma/features/metabolism/services/metabolism_engine.dart"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter_test/flutter_test.dart",
+    "package:fitkarma/features/metabolism/services/metabolism_engine.dart",
+    "package:fitkarma/features/environmental/services/environmental_health_engine.dart",
+    "package:fitkarma/features/program_evolution/services/program_evolution_engine.dart"
+  ]
+}
