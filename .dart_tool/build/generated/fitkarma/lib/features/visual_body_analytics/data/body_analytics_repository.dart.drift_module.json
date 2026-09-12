@@ -1,0 +1,11 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/drift.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/visual_body_analytics/domain/models/body_analytics_models.dart",
+    "package:fitkarma/features/visual_body_analytics/domain/services/body_composition_engine.dart",
+    "package:fitkarma/features/visual_body_analytics/domain/services/visual_comparison_engine.dart"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/features/life_events/domain/models/life_event_models.dart",
+    "package:fitkarma/features/life_events/domain/services/festival_intelligence_engine.dart",
+    "package:fitkarma/features/life_events/domain/services/ai_roast_engine.dart",
+    "package:fitkarma/features/life_events/presentation/screens/wedding_mode_screen.dart",
+    "package:fitkarma/features/life_events/presentation/screens/travel_mode_screen.dart"
+  ]
+}

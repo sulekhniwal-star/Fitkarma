@@ -500,6 +500,96 @@ class LocalBodyCompositionSnapshots extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 33. Local Active Life Events Table
+class LocalActiveLifeEvents extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get eventType => text()();
+  TextColumn get title => text()();
+  DateTimeColumn get startDate => dateTime()();
+  DateTimeColumn get endDate => dateTime()();
+  TextColumn get configJson => text().nullable()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 34. Local Wedding Plans Table
+class LocalWeddingPlans extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  DateTimeColumn get weddingDate => dateTime()();
+  RealColumn get targetWeightKg => real()();
+  RealColumn get targetWaistCm => real()();
+  TextColumn get currentPhase => text()();
+  TextColumn get currentPhaseHindi => text()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 35. Local Entitlements Table (Server-verified only)
+class LocalEntitlements extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get tier => text()(); // 'free', 'pro', 'elite', 'corporate'
+  TextColumn get source => text()(); // 'revenuecat', 'razorpay', 'corporate_sso'
+  DateTimeColumn get expiresAt => dateTime().nullable()();
+  BoolColumn get isActive => boolean().withDefault(const Constant(true))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 36. Local Coach Profiles Table
+class LocalCoachProfiles extends Table {
+  TextColumn get id => text()();
+  TextColumn get name => text()();
+  TextColumn get title => text()();
+  TextColumn get specialty => text()();
+  TextColumn get bio => text()();
+  TextColumn get languagesJson => text()();
+  RealColumn get rating => real()();
+  IntColumn get reviewCount => integer()();
+  IntColumn get hourlyRateInr => integer()();
+  TextColumn get avatarUrl => text().nullable()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 37. Local Coach Bookings Table
+class LocalCoachBookings extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get coachId => text()();
+  DateTimeColumn get scheduledAt => dateTime()();
+  TextColumn get status => text()(); // 'pending', 'confirmed', 'completed', 'cancelled'
+  IntColumn get amountInr => integer()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 38. Local Affiliate Referrals Table
+class LocalAffiliateReferrals extends Table {
+  TextColumn get id => text()();
+  TextColumn get referrerId => text()();
+  TextColumn get referralCode => text()();
+  TextColumn get refereeUserId => text()();
+  IntColumn get karmaReward => integer()();
+  IntColumn get commissionInr => integer()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -533,6 +623,12 @@ class LocalBodyCompositionSnapshots extends Table {
   LocalDoctorGrants,
   LocalProgressPhotos,
   LocalBodyCompositionSnapshots,
+  LocalActiveLifeEvents,
+  LocalWeddingPlans,
+  LocalEntitlements,
+  LocalCoachProfiles,
+  LocalCoachBookings,
+  LocalAffiliateReferrals,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

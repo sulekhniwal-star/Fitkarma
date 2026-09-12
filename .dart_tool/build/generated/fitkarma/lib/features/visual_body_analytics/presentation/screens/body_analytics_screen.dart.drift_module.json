@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_animate/flutter_animate.dart",
+    "package:uuid/uuid.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/features/visual_body_analytics/domain/models/body_analytics_models.dart",
+    "package:fitkarma/features/visual_body_analytics/domain/services/body_composition_engine.dart",
+    "package:fitkarma/features/visual_body_analytics/domain/services/visual_comparison_engine.dart"
+  ]
+}

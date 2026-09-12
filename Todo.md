@@ -571,54 +571,54 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 12 — Festival & Life Events
 
-- [ ] **Festival Intelligence System**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Life Events Engine**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Wedding Transformation Mode**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **AI Roast Mode**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Travel Intelligence (Travel Mode)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Smart Calendar Integration**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Festival Intelligence System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Life Events Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Wedding Transformation Mode**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Roast Mode**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Travel Intelligence (Travel Mode)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Smart Calendar Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 13 — Monetisation
 
-- [ ] **Subscription Tiers (server-side entitlement verification)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Creator & Coach Marketplace**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Creator Affiliate Program**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Subscription Tiers (server-side entitlement verification)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Creator & Coach Marketplace**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Creator Affiliate Program**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 14 — Enterprise Hardening
 

@@ -7,7 +7,7 @@
       },
       "declaration": {
         "source_uri": "package:fitkarma/core/database/app_database.dart",
-        "offset": 18277,
+        "offset": 21597,
         "name": "AppDatabase"
       },
       "references": [
@@ -138,6 +138,30 @@
         {
           "library_uri": "package:fitkarma/core/database/app_database.dart",
           "name": "local_body_composition_snapshots"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_active_life_events"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_wedding_plans"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_entitlements"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_coach_profiles"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_coach_bookings"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_affiliate_referrals"
         }
       ],
       "type": "database",
@@ -269,6 +293,30 @@
         {
           "library_uri": "package:fitkarma/core/database/app_database.dart",
           "name": "local_body_composition_snapshots"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_active_life_events"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_wedding_plans"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_entitlements"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_coach_profiles"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_coach_bookings"
+        },
+        {
+          "library_uri": "package:fitkarma/core/database/app_database.dart",
+          "name": "local_affiliate_referrals"
         }
       ],
       "views": [],
@@ -7425,6 +7473,1275 @@
       "fixed_entity_info_name": null,
       "base_dart_name": "LocalBodyCompositionSnapshots",
       "row_class_name": "LocalBodyCompositionSnapshot",
+      "companion_class_name": null,
+      "without_rowid": false,
+      "strict": false,
+      "write_default_constraints": true,
+      "custom_constraints": [],
+      "attached_indices": []
+    },
+    "local_active_life_events": {
+      "id": {
+        "library_uri": "package:fitkarma/core/database/app_database.dart",
+        "name": "local_active_life_events"
+      },
+      "declaration": {
+        "source_uri": "package:fitkarma/core/database/app_database.dart",
+        "offset": 17590,
+        "name": "LocalActiveLifeEvents"
+      },
+      "references": [],
+      "type": "table",
+      "columns": [
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "id",
+          "nameInDart": "id",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17645,
+            "name": "id"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "user_id",
+          "nameInDart": "userId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17678,
+            "name": "userId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "event_type",
+          "nameInDart": "eventType",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17715,
+            "name": "eventType"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "title",
+          "nameInDart": "title",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17755,
+            "name": "title"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "start_date",
+          "nameInDart": "startDate",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17795,
+            "name": "startDate"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "end_date",
+          "nameInDart": "endDate",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17843,
+            "name": "endDate"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": true,
+          "nameInSql": "config_json",
+          "nameInDart": "configJson",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17885,
+            "name": "configJson"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "created_at",
+          "nameInDart": "createdAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 17941,
+            "name": "createdAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              {
+                "lexeme": "currentDateAndTime",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              }
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        }
+      ],
+      "existing_data_class": null,
+      "table_constraints": [
+        {
+          "type": "primary_key",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "custom_parent_class": null,
+      "interfaces_for_row_class": [],
+      "fixed_entity_info_name": null,
+      "base_dart_name": "LocalActiveLifeEvents",
+      "row_class_name": "LocalActiveLifeEvent",
+      "companion_class_name": null,
+      "without_rowid": false,
+      "strict": false,
+      "write_default_constraints": true,
+      "custom_constraints": [],
+      "attached_indices": []
+    },
+    "local_wedding_plans": {
+      "id": {
+        "library_uri": "package:fitkarma/core/database/app_database.dart",
+        "name": "local_wedding_plans"
+      },
+      "declaration": {
+        "source_uri": "package:fitkarma/core/database/app_database.dart",
+        "offset": 18093,
+        "name": "LocalWeddingPlans"
+      },
+      "references": [],
+      "type": "table",
+      "columns": [
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "id",
+          "nameInDart": "id",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18144,
+            "name": "id"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "user_id",
+          "nameInDart": "userId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18177,
+            "name": "userId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "wedding_date",
+          "nameInDart": "weddingDate",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18218,
+            "name": "weddingDate"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "double"
+          },
+          "nullable": false,
+          "nameInSql": "target_weight_kg",
+          "nameInDart": "targetWeightKg",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18264,
+            "name": "targetWeightKg"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "double"
+          },
+          "nullable": false,
+          "nameInSql": "target_waist_cm",
+          "nameInDart": "targetWaistCm",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18309,
+            "name": "targetWaistCm"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "current_phase",
+          "nameInDart": "currentPhase",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18353,
+            "name": "currentPhase"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "current_phase_hindi",
+          "nameInDart": "currentPhaseHindi",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18396,
+            "name": "currentPhaseHindi"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "created_at",
+          "nameInDart": "createdAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18448,
+            "name": "createdAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              {
+                "lexeme": "currentDateAndTime",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              }
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        }
+      ],
+      "existing_data_class": null,
+      "table_constraints": [
+        {
+          "type": "primary_key",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "custom_parent_class": null,
+      "interfaces_for_row_class": [],
+      "fixed_entity_info_name": null,
+      "base_dart_name": "LocalWeddingPlans",
+      "row_class_name": "LocalWeddingPlan",
+      "companion_class_name": null,
+      "without_rowid": false,
+      "strict": false,
+      "write_default_constraints": true,
+      "custom_constraints": [],
+      "attached_indices": []
+    },
+    "local_entitlements": {
+      "id": {
+        "library_uri": "package:fitkarma/core/database/app_database.dart",
+        "name": "local_entitlements"
+      },
+      "declaration": {
+        "source_uri": "package:fitkarma/core/database/app_database.dart",
+        "offset": 18622,
+        "name": "LocalEntitlements"
+      },
+      "references": [],
+      "type": "table",
+      "columns": [
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "id",
+          "nameInDart": "id",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18673,
+            "name": "id"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "user_id",
+          "nameInDart": "userId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18706,
+            "name": "userId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "tier",
+          "nameInDart": "tier",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18743,
+            "name": "tier"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "source",
+          "nameInDart": "source",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18817,
+            "name": "source"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": true,
+          "nameInSql": "expires_at",
+          "nameInDart": "expiresAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18903,
+            "name": "expiresAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "bool"
+          },
+          "nullable": false,
+          "nameInSql": "is_active",
+          "nameInDart": "isActive",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 18958,
+            "name": "isActive"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              "const ",
+              {
+                "lexeme": "Constant",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              },
+              "(true)"
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "created_at",
+          "nameInDart": "createdAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19038,
+            "name": "createdAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              {
+                "lexeme": "currentDateAndTime",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              }
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        }
+      ],
+      "existing_data_class": null,
+      "table_constraints": [
+        {
+          "type": "primary_key",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "custom_parent_class": null,
+      "interfaces_for_row_class": [],
+      "fixed_entity_info_name": null,
+      "base_dart_name": "LocalEntitlements",
+      "row_class_name": "LocalEntitlement",
+      "companion_class_name": null,
+      "without_rowid": false,
+      "strict": false,
+      "write_default_constraints": true,
+      "custom_constraints": [],
+      "attached_indices": []
+    },
+    "local_coach_profiles": {
+      "id": {
+        "library_uri": "package:fitkarma/core/database/app_database.dart",
+        "name": "local_coach_profiles"
+      },
+      "declaration": {
+        "source_uri": "package:fitkarma/core/database/app_database.dart",
+        "offset": 19191,
+        "name": "LocalCoachProfiles"
+      },
+      "references": [],
+      "type": "table",
+      "columns": [
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "id",
+          "nameInDart": "id",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19243,
+            "name": "id"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "name",
+          "nameInDart": "name",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19276,
+            "name": "name"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "title",
+          "nameInDart": "title",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19311,
+            "name": "title"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "specialty",
+          "nameInDart": "specialty",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19347,
+            "name": "specialty"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "bio",
+          "nameInDart": "bio",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19387,
+            "name": "bio"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "languages_json",
+          "nameInDart": "languagesJson",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19421,
+            "name": "languagesJson"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "double"
+          },
+          "nullable": false,
+          "nameInSql": "rating",
+          "nameInDart": "rating",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19465,
+            "name": "rating"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "int"
+          },
+          "nullable": false,
+          "nameInSql": "review_count",
+          "nameInDart": "reviewCount",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19501,
+            "name": "reviewCount"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "int"
+          },
+          "nullable": false,
+          "nameInSql": "hourly_rate_inr",
+          "nameInDart": "hourlyRateInr",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19545,
+            "name": "hourlyRateInr"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": true,
+          "nameInSql": "avatar_url",
+          "nameInDart": "avatarUrl",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19592,
+            "name": "avatarUrl"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "created_at",
+          "nameInDart": "createdAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19647,
+            "name": "createdAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              {
+                "lexeme": "currentDateAndTime",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              }
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        }
+      ],
+      "existing_data_class": null,
+      "table_constraints": [
+        {
+          "type": "primary_key",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "custom_parent_class": null,
+      "interfaces_for_row_class": [],
+      "fixed_entity_info_name": null,
+      "base_dart_name": "LocalCoachProfiles",
+      "row_class_name": "LocalCoachProfile",
+      "companion_class_name": null,
+      "without_rowid": false,
+      "strict": false,
+      "write_default_constraints": true,
+      "custom_constraints": [],
+      "attached_indices": []
+    },
+    "local_coach_bookings": {
+      "id": {
+        "library_uri": "package:fitkarma/core/database/app_database.dart",
+        "name": "local_coach_bookings"
+      },
+      "declaration": {
+        "source_uri": "package:fitkarma/core/database/app_database.dart",
+        "offset": 19800,
+        "name": "LocalCoachBookings"
+      },
+      "references": [],
+      "type": "table",
+      "columns": [
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "id",
+          "nameInDart": "id",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19852,
+            "name": "id"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "user_id",
+          "nameInDart": "userId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19885,
+            "name": "userId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "coach_id",
+          "nameInDart": "coachId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19922,
+            "name": "coachId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "scheduled_at",
+          "nameInDart": "scheduledAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 19964,
+            "name": "scheduledAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "status",
+          "nameInDart": "status",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20010,
+            "name": "status"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "int"
+          },
+          "nullable": false,
+          "nameInSql": "amount_inr",
+          "nameInDart": "amountInr",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20098,
+            "name": "amountInr"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "created_at",
+          "nameInDart": "createdAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20145,
+            "name": "createdAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              {
+                "lexeme": "currentDateAndTime",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              }
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        }
+      ],
+      "existing_data_class": null,
+      "table_constraints": [
+        {
+          "type": "primary_key",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "custom_parent_class": null,
+      "interfaces_for_row_class": [],
+      "fixed_entity_info_name": null,
+      "base_dart_name": "LocalCoachBookings",
+      "row_class_name": "LocalCoachBooking",
+      "companion_class_name": null,
+      "without_rowid": false,
+      "strict": false,
+      "write_default_constraints": true,
+      "custom_constraints": [],
+      "attached_indices": []
+    },
+    "local_affiliate_referrals": {
+      "id": {
+        "library_uri": "package:fitkarma/core/database/app_database.dart",
+        "name": "local_affiliate_referrals"
+      },
+      "declaration": {
+        "source_uri": "package:fitkarma/core/database/app_database.dart",
+        "offset": 20303,
+        "name": "LocalAffiliateReferrals"
+      },
+      "references": [],
+      "type": "table",
+      "columns": [
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "id",
+          "nameInDart": "id",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20360,
+            "name": "id"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "referrer_id",
+          "nameInDart": "referrerId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20393,
+            "name": "referrerId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "referral_code",
+          "nameInDart": "referralCode",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20434,
+            "name": "referralCode"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "string"
+          },
+          "nullable": false,
+          "nameInSql": "referee_user_id",
+          "nameInDart": "refereeUserId",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20477,
+            "name": "refereeUserId"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "int"
+          },
+          "nullable": false,
+          "nameInSql": "karma_reward",
+          "nameInDart": "karmaReward",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20520,
+            "name": "karmaReward"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "int"
+          },
+          "nullable": false,
+          "nameInSql": "commission_inr",
+          "nameInDart": "commissionInr",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20564,
+            "name": "commissionInr"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": null,
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        },
+        {
+          "sqlType": {
+            "builtin": "dateTime"
+          },
+          "nullable": false,
+          "nameInSql": "created_at",
+          "nameInDart": "createdAt",
+          "declaration": {
+            "source_uri": "package:fitkarma/core/database/app_database.dart",
+            "offset": 20615,
+            "name": "createdAt"
+          },
+          "typeConverter": null,
+          "clientDefaultCode": null,
+          "defaultArgument": {
+            "elements": [
+              {
+                "lexeme": "currentDateAndTime",
+                "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+              }
+            ]
+          },
+          "overriddenJsonName": null,
+          "referenceName": null,
+          "documentationComment": null,
+          "constraints": [],
+          "customConstraints": null
+        }
+      ],
+      "existing_data_class": null,
+      "table_constraints": [
+        {
+          "type": "primary_key",
+          "columns": [
+            "id"
+          ]
+        }
+      ],
+      "custom_parent_class": null,
+      "interfaces_for_row_class": [],
+      "fixed_entity_info_name": null,
+      "base_dart_name": "LocalAffiliateReferrals",
+      "row_class_name": "LocalAffiliateReferral",
       "companion_class_name": null,
       "without_rowid": false,
       "strict": false,

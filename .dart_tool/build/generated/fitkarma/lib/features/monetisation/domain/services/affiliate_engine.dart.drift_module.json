@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/monetisation/domain/models/monetisation_models.dart"
+  ]
+}

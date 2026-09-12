@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/life_events/domain/models/life_event_models.dart"
+  ]
+}

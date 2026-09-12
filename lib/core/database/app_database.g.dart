@@ -14651,6 +14651,2609 @@ class LocalBodyCompositionSnapshotsCompanion
   }
 }
 
+class $LocalActiveLifeEventsTable extends LocalActiveLifeEvents
+    with TableInfo<$LocalActiveLifeEventsTable, LocalActiveLifeEvent> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalActiveLifeEventsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _eventTypeMeta =
+      const VerificationMeta('eventType');
+  @override
+  late final GeneratedColumn<String> eventType = GeneratedColumn<String>(
+      'event_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _startDateMeta =
+      const VerificationMeta('startDate');
+  @override
+  late final GeneratedColumn<DateTime> startDate = GeneratedColumn<DateTime>(
+      'start_date', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _endDateMeta =
+      const VerificationMeta('endDate');
+  @override
+  late final GeneratedColumn<DateTime> endDate = GeneratedColumn<DateTime>(
+      'end_date', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _configJsonMeta =
+      const VerificationMeta('configJson');
+  @override
+  late final GeneratedColumn<String> configJson = GeneratedColumn<String>(
+      'config_json', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, eventType, title, startDate, endDate, configJson, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_active_life_events';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalActiveLifeEvent> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('event_type')) {
+      context.handle(_eventTypeMeta,
+          eventType.isAcceptableOrUnknown(data['event_type']!, _eventTypeMeta));
+    } else if (isInserting) {
+      context.missing(_eventTypeMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('start_date')) {
+      context.handle(_startDateMeta,
+          startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta));
+    } else if (isInserting) {
+      context.missing(_startDateMeta);
+    }
+    if (data.containsKey('end_date')) {
+      context.handle(_endDateMeta,
+          endDate.isAcceptableOrUnknown(data['end_date']!, _endDateMeta));
+    } else if (isInserting) {
+      context.missing(_endDateMeta);
+    }
+    if (data.containsKey('config_json')) {
+      context.handle(
+          _configJsonMeta,
+          configJson.isAcceptableOrUnknown(
+              data['config_json']!, _configJsonMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalActiveLifeEvent map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalActiveLifeEvent(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      eventType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}event_type'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      startDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}start_date'])!,
+      endDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}end_date'])!,
+      configJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}config_json']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalActiveLifeEventsTable createAlias(String alias) {
+    return $LocalActiveLifeEventsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalActiveLifeEvent extends DataClass
+    implements Insertable<LocalActiveLifeEvent> {
+  final String id;
+  final String userId;
+  final String eventType;
+  final String title;
+  final DateTime startDate;
+  final DateTime endDate;
+  final String? configJson;
+  final DateTime createdAt;
+  const LocalActiveLifeEvent(
+      {required this.id,
+      required this.userId,
+      required this.eventType,
+      required this.title,
+      required this.startDate,
+      required this.endDate,
+      this.configJson,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['event_type'] = Variable<String>(eventType);
+    map['title'] = Variable<String>(title);
+    map['start_date'] = Variable<DateTime>(startDate);
+    map['end_date'] = Variable<DateTime>(endDate);
+    if (!nullToAbsent || configJson != null) {
+      map['config_json'] = Variable<String>(configJson);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalActiveLifeEventsCompanion toCompanion(bool nullToAbsent) {
+    return LocalActiveLifeEventsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      eventType: Value(eventType),
+      title: Value(title),
+      startDate: Value(startDate),
+      endDate: Value(endDate),
+      configJson: configJson == null && nullToAbsent
+          ? const Value.absent()
+          : Value(configJson),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalActiveLifeEvent.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalActiveLifeEvent(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      eventType: serializer.fromJson<String>(json['eventType']),
+      title: serializer.fromJson<String>(json['title']),
+      startDate: serializer.fromJson<DateTime>(json['startDate']),
+      endDate: serializer.fromJson<DateTime>(json['endDate']),
+      configJson: serializer.fromJson<String?>(json['configJson']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'eventType': serializer.toJson<String>(eventType),
+      'title': serializer.toJson<String>(title),
+      'startDate': serializer.toJson<DateTime>(startDate),
+      'endDate': serializer.toJson<DateTime>(endDate),
+      'configJson': serializer.toJson<String?>(configJson),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalActiveLifeEvent copyWith(
+          {String? id,
+          String? userId,
+          String? eventType,
+          String? title,
+          DateTime? startDate,
+          DateTime? endDate,
+          Value<String?> configJson = const Value.absent(),
+          DateTime? createdAt}) =>
+      LocalActiveLifeEvent(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        eventType: eventType ?? this.eventType,
+        title: title ?? this.title,
+        startDate: startDate ?? this.startDate,
+        endDate: endDate ?? this.endDate,
+        configJson: configJson.present ? configJson.value : this.configJson,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalActiveLifeEvent copyWithCompanion(LocalActiveLifeEventsCompanion data) {
+    return LocalActiveLifeEvent(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      eventType: data.eventType.present ? data.eventType.value : this.eventType,
+      title: data.title.present ? data.title.value : this.title,
+      startDate: data.startDate.present ? data.startDate.value : this.startDate,
+      endDate: data.endDate.present ? data.endDate.value : this.endDate,
+      configJson:
+          data.configJson.present ? data.configJson.value : this.configJson,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalActiveLifeEvent(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('eventType: $eventType, ')
+          ..write('title: $title, ')
+          ..write('startDate: $startDate, ')
+          ..write('endDate: $endDate, ')
+          ..write('configJson: $configJson, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, eventType, title, startDate, endDate, configJson, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalActiveLifeEvent &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.eventType == this.eventType &&
+          other.title == this.title &&
+          other.startDate == this.startDate &&
+          other.endDate == this.endDate &&
+          other.configJson == this.configJson &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalActiveLifeEventsCompanion
+    extends UpdateCompanion<LocalActiveLifeEvent> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> eventType;
+  final Value<String> title;
+  final Value<DateTime> startDate;
+  final Value<DateTime> endDate;
+  final Value<String?> configJson;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalActiveLifeEventsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.eventType = const Value.absent(),
+    this.title = const Value.absent(),
+    this.startDate = const Value.absent(),
+    this.endDate = const Value.absent(),
+    this.configJson = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalActiveLifeEventsCompanion.insert({
+    required String id,
+    required String userId,
+    required String eventType,
+    required String title,
+    required DateTime startDate,
+    required DateTime endDate,
+    this.configJson = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        eventType = Value(eventType),
+        title = Value(title),
+        startDate = Value(startDate),
+        endDate = Value(endDate);
+  static Insertable<LocalActiveLifeEvent> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? eventType,
+    Expression<String>? title,
+    Expression<DateTime>? startDate,
+    Expression<DateTime>? endDate,
+    Expression<String>? configJson,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (eventType != null) 'event_type': eventType,
+      if (title != null) 'title': title,
+      if (startDate != null) 'start_date': startDate,
+      if (endDate != null) 'end_date': endDate,
+      if (configJson != null) 'config_json': configJson,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalActiveLifeEventsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? eventType,
+      Value<String>? title,
+      Value<DateTime>? startDate,
+      Value<DateTime>? endDate,
+      Value<String?>? configJson,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalActiveLifeEventsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      eventType: eventType ?? this.eventType,
+      title: title ?? this.title,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      configJson: configJson ?? this.configJson,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (eventType.present) {
+      map['event_type'] = Variable<String>(eventType.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (startDate.present) {
+      map['start_date'] = Variable<DateTime>(startDate.value);
+    }
+    if (endDate.present) {
+      map['end_date'] = Variable<DateTime>(endDate.value);
+    }
+    if (configJson.present) {
+      map['config_json'] = Variable<String>(configJson.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalActiveLifeEventsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('eventType: $eventType, ')
+          ..write('title: $title, ')
+          ..write('startDate: $startDate, ')
+          ..write('endDate: $endDate, ')
+          ..write('configJson: $configJson, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalWeddingPlansTable extends LocalWeddingPlans
+    with TableInfo<$LocalWeddingPlansTable, LocalWeddingPlan> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalWeddingPlansTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _weddingDateMeta =
+      const VerificationMeta('weddingDate');
+  @override
+  late final GeneratedColumn<DateTime> weddingDate = GeneratedColumn<DateTime>(
+      'wedding_date', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _targetWeightKgMeta =
+      const VerificationMeta('targetWeightKg');
+  @override
+  late final GeneratedColumn<double> targetWeightKg = GeneratedColumn<double>(
+      'target_weight_kg', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _targetWaistCmMeta =
+      const VerificationMeta('targetWaistCm');
+  @override
+  late final GeneratedColumn<double> targetWaistCm = GeneratedColumn<double>(
+      'target_waist_cm', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _currentPhaseMeta =
+      const VerificationMeta('currentPhase');
+  @override
+  late final GeneratedColumn<String> currentPhase = GeneratedColumn<String>(
+      'current_phase', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _currentPhaseHindiMeta =
+      const VerificationMeta('currentPhaseHindi');
+  @override
+  late final GeneratedColumn<String> currentPhaseHindi =
+      GeneratedColumn<String>('current_phase_hindi', aliasedName, false,
+          type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        weddingDate,
+        targetWeightKg,
+        targetWaistCm,
+        currentPhase,
+        currentPhaseHindi,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_wedding_plans';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalWeddingPlan> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('wedding_date')) {
+      context.handle(
+          _weddingDateMeta,
+          weddingDate.isAcceptableOrUnknown(
+              data['wedding_date']!, _weddingDateMeta));
+    } else if (isInserting) {
+      context.missing(_weddingDateMeta);
+    }
+    if (data.containsKey('target_weight_kg')) {
+      context.handle(
+          _targetWeightKgMeta,
+          targetWeightKg.isAcceptableOrUnknown(
+              data['target_weight_kg']!, _targetWeightKgMeta));
+    } else if (isInserting) {
+      context.missing(_targetWeightKgMeta);
+    }
+    if (data.containsKey('target_waist_cm')) {
+      context.handle(
+          _targetWaistCmMeta,
+          targetWaistCm.isAcceptableOrUnknown(
+              data['target_waist_cm']!, _targetWaistCmMeta));
+    } else if (isInserting) {
+      context.missing(_targetWaistCmMeta);
+    }
+    if (data.containsKey('current_phase')) {
+      context.handle(
+          _currentPhaseMeta,
+          currentPhase.isAcceptableOrUnknown(
+              data['current_phase']!, _currentPhaseMeta));
+    } else if (isInserting) {
+      context.missing(_currentPhaseMeta);
+    }
+    if (data.containsKey('current_phase_hindi')) {
+      context.handle(
+          _currentPhaseHindiMeta,
+          currentPhaseHindi.isAcceptableOrUnknown(
+              data['current_phase_hindi']!, _currentPhaseHindiMeta));
+    } else if (isInserting) {
+      context.missing(_currentPhaseHindiMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalWeddingPlan map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalWeddingPlan(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      weddingDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}wedding_date'])!,
+      targetWeightKg: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}target_weight_kg'])!,
+      targetWaistCm: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}target_waist_cm'])!,
+      currentPhase: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}current_phase'])!,
+      currentPhaseHindi: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}current_phase_hindi'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalWeddingPlansTable createAlias(String alias) {
+    return $LocalWeddingPlansTable(attachedDatabase, alias);
+  }
+}
+
+class LocalWeddingPlan extends DataClass
+    implements Insertable<LocalWeddingPlan> {
+  final String id;
+  final String userId;
+  final DateTime weddingDate;
+  final double targetWeightKg;
+  final double targetWaistCm;
+  final String currentPhase;
+  final String currentPhaseHindi;
+  final DateTime createdAt;
+  const LocalWeddingPlan(
+      {required this.id,
+      required this.userId,
+      required this.weddingDate,
+      required this.targetWeightKg,
+      required this.targetWaistCm,
+      required this.currentPhase,
+      required this.currentPhaseHindi,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['wedding_date'] = Variable<DateTime>(weddingDate);
+    map['target_weight_kg'] = Variable<double>(targetWeightKg);
+    map['target_waist_cm'] = Variable<double>(targetWaistCm);
+    map['current_phase'] = Variable<String>(currentPhase);
+    map['current_phase_hindi'] = Variable<String>(currentPhaseHindi);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalWeddingPlansCompanion toCompanion(bool nullToAbsent) {
+    return LocalWeddingPlansCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      weddingDate: Value(weddingDate),
+      targetWeightKg: Value(targetWeightKg),
+      targetWaistCm: Value(targetWaistCm),
+      currentPhase: Value(currentPhase),
+      currentPhaseHindi: Value(currentPhaseHindi),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalWeddingPlan.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalWeddingPlan(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      weddingDate: serializer.fromJson<DateTime>(json['weddingDate']),
+      targetWeightKg: serializer.fromJson<double>(json['targetWeightKg']),
+      targetWaistCm: serializer.fromJson<double>(json['targetWaistCm']),
+      currentPhase: serializer.fromJson<String>(json['currentPhase']),
+      currentPhaseHindi: serializer.fromJson<String>(json['currentPhaseHindi']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'weddingDate': serializer.toJson<DateTime>(weddingDate),
+      'targetWeightKg': serializer.toJson<double>(targetWeightKg),
+      'targetWaistCm': serializer.toJson<double>(targetWaistCm),
+      'currentPhase': serializer.toJson<String>(currentPhase),
+      'currentPhaseHindi': serializer.toJson<String>(currentPhaseHindi),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalWeddingPlan copyWith(
+          {String? id,
+          String? userId,
+          DateTime? weddingDate,
+          double? targetWeightKg,
+          double? targetWaistCm,
+          String? currentPhase,
+          String? currentPhaseHindi,
+          DateTime? createdAt}) =>
+      LocalWeddingPlan(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        weddingDate: weddingDate ?? this.weddingDate,
+        targetWeightKg: targetWeightKg ?? this.targetWeightKg,
+        targetWaistCm: targetWaistCm ?? this.targetWaistCm,
+        currentPhase: currentPhase ?? this.currentPhase,
+        currentPhaseHindi: currentPhaseHindi ?? this.currentPhaseHindi,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalWeddingPlan copyWithCompanion(LocalWeddingPlansCompanion data) {
+    return LocalWeddingPlan(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      weddingDate:
+          data.weddingDate.present ? data.weddingDate.value : this.weddingDate,
+      targetWeightKg: data.targetWeightKg.present
+          ? data.targetWeightKg.value
+          : this.targetWeightKg,
+      targetWaistCm: data.targetWaistCm.present
+          ? data.targetWaistCm.value
+          : this.targetWaistCm,
+      currentPhase: data.currentPhase.present
+          ? data.currentPhase.value
+          : this.currentPhase,
+      currentPhaseHindi: data.currentPhaseHindi.present
+          ? data.currentPhaseHindi.value
+          : this.currentPhaseHindi,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalWeddingPlan(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('weddingDate: $weddingDate, ')
+          ..write('targetWeightKg: $targetWeightKg, ')
+          ..write('targetWaistCm: $targetWaistCm, ')
+          ..write('currentPhase: $currentPhase, ')
+          ..write('currentPhaseHindi: $currentPhaseHindi, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, weddingDate, targetWeightKg,
+      targetWaistCm, currentPhase, currentPhaseHindi, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalWeddingPlan &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.weddingDate == this.weddingDate &&
+          other.targetWeightKg == this.targetWeightKg &&
+          other.targetWaistCm == this.targetWaistCm &&
+          other.currentPhase == this.currentPhase &&
+          other.currentPhaseHindi == this.currentPhaseHindi &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalWeddingPlansCompanion extends UpdateCompanion<LocalWeddingPlan> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<DateTime> weddingDate;
+  final Value<double> targetWeightKg;
+  final Value<double> targetWaistCm;
+  final Value<String> currentPhase;
+  final Value<String> currentPhaseHindi;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalWeddingPlansCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.weddingDate = const Value.absent(),
+    this.targetWeightKg = const Value.absent(),
+    this.targetWaistCm = const Value.absent(),
+    this.currentPhase = const Value.absent(),
+    this.currentPhaseHindi = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalWeddingPlansCompanion.insert({
+    required String id,
+    required String userId,
+    required DateTime weddingDate,
+    required double targetWeightKg,
+    required double targetWaistCm,
+    required String currentPhase,
+    required String currentPhaseHindi,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        weddingDate = Value(weddingDate),
+        targetWeightKg = Value(targetWeightKg),
+        targetWaistCm = Value(targetWaistCm),
+        currentPhase = Value(currentPhase),
+        currentPhaseHindi = Value(currentPhaseHindi);
+  static Insertable<LocalWeddingPlan> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<DateTime>? weddingDate,
+    Expression<double>? targetWeightKg,
+    Expression<double>? targetWaistCm,
+    Expression<String>? currentPhase,
+    Expression<String>? currentPhaseHindi,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (weddingDate != null) 'wedding_date': weddingDate,
+      if (targetWeightKg != null) 'target_weight_kg': targetWeightKg,
+      if (targetWaistCm != null) 'target_waist_cm': targetWaistCm,
+      if (currentPhase != null) 'current_phase': currentPhase,
+      if (currentPhaseHindi != null) 'current_phase_hindi': currentPhaseHindi,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalWeddingPlansCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<DateTime>? weddingDate,
+      Value<double>? targetWeightKg,
+      Value<double>? targetWaistCm,
+      Value<String>? currentPhase,
+      Value<String>? currentPhaseHindi,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalWeddingPlansCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      weddingDate: weddingDate ?? this.weddingDate,
+      targetWeightKg: targetWeightKg ?? this.targetWeightKg,
+      targetWaistCm: targetWaistCm ?? this.targetWaistCm,
+      currentPhase: currentPhase ?? this.currentPhase,
+      currentPhaseHindi: currentPhaseHindi ?? this.currentPhaseHindi,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (weddingDate.present) {
+      map['wedding_date'] = Variable<DateTime>(weddingDate.value);
+    }
+    if (targetWeightKg.present) {
+      map['target_weight_kg'] = Variable<double>(targetWeightKg.value);
+    }
+    if (targetWaistCm.present) {
+      map['target_waist_cm'] = Variable<double>(targetWaistCm.value);
+    }
+    if (currentPhase.present) {
+      map['current_phase'] = Variable<String>(currentPhase.value);
+    }
+    if (currentPhaseHindi.present) {
+      map['current_phase_hindi'] = Variable<String>(currentPhaseHindi.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalWeddingPlansCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('weddingDate: $weddingDate, ')
+          ..write('targetWeightKg: $targetWeightKg, ')
+          ..write('targetWaistCm: $targetWaistCm, ')
+          ..write('currentPhase: $currentPhase, ')
+          ..write('currentPhaseHindi: $currentPhaseHindi, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalEntitlementsTable extends LocalEntitlements
+    with TableInfo<$LocalEntitlementsTable, LocalEntitlement> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalEntitlementsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _tierMeta = const VerificationMeta('tier');
+  @override
+  late final GeneratedColumn<String> tier = GeneratedColumn<String>(
+      'tier', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  @override
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+      'source', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _expiresAtMeta =
+      const VerificationMeta('expiresAt');
+  @override
+  late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
+      'expires_at', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _isActiveMeta =
+      const VerificationMeta('isActive');
+  @override
+  late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
+      'is_active', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_active" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, tier, source, expiresAt, isActive, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_entitlements';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalEntitlement> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('tier')) {
+      context.handle(
+          _tierMeta, tier.isAcceptableOrUnknown(data['tier']!, _tierMeta));
+    } else if (isInserting) {
+      context.missing(_tierMeta);
+    }
+    if (data.containsKey('source')) {
+      context.handle(_sourceMeta,
+          source.isAcceptableOrUnknown(data['source']!, _sourceMeta));
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
+    }
+    if (data.containsKey('expires_at')) {
+      context.handle(_expiresAtMeta,
+          expiresAt.isAcceptableOrUnknown(data['expires_at']!, _expiresAtMeta));
+    }
+    if (data.containsKey('is_active')) {
+      context.handle(_isActiveMeta,
+          isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalEntitlement map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalEntitlement(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      tier: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}tier'])!,
+      source: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source'])!,
+      expiresAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}expires_at']),
+      isActive: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_active'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalEntitlementsTable createAlias(String alias) {
+    return $LocalEntitlementsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalEntitlement extends DataClass
+    implements Insertable<LocalEntitlement> {
+  final String id;
+  final String userId;
+  final String tier;
+  final String source;
+  final DateTime? expiresAt;
+  final bool isActive;
+  final DateTime createdAt;
+  const LocalEntitlement(
+      {required this.id,
+      required this.userId,
+      required this.tier,
+      required this.source,
+      this.expiresAt,
+      required this.isActive,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['tier'] = Variable<String>(tier);
+    map['source'] = Variable<String>(source);
+    if (!nullToAbsent || expiresAt != null) {
+      map['expires_at'] = Variable<DateTime>(expiresAt);
+    }
+    map['is_active'] = Variable<bool>(isActive);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalEntitlementsCompanion toCompanion(bool nullToAbsent) {
+    return LocalEntitlementsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      tier: Value(tier),
+      source: Value(source),
+      expiresAt: expiresAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(expiresAt),
+      isActive: Value(isActive),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalEntitlement.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalEntitlement(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      tier: serializer.fromJson<String>(json['tier']),
+      source: serializer.fromJson<String>(json['source']),
+      expiresAt: serializer.fromJson<DateTime?>(json['expiresAt']),
+      isActive: serializer.fromJson<bool>(json['isActive']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'tier': serializer.toJson<String>(tier),
+      'source': serializer.toJson<String>(source),
+      'expiresAt': serializer.toJson<DateTime?>(expiresAt),
+      'isActive': serializer.toJson<bool>(isActive),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalEntitlement copyWith(
+          {String? id,
+          String? userId,
+          String? tier,
+          String? source,
+          Value<DateTime?> expiresAt = const Value.absent(),
+          bool? isActive,
+          DateTime? createdAt}) =>
+      LocalEntitlement(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        tier: tier ?? this.tier,
+        source: source ?? this.source,
+        expiresAt: expiresAt.present ? expiresAt.value : this.expiresAt,
+        isActive: isActive ?? this.isActive,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalEntitlement copyWithCompanion(LocalEntitlementsCompanion data) {
+    return LocalEntitlement(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      tier: data.tier.present ? data.tier.value : this.tier,
+      source: data.source.present ? data.source.value : this.source,
+      expiresAt: data.expiresAt.present ? data.expiresAt.value : this.expiresAt,
+      isActive: data.isActive.present ? data.isActive.value : this.isActive,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalEntitlement(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('tier: $tier, ')
+          ..write('source: $source, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('isActive: $isActive, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, userId, tier, source, expiresAt, isActive, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalEntitlement &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.tier == this.tier &&
+          other.source == this.source &&
+          other.expiresAt == this.expiresAt &&
+          other.isActive == this.isActive &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalEntitlementsCompanion extends UpdateCompanion<LocalEntitlement> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> tier;
+  final Value<String> source;
+  final Value<DateTime?> expiresAt;
+  final Value<bool> isActive;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalEntitlementsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.tier = const Value.absent(),
+    this.source = const Value.absent(),
+    this.expiresAt = const Value.absent(),
+    this.isActive = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalEntitlementsCompanion.insert({
+    required String id,
+    required String userId,
+    required String tier,
+    required String source,
+    this.expiresAt = const Value.absent(),
+    this.isActive = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        tier = Value(tier),
+        source = Value(source);
+  static Insertable<LocalEntitlement> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? tier,
+    Expression<String>? source,
+    Expression<DateTime>? expiresAt,
+    Expression<bool>? isActive,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (tier != null) 'tier': tier,
+      if (source != null) 'source': source,
+      if (expiresAt != null) 'expires_at': expiresAt,
+      if (isActive != null) 'is_active': isActive,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalEntitlementsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? tier,
+      Value<String>? source,
+      Value<DateTime?>? expiresAt,
+      Value<bool>? isActive,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalEntitlementsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      tier: tier ?? this.tier,
+      source: source ?? this.source,
+      expiresAt: expiresAt ?? this.expiresAt,
+      isActive: isActive ?? this.isActive,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (tier.present) {
+      map['tier'] = Variable<String>(tier.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
+    if (expiresAt.present) {
+      map['expires_at'] = Variable<DateTime>(expiresAt.value);
+    }
+    if (isActive.present) {
+      map['is_active'] = Variable<bool>(isActive.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalEntitlementsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('tier: $tier, ')
+          ..write('source: $source, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('isActive: $isActive, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCoachProfilesTable extends LocalCoachProfiles
+    with TableInfo<$LocalCoachProfilesTable, LocalCoachProfile> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCoachProfilesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _specialtyMeta =
+      const VerificationMeta('specialty');
+  @override
+  late final GeneratedColumn<String> specialty = GeneratedColumn<String>(
+      'specialty', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _bioMeta = const VerificationMeta('bio');
+  @override
+  late final GeneratedColumn<String> bio = GeneratedColumn<String>(
+      'bio', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _languagesJsonMeta =
+      const VerificationMeta('languagesJson');
+  @override
+  late final GeneratedColumn<String> languagesJson = GeneratedColumn<String>(
+      'languages_json', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _ratingMeta = const VerificationMeta('rating');
+  @override
+  late final GeneratedColumn<double> rating = GeneratedColumn<double>(
+      'rating', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _reviewCountMeta =
+      const VerificationMeta('reviewCount');
+  @override
+  late final GeneratedColumn<int> reviewCount = GeneratedColumn<int>(
+      'review_count', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _hourlyRateInrMeta =
+      const VerificationMeta('hourlyRateInr');
+  @override
+  late final GeneratedColumn<int> hourlyRateInr = GeneratedColumn<int>(
+      'hourly_rate_inr', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _avatarUrlMeta =
+      const VerificationMeta('avatarUrl');
+  @override
+  late final GeneratedColumn<String> avatarUrl = GeneratedColumn<String>(
+      'avatar_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        name,
+        title,
+        specialty,
+        bio,
+        languagesJson,
+        rating,
+        reviewCount,
+        hourlyRateInr,
+        avatarUrl,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_coach_profiles';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalCoachProfile> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('specialty')) {
+      context.handle(_specialtyMeta,
+          specialty.isAcceptableOrUnknown(data['specialty']!, _specialtyMeta));
+    } else if (isInserting) {
+      context.missing(_specialtyMeta);
+    }
+    if (data.containsKey('bio')) {
+      context.handle(
+          _bioMeta, bio.isAcceptableOrUnknown(data['bio']!, _bioMeta));
+    } else if (isInserting) {
+      context.missing(_bioMeta);
+    }
+    if (data.containsKey('languages_json')) {
+      context.handle(
+          _languagesJsonMeta,
+          languagesJson.isAcceptableOrUnknown(
+              data['languages_json']!, _languagesJsonMeta));
+    } else if (isInserting) {
+      context.missing(_languagesJsonMeta);
+    }
+    if (data.containsKey('rating')) {
+      context.handle(_ratingMeta,
+          rating.isAcceptableOrUnknown(data['rating']!, _ratingMeta));
+    } else if (isInserting) {
+      context.missing(_ratingMeta);
+    }
+    if (data.containsKey('review_count')) {
+      context.handle(
+          _reviewCountMeta,
+          reviewCount.isAcceptableOrUnknown(
+              data['review_count']!, _reviewCountMeta));
+    } else if (isInserting) {
+      context.missing(_reviewCountMeta);
+    }
+    if (data.containsKey('hourly_rate_inr')) {
+      context.handle(
+          _hourlyRateInrMeta,
+          hourlyRateInr.isAcceptableOrUnknown(
+              data['hourly_rate_inr']!, _hourlyRateInrMeta));
+    } else if (isInserting) {
+      context.missing(_hourlyRateInrMeta);
+    }
+    if (data.containsKey('avatar_url')) {
+      context.handle(_avatarUrlMeta,
+          avatarUrl.isAcceptableOrUnknown(data['avatar_url']!, _avatarUrlMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCoachProfile map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCoachProfile(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      specialty: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}specialty'])!,
+      bio: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}bio'])!,
+      languagesJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}languages_json'])!,
+      rating: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}rating'])!,
+      reviewCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}review_count'])!,
+      hourlyRateInr: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}hourly_rate_inr'])!,
+      avatarUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}avatar_url']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalCoachProfilesTable createAlias(String alias) {
+    return $LocalCoachProfilesTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCoachProfile extends DataClass
+    implements Insertable<LocalCoachProfile> {
+  final String id;
+  final String name;
+  final String title;
+  final String specialty;
+  final String bio;
+  final String languagesJson;
+  final double rating;
+  final int reviewCount;
+  final int hourlyRateInr;
+  final String? avatarUrl;
+  final DateTime createdAt;
+  const LocalCoachProfile(
+      {required this.id,
+      required this.name,
+      required this.title,
+      required this.specialty,
+      required this.bio,
+      required this.languagesJson,
+      required this.rating,
+      required this.reviewCount,
+      required this.hourlyRateInr,
+      this.avatarUrl,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    map['title'] = Variable<String>(title);
+    map['specialty'] = Variable<String>(specialty);
+    map['bio'] = Variable<String>(bio);
+    map['languages_json'] = Variable<String>(languagesJson);
+    map['rating'] = Variable<double>(rating);
+    map['review_count'] = Variable<int>(reviewCount);
+    map['hourly_rate_inr'] = Variable<int>(hourlyRateInr);
+    if (!nullToAbsent || avatarUrl != null) {
+      map['avatar_url'] = Variable<String>(avatarUrl);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalCoachProfilesCompanion toCompanion(bool nullToAbsent) {
+    return LocalCoachProfilesCompanion(
+      id: Value(id),
+      name: Value(name),
+      title: Value(title),
+      specialty: Value(specialty),
+      bio: Value(bio),
+      languagesJson: Value(languagesJson),
+      rating: Value(rating),
+      reviewCount: Value(reviewCount),
+      hourlyRateInr: Value(hourlyRateInr),
+      avatarUrl: avatarUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(avatarUrl),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalCoachProfile.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCoachProfile(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      title: serializer.fromJson<String>(json['title']),
+      specialty: serializer.fromJson<String>(json['specialty']),
+      bio: serializer.fromJson<String>(json['bio']),
+      languagesJson: serializer.fromJson<String>(json['languagesJson']),
+      rating: serializer.fromJson<double>(json['rating']),
+      reviewCount: serializer.fromJson<int>(json['reviewCount']),
+      hourlyRateInr: serializer.fromJson<int>(json['hourlyRateInr']),
+      avatarUrl: serializer.fromJson<String?>(json['avatarUrl']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+      'title': serializer.toJson<String>(title),
+      'specialty': serializer.toJson<String>(specialty),
+      'bio': serializer.toJson<String>(bio),
+      'languagesJson': serializer.toJson<String>(languagesJson),
+      'rating': serializer.toJson<double>(rating),
+      'reviewCount': serializer.toJson<int>(reviewCount),
+      'hourlyRateInr': serializer.toJson<int>(hourlyRateInr),
+      'avatarUrl': serializer.toJson<String?>(avatarUrl),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalCoachProfile copyWith(
+          {String? id,
+          String? name,
+          String? title,
+          String? specialty,
+          String? bio,
+          String? languagesJson,
+          double? rating,
+          int? reviewCount,
+          int? hourlyRateInr,
+          Value<String?> avatarUrl = const Value.absent(),
+          DateTime? createdAt}) =>
+      LocalCoachProfile(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        title: title ?? this.title,
+        specialty: specialty ?? this.specialty,
+        bio: bio ?? this.bio,
+        languagesJson: languagesJson ?? this.languagesJson,
+        rating: rating ?? this.rating,
+        reviewCount: reviewCount ?? this.reviewCount,
+        hourlyRateInr: hourlyRateInr ?? this.hourlyRateInr,
+        avatarUrl: avatarUrl.present ? avatarUrl.value : this.avatarUrl,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalCoachProfile copyWithCompanion(LocalCoachProfilesCompanion data) {
+    return LocalCoachProfile(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      title: data.title.present ? data.title.value : this.title,
+      specialty: data.specialty.present ? data.specialty.value : this.specialty,
+      bio: data.bio.present ? data.bio.value : this.bio,
+      languagesJson: data.languagesJson.present
+          ? data.languagesJson.value
+          : this.languagesJson,
+      rating: data.rating.present ? data.rating.value : this.rating,
+      reviewCount:
+          data.reviewCount.present ? data.reviewCount.value : this.reviewCount,
+      hourlyRateInr: data.hourlyRateInr.present
+          ? data.hourlyRateInr.value
+          : this.hourlyRateInr,
+      avatarUrl: data.avatarUrl.present ? data.avatarUrl.value : this.avatarUrl,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachProfile(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('title: $title, ')
+          ..write('specialty: $specialty, ')
+          ..write('bio: $bio, ')
+          ..write('languagesJson: $languagesJson, ')
+          ..write('rating: $rating, ')
+          ..write('reviewCount: $reviewCount, ')
+          ..write('hourlyRateInr: $hourlyRateInr, ')
+          ..write('avatarUrl: $avatarUrl, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, title, specialty, bio,
+      languagesJson, rating, reviewCount, hourlyRateInr, avatarUrl, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCoachProfile &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.title == this.title &&
+          other.specialty == this.specialty &&
+          other.bio == this.bio &&
+          other.languagesJson == this.languagesJson &&
+          other.rating == this.rating &&
+          other.reviewCount == this.reviewCount &&
+          other.hourlyRateInr == this.hourlyRateInr &&
+          other.avatarUrl == this.avatarUrl &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalCoachProfilesCompanion extends UpdateCompanion<LocalCoachProfile> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<String> title;
+  final Value<String> specialty;
+  final Value<String> bio;
+  final Value<String> languagesJson;
+  final Value<double> rating;
+  final Value<int> reviewCount;
+  final Value<int> hourlyRateInr;
+  final Value<String?> avatarUrl;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalCoachProfilesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.title = const Value.absent(),
+    this.specialty = const Value.absent(),
+    this.bio = const Value.absent(),
+    this.languagesJson = const Value.absent(),
+    this.rating = const Value.absent(),
+    this.reviewCount = const Value.absent(),
+    this.hourlyRateInr = const Value.absent(),
+    this.avatarUrl = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCoachProfilesCompanion.insert({
+    required String id,
+    required String name,
+    required String title,
+    required String specialty,
+    required String bio,
+    required String languagesJson,
+    required double rating,
+    required int reviewCount,
+    required int hourlyRateInr,
+    this.avatarUrl = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name),
+        title = Value(title),
+        specialty = Value(specialty),
+        bio = Value(bio),
+        languagesJson = Value(languagesJson),
+        rating = Value(rating),
+        reviewCount = Value(reviewCount),
+        hourlyRateInr = Value(hourlyRateInr);
+  static Insertable<LocalCoachProfile> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<String>? title,
+    Expression<String>? specialty,
+    Expression<String>? bio,
+    Expression<String>? languagesJson,
+    Expression<double>? rating,
+    Expression<int>? reviewCount,
+    Expression<int>? hourlyRateInr,
+    Expression<String>? avatarUrl,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (title != null) 'title': title,
+      if (specialty != null) 'specialty': specialty,
+      if (bio != null) 'bio': bio,
+      if (languagesJson != null) 'languages_json': languagesJson,
+      if (rating != null) 'rating': rating,
+      if (reviewCount != null) 'review_count': reviewCount,
+      if (hourlyRateInr != null) 'hourly_rate_inr': hourlyRateInr,
+      if (avatarUrl != null) 'avatar_url': avatarUrl,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCoachProfilesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? name,
+      Value<String>? title,
+      Value<String>? specialty,
+      Value<String>? bio,
+      Value<String>? languagesJson,
+      Value<double>? rating,
+      Value<int>? reviewCount,
+      Value<int>? hourlyRateInr,
+      Value<String?>? avatarUrl,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalCoachProfilesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      title: title ?? this.title,
+      specialty: specialty ?? this.specialty,
+      bio: bio ?? this.bio,
+      languagesJson: languagesJson ?? this.languagesJson,
+      rating: rating ?? this.rating,
+      reviewCount: reviewCount ?? this.reviewCount,
+      hourlyRateInr: hourlyRateInr ?? this.hourlyRateInr,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (specialty.present) {
+      map['specialty'] = Variable<String>(specialty.value);
+    }
+    if (bio.present) {
+      map['bio'] = Variable<String>(bio.value);
+    }
+    if (languagesJson.present) {
+      map['languages_json'] = Variable<String>(languagesJson.value);
+    }
+    if (rating.present) {
+      map['rating'] = Variable<double>(rating.value);
+    }
+    if (reviewCount.present) {
+      map['review_count'] = Variable<int>(reviewCount.value);
+    }
+    if (hourlyRateInr.present) {
+      map['hourly_rate_inr'] = Variable<int>(hourlyRateInr.value);
+    }
+    if (avatarUrl.present) {
+      map['avatar_url'] = Variable<String>(avatarUrl.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachProfilesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('title: $title, ')
+          ..write('specialty: $specialty, ')
+          ..write('bio: $bio, ')
+          ..write('languagesJson: $languagesJson, ')
+          ..write('rating: $rating, ')
+          ..write('reviewCount: $reviewCount, ')
+          ..write('hourlyRateInr: $hourlyRateInr, ')
+          ..write('avatarUrl: $avatarUrl, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCoachBookingsTable extends LocalCoachBookings
+    with TableInfo<$LocalCoachBookingsTable, LocalCoachBooking> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCoachBookingsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _coachIdMeta =
+      const VerificationMeta('coachId');
+  @override
+  late final GeneratedColumn<String> coachId = GeneratedColumn<String>(
+      'coach_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _scheduledAtMeta =
+      const VerificationMeta('scheduledAt');
+  @override
+  late final GeneratedColumn<DateTime> scheduledAt = GeneratedColumn<DateTime>(
+      'scheduled_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+      'status', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _amountInrMeta =
+      const VerificationMeta('amountInr');
+  @override
+  late final GeneratedColumn<int> amountInr = GeneratedColumn<int>(
+      'amount_inr', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, coachId, scheduledAt, status, amountInr, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_coach_bookings';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalCoachBooking> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('coach_id')) {
+      context.handle(_coachIdMeta,
+          coachId.isAcceptableOrUnknown(data['coach_id']!, _coachIdMeta));
+    } else if (isInserting) {
+      context.missing(_coachIdMeta);
+    }
+    if (data.containsKey('scheduled_at')) {
+      context.handle(
+          _scheduledAtMeta,
+          scheduledAt.isAcceptableOrUnknown(
+              data['scheduled_at']!, _scheduledAtMeta));
+    } else if (isInserting) {
+      context.missing(_scheduledAtMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(_statusMeta,
+          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
+    } else if (isInserting) {
+      context.missing(_statusMeta);
+    }
+    if (data.containsKey('amount_inr')) {
+      context.handle(_amountInrMeta,
+          amountInr.isAcceptableOrUnknown(data['amount_inr']!, _amountInrMeta));
+    } else if (isInserting) {
+      context.missing(_amountInrMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCoachBooking map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCoachBooking(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      coachId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}coach_id'])!,
+      scheduledAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}scheduled_at'])!,
+      status: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
+      amountInr: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}amount_inr'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalCoachBookingsTable createAlias(String alias) {
+    return $LocalCoachBookingsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCoachBooking extends DataClass
+    implements Insertable<LocalCoachBooking> {
+  final String id;
+  final String userId;
+  final String coachId;
+  final DateTime scheduledAt;
+  final String status;
+  final int amountInr;
+  final DateTime createdAt;
+  const LocalCoachBooking(
+      {required this.id,
+      required this.userId,
+      required this.coachId,
+      required this.scheduledAt,
+      required this.status,
+      required this.amountInr,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['coach_id'] = Variable<String>(coachId);
+    map['scheduled_at'] = Variable<DateTime>(scheduledAt);
+    map['status'] = Variable<String>(status);
+    map['amount_inr'] = Variable<int>(amountInr);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalCoachBookingsCompanion toCompanion(bool nullToAbsent) {
+    return LocalCoachBookingsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      coachId: Value(coachId),
+      scheduledAt: Value(scheduledAt),
+      status: Value(status),
+      amountInr: Value(amountInr),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalCoachBooking.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCoachBooking(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      coachId: serializer.fromJson<String>(json['coachId']),
+      scheduledAt: serializer.fromJson<DateTime>(json['scheduledAt']),
+      status: serializer.fromJson<String>(json['status']),
+      amountInr: serializer.fromJson<int>(json['amountInr']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'coachId': serializer.toJson<String>(coachId),
+      'scheduledAt': serializer.toJson<DateTime>(scheduledAt),
+      'status': serializer.toJson<String>(status),
+      'amountInr': serializer.toJson<int>(amountInr),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalCoachBooking copyWith(
+          {String? id,
+          String? userId,
+          String? coachId,
+          DateTime? scheduledAt,
+          String? status,
+          int? amountInr,
+          DateTime? createdAt}) =>
+      LocalCoachBooking(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        coachId: coachId ?? this.coachId,
+        scheduledAt: scheduledAt ?? this.scheduledAt,
+        status: status ?? this.status,
+        amountInr: amountInr ?? this.amountInr,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalCoachBooking copyWithCompanion(LocalCoachBookingsCompanion data) {
+    return LocalCoachBooking(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      coachId: data.coachId.present ? data.coachId.value : this.coachId,
+      scheduledAt:
+          data.scheduledAt.present ? data.scheduledAt.value : this.scheduledAt,
+      status: data.status.present ? data.status.value : this.status,
+      amountInr: data.amountInr.present ? data.amountInr.value : this.amountInr,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachBooking(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('coachId: $coachId, ')
+          ..write('scheduledAt: $scheduledAt, ')
+          ..write('status: $status, ')
+          ..write('amountInr: $amountInr, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, coachId, scheduledAt, status, amountInr, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCoachBooking &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.coachId == this.coachId &&
+          other.scheduledAt == this.scheduledAt &&
+          other.status == this.status &&
+          other.amountInr == this.amountInr &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalCoachBookingsCompanion extends UpdateCompanion<LocalCoachBooking> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> coachId;
+  final Value<DateTime> scheduledAt;
+  final Value<String> status;
+  final Value<int> amountInr;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalCoachBookingsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.coachId = const Value.absent(),
+    this.scheduledAt = const Value.absent(),
+    this.status = const Value.absent(),
+    this.amountInr = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCoachBookingsCompanion.insert({
+    required String id,
+    required String userId,
+    required String coachId,
+    required DateTime scheduledAt,
+    required String status,
+    required int amountInr,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        coachId = Value(coachId),
+        scheduledAt = Value(scheduledAt),
+        status = Value(status),
+        amountInr = Value(amountInr);
+  static Insertable<LocalCoachBooking> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? coachId,
+    Expression<DateTime>? scheduledAt,
+    Expression<String>? status,
+    Expression<int>? amountInr,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (coachId != null) 'coach_id': coachId,
+      if (scheduledAt != null) 'scheduled_at': scheduledAt,
+      if (status != null) 'status': status,
+      if (amountInr != null) 'amount_inr': amountInr,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCoachBookingsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? coachId,
+      Value<DateTime>? scheduledAt,
+      Value<String>? status,
+      Value<int>? amountInr,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalCoachBookingsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      coachId: coachId ?? this.coachId,
+      scheduledAt: scheduledAt ?? this.scheduledAt,
+      status: status ?? this.status,
+      amountInr: amountInr ?? this.amountInr,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (coachId.present) {
+      map['coach_id'] = Variable<String>(coachId.value);
+    }
+    if (scheduledAt.present) {
+      map['scheduled_at'] = Variable<DateTime>(scheduledAt.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (amountInr.present) {
+      map['amount_inr'] = Variable<int>(amountInr.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCoachBookingsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('coachId: $coachId, ')
+          ..write('scheduledAt: $scheduledAt, ')
+          ..write('status: $status, ')
+          ..write('amountInr: $amountInr, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalAffiliateReferralsTable extends LocalAffiliateReferrals
+    with TableInfo<$LocalAffiliateReferralsTable, LocalAffiliateReferral> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalAffiliateReferralsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _referrerIdMeta =
+      const VerificationMeta('referrerId');
+  @override
+  late final GeneratedColumn<String> referrerId = GeneratedColumn<String>(
+      'referrer_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _referralCodeMeta =
+      const VerificationMeta('referralCode');
+  @override
+  late final GeneratedColumn<String> referralCode = GeneratedColumn<String>(
+      'referral_code', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _refereeUserIdMeta =
+      const VerificationMeta('refereeUserId');
+  @override
+  late final GeneratedColumn<String> refereeUserId = GeneratedColumn<String>(
+      'referee_user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _karmaRewardMeta =
+      const VerificationMeta('karmaReward');
+  @override
+  late final GeneratedColumn<int> karmaReward = GeneratedColumn<int>(
+      'karma_reward', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _commissionInrMeta =
+      const VerificationMeta('commissionInr');
+  @override
+  late final GeneratedColumn<int> commissionInr = GeneratedColumn<int>(
+      'commission_inr', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        referrerId,
+        referralCode,
+        refereeUserId,
+        karmaReward,
+        commissionInr,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_affiliate_referrals';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalAffiliateReferral> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('referrer_id')) {
+      context.handle(
+          _referrerIdMeta,
+          referrerId.isAcceptableOrUnknown(
+              data['referrer_id']!, _referrerIdMeta));
+    } else if (isInserting) {
+      context.missing(_referrerIdMeta);
+    }
+    if (data.containsKey('referral_code')) {
+      context.handle(
+          _referralCodeMeta,
+          referralCode.isAcceptableOrUnknown(
+              data['referral_code']!, _referralCodeMeta));
+    } else if (isInserting) {
+      context.missing(_referralCodeMeta);
+    }
+    if (data.containsKey('referee_user_id')) {
+      context.handle(
+          _refereeUserIdMeta,
+          refereeUserId.isAcceptableOrUnknown(
+              data['referee_user_id']!, _refereeUserIdMeta));
+    } else if (isInserting) {
+      context.missing(_refereeUserIdMeta);
+    }
+    if (data.containsKey('karma_reward')) {
+      context.handle(
+          _karmaRewardMeta,
+          karmaReward.isAcceptableOrUnknown(
+              data['karma_reward']!, _karmaRewardMeta));
+    } else if (isInserting) {
+      context.missing(_karmaRewardMeta);
+    }
+    if (data.containsKey('commission_inr')) {
+      context.handle(
+          _commissionInrMeta,
+          commissionInr.isAcceptableOrUnknown(
+              data['commission_inr']!, _commissionInrMeta));
+    } else if (isInserting) {
+      context.missing(_commissionInrMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalAffiliateReferral map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalAffiliateReferral(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      referrerId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}referrer_id'])!,
+      referralCode: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}referral_code'])!,
+      refereeUserId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}referee_user_id'])!,
+      karmaReward: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}karma_reward'])!,
+      commissionInr: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}commission_inr'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalAffiliateReferralsTable createAlias(String alias) {
+    return $LocalAffiliateReferralsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalAffiliateReferral extends DataClass
+    implements Insertable<LocalAffiliateReferral> {
+  final String id;
+  final String referrerId;
+  final String referralCode;
+  final String refereeUserId;
+  final int karmaReward;
+  final int commissionInr;
+  final DateTime createdAt;
+  const LocalAffiliateReferral(
+      {required this.id,
+      required this.referrerId,
+      required this.referralCode,
+      required this.refereeUserId,
+      required this.karmaReward,
+      required this.commissionInr,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['referrer_id'] = Variable<String>(referrerId);
+    map['referral_code'] = Variable<String>(referralCode);
+    map['referee_user_id'] = Variable<String>(refereeUserId);
+    map['karma_reward'] = Variable<int>(karmaReward);
+    map['commission_inr'] = Variable<int>(commissionInr);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalAffiliateReferralsCompanion toCompanion(bool nullToAbsent) {
+    return LocalAffiliateReferralsCompanion(
+      id: Value(id),
+      referrerId: Value(referrerId),
+      referralCode: Value(referralCode),
+      refereeUserId: Value(refereeUserId),
+      karmaReward: Value(karmaReward),
+      commissionInr: Value(commissionInr),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalAffiliateReferral.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalAffiliateReferral(
+      id: serializer.fromJson<String>(json['id']),
+      referrerId: serializer.fromJson<String>(json['referrerId']),
+      referralCode: serializer.fromJson<String>(json['referralCode']),
+      refereeUserId: serializer.fromJson<String>(json['refereeUserId']),
+      karmaReward: serializer.fromJson<int>(json['karmaReward']),
+      commissionInr: serializer.fromJson<int>(json['commissionInr']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'referrerId': serializer.toJson<String>(referrerId),
+      'referralCode': serializer.toJson<String>(referralCode),
+      'refereeUserId': serializer.toJson<String>(refereeUserId),
+      'karmaReward': serializer.toJson<int>(karmaReward),
+      'commissionInr': serializer.toJson<int>(commissionInr),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalAffiliateReferral copyWith(
+          {String? id,
+          String? referrerId,
+          String? referralCode,
+          String? refereeUserId,
+          int? karmaReward,
+          int? commissionInr,
+          DateTime? createdAt}) =>
+      LocalAffiliateReferral(
+        id: id ?? this.id,
+        referrerId: referrerId ?? this.referrerId,
+        referralCode: referralCode ?? this.referralCode,
+        refereeUserId: refereeUserId ?? this.refereeUserId,
+        karmaReward: karmaReward ?? this.karmaReward,
+        commissionInr: commissionInr ?? this.commissionInr,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalAffiliateReferral copyWithCompanion(
+      LocalAffiliateReferralsCompanion data) {
+    return LocalAffiliateReferral(
+      id: data.id.present ? data.id.value : this.id,
+      referrerId:
+          data.referrerId.present ? data.referrerId.value : this.referrerId,
+      referralCode: data.referralCode.present
+          ? data.referralCode.value
+          : this.referralCode,
+      refereeUserId: data.refereeUserId.present
+          ? data.refereeUserId.value
+          : this.refereeUserId,
+      karmaReward:
+          data.karmaReward.present ? data.karmaReward.value : this.karmaReward,
+      commissionInr: data.commissionInr.present
+          ? data.commissionInr.value
+          : this.commissionInr,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalAffiliateReferral(')
+          ..write('id: $id, ')
+          ..write('referrerId: $referrerId, ')
+          ..write('referralCode: $referralCode, ')
+          ..write('refereeUserId: $refereeUserId, ')
+          ..write('karmaReward: $karmaReward, ')
+          ..write('commissionInr: $commissionInr, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, referrerId, referralCode, refereeUserId,
+      karmaReward, commissionInr, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalAffiliateReferral &&
+          other.id == this.id &&
+          other.referrerId == this.referrerId &&
+          other.referralCode == this.referralCode &&
+          other.refereeUserId == this.refereeUserId &&
+          other.karmaReward == this.karmaReward &&
+          other.commissionInr == this.commissionInr &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalAffiliateReferralsCompanion
+    extends UpdateCompanion<LocalAffiliateReferral> {
+  final Value<String> id;
+  final Value<String> referrerId;
+  final Value<String> referralCode;
+  final Value<String> refereeUserId;
+  final Value<int> karmaReward;
+  final Value<int> commissionInr;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalAffiliateReferralsCompanion({
+    this.id = const Value.absent(),
+    this.referrerId = const Value.absent(),
+    this.referralCode = const Value.absent(),
+    this.refereeUserId = const Value.absent(),
+    this.karmaReward = const Value.absent(),
+    this.commissionInr = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalAffiliateReferralsCompanion.insert({
+    required String id,
+    required String referrerId,
+    required String referralCode,
+    required String refereeUserId,
+    required int karmaReward,
+    required int commissionInr,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        referrerId = Value(referrerId),
+        referralCode = Value(referralCode),
+        refereeUserId = Value(refereeUserId),
+        karmaReward = Value(karmaReward),
+        commissionInr = Value(commissionInr);
+  static Insertable<LocalAffiliateReferral> custom({
+    Expression<String>? id,
+    Expression<String>? referrerId,
+    Expression<String>? referralCode,
+    Expression<String>? refereeUserId,
+    Expression<int>? karmaReward,
+    Expression<int>? commissionInr,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (referrerId != null) 'referrer_id': referrerId,
+      if (referralCode != null) 'referral_code': referralCode,
+      if (refereeUserId != null) 'referee_user_id': refereeUserId,
+      if (karmaReward != null) 'karma_reward': karmaReward,
+      if (commissionInr != null) 'commission_inr': commissionInr,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalAffiliateReferralsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? referrerId,
+      Value<String>? referralCode,
+      Value<String>? refereeUserId,
+      Value<int>? karmaReward,
+      Value<int>? commissionInr,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalAffiliateReferralsCompanion(
+      id: id ?? this.id,
+      referrerId: referrerId ?? this.referrerId,
+      referralCode: referralCode ?? this.referralCode,
+      refereeUserId: refereeUserId ?? this.refereeUserId,
+      karmaReward: karmaReward ?? this.karmaReward,
+      commissionInr: commissionInr ?? this.commissionInr,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (referrerId.present) {
+      map['referrer_id'] = Variable<String>(referrerId.value);
+    }
+    if (referralCode.present) {
+      map['referral_code'] = Variable<String>(referralCode.value);
+    }
+    if (refereeUserId.present) {
+      map['referee_user_id'] = Variable<String>(refereeUserId.value);
+    }
+    if (karmaReward.present) {
+      map['karma_reward'] = Variable<int>(karmaReward.value);
+    }
+    if (commissionInr.present) {
+      map['commission_inr'] = Variable<int>(commissionInr.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalAffiliateReferralsCompanion(')
+          ..write('id: $id, ')
+          ..write('referrerId: $referrerId, ')
+          ..write('referralCode: $referralCode, ')
+          ..write('refereeUserId: $refereeUserId, ')
+          ..write('karmaReward: $karmaReward, ')
+          ..write('commissionInr: $commissionInr, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -14712,6 +17315,18 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalProgressPhotosTable(this);
   late final $LocalBodyCompositionSnapshotsTable localBodyCompositionSnapshots =
       $LocalBodyCompositionSnapshotsTable(this);
+  late final $LocalActiveLifeEventsTable localActiveLifeEvents =
+      $LocalActiveLifeEventsTable(this);
+  late final $LocalWeddingPlansTable localWeddingPlans =
+      $LocalWeddingPlansTable(this);
+  late final $LocalEntitlementsTable localEntitlements =
+      $LocalEntitlementsTable(this);
+  late final $LocalCoachProfilesTable localCoachProfiles =
+      $LocalCoachProfilesTable(this);
+  late final $LocalCoachBookingsTable localCoachBookings =
+      $LocalCoachBookingsTable(this);
+  late final $LocalAffiliateReferralsTable localAffiliateReferrals =
+      $LocalAffiliateReferralsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -14748,7 +17363,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localMedications,
         localDoctorGrants,
         localProgressPhotos,
-        localBodyCompositionSnapshots
+        localBodyCompositionSnapshots,
+        localActiveLifeEvents,
+        localWeddingPlans,
+        localEntitlements,
+        localCoachProfiles,
+        localCoachBookings,
+        localAffiliateReferrals
       ];
 }
 
@@ -22244,6 +24865,1377 @@ typedef $$LocalBodyCompositionSnapshotsTableProcessedTableManager
         ),
         LocalBodyCompositionSnapshot,
         PrefetchHooks Function()>;
+typedef $$LocalActiveLifeEventsTableCreateCompanionBuilder
+    = LocalActiveLifeEventsCompanion Function({
+  required String id,
+  required String userId,
+  required String eventType,
+  required String title,
+  required DateTime startDate,
+  required DateTime endDate,
+  Value<String?> configJson,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalActiveLifeEventsTableUpdateCompanionBuilder
+    = LocalActiveLifeEventsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> eventType,
+  Value<String> title,
+  Value<DateTime> startDate,
+  Value<DateTime> endDate,
+  Value<String?> configJson,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalActiveLifeEventsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalActiveLifeEventsTable> {
+  $$LocalActiveLifeEventsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get eventType => $composableBuilder(
+      column: $table.eventType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get startDate => $composableBuilder(
+      column: $table.startDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get endDate => $composableBuilder(
+      column: $table.endDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get configJson => $composableBuilder(
+      column: $table.configJson, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalActiveLifeEventsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalActiveLifeEventsTable> {
+  $$LocalActiveLifeEventsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get eventType => $composableBuilder(
+      column: $table.eventType, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get startDate => $composableBuilder(
+      column: $table.startDate, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get endDate => $composableBuilder(
+      column: $table.endDate, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get configJson => $composableBuilder(
+      column: $table.configJson, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalActiveLifeEventsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalActiveLifeEventsTable> {
+  $$LocalActiveLifeEventsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get eventType =>
+      $composableBuilder(column: $table.eventType, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get startDate =>
+      $composableBuilder(column: $table.startDate, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get endDate =>
+      $composableBuilder(column: $table.endDate, builder: (column) => column);
+
+  GeneratedColumn<String> get configJson => $composableBuilder(
+      column: $table.configJson, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalActiveLifeEventsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalActiveLifeEventsTable,
+    LocalActiveLifeEvent,
+    $$LocalActiveLifeEventsTableFilterComposer,
+    $$LocalActiveLifeEventsTableOrderingComposer,
+    $$LocalActiveLifeEventsTableAnnotationComposer,
+    $$LocalActiveLifeEventsTableCreateCompanionBuilder,
+    $$LocalActiveLifeEventsTableUpdateCompanionBuilder,
+    (
+      LocalActiveLifeEvent,
+      BaseReferences<_$AppDatabase, $LocalActiveLifeEventsTable,
+          LocalActiveLifeEvent>
+    ),
+    LocalActiveLifeEvent,
+    PrefetchHooks Function()> {
+  $$LocalActiveLifeEventsTableTableManager(
+      _$AppDatabase db, $LocalActiveLifeEventsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalActiveLifeEventsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalActiveLifeEventsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalActiveLifeEventsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> eventType = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<DateTime> startDate = const Value.absent(),
+            Value<DateTime> endDate = const Value.absent(),
+            Value<String?> configJson = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalActiveLifeEventsCompanion(
+            id: id,
+            userId: userId,
+            eventType: eventType,
+            title: title,
+            startDate: startDate,
+            endDate: endDate,
+            configJson: configJson,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String eventType,
+            required String title,
+            required DateTime startDate,
+            required DateTime endDate,
+            Value<String?> configJson = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalActiveLifeEventsCompanion.insert(
+            id: id,
+            userId: userId,
+            eventType: eventType,
+            title: title,
+            startDate: startDate,
+            endDate: endDate,
+            configJson: configJson,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalActiveLifeEventsTable,
+                        LocalActiveLifeEvent>(table),
+                    BaseReferences<_$AppDatabase, $LocalActiveLifeEventsTable,
+                        LocalActiveLifeEvent>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalActiveLifeEventsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalActiveLifeEventsTable,
+        LocalActiveLifeEvent,
+        $$LocalActiveLifeEventsTableFilterComposer,
+        $$LocalActiveLifeEventsTableOrderingComposer,
+        $$LocalActiveLifeEventsTableAnnotationComposer,
+        $$LocalActiveLifeEventsTableCreateCompanionBuilder,
+        $$LocalActiveLifeEventsTableUpdateCompanionBuilder,
+        (
+          LocalActiveLifeEvent,
+          BaseReferences<_$AppDatabase, $LocalActiveLifeEventsTable,
+              LocalActiveLifeEvent>
+        ),
+        LocalActiveLifeEvent,
+        PrefetchHooks Function()>;
+typedef $$LocalWeddingPlansTableCreateCompanionBuilder
+    = LocalWeddingPlansCompanion Function({
+  required String id,
+  required String userId,
+  required DateTime weddingDate,
+  required double targetWeightKg,
+  required double targetWaistCm,
+  required String currentPhase,
+  required String currentPhaseHindi,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalWeddingPlansTableUpdateCompanionBuilder
+    = LocalWeddingPlansCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<DateTime> weddingDate,
+  Value<double> targetWeightKg,
+  Value<double> targetWaistCm,
+  Value<String> currentPhase,
+  Value<String> currentPhaseHindi,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalWeddingPlansTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalWeddingPlansTable> {
+  $$LocalWeddingPlansTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get weddingDate => $composableBuilder(
+      column: $table.weddingDate, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get targetWeightKg => $composableBuilder(
+      column: $table.targetWeightKg,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get targetWaistCm => $composableBuilder(
+      column: $table.targetWaistCm, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get currentPhase => $composableBuilder(
+      column: $table.currentPhase, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get currentPhaseHindi => $composableBuilder(
+      column: $table.currentPhaseHindi,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalWeddingPlansTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalWeddingPlansTable> {
+  $$LocalWeddingPlansTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get weddingDate => $composableBuilder(
+      column: $table.weddingDate, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get targetWeightKg => $composableBuilder(
+      column: $table.targetWeightKg,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get targetWaistCm => $composableBuilder(
+      column: $table.targetWaistCm,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentPhase => $composableBuilder(
+      column: $table.currentPhase,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get currentPhaseHindi => $composableBuilder(
+      column: $table.currentPhaseHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalWeddingPlansTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalWeddingPlansTable> {
+  $$LocalWeddingPlansTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get weddingDate => $composableBuilder(
+      column: $table.weddingDate, builder: (column) => column);
+
+  GeneratedColumn<double> get targetWeightKg => $composableBuilder(
+      column: $table.targetWeightKg, builder: (column) => column);
+
+  GeneratedColumn<double> get targetWaistCm => $composableBuilder(
+      column: $table.targetWaistCm, builder: (column) => column);
+
+  GeneratedColumn<String> get currentPhase => $composableBuilder(
+      column: $table.currentPhase, builder: (column) => column);
+
+  GeneratedColumn<String> get currentPhaseHindi => $composableBuilder(
+      column: $table.currentPhaseHindi, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalWeddingPlansTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalWeddingPlansTable,
+    LocalWeddingPlan,
+    $$LocalWeddingPlansTableFilterComposer,
+    $$LocalWeddingPlansTableOrderingComposer,
+    $$LocalWeddingPlansTableAnnotationComposer,
+    $$LocalWeddingPlansTableCreateCompanionBuilder,
+    $$LocalWeddingPlansTableUpdateCompanionBuilder,
+    (
+      LocalWeddingPlan,
+      BaseReferences<_$AppDatabase, $LocalWeddingPlansTable, LocalWeddingPlan>
+    ),
+    LocalWeddingPlan,
+    PrefetchHooks Function()> {
+  $$LocalWeddingPlansTableTableManager(
+      _$AppDatabase db, $LocalWeddingPlansTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalWeddingPlansTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalWeddingPlansTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalWeddingPlansTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<DateTime> weddingDate = const Value.absent(),
+            Value<double> targetWeightKg = const Value.absent(),
+            Value<double> targetWaistCm = const Value.absent(),
+            Value<String> currentPhase = const Value.absent(),
+            Value<String> currentPhaseHindi = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalWeddingPlansCompanion(
+            id: id,
+            userId: userId,
+            weddingDate: weddingDate,
+            targetWeightKg: targetWeightKg,
+            targetWaistCm: targetWaistCm,
+            currentPhase: currentPhase,
+            currentPhaseHindi: currentPhaseHindi,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required DateTime weddingDate,
+            required double targetWeightKg,
+            required double targetWaistCm,
+            required String currentPhase,
+            required String currentPhaseHindi,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalWeddingPlansCompanion.insert(
+            id: id,
+            userId: userId,
+            weddingDate: weddingDate,
+            targetWeightKg: targetWeightKg,
+            targetWaistCm: targetWaistCm,
+            currentPhase: currentPhase,
+            currentPhaseHindi: currentPhaseHindi,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalWeddingPlansTable, LocalWeddingPlan>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalWeddingPlansTable,
+                        LocalWeddingPlan>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalWeddingPlansTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalWeddingPlansTable,
+    LocalWeddingPlan,
+    $$LocalWeddingPlansTableFilterComposer,
+    $$LocalWeddingPlansTableOrderingComposer,
+    $$LocalWeddingPlansTableAnnotationComposer,
+    $$LocalWeddingPlansTableCreateCompanionBuilder,
+    $$LocalWeddingPlansTableUpdateCompanionBuilder,
+    (
+      LocalWeddingPlan,
+      BaseReferences<_$AppDatabase, $LocalWeddingPlansTable, LocalWeddingPlan>
+    ),
+    LocalWeddingPlan,
+    PrefetchHooks Function()>;
+typedef $$LocalEntitlementsTableCreateCompanionBuilder
+    = LocalEntitlementsCompanion Function({
+  required String id,
+  required String userId,
+  required String tier,
+  required String source,
+  Value<DateTime?> expiresAt,
+  Value<bool> isActive,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalEntitlementsTableUpdateCompanionBuilder
+    = LocalEntitlementsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> tier,
+  Value<String> source,
+  Value<DateTime?> expiresAt,
+  Value<bool> isActive,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalEntitlementsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalEntitlementsTable> {
+  $$LocalEntitlementsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get tier => $composableBuilder(
+      column: $table.tier, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get source => $composableBuilder(
+      column: $table.source, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+      column: $table.expiresAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isActive => $composableBuilder(
+      column: $table.isActive, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalEntitlementsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalEntitlementsTable> {
+  $$LocalEntitlementsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get tier => $composableBuilder(
+      column: $table.tier, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get source => $composableBuilder(
+      column: $table.source, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+      column: $table.expiresAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isActive => $composableBuilder(
+      column: $table.isActive, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalEntitlementsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalEntitlementsTable> {
+  $$LocalEntitlementsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get tier =>
+      $composableBuilder(column: $table.tier, builder: (column) => column);
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiresAt =>
+      $composableBuilder(column: $table.expiresAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get isActive =>
+      $composableBuilder(column: $table.isActive, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalEntitlementsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalEntitlementsTable,
+    LocalEntitlement,
+    $$LocalEntitlementsTableFilterComposer,
+    $$LocalEntitlementsTableOrderingComposer,
+    $$LocalEntitlementsTableAnnotationComposer,
+    $$LocalEntitlementsTableCreateCompanionBuilder,
+    $$LocalEntitlementsTableUpdateCompanionBuilder,
+    (
+      LocalEntitlement,
+      BaseReferences<_$AppDatabase, $LocalEntitlementsTable, LocalEntitlement>
+    ),
+    LocalEntitlement,
+    PrefetchHooks Function()> {
+  $$LocalEntitlementsTableTableManager(
+      _$AppDatabase db, $LocalEntitlementsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalEntitlementsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalEntitlementsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalEntitlementsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> tier = const Value.absent(),
+            Value<String> source = const Value.absent(),
+            Value<DateTime?> expiresAt = const Value.absent(),
+            Value<bool> isActive = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalEntitlementsCompanion(
+            id: id,
+            userId: userId,
+            tier: tier,
+            source: source,
+            expiresAt: expiresAt,
+            isActive: isActive,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String tier,
+            required String source,
+            Value<DateTime?> expiresAt = const Value.absent(),
+            Value<bool> isActive = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalEntitlementsCompanion.insert(
+            id: id,
+            userId: userId,
+            tier: tier,
+            source: source,
+            expiresAt: expiresAt,
+            isActive: isActive,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalEntitlementsTable, LocalEntitlement>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalEntitlementsTable,
+                        LocalEntitlement>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalEntitlementsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalEntitlementsTable,
+    LocalEntitlement,
+    $$LocalEntitlementsTableFilterComposer,
+    $$LocalEntitlementsTableOrderingComposer,
+    $$LocalEntitlementsTableAnnotationComposer,
+    $$LocalEntitlementsTableCreateCompanionBuilder,
+    $$LocalEntitlementsTableUpdateCompanionBuilder,
+    (
+      LocalEntitlement,
+      BaseReferences<_$AppDatabase, $LocalEntitlementsTable, LocalEntitlement>
+    ),
+    LocalEntitlement,
+    PrefetchHooks Function()>;
+typedef $$LocalCoachProfilesTableCreateCompanionBuilder
+    = LocalCoachProfilesCompanion Function({
+  required String id,
+  required String name,
+  required String title,
+  required String specialty,
+  required String bio,
+  required String languagesJson,
+  required double rating,
+  required int reviewCount,
+  required int hourlyRateInr,
+  Value<String?> avatarUrl,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalCoachProfilesTableUpdateCompanionBuilder
+    = LocalCoachProfilesCompanion Function({
+  Value<String> id,
+  Value<String> name,
+  Value<String> title,
+  Value<String> specialty,
+  Value<String> bio,
+  Value<String> languagesJson,
+  Value<double> rating,
+  Value<int> reviewCount,
+  Value<int> hourlyRateInr,
+  Value<String?> avatarUrl,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalCoachProfilesTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCoachProfilesTable> {
+  $$LocalCoachProfilesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get specialty => $composableBuilder(
+      column: $table.specialty, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get bio => $composableBuilder(
+      column: $table.bio, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get languagesJson => $composableBuilder(
+      column: $table.languagesJson, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get rating => $composableBuilder(
+      column: $table.rating, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get reviewCount => $composableBuilder(
+      column: $table.reviewCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get hourlyRateInr => $composableBuilder(
+      column: $table.hourlyRateInr, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get avatarUrl => $composableBuilder(
+      column: $table.avatarUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCoachProfilesTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCoachProfilesTable> {
+  $$LocalCoachProfilesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get specialty => $composableBuilder(
+      column: $table.specialty, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get bio => $composableBuilder(
+      column: $table.bio, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get languagesJson => $composableBuilder(
+      column: $table.languagesJson,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get rating => $composableBuilder(
+      column: $table.rating, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get reviewCount => $composableBuilder(
+      column: $table.reviewCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get hourlyRateInr => $composableBuilder(
+      column: $table.hourlyRateInr,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get avatarUrl => $composableBuilder(
+      column: $table.avatarUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCoachProfilesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCoachProfilesTable> {
+  $$LocalCoachProfilesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get specialty =>
+      $composableBuilder(column: $table.specialty, builder: (column) => column);
+
+  GeneratedColumn<String> get bio =>
+      $composableBuilder(column: $table.bio, builder: (column) => column);
+
+  GeneratedColumn<String> get languagesJson => $composableBuilder(
+      column: $table.languagesJson, builder: (column) => column);
+
+  GeneratedColumn<double> get rating =>
+      $composableBuilder(column: $table.rating, builder: (column) => column);
+
+  GeneratedColumn<int> get reviewCount => $composableBuilder(
+      column: $table.reviewCount, builder: (column) => column);
+
+  GeneratedColumn<int> get hourlyRateInr => $composableBuilder(
+      column: $table.hourlyRateInr, builder: (column) => column);
+
+  GeneratedColumn<String> get avatarUrl =>
+      $composableBuilder(column: $table.avatarUrl, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalCoachProfilesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCoachProfilesTable,
+    LocalCoachProfile,
+    $$LocalCoachProfilesTableFilterComposer,
+    $$LocalCoachProfilesTableOrderingComposer,
+    $$LocalCoachProfilesTableAnnotationComposer,
+    $$LocalCoachProfilesTableCreateCompanionBuilder,
+    $$LocalCoachProfilesTableUpdateCompanionBuilder,
+    (
+      LocalCoachProfile,
+      BaseReferences<_$AppDatabase, $LocalCoachProfilesTable, LocalCoachProfile>
+    ),
+    LocalCoachProfile,
+    PrefetchHooks Function()> {
+  $$LocalCoachProfilesTableTableManager(
+      _$AppDatabase db, $LocalCoachProfilesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCoachProfilesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCoachProfilesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCoachProfilesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> specialty = const Value.absent(),
+            Value<String> bio = const Value.absent(),
+            Value<String> languagesJson = const Value.absent(),
+            Value<double> rating = const Value.absent(),
+            Value<int> reviewCount = const Value.absent(),
+            Value<int> hourlyRateInr = const Value.absent(),
+            Value<String?> avatarUrl = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachProfilesCompanion(
+            id: id,
+            name: name,
+            title: title,
+            specialty: specialty,
+            bio: bio,
+            languagesJson: languagesJson,
+            rating: rating,
+            reviewCount: reviewCount,
+            hourlyRateInr: hourlyRateInr,
+            avatarUrl: avatarUrl,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String name,
+            required String title,
+            required String specialty,
+            required String bio,
+            required String languagesJson,
+            required double rating,
+            required int reviewCount,
+            required int hourlyRateInr,
+            Value<String?> avatarUrl = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachProfilesCompanion.insert(
+            id: id,
+            name: name,
+            title: title,
+            specialty: specialty,
+            bio: bio,
+            languagesJson: languagesJson,
+            rating: rating,
+            reviewCount: reviewCount,
+            hourlyRateInr: hourlyRateInr,
+            avatarUrl: avatarUrl,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCoachProfilesTable, LocalCoachProfile>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCoachProfilesTable,
+                        LocalCoachProfile>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCoachProfilesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCoachProfilesTable,
+    LocalCoachProfile,
+    $$LocalCoachProfilesTableFilterComposer,
+    $$LocalCoachProfilesTableOrderingComposer,
+    $$LocalCoachProfilesTableAnnotationComposer,
+    $$LocalCoachProfilesTableCreateCompanionBuilder,
+    $$LocalCoachProfilesTableUpdateCompanionBuilder,
+    (
+      LocalCoachProfile,
+      BaseReferences<_$AppDatabase, $LocalCoachProfilesTable, LocalCoachProfile>
+    ),
+    LocalCoachProfile,
+    PrefetchHooks Function()>;
+typedef $$LocalCoachBookingsTableCreateCompanionBuilder
+    = LocalCoachBookingsCompanion Function({
+  required String id,
+  required String userId,
+  required String coachId,
+  required DateTime scheduledAt,
+  required String status,
+  required int amountInr,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalCoachBookingsTableUpdateCompanionBuilder
+    = LocalCoachBookingsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> coachId,
+  Value<DateTime> scheduledAt,
+  Value<String> status,
+  Value<int> amountInr,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalCoachBookingsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCoachBookingsTable> {
+  $$LocalCoachBookingsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get coachId => $composableBuilder(
+      column: $table.coachId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get scheduledAt => $composableBuilder(
+      column: $table.scheduledAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get amountInr => $composableBuilder(
+      column: $table.amountInr, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCoachBookingsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCoachBookingsTable> {
+  $$LocalCoachBookingsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get coachId => $composableBuilder(
+      column: $table.coachId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get scheduledAt => $composableBuilder(
+      column: $table.scheduledAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get amountInr => $composableBuilder(
+      column: $table.amountInr, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCoachBookingsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCoachBookingsTable> {
+  $$LocalCoachBookingsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get coachId =>
+      $composableBuilder(column: $table.coachId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get scheduledAt => $composableBuilder(
+      column: $table.scheduledAt, builder: (column) => column);
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get amountInr =>
+      $composableBuilder(column: $table.amountInr, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalCoachBookingsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCoachBookingsTable,
+    LocalCoachBooking,
+    $$LocalCoachBookingsTableFilterComposer,
+    $$LocalCoachBookingsTableOrderingComposer,
+    $$LocalCoachBookingsTableAnnotationComposer,
+    $$LocalCoachBookingsTableCreateCompanionBuilder,
+    $$LocalCoachBookingsTableUpdateCompanionBuilder,
+    (
+      LocalCoachBooking,
+      BaseReferences<_$AppDatabase, $LocalCoachBookingsTable, LocalCoachBooking>
+    ),
+    LocalCoachBooking,
+    PrefetchHooks Function()> {
+  $$LocalCoachBookingsTableTableManager(
+      _$AppDatabase db, $LocalCoachBookingsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCoachBookingsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCoachBookingsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCoachBookingsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> coachId = const Value.absent(),
+            Value<DateTime> scheduledAt = const Value.absent(),
+            Value<String> status = const Value.absent(),
+            Value<int> amountInr = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachBookingsCompanion(
+            id: id,
+            userId: userId,
+            coachId: coachId,
+            scheduledAt: scheduledAt,
+            status: status,
+            amountInr: amountInr,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String coachId,
+            required DateTime scheduledAt,
+            required String status,
+            required int amountInr,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCoachBookingsCompanion.insert(
+            id: id,
+            userId: userId,
+            coachId: coachId,
+            scheduledAt: scheduledAt,
+            status: status,
+            amountInr: amountInr,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCoachBookingsTable, LocalCoachBooking>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCoachBookingsTable,
+                        LocalCoachBooking>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCoachBookingsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCoachBookingsTable,
+    LocalCoachBooking,
+    $$LocalCoachBookingsTableFilterComposer,
+    $$LocalCoachBookingsTableOrderingComposer,
+    $$LocalCoachBookingsTableAnnotationComposer,
+    $$LocalCoachBookingsTableCreateCompanionBuilder,
+    $$LocalCoachBookingsTableUpdateCompanionBuilder,
+    (
+      LocalCoachBooking,
+      BaseReferences<_$AppDatabase, $LocalCoachBookingsTable, LocalCoachBooking>
+    ),
+    LocalCoachBooking,
+    PrefetchHooks Function()>;
+typedef $$LocalAffiliateReferralsTableCreateCompanionBuilder
+    = LocalAffiliateReferralsCompanion Function({
+  required String id,
+  required String referrerId,
+  required String referralCode,
+  required String refereeUserId,
+  required int karmaReward,
+  required int commissionInr,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalAffiliateReferralsTableUpdateCompanionBuilder
+    = LocalAffiliateReferralsCompanion Function({
+  Value<String> id,
+  Value<String> referrerId,
+  Value<String> referralCode,
+  Value<String> refereeUserId,
+  Value<int> karmaReward,
+  Value<int> commissionInr,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalAffiliateReferralsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalAffiliateReferralsTable> {
+  $$LocalAffiliateReferralsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get referrerId => $composableBuilder(
+      column: $table.referrerId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get referralCode => $composableBuilder(
+      column: $table.referralCode, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get refereeUserId => $composableBuilder(
+      column: $table.refereeUserId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get karmaReward => $composableBuilder(
+      column: $table.karmaReward, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get commissionInr => $composableBuilder(
+      column: $table.commissionInr, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalAffiliateReferralsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalAffiliateReferralsTable> {
+  $$LocalAffiliateReferralsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get referrerId => $composableBuilder(
+      column: $table.referrerId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get referralCode => $composableBuilder(
+      column: $table.referralCode,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get refereeUserId => $composableBuilder(
+      column: $table.refereeUserId,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get karmaReward => $composableBuilder(
+      column: $table.karmaReward, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get commissionInr => $composableBuilder(
+      column: $table.commissionInr,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalAffiliateReferralsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalAffiliateReferralsTable> {
+  $$LocalAffiliateReferralsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get referrerId => $composableBuilder(
+      column: $table.referrerId, builder: (column) => column);
+
+  GeneratedColumn<String> get referralCode => $composableBuilder(
+      column: $table.referralCode, builder: (column) => column);
+
+  GeneratedColumn<String> get refereeUserId => $composableBuilder(
+      column: $table.refereeUserId, builder: (column) => column);
+
+  GeneratedColumn<int> get karmaReward => $composableBuilder(
+      column: $table.karmaReward, builder: (column) => column);
+
+  GeneratedColumn<int> get commissionInr => $composableBuilder(
+      column: $table.commissionInr, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalAffiliateReferralsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalAffiliateReferralsTable,
+    LocalAffiliateReferral,
+    $$LocalAffiliateReferralsTableFilterComposer,
+    $$LocalAffiliateReferralsTableOrderingComposer,
+    $$LocalAffiliateReferralsTableAnnotationComposer,
+    $$LocalAffiliateReferralsTableCreateCompanionBuilder,
+    $$LocalAffiliateReferralsTableUpdateCompanionBuilder,
+    (
+      LocalAffiliateReferral,
+      BaseReferences<_$AppDatabase, $LocalAffiliateReferralsTable,
+          LocalAffiliateReferral>
+    ),
+    LocalAffiliateReferral,
+    PrefetchHooks Function()> {
+  $$LocalAffiliateReferralsTableTableManager(
+      _$AppDatabase db, $LocalAffiliateReferralsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalAffiliateReferralsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalAffiliateReferralsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalAffiliateReferralsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> referrerId = const Value.absent(),
+            Value<String> referralCode = const Value.absent(),
+            Value<String> refereeUserId = const Value.absent(),
+            Value<int> karmaReward = const Value.absent(),
+            Value<int> commissionInr = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalAffiliateReferralsCompanion(
+            id: id,
+            referrerId: referrerId,
+            referralCode: referralCode,
+            refereeUserId: refereeUserId,
+            karmaReward: karmaReward,
+            commissionInr: commissionInr,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String referrerId,
+            required String referralCode,
+            required String refereeUserId,
+            required int karmaReward,
+            required int commissionInr,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalAffiliateReferralsCompanion.insert(
+            id: id,
+            referrerId: referrerId,
+            referralCode: referralCode,
+            refereeUserId: refereeUserId,
+            karmaReward: karmaReward,
+            commissionInr: commissionInr,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalAffiliateReferralsTable,
+                        LocalAffiliateReferral>(table),
+                    BaseReferences<_$AppDatabase, $LocalAffiliateReferralsTable,
+                        LocalAffiliateReferral>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalAffiliateReferralsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalAffiliateReferralsTable,
+        LocalAffiliateReferral,
+        $$LocalAffiliateReferralsTableFilterComposer,
+        $$LocalAffiliateReferralsTableOrderingComposer,
+        $$LocalAffiliateReferralsTableAnnotationComposer,
+        $$LocalAffiliateReferralsTableCreateCompanionBuilder,
+        $$LocalAffiliateReferralsTableUpdateCompanionBuilder,
+        (
+          LocalAffiliateReferral,
+          BaseReferences<_$AppDatabase, $LocalAffiliateReferralsTable,
+              LocalAffiliateReferral>
+        ),
+        LocalAffiliateReferral,
+        PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -22320,4 +26312,17 @@ class $AppDatabaseManager {
       get localBodyCompositionSnapshots =>
           $$LocalBodyCompositionSnapshotsTableTableManager(
               _db, _db.localBodyCompositionSnapshots);
+  $$LocalActiveLifeEventsTableTableManager get localActiveLifeEvents =>
+      $$LocalActiveLifeEventsTableTableManager(_db, _db.localActiveLifeEvents);
+  $$LocalWeddingPlansTableTableManager get localWeddingPlans =>
+      $$LocalWeddingPlansTableTableManager(_db, _db.localWeddingPlans);
+  $$LocalEntitlementsTableTableManager get localEntitlements =>
+      $$LocalEntitlementsTableTableManager(_db, _db.localEntitlements);
+  $$LocalCoachProfilesTableTableManager get localCoachProfiles =>
+      $$LocalCoachProfilesTableTableManager(_db, _db.localCoachProfiles);
+  $$LocalCoachBookingsTableTableManager get localCoachBookings =>
+      $$LocalCoachBookingsTableTableManager(_db, _db.localCoachBookings);
+  $$LocalAffiliateReferralsTableTableManager get localAffiliateReferrals =>
+      $$LocalAffiliateReferralsTableTableManager(
+          _db, _db.localAffiliateReferrals);
 }

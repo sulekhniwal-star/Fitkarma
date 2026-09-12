@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/drift.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/life_events/domain/models/life_event_models.dart",
+    "package:fitkarma/features/life_events/domain/services/festival_intelligence_engine.dart",
+    "package:fitkarma/features/life_events/domain/services/wedding_transformation_engine.dart",
+    "package:fitkarma/features/life_events/domain/services/ai_roast_engine.dart",
+    "package:fitkarma/features/life_events/domain/services/travel_intelligence_engine.dart"
+  ]
+}
