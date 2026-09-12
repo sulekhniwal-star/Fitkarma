@@ -1,0 +1,13 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/core/widgets/glowing_metric.dart",
+    "package:fitkarma/features/metabolism/services/metabolism_engine.dart",
+    "package:fitkarma/features/onboarding/domain/models/onboarding_state.dart"
+  ]
+}

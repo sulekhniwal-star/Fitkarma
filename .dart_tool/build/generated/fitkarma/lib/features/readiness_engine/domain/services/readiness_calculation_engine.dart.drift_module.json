@@ -1,0 +1,9 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/readiness_engine/domain/models/readiness_input.dart",
+    "package:fitkarma/features/readiness_engine/domain/models/readiness_result.dart",
+    "package:fitkarma/features/readiness_engine/domain/services/recovery_os_engine.dart",
+    "package:fitkarma/features/readiness_engine/domain/services/sleep_intelligence_engine.dart"
+  ]
+}

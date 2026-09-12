@@ -85,6 +85,18 @@ class LocalCycleTracking extends Table {
   Set<Column> get primaryKey => {userId};
 }
 
+// 7. Local Body Soreness Logs Table
+class LocalSorenessLogs extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get muscleGroup => text()();
+  IntColumn get severity => integer()(); // 1 to 5
+  DateTimeColumn get loggedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -92,6 +104,7 @@ class LocalCycleTracking extends Table {
   LocalDipCache,
   LocalDoshaScores,
   LocalCycleTracking,
+  LocalSorenessLogs,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

@@ -1,7 +1,6 @@
 {
   "elements": {},
   "imports": [
-    "package:flutter/material.dart",
-    "package:fitkarma/core/theme/app_colors.dart"
+    "package:flutter/material.dart"
   ]
 }

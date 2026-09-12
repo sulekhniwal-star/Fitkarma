@@ -1,0 +1,11 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/core/widgets/bento_card.dart",
+    "package:fitkarma/core/widgets/bilingual_label.dart",
+    "package:fitkarma/features/onboarding/domain/services/womens_health_engine.dart"
+  ]
+}

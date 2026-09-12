@@ -25,7 +25,7 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 - [x] **Phase 0 — Foundation** (Health OS Brain, AI routing layer → Groq via Edge Functions)
 - [x] **Phase 1 — Onboarding** (profiles, dosha_scores, cycle_tracking tables)
-- [ ] **Phase 2 — Daily Mission + Readiness** (readiness_scores, dip_cache)
+- [x] **Phase 2 — Daily Mission + Readiness** (readiness_scores, dip_cache)
 - [ ] **Phase 3 — AI Adaptive Coach** (coach_sessions/coach_messages, Cloud Function coach endpoint → `coach-message` Edge Function)
 - [ ] **Phase 4 — Health Tracking** (wearable_samples/biomarkers/cgm_telemetry — **blocked on the offline-sync decision in `decisions.md` ADR-002** before porting late-sync conflict resolution)
 - [ ] **Phase 5 — Smart Indian Nutrition** (recipes with pgvector, meals, grocery_price_matrix)
@@ -146,46 +146,46 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 2 — Daily Mission + Readiness
 
-- [ ] **Readiness Engine (three-tier confidence model, deterministic score formula)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Daily Briefing Screen (morning check-in ritual)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Recovery Log Screen (body soreness map)**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Recovery Operating System — Sleep Intelligence Layer**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Recovery Operating System — Recovery Capacity & Strain System**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Recovery Operating System — Recovery Behaviors & Prescriptions**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Recovery Operating System — Circadian & Environmental Intelligence**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Recovery Operating System — Recovery Age & Forecasting**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **Readiness Engine (three-tier confidence model, deterministic score formula)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Daily Briefing Screen (morning check-in ritual)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Log Screen (body soreness map)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Sleep Intelligence Layer**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Recovery Capacity & Strain System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Recovery Behaviors & Prescriptions**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Circadian & Environmental Intelligence**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Recovery Age & Forecasting**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ## Phase 3 — AI Adaptive Coach
 

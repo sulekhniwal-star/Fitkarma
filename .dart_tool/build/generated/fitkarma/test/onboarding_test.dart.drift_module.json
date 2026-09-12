@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/native.dart",
+    "package:flutter_test/flutter_test.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/metabolism/services/metabolism_engine.dart",
+    "package:fitkarma/features/onboarding/data/onboarding_repository.dart",
+    "package:fitkarma/features/onboarding/domain/models/onboarding_state.dart",
+    "package:fitkarma/features/onboarding/domain/services/bmi_calculator.dart",
+    "package:fitkarma/features/onboarding/domain/services/dosha_scoring_engine.dart",
+    "package:fitkarma/features/onboarding/domain/services/womens_health_engine.dart"
+  ]
+}

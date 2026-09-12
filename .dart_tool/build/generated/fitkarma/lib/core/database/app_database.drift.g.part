@@ -2173,6 +2173,317 @@ class LocalCycleTrackingCompanion
   }
 }
 
+class $LocalSorenessLogsTable extends LocalSorenessLogs
+    with TableInfo<$LocalSorenessLogsTable, LocalSorenessLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalSorenessLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _muscleGroupMeta =
+      const VerificationMeta('muscleGroup');
+  @override
+  late final GeneratedColumn<String> muscleGroup = GeneratedColumn<String>(
+      'muscle_group', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _severityMeta =
+      const VerificationMeta('severity');
+  @override
+  late final GeneratedColumn<int> severity = GeneratedColumn<int>(
+      'severity', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _loggedAtMeta =
+      const VerificationMeta('loggedAt');
+  @override
+  late final GeneratedColumn<DateTime> loggedAt = GeneratedColumn<DateTime>(
+      'logged_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, muscleGroup, severity, loggedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_soreness_logs';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalSorenessLog> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('muscle_group')) {
+      context.handle(
+          _muscleGroupMeta,
+          muscleGroup.isAcceptableOrUnknown(
+              data['muscle_group']!, _muscleGroupMeta));
+    } else if (isInserting) {
+      context.missing(_muscleGroupMeta);
+    }
+    if (data.containsKey('severity')) {
+      context.handle(_severityMeta,
+          severity.isAcceptableOrUnknown(data['severity']!, _severityMeta));
+    } else if (isInserting) {
+      context.missing(_severityMeta);
+    }
+    if (data.containsKey('logged_at')) {
+      context.handle(_loggedAtMeta,
+          loggedAt.isAcceptableOrUnknown(data['logged_at']!, _loggedAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalSorenessLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalSorenessLog(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      muscleGroup: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}muscle_group'])!,
+      severity: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}severity'])!,
+      loggedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}logged_at'])!,
+    );
+  }
+
+  @override
+  $LocalSorenessLogsTable createAlias(String alias) {
+    return $LocalSorenessLogsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalSorenessLog extends DataClass
+    implements Insertable<LocalSorenessLog> {
+  final String id;
+  final String userId;
+  final String muscleGroup;
+  final int severity;
+  final DateTime loggedAt;
+  const LocalSorenessLog(
+      {required this.id,
+      required this.userId,
+      required this.muscleGroup,
+      required this.severity,
+      required this.loggedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['muscle_group'] = Variable<String>(muscleGroup);
+    map['severity'] = Variable<int>(severity);
+    map['logged_at'] = Variable<DateTime>(loggedAt);
+    return map;
+  }
+
+  LocalSorenessLogsCompanion toCompanion(bool nullToAbsent) {
+    return LocalSorenessLogsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      muscleGroup: Value(muscleGroup),
+      severity: Value(severity),
+      loggedAt: Value(loggedAt),
+    );
+  }
+
+  factory LocalSorenessLog.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalSorenessLog(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      muscleGroup: serializer.fromJson<String>(json['muscleGroup']),
+      severity: serializer.fromJson<int>(json['severity']),
+      loggedAt: serializer.fromJson<DateTime>(json['loggedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'muscleGroup': serializer.toJson<String>(muscleGroup),
+      'severity': serializer.toJson<int>(severity),
+      'loggedAt': serializer.toJson<DateTime>(loggedAt),
+    };
+  }
+
+  LocalSorenessLog copyWith(
+          {String? id,
+          String? userId,
+          String? muscleGroup,
+          int? severity,
+          DateTime? loggedAt}) =>
+      LocalSorenessLog(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        muscleGroup: muscleGroup ?? this.muscleGroup,
+        severity: severity ?? this.severity,
+        loggedAt: loggedAt ?? this.loggedAt,
+      );
+  LocalSorenessLog copyWithCompanion(LocalSorenessLogsCompanion data) {
+    return LocalSorenessLog(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      muscleGroup:
+          data.muscleGroup.present ? data.muscleGroup.value : this.muscleGroup,
+      severity: data.severity.present ? data.severity.value : this.severity,
+      loggedAt: data.loggedAt.present ? data.loggedAt.value : this.loggedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalSorenessLog(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('muscleGroup: $muscleGroup, ')
+          ..write('severity: $severity, ')
+          ..write('loggedAt: $loggedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, muscleGroup, severity, loggedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalSorenessLog &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.muscleGroup == this.muscleGroup &&
+          other.severity == this.severity &&
+          other.loggedAt == this.loggedAt);
+}
+
+class LocalSorenessLogsCompanion extends UpdateCompanion<LocalSorenessLog> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> muscleGroup;
+  final Value<int> severity;
+  final Value<DateTime> loggedAt;
+  final Value<int> rowid;
+  const LocalSorenessLogsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.muscleGroup = const Value.absent(),
+    this.severity = const Value.absent(),
+    this.loggedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalSorenessLogsCompanion.insert({
+    required String id,
+    required String userId,
+    required String muscleGroup,
+    required int severity,
+    this.loggedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        muscleGroup = Value(muscleGroup),
+        severity = Value(severity);
+  static Insertable<LocalSorenessLog> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? muscleGroup,
+    Expression<int>? severity,
+    Expression<DateTime>? loggedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (muscleGroup != null) 'muscle_group': muscleGroup,
+      if (severity != null) 'severity': severity,
+      if (loggedAt != null) 'logged_at': loggedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalSorenessLogsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? muscleGroup,
+      Value<int>? severity,
+      Value<DateTime>? loggedAt,
+      Value<int>? rowid}) {
+    return LocalSorenessLogsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      muscleGroup: muscleGroup ?? this.muscleGroup,
+      severity: severity ?? this.severity,
+      loggedAt: loggedAt ?? this.loggedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (muscleGroup.present) {
+      map['muscle_group'] = Variable<String>(muscleGroup.value);
+    }
+    if (severity.present) {
+      map['severity'] = Variable<int>(severity.value);
+    }
+    if (loggedAt.present) {
+      map['logged_at'] = Variable<DateTime>(loggedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalSorenessLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('muscleGroup: $muscleGroup, ')
+          ..write('severity: $severity, ')
+          ..write('loggedAt: $loggedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2186,6 +2497,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalDoshaScoresTable(this);
   late final $LocalCycleTrackingTable localCycleTracking =
       $LocalCycleTrackingTable(this);
+  late final $LocalSorenessLogsTable localSorenessLogs =
+      $LocalSorenessLogsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2196,7 +2509,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localReadinessScores,
         localDipCache,
         localDoshaScores,
-        localCycleTracking
+        localCycleTracking,
+        localSorenessLogs
       ];
 }
 
@@ -3390,6 +3704,186 @@ typedef $$LocalCycleTrackingTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalCycleTrackingData,
     PrefetchHooks Function()>;
+typedef $$LocalSorenessLogsTableCreateCompanionBuilder
+    = LocalSorenessLogsCompanion Function({
+  required String id,
+  required String userId,
+  required String muscleGroup,
+  required int severity,
+  Value<DateTime> loggedAt,
+  Value<int> rowid,
+});
+typedef $$LocalSorenessLogsTableUpdateCompanionBuilder
+    = LocalSorenessLogsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> muscleGroup,
+  Value<int> severity,
+  Value<DateTime> loggedAt,
+  Value<int> rowid,
+});
+
+class $$LocalSorenessLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalSorenessLogsTable> {
+  $$LocalSorenessLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get muscleGroup => $composableBuilder(
+      column: $table.muscleGroup, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get severity => $composableBuilder(
+      column: $table.severity, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get loggedAt => $composableBuilder(
+      column: $table.loggedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalSorenessLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalSorenessLogsTable> {
+  $$LocalSorenessLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get muscleGroup => $composableBuilder(
+      column: $table.muscleGroup, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get severity => $composableBuilder(
+      column: $table.severity, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get loggedAt => $composableBuilder(
+      column: $table.loggedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalSorenessLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalSorenessLogsTable> {
+  $$LocalSorenessLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get muscleGroup => $composableBuilder(
+      column: $table.muscleGroup, builder: (column) => column);
+
+  GeneratedColumn<int> get severity =>
+      $composableBuilder(column: $table.severity, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get loggedAt =>
+      $composableBuilder(column: $table.loggedAt, builder: (column) => column);
+}
+
+class $$LocalSorenessLogsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalSorenessLogsTable,
+    LocalSorenessLog,
+    $$LocalSorenessLogsTableFilterComposer,
+    $$LocalSorenessLogsTableOrderingComposer,
+    $$LocalSorenessLogsTableAnnotationComposer,
+    $$LocalSorenessLogsTableCreateCompanionBuilder,
+    $$LocalSorenessLogsTableUpdateCompanionBuilder,
+    (
+      LocalSorenessLog,
+      BaseReferences<_$AppDatabase, $LocalSorenessLogsTable, LocalSorenessLog>
+    ),
+    LocalSorenessLog,
+    PrefetchHooks Function()> {
+  $$LocalSorenessLogsTableTableManager(
+      _$AppDatabase db, $LocalSorenessLogsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalSorenessLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalSorenessLogsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalSorenessLogsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> muscleGroup = const Value.absent(),
+            Value<int> severity = const Value.absent(),
+            Value<DateTime> loggedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalSorenessLogsCompanion(
+            id: id,
+            userId: userId,
+            muscleGroup: muscleGroup,
+            severity: severity,
+            loggedAt: loggedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String muscleGroup,
+            required int severity,
+            Value<DateTime> loggedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalSorenessLogsCompanion.insert(
+            id: id,
+            userId: userId,
+            muscleGroup: muscleGroup,
+            severity: severity,
+            loggedAt: loggedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalSorenessLogsTable, LocalSorenessLog>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalSorenessLogsTable,
+                        LocalSorenessLog>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalSorenessLogsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalSorenessLogsTable,
+    LocalSorenessLog,
+    $$LocalSorenessLogsTableFilterComposer,
+    $$LocalSorenessLogsTableOrderingComposer,
+    $$LocalSorenessLogsTableAnnotationComposer,
+    $$LocalSorenessLogsTableCreateCompanionBuilder,
+    $$LocalSorenessLogsTableUpdateCompanionBuilder,
+    (
+      LocalSorenessLog,
+      BaseReferences<_$AppDatabase, $LocalSorenessLogsTable, LocalSorenessLog>
+    ),
+    LocalSorenessLog,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3406,4 +3900,6 @@ class $AppDatabaseManager {
       $$LocalDoshaScoresTableTableManager(_db, _db.localDoshaScores);
   $$LocalCycleTrackingTableTableManager get localCycleTracking =>
       $$LocalCycleTrackingTableTableManager(_db, _db.localCycleTracking);
+  $$LocalSorenessLogsTableTableManager get localSorenessLogs =>
+      $$LocalSorenessLogsTableTableManager(_db, _db.localSorenessLogs);
 }

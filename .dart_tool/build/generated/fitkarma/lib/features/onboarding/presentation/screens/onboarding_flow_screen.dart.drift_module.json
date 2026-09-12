@@ -1,0 +1,19 @@
+{
+  "elements": {},
+  "imports": [
+    "package:flutter/material.dart",
+    "package:flutter_riverpod/flutter_riverpod.dart",
+    "package:fitkarma/main.dart",
+    "package:fitkarma/core/theme/app_colors.dart",
+    "package:fitkarma/core/theme/app_typography.dart",
+    "package:fitkarma/features/onboarding/data/onboarding_repository.dart",
+    "package:fitkarma/features/onboarding/domain/models/onboarding_state.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/welcome_step.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/goals_step.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/demographics_step.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/dosha_quiz_step.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/womens_health_step.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/blueprint_step.dart",
+    "package:fitkarma/features/onboarding/presentation/screens/diet_plan_results_step.dart"
+  ]
+}

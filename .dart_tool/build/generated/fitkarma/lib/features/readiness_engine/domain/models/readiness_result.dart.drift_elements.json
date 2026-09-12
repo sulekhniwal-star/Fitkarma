@@ -1,0 +1,1 @@
+{"valid_import":true,"imports":[{"uri":"package:flutter/material.dart","transitive":false},{"uri":"package:fitkarma/core/theme/app_colors.dart","transitive":false},{"uri":"package:fitkarma/features/readiness_engine/domain/models/readiness_input.dart","transitive":false}],"elements":[]}
