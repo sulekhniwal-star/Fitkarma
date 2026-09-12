@@ -1,0 +1,666 @@
+# FitKarma — TODO.md
+
+**This file is the sole working command list for AI-IDE-assisted development on this repo.** Work top to bottom, phase by phase. Do not skip ahead. Before starting any item, read `SKILL.md` for the required workflow and `FitKarma_Documentation_v2.md` for that feature's spec (`§P#-#` sections, referenced in `FitKarma_Documentation_v2.md §P0-G`).
+
+**Every feature item below expands to the same 5-step checklist (per `SKILL.md` §4):**
+1. Implement per spec section
+2. Verify offline behavior where required
+3. Add/update Firestore & Storage security rules for any new data paths
+4. **Write the feature's own `README.md`** (mandatory — see `SKILL.md` §3)
+5. Check this box off
+
+---
+
+## Phase 0 — Foundation
+
+- [x] **Design Philosophy & Anti-Patterns**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Project Structure**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Architecture Overview (offline-first, Health OS Brain)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Design Tokens**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Shared Foundation Widgets (BentoCard, ActivityRings, GlowingMetric, BilingualLabel)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Health OS Brain (Daily Intelligence Package orchestration)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Routing Layer (Groq multi-model router)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Program Evolution Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Prerequisites setup**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Adaptive Metabolism Engine (base version)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Environmental Health Layer (AQI/UV/Heat, base version)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 1 — Onboarding
+
+- [x] **Onboarding Flow Order**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Welcome Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Goals Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Demographics Screen (live BMI + adaptive targets)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Diet Plan Results Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Dosha Quiz (scoring engine)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Program Blueprint Selection Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Women's Advanced Health Layer (cycle-aware training/nutrition, fertility planning, menopause tracking, PCOS calibrator)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 2 — Daily Mission + Readiness
+
+- [x] **Readiness Engine (three-tier confidence model, deterministic score formula)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Daily Briefing Screen (morning check-in ritual)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Log Screen (body soreness map)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Sleep Intelligence Layer**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Recovery Capacity & Strain System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Recovery Behaviors & Prescriptions**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Circadian & Environmental Intelligence**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Recovery Operating System — Recovery Age & Forecasting**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 3 — AI Adaptive Coach
+
+- [x] **AI Coach Philosophy & Context Builder**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Coach Screen (local chat cache, optimistic UI)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Cloud Function coach endpoint**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Proactive event-driven insights**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Health Coach Escalation Layer (elite tier — human coach handoff)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 4 — Health Tracking
+
+- [x] **Dashboard Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Steps Screen (auto-detection & sync)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Sleep Screen (stage metrics, debt modeling)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Blood Pressure Screen (biometric-gated access)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Glucose Screen (meal correlation, HbA1c estimation)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Preventive Intelligence Engine (deterministic)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 5 — Smart Indian Nutrition
+
+- [x] **Food Screen Home**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Meal Analysis Pipeline**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **"Fix My Meal" AI Photo Analysis (vision cost optimization)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Smart Indian Meal Intelligence (offline seeded food DB, local meal-quality scoring)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Indian Restaurant Intelligence (menu OCR, chain presets)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Grocery Optimization Engine (budget-optimized flow)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Nutrition Periodization Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Protein Distribution & Timing Intelligence**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Micronutrient Intelligence Core**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Nutrition Adherence Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Festival Nutrition Adaptation**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Adaptive Hunger & Cravings Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Glycemic Response & Personal Food Scoring**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Multi-Dimensional Meal Quality Score**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Nutrition Reliability Score & Data Confidence Shield**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Satiety Prediction Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Family Nutrition Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Indian Food Substitution & Swap Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 6 — Workout System
+
+- [x] **Workout Screen Home**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Active Workout Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Progressive Overload Engine (deterministic)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Dynamic Fitness Blueprint Generator**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Movement Intelligence Platform**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Confidence Indices**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Smart Programming & Overload Logic**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Adherence & Athletic Profiling**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Training Operating System — Biomechanics & Trajectory Projections**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Adaptive Computer Vision Loop (pose estimation form-checking)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 7 — Gamification
+
+- [x] **Karma System Design**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Karma Hub Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Habit Automation System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Adherence Score**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Benchmarking Engine (fitness percentile)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Demographic Cohort Insights & Network Effects**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 8 — Transformation Journey
+
+- [x] **Transformation Journey Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Transformation Timeline Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Habit Identity Layer (behavior science)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 9 — Social
+
+- [x] **Social Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Squad System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Accountability Communities**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Family Health Hub**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Activity Feed & Sharing Architecture**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Local Geolocation Clubs & Interest Circles**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Weekly/Monthly Leaderboards**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 10 — Predictive & Clinical Health
+
+- [x] **Health Risk Prevention System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Biological Age Estimation (monthly, deterministic)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Monthly Health Report**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Injury Risk Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Stress Detection Engine (inferred)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Clinical Report Intelligence (lab data parsing)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Longevity Score**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Continuous Biomarker (CGM) Sync**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Medication Tracker & Interaction Warning Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Doctor Sharing Portal**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Regulatory & Clinical Compliance Framework**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Retrospective Glycemic Processing Pipeline**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 11 — Visual Body Analytics
+
+- [x] **Body Analytics Screen**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Progress Photo System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Wearable-Free Body Composition Estimation**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 12 — Festival & Life Events
+
+- [x] **Festival Intelligence System**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Life Events Engine**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Wedding Transformation Mode**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **AI Roast Mode**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Travel Intelligence (Travel Mode)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Smart Calendar Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 13 — Monetisation
+
+- [x] **Subscription Tiers (server-side entitlement verification)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Creator & Coach Marketplace**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Creator Affiliate Program**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 14 — Enterprise Hardening
+
+- [x] **Security (Firestore/Storage rules audit, App Check, secrets management)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Performance**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Testing Strategy**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **CI/CD Pipeline**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 15 — Advanced Intelligence
+
+- [x] **Adaptive Metabolism Engine (deepened)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Longevity Score (deepened)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Environmental Health Layer (deepened)**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+## Phase 16 — India Growth & Trust Layer
+
+- [x] **WhatsApp Business Logging**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Vernacular Voice Logging**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **ABHA Health ID Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Corporate Wellness & Insurer Tier**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Grocery Vendor Checkout Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] Security rules updated (if new data paths)
+    - [x] `README.md` written for this feature
+
+---
+
+## Cross-cutting (ongoing, not a phase)
+
+- [x] Keep `README.md` (project root) in sync as features land
+- [x] Keep `FitKarma_Documentation_v2.md` updated if a feature's implementation deviates from spec
+- [x] DPDP-compliant cascading deletion (`deleteUserData` Cloud Function) covers every new collection added
