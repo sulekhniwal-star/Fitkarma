@@ -45,656 +45,656 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 0 — Foundation
 
-- [x] **Design Philosophy & Anti-Patterns**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Project Structure**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Architecture Overview (offline-first, Health OS Brain)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Design Tokens**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Shared Foundation Widgets (BentoCard, ActivityRings, GlowingMetric, BilingualLabel)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Health OS Brain (Daily Intelligence Package orchestration)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **AI Routing Layer (Groq multi-model router)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Program Evolution Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Prerequisites setup**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Adaptive Metabolism Engine (base version)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Environmental Health Layer (AQI/UV/Heat, base version)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Design Philosophy & Anti-Patterns**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Project Structure**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Architecture Overview (offline-first, Health OS Brain)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Design Tokens**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Shared Foundation Widgets (BentoCard, ActivityRings, GlowingMetric, BilingualLabel)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Health OS Brain (Daily Intelligence Package orchestration)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **AI Routing Layer (Groq multi-model router)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Program Evolution Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Prerequisites setup**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Adaptive Metabolism Engine (base version)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Environmental Health Layer (AQI/UV/Heat, base version)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 1 — Onboarding
 
-- [x] **Onboarding Flow Order**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Welcome Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Goals Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Demographics Screen (live BMI + adaptive targets)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **AI Diet Plan Results Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Dosha Quiz (scoring engine)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Program Blueprint Selection Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Women's Advanced Health Layer (cycle-aware training/nutrition, fertility planning, menopause tracking, PCOS calibrator)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Onboarding Flow Order**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Welcome Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Goals Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Demographics Screen (live BMI + adaptive targets)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **AI Diet Plan Results Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Dosha Quiz (scoring engine)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Program Blueprint Selection Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Women's Advanced Health Layer (cycle-aware training/nutrition, fertility planning, menopause tracking, PCOS calibrator)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 2 — Daily Mission + Readiness
 
-- [x] **Readiness Engine (three-tier confidence model, deterministic score formula)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Daily Briefing Screen (morning check-in ritual)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Recovery Log Screen (body soreness map)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Recovery Operating System — Sleep Intelligence Layer**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Recovery Operating System — Recovery Capacity & Strain System**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Recovery Operating System — Recovery Behaviors & Prescriptions**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Recovery Operating System — Circadian & Environmental Intelligence**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Recovery Operating System — Recovery Age & Forecasting**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Readiness Engine (three-tier confidence model, deterministic score formula)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Daily Briefing Screen (morning check-in ritual)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Recovery Log Screen (body soreness map)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Recovery Operating System — Sleep Intelligence Layer**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Recovery Operating System — Recovery Capacity & Strain System**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Recovery Operating System — Recovery Behaviors & Prescriptions**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Recovery Operating System — Circadian & Environmental Intelligence**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Recovery Operating System — Recovery Age & Forecasting**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 3 — AI Adaptive Coach
 
-- [x] **AI Coach Philosophy & Context Builder**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **AI Coach Screen (local chat cache, optimistic UI)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Cloud Function coach endpoint**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Proactive event-driven insights**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Health Coach Escalation Layer (elite tier — human coach handoff)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **AI Coach Philosophy & Context Builder**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **AI Coach Screen (local chat cache, optimistic UI)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Cloud Function coach endpoint**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Proactive event-driven insights**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Health Coach Escalation Layer (elite tier — human coach handoff)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 4 — Health Tracking
 
-- [x] **Dashboard Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Steps Screen (auto-detection & sync)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Sleep Screen (stage metrics, debt modeling)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Blood Pressure Screen (biometric-gated access)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Glucose Screen (meal correlation, HbA1c estimation)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Preventive Intelligence Engine (deterministic)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Dashboard Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Steps Screen (auto-detection & sync)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Sleep Screen (stage metrics, debt modeling)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Blood Pressure Screen (biometric-gated access)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Glucose Screen (meal correlation, HbA1c estimation)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Preventive Intelligence Engine (deterministic)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Smart Wearable Comparison Layer (device confidence matrix, late-sync merge rules)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 5 — Smart Indian Nutrition
 
-- [x] **Food Screen Home**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Meal Analysis Pipeline**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **"Fix My Meal" AI Photo Analysis (vision cost optimization)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Smart Indian Meal Intelligence (offline seeded food DB, local meal-quality scoring)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Indian Restaurant Intelligence (menu OCR, chain presets)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Grocery Optimization Engine (budget-optimized flow)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Nutrition Periodization Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Protein Distribution & Timing Intelligence**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Micronutrient Intelligence Core**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Nutrition Adherence Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Festival Nutrition Adaptation**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Adaptive Hunger & Cravings Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Glycemic Response & Personal Food Scoring**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Multi-Dimensional Meal Quality Score**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Nutrition Reliability Score & Data Confidence Shield**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Satiety Prediction Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Family Nutrition Integration**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Indian Food Substitution & Swap Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Food Screen Home**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Meal Analysis Pipeline**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **"Fix My Meal" AI Photo Analysis (vision cost optimization)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Smart Indian Meal Intelligence (offline seeded food DB, local meal-quality scoring)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Indian Restaurant Intelligence (menu OCR, chain presets)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Grocery Optimization Engine (budget-optimized flow)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Nutrition Periodization Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Protein Distribution & Timing Intelligence**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Micronutrient Intelligence Core**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Nutrition Adherence Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Festival Nutrition Adaptation**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Adaptive Hunger & Cravings Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Glycemic Response & Personal Food Scoring**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Multi-Dimensional Meal Quality Score**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Nutrition Reliability Score & Data Confidence Shield**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Satiety Prediction Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Family Nutrition Integration**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Indian Food Substitution & Swap Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 6 — Workout System
 
-- [x] **Workout Screen Home**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Active Workout Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Progressive Overload Engine (deterministic)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Dynamic Fitness Blueprint Generator**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Training Operating System — Movement Intelligence Platform**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Training Operating System — Confidence Indices**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Training Operating System — Smart Programming & Overload Logic**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Training Operating System — Adherence & Athletic Profiling**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Training Operating System — Biomechanics & Trajectory Projections**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Adaptive Computer Vision Loop (pose estimation form-checking)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Workout Screen Home**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Active Workout Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Progressive Overload Engine (deterministic)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Dynamic Fitness Blueprint Generator**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Training Operating System — Movement Intelligence Platform**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Training Operating System — Confidence Indices**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Training Operating System — Smart Programming & Overload Logic**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Training Operating System — Adherence & Athletic Profiling**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Training Operating System — Biomechanics & Trajectory Projections**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Adaptive Computer Vision Loop (pose estimation form-checking)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 7 — Gamification
 
-- [x] **Karma System Design**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Karma Hub Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Habit Automation System**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Adherence Score**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Benchmarking Engine (fitness percentile)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Demographic Cohort Insights & Network Effects**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Karma System Design**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Karma Hub Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Habit Automation System**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Adherence Score**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Benchmarking Engine (fitness percentile)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Demographic Cohort Insights & Network Effects**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 8 — Transformation Journey
 
-- [x] **Transformation Journey Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Transformation Timeline Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Habit Identity Layer (behavior science)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Transformation Journey Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Transformation Timeline Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Habit Identity Layer (behavior science)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 9 — Social
 
-- [x] **Social Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Squad System**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Accountability Communities**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Family Health Hub**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Activity Feed & Sharing Architecture**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Local Geolocation Clubs & Interest Circles**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Weekly/Monthly Leaderboards**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Social Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Squad System**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Accountability Communities**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Family Health Hub**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Activity Feed & Sharing Architecture**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Local Geolocation Clubs & Interest Circles**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Weekly/Monthly Leaderboards**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 10 — Predictive & Clinical Health
 
-- [x] **Health Risk Prevention System**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Biological Age Estimation (monthly, deterministic)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Monthly Health Report**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Injury Risk Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Stress Detection Engine (inferred)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Clinical Report Intelligence (lab data parsing)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Longevity Score**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Continuous Biomarker (CGM) Sync**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Medication Tracker & Interaction Warning Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Doctor Sharing Portal**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Regulatory & Clinical Compliance Framework**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Retrospective Glycemic Processing Pipeline**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Health Risk Prevention System**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Biological Age Estimation (monthly, deterministic)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Monthly Health Report**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Injury Risk Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Stress Detection Engine (inferred)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Clinical Report Intelligence (lab data parsing)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Longevity Score**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Continuous Biomarker (CGM) Sync**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Medication Tracker & Interaction Warning Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Doctor Sharing Portal**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Regulatory & Clinical Compliance Framework**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Retrospective Glycemic Processing Pipeline**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 11 — Visual Body Analytics
 
-- [x] **Body Analytics Screen**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Progress Photo System**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Wearable-Free Body Composition Estimation**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Body Analytics Screen**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Progress Photo System**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Wearable-Free Body Composition Estimation**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 12 — Festival & Life Events
 
-- [x] **Festival Intelligence System**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Life Events Engine**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Wedding Transformation Mode**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **AI Roast Mode**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Travel Intelligence (Travel Mode)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Smart Calendar Integration**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Festival Intelligence System**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Life Events Engine**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Wedding Transformation Mode**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **AI Roast Mode**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Travel Intelligence (Travel Mode)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Smart Calendar Integration**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 13 — Monetisation
 
-- [x] **Subscription Tiers (server-side entitlement verification)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Creator & Coach Marketplace**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Creator Affiliate Program**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Subscription Tiers (server-side entitlement verification)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Creator & Coach Marketplace**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Creator Affiliate Program**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 14 — Enterprise Hardening
 
-- [x] **Security (Firestore/Storage rules audit, App Check, secrets management)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Performance**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Testing Strategy**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **CI/CD Pipeline**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Security (Firestore/Storage rules audit, App Check, secrets management)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Performance**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Testing Strategy**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **CI/CD Pipeline**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 15 — Advanced Intelligence
 
-- [x] **Adaptive Metabolism Engine (deepened)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Longevity Score (deepened)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Environmental Health Layer (deepened)**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **Adaptive Metabolism Engine (deepened)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Longevity Score (deepened)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Environmental Health Layer (deepened)**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ## Phase 16 — India Growth & Trust Layer
 
-- [x] **WhatsApp Business Logging**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Vernacular Voice Logging**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **ABHA Health ID Integration**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Corporate Wellness & Insurer Tier**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
-- [x] **Grocery Vendor Checkout Integration**
-    - [x] Implement
-    - [x] Offline-verified
-    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [x] `README.md` written for this feature
+- [ ] **WhatsApp Business Logging**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Vernacular Voice Logging**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **ABHA Health ID Integration**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Corporate Wellness & Insurer Tier**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
+- [ ] **Grocery Vendor Checkout Integration**
+    - [ ] Implement
+    - [ ] Offline-verified
+    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [ ] `README.md` written for this feature
 
 ---
 
 ## Cross-cutting (ongoing, not a phase)
 
-- [x] Keep `README.md` (project root) in sync as features land
-- [x] Keep the doc suite (`architechture.md`, `data_model.md`, etc.) updated if a feature's implementation deviates from spec — log the deviation in `decisions.md` too
+- [ ] Keep `README.md` (project root) in sync as features land
+- [ ] Keep the doc suite (`architechture.md`, `data_model.md`, etc.) updated if a feature's implementation deviates from spec — log the deviation in `decisions.md` too
 - [ ] DPDP-compliant cascading deletion — **port `deleteUserData` Cloud Function to the `delete_user_data` Edge Function** (see `api_contract.md` §5, `security.md` §5) and confirm it covers every table in `data_model.md`, not just the original Firestore collection list
 - [ ] Add RLS pgTAP coverage for every table as it's ported (see `tedting.md` §1.3) — not previously required under Firestore rules, now part of "done"
 - [ ] Update `github_actions.md`-defined CI workflows in the actual repo (`supabase-migrate.yml`, `edge-functions-deploy.yml`, `rls-test.yml`) as each phase is ported, retiring the equivalent `firebase deploy` steps once nothing depends on them
