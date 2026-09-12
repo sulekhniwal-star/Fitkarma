@@ -1,6 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:fitkarma/features/predictive_health/domain/models/predictive_health_models.dart"
-  ]
-}

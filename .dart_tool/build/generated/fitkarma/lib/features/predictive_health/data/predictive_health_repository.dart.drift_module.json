@@ -1,0 +1,15 @@
+{
+  "elements": {},
+  "imports": [
+    "package:drift/drift.dart",
+    "package:fitkarma/core/database/app_database.dart",
+    "package:fitkarma/core/sync/outbox_sync_worker.dart",
+    "package:fitkarma/features/predictive_health/domain/models/predictive_health_models.dart",
+    "package:fitkarma/features/predictive_health/domain/services/biological_age_engine.dart",
+    "package:fitkarma/features/predictive_health/domain/services/cardiometabolic_risk_engine.dart",
+    "package:fitkarma/features/predictive_health/domain/services/clinical_lab_intelligence_engine.dart",
+    "package:fitkarma/features/predictive_health/domain/services/injury_risk_engine.dart",
+    "package:fitkarma/features/predictive_health/domain/services/medication_safety_engine.dart",
+    "package:fitkarma/features/predictive_health/domain/services/stress_detection_engine.dart"
+  ]
+}

@@ -13629,6 +13629,1028 @@ class LocalDoctorGrantsCompanion extends UpdateCompanion<LocalDoctorGrant> {
   }
 }
 
+class $LocalProgressPhotosTable extends LocalProgressPhotos
+    with TableInfo<$LocalProgressPhotosTable, LocalProgressPhoto> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalProgressPhotosTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _poseTypeMeta =
+      const VerificationMeta('poseType');
+  @override
+  late final GeneratedColumn<String> poseType = GeneratedColumn<String>(
+      'pose_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _localFilePathMeta =
+      const VerificationMeta('localFilePath');
+  @override
+  late final GeneratedColumn<String> localFilePath = GeneratedColumn<String>(
+      'local_file_path', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _poseConfidenceMeta =
+      const VerificationMeta('poseConfidence');
+  @override
+  late final GeneratedColumn<double> poseConfidence = GeneratedColumn<double>(
+      'pose_confidence', aliasedName, false,
+      type: DriftSqlType.double,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(1.0));
+  static const VerificationMeta _recordedAtMeta =
+      const VerificationMeta('recordedAt');
+  @override
+  late final GeneratedColumn<DateTime> recordedAt = GeneratedColumn<DateTime>(
+      'recorded_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        poseType,
+        localFilePath,
+        poseConfidence,
+        recordedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_progress_photos';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalProgressPhoto> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('pose_type')) {
+      context.handle(_poseTypeMeta,
+          poseType.isAcceptableOrUnknown(data['pose_type']!, _poseTypeMeta));
+    } else if (isInserting) {
+      context.missing(_poseTypeMeta);
+    }
+    if (data.containsKey('local_file_path')) {
+      context.handle(
+          _localFilePathMeta,
+          localFilePath.isAcceptableOrUnknown(
+              data['local_file_path']!, _localFilePathMeta));
+    } else if (isInserting) {
+      context.missing(_localFilePathMeta);
+    }
+    if (data.containsKey('pose_confidence')) {
+      context.handle(
+          _poseConfidenceMeta,
+          poseConfidence.isAcceptableOrUnknown(
+              data['pose_confidence']!, _poseConfidenceMeta));
+    }
+    if (data.containsKey('recorded_at')) {
+      context.handle(
+          _recordedAtMeta,
+          recordedAt.isAcceptableOrUnknown(
+              data['recorded_at']!, _recordedAtMeta));
+    } else if (isInserting) {
+      context.missing(_recordedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalProgressPhoto map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalProgressPhoto(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      poseType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}pose_type'])!,
+      localFilePath: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}local_file_path'])!,
+      poseConfidence: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}pose_confidence'])!,
+      recordedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}recorded_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalProgressPhotosTable createAlias(String alias) {
+    return $LocalProgressPhotosTable(attachedDatabase, alias);
+  }
+}
+
+class LocalProgressPhoto extends DataClass
+    implements Insertable<LocalProgressPhoto> {
+  final String id;
+  final String userId;
+  final String poseType;
+  final String localFilePath;
+  final double poseConfidence;
+  final DateTime recordedAt;
+  final DateTime createdAt;
+  const LocalProgressPhoto(
+      {required this.id,
+      required this.userId,
+      required this.poseType,
+      required this.localFilePath,
+      required this.poseConfidence,
+      required this.recordedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['pose_type'] = Variable<String>(poseType);
+    map['local_file_path'] = Variable<String>(localFilePath);
+    map['pose_confidence'] = Variable<double>(poseConfidence);
+    map['recorded_at'] = Variable<DateTime>(recordedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalProgressPhotosCompanion toCompanion(bool nullToAbsent) {
+    return LocalProgressPhotosCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      poseType: Value(poseType),
+      localFilePath: Value(localFilePath),
+      poseConfidence: Value(poseConfidence),
+      recordedAt: Value(recordedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalProgressPhoto.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalProgressPhoto(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      poseType: serializer.fromJson<String>(json['poseType']),
+      localFilePath: serializer.fromJson<String>(json['localFilePath']),
+      poseConfidence: serializer.fromJson<double>(json['poseConfidence']),
+      recordedAt: serializer.fromJson<DateTime>(json['recordedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'poseType': serializer.toJson<String>(poseType),
+      'localFilePath': serializer.toJson<String>(localFilePath),
+      'poseConfidence': serializer.toJson<double>(poseConfidence),
+      'recordedAt': serializer.toJson<DateTime>(recordedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalProgressPhoto copyWith(
+          {String? id,
+          String? userId,
+          String? poseType,
+          String? localFilePath,
+          double? poseConfidence,
+          DateTime? recordedAt,
+          DateTime? createdAt}) =>
+      LocalProgressPhoto(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        poseType: poseType ?? this.poseType,
+        localFilePath: localFilePath ?? this.localFilePath,
+        poseConfidence: poseConfidence ?? this.poseConfidence,
+        recordedAt: recordedAt ?? this.recordedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalProgressPhoto copyWithCompanion(LocalProgressPhotosCompanion data) {
+    return LocalProgressPhoto(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      poseType: data.poseType.present ? data.poseType.value : this.poseType,
+      localFilePath: data.localFilePath.present
+          ? data.localFilePath.value
+          : this.localFilePath,
+      poseConfidence: data.poseConfidence.present
+          ? data.poseConfidence.value
+          : this.poseConfidence,
+      recordedAt:
+          data.recordedAt.present ? data.recordedAt.value : this.recordedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalProgressPhoto(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('poseType: $poseType, ')
+          ..write('localFilePath: $localFilePath, ')
+          ..write('poseConfidence: $poseConfidence, ')
+          ..write('recordedAt: $recordedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, userId, poseType, localFilePath,
+      poseConfidence, recordedAt, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalProgressPhoto &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.poseType == this.poseType &&
+          other.localFilePath == this.localFilePath &&
+          other.poseConfidence == this.poseConfidence &&
+          other.recordedAt == this.recordedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalProgressPhotosCompanion extends UpdateCompanion<LocalProgressPhoto> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> poseType;
+  final Value<String> localFilePath;
+  final Value<double> poseConfidence;
+  final Value<DateTime> recordedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalProgressPhotosCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.poseType = const Value.absent(),
+    this.localFilePath = const Value.absent(),
+    this.poseConfidence = const Value.absent(),
+    this.recordedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalProgressPhotosCompanion.insert({
+    required String id,
+    required String userId,
+    required String poseType,
+    required String localFilePath,
+    this.poseConfidence = const Value.absent(),
+    required DateTime recordedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        poseType = Value(poseType),
+        localFilePath = Value(localFilePath),
+        recordedAt = Value(recordedAt);
+  static Insertable<LocalProgressPhoto> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? poseType,
+    Expression<String>? localFilePath,
+    Expression<double>? poseConfidence,
+    Expression<DateTime>? recordedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (poseType != null) 'pose_type': poseType,
+      if (localFilePath != null) 'local_file_path': localFilePath,
+      if (poseConfidence != null) 'pose_confidence': poseConfidence,
+      if (recordedAt != null) 'recorded_at': recordedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalProgressPhotosCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? poseType,
+      Value<String>? localFilePath,
+      Value<double>? poseConfidence,
+      Value<DateTime>? recordedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalProgressPhotosCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      poseType: poseType ?? this.poseType,
+      localFilePath: localFilePath ?? this.localFilePath,
+      poseConfidence: poseConfidence ?? this.poseConfidence,
+      recordedAt: recordedAt ?? this.recordedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (poseType.present) {
+      map['pose_type'] = Variable<String>(poseType.value);
+    }
+    if (localFilePath.present) {
+      map['local_file_path'] = Variable<String>(localFilePath.value);
+    }
+    if (poseConfidence.present) {
+      map['pose_confidence'] = Variable<double>(poseConfidence.value);
+    }
+    if (recordedAt.present) {
+      map['recorded_at'] = Variable<DateTime>(recordedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalProgressPhotosCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('poseType: $poseType, ')
+          ..write('localFilePath: $localFilePath, ')
+          ..write('poseConfidence: $poseConfidence, ')
+          ..write('recordedAt: $recordedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalBodyCompositionSnapshotsTable extends LocalBodyCompositionSnapshots
+    with
+        TableInfo<$LocalBodyCompositionSnapshotsTable,
+            LocalBodyCompositionSnapshot> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalBodyCompositionSnapshotsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _bodyFatPctMeta =
+      const VerificationMeta('bodyFatPct');
+  @override
+  late final GeneratedColumn<double> bodyFatPct = GeneratedColumn<double>(
+      'body_fat_pct', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _leanMassKgMeta =
+      const VerificationMeta('leanMassKg');
+  @override
+  late final GeneratedColumn<double> leanMassKg = GeneratedColumn<double>(
+      'lean_mass_kg', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _fatMassKgMeta =
+      const VerificationMeta('fatMassKg');
+  @override
+  late final GeneratedColumn<double> fatMassKg = GeneratedColumn<double>(
+      'fat_mass_kg', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _totalWeightKgMeta =
+      const VerificationMeta('totalWeightKg');
+  @override
+  late final GeneratedColumn<double> totalWeightKg = GeneratedColumn<double>(
+      'total_weight_kg', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _waistToHeightRatioMeta =
+      const VerificationMeta('waistToHeightRatio');
+  @override
+  late final GeneratedColumn<double> waistToHeightRatio =
+      GeneratedColumn<double>('waist_to_height_ratio', aliasedName, false,
+          type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _ffmiMeta = const VerificationMeta('ffmi');
+  @override
+  late final GeneratedColumn<double> ffmi = GeneratedColumn<double>(
+      'ffmi', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _insightMeta =
+      const VerificationMeta('insight');
+  @override
+  late final GeneratedColumn<String> insight = GeneratedColumn<String>(
+      'insight', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _insightHindiMeta =
+      const VerificationMeta('insightHindi');
+  @override
+  late final GeneratedColumn<String> insightHindi = GeneratedColumn<String>(
+      'insight_hindi', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _calculatedAtMeta =
+      const VerificationMeta('calculatedAt');
+  @override
+  late final GeneratedColumn<DateTime> calculatedAt = GeneratedColumn<DateTime>(
+      'calculated_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        bodyFatPct,
+        leanMassKg,
+        fatMassKg,
+        totalWeightKg,
+        waistToHeightRatio,
+        ffmi,
+        insight,
+        insightHindi,
+        calculatedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_body_composition_snapshots';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalBodyCompositionSnapshot> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('body_fat_pct')) {
+      context.handle(
+          _bodyFatPctMeta,
+          bodyFatPct.isAcceptableOrUnknown(
+              data['body_fat_pct']!, _bodyFatPctMeta));
+    } else if (isInserting) {
+      context.missing(_bodyFatPctMeta);
+    }
+    if (data.containsKey('lean_mass_kg')) {
+      context.handle(
+          _leanMassKgMeta,
+          leanMassKg.isAcceptableOrUnknown(
+              data['lean_mass_kg']!, _leanMassKgMeta));
+    } else if (isInserting) {
+      context.missing(_leanMassKgMeta);
+    }
+    if (data.containsKey('fat_mass_kg')) {
+      context.handle(
+          _fatMassKgMeta,
+          fatMassKg.isAcceptableOrUnknown(
+              data['fat_mass_kg']!, _fatMassKgMeta));
+    } else if (isInserting) {
+      context.missing(_fatMassKgMeta);
+    }
+    if (data.containsKey('total_weight_kg')) {
+      context.handle(
+          _totalWeightKgMeta,
+          totalWeightKg.isAcceptableOrUnknown(
+              data['total_weight_kg']!, _totalWeightKgMeta));
+    } else if (isInserting) {
+      context.missing(_totalWeightKgMeta);
+    }
+    if (data.containsKey('waist_to_height_ratio')) {
+      context.handle(
+          _waistToHeightRatioMeta,
+          waistToHeightRatio.isAcceptableOrUnknown(
+              data['waist_to_height_ratio']!, _waistToHeightRatioMeta));
+    } else if (isInserting) {
+      context.missing(_waistToHeightRatioMeta);
+    }
+    if (data.containsKey('ffmi')) {
+      context.handle(
+          _ffmiMeta, ffmi.isAcceptableOrUnknown(data['ffmi']!, _ffmiMeta));
+    } else if (isInserting) {
+      context.missing(_ffmiMeta);
+    }
+    if (data.containsKey('insight')) {
+      context.handle(_insightMeta,
+          insight.isAcceptableOrUnknown(data['insight']!, _insightMeta));
+    } else if (isInserting) {
+      context.missing(_insightMeta);
+    }
+    if (data.containsKey('insight_hindi')) {
+      context.handle(
+          _insightHindiMeta,
+          insightHindi.isAcceptableOrUnknown(
+              data['insight_hindi']!, _insightHindiMeta));
+    } else if (isInserting) {
+      context.missing(_insightHindiMeta);
+    }
+    if (data.containsKey('calculated_at')) {
+      context.handle(
+          _calculatedAtMeta,
+          calculatedAt.isAcceptableOrUnknown(
+              data['calculated_at']!, _calculatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_calculatedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalBodyCompositionSnapshot map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalBodyCompositionSnapshot(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      bodyFatPct: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}body_fat_pct'])!,
+      leanMassKg: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}lean_mass_kg'])!,
+      fatMassKg: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}fat_mass_kg'])!,
+      totalWeightKg: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}total_weight_kg'])!,
+      waistToHeightRatio: attachedDatabase.typeMapping.read(DriftSqlType.double,
+          data['${effectivePrefix}waist_to_height_ratio'])!,
+      ffmi: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}ffmi'])!,
+      insight: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}insight'])!,
+      insightHindi: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}insight_hindi'])!,
+      calculatedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}calculated_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalBodyCompositionSnapshotsTable createAlias(String alias) {
+    return $LocalBodyCompositionSnapshotsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalBodyCompositionSnapshot extends DataClass
+    implements Insertable<LocalBodyCompositionSnapshot> {
+  final String id;
+  final String userId;
+  final double bodyFatPct;
+  final double leanMassKg;
+  final double fatMassKg;
+  final double totalWeightKg;
+  final double waistToHeightRatio;
+  final double ffmi;
+  final String insight;
+  final String insightHindi;
+  final DateTime calculatedAt;
+  final DateTime createdAt;
+  const LocalBodyCompositionSnapshot(
+      {required this.id,
+      required this.userId,
+      required this.bodyFatPct,
+      required this.leanMassKg,
+      required this.fatMassKg,
+      required this.totalWeightKg,
+      required this.waistToHeightRatio,
+      required this.ffmi,
+      required this.insight,
+      required this.insightHindi,
+      required this.calculatedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['body_fat_pct'] = Variable<double>(bodyFatPct);
+    map['lean_mass_kg'] = Variable<double>(leanMassKg);
+    map['fat_mass_kg'] = Variable<double>(fatMassKg);
+    map['total_weight_kg'] = Variable<double>(totalWeightKg);
+    map['waist_to_height_ratio'] = Variable<double>(waistToHeightRatio);
+    map['ffmi'] = Variable<double>(ffmi);
+    map['insight'] = Variable<String>(insight);
+    map['insight_hindi'] = Variable<String>(insightHindi);
+    map['calculated_at'] = Variable<DateTime>(calculatedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalBodyCompositionSnapshotsCompanion toCompanion(bool nullToAbsent) {
+    return LocalBodyCompositionSnapshotsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      bodyFatPct: Value(bodyFatPct),
+      leanMassKg: Value(leanMassKg),
+      fatMassKg: Value(fatMassKg),
+      totalWeightKg: Value(totalWeightKg),
+      waistToHeightRatio: Value(waistToHeightRatio),
+      ffmi: Value(ffmi),
+      insight: Value(insight),
+      insightHindi: Value(insightHindi),
+      calculatedAt: Value(calculatedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalBodyCompositionSnapshot.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalBodyCompositionSnapshot(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      bodyFatPct: serializer.fromJson<double>(json['bodyFatPct']),
+      leanMassKg: serializer.fromJson<double>(json['leanMassKg']),
+      fatMassKg: serializer.fromJson<double>(json['fatMassKg']),
+      totalWeightKg: serializer.fromJson<double>(json['totalWeightKg']),
+      waistToHeightRatio:
+          serializer.fromJson<double>(json['waistToHeightRatio']),
+      ffmi: serializer.fromJson<double>(json['ffmi']),
+      insight: serializer.fromJson<String>(json['insight']),
+      insightHindi: serializer.fromJson<String>(json['insightHindi']),
+      calculatedAt: serializer.fromJson<DateTime>(json['calculatedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'bodyFatPct': serializer.toJson<double>(bodyFatPct),
+      'leanMassKg': serializer.toJson<double>(leanMassKg),
+      'fatMassKg': serializer.toJson<double>(fatMassKg),
+      'totalWeightKg': serializer.toJson<double>(totalWeightKg),
+      'waistToHeightRatio': serializer.toJson<double>(waistToHeightRatio),
+      'ffmi': serializer.toJson<double>(ffmi),
+      'insight': serializer.toJson<String>(insight),
+      'insightHindi': serializer.toJson<String>(insightHindi),
+      'calculatedAt': serializer.toJson<DateTime>(calculatedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalBodyCompositionSnapshot copyWith(
+          {String? id,
+          String? userId,
+          double? bodyFatPct,
+          double? leanMassKg,
+          double? fatMassKg,
+          double? totalWeightKg,
+          double? waistToHeightRatio,
+          double? ffmi,
+          String? insight,
+          String? insightHindi,
+          DateTime? calculatedAt,
+          DateTime? createdAt}) =>
+      LocalBodyCompositionSnapshot(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        bodyFatPct: bodyFatPct ?? this.bodyFatPct,
+        leanMassKg: leanMassKg ?? this.leanMassKg,
+        fatMassKg: fatMassKg ?? this.fatMassKg,
+        totalWeightKg: totalWeightKg ?? this.totalWeightKg,
+        waistToHeightRatio: waistToHeightRatio ?? this.waistToHeightRatio,
+        ffmi: ffmi ?? this.ffmi,
+        insight: insight ?? this.insight,
+        insightHindi: insightHindi ?? this.insightHindi,
+        calculatedAt: calculatedAt ?? this.calculatedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalBodyCompositionSnapshot copyWithCompanion(
+      LocalBodyCompositionSnapshotsCompanion data) {
+    return LocalBodyCompositionSnapshot(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      bodyFatPct:
+          data.bodyFatPct.present ? data.bodyFatPct.value : this.bodyFatPct,
+      leanMassKg:
+          data.leanMassKg.present ? data.leanMassKg.value : this.leanMassKg,
+      fatMassKg: data.fatMassKg.present ? data.fatMassKg.value : this.fatMassKg,
+      totalWeightKg: data.totalWeightKg.present
+          ? data.totalWeightKg.value
+          : this.totalWeightKg,
+      waistToHeightRatio: data.waistToHeightRatio.present
+          ? data.waistToHeightRatio.value
+          : this.waistToHeightRatio,
+      ffmi: data.ffmi.present ? data.ffmi.value : this.ffmi,
+      insight: data.insight.present ? data.insight.value : this.insight,
+      insightHindi: data.insightHindi.present
+          ? data.insightHindi.value
+          : this.insightHindi,
+      calculatedAt: data.calculatedAt.present
+          ? data.calculatedAt.value
+          : this.calculatedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBodyCompositionSnapshot(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('bodyFatPct: $bodyFatPct, ')
+          ..write('leanMassKg: $leanMassKg, ')
+          ..write('fatMassKg: $fatMassKg, ')
+          ..write('totalWeightKg: $totalWeightKg, ')
+          ..write('waistToHeightRatio: $waistToHeightRatio, ')
+          ..write('ffmi: $ffmi, ')
+          ..write('insight: $insight, ')
+          ..write('insightHindi: $insightHindi, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      userId,
+      bodyFatPct,
+      leanMassKg,
+      fatMassKg,
+      totalWeightKg,
+      waistToHeightRatio,
+      ffmi,
+      insight,
+      insightHindi,
+      calculatedAt,
+      createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalBodyCompositionSnapshot &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.bodyFatPct == this.bodyFatPct &&
+          other.leanMassKg == this.leanMassKg &&
+          other.fatMassKg == this.fatMassKg &&
+          other.totalWeightKg == this.totalWeightKg &&
+          other.waistToHeightRatio == this.waistToHeightRatio &&
+          other.ffmi == this.ffmi &&
+          other.insight == this.insight &&
+          other.insightHindi == this.insightHindi &&
+          other.calculatedAt == this.calculatedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalBodyCompositionSnapshotsCompanion
+    extends UpdateCompanion<LocalBodyCompositionSnapshot> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<double> bodyFatPct;
+  final Value<double> leanMassKg;
+  final Value<double> fatMassKg;
+  final Value<double> totalWeightKg;
+  final Value<double> waistToHeightRatio;
+  final Value<double> ffmi;
+  final Value<String> insight;
+  final Value<String> insightHindi;
+  final Value<DateTime> calculatedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalBodyCompositionSnapshotsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.bodyFatPct = const Value.absent(),
+    this.leanMassKg = const Value.absent(),
+    this.fatMassKg = const Value.absent(),
+    this.totalWeightKg = const Value.absent(),
+    this.waistToHeightRatio = const Value.absent(),
+    this.ffmi = const Value.absent(),
+    this.insight = const Value.absent(),
+    this.insightHindi = const Value.absent(),
+    this.calculatedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalBodyCompositionSnapshotsCompanion.insert({
+    required String id,
+    required String userId,
+    required double bodyFatPct,
+    required double leanMassKg,
+    required double fatMassKg,
+    required double totalWeightKg,
+    required double waistToHeightRatio,
+    required double ffmi,
+    required String insight,
+    required String insightHindi,
+    required DateTime calculatedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        bodyFatPct = Value(bodyFatPct),
+        leanMassKg = Value(leanMassKg),
+        fatMassKg = Value(fatMassKg),
+        totalWeightKg = Value(totalWeightKg),
+        waistToHeightRatio = Value(waistToHeightRatio),
+        ffmi = Value(ffmi),
+        insight = Value(insight),
+        insightHindi = Value(insightHindi),
+        calculatedAt = Value(calculatedAt);
+  static Insertable<LocalBodyCompositionSnapshot> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<double>? bodyFatPct,
+    Expression<double>? leanMassKg,
+    Expression<double>? fatMassKg,
+    Expression<double>? totalWeightKg,
+    Expression<double>? waistToHeightRatio,
+    Expression<double>? ffmi,
+    Expression<String>? insight,
+    Expression<String>? insightHindi,
+    Expression<DateTime>? calculatedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (bodyFatPct != null) 'body_fat_pct': bodyFatPct,
+      if (leanMassKg != null) 'lean_mass_kg': leanMassKg,
+      if (fatMassKg != null) 'fat_mass_kg': fatMassKg,
+      if (totalWeightKg != null) 'total_weight_kg': totalWeightKg,
+      if (waistToHeightRatio != null)
+        'waist_to_height_ratio': waistToHeightRatio,
+      if (ffmi != null) 'ffmi': ffmi,
+      if (insight != null) 'insight': insight,
+      if (insightHindi != null) 'insight_hindi': insightHindi,
+      if (calculatedAt != null) 'calculated_at': calculatedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalBodyCompositionSnapshotsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<double>? bodyFatPct,
+      Value<double>? leanMassKg,
+      Value<double>? fatMassKg,
+      Value<double>? totalWeightKg,
+      Value<double>? waistToHeightRatio,
+      Value<double>? ffmi,
+      Value<String>? insight,
+      Value<String>? insightHindi,
+      Value<DateTime>? calculatedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalBodyCompositionSnapshotsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      bodyFatPct: bodyFatPct ?? this.bodyFatPct,
+      leanMassKg: leanMassKg ?? this.leanMassKg,
+      fatMassKg: fatMassKg ?? this.fatMassKg,
+      totalWeightKg: totalWeightKg ?? this.totalWeightKg,
+      waistToHeightRatio: waistToHeightRatio ?? this.waistToHeightRatio,
+      ffmi: ffmi ?? this.ffmi,
+      insight: insight ?? this.insight,
+      insightHindi: insightHindi ?? this.insightHindi,
+      calculatedAt: calculatedAt ?? this.calculatedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (bodyFatPct.present) {
+      map['body_fat_pct'] = Variable<double>(bodyFatPct.value);
+    }
+    if (leanMassKg.present) {
+      map['lean_mass_kg'] = Variable<double>(leanMassKg.value);
+    }
+    if (fatMassKg.present) {
+      map['fat_mass_kg'] = Variable<double>(fatMassKg.value);
+    }
+    if (totalWeightKg.present) {
+      map['total_weight_kg'] = Variable<double>(totalWeightKg.value);
+    }
+    if (waistToHeightRatio.present) {
+      map['waist_to_height_ratio'] = Variable<double>(waistToHeightRatio.value);
+    }
+    if (ffmi.present) {
+      map['ffmi'] = Variable<double>(ffmi.value);
+    }
+    if (insight.present) {
+      map['insight'] = Variable<String>(insight.value);
+    }
+    if (insightHindi.present) {
+      map['insight_hindi'] = Variable<String>(insightHindi.value);
+    }
+    if (calculatedAt.present) {
+      map['calculated_at'] = Variable<DateTime>(calculatedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalBodyCompositionSnapshotsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('bodyFatPct: $bodyFatPct, ')
+          ..write('leanMassKg: $leanMassKg, ')
+          ..write('fatMassKg: $fatMassKg, ')
+          ..write('totalWeightKg: $totalWeightKg, ')
+          ..write('waistToHeightRatio: $waistToHeightRatio, ')
+          ..write('ffmi: $ffmi, ')
+          ..write('insight: $insight, ')
+          ..write('insightHindi: $insightHindi, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -13686,6 +14708,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalMedicationsTable(this);
   late final $LocalDoctorGrantsTable localDoctorGrants =
       $LocalDoctorGrantsTable(this);
+  late final $LocalProgressPhotosTable localProgressPhotos =
+      $LocalProgressPhotosTable(this);
+  late final $LocalBodyCompositionSnapshotsTable localBodyCompositionSnapshots =
+      $LocalBodyCompositionSnapshotsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -13720,7 +14746,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localBiologicalAgeRecords,
         localClinicalLabReports,
         localMedications,
-        localDoctorGrants
+        localDoctorGrants,
+        localProgressPhotos,
+        localBodyCompositionSnapshots
       ];
 }
 
@@ -20703,6 +21731,519 @@ typedef $$LocalDoctorGrantsTableProcessedTableManager = ProcessedTableManager<
     ),
     LocalDoctorGrant,
     PrefetchHooks Function()>;
+typedef $$LocalProgressPhotosTableCreateCompanionBuilder
+    = LocalProgressPhotosCompanion Function({
+  required String id,
+  required String userId,
+  required String poseType,
+  required String localFilePath,
+  Value<double> poseConfidence,
+  required DateTime recordedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalProgressPhotosTableUpdateCompanionBuilder
+    = LocalProgressPhotosCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> poseType,
+  Value<String> localFilePath,
+  Value<double> poseConfidence,
+  Value<DateTime> recordedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalProgressPhotosTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalProgressPhotosTable> {
+  $$LocalProgressPhotosTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get poseType => $composableBuilder(
+      column: $table.poseType, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get localFilePath => $composableBuilder(
+      column: $table.localFilePath, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get poseConfidence => $composableBuilder(
+      column: $table.poseConfidence,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get recordedAt => $composableBuilder(
+      column: $table.recordedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalProgressPhotosTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalProgressPhotosTable> {
+  $$LocalProgressPhotosTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get poseType => $composableBuilder(
+      column: $table.poseType, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get localFilePath => $composableBuilder(
+      column: $table.localFilePath,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get poseConfidence => $composableBuilder(
+      column: $table.poseConfidence,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get recordedAt => $composableBuilder(
+      column: $table.recordedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalProgressPhotosTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalProgressPhotosTable> {
+  $$LocalProgressPhotosTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get poseType =>
+      $composableBuilder(column: $table.poseType, builder: (column) => column);
+
+  GeneratedColumn<String> get localFilePath => $composableBuilder(
+      column: $table.localFilePath, builder: (column) => column);
+
+  GeneratedColumn<double> get poseConfidence => $composableBuilder(
+      column: $table.poseConfidence, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get recordedAt => $composableBuilder(
+      column: $table.recordedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalProgressPhotosTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalProgressPhotosTable,
+    LocalProgressPhoto,
+    $$LocalProgressPhotosTableFilterComposer,
+    $$LocalProgressPhotosTableOrderingComposer,
+    $$LocalProgressPhotosTableAnnotationComposer,
+    $$LocalProgressPhotosTableCreateCompanionBuilder,
+    $$LocalProgressPhotosTableUpdateCompanionBuilder,
+    (
+      LocalProgressPhoto,
+      BaseReferences<_$AppDatabase, $LocalProgressPhotosTable,
+          LocalProgressPhoto>
+    ),
+    LocalProgressPhoto,
+    PrefetchHooks Function()> {
+  $$LocalProgressPhotosTableTableManager(
+      _$AppDatabase db, $LocalProgressPhotosTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalProgressPhotosTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalProgressPhotosTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalProgressPhotosTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> poseType = const Value.absent(),
+            Value<String> localFilePath = const Value.absent(),
+            Value<double> poseConfidence = const Value.absent(),
+            Value<DateTime> recordedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalProgressPhotosCompanion(
+            id: id,
+            userId: userId,
+            poseType: poseType,
+            localFilePath: localFilePath,
+            poseConfidence: poseConfidence,
+            recordedAt: recordedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String poseType,
+            required String localFilePath,
+            Value<double> poseConfidence = const Value.absent(),
+            required DateTime recordedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalProgressPhotosCompanion.insert(
+            id: id,
+            userId: userId,
+            poseType: poseType,
+            localFilePath: localFilePath,
+            poseConfidence: poseConfidence,
+            recordedAt: recordedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalProgressPhotosTable, LocalProgressPhoto>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalProgressPhotosTable,
+                        LocalProgressPhoto>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalProgressPhotosTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalProgressPhotosTable,
+    LocalProgressPhoto,
+    $$LocalProgressPhotosTableFilterComposer,
+    $$LocalProgressPhotosTableOrderingComposer,
+    $$LocalProgressPhotosTableAnnotationComposer,
+    $$LocalProgressPhotosTableCreateCompanionBuilder,
+    $$LocalProgressPhotosTableUpdateCompanionBuilder,
+    (
+      LocalProgressPhoto,
+      BaseReferences<_$AppDatabase, $LocalProgressPhotosTable,
+          LocalProgressPhoto>
+    ),
+    LocalProgressPhoto,
+    PrefetchHooks Function()>;
+typedef $$LocalBodyCompositionSnapshotsTableCreateCompanionBuilder
+    = LocalBodyCompositionSnapshotsCompanion Function({
+  required String id,
+  required String userId,
+  required double bodyFatPct,
+  required double leanMassKg,
+  required double fatMassKg,
+  required double totalWeightKg,
+  required double waistToHeightRatio,
+  required double ffmi,
+  required String insight,
+  required String insightHindi,
+  required DateTime calculatedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalBodyCompositionSnapshotsTableUpdateCompanionBuilder
+    = LocalBodyCompositionSnapshotsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<double> bodyFatPct,
+  Value<double> leanMassKg,
+  Value<double> fatMassKg,
+  Value<double> totalWeightKg,
+  Value<double> waistToHeightRatio,
+  Value<double> ffmi,
+  Value<String> insight,
+  Value<String> insightHindi,
+  Value<DateTime> calculatedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalBodyCompositionSnapshotsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalBodyCompositionSnapshotsTable> {
+  $$LocalBodyCompositionSnapshotsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get bodyFatPct => $composableBuilder(
+      column: $table.bodyFatPct, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get leanMassKg => $composableBuilder(
+      column: $table.leanMassKg, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get fatMassKg => $composableBuilder(
+      column: $table.fatMassKg, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get totalWeightKg => $composableBuilder(
+      column: $table.totalWeightKg, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get waistToHeightRatio => $composableBuilder(
+      column: $table.waistToHeightRatio,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get ffmi => $composableBuilder(
+      column: $table.ffmi, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get insight => $composableBuilder(
+      column: $table.insight, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get insightHindi => $composableBuilder(
+      column: $table.insightHindi, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalBodyCompositionSnapshotsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalBodyCompositionSnapshotsTable> {
+  $$LocalBodyCompositionSnapshotsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get bodyFatPct => $composableBuilder(
+      column: $table.bodyFatPct, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get leanMassKg => $composableBuilder(
+      column: $table.leanMassKg, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get fatMassKg => $composableBuilder(
+      column: $table.fatMassKg, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get totalWeightKg => $composableBuilder(
+      column: $table.totalWeightKg,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get waistToHeightRatio => $composableBuilder(
+      column: $table.waistToHeightRatio,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get ffmi => $composableBuilder(
+      column: $table.ffmi, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get insight => $composableBuilder(
+      column: $table.insight, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get insightHindi => $composableBuilder(
+      column: $table.insightHindi,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalBodyCompositionSnapshotsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalBodyCompositionSnapshotsTable> {
+  $$LocalBodyCompositionSnapshotsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<double> get bodyFatPct => $composableBuilder(
+      column: $table.bodyFatPct, builder: (column) => column);
+
+  GeneratedColumn<double> get leanMassKg => $composableBuilder(
+      column: $table.leanMassKg, builder: (column) => column);
+
+  GeneratedColumn<double> get fatMassKg =>
+      $composableBuilder(column: $table.fatMassKg, builder: (column) => column);
+
+  GeneratedColumn<double> get totalWeightKg => $composableBuilder(
+      column: $table.totalWeightKg, builder: (column) => column);
+
+  GeneratedColumn<double> get waistToHeightRatio => $composableBuilder(
+      column: $table.waistToHeightRatio, builder: (column) => column);
+
+  GeneratedColumn<double> get ffmi =>
+      $composableBuilder(column: $table.ffmi, builder: (column) => column);
+
+  GeneratedColumn<String> get insight =>
+      $composableBuilder(column: $table.insight, builder: (column) => column);
+
+  GeneratedColumn<String> get insightHindi => $composableBuilder(
+      column: $table.insightHindi, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalBodyCompositionSnapshotsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalBodyCompositionSnapshotsTable,
+    LocalBodyCompositionSnapshot,
+    $$LocalBodyCompositionSnapshotsTableFilterComposer,
+    $$LocalBodyCompositionSnapshotsTableOrderingComposer,
+    $$LocalBodyCompositionSnapshotsTableAnnotationComposer,
+    $$LocalBodyCompositionSnapshotsTableCreateCompanionBuilder,
+    $$LocalBodyCompositionSnapshotsTableUpdateCompanionBuilder,
+    (
+      LocalBodyCompositionSnapshot,
+      BaseReferences<_$AppDatabase, $LocalBodyCompositionSnapshotsTable,
+          LocalBodyCompositionSnapshot>
+    ),
+    LocalBodyCompositionSnapshot,
+    PrefetchHooks Function()> {
+  $$LocalBodyCompositionSnapshotsTableTableManager(
+      _$AppDatabase db, $LocalBodyCompositionSnapshotsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalBodyCompositionSnapshotsTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalBodyCompositionSnapshotsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalBodyCompositionSnapshotsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<double> bodyFatPct = const Value.absent(),
+            Value<double> leanMassKg = const Value.absent(),
+            Value<double> fatMassKg = const Value.absent(),
+            Value<double> totalWeightKg = const Value.absent(),
+            Value<double> waistToHeightRatio = const Value.absent(),
+            Value<double> ffmi = const Value.absent(),
+            Value<String> insight = const Value.absent(),
+            Value<String> insightHindi = const Value.absent(),
+            Value<DateTime> calculatedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBodyCompositionSnapshotsCompanion(
+            id: id,
+            userId: userId,
+            bodyFatPct: bodyFatPct,
+            leanMassKg: leanMassKg,
+            fatMassKg: fatMassKg,
+            totalWeightKg: totalWeightKg,
+            waistToHeightRatio: waistToHeightRatio,
+            ffmi: ffmi,
+            insight: insight,
+            insightHindi: insightHindi,
+            calculatedAt: calculatedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required double bodyFatPct,
+            required double leanMassKg,
+            required double fatMassKg,
+            required double totalWeightKg,
+            required double waistToHeightRatio,
+            required double ffmi,
+            required String insight,
+            required String insightHindi,
+            required DateTime calculatedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalBodyCompositionSnapshotsCompanion.insert(
+            id: id,
+            userId: userId,
+            bodyFatPct: bodyFatPct,
+            leanMassKg: leanMassKg,
+            fatMassKg: fatMassKg,
+            totalWeightKg: totalWeightKg,
+            waistToHeightRatio: waistToHeightRatio,
+            ffmi: ffmi,
+            insight: insight,
+            insightHindi: insightHindi,
+            calculatedAt: calculatedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalBodyCompositionSnapshotsTable,
+                        LocalBodyCompositionSnapshot>(table),
+                    BaseReferences<
+                        _$AppDatabase,
+                        $LocalBodyCompositionSnapshotsTable,
+                        LocalBodyCompositionSnapshot>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalBodyCompositionSnapshotsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalBodyCompositionSnapshotsTable,
+        LocalBodyCompositionSnapshot,
+        $$LocalBodyCompositionSnapshotsTableFilterComposer,
+        $$LocalBodyCompositionSnapshotsTableOrderingComposer,
+        $$LocalBodyCompositionSnapshotsTableAnnotationComposer,
+        $$LocalBodyCompositionSnapshotsTableCreateCompanionBuilder,
+        $$LocalBodyCompositionSnapshotsTableUpdateCompanionBuilder,
+        (
+          LocalBodyCompositionSnapshot,
+          BaseReferences<_$AppDatabase, $LocalBodyCompositionSnapshotsTable,
+              LocalBodyCompositionSnapshot>
+        ),
+        LocalBodyCompositionSnapshot,
+        PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -20773,4 +22314,10 @@ class $AppDatabaseManager {
       $$LocalMedicationsTableTableManager(_db, _db.localMedications);
   $$LocalDoctorGrantsTableTableManager get localDoctorGrants =>
       $$LocalDoctorGrantsTableTableManager(_db, _db.localDoctorGrants);
+  $$LocalProgressPhotosTableTableManager get localProgressPhotos =>
+      $$LocalProgressPhotosTableTableManager(_db, _db.localProgressPhotos);
+  $$LocalBodyCompositionSnapshotsTableTableManager
+      get localBodyCompositionSnapshots =>
+          $$LocalBodyCompositionSnapshotsTableTableManager(
+              _db, _db.localBodyCompositionSnapshots);
 }

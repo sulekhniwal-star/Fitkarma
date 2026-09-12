@@ -467,6 +467,39 @@ class LocalDoctorGrants extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 31. Local Progress Photos Table
+class LocalProgressPhotos extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get poseType => text()();
+  TextColumn get localFilePath => text()();
+  RealColumn get poseConfidence => real().withDefault(const Constant(1.0))();
+  DateTimeColumn get recordedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 32. Local Body Composition Snapshots Table
+class LocalBodyCompositionSnapshots extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  RealColumn get bodyFatPct => real()();
+  RealColumn get leanMassKg => real()();
+  RealColumn get fatMassKg => real()();
+  RealColumn get totalWeightKg => real()();
+  RealColumn get waistToHeightRatio => real()();
+  RealColumn get ffmi => real()();
+  TextColumn get insight => text()();
+  TextColumn get insightHindi => text()();
+  DateTimeColumn get calculatedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -498,6 +531,8 @@ class LocalDoctorGrants extends Table {
   LocalClinicalLabReports,
   LocalMedications,
   LocalDoctorGrants,
+  LocalProgressPhotos,
+  LocalBodyCompositionSnapshots,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

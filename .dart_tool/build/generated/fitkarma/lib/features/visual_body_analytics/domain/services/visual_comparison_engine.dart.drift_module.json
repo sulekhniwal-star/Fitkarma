@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/visual_body_analytics/domain/models/body_analytics_models.dart"
+  ]
+}
