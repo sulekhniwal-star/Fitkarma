@@ -156,7 +156,7 @@ class _WhatsappVoiceLoggingScreenState extends ConsumerState<WhatsappVoiceLoggin
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryEmerald.withValues(alpha: 0.1),
+                        color: AppColors.primaryEmerald.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(

@@ -71,7 +71,7 @@ class _WomensHealthStepState extends State<WomensHealthStep> {
                       style: AppTypography.bodySmall,
                     ),
                     value: widget.enableWomensHealth,
-                    activeThumbColor: AppColors.accentPurple,
+                    activeColor: AppColors.accentPurple,
                     onChanged: (val) {
                       widget.onToggleEnable(val);
                       if (val) {

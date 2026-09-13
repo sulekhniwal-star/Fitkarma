@@ -64,7 +64,7 @@ class _WeddingModeScreenState extends ConsumerState<WeddingModeScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryEmerald.withValues(alpha: 0.2),
+                          color: AppColors.primaryEmerald.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(

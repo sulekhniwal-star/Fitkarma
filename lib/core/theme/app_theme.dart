@@ -31,7 +31,7 @@ class AppTheme {
         bodySmall: AppTypography.bodySmall,
         labelLarge: AppTypography.label,
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: AppColors.surfaceCard,
         elevation: 0,
         shape: RoundedRectangleBorder(

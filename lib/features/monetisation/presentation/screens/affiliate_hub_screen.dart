@@ -51,7 +51,7 @@ class _AffiliateHubScreenState extends ConsumerState<AffiliateHubScreen> {
                     decoration: BoxDecoration(
                       color: AppColors.surfaceGlassHover,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: AppColors.primaryEmerald.withValues(alpha: 0.5)),
+                      border: Border.all(color: AppColors.primaryEmerald.withOpacity(0.5)),
                     ),
                     child: Text(_referralCode, style: AppTypography.heroMetric.copyWith(fontSize: 32, letterSpacing: 2)),
                   ),

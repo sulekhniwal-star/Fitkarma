@@ -153,7 +153,7 @@ class _LifeEventsHubScreenState extends ConsumerState<LifeEventsHubScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.accentCoral.withValues(alpha: 0.12),
+                      color: AppColors.accentCoral.withOpacity(0.12),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
