@@ -1,0 +1,6 @@
+{
+  "elements": {},
+  "imports": [
+    "package:fitkarma/features/india_trust/domain/models/india_trust_models.dart"
+  ]
+}

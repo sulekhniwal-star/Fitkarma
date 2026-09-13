@@ -663,38 +663,38 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 
 ## Phase 16 — India Growth & Trust Layer
 
-- [ ] **WhatsApp Business Logging**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Vernacular Voice Logging**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **ABHA Health ID Integration**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Corporate Wellness & Insurer Tier**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
-- [ ] **Grocery Vendor Checkout Integration**
-    - [ ] Implement
-    - [ ] Offline-verified
-    - [ ] RLS & Storage bucket policies updated (Supabase, if new data paths)
-    - [ ] `README.md` written for this feature
+- [x] **WhatsApp Business Logging**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Vernacular Voice Logging**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **ABHA Health ID Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Corporate Wellness & Insurer Tier**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
+- [x] **Grocery Vendor Checkout Integration**
+    - [x] Implement
+    - [x] Offline-verified
+    - [x] RLS & Storage bucket policies updated (Supabase, if new data paths)
+    - [x] `README.md` written for this feature
 
 ---
 
 ## Cross-cutting (ongoing, not a phase)
 
-- [ ] Keep `README.md` (project root) in sync as features land
-- [ ] Keep the doc suite (`architechture.md`, `data_model.md`, etc.) updated if a feature's implementation deviates from spec — log the deviation in `decisions.md` too
-- [ ] DPDP-compliant cascading deletion — **port `deleteUserData` Cloud Function to the `delete_user_data` Edge Function** (see `api_contract.md` §5, `security.md` §5) and confirm it covers every table in `data_model.md`, not just the original Firestore collection list
-- [ ] Add RLS pgTAP coverage for every table as it's ported (see `tedting.md` §1.3) — not previously required under Firestore rules, now part of "done"
-- [ ] Update `github_actions.md`-defined CI workflows in the actual repo (`supabase-migrate.yml`, `edge-functions-deploy.yml`, `rls-test.yml`) as each phase is ported, retiring the equivalent `firebase deploy` steps once nothing depends on them
+- [x] Keep `README.md` (project root) in sync as features land
+- [x] Keep the doc suite (`architechture.md`, `data_model.md`, etc.) updated if a feature's implementation deviates from spec — log the deviation in `decisions.md` too
+- [x] DPDP-compliant cascading deletion — **port `deleteUserData` Cloud Function to the `delete_user_data` Edge Function** (see `api_contract.md` §5, `security.md` §5) and confirm it covers every table in `data_model.md`, not just the original Firestore collection list
+- [x] Add RLS pgTAP coverage for every table as it's ported (see `tedting.md` §1.3) — not previously required under Firestore rules, now part of "done"
+- [x] Update `github_actions.md`-defined CI workflows in the actual repo (`supabase-migrate.yml`, `edge-functions-deploy.yml`, `rls-test.yml`) as each phase is ported, retiring the equivalent `firebase deploy` steps once nothing depends on them

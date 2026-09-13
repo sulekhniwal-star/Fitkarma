@@ -626,6 +626,48 @@ class LocalLongevityScores extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 41. Local ABHA Records Table
+class LocalAbhaRecords extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get abhaNumber => text()();
+  TextColumn get abhaAddress => text()();
+  BoolColumn get isLinked => boolean().withDefault(const Constant(true))();
+  TextColumn get fhirSyncStatus => text().withDefault(const Constant('synced'))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 42. Local WhatsApp Logs Table
+class LocalWhatsappLogs extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  TextColumn get messageId => text()();
+  TextColumn get direction => text()(); // 'inbound', 'outbound'
+  TextColumn get rawText => text()();
+  TextColumn get parsedEntityType => text().nullable()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 43. Local Corporate Teams Table
+class LocalCorporateTeams extends Table {
+  TextColumn get id => text()();
+  TextColumn get companyName => text()();
+  TextColumn get teamName => text()();
+  TextColumn get corporateCode => text()();
+  RealColumn get wellnessScore => real()();
+  IntColumn get memberCount => integer()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -667,6 +709,9 @@ class LocalLongevityScores extends Table {
   LocalAffiliateReferrals,
   LocalMetabolicProfiles,
   LocalLongevityScores,
+  LocalAbhaRecords,
+  LocalWhatsappLogs,
+  LocalCorporateTeams,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

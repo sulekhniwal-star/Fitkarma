@@ -18454,6 +18454,1200 @@ class LocalLongevityScoresCompanion
   }
 }
 
+class $LocalAbhaRecordsTable extends LocalAbhaRecords
+    with TableInfo<$LocalAbhaRecordsTable, LocalAbhaRecord> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalAbhaRecordsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _abhaNumberMeta =
+      const VerificationMeta('abhaNumber');
+  @override
+  late final GeneratedColumn<String> abhaNumber = GeneratedColumn<String>(
+      'abha_number', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _abhaAddressMeta =
+      const VerificationMeta('abhaAddress');
+  @override
+  late final GeneratedColumn<String> abhaAddress = GeneratedColumn<String>(
+      'abha_address', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _isLinkedMeta =
+      const VerificationMeta('isLinked');
+  @override
+  late final GeneratedColumn<bool> isLinked = GeneratedColumn<bool>(
+      'is_linked', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_linked" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  static const VerificationMeta _fhirSyncStatusMeta =
+      const VerificationMeta('fhirSyncStatus');
+  @override
+  late final GeneratedColumn<String> fhirSyncStatus = GeneratedColumn<String>(
+      'fhir_sync_status', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('synced'));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        abhaNumber,
+        abhaAddress,
+        isLinked,
+        fhirSyncStatus,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_abha_records';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalAbhaRecord> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('abha_number')) {
+      context.handle(
+          _abhaNumberMeta,
+          abhaNumber.isAcceptableOrUnknown(
+              data['abha_number']!, _abhaNumberMeta));
+    } else if (isInserting) {
+      context.missing(_abhaNumberMeta);
+    }
+    if (data.containsKey('abha_address')) {
+      context.handle(
+          _abhaAddressMeta,
+          abhaAddress.isAcceptableOrUnknown(
+              data['abha_address']!, _abhaAddressMeta));
+    } else if (isInserting) {
+      context.missing(_abhaAddressMeta);
+    }
+    if (data.containsKey('is_linked')) {
+      context.handle(_isLinkedMeta,
+          isLinked.isAcceptableOrUnknown(data['is_linked']!, _isLinkedMeta));
+    }
+    if (data.containsKey('fhir_sync_status')) {
+      context.handle(
+          _fhirSyncStatusMeta,
+          fhirSyncStatus.isAcceptableOrUnknown(
+              data['fhir_sync_status']!, _fhirSyncStatusMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalAbhaRecord map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalAbhaRecord(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      abhaNumber: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}abha_number'])!,
+      abhaAddress: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}abha_address'])!,
+      isLinked: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_linked'])!,
+      fhirSyncStatus: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}fhir_sync_status'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalAbhaRecordsTable createAlias(String alias) {
+    return $LocalAbhaRecordsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalAbhaRecord extends DataClass implements Insertable<LocalAbhaRecord> {
+  final String id;
+  final String userId;
+  final String abhaNumber;
+  final String abhaAddress;
+  final bool isLinked;
+  final String fhirSyncStatus;
+  final DateTime createdAt;
+  const LocalAbhaRecord(
+      {required this.id,
+      required this.userId,
+      required this.abhaNumber,
+      required this.abhaAddress,
+      required this.isLinked,
+      required this.fhirSyncStatus,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['abha_number'] = Variable<String>(abhaNumber);
+    map['abha_address'] = Variable<String>(abhaAddress);
+    map['is_linked'] = Variable<bool>(isLinked);
+    map['fhir_sync_status'] = Variable<String>(fhirSyncStatus);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalAbhaRecordsCompanion toCompanion(bool nullToAbsent) {
+    return LocalAbhaRecordsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      abhaNumber: Value(abhaNumber),
+      abhaAddress: Value(abhaAddress),
+      isLinked: Value(isLinked),
+      fhirSyncStatus: Value(fhirSyncStatus),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalAbhaRecord.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalAbhaRecord(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      abhaNumber: serializer.fromJson<String>(json['abhaNumber']),
+      abhaAddress: serializer.fromJson<String>(json['abhaAddress']),
+      isLinked: serializer.fromJson<bool>(json['isLinked']),
+      fhirSyncStatus: serializer.fromJson<String>(json['fhirSyncStatus']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'abhaNumber': serializer.toJson<String>(abhaNumber),
+      'abhaAddress': serializer.toJson<String>(abhaAddress),
+      'isLinked': serializer.toJson<bool>(isLinked),
+      'fhirSyncStatus': serializer.toJson<String>(fhirSyncStatus),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalAbhaRecord copyWith(
+          {String? id,
+          String? userId,
+          String? abhaNumber,
+          String? abhaAddress,
+          bool? isLinked,
+          String? fhirSyncStatus,
+          DateTime? createdAt}) =>
+      LocalAbhaRecord(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        abhaNumber: abhaNumber ?? this.abhaNumber,
+        abhaAddress: abhaAddress ?? this.abhaAddress,
+        isLinked: isLinked ?? this.isLinked,
+        fhirSyncStatus: fhirSyncStatus ?? this.fhirSyncStatus,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalAbhaRecord copyWithCompanion(LocalAbhaRecordsCompanion data) {
+    return LocalAbhaRecord(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      abhaNumber:
+          data.abhaNumber.present ? data.abhaNumber.value : this.abhaNumber,
+      abhaAddress:
+          data.abhaAddress.present ? data.abhaAddress.value : this.abhaAddress,
+      isLinked: data.isLinked.present ? data.isLinked.value : this.isLinked,
+      fhirSyncStatus: data.fhirSyncStatus.present
+          ? data.fhirSyncStatus.value
+          : this.fhirSyncStatus,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalAbhaRecord(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('abhaNumber: $abhaNumber, ')
+          ..write('abhaAddress: $abhaAddress, ')
+          ..write('isLinked: $isLinked, ')
+          ..write('fhirSyncStatus: $fhirSyncStatus, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, abhaNumber, abhaAddress, isLinked, fhirSyncStatus, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalAbhaRecord &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.abhaNumber == this.abhaNumber &&
+          other.abhaAddress == this.abhaAddress &&
+          other.isLinked == this.isLinked &&
+          other.fhirSyncStatus == this.fhirSyncStatus &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalAbhaRecordsCompanion extends UpdateCompanion<LocalAbhaRecord> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> abhaNumber;
+  final Value<String> abhaAddress;
+  final Value<bool> isLinked;
+  final Value<String> fhirSyncStatus;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalAbhaRecordsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.abhaNumber = const Value.absent(),
+    this.abhaAddress = const Value.absent(),
+    this.isLinked = const Value.absent(),
+    this.fhirSyncStatus = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalAbhaRecordsCompanion.insert({
+    required String id,
+    required String userId,
+    required String abhaNumber,
+    required String abhaAddress,
+    this.isLinked = const Value.absent(),
+    this.fhirSyncStatus = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        abhaNumber = Value(abhaNumber),
+        abhaAddress = Value(abhaAddress);
+  static Insertable<LocalAbhaRecord> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? abhaNumber,
+    Expression<String>? abhaAddress,
+    Expression<bool>? isLinked,
+    Expression<String>? fhirSyncStatus,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (abhaNumber != null) 'abha_number': abhaNumber,
+      if (abhaAddress != null) 'abha_address': abhaAddress,
+      if (isLinked != null) 'is_linked': isLinked,
+      if (fhirSyncStatus != null) 'fhir_sync_status': fhirSyncStatus,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalAbhaRecordsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? abhaNumber,
+      Value<String>? abhaAddress,
+      Value<bool>? isLinked,
+      Value<String>? fhirSyncStatus,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalAbhaRecordsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      abhaNumber: abhaNumber ?? this.abhaNumber,
+      abhaAddress: abhaAddress ?? this.abhaAddress,
+      isLinked: isLinked ?? this.isLinked,
+      fhirSyncStatus: fhirSyncStatus ?? this.fhirSyncStatus,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (abhaNumber.present) {
+      map['abha_number'] = Variable<String>(abhaNumber.value);
+    }
+    if (abhaAddress.present) {
+      map['abha_address'] = Variable<String>(abhaAddress.value);
+    }
+    if (isLinked.present) {
+      map['is_linked'] = Variable<bool>(isLinked.value);
+    }
+    if (fhirSyncStatus.present) {
+      map['fhir_sync_status'] = Variable<String>(fhirSyncStatus.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalAbhaRecordsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('abhaNumber: $abhaNumber, ')
+          ..write('abhaAddress: $abhaAddress, ')
+          ..write('isLinked: $isLinked, ')
+          ..write('fhirSyncStatus: $fhirSyncStatus, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalWhatsappLogsTable extends LocalWhatsappLogs
+    with TableInfo<$LocalWhatsappLogsTable, LocalWhatsappLog> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalWhatsappLogsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _messageIdMeta =
+      const VerificationMeta('messageId');
+  @override
+  late final GeneratedColumn<String> messageId = GeneratedColumn<String>(
+      'message_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _directionMeta =
+      const VerificationMeta('direction');
+  @override
+  late final GeneratedColumn<String> direction = GeneratedColumn<String>(
+      'direction', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _rawTextMeta =
+      const VerificationMeta('rawText');
+  @override
+  late final GeneratedColumn<String> rawText = GeneratedColumn<String>(
+      'raw_text', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _parsedEntityTypeMeta =
+      const VerificationMeta('parsedEntityType');
+  @override
+  late final GeneratedColumn<String> parsedEntityType = GeneratedColumn<String>(
+      'parsed_entity_type', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, messageId, direction, rawText, parsedEntityType, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_whatsapp_logs';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalWhatsappLog> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('message_id')) {
+      context.handle(_messageIdMeta,
+          messageId.isAcceptableOrUnknown(data['message_id']!, _messageIdMeta));
+    } else if (isInserting) {
+      context.missing(_messageIdMeta);
+    }
+    if (data.containsKey('direction')) {
+      context.handle(_directionMeta,
+          direction.isAcceptableOrUnknown(data['direction']!, _directionMeta));
+    } else if (isInserting) {
+      context.missing(_directionMeta);
+    }
+    if (data.containsKey('raw_text')) {
+      context.handle(_rawTextMeta,
+          rawText.isAcceptableOrUnknown(data['raw_text']!, _rawTextMeta));
+    } else if (isInserting) {
+      context.missing(_rawTextMeta);
+    }
+    if (data.containsKey('parsed_entity_type')) {
+      context.handle(
+          _parsedEntityTypeMeta,
+          parsedEntityType.isAcceptableOrUnknown(
+              data['parsed_entity_type']!, _parsedEntityTypeMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalWhatsappLog map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalWhatsappLog(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      messageId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}message_id'])!,
+      direction: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}direction'])!,
+      rawText: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}raw_text'])!,
+      parsedEntityType: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}parsed_entity_type']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalWhatsappLogsTable createAlias(String alias) {
+    return $LocalWhatsappLogsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalWhatsappLog extends DataClass
+    implements Insertable<LocalWhatsappLog> {
+  final String id;
+  final String userId;
+  final String messageId;
+  final String direction;
+  final String rawText;
+  final String? parsedEntityType;
+  final DateTime createdAt;
+  const LocalWhatsappLog(
+      {required this.id,
+      required this.userId,
+      required this.messageId,
+      required this.direction,
+      required this.rawText,
+      this.parsedEntityType,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['message_id'] = Variable<String>(messageId);
+    map['direction'] = Variable<String>(direction);
+    map['raw_text'] = Variable<String>(rawText);
+    if (!nullToAbsent || parsedEntityType != null) {
+      map['parsed_entity_type'] = Variable<String>(parsedEntityType);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalWhatsappLogsCompanion toCompanion(bool nullToAbsent) {
+    return LocalWhatsappLogsCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      messageId: Value(messageId),
+      direction: Value(direction),
+      rawText: Value(rawText),
+      parsedEntityType: parsedEntityType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(parsedEntityType),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalWhatsappLog.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalWhatsappLog(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      messageId: serializer.fromJson<String>(json['messageId']),
+      direction: serializer.fromJson<String>(json['direction']),
+      rawText: serializer.fromJson<String>(json['rawText']),
+      parsedEntityType: serializer.fromJson<String?>(json['parsedEntityType']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'messageId': serializer.toJson<String>(messageId),
+      'direction': serializer.toJson<String>(direction),
+      'rawText': serializer.toJson<String>(rawText),
+      'parsedEntityType': serializer.toJson<String?>(parsedEntityType),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalWhatsappLog copyWith(
+          {String? id,
+          String? userId,
+          String? messageId,
+          String? direction,
+          String? rawText,
+          Value<String?> parsedEntityType = const Value.absent(),
+          DateTime? createdAt}) =>
+      LocalWhatsappLog(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        messageId: messageId ?? this.messageId,
+        direction: direction ?? this.direction,
+        rawText: rawText ?? this.rawText,
+        parsedEntityType: parsedEntityType.present
+            ? parsedEntityType.value
+            : this.parsedEntityType,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalWhatsappLog copyWithCompanion(LocalWhatsappLogsCompanion data) {
+    return LocalWhatsappLog(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      messageId: data.messageId.present ? data.messageId.value : this.messageId,
+      direction: data.direction.present ? data.direction.value : this.direction,
+      rawText: data.rawText.present ? data.rawText.value : this.rawText,
+      parsedEntityType: data.parsedEntityType.present
+          ? data.parsedEntityType.value
+          : this.parsedEntityType,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalWhatsappLog(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('messageId: $messageId, ')
+          ..write('direction: $direction, ')
+          ..write('rawText: $rawText, ')
+          ..write('parsedEntityType: $parsedEntityType, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, messageId, direction, rawText, parsedEntityType, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalWhatsappLog &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.messageId == this.messageId &&
+          other.direction == this.direction &&
+          other.rawText == this.rawText &&
+          other.parsedEntityType == this.parsedEntityType &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalWhatsappLogsCompanion extends UpdateCompanion<LocalWhatsappLog> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<String> messageId;
+  final Value<String> direction;
+  final Value<String> rawText;
+  final Value<String?> parsedEntityType;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalWhatsappLogsCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.messageId = const Value.absent(),
+    this.direction = const Value.absent(),
+    this.rawText = const Value.absent(),
+    this.parsedEntityType = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalWhatsappLogsCompanion.insert({
+    required String id,
+    required String userId,
+    required String messageId,
+    required String direction,
+    required String rawText,
+    this.parsedEntityType = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        messageId = Value(messageId),
+        direction = Value(direction),
+        rawText = Value(rawText);
+  static Insertable<LocalWhatsappLog> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<String>? messageId,
+    Expression<String>? direction,
+    Expression<String>? rawText,
+    Expression<String>? parsedEntityType,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (messageId != null) 'message_id': messageId,
+      if (direction != null) 'direction': direction,
+      if (rawText != null) 'raw_text': rawText,
+      if (parsedEntityType != null) 'parsed_entity_type': parsedEntityType,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalWhatsappLogsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<String>? messageId,
+      Value<String>? direction,
+      Value<String>? rawText,
+      Value<String?>? parsedEntityType,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalWhatsappLogsCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      messageId: messageId ?? this.messageId,
+      direction: direction ?? this.direction,
+      rawText: rawText ?? this.rawText,
+      parsedEntityType: parsedEntityType ?? this.parsedEntityType,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (messageId.present) {
+      map['message_id'] = Variable<String>(messageId.value);
+    }
+    if (direction.present) {
+      map['direction'] = Variable<String>(direction.value);
+    }
+    if (rawText.present) {
+      map['raw_text'] = Variable<String>(rawText.value);
+    }
+    if (parsedEntityType.present) {
+      map['parsed_entity_type'] = Variable<String>(parsedEntityType.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalWhatsappLogsCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('messageId: $messageId, ')
+          ..write('direction: $direction, ')
+          ..write('rawText: $rawText, ')
+          ..write('parsedEntityType: $parsedEntityType, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalCorporateTeamsTable extends LocalCorporateTeams
+    with TableInfo<$LocalCorporateTeamsTable, LocalCorporateTeam> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalCorporateTeamsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _companyNameMeta =
+      const VerificationMeta('companyName');
+  @override
+  late final GeneratedColumn<String> companyName = GeneratedColumn<String>(
+      'company_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _teamNameMeta =
+      const VerificationMeta('teamName');
+  @override
+  late final GeneratedColumn<String> teamName = GeneratedColumn<String>(
+      'team_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _corporateCodeMeta =
+      const VerificationMeta('corporateCode');
+  @override
+  late final GeneratedColumn<String> corporateCode = GeneratedColumn<String>(
+      'corporate_code', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _wellnessScoreMeta =
+      const VerificationMeta('wellnessScore');
+  @override
+  late final GeneratedColumn<double> wellnessScore = GeneratedColumn<double>(
+      'wellness_score', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _memberCountMeta =
+      const VerificationMeta('memberCount');
+  @override
+  late final GeneratedColumn<int> memberCount = GeneratedColumn<int>(
+      'member_count', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        companyName,
+        teamName,
+        corporateCode,
+        wellnessScore,
+        memberCount,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_corporate_teams';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocalCorporateTeam> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('company_name')) {
+      context.handle(
+          _companyNameMeta,
+          companyName.isAcceptableOrUnknown(
+              data['company_name']!, _companyNameMeta));
+    } else if (isInserting) {
+      context.missing(_companyNameMeta);
+    }
+    if (data.containsKey('team_name')) {
+      context.handle(_teamNameMeta,
+          teamName.isAcceptableOrUnknown(data['team_name']!, _teamNameMeta));
+    } else if (isInserting) {
+      context.missing(_teamNameMeta);
+    }
+    if (data.containsKey('corporate_code')) {
+      context.handle(
+          _corporateCodeMeta,
+          corporateCode.isAcceptableOrUnknown(
+              data['corporate_code']!, _corporateCodeMeta));
+    } else if (isInserting) {
+      context.missing(_corporateCodeMeta);
+    }
+    if (data.containsKey('wellness_score')) {
+      context.handle(
+          _wellnessScoreMeta,
+          wellnessScore.isAcceptableOrUnknown(
+              data['wellness_score']!, _wellnessScoreMeta));
+    } else if (isInserting) {
+      context.missing(_wellnessScoreMeta);
+    }
+    if (data.containsKey('member_count')) {
+      context.handle(
+          _memberCountMeta,
+          memberCount.isAcceptableOrUnknown(
+              data['member_count']!, _memberCountMeta));
+    } else if (isInserting) {
+      context.missing(_memberCountMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalCorporateTeam map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalCorporateTeam(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      companyName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}company_name'])!,
+      teamName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}team_name'])!,
+      corporateCode: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}corporate_code'])!,
+      wellnessScore: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}wellness_score'])!,
+      memberCount: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}member_count'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalCorporateTeamsTable createAlias(String alias) {
+    return $LocalCorporateTeamsTable(attachedDatabase, alias);
+  }
+}
+
+class LocalCorporateTeam extends DataClass
+    implements Insertable<LocalCorporateTeam> {
+  final String id;
+  final String companyName;
+  final String teamName;
+  final String corporateCode;
+  final double wellnessScore;
+  final int memberCount;
+  final DateTime createdAt;
+  const LocalCorporateTeam(
+      {required this.id,
+      required this.companyName,
+      required this.teamName,
+      required this.corporateCode,
+      required this.wellnessScore,
+      required this.memberCount,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['company_name'] = Variable<String>(companyName);
+    map['team_name'] = Variable<String>(teamName);
+    map['corporate_code'] = Variable<String>(corporateCode);
+    map['wellness_score'] = Variable<double>(wellnessScore);
+    map['member_count'] = Variable<int>(memberCount);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalCorporateTeamsCompanion toCompanion(bool nullToAbsent) {
+    return LocalCorporateTeamsCompanion(
+      id: Value(id),
+      companyName: Value(companyName),
+      teamName: Value(teamName),
+      corporateCode: Value(corporateCode),
+      wellnessScore: Value(wellnessScore),
+      memberCount: Value(memberCount),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalCorporateTeam.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalCorporateTeam(
+      id: serializer.fromJson<String>(json['id']),
+      companyName: serializer.fromJson<String>(json['companyName']),
+      teamName: serializer.fromJson<String>(json['teamName']),
+      corporateCode: serializer.fromJson<String>(json['corporateCode']),
+      wellnessScore: serializer.fromJson<double>(json['wellnessScore']),
+      memberCount: serializer.fromJson<int>(json['memberCount']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'companyName': serializer.toJson<String>(companyName),
+      'teamName': serializer.toJson<String>(teamName),
+      'corporateCode': serializer.toJson<String>(corporateCode),
+      'wellnessScore': serializer.toJson<double>(wellnessScore),
+      'memberCount': serializer.toJson<int>(memberCount),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalCorporateTeam copyWith(
+          {String? id,
+          String? companyName,
+          String? teamName,
+          String? corporateCode,
+          double? wellnessScore,
+          int? memberCount,
+          DateTime? createdAt}) =>
+      LocalCorporateTeam(
+        id: id ?? this.id,
+        companyName: companyName ?? this.companyName,
+        teamName: teamName ?? this.teamName,
+        corporateCode: corporateCode ?? this.corporateCode,
+        wellnessScore: wellnessScore ?? this.wellnessScore,
+        memberCount: memberCount ?? this.memberCount,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalCorporateTeam copyWithCompanion(LocalCorporateTeamsCompanion data) {
+    return LocalCorporateTeam(
+      id: data.id.present ? data.id.value : this.id,
+      companyName:
+          data.companyName.present ? data.companyName.value : this.companyName,
+      teamName: data.teamName.present ? data.teamName.value : this.teamName,
+      corporateCode: data.corporateCode.present
+          ? data.corporateCode.value
+          : this.corporateCode,
+      wellnessScore: data.wellnessScore.present
+          ? data.wellnessScore.value
+          : this.wellnessScore,
+      memberCount:
+          data.memberCount.present ? data.memberCount.value : this.memberCount,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCorporateTeam(')
+          ..write('id: $id, ')
+          ..write('companyName: $companyName, ')
+          ..write('teamName: $teamName, ')
+          ..write('corporateCode: $corporateCode, ')
+          ..write('wellnessScore: $wellnessScore, ')
+          ..write('memberCount: $memberCount, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, companyName, teamName, corporateCode,
+      wellnessScore, memberCount, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalCorporateTeam &&
+          other.id == this.id &&
+          other.companyName == this.companyName &&
+          other.teamName == this.teamName &&
+          other.corporateCode == this.corporateCode &&
+          other.wellnessScore == this.wellnessScore &&
+          other.memberCount == this.memberCount &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalCorporateTeamsCompanion extends UpdateCompanion<LocalCorporateTeam> {
+  final Value<String> id;
+  final Value<String> companyName;
+  final Value<String> teamName;
+  final Value<String> corporateCode;
+  final Value<double> wellnessScore;
+  final Value<int> memberCount;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalCorporateTeamsCompanion({
+    this.id = const Value.absent(),
+    this.companyName = const Value.absent(),
+    this.teamName = const Value.absent(),
+    this.corporateCode = const Value.absent(),
+    this.wellnessScore = const Value.absent(),
+    this.memberCount = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalCorporateTeamsCompanion.insert({
+    required String id,
+    required String companyName,
+    required String teamName,
+    required String corporateCode,
+    required double wellnessScore,
+    required int memberCount,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        companyName = Value(companyName),
+        teamName = Value(teamName),
+        corporateCode = Value(corporateCode),
+        wellnessScore = Value(wellnessScore),
+        memberCount = Value(memberCount);
+  static Insertable<LocalCorporateTeam> custom({
+    Expression<String>? id,
+    Expression<String>? companyName,
+    Expression<String>? teamName,
+    Expression<String>? corporateCode,
+    Expression<double>? wellnessScore,
+    Expression<int>? memberCount,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (companyName != null) 'company_name': companyName,
+      if (teamName != null) 'team_name': teamName,
+      if (corporateCode != null) 'corporate_code': corporateCode,
+      if (wellnessScore != null) 'wellness_score': wellnessScore,
+      if (memberCount != null) 'member_count': memberCount,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalCorporateTeamsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? companyName,
+      Value<String>? teamName,
+      Value<String>? corporateCode,
+      Value<double>? wellnessScore,
+      Value<int>? memberCount,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalCorporateTeamsCompanion(
+      id: id ?? this.id,
+      companyName: companyName ?? this.companyName,
+      teamName: teamName ?? this.teamName,
+      corporateCode: corporateCode ?? this.corporateCode,
+      wellnessScore: wellnessScore ?? this.wellnessScore,
+      memberCount: memberCount ?? this.memberCount,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (companyName.present) {
+      map['company_name'] = Variable<String>(companyName.value);
+    }
+    if (teamName.present) {
+      map['team_name'] = Variable<String>(teamName.value);
+    }
+    if (corporateCode.present) {
+      map['corporate_code'] = Variable<String>(corporateCode.value);
+    }
+    if (wellnessScore.present) {
+      map['wellness_score'] = Variable<double>(wellnessScore.value);
+    }
+    if (memberCount.present) {
+      map['member_count'] = Variable<int>(memberCount.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalCorporateTeamsCompanion(')
+          ..write('id: $id, ')
+          ..write('companyName: $companyName, ')
+          ..write('teamName: $teamName, ')
+          ..write('corporateCode: $corporateCode, ')
+          ..write('wellnessScore: $wellnessScore, ')
+          ..write('memberCount: $memberCount, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -18531,6 +19725,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalMetabolicProfilesTable(this);
   late final $LocalLongevityScoresTable localLongevityScores =
       $LocalLongevityScoresTable(this);
+  late final $LocalAbhaRecordsTable localAbhaRecords =
+      $LocalAbhaRecordsTable(this);
+  late final $LocalWhatsappLogsTable localWhatsappLogs =
+      $LocalWhatsappLogsTable(this);
+  late final $LocalCorporateTeamsTable localCorporateTeams =
+      $LocalCorporateTeamsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -18575,7 +19775,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localCoachBookings,
         localAffiliateReferrals,
         localMetabolicProfiles,
-        localLongevityScores
+        localLongevityScores,
+        localAbhaRecords,
+        localWhatsappLogs,
+        localCorporateTeams
       ];
 }
 
@@ -28011,6 +29214,643 @@ typedef $$LocalLongevityScoresTableProcessedTableManager
         ),
         LocalLongevityScore,
         PrefetchHooks Function()>;
+typedef $$LocalAbhaRecordsTableCreateCompanionBuilder
+    = LocalAbhaRecordsCompanion Function({
+  required String id,
+  required String userId,
+  required String abhaNumber,
+  required String abhaAddress,
+  Value<bool> isLinked,
+  Value<String> fhirSyncStatus,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalAbhaRecordsTableUpdateCompanionBuilder
+    = LocalAbhaRecordsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> abhaNumber,
+  Value<String> abhaAddress,
+  Value<bool> isLinked,
+  Value<String> fhirSyncStatus,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalAbhaRecordsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalAbhaRecordsTable> {
+  $$LocalAbhaRecordsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get abhaNumber => $composableBuilder(
+      column: $table.abhaNumber, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get abhaAddress => $composableBuilder(
+      column: $table.abhaAddress, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isLinked => $composableBuilder(
+      column: $table.isLinked, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get fhirSyncStatus => $composableBuilder(
+      column: $table.fhirSyncStatus,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalAbhaRecordsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalAbhaRecordsTable> {
+  $$LocalAbhaRecordsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get abhaNumber => $composableBuilder(
+      column: $table.abhaNumber, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get abhaAddress => $composableBuilder(
+      column: $table.abhaAddress, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isLinked => $composableBuilder(
+      column: $table.isLinked, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get fhirSyncStatus => $composableBuilder(
+      column: $table.fhirSyncStatus,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalAbhaRecordsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalAbhaRecordsTable> {
+  $$LocalAbhaRecordsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get abhaNumber => $composableBuilder(
+      column: $table.abhaNumber, builder: (column) => column);
+
+  GeneratedColumn<String> get abhaAddress => $composableBuilder(
+      column: $table.abhaAddress, builder: (column) => column);
+
+  GeneratedColumn<bool> get isLinked =>
+      $composableBuilder(column: $table.isLinked, builder: (column) => column);
+
+  GeneratedColumn<String> get fhirSyncStatus => $composableBuilder(
+      column: $table.fhirSyncStatus, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalAbhaRecordsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalAbhaRecordsTable,
+    LocalAbhaRecord,
+    $$LocalAbhaRecordsTableFilterComposer,
+    $$LocalAbhaRecordsTableOrderingComposer,
+    $$LocalAbhaRecordsTableAnnotationComposer,
+    $$LocalAbhaRecordsTableCreateCompanionBuilder,
+    $$LocalAbhaRecordsTableUpdateCompanionBuilder,
+    (
+      LocalAbhaRecord,
+      BaseReferences<_$AppDatabase, $LocalAbhaRecordsTable, LocalAbhaRecord>
+    ),
+    LocalAbhaRecord,
+    PrefetchHooks Function()> {
+  $$LocalAbhaRecordsTableTableManager(
+      _$AppDatabase db, $LocalAbhaRecordsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalAbhaRecordsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalAbhaRecordsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalAbhaRecordsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> abhaNumber = const Value.absent(),
+            Value<String> abhaAddress = const Value.absent(),
+            Value<bool> isLinked = const Value.absent(),
+            Value<String> fhirSyncStatus = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalAbhaRecordsCompanion(
+            id: id,
+            userId: userId,
+            abhaNumber: abhaNumber,
+            abhaAddress: abhaAddress,
+            isLinked: isLinked,
+            fhirSyncStatus: fhirSyncStatus,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String abhaNumber,
+            required String abhaAddress,
+            Value<bool> isLinked = const Value.absent(),
+            Value<String> fhirSyncStatus = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalAbhaRecordsCompanion.insert(
+            id: id,
+            userId: userId,
+            abhaNumber: abhaNumber,
+            abhaAddress: abhaAddress,
+            isLinked: isLinked,
+            fhirSyncStatus: fhirSyncStatus,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalAbhaRecordsTable, LocalAbhaRecord>(table),
+                    BaseReferences<_$AppDatabase, $LocalAbhaRecordsTable,
+                        LocalAbhaRecord>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalAbhaRecordsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalAbhaRecordsTable,
+    LocalAbhaRecord,
+    $$LocalAbhaRecordsTableFilterComposer,
+    $$LocalAbhaRecordsTableOrderingComposer,
+    $$LocalAbhaRecordsTableAnnotationComposer,
+    $$LocalAbhaRecordsTableCreateCompanionBuilder,
+    $$LocalAbhaRecordsTableUpdateCompanionBuilder,
+    (
+      LocalAbhaRecord,
+      BaseReferences<_$AppDatabase, $LocalAbhaRecordsTable, LocalAbhaRecord>
+    ),
+    LocalAbhaRecord,
+    PrefetchHooks Function()>;
+typedef $$LocalWhatsappLogsTableCreateCompanionBuilder
+    = LocalWhatsappLogsCompanion Function({
+  required String id,
+  required String userId,
+  required String messageId,
+  required String direction,
+  required String rawText,
+  Value<String?> parsedEntityType,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalWhatsappLogsTableUpdateCompanionBuilder
+    = LocalWhatsappLogsCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<String> messageId,
+  Value<String> direction,
+  Value<String> rawText,
+  Value<String?> parsedEntityType,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalWhatsappLogsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalWhatsappLogsTable> {
+  $$LocalWhatsappLogsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get messageId => $composableBuilder(
+      column: $table.messageId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get direction => $composableBuilder(
+      column: $table.direction, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get rawText => $composableBuilder(
+      column: $table.rawText, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get parsedEntityType => $composableBuilder(
+      column: $table.parsedEntityType,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalWhatsappLogsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalWhatsappLogsTable> {
+  $$LocalWhatsappLogsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get messageId => $composableBuilder(
+      column: $table.messageId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get direction => $composableBuilder(
+      column: $table.direction, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get rawText => $composableBuilder(
+      column: $table.rawText, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get parsedEntityType => $composableBuilder(
+      column: $table.parsedEntityType,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalWhatsappLogsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalWhatsappLogsTable> {
+  $$LocalWhatsappLogsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<String> get messageId =>
+      $composableBuilder(column: $table.messageId, builder: (column) => column);
+
+  GeneratedColumn<String> get direction =>
+      $composableBuilder(column: $table.direction, builder: (column) => column);
+
+  GeneratedColumn<String> get rawText =>
+      $composableBuilder(column: $table.rawText, builder: (column) => column);
+
+  GeneratedColumn<String> get parsedEntityType => $composableBuilder(
+      column: $table.parsedEntityType, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalWhatsappLogsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalWhatsappLogsTable,
+    LocalWhatsappLog,
+    $$LocalWhatsappLogsTableFilterComposer,
+    $$LocalWhatsappLogsTableOrderingComposer,
+    $$LocalWhatsappLogsTableAnnotationComposer,
+    $$LocalWhatsappLogsTableCreateCompanionBuilder,
+    $$LocalWhatsappLogsTableUpdateCompanionBuilder,
+    (
+      LocalWhatsappLog,
+      BaseReferences<_$AppDatabase, $LocalWhatsappLogsTable, LocalWhatsappLog>
+    ),
+    LocalWhatsappLog,
+    PrefetchHooks Function()> {
+  $$LocalWhatsappLogsTableTableManager(
+      _$AppDatabase db, $LocalWhatsappLogsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalWhatsappLogsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalWhatsappLogsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalWhatsappLogsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<String> messageId = const Value.absent(),
+            Value<String> direction = const Value.absent(),
+            Value<String> rawText = const Value.absent(),
+            Value<String?> parsedEntityType = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalWhatsappLogsCompanion(
+            id: id,
+            userId: userId,
+            messageId: messageId,
+            direction: direction,
+            rawText: rawText,
+            parsedEntityType: parsedEntityType,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required String messageId,
+            required String direction,
+            required String rawText,
+            Value<String?> parsedEntityType = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalWhatsappLogsCompanion.insert(
+            id: id,
+            userId: userId,
+            messageId: messageId,
+            direction: direction,
+            rawText: rawText,
+            parsedEntityType: parsedEntityType,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalWhatsappLogsTable, LocalWhatsappLog>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalWhatsappLogsTable,
+                        LocalWhatsappLog>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalWhatsappLogsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalWhatsappLogsTable,
+    LocalWhatsappLog,
+    $$LocalWhatsappLogsTableFilterComposer,
+    $$LocalWhatsappLogsTableOrderingComposer,
+    $$LocalWhatsappLogsTableAnnotationComposer,
+    $$LocalWhatsappLogsTableCreateCompanionBuilder,
+    $$LocalWhatsappLogsTableUpdateCompanionBuilder,
+    (
+      LocalWhatsappLog,
+      BaseReferences<_$AppDatabase, $LocalWhatsappLogsTable, LocalWhatsappLog>
+    ),
+    LocalWhatsappLog,
+    PrefetchHooks Function()>;
+typedef $$LocalCorporateTeamsTableCreateCompanionBuilder
+    = LocalCorporateTeamsCompanion Function({
+  required String id,
+  required String companyName,
+  required String teamName,
+  required String corporateCode,
+  required double wellnessScore,
+  required int memberCount,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalCorporateTeamsTableUpdateCompanionBuilder
+    = LocalCorporateTeamsCompanion Function({
+  Value<String> id,
+  Value<String> companyName,
+  Value<String> teamName,
+  Value<String> corporateCode,
+  Value<double> wellnessScore,
+  Value<int> memberCount,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalCorporateTeamsTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalCorporateTeamsTable> {
+  $$LocalCorporateTeamsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get companyName => $composableBuilder(
+      column: $table.companyName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get teamName => $composableBuilder(
+      column: $table.teamName, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get corporateCode => $composableBuilder(
+      column: $table.corporateCode, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get wellnessScore => $composableBuilder(
+      column: $table.wellnessScore, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get memberCount => $composableBuilder(
+      column: $table.memberCount, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalCorporateTeamsTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalCorporateTeamsTable> {
+  $$LocalCorporateTeamsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get companyName => $composableBuilder(
+      column: $table.companyName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get teamName => $composableBuilder(
+      column: $table.teamName, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get corporateCode => $composableBuilder(
+      column: $table.corporateCode,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get wellnessScore => $composableBuilder(
+      column: $table.wellnessScore,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get memberCount => $composableBuilder(
+      column: $table.memberCount, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalCorporateTeamsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalCorporateTeamsTable> {
+  $$LocalCorporateTeamsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get companyName => $composableBuilder(
+      column: $table.companyName, builder: (column) => column);
+
+  GeneratedColumn<String> get teamName =>
+      $composableBuilder(column: $table.teamName, builder: (column) => column);
+
+  GeneratedColumn<String> get corporateCode => $composableBuilder(
+      column: $table.corporateCode, builder: (column) => column);
+
+  GeneratedColumn<double> get wellnessScore => $composableBuilder(
+      column: $table.wellnessScore, builder: (column) => column);
+
+  GeneratedColumn<int> get memberCount => $composableBuilder(
+      column: $table.memberCount, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalCorporateTeamsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalCorporateTeamsTable,
+    LocalCorporateTeam,
+    $$LocalCorporateTeamsTableFilterComposer,
+    $$LocalCorporateTeamsTableOrderingComposer,
+    $$LocalCorporateTeamsTableAnnotationComposer,
+    $$LocalCorporateTeamsTableCreateCompanionBuilder,
+    $$LocalCorporateTeamsTableUpdateCompanionBuilder,
+    (
+      LocalCorporateTeam,
+      BaseReferences<_$AppDatabase, $LocalCorporateTeamsTable,
+          LocalCorporateTeam>
+    ),
+    LocalCorporateTeam,
+    PrefetchHooks Function()> {
+  $$LocalCorporateTeamsTableTableManager(
+      _$AppDatabase db, $LocalCorporateTeamsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalCorporateTeamsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalCorporateTeamsTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalCorporateTeamsTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> companyName = const Value.absent(),
+            Value<String> teamName = const Value.absent(),
+            Value<String> corporateCode = const Value.absent(),
+            Value<double> wellnessScore = const Value.absent(),
+            Value<int> memberCount = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCorporateTeamsCompanion(
+            id: id,
+            companyName: companyName,
+            teamName: teamName,
+            corporateCode: corporateCode,
+            wellnessScore: wellnessScore,
+            memberCount: memberCount,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String companyName,
+            required String teamName,
+            required String corporateCode,
+            required double wellnessScore,
+            required int memberCount,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalCorporateTeamsCompanion.insert(
+            id: id,
+            companyName: companyName,
+            teamName: teamName,
+            corporateCode: corporateCode,
+            wellnessScore: wellnessScore,
+            memberCount: memberCount,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalCorporateTeamsTable, LocalCorporateTeam>(
+                        table),
+                    BaseReferences<_$AppDatabase, $LocalCorporateTeamsTable,
+                        LocalCorporateTeam>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalCorporateTeamsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocalCorporateTeamsTable,
+    LocalCorporateTeam,
+    $$LocalCorporateTeamsTableFilterComposer,
+    $$LocalCorporateTeamsTableOrderingComposer,
+    $$LocalCorporateTeamsTableAnnotationComposer,
+    $$LocalCorporateTeamsTableCreateCompanionBuilder,
+    $$LocalCorporateTeamsTableUpdateCompanionBuilder,
+    (
+      LocalCorporateTeam,
+      BaseReferences<_$AppDatabase, $LocalCorporateTeamsTable,
+          LocalCorporateTeam>
+    ),
+    LocalCorporateTeam,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -28105,4 +29945,10 @@ class $AppDatabaseManager {
           _db, _db.localMetabolicProfiles);
   $$LocalLongevityScoresTableTableManager get localLongevityScores =>
       $$LocalLongevityScoresTableTableManager(_db, _db.localLongevityScores);
+  $$LocalAbhaRecordsTableTableManager get localAbhaRecords =>
+      $$LocalAbhaRecordsTableTableManager(_db, _db.localAbhaRecords);
+  $$LocalWhatsappLogsTableTableManager get localWhatsappLogs =>
+      $$LocalWhatsappLogsTableTableManager(_db, _db.localWhatsappLogs);
+  $$LocalCorporateTeamsTableTableManager get localCorporateTeams =>
+      $$LocalCorporateTeamsTableTableManager(_db, _db.localCorporateTeams);
 }
