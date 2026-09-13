@@ -590,6 +590,42 @@ class LocalAffiliateReferrals extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+// 39. Local Metabolic Profiles Table
+class LocalMetabolicProfiles extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  RealColumn get baselineBmr => real()();
+  RealColumn get estimatedTdee => real()();
+  RealColumn get currentCalorieTarget => real()();
+  RealColumn get adaptationFactor => real()();
+  TextColumn get plateauStatus => text()();
+  IntColumn get weeksStalled => integer()();
+  TextColumn get strategy => text()();
+  DateTimeColumn get calculatedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+// 40. Local Longevity Scores Table
+class LocalLongevityScores extends Table {
+  TextColumn get id => text()();
+  TextColumn get userId => text()();
+  IntColumn get overallScore => integer()();
+  RealColumn get cardiometabolicScore => real()();
+  RealColumn get cellularRecoveryScore => real()();
+  RealColumn get functionalStrengthScore => real()();
+  RealColumn get lifestyleScore => real()();
+  RealColumn get projectedLifespanGainYears => real()();
+  TextColumn get primaryLever => text()();
+  DateTimeColumn get assessedAt => dateTime()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @DriftDatabase(tables: [
   PendingMutations,
   LocalProfiles,
@@ -629,6 +665,8 @@ class LocalAffiliateReferrals extends Table {
   LocalCoachProfiles,
   LocalCoachBookings,
   LocalAffiliateReferrals,
+  LocalMetabolicProfiles,
+  LocalLongevityScores,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());

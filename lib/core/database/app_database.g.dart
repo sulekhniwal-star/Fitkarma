@@ -17254,6 +17254,1206 @@ class LocalAffiliateReferralsCompanion
   }
 }
 
+class $LocalMetabolicProfilesTable extends LocalMetabolicProfiles
+    with TableInfo<$LocalMetabolicProfilesTable, LocalMetabolicProfile> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalMetabolicProfilesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _baselineBmrMeta =
+      const VerificationMeta('baselineBmr');
+  @override
+  late final GeneratedColumn<double> baselineBmr = GeneratedColumn<double>(
+      'baseline_bmr', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _estimatedTdeeMeta =
+      const VerificationMeta('estimatedTdee');
+  @override
+  late final GeneratedColumn<double> estimatedTdee = GeneratedColumn<double>(
+      'estimated_tdee', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _currentCalorieTargetMeta =
+      const VerificationMeta('currentCalorieTarget');
+  @override
+  late final GeneratedColumn<double> currentCalorieTarget =
+      GeneratedColumn<double>('current_calorie_target', aliasedName, false,
+          type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _adaptationFactorMeta =
+      const VerificationMeta('adaptationFactor');
+  @override
+  late final GeneratedColumn<double> adaptationFactor = GeneratedColumn<double>(
+      'adaptation_factor', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _plateauStatusMeta =
+      const VerificationMeta('plateauStatus');
+  @override
+  late final GeneratedColumn<String> plateauStatus = GeneratedColumn<String>(
+      'plateau_status', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _weeksStalledMeta =
+      const VerificationMeta('weeksStalled');
+  @override
+  late final GeneratedColumn<int> weeksStalled = GeneratedColumn<int>(
+      'weeks_stalled', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _strategyMeta =
+      const VerificationMeta('strategy');
+  @override
+  late final GeneratedColumn<String> strategy = GeneratedColumn<String>(
+      'strategy', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _calculatedAtMeta =
+      const VerificationMeta('calculatedAt');
+  @override
+  late final GeneratedColumn<DateTime> calculatedAt = GeneratedColumn<DateTime>(
+      'calculated_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        baselineBmr,
+        estimatedTdee,
+        currentCalorieTarget,
+        adaptationFactor,
+        plateauStatus,
+        weeksStalled,
+        strategy,
+        calculatedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_metabolic_profiles';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalMetabolicProfile> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('baseline_bmr')) {
+      context.handle(
+          _baselineBmrMeta,
+          baselineBmr.isAcceptableOrUnknown(
+              data['baseline_bmr']!, _baselineBmrMeta));
+    } else if (isInserting) {
+      context.missing(_baselineBmrMeta);
+    }
+    if (data.containsKey('estimated_tdee')) {
+      context.handle(
+          _estimatedTdeeMeta,
+          estimatedTdee.isAcceptableOrUnknown(
+              data['estimated_tdee']!, _estimatedTdeeMeta));
+    } else if (isInserting) {
+      context.missing(_estimatedTdeeMeta);
+    }
+    if (data.containsKey('current_calorie_target')) {
+      context.handle(
+          _currentCalorieTargetMeta,
+          currentCalorieTarget.isAcceptableOrUnknown(
+              data['current_calorie_target']!, _currentCalorieTargetMeta));
+    } else if (isInserting) {
+      context.missing(_currentCalorieTargetMeta);
+    }
+    if (data.containsKey('adaptation_factor')) {
+      context.handle(
+          _adaptationFactorMeta,
+          adaptationFactor.isAcceptableOrUnknown(
+              data['adaptation_factor']!, _adaptationFactorMeta));
+    } else if (isInserting) {
+      context.missing(_adaptationFactorMeta);
+    }
+    if (data.containsKey('plateau_status')) {
+      context.handle(
+          _plateauStatusMeta,
+          plateauStatus.isAcceptableOrUnknown(
+              data['plateau_status']!, _plateauStatusMeta));
+    } else if (isInserting) {
+      context.missing(_plateauStatusMeta);
+    }
+    if (data.containsKey('weeks_stalled')) {
+      context.handle(
+          _weeksStalledMeta,
+          weeksStalled.isAcceptableOrUnknown(
+              data['weeks_stalled']!, _weeksStalledMeta));
+    } else if (isInserting) {
+      context.missing(_weeksStalledMeta);
+    }
+    if (data.containsKey('strategy')) {
+      context.handle(_strategyMeta,
+          strategy.isAcceptableOrUnknown(data['strategy']!, _strategyMeta));
+    } else if (isInserting) {
+      context.missing(_strategyMeta);
+    }
+    if (data.containsKey('calculated_at')) {
+      context.handle(
+          _calculatedAtMeta,
+          calculatedAt.isAcceptableOrUnknown(
+              data['calculated_at']!, _calculatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_calculatedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalMetabolicProfile map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalMetabolicProfile(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      baselineBmr: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}baseline_bmr'])!,
+      estimatedTdee: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}estimated_tdee'])!,
+      currentCalorieTarget: attachedDatabase.typeMapping.read(
+          DriftSqlType.double,
+          data['${effectivePrefix}current_calorie_target'])!,
+      adaptationFactor: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}adaptation_factor'])!,
+      plateauStatus: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}plateau_status'])!,
+      weeksStalled: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}weeks_stalled'])!,
+      strategy: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}strategy'])!,
+      calculatedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}calculated_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalMetabolicProfilesTable createAlias(String alias) {
+    return $LocalMetabolicProfilesTable(attachedDatabase, alias);
+  }
+}
+
+class LocalMetabolicProfile extends DataClass
+    implements Insertable<LocalMetabolicProfile> {
+  final String id;
+  final String userId;
+  final double baselineBmr;
+  final double estimatedTdee;
+  final double currentCalorieTarget;
+  final double adaptationFactor;
+  final String plateauStatus;
+  final int weeksStalled;
+  final String strategy;
+  final DateTime calculatedAt;
+  final DateTime createdAt;
+  const LocalMetabolicProfile(
+      {required this.id,
+      required this.userId,
+      required this.baselineBmr,
+      required this.estimatedTdee,
+      required this.currentCalorieTarget,
+      required this.adaptationFactor,
+      required this.plateauStatus,
+      required this.weeksStalled,
+      required this.strategy,
+      required this.calculatedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['baseline_bmr'] = Variable<double>(baselineBmr);
+    map['estimated_tdee'] = Variable<double>(estimatedTdee);
+    map['current_calorie_target'] = Variable<double>(currentCalorieTarget);
+    map['adaptation_factor'] = Variable<double>(adaptationFactor);
+    map['plateau_status'] = Variable<String>(plateauStatus);
+    map['weeks_stalled'] = Variable<int>(weeksStalled);
+    map['strategy'] = Variable<String>(strategy);
+    map['calculated_at'] = Variable<DateTime>(calculatedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalMetabolicProfilesCompanion toCompanion(bool nullToAbsent) {
+    return LocalMetabolicProfilesCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      baselineBmr: Value(baselineBmr),
+      estimatedTdee: Value(estimatedTdee),
+      currentCalorieTarget: Value(currentCalorieTarget),
+      adaptationFactor: Value(adaptationFactor),
+      plateauStatus: Value(plateauStatus),
+      weeksStalled: Value(weeksStalled),
+      strategy: Value(strategy),
+      calculatedAt: Value(calculatedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalMetabolicProfile.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalMetabolicProfile(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      baselineBmr: serializer.fromJson<double>(json['baselineBmr']),
+      estimatedTdee: serializer.fromJson<double>(json['estimatedTdee']),
+      currentCalorieTarget:
+          serializer.fromJson<double>(json['currentCalorieTarget']),
+      adaptationFactor: serializer.fromJson<double>(json['adaptationFactor']),
+      plateauStatus: serializer.fromJson<String>(json['plateauStatus']),
+      weeksStalled: serializer.fromJson<int>(json['weeksStalled']),
+      strategy: serializer.fromJson<String>(json['strategy']),
+      calculatedAt: serializer.fromJson<DateTime>(json['calculatedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'baselineBmr': serializer.toJson<double>(baselineBmr),
+      'estimatedTdee': serializer.toJson<double>(estimatedTdee),
+      'currentCalorieTarget': serializer.toJson<double>(currentCalorieTarget),
+      'adaptationFactor': serializer.toJson<double>(adaptationFactor),
+      'plateauStatus': serializer.toJson<String>(plateauStatus),
+      'weeksStalled': serializer.toJson<int>(weeksStalled),
+      'strategy': serializer.toJson<String>(strategy),
+      'calculatedAt': serializer.toJson<DateTime>(calculatedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalMetabolicProfile copyWith(
+          {String? id,
+          String? userId,
+          double? baselineBmr,
+          double? estimatedTdee,
+          double? currentCalorieTarget,
+          double? adaptationFactor,
+          String? plateauStatus,
+          int? weeksStalled,
+          String? strategy,
+          DateTime? calculatedAt,
+          DateTime? createdAt}) =>
+      LocalMetabolicProfile(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        baselineBmr: baselineBmr ?? this.baselineBmr,
+        estimatedTdee: estimatedTdee ?? this.estimatedTdee,
+        currentCalorieTarget: currentCalorieTarget ?? this.currentCalorieTarget,
+        adaptationFactor: adaptationFactor ?? this.adaptationFactor,
+        plateauStatus: plateauStatus ?? this.plateauStatus,
+        weeksStalled: weeksStalled ?? this.weeksStalled,
+        strategy: strategy ?? this.strategy,
+        calculatedAt: calculatedAt ?? this.calculatedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalMetabolicProfile copyWithCompanion(
+      LocalMetabolicProfilesCompanion data) {
+    return LocalMetabolicProfile(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      baselineBmr:
+          data.baselineBmr.present ? data.baselineBmr.value : this.baselineBmr,
+      estimatedTdee: data.estimatedTdee.present
+          ? data.estimatedTdee.value
+          : this.estimatedTdee,
+      currentCalorieTarget: data.currentCalorieTarget.present
+          ? data.currentCalorieTarget.value
+          : this.currentCalorieTarget,
+      adaptationFactor: data.adaptationFactor.present
+          ? data.adaptationFactor.value
+          : this.adaptationFactor,
+      plateauStatus: data.plateauStatus.present
+          ? data.plateauStatus.value
+          : this.plateauStatus,
+      weeksStalled: data.weeksStalled.present
+          ? data.weeksStalled.value
+          : this.weeksStalled,
+      strategy: data.strategy.present ? data.strategy.value : this.strategy,
+      calculatedAt: data.calculatedAt.present
+          ? data.calculatedAt.value
+          : this.calculatedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalMetabolicProfile(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('baselineBmr: $baselineBmr, ')
+          ..write('estimatedTdee: $estimatedTdee, ')
+          ..write('currentCalorieTarget: $currentCalorieTarget, ')
+          ..write('adaptationFactor: $adaptationFactor, ')
+          ..write('plateauStatus: $plateauStatus, ')
+          ..write('weeksStalled: $weeksStalled, ')
+          ..write('strategy: $strategy, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      userId,
+      baselineBmr,
+      estimatedTdee,
+      currentCalorieTarget,
+      adaptationFactor,
+      plateauStatus,
+      weeksStalled,
+      strategy,
+      calculatedAt,
+      createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalMetabolicProfile &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.baselineBmr == this.baselineBmr &&
+          other.estimatedTdee == this.estimatedTdee &&
+          other.currentCalorieTarget == this.currentCalorieTarget &&
+          other.adaptationFactor == this.adaptationFactor &&
+          other.plateauStatus == this.plateauStatus &&
+          other.weeksStalled == this.weeksStalled &&
+          other.strategy == this.strategy &&
+          other.calculatedAt == this.calculatedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalMetabolicProfilesCompanion
+    extends UpdateCompanion<LocalMetabolicProfile> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<double> baselineBmr;
+  final Value<double> estimatedTdee;
+  final Value<double> currentCalorieTarget;
+  final Value<double> adaptationFactor;
+  final Value<String> plateauStatus;
+  final Value<int> weeksStalled;
+  final Value<String> strategy;
+  final Value<DateTime> calculatedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalMetabolicProfilesCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.baselineBmr = const Value.absent(),
+    this.estimatedTdee = const Value.absent(),
+    this.currentCalorieTarget = const Value.absent(),
+    this.adaptationFactor = const Value.absent(),
+    this.plateauStatus = const Value.absent(),
+    this.weeksStalled = const Value.absent(),
+    this.strategy = const Value.absent(),
+    this.calculatedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalMetabolicProfilesCompanion.insert({
+    required String id,
+    required String userId,
+    required double baselineBmr,
+    required double estimatedTdee,
+    required double currentCalorieTarget,
+    required double adaptationFactor,
+    required String plateauStatus,
+    required int weeksStalled,
+    required String strategy,
+    required DateTime calculatedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        baselineBmr = Value(baselineBmr),
+        estimatedTdee = Value(estimatedTdee),
+        currentCalorieTarget = Value(currentCalorieTarget),
+        adaptationFactor = Value(adaptationFactor),
+        plateauStatus = Value(plateauStatus),
+        weeksStalled = Value(weeksStalled),
+        strategy = Value(strategy),
+        calculatedAt = Value(calculatedAt);
+  static Insertable<LocalMetabolicProfile> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<double>? baselineBmr,
+    Expression<double>? estimatedTdee,
+    Expression<double>? currentCalorieTarget,
+    Expression<double>? adaptationFactor,
+    Expression<String>? plateauStatus,
+    Expression<int>? weeksStalled,
+    Expression<String>? strategy,
+    Expression<DateTime>? calculatedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (baselineBmr != null) 'baseline_bmr': baselineBmr,
+      if (estimatedTdee != null) 'estimated_tdee': estimatedTdee,
+      if (currentCalorieTarget != null)
+        'current_calorie_target': currentCalorieTarget,
+      if (adaptationFactor != null) 'adaptation_factor': adaptationFactor,
+      if (plateauStatus != null) 'plateau_status': plateauStatus,
+      if (weeksStalled != null) 'weeks_stalled': weeksStalled,
+      if (strategy != null) 'strategy': strategy,
+      if (calculatedAt != null) 'calculated_at': calculatedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalMetabolicProfilesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<double>? baselineBmr,
+      Value<double>? estimatedTdee,
+      Value<double>? currentCalorieTarget,
+      Value<double>? adaptationFactor,
+      Value<String>? plateauStatus,
+      Value<int>? weeksStalled,
+      Value<String>? strategy,
+      Value<DateTime>? calculatedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalMetabolicProfilesCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      baselineBmr: baselineBmr ?? this.baselineBmr,
+      estimatedTdee: estimatedTdee ?? this.estimatedTdee,
+      currentCalorieTarget: currentCalorieTarget ?? this.currentCalorieTarget,
+      adaptationFactor: adaptationFactor ?? this.adaptationFactor,
+      plateauStatus: plateauStatus ?? this.plateauStatus,
+      weeksStalled: weeksStalled ?? this.weeksStalled,
+      strategy: strategy ?? this.strategy,
+      calculatedAt: calculatedAt ?? this.calculatedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (baselineBmr.present) {
+      map['baseline_bmr'] = Variable<double>(baselineBmr.value);
+    }
+    if (estimatedTdee.present) {
+      map['estimated_tdee'] = Variable<double>(estimatedTdee.value);
+    }
+    if (currentCalorieTarget.present) {
+      map['current_calorie_target'] =
+          Variable<double>(currentCalorieTarget.value);
+    }
+    if (adaptationFactor.present) {
+      map['adaptation_factor'] = Variable<double>(adaptationFactor.value);
+    }
+    if (plateauStatus.present) {
+      map['plateau_status'] = Variable<String>(plateauStatus.value);
+    }
+    if (weeksStalled.present) {
+      map['weeks_stalled'] = Variable<int>(weeksStalled.value);
+    }
+    if (strategy.present) {
+      map['strategy'] = Variable<String>(strategy.value);
+    }
+    if (calculatedAt.present) {
+      map['calculated_at'] = Variable<DateTime>(calculatedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalMetabolicProfilesCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('baselineBmr: $baselineBmr, ')
+          ..write('estimatedTdee: $estimatedTdee, ')
+          ..write('currentCalorieTarget: $currentCalorieTarget, ')
+          ..write('adaptationFactor: $adaptationFactor, ')
+          ..write('plateauStatus: $plateauStatus, ')
+          ..write('weeksStalled: $weeksStalled, ')
+          ..write('strategy: $strategy, ')
+          ..write('calculatedAt: $calculatedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocalLongevityScoresTable extends LocalLongevityScores
+    with TableInfo<$LocalLongevityScoresTable, LocalLongevityScore> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocalLongevityScoresTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _overallScoreMeta =
+      const VerificationMeta('overallScore');
+  @override
+  late final GeneratedColumn<int> overallScore = GeneratedColumn<int>(
+      'overall_score', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _cardiometabolicScoreMeta =
+      const VerificationMeta('cardiometabolicScore');
+  @override
+  late final GeneratedColumn<double> cardiometabolicScore =
+      GeneratedColumn<double>('cardiometabolic_score', aliasedName, false,
+          type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _cellularRecoveryScoreMeta =
+      const VerificationMeta('cellularRecoveryScore');
+  @override
+  late final GeneratedColumn<double> cellularRecoveryScore =
+      GeneratedColumn<double>('cellular_recovery_score', aliasedName, false,
+          type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _functionalStrengthScoreMeta =
+      const VerificationMeta('functionalStrengthScore');
+  @override
+  late final GeneratedColumn<double> functionalStrengthScore =
+      GeneratedColumn<double>('functional_strength_score', aliasedName, false,
+          type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _lifestyleScoreMeta =
+      const VerificationMeta('lifestyleScore');
+  @override
+  late final GeneratedColumn<double> lifestyleScore = GeneratedColumn<double>(
+      'lifestyle_score', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _projectedLifespanGainYearsMeta =
+      const VerificationMeta('projectedLifespanGainYears');
+  @override
+  late final GeneratedColumn<double> projectedLifespanGainYears =
+      GeneratedColumn<double>(
+          'projected_lifespan_gain_years', aliasedName, false,
+          type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _primaryLeverMeta =
+      const VerificationMeta('primaryLever');
+  @override
+  late final GeneratedColumn<String> primaryLever = GeneratedColumn<String>(
+      'primary_lever', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _assessedAtMeta =
+      const VerificationMeta('assessedAt');
+  @override
+  late final GeneratedColumn<DateTime> assessedAt = GeneratedColumn<DateTime>(
+      'assessed_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        userId,
+        overallScore,
+        cardiometabolicScore,
+        cellularRecoveryScore,
+        functionalStrengthScore,
+        lifestyleScore,
+        projectedLifespanGainYears,
+        primaryLever,
+        assessedAt,
+        createdAt
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'local_longevity_scores';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<LocalLongevityScore> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('overall_score')) {
+      context.handle(
+          _overallScoreMeta,
+          overallScore.isAcceptableOrUnknown(
+              data['overall_score']!, _overallScoreMeta));
+    } else if (isInserting) {
+      context.missing(_overallScoreMeta);
+    }
+    if (data.containsKey('cardiometabolic_score')) {
+      context.handle(
+          _cardiometabolicScoreMeta,
+          cardiometabolicScore.isAcceptableOrUnknown(
+              data['cardiometabolic_score']!, _cardiometabolicScoreMeta));
+    } else if (isInserting) {
+      context.missing(_cardiometabolicScoreMeta);
+    }
+    if (data.containsKey('cellular_recovery_score')) {
+      context.handle(
+          _cellularRecoveryScoreMeta,
+          cellularRecoveryScore.isAcceptableOrUnknown(
+              data['cellular_recovery_score']!, _cellularRecoveryScoreMeta));
+    } else if (isInserting) {
+      context.missing(_cellularRecoveryScoreMeta);
+    }
+    if (data.containsKey('functional_strength_score')) {
+      context.handle(
+          _functionalStrengthScoreMeta,
+          functionalStrengthScore.isAcceptableOrUnknown(
+              data['functional_strength_score']!,
+              _functionalStrengthScoreMeta));
+    } else if (isInserting) {
+      context.missing(_functionalStrengthScoreMeta);
+    }
+    if (data.containsKey('lifestyle_score')) {
+      context.handle(
+          _lifestyleScoreMeta,
+          lifestyleScore.isAcceptableOrUnknown(
+              data['lifestyle_score']!, _lifestyleScoreMeta));
+    } else if (isInserting) {
+      context.missing(_lifestyleScoreMeta);
+    }
+    if (data.containsKey('projected_lifespan_gain_years')) {
+      context.handle(
+          _projectedLifespanGainYearsMeta,
+          projectedLifespanGainYears.isAcceptableOrUnknown(
+              data['projected_lifespan_gain_years']!,
+              _projectedLifespanGainYearsMeta));
+    } else if (isInserting) {
+      context.missing(_projectedLifespanGainYearsMeta);
+    }
+    if (data.containsKey('primary_lever')) {
+      context.handle(
+          _primaryLeverMeta,
+          primaryLever.isAcceptableOrUnknown(
+              data['primary_lever']!, _primaryLeverMeta));
+    } else if (isInserting) {
+      context.missing(_primaryLeverMeta);
+    }
+    if (data.containsKey('assessed_at')) {
+      context.handle(
+          _assessedAtMeta,
+          assessedAt.isAcceptableOrUnknown(
+              data['assessed_at']!, _assessedAtMeta));
+    } else if (isInserting) {
+      context.missing(_assessedAtMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocalLongevityScore map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocalLongevityScore(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      overallScore: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}overall_score'])!,
+      cardiometabolicScore: attachedDatabase.typeMapping.read(
+          DriftSqlType.double,
+          data['${effectivePrefix}cardiometabolic_score'])!,
+      cellularRecoveryScore: attachedDatabase.typeMapping.read(
+          DriftSqlType.double,
+          data['${effectivePrefix}cellular_recovery_score'])!,
+      functionalStrengthScore: attachedDatabase.typeMapping.read(
+          DriftSqlType.double,
+          data['${effectivePrefix}functional_strength_score'])!,
+      lifestyleScore: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}lifestyle_score'])!,
+      projectedLifespanGainYears: attachedDatabase.typeMapping.read(
+          DriftSqlType.double,
+          data['${effectivePrefix}projected_lifespan_gain_years'])!,
+      primaryLever: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}primary_lever'])!,
+      assessedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}assessed_at'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $LocalLongevityScoresTable createAlias(String alias) {
+    return $LocalLongevityScoresTable(attachedDatabase, alias);
+  }
+}
+
+class LocalLongevityScore extends DataClass
+    implements Insertable<LocalLongevityScore> {
+  final String id;
+  final String userId;
+  final int overallScore;
+  final double cardiometabolicScore;
+  final double cellularRecoveryScore;
+  final double functionalStrengthScore;
+  final double lifestyleScore;
+  final double projectedLifespanGainYears;
+  final String primaryLever;
+  final DateTime assessedAt;
+  final DateTime createdAt;
+  const LocalLongevityScore(
+      {required this.id,
+      required this.userId,
+      required this.overallScore,
+      required this.cardiometabolicScore,
+      required this.cellularRecoveryScore,
+      required this.functionalStrengthScore,
+      required this.lifestyleScore,
+      required this.projectedLifespanGainYears,
+      required this.primaryLever,
+      required this.assessedAt,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['user_id'] = Variable<String>(userId);
+    map['overall_score'] = Variable<int>(overallScore);
+    map['cardiometabolic_score'] = Variable<double>(cardiometabolicScore);
+    map['cellular_recovery_score'] = Variable<double>(cellularRecoveryScore);
+    map['functional_strength_score'] =
+        Variable<double>(functionalStrengthScore);
+    map['lifestyle_score'] = Variable<double>(lifestyleScore);
+    map['projected_lifespan_gain_years'] =
+        Variable<double>(projectedLifespanGainYears);
+    map['primary_lever'] = Variable<String>(primaryLever);
+    map['assessed_at'] = Variable<DateTime>(assessedAt);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  LocalLongevityScoresCompanion toCompanion(bool nullToAbsent) {
+    return LocalLongevityScoresCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      overallScore: Value(overallScore),
+      cardiometabolicScore: Value(cardiometabolicScore),
+      cellularRecoveryScore: Value(cellularRecoveryScore),
+      functionalStrengthScore: Value(functionalStrengthScore),
+      lifestyleScore: Value(lifestyleScore),
+      projectedLifespanGainYears: Value(projectedLifespanGainYears),
+      primaryLever: Value(primaryLever),
+      assessedAt: Value(assessedAt),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory LocalLongevityScore.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocalLongevityScore(
+      id: serializer.fromJson<String>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
+      overallScore: serializer.fromJson<int>(json['overallScore']),
+      cardiometabolicScore:
+          serializer.fromJson<double>(json['cardiometabolicScore']),
+      cellularRecoveryScore:
+          serializer.fromJson<double>(json['cellularRecoveryScore']),
+      functionalStrengthScore:
+          serializer.fromJson<double>(json['functionalStrengthScore']),
+      lifestyleScore: serializer.fromJson<double>(json['lifestyleScore']),
+      projectedLifespanGainYears:
+          serializer.fromJson<double>(json['projectedLifespanGainYears']),
+      primaryLever: serializer.fromJson<String>(json['primaryLever']),
+      assessedAt: serializer.fromJson<DateTime>(json['assessedAt']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'userId': serializer.toJson<String>(userId),
+      'overallScore': serializer.toJson<int>(overallScore),
+      'cardiometabolicScore': serializer.toJson<double>(cardiometabolicScore),
+      'cellularRecoveryScore': serializer.toJson<double>(cellularRecoveryScore),
+      'functionalStrengthScore':
+          serializer.toJson<double>(functionalStrengthScore),
+      'lifestyleScore': serializer.toJson<double>(lifestyleScore),
+      'projectedLifespanGainYears':
+          serializer.toJson<double>(projectedLifespanGainYears),
+      'primaryLever': serializer.toJson<String>(primaryLever),
+      'assessedAt': serializer.toJson<DateTime>(assessedAt),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  LocalLongevityScore copyWith(
+          {String? id,
+          String? userId,
+          int? overallScore,
+          double? cardiometabolicScore,
+          double? cellularRecoveryScore,
+          double? functionalStrengthScore,
+          double? lifestyleScore,
+          double? projectedLifespanGainYears,
+          String? primaryLever,
+          DateTime? assessedAt,
+          DateTime? createdAt}) =>
+      LocalLongevityScore(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        overallScore: overallScore ?? this.overallScore,
+        cardiometabolicScore: cardiometabolicScore ?? this.cardiometabolicScore,
+        cellularRecoveryScore:
+            cellularRecoveryScore ?? this.cellularRecoveryScore,
+        functionalStrengthScore:
+            functionalStrengthScore ?? this.functionalStrengthScore,
+        lifestyleScore: lifestyleScore ?? this.lifestyleScore,
+        projectedLifespanGainYears:
+            projectedLifespanGainYears ?? this.projectedLifespanGainYears,
+        primaryLever: primaryLever ?? this.primaryLever,
+        assessedAt: assessedAt ?? this.assessedAt,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  LocalLongevityScore copyWithCompanion(LocalLongevityScoresCompanion data) {
+    return LocalLongevityScore(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      overallScore: data.overallScore.present
+          ? data.overallScore.value
+          : this.overallScore,
+      cardiometabolicScore: data.cardiometabolicScore.present
+          ? data.cardiometabolicScore.value
+          : this.cardiometabolicScore,
+      cellularRecoveryScore: data.cellularRecoveryScore.present
+          ? data.cellularRecoveryScore.value
+          : this.cellularRecoveryScore,
+      functionalStrengthScore: data.functionalStrengthScore.present
+          ? data.functionalStrengthScore.value
+          : this.functionalStrengthScore,
+      lifestyleScore: data.lifestyleScore.present
+          ? data.lifestyleScore.value
+          : this.lifestyleScore,
+      projectedLifespanGainYears: data.projectedLifespanGainYears.present
+          ? data.projectedLifespanGainYears.value
+          : this.projectedLifespanGainYears,
+      primaryLever: data.primaryLever.present
+          ? data.primaryLever.value
+          : this.primaryLever,
+      assessedAt:
+          data.assessedAt.present ? data.assessedAt.value : this.assessedAt,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalLongevityScore(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('overallScore: $overallScore, ')
+          ..write('cardiometabolicScore: $cardiometabolicScore, ')
+          ..write('cellularRecoveryScore: $cellularRecoveryScore, ')
+          ..write('functionalStrengthScore: $functionalStrengthScore, ')
+          ..write('lifestyleScore: $lifestyleScore, ')
+          ..write('projectedLifespanGainYears: $projectedLifespanGainYears, ')
+          ..write('primaryLever: $primaryLever, ')
+          ..write('assessedAt: $assessedAt, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      userId,
+      overallScore,
+      cardiometabolicScore,
+      cellularRecoveryScore,
+      functionalStrengthScore,
+      lifestyleScore,
+      projectedLifespanGainYears,
+      primaryLever,
+      assessedAt,
+      createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocalLongevityScore &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.overallScore == this.overallScore &&
+          other.cardiometabolicScore == this.cardiometabolicScore &&
+          other.cellularRecoveryScore == this.cellularRecoveryScore &&
+          other.functionalStrengthScore == this.functionalStrengthScore &&
+          other.lifestyleScore == this.lifestyleScore &&
+          other.projectedLifespanGainYears == this.projectedLifespanGainYears &&
+          other.primaryLever == this.primaryLever &&
+          other.assessedAt == this.assessedAt &&
+          other.createdAt == this.createdAt);
+}
+
+class LocalLongevityScoresCompanion
+    extends UpdateCompanion<LocalLongevityScore> {
+  final Value<String> id;
+  final Value<String> userId;
+  final Value<int> overallScore;
+  final Value<double> cardiometabolicScore;
+  final Value<double> cellularRecoveryScore;
+  final Value<double> functionalStrengthScore;
+  final Value<double> lifestyleScore;
+  final Value<double> projectedLifespanGainYears;
+  final Value<String> primaryLever;
+  final Value<DateTime> assessedAt;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const LocalLongevityScoresCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.overallScore = const Value.absent(),
+    this.cardiometabolicScore = const Value.absent(),
+    this.cellularRecoveryScore = const Value.absent(),
+    this.functionalStrengthScore = const Value.absent(),
+    this.lifestyleScore = const Value.absent(),
+    this.projectedLifespanGainYears = const Value.absent(),
+    this.primaryLever = const Value.absent(),
+    this.assessedAt = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LocalLongevityScoresCompanion.insert({
+    required String id,
+    required String userId,
+    required int overallScore,
+    required double cardiometabolicScore,
+    required double cellularRecoveryScore,
+    required double functionalStrengthScore,
+    required double lifestyleScore,
+    required double projectedLifespanGainYears,
+    required String primaryLever,
+    required DateTime assessedAt,
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
+        overallScore = Value(overallScore),
+        cardiometabolicScore = Value(cardiometabolicScore),
+        cellularRecoveryScore = Value(cellularRecoveryScore),
+        functionalStrengthScore = Value(functionalStrengthScore),
+        lifestyleScore = Value(lifestyleScore),
+        projectedLifespanGainYears = Value(projectedLifespanGainYears),
+        primaryLever = Value(primaryLever),
+        assessedAt = Value(assessedAt);
+  static Insertable<LocalLongevityScore> custom({
+    Expression<String>? id,
+    Expression<String>? userId,
+    Expression<int>? overallScore,
+    Expression<double>? cardiometabolicScore,
+    Expression<double>? cellularRecoveryScore,
+    Expression<double>? functionalStrengthScore,
+    Expression<double>? lifestyleScore,
+    Expression<double>? projectedLifespanGainYears,
+    Expression<String>? primaryLever,
+    Expression<DateTime>? assessedAt,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (overallScore != null) 'overall_score': overallScore,
+      if (cardiometabolicScore != null)
+        'cardiometabolic_score': cardiometabolicScore,
+      if (cellularRecoveryScore != null)
+        'cellular_recovery_score': cellularRecoveryScore,
+      if (functionalStrengthScore != null)
+        'functional_strength_score': functionalStrengthScore,
+      if (lifestyleScore != null) 'lifestyle_score': lifestyleScore,
+      if (projectedLifespanGainYears != null)
+        'projected_lifespan_gain_years': projectedLifespanGainYears,
+      if (primaryLever != null) 'primary_lever': primaryLever,
+      if (assessedAt != null) 'assessed_at': assessedAt,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LocalLongevityScoresCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? userId,
+      Value<int>? overallScore,
+      Value<double>? cardiometabolicScore,
+      Value<double>? cellularRecoveryScore,
+      Value<double>? functionalStrengthScore,
+      Value<double>? lifestyleScore,
+      Value<double>? projectedLifespanGainYears,
+      Value<String>? primaryLever,
+      Value<DateTime>? assessedAt,
+      Value<DateTime>? createdAt,
+      Value<int>? rowid}) {
+    return LocalLongevityScoresCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      overallScore: overallScore ?? this.overallScore,
+      cardiometabolicScore: cardiometabolicScore ?? this.cardiometabolicScore,
+      cellularRecoveryScore:
+          cellularRecoveryScore ?? this.cellularRecoveryScore,
+      functionalStrengthScore:
+          functionalStrengthScore ?? this.functionalStrengthScore,
+      lifestyleScore: lifestyleScore ?? this.lifestyleScore,
+      projectedLifespanGainYears:
+          projectedLifespanGainYears ?? this.projectedLifespanGainYears,
+      primaryLever: primaryLever ?? this.primaryLever,
+      assessedAt: assessedAt ?? this.assessedAt,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
+    }
+    if (overallScore.present) {
+      map['overall_score'] = Variable<int>(overallScore.value);
+    }
+    if (cardiometabolicScore.present) {
+      map['cardiometabolic_score'] =
+          Variable<double>(cardiometabolicScore.value);
+    }
+    if (cellularRecoveryScore.present) {
+      map['cellular_recovery_score'] =
+          Variable<double>(cellularRecoveryScore.value);
+    }
+    if (functionalStrengthScore.present) {
+      map['functional_strength_score'] =
+          Variable<double>(functionalStrengthScore.value);
+    }
+    if (lifestyleScore.present) {
+      map['lifestyle_score'] = Variable<double>(lifestyleScore.value);
+    }
+    if (projectedLifespanGainYears.present) {
+      map['projected_lifespan_gain_years'] =
+          Variable<double>(projectedLifespanGainYears.value);
+    }
+    if (primaryLever.present) {
+      map['primary_lever'] = Variable<String>(primaryLever.value);
+    }
+    if (assessedAt.present) {
+      map['assessed_at'] = Variable<DateTime>(assessedAt.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocalLongevityScoresCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('overallScore: $overallScore, ')
+          ..write('cardiometabolicScore: $cardiometabolicScore, ')
+          ..write('cellularRecoveryScore: $cellularRecoveryScore, ')
+          ..write('functionalStrengthScore: $functionalStrengthScore, ')
+          ..write('lifestyleScore: $lifestyleScore, ')
+          ..write('projectedLifespanGainYears: $projectedLifespanGainYears, ')
+          ..write('primaryLever: $primaryLever, ')
+          ..write('assessedAt: $assessedAt, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -17327,6 +18527,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $LocalCoachBookingsTable(this);
   late final $LocalAffiliateReferralsTable localAffiliateReferrals =
       $LocalAffiliateReferralsTable(this);
+  late final $LocalMetabolicProfilesTable localMetabolicProfiles =
+      $LocalMetabolicProfilesTable(this);
+  late final $LocalLongevityScoresTable localLongevityScores =
+      $LocalLongevityScoresTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -17369,7 +18573,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         localEntitlements,
         localCoachProfiles,
         localCoachBookings,
-        localAffiliateReferrals
+        localAffiliateReferrals,
+        localMetabolicProfiles,
+        localLongevityScores
       ];
 }
 
@@ -26236,6 +27442,575 @@ typedef $$LocalAffiliateReferralsTableProcessedTableManager
         ),
         LocalAffiliateReferral,
         PrefetchHooks Function()>;
+typedef $$LocalMetabolicProfilesTableCreateCompanionBuilder
+    = LocalMetabolicProfilesCompanion Function({
+  required String id,
+  required String userId,
+  required double baselineBmr,
+  required double estimatedTdee,
+  required double currentCalorieTarget,
+  required double adaptationFactor,
+  required String plateauStatus,
+  required int weeksStalled,
+  required String strategy,
+  required DateTime calculatedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalMetabolicProfilesTableUpdateCompanionBuilder
+    = LocalMetabolicProfilesCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<double> baselineBmr,
+  Value<double> estimatedTdee,
+  Value<double> currentCalorieTarget,
+  Value<double> adaptationFactor,
+  Value<String> plateauStatus,
+  Value<int> weeksStalled,
+  Value<String> strategy,
+  Value<DateTime> calculatedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalMetabolicProfilesTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalMetabolicProfilesTable> {
+  $$LocalMetabolicProfilesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get baselineBmr => $composableBuilder(
+      column: $table.baselineBmr, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get estimatedTdee => $composableBuilder(
+      column: $table.estimatedTdee, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get currentCalorieTarget => $composableBuilder(
+      column: $table.currentCalorieTarget,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get adaptationFactor => $composableBuilder(
+      column: $table.adaptationFactor,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get plateauStatus => $composableBuilder(
+      column: $table.plateauStatus, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get weeksStalled => $composableBuilder(
+      column: $table.weeksStalled, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get strategy => $composableBuilder(
+      column: $table.strategy, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalMetabolicProfilesTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalMetabolicProfilesTable> {
+  $$LocalMetabolicProfilesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get baselineBmr => $composableBuilder(
+      column: $table.baselineBmr, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get estimatedTdee => $composableBuilder(
+      column: $table.estimatedTdee,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get currentCalorieTarget => $composableBuilder(
+      column: $table.currentCalorieTarget,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get adaptationFactor => $composableBuilder(
+      column: $table.adaptationFactor,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get plateauStatus => $composableBuilder(
+      column: $table.plateauStatus,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get weeksStalled => $composableBuilder(
+      column: $table.weeksStalled,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get strategy => $composableBuilder(
+      column: $table.strategy, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalMetabolicProfilesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalMetabolicProfilesTable> {
+  $$LocalMetabolicProfilesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<double> get baselineBmr => $composableBuilder(
+      column: $table.baselineBmr, builder: (column) => column);
+
+  GeneratedColumn<double> get estimatedTdee => $composableBuilder(
+      column: $table.estimatedTdee, builder: (column) => column);
+
+  GeneratedColumn<double> get currentCalorieTarget => $composableBuilder(
+      column: $table.currentCalorieTarget, builder: (column) => column);
+
+  GeneratedColumn<double> get adaptationFactor => $composableBuilder(
+      column: $table.adaptationFactor, builder: (column) => column);
+
+  GeneratedColumn<String> get plateauStatus => $composableBuilder(
+      column: $table.plateauStatus, builder: (column) => column);
+
+  GeneratedColumn<int> get weeksStalled => $composableBuilder(
+      column: $table.weeksStalled, builder: (column) => column);
+
+  GeneratedColumn<String> get strategy =>
+      $composableBuilder(column: $table.strategy, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get calculatedAt => $composableBuilder(
+      column: $table.calculatedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalMetabolicProfilesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalMetabolicProfilesTable,
+    LocalMetabolicProfile,
+    $$LocalMetabolicProfilesTableFilterComposer,
+    $$LocalMetabolicProfilesTableOrderingComposer,
+    $$LocalMetabolicProfilesTableAnnotationComposer,
+    $$LocalMetabolicProfilesTableCreateCompanionBuilder,
+    $$LocalMetabolicProfilesTableUpdateCompanionBuilder,
+    (
+      LocalMetabolicProfile,
+      BaseReferences<_$AppDatabase, $LocalMetabolicProfilesTable,
+          LocalMetabolicProfile>
+    ),
+    LocalMetabolicProfile,
+    PrefetchHooks Function()> {
+  $$LocalMetabolicProfilesTableTableManager(
+      _$AppDatabase db, $LocalMetabolicProfilesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalMetabolicProfilesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalMetabolicProfilesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalMetabolicProfilesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<double> baselineBmr = const Value.absent(),
+            Value<double> estimatedTdee = const Value.absent(),
+            Value<double> currentCalorieTarget = const Value.absent(),
+            Value<double> adaptationFactor = const Value.absent(),
+            Value<String> plateauStatus = const Value.absent(),
+            Value<int> weeksStalled = const Value.absent(),
+            Value<String> strategy = const Value.absent(),
+            Value<DateTime> calculatedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalMetabolicProfilesCompanion(
+            id: id,
+            userId: userId,
+            baselineBmr: baselineBmr,
+            estimatedTdee: estimatedTdee,
+            currentCalorieTarget: currentCalorieTarget,
+            adaptationFactor: adaptationFactor,
+            plateauStatus: plateauStatus,
+            weeksStalled: weeksStalled,
+            strategy: strategy,
+            calculatedAt: calculatedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required double baselineBmr,
+            required double estimatedTdee,
+            required double currentCalorieTarget,
+            required double adaptationFactor,
+            required String plateauStatus,
+            required int weeksStalled,
+            required String strategy,
+            required DateTime calculatedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalMetabolicProfilesCompanion.insert(
+            id: id,
+            userId: userId,
+            baselineBmr: baselineBmr,
+            estimatedTdee: estimatedTdee,
+            currentCalorieTarget: currentCalorieTarget,
+            adaptationFactor: adaptationFactor,
+            plateauStatus: plateauStatus,
+            weeksStalled: weeksStalled,
+            strategy: strategy,
+            calculatedAt: calculatedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalMetabolicProfilesTable,
+                        LocalMetabolicProfile>(table),
+                    BaseReferences<_$AppDatabase, $LocalMetabolicProfilesTable,
+                        LocalMetabolicProfile>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalMetabolicProfilesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalMetabolicProfilesTable,
+        LocalMetabolicProfile,
+        $$LocalMetabolicProfilesTableFilterComposer,
+        $$LocalMetabolicProfilesTableOrderingComposer,
+        $$LocalMetabolicProfilesTableAnnotationComposer,
+        $$LocalMetabolicProfilesTableCreateCompanionBuilder,
+        $$LocalMetabolicProfilesTableUpdateCompanionBuilder,
+        (
+          LocalMetabolicProfile,
+          BaseReferences<_$AppDatabase, $LocalMetabolicProfilesTable,
+              LocalMetabolicProfile>
+        ),
+        LocalMetabolicProfile,
+        PrefetchHooks Function()>;
+typedef $$LocalLongevityScoresTableCreateCompanionBuilder
+    = LocalLongevityScoresCompanion Function({
+  required String id,
+  required String userId,
+  required int overallScore,
+  required double cardiometabolicScore,
+  required double cellularRecoveryScore,
+  required double functionalStrengthScore,
+  required double lifestyleScore,
+  required double projectedLifespanGainYears,
+  required String primaryLever,
+  required DateTime assessedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+typedef $$LocalLongevityScoresTableUpdateCompanionBuilder
+    = LocalLongevityScoresCompanion Function({
+  Value<String> id,
+  Value<String> userId,
+  Value<int> overallScore,
+  Value<double> cardiometabolicScore,
+  Value<double> cellularRecoveryScore,
+  Value<double> functionalStrengthScore,
+  Value<double> lifestyleScore,
+  Value<double> projectedLifespanGainYears,
+  Value<String> primaryLever,
+  Value<DateTime> assessedAt,
+  Value<DateTime> createdAt,
+  Value<int> rowid,
+});
+
+class $$LocalLongevityScoresTableFilterComposer
+    extends Composer<_$AppDatabase, $LocalLongevityScoresTable> {
+  $$LocalLongevityScoresTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get overallScore => $composableBuilder(
+      column: $table.overallScore, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get cardiometabolicScore => $composableBuilder(
+      column: $table.cardiometabolicScore,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get cellularRecoveryScore => $composableBuilder(
+      column: $table.cellularRecoveryScore,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get functionalStrengthScore => $composableBuilder(
+      column: $table.functionalStrengthScore,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get lifestyleScore => $composableBuilder(
+      column: $table.lifestyleScore,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get projectedLifespanGainYears => $composableBuilder(
+      column: $table.projectedLifespanGainYears,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get primaryLever => $composableBuilder(
+      column: $table.primaryLever, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get assessedAt => $composableBuilder(
+      column: $table.assessedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocalLongevityScoresTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocalLongevityScoresTable> {
+  $$LocalLongevityScoresTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get userId => $composableBuilder(
+      column: $table.userId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get overallScore => $composableBuilder(
+      column: $table.overallScore,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get cardiometabolicScore => $composableBuilder(
+      column: $table.cardiometabolicScore,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get cellularRecoveryScore => $composableBuilder(
+      column: $table.cellularRecoveryScore,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get functionalStrengthScore => $composableBuilder(
+      column: $table.functionalStrengthScore,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get lifestyleScore => $composableBuilder(
+      column: $table.lifestyleScore,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get projectedLifespanGainYears => $composableBuilder(
+      column: $table.projectedLifespanGainYears,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get primaryLever => $composableBuilder(
+      column: $table.primaryLever,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get assessedAt => $composableBuilder(
+      column: $table.assessedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocalLongevityScoresTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocalLongevityScoresTable> {
+  $$LocalLongevityScoresTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get userId =>
+      $composableBuilder(column: $table.userId, builder: (column) => column);
+
+  GeneratedColumn<int> get overallScore => $composableBuilder(
+      column: $table.overallScore, builder: (column) => column);
+
+  GeneratedColumn<double> get cardiometabolicScore => $composableBuilder(
+      column: $table.cardiometabolicScore, builder: (column) => column);
+
+  GeneratedColumn<double> get cellularRecoveryScore => $composableBuilder(
+      column: $table.cellularRecoveryScore, builder: (column) => column);
+
+  GeneratedColumn<double> get functionalStrengthScore => $composableBuilder(
+      column: $table.functionalStrengthScore, builder: (column) => column);
+
+  GeneratedColumn<double> get lifestyleScore => $composableBuilder(
+      column: $table.lifestyleScore, builder: (column) => column);
+
+  GeneratedColumn<double> get projectedLifespanGainYears => $composableBuilder(
+      column: $table.projectedLifespanGainYears, builder: (column) => column);
+
+  GeneratedColumn<String> get primaryLever => $composableBuilder(
+      column: $table.primaryLever, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get assessedAt => $composableBuilder(
+      column: $table.assessedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$LocalLongevityScoresTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocalLongevityScoresTable,
+    LocalLongevityScore,
+    $$LocalLongevityScoresTableFilterComposer,
+    $$LocalLongevityScoresTableOrderingComposer,
+    $$LocalLongevityScoresTableAnnotationComposer,
+    $$LocalLongevityScoresTableCreateCompanionBuilder,
+    $$LocalLongevityScoresTableUpdateCompanionBuilder,
+    (
+      LocalLongevityScore,
+      BaseReferences<_$AppDatabase, $LocalLongevityScoresTable,
+          LocalLongevityScore>
+    ),
+    LocalLongevityScore,
+    PrefetchHooks Function()> {
+  $$LocalLongevityScoresTableTableManager(
+      _$AppDatabase db, $LocalLongevityScoresTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocalLongevityScoresTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocalLongevityScoresTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocalLongevityScoresTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> userId = const Value.absent(),
+            Value<int> overallScore = const Value.absent(),
+            Value<double> cardiometabolicScore = const Value.absent(),
+            Value<double> cellularRecoveryScore = const Value.absent(),
+            Value<double> functionalStrengthScore = const Value.absent(),
+            Value<double> lifestyleScore = const Value.absent(),
+            Value<double> projectedLifespanGainYears = const Value.absent(),
+            Value<String> primaryLever = const Value.absent(),
+            Value<DateTime> assessedAt = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalLongevityScoresCompanion(
+            id: id,
+            userId: userId,
+            overallScore: overallScore,
+            cardiometabolicScore: cardiometabolicScore,
+            cellularRecoveryScore: cellularRecoveryScore,
+            functionalStrengthScore: functionalStrengthScore,
+            lifestyleScore: lifestyleScore,
+            projectedLifespanGainYears: projectedLifespanGainYears,
+            primaryLever: primaryLever,
+            assessedAt: assessedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String userId,
+            required int overallScore,
+            required double cardiometabolicScore,
+            required double cellularRecoveryScore,
+            required double functionalStrengthScore,
+            required double lifestyleScore,
+            required double projectedLifespanGainYears,
+            required String primaryLever,
+            required DateTime assessedAt,
+            Value<DateTime> createdAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              LocalLongevityScoresCompanion.insert(
+            id: id,
+            userId: userId,
+            overallScore: overallScore,
+            cardiometabolicScore: cardiometabolicScore,
+            cellularRecoveryScore: cellularRecoveryScore,
+            functionalStrengthScore: functionalStrengthScore,
+            lifestyleScore: lifestyleScore,
+            projectedLifespanGainYears: projectedLifespanGainYears,
+            primaryLever: primaryLever,
+            assessedAt: assessedAt,
+            createdAt: createdAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable<$LocalLongevityScoresTable,
+                        LocalLongevityScore>(table),
+                    BaseReferences<_$AppDatabase, $LocalLongevityScoresTable,
+                        LocalLongevityScore>(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocalLongevityScoresTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $LocalLongevityScoresTable,
+        LocalLongevityScore,
+        $$LocalLongevityScoresTableFilterComposer,
+        $$LocalLongevityScoresTableOrderingComposer,
+        $$LocalLongevityScoresTableAnnotationComposer,
+        $$LocalLongevityScoresTableCreateCompanionBuilder,
+        $$LocalLongevityScoresTableUpdateCompanionBuilder,
+        (
+          LocalLongevityScore,
+          BaseReferences<_$AppDatabase, $LocalLongevityScoresTable,
+              LocalLongevityScore>
+        ),
+        LocalLongevityScore,
+        PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -26325,4 +28100,9 @@ class $AppDatabaseManager {
   $$LocalAffiliateReferralsTableTableManager get localAffiliateReferrals =>
       $$LocalAffiliateReferralsTableTableManager(
           _db, _db.localAffiliateReferrals);
+  $$LocalMetabolicProfilesTableTableManager get localMetabolicProfiles =>
+      $$LocalMetabolicProfilesTableTableManager(
+          _db, _db.localMetabolicProfiles);
+  $$LocalLongevityScoresTableTableManager get localLongevityScores =>
+      $$LocalLongevityScoresTableTableManager(_db, _db.localLongevityScores);
 }
