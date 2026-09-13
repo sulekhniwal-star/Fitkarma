@@ -65,3 +65,35 @@ No issues found! (ran in 3.8s)
 $ flutter test
 00:06 +159: All tests passed!
 ```
+
+---
+
+## 🚀 Git Branching & CI/CD Pipeline Strategy
+
+### 1. `develop` Branch (Integration & Automated Verification)
+- **Trigger**: Every push to `develop` and every pull request targeting `develop` or `main`.
+- **Workflow**: [flutter-ci.yml](file:///f:/fitkarma/.github/workflows/flutter-ci.yml)
+- **Pipeline Stages**:
+  1. Setup Java 17 + Flutter 3.24.x Stable.
+  2. `flutter pub get`
+  3. `flutter analyze --no-fatal-infos` (Linter & Static Analysis).
+  4. `flutter test --coverage` (159/159 Unit/Widget Tests).
+  5. `flutter build apk --debug` (Build verification).
+  6. Uploads test coverage artifact.
+
+### 2. `main` Branch (Production Release Pipeline)
+- **Trigger**: Only when the developer manually merges/pushes verified code from `develop` to `main`, or creates a release tag `v*`.
+- **Workflow**: [release.yml](file:///f:/fitkarma/.github/workflows/release.yml)
+- **Pipeline Stages**:
+  1. Setup Java 17 + Flutter 3.24.x Stable.
+  2. `flutter pub get`
+  3. `flutter analyze` & `flutter test`
+  4. `flutter build appbundle --release` (Generates Google Play Store production AAB).
+  5. `flutter build apk --release` (Generates release APK).
+  6. Uploads release artifacts (`fitkarma-release-aab` & `fitkarma-release-apk`).
+
+### 3. Database Migrations Pipeline
+- **Trigger**: Pushes to `main` with changes in `supabase/migrations/**`.
+- **Workflow**: [supabase-migrate.yml](file:///f:/fitkarma/.github/workflows/supabase-migrate.yml)
+- **Pipeline Stages**: Supabase CLI link & `supabase db push` to staging/production PostgreSQL.
+
