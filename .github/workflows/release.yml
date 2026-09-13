@@ -1,18 +1,26 @@
-name: Release Build
+name: FitKarma Production Release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
 
 jobs:
   build_release:
-    name: Build Signed Android AAB & iOS Archive
+    name: Build & Package Production Release (AAB & APK)
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -24,11 +32,26 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build Android App Bundle
+      - name: Run Static Analysis
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run Automated Test Suite
+        run: flutter test
+
+      - name: Build Android App Bundle (Release AAB)
         run: flutter build appbundle --release
 
-      - name: Upload Release Artifacts
+      - name: Build Android APK (Release APK)
+        run: flutter build apk --release
+
+      - name: Upload Release Bundle Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-bundle
+          name: fitkarma-release-aab
           path: build/app/outputs/bundle/release/app-release.aab
+
+      - name: Upload Release APK Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitkarma-release-apk
+          path: build/app/outputs/flutter-apk/*.apk
