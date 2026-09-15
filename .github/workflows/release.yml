@@ -8,8 +8,64 @@ on:
       - 'v*'
 
 jobs:
+  pre_release_verification:
+    name: Verify Branch Parity, Run Tests & Debug Builds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository (Full History)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify Branch Parity with develop
+        run: |
+          echo "🔍 Fetching develop branch from origin..."
+          git fetch origin develop:refs/remotes/origin/develop
+
+          echo "🔍 Comparing file tree between main (HEAD) and origin/develop..."
+          DIFF_STATUS=$(git diff --name-status origin/develop HEAD)
+          
+          if [ -n "$DIFF_STATUS" ]; then
+            echo "❌ ERROR: Branch parity mismatch detected!"
+            echo "The 'main' branch must have identical files to the verified 'develop' branch before releasing."
+            echo "--------------------------------------------------------"
+            echo "$DIFF_STATUS"
+            echo "--------------------------------------------------------"
+            echo "Action Required: Synchronize or merge 'develop' into 'main' and re-push."
+            exit 1
+          else
+            echo "✅ Branch parity check passed: 'main' is identical to 'develop'."
+          fi
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Static Analysis
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run Automated Test Suite
+        run: flutter test --coverage
+
+      - name: Run Debug Build Verification (Testing)
+        run: flutter build apk --debug
+
   release_android:
     name: Build & Package Android Production Release (AAB & APK)
+    needs: pre_release_verification
     runs-on: ubuntu-latest
 
     steps:
@@ -32,12 +88,6 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Run Static Analysis
-        run: flutter analyze --no-fatal-infos
-
-      - name: Run Automated Test Suite
-        run: flutter test
-
       - name: Build Android App Bundle (Release AAB)
         run: flutter build appbundle --release
 
@@ -58,6 +108,7 @@ jobs:
 
   release_ios:
     name: Build & Package iOS Production Release
+    needs: pre_release_verification
     runs-on: macos-latest
 
     steps:
@@ -73,12 +124,6 @@ jobs:
 
       - name: Install Dependencies
         run: flutter pub get
-
-      - name: Run Static Analysis
-        run: flutter analyze --no-fatal-infos
-
-      - name: Run Automated Test Suite
-        run: flutter test
 
       - name: Build iOS Release (No Codesign)
         run: flutter build ios --release --no-codesign
