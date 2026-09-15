@@ -1,6 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:fitkarma/features/india_trust/domain/services/vernacular_voice_engine.dart"
-  ]
-}

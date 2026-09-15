@@ -1,8 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:flutter_test/flutter_test.dart",
-    "package:fitkarma/core/security/security_audit_service.dart",
-    "package:fitkarma/core/performance/performance_monitor.dart"
-  ]
-}

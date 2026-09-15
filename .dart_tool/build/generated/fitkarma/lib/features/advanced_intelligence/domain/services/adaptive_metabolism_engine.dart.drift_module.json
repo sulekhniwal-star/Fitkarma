@@ -1,6 +1,0 @@
-{
-  "elements": {},
-  "imports": [
-    "package:fitkarma/features/advanced_intelligence/domain/models/advanced_intelligence_models.dart"
-  ]
-}

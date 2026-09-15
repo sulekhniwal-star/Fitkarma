@@ -1,4 +1,4 @@
-name: FitKarma Production Release
+name: FitKarma Production Release (Android & iOS)
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
       - 'v*'
 
 jobs:
-  build_release:
-    name: Build & Package Production Release (AAB & APK)
+  release_android:
+    name: Build & Package Android Production Release (AAB & APK)
     runs-on: ubuntu-latest
 
     steps:
@@ -44,14 +44,53 @@ jobs:
       - name: Build Android APK (Release APK)
         run: flutter build apk --release
 
-      - name: Upload Release Bundle Artifacts
+      - name: Upload Android Release Bundle (AAB)
         uses: actions/upload-artifact@v4
         with:
-          name: fitkarma-release-aab
+          name: fitkarma-android-release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload Release APK Artifacts
+      - name: Upload Android Release APK
         uses: actions/upload-artifact@v4
         with:
-          name: fitkarma-release-apk
+          name: fitkarma-android-release-apk
           path: build/app/outputs/flutter-apk/*.apk
+
+  release_ios:
+    name: Build & Package iOS Production Release
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Static Analysis
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run Automated Test Suite
+        run: flutter test
+
+      - name: Build iOS Release (No Codesign)
+        run: flutter build ios --release --no-codesign
+
+      - name: Package iOS Release Bundle
+        run: |
+          mkdir -p build/ios/release
+          cd build/ios/iphoneos
+          zip -r ../release/Runner.app.zip Runner.app
+
+      - name: Upload iOS Release Bundle (Zip)
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitkarma-ios-release-bundle
+          path: build/ios/release/Runner.app.zip
