@@ -24,12 +24,14 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
+      - name: Upgrade Flutter & Dependencies
+        run: |
+          flutter upgrade --force
+          flutter pub upgrade --major-versions
+          flutter pub get
 
       - name: Run Static Analysis
         run: flutter analyze --no-fatal-infos
@@ -61,12 +63,14 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
+      - name: Upgrade Flutter & Dependencies
+        run: |
+          flutter upgrade --force
+          flutter pub upgrade --major-versions
+          flutter pub get
 
       - name: Build Android Debug APK
         run: flutter build apk --debug
@@ -89,12 +93,14 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
+      - name: Upgrade Flutter & Dependencies
+        run: |
+          flutter upgrade --force
+          flutter pub upgrade --major-versions
+          flutter pub get
 
       - name: Build iOS Verification
         run: flutter build ios --no-codesign --simulator

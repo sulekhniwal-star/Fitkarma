@@ -47,12 +47,14 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
+      - name: Upgrade Flutter & Dependencies
+        run: |
+          flutter upgrade --force
+          flutter pub upgrade --major-versions
+          flutter pub get
 
       - name: Run Static Analysis
         run: flutter analyze --no-fatal-infos
@@ -60,16 +62,13 @@ jobs:
       - name: Run Automated Test Suite
         run: flutter test --coverage
 
-      - name: Run Debug Build Verification (Testing)
-        run: flutter build apk --debug
-
-  release_android:
-    name: Build & Package Android Production Release (AAB & APK)
+  build_android:
+    name: Build Android Release (APK & AAB)
     needs: pre_release_verification
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Java
@@ -81,61 +80,53 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
+      - name: Upgrade Flutter & Dependencies
+        run: |
+          flutter upgrade --force
+          flutter pub upgrade --major-versions
+          flutter pub get
 
-      - name: Build Android App Bundle (Release AAB)
-        run: flutter build appbundle --release
-
-      - name: Build Android APK (Release APK)
+      - name: Build Android Release APK
         run: flutter build apk --release
 
-      - name: Upload Android Release Bundle (AAB)
+      - name: Build Android App Bundle (AAB for Play Store)
+        run: flutter build appbundle --release
+
+      - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
-          name: fitkarma-android-release-aab
+          name: fitkarma-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload Release AAB (Play Store Bundle)
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitkarma-release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload Android Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: fitkarma-android-release-apk
-          path: build/app/outputs/flutter-apk/*.apk
-
-  release_ios:
-    name: Build & Package iOS Production Release
+  build_ios_ipa:
+    name: Build iOS IPA Package
     needs: pre_release_verification
     runs-on: macos-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.x'
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Build iOS Release (No Codesign)
-        run: flutter build ios --release --no-codesign
-
-      - name: Package iOS Release Bundle
+      - name: Upgrade Flutter & Dependencies
         run: |
-          mkdir -p build/ios/release
-          cd build/ios/iphoneos
-          zip -r ../release/Runner.app.zip Runner.app
+          flutter upgrade --force
+          flutter pub upgrade --major-versions
+          flutter pub get
 
-      - name: Upload iOS Release Bundle (Zip)
-        uses: actions/upload-artifact@v4
-        with:
-          name: fitkarma-ios-release-bundle
-          path: build/ios/release/Runner.app.zip
+      - name: Build iOS Release Package
+        run: flutter build ios --release --no-codesign
