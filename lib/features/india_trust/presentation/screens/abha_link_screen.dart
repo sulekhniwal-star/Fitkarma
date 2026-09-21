@@ -60,8 +60,8 @@ class _AbhaLinkScreenState extends ConsumerState<AbhaLinkScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: _isLinked
-                              ? AppColors.primaryEmerald.withOpacity(0.2)
-                              : AppColors.accentAmber.withOpacity(0.2),
+                              ? AppColors.primaryEmerald.withValues(alpha: 0.2)
+                              : AppColors.accentAmber.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -137,7 +137,7 @@ class _AbhaLinkScreenState extends ConsumerState<AbhaLinkScreen> {
                       Text('ABDM Gateway Health Linkage', style: AppTypography.h3),
                       Switch(
                         value: _isLinked,
-                        activeColor: AppColors.primaryEmerald,
+                        activeThumbColor: AppColors.primaryEmerald,
                         onChanged: (val) {
                           setState(() {
                             _isLinked = val;

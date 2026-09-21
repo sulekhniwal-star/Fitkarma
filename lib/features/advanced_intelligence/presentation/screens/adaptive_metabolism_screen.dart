@@ -63,7 +63,7 @@ class _AdaptiveMetabolismScreenState extends ConsumerState<AdaptiveMetabolismScr
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.accentAmber.withOpacity(0.2),
+                          color: AppColors.accentAmber.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(

@@ -67,17 +67,26 @@ class BodySorenessMap extends StatelessWidget {
 
             Color accentColor = AppColors.surfaceGlass;
             if (severity == 1 || severity == 2) accentColor = AppColors.primaryCyan;
-            if (severity == 3 || severity == 4) accentColor = AppColors.accentAmber;
-            if (severity >= 5) accentColor = AppColors.accentCoral;
+            if (severity == 3 || severity == 4) {
+              accentColor = AppColors.accentAmber;
+            }
+            if (severity >= 5) {
+              accentColor = AppColors.accentCoral;
+            }
 
             return InkWell(
               onTap: () {
                 // Cycle: 0 -> 2 (mild) -> 4 (moderate) -> 5 (extreme) -> 0
                 int nextSeverity = 0;
-                if (severity == 0) nextSeverity = 2;
-                else if (severity == 2) nextSeverity = 4;
-                else if (severity == 4) nextSeverity = 5;
-                else nextSeverity = 0;
+                if (severity == 0) {
+                  nextSeverity = 2;
+                } else if (severity == 2) {
+                  nextSeverity = 4;
+                } else if (severity == 4) {
+                  nextSeverity = 5;
+                } else {
+                  nextSeverity = 0;
+                }
 
                 onSorenessToggled(muscle.key, nextSeverity);
               },

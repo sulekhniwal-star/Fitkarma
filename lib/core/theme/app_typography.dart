@@ -67,4 +67,10 @@ class AppTypography {
         fontWeight: FontWeight.w500,
         color: AppColors.textMuted,
       );
+
+  static TextStyle get button => GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.2,
+      );
 }

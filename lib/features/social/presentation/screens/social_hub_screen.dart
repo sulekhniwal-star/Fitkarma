@@ -132,8 +132,8 @@ class _SocialHubScreenState extends ConsumerState<SocialHubScreen>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => SquadDetailScreen(
-                            squad: const Squad(
+                          builder: (_) => const SquadDetailScreen(
+                            squad: Squad(
                               id: 'sq-1',
                               name: 'Vayu Warriors',
                               bio: 'Early morning lifters & runners',

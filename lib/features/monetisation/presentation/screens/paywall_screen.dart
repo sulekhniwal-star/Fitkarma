@@ -69,7 +69,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 Text('Monthly', style: _isAnnual ? AppTypography.bodySmall : AppTypography.label.copyWith(color: AppColors.primaryCyan)),
                 Switch(
                   value: _isAnnual,
-                  activeColor: AppColors.primaryCyan,
+                  activeThumbColor: AppColors.primaryCyan,
                   onChanged: (val) => setState(() => _isAnnual = val),
                 ),
                 Text('Annual (Save 35%)', style: _isAnnual ? AppTypography.label.copyWith(color: AppColors.primaryCyan) : AppTypography.bodySmall),
@@ -198,7 +198,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryEmerald.withOpacity(0.2),
+                    color: AppColors.primaryEmerald.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text('MOST POPULAR', style: AppTypography.label.copyWith(color: AppColors.primaryEmerald, fontWeight: FontWeight.bold)),

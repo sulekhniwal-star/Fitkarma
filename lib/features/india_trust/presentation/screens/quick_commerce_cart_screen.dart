@@ -57,7 +57,7 @@ class _QuickCommerceCartScreenState extends ConsumerState<QuickCommerceCartScree
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryEmerald.withOpacity(0.2),
+                          color: AppColors.primaryEmerald.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text('LOWEST PRICE', style: AppTypography.label.copyWith(color: AppColors.primaryEmerald, fontWeight: FontWeight.bold)),

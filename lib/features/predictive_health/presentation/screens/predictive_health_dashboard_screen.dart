@@ -188,7 +188,7 @@ class _PredictiveHealthDashboardScreenState
                   border: Border.all(color: isYounger ? AppColors.primaryEmerald : AppColors.accentAmber),
                 ),
                 child: Text(
-                  isYounger ? '${deltaYears.abs()} yrs YOUNGER ✨' : '${deltaYears} yrs OLDER ⚠️',
+                  isYounger ? '${deltaYears.abs()} yrs YOUNGER ✨' : '$deltaYears yrs OLDER ⚠️',
                   style: AppTypography.label.copyWith(
                     color: isYounger ? AppColors.primaryEmerald : AppColors.accentAmber,
                     fontWeight: FontWeight.bold,

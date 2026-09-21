@@ -59,7 +59,7 @@ class ProgressiveOverloadEngine {
         suggestedMaxReps: exercise.defaultMaxReps,
         action: 'increase_weight',
         reasoning: 'Max reps hit across all sets! Increased load by +${weightIncrement}kg for progressive overload.',
-        reasoningHindi: 'सभी सेट पूरे हुए! वजन में +${weightIncrement} किलो की वृद्धि की गई।',
+        reasoningHindi: 'सभी सेट पूरे हुए! वजन में +$weightIncrement किलो की वृद्धि की गई।',
       );
     }
 

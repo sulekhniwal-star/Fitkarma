@@ -57,7 +57,7 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryEmerald.withOpacity(0.2),
+                          color: AppColors.primaryEmerald.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -139,7 +139,7 @@ class _CorporateWellnessScreenState extends ConsumerState<CorporateWellnessScree
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isLeader ? AppColors.primaryEmerald.withOpacity(0.2) : AppColors.surfaceGlass,
+              color: isLeader ? AppColors.primaryEmerald.withValues(alpha: 0.2) : AppColors.surfaceGlass,
               shape: BoxShape.circle,
             ),
             child: Text(rank, style: AppTypography.h3.copyWith(color: isLeader ? AppColors.primaryEmerald : AppColors.textSecondary)),

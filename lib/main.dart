@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'core/config/supabase_config.dart';
 import 'core/database/app_database.dart';
 import 'core/sync/outbox_sync_worker.dart';
 import 'core/theme/app_colors.dart';
@@ -9,6 +11,8 @@ import 'core/widgets/activity_rings.dart';
 import 'core/widgets/bento_card.dart';
 import 'core/widgets/bilingual_label.dart';
 import 'core/widgets/glowing_metric.dart';
+import 'features/auth/presentation/controllers/auth_controller.dart';
+import 'features/auth/presentation/screens/auth_gate.dart';
 import 'features/environmental/services/environmental_health_engine.dart';
 import 'features/health_os/services/ai_routing_service.dart';
 import 'features/health_os/services/health_os_brain.dart';
@@ -23,7 +27,8 @@ final appDatabaseProvider = Provider<AppDatabase>((ref) {
 
 final outboxSyncWorkerProvider = Provider<OutboxSyncWorker>((ref) {
   final db = ref.watch(appDatabaseProvider);
-  final worker = OutboxSyncWorker(db: db);
+  final client = ref.watch(supabaseClientProvider);
+  final worker = OutboxSyncWorker(db: db, supabaseClient: client);
   ref.onDispose(() => worker.dispose());
   return worker;
 });
@@ -37,7 +42,8 @@ final environmentalEngineProvider = Provider<EnvironmentalHealthEngine>((ref) {
 });
 
 final aiRoutingServiceProvider = Provider<AIRoutingService>((ref) {
-  return AIRoutingService();
+  final client = ref.watch(supabaseClientProvider);
+  return AIRoutingService(supabaseClient: client);
 });
 
 final healthOSBrainProvider = Provider<HealthOSBrain>((ref) {
@@ -48,8 +54,13 @@ final healthOSBrainProvider = Provider<HealthOSBrain>((ref) {
   );
 });
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: SupabaseConfig.url,
+    // ignore: deprecated_member_use
+    anonKey: SupabaseConfig.anonKey,
+  );
   runApp(
     const ProviderScope(
       child: FitKarmaApp(),
@@ -66,7 +77,7 @@ class FitKarmaApp extends StatelessWidget {
       title: 'FitKarma',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: const FoundationDashboardScreen(),
+      home: const AuthGate(),
     );
   }
 }
@@ -76,6 +87,7 @@ class FoundationDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(currentUserProvider);
     final metabolism = ref.watch(metabolismEngineProvider).calculateProfile(
           weightKg: 72.0,
           heightCm: 175.0,
@@ -102,6 +114,7 @@ class FoundationDashboardScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.sync, color: AppColors.primaryCyan),
+            tooltip: 'Sync Offline Queue',
             onPressed: () {
               ref.read(outboxSyncWorkerProvider).triggerSync();
               ScaffoldMessenger.of(context).showSnackBar(
@@ -112,12 +125,73 @@ class FoundationDashboardScreen extends ConsumerWidget {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.logout, color: AppColors.accentCoral),
+            tooltip: 'Sign Out',
+            onPressed: () {
+              ref.read(authControllerProvider.notifier).signOut();
+            },
+          ),
         ],
       ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
+            // User Session Header
+            if (user != null) ...[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceGlass,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.borderGlass),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 18,
+                      backgroundColor: AppColors.primaryCyan.withAlpha(50),
+                      backgroundImage: user.avatarUrl != null ? NetworkImage(user.avatarUrl!) : null,
+                      child: user.avatarUrl == null
+                          ? Text(
+                              (user.fullName ?? user.email).substring(0, 1).toUpperCase(),
+                              style: const TextStyle(color: AppColors.primaryCyan, fontWeight: FontWeight.bold),
+                            )
+                          : null,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            user.fullName ?? 'FitKarma Member',
+                            style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            user.email,
+                            style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryEmerald.withAlpha(35),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        user.provider?.toUpperCase() ?? 'ACTIVE',
+                        style: AppTypography.label.copyWith(color: AppColors.primaryEmerald, fontSize: 10),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             // 1. Hero Readiness Bento Card
             BentoCard(
               isGlowing: true,

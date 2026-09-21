@@ -68,7 +68,7 @@ class _LongevityDashboardScreenState extends ConsumerState<LongevityDashboardScr
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryEmerald.withOpacity(0.15),
+                          color: AppColors.primaryEmerald.withValues(alpha: 0.15),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.all_inclusive, color: AppColors.primaryEmerald, size: 36),

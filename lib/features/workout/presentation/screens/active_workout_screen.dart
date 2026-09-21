@@ -98,7 +98,7 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                         style: AppTypography.label.copyWith(color: AppColors.primaryCyan),
                       ),
                       Text(
-                        '${currentEx.equipment.name.toUpperCase()}',
+                        currentEx.equipment.name.toUpperCase(),
                         style: AppTypography.label.copyWith(fontSize: 10, color: AppColors.textMuted),
                       ),
                     ],

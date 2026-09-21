@@ -15,7 +15,7 @@ class HabitIdentityEngine {
     final List<TransformationMilestone> newMilestones = [];
     final now = DateTime.now();
 
-    final hasMilestone = (MilestoneType type) => alreadyUnlocked.any((m) => m.type == type);
+    bool hasMilestone(MilestoneType type) => alreadyUnlocked.any((m) => m.type == type);
 
     // 1. Baseline Set
     if (!hasMilestone(MilestoneType.baselineSet)) {

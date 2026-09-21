@@ -55,7 +55,7 @@ class _TravelModeScreenState extends ConsumerState<TravelModeScreen> {
                       ),
                       Switch(
                         value: _hasHotelGym,
-                        activeColor: AppColors.primaryEmerald,
+                        activeThumbColor: AppColors.primaryEmerald,
                         onChanged: (val) {
                           setState(() => _hasHotelGym = val);
                         },

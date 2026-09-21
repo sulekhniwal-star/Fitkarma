@@ -66,7 +66,7 @@ class ProactiveInsightsEngine {
     // 3. Multi-Region Muscle Soreness Trigger
     if (soreMuscleCount >= 3) {
       insights.add(
-        ProactiveInsight(
+        const ProactiveInsight(
           triggerKey: 'systemic_soreness',
           title: 'Widespread DOMS Recorded',
           titleHindi: 'मांसपेशियों में अत्यधिक दर्द',
@@ -80,7 +80,7 @@ class ProactiveInsightsEngine {
     // 4. PCOS / Luteal Phase Craving Trigger
     if (cyclePhase == 'luteal' && hasPcos) {
       insights.add(
-        ProactiveInsight(
+        const ProactiveInsight(
           triggerKey: 'pcos_luteal_craving',
           title: 'Luteal Phase Metabolic Calibration',
           titleHindi: 'ल्यूटियल चरण आहार संतुलन',

@@ -62,6 +62,7 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
       state: _state,
     );
 
+    if (!mounted) return;
     setState(() => _state = _state.copyWith(isSubmitting: false));
 
     if (widget.onComplete != null) {
