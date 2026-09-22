@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fitkarma/main.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
+import '../../../../main.dart';
 import '../../data/onboarding_repository.dart';
 import '../../domain/models/onboarding_state.dart';
+import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
+import 'package:fitkarma/features/health_os/presentation/screens/main_navigation_shell.dart';
 import 'welcome_step.dart';
 import 'goals_step.dart';
 import 'demographics_step.dart';
@@ -55,10 +57,11 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
   Future<void> _finishOnboarding() async {
     setState(() => _state = _state.copyWith(isSubmitting: true));
 
+    final userId = ref.read(activeUserIdProvider);
     final repo = ref.read(onboardingRepositoryProvider);
     // Persist to local Drift database & outbox queue
     await repo.saveCompleteOnboarding(
-      userId: 'local-user-demo-1',
+      userId: userId,
       state: _state,
     );
 
@@ -69,7 +72,7 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
       widget.onComplete!();
     } else {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const FoundationDashboardScreen()),
+        MaterialPageRoute(builder: (_) => const MainNavigationShell()),
       );
     }
   }

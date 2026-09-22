@@ -1,28 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/widgets/bento_card.dart';
-import '../../../../core/widgets/bilingual_label.dart';
-import '../../../../core/widgets/glowing_metric.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/core/widgets/bento_card.dart';
+import 'package:fitkarma/core/widgets/bilingual_label.dart';
+import 'package:fitkarma/core/widgets/glowing_metric.dart';
+import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
 
-class StepsTrackingScreen extends StatelessWidget {
+class StepsTrackingScreen extends ConsumerStatefulWidget {
   final int stepCount;
   final int stepGoal;
   final String primarySource;
 
   const StepsTrackingScreen({
     super.key,
-    this.stepCount = 8420,
+    this.stepCount = 0,
     this.stepGoal = 10000,
-    this.primarySource = 'Apple Watch (Tier 1)',
+    this.primarySource = 'Wearable Synced',
   });
 
   @override
+  ConsumerState<StepsTrackingScreen> createState() => _StepsTrackingScreenState();
+}
+
+class _StepsTrackingScreenState extends ConsumerState<StepsTrackingScreen> {
+  Future<void> _logSteps(int additionalSteps) async {
+    final userId = ref.read(activeUserIdProvider);
+    final repo = ref.read(healthTrackingRepositoryProvider);
+
+    await repo.recordWearableSample(
+      userId: userId,
+      source: 'fitkarma_tracker',
+      metric: 'steps',
+      value: additionalSteps.toDouble(),
+      unit: 'count',
+      timestamp: DateTime.now(),
+    );
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('+$additionalSteps steps recorded & synced!'),
+          backgroundColor: AppColors.primaryEmerald,
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final progress = (stepCount / stepGoal).clamp(0.0, 1.0);
-    final distanceKm = (stepCount * 0.00075).toStringAsFixed(2);
-    final caloriesKcal = (stepCount * 0.04).round();
+    final dashboard = ref.watch(dashboardStateProvider);
+    final currentSteps = dashboard.todaySteps > 0 ? dashboard.todaySteps : widget.stepCount;
+    final stepGoal = widget.stepGoal;
+    final progress = (currentSteps / stepGoal).clamp(0.0, 1.0);
+    final distanceKm = (currentSteps * 0.00075).toStringAsFixed(2);
+    final caloriesKcal = (currentSteps * 0.04).round();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -54,7 +87,7 @@ class StepsTrackingScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GlowingMetric(
-                        value: '$stepCount',
+                        value: '$currentSteps',
                         label: 'Steps Today',
                         unit: '/ $stepGoal',
                         glowColor: AppColors.primaryEmerald,
@@ -72,7 +105,7 @@ class StepsTrackingScreen extends StatelessWidget {
                             const Icon(Icons.watch, size: 14, color: AppColors.primaryCyan),
                             const SizedBox(width: 6),
                             Text(
-                              primarySource,
+                              widget.primarySource,
                               style: AppTypography.label.copyWith(color: AppColors.textSecondary),
                             ),
                           ],
@@ -99,7 +132,7 @@ class StepsTrackingScreen extends StatelessWidget {
                         style: AppTypography.bodySmall.copyWith(color: AppColors.primaryEmerald),
                       ),
                       Text(
-                        '${stepGoal - stepCount > 0 ? stepGoal - stepCount : 0} steps left',
+                        '${stepGoal - currentSteps > 0 ? stepGoal - currentSteps : 0} steps left',
                         style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
                       ),
                     ],
@@ -180,6 +213,43 @@ class StepsTrackingScreen extends StatelessWidget {
                 ],
               ),
             ).animate().fadeIn(delay: 300.ms, duration: 400.ms),
+
+            const SizedBox(height: 20),
+
+            // Quick Step Logging Buttons
+            Text('Quick Step Log', style: AppTypography.h3),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primaryEmerald,
+                      side: const BorderSide(color: AppColors.primaryEmerald),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    icon: const Icon(Icons.add, size: 16),
+                    label: const Text('+1,000 Walk'),
+                    onPressed: () => _logSteps(1000),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primaryCyan,
+                      side: const BorderSide(color: AppColors.primaryCyan),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    icon: const Icon(Icons.add, size: 16),
+                    label: const Text('+2,500 Walk'),
+                    onPressed: () => _logSteps(2500),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

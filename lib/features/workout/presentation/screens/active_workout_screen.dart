@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/widgets/bento_card.dart';
-import '../../../../core/widgets/bilingual_label.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/core/widgets/bento_card.dart';
+import 'package:fitkarma/core/widgets/bilingual_label.dart';
 import '../../domain/models/workout_models.dart';
 import '../../domain/services/exercise_database.dart';
+import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
 
-class ActiveWorkoutScreen extends StatefulWidget {
+class ActiveWorkoutScreen extends ConsumerStatefulWidget {
   const ActiveWorkoutScreen({super.key});
 
   @override
-  State<ActiveWorkoutScreen> createState() => _ActiveWorkoutScreenState();
+  ConsumerState<ActiveWorkoutScreen> createState() => _ActiveWorkoutScreenState();
 }
 
-class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
+class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
   int _currentExerciseIndex = 0;
+  bool _isSaving = false;
   final List<Exercise> _exercises = [
     ExerciseDatabase.seededExercises.firstWhere((e) => e.id == 'ex_barbell_bench_press'),
     ExerciseDatabase.seededExercises.firstWhere((e) => e.id == 'ex_barbell_bent_row'),
@@ -38,6 +41,39 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
         ),
       );
     }).toList();
+  }
+
+  Future<void> _finishWorkout() async {
+    setState(() => _isSaving = true);
+    final userId = ref.read(activeUserIdProvider);
+    final repo = ref.read(workoutRepositoryProvider);
+
+    final List<SessionExercise> sessionExercises = [];
+    for (int i = 0; i < _exercises.length; i++) {
+      sessionExercises.add(
+        SessionExercise(
+          exercise: _exercises[i],
+          sets: _sessionSets[i],
+        ),
+      );
+    }
+
+    await repo.saveWorkoutSession(
+      userId: userId,
+      name: 'Upper Body Strength (A)',
+      durationSeconds: 30 * 60, // 30 mins
+      exercises: sessionExercises,
+    );
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Workout session saved and synced locally!'),
+          backgroundColor: AppColors.primaryEmerald,
+        ),
+      );
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -224,23 +260,25 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    onPressed: () {
-                      if (_currentExerciseIndex < _exercises.length - 1) {
-                        setState(() => _currentExerciseIndex++);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Workout session completed & saved to local database!'),
-                            backgroundColor: AppColors.primaryEmerald,
+                    onPressed: _isSaving
+                        ? null
+                        : () {
+                            if (_currentExerciseIndex < _exercises.length - 1) {
+                              setState(() => _currentExerciseIndex++);
+                            } else {
+                              _finishWorkout();
+                            }
+                          },
+                    child: _isSaving
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                          )
+                        : Text(
+                            _currentExerciseIndex < _exercises.length - 1 ? 'Next Exercise' : 'Finish Workout',
+                            style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold, color: AppColors.textOnAccent),
                           ),
-                        );
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: Text(
-                      _currentExerciseIndex < _exercises.length - 1 ? 'Next Exercise' : 'Finish Workout',
-                      style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold, color: AppColors.textOnAccent),
-                    ),
                   ),
                 ),
               ],

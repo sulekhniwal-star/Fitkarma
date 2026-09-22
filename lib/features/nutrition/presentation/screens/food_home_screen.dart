@@ -11,7 +11,9 @@ import 'indian_food_swaps_screen.dart';
 import 'meal_logger_screen.dart';
 
 class FoodHomeScreen extends StatelessWidget {
-  const FoodHomeScreen({super.key});
+  final bool showBackButton;
+
+  const FoodHomeScreen({super.key, this.showBackButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,12 @@ class FoodHomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        leading: (showBackButton && Navigator.canPop(context))
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.textPrimary),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
         title: BilingualLabel(
           english: 'Smart Indian Nutrition',
           hindi: 'स्मार्ट भारतीय पोषण व आहार',

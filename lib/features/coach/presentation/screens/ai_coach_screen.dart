@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/widgets/bento_card.dart';
-import '../../../../core/widgets/bilingual_label.dart';
-import '../../../../main.dart';
+import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/core/widgets/bento_card.dart';
+import 'package:fitkarma/core/widgets/bilingual_label.dart';
+import 'package:fitkarma/main.dart';
 import '../../data/coach_repository.dart';
 import '../../data/coach_service.dart';
 import '../../domain/models/coach_message.dart';
 import '../../domain/services/proactive_insights_engine.dart';
+import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
 
 final coachServiceProvider = Provider<CoachService>((ref) {
   return CoachService();
@@ -31,18 +32,18 @@ class AICoachScreen extends ConsumerStatefulWidget {
 class _AICoachScreenState extends ConsumerState<AICoachScreen> {
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final ProactiveInsightsEngine _insightsEngine = const ProactiveInsightsEngine();
+
   final List<CoachMessage> _messages = [];
+  List<ProactiveInsight> _activeInsights = [];
   String? _sessionId;
   bool _isTyping = false;
-
-  final _insightsEngine = const ProactiveInsightsEngine();
-  List<ProactiveInsight> _activeInsights = [];
 
   static const List<String> _quickPrompts = [
     'Fix my lunch for high protein 🥗',
     'Low readiness workout adjustment ⚡',
     'Ayurvedic cooling food suggestions 🌿',
-    'How to recover from sleep debt 🌙',
+    'Analyze my weekly training volume 📊',
   ];
 
   @override
@@ -52,8 +53,9 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
   }
 
   Future<void> _initializeChatSession() async {
+    final userId = ref.read(activeUserIdProvider);
     final repo = ref.read(coachRepositoryProvider);
-    final sessionId = await repo.getOrCreateActiveSession('local-user-demo-1');
+    final sessionId = await repo.getOrCreateActiveSession(userId);
     final history = await repo.loadSessionMessages(sessionId);
 
     final insights = _insightsEngine.evaluateTriggers(
@@ -124,9 +126,10 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
       'metabolic_targets': {'target_calories': 2100, 'protein_grams': 140},
     };
 
+    final userId = ref.read(activeUserIdProvider);
     final repo = ref.read(coachRepositoryProvider);
     final reply = await repo.sendUserMessage(
-      userId: 'local-user-demo-1',
+      userId: userId,
       sessionId: _sessionId!,
       text: text,
       contextSnapshot: contextSnapshot,

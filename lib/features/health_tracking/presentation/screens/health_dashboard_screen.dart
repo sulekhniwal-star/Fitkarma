@@ -11,7 +11,9 @@ import 'sleep_tracking_screen.dart';
 import 'steps_tracking_screen.dart';
 
 class HealthDashboardScreen extends StatelessWidget {
-  const HealthDashboardScreen({super.key});
+  final bool showBackButton;
+
+  const HealthDashboardScreen({super.key, this.showBackButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,12 @@ class HealthDashboardScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        leading: (showBackButton && Navigator.canPop(context))
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.textPrimary),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
         title: BilingualLabel(
           english: 'Health Intelligence Hub',
           hindi: 'स्वास्थ्य व बायोमार्कर डैशबोर्ड',

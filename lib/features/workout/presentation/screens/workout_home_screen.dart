@@ -9,7 +9,9 @@ import 'active_workout_screen.dart';
 import 'exercise_library_screen.dart';
 
 class WorkoutHomeScreen extends StatelessWidget {
-  const WorkoutHomeScreen({super.key});
+  final bool showBackButton;
+
+  const WorkoutHomeScreen({super.key, this.showBackButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,12 @@ class WorkoutHomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        leading: (showBackButton && Navigator.canPop(context))
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.textPrimary),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
         title: BilingualLabel(
           english: 'Training Operating System',
           hindi: 'व्यायाम व शक्ति प्रशिक्षण',

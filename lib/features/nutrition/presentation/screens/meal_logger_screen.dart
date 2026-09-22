@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/widgets/bento_card.dart';
-import '../../../../core/widgets/bilingual_label.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/core/widgets/bento_card.dart';
+import 'package:fitkarma/core/widgets/bilingual_label.dart';
 import '../../domain/models/nutrition_models.dart';
 import '../../domain/services/indian_nutrition_engine.dart';
 import '../../domain/services/meal_quality_engine.dart';
+import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
 
-class MealLoggerScreen extends StatefulWidget {
+class MealLoggerScreen extends ConsumerStatefulWidget {
   const MealLoggerScreen({super.key});
 
   @override
-  State<MealLoggerScreen> createState() => _MealLoggerScreenState();
+  ConsumerState<MealLoggerScreen> createState() => _MealLoggerScreenState();
 }
 
-class _MealLoggerScreenState extends State<MealLoggerScreen> {
+class _MealLoggerScreenState extends ConsumerState<MealLoggerScreen> {
   final _searchController = TextEditingController();
   final _engine = const IndianNutritionEngine();
   final _qualityEngine = const MealQualityEngine();
@@ -22,11 +24,46 @@ class _MealLoggerScreenState extends State<MealLoggerScreen> {
   String _searchQuery = '';
   MealType _selectedMealType = MealType.lunch;
   final Map<FoodItem, double> _selectedQuantities = {};
+  bool _isSaving = false;
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> _saveMeal() async {
+    if (_selectedQuantities.isEmpty) return;
+    setState(() => _isSaving = true);
+
+    final userId = ref.read(activeUserIdProvider);
+    final repo = ref.read(nutritionRepositoryProvider);
+
+    final components = _selectedQuantities.entries.map((e) {
+      return MealComponent(
+        food: e.key,
+        quantity: e.value,
+      );
+    }).toList();
+
+    final mealName = components.map((c) => c.food.name).take(2).join(' + ');
+
+    await repo.logMeal(
+      userId: userId,
+      name: mealName.isNotEmpty ? mealName : 'Indian Meal',
+      mealType: _selectedMealType,
+      components: components,
+    );
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Meal logged and synced locally!'),
+          backgroundColor: AppColors.primaryEmerald,
+        ),
+      );
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -236,16 +273,17 @@ class _MealLoggerScreenState extends State<MealLoggerScreen> {
                             foregroundColor: AppColors.textOnAccent,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Meal successfully logged offline!'),
-                                backgroundColor: AppColors.primaryEmerald,
-                              ),
-                            );
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Save Meal'),
+                          onPressed: _isSaving ? null : _saveMeal,
+                          child: _isSaving
+                              ? const SizedBox(
+                                  width: 18,
+                                  height: 18,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const Text('Save Meal'),
                         ),
                       ],
                     ),

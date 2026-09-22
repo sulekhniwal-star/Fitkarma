@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/widgets/bento_card.dart';
-import '../../../../core/widgets/bilingual_label.dart';
-import '../../../../main.dart';
+import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/core/widgets/bento_card.dart';
+import 'package:fitkarma/core/widgets/bilingual_label.dart';
+import 'package:fitkarma/main.dart';
 import '../../data/readiness_repository.dart';
 import '../../domain/models/readiness_input.dart';
 import '../../domain/models/readiness_result.dart';
 import '../../domain/services/readiness_calculation_engine.dart';
 import '../widgets/body_soreness_map.dart';
+import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
 
 final readinessCalculationEngineProvider = Provider<ReadinessCalculationEngine>((ref) {
   return const ReadinessCalculationEngine();
@@ -63,9 +64,10 @@ class _RecoveryLogScreenState extends ConsumerState<RecoveryLogScreen> {
       sorenessList: sorenessList,
     );
 
+    final userId = ref.read(activeUserIdProvider);
     final repo = ref.read(readinessRepositoryProvider);
     final result = await repo.calculateAndSaveReadiness(
-      userId: 'local-user-demo-1',
+      userId: userId,
       input: input,
       chronologicalAge: 27,
     );

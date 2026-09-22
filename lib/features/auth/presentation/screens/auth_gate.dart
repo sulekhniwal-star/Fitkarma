@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../main.dart';
+import '../../../health_os/presentation/screens/main_navigation_shell.dart';
 import '../controllers/auth_controller.dart';
 import 'auth_screen.dart';
 
@@ -18,7 +18,7 @@ class AuthGate extends ConsumerWidget {
     return authStateAsync.when(
       data: (user) {
         if (user != null) {
-          return const FoundationDashboardScreen();
+          return const MainNavigationShell();
         }
         return const AuthScreen();
       },
