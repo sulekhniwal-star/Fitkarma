@@ -104,6 +104,54 @@ final latestReadinessStreamProvider = StreamProvider<LocalReadinessScore?>((ref)
       .watchSingleOrNull();
 });
 
+/// Reactive Stream of Latest Blood Pressure Reading
+final latestBloodPressureStreamProvider = StreamProvider<LocalBiomarker?>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final userId = ref.watch(activeUserIdProvider);
+
+  return (db.select(db.localBiomarkers)
+        ..where((t) => t.userId.equals(userId) & t.type.equals('bloodPressure'))
+        ..orderBy([(t) => OrderingTerm(expression: t.measuredAt, mode: OrderingMode.desc)])
+        ..limit(1))
+      .watchSingleOrNull();
+});
+
+/// Reactive Stream of Latest Blood Glucose Reading
+final latestGlucoseStreamProvider = StreamProvider<LocalBiomarker?>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final userId = ref.watch(activeUserIdProvider);
+
+  return (db.select(db.localBiomarkers)
+        ..where((t) => t.userId.equals(userId) & (t.type.equals('bloodGlucose') | t.type.equals('fastingGlucose')))
+        ..orderBy([(t) => OrderingTerm(expression: t.measuredAt, mode: OrderingMode.desc)])
+        ..limit(1))
+      .watchSingleOrNull();
+});
+
+/// Reactive Stream of Latest Sleep Sample
+final latestSleepStreamProvider = StreamProvider<LocalWearableSample?>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final userId = ref.watch(activeUserIdProvider);
+
+  return (db.select(db.localWearableSamples)
+        ..where((t) => t.userId.equals(userId) & t.metric.equals('sleep'))
+        ..orderBy([(t) => OrderingTerm(expression: t.timestamp, mode: OrderingMode.desc)])
+        ..limit(1))
+      .watchSingleOrNull();
+});
+
+/// Reactive Stream of Latest Heart Rate Sample
+final latestHeartRateStreamProvider = StreamProvider<LocalWearableSample?>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final userId = ref.watch(activeUserIdProvider);
+
+  return (db.select(db.localWearableSamples)
+        ..where((t) => t.userId.equals(userId) & (t.metric.equals('heart_rate') | t.metric.equals('hrv')))
+        ..orderBy([(t) => OrderingTerm(expression: t.timestamp, mode: OrderingMode.desc)])
+        ..limit(1))
+      .watchSingleOrNull();
+});
+
 /// Aggregated Live Dashboard State Model
 class DashboardState {
   final double targetCalories;
@@ -175,12 +223,16 @@ final dashboardStateProvider = Provider<DashboardState>((ref) {
   final readinessAsync = ref.watch(latestReadinessStreamProvider);
   final metabolismEngine = ref.watch(metabolismEngineProvider);
 
-  // 1. Calculate profile & targets
+  // 1. Calculate profile & targets from user inputs
   final profile = profileAsync.value;
-  final weight = profile?.weightKg ?? 72.0;
-  final height = profile?.heightCm ?? 175.0;
-  final age = profile?.age ?? 28;
-  final gender = profile?.gender == 'female' ? Gender.female : Gender.male;
+  final weight = profile?.weightKg ?? 70.0;
+  final height = profile?.heightCm ?? 170.0;
+  final age = profile?.age ?? 25;
+  final gender = profile?.gender?.toLowerCase() == 'female' ? Gender.female : Gender.male;
+  final userGoal = Goal.values.firstWhere(
+    (g) => g.name.toLowerCase() == (profile?.primaryGoal ?? '').toLowerCase(),
+    orElse: () => Goal.fatLoss,
+  );
 
   final metaTarget = metabolismEngine.calculateProfile(
     weightKg: weight,
@@ -188,7 +240,7 @@ final dashboardStateProvider = Provider<DashboardState>((ref) {
     age: age,
     gender: gender,
     activityLevel: ActivityLevel.moderate,
-    goal: Goal.fatLoss,
+    goal: userGoal,
   );
 
   // 2. Aggregate Today's Meals

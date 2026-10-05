@@ -10,10 +10,6 @@ jobs:
   deploy_migrations:
     name: Deploy Migrations to Remote Supabase
     runs-on: ubuntu-latest
-    env:
-      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -24,6 +20,9 @@ jobs:
           version: latest
 
       - name: Link Project & Push Migrations
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
         run: |
           supabase link --project-ref "$SUPABASE_PROJECT_REF"
           supabase db push --include-all --yes

@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/bento_card.dart';
 import '../../../../core/widgets/bilingual_label.dart';
 import '../../../../core/widgets/glowing_metric.dart';
+import '../../../health_os/presentation/providers/dashboard_providers.dart';
 import 'active_workout_screen.dart';
 import 'exercise_library_screen.dart';
 
-class WorkoutHomeScreen extends StatelessWidget {
+class WorkoutHomeScreen extends ConsumerWidget {
   final bool showBackButton;
 
   const WorkoutHomeScreen({super.key, this.showBackButton = false});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashboard = ref.watch(dashboardStateProvider);
+    final workoutsAsync = ref.watch(todayWorkoutsStreamProvider);
+    final workouts = workoutsAsync.value ?? [];
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -45,19 +51,19 @@ class WorkoutHomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Training Volume & Streak Bento Card
+            // Training Volume & Today Stats Bento Card
             BentoCard(
-              isGlowing: true,
+              isGlowing: dashboard.workoutsLoggedCount > 0,
               glowColor: AppColors.primaryCyan,
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const GlowingMetric(
-                        value: '14,250',
-                        label: 'Weekly Tonnage',
-                        unit: 'kg moved',
+                      GlowingMetric(
+                        value: '${dashboard.totalVolumeTonnageKg.toInt()}',
+                        label: 'Total Tonnage',
+                        unit: 'kg moved today',
                         glowColor: AppColors.primaryCyan,
                       ),
                       Container(
@@ -68,7 +74,7 @@ class WorkoutHomeScreen extends StatelessWidget {
                           border: Border.all(color: AppColors.primaryCyan.withAlpha(100)),
                         ),
                         child: Text(
-                          'Streak: 4 Days',
+                          '${dashboard.workoutDurationMinutes} mins active',
                           style: AppTypography.label.copyWith(color: AppColors.primaryCyan, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -76,7 +82,9 @@ class WorkoutHomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Progressive overload achieved on 8 out of 10 compound sets this week.',
+                    dashboard.workoutsLoggedCount > 0
+                        ? 'Active training session logged. Progressive overload tracked in local DB.'
+                        : 'No workouts completed yet today. Start a training session below.',
                     style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
                   ),
                 ],
@@ -85,40 +93,66 @@ class WorkoutHomeScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Today's Scheduled Blueprint
-            Text('Today\'s Training Blueprint', style: AppTypography.h3),
+            // Today's Logged Sessions / Blueprint Header
+            Text('Today\'s Training Sessions', style: AppTypography.h3),
             const SizedBox(height: 12),
 
-            BentoCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Upper Body Strength (A)', style: AppTypography.h3),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppColors.surfaceGlassHover,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.borderGlass),
+            if (workouts.isEmpty)
+              BentoCard(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        const Icon(Icons.fitness_center_outlined, size: 40, color: AppColors.textMuted),
+                        const SizedBox(height: 10),
+                        Text(
+                          'No workout sessions recorded today',
+                          style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold, color: AppColors.textSecondary),
                         ),
-                        child: Text('45 Mins • 5 Exercises', style: AppTypography.label.copyWith(color: AppColors.textMuted)),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          'Start your session tracker below to log sets, reps, and tonnage',
+                          style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 8),
-                  Text('Focus: Chest, Upper Back & Shoulders Hypertrophy', style: AppTypography.bodySmall.copyWith(color: AppColors.primaryCyan)),
-                  const Divider(color: AppColors.borderGlass, height: 20),
-                  _buildExerciseItem('1. Flat Barbell Bench Press', '4 Sets • 8-10 Reps', 'Target: 70kg (+2.5kg)'),
-                  _buildExerciseItem('2. Bent-Over Barbell Row', '4 Sets • 8-12 Reps', 'Target: 60kg'),
-                  _buildExerciseItem('3. Standing Overhead Press', '3 Sets • 6-8 Reps', 'Target: 42.5kg'),
-                  _buildExerciseItem('4. Desi Dand (Hindu Pushups)', '3 Sets • 15 Reps', 'Bodyweight'),
-                  _buildExerciseItem('5. Overhand Pull-ups', '3 Sets • 8 Reps', 'Bodyweight'),
-                ],
-              ),
-            ).animate().fadeIn(delay: 150.ms, duration: 400.ms),
+                ),
+              )
+            else
+              ...workouts.map((w) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: BentoCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(w.name, style: AppTypography.h3),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryEmerald.withAlpha(30),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: AppColors.primaryEmerald.withAlpha(80)),
+                              ),
+                              child: Text('${(w.durationSeconds / 60).round()} Mins', style: AppTypography.label.copyWith(color: AppColors.primaryEmerald, fontWeight: FontWeight.bold)),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Volume: ${w.totalVolumeKg.toInt()} kg • RPE: ${w.avgRpe.toStringAsFixed(1)} • Burned: ~${(w.durationSeconds / 60 * 7.5).round()} kcal',
+                          style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
 
             const SizedBox(height: 24),
 
@@ -141,27 +175,6 @@ class WorkoutHomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildExerciseItem(String name, String setsReps, String target) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
-                Text(setsReps, style: AppTypography.label.copyWith(fontSize: 10, color: AppColors.textMuted)),
-              ],
-            ),
-          ),
-          Text(target, style: AppTypography.label.copyWith(color: AppColors.accentAmber)),
-        ],
       ),
     );
   }

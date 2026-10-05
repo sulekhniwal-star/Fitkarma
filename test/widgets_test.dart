@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fitkarma/core/localization/app_language.dart';
 import 'package:fitkarma/core/widgets/bento_card.dart';
 import 'package:fitkarma/core/widgets/bilingual_label.dart';
 import 'package:fitkarma/core/widgets/glowing_metric.dart';
@@ -26,13 +28,37 @@ void main() {
     expect(tapped, isTrue);
   });
 
-  testWidgets('BilingualLabel renders English and Hindi correctly', (WidgetTester tester) async {
+  testWidgets('BilingualLabel renders English when English language selected', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: BilingualLabel(
-            english: 'Readiness Score',
-            hindi: 'तत्परता स्कोर',
+      const ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: BilingualLabel(
+              english: 'Readiness Score',
+              hindi: 'तत्परता स्कोर',
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Readiness Score'), findsOneWidget);
+    expect(find.text('तत्परता स्कोर'), findsNothing);
+  });
+
+  testWidgets('BilingualLabel renders both when Bilingual selected', (WidgetTester tester) async {
+    final container = ProviderContainer();
+    container.read(appLanguageProvider.notifier).setLanguage(AppLanguage.bilingual);
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: const MaterialApp(
+          home: Scaffold(
+            body: BilingualLabel(
+              english: 'Readiness Score',
+              hindi: 'तत्परता स्कोर',
+            ),
           ),
         ),
       ),
@@ -44,13 +70,17 @@ void main() {
 
   testWidgets('GlowingMetric renders value, unit, and label', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: GlowingMetric(
-            value: '92',
-            unit: 'bpm',
-            label: 'Heart Rate',
-            hindiLabel: 'हृदय गति',
+      const ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: GlowingMetric(
+                value: '92',
+                unit: 'bpm',
+                label: 'Heart Rate',
+                hindiLabel: 'हृदय गति',
+              ),
+            ),
           ),
         ),
       ),
@@ -59,7 +89,6 @@ void main() {
     expect(find.text('92'), findsOneWidget);
     expect(find.text('bpm'), findsOneWidget);
     expect(find.text('Heart Rate'), findsOneWidget);
-    expect(find.text('हृदय गति'), findsOneWidget);
   });
 
   testWidgets('ActivityRings renders concentric progress ring painter', (WidgetTester tester) async {

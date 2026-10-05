@@ -65,9 +65,10 @@ class AuthController extends Notifier<AuthState> {
       await _authRepository.signInWithEmail(email: email, password: password);
       state = state.copyWith(status: AuthStatus.success);
     } catch (e) {
+      final msg = _formatAuthError(e);
       state = state.copyWith(
         status: AuthStatus.error,
-        errorMessage: e.toString().replaceAll('Exception: ', ''),
+        errorMessage: msg,
       );
     }
   }
@@ -82,12 +83,13 @@ class AuthController extends Notifier<AuthState> {
       );
       state = state.copyWith(
         status: AuthStatus.success,
-        successMessage: 'Account created! Please check your email to verify if required.',
+        successMessage: 'Account created! Please check your email inbox to verify your account and sign in.',
       );
     } catch (e) {
+      final msg = _formatAuthError(e);
       state = state.copyWith(
         status: AuthStatus.error,
-        errorMessage: e.toString().replaceAll('Exception: ', ''),
+        errorMessage: msg,
       );
     }
   }
@@ -98,9 +100,10 @@ class AuthController extends Notifier<AuthState> {
       await _authRepository.signInWithGoogle();
       state = state.copyWith(status: AuthStatus.success);
     } catch (e) {
+      final msg = _formatAuthError(e);
       state = state.copyWith(
         status: AuthStatus.error,
-        errorMessage: e.toString().replaceAll('Exception: ', ''),
+        errorMessage: msg,
       );
     }
   }
@@ -111,9 +114,10 @@ class AuthController extends Notifier<AuthState> {
       await _authRepository.signOut();
       state = state.copyWith(status: AuthStatus.initial);
     } catch (e) {
+      final msg = _formatAuthError(e);
       state = state.copyWith(
         status: AuthStatus.error,
-        errorMessage: e.toString().replaceAll('Exception: ', ''),
+        errorMessage: msg,
       );
     }
   }
@@ -127,11 +131,51 @@ class AuthController extends Notifier<AuthState> {
         successMessage: 'Password reset link sent to $email.',
       );
     } catch (e) {
+      final msg = _formatAuthError(e);
       state = state.copyWith(
         status: AuthStatus.error,
-        errorMessage: e.toString().replaceAll('Exception: ', ''),
+        errorMessage: msg,
       );
     }
+  }
+
+  String _formatAuthError(dynamic e) {
+    final str = e.toString().toLowerCase();
+
+    if (str.contains('invalid login credentials') || str.contains('invalid_credentials')) {
+      return 'Incorrect email or password. If you just created your account, please verify the link in your email inbox first.';
+    }
+
+    if (str.contains('email not confirmed') || str.contains('email_not_confirmed')) {
+      return 'Please verify your email address to sign in. We have sent a confirmation link to your inbox.';
+    }
+
+    if (str.contains('user already registered') || str.contains('user_already_exists') || str.contains('already registered')) {
+      return 'An account with this email already exists. Please tap "Sign In" above to continue.';
+    }
+
+    if (str.contains('password should be at least') || str.contains('weak_password')) {
+      return 'Password must be at least 6 characters long.';
+    }
+
+    if (str.contains('invalid email') || str.contains('validation_failed')) {
+      return 'Please enter a valid email address.';
+    }
+
+    if (str.contains('socketexception') ||
+        str.contains('failed host lookup') ||
+        str.contains('socketfailed') ||
+        str.contains('network') ||
+        str.contains('connection refused') ||
+        str.contains('timeout')) {
+      return 'Unable to connect to the server right now. Please check your internet connection or tap "Explore as Guest" below.';
+    }
+
+    if (str.contains('over_email_send_rate_limit') || str.contains('rate limit')) {
+      return 'Too many attempts. Please wait a moment before trying again.';
+    }
+
+    return 'Something went wrong while signing in. Please check your details and try again.';
   }
 
   void clearError() {

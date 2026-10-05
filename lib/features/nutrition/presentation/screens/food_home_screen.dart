@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/bento_card.dart';
 import '../../../../core/widgets/bilingual_label.dart';
 import '../../../../core/widgets/glowing_metric.dart';
+import '../../../health_os/presentation/providers/dashboard_providers.dart';
 import 'fix_my_meal_screen.dart';
 import 'grocery_optimizer_screen.dart';
 import 'indian_food_swaps_screen.dart';
 import 'meal_logger_screen.dart';
 
-class FoodHomeScreen extends StatelessWidget {
+class FoodHomeScreen extends ConsumerWidget {
   final bool showBackButton;
 
   const FoodHomeScreen({super.key, this.showBackButton = false});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashboard = ref.watch(dashboardStateProvider);
+    final mealsAsync = ref.watch(todayMealsStreamProvider);
+    final meals = mealsAsync.value ?? [];
+
+    final proteinProgress = dashboard.targetProteinGrams > 0
+        ? (dashboard.consumedProteinGrams / dashboard.targetProteinGrams).clamp(0.0, 1.0)
+        : 0.0;
+    final carbsProgress = dashboard.targetCarbsGrams > 0
+        ? (dashboard.consumedCarbsGrams / dashboard.targetCarbsGrams).clamp(0.0, 1.0)
+        : 0.0;
+    final fatsProgress = dashboard.targetFatsGrams > 0
+        ? (dashboard.consumedFatsGrams / dashboard.targetFatsGrams).clamp(0.0, 1.0)
+        : 0.0;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -47,19 +63,19 @@ class FoodHomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Daily Calorie & Macro Target Card
+            // Daily Calorie & Macro Target Card (Live User Data)
             BentoCard(
-              isGlowing: true,
+              isGlowing: dashboard.consumedCalories > 0,
               glowColor: AppColors.primaryEmerald,
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const GlowingMetric(
-                        value: '1,420',
+                      GlowingMetric(
+                        value: '${dashboard.consumedCalories.toInt()}',
                         label: 'Calories Consumed',
-                        unit: '/ 1,850 kcal',
+                        unit: '/ ${dashboard.targetCalories.toInt()} kcal',
                         glowColor: AppColors.primaryEmerald,
                       ),
                       Container(
@@ -70,7 +86,7 @@ class FoodHomeScreen extends StatelessWidget {
                           border: Border.all(color: AppColors.primaryEmerald.withAlpha(100)),
                         ),
                         child: Text(
-                          'Score 84/100',
+                          '${meals.length} Meals Logged',
                           style: AppTypography.label.copyWith(color: AppColors.primaryEmerald, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -80,13 +96,29 @@ class FoodHomeScreen extends StatelessWidget {
                   // Macro Bars Row
                   Row(
                     children: [
-                      _buildMacroColumn('Protein', '68g', '/ 90g', AppColors.primaryCyan, 0.75),
+                      _buildMacroColumn(
+                        'Protein',
+                        '${dashboard.consumedProteinGrams.toInt()}g',
+                        '/ ${dashboard.targetProteinGrams.toInt()}g',
+                        AppColors.primaryCyan,
+                        proteinProgress,
+                      ),
                       const SizedBox(width: 12),
-                      _buildMacroColumn('Carbs', '165g', '/ 220g', AppColors.accentAmber, 0.75),
+                      _buildMacroColumn(
+                        'Carbs',
+                        '${dashboard.consumedCarbsGrams.toInt()}g',
+                        '/ ${dashboard.targetCarbsGrams.toInt()}g',
+                        AppColors.accentAmber,
+                        carbsProgress,
+                      ),
                       const SizedBox(width: 12),
-                      _buildMacroColumn('Fats', '42g', '/ 55g', AppColors.accentCoral, 0.76),
-                      const SizedBox(width: 12),
-                      _buildMacroColumn('Fiber', '24g', '/ 30g', AppColors.primaryEmerald, 0.80),
+                      _buildMacroColumn(
+                        'Fats',
+                        '${dashboard.consumedFatsGrams.toInt()}g',
+                        '/ ${dashboard.targetFatsGrams.toInt()}g',
+                        AppColors.accentCoral,
+                        fatsProgress,
+                      ),
                     ],
                   ),
                 ],
@@ -148,7 +180,7 @@ class FoodHomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Today\'s Thali Timeline', style: AppTypography.h3),
+                Text('Today\'s Logged Thalis', style: AppTypography.h3),
                 TextButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => const IndianFoodSwapsScreen()),
@@ -160,39 +192,46 @@ class FoodHomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Meal Timeline Items
-            _buildMealTimelineCard(
-              context,
-              title: 'Breakfast',
-              hindiTitle: 'नाश्ता',
-              foodNames: '2 Steamed Idlis + 1 Katori Drumstick Sambar + 1 Boiled Egg',
-              calories: '286 kcal',
-              protein: '15g Protein',
-              qualityScore: 88,
-              time: '08:30 AM',
-            ),
-            const SizedBox(height: 10),
-            _buildMealTimelineCard(
-              context,
-              title: 'Lunch',
-              hindiTitle: 'दोपहर का भोजन',
-              foodNames: '2 Jowar Bhakris + 1 Katori Dal Tadka + 100g Raw Paneer Salad',
-              calories: '625 kcal',
-              protein: '30.6g Protein',
-              qualityScore: 92,
-              time: '01:30 PM',
-            ),
-            const SizedBox(height: 10),
-            _buildMealTimelineCard(
-              context,
-              title: 'Evening Snack',
-              hindiTitle: 'शाम का अल्पाहार',
-              foodNames: '1 Bowl Roasted Makhana + Spiced Cinnamon Kadha',
-              calories: '115 kcal',
-              protein: '3.2g Protein',
-              qualityScore: 80,
-              time: '05:15 PM',
-            ),
+            // Dynamic Real Logged Meals from User
+            if (meals.isEmpty)
+              BentoCard(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24.0),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        const Icon(Icons.restaurant_menu_outlined, size: 40, color: AppColors.textMuted),
+                        const SizedBox(height: 10),
+                        Text(
+                          'No meals logged yet today',
+                          style: AppTypography.bodyMedium.copyWith(color: AppColors.textSecondary, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Tap below to log your breakfast, lunch, snack, or dinner',
+                          style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            else
+              ...meals.map((meal) {
+                final timeStr = '${meal.loggedAt.hour.toString().padLeft(2, '0')}:${meal.loggedAt.minute.toString().padLeft(2, '0')}';
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: _buildMealTimelineCard(
+                    context,
+                    title: meal.name,
+                    hindiTitle: meal.mealType,
+                    foodNames: '${meal.proteinGrams.toStringAsFixed(1)}g Protein • ${meal.carbsGrams.toStringAsFixed(1)}g Carbs • ${meal.fatGrams.toStringAsFixed(1)}g Fat',
+                    calories: '${meal.caloriesKcal.toInt()} kcal',
+                    protein: '${meal.proteinGrams.toStringAsFixed(1)}g Protein',
+                    time: timeStr,
+                  ),
+                );
+              }),
 
             const SizedBox(height: 24),
 
@@ -258,7 +297,7 @@ class FoodHomeScreen extends StatelessWidget {
     required String foodNames,
     required String calories,
     required String protein,
-    required int qualityScore,
+    int qualityScore = 85,
     required String time,
   }) {
     return BentoCard(

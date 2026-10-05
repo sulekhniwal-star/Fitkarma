@@ -5,6 +5,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../main.dart';
 import '../../data/onboarding_repository.dart';
 import '../../domain/models/onboarding_state.dart';
+import 'package:fitkarma/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
 import 'package:fitkarma/features/health_os/presentation/screens/main_navigation_shell.dart';
 import 'welcome_step.dart';
@@ -57,12 +58,14 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
   Future<void> _finishOnboarding() async {
     setState(() => _state = _state.copyWith(isSubmitting: true));
 
+    final user = ref.read(currentUserProvider);
     final userId = ref.read(activeUserIdProvider);
     final repo = ref.read(onboardingRepositoryProvider);
     // Persist to local Drift database & outbox queue
     await repo.saveCompleteOnboarding(
       userId: userId,
       state: _state,
+      name: user?.fullName ?? (user?.email != null ? user!.email.split('@').first : null),
     );
 
     if (!mounted) return;

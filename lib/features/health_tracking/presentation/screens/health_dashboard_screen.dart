@@ -1,22 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/bento_card.dart';
 import '../../../../core/widgets/bilingual_label.dart';
 import '../../../../core/widgets/glowing_metric.dart';
+import '../../../health_os/presentation/providers/dashboard_providers.dart';
 import 'blood_pressure_screen.dart';
 import 'glucose_tracking_screen.dart';
 import 'sleep_tracking_screen.dart';
 import 'steps_tracking_screen.dart';
 
-class HealthDashboardScreen extends StatelessWidget {
+class HealthDashboardScreen extends ConsumerWidget {
   final bool showBackButton;
 
   const HealthDashboardScreen({super.key, this.showBackButton = false});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashboard = ref.watch(dashboardStateProvider);
+    final bpAsync = ref.watch(latestBloodPressureStreamProvider);
+    final glucoseAsync = ref.watch(latestGlucoseStreamProvider);
+    final sleepAsync = ref.watch(latestSleepStreamProvider);
+
+    final bp = bpAsync.value;
+    final glucose = glucoseAsync.value;
+    final sleep = sleepAsync.value;
+
+    final bpDisplay = bp != null
+        ? '${bp.primaryValue.toInt()} / ${bp.secondaryValue?.toInt() ?? 80}'
+        : '-- / --';
+    final glucoseDisplay = glucose != null
+        ? '${glucose.primaryValue.toInt()} mg/dL'
+        : '-- mg/dL';
+    final sleepDisplay = sleep != null
+        ? '${sleep.value.toStringAsFixed(1)} hrs'
+        : '-- hrs';
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -55,7 +76,7 @@ class HealthDashboardScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'Wearables Synced',
+                  'Sensors Active',
                   style: AppTypography.label.copyWith(color: AppColors.primaryEmerald),
                 ),
               ],
@@ -70,17 +91,17 @@ class HealthDashboardScreen extends StatelessWidget {
           children: [
             // Hero Cardiovascular & Metabolic Health Bento
             BentoCard(
-              isGlowing: true,
+              isGlowing: dashboard.readinessScore != null || bp != null,
               glowColor: AppColors.primaryEmerald,
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const GlowingMetric(
-                        value: 'Optimal',
-                        label: 'Preventive Health Index',
-                        unit: 'Low Risk',
+                      GlowingMetric(
+                        value: dashboard.readinessScore != null ? '${dashboard.readinessScore}' : 'Live Hub',
+                        label: dashboard.readinessLabel,
+                        unit: 'Health Status',
                         glowColor: AppColors.primaryEmerald,
                       ),
                       Container(
@@ -95,7 +116,7 @@ class HealthDashboardScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'All vital markers within physiological targets for Asian-Indian metabolic profile.',
+                    'Biometric and sensor telemetry evaluated against Asian-Indian metabolic thresholds.',
                     style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
                   ),
                 ],
@@ -120,7 +141,7 @@ class HealthDashboardScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.directions_walk, color: AppColors.primaryEmerald, size: 28),
                         const SizedBox(height: 12),
-                        Text('8,420', style: AppTypography.h2),
+                        Text('${dashboard.todaySteps}', style: AppTypography.h2),
                         Text('Steps Today', style: AppTypography.label.copyWith(color: AppColors.textSecondary)),
                       ],
                     ),
@@ -137,7 +158,7 @@ class HealthDashboardScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.bedtime, color: AppColors.accentPurple, size: 28),
                         const SizedBox(height: 12),
-                        Text('7.7 hrs', style: AppTypography.h2),
+                        Text(sleepDisplay, style: AppTypography.h2),
                         Text('Sleep & Recovery', style: AppTypography.label.copyWith(color: AppColors.textSecondary)),
                       ],
                     ),
@@ -160,7 +181,7 @@ class HealthDashboardScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.favorite_outline, color: AppColors.accentCoral, size: 28),
                         const SizedBox(height: 12),
-                        Text('122 / 78', style: AppTypography.h2),
+                        Text(bpDisplay, style: AppTypography.h2),
                         Text('Blood Pressure', style: AppTypography.label.copyWith(color: AppColors.textSecondary)),
                       ],
                     ),
@@ -177,7 +198,7 @@ class HealthDashboardScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.water_drop_outlined, color: AppColors.primaryCyan, size: 28),
                         const SizedBox(height: 12),
-                        Text('108 mg/dL', style: AppTypography.h2),
+                        Text(glucoseDisplay, style: AppTypography.h2),
                         Text('Fasting Glucose', style: AppTypography.label.copyWith(color: AppColors.textSecondary)),
                       ],
                     ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/widgets/bilingual_label.dart';
+import 'package:fitkarma/core/theme/app_colors.dart';
+import 'package:fitkarma/core/theme/app_typography.dart';
+import 'package:fitkarma/core/widgets/bilingual_label.dart';
+import 'package:fitkarma/features/onboarding/presentation/screens/onboarding_flow_screen.dart';
 import '../controllers/auth_controller.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
@@ -531,7 +532,30 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 14),
+
+                  // Guest / Offline Mode Button
+                  TextButton.icon(
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.primaryCyan,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    icon: const Icon(Icons.offline_bolt_outlined, size: 20, color: AppColors.primaryCyan),
+                    label: Text(
+                      'Explore as Guest (Offline Mode)',
+                      style: AppTypography.button.copyWith(
+                        color: AppColors.primaryCyan,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (_) => const OnboardingFlowScreen()),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 20),
 
                   // Privacy / Terms Note
                   Center(

@@ -14,6 +14,7 @@ import 'package:fitkarma/features/health_tracking/presentation/screens/steps_tra
 import 'package:fitkarma/features/nutrition/presentation/screens/meal_logger_screen.dart';
 import 'package:fitkarma/features/readiness_engine/presentation/screens/recovery_log_screen.dart';
 import 'package:fitkarma/features/workout/presentation/screens/active_workout_screen.dart';
+import 'package:fitkarma/core/localization/app_language.dart';
 import '../providers/dashboard_providers.dart';
 
 class HealthOSHomeScreen extends ConsumerWidget {
@@ -32,6 +33,8 @@ class HealthOSHomeScreen extends ConsumerWidget {
           humidityPercent: 65.0,
         );
 
+    final currentLanguage = ref.watch(appLanguageProvider);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -42,6 +45,35 @@ class HealthOSHomeScreen extends ConsumerWidget {
           hindi: 'हेल्थ ओएस इंटेलिजेंस',
         ),
         actions: [
+          // Language Switcher Button
+          InkWell(
+            onTap: () => _showLanguagePicker(context, ref),
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceGlass,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.borderGlass),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(currentLanguage.flag, style: const TextStyle(fontSize: 14)),
+                  const SizedBox(width: 4),
+                  Text(
+                    currentLanguage.code.toUpperCase(),
+                    style: AppTypography.label.copyWith(
+                      color: AppColors.primaryCyan,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.sync, color: AppColors.primaryCyan),
             tooltip: 'Sync Offline Outbox',
@@ -679,6 +711,110 @@ class HealthOSHomeScreen extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showLanguagePicker(BuildContext context, WidgetRef ref) {
+    final currentLanguage = ref.read(appLanguageProvider);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: AppColors.surfaceDark,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.75,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Select Language • மொழி / भाषा',
+                      style: AppTypography.h3,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.textSecondary),
+                      onPressed: () => Navigator.pop(ctx),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: AppLanguage.values.length,
+                    itemBuilder: (ctx, index) {
+                      final lang = AppLanguage.values[index];
+                      final isSelected = currentLanguage == lang;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: InkWell(
+                          onTap: () {
+                            ref.read(appLanguageProvider.notifier).setLanguage(lang);
+                            Navigator.pop(ctx);
+                          },
+                          borderRadius: BorderRadius.circular(14),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            decoration: BoxDecoration(
+                              color: isSelected ? AppColors.primaryCyan.withAlpha(30) : AppColors.surfaceGlass,
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: isSelected ? AppColors.primaryCyan : AppColors.borderGlass,
+                                width: isSelected ? 1.5 : 1.0,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Text(lang.flag, style: const TextStyle(fontSize: 22)),
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        lang.nativeLabel,
+                                        style: AppTypography.bodyMedium.copyWith(
+                                          fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                                          color: isSelected ? AppColors.primaryCyan : AppColors.textPrimary,
+                                        ),
+                                      ),
+                                      Text(
+                                        lang.subLabel,
+                                        style: AppTypography.bodySmall.copyWith(
+                                          color: AppColors.textSecondary,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                if (isSelected)
+                                  const Icon(Icons.check_circle_rounded, color: AppColors.primaryCyan),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

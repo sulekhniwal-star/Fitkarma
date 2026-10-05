@@ -18,6 +18,7 @@ class OnboardingRepository {
   Future<void> saveCompleteOnboarding({
     required String userId,
     required OnboardingState state,
+    String? name,
   }) async {
     final now = DateTime.now();
 
@@ -25,7 +26,7 @@ class OnboardingRepository {
     await db.into(db.localProfiles).insertOnConflictUpdate(
           LocalProfilesCompanion.insert(
             userId: userId,
-            name: const Value('FitKarma User'),
+            name: Value(name ?? 'FitKarma Member'),
             age: Value(state.age),
             gender: Value(state.gender.name),
             heightCm: Value(state.heightCm),
