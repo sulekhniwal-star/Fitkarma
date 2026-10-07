@@ -134,6 +134,59 @@ class NutritionRepository {
     return loggedMeal;
   }
 
+  /// Log direct meal with custom macros (used by Barcode Scanner & Thali Presets)
+  Future<void> logDirectMeal({
+    required String userId,
+    required String name,
+    required String mealType,
+    required double calories,
+    required double protein,
+    required double carbs,
+    required double fat,
+    double fiber = 2.0,
+  }) async {
+    final mealId = _uuid.v4();
+    final now = DateTime.now();
+
+    await db.into(db.localMeals).insert(
+          LocalMealsCompanion.insert(
+            id: mealId,
+            userId: userId,
+            name: name,
+            mealType: mealType,
+            caloriesKcal: calories,
+            proteinGrams: protein,
+            carbsGrams: carbs,
+            fatGrams: fat,
+            fiberGrams: fiber,
+            mealQualityScore: 85,
+            visionConfidence: const Value(1.0),
+            photoUrl: const Value(null),
+            loggedAt: now,
+          ),
+        );
+
+    await syncWorker.enqueueMutation(
+      tableName: 'meals',
+      action: 'INSERT',
+      payload: {
+        'id': mealId,
+        'user_id': userId,
+        'name': name,
+        'meal_type': mealType,
+        'calories_kcal': calories,
+        'protein_grams': protein,
+        'carbs_grams': carbs,
+        'fat_grams': fat,
+        'fiber_grams': fiber,
+        'meal_quality_score': 85,
+        'vision_confidence': 1.0,
+        'photo_url': null,
+        'logged_at': now.toIso8601String(),
+      },
+    );
+  }
+
   /// Get user meals for today
   Future<List<LocalMeal>> getTodayMeals(String userId) async {
     final now = DateTime.now();

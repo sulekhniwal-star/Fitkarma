@@ -7,6 +7,7 @@ import 'package:fitkarma/core/widgets/bento_card.dart';
 import 'package:fitkarma/core/widgets/bilingual_label.dart';
 import 'package:fitkarma/core/widgets/glowing_metric.dart';
 import 'package:fitkarma/features/health_os/presentation/providers/dashboard_providers.dart';
+import '../../services/google_health_sync_service.dart';
 
 class StepsTrackingScreen extends ConsumerStatefulWidget {
   final int stepCount;
@@ -140,6 +141,141 @@ class _StepsTrackingScreenState extends ConsumerState<StepsTrackingScreen> {
                 ],
               ),
             ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0),
+
+            // Google Health Connect Live Sensor Card
+            Consumer(
+              builder: (context, ref, _) {
+                final healthState = ref.watch(googleHealthSyncServiceProvider);
+                final isSyncing = healthState.connectionState == GoogleHealthConnectionState.syncing;
+                final isAuthorizing = healthState.connectionState == GoogleHealthConnectionState.authorizing;
+
+                return BentoCard(
+                  isGlowing: healthState.isAuthorized,
+                  glowColor: AppColors.primaryCyan,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryCyan.withAlpha(30),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.favorite_rounded, color: AppColors.primaryCyan, size: 20),
+                              ),
+                              const SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Google Health Connect',
+                                    style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    healthState.isAuthorized ? 'Auto-Syncing Sensor Telemetry' : 'Device Sensors Disconnected',
+                                    style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: healthState.isAuthorized
+                                  ? AppColors.primaryEmerald.withAlpha(35)
+                                  : AppColors.accentCoral.withAlpha(35),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              healthState.isAuthorized ? 'CONNECTED' : 'DISCONNECTED',
+                              style: AppTypography.label.copyWith(
+                                color: healthState.isAuthorized ? AppColors.primaryEmerald : AppColors.accentCoral,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      if (healthState.errorMessage != null)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            healthState.errorMessage!,
+                            style: AppTypography.bodySmall.copyWith(color: AppColors.accentAmber, fontSize: 11),
+                          ),
+                        ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 44,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: healthState.isAuthorized ? AppColors.surfaceGlassHover : AppColors.primaryCyan,
+                            foregroundColor: healthState.isAuthorized ? AppColors.primaryCyan : AppColors.background,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              side: BorderSide(
+                                color: healthState.isAuthorized ? AppColors.primaryCyan : Colors.transparent,
+                              ),
+                            ),
+                          ),
+                          onPressed: (isSyncing || isAuthorizing)
+                              ? null
+                              : () async {
+                                  if (!healthState.isAuthorized) {
+                                    await ref.read(googleHealthSyncServiceProvider.notifier).requestAuthorization();
+                                  } else {
+                                    final userId = ref.read(activeUserIdProvider);
+                                    await ref.read(googleHealthSyncServiceProvider.notifier).syncData(userId: userId);
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Synced live data from Google Health!'),
+                                          backgroundColor: AppColors.primaryEmerald,
+                                          duration: Duration(seconds: 2),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
+                          icon: (isSyncing || isAuthorizing)
+                              ? const SizedBox(
+                                  width: 16,
+                                  height: 16,
+                                  child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primaryCyan),
+                                )
+                              : Icon(
+                                  healthState.isAuthorized ? Icons.sync : Icons.sensors_outlined,
+                                  size: 18,
+                                ),
+                          label: Text(
+                            isAuthorizing
+                                ? 'Connecting...'
+                                : isSyncing
+                                    ? 'Syncing Sensors...'
+                                    : healthState.isAuthorized
+                                        ? 'Sync from Google Health Now'
+                                        : 'Connect Google Health Sensors',
+                            style: AppTypography.button.copyWith(
+                              color: healthState.isAuthorized ? AppColors.primaryCyan : AppColors.background,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
 
             const SizedBox(height: 16),
 

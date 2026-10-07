@@ -7,10 +7,13 @@ import '../../../../core/widgets/bento_card.dart';
 import '../../../../core/widgets/bilingual_label.dart';
 import '../../../../core/widgets/glowing_metric.dart';
 import '../../../health_os/presentation/providers/dashboard_providers.dart';
+import 'barcode_scanner_screen.dart';
+import 'event_nutrition_guide_screen.dart';
 import 'fix_my_meal_screen.dart';
 import 'grocery_optimizer_screen.dart';
 import 'indian_food_swaps_screen.dart';
 import 'meal_logger_screen.dart';
+import 'thali_presets_screen.dart';
 
 class FoodHomeScreen extends ConsumerWidget {
   final bool showBackButton;
@@ -173,6 +176,123 @@ class FoodHomeScreen extends ConsumerWidget {
                 ],
               ),
             ).animate().fadeIn(delay: 150.ms, duration: 400.ms),
+
+            const SizedBox(height: 12),
+
+            // Barcode Scanner & Thali Presets Row
+            Row(
+              children: [
+                Expanded(
+                  child: BentoCard(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const BarcodeScannerScreen()),
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryCyan.withAlpha(30),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(Icons.qr_code_scanner, color: AppColors.primaryCyan, size: 20),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Barcode Scan', style: AppTypography.label.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                              Text('Amul, Maggi, etc.', style: AppTypography.label.copyWith(fontSize: 10, color: AppColors.textMuted)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: BentoCard(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const ThaliPresetsScreen()),
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColors.accentAmber.withAlpha(30),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(Icons.lunch_dining, color: AppColors.accentAmber, size: 20),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Thali Presets', style: AppTypography.label.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                              Text('1-Tap Ghar Ki Thali', style: AppTypography.label.copyWith(fontSize: 10, color: AppColors.textMuted)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ).animate().fadeIn(delay: 180.ms, duration: 400.ms),
+
+            const SizedBox(height: 12),
+
+            // Tonight's Event / Shaadi Food Strategy Card
+            BentoCard(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const EventNutritionGuideScreen()),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.accentCoral.withAlpha(30),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.celebration, color: AppColors.accentCoral, size: 20),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text('Tonight\'s Event Plan', style: AppTypography.label.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                              decoration: BoxDecoration(
+                                color: AppColors.accentCoral.withAlpha(35),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text('Shaadi / Party', style: AppTypography.label.copyWith(fontSize: 9, color: AppColors.accentCoral, fontWeight: FontWeight.bold)),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Pre-load protein & master the buffet without spiking fat or guilt.',
+                          style: AppTypography.label.copyWith(fontSize: 10, color: AppColors.textMuted),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(Icons.arrow_forward_ios, color: AppColors.textMuted, size: 14),
+                ],
+              ),
+            ).animate().fadeIn(delay: 200.ms, duration: 400.ms),
 
             const SizedBox(height: 20),
 

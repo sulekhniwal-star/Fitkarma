@@ -15,6 +15,7 @@ import 'dosha_quiz_step.dart';
 import 'womens_health_step.dart';
 import 'blueprint_step.dart';
 import 'diet_plan_results_step.dart';
+import 'language_selection_step.dart';
 
 final onboardingRepositoryProvider = Provider<OnboardingRepository>((ref) {
   final db = ref.watch(appDatabaseProvider);
@@ -35,7 +36,7 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
   final PageController _pageController = PageController();
   OnboardingState _state = const OnboardingState();
 
-  final int _totalSteps = 7;
+  final int _totalSteps = 8;
 
   void _nextPage() {
     if (_state.currentStep < _totalSteps - 1) {
@@ -122,10 +123,13 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
             setState(() => _state = _state.copyWith(currentStep: index));
           },
           children: [
-            // 0: Welcome
+            // 0: Language Selection
+            LanguageSelectionStep(onNext: _nextPage),
+
+            // 1: Welcome
             WelcomeStep(onNext: _nextPage),
 
-            // 1: Goals
+            // 2: Goals
             GoalsStep(
               selectedGoal: _state.goal!,
               onGoalSelected: (g) => setState(() => _state = _state.copyWith(goal: g)),

@@ -9,6 +9,8 @@ import '../../data/social_repository.dart';
 import '../../domain/models/social_models.dart';
 import 'squad_detail_screen.dart';
 import 'family_health_hub_screen.dart';
+import 'referral_screen.dart';
+import 'shareable_progress_card_screen.dart';
 
 class SocialHubScreen extends ConsumerStatefulWidget {
   final String userId;
@@ -52,6 +54,22 @@ class _SocialHubScreenState extends ConsumerState<SocialHubScreen>
           hindi: 'सामाजिक व संघ केंद्र',
           primaryStyle: AppTypography.h3,
         ),
+        actions: [
+          IconButton(
+            tooltip: 'Share Progress Story (Instagram/WhatsApp)',
+            icon: const Icon(Icons.auto_awesome_motion_outlined, color: AppColors.primaryCyan),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ShareableProgressCardScreen()),
+            ),
+          ),
+          IconButton(
+            tooltip: 'Invite Friends & Earn Pro',
+            icon: const Icon(Icons.card_giftcard_rounded, color: AppColors.primaryEmerald),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ReferralScreen()),
+            ),
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: AppColors.primaryCyan,

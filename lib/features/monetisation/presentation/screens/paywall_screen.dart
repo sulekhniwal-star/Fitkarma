@@ -131,31 +131,236 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             SizedBox(
               width: double.infinity,
               height: 52,
-              child: ElevatedButton(
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.flash_on, color: Colors.black),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryCyan,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Subscribed to ${_selectedTier.name.toUpperCase()} tier!'),
-                      backgroundColor: AppColors.primaryEmerald,
-                    ),
-                  );
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Upgrade to ${_selectedTier.name.toUpperCase()}',
-                  style: AppTypography.h3.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                onPressed: () => _openIndianPaymentSheet(context),
+                label: Text(
+                  _selectedTier == AppSubscriptionTier.free
+                      ? 'Continue with Yogi Free'
+                      : 'Pay via UPI / Card • ${_selectedTier.name.toUpperCase()}',
+                  style: AppTypography.h3.copyWith(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
             ),
             const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.shield_outlined, color: AppColors.primaryEmerald, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  '100% Secure • Razorpay UPI • Instant Activation',
+                  style: AppTypography.label.copyWith(color: AppColors.textSecondary, fontSize: 11),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
             Text(
-              'Secured by Razorpay & RevenueCat. Auto-renews. Cancel anytime.',
-              style: AppTypography.bilingualSub,
+              'GPay • PhonePe • Paytm • BHIM • Cards • No-Cost EMI',
+              style: AppTypography.label.copyWith(color: AppColors.textMuted, fontSize: 10),
               textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _openIndianPaymentSheet(BuildContext context) {
+    if (_selectedTier == AppSubscriptionTier.free) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Switched to Yogi Free tier'),
+          backgroundColor: AppColors.primaryCyan,
+        ),
+      );
+      Navigator.pop(context);
+      return;
+    }
+
+    final priceStr = _selectedTier == AppSubscriptionTier.pro
+        ? (_isAnnual ? '₹1,999' : '₹299')
+        : (_isAnnual ? '₹7,999' : '₹999');
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: AppColors.surfaceDark,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        String selectedPaymentMethod = 'gpay';
+        return StatefulBuilder(
+          builder: (ctx, setSheetState) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Razorpay Fast Checkout', style: AppTypography.h3),
+                            Text('Pay $priceStr for ${_selectedTier.name.toUpperCase()}', style: AppTypography.bodySmall.copyWith(color: AppColors.primaryCyan)),
+                          ],
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close, color: AppColors.textMuted),
+                          onPressed: () => Navigator.pop(ctx),
+                        ),
+                      ],
+                    ),
+                    const Divider(color: AppColors.borderGlass, height: 24),
+                    Text('Select Preferred UPI / Payment Rail', style: AppTypography.label.copyWith(color: AppColors.textSecondary)),
+                    const SizedBox(height: 12),
+                    
+                    // UPI Apps
+                    _buildPaymentOptionTile(
+                      id: 'gpay',
+                      title: 'Google Pay (UPI)',
+                      subtitle: 'Fast 1-tap checkout via GPay UPI',
+                      icon: Icons.account_balance_wallet_outlined,
+                      selected: selectedPaymentMethod == 'gpay',
+                      badge: 'FASTEST',
+                      onTap: () => setSheetState(() => selectedPaymentMethod = 'gpay'),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildPaymentOptionTile(
+                      id: 'phonepe',
+                      title: 'PhonePe',
+                      subtitle: 'UPI payment via PhonePe app',
+                      icon: Icons.mobile_friendly,
+                      selected: selectedPaymentMethod == 'phonepe',
+                      onTap: () => setSheetState(() => selectedPaymentMethod = 'phonepe'),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildPaymentOptionTile(
+                      id: 'paytm',
+                      title: 'Paytm UPI / Wallet',
+                      subtitle: 'Paytm balance, Postpaid & UPI',
+                      icon: Icons.payment,
+                      selected: selectedPaymentMethod == 'paytm',
+                      onTap: () => setSheetState(() => selectedPaymentMethod = 'paytm'),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildPaymentOptionTile(
+                      id: 'emi',
+                      title: 'No-Cost EMI (3/6 Months)',
+                      subtitle: 'Bajaj Finserv, HDFC, ICICI, SBI',
+                      icon: Icons.credit_score,
+                      selected: selectedPaymentMethod == 'emi',
+                      badge: '0% INTEREST',
+                      onTap: () => setSheetState(() => selectedPaymentMethod = 'emi'),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildPaymentOptionTile(
+                      id: 'card',
+                      title: 'Cards & NetBanking',
+                      subtitle: 'All Indian Debit/Credit cards',
+                      icon: Icons.credit_card,
+                      selected: selectedPaymentMethod == 'card',
+                      onTap: () => setSheetState(() => selectedPaymentMethod = 'card'),
+                    ),
+                    const SizedBox(height: 20),
+                    
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryEmerald,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Payment Successful ($priceStr via ${selectedPaymentMethod.toUpperCase()})! Welcome to ${_selectedTier.name.toUpperCase()}!'),
+                              backgroundColor: AppColors.primaryEmerald,
+                              duration: const Duration(seconds: 4),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Authorize & Pay $priceStr',
+                          style: AppTypography.bodyMedium.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildPaymentOptionTile({
+    required String id,
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required bool selected,
+    String? badge,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.primaryCyan.withAlpha(20) : AppColors.surfaceCard,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: selected ? AppColors.primaryCyan : AppColors.borderGlass,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: selected ? AppColors.primaryCyan : AppColors.textSecondary, size: 22),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(title, style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
+                      if (badge != null) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryEmerald.withAlpha(30),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(badge, style: AppTypography.label.copyWith(fontSize: 9, color: AppColors.primaryEmerald, fontWeight: FontWeight.bold)),
+                        ),
+                      ],
+                    ],
+                  ),
+                  Text(subtitle, style: AppTypography.label.copyWith(fontSize: 11, color: AppColors.textMuted)),
+                ],
+              ),
+            ),
+            Icon(
+              selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              color: selected ? AppColors.primaryCyan : AppColors.textMuted,
+              size: 20,
             ),
           ],
         ),

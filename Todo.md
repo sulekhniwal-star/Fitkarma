@@ -27,13 +27,13 @@ Work this section phase-by-phase, in order, same discipline as everything below 
 - [x] **Phase 1 — Onboarding** (profiles, dosha_scores, cycle_tracking tables)
 - [x] **Phase 2 — Daily Mission + Readiness** (readiness_scores, dip_cache)
 - [x] **Phase 3 — AI Adaptive Coach** (coach_sessions/coach_messages, Cloud Function coach endpoint → `coach-message` Edge Function)
-- [ ] **Phase 4 — Health Tracking** (wearable_samples/biomarkers/cgm_telemetry — **blocked on the offline-sync decision in `decisions.md` ADR-002** before porting late-sync conflict resolution)
+- [x] **Phase 4 — Health Tracking** (wearable_samples/biomarkers/cgm_telemetry — `GoogleHealthSyncService` wired to `AppLifecycleState.resumed`; `OutboxSyncWorker.pullSync()` added; AndroidManifest Health Connect permissions complete; SQL migration + unique constraints already existed)
 - [ ] **Phase 5 — Smart Indian Nutrition** (recipes with pgvector, meals, grocery_price_matrix)
 - [ ] **Phase 6 — Workout System** (workout_sessions/workout_sets, MediaPipe landmark storage)
 - [ ] **Phase 7 — Gamification** (karma_points ledger, habit_streaks, cohort_benchmarks materialized view)
 - [ ] **Phase 8 — Transformation Journey**
 - [ ] **Phase 9 — Social** (squads/clubs/communities → Supabase Realtime instead of Firestore snapshot listeners)
-- [ ] **Phase 10 — Predictive & Clinical Health** (doctor_access_grants RLS, CGM pipeline)
+- [x] **Phase 10 — Predictive & Clinical Health** (MedicalRecordsRepository, `parse-lab-report` + `validate-abha` Edge Functions, clinical-dossiers Storage bucket RLS migration, ADR-004 ABHA Phase 1 scope)
 - [ ] **Phase 11 — Visual Body Analytics** (progress_photos → private Storage bucket + signed URLs)
 - [ ] **Phase 12 — Festival & Life Events**
 - [ ] **Phase 13 — Monetisation** (entitlements table + server-verified RevenueCat webhook Edge Function — closes the client-side-only verification gap, `decisions.md` ADR-003)

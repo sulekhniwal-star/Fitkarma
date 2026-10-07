@@ -35,16 +35,9 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
   final ProactiveInsightsEngine _insightsEngine = const ProactiveInsightsEngine();
 
   final List<CoachMessage> _messages = [];
-  List<ProactiveInsight> _activeInsights = [];
   String? _sessionId;
   bool _isTyping = false;
-
-  static const List<String> _quickPrompts = [
-    'Fix my lunch for high protein 🥗',
-    'Low readiness workout adjustment ⚡',
-    'Ayurvedic cooling food suggestions 🌿',
-    'Analyze my weekly training volume 📊',
-  ];
+  bool _isDostMode = true;
 
   @override
   void initState() {
@@ -58,19 +51,9 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
     final sessionId = await repo.getOrCreateActiveSession(userId);
     final history = await repo.loadSessionMessages(sessionId);
 
-    final insights = _insightsEngine.evaluateTriggers(
-      readinessScore: 54, // Example alert
-      sleepDebtHours: 1.8,
-      soreMuscleCount: 2,
-      hasPcos: false,
-      cyclePhase: null,
-      isEliteTier: false,
-    );
-
     setState(() {
       _sessionId = sessionId;
       _messages.addAll(history);
-      _activeInsights = insights;
 
       if (_messages.isEmpty) {
         _messages.add(
@@ -78,7 +61,9 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
             id: 'welcome-1',
             sessionId: sessionId,
             sender: MessageSender.coach,
-            content: 'Namaste! I am your FitKarma Adaptive Coach. How can I optimize your training, Indian nutrition, or recovery today?',
+            content: _isDostMode
+                ? 'Arre namaste bhai! FitKarma AI Dost yahan hai. Kal ka workout kaisa raha? Aaj gym phodna hai ya recovery session rakhein?'
+                : 'Namaste! I am your FitKarma Adaptive AI Coach. I analyze your live readiness, workouts, and nutrition in real-time. How can I guide your health today?',
             timestamp: DateTime.now(),
           ),
         );
@@ -100,6 +85,35 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
     });
   }
 
+  List<String> _getDynamicPrompts(DashboardState stats) {
+    if (_isDostMode) {
+      return [
+        'Bhai, aaj mera workout plan kya hai? 🏋️',
+        'High protein desi lunch batao (Paneer/Soya) 🥗',
+        'Kal thoda fast food kha liya tha, ab kya karoon? 🍕',
+        'Sharma Ji ke bete se zyada fit banna hai! 🔥',
+        'Readiness score analyse karo bhai 📊',
+      ];
+    }
+
+    final List<String> prompts = [];
+    final score = stats.readinessScore;
+
+    if (score != null && score >= 85) {
+      prompts.add('Maximize my $score score workout 🔥');
+    } else if (score != null && score < 60) {
+      prompts.add('Low readiness workout adjustment ⚡');
+    } else {
+      prompts.add('Optimal workout for today 🏋️');
+    }
+
+    prompts.add('Fix my lunch for high protein 🥗');
+    prompts.add('Ayurvedic cooling food suggestions 🌿');
+    prompts.add('Analyze my daily health stats 📊');
+
+    return prompts;
+  }
+
   Future<void> _handleSendMessage(String text) async {
     if (text.trim().isEmpty || _sessionId == null) return;
     _textController.clear();
@@ -119,11 +133,33 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
     });
     _scrollToBottom();
 
+    final dashboardState = ref.read(dashboardStateProvider);
+    final profile = ref.read(userProfileStreamProvider).value;
+
     final contextSnapshot = {
-      'user_meta': {'gender': 'male', 'age': 27, 'weight_kg': 72.0, 'primary_goal': 'fat_loss'},
+      'user_meta': {
+        'gender': profile?.gender ?? 'male',
+        'age': profile?.age ?? 26,
+        'weight_kg': profile?.weightKg ?? 70.0,
+        'primary_goal': profile?.primaryGoal ?? 'fat_loss',
+        'program_blueprint': 'adaptivePerformance',
+      },
       'ayurvedic_prakriti': {'dominant_dosha': 'pitta'},
-      'daily_readiness': {'score': 84, 'state': 'prime'},
-      'metabolic_targets': {'target_calories': 2100, 'protein_grams': 140},
+      'daily_readiness': {
+        'score': dashboardState.readinessScore ?? 80,
+        'state': dashboardState.readinessLabel.toLowerCase(),
+      },
+      'metabolic_targets': {
+        'target_calories': dashboardState.targetCalories.round(),
+        'protein_grams': dashboardState.targetProteinGrams.round(),
+        'consumed_calories': dashboardState.consumedCalories.round(),
+        'consumed_protein': dashboardState.consumedProteinGrams.round(),
+      },
+      'live_telemetry': {
+        'today_steps': dashboardState.todaySteps,
+        'step_goal': dashboardState.stepGoal,
+        'workout_minutes': dashboardState.workoutDurationMinutes,
+      },
     };
 
     final userId = ref.read(activeUserIdProvider);
@@ -144,6 +180,24 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final dashboardState = ref.watch(dashboardStateProvider);
+    final sleepSample = ref.watch(latestSleepStreamProvider).value;
+
+    final liveInsights = _insightsEngine.evaluateTriggers(
+      readinessScore: dashboardState.readinessScore,
+      sleepDebtHours: sleepSample != null ? (8.0 - (sleepSample.value / 60)).clamp(0.0, 5.0) : 0.0,
+      todaySteps: dashboardState.todaySteps,
+      stepGoal: dashboardState.stepGoal,
+      consumedCalories: dashboardState.consumedCalories,
+      targetCalories: dashboardState.targetCalories,
+      consumedProteinGrams: dashboardState.consumedProteinGrams,
+      targetProteinGrams: dashboardState.targetProteinGrams,
+      workoutDurationMinutes: dashboardState.workoutDurationMinutes,
+    );
+
+    final primaryInsight = liveInsights.isNotEmpty ? liveInsights.first : null;
+    final dynamicPrompts = _getDynamicPrompts(dashboardState);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -165,45 +219,100 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
             ),
           ],
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: FilterChip(
+              avatar: Icon(
+                _isDostMode ? Icons.sentiment_very_satisfied : Icons.school_outlined,
+                size: 16,
+                color: _isDostMode ? AppColors.accentAmber : AppColors.primaryCyan,
+              ),
+              label: Text(
+                _isDostMode ? 'Dost Mode' : 'Guru Mode',
+                style: AppTypography.label.copyWith(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: _isDostMode ? AppColors.accentAmber : AppColors.primaryCyan,
+                ),
+              ),
+              selected: _isDostMode,
+              selectedColor: AppColors.accentAmber.withAlpha(40),
+              backgroundColor: AppColors.surfaceCard,
+              side: BorderSide(
+                color: _isDostMode ? AppColors.accentAmber : AppColors.borderGlass,
+              ),
+              onSelected: (val) {
+                setState(() => _isDostMode = val);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(val ? 'Switched to Hinglish Dost Mode! 🤝' : 'Switched to Professional Guru Mode 🧘'),
+                    backgroundColor: val ? AppColors.accentAmber : AppColors.primaryCyan,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            // Proactive Insights Banner
-            if (_activeInsights.isNotEmpty)
+            // Proactive Live Insights Banner
+            if (primaryInsight != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: BentoCard(
                   isGlowing: true,
-                  glowColor: AppColors.accentAmber,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  glowColor: primaryInsight.glowColor,
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   child: Row(
                     children: [
-                      const Icon(Icons.offline_bolt_rounded, color: AppColors.accentAmber, size: 24),
-                      const SizedBox(width: 10),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: primaryInsight.glowColor.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(primaryInsight.icon, color: primaryInsight.glowColor, size: 22),
+                      ),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              _activeInsights.first.title,
-                              style: AppTypography.bodySmall.copyWith(
-                                color: AppColors.accentAmber,
+                            BilingualLabel(
+                              english: primaryInsight.title,
+                              hindi: primaryInsight.titleHindi,
+                              primaryStyle: AppTypography.bodySmall.copyWith(
+                                color: primaryInsight.glowColor,
                                 fontWeight: FontWeight.bold,
                               ),
+                              secondaryStyle: AppTypography.bilingualSub.copyWith(
+                                color: primaryInsight.glowColor.withValues(alpha: 0.8),
+                                fontSize: 10,
+                              ),
                             ),
-                            Text(
-                              _activeInsights.first.suggestion,
-                              style: AppTypography.bilingualSub,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                            const SizedBox(height: 3),
+                            BilingualLabel(
+                              english: primaryInsight.suggestion,
+                              hindi: primaryInsight.suggestionHindi,
+                              primaryStyle: AppTypography.bodySmall.copyWith(
+                                color: AppColors.textPrimary,
+                                fontSize: 11,
+                              ),
+                              secondaryStyle: AppTypography.bilingualSub.copyWith(
+                                fontSize: 9,
+                              ),
                             ),
                           ],
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: AppColors.accentAmber),
-                        onPressed: () => _handleSendMessage(_activeInsights.first.promptShortcut),
+                        icon: Icon(Icons.arrow_forward_ios_rounded, size: 14, color: primaryInsight.glowColor),
+                        tooltip: 'Apply Insight',
+                        onPressed: () => _handleSendMessage(primaryInsight.promptShortcut),
                       ),
                     ],
                   ),
@@ -277,9 +386,9 @@ class _AICoachScreenState extends ConsumerState<AICoachScreen> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
-                itemCount: _quickPrompts.length,
+                itemCount: dynamicPrompts.length,
                 itemBuilder: (context, index) {
-                  final prompt = _quickPrompts[index];
+                  final prompt = dynamicPrompts[index];
                   return ActionChip(
                     backgroundColor: AppColors.surfaceDark,
                     label: Text(prompt, style: AppTypography.bodySmall),

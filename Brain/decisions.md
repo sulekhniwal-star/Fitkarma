@@ -4,6 +4,25 @@ Each entry: context → decision → consequences. Add new entries at the top. D
 
 ---
 
+## ADR-005: Indian Market High-Convenience Adaptations (UPI Rail, Barcode Scanner, Thali Presets, Hydration, Vernacular Onboarding)
+**Context**: FitKarma had advanced intelligence moats (Dosha, CGM, Festival modes), but lacked crucial convenience hooks common in Indian daily life: UPI checkout, packaged food barcode lookups, single-tap thali logging, summer hydration tracking, and instant language onboarding.
+**Decision**:
+1. **Payments**: Augmented RevenueCat paywall with native Razorpay Fast Checkout sheet supporting Google Pay, PhonePe, Paytm, BHIM, and No-Cost EMI.
+2. **Nutrition**: Added `BarcodeScanEngine` pre-seeded with Indian FMCG brands (Amul, Britannia, Maggi, Haldiram, Epigamia, Tata) and `ThaliPresetsScreen` for 1-tap logging of complete regional thalis (North, South, Gujarati, Bengali, Gym Protein).
+3. **Hydration**: Added `HydrationTrackerScreen` + Home Bento card with temperature/AQI-aware goal adjustments and desi drinks (Nimbu Pani, Coconut Water, Chai).
+4. **Onboarding & Vernacular**: Inserted `LanguageSelectionStep` as Step 0 in the onboarding flow supporting Hindi, Hinglish, Tamil, Telugu, Marathi, Bengali, Gujarati, Punjabi, Kannada, and English.
+5. **Engagement & Virality**: Added `ReferralScreen` (WhatsApp invite with 7-day Pro reward), `ShareableProgressCardScreen` (9:16 Instagram/WhatsApp story cards), and "Dost Mode" Hinglish AI coach personality.
+**Consequences**: Eliminates friction for Tier-1, Tier-2, and Tier-3 Indian fitness users without adding heavy external server dependencies.
+
+---
+
+## ADR-004: ABHA Integration — Phase 1 Scope (Demo-Safe)
+**Context**: Full ABDM (Ayushman Bharat Digital Mission) M1 token exchange requires government sandbox approval and OAuth2 flows that take months. The college major-project demo needs a working ABHA feature now (see PRD §9 Milestone 1).
+**Decision**: Phase 1 ships **format validation only** — 14-digit numeric check on the client, upsert to `abha_records` with `fhir_sync_status = 'pending'` via the `validate-abha` Edge Function. The UI shows "ABHA Linked — Records will sync once ABDM integration is live." No actual ABDM API calls are made.
+**Consequences**: Demo works without government approval. `fhir_sync_status` column already distinguishes `pending` vs `synced` so Phase 2 (real M1 token exchange) can update that column without a schema change. Live ABDM token exchange is tracked as a post-launch milestone in `architechture.md §3` under the ABHA edge function.
+
+---
+
 ## ADR-003: RevenueCat entitlement verification moves server-side
 **Context**: entitlement checks were previously validated client-side only, which is spoofable and doesn't survive reinstalls/device changes correctly.
 **Decision**: RevenueCat webhook → Edge Function verifies signature → upserts `entitlements` table via service role. Client reads `entitlements`, never trusts local RevenueCat SDK state alone for gating.

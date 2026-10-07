@@ -14,6 +14,8 @@ import 'package:fitkarma/features/health_tracking/presentation/screens/steps_tra
 import 'package:fitkarma/features/nutrition/presentation/screens/meal_logger_screen.dart';
 import 'package:fitkarma/features/readiness_engine/presentation/screens/recovery_log_screen.dart';
 import 'package:fitkarma/features/workout/presentation/screens/active_workout_screen.dart';
+import 'package:fitkarma/features/hydration/domain/providers/hydration_provider.dart';
+import 'package:fitkarma/features/hydration/presentation/screens/hydration_tracker_screen.dart';
 import 'package:fitkarma/core/localization/app_language.dart';
 import '../providers/dashboard_providers.dart';
 
@@ -34,6 +36,7 @@ class HealthOSHomeScreen extends ConsumerWidget {
         );
 
     final currentLanguage = ref.watch(appLanguageProvider);
+    final hydration = ref.watch(hydrationProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -387,6 +390,109 @@ class HealthOSHomeScreen extends ConsumerWidget {
 
             const SizedBox(height: 16),
 
+            // Hydration Card (Indian Climate Aware)
+            BentoCard(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const HydrationTrackerScreen()),
+              ),
+              isGlowing: hydration.isGoalMet,
+              glowColor: AppColors.primaryCyan,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryCyan.withAlpha(35),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.water_drop, color: AppColors.primaryCyan, size: 20),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const BilingualLabel(
+                                english: 'Daily Hydration',
+                                hindi: 'दैनिक जल सेवन',
+                              ),
+                              Text(
+                                '${hydration.consumedMl.toInt()} / ${hydration.goalMl.toInt()} ml',
+                                style: AppTypography.heroMetric.copyWith(fontSize: 18, color: AppColors.primaryCyan),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.add_circle, color: AppColors.primaryCyan, size: 24),
+                            tooltip: 'Quick +250ml Glass',
+                            onPressed: () {
+                              ref.read(hydrationProvider.notifier).logWater(amountMl: 250);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Added 250ml water (Glass)! 💧'),
+                                  backgroundColor: AppColors.primaryCyan,
+                                  duration: Duration(seconds: 1),
+                                ),
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.local_drink, color: AppColors.primaryEmerald, size: 24),
+                            tooltip: 'Quick +500ml Bottle',
+                            onPressed: () {
+                              ref.read(hydrationProvider.notifier).logWater(amountMl: 500);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Added 500ml water (Bottle)! 💧'),
+                                  backgroundColor: AppColors.primaryEmerald,
+                                  duration: Duration(seconds: 1),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: LinearProgressIndicator(
+                      value: hydration.progressFraction,
+                      minHeight: 6,
+                      backgroundColor: AppColors.surfaceCard,
+                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryCyan),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        hydration.isGoalMet ? 'Daily goal reached! 🎉' : '${hydration.remainingMl.toInt()} ml remaining',
+                        style: AppTypography.label.copyWith(fontSize: 11, color: AppColors.textSecondary),
+                      ),
+                      Text(
+                        'Nimbu Pani • Coconut Water • Chai options inside →',
+                        style: AppTypography.label.copyWith(fontSize: 10, color: AppColors.primaryCyan),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ).animate().fadeIn(delay: 120.ms, duration: 400.ms),
+
+            const SizedBox(height: 16),
+
             // 4. Quick Action Logging Bar
             Text('Quick Activity Logging', style: AppTypography.h3),
             const SizedBox(height: 10),
@@ -394,6 +500,17 @@ class HealthOSHomeScreen extends ConsumerWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
+                  _buildQuickActionButton(
+                    icon: Icons.water_drop_outlined,
+                    label: '+ Hydration',
+                    color: AppColors.primaryCyan,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const HydrationTrackerScreen()),
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 10),
                   _buildQuickActionButton(
                     icon: Icons.restaurant_outlined,
                     label: '+ Log Meal',

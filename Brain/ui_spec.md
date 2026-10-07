@@ -16,14 +16,14 @@
 - Contextual entry points (not in bottom nav): Coach chat (floating action), Doctor dossier share (from Profile), Corporate dashboard (separate entry for B2B accounts, surfaces via FitKarma Hub-issued deep link).
 
 ## 4. Key screens by phase
-- **Onboarding (P1)**: demographics → BMI calibration → Dosha assessment → women's health toggle (if applicable).
-- **Home/Daily Mission (P2)**: readiness score hero (`GlowingMetric`), morning briefing card, soreness heatmap.
-- **Coach (P3)**: chat-style interface, model attribution not shown to the user (internal only).
-- **Nutrition (P5)**: meal log (photo/voice/manual), swap suggestions, grocery price comparison view.
+- **Onboarding (P1)**: Step 0 Language Picker (Vernacular English, Hindi, Hinglish, Tamil, Telugu, Marathi, Bengali, Gujarati, Punjabi, Kannada) → demographics → BMI calibration → Dosha assessment → women's health toggle (if applicable) → blueprint.
+- **Home/Daily Mission (P2)**: readiness score hero (`GlowingMetric`), morning briefing card, soreness heatmap, **Hydration Tracker Bento card (Indian summer climate-aware with +250ml/+500ml quick-log)**, and quick activity logging.
+- **Coach (P3)**: chat-style interface, dynamic prompt chips, and **Hinglish "Dost Mode" vs "Professional Guru Mode" toggle**.
+- **Nutrition (P5)**: meal log (photo/voice/manual), swap suggestions, grocery price comparison view, **Barcode Scanner Screen (packaged Indian foods)**, **Thali Presets Screen (1-tap complete regional thali logging)**, and **Tonight's Event / Shaadi Food Strategy Guide**.
 - **Workout (P6)**: session player with MediaPipe pose overlay for form feedback.
-- **Squad/Social (P9)**: feed, squad challenge cards, geolocation club discovery.
-- **Predictive Health (P10)**: biological age card, CGM trend chart, doctor dossier share flow.
-- **Monetisation (P13)**: paywall screens per tier, clearly distinguishing Free (ad-supported, see `admob_spec.md`) from Pro/Elite (ad-free).
+- **Squad/Social (P9)**: feed, squad challenge cards, geolocation club discovery, **Peer-to-Peer Sangha Referral Screen (WhatsApp invite + 7-day Pro milestone rewards)**, and **Shareable 9:16 Story Cards (Instagram Stories & WhatsApp Status)**.
+- **Predictive Health (P10)**: biological age card, CGM trend chart, doctor dossier share flow, ABHA ID linking.
+- **Monetisation (P13)**: paywall screens per tier, with **Razorpay Fast Checkout sheet supporting Google Pay, PhonePe, Paytm, BHIM UPI, Netbanking, and No-Cost EMI**.
 
 ## 5. Accessibility
 - Minimum tap target sizes per platform guidelines.

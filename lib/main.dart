@@ -8,8 +8,10 @@ import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/controllers/auth_controller.dart';
 import 'features/auth/presentation/screens/auth_gate.dart';
 import 'features/environmental/services/environmental_health_engine.dart';
+import 'features/health_os/presentation/providers/dashboard_providers.dart';
 import 'features/health_os/services/ai_routing_service.dart';
 import 'features/health_os/services/health_os_brain.dart';
+import 'features/health_tracking/services/google_health_sync_service.dart';
 import 'features/metabolism/services/metabolism_engine.dart';
 
 // Riverpod Global Providers
@@ -62,8 +64,45 @@ void main() async {
   );
 }
 
-class FitKarmaApp extends StatelessWidget {
+class FitKarmaApp extends ConsumerStatefulWidget {
   const FitKarmaApp({super.key});
+
+  @override
+  ConsumerState<FitKarmaApp> createState() => _FitKarmaAppState();
+}
+
+class _FitKarmaAppState extends ConsumerState<FitKarmaApp>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Trigger an initial sync on startup (after first frame so providers are ready)
+    WidgetsBinding.instance.addPostFrameCallback((_) => _triggerWearableSync());
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _triggerWearableSync();
+    }
+  }
+
+  /// Pulls latest data from Health Connect / HealthKit → Drift → Outbox.
+  /// Fire-and-forget: errors are handled inside GoogleHealthSyncService.
+  void _triggerWearableSync() {
+    final userId = ref.read(activeUserIdProvider);
+    if (userId == 'local-user-demo-1') return; // not authenticated yet
+    ref
+        .read(googleHealthSyncServiceProvider.notifier)
+        .syncData(userId: userId);
+  }
 
   @override
   Widget build(BuildContext context) {

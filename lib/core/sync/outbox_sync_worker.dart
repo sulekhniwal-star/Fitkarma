@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 import '../database/app_database.dart';
@@ -127,6 +128,38 @@ class OutboxSyncWorker {
     _retryTimer = Timer(Duration(seconds: delaySeconds), () {
       triggerSync();
     });
+  }
+
+  /// Incremental pull sync — fetches rows newer than [lastSyncedAt] from
+  /// Supabase and delivers them to [onRows] for local upsert.
+  /// Implements the `architechture.md §4` pull pattern:
+  ///   `select * where updated_at > :last_synced_at` — not a full-table refresh.
+  ///
+  /// Pull failures are non-blocking: if Supabase is unreachable the local
+  /// Drift data remains the source of truth and the next sync attempt retries.
+  Future<void> pullSync({
+    required String tableName,
+    required DateTime lastSyncedAt,
+    required Future<void> Function(List<Map<String, dynamic>> rows) onRows,
+  }) async {
+    if (supabaseClient == null) return;
+
+    try {
+      final response = await supabaseClient!
+          .from(tableName)
+          .select()
+          .gt('updated_at', lastSyncedAt.toIso8601String())
+          .order('updated_at')
+          .limit(500);
+
+      final rows = List<Map<String, dynamic>>.from(response as List);
+      if (rows.isNotEmpty) {
+        await onRows(rows);
+      }
+    } catch (e) {
+      // Pull failures are intentionally swallowed — see error_handling.md §5
+      debugPrint('[OutboxSyncWorker] pullSync($tableName) error: $e');
+    }
   }
 
   void dispose() {
